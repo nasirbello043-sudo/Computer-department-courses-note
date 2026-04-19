@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENG 101 — University English Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy2: #102040;
+  --gold: #c9a84c;
+  --gold2: #f0c96e;
+  --gold-light: #fdf3d7;
+  --cream: #faf6ee;
+  --white: #ffffff;
+  --text: #1a1a2e;
+  --text-muted: #4a5568;
+  --border: #d4b96a;
+  --correct: #1a6b3a;
+  --wrong: #8b1a1a;
+  --info: #1a3a6b;
+  --shadow: 0 4px 24px rgba(10,22,40,0.13);
+  --radius: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a2d50 60%, #0d1f3c 100%);
+  color: var(--white);
+  padding: 48px 40px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--gold);
+}
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 80px);
+}
+header .badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  padding: 5px 18px;
+  border-radius: 30px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+header h1 span { color: var(--gold2); }
+header p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.05rem;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.1);
+  border-radius: 30px;
+  height: 10px;
+  max-width: 400px;
+  margin: 0 auto 8px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 30px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold2);
+  letter-spacing: 1px;
+}
+
+/* ===== NAV ===== */
+nav {
+  background: var(--navy2);
+  border-bottom: 2px solid var(--gold);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--navy);
+}
+.nav-inner {
+  display: flex;
+  gap: 0;
+  min-width: max-content;
+  padding: 0 20px;
+}
+.nav-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.65);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  position: relative;
+}
+.nav-btn:hover { color: var(--gold2); border-bottom-color: var(--gold); }
+.nav-btn.done { color: var(--gold); }
+.nav-btn.done::after {
+  content: '✓';
+  margin-left: 5px;
+  color: #4caf50;
+  font-size: 10px;
+}
+.nav-btn.active {
+  color: var(--gold2);
+  border-bottom-color: var(--gold2);
+  background: rgba(201,168,76,0.08);
+}
+
+/* ===== MAIN LAYOUT ===== */
+main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* ===== CHAPTER SECTIONS ===== */
+.chapter {
+  background: var(--white);
+  border: 1px solid #e8dfc8;
+  border-radius: var(--radius);
+  margin-bottom: 56px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.chapter-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3060 100%);
+  color: white;
+  padding: 28px 36px;
+  border-bottom: 3px solid var(--gold);
+  position: relative;
+}
+.chapter-header .ch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.chapter-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.chapter-header .ch-mark {
+  position: absolute;
+  right: 28px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  opacity: 0.15;
+}
+.chapter-body { padding: 32px 36px; }
+
+/* ===== CONTENT STYLES ===== */
+.chapter-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin: 28px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--gold-light);
+}
+.chapter-body h4 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1rem;
+  color: var(--navy2);
+  font-weight: 600;
+  margin: 18px 0 6px;
+}
+.chapter-body p { margin-bottom: 14px; color: #2d3748; }
+.chapter-body ul, .chapter-body ol {
+  margin: 10px 0 14px 20px;
+  color: #2d3748;
+}
+.chapter-body li { margin-bottom: 6px; }
+
+.definition-box {
+  background: linear-gradient(135deg, #f8f3e8 0%, var(--gold-light) 100%);
+  border-left: 5px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 18px 0;
+  font-style: italic;
+}
+.definition-box strong { font-style: normal; color: var(--navy); }
+
+.example-box {
+  background: #f0f4ff;
+  border: 1px solid #b8c8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: #1a2d6b;
+}
+.example-box .label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 15px;
+}
+.info-table th {
+  background: var(--navy);
+  color: var(--gold2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 10px 14px;
+  text-align: left;
+}
+.info-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #e8dfc8;
+  vertical-align: top;
+}
+.info-table tr:nth-child(even) td { background: #faf6ee; }
+.info-table tr:hover td { background: var(--gold-light); }
+
+/* ===== PRONUNCIATION SECTION ===== */
+.phonetics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.phon-card {
+  background: var(--navy);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.phon-card:hover {
+  background: #1a3060;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.25);
+}
+.phon-card:active { transform: scale(0.97); }
+.phon-card .ipa {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  color: var(--gold2);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.phon-card .word {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+.phon-card .type-tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 2px;
+}
+.speak-icon {
+  position: absolute;
+  bottom: 8px; right: 10px;
+  font-size: 14px;
+  opacity: 0.4;
+}
+.phon-card.speaking {
+  background: #1a4060;
+  border-color: var(--gold2);
+  box-shadow: 0 0 16px rgba(240,201,110,0.4);
+}
+
+/* ===== QUIZ SECTION ===== */
+.quiz-section {
+  background: linear-gradient(135deg, #0a1628 0%, #1a2d50 100%);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 28px 36px;
+  margin-top: 20px;
+}
+.quiz-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold2);
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-title::before { content: '📝'; font-size: 1rem; }
+.quiz-subtitle {
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.quiz-q {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+.quiz-q .q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.quiz-q .q-type {
+  display: inline-block;
+  background: rgba(201,168,76,0.15);
+  color: var(--gold2);
+  font-size: 10px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+}
+.quiz-q .q-text {
+  color: var(--white);
+  font-size: 15px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.mc-options { display: grid; gap: 8px; }
+.mc-opt {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+.mc-opt:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); color: white; }
+.mc-opt.correct { background: rgba(26,107,58,0.3); border-color: #4caf50; color: #a8f0c0; }
+.mc-opt.wrong { background: rgba(139,26,26,0.3); border-color: #e57373; color: #ffb3b3; }
+.mc-opt:disabled { cursor: default; }
+
+.tf-options { display: flex; gap: 12px; }
+.tf-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+}
+.tf-btn:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+.tf-btn.correct { background: rgba(26,107,58,0.3); border-color: #4caf50; color: #a8f0c0; }
+.tf-btn.wrong { background: rgba(139,26,26,0.3); border-color: #e57373; color: #ffb3b3; }
+
+.fitb-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  font-family: 'Source Serif 4', serif;
+  transition: border 0.2s;
+}
+.fitb-input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.1); }
+.fitb-input.correct { border-color: #4caf50; background: rgba(26,107,58,0.2); }
+.fitb-input.wrong { border-color: #e57373; background: rgba(139,26,26,0.2); }
+
+.short-ans-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  font-family: 'Source Serif 4', serif;
+}
+.short-ans-input:focus { outline: none; border-color: var(--gold); }
+
+.check-btn {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color: var(--navy);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+.check-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,168,76,0.35); }
+
+.answer-reveal {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin-top: 10px;
+  color: rgba(255,255,255,0.75);
+  font-size: 13px;
+  display: none;
+}
+.answer-reveal.show { display: block; }
+.answer-reveal strong { color: var(--gold2); }
+
+.quiz-score-area {
+  text-align: center;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  margin-top: 20px;
+}
+.submit-quiz-btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 13px 36px;
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 0.5px;
+}
+.submit-quiz-btn:hover { background: var(--gold2); transform: scale(1.03); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+.score-display {
+  display: none;
+  margin-top: 16px;
+}
+.score-display .score-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--gold2);
+  font-weight: 900;
+}
+.score-display .score-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+}
+.mark-done-btn {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold2);
+  padding: 9px 24px;
+  border-radius: 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+.mark-done-btn:hover { background: rgba(201,168,76,0.15); }
+.mark-done-btn.completed { background: rgba(76,175,80,0.2); border-color: #4caf50; color: #a8f0c0; }
+
+/* ===== FINAL EXAM ===== */
+#final-exam {
+  background: linear-gradient(135deg, #0a0f1e 0%, #0a1628 100%);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 40px;
+  margin-bottom: 56px;
+  box-shadow: 0 8px 40px rgba(201,168,76,0.15);
+}
+#final-exam h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold2);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 6px;
+}
+#final-exam .subtitle {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .chapter-body, .quiz-section { padding: 20px 18px; }
+  .chapter-header { padding: 20px 18px; }
+  .phonetics-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  header { padding: 32px 20px 24px; }
+}
+
+/* ===== SCROLL ANIMATION ===== */
+.chapter { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.chapter.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">ENG 101 · University English</div>
+  <h1>Mastering <span>English Language</span><br>& Communication</h1>
+  <p>A comprehensive university-level course in English linguistics, composition, and critical thinking</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0 of 14 topics completed</div>
+</header>
+
+<nav>
+  <div class="nav-inner" id="navInner">
+    <button class="nav-btn" onclick="scrollTo('ch1')">Ch.1 Phonetics</button>
+    <button class="nav-btn" onclick="scrollTo('ch2')">Ch.2 Word Classes</button>
+    <button class="nav-btn" onclick="scrollTo('ch3')">Ch.3 Sentences</button>
+    <button class="nav-btn" onclick="scrollTo('ch4')">Ch.4 Grammar</button>
+    <button class="nav-btn" onclick="scrollTo('ch5')">Ch.5 Critical Thinking</button>
+    <button class="nav-btn" onclick="scrollTo('ch6')">Ch.6 Analogy</button>
+    <button class="nav-btn" onclick="scrollTo('ch7')">Ch.7 Ethics</button>
+    <button class="nav-btn" onclick="scrollTo('ch8')">Ch.8 Writing Activities</button>
+    <button class="nav-btn" onclick="scrollTo('ch9')">Ch.9 Types of Writing</button>
+    <button class="nav-btn" onclick="scrollTo('ch10')">Ch.10 Comprehension Strategy</button>
+    <button class="nav-btn" onclick="scrollTo('ch11')">Ch.11 Comprehension Skills</button>
+    <button class="nav-btn" onclick="scrollTo('ch12')">Ch.12 ICT & Language</button>
+    <button class="nav-btn" onclick="scrollTo('ch13')">Ch.13 Language Skills</button>
+    <button class="nav-btn" onclick="scrollTo('ch14')">Ch.14 Public Speaking</button>
+    <button class="nav-btn" onclick="scrollTo('final')">📋 Final Exam</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- =================== CHAPTER 1 =================== -->
+<div class="chapter" id="ch1">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 01</div>
+    <h2>Sound Patterns in English Language: Phonetics & Phonology</h2>
+    <div class="ch-mark">🔊</div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="definition-box">
+      <strong>Phonetics</strong> is the scientific study of the physical properties of speech sounds — how they are produced (articulatory phonetics), transmitted (acoustic phonetics), and perceived (auditory phonetics). <strong>Phonology</strong>, by contrast, is the study of the sound systems of languages — how sounds function and contrast within a given language to create meaning.
+    </div>
+
+    <h3>1.1 What is Phonetics?</h3>
+    <p>Phonetics deals with the concrete physical realization of sounds, regardless of their linguistic function. It concerns itself with three branches: <em>articulatory phonetics</em> (how speech sounds are produced by the vocal tract), <em>acoustic phonetics</em> (the physical properties of sound waves), and <em>auditory phonetics</em> (how sounds are perceived by the listener's ear and brain).</p>
+    <p>Every human language uses a subset of the possible sounds producible by the human vocal tract. The International Phonetic Alphabet (IPA) was developed to provide a standardized notation for all possible sounds.</p>
+
+    <h3>1.2 What is Phonology?</h3>
+    <p>Phonology is the abstract, cognitive level of sound study. While phonetics asks "what is this sound physically?", phonology asks "what role does this sound play in the language?" Phonology studies <em>phonemes</em> — the smallest units of sound that can change meaning in a language. For example, the sounds /p/ and /b/ are distinct phonemes in English because they differentiate minimal pairs like <em>pat</em> and <em>bat</em>.</p>
+
+    <h3>1.3 Phonemes and Allophones</h3>
+    <p>A <strong>phoneme</strong> is an abstract unit of sound that distinguishes meaning. An <strong>allophone</strong> is a variant pronunciation of a phoneme that does not change meaning. For example, the phoneme /p/ in English has two allophones: the aspirated [pʰ] in <em>pot</em> and the unaspirated [p] in <em>spot</em>. Native speakers perceive both as the same sound.</p>
+
+    <table class="info-table">
+      <thead><tr><th>Concept</th><th>Definition</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Phoneme</td><td>Smallest meaning-distinguishing sound unit</td><td>/k/ vs /g/ — cat vs gat</td></tr>
+        <tr><td>Allophone</td><td>Variant of a phoneme, no meaning change</td><td>[pʰ] in pot vs [p] in spot</td></tr>
+        <tr><td>Minimal Pair</td><td>Words differing in exactly one phoneme</td><td>bit / bat, cat / hat</td></tr>
+        <tr><td>Phone</td><td>Any distinct speech sound, language-neutral</td><td>[t], [d], [s]</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.4 English Vowel Sounds — Click to Pronounce</h3>
+    <p>English has 12 pure vowel sounds (monophthongs). Each card below shows the IPA symbol, an example word, and a speaker button. Click any card to hear the sound pronounced clearly.</p>
+
+    <div class="phonetics-grid" id="vowelGrid"></div>
+
+    <h3>1.5 English Diphthongs — Click to Pronounce</h3>
+    <p>Diphthongs are vowel sounds that glide from one position to another within a single syllable. English has 8 standard diphthongs. They are classified into <em>closing diphthongs</em> (ending in /ɪ/ or /ʊ/) and <em>centring diphthongs</em> (ending in /ə/).</p>
+
+    <div class="phonetics-grid" id="diphthongGrid"></div>
+
+    <h3>1.6 English Consonants — Click to Pronounce</h3>
+    <p>English consonants are classified by three features: <strong>place of articulation</strong> (where in the vocal tract the sound is made), <strong>manner of articulation</strong> (how airflow is modified), and <strong>voicing</strong> (whether the vocal cords vibrate).</p>
+
+    <div class="phonetics-grid" id="consonantGrid"></div>
+
+    <h3>1.7 Suprasegmental Features</h3>
+    <p>Beyond individual sounds, phonology also studies suprasegmental features — aspects of speech that span more than one segment (sound):</p>
+    <ul>
+      <li><strong>Stress:</strong> The relative emphasis placed on syllables. E.g., <em>REcord</em> (noun) vs <em>reCORD</em> (verb).</li>
+      <li><strong>Intonation:</strong> The rise and fall of pitch across an utterance, conveying meaning and attitude.</li>
+      <li><strong>Tone:</strong> In tonal languages, pitch distinguishes lexical meaning. In English, it operates at discourse level.</li>
+      <li><strong>Rhythm:</strong> English is a stress-timed language — stressed syllables occur at roughly equal intervals.</li>
+    </ul>
+
+  </div>
+
+  <!-- QUIZ 1 -->
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 1 Assessment</div>
+    <div class="quiz-subtitle">PHONETICS &amp; PHONOLOGY · 6 QUESTIONS</div>
+
+    <div class="quiz-q" id="q1_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which branch of phonetics studies how speech sounds are <em>physically produced</em> by the vocal organs?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">A. Acoustic phonetics</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q1_1')">B. Articulatory phonetics</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">C. Auditory phonetics</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">D. Phonology</button>
+      </div>
+      <div class="answer-reveal" id="q1_1_reveal"><strong>Correct Answer: B.</strong> Articulatory phonetics examines how the vocal organs (tongue, lips, teeth, glottis) work together to produce sounds.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">A phoneme and a phone are identical concepts — both refer to concrete, physically produced speech sounds.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q1_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q1_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q1_2_reveal"><strong>False.</strong> A phone is any concrete speech sound (physical); a phoneme is an abstract cognitive unit that distinguishes meaning in a specific language.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The word pair <em>bat</em> and <em>cat</em> differ in exactly one phoneme, making them a __________ pair.</div>
+      <input class="fitb-input" id="fitb1_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb1_3',['minimal'],'q1_3_reveal')">Check Answer</button>
+      <div class="answer-reveal" id="q1_3_reveal"><strong>Answer: minimal.</strong> A minimal pair consists of two words that differ in exactly one phoneme, demonstrating that the two sounds are distinct phonemes in that language.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_4">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In the words <em>pot</em> and <em>spot</em>, the /p/ sound is pronounced differently (aspirated vs. unaspirated). These two pronunciations are called:</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">A. Phonemes</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">B. Morphemes</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q1_4')">C. Allophones</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">D. Diphthongs</button>
+      </div>
+      <div class="answer-reveal" id="q1_4_reveal"><strong>Correct Answer: C.</strong> Allophones are variant realizations of the same phoneme that occur in predictable environments and do not change lexical meaning.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_5">
+      <div class="q-num">Q5 <span class="q-type">True / False</span></div>
+      <div class="q-text">English is classified as a <em>tone language</em>, meaning pitch changes at the word level alter lexical meaning.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q1_5')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q1_5')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q1_5_reveal"><strong>False.</strong> English is not a tone language. It is a stress-timed intonation language. Languages like Mandarin Chinese and Yoruba use lexical tone to distinguish word meanings.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_6">
+      <div class="q-num">Q6 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Define a <em>diphthong</em> and provide TWO examples from English, using either IPA notation or example words.</div>
+      <textarea class="short-ans-input" id="short1_6" placeholder="Write your answer here..."></textarea>
+      <button class="check-btn" onclick="revealShort('q1_6_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q1_6_reveal"><strong>Model Answer:</strong> A diphthong is a vowel sound that involves a glide from one vowel position to another within the same syllable, producing a single complex sound. Examples: /eɪ/ as in <em>day</em>; /aʊ/ as in <em>now</em>; /ɔɪ/ as in <em>boy</em>. The tongue and lips move continuously from the starting vowel position toward the ending position.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch1',6)">Submit Chapter 1 Quiz</button>
+      <div class="score-display" id="ch1_score"></div>
+      <br><button class="mark-done-btn" id="done_ch1" onclick="markDone('ch1',0)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CHAPTER 2 =================== -->
+<div class="chapter" id="ch2">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 02</div>
+    <h2>English Word Classes: Parts of Speech</h2>
+    <div class="ch-mark">📚</div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="definition-box">
+      <strong>Word classes</strong> (also called parts of speech or grammatical categories) are categories of words that share similar grammatical properties, functions within a sentence, and distributional patterns. English word classes are divided into <strong>lexical (open) classes</strong> and <strong>grammatical (closed) classes</strong>.
+    </div>
+
+    <h3>2.1 Lexical Classes (Open Class Words)</h3>
+    <p>Lexical words carry the main semantic content of a sentence. They are called "open" because new words are constantly added to these categories. The four major open word classes in English are:</p>
+    <ul>
+      <li><strong>Nouns:</strong> Words that denote entities, objects, concepts, or ideas. They function as subjects, objects, or complements in sentences. They can be countable/uncountable, concrete/abstract, proper/common. E.g., <em>university, freedom, professor, Lagos</em>.</li>
+      <li><strong>Verbs:</strong> Words that express actions, states, or events. They carry tense, aspect, and mood information. E.g., <em>run, analyze, become, possess</em>.</li>
+      <li><strong>Adjectives:</strong> Words that modify nouns, providing descriptive or qualifying information. They can be attributive (before a noun: <em>intelligent student</em>) or predicative (after a copula: <em>the student is intelligent</em>).</li>
+      <li><strong>Adverbs:</strong> Words that modify verbs, adjectives, other adverbs, or whole clauses, providing information about manner, time, place, degree, or frequency. E.g., <em>quickly, very, always, unfortunately</em>.</li>
+    </ul>
+
+    <h3>2.2 Grammatical Classes (Closed Class Words)</h3>
+    <p>Grammatical words serve structural/functional roles rather than carrying primary lexical meaning. New words are rarely added to these categories.</p>
+    <table class="info-table">
+      <thead><tr><th>Class</th><th>Function</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Determiners</td><td>Introduce and specify nouns</td><td>the, a, this, those, every, some</td></tr>
+        <tr><td>Pronouns</td><td>Replace or refer to noun phrases</td><td>he, she, they, whom, himself, each</td></tr>
+        <tr><td>Prepositions</td><td>Express relations between elements</td><td>in, at, under, through, despite</td></tr>
+        <tr><td>Conjunctions</td><td>Link clauses, phrases, or words</td><td>and, but, although, because, while</td></tr>
+        <tr><td>Auxiliary Verbs</td><td>Express tense, aspect, mood, voice</td><td>is, was, have, will, must, should</td></tr>
+        <tr><td>Interjections</td><td>Express emotions or exclamations</td><td>Oh!, Wow!, Alas!, Indeed!</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.3 Forms of Words (Morphology)</h3>
+    <p>Words change their form to express grammatical distinctions. This is studied in <strong>morphology</strong>. Key concepts include:</p>
+    <ul>
+      <li><strong>Inflection:</strong> Adding endings to modify grammatical features without changing word class. E.g., <em>walk → walks, walked, walking</em> (verb inflection); <em>book → books</em> (noun plural).</li>
+      <li><strong>Derivation:</strong> Adding prefixes or suffixes to create new words, often changing word class. E.g., <em>happy (adj) → happiness (noun)</em>; <em>teach (verb) → teacher (noun)</em>.</li>
+      <li><strong>Compounding:</strong> Combining two or more free morphemes to form a new word. E.g., <em>blackboard, sunflower, textbook</em>.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="label">Word Formation Example</span>
+      Base: nation (noun)<br>
+      → national (adjective) [derivation: + -al]<br>
+      → nationalize (verb) [derivation: + -ize]<br>
+      → nationalization (noun) [derivation: + -ation]<br>
+      → denationalize (verb) [derivation: de- + ...]
+    </div>
+
+    <h3>2.4 Functions of Words in Sentences</h3>
+    <p>Every word in a sentence performs a grammatical <em>function</em>. A word's function is its role in a particular sentence — this is distinct from its class. For instance, a noun can function as subject, object, complement, or appositive.</p>
+    <table class="info-table">
+      <thead><tr><th>Function</th><th>Description</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Subject</td><td>Performs or initiates the action</td><td><u>The professor</u> lectured.</td></tr>
+        <tr><td>Predicate</td><td>States something about the subject</td><td>The professor <u>lectured brilliantly</u>.</td></tr>
+        <tr><td>Direct Object</td><td>Receives the action directly</td><td>She wrote <u>the thesis</u>.</td></tr>
+        <tr><td>Indirect Object</td><td>Benefits from the action</td><td>He gave <u>the student</u> feedback.</td></tr>
+        <tr><td>Complement</td><td>Completes the meaning of subject/object</td><td>She became <u>a linguist</u>.</td></tr>
+        <tr><td>Adjunct</td><td>Optional modifier giving extra info</td><td>She studied <u>in the library</u>.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.5 Collocation</h3>
+    <p>Collocation refers to the habitual co-occurrence of words — the tendency for certain words to appear together more frequently than by chance. Mastery of collocations is a hallmark of advanced English proficiency.</p>
+    <ul>
+      <li><strong>Verb-noun collocations:</strong> <em>commit a crime, make a decision, take an opportunity</em></li>
+      <li><strong>Adjective-noun collocations:</strong> <em>heavy rain, strong argument, rich tradition</em></li>
+      <li><strong>Adverb-adjective collocations:</strong> <em>deeply concerned, highly significant, perfectly clear</em></li>
+    </ul>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 2 Assessment</div>
+    <div class="quiz-subtitle">WORD CLASSES &amp; MORPHOLOGY · 6 QUESTIONS</div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which process creates the word <em>denationalization</em> from <em>nation</em>?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">A. Inflection only</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">B. Compounding</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q2_1')">C. Multiple derivational affixation</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">D. Blending</button>
+      </div>
+      <div class="answer-reveal" id="q2_1_reveal"><strong>Correct: C.</strong> The word undergoes multiple derivational steps: nation → national → nationalize → nationalization → denationalization. Each step adds a derivational affix changing the word class or meaning.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">Words belonging to <em>open</em> word classes are called __________ words because they carry the primary meaning of a sentence.</div>
+      <input class="fitb-input" id="fitb2_2" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb2_2',['lexical','content'],'q2_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q2_2_reveal"><strong>Answer: lexical (or content).</strong> Lexical/content words include nouns, verbs, adjectives, and adverbs — they carry the main semantic burden of a sentence.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">The word class (category) of a word and its grammatical function in a sentence are always identical concepts.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q2_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q2_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q2_3_reveal"><strong>False.</strong> Word class is a category (e.g., noun), while function is the role in a specific sentence (e.g., subject, object). The same word can have different functions in different sentences.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In the sentence "She gave <u>the student</u> the book," what grammatical function does "the student" perform?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">A. Direct Object</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q2_4')">B. Indirect Object</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">C. Subject Complement</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">D. Adjunct</button>
+      </div>
+      <div class="answer-reveal" id="q2_4_reveal"><strong>Correct: B.</strong> The indirect object is the beneficiary of the action. "The student" receives the book (direct object). The ditransitive verb "gave" takes both objects.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The habitual tendency of specific words to appear together — such as <em>make a decision</em> rather than <em>do a decision</em> — is called __________.</div>
+      <input class="fitb-input" id="fitb2_5" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb2_5',['collocation','collocations'],'q2_5_reveal')">Check</button>
+      <div class="answer-reveal" id="q2_5_reveal"><strong>Answer: collocation.</strong> Collocations are statistically significant word pairings that native speakers use habitually, and mastery of them distinguishes advanced from intermediate learners.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q6 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Distinguish between <em>inflection</em> and <em>derivation</em> in morphology. Provide two examples of each.</div>
+      <textarea class="short-ans-input" id="short2_6" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q2_6_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q2_6_reveal"><strong>Model Answer:</strong> <em>Inflection</em> modifies a word's grammatical form without changing its class or core meaning: walk→walked (past tense), book→books (plural). <em>Derivation</em> creates a new word, often changing its class: teach (v)→teacher (n); happy (adj)→happiness (n). Inflection is grammatically conditioned; derivation is lexically creative.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch2',6)">Submit Chapter 2 Quiz</button>
+      <div class="score-display" id="ch2_score"></div>
+      <br><button class="mark-done-btn" id="done_ch2" onclick="markDone('ch2',1)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CHAPTER 3 =================== -->
+<div class="chapter" id="ch3">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 03</div>
+    <h2>English Sentences: Structural and Functional Analysis</h2>
+    <div class="ch-mark">📐</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">
+      A <strong>sentence</strong> is the largest grammatical unit in syntax. It is a complete, independent unit of expression conveying a proposition or speech act. Sentences can be analyzed from two perspectives: their <strong>structural form</strong> (what they look like grammatically) and their <strong>functional purpose</strong> (what communicative act they perform).
+    </div>
+
+    <h3>3.1 Structural Classification of Sentences</h3>
+
+    <h4>Simple Sentences</h4>
+    <p>A simple sentence contains one independent clause — a subject and predicate that together express a complete thought. Despite being structurally simple, simple sentences can contain complex phrases.</p>
+    <div class="example-box"><span class="label">Simple Sentence</span>The diligent student completed the research paper.</div>
+
+    <h4>Compound Sentences</h4>
+    <p>A compound sentence joins two or more independent clauses using a coordinating conjunction (FANBOYS: for, and, nor, but, or, yet, so) or a semicolon. Each clause could stand alone as a sentence.</p>
+    <div class="example-box"><span class="label">Compound Sentence</span>The professor explained the theory, but the students remained confused.</div>
+
+    <h4>Complex Sentences</h4>
+    <p>A complex sentence contains one independent clause and at least one dependent (subordinate) clause. The subordinate clause is introduced by a subordinating conjunction (because, although, when, since, if, etc.) or a relative pronoun (who, which, that).</p>
+    <div class="example-box"><span class="label">Complex Sentence</span>Although the examination was difficult, most students who had studied consistently performed well.</div>
+
+    <h4>Compound-Complex Sentences</h4>
+    <p>The most structurally elaborate type, containing at least two independent clauses and at least one dependent clause.</p>
+    <div class="example-box"><span class="label">Compound-Complex</span>When the results were announced, the lecturer smiled broadly, and the students erupted in celebration.</div>
+
+    <h3>3.2 Functional Classification of Sentences</h3>
+    <table class="info-table">
+      <thead><tr><th>Type</th><th>Function</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Declarative</td><td>States a fact or proposition</td><td>Language is a system of arbitrary signs.</td></tr>
+        <tr><td>Interrogative</td><td>Asks a question</td><td>Have you completed the assignment?</td></tr>
+        <tr><td>Imperative</td><td>Gives a command or instruction</td><td>Analyze the text carefully.</td></tr>
+        <tr><td>Exclamatory</td><td>Expresses strong emotion</td><td>What a remarkable discovery this is!</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.3 Sentence Elements: A Deep Analysis</h3>
+    <p>Every sentence can be broken down into constituent elements. Transformational-generative grammar (Chomsky) proposes that every sentence has both a <em>deep structure</em> (underlying semantic representation) and a <em>surface structure</em> (actual spoken/written form). Passive transformations, for instance, change surface but not deep structure.</p>
+    <ul>
+      <li><strong>Noun Phrase (NP):</strong> Determiner + (Adjective) + Noun + (Prepositional phrase)</li>
+      <li><strong>Verb Phrase (VP):</strong> (Auxiliary) + Main Verb + (Complement/Object)</li>
+      <li><strong>Prepositional Phrase (PP):</strong> Preposition + NP</li>
+      <li><strong>Adjective Phrase (AdjP):</strong> (Intensifier) + Adjective + (Complement)</li>
+    </ul>
+
+    <h3>3.4 Clause Types</h3>
+    <p>Clauses are the building blocks of sentences. They contain a subject and predicate. <strong>Independent clauses</strong> can stand alone. <strong>Dependent clauses</strong> serve noun, adjective, or adverb roles within larger sentences.</p>
+    <ul>
+      <li><strong>Noun clause:</strong> <em>That she passed the exam</em> surprised everyone. [subject function]</li>
+      <li><strong>Adjective/Relative clause:</strong> The book <em>that she recommended</em> was outstanding. [modifies noun]</li>
+      <li><strong>Adverbial clause:</strong> He revised thoroughly <em>because the exam was approaching</em>. [modifies verb]</li>
+    </ul>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 3 Assessment</div>
+    <div class="quiz-subtitle">SENTENCE STRUCTURE &amp; FUNCTION · 6 QUESTIONS</div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Identify the sentence type: "Although he studied for hours, he could not recall the formula, and his confidence faltered."</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">A. Simple</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">B. Compound</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">C. Complex</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q3_1')">D. Compound-Complex</button>
+      </div>
+      <div class="answer-reveal" id="q3_1_reveal"><strong>Correct: D.</strong> The sentence contains a subordinate clause ("Although he studied for hours") + two independent clauses joined by "and" — making it compound-complex.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">In transformational-generative grammar, passive sentences have a different deep structure from their active counterparts.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q3_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q3_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q3_2_reveal"><strong>False.</strong> According to Chomsky's transformational grammar, active and passive versions of a sentence share the same deep structure (semantic meaning) but differ in surface structure (the word arrangement).</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">A sentence that contains exactly ONE independent clause and at least one dependent clause is called a __________ sentence.</div>
+      <input class="fitb-input" id="fitb3_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb3_3',['complex'],'q3_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q3_3_reveal"><strong>Answer: complex.</strong> A complex sentence combines an independent clause with at least one subordinate clause introduced by a subordinating conjunction or relative pronoun.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In "The book <u>that she recommended</u> was outstanding," the underlined clause functions as a(n):</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">A. Adverbial clause</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">B. Noun clause</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q3_4')">C. Relative (adjective) clause</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">D. Complement clause</button>
+      </div>
+      <div class="answer-reveal" id="q3_4_reveal"><strong>Correct: C.</strong> Relative clauses (introduced by who, which, that) function as adjectives, modifying a preceding noun. Here it modifies "The book."</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">A declarative sentence states a __________, while an imperative sentence gives a __________ or instruction.</div>
+      <input class="fitb-input" id="fitb3_5" placeholder="fact / ...">
+      <button class="check-btn" onclick="checkFITB('fitb3_5',['fact','command'],'q3_5_reveal')">Check</button>
+      <div class="answer-reveal" id="q3_5_reveal"><strong>Answer: fact / command.</strong> Declaratives state propositions; imperatives direct behavior. (Both words required for full marks.)</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q6 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Explain Chomsky's distinction between "deep structure" and "surface structure," using the active/passive pair as an example.</div>
+      <textarea class="short-ans-input" id="short3_6" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q3_6_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q3_6_reveal"><strong>Model Answer:</strong> Chomsky's TG grammar posits that sentences have two levels: deep structure (the underlying semantic/logical representation) and surface structure (the actual spoken/written form). Active: "The dog bit the man" and Passive: "The man was bitten by the dog" share the same deep structure — both express the same real-world event — but differ at surface structure because transformational rules have rearranged constituents and added auxiliary "was" and "by."</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch3',6)">Submit Chapter 3 Quiz</button>
+      <div class="score-display" id="ch3_score"></div>
+      <br><button class="mark-done-btn" id="done_ch3" onclick="markDone('ch3',2)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CHAPTER 4 =================== -->
+<div class="chapter" id="ch4">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 04</div>
+    <h2>Grammar and Usage: Tenses, Mood, Modality, Concord & Aspects</h2>
+    <div class="ch-mark">⚙️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">
+      <strong>Grammar</strong> is the system of rules governing the structure of a language. <strong>Usage</strong> refers to how these rules are applied in real communicative contexts. The major grammatical categories of the English verb system include <strong>tense</strong>, <strong>aspect</strong>, <strong>mood</strong>, <strong>modality</strong>, and <strong>concord</strong> (agreement).
+    </div>
+
+    <h3>4.1 Tense</h3>
+    <p>Tense is a grammatical category that locates events and states in time, primarily distinguishing past from present. English has two morphological tenses: <em>past</em> (marked by -ed or irregular forms) and <em>present</em> (unmarked or marked by -s for 3rd person singular). Future is expressed through modals or <em>going to</em> constructions.</p>
+    <table class="info-table">
+      <thead><tr><th>Tense/Aspect Combination</th><th>Form</th><th>Example</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Simple Present</td><td>V / V+s</td><td>She writes essays.</td><td>Habitual action / general truth</td></tr>
+        <tr><td>Present Continuous</td><td>am/is/are + V-ing</td><td>She is writing now.</td><td>Action in progress at speech time</td></tr>
+        <tr><td>Present Perfect</td><td>have/has + V-en</td><td>She has written the report.</td><td>Past action with current relevance</td></tr>
+        <tr><td>Present Perfect Continuous</td><td>have/has + been + V-ing</td><td>She has been writing all day.</td><td>Ongoing action from past to present</td></tr>
+        <tr><td>Simple Past</td><td>V-ed / irregular</td><td>She wrote yesterday.</td><td>Completed past action</td></tr>
+        <tr><td>Past Continuous</td><td>was/were + V-ing</td><td>She was writing when I arrived.</td><td>Ongoing past action interrupted</td></tr>
+        <tr><td>Past Perfect</td><td>had + V-en</td><td>She had written before leaving.</td><td>Action completed before another past action</td></tr>
+        <tr><td>Future Simple</td><td>will + V</td><td>She will write tomorrow.</td><td>Future prediction/intention</td></tr>
+        <tr><td>Future Perfect</td><td>will have + V-en</td><td>By June, she will have written 10 chapters.</td><td>Completion before a future time</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.2 Aspect</h3>
+    <p>Aspect expresses how an event unfolds or extends in time, independent of tense. English has two grammatical aspects:</p>
+    <ul>
+      <li><strong>Perfective aspect</strong> (marked by <em>have + past participle</em>): views the event as a complete whole with current relevance — <em>She has finished the report.</em></li>
+      <li><strong>Progressive/Continuous aspect</strong> (marked by <em>be + present participle</em>): views the event as ongoing and unfolding — <em>She is writing the report.</em></li>
+      <li>These can be combined: <em>She has been writing for hours.</em> (Perfect Progressive)</li>
+    </ul>
+
+    <h3>4.3 Mood</h3>
+    <p>Mood expresses the speaker's attitude toward the content of the utterance — specifically, the speaker's assessment of reality, possibility, necessity, or desirability.</p>
+    <ul>
+      <li><strong>Indicative mood:</strong> States facts or asks questions about reality. <em>The student passed the examination.</em></li>
+      <li><strong>Imperative mood:</strong> Issues commands or requests. <em>Submit your assignment by Friday.</em></li>
+      <li><strong>Subjunctive mood:</strong> Expresses hypothetical, counterfactual, or desired states. <em>If I were the professor, I would restructure the curriculum.</em> / <em>It is essential that every student attend.</em></li>
+    </ul>
+
+    <h3>4.4 Modality</h3>
+    <p>Modality is expressed primarily through <em>modal auxiliary verbs</em> and encodes epistemic (knowledge/belief-based) or deontic (obligation/permission-based) meanings.</p>
+    <table class="info-table">
+      <thead><tr><th>Modal</th><th>Epistemic Use</th><th>Deontic Use</th></tr></thead>
+      <tbody>
+        <tr><td>must</td><td>She must be the lecturer. (deduction)</td><td>You must submit on time. (obligation)</td></tr>
+        <tr><td>can / could</td><td>That could be the answer. (possibility)</td><td>You can leave early. (permission)</td></tr>
+        <tr><td>may / might</td><td>It might rain. (possibility)</td><td>You may enter now. (permission)</td></tr>
+        <tr><td>will / would</td><td>That would be the error. (probability)</td><td>Students will attend all lectures. (requirement)</td></tr>
+        <tr><td>should / ought to</td><td>She should know the answer. (expectation)</td><td>You should cite all sources. (recommendation)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.5 Concord (Subject-Verb Agreement)</h3>
+    <p>Concord (or agreement) refers to the grammatical relationship whereby a verb must agree with its subject in number and person. Violations of concord are among the most common grammatical errors in academic writing.</p>
+    <ul>
+      <li><strong>Basic rule:</strong> Singular subjects take singular verbs; plural subjects take plural verbs. <em>The data show</em> (not <em>shows</em>) — because "data" is technically plural.</li>
+      <li><strong>Collective nouns:</strong> In American English, collective nouns (committee, team) take singular verbs. In British English, plural is acceptable.</li>
+      <li><strong>Intervening phrases:</strong> <em>The quality of the results <u>is</u> impressive</em> — the verb agrees with "quality," not "results."</li>
+      <li><strong>Neither…nor / Either…or:</strong> The verb agrees with the nearest subject. <em>Neither the students nor the professor <u>was</u> ready.</em></li>
+    </ul>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 4 Assessment</div>
+    <div class="quiz-subtitle">GRAMMAR &amp; USAGE · 6 QUESTIONS</div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which tense/aspect combination is used in "By the time she arrives, he will have submitted the report"?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_1')">A. Future Simple</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q4_1')">B. Future Perfect</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_1')">C. Present Perfect</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_1')">D. Past Perfect</button>
+      </div>
+      <div class="answer-reveal" id="q4_1_reveal"><strong>Correct: B.</strong> Future Perfect (will have + past participle) expresses an action that will be completed before a specified future point.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The sentence "It is essential that every student __________ [attend/attends] all lectures" uses the __________ mood.</div>
+      <input class="fitb-input" id="fitb4_2" placeholder="attend / subjunctive">
+      <button class="check-btn" onclick="checkFITB('fitb4_2',['attend','subjunctive'],'q4_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q4_2_reveal"><strong>Answer: attend / subjunctive.</strong> The mandative subjunctive uses the base form of the verb (attend, not attends) in "that" clauses following verbs of recommendation, requirement, or necessity.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">"You must submit your thesis" — which type of modality does <em>must</em> express here?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">A. Epistemic (deduction)</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q4_3')">B. Deontic (obligation)</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">C. Dynamic (ability)</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">D. Alethic (necessity)</button>
+      </div>
+      <div class="answer-reveal" id="q4_3_reveal"><strong>Correct: B.</strong> Deontic modality expresses obligation, permission, or prohibition. Here "must" imposes an obligation on the addressee.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">True / False</span></div>
+      <div class="q-text">In the sentence "Neither the dean nor the lecturers was present," the verb form "was" is grammatically correct.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q4_4')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q4_4')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q4_4_reveal"><strong>False.</strong> With neither…nor, the verb agrees with the nearest subject. "The lecturers" (plural) is nearest to the verb, so the correct form is "were present."</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The progressive aspect marks a situation as __________ and ongoing, while the perfective aspect presents an event as a __________ whole.</div>
+      <input class="fitb-input" id="fitb4_5" placeholder="unfolding / complete">
+      <button class="check-btn" onclick="checkFITB('fitb4_5',['unfolding','complete'],'q4_5_reveal')">Check</button>
+      <div class="answer-reveal" id="q4_5_reveal"><strong>Answer: unfolding / complete.</strong> Progressive = internal, unfinished perspective. Perfective = external, completed perspective with present relevance.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="q-num">Q6 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">What is the difference between epistemic and deontic modality? Provide one sentence example for each using the modal verb <em>may</em>.</div>
+      <textarea class="short-ans-input" id="short4_6" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q4_6_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q4_6_reveal"><strong>Model Answer:</strong> <em>Epistemic modality</em> expresses the speaker's degree of certainty or knowledge about a proposition: "She may be in the library" (= possibly she is). <em>Deontic modality</em> expresses permission, obligation, or prohibition: "You may submit your paper tomorrow" (= I give you permission). The same modal verb can express either meaning depending on context.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch4',6)">Submit Chapter 4 Quiz</button>
+      <div class="score-display" id="ch4_score"></div>
+      <br><button class="mark-done-btn" id="done_ch4" onclick="markDone('ch4',3)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chapters 5-14 and Final Exam will be injected by JS below -->
+<div id="remaining-chapters"></div>
+
+<!-- =================== FINAL EXAM =================== -->
+<div id="final-exam">
+  <h2>📋 Final Examination</h2>
+  <div class="subtitle">ENG 101 · COMPREHENSIVE ASSESSMENT · 15 QUESTIONS</div>
+  <div id="finalQuizContainer"></div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="submit-quiz-btn" onclick="scoreFinal()">Submit Final Exam</button>
+    <div class="score-display" id="final_score" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ============================================================
+// PHONETICS DATA
+// ============================================================
+const vowels = [
+  {ipa:'/iː/', word:'fleece', say:'fleece', type:'Long Vowel'},
+  {ipa:'/ɪ/', word:'kit', say:'kit', type:'Short Vowel'},
+  {ipa:'/e/', word:'dress', say:'dress', type:'Short Vowel'},
+  {ipa:'/æ/', word:'trap', say:'trap', type:'Short Vowel'},
+  {ipa:'/ɑː/', word:'bath', say:'bath', type:'Long Vowel'},
+  {ipa:'/ɒ/', word:'lot', say:'lot', type:'Short Vowel'},
+  {ipa:'/ɔː/', word:'thought', say:'thought', type:'Long Vowel'},
+  {ipa:'/ʊ/', word:'foot', say:'foot', type:'Short Vowel'},
+  {ipa:'/uː/', word:'goose', say:'goose', type:'Long Vowel'},
+  {ipa:'/ʌ/', word:'strut', say:'strut', type:'Short Vowel'},
+  {ipa:'/ɜː/', word:'nurse', say:'nurse', type:'Long Vowel'},
+  {ipa:'/ə/', word:'comma', say:'comma', type:'Schwa'},
+];
+const diphthongs = [
+  {ipa:'/eɪ/', word:'face', say:'face', type:'Diphthong'},
+  {ipa:'/aɪ/', word:'price', say:'price', type:'Diphthong'},
+  {ipa:'/ɔɪ/', word:'choice', say:'choice', type:'Diphthong'},
+  {ipa:'/əʊ/', word:'goat', say:'goat', type:'Diphthong'},
+  {ipa:'/aʊ/', word:'mouth', say:'mouth', type:'Diphthong'},
+  {ipa:'/ɪə/', word:'near', say:'near', type:'Centring'},
+  {ipa:'/eə/', word:'square', say:'square', type:'Centring'},
+  {ipa:'/ʊə/', word:'cure', say:'cure', type:'Centring'},
+];
+const consonants = [
+  {ipa:'/p/', word:'pen', say:'pen', type:'Plosive'},
+  {ipa:'/b/', word:'bed', say:'bed', type:'Plosive'},
+  {ipa:'/t/', word:'top', say:'top', type:'Plosive'},
+  {ipa:'/d/', word:'dog', say:'dog', type:'Plosive'},
+  {ipa:'/k/', word:'cat', say:'cat', type:'Plosive'},
+  {ipa:'/g/', word:'get', say:'get', type:'Plosive'},
+  {ipa:'/f/', word:'fan', say:'fan', type:'Fricative'},
+  {ipa:'/v/', word:'van', say:'van', type:'Fricative'},
+  {ipa:'/θ/', word:'think', say:'think', type:'Fricative'},
+  {ipa:'/ð/', word:'this', say:'this', type:'Fricative'},
+  {ipa:'/s/', word:'sun', say:'sun', type:'Fricative'},
+  {ipa:'/z/', word:'zoo', say:'zoo', type:'Fricative'},
+  {ipa:'/ʃ/', word:'shoe', say:'shoe', type:'Fricative'},
+  {ipa:'/ʒ/', word:'measure', say:'measure', type:'Fricative'},
+  {ipa:'/h/', word:'hot', say:'hot', type:'Fricative'},
+  {ipa:'/tʃ/', word:'church', say:'church', type:'Affricate'},
+  {ipa:'/dʒ/', word:'judge', say:'judge', type:'Affricate'},
+  {ipa:'/m/', word:'man', say:'man', type:'Nasal'},
+  {ipa:'/n/', word:'no', say:'no', type:'Nasal'},
+  {ipa:'/ŋ/', word:'ring', say:'ring', type:'Nasal'},
+  {ipa:'/l/', word:'leg', say:'leg', type:'Lateral'},
+  {ipa:'/r/', word:'red', say:'red', type:'Rhotic'},
+  {ipa:'/j/', word:'yes', say:'yes', type:'Approximant'},
+  {ipa:'/w/', word:'wet', say:'wet', type:'Approximant'},
+];
+
+function buildPhonCards(data, containerId) {
+  const grid = document.getElementById(containerId);
+  data.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'phon-card';
+    card.innerHTML = `<span class="type-tag">${item.type}</span><span class="ipa">${item.ipa}</span><span class="word">${item.word}</span><span class="speak-icon">🔊</span>`;
+    card.onclick = () => speak(item.say, card);
+    grid.appendChild(card);
+  });
+}
+
+function speak(text, card) {
+  if (!window.speechSynthesis) { alert('Speech not supported in this browser.'); return; }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-GB';
+  utter.rate = 0.8;
+  utter.pitch = 1.1;
+  if (card) {
+    card.classList.add('speaking');
+    utter.onend = () => card.classList.remove('speaking');
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+buildPhonCards(vowels, 'vowelGrid');
+buildPhonCards(diphthongs, 'diphthongGrid');
+buildPhonCards(consonants, 'consonantGrid');
+
+// ============================================================
+// REMAINING CHAPTERS (5-14)
+// ============================================================
+const chaptersHTML = `
+<!-- CHAPTER 5 -->
+<div class="chapter" id="ch5">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 05</div>
+    <h2>Logical and Critical Thinking & Reasoning</h2>
+    <div class="ch-mark">🧠</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box"><strong>Critical thinking</strong> is the intellectually disciplined process of actively conceptualizing, applying, analyzing, synthesizing, and evaluating information gathered from observation, experience, reflection, reasoning, or communication, as a guide to belief and action. <strong>Logical reasoning</strong> is the systematic application of formal or informal rules of inference to derive conclusions from premises.</div>
+    <h3>5.1 What is Logic?</h3>
+    <p>Logic is the branch of philosophy and mathematics concerned with valid inference. It provides the formal structure through which arguments are evaluated. An <strong>argument</strong> consists of one or more <em>premises</em> (supporting statements) and a <em>conclusion</em> (the claim being defended). A <strong>valid argument</strong> is one where, IF all premises are true, the conclusion MUST be true. A <strong>sound argument</strong> is both valid AND has all true premises.</p>
+    <h3>5.2 Deductive Reasoning</h3>
+    <p>Deductive reasoning moves from general principles to specific conclusions. If the premises are true and the argument is valid, the conclusion is necessarily true. This is the basis of mathematical proof and formal logic.</p>
+    <div class="example-box"><span class="label">Classic Syllogism (Deductive)</span>Premise 1: All humans are mortal.<br>Premise 2: Socrates is a human.<br>Conclusion: ∴ Socrates is mortal. [VALID & SOUND]</div>
+    <h3>5.3 Inductive Reasoning</h3>
+    <p>Inductive reasoning moves from specific observations to broad generalizations. The conclusion is <em>probable</em> but not certain — it can always be overturned by new evidence. Induction is the basis of scientific inquiry.</p>
+    <div class="example-box"><span class="label">Inductive Argument</span>Observation: Every crow observed so far has been black.<br>Inductive Conclusion: All crows are black.<br>Status: PROBABLE but not logically certain (one white crow refutes it).</div>
+    <h3>5.4 Logical Fallacies</h3>
+    <p>A <strong>fallacy</strong> is an error in reasoning that renders an argument invalid or unsound. Common fallacies include:</p>
+    <ul>
+      <li><strong>Ad hominem:</strong> Attacking the person rather than their argument.</li>
+      <li><strong>Straw man:</strong> Misrepresenting an opponent's argument to attack a weaker version.</li>
+      <li><strong>False dilemma:</strong> Presenting only two options when more exist.</li>
+      <li><strong>Hasty generalization:</strong> Drawing broad conclusions from insufficient evidence.</li>
+      <li><strong>Post hoc ergo propter hoc:</strong> Assuming causation from temporal sequence.</li>
+      <li><strong>Circular reasoning (begging the question):</strong> The conclusion is assumed in the premise.</li>
+    </ul>
+    <h3>5.5 Algorithmic Thinking</h3>
+    <p>Algorithmic thinking involves breaking a complex problem into a finite sequence of well-defined steps. It is closely related to logical reasoning and is foundational in both computer science and analytical writing. In composition, algorithmic thinking helps writers structure arguments systematically — premise → evidence → warrant → conclusion.</p>
+    <h3>5.6 Critical Analysis of Texts</h3>
+    <p>Critical thinking applied to reading involves: (1) identifying the author's central claim/thesis; (2) evaluating the quality and relevance of supporting evidence; (3) detecting logical fallacies or rhetorical manipulation; (4) considering alternative perspectives; (5) assessing the strength of the conclusion relative to the evidence presented.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 5 Assessment</div>
+    <div class="quiz-subtitle">CRITICAL THINKING &amp; LOGIC · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">An argument is <em>valid</em> but <em>unsound</em>. What does this mean?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">A. The structure is flawed and premises are false</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q5_1')">B. The structure is correct but at least one premise is false</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">C. The structure is flawed but premises are true</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">D. Both structure and premises are acceptable</button>
+      </div>
+      <div class="answer-reveal" id="q5_1_reveal"><strong>Correct: B.</strong> Validity concerns logical structure; soundness requires valid structure PLUS true premises. A valid argument with false premises is unsound.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">Inductive reasoning guarantees a certain conclusion if enough observations are made.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q5_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q5_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q5_2_reveal"><strong>False.</strong> Induction yields probable, not certain conclusions. No quantity of confirming instances can logically guarantee a universal conclusion — a single counter-example can falsify it (Popper's falsifiability principle).</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The fallacy of attacking a person's character rather than addressing their argument is called __________ .</div>
+      <input class="fitb-input" id="fitb5_3" placeholder="Type the fallacy name...">
+      <button class="check-btn" onclick="checkFITB('fitb5_3',['ad hominem','ad-hominem'],'q5_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q5_3_reveal"><strong>Answer: Ad hominem.</strong> Latin for "to the person" — this fallacy redirects criticism from an argument to the arguer, which is logically irrelevant to the argument's validity.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which reasoning pattern moves from general principles to specific, necessarily true conclusions?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'correct','q5_4')">A. Deductive reasoning</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_4')">B. Inductive reasoning</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_4')">C. Abductive reasoning</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_4')">D. Analogical reasoning</button>
+      </div>
+      <div class="answer-reveal" id="q5_4_reveal"><strong>Correct: A.</strong> Deductive reasoning proceeds from universal premises to necessarily true particular conclusions — the conclusion is "contained in" the premises.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Identify and explain the logical fallacy in this argument: "We must either increase university fees dramatically or close half the universities. Clearly we cannot close universities, so fees must be dramatically increased."</div>
+      <textarea class="short-ans-input" id="short5_5" placeholder="Name the fallacy and explain..."></textarea>
+      <button class="check-btn" onclick="revealShort('q5_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q5_5_reveal"><strong>Model Answer:</strong> This is a <em>False Dilemma</em> (also called the either/or fallacy or bifurcation fallacy). The argument artificially restricts the solution space to only two options when other alternatives exist (e.g., government grants, corporate sponsorships, efficiency improvements, partial fee increases). By excluding other possibilities, it forces a choice between a false binary.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch5',5)">Submit Chapter 5 Quiz</button>
+      <div class="score-display" id="ch5_score"></div>
+      <br><button class="mark-done-btn" id="done_ch5" onclick="markDone('ch5',4)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 6 -->
+<div class="chapter" id="ch6">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 06</div>
+    <h2>Analogy: Generalization and Explanation</h2>
+    <div class="ch-mark">🔗</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">An <strong>analogy</strong> is a cognitive and rhetorical device that explains or justifies something unfamiliar or complex by comparing it to something familiar. Analogical reasoning is used in scientific discovery, legal argument, philosophical inquiry, and everyday explanation.</div>
+    <h3>6.1 The Structure of an Analogy</h3>
+    <p>An analogy establishes a relationship of similarity between two things (the <em>source domain</em> and the <em>target domain</em>) across some relevant dimension. The formal structure is: <em>A is to B as C is to D</em> (A:B :: C:D). The power of an analogy rests on the <strong>relational similarity</strong> between the two domains, not merely surface resemblance.</p>
+    <div class="example-box"><span class="label">Analogical Structure</span>The brain is to the body as a CPU is to a computer.<br>Source: CPU/Computer → Target: Brain/Body<br>Shared relation: central processing and coordination of system functions.</div>
+    <h3>6.2 Analogical Reasoning in Argument</h3>
+    <p>Arguments by analogy claim that if two things are similar in certain respects, they are likely similar in further respects. The strength of analogical argument depends on: (1) the number of similarities between source and target; (2) the relevance of those similarities to the conclusion; (3) the absence of critical disanalogies (differences that would undermine the comparison).</p>
+    <h3>6.3 Generalization</h3>
+    <p>Generalization is the cognitive process of forming a general rule or principle from particular instances. It is closely linked to inductive reasoning. There are two types:</p>
+    <ul>
+      <li><strong>Empirical generalization:</strong> Based on observed data — <em>"In every study reviewed, bilingual children showed enhanced executive function."</em></li>
+      <li><strong>Hasty generalization:</strong> Drawn from insufficient or unrepresentative samples — a logical fallacy.</li>
+    </ul>
+    <h3>6.4 Explanation by Analogy in Academic Writing</h3>
+    <p>Analogy is a powerful explanatory tool in academic prose. When introducing complex technical or abstract concepts, writers use familiar analogies to build conceptual bridges. However, analogies must not be over-extended — at some point, all analogies break down, and the writer must acknowledge the limits of the comparison to avoid misleading the reader.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 6 Assessment</div>
+    <div class="quiz-subtitle">ANALOGY &amp; GENERALIZATION · 4 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In the analogy "Surgeon is to scalpel as painter is to brush," what is the shared relational structure?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">A. Both involve sharp instruments</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q6_1')">B. A skilled practitioner uses a specialized tool in their craft</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">C. Both surgeons and painters work in hospitals</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">D. Both tools are made of wood</button>
+      </div>
+      <div class="answer-reveal" id="q6_1_reveal"><strong>Correct: B.</strong> The analogy captures the relational structure: professional → characteristic tool of their trade. This relational similarity, not surface resemblance, is what makes analogies powerful.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">The strength of an analogical argument increases when there are significant disanalogies (critical differences) between the source and target domains.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q6_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q6_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q6_2_reveal"><strong>False.</strong> Significant disanalogies weaken analogical arguments. If the source and target differ in ways relevant to the conclusion, the analogy is weakened or broken.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">A generalization drawn from too few or unrepresentative examples is called a __________ generalization, and constitutes a logical fallacy.</div>
+      <input class="fitb-input" id="fitb6_3" placeholder="Type the adjective...">
+      <button class="check-btn" onclick="checkFITB('fitb6_3',['hasty'],'q6_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q6_3_reveal"><strong>Answer: hasty.</strong> A hasty generalization leaps to a broad conclusion without sufficient inductive support, violating the requirement for representative and adequate sampling.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Construct an original analogy to explain the concept of "peer review in academic publishing" to someone unfamiliar with academia. Identify the source domain, target domain, and shared relational structure.</div>
+      <textarea class="short-ans-input" id="short6_4" placeholder="Write your analogy..."></textarea>
+      <button class="check-btn" onclick="revealShort('q6_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q6_4_reveal"><strong>Model Answer:</strong> <em>Source domain:</em> A quality control inspector checking products on a manufacturing line before they reach stores. <em>Target domain:</em> Peer reviewers evaluating academic manuscripts before publication. <em>Shared relational structure:</em> Expert evaluators independently scrutinize a product/paper before it is released to the general public/scholarly community, to ensure it meets established quality standards. Both involve qualified gatekeepers protecting the integrity of what consumers/readers receive.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch6',4)">Submit Chapter 6 Quiz</button>
+      <div class="score-display" id="ch6_score"></div>
+      <br><button class="mark-done-btn" id="done_ch6" onclick="markDone('ch6',5)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 7 -->
+<div class="chapter" id="ch7">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 07</div>
+    <h2>Ethical Considerations: Copyright, Rules & Infringement</h2>
+    <div class="ch-mark">⚖️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box"><strong>Academic ethics</strong> encompasses the moral principles governing intellectual work, including honesty in attribution, respect for intellectual property, and responsible use of information. <strong>Copyright</strong> is the legal right granted to creators of original works to control the use and distribution of those works.</div>
+    <h3>7.1 What is Copyright?</h3>
+    <p>Copyright is an automatic legal right that arises the moment an original work is created and fixed in a tangible medium. It protects literary, artistic, musical, and other creative works. Copyright gives the creator exclusive rights to reproduce, distribute, perform, display, and create derivative works.</p>
+    <h3>7.2 Academic Integrity and Plagiarism</h3>
+    <p><strong>Plagiarism</strong> is the act of presenting someone else's ideas, words, data, or creative work as one's own without proper attribution. It is both an ethical violation and, in many contexts, a legal one. Types include: direct copying, paraphrasing without attribution, mosaic plagiarism (patching together from multiple sources), self-plagiarism (recycling one's own prior work), and idea theft.</p>
+    <h3>7.3 Citation and Attribution</h3>
+    <p>Proper citation acknowledges intellectual debts. Major citation systems include APA (Psychology, Social Sciences), MLA (Humanities), Chicago/Turabian (History, Arts), and IEEE (Engineering). Each system has specific rules for formatting in-text citations and reference lists.</p>
+    <div class="example-box"><span class="label">APA In-Text Citation</span>Language acquisition follows a predictable developmental sequence (Chomsky, 1965, p. 47).</div>
+    <h3>7.4 Fair Use Doctrine</h3>
+    <p>Fair use (or fair dealing) permits limited use of copyrighted material without permission under specific conditions: (1) purpose (educational, critical, transformative uses favored); (2) nature of the copyrighted work; (3) amount used relative to the whole; (4) effect on the market value of the original.</p>
+    <h3>7.5 Infringement and Consequences</h3>
+    <p>Copyright infringement occurs when copyrighted material is used without authorization in ways not covered by fair use. Consequences range from academic sanctions (grade reduction, expulsion) to civil lawsuits and criminal prosecution for willful commercial infringement.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 7 Assessment</div>
+    <div class="quiz-subtitle">ETHICS &amp; COPYRIGHT · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">True / False</span></div>
+      <div class="q-text">Copyright protection begins only after a work has been formally registered with a government copyright office.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q7_1')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q7_1')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q7_1_reveal"><strong>False.</strong> In most jurisdictions under the Berne Convention, copyright is automatic upon creation and fixation of an original work. Registration is not required for protection, though it may provide additional legal benefits.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A student rewrites passages from three different sources and combines them into a paragraph without citation. This form of plagiarism is specifically called:</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_2')">A. Direct plagiarism</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_2')">B. Self-plagiarism</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q7_2')">C. Mosaic plagiarism</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_2')">D. Idea theft</button>
+      </div>
+      <div class="answer-reveal" id="q7_2_reveal"><strong>Correct: C.</strong> Mosaic plagiarism (also called patchwriting) involves weaving together phrases from multiple sources, creating a false impression of originality even though no original source is directly quoted verbatim.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The legal doctrine that permits limited use of copyrighted material for educational, critical, or transformative purposes is called __________ use.</div>
+      <input class="fitb-input" id="fitb7_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb7_3',['fair'],'q7_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q7_3_reveal"><strong>Answer: fair.</strong> Fair use is a limitation on copyright that allows unauthorized use under specific circumstances, evaluated on a case-by-case basis considering purpose, nature, amount, and market effect.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which citation style is primarily used in the humanities (literature, language arts)?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_4')">A. APA</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q7_4')">B. MLA</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_4')">C. IEEE</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_4')">D. Vancouver</button>
+      </div>
+      <div class="answer-reveal" id="q7_4_reveal"><strong>Correct: B.</strong> MLA (Modern Language Association) style is the standard in humanities disciplines, particularly literature and language studies. APA is used in social sciences; IEEE in engineering.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Explain the concept of "self-plagiarism." Is it truly a form of plagiarism? Defend your position with reference to academic integrity principles.</div>
+      <textarea class="short-ans-input" id="short7_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q7_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q7_5_reveal"><strong>Model Answer:</strong> Self-plagiarism occurs when a writer submits their own previously published or submitted work as though it were new and original. While it may seem paradoxical to plagiarize oneself, it is genuinely a form of academic dishonesty because: (1) it violates the implicit contract that submitted work is original to that assignment; (2) it may violate copyright if the work was previously published; (3) it misrepresents the scope of one's current intellectual effort. Academic integrity requires that each submission represent fresh intellectual engagement with the topic.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch7',5)">Submit Chapter 7 Quiz</button>
+      <div class="score-display" id="ch7_score"></div>
+      <br><button class="mark-done-btn" id="done_ch7" onclick="markDone('ch7',6)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 8 -->
+<div class="chapter" id="ch8">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 08</div>
+    <h2>Writing Activities: Pre-Writing, Writing, Post-Writing & Editing</h2>
+    <div class="ch-mark">✍️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">The <strong>writing process</strong> is a recursive, multi-stage activity — not a linear sequence. Skilled writers move back and forth between planning, drafting, revising, and editing. Understanding each stage enables more effective and systematic written communication.</div>
+    <h3>8.1 Pre-Writing Strategies</h3>
+    <p>Pre-writing is everything done before producing a draft. It is arguably the most intellectually intensive stage. Effective pre-writing strategies include:</p>
+    <ul>
+      <li><strong>Brainstorming:</strong> Free, uncritical generation of all ideas related to a topic.</li>
+      <li><strong>Mind-mapping:</strong> Visual representation of ideas and their relationships.</li>
+      <li><strong>Free-writing:</strong> Writing continuously without stopping to edit, to overcome writer's block.</li>
+      <li><strong>Outlining:</strong> Organizing ideas hierarchically before drafting.</li>
+      <li><strong>Research:</strong> Gathering evidence, data, and sources to support the intended argument.</li>
+      <li><strong>Audience analysis:</strong> Considering who will read the text and what they know/expect.</li>
+    </ul>
+    <h3>8.2 The Writing/Drafting Stage</h3>
+    <p>During drafting, the writer transforms pre-writing ideas into connected prose. The goal is to produce a complete, rough version without excessive self-editing. Key principles: follow the outline but allow organic development; prioritize completion over perfection; maintain focus on the thesis/central argument; use paragraph unity (one main idea per paragraph) and coherence (logical flow between sentences).</p>
+    <h3>8.3 Post-Writing: Revision</h3>
+    <p>Revision (from Latin <em>re-visere</em> = to see again) involves substantial rethinking of content, structure, and argument — not merely surface correction. Revision questions include: Does the thesis respond to the assignment? Is the argument logically coherent? Is evidence sufficient and well-integrated? Are there gaps in reasoning? Is the structure optimal?</p>
+    <h3>8.4 Editing and Proofreading</h3>
+    <p>Editing addresses sentence-level issues: clarity, conciseness, grammar, punctuation, word choice. Proofreading is the final scan for surface errors — typos, spelling, formatting. The distinction is important: revision is macro-level; editing is micro-level.</p>
+    <h3>8.5 Book Reading as a Writing Activity</h3>
+    <p>Extensive reading is the single most powerful contributor to writing development. Readers internalize syntax patterns, vocabulary ranges, organizational structures, and rhetorical strategies that enrich their own writing. Active reading — annotating, questioning, summarizing — is more developmentally beneficial than passive reading.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 8 Assessment</div>
+    <div class="quiz-subtitle">WRITING PROCESS · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which pre-writing strategy involves writing continuously for a set time without stopping to correct or evaluate — specifically to overcome writer's block?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">A. Outlining</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">B. Mind-mapping</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q8_1')">C. Free-writing</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">D. Brainstorming</button>
+      </div>
+      <div class="answer-reveal" id="q8_1_reveal"><strong>Correct: C.</strong> Free-writing suspends the critical inner editor to allow unconstrained idea generation. It is effective against perfectionism and writer's block.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">Revision and proofreading are the same activity — both primarily correct grammar and spelling errors at the sentence level.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q8_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q8_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q8_2_reveal"><strong>False.</strong> Revision is macro-level: rethinking argument, structure, evidence, and logic. Proofreading is micro-level: correcting surface errors (typos, spelling, punctuation). Conflating them leads to poorly structured writing that is merely grammatically correct.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The principle that each paragraph should develop one main controlling idea is called paragraph __________.</div>
+      <input class="fitb-input" id="fitb8_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb8_3',['unity'],'q8_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q8_3_reveal"><strong>Answer: unity.</strong> Paragraph unity requires that every sentence in a paragraph relate directly to the paragraph's topic sentence/controlling idea. Sentences that diverge from this unity should be relocated or deleted.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">The writing process is best described as:</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_4')">A. A strictly linear sequence: plan → draft → edit → submit</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q8_4')">B. A recursive, non-linear process where writers loop between stages</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_4')">C. A process that begins with editing and ends with brainstorming</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_4')">D. A purely individual process unaffected by audience or purpose</button>
+      </div>
+      <div class="answer-reveal" id="q8_4_reveal"><strong>Correct: B.</strong> Research in composition studies shows that skilled writers move recursively between stages — drafting may generate new ideas that require more research; revision may require re-drafting entire sections.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">What is "audience analysis" in pre-writing? Explain why it is critical to the effectiveness of any written communication.</div>
+      <textarea class="short-ans-input" id="short8_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q8_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q8_5_reveal"><strong>Model Answer:</strong> Audience analysis is the process of systematically assessing the characteristics, knowledge level, expectations, values, and needs of the intended readership before writing. It is critical because writing is fundamentally a communicative act aimed at a specific receiver: the appropriate level of technicality, assumed background knowledge, tone (formal/informal), organizational strategy, and type of evidence all vary depending on who will read the text. Writing without audience analysis risks producing content that is too complex, too simple, inappropriately toned, or irrelevant to the reader's actual needs.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch8',5)">Submit Chapter 8 Quiz</button>
+      <div class="score-display" id="ch8_score"></div>
+      <br><button class="mark-done-btn" id="done_ch8" onclick="markDone('ch8',7)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 9 -->
+<div class="chapter" id="ch9">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 09</div>
+    <h2>Types of Writing: Summary, Essay, Letters & Report Writing</h2>
+    <div class="ch-mark">📄</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">Academic and professional writing encompasses a range of genres, each with distinct conventions, structures, and purposes. Mastery requires understanding not only <em>what</em> to write but <em>how</em> the genre shapes content, style, and organization.</div>
+    <h3>9.1 Summary Writing</h3>
+    <p>A summary is a condensed restatement of a source text in the writer's own words, capturing the main ideas without personal interpretation or evaluation. Key requirements: brevity (typically 1/4 to 1/3 of original length), fidelity to the source's meaning, objective third-person voice, and no direct quotation unless unavoidable.</p>
+    <h3>9.2 Essay Writing</h3>
+    <p>The academic essay is the primary genre of university intellectual work. It requires a clear <strong>thesis</strong> (arguable central claim), supporting <strong>body paragraphs</strong> (each with topic sentence, evidence, analysis), and a <strong>conclusion</strong> that synthesizes rather than merely summarizes. Essay types include expository, argumentative/persuasive, analytical, comparative, and reflective.</p>
+    <div class="example-box"><span class="label">Essay Structure</span>Introduction → Hook → Background → Thesis Statement<br>Body ¶1 → Topic Sentence → Evidence → Analysis → Transition<br>Body ¶2 → Topic Sentence → Evidence → Analysis → Transition<br>Conclusion → Synthesis → Broader Implications → Closing</div>
+    <h3>9.3 Letter Writing</h3>
+    <p>Formal letters follow strict conventions: sender's address, date, recipient's address, salutation, body paragraphs, complimentary close, signature. Register must match purpose — formal letters use standard grammar, impersonal tone, and avoid contractions. Types: application letters, complaint letters, enquiry letters, official correspondence.</p>
+    <h3>9.4 Report Writing</h3>
+    <p>Reports present factual information, analysis, and recommendations to a specific audience for a specific purpose. Academic/technical reports typically include: Title Page, Abstract/Executive Summary, Introduction, Methodology, Findings/Results, Discussion, Conclusion, Recommendations, References, Appendices. Reports are organized for selective reading, using numbered sections, tables, and figures.</p>
+    <h3>9.5 Academic Style and Register</h3>
+    <p>Academic writing is characterized by: formality (avoiding contractions, slang, first-person casual usage), precision (specific vocabulary, hedged claims), objectivity (evidence-based, passive voice where appropriate), density (complex noun phrases, nominalization), and intertextuality (explicit engagement with sources through citation).</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 9 Assessment</div>
+    <div class="quiz-subtitle">TYPES OF WRITING · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which of the following is NOT a characteristic of an effective academic essay conclusion?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">A. Synthesizing the main arguments</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">B. Restating the thesis in light of the evidence presented</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q9_1')">C. Introducing significant new evidence not discussed in the body</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">D. Suggesting broader implications or future directions</button>
+      </div>
+      <div class="answer-reveal" id="q9_1_reveal"><strong>Correct: C.</strong> Conclusions should synthesize and close — introducing significant new evidence or arguments in the conclusion is a structural error. New evidence belongs in the body where it can be properly analyzed.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">A summary may include the writer's personal opinion and evaluation of the source text's argument, provided they are clearly labeled.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q9_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q9_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q9_2_reveal"><strong>False.</strong> A pure summary is objective and neutral — it reports what the source says without the summarizer's evaluation. A summary that includes personal response is a "summary and response" — a different genre.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">In academic writing, the process of turning verb phrases into nouns (e.g., "to analyze" → "an analysis of") is called __________.</div>
+      <input class="fitb-input" id="fitb9_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb9_3',['nominalization'],'q9_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q9_3_reveal"><strong>Answer: nominalization.</strong> Nominalization is a key feature of academic register that creates more formal, abstract, and dense prose. However, overuse can make writing unnecessarily obscure.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which section of a formal report provides a brief overview of the entire report — including purpose, methodology, key findings, and recommendations — for readers who may not read the full document?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">A. Introduction</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q9_4')">B. Executive Summary / Abstract</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">C. Discussion</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">D. Conclusion</button>
+      </div>
+      <div class="answer-reveal" id="q9_4_reveal"><strong>Correct: B.</strong> The executive summary (in professional reports) or abstract (in academic reports) provides a standalone overview of the entire document, enabling busy readers to grasp key points without reading everything.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Explain the difference between a <em>thesis statement</em> in an essay and a <em>research question</em> in a report. Why can't they be used interchangeably?</div>
+      <textarea class="short-ans-input" id="short9_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q9_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q9_5_reveal"><strong>Model Answer:</strong> A <em>thesis statement</em> is an arguable proposition — a claim the essay will defend with evidence and reasoning. It takes a position: "Social media significantly impairs deep reading among university students." A <em>research question</em> is an open interrogative that the report will investigate empirically: "To what extent does social media usage affect reading comprehension among university students?" They cannot be used interchangeably because essays are argument-driven (the writer defends a pre-formed position) while reports are inquiry-driven (findings emerge from investigation and may be unexpected).</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch9',5)">Submit Chapter 9 Quiz</button>
+      <div class="score-display" id="ch9_score"></div>
+      <br><button class="mark-done-btn" id="done_ch9" onclick="markDone('ch9',8)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 10 -->
+<div class="chapter" id="ch10">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 10</div>
+    <h2>Comprehension Strategy: Reading and Its Types</h2>
+    <div class="ch-mark">👁️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box"><strong>Reading comprehension</strong> is the active cognitive process of constructing meaning from written text. It involves decoding, linguistic knowledge, prior knowledge activation, inferencing, and metacognitive monitoring. Strategic reading applies deliberate techniques to maximize comprehension efficiency.</div>
+    <h3>10.1 Types of Reading</h3>
+    <table class="info-table">
+      <thead><tr><th>Reading Type</th><th>Purpose</th><th>Technique</th></tr></thead>
+      <tbody>
+        <tr><td>Skimming</td><td>Get general overview quickly</td><td>Read headings, first/last sentences of paragraphs</td></tr>
+        <tr><td>Scanning</td><td>Locate specific information</td><td>Run eyes rapidly for keywords/numbers</td></tr>
+        <tr><td>Intensive Reading</td><td>Deep, detailed understanding</td><td>Slow, careful reading with annotation</td></tr>
+        <tr><td>Extensive Reading</td><td>Fluency and general comprehension</td><td>Read large volumes at comfortable pace</td></tr>
+        <tr><td>Critical Reading</td><td>Evaluate argument and evidence</td><td>Question assumptions, assess logic</td></tr>
+        <tr><td>Inferential Reading</td><td>Read "between the lines"</td><td>Deduce implied meanings from context clues</td></tr>
+      </tbody>
+    </table>
+    <h3>10.2 Schema Theory and Reading</h3>
+    <p>Schema theory (Bartlett, 1932; Rumelhart, 1980) proposes that comprehension occurs when new textual information is connected to pre-existing mental frameworks (schemata) — organized knowledge structures stored in long-term memory. Effective readers actively activate relevant prior knowledge before reading.</p>
+    <h3>10.3 Metacognitive Reading Strategies</h3>
+    <p>Metacognition in reading involves awareness and regulation of one's own comprehension processes. Strategies include: prediction (before reading), self-questioning (during reading), clarification (when confusion occurs), summarization (after sections), and evaluation (after completing the text).</p>
+    <h3>10.4 Vocabulary in Reading Comprehension</h3>
+    <p>Vocabulary knowledge is the strongest predictor of reading comprehension. Research suggests readers need to know approximately 95-98% of words in a text to comprehend it adequately. Context clue strategies and morphological analysis (recognizing prefixes, roots, suffixes) are key tools for inferring unknown vocabulary.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 10 Assessment</div>
+    <div class="quiz-subtitle">READING COMPREHENSION STRATEGIES · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A student rapidly moves their eyes across a journal article to find the year a specific study was conducted. Which reading type is this?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">A. Skimming</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q10_1')">B. Scanning</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">C. Intensive reading</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">D. Critical reading</button>
+      </div>
+      <div class="answer-reveal" id="q10_1_reveal"><strong>Correct: B.</strong> Scanning is purposeful search reading — the reader looks for specific data (dates, names, numbers) without processing the surrounding text. Skimming gives overview; scanning targets specific items.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">According to schema theory, comprehension is entirely a bottom-up process determined solely by the text's content.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q10_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q10_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q10_2_reveal"><strong>False.</strong> Schema theory demonstrates that comprehension is both bottom-up (text-driven) and top-down (knowledge-driven). The reader's pre-existing knowledge structures actively shape how textual information is interpreted and retained.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The awareness and active monitoring of one's own reading comprehension processes — knowing when you understand and when you don't — is called __________ cognition.</div>
+      <input class="fitb-input" id="fitb10_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb10_3',['meta','metacognition','metacognitive'],'q10_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q10_3_reveal"><strong>Answer: meta (metacognition).</strong> Metacognition — thinking about thinking — is essential to strategic reading. Skilled readers monitor comprehension continuously and deploy repair strategies when comprehension breaks down.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Research suggests readers need to know approximately what percentage of words in a text to achieve adequate comprehension?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_4')">A. 70-80%</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_4')">B. 85-90%</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q10_4')">C. 95-98%</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_4')">D. 100%</button>
+      </div>
+      <div class="answer-reveal" id="q10_4_reveal"><strong>Correct: C.</strong> Nation (2001) and other vocabulary researchers established that 95-98% word coverage is needed for unassisted reading comprehension. Below this threshold, too many unknown words interrupt processing and meaning construction.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Distinguish between "inferential reading" and "literal reading." Why is inferential reading considered a higher-order reading skill?</div>
+      <textarea class="short-ans-input" id="short10_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q10_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q10_5_reveal"><strong>Model Answer:</strong> <em>Literal reading</em> extracts information explicitly stated in the text — the reader identifies facts and statements as directly written. <em>Inferential reading</em> goes beyond the surface, requiring the reader to use textual clues, background knowledge, and logical reasoning to derive implied meanings not directly stated. It is a higher-order skill because it demands synthesis of multiple cues, activation of prior knowledge, and abstract reasoning — all of which require greater cognitive engagement than simple text recall.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch10',5)">Submit Chapter 10 Quiz</button>
+      <div class="score-display" id="ch10_score"></div>
+      <br><button class="mark-done-btn" id="done_ch10" onclick="markDone('ch10',9)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 11 -->
+<div class="chapter" id="ch11">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 11</div>
+    <h2>Comprehension Skill: The SQ3R / SQ4R Method</h2>
+    <div class="ch-mark">📖</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">The <strong>SQ3R method</strong> (Survey, Question, Read, Recite, Review) is a structured, evidence-based reading strategy developed by Francis Pleasant Robinson (1941) that significantly improves comprehension and retention of academic texts. The extended <strong>SQ4R</strong> adds a "Record" step.</div>
+    <h3>11.1 The SQ3R Steps</h3>
+    <ul>
+      <li><strong>S — Survey:</strong> Preview the text before reading. Skim headings, subheadings, introduction, conclusion, and any bold terms. This activates prior knowledge and creates a mental framework for organizing incoming information. Time: 3-5 minutes.</li>
+      <li><strong>Q — Question:</strong> Convert each heading and subheading into a question. E.g., "Phonetics and Phonology" → "What is the difference between phonetics and phonology?" This creates a reading purpose — you read to answer, not just to consume.</li>
+      <li><strong>R1 — Read:</strong> Read actively and selectively, seeking answers to the questions formulated. Do NOT highlight everything. Annotate key passages. Pause at the end of each section.</li>
+      <li><strong>R2 — Recite:</strong> After each section, close the book and verbally or mentally answer the questions in your own words. This forces active recall — the most powerful memory consolidation technique known to cognitive science.</li>
+      <li><strong>R3 — Review:</strong> After completing the entire text, review all questions and answers. Connect ideas across sections. Identify gaps. This consolidates memory and builds an integrated mental model.</li>
+    </ul>
+    <h3>11.2 SQ4R: Adding Record</h3>
+    <p>The SQ4R extension adds a <strong>Record</strong> step (after Recite), in which the student writes their answers and key points in notes. Written records engage motor memory and create a study resource for later review.</p>
+    <h3>11.3 Why SQ3R Works: Cognitive Science</h3>
+    <p>SQ3R aligns with several well-established learning principles: (1) <em>Elaborative interrogation</em> — generating questions deepens processing; (2) <em>Spaced practice</em> — multiple encounters with material (survey → read → recite → review) enhance retention; (3) <em>Retrieval practice</em> — the Recite step activates the testing effect, the most robust finding in memory research; (4) <em>Schema activation</em> — Survey primes relevant prior knowledge.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 11 Assessment</div>
+    <div class="quiz-subtitle">SQ3R / SQ4R METHOD · 4 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which step of SQ3R directly activates the "testing effect" — the most powerful memory consolidation technique from cognitive research?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">A. Survey</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">B. Question</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">C. Read</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q11_1')">D. Recite</button>
+      </div>
+      <div class="answer-reveal" id="q11_1_reveal"><strong>Correct: D.</strong> The Recite step requires active retrieval from memory (without looking at the text), which directly engages the testing effect — the proven phenomenon whereby retrieval practice dramatically enhances long-term retention.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">In SQ3R, the "Question" step converts __________ into questions that give the reader a specific purpose for reading.</div>
+      <input class="fitb-input" id="fitb11_2" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb11_2',['headings','headings and subheadings','subheadings'],'q11_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q11_2_reveal"><strong>Answer: headings (and subheadings).</strong> By rephrasing structural titles as questions, the reader creates an active reading goal — transforming passive reading into purposeful inquiry.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">SQ4R differs from SQ3R by adding a "Record" step in which students write their answers in notes, engaging motor memory and creating a review resource.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,true,'q11_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,false,'q11_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q11_3_reveal"><strong>True.</strong> SQ4R = Survey, Question, Read, Record, Recite, Review. The Record step adds written note-taking to deepen encoding and create study materials.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Apply SQ3R to study this chapter (Chapter 11). Write out what you would do at each of the five steps specifically for THIS chapter's content.</div>
+      <textarea class="short-ans-input" id="short11_4" placeholder="S: ...\nQ: ...\nR1: ...\nR2: ...\nR3: ..."></textarea>
+      <button class="check-btn" onclick="revealShort('q11_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q11_4_reveal"><strong>Model Answer:</strong> S: Survey the headings (SQ3R Steps, SQ4R, Why SQ3R Works), skim the bullet points and definition box — 3 min. Q: Turn headings into questions: "What are the 5 SQ3R steps?" "How does SQ4R differ?" "What cognitive science principles explain why SQ3R works?" R1: Read each section carefully, annotating answers to those questions. R2: Close page, mentally answer each question in own words — "Survey = preview headings… Question = turn them into questions…" R3: Review all 5 questions and answers; note connections between retrieval practice (Recite) and the testing effect discussed in Section 11.3.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch11',4)">Submit Chapter 11 Quiz</button>
+      <div class="score-display" id="ch11_score"></div>
+      <br><button class="mark-done-btn" id="done_ch11" onclick="markDone('ch11',10)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 12 -->
+<div class="chapter" id="ch12">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 12</div>
+    <h2>Information & Communication Technology in Modern Language Learning</h2>
+    <div class="ch-mark">💻</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box"><strong>ICT in language learning</strong> encompasses the use of digital technologies — internet, software, mobile apps, AI tools, online platforms, multimedia — to facilitate the acquisition, practice, and assessment of language skills. It has fundamentally transformed pedagogical approaches to English education.</div>
+    <h3>12.1 Computer-Assisted Language Learning (CALL)</h3>
+    <p>CALL refers to the use of computer-based tools to support language instruction. Early CALL (1960s–80s) focused on grammar drills. Modern CALL is communicative and task-based, integrating multimedia, authentic materials, and learner-centered activities. Key CALL tools include: vocabulary software (Anki, Quizlet), grammar checkers, pronunciation trainers, and corpus query tools.</p>
+    <h3>12.2 The Internet as a Language Resource</h3>
+    <p>The internet provides unprecedented access to authentic English language data: news sites, academic databases, podcasts, YouTube lectures, online dictionaries (Oxford, Merriam-Webster), and corpus tools (BNC, COCA). Learners can engage with English at any hour, at any level, across any genre.</p>
+    <h3>12.3 Mobile-Assisted Language Learning (MALL)</h3>
+    <p>Smartphones have democratized language learning through apps like Duolingo, BBC Learning English, and grammar reference apps. MALL capitalizes on "dead time" (commutes, waiting periods) for microlearning — short, focused bursts of practice that cumulatively produce significant learning.</p>
+    <h3>12.4 Digital Literacy and Critical Evaluation of Online Sources</h3>
+    <p>ICT integration requires digital literacy — the ability to evaluate online information critically. Students must assess: source credibility (is the author qualified?), currency (when was it last updated?), accuracy (is evidence provided?), purpose (educational vs. commercial vs. propaganda?). The CRAAP test (Currency, Relevance, Authority, Accuracy, Purpose) is a standard evaluation framework.</p>
+    <h3>12.5 AI and Language Learning</h3>
+    <p>AI-powered tools (large language models, neural machine translators, speech recognition systems) are transforming language learning. They offer personalized feedback, on-demand conversation practice, instant translation, and adaptive difficulty. Ethical considerations include over-reliance, reduced authentic human interaction, and academic integrity concerns.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 12 Assessment</div>
+    <div class="quiz-subtitle">ICT &amp; LANGUAGE LEARNING · 4 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">What does the acronym CALL stand for?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q12_1')">A. Communicative Approach to Language and Linguistics</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q12_1')">B. Computer-Assisted Language Learning</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q12_1')">C. Comprehensive Assessment of Language Learners</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q12_1')">D. Cognitive Approach to Learning Language</button>
+      </div>
+      <div class="answer-reveal" id="q12_1_reveal"><strong>Correct: B.</strong> CALL — Computer-Assisted Language Learning — is the established field studying the role of computers in language pedagogy, dating to the 1960s.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">The CRAAP test is a framework for evaluating the quality and credibility of online information sources.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,true,'q12_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,false,'q12_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q12_2_reveal"><strong>True.</strong> CRAAP = Currency, Relevance, Authority, Accuracy, Purpose. It is widely used in academic library instruction to teach students to critically evaluate web sources.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The use of smartphones and mobile apps for brief, flexible language practice is called __________ -Assisted Language Learning (MALL).</div>
+      <input class="fitb-input" id="fitb12_3" placeholder="Type the missing word...">
+      <button class="check-btn" onclick="checkFITB('fitb12_3',['mobile','Mobile'],'q12_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q12_3_reveal"><strong>Answer: Mobile.</strong> MALL capitalizes on ubiquitous smartphone access and the affordance of incidental, just-in-time learning through apps and mobile-optimized content.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">What are THREE specific ethical concerns raised by the integration of AI language tools (e.g., AI writing assistants) in university education?</div>
+      <textarea class="short-ans-input" id="short12_4" placeholder="List and briefly explain three concerns..."></textarea>
+      <button class="check-btn" onclick="revealShort('q12_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q12_4_reveal"><strong>Model Answer:</strong> (1) <em>Academic integrity:</em> Students may submit AI-generated text as their own work, constituting a form of plagiarism and undermining the development of their own writing competence. (2) <em>Over-reliance and skill atrophy:</em> Excessive dependence on AI grammar correction and writing assistance may prevent students from developing genuine linguistic competence — the cognitive "struggle" that produces learning is bypassed. (3) <em>Equity and access:</em> Premium AI tools cost money, creating a two-tier system where wealthier students have access to superior AI assistance, exacerbating existing educational inequalities.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch12',4)">Submit Chapter 12 Quiz</button>
+      <div class="score-display" id="ch12_score"></div>
+      <br><button class="mark-done-btn" id="done_ch12" onclick="markDone('ch12',11)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 13 -->
+<div class="chapter" id="ch13">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 13</div>
+    <h2>Language Skills for Effective Communication</h2>
+    <div class="ch-mark">🗣️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box">Effective communication requires the integrated deployment of four macro language skills: <strong>Listening, Speaking, Reading,</strong> and <strong>Writing</strong> (LSRW). These are further subdivided into <em>receptive</em> skills (Listening, Reading) and <em>productive</em> skills (Speaking, Writing). Mastery of all four is the hallmark of a communicatively competent language user.</div>
+    <h3>13.1 Communicative Competence</h3>
+    <p>Hymes (1972) introduced the concept of <strong>communicative competence</strong> — the knowledge not only of grammatical rules but of how to use language appropriately in social contexts. Dell Hymes argued that "competence" must include sociolinguistic knowledge. Canale and Swain (1980) expanded this to four components:</p>
+    <ul>
+      <li><strong>Grammatical competence:</strong> Knowledge of linguistic rules (grammar, vocabulary, phonology)</li>
+      <li><strong>Sociolinguistic competence:</strong> Ability to use language appropriately in different social contexts</li>
+      <li><strong>Discourse competence:</strong> Ability to create cohesive, coherent extended texts</li>
+      <li><strong>Strategic competence:</strong> Ability to manage communication breakdowns and compensate for gaps</li>
+    </ul>
+    <h3>13.2 Listening Skills</h3>
+    <p>Listening is not passive hearing — it is active cognitive processing. <strong>Active listening</strong> involves: maintaining attention, processing for meaning, making inferences, evaluating arguments, and formulating responses. Types include: discriminative (distinguishing sounds), comprehensive, critical (evaluating arguments), empathic, and appreciative listening.</p>
+    <h3>13.3 Speaking Skills</h3>
+    <p>Spoken communication requires proficiency in pronunciation, fluency, accuracy, and pragmatic appropriateness. Key elements include turn-taking, topic management, repair strategies, register adjustment, and non-verbal communication. <strong>Pragmatic competence</strong> — knowing how to perform speech acts (request, apologize, refuse, persuade) appropriately — is crucial for effective oral communication.</p>
+    <h3>13.4 Reading and Writing as Communication</h3>
+    <p>Reading and writing are not merely academic exercises — they are communicative acts. Academic writing communicates arguments to scholarly communities. Reading academic texts involves a dialogue with the author's ideas. The ability to integrate all four skills creates a complete communicator who can participate fully in academic and professional discourse communities.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 13 Assessment</div>
+    <div class="quiz-subtitle">LANGUAGE SKILLS &amp; COMMUNICATION · 4 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">According to Canale and Swain's model, the ability to manage communication breakdowns and compensate for gaps in linguistic knowledge is called:</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q13_1')">A. Grammatical competence</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q13_1')">B. Sociolinguistic competence</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q13_1')">C. Discourse competence</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q13_1')">D. Strategic competence</button>
+      </div>
+      <div class="answer-reveal" id="q13_1_reveal"><strong>Correct: D.</strong> Strategic competence covers circumlocution, paraphrase, appeals for help, and other strategies to maintain communication when linguistic resources are insufficient for the communicative goal.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">Hymes argued that grammatical knowledge alone constitutes full linguistic competence.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q13_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q13_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q13_2_reveal"><strong>False.</strong> Hymes specifically challenged Chomsky's narrow competence/performance distinction by arguing that a speaker must know not only IF something is grammatical but also WHEN it is appropriate, feasible, and actually performed — this requires sociolinguistic knowledge beyond grammar.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">Listening and reading are classified as __________ language skills, while speaking and writing are classified as __________ skills.</div>
+      <input class="fitb-input" id="fitb13_3" placeholder="receptive / productive">
+      <button class="check-btn" onclick="checkFITB('fitb13_3',['receptive','productive'],'q13_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q13_3_reveal"><strong>Answer: receptive / productive.</strong> Receptive skills involve receiving and decoding messages; productive skills involve encoding and transmitting them. Both require active cognitive engagement.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Explain what "pragmatic competence" means in spoken communication and provide TWO examples of speech acts that require pragmatic knowledge to perform appropriately.</div>
+      <textarea class="short-ans-input" id="short13_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q13_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q13_4_reveal"><strong>Model Answer:</strong> Pragmatic competence is the knowledge of how to use language to perform social actions appropriately — understanding not just what words mean literally but what they accomplish in context and how to deploy them correctly relative to social relationships, context, and cultural norms. Example 1: <em>Refusing a request</em> — A grammatically correct refusal ("No, I won't") might be pragmatically inappropriate with a professor; a pragmatically competent speaker might say "I'm afraid that won't be possible at this time, but perhaps I could...". Example 2: <em>Making an indirect request</em> — "It's very warm in here" (to a colleague near the window) is pragmatically understood as a request to open the window, not a weather observation — understanding this requires pragmatic knowledge of indirect speech acts.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch13',4)">Submit Chapter 13 Quiz</button>
+      <div class="score-display" id="ch13_score"></div>
+      <br><button class="mark-done-btn" id="done_ch13" onclick="markDone('ch13',12)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 14 -->
+<div class="chapter" id="ch14">
+  <div class="chapter-header">
+    <div class="ch-num">Chapter 14</div>
+    <h2>Acts of Public Speaking and Listening</h2>
+    <div class="ch-mark">🎤</div>
+  </div>
+  <div class="chapter-body">
+    <div class="definition-box"><strong>Public speaking</strong> is the formal act of delivering a prepared oral message to an audience. It integrates linguistic knowledge, rhetorical skill, non-verbal communication, and audience awareness. Aristotle identified three modes of persuasion: <em>logos</em> (reason), <em>ethos</em> (credibility), and <em>pathos</em> (emotion) — still the foundational framework for rhetorical analysis.</div>
+    <h3>14.1 Aristotle's Rhetorical Triangle</h3>
+    <ul>
+      <li><strong>Logos:</strong> Appeals to logic and reason — evidence, statistics, logical arguments, expert testimony. The intellectual backbone of any speech.</li>
+      <li><strong>Ethos:</strong> Appeals based on the speaker's credibility, expertise, and trustworthiness. Established through qualifications, demonstrated knowledge, and consistent integrity.</li>
+      <li><strong>Pathos:</strong> Appeals to the audience's emotions and values — stories, vivid imagery, emotional language. Creates connection and motivation to act.</li>
+    </ul>
+    <h3>14.2 Structure of a Public Speech</h3>
+    <table class="info-table">
+      <thead><tr><th>Section</th><th>Purpose</th><th>Techniques</th></tr></thead>
+      <tbody>
+        <tr><td>Introduction</td><td>Capture attention, establish relevance, preview</td><td>Startling statistic, rhetorical question, anecdote, quotation</td></tr>
+        <tr><td>Body</td><td>Present main points with evidence and explanation</td><td>3-5 main points, transitions, signposting language</td></tr>
+        <tr><td>Conclusion</td><td>Reinforce message, call to action, memorable close</td><td>Summary, call to action, full-circle return to opening</td></tr>
+      </tbody>
+    </table>
+    <h3>14.3 Delivery: Verbal and Non-Verbal</h3>
+    <p>Effective delivery involves both verbal and non-verbal dimensions. <strong>Verbal delivery:</strong> rate (speed), volume, pitch variation, pause (strategic silence), articulation, and vocal variety. <strong>Non-verbal delivery:</strong> eye contact (establishes ethos and connection), gestures (reinforce content), posture (projects confidence), facial expressions (convey emotion), movement (controls space and energy).</p>
+    <h3>14.4 Active Listening in Public Contexts</h3>
+    <p>Effective listening in public speaking contexts involves critical engagement: evaluating the speaker's use of logos, ethos, and pathos; identifying the central argument and main supporting points; detecting logical fallacies or emotional manipulation; and formulating thoughtful questions. Note-taking during lectures and seminars is an application of structured listening.</p>
+    <h3>14.5 Overcoming Public Speaking Anxiety</h3>
+    <p>Communication apprehension (CA) affects up to 75% of the population. Evidence-based strategies for managing CA include: thorough preparation (the strongest anxiety reducer), systematic desensitization (gradual exposure), cognitive restructuring (reframing anxiety as excitement), visualization, and physical warm-up. Anxiety is normal — even expert speakers experience it; the goal is channeling it productively.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Chapter 14 Assessment</div>
+    <div class="quiz-subtitle">PUBLIC SPEAKING &amp; LISTENING · 5 QUESTIONS</div>
+    <div class="quiz-q">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A speaker opens with the statement: "Every 40 seconds, someone in the world takes their own life." Which rhetorical appeal is primarily being employed?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_1')">A. Ethos</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_1')">B. Logos only</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q14_1')">C. Pathos with elements of Logos</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_1')">D. Pure Logos</button>
+      </div>
+      <div class="answer-reveal" id="q14_1_reveal"><strong>Correct: C.</strong> The statistic is data (logos) but the specific framing — "every 40 seconds" rather than "~800,000 per year" — is chosen for its emotional impact (pathos), making listeners feel the urgency viscerally. Skilled rhetoricians blend appeals.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">Complete elimination of public speaking anxiety is the goal for university-level communicators.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q14_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q14_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q14_2_reveal"><strong>False.</strong> Complete elimination is neither achievable nor desirable — moderate arousal (the "Yerkes-Dodson curve") actually enhances performance. The goal is to manage and channel anxiety productively, not eliminate it entirely.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">Aristotle's three modes of persuasion are logos (reason), __________ (credibility), and pathos (emotion).</div>
+      <input class="fitb-input" id="fitb14_3" placeholder="Type the missing term...">
+      <button class="check-btn" onclick="checkFITB('fitb14_3',['ethos'],'q14_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q14_3_reveal"><strong>Answer: ethos.</strong> Ethos is the appeal based on the speaker's character, credibility, and trustworthiness — the reason why the audience should believe and trust the speaker, not just the argument.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which non-verbal element of speech delivery is most closely associated with establishing ethos (credibility and connection with the audience)?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'correct','q14_4')">A. Eye contact</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_4')">B. Gestures</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_4')">C. Vocal rate</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q14_4')">D. Strategic pause</button>
+      </div>
+      <div class="answer-reveal" id="q14_4_reveal"><strong>Correct: A.</strong> Eye contact is the primary non-verbal signal of credibility, engagement, and trustworthiness. Lack of eye contact signals avoidance or dishonesty in most Western and many African cultural contexts.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q5 <span class="q-type">Short Identification</span></div>
+      <div class="q-text">Design the introduction for a 5-minute persuasive speech on "Why every university student should learn a second language." Apply at least TWO of Aristotle's rhetorical appeals and identify them explicitly.</div>
+      <textarea class="short-ans-input" id="short14_5" placeholder="Write your speech introduction here..."></textarea>
+      <button class="check-btn" onclick="revealShort('q14_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q14_5_reveal"><strong>Model Answer:</strong> "Imagine waking up tomorrow able to hold a conversation in Hausa, French, or Mandarin — to walk into any room in the world and connect. [PATHOS — vivid imagery] Research from the American Council on the Teaching of Foreign Languages shows that bilinguals demonstrate measurably greater cognitive flexibility, higher average salaries, and significantly delayed onset of Alzheimer's disease. [LOGOS — evidence] As a graduate of English Studies with experience teaching in multilingual classrooms, I have seen firsthand what language knowledge does for a student's opportunities and confidence. [ETHOS — personal credibility] Today, I will demonstrate that second language acquisition is not a luxury — it is one of the most valuable investments a university student can make in their intellectual and professional future."</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-quiz-btn" onclick="scoreQuiz('ch14',5)">Submit Chapter 14 Quiz</button>
+      <div class="score-display" id="ch14_score"></div>
+      <br><button class="mark-done-btn" id="done_ch14" onclick="markDone('ch14',13)">✓ Mark Chapter Complete</button>
+    </div>
+  </div>
+</div>
+`;
+
+document.getElementById('remaining-chapters').innerHTML = chaptersHTML;
+
+// ============================================================
+// FINAL EXAM QUESTIONS
+// ============================================================
+const finalQuestions = [
+  { type:'mc', q:'Which IPA symbol represents the vowel sound in the word "nurse"?', opts:['/ɒ/','/ɜː/','/uː/','/ʌ/'], ans:1, reveal:'The /ɜː/ sound is a long central vowel heard in nurse, bird, and word. It is one of the most distinctive vowels in Received Pronunciation (RP) English.' },
+  { type:'tf', q:'A complex sentence contains two or more independent clauses joined by a coordinating conjunction.', ans:false, reveal:'That describes a COMPOUND sentence. A complex sentence has ONE independent clause + at least one DEPENDENT (subordinate) clause.' },
+  { type:'mc', q:'In grammar, "concord" refers to:', opts:['The relationship between tense and aspect','The agreement between subject and verb in number and person','The system of modal auxiliaries','The classification of clause types'], ans:1, reveal:'Concord (subject-verb agreement) requires the verb to match its subject in grammatical number and person.' },
+  { type:'mc', q:'"She may be the new lecturer" expresses which type of modality?', opts:['Deontic','Alethic','Epistemic','Dynamic'], ans:2, reveal:'Epistemic modality expresses the speaker\'s degree of certainty or knowledge about a proposition. "May" here = "possibly she is."' },
+  { type:'tf', q:'In a valid deductive argument with at least one false premise, the conclusion is necessarily false.', ans:false, reveal:'A valid argument with false premises can have a true or false conclusion. Validity only guarantees: IF premises are true THEN conclusion must be true. A false premise breaks the soundness, not necessarily the conclusion\'s truth value.' },
+  { type:'mc', q:'Which fallacy does this commit: "After the professor introduced online assignments, exam scores dropped. Therefore, online assignments caused lower scores"?', opts:['Ad hominem','Straw man','Post hoc ergo propter hoc','False dilemma'], ans:2, reveal:'Post hoc ergo propter hoc — "after this, therefore because of this" — wrongly assumes temporal sequence implies causation.' },
+  { type:'mc', q:'In SQ3R, which step directly employs the "testing effect" by forcing retrieval without consulting the text?', opts:['Survey','Question','Read','Recite'], ans:3, reveal:'The Recite step requires active memory retrieval (closing the book and answering the questions from memory), directly activating the testing effect.' },
+  { type:'tf', q:'Copyright protection in most countries requires formal registration with a government office before protection begins.', ans:false, reveal:'Under the Berne Convention (adopted by most countries), copyright is automatic upon creation and fixation of an original work. Registration is optional.' },
+  { type:'mc', q:'Which section of a formal academic report provides the methodology, detailed findings, and statistical analysis?', opts:['Executive Summary','Introduction','Body (Findings/Results & Discussion)','Conclusion'], ans:2, reveal:'The body of an academic report contains the Methodology, Results/Findings, and Discussion sections — the substantive analytical content.' },
+  { type:'mc', q:'Canale and Swain\'s "discourse competence" specifically refers to:', opts:['Knowledge of grammar rules','Ability to use language appropriately in social contexts','Ability to manage breakdowns in communication','Ability to create cohesive and coherent extended texts'], ans:3, reveal:'Discourse competence = knowledge of how to create unified, coherent extended communication — understanding cohesion devices, genre conventions, and text organization.' },
+  { type:'tf', q:'Skimming and scanning are the same reading strategy, both used to find specific pieces of information quickly.', ans:false, reveal:'Skimming = getting the general overview/gist. Scanning = locating specific information (dates, names, numbers). They serve different purposes despite both being fast reading types.' },
+  { type:'mc', q:'Which type of morphological process adds an ending to a verb to indicate past tense WITHOUT changing the word\'s class?', opts:['Derivation','Compounding','Inflection','Conversion'], ans:2, reveal:'Inflection modifies grammatical form without changing word class. Adding "-ed" for past tense (walk→walked) is inflectional morphology.' },
+  { type:'mc', q:'Aristotle\'s "ethos" in rhetoric primarily refers to:', opts:['Logical evidence and reasoning','The emotional impact on the audience','The speaker\'s credibility and trustworthiness','The structure of the argument'], ans:2, reveal:'Ethos is the appeal to the speaker\'s character, expertise, and credibility — the reason the audience should trust and believe the speaker.' },
+  { type:'tf', q:'In Chomsky\'s transformational grammar, "surface structure" captures the deep semantic meaning shared by active and passive versions of a sentence.', ans:false, reveal:'It is the DEEP structure that captures the underlying semantic content. Surface structure is the actual spoken/written form. Active and passive share deep structure but differ in surface structure.' },
+  { type:'mc', q:'A student rewrites sentences from three different academic papers, weaving them together without citation. This is specifically called:', opts:['Direct plagiarism','Self-plagiarism','Mosaic plagiarism','Idea theft'], ans:2, reveal:'Mosaic plagiarism (patchwriting) involves combining rephrased passages from multiple sources without attribution, creating a false impression of originality.' },
+];
+
+function buildFinalExam() {
+  const container = document.getElementById('finalQuizContainer');
+  finalQuestions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.id = `fq_${i}`;
+    let optionsHTML = '';
+    if (q.type === 'mc') {
+      optionsHTML = `<div class="mc-options">${q.opts.map((o,j)=>`<button class="mc-opt" onclick="checkMC(this,'${j===q.ans?'correct':'wrong'}','fq_${i}')">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div>`;
+    } else {
+      optionsHTML = `<div class="tf-options"><button class="tf-btn" onclick="checkTF(this,${q.ans===true},'fq_${i}')">TRUE</button><button class="tf-btn" onclick="checkTF(this,${q.ans===false},'fq_${i}')">FALSE</button></div>`;
+    }
+    div.innerHTML = `<div class="q-num">Q${i+1} <span class="q-type">${q.type==='mc'?'Multiple Choice':'True / False'}</span></div><div class="q-text">${q.q}</div>${optionsHTML}<div class="answer-reveal" id="fq_${i}_reveal"><strong>Explanation:</strong> ${q.reveal}</div>`;
+    container.appendChild(div);
+  });
+}
+buildFinalExam();
+
+// ============================================================
+// QUIZ LOGIC
+// ============================================================
+function checkMC(btn, result, qId) {
+  const container = btn.closest('.quiz-q') || document.getElementById(qId);
+  const buttons = btn.parentElement.querySelectorAll('.mc-opt');
+  buttons.forEach(b => { b.disabled = true; });
+  btn.classList.add(result);
+  const reveal = document.getElementById(qId + '_reveal');
+  if (reveal) { reveal.classList.add('show'); }
+  if (result === 'correct') btn.textContent = '✓ ' + btn.textContent;
+  else btn.textContent = '✗ ' + btn.textContent;
+}
+
+function checkTF(btn, isCorrect, qId) {
+  const buttons = btn.parentElement.querySelectorAll('.tf-btn');
+  buttons.forEach(b => b.disabled = true);
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  const reveal = document.getElementById(qId + '_reveal');
+  if (reveal) reveal.classList.add('show');
+}
+
+function checkFITB(inputId, answers, revealId) {
+  const input = document.getElementById(inputId);
+  const val = input.value.trim().toLowerCase();
+  const correct = answers.some(a => val.includes(a.toLowerCase()));
+  input.classList.add(correct ? 'correct' : 'wrong');
+  input.disabled = true;
+  const reveal = document.getElementById(revealId);
+  if (reveal) reveal.classList.add('show');
+}
+
+function revealShort(revealId) {
+  const reveal = document.getElementById(revealId);
+  if (reveal) reveal.classList.add('show');
+}
+
+function scoreQuiz(chId, total) {
+  const scoreDiv = document.getElementById(chId + '_score');
+  scoreDiv.style.display = 'block';
+  const correct = document.querySelectorAll(`#${chId} .mc-opt.correct, #${chId} .tf-btn.correct, #${chId} .fitb-input.correct`).length;
+  const pct = Math.round((correct / total) * 100);
+  let grade = pct >= 90 ? 'Excellent' : pct >= 75 ? 'Good' : pct >= 60 ? 'Pass' : 'Needs Review';
+  scoreDiv.innerHTML = `<div class="score-num">${correct}/${total}</div><div class="score-label">${pct}% · ${grade}</div>`;
+}
+
+function scoreFinal() {
+  const total = finalQuestions.length;
+  const correct = document.querySelectorAll('#final-exam .mc-opt.correct, #final-exam .tf-btn.correct').length;
+  const pct = Math.round((correct / total) * 100);
+  let grade = pct >= 90 ? '🏆 Distinction' : pct >= 75 ? '🥇 Credit' : pct >= 60 ? '✅ Pass' : '📚 Needs Review';
+  const sd = document.getElementById('final_score');
+  sd.style.display = 'block';
+  sd.innerHTML = `<div class="score-num">${correct}/${total}</div><div class="score-label">${pct}% · ${grade}</div>`;
+  finalQuestions.forEach((_,i) => {
+    const r = document.getElementById(`fq_${i}_reveal`);
+    if (r) r.classList.add('show');
+  });
+}
+
+// ============================================================
+// PROGRESS TRACKING
+// ============================================================
+const totalTopics = 14;
+let completed = JSON.parse(localStorage.getItem('eng101_progress') || '[]');
+
+function updateProgress() {
+  const pct = Math.round((completed.length / totalTopics) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${completed.length} of ${totalTopics} topics completed`;
+  const navBtns = document.querySelectorAll('.nav-btn');
+  navBtns.forEach((btn, i) => {
+    if (i < totalTopics && completed.includes(i)) btn.classList.add('done');
+    else btn.classList.remove('done');
+  });
+}
+
+function markDone(chId, idx) {
+  if (!completed.includes(idx)) {
+    completed.push(idx);
+    localStorage.setItem('eng101_progress', JSON.stringify(completed));
+  }
+  const btn = document.getElementById('done_' + chId);
+  if (btn) { btn.classList.add('completed'); btn.textContent = '✓ Chapter Completed!'; }
+  updateProgress();
+}
+
+// Restore completed state
+completed.forEach(idx => {
+  const chMap = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch13','ch14'];
+  const btn = document.getElementById('done_' + chMap[idx]);
+  if (btn) { btn.classList.add('completed'); btn.textContent = '✓ Chapter Completed!'; }
+});
+updateProgress();
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+}
+
+// ============================================================
+// SCROLL ANIMATION
+// ============================================================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.05 });
+document.querySelectorAll('.chapter').forEach(c => observer.observe(c));
+setTimeout(() => { document.querySelectorAll('.chapter').forEach(c => observer.observe(c)); }, 500);
+</script>
+</body>
+</html>
