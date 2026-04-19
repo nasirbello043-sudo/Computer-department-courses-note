@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Learning Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        #f4f1eb;
+            --surface:   #ffffff;
+            --border:    #ddd9cf;
+            --accent:    #1a4f7a;
+            --accent2:   #a0280e;
+            --text:      #1a1a1a;
+            --text-mid:  #4a4a4a;
+            --text-soft: #888880;
+            --radius:    14px;
+        }
+
+        body {
+            background: var(--bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8c2b4' fill-opacity='0.18'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: var(--text);
+            font-family: 'Source Sans 3', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 48px;
+        }
+        .top-bar-left {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: rgba(255,255,255,0.65);
+            text-transform: uppercase;
+        }
+        .top-bar-right { display: flex; gap: 20px; }
+        .top-bar-right button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.75);
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .top-bar-right button:hover { color: #fff; }
+
+        /* HEADER */
+        header {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dept-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(26,79,122,0.08);
+            border: 1px solid rgba(26,79,122,0.18);
+            border-radius: 4px;
+            padding: 3px 10px;
+            margin-bottom: 14px;
+        }
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.15;
+        }
+        h1 em { font-style: normal; color: var(--accent); }
+        .header-sub {
+            font-size: 0.95rem;
+            color: var(--text-mid);
+            font-weight: 300;
+            margin-top: 10px;
+            max-width: 500px;
+        }
+
+        /* MAIN */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 36px 24px 0;
+        }
+
+        /* CONTROLS */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .search-wrap { flex: 1; min-width: 200px; position: relative; }
+        .search-wrap svg {
+            position: absolute;
+            left: 13px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-soft);
+            pointer-events: none;
+        }
+        #search-input {
+            width: 100%;
+            padding: 10px 14px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            font-family: inherit;
+            font-size: 0.92rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+        }
+        #search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26,79,122,0.1);
+        }
+        .filter-btns { display: flex; gap: 8px; }
+        .filter-btn {
+            padding: 9px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+        }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active     { background: var(--accent);  border-color: var(--accent);  color: #fff; }
+        .filter-btn.active-pdf { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+
+        /* COUNT ROW */
+        .count-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: var(--text-soft);
+            text-transform: uppercase;
+        }
+        #count-pill {
+            font-size: 0.78rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3px 12px;
+            color: var(--text-mid);
+            font-weight: 500;
+        }
+
+        /* POSTER GRID */
+        #report-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        #report-list.state-wrap { display: block; }
+
+        /* POSTER CARD */
+        .report-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 3px 16px rgba(0,0,0,0.09);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.88) translateY(12px); }
+            to   { opacity: 1; transform: scale(1)    translateY(0);    }
+        }
+        .report-card:hover {
+            transform: translateY(-5px) scale(1.025);
+            box-shadow: 0 14px 38px rgba(0,0,0,0.16);
+        }
+        .report-card a {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Poster coloured top slab */
+        .poster-top {
+            padding: 26px 18px 20px;
+            position: relative;
+            min-height: 145px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .poster-top::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                135deg,
+                rgba(255,255,255,0)    0px,
+                rgba(255,255,255,0)    18px,
+                rgba(255,255,255,0.04) 18px,
+                rgba(255,255,255,0.04) 19px
+            );
+        }
+        .poster-type-badge {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.2);
+            color: rgba(255,255,255,0.9);
+            border-radius: 4px;
+            padding: 3px 8px;
+            align-self: flex-start;
+        }
+        .poster-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.13);
+            line-height: 1;
+            position: absolute;
+            bottom: 8px;
+            right: 14px;
+            user-select: none;
+        }
+
+        /* Poster white info bottom */
+        .poster-bottom {
+            background: var(--surface);
+            padding: 14px 16px 16px;
+            flex: 1;
+            border-top: 3px solid transparent;
+        }
+        .poster-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.3;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .poster-sub {
+            font-size: 0.72rem;
+            color: var(--text-soft);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* 8 poster colours assigned via JS inline style */
+
+        /* DIVIDER */
+        .type-divider {
+            grid-column: 1 / -1;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 4px;
+        }
+        .type-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* STATE MESSAGES */
+        .state-msg {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-soft);
+        }
+        .state-msg .icon { font-size: 2.4rem; margin-bottom: 14px; }
+        .state-msg p { font-size: 0.92rem; line-height: 1.6; }
+        .state-msg strong { color: var(--accent2); }
+        .spinner {
+            width: 32px; height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto 14px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* FOOTER */
+        footer {
+            max-width: 900px;
+            margin: 50px auto 0;
+            padding: 20px 24px 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        footer p { font-size: 0.78rem; color: var(--text-soft); }
+        .footer-links { display: flex; gap: 16px; }
+        .footer-links button {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.78rem;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+        }
+        .footer-links button:hover { color: var(--accent2); }
+        .config-note {
+            width: 100%;
+            font-size: 0.75rem;
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            color: #7a5500;
+            border-radius: 6px;
+            padding: 6px 12px;
+            display: none;
+        }
+
+        /* ════════════════════════
+           MODALS
+        ════════════════════════ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,20,35,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 18px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+            overflow: hidden;
+            animation: slideUp 0.28s cubic-bezier(0.34,1.4,0.64,1);
+            margin: auto;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0)    scale(1);    }
+        }
+
+        .modal-header {
+            padding: 22px 26px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .modal-header-left { display: flex; align-items: center; gap: 14px; }
+        .modal-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .modal-icon.blue  { background: rgba(26,79,122,0.1);  }
+        .modal-icon.red   { background: rgba(160,40,14,0.1);  }
+        .modal-icon.green { background: rgba(26,107,60,0.1);  }
+        .modal-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .modal-subtitle { font-size: 0.78rem; color: var(--text-soft); margin-top: 2px; }
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-soft);
+            font-size: 1.4rem;
+            line-height: 1;
+            padding: 4px 6px;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+            flex-shrink: 0;
+        }
+        .modal-close:hover { background: #f0ede6; color: var(--text); }
+        .modal-body { padding: 22px 26px 26px; }
+
+        /* About */
+        .about-text {
+            font-size: 0.91rem;
+            color: var(--text-mid);
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+        .about-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .about-stat {
+            background: #f4f1eb;
+            border-radius: 10px;
+            padding: 13px 15px;
+            border: 1px solid var(--border);
+        }
+        .about-stat .val {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .about-stat .lbl { font-size: 0.73rem; color: var(--text-soft); margin-top: 2px; }
+
+        /* Contact */
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .contact-item:last-child { border-bottom: none; }
+        .contact-item-icon {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            background: rgba(26,79,122,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-item-text .label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+        }
+        .contact-item-text .value {
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        /* Bug report form */
+        .form-group { margin-bottom: 14px; }
+        .form-group label {
+            display: block;
+            font-size: 0.79rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            color: var(--text);
+            background: var(--surface);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26,79,122,0.09);
+        }
+        .form-group textarea { min-height: 86px; }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 4px;
+        }
+        .submit-btn:hover  { background: #15406a; }
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-success {
+            text-align: center;
+            padding: 20px 0 4px;
+            display: none;
+        }
+        .submit-success .icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .submit-success p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+
+        /* Responsive */
+        @media (max-width: 540px) {
+            .top-bar { padding: 0 16px; }
+            .top-bar-left { display: none; }
+            header { padding: 28px 16px 24px; }
+            main   { padding: 24px 16px 0; }
+            footer { padding: 18px 16px 0; }
+            #report-list { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
+            .modal { border-radius: 14px; }
+            .modal-header, .modal-body { padding-left: 18px; padding-right: 18px; }
+            .about-stat-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <span class="top-bar-left">ICT / Computer Science Department</span>
+    <div class="top-bar-right">
+        <button onclick="openModal('about-modal')">About Us</button>
+        <button onclick="openModal('contact-modal')">Contact Us</button>
+        <button onclick="openModal('bug-modal')">Report a Bug</button>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div class="dept-tag">Learning Resources</div>
+    <h1>Computer Department <em>Learning Hub</em></h1>
+    <p class="header-sub">Interactive textbooks, lecture notes, and reference materials for students.</p>
+</header>
+
+<!-- MAIN -->
+<main>
+    <div class="controls">
+        <div class="search-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search materials by name…" autocomplete="off">
+        </div>
+        <div class="filter-btns">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn"        data-filter="html">HTML</button>
+            <button class="filter-btn"        data-filter="pdf">PDF</button>
+        </div>
+    </div>
+
+    <div class="count-row">
+        <span class="section-label">Available Materials</span>
+        <span id="count-pill">Loading…</span>
+    </div>
+
+    <ul id="report-list" class="state-wrap">
+        <li class="state-msg">
+            <div class="spinner"></div>
+            <p>Fetching materials from repository…</p>
+        </li>
+    </ul>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2025 Department Learning Hub &mdash; Powered by GitHub Pages</p>
+    <div class="footer-links">
+        <button onclick="openModal('about-modal')">About Us</button>
+        <button onclick="openModal('contact-modal')">Contact Us</button>
+        <button onclick="openModal('bug-modal')">Report a Bug</button>
+    </div>
+    <p class="config-note" id="config-note">⚠️ Update USERNAME and REPO in the script before deploying.</p>
+</footer>
+
+
+<!-- MODAL: ABOUT US -->
+<div class="modal-overlay" id="about-modal" onclick="handleOverlayClick(event,'about-modal')">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <div class="modal-icon blue">📚</div>
+                <div>
+                    <div class="modal-title">About This Hub</div>
+                    <div class="modal-subtitle">Department Learning Hub</div>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal('about-modal')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+            <p class="about-text">
+                Welcome to the <strong>Department Learning Hub</strong> — a free digital library built for students and staff of the Computer Department at <strong>Federal College of Education (FCE), Kontagora</strong>.
+                <br><br>
+                This platform was created with one goal in mind: to make learning easier, more accessible, and more engaging for every FCE student — regardless of where they are. We believe technology should bridge the gap between students and quality education, not widen it.
+                <br><br>
+                Here you will find interactive HTML textbooks, lecture notes, and PDF reference materials — all carefully prepared by your instructors and uploaded directly to this hub. New materials appear automatically as soon as they are published — no waiting, no searching.
+                <br><br>
+                We are looking forward to a future where every student at FCE Kontagora has everything they need to learn, revise, and excel — right at their fingertips. This is just the beginning.
+            </p>
+            <div class="about-stat-row">
+                <div class="about-stat">
+                    <div class="val" id="stat-count">—</div>
+                    <div class="lbl">Materials Published</div>
+                </div>
+                <div class="about-stat">
+                    <div class="val">Free</div>
+                    <div class="lbl">Always Free for Students</div>
+                </div>
+                <div class="about-stat">
+                    <div class="val">24/7</div>
+                    <div class="lbl">Available Anytime</div>
+                </div>
+                <div class="about-stat">
+                    <div class="val">FCE</div>
+                    <div class="lbl">Kontagora, Niger State</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL: CONTACT US -->
+<div class="modal-overlay" id="contact-modal" onclick="handleOverlayClick(event,'contact-modal')">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <div class="modal-icon green">📬</div>
+                <div>
+                    <div class="modal-title">Contact Us</div>
+                    <div class="modal-subtitle">We're here to help</div>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal('contact-modal')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+            <div class="contact-item">
+                <div class="contact-item-icon">✉️</div>
+                <div class="contact-item-text">
+                    <div class="label">Gmail</div>
+                    <div class="value"><a href="mailto:nasirbello008@gmail.com" style="color:var(--accent);text-decoration:none;">nasirbello008@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon">📱</div>
+                <div class="contact-item-text">
+                    <div class="label">WhatsApp / Phone</div>
+                    <div class="value"><a href="https://wa.me/2348130594985" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">08130594985</a></div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon">🏛️</div>
+                <div class="contact-item-text">
+                    <div class="label">Address</div>
+                    <div class="value">Computer Department, FCE Kontagora<br>
+                    <span style="font-size:0.82rem;color:var(--text-soft);font-weight:400;">FUE Mosque / Mangoron Kansiloli, Niger State</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL: REPORT A BUG -->
+<div class="modal-overlay" id="bug-modal" onclick="handleOverlayClick(event,'bug-modal')">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <div class="modal-icon red">🐛</div>
+                <div>
+                    <div class="modal-title">Report a Bug</div>
+                    <div class="modal-subtitle">Help us improve the hub</div>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal('bug-modal')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+            <div id="bug-form">
+                <div class="form-group">
+                    <label>Your Name (optional)</label>
+                    <input type="text" id="bug-name" placeholder="e.g. Nasir Bello">
+                </div>
+                <div class="form-group">
+                    <label>Which material is affected?</label>
+                    <input type="text" id="bug-material" placeholder="e.g. Data Structures Week 3">
+                </div>
+                <div class="form-group">
+                    <label>Type of Issue</label>
+                    <select id="bug-type">
+                        <option value="">— Select one —</option>
+                        <option>Broken link / file not opening</option>
+                        <option>Content error or typo</option>
+                        <option>Layout / display problem</option>
+                        <option>Search not working</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Describe the issue</label>
+                    <textarea id="bug-desc" placeholder="What went wrong? What did you expect to happen?"></textarea>
+                </div>
+                <button class="submit-btn" onclick="submitBug()">Send Report</button>
+            </div>
+            <div class="submit-success" id="bug-success">
+                <div class="icon">✅</div>
+                <p>
+                    Your report has been prepared!<br>
+                    Your email app should have opened with the report ready to send to <strong>nasirbello008@gmail.com</strong>.<br><br>
+                    <span style="font-size:0.8rem;color:var(--text-soft);">
+                        If it didn't open, you can send the report manually to nasirbello008@gmail.com.
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // ─────────────────────────────────────────────
+    //  CONFIGURATION — update these two values
+    // ─────────────────────────────────────────────
+    const USERNAME = 'nasirbello043-sudo';
+    const REPO     = 'Computer-department-courses-note';
+    // ─────────────────────────────────────────────
+
+    // 8 rich poster colours (background, border-top)
+    const COLORS = [
+        { bg: '#1a4f7a', bt: '#1a4f7a' },
+        { bg: '#7a3b1a', bt: '#7a3b1a' },
+        { bg: '#1a6b3c', bt: '#1a6b3c' },
+        { bg: '#5b1a7a', bt: '#5b1a7a' },
+        { bg: '#a0280e', bt: '#a0280e' },
+        { bg: '#1a5a6b', bt: '#1a5a6b' },
+        { bg: '#6b5a1a', bt: '#6b5a1a' },
+        { bg: '#2e4a1a', bt: '#2e4a1a' },
+    ];
+
+    let allItems     = [];
+    let activeFilter = 'all';
+
+    if (USERNAME === 'your-github-username') {
+        document.getElementById('config-note').style.display = 'block';
+    }
+
+    // Deterministic color index from filename so it never changes on refresh
+    function colorIndex(name) {
+        let h = 0;
+        for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+        return Math.abs(h) % COLORS.length;
+    }
+
+    function formatName(filename) {
+        return filename
+            .replace(/\.(html|pdf)$/i, '')
+            .replace(/[-_]/g, ' ')
+            .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    async function fetchMaterials() {
+        const list = document.getElementById('report-list');
+        try {
+            const res = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const files = await res.json();
+            allItems = files.filter(f =>
+                (f.name.endsWith('.html') && f.name.toLowerCase() !== 'index.html') ||
+                f.name.endsWith('.pdf')
+            );
+            renderList();
+        } catch (err) {
+            console.error(err);
+            list.className = 'state-wrap';
+            list.innerHTML = `
+                <li class="state-msg">
+                    <div class="icon">⚠️</div>
+                    <p>Could not load materials.<br>
+                    Make sure the repo is <strong>public</strong> and USERNAME/REPO are correct.</p>
+                </li>`;
+            document.getElementById('count-pill').textContent = 'Error';
+        }
+    }
+
+    function renderList() {
+        const list  = document.getElementById('report-list');
+        const pill  = document.getElementById('count-pill');
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+
+        const filtered = allItems.filter(f => {
+            const matchType =
+                activeFilter === 'all'  ? true :
+                activeFilter === 'html' ? f.name.endsWith('.html') :
+                activeFilter === 'pdf'  ? f.name.endsWith('.pdf')  : true;
+            return matchType && (!query || f.name.toLowerCase().includes(query));
+        });
+
+        pill.textContent = `${filtered.length} material${filtered.length !== 1 ? 's' : ''}`;
+        document.getElementById('stat-count').textContent = allItems.length;
+
+        if (filtered.length === 0) {
+            list.className = 'state-wrap';
+            list.innerHTML = `
+                <li class="state-msg">
+                    <div class="icon">📭</div>
+                    <p>No materials found${query ? ` for "<strong>${query}</strong>"` : ''}.</p>
+                </li>`;
+            return;
+        }
+
+        list.className = '';
+        list.innerHTML = '';
+
+        const htmlFiles = filtered.filter(f => f.name.endsWith('.html'));
+        const pdfFiles  = filtered.filter(f => f.name.endsWith('.pdf'));
+
+        function renderGroup(group, label) {
+            if (!group.length) return;
+            if (activeFilter === 'all') {
+                const li = document.createElement('li');
+                li.className = 'type-divider';
+                li.textContent = label;
+                list.appendChild(li);
+            }
+            group.forEach((file, i) => {
+                const isPdf  = file.name.endsWith('.pdf');
+                const ci     = colorIndex(file.name);
+                const col    = COLORS[ci];
+                const num    = String(i + 1).padStart(2, '0');
+                const target = isPdf ? ' target="_blank" rel="noopener"' : '';
+
+                const li = document.createElement('li');
+                li.className = 'report-card';
+                li.style.animationDelay = `${i * 0.06}s`;
+
+                li.innerHTML = `
+                    <a href="${file.name}"${target}>
+                        <div class="poster-top" style="background:${col.bg}">
+                            <span class="poster-type-badge">${isPdf ? 'PDF Document' : 'Interactive'}</span>
+                            <span class="poster-number">${num}</span>
+                        </div>
+                        <div class="poster-bottom" style="border-top-color:${col.bt}">
+                            <div class="poster-title">${formatName(file.name)}</div>
+                            <div class="poster-sub">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                    ${isPdf
+                                        ? '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>'
+                                        : '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'}
+                                </svg>
+                                ${isPdf ? 'PDF Document' : 'HTML Textbook'}
+                            </div>
+                        </div>
+                    </a>`;
+                list.appendChild(li);
+            });
+        }
+
+        renderGroup(htmlFiles, 'Interactive Materials');
+        renderGroup(pdfFiles,  'PDF Documents');
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            activeFilter = btn.dataset.filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active','active-pdf'));
+            btn.classList.add(activeFilter === 'pdf' ? 'active-pdf' : 'active');
+            renderList();
+        });
+    });
+
+    // Search
+    document.getElementById('search-input').addEventListener('input', renderList);
+
+    // Modal logic
+    function openModal(id) {
+        document.getElementById(id).classList.add('open');
+    }
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+    }
+    function handleOverlayClick(e, id) {
+        if (e.target === document.getElementById(id)) closeModal(id);
+    }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay.open').forEach(m => {
+                m.classList.remove('open');
+            });
+        }
+    });
+
+    // Bug form submit — opens Gmail with pre-filled report
+    function submitBug() {
+        const type     = document.getElementById('bug-type').value;
+        const desc     = document.getElementById('bug-desc').value.trim();
+        const name     = document.getElementById('bug-name').value.trim() || 'Anonymous';
+        const material = document.getElementById('bug-material').value.trim() || 'Not specified';
+
+        if (!type || !desc) { alert('Please select an issue type and describe the problem.'); return; }
+
+        const subject = encodeURIComponent(`[Learning Hub Bug] ${type}`);
+        const body    = encodeURIComponent(
+            `Bug Report — Department Learning Hub\n` +
+            `─────────────────────────────────\n` +
+            `Reported by : ${name}\n` +
+            `Material    : ${material}\n` +
+            `Issue type  : ${type}\n` +
+            `─────────────────────────────────\n\n` +
+            `Description:\n${desc}`
+        );
+
+        window.open(`mailto:nasirbello008@gmail.com?subject=${subject}&body=${body}`, '_blank');
+
+        document.getElementById('bug-form').style.display    = 'none';
+        document.getElementById('bug-success').style.display = 'block';
+    }
+
+    // Reset bug form on close
+    document.getElementById('bug-modal').addEventListener('click', e => {
+        if (!document.getElementById('bug-modal').classList.contains('open')) {
+            setTimeout(() => {
+                document.getElementById('bug-form').style.display    = 'block';
+                document.getElementById('bug-success').style.display = 'none';
+                ['bug-name','bug-material','bug-desc'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('bug-type').value = '';
+            }, 300);
+        }
+    });
+
+    fetchMaterials();
+</script>
+</body>
+</html>
