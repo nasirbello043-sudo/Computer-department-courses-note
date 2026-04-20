@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT 201 — Internet & Networking Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050d1a;
+  --bg2: #071222;
+  --bg3: #0a1a2e;
+  --panel: #0d1f35;
+  --panel2: #112440;
+  --cyan: #00e5ff;
+  --cyan2: #00b8d4;
+  --green: #00ff9d;
+  --green2: #00c97a;
+  --amber: #ffb300;
+  --red: #ff4757;
+  --white: #e8f4f8;
+  --muted: #7a9ab5;
+  --border: rgba(0,229,255,0.18);
+  --border2: rgba(0,255,157,0.15);
+  --glow: 0 0 20px rgba(0,229,255,0.25);
+  --glow2: 0 0 20px rgba(0,255,157,0.2);
+  --radius: 12px;
+  --correct: rgba(0,255,157,0.15);
+  --wrong: rgba(255,71,87,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Exo 2',sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  line-height:1.8;
+  font-size:16px;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(0,229,255,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0,255,157,0.03) 0%, transparent 50%);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:3px;}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#020810 0%,#071628 50%,#030d1c 100%);
+  border-bottom:2px solid var(--cyan);
+  padding:50px 40px 36px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(0,229,255,0.02) 40px,rgba(0,229,255,0.02) 41px),
+    repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,229,255,0.02) 40px,rgba(0,229,255,0.02) 41px);
+}
+header::after{
+  content:'';position:absolute;
+  top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(ellipse at center,rgba(0,229,255,0.06) 0%,transparent 70%);
+  animation:pulse-bg 4s ease-in-out infinite;
+}
+@keyframes pulse-bg{0%,100%{opacity:0.5;}50%{opacity:1;}}
+.header-badge{
+  display:inline-block;
+  background:transparent;
+  border:1px solid var(--cyan);
+  color:var(--cyan);
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:4px;
+  padding:5px 18px;border-radius:2px;
+  margin-bottom:18px;position:relative;z-index:1;
+  text-transform:uppercase;
+}
+header h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(1.8rem,5vw,3.2rem);
+  font-weight:900;
+  color:var(--white);
+  letter-spacing:2px;
+  line-height:1.15;
+  margin-bottom:8px;
+  position:relative;z-index:1;
+  text-shadow:0 0 30px rgba(0,229,255,0.4);
+}
+header h1 span{color:var(--cyan);}
+header p{
+  color:var(--muted);font-size:1rem;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:1px;margin-bottom:24px;
+  position:relative;z-index:1;
+}
+.progress-wrap{
+  background:rgba(0,229,255,0.08);
+  border:1px solid var(--border);
+  border-radius:2px;height:8px;
+  max-width:420px;margin:0 auto 8px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  border-radius:2px;
+  transition:width 0.6s ease;width:0%;
+  box-shadow:0 0 10px rgba(0,229,255,0.6);
+}
+.progress-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--cyan);
+  letter-spacing:2px;position:relative;z-index:1;
+}
+
+/* NAV */
+nav{
+  background:rgba(5,13,26,0.97);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:999;
+  overflow-x:auto;
+  scrollbar-width:thin;
+  scrollbar-color:var(--cyan) var(--bg);
+  backdrop-filter:blur(10px);
+}
+.nav-inner{display:flex;min-width:max-content;padding:0 16px;}
+.nav-btn{
+  background:none;border:none;
+  color:var(--muted);
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:0.5px;
+  padding:13px 14px;cursor:pointer;
+  transition:all 0.2s;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+}
+.nav-btn:hover{color:var(--cyan);border-bottom-color:rgba(0,229,255,0.4);}
+.nav-btn.done{color:var(--green);}
+.nav-btn.done::after{content:' ✓';color:var(--green);font-size:10px;}
+.nav-btn.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+
+/* MAIN */
+main{max-width:960px;margin:0 auto;padding:40px 20px 80px;}
+
+/* CHAPTERS */
+.chapter{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:60px;
+  overflow:hidden;
+  box-shadow:0 4px 30px rgba(0,0,0,0.4);
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.5s ease,transform 0.5s ease;
+}
+.chapter.visible{opacity:1;transform:translateY(0);}
+
+.chapter-header{
+  background:linear-gradient(135deg,#071628 0%,#0a1e3a 100%);
+  border-bottom:2px solid var(--cyan);
+  padding:28px 32px;
+  position:relative;overflow:hidden;
+}
+.chapter-header::before{
+  content:'';position:absolute;right:-20px;top:-20px;
+  width:120px;height:120px;
+  background:radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%);
+}
+.ch-num{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:4px;
+  color:var(--cyan);margin-bottom:6px;
+  text-transform:uppercase;
+}
+.chapter-header h2{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--white);line-height:1.3;
+}
+.ch-icon{
+  position:absolute;right:28px;top:50%;
+  transform:translateY(-50%);
+  font-size:2.2rem;opacity:0.12;
+}
+
+/* BODY */
+.chapter-body{padding:28px 32px;}
+.chapter-body h3{
+  font-family:'Orbitron',sans-serif;
+  font-size:1rem;color:var(--cyan);
+  margin:28px 0 12px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+  letter-spacing:1px;
+}
+.chapter-body h4{
+  font-family:'Exo 2',sans-serif;
+  font-size:0.95rem;color:var(--green);
+  font-weight:600;margin:16px 0 6px;
+  letter-spacing:0.5px;
+}
+.chapter-body p{margin-bottom:14px;color:#c8dde8;line-height:1.85;}
+.chapter-body ul,.chapter-body ol{margin:10px 0 14px 22px;color:#c8dde8;}
+.chapter-body li{margin-bottom:7px;}
+.chapter-body strong{color:var(--cyan);}
+.chapter-body em{color:var(--amber);}
+
+/* DEFINITION BOX */
+.def-box{
+  background:linear-gradient(135deg,rgba(0,229,255,0.06),rgba(0,229,255,0.02));
+  border-left:3px solid var(--cyan);
+  border-radius:0 10px 10px 0;
+  padding:16px 20px;margin:18px 0;
+  position:relative;
+}
+.def-box::before{
+  content:'DEF';
+  position:absolute;top:12px;right:14px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:2px;
+  color:rgba(0,229,255,0.3);
+}
+
+/* CODE/EXAMPLE BOX */
+.code-box{
+  background:#020810;
+  border:1px solid rgba(0,255,157,0.25);
+  border-radius:8px;
+  padding:16px 20px;margin:16px 0;
+  font-family:'Share Tech Mono',monospace;
+  font-size:13px;color:var(--green);
+  position:relative;overflow-x:auto;
+  line-height:1.7;
+}
+.code-box .code-label{
+  position:absolute;top:8px;right:12px;
+  font-size:9px;letter-spacing:2px;
+  color:rgba(0,255,157,0.4);
+  text-transform:uppercase;
+}
+.code-box .comment{color:rgba(0,255,157,0.4);}
+.code-box .keyword{color:var(--cyan);}
+.code-box .value{color:var(--amber);}
+.code-box .highlight{color:#fff;background:rgba(0,229,255,0.12);padding:1px 4px;border-radius:3px;}
+
+/* INFO TABLE */
+.info-table{
+  width:100%;border-collapse:collapse;
+  margin:16px 0;font-size:14px;
+  overflow:hidden;border-radius:8px;
+}
+.info-table th{
+  background:rgba(0,229,255,0.1);
+  color:var(--cyan);
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:1px;
+  padding:10px 14px;text-align:left;
+  border-bottom:1px solid var(--border);
+}
+.info-table td{
+  padding:9px 14px;
+  border-bottom:1px solid rgba(0,229,255,0.06);
+  color:#c8dde8;vertical-align:top;
+}
+.info-table tr:nth-child(even) td{background:rgba(0,229,255,0.03);}
+.info-table tr:hover td{background:rgba(0,229,255,0.06);}
+
+/* DIAGRAM / SVG CONTAINERS */
+.diagram-wrap{
+  background:#020810;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;margin:18px 0;
+  text-align:center;overflow-x:auto;
+}
+.diagram-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;letter-spacing:3px;
+  color:var(--cyan);opacity:0.6;
+  text-align:center;margin-top:10px;
+  text-transform:uppercase;
+}
+
+/* EMBEDDED IMAGES */
+.img-wrap{
+  margin:18px 0;border-radius:10px;
+  overflow:hidden;border:1px solid var(--border);
+  background:#020810;
+}
+.img-wrap img{
+  width:100%;display:block;
+  max-height:380px;object-fit:contain;
+  background:#020810;padding:10px;
+}
+.img-caption{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:1px;
+  color:var(--muted);padding:8px 14px;
+  border-top:1px solid var(--border);
+  background:rgba(0,0,0,0.3);
+}
+
+/* CALC BOX */
+.calc-box{
+  background:rgba(255,179,0,0.05);
+  border:1px solid rgba(255,179,0,0.25);
+  border-radius:10px;padding:18px 22px;
+  margin:16px 0;
+}
+.calc-box .calc-title{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:3px;
+  color:var(--amber);margin-bottom:12px;
+  text-transform:uppercase;
+}
+.calc-box .step{
+  font-family:'Share Tech Mono',monospace;
+  font-size:13px;color:#e8d5a0;
+  margin-bottom:6px;line-height:1.7;
+}
+.calc-box .step .arrow{color:var(--cyan);}
+
+/* QUIZ */
+.quiz-section{
+  background:linear-gradient(135deg,#020810 0%,#071220 100%);
+  border-top:2px solid var(--border);
+  padding:28px 32px;
+}
+.quiz-title{
+  font-family:'Orbitron',sans-serif;
+  color:var(--cyan);font-size:1.1rem;
+  margin-bottom:4px;font-weight:700;
+  display:flex;align-items:center;gap:10px;
+}
+.quiz-title::before{content:'//';color:var(--green);font-family:'Share Tech Mono',monospace;}
+.quiz-sub{
+  color:var(--muted);font-size:11px;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:2px;margin-bottom:22px;
+  text-transform:uppercase;
+}
+.quiz-q{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(0,229,255,0.12);
+  border-radius:10px;padding:18px 20px;
+  margin-bottom:16px;
+}
+.q-num{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--green);
+  letter-spacing:2px;margin-bottom:8px;
+}
+.q-type{
+  display:inline-block;
+  background:rgba(0,229,255,0.1);
+  color:var(--cyan);font-size:10px;
+  padding:2px 10px;border-radius:20px;
+  margin-left:8px;letter-spacing:1px;
+  font-family:'Share Tech Mono',monospace;
+}
+.q-text{color:var(--white);font-size:15px;margin-bottom:14px;line-height:1.65;}
+.mc-options{display:grid;gap:8px;}
+.mc-opt{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:6px;padding:10px 14px;
+  color:var(--muted);font-size:14px;
+  cursor:pointer;transition:all 0.2s;
+  text-align:left;width:100%;
+  font-family:'Exo 2',sans-serif;
+}
+.mc-opt:hover{background:rgba(0,229,255,0.08);border-color:var(--cyan);color:var(--white);}
+.mc-opt.correct{background:var(--correct);border-color:var(--green);color:var(--green);}
+.mc-opt.wrong{background:var(--wrong);border-color:var(--red);color:#ff8a97;}
+.mc-opt:disabled{cursor:default;}
+.tf-options{display:flex;gap:10px;}
+.tf-btn{
+  flex:1;padding:10px;border-radius:6px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:var(--muted);font-size:14px;
+  cursor:pointer;transition:all 0.2s;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:2px;
+}
+.tf-btn:hover{background:rgba(0,229,255,0.08);border-color:var(--cyan);color:var(--white);}
+.tf-btn.correct{background:var(--correct);border-color:var(--green);color:var(--green);}
+.tf-btn.wrong{background:var(--wrong);border-color:var(--red);color:#ff8a97;}
+.fitb-input{
+  background:rgba(0,229,255,0.05);
+  border:1px solid rgba(0,229,255,0.2);
+  border-radius:6px;padding:10px 14px;
+  color:var(--white);font-size:14px;width:100%;
+  font-family:'Share Tech Mono',monospace;
+  transition:border 0.2s;
+}
+.fitb-input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 8px rgba(0,229,255,0.2);}
+.fitb-input.correct{border-color:var(--green);background:var(--correct);}
+.fitb-input.wrong{border-color:var(--red);background:var(--wrong);}
+.short-input{
+  background:rgba(0,229,255,0.05);
+  border:1px solid rgba(0,229,255,0.2);
+  border-radius:6px;padding:10px 14px;
+  color:var(--white);font-size:14px;width:100%;
+  min-height:90px;resize:vertical;
+  font-family:'Exo 2',sans-serif;
+}
+.short-input:focus{outline:none;border-color:var(--cyan);}
+.check-btn{
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  color:var(--bg);border:none;
+  padding:8px 20px;border-radius:6px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:2px;
+  font-weight:700;cursor:pointer;
+  margin-top:10px;transition:all 0.2s;
+  text-transform:uppercase;
+}
+.check-btn:hover{transform:translateY(-1px);box-shadow:var(--glow);}
+.answer-reveal{
+  background:rgba(0,229,255,0.04);
+  border-left:3px solid var(--green);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-top:10px;
+  color:var(--muted);font-size:13px;
+  display:none;font-family:'Exo 2',sans-serif;
+}
+.answer-reveal.show{display:block;}
+.answer-reveal strong{color:var(--green);}
+.quiz-score-area{
+  text-align:center;padding:20px 0 0;
+  border-top:1px solid var(--border);
+  margin-top:20px;
+}
+.submit-btn{
+  background:transparent;
+  border:1.5px solid var(--cyan);
+  color:var(--cyan);padding:12px 36px;
+  border-radius:4px;
+  font-family:'Orbitron',sans-serif;
+  font-size:12px;letter-spacing:3px;
+  font-weight:700;cursor:pointer;
+  transition:all 0.3s;text-transform:uppercase;
+}
+.submit-btn:hover{background:rgba(0,229,255,0.1);box-shadow:var(--glow);}
+.score-display{display:none;margin-top:16px;}
+.score-num{
+  font-family:'Orbitron',sans-serif;
+  font-size:2.5rem;color:var(--cyan);
+  font-weight:900;text-shadow:var(--glow);
+}
+.score-lbl{
+  color:var(--muted);font-size:12px;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:2px;
+}
+.mark-done-btn{
+  background:transparent;
+  border:1px solid var(--green);
+  color:var(--green);padding:8px 22px;
+  border-radius:4px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:2px;
+  cursor:pointer;margin-top:12px;
+  transition:all 0.2s;text-transform:uppercase;
+}
+.mark-done-btn:hover{background:rgba(0,255,157,0.08);}
+.mark-done-btn.completed{background:rgba(0,255,157,0.12);color:var(--green);}
+
+/* FINAL EXAM */
+#final-exam{
+  background:linear-gradient(135deg,#020810,#071220);
+  border:1px solid var(--cyan);
+  border-radius:var(--radius);
+  padding:40px;margin-bottom:60px;
+  box-shadow:0 0 40px rgba(0,229,255,0.1);
+}
+#final-exam h2{
+  font-family:'Orbitron',sans-serif;
+  color:var(--cyan);font-size:1.8rem;
+  text-align:center;margin-bottom:6px;
+  text-shadow:var(--glow);
+}
+#final-exam .fe-sub{
+  text-align:center;color:var(--muted);
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:3px;
+  margin-bottom:30px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .chapter-body,.quiz-section{padding:18px 16px;}
+  .chapter-header{padding:20px 16px;}
+  header{padding:32px 16px 24px;}
+  #final-exam{padding:24px 16px;}
+}
+
+/* TAG BADGES */
+.tag{
+  display:inline-block;
+  background:rgba(0,229,255,0.1);
+  border:1px solid rgba(0,229,255,0.2);
+  color:var(--cyan);
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;letter-spacing:1px;
+  padding:2px 10px;border-radius:20px;
+  margin:2px;
+}
+.tag.green{background:rgba(0,255,157,0.1);border-color:rgba(0,255,157,0.2);color:var(--green);}
+.tag.amber{background:rgba(255,179,0,0.1);border-color:rgba(255,179,0,0.2);color:var(--amber);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">ICT 201 · University Level · Advanced</div>
+  <h1>Internet &amp; <span>Computer Networking</span></h1>
+  <p>// A comprehensive technical textbook for university students</p>
+  <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 of 11 units completed</div>
+</header>
+
+<nav>
+  <div class="nav-inner" id="navInner">
+    <button class="nav-btn" onclick="goTo('u1')">U1 Intro to Networks</button>
+    <button class="nav-btn" onclick="goTo('u2')">U2 OSI &amp; TCP/IP</button>
+    <button class="nav-btn" onclick="goTo('u3')">U3 Physical &amp; Data Link</button>
+    <button class="nav-btn" onclick="goTo('u4')">U4 Network Layer &amp; IP</button>
+    <button class="nav-btn" onclick="goTo('u5')">U5 Transport Layer</button>
+    <button class="nav-btn" onclick="goTo('u6')">U6 Application Layer</button>
+    <button class="nav-btn" onclick="goTo('u7')">U7 The Internet</button>
+    <button class="nav-btn" onclick="goTo('u8')">U8 Wireless &amp; Mobile</button>
+    <button class="nav-btn" onclick="goTo('u9')">U9 Network Security</button>
+    <button class="nav-btn" onclick="goTo('u10')">U10 Administration</button>
+    <button class="nav-btn" onclick="goTo('u11')">U11 Emerging Tech</button>
+    <button class="nav-btn" onclick="goTo('final')">📋 Final Exam</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ========== UNIT 1 ========== -->
+<div class="chapter" id="u1">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 01 // Introduction to Computer Networks</div>
+    <h2>Foundations, Types, Topologies & Components</h2>
+    <div class="ch-icon">🌐</div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="def-box">
+      A <strong>computer network</strong> is a set of interconnected computing devices that can communicate and share resources using a defined set of rules (protocols). Networks range from two computers linked in a home to billions of devices forming the global internet.
+    </div>
+
+    <h3>1.1 History & Evolution of Networking</h3>
+    <p>The history of networking spans six decades of remarkable innovation:</p>
+    <ul>
+      <li><strong>1960s:</strong> ARPANET — the U.S. Department of Defense funded the first packet-switching network, connecting four universities. This is the direct ancestor of the internet.</li>
+      <li><strong>1970s:</strong> TCP/IP protocol suite developed by Cerf and Kahn; Ethernet invented at Xerox PARC.</li>
+      <li><strong>1980s:</strong> DNS introduced; TCP/IP adopted as the standard; NSFNet expands academic networking.</li>
+      <li><strong>1990s:</strong> Tim Berners-Lee invents the World Wide Web (WWW); commercialization of the internet begins; dial-up modems become widespread.</li>
+      <li><strong>2000s–present:</strong> Broadband, Wi-Fi, mobile internet, cloud computing, IoT, 5G.</li>
+    </ul>
+
+    <h3>1.2 Types of Networks</h3>
+    <table class="info-table">
+      <thead><tr><th>Type</th><th>Full Name</th><th>Coverage</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag">PAN</span></td><td>Personal Area Network</td><td>~10 metres</td><td>Bluetooth headset ↔ phone</td></tr>
+        <tr><td><span class="tag">LAN</span></td><td>Local Area Network</td><td>Building/Campus</td><td>University computer lab</td></tr>
+        <tr><td><span class="tag">MAN</span></td><td>Metropolitan Area Network</td><td>City-wide</td><td>City government network</td></tr>
+        <tr><td><span class="tag">WAN</span></td><td>Wide Area Network</td><td>Country/Global</td><td>The Internet, ATM networks</td></tr>
+        <tr><td><span class="tag">SAN</span></td><td>Storage Area Network</td><td>Data centre</td><td>Enterprise storage systems</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.3 Network Topologies</h3>
+    <p>Network topology describes the physical or logical arrangement of nodes and connections. Each topology has distinct advantages, limitations, and failure characteristics.</p>
+
+    <!-- SVG TOPOLOGY DIAGRAMS -->
+    <div class="diagram-wrap">
+      <svg width="100%" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#00e5ff" opacity="0.6"/>
+          </marker>
+        </defs>
+        <!-- BUS -->
+        <text x="60" y="22" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" letter-spacing="2">BUS</text>
+        <line x1="20" y1="60" x2="200" y2="60" stroke="#00e5ff" stroke-width="2" opacity="0.7"/>
+        <circle cx="50" cy="60" r="14" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="50" y="64" fill="#00e5ff" font-size="9" text-anchor="middle" font-family="Share Tech Mono">PC1</text>
+        <circle cx="100" cy="60" r="14" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="100" y="64" fill="#00e5ff" font-size="9" text-anchor="middle" font-family="Share Tech Mono">PC2</text>
+        <circle cx="150" cy="60" r="14" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="150" y="64" fill="#00e5ff" font-size="9" text-anchor="middle" font-family="Share Tech Mono">PC3</text>
+        <rect x="18" y="52" width="8" height="16" fill="#00e5ff" opacity="0.4" rx="2"/>
+        <rect x="192" y="52" width="8" height="16" fill="#ff4757" opacity="0.6" rx="2"/>
+        <text x="110" y="100" fill="#7a9ab5" font-size="10" text-anchor="middle" font-family="Share Tech Mono">Terminators at each end</text>
+
+        <!-- STAR -->
+        <text x="280" y="22" fill="#00ff9d" font-family="Share Tech Mono" font-size="11" letter-spacing="2">STAR</text>
+        <circle cx="350" cy="110" r="18" fill="#0a2a1a" stroke="#00ff9d" stroke-width="2"/>
+        <text x="350" y="114" fill="#00ff9d" font-size="9" text-anchor="middle" font-family="Share Tech Mono">SW</text>
+        <circle cx="290" cy="55" r="13" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="290" y="59" fill="#00e5ff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC1</text>
+        <circle cx="350" cy="45" r="13" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="350" y="49" fill="#00e5ff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC2</text>
+        <circle cx="410" cy="55" r="13" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="410" y="59" fill="#00e5ff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC3</text>
+        <circle cx="290" cy="165" r="13" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="290" y="169" fill="#00e5ff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC4</text>
+        <circle cx="410" cy="165" r="13" fill="#0a1e3a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="410" y="169" fill="#00e5ff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC5</text>
+        <line x1="303" y1="65" x2="335" y2="96" stroke="#00ff9d" stroke-width="1.5" opacity="0.6"/>
+        <line x1="350" y1="58" x2="350" y2="92" stroke="#00ff9d" stroke-width="1.5" opacity="0.6"/>
+        <line x1="397" y1="65" x2="365" y2="96" stroke="#00ff9d" stroke-width="1.5" opacity="0.6"/>
+        <line x1="303" y1="155" x2="335" y2="124" stroke="#00ff9d" stroke-width="1.5" opacity="0.6"/>
+        <line x1="397" y1="155" x2="365" y2="124" stroke="#00ff9d" stroke-width="1.5" opacity="0.6"/>
+
+        <!-- RING -->
+        <text x="490" y="22" fill="#ffb300" font-family="Share Tech Mono" font-size="11" letter-spacing="2">RING</text>
+        <circle cx="580" cy="100" r="60" fill="none" stroke="#ffb300" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.4"/>
+        <circle cx="580" cy="40" r="13" fill="#0a1e3a" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="580" y="44" fill="#ffb300" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC1</text>
+        <circle cx="640" cy="100" r="13" fill="#0a1e3a" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="640" y="104" fill="#ffb300" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC2</text>
+        <circle cx="580" cy="160" r="13" fill="#0a1e3a" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="580" y="164" fill="#ffb300" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC3</text>
+        <circle cx="520" cy="100" r="13" fill="#0a1e3a" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="520" y="104" fill="#ffb300" font-size="8" text-anchor="middle" font-family="Share Tech Mono">PC4</text>
+        <line x1="590" y1="52" x2="628" y2="88" stroke="#ffb300" stroke-width="1.5" opacity="0.7"/>
+        <line x1="640" y1="113" x2="592" y2="148" stroke="#ffb300" stroke-width="1.5" opacity="0.7"/>
+        <line x1="567" y1="148" x2="533" y2="113" stroke="#ffb300" stroke-width="1.5" opacity="0.7"/>
+        <line x1="520" y1="87" x2="568" y2="52" stroke="#ffb300" stroke-width="1.5" opacity="0.7"/>
+
+        <!-- MESH bottom row -->
+        <text x="60" y="210" fill="#c850c0" font-family="Share Tech Mono" font-size="11" letter-spacing="2">MESH</text>
+        <circle cx="70" cy="260" r="13" fill="#0a1e3a" stroke="#c850c0" stroke-width="1.5"/>
+        <text x="70" y="264" fill="#c850c0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">A</text>
+        <circle cx="140" cy="240" r="13" fill="#0a1e3a" stroke="#c850c0" stroke-width="1.5"/>
+        <text x="140" y="244" fill="#c850c0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">B</text>
+        <circle cx="180" cy="300" r="13" fill="#0a1e3a" stroke="#c850c0" stroke-width="1.5"/>
+        <text x="180" y="304" fill="#c850c0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">C</text>
+        <circle cx="80" cy="310" r="13" fill="#0a1e3a" stroke="#c850c0" stroke-width="1.5"/>
+        <text x="80" y="314" fill="#c850c0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">D</text>
+        <line x1="83" y1="255" x2="127" y2="247" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <line x1="83" y1="268" x2="80" y2="297" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <line x1="93" y1="263" x2="167" y2="293" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <line x1="153" y1="250" x2="170" y2="287" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <line x1="127" y1="246" x2="93" y2="305" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <line x1="167" y1="300" x2="93" y2="312" stroke="#c850c0" stroke-width="1" opacity="0.6"/>
+        <text x="125" y="330" fill="#7a9ab5" font-size="9" text-anchor="middle" font-family="Share Tech Mono">Every node connected to every other</text>
+      </svg>
+      <div class="diagram-label">Fig 1.1 — Network Topologies: Bus, Star, Ring, Mesh</div>
+    </div>
+
+    <h3>1.4 Network Components</h3>
+
+    <!-- Real image: Router -->
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_network_diagram.png/640px-Simple_network_diagram.png" alt="Network diagram showing router, switch and connected devices" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">📡 Fig 1.2 — A typical network with router, switch and end devices (Wikimedia Commons)</div>
+    </div>
+
+    <table class="info-table">
+      <thead><tr><th>Device</th><th>OSI Layer</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hub</strong></td><td>Layer 1 (Physical)</td><td>Broadcasts all data to all ports — obsolete, replaced by switches</td></tr>
+        <tr><td><strong>Switch</strong></td><td>Layer 2 (Data Link)</td><td>Forwards frames using MAC address table — intelligent, collision-free</td></tr>
+        <tr><td><strong>Router</strong></td><td>Layer 3 (Network)</td><td>Routes packets between networks using IP addresses and routing tables</td></tr>
+        <tr><td><strong>Modem</strong></td><td>Layer 1</td><td>Modulates/demodulates signals for transmission over phone/cable lines</td></tr>
+        <tr><td><strong>Access Point</strong></td><td>Layer 2</td><td>Connects wireless devices to a wired network</td></tr>
+        <tr><td><strong>Firewall</strong></td><td>Layer 3–7</td><td>Filters network traffic based on security rules</td></tr>
+        <tr><td><strong>NIC</strong></td><td>Layer 1–2</td><td>Network Interface Card — physical hardware connecting a device to the network</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.5 Transmission Media</h3>
+    <p><strong>Wired (Guided) Media:</strong></p>
+    <ul>
+      <li><em>Twisted Pair (UTP/STP):</em> Cat5e supports 1 Gbps up to 100m; Cat6 supports 10 Gbps up to 55m; Cat6a 10 Gbps up to 100m.</li>
+      <li><em>Coaxial Cable:</em> Used for cable TV and early Ethernet (10BASE2, 10BASE5). Provides better shielding than twisted pair.</li>
+      <li><em>Fibre Optic:</em> Uses light pulses; single-mode (long distance, ~100km) vs multimode (short distance, up to 2km). Speeds: 10 Gbps to 100 Tbps. Immune to electromagnetic interference.</li>
+    </ul>
+    <p><strong>Wireless (Unguided) Media:</strong> Radio waves (Wi-Fi, Bluetooth), Microwave (point-to-point links), Infrared (short range), Satellite (global coverage, high latency ~600ms).</p>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 1 Assessment</div>
+    <div class="quiz-sub">Intro to Networks · 5 Questions</div>
+
+    <div class="quiz-q" id="q1_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A university campus has multiple buildings connected via a high-speed fibre backbone, all within a 2km radius. Which network type best describes this?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">A. PAN</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q1_1')">B. LAN</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">C. MAN</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_1')">D. WAN</button>
+      </div>
+      <div class="answer-reveal" id="q1_1_reveal"><strong>Correct: B — LAN.</strong> A campus network spanning a few kilometres is a LAN. A MAN would span an entire city; a WAN spans countries/continents.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">A network hub operates at Layer 2 (Data Link) of the OSI model and uses MAC addresses to forward frames intelligently.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q1_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q1_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q1_2_reveal"><strong>False.</strong> A hub operates at Layer 1 (Physical) and blindly broadcasts all data to every port. It is a switch that operates at Layer 2 using MAC address tables.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The network topology in which every node has a dedicated connection to every other node, providing maximum redundancy, is called a __________ topology.</div>
+      <input class="fitb-input" id="fitb1_3" placeholder="Type your answer...">
+      <button class="check-btn" onclick="checkFITB('fitb1_3',['mesh','full mesh'],'q1_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q1_3_reveal"><strong>Answer: Mesh.</strong> In a full mesh topology with n nodes, there are n(n-1)/2 links. It provides maximum fault tolerance but is expensive and complex to manage.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_4">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which transmission medium is completely immune to electromagnetic interference (EMI) and supports the highest bandwidth over the longest distances?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">A. Cat6a UTP cable</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">B. Coaxial cable</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q1_4')">C. Single-mode fibre optic</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q1_4')">D. Shielded twisted pair (STP)</button>
+      </div>
+      <div class="answer-reveal" id="q1_4_reveal"><strong>Correct: C.</strong> Single-mode fibre uses a laser to transmit light through a very narrow core (~9 microns), enabling distances up to 100km and speeds exceeding 100 Gbps, with zero susceptibility to EMI.</div>
+    </div>
+
+    <div class="quiz-q" id="q1_5">
+      <div class="q-num">Q5 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Compare the Star and Bus topologies in terms of: (a) failure impact, (b) ease of troubleshooting, and (c) scalability. Which is preferred in modern LANs and why?</div>
+      <textarea class="short-input" id="short1_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q1_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q1_5_reveal"><strong>Model Answer:</strong> (a) Failure: In a Bus, a single cable break fails the entire network. In a Star, only the affected node is isolated — the central switch remains operational. (b) Troubleshooting: Star is far easier — you isolate problems port by port at the switch. Bus requires checking the entire cable run. (c) Scalability: Star scales easily — add another port/switch. Bus becomes increasingly inefficient with more nodes. Modern LANs universally use switched Star topology because switches eliminate collisions, provide per-port bandwidth, support VLANs, and enable easy management.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u1',5)">Submit Unit 1 Quiz</button>
+      <div class="score-display" id="u1_score"></div>
+      <br><button class="mark-done-btn" id="done_u1" onclick="markDone('u1',0)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== UNIT 2 ========== -->
+<div class="chapter" id="u2">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 02 // Network Models & Architecture</div>
+    <h2>The OSI Reference Model & TCP/IP Stack</h2>
+    <div class="ch-icon">📐</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">
+      The <strong>OSI (Open Systems Interconnection) Model</strong> is a conceptual seven-layer framework developed by ISO that standardizes network communication functions. The <strong>TCP/IP model</strong> is the practical four-layer implementation that underlies the internet.
+    </div>
+
+    <h3>2.1 The OSI Reference Model — All 7 Layers</h3>
+
+    <!-- SVG OSI Diagram -->
+    <div class="diagram-wrap">
+      <svg width="100%" viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
+        <!-- Sender side -->
+        <text x="90" y="18" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" text-anchor="middle" letter-spacing="1">SENDER</text>
+        <!-- Receiver side -->
+        <text x="420" y="18" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" text-anchor="middle" letter-spacing="1">RECEIVER</text>
+
+        <!-- Layer definitions: [y, label, color, PDU] -->
+        <g id="osi-layers">
+          <!-- L7 Application -->
+          <rect x="20" y="24" width="140" height="38" rx="4" fill="rgba(0,229,255,0.12)" stroke="#00e5ff" stroke-width="1.2"/>
+          <text x="90" y="38" fill="#00e5ff" font-family="Share Tech Mono" font-size="10" text-anchor="middle">7 — APPLICATION</text>
+          <text x="90" y="52" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">HTTP, FTP, DNS, SMTP</text>
+          <!-- L6 Presentation -->
+          <rect x="20" y="66" width="140" height="38" rx="4" fill="rgba(0,200,220,0.1)" stroke="#00b8d4" stroke-width="1.2"/>
+          <text x="90" y="80" fill="#00b8d4" font-family="Share Tech Mono" font-size="10" text-anchor="middle">6 — PRESENTATION</text>
+          <text x="90" y="94" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">SSL/TLS, JPEG, ASCII</text>
+          <!-- L5 Session -->
+          <rect x="20" y="108" width="140" height="38" rx="4" fill="rgba(0,180,200,0.1)" stroke="#0097a7" stroke-width="1.2"/>
+          <text x="90" y="122" fill="#00acc1" font-family="Share Tech Mono" font-size="10" text-anchor="middle">5 — SESSION</text>
+          <text x="90" y="136" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">NetBIOS, RPC, SQL</text>
+          <!-- L4 Transport -->
+          <rect x="20" y="150" width="140" height="38" rx="4" fill="rgba(0,255,157,0.1)" stroke="#00ff9d" stroke-width="1.5"/>
+          <text x="90" y="164" fill="#00ff9d" font-family="Share Tech Mono" font-size="10" text-anchor="middle">4 — TRANSPORT</text>
+          <text x="90" y="178" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">TCP, UDP — Segments</text>
+          <!-- L3 Network -->
+          <rect x="20" y="192" width="140" height="38" rx="4" fill="rgba(255,179,0,0.1)" stroke="#ffb300" stroke-width="1.5"/>
+          <text x="90" y="206" fill="#ffb300" font-family="Share Tech Mono" font-size="10" text-anchor="middle">3 — NETWORK</text>
+          <text x="90" y="220" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">IP, ICMP — Packets</text>
+          <!-- L2 Data Link -->
+          <rect x="20" y="234" width="140" height="38" rx="4" fill="rgba(255,100,0,0.1)" stroke="#ff6d00" stroke-width="1.5"/>
+          <text x="90" y="248" fill="#ff6d00" font-family="Share Tech Mono" font-size="10" text-anchor="middle">2 — DATA LINK</text>
+          <text x="90" y="262" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Ethernet, MAC — Frames</text>
+          <!-- L1 Physical -->
+          <rect x="20" y="276" width="140" height="38" rx="4" fill="rgba(255,71,87,0.1)" stroke="#ff4757" stroke-width="1.5"/>
+          <text x="90" y="290" fill="#ff4757" font-family="Share Tech Mono" font-size="10" text-anchor="middle">1 — PHYSICAL</text>
+          <text x="90" y="304" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Bits — cables, signals</text>
+
+          <!-- Mirror on receiver side (350 offset) -->
+          <rect x="350" y="24" width="140" height="38" rx="4" fill="rgba(0,229,255,0.12)" stroke="#00e5ff" stroke-width="1.2"/>
+          <text x="420" y="38" fill="#00e5ff" font-family="Share Tech Mono" font-size="10" text-anchor="middle">7 — APPLICATION</text>
+          <text x="420" y="52" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Data received</text>
+          <rect x="350" y="66" width="140" height="38" rx="4" fill="rgba(0,200,220,0.1)" stroke="#00b8d4" stroke-width="1.2"/>
+          <text x="420" y="80" fill="#00b8d4" font-family="Share Tech Mono" font-size="10" text-anchor="middle">6 — PRESENTATION</text>
+          <text x="420" y="94" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Decrypts/Decompresses</text>
+          <rect x="350" y="108" width="140" height="38" rx="4" fill="rgba(0,180,200,0.1)" stroke="#0097a7" stroke-width="1.2"/>
+          <text x="420" y="122" fill="#00acc1" font-family="Share Tech Mono" font-size="10" text-anchor="middle">5 — SESSION</text>
+          <rect x="350" y="150" width="140" height="38" rx="4" fill="rgba(0,255,157,0.1)" stroke="#00ff9d" stroke-width="1.5"/>
+          <text x="420" y="164" fill="#00ff9d" font-family="Share Tech Mono" font-size="10" text-anchor="middle">4 — TRANSPORT</text>
+          <rect x="350" y="192" width="140" height="38" rx="4" fill="rgba(255,179,0,0.1)" stroke="#ffb300" stroke-width="1.5"/>
+          <text x="420" y="206" fill="#ffb300" font-family="Share Tech Mono" font-size="10" text-anchor="middle">3 — NETWORK</text>
+          <rect x="350" y="234" width="140" height="38" rx="4" fill="rgba(255,100,0,0.1)" stroke="#ff6d00" stroke-width="1.5"/>
+          <text x="420" y="248" fill="#ff6d00" font-family="Share Tech Mono" font-size="10" text-anchor="middle">2 — DATA LINK</text>
+          <rect x="350" y="276" width="140" height="38" rx="4" fill="rgba(255,71,87,0.1)" stroke="#ff4757" stroke-width="1.5"/>
+          <text x="420" y="290" fill="#ff4757" font-family="Share Tech Mono" font-size="10" text-anchor="middle">1 — PHYSICAL</text>
+
+          <!-- Down arrow left -->
+          <line x1="165" y1="295" x2="345" y2="295" stroke="#ff4757" stroke-width="2" opacity="0.6"/>
+          <polygon points="345,291 355,295 345,299" fill="#ff4757" opacity="0.8"/>
+          <text x="255" y="312" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Physical transmission medium</text>
+
+          <!-- Encapsulation arrows -->
+          <text x="255" y="44" fill="#00e5ff" font-family="Share Tech Mono" font-size="9" text-anchor="middle">DATA ↓</text>
+          <text x="255" y="86" fill="#00e5ff" font-family="Share Tech Mono" font-size="8" text-anchor="middle">ENCAPSULATION</text>
+          <text x="255" y="212" fill="#ffb300" font-family="Share Tech Mono" font-size="9" text-anchor="middle">PACKETS</text>
+          <text x="255" y="254" fill="#ff6d00" font-family="Share Tech Mono" font-size="9" text-anchor="middle">FRAMES</text>
+        </g>
+      </svg>
+      <div class="diagram-label">Fig 2.1 — OSI 7-Layer Model with PDUs and example protocols</div>
+    </div>
+
+    <h3>2.2 OSI Layers — Detailed Functions</h3>
+    <table class="info-table">
+      <thead><tr><th>#</th><th>Layer</th><th>PDU</th><th>Key Functions</th><th>Protocols/Standards</th></tr></thead>
+      <tbody>
+        <tr><td>7</td><td>Application</td><td>Data</td><td>User interface, network services</td><td>HTTP, HTTPS, FTP, SMTP, DNS, DHCP</td></tr>
+        <tr><td>6</td><td>Presentation</td><td>Data</td><td>Encryption, compression, translation</td><td>SSL/TLS, JPEG, MPEG, ASCII, EBCDIC</td></tr>
+        <tr><td>5</td><td>Session</td><td>Data</td><td>Session setup/maintenance/teardown</td><td>NetBIOS, RPC, SQL, NFS</td></tr>
+        <tr><td>4</td><td>Transport</td><td>Segment</td><td>End-to-end delivery, flow/error control</td><td>TCP, UDP, SCTP</td></tr>
+        <tr><td>3</td><td>Network</td><td>Packet</td><td>Logical addressing, routing</td><td>IP, ICMP, OSPF, BGP, ARP</td></tr>
+        <tr><td>2</td><td>Data Link</td><td>Frame</td><td>Physical addressing, error detection</td><td>Ethernet, Wi-Fi (802.11), PPP, HDLC</td></tr>
+        <tr><td>1</td><td>Physical</td><td>Bit</td><td>Bit transmission, electrical/optical signals</td><td>RS-232, USB, Ethernet PHY, DSL</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.3 TCP/IP Model</h3>
+    <p>The TCP/IP model (also called the Internet model) was developed pragmatically for ARPANET and collapses the OSI 7 layers into 4 functional layers:</p>
+
+    <!-- SVG TCP/IP vs OSI comparison -->
+    <div class="diagram-wrap">
+      <svg width="100%" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;">
+        <text x="90" y="16" fill="#7a9ab5" font-family="Share Tech Mono" font-size="10" text-anchor="middle">OSI MODEL</text>
+        <text x="360" y="16" fill="#7a9ab5" font-family="Share Tech Mono" font-size="10" text-anchor="middle">TCP/IP MODEL</text>
+
+        <rect x="20" y="24" width="140" height="28" rx="3" fill="rgba(0,229,255,0.1)" stroke="#00e5ff" stroke-width="1"/>
+        <text x="90" y="42" fill="#00e5ff" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Application (7)</text>
+        <rect x="20" y="55" width="140" height="28" rx="3" fill="rgba(0,200,220,0.1)" stroke="#00b8d4" stroke-width="1"/>
+        <text x="90" y="73" fill="#00b8d4" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Presentation (6)</text>
+        <rect x="20" y="86" width="140" height="28" rx="3" fill="rgba(0,172,193,0.1)" stroke="#00acc1" stroke-width="1"/>
+        <text x="90" y="104" fill="#00acc1" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Session (5)</text>
+        <rect x="20" y="117" width="140" height="28" rx="3" fill="rgba(0,255,157,0.1)" stroke="#00ff9d" stroke-width="1.5"/>
+        <text x="90" y="135" fill="#00ff9d" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Transport (4)</text>
+        <rect x="20" y="148" width="140" height="28" rx="3" fill="rgba(255,179,0,0.1)" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="90" y="166" fill="#ffb300" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Network (3)</text>
+        <rect x="20" y="179" width="140" height="28" rx="3" fill="rgba(255,100,0,0.1)" stroke="#ff6d00" stroke-width="1"/>
+        <text x="90" y="197" fill="#ff6d00" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Data Link (2)</text>
+        <rect x="20" y="210" width="140" height="28" rx="3" fill="rgba(255,71,87,0.1)" stroke="#ff4757" stroke-width="1"/>
+        <text x="90" y="228" fill="#ff4757" font-family="Share Tech Mono" font-size="9" text-anchor="middle">Physical (1)</text>
+
+        <!-- Arrows -->
+        <line x1="200" y1="130" x2="250" y2="130" stroke="#7a9ab5" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- TCP/IP 4 layers -->
+        <rect x="260" y="24" width="180" height="90" rx="4" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="350" y="74" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" text-anchor="middle">APPLICATION</text>
+        <text x="350" y="90" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">(OSI 5, 6, 7)</text>
+        <rect x="260" y="117" width="180" height="31" rx="4" fill="rgba(0,255,157,0.08)" stroke="#00ff9d" stroke-width="1.5"/>
+        <text x="350" y="137" fill="#00ff9d" font-family="Share Tech Mono" font-size="11" text-anchor="middle">TRANSPORT</text>
+        <rect x="260" y="151" width="180" height="31" rx="4" fill="rgba(255,179,0,0.08)" stroke="#ffb300" stroke-width="1.5"/>
+        <text x="350" y="171" fill="#ffb300" font-family="Share Tech Mono" font-size="11" text-anchor="middle">INTERNET (Network)</text>
+        <rect x="260" y="185" width="180" height="53" rx="4" fill="rgba(255,71,87,0.06)" stroke="#ff4757" stroke-width="1.5"/>
+        <text x="350" y="216" fill="#ff4757" font-family="Share Tech Mono" font-size="11" text-anchor="middle">NETWORK ACCESS</text>
+        <text x="350" y="230" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">(OSI 1 + 2)</text>
+
+        <!-- bracket lines -->
+        <line x1="163" y1="38" x2="200" y2="38" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+        <line x1="163" y1="100" x2="200" y2="100" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+        <line x1="200" y1="38" x2="200" y2="100" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+        <line x1="200" y1="69" x2="258" y2="69" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+        <polygon points="255,65 265,69 255,73" fill="#00e5ff" opacity="0.5"/>
+      </svg>
+      <div class="diagram-label">Fig 2.2 — OSI vs TCP/IP Model Layer Mapping</div>
+    </div>
+
+    <h3>2.4 Data Encapsulation</h3>
+    <p>As data travels down the OSI stack at the sender, each layer <strong>adds a header</strong> (and sometimes a trailer) to the data — this is called <em>encapsulation</em>. At the receiver, each layer <em>decapsulates</em> (removes its header) as data moves up the stack.</p>
+
+    <div class="code-box">
+      <span class="code-label">Encapsulation Flow</span>
+      <span class="comment">// Application Layer (L7)</span>
+      DATA = "GET /index.html HTTP/1.1"
+
+      <span class="comment">// Transport Layer (L4) adds TCP header</span>
+      SEGMENT = [<span class="keyword">TCP Header</span> | DATA]
+      <span class="comment">// Fields: Source Port, Dest Port, Seq No, Checksum...</span>
+
+      <span class="comment">// Network Layer (L3) adds IP header</span>
+      PACKET = [<span class="keyword">IP Header</span> | SEGMENT]
+      <span class="comment">// Fields: Src IP, Dest IP, TTL, Protocol...</span>
+
+      <span class="comment">// Data Link Layer (L2) adds Ethernet frame</span>
+      FRAME = [<span class="keyword">Eth Header</span> | PACKET | <span class="value">FCS Trailer</span>]
+      <span class="comment">// Fields: Src MAC, Dest MAC, Type | CRC checksum</span>
+
+      <span class="comment">// Physical Layer (L1)</span>
+      BITS = 01001000 01000101 01000001 01000100 ...
+    </div>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 2 Assessment</div>
+    <div class="quiz-sub">OSI & TCP/IP Models · 5 Questions</div>
+
+    <div class="quiz-q" id="q2_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">At which OSI layer does a router primarily operate, and what addressing scheme does it use?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">A. Layer 2, using MAC addresses</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q2_1')">B. Layer 3, using IP addresses</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">C. Layer 4, using port numbers</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_1')">D. Layer 1, using physical signals</button>
+      </div>
+      <div class="answer-reveal" id="q2_1_reveal"><strong>Correct: B.</strong> Routers operate at Layer 3 (Network layer) and make forwarding decisions based on destination IP addresses in the packet header.</div>
+    </div>
+
+    <div class="quiz-q" id="q2_2">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The process by which each OSI layer adds its own header to the data from the layer above is called __________. The reverse process at the receiver is called __________.</div>
+      <input class="fitb-input" id="fitb2_2" placeholder="encapsulation / decapsulation">
+      <button class="check-btn" onclick="checkFITB('fitb2_2',['encapsulation','decapsulation'],'q2_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q2_2_reveal"><strong>Answer: encapsulation / decapsulation.</strong> Encapsulation builds the PDU by wrapping data with headers/trailers at each layer. Decapsulation reverses this, with each layer reading and removing its own header.</div>
+    </div>
+
+    <div class="quiz-q" id="q2_3">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">The TCP/IP model's "Network Access" layer combines the functions of BOTH OSI Layer 1 (Physical) and Layer 2 (Data Link).</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,true,'q2_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,false,'q2_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q2_3_reveal"><strong>True.</strong> The TCP/IP Network Access layer (also called Link layer) handles both physical transmission (OSI L1) and frame-level addressing/error detection (OSI L2).</div>
+    </div>
+
+    <div class="quiz-q" id="q2_4">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">SSL/TLS encryption operates at which OSI layer?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">A. Layer 4 — Transport</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">B. Layer 7 — Application</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q2_4')">C. Layer 6 — Presentation</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q2_4')">D. Layer 5 — Session</button>
+      </div>
+      <div class="answer-reveal" id="q2_4_reveal"><strong>Correct: C.</strong> The Presentation layer handles data format translation, encryption/decryption, and compression. SSL/TLS are Presentation layer protocols that provide encryption services to Application layer protocols like HTTP.</div>
+    </div>
+
+    <div class="quiz-q" id="q2_5">
+      <div class="q-num">Q5 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain why the OSI model has 7 layers but the TCP/IP model has only 4. What happened to OSI layers 5 and 6 in TCP/IP?</div>
+      <textarea class="short-input" id="short2_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q2_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q2_5_reveal"><strong>Model Answer:</strong> The OSI model is a theoretical reference framework designed for conceptual clarity — each layer has a precise, distinct function. The TCP/IP model was developed pragmatically for ARPANET and reflects how internet protocols actually work in practice. OSI layers 5 (Session) and 6 (Presentation) were collapsed into TCP/IP's Application layer because in practice, most internet applications handle session management and data formatting themselves (e.g., HTTP manages its own session; TLS handles encryption at the application level). The TCP/IP model is not inferior — it is simply a more pragmatic, implementation-focused abstraction.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u2',5)">Submit Unit 2 Quiz</button>
+      <div class="score-display" id="u2_score"></div>
+      <br><button class="mark-done-btn" id="done_u2" onclick="markDone('u2',1)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== UNIT 3 ========== -->
+<div class="chapter" id="u3">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 03 // Physical & Data Link Layer</div>
+    <h2>Signals, Encoding, Error Detection, MAC & Ethernet</h2>
+    <div class="ch-icon">⚡</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The <strong>Physical layer</strong> transmits raw bits over a medium. The <strong>Data Link layer</strong> packages bits into frames, handles physical addressing (MAC), and provides error detection/correction between directly connected nodes.</div>
+
+    <h3>3.1 Analog vs Digital Signals</h3>
+    <p>An <strong>analog signal</strong> is continuous, varying smoothly over time. A <strong>digital signal</strong> is discrete, representing data as binary values (0s and 1s). Modern networks use digital signals but must convert them for transmission over analog media (e.g., telephone lines) using modulation.</p>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Analog_and_digital_signals.svg/640px-Analog_and_digital_signals.svg.png" alt="Analog vs Digital signal waveforms" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">📊 Fig 3.1 — Analog (continuous) vs Digital (discrete) signal waveforms (Wikimedia Commons)</div>
+    </div>
+
+    <h3>3.2 Bandwidth, Latency & Throughput</h3>
+    <ul>
+      <li><strong>Bandwidth:</strong> Maximum data transfer rate of a medium — measured in bits per second (bps, Mbps, Gbps). This is the theoretical maximum capacity.</li>
+      <li><strong>Throughput:</strong> Actual data transfer rate achieved in practice — always less than bandwidth due to overhead, errors, congestion.</li>
+      <li><strong>Latency:</strong> The time delay for a packet to travel from source to destination — measured in milliseconds (ms).</li>
+      <li><strong>Goodput:</strong> Useful data throughput excluding retransmissions and protocol overhead.</li>
+    </ul>
+
+    <div class="code-box">
+      <span class="code-label">Shannon's Channel Capacity Formula</span>
+      <span class="comment">// Maximum data rate (bits/sec) for a noisy channel:</span>
+      C = B × log₂(1 + S/N)
+
+      <span class="comment">Where:</span>
+      C = channel capacity (bps)
+      B = bandwidth of channel (Hz)
+      S/N = Signal-to-Noise ratio
+
+      <span class="comment">// Example: B=3000Hz, SNR=30dB (S/N = 1000)</span>
+      C = 3000 × log₂(1 + 1000)
+      C = 3000 × 9.97
+      C ≈ <span class="highlight">29,900 bps ≈ 30 Kbps</span>
+    </div>
+
+    <h3>3.3 Error Detection & Correction</h3>
+    <table class="info-table">
+      <thead><tr><th>Technique</th><th>Method</th><th>Detects</th><th>Corrects?</th></tr></thead>
+      <tbody>
+        <tr><td>Parity Bit</td><td>Add 1 bit to make 1s count even/odd</td><td>Single-bit errors</td><td>No</td></tr>
+        <tr><td>CRC (Cyclic Redundancy Check)</td><td>Polynomial division; append remainder</td><td>Burst errors up to r bits</td><td>No — requires retransmit</td></tr>
+        <tr><td>Checksum</td><td>Sum of data segments, transmit complement</td><td>Moderate error detection</td><td>No</td></tr>
+        <tr><td>Hamming Code</td><td>Multiple parity bits at power-of-2 positions</td><td>Single & double bit errors</td><td>Yes — single bit</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.4 MAC Addressing</h3>
+    <p>A <strong>MAC (Media Access Control) address</strong> is a 48-bit (6-byte) hardware address permanently assigned to a network interface card (NIC). It is expressed as 6 pairs of hexadecimal digits.</p>
+
+    <div class="code-box">
+      <span class="code-label">MAC Address Structure</span>
+      <span class="comment">// Format: XX:XX:XX:XX:XX:XX (colon notation)</span>
+      <span class="comment">// Or:     XX-XX-XX-XX-XX-XX (hyphen notation)</span>
+
+      Example: <span class="highlight">00:1A:2B:3C:4D:5E</span>
+               └──────────┘ └──────────┘
+               OUI (Org ID)  Device ID
+               (3 bytes)     (3 bytes)
+
+      <span class="comment">// OUI = Organizationally Unique Identifier</span>
+      <span class="comment">// Assigned by IEEE to manufacturers</span>
+      00:1A:2B → Apple Inc.
+      00:50:56 → VMware
+      FC:FB:FB → Cisco Systems
+
+      <span class="comment">// Special addresses:</span>
+      FF:FF:FF:FF:FF:FF → <span class="keyword">Broadcast</span> (all devices)
+      01:00:00:00:00:00 → <span class="keyword">Multicast</span> (prefix)
+    </div>
+
+    <h3>3.5 Ethernet & IEEE 802.3</h3>
+    <p>Ethernet is the dominant LAN technology, standardized as IEEE 802.3. Modern Ethernet uses CSMA/CD (Carrier Sense Multiple Access with Collision Detection) though full-duplex switched Ethernet eliminates collisions entirely.</p>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Ethernet_Type_II_Frame_format.svg/700px-Ethernet_Type_II_Frame_format.svg.png" alt="Ethernet frame format diagram" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">📦 Fig 3.2 — Ethernet Type II Frame Format showing all fields (Wikimedia Commons)</div>
+    </div>
+
+    <h3>3.6 VLANs</h3>
+    <p>A <strong>VLAN (Virtual LAN)</strong> logically segments a physical network into multiple isolated broadcast domains. VLANs improve security, reduce broadcast traffic, and enable flexible network design without physical rewiring. IEEE 802.1Q adds a 4-byte VLAN tag to Ethernet frames: 12 bits for VLAN ID (supporting VLANs 1–4094).</p>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 3 Assessment</div>
+    <div class="quiz-sub">Physical & Data Link · 5 Questions</div>
+
+    <div class="quiz-q" id="q3_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A channel has a bandwidth of 4000 Hz and a Signal-to-Noise ratio of 255. Using Shannon's theorem, what is the maximum channel capacity?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">A. 16,000 bps</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">B. 28,000 bps</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q3_1')">C. 32,000 bps</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_1')">D. 40,000 bps</button>
+      </div>
+      <div class="answer-reveal" id="q3_1_reveal"><strong>Correct: C — 32,000 bps.</strong> C = B × log₂(1 + S/N) = 4000 × log₂(256) = 4000 × 8 = 32,000 bps. Note: log₂(256) = 8 because 2⁸ = 256.</div>
+    </div>
+
+    <div class="quiz-q" id="q3_2">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">In a MAC address, the first 3 bytes (24 bits) identify the manufacturer and are called the __________ (OUI).</div>
+      <input class="fitb-input" id="fitb3_2" placeholder="Full form of OUI...">
+      <button class="check-btn" onclick="checkFITB('fitb3_2',['organizationally unique identifier','oui','organizationally unique'],'q3_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q3_2_reveal"><strong>Answer: Organizationally Unique Identifier.</strong> The OUI is the first 24 bits of a MAC address, assigned by IEEE to hardware manufacturers. The last 24 bits are assigned by the manufacturer to uniquely identify the device.</div>
+    </div>
+
+    <div class="quiz-q" id="q3_3">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">CRC (Cyclic Redundancy Check) can both detect AND automatically correct burst errors in transmitted data.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q3_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q3_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q3_3_reveal"><strong>False.</strong> CRC is an error detection scheme only — it can detect burst errors up to r bits (where r is the degree of the generator polynomial) but cannot correct them. When an error is detected, the frame is discarded and retransmission is requested.</div>
+    </div>
+
+    <div class="quiz-q" id="q3_4">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">How many VLANs can be created using the 12-bit VLAN ID field in the IEEE 802.1Q standard?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">A. 256</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">B. 1024</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q3_4')">C. 4094</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q3_4')">D. 65535</button>
+      </div>
+      <div class="answer-reveal" id="q3_4_reveal"><strong>Correct: C — 4094.</strong> A 12-bit field gives 2¹² = 4096 possible values (0–4095). VLANs 0 and 4095 are reserved, leaving 4094 usable VLANs (1–4094).</div>
+    </div>
+
+    <div class="quiz-q" id="q3_5">
+      <div class="q-num">Q5 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain the difference between bandwidth and throughput. Give a practical analogy and explain why throughput is always less than bandwidth in real networks.</div>
+      <textarea class="short-input" id="short3_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q3_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q3_5_reveal"><strong>Model Answer:</strong> Bandwidth is the theoretical maximum capacity of a network link (e.g., 1 Gbps). Throughput is the actual achieved data transfer rate (e.g., 750 Mbps). Analogy: A highway with 6 lanes (bandwidth) can theoretically accommodate maximum traffic, but actual traffic flow (throughput) is reduced by toll booths (protocol overhead), accidents (packet loss/retransmissions), speed limits (congestion control), and merging slowdowns (queuing delays). Throughput is always less than bandwidth due to: protocol headers consuming bandwidth; packet retransmissions due to errors; congestion control throttling; queuing and processing delays at intermediate nodes; and TCP acknowledgment overhead.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u3',5)">Submit Unit 3 Quiz</button>
+      <div class="score-display" id="u3_score"></div>
+      <br><button class="mark-done-btn" id="done_u3" onclick="markDone('u3',2)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== UNIT 4 (IP ADDRESSING — MOST TECHNICAL) ========== -->
+<div class="chapter" id="u4">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 04 // Network Layer</div>
+    <h2>IP Addressing, Subnetting, CIDR, VLSM & Routing</h2>
+    <div class="ch-icon">🗺️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The <strong>Network Layer</strong> (OSI Layer 3) provides logical addressing, routing, and packet forwarding between networks. The Internet Protocol (IP) is the foundation — every device on an IP network has a unique IP address used to identify it and route packets to it.</div>
+
+    <h3>4.1 IPv4 Addressing</h3>
+    <p>An IPv4 address is a <strong>32-bit</strong> number represented in <em>dotted-decimal notation</em> — four 8-bit octets separated by dots.</p>
+
+    <div class="code-box">
+      <span class="code-label">IPv4 Address Structure</span>
+      <span class="comment">// 32-bit binary representation:</span>
+      IP: <span class="highlight">192.168.10.5</span>
+
+      Binary: <span class="keyword">11000000.10101000.00001010.00000101</span>
+
+      Octet 1: 192 = 1+1+0+0+0+0+0+0 = 11000000
+      Octet 2: 168 = 10101000
+      Octet 3:  10 = 00001010
+      Octet 4:   5 = 00000101
+
+      <span class="comment">// IPv4 Address Classes (Classful):</span>
+      Class A: <span class="value">1.0.0.0 – 126.255.255.255</span>   /8  (16M hosts)
+      Class B: <span class="value">128.0.0.0 – 191.255.255.255</span> /16  (65K hosts)
+      Class C: <span class="value">192.0.0.0 – 223.255.255.255</span> /24  (254 hosts)
+      Class D: <span class="value">224.0.0.0 – 239.255.255.255</span> Multicast
+      Class E: <span class="value">240.0.0.0 – 255.255.255.255</span> Reserved
+    </div>
+
+    <h3>4.2 Subnet Masks & CIDR Notation</h3>
+    <p>A <strong>subnet mask</strong> defines which portion of an IP address is the <em>network</em> portion and which is the <em>host</em> portion. <strong>CIDR (Classless Inter-Domain Routing)</strong> notation expresses the mask as a prefix length (e.g., /24).</p>
+
+    <div class="calc-box">
+      <div class="calc-title">🔢 Subnetting Calculation — Step by Step</div>
+      <div class="step">Problem: Network <span class="highlight">192.168.1.0/24</span> — divide into 4 equal subnets.</div>
+      <div class="step"><span class="arrow">Step 1:</span> Need 4 subnets → 2² = 4 → borrow <span class="highlight">2 bits</span> from host portion</div>
+      <div class="step"><span class="arrow">Step 2:</span> New prefix = /24 + 2 = <span class="highlight">/26</span></div>
+      <div class="step"><span class="arrow">Step 3:</span> New subnet mask = 255.255.255.<span class="highlight">192</span> (11000000 in last octet)</div>
+      <div class="step"><span class="arrow">Step 4:</span> Hosts per subnet = 2^(32-26) - 2 = 2^6 - 2 = 64 - 2 = <span class="highlight">62 usable hosts</span></div>
+      <div class="step"><span class="arrow">Step 5:</span> Subnet block size = 256 - 192 = <span class="highlight">64</span></div>
+      <div class="step"><span class="arrow">Subnet 1:</span> 192.168.1.0/26   → Hosts: .1–.62   → Broadcast: .63</div>
+      <div class="step"><span class="arrow">Subnet 2:</span> 192.168.1.64/26  → Hosts: .65–.126 → Broadcast: .127</div>
+      <div class="step"><span class="arrow">Subnet 3:</span> 192.168.1.128/26 → Hosts: .129–.190 → Broadcast: .191</div>
+      <div class="step"><span class="arrow">Subnet 4:</span> 192.168.1.192/26 → Hosts: .193–.254 → Broadcast: .255</div>
+    </div>
+
+    <h3>4.3 VLSM — Variable Length Subnet Masking</h3>
+    <p>VLSM allows a network to use <strong>different subnet mask lengths</strong> within the same network — allocating exactly the right number of host addresses for each subnet, minimizing waste. This is the advanced enterprise standard.</p>
+
+    <div class="calc-box">
+      <div class="calc-title">🔢 VLSM Calculation Example</div>
+      <div class="step">Given: 192.168.1.0/24 | Requirements:</div>
+      <div class="step">• Network A: 100 hosts | • Network B: 50 hosts</div>
+      <div class="step">• Network C: 25 hosts  | • Network D: 10 hosts (2× WAN links)</div>
+      <div class="step">──────────────────────────────────────</div>
+      <div class="step"><span class="arrow">Sort LARGEST first (VLSM rule):</span></div>
+      <div class="step"><span class="arrow">Network A (100 hosts):</span> Need 2^n-2 ≥ 100 → 2^7=128 → /25</div>
+      <div class="step">  → <span class="highlight">192.168.1.0/25</span>  Hosts: .1–.126  BC: .127  (126 hosts)</div>
+      <div class="step"><span class="arrow">Network B (50 hosts):</span> Need 2^n-2 ≥ 50 → 2^6=64 → /26</div>
+      <div class="step">  → <span class="highlight">192.168.1.128/26</span> Hosts: .129–.190 BC: .191 (62 hosts)</div>
+      <div class="step"><span class="arrow">Network C (25 hosts):</span> Need 2^n-2 ≥ 25 → 2^5=32 → /27</div>
+      <div class="step">  → <span class="highlight">192.168.1.192/27</span> Hosts: .193–.222 BC: .223 (30 hosts)</div>
+      <div class="step"><span class="arrow">Network D (10 hosts):</span> Need 2^n-2 ≥ 10 → 2^4=16 → /28</div>
+      <div class="step">  → <span class="highlight">192.168.1.224/28</span> Hosts: .225–.238 BC: .239 (14 hosts)</div>
+      <div class="step"><span class="arrow">WAN links (2 hosts each):</span> 2^2-2=2 → /30</div>
+      <div class="step">  → <span class="highlight">192.168.1.240/30</span> + 192.168.1.244/30</div>
+    </div>
+
+    <h3>4.4 Wildcard Masks</h3>
+    <p>A <strong>wildcard mask</strong> is the inverse of a subnet mask — 0 bits mean "must match" and 1 bits mean "any value." Wildcard masks are used in ACLs (Access Control Lists) and OSPF configurations.</p>
+
+    <div class="code-box">
+      <span class="code-label">Wildcard Mask Calculation</span>
+      <span class="comment">// Wildcard = 255.255.255.255 - Subnet Mask</span>
+
+      Subnet mask /24:  255.255.255.0
+      Wildcard:         <span class="highlight">0.0.0.255</span>
+      <span class="comment">// Matches any host in the /24 network</span>
+
+      Subnet mask /26:  255.255.255.192
+      Wildcard:         <span class="highlight">0.0.0.63</span>
+      <span class="comment">// Matches hosts .0 to .63 in the subnet</span>
+
+      Subnet mask /30:  255.255.255.252
+      Wildcard:         <span class="highlight">0.0.0.3</span>
+      <span class="comment">// Matches only 4 addresses (WAN link)</span>
+
+      <span class="comment">// ACL example using wildcard:</span>
+      access-list 10 permit <span class="keyword">192.168.1.0 0.0.0.255</span>
+      <span class="comment">// Permits all hosts in 192.168.1.0/24</span>
+    </div>
+
+    <h3>4.5 IPv6 Addressing</h3>
+    <p>IPv6 uses <strong>128-bit addresses</strong> represented as 8 groups of 4 hexadecimal digits. The address space is 2¹²⁸ ≈ 340 undecillion addresses — effectively unlimited.</p>
+
+    <div class="code-box">
+      <span class="code-label">IPv6 Address Format</span>
+      Full:        <span class="highlight">2001:0db8:85a3:0000:0000:8a2e:0370:7334</span>
+      Compressed:  <span class="keyword">2001:db8:85a3::8a2e:370:7334</span>
+      <span class="comment">// Rules: Remove leading zeros; :: replaces ONE sequence of all-zero groups</span>
+
+      Loopback:    <span class="value">::1</span>  (equivalent to 127.0.0.1 in IPv4)
+      Link-local:  <span class="value">fe80::/10</span>  (auto-configured, not routable)
+      Global unicast: <span class="value">2000::/3</span>
+
+      <span class="comment">// Prefix notation same as IPv4 CIDR:</span>
+      2001:db8::/32 <span class="comment">// Documentation prefix</span>
+    </div>
+
+    <h3>4.6 Routing Protocols</h3>
+    <table class="info-table">
+      <thead><tr><th>Protocol</th><th>Type</th><th>Algorithm</th><th>Metric</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td>RIP v2</td><td>IGP, Distance Vector</td><td>Bellman-Ford</td><td>Hop count (max 15)</td><td>Small legacy networks</td></tr>
+        <tr><td>OSPF</td><td>IGP, Link State</td><td>Dijkstra (SPF)</td><td>Cost (bandwidth-based)</td><td>Enterprise networks</td></tr>
+        <tr><td>EIGRP</td><td>IGP, Hybrid</td><td>DUAL</td><td>Bandwidth + Delay</td><td>Cisco enterprise networks</td></tr>
+        <tr><td>BGP</td><td>EGP, Path Vector</td><td>Best path selection</td><td>AS path, policy</td><td>Internet backbone (ISPs)</td></tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 4 Assessment</div>
+    <div class="quiz-sub">IP Addressing, VLSM & Routing · 6 Questions (Advanced)</div>
+
+    <div class="quiz-q" id="q4_1">
+      <div class="q-num">Q1 <span class="q-type">Calculation — CIDR</span></div>
+      <div class="q-text">Given the network 172.16.0.0/20, calculate: (a) the subnet mask in dotted-decimal, (b) the number of usable host addresses, (c) the broadcast address.</div>
+      <textarea class="short-input" id="short4_1" placeholder="Show your working..."></textarea>
+      <button class="check-btn" onclick="revealShort('q4_1_reveal')">View Solution</button>
+      <div class="answer-reveal" id="q4_1_reveal"><strong>Solution:</strong> (a) /20 = 20 bits network, 12 bits host. First 20 bits set = 11111111.11111111.11110000.00000000 = <strong>255.255.240.0</strong>. (b) Usable hosts = 2^12 - 2 = 4096 - 2 = <strong>4,094 hosts</strong>. (c) Network: 172.16.0.0. Last host octet block: 256-240=16. Broadcast = 172.16.0.0 + 16 addresses in 3rd octet - 1 = <strong>172.16.15.255</strong>.</div>
+    </div>
+
+    <div class="quiz-q" id="q4_2">
+      <div class="q-num">Q2 <span class="q-type">Calculation — VLSM</span></div>
+      <div class="q-text">You are given 10.0.0.0/24. Using VLSM, allocate subnets for: Dept A = 60 hosts, Dept B = 28 hosts, Dept C = 12 hosts, WAN link = 2 hosts. Show the subnet address, mask, and usable range for each.</div>
+      <textarea class="short-input" id="short4_2" placeholder="Work through each allocation in order (largest first)..."></textarea>
+      <button class="check-btn" onclick="revealShort('q4_2_reveal')">View Solution</button>
+      <div class="answer-reveal" id="q4_2_reveal"><strong>Solution (largest first):</strong> Dept A (60 hosts): 2^6=64 → /26. <strong>10.0.0.0/26</strong>, mask 255.255.255.192, hosts 10.0.0.1–.62, BC .63. | Dept B (28 hosts): 2^5=32 → /27. <strong>10.0.0.64/27</strong>, mask 255.255.255.224, hosts .65–.94, BC .95. | Dept C (12 hosts): 2^4=16 → /28. <strong>10.0.0.96/28</strong>, mask 255.255.255.240, hosts .97–.110, BC .111. | WAN (2 hosts): 2^2=4 → /30. <strong>10.0.0.112/30</strong>, mask 255.255.255.252, hosts .113–.114, BC .115.</div>
+    </div>
+
+    <div class="quiz-q" id="q4_3">
+      <div class="q-num">Q3 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">What is the wildcard mask for the subnet 192.168.5.128/27?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">A. 0.0.0.192</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">B. 0.0.0.128</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q4_3')">C. 0.0.0.31</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q4_3')">D. 0.0.0.63</button>
+      </div>
+      <div class="answer-reveal" id="q4_3_reveal"><strong>Correct: C — 0.0.0.31.</strong> /27 subnet mask = 255.255.255.224. Wildcard = 255.255.255.255 - 255.255.255.224 = 0.0.0.31. In binary: 224 = 11100000, so wildcard last octet = 00011111 = 31.</div>
+    </div>
+
+    <div class="quiz-q" id="q4_4">
+      <div class="q-num">Q4 <span class="q-type">True / False</span></div>
+      <div class="q-text">BGP (Border Gateway Protocol) is classified as an Interior Gateway Protocol (IGP) used within a single autonomous system.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q4_4')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q4_4')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q4_4_reveal"><strong>False.</strong> BGP is an Exterior Gateway Protocol (EGP) — specifically a path-vector protocol used to route between autonomous systems (ASes). It is the routing protocol of the internet backbone.</div>
+    </div>
+
+    <div class="quiz-q" id="q4_5">
+      <div class="q-num">Q5 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">IPv6 uses ________-bit addresses, providing approximately 3.4 × 10^38 unique addresses, solving IPv4 exhaustion.</div>
+      <input class="fitb-input" id="fitb4_5" placeholder="Number of bits...">
+      <button class="check-btn" onclick="checkFITB('fitb4_5',['128'],'q4_5_reveal')">Check</button>
+      <div class="answer-reveal" id="q4_5_reveal"><strong>Answer: 128.</strong> IPv6 addresses are 128 bits, compared to IPv4's 32 bits. This provides 2^128 ≈ 3.4 × 10^38 addresses — enough for every atom on Earth's surface to have millions of addresses.</div>
+    </div>
+
+    <div class="quiz-q" id="q4_6">
+      <div class="q-num">Q6 <span class="q-type">Binary Conversion</span></div>
+      <div class="q-text">Convert the IPv4 address 10.255.128.5 to binary. Then identify which class it belongs to and its default subnet mask.</div>
+      <textarea class="short-input" id="short4_6" placeholder="Show binary conversion for each octet..."></textarea>
+      <button class="check-btn" onclick="revealShort('q4_6_reveal')">View Solution</button>
+      <div class="answer-reveal" id="q4_6_reveal"><strong>Solution:</strong> 10 = 00001010 | 255 = 11111111 | 128 = 10000000 | 5 = 00000101. Binary: <strong>00001010.11111111.10000000.00000101</strong>. The first octet is 10 (00001010), which falls in the range 1–126 → <strong>Class A</strong>. Default Class A mask = <strong>255.0.0.0 (/8)</strong>. Note: 10.x.x.x is also a private (RFC 1918) address range.</div>
+    </div>
+
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u4',6)">Submit Unit 4 Quiz</button>
+      <div class="score-display" id="u4_score"></div>
+      <br><button class="mark-done-btn" id="done_u4" onclick="markDone('u4',3)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Remaining units injected by JS -->
+<div id="remaining-units"></div>
+
+<!-- FINAL EXAM -->
+<div id="final-exam">
+  <h2>📋 FINAL EXAMINATION</h2>
+  <div class="fe-sub">ICT 201 · Internet & Networking · 15 Questions · Advanced Level</div>
+  <div id="finalContainer"></div>
+  <div style="text-align:center;margin-top:24px;">
+    <button class="submit-btn" onclick="scoreFinal()">Submit Final Exam</button>
+    <div class="score-display" id="final_score" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ========== REMAINING UNITS HTML ==========
+const remainingHTML = `
+<!-- UNIT 5 -->
+<div class="chapter" id="u5">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 05 // Transport Layer</div>
+    <h2>TCP, UDP, Ports, Flow Control & Three-Way Handshake</h2>
+    <div class="ch-icon">🔄</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The <strong>Transport layer</strong> (OSI Layer 4) provides end-to-end communication between processes on different hosts. It multiplexes data streams using <strong>port numbers</strong> and chooses between reliable (TCP) and unreliable-but-fast (UDP) delivery.</div>
+
+    <h3>5.1 TCP vs UDP</h3>
+    <table class="info-table">
+      <thead><tr><th>Feature</th><th>TCP</th><th>UDP</th></tr></thead>
+      <tbody>
+        <tr><td>Connection</td><td>Connection-oriented (3-way handshake)</td><td>Connectionless</td></tr>
+        <tr><td>Reliability</td><td>Guaranteed delivery + ordering</td><td>Best-effort, no guarantee</td></tr>
+        <tr><td>Speed</td><td>Slower (overhead)</td><td>Faster (minimal overhead)</td></tr>
+        <tr><td>Header size</td><td>20–60 bytes</td><td>8 bytes</td></tr>
+        <tr><td>Flow control</td><td>Yes (sliding window)</td><td>No</td></tr>
+        <tr><td>Congestion control</td><td>Yes (slow start, AIMD)</td><td>No</td></tr>
+        <tr><td>Use cases</td><td>HTTP, FTP, SMTP, SSH</td><td>DNS, DHCP, VoIP, video streaming, gaming</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.2 TCP Three-Way Handshake</h3>
+    <div class="diagram-wrap">
+      <svg width="100%" viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;">
+        <text x="80" y="20" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" text-anchor="middle">CLIENT</text>
+        <text x="360" y="20" fill="#00e5ff" font-family="Share Tech Mono" font-size="11" text-anchor="middle">SERVER</text>
+        <line x1="80" y1="30" x2="80" y2="210" stroke="#00e5ff" stroke-width="1.5" opacity="0.4"/>
+        <line x1="360" y1="30" x2="360" y2="210" stroke="#00e5ff" stroke-width="1.5" opacity="0.4"/>
+        <!-- Step 1: SYN -->
+        <line x1="90" y1="60" x2="350" y2="90" stroke="#00ff9d" stroke-width="2"/>
+        <polygon points="350,86 360,90 350,94" fill="#00ff9d"/>
+        <text x="220" y="68" fill="#00ff9d" font-family="Share Tech Mono" font-size="10" text-anchor="middle">SYN (seq=x)</text>
+        <!-- Step 2: SYN-ACK -->
+        <line x1="350" y1="110" x2="90" y2="140" stroke="#ffb300" stroke-width="2"/>
+        <polygon points="90,136 80,140 90,144" fill="#ffb300"/>
+        <text x="220" y="118" fill="#ffb300" font-family="Share Tech Mono" font-size="10" text-anchor="middle">SYN-ACK (seq=y, ack=x+1)</text>
+        <!-- Step 3: ACK -->
+        <line x1="90" y1="160" x2="350" y2="190" stroke="#00e5ff" stroke-width="2"/>
+        <polygon points="350,186 360,190 350,194" fill="#00e5ff"/>
+        <text x="220" y="168" fill="#00e5ff" font-family="Share Tech Mono" font-size="10" text-anchor="middle">ACK (ack=y+1)</text>
+        <!-- Labels -->
+        <text x="80" y="55" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9">Step 1</text>
+        <text x="80" y="105" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9">Step 2</text>
+        <text x="80" y="155" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9">Step 3</text>
+        <text x="220" y="210" fill="#00ff9d" font-family="Share Tech Mono" font-size="9" text-anchor="middle">CONNECTION ESTABLISHED ✓</text>
+      </svg>
+      <div class="diagram-label">Fig 5.1 — TCP Three-Way Handshake</div>
+    </div>
+
+    <h3>5.3 Port Numbers</h3>
+    <table class="info-table">
+      <thead><tr><th>Port</th><th>Protocol</th><th>Service</th></tr></thead>
+      <tbody>
+        <tr><td>20/21</td><td>TCP</td><td>FTP (Data/Control)</td></tr>
+        <tr><td>22</td><td>TCP</td><td>SSH (Secure Shell)</td></tr>
+        <tr><td>23</td><td>TCP</td><td>Telnet (unencrypted, avoid)</td></tr>
+        <tr><td>25</td><td>TCP</td><td>SMTP (email sending)</td></tr>
+        <tr><td>53</td><td>TCP/UDP</td><td>DNS</td></tr>
+        <tr><td>67/68</td><td>UDP</td><td>DHCP (Server/Client)</td></tr>
+        <tr><td>80</td><td>TCP</td><td>HTTP</td></tr>
+        <tr><td>110</td><td>TCP</td><td>POP3</td></tr>
+        <tr><td>143</td><td>TCP</td><td>IMAP</td></tr>
+        <tr><td>443</td><td>TCP</td><td>HTTPS</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.4 TCP Flow Control — Sliding Window</h3>
+    <p>TCP uses a <strong>sliding window</strong> mechanism for flow control. The receiver advertises a <em>window size</em> — the amount of data it can buffer before requiring acknowledgment. The sender cannot send more than the window size without receiving an ACK.</p>
+    <div class="code-box">
+      <span class="code-label">TCP Window Calculation</span>
+      <span class="comment">// Window size controls throughput:</span>
+      Max throughput = Window Size / RTT
+
+      Example: Window = 65,535 bytes, RTT = 100ms
+      Max throughput = 65,535 / 0.1 = <span class="highlight">655,350 bytes/sec ≈ 5.2 Mbps</span>
+
+      <span class="comment">// TCP Slow Start congestion control:</span>
+      cwnd (congestion window) starts at 1 MSS
+      Doubles every RTT until ssthresh
+      Then increases by 1 MSS per RTT (congestion avoidance)
+    </div>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 5 Assessment</div>
+    <div class="quiz-sub">Transport Layer · 5 Questions</div>
+    <div class="quiz-q" id="q5_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A VoIP (Voice over IP) application requires low latency but can tolerate occasional packet loss. Which transport protocol should it use?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">A. TCP — guaranteed delivery</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q5_1')">B. UDP — low overhead, real-time</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">C. FTP — file transfer protocol</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q5_1')">D. ICMP — control messages</button>
+      </div>
+      <div class="answer-reveal" id="q5_1_reveal"><strong>Correct: B.</strong> UDP is ideal for real-time applications like VoIP. TCP retransmission would introduce unacceptable delays in voice calls — it is better to drop a packet than wait for a retransmission of stale audio data.</div>
+    </div>
+    <div class="quiz-q" id="q5_2">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">In the TCP three-way handshake, the second step is the server responding with a __________ packet.</div>
+      <input class="fitb-input" id="fitb5_2" placeholder="Type the packet type...">
+      <button class="check-btn" onclick="checkFITB('fitb5_2',['syn-ack','synack','syn ack'],'q5_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q5_2_reveal"><strong>Answer: SYN-ACK.</strong> Step 1: Client sends SYN (synchronize). Step 2: Server responds SYN-ACK (synchronize-acknowledge). Step 3: Client sends ACK. Connection is then established.</div>
+    </div>
+    <div class="quiz-q" id="q5_3">
+      <div class="q-num">Q3 <span class="q-type">Calculation</span></div>
+      <div class="q-text">A TCP connection has a window size of 131,070 bytes and an RTT of 50ms. Calculate the maximum theoretical throughput in Mbps.</div>
+      <textarea class="short-input" id="short5_3" placeholder="Show calculation..."></textarea>
+      <button class="check-btn" onclick="revealShort('q5_3_reveal')">View Solution</button>
+      <div class="answer-reveal" id="q5_3_reveal"><strong>Solution:</strong> Throughput = Window Size / RTT = 131,070 bytes / 0.05s = 2,621,400 bytes/sec. Convert: × 8 bits/byte = 20,971,200 bps = <strong>~20.97 Mbps ≈ 21 Mbps</strong>.</div>
+    </div>
+    <div class="quiz-q" id="q5_4">
+      <div class="q-num">Q4 <span class="q-type">True / False</span></div>
+      <div class="q-text">Port 443 is used for unencrypted HTTP traffic, while port 80 is used for HTTPS.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q5_4')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q5_4')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q5_4_reveal"><strong>False.</strong> This is reversed. Port 80 = HTTP (unencrypted). Port 443 = HTTPS (HTTP over TLS/SSL — encrypted). Always use HTTPS (443) for sensitive data transmission.</div>
+    </div>
+    <div class="quiz-q" id="q5_5">
+      <div class="q-num">Q5 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain TCP's "slow start" congestion control mechanism. Why does it start slow and what triggers a return to slow start?</div>
+      <textarea class="short-input" id="short5_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q5_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q5_5_reveal"><strong>Model Answer:</strong> TCP Slow Start begins with a congestion window (cwnd) of 1 MSS (Maximum Segment Size). The cwnd doubles every RTT (exponential growth) until it reaches the slow start threshold (ssthresh), then switches to congestion avoidance (linear growth, +1 MSS per RTT). "Slow" refers to the initial single-packet start, not the growth rate. Triggers for returning to slow start: (1) packet loss detected by timeout (cwnd reset to 1 MSS, ssthresh halved); (2) triple duplicate ACKs trigger Fast Retransmit/Fast Recovery (cwnd halved, not reset to 1). The goal is to probe network capacity without overwhelming bottleneck links.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u5',5)">Submit Unit 5 Quiz</button>
+      <div class="score-display" id="u5_score"></div>
+      <br><button class="mark-done-btn" id="done_u5" onclick="markDone('u5',4)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 6 -->
+<div class="chapter" id="u6">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 06 // Application Layer & Internet Protocols</div>
+    <h2>DNS, HTTP/S, Email Protocols, DHCP & TLS</h2>
+    <div class="ch-icon">🌍</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The <strong>Application layer</strong> is where network services interface with user applications. It defines the protocols that govern how data is formatted, requested, and delivered for specific services like web browsing, email, and name resolution.</div>
+
+    <h3>6.1 DNS — Domain Name System</h3>
+    <p>DNS is a hierarchical, distributed database that translates human-readable domain names into IP addresses. It is often described as the "phone book of the internet."</p>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Example_of_an_iterative_DNS_resolver.svg/640px-Example_of_an_iterative_DNS_resolver.svg.png" alt="DNS resolution process diagram" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">🔍 Fig 6.1 — DNS Iterative Resolution Process (Wikimedia Commons)</div>
+    </div>
+
+    <div class="code-box">
+      <span class="code-label">DNS Resolution Steps</span>
+      <span class="comment">// User types: www.university.edu.ng</span>
+      1. Browser checks <span class="keyword">local cache</span>
+      2. OS checks <span class="keyword">hosts file</span> (/etc/hosts)
+      3. Query sent to <span class="keyword">Recursive Resolver</span> (ISP DNS)
+      4. Resolver queries <span class="keyword">Root Name Server</span> (.)
+         → Returns: "Try .ng TLD servers"
+      5. Resolver queries <span class="keyword">.ng TLD Server</span>
+         → Returns: "Try university.edu.ng NS servers"
+      6. Resolver queries <span class="keyword">Authoritative NS</span>
+         → Returns: <span class="value">www.university.edu.ng → 197.210.52.100</span>
+      7. Resolver <span class="keyword">caches result</span> (TTL-based)
+      8. Browser connects to <span class="value">197.210.52.100</span>
+    </div>
+
+    <h3>6.2 HTTP & HTTPS</h3>
+    <p>HTTP (HyperText Transfer Protocol) is a request-response protocol for web communication. HTTP/1.1 uses persistent connections. HTTP/2 adds multiplexing. HTTP/3 uses QUIC (UDP-based). HTTPS = HTTP + TLS encryption.</p>
+
+    <div class="code-box">
+      <span class="code-label">HTTP Request/Response</span>
+      <span class="comment">// HTTP GET Request:</span>
+      <span class="keyword">GET</span> /index.html HTTP/1.1
+      Host: www.example.com
+      Accept: text/html
+      Connection: keep-alive
+
+      <span class="comment">// HTTP Response:</span>
+      HTTP/1.1 <span class="value">200 OK</span>
+      Content-Type: text/html; charset=UTF-8
+      Content-Length: 1234
+      &lt;html&gt;...&lt;/html&gt;
+
+      <span class="comment">// Common HTTP Status Codes:</span>
+      200 OK | 301 Moved Permanently | 404 Not Found
+      403 Forbidden | 500 Internal Server Error
+    </div>
+
+    <h3>6.3 Email Protocols</h3>
+    <table class="info-table">
+      <thead><tr><th>Protocol</th><th>Port</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>SMTP</td><td>25 / 587</td><td>Sending email (Mail Transfer Agent)</td></tr>
+        <tr><td>POP3</td><td>110 / 995</td><td>Retrieve email — downloads and deletes from server</td></tr>
+        <tr><td>IMAP</td><td>143 / 993</td><td>Access email — keeps messages on server, syncs across devices</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6.4 DHCP</h3>
+    <p>DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses to network devices. The DORA process: <strong>Discover → Offer → Request → Acknowledge</strong>.</p>
+
+    <h3>6.5 TLS/SSL Handshake</h3>
+    <p>TLS (Transport Layer Security) provides confidentiality, integrity, and authentication for HTTPS. The TLS handshake negotiates cipher suites and establishes session keys using asymmetric cryptography before switching to faster symmetric encryption for the session.</p>
+
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 6 Assessment</div>
+    <div class="quiz-sub">Application Layer Protocols · 4 Questions</div>
+    <div class="quiz-q" id="q6_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In the DNS resolution process, which server provides the definitive, authoritative answer for a specific domain name?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">A. Root Name Server</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">B. Recursive Resolver</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q6_1')">C. TLD Name Server</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q6_1')">D. Authoritative Name Server</button>
+      </div>
+      <div class="answer-reveal" id="q6_1_reveal"><strong>Correct: D.</strong> The Authoritative Name Server holds the actual DNS records (A, AAAA, MX, CNAME etc.) for a specific domain and provides the final, definitive answer to the recursive resolver.</div>
+    </div>
+    <div class="quiz-q" id="q6_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">IMAP is preferred over POP3 for users who access email from multiple devices because IMAP keeps messages synchronized on the server.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,true,'q6_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,false,'q6_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q6_2_reveal"><strong>True.</strong> IMAP maintains a synchronized view of the mailbox on the server — reading on phone marks as read on laptop too. POP3 downloads and (typically) deletes from server, making multi-device access problematic.</div>
+    </div>
+    <div class="quiz-q" id="q6_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The DHCP process follows four steps abbreviated as __________ (Discover, Offer, Request, Acknowledge).</div>
+      <input class="fitb-input" id="fitb6_3" placeholder="4-letter acronym...">
+      <button class="check-btn" onclick="checkFITB('fitb6_3',['dora','d.o.r.a'],'q6_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q6_3_reveal"><strong>Answer: DORA.</strong> DHCP DORA: (1) Client broadcasts DHCPDISCOVER; (2) Server responds DHCPOFFER with available IP; (3) Client sends DHCPREQUEST to accept; (4) Server confirms with DHCPACK. The client is then configured with IP, mask, gateway, and DNS.</div>
+    </div>
+    <div class="quiz-q" id="q6_4">
+      <div class="q-num">Q4 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain why HTTP/3 switched from TCP to UDP (using QUIC). What problems with TCP does QUIC solve for modern web applications?</div>
+      <textarea class="short-input" id="short6_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q6_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q6_4_reveal"><strong>Model Answer:</strong> HTTP/3 uses QUIC (Quick UDP Internet Connections) over UDP to solve TCP's Head-of-Line (HOL) Blocking problem. In HTTP/2, multiple streams share one TCP connection — if one packet is lost, ALL streams are blocked waiting for retransmission (TCP HOL blocking). QUIC multiplexes streams independently over UDP: a lost packet only blocks its own stream, not others. QUIC also provides: (1) 0-RTT connection establishment (vs TCP's 1-RTT + TLS handshake); (2) built-in TLS 1.3 encryption; (3) connection migration (handles IP changes during mobile roaming). The combination significantly reduces latency for modern, resource-heavy web pages.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u6',4)">Submit Unit 6 Quiz</button>
+      <div class="score-display" id="u6_score"></div>
+      <br><button class="mark-done-btn" id="done_u6" onclick="markDone('u6',5)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 7 -->
+<div class="chapter" id="u7">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 07 // The Internet — Structure & Operation</div>
+    <h2>ISPs, IXPs, BGP, Cloud Computing & Web Evolution</h2>
+    <div class="ch-icon">🕸️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The <strong>internet</strong> is a global system of interconnected computer networks using the TCP/IP protocol suite. It is not owned by any single entity — it is a network of networks, connected through a hierarchy of ISPs, exchange points, and backbone providers.</div>
+
+    <h3>7.1 ISP Hierarchy</h3>
+    <ul>
+      <li><strong>Tier 1 ISPs:</strong> Global backbone providers (AT&T, NTT, Telia) — peer freely with each other, no transit costs. Their networks span continents via submarine cables.</li>
+      <li><strong>Tier 2 ISPs:</strong> Regional providers — pay Tier 1 for transit, peer with other Tier 2s.</li>
+      <li><strong>Tier 3 ISPs:</strong> Local/access providers — sell internet access to end users and businesses, purchasing transit from Tier 1/2.</li>
+    </ul>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Internet_Connectivity_Distribution_%26_Core.svg/640px-Internet_Connectivity_Distribution_%26_Core.svg.png" alt="Internet connectivity and ISP tier structure" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">🌐 Fig 7.1 — Internet Connectivity Distribution showing ISP tiers (Wikimedia Commons)</div>
+    </div>
+
+    <h3>7.2 Internet Exchange Points (IXPs)</h3>
+    <p>An <strong>IXP</strong> is a physical infrastructure where multiple ISPs and networks exchange internet traffic directly, bypassing upstream providers. IXPs reduce latency, lower transit costs, and improve resilience. Major IXPs include DE-CIX (Frankfurt, world's largest), AMS-IX (Amsterdam), LINX (London). Africa's IXPN (Lagos) is a key regional hub.</p>
+
+    <h3>7.3 Cloud Computing Models</h3>
+    <table class="info-table">
+      <thead><tr><th>Model</th><th>Full Name</th><th>Provider Manages</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>IaaS</td><td>Infrastructure as a Service</td><td>Hardware, networking, storage</td><td>AWS EC2, Azure VMs, GCP Compute</td></tr>
+        <tr><td>PaaS</td><td>Platform as a Service</td><td>OS, runtime, middleware</td><td>Heroku, Google App Engine</td></tr>
+        <tr><td>SaaS</td><td>Software as a Service</td><td>Everything</td><td>Gmail, Office 365, Salesforce</td></tr>
+      </tbody>
+    </table>
+
+    <h3>7.4 Web Evolution</h3>
+    <ul>
+      <li><strong>Web 1.0 (1991–2004):</strong> Static HTML pages, read-only, no user interaction. "Brochure web."</li>
+      <li><strong>Web 2.0 (2004–present):</strong> Dynamic, user-generated content, social media, AJAX, APIs. Users are creators.</li>
+      <li><strong>Web 3.0 (emerging):</strong> Decentralized, blockchain-based, semantic web, user data ownership. NFTs, DAOs, DeFi.</li>
+    </ul>
+
+    <h3>7.5 Content Delivery Networks (CDNs)</h3>
+    <p>A CDN is a geographically distributed network of servers that caches and delivers content from locations close to users, dramatically reducing latency. Cloudflare, Akamai, and Fastly are major CDN providers. CDNs serve static assets (images, CSS, JS) and increasingly dynamic content through edge computing.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 7 Assessment</div>
+    <div class="quiz-sub">Internet Structure · 4 Questions</div>
+    <div class="quiz-q" id="q7_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which cloud service model gives users the most control over the operating system, middleware, and application runtime environment?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'correct','q7_1')">A. IaaS</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_1')">B. PaaS</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_1')">C. SaaS</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q7_1')">D. FaaS</button>
+      </div>
+      <div class="answer-reveal" id="q7_1_reveal"><strong>Correct: A — IaaS.</strong> IaaS provides raw infrastructure. The user manages OS, middleware, runtime, and applications. SaaS manages everything; PaaS manages up to runtime. More control = more responsibility.</div>
+    </div>
+    <div class="quiz-q" id="q7_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">Tier 1 ISPs pay each other for transit when exchanging traffic across their backbone networks.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q7_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q7_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q7_2_reveal"><strong>False.</strong> Tier 1 ISPs have "settlement-free peering" agreements — they exchange traffic for free because the exchange is roughly equal and mutually beneficial. Only Tier 2 and Tier 3 ISPs pay Tier 1 for transit.</div>
+    </div>
+    <div class="quiz-q" id="q7_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">A CDN (Content Delivery Network) reduces latency by serving content from __________ servers located geographically close to users.</div>
+      <input class="fitb-input" id="fitb7_3" placeholder="Type the adjective...">
+      <button class="check-btn" onclick="checkFITB('fitb7_3',['edge','cached','cache'],'q7_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q7_3_reveal"><strong>Answer: edge (or cached).</strong> CDN edge servers are distributed globally. When you request a video or image, it is served from the nearest edge server rather than the origin server, drastically reducing round-trip time.</div>
+    </div>
+    <div class="quiz-q" id="q7_4">
+      <div class="q-num">Q4 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">What is an Internet Exchange Point (IXP) and why is local/regional IXP infrastructure (like IXPN in Nigeria) important for a country's internet economy?</div>
+      <textarea class="short-input" id="short7_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q7_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q7_4_reveal"><strong>Model Answer:</strong> An IXP is a physical facility where ISPs and network operators interconnect to exchange traffic directly, without routing through upstream providers. Importance for national economies: (1) Latency reduction: Traffic between two Nigerian users stays in Nigeria instead of routing through London or New York, reducing round-trip times from ~200ms to under 5ms. (2) Cost reduction: ISPs avoid paying expensive international transit fees for domestic traffic. (3) Resilience: Local traffic continues flowing even if international links fail. (4) Economic development: Lower internet costs stimulate digital economy growth, e-commerce, and local content creation.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u7',4)">Submit Unit 7 Quiz</button>
+      <div class="score-display" id="u7_score"></div>
+      <br><button class="mark-done-btn" id="done_u7" onclick="markDone('u7',6)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 8 -->
+<div class="chapter" id="u8">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 08 // Wireless & Mobile Networking</div>
+    <h2>Wi-Fi Standards, Bluetooth, Mobile Networks & IoT</h2>
+    <div class="ch-icon">📡</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">Wireless networking transmits data using electromagnetic waves rather than physical cables. IEEE 802.11 (Wi-Fi) governs wireless LANs; cellular standards (2G–5G) govern mobile networks. Both have revolutionized connectivity by eliminating physical constraints.</div>
+
+    <h3>8.1 Wi-Fi Standards Comparison</h3>
+    <table class="info-table">
+      <thead><tr><th>Standard</th><th>Wi-Fi Name</th><th>Year</th><th>Max Speed</th><th>Frequency</th></tr></thead>
+      <tbody>
+        <tr><td>802.11b</td><td>Wi-Fi 1</td><td>1999</td><td>11 Mbps</td><td>2.4 GHz</td></tr>
+        <tr><td>802.11g</td><td>Wi-Fi 3</td><td>2003</td><td>54 Mbps</td><td>2.4 GHz</td></tr>
+        <tr><td>802.11n</td><td>Wi-Fi 4</td><td>2009</td><td>600 Mbps</td><td>2.4/5 GHz</td></tr>
+        <tr><td>802.11ac</td><td>Wi-Fi 5</td><td>2013</td><td>3.5 Gbps</td><td>5 GHz</td></tr>
+        <tr><td>802.11ax</td><td>Wi-Fi 6</td><td>2019</td><td>9.6 Gbps</td><td>2.4/5/6 GHz</td></tr>
+        <tr><td>802.11be</td><td>Wi-Fi 7</td><td>2024</td><td>46 Gbps</td><td>2.4/5/6 GHz</td></tr>
+      </tbody>
+    </table>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Wifi_logo.svg/640px-Wifi_logo.svg.png" alt="Wi-Fi logo and wireless network concept" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">📶 Fig 8.1 — Wi-Fi (IEEE 802.11) — the global wireless LAN standard (Wikimedia Commons)</div>
+    </div>
+
+    <h3>8.2 Mobile Network Generations</h3>
+    <table class="info-table">
+      <thead><tr><th>Generation</th><th>Technology</th><th>Peak Speed</th><th>Key Feature</th></tr></thead>
+      <tbody>
+        <tr><td>2G (GSM)</td><td>TDMA/CDMA</td><td>0.3 Mbps</td><td>Digital voice, SMS</td></tr>
+        <tr><td>3G (UMTS/HSPA)</td><td>WCDMA</td><td>42 Mbps</td><td>Mobile internet, video calls</td></tr>
+        <tr><td>4G LTE</td><td>OFDMA</td><td>300 Mbps</td><td>HD streaming, low latency</td></tr>
+        <tr><td>5G NR</td><td>mmWave/Sub-6GHz</td><td>20 Gbps</td><td>IoT, AR/VR, autonomous vehicles</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8.3 Wireless Security Protocols</h3>
+    <ul>
+      <li><strong>WEP (1997):</strong> Completely broken — RC4 cipher with static keys. Never use.</li>
+      <li><strong>WPA (2003):</strong> Introduced TKIP — temporary fix, also deprecated.</li>
+      <li><strong>WPA2 (2004):</strong> AES-CCMP encryption — still widely used, vulnerable to KRACK attack.</li>
+      <li><strong>WPA3 (2018):</strong> SAE (Simultaneous Authentication of Equals) replaces PSK — forward secrecy, stronger against brute force. Current standard.</li>
+    </ul>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 8 Assessment</div>
+    <div class="quiz-sub">Wireless & Mobile · 4 Questions</div>
+    <div class="quiz-q" id="q8_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which wireless security protocol uses SAE (Simultaneous Authentication of Equals) to replace the vulnerable PSK handshake and provides forward secrecy?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">A. WEP</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">B. WPA</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q8_1')">C. WPA2</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q8_1')">D. WPA3</button>
+      </div>
+      <div class="answer-reveal" id="q8_1_reveal"><strong>Correct: D — WPA3.</strong> WPA3, introduced in 2018, replaces WPA2's vulnerable 4-way handshake with SAE (Dragonfly handshake), providing resistance to offline dictionary attacks and forward secrecy.</div>
+    </div>
+    <div class="quiz-q" id="q8_2">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">5G's peak theoretical speed is __________ Gbps, compared to 4G LTE's 300 Mbps peak.</div>
+      <input class="fitb-input" id="fitb8_2" placeholder="Number...">
+      <button class="check-btn" onclick="checkFITB('fitb8_2',['20'],'q8_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q8_2_reveal"><strong>Answer: 20 Gbps.</strong> 5G NR (New Radio) achieves peak speeds of 20 Gbps using mmWave spectrum and massive MIMO antenna arrays, though real-world speeds are typically 100–900 Mbps due to coverage and interference.</div>
+    </div>
+    <div class="quiz-q" id="q8_3">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">WEP (Wired Equivalent Privacy) is the current recommended wireless security standard for university networks.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q8_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q8_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q8_3_reveal"><strong>False.</strong> WEP was broken in 2001 and deprecated in 2004. It can be cracked in under 60 seconds using freely available tools. The current recommended standard is WPA3, or at minimum WPA2-AES.</div>
+    </div>
+    <div class="quiz-q" id="q8_4">
+      <div class="q-num">Q4 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Compare 2.4 GHz and 5 GHz Wi-Fi bands. In what scenarios would each be preferred and why?</div>
+      <textarea class="short-input" id="short8_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q8_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q8_4_reveal"><strong>Model Answer:</strong> 2.4 GHz: Longer range (penetrates walls better), more interference (shares band with Bluetooth, microwaves, other Wi-Fi), fewer non-overlapping channels (3 in IEEE standard), lower maximum speeds. Preferred for: IoT devices, large areas needing coverage over speed, legacy devices. 5 GHz: Shorter range, less interference (less congested), more non-overlapping channels (23+ with 802.11ac), much higher speeds. Preferred for: HD video streaming, gaming, high-density environments (offices, lecture halls) where throughput matters more than range. Modern Wi-Fi 6 routers use band steering to automatically move devices to the optimal band.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u8',4)">Submit Unit 8 Quiz</button>
+      <div class="score-display" id="u8_score"></div>
+      <br><button class="mark-done-btn" id="done_u8" onclick="markDone('u8',7)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 9 -->
+<div class="chapter" id="u9">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 09 // Network Security</div>
+    <h2>Threats, Firewalls, VPNs, Cryptography & IDS/IPS</h2>
+    <div class="ch-icon">🛡️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box"><strong>Network security</strong> encompasses the policies, processes, and technologies designed to protect the confidentiality, integrity, and availability (CIA triad) of network infrastructure and the data transmitted over it.</div>
+
+    <h3>9.1 The CIA Triad</h3>
+    <ul>
+      <li><strong>Confidentiality:</strong> Data accessible only to authorized parties — enforced by encryption.</li>
+      <li><strong>Integrity:</strong> Data not altered in transit — enforced by hashing (SHA-256, HMAC).</li>
+      <li><strong>Availability:</strong> Systems accessible when needed — protected against DoS/DDoS attacks.</li>
+    </ul>
+
+    <h3>9.2 Common Attack Types</h3>
+    <table class="info-table">
+      <thead><tr><th>Attack</th><th>Description</th><th>Countermeasure</th></tr></thead>
+      <tbody>
+        <tr><td>DDoS</td><td>Flood target with traffic to exhaust resources</td><td>Rate limiting, CDN, scrubbing centers</td></tr>
+        <tr><td>Man-in-the-Middle</td><td>Attacker intercepts/modifies communication</td><td>TLS/HTTPS, certificate pinning</td></tr>
+        <tr><td>SQL Injection</td><td>Malicious SQL code in input fields</td><td>Parameterized queries, WAF</td></tr>
+        <tr><td>Phishing</td><td>Deceptive messages to steal credentials</td><td>MFA, user training, email filtering</td></tr>
+        <tr><td>ARP Spoofing</td><td>Fake ARP replies to redirect traffic</td><td>Dynamic ARP Inspection (DAI)</td></tr>
+        <tr><td>DNS Poisoning</td><td>Corrupt DNS cache to redirect to malicious sites</td><td>DNSSEC</td></tr>
+      </tbody>
+    </table>
+
+    <h3>9.3 Cryptography Fundamentals</h3>
+    <div class="code-box">
+      <span class="code-label">Symmetric vs Asymmetric Encryption</span>
+      <span class="comment">// SYMMETRIC (same key encrypt & decrypt)</span>
+      Algorithms: AES-256, ChaCha20, DES (deprecated)
+      Speed: <span class="keyword">Fast</span> — used for bulk data encryption
+      Problem: Key distribution (how to share the key securely?)
+
+      <span class="comment">// ASYMMETRIC (public/private key pair)</span>
+      Algorithms: RSA-2048/4096, ECC (Elliptic Curve), Diffie-Hellman
+      Speed: <span class="keyword">Slow</span> — used for key exchange and digital signatures
+      Solution: Publish public key, keep private key secret
+
+      <span class="comment">// TLS combines BOTH:</span>
+      1. Asymmetric crypto → <span class="value">negotiate session key</span>
+      2. Symmetric crypto → <span class="value">encrypt all session data</span>
+
+      <span class="comment">// Hashing (one-way, no decryption):</span>
+      MD5 (broken) → SHA-1 (deprecated) → <span class="highlight">SHA-256 / SHA-3</span>
+    </div>
+
+    <h3>9.4 VPN (Virtual Private Network)</h3>
+    <p>A VPN creates an encrypted tunnel over a public network, providing secure remote access. VPN protocols include IPSec (Layer 3), SSL/TLS VPN (Layer 7), WireGuard (modern, fast), and OpenVPN. Site-to-site VPNs connect two office networks; remote-access VPNs connect individual users.</p>
+
+    <div class="img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/VPN_overview-en.svg/640px-VPN_overview-en.svg.png" alt="VPN tunnel diagram showing encrypted connection" onerror="this.src='';this.parentElement.style.display='none'">
+      <div class="img-caption">🔐 Fig 9.1 — VPN Tunnel: Encrypted connection over public internet (Wikimedia Commons)</div>
+    </div>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 9 Assessment</div>
+    <div class="quiz-sub">Network Security · 5 Questions</div>
+    <div class="quiz-q" id="q9_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">AES-256 is an example of which type of encryption algorithm?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'correct','q9_1')">A. Symmetric encryption</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">B. Asymmetric encryption</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">C. Hashing algorithm</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_1')">D. Digital signature scheme</button>
+      </div>
+      <div class="answer-reveal" id="q9_1_reveal"><strong>Correct: A.</strong> AES (Advanced Encryption Standard) is a symmetric block cipher — the same 256-bit key is used to both encrypt and decrypt data. It is the gold standard for fast bulk data encryption.</div>
+    </div>
+    <div class="quiz-q" id="q9_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">In asymmetric cryptography, data encrypted with the public key can only be decrypted with the corresponding private key.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,true,'q9_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,false,'q9_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q9_2_reveal"><strong>True.</strong> This is the fundamental property of asymmetric cryptography. Anyone can encrypt with your public key; only you can decrypt with your private key. This solves the key distribution problem that symmetric encryption faces.</div>
+    </div>
+    <div class="quiz-q" id="q9_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The three pillars of the CIA triad in information security are Confidentiality, __________, and Availability.</div>
+      <input class="fitb-input" id="fitb9_3" placeholder="Second pillar...">
+      <button class="check-btn" onclick="checkFITB('fitb9_3',['integrity'],'q9_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q9_3_reveal"><strong>Answer: Integrity.</strong> CIA Triad: Confidentiality (only authorized access), Integrity (data not tampered with), Availability (systems accessible when needed). Every security control should be evaluated against how it protects one or more of these three properties.</div>
+    </div>
+    <div class="quiz-q" id="q9_4">
+      <div class="q-num">Q4 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">Which attack involves an attacker sending fraudulent ARP replies to associate their MAC address with a legitimate IP address?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">A. DNS Poisoning</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q9_4')">B. ARP Spoofing</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">C. SQL Injection</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q9_4')">D. SYN Flood</button>
+      </div>
+      <div class="answer-reveal" id="q9_4_reveal"><strong>Correct: B — ARP Spoofing.</strong> The attacker broadcasts fake ARP replies, causing other devices to update their ARP cache with the attacker's MAC address for a victim's IP. This enables Man-in-the-Middle attacks on the local network.</div>
+    </div>
+    <div class="quiz-q" id="q9_5">
+      <div class="q-num">Q5 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain how TLS (used in HTTPS) combines both symmetric and asymmetric cryptography during the handshake and session. Why are both types needed?</div>
+      <textarea class="short-input" id="short9_5" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q9_5_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q9_5_reveal"><strong>Model Answer:</strong> TLS uses a hybrid approach because neither type alone is sufficient: Asymmetric is secure for key exchange but too slow for bulk data; Symmetric is fast but requires a secure channel to share the key first. TLS Handshake: (1) Server sends its certificate containing its public key. (2) Client verifies certificate against trusted CAs. (3) Both parties use Diffie-Hellman (asymmetric) to negotiate a shared session key without transmitting it. (4) All subsequent data encrypted with AES (symmetric) using the negotiated session key. Result: Security of asymmetric for key establishment + speed of symmetric for data transfer. This is why HTTPS has minimal performance overhead compared to HTTP.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u9',5)">Submit Unit 9 Quiz</button>
+      <div class="score-display" id="u9_score"></div>
+      <br><button class="mark-done-btn" id="done_u9" onclick="markDone('u9',8)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 10 -->
+<div class="chapter" id="u10">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 10 // Network Administration & Management</div>
+    <h2>IP Management, Monitoring Tools, Troubleshooting & QoS</h2>
+    <div class="ch-icon">⚙️</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box"><strong>Network administration</strong> is the ongoing management of network infrastructure — configuring, monitoring, troubleshooting, and optimizing networks to ensure performance, reliability, and security.</div>
+
+    <h3>10.1 Essential Network Diagnostic Tools</h3>
+    <div class="code-box">
+      <span class="code-label">Network Diagnostic Commands</span>
+      <span class="comment">// PING — test reachability and measure RTT</span>
+      $ ping <span class="keyword">8.8.8.8</span>
+      PING 8.8.8.8: 64 bytes, icmp_seq=1 ttl=118 time=<span class="value">12.4 ms</span>
+
+      <span class="comment">// TRACEROUTE — trace packet path hop by hop</span>
+      $ traceroute <span class="keyword">www.google.com</span>
+       1  192.168.1.1    1.2 ms   <span class="comment">// Default gateway</span>
+       2  196.201.210.1  8.4 ms   <span class="comment">// ISP router</span>
+       3  209.85.240.1   12.1 ms  <span class="comment">// Google edge</span>
+
+      <span class="comment">// NSLOOKUP — DNS query tool</span>
+      $ nslookup <span class="keyword">google.com</span>
+      Address: <span class="value">142.250.185.46</span>
+
+      <span class="comment">// NETSTAT — active connections</span>
+      $ netstat -an | grep ESTABLISHED
+
+      <span class="comment">// NMAP — network scanner (use ethically!)</span>
+      $ nmap -sV <span class="keyword">192.168.1.0/24</span>
+      <span class="comment">// Scans subnet, shows open ports and services</span>
+
+      <span class="comment">// IPCONFIG / IFCONFIG — interface info</span>
+      $ ipconfig /all    <span class="comment">// Windows</span>
+      $ ifconfig -a      <span class="comment">// Linux/Mac</span>
+      $ ip addr show     <span class="comment">// Modern Linux</span>
+    </div>
+
+    <h3>10.2 Network Troubleshooting Methodology</h3>
+    <ul>
+      <li><strong>Bottom-up approach:</strong> Start at Layer 1 (check cables/power) → Layer 2 (check MAC/switch) → Layer 3 (check IP/routing) → Layer 7 (check application).</li>
+      <li><strong>Top-down approach:</strong> Start at the application and work down.</li>
+      <li><strong>Divide and conquer:</strong> Start at the most likely layer and work in both directions.</li>
+    </ul>
+
+    <h3>10.3 SNMP — Simple Network Management Protocol</h3>
+    <p>SNMP enables centralized monitoring and management of network devices. Components: <em>Manager</em> (NMS — network management station), <em>Agent</em> (software on managed device), <em>MIB</em> (Management Information Base — database of manageable objects). SNMPv3 adds authentication and encryption; earlier versions (v1, v2c) transmit community strings in plaintext.</p>
+
+    <h3>10.4 Quality of Service (QoS)</h3>
+    <p>QoS mechanisms prioritize critical traffic (VoIP, video conferencing) over less time-sensitive traffic (file downloads). Key QoS techniques: <em>Traffic classification</em> (DSCP marking), <em>Queuing</em> (WFQ, CBWFQ, LLQ), <em>Traffic shaping/policing</em>, <em>Bandwidth reservation</em>. In enterprise networks, voice traffic should receive highest priority with guaranteed bandwidth and maximum 150ms one-way latency.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 10 Assessment</div>
+    <div class="quiz-sub">Network Admin & Management · 4 Questions</div>
+    <div class="quiz-q" id="q10_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">A network engineer discovers users cannot reach the internet. Using the bottom-up troubleshooting approach, what should be checked FIRST?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'correct','q10_1')">A. Physical layer — cable connections and link lights</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">B. Application layer — browser settings and DNS</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">C. Transport layer — TCP connections and ports</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q10_1')">D. Network layer — IP address and routing table</button>
+      </div>
+      <div class="answer-reveal" id="q10_1_reveal"><strong>Correct: A.</strong> Bottom-up troubleshooting starts at OSI Layer 1 (Physical). Check: Is the cable plugged in? Is the link LED lit on the switch? Is the NIC recognized by the OS? Most network issues are physical — always check hardware first.</div>
+    </div>
+    <div class="quiz-q" id="q10_2">
+      <div class="q-num">Q2 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">The command __________ traces the route packets take through the network, showing each hop's IP address and latency.</div>
+      <input class="fitb-input" id="fitb10_2" placeholder="Command name...">
+      <button class="check-btn" onclick="checkFITB('fitb10_2',['traceroute','tracert'],'q10_2_reveal')">Check</button>
+      <div class="answer-reveal" id="q10_2_reveal"><strong>Answer: traceroute (or tracert on Windows).</strong> Traceroute works by sending packets with increasing TTL values. Each router decrements TTL; when it reaches 0, an ICMP "Time Exceeded" is returned, revealing that hop's identity and latency.</div>
+    </div>
+    <div class="quiz-q" id="q10_3">
+      <div class="q-num">Q3 <span class="q-type">True / False</span></div>
+      <div class="q-text">SNMPv1 and v2c are the recommended versions for enterprise network management because they support full encryption of management traffic.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q10_3')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q10_3')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q10_3_reveal"><strong>False.</strong> SNMPv1 and v2c transmit community strings (passwords) in plaintext — a serious security vulnerability. <strong>SNMPv3</strong> is the recommended version for enterprises as it provides authentication (MD5/SHA) and encryption (DES/AES) of management traffic.</div>
+    </div>
+    <div class="quiz-q" id="q10_4">
+      <div class="q-num">Q4 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain QoS and why it is essential in modern enterprise networks that carry both VoIP calls and bulk file transfers simultaneously.</div>
+      <textarea class="short-input" id="short10_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q10_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q10_4_reveal"><strong>Model Answer:</strong> QoS (Quality of Service) is a set of techniques to manage network traffic to ensure critical applications receive the resources they need. Without QoS, a large file transfer can saturate a WAN link and cause VoIP calls to drop or become unintelligible due to increased latency and jitter. QoS solutions: (1) Traffic classification: Mark VoIP packets with high-priority DSCP codes (EF — Expedited Forwarding). (2) Queuing: Low Latency Queuing (LLQ) creates a priority queue that is always served first for VoIP. (3) Bandwidth reservation: Guarantee minimum bandwidth for voice (typically 64–128 Kbps per call). (4) Result: VoIP calls experience less than 150ms latency (ITU-T G.114 recommendation) even when the file transfer saturates remaining bandwidth.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u10',4)">Submit Unit 10 Quiz</button>
+      <div class="score-display" id="u10_score"></div>
+      <br><button class="mark-done-btn" id="done_u10" onclick="markDone('u10',9)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 11 -->
+<div class="chapter" id="u11">
+  <div class="chapter-header">
+    <div class="ch-num">Unit 11 // Emerging Technologies in Networking</div>
+    <h2>SDN, NFV, Edge Computing, Blockchain, AI & 5G</h2>
+    <div class="ch-icon">🚀</div>
+  </div>
+  <div class="chapter-body">
+    <div class="def-box">The networking landscape is being transformed by software-defined architectures, AI-driven management, and ultra-low-latency wireless standards. Understanding these emerging technologies prepares students for the next decade of network engineering.</div>
+
+    <h3>11.1 Software-Defined Networking (SDN)</h3>
+    <p>SDN decouples the <strong>control plane</strong> (routing decisions) from the <strong>data plane</strong> (packet forwarding) in network devices. A centralized SDN Controller programmatically manages all network devices through open APIs (OpenFlow, REST). This enables: automated network configuration, rapid policy deployment, and network virtualization.</p>
+
+    <div class="diagram-wrap">
+      <svg width="100%" viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;">
+        <!-- Traditional -->
+        <text x="100" y="16" fill="#7a9ab5" font-family="Share Tech Mono" font-size="10" text-anchor="middle">TRADITIONAL</text>
+        <rect x="20" y="24" width="160" height="50" rx="6" fill="rgba(255,71,87,0.1)" stroke="#ff4757" stroke-width="1.5"/>
+        <text x="100" y="44" fill="#ff4757" font-family="Share Tech Mono" font-size="10" text-anchor="middle">Control Plane</text>
+        <text x="100" y="60" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">(Routing logic inside)</text>
+        <rect x="20" y="90" width="160" height="50" rx="6" fill="rgba(255,71,87,0.08)" stroke="#ff4757" stroke-width="1"/>
+        <text x="100" y="110" fill="#ff4757" font-family="Share Tech Mono" font-size="10" text-anchor="middle">Data Plane</text>
+        <text x="100" y="126" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">(Forwarding)</text>
+        <text x="100" y="165" fill="#7a9ab5" font-family="Share Tech Mono" font-size="8" text-anchor="middle">Tightly Coupled in each router</text>
+        <line x1="100" y1="74" x2="100" y2="90" stroke="#ff4757" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+        <!-- Arrow -->
+        <text x="230" y="100" fill="#00e5ff" font-family="Share Tech Mono" font-size="18" text-anchor="middle">→</text>
+
+        <!-- SDN -->
+        <text x="360" y="16" fill="#00e5ff" font-family="Share Tech Mono" font-size="10" text-anchor="middle">SDN</text>
+        <rect x="280" y="24" width="160" height="50" rx="6" fill="rgba(0,229,255,0.12)" stroke="#00e5ff" stroke-width="2"/>
+        <text x="360" y="44" fill="#00e5ff" font-family="Share Tech Mono" font-size="10" text-anchor="middle">SDN CONTROLLER</text>
+        <text x="360" y="60" fill="#7a9ab5" font-family="Share Tech Mono" font-size="9" text-anchor="middle">(Centralized Control Plane)</text>
+        <line x1="330" y1="76" x2="310" y2="120" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
+        <line x1="360" y1="76" x2="360" y2="120" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
+        <line x1="390" y1="76" x2="410" y2="120" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
+        <rect x="282" y="120" width="46" height="40" rx="4" fill="rgba(0,255,157,0.08)" stroke="#00ff9d" stroke-width="1"/>
+        <text x="305" y="145" fill="#00ff9d" font-family="Share Tech Mono" font-size="8" text-anchor="middle">Switch</text>
+        <rect x="336" y="120" width="46" height="40" rx="4" fill="rgba(0,255,157,0.08)" stroke="#00ff9d" stroke-width="1"/>
+        <text x="359" y="145" fill="#00ff9d" font-family="Share Tech Mono" font-size="8" text-anchor="middle">Switch</text>
+        <rect x="390" y="120" width="46" height="40" rx="4" fill="rgba(0,255,157,0.08)" stroke="#00ff9d" stroke-width="1"/>
+        <text x="413" y="145" fill="#00ff9d" font-family="Share Tech Mono" font-size="8" text-anchor="middle">Switch</text>
+        <text x="360" y="185" fill="#7a9ab5" font-family="Share Tech Mono" font-size="8" text-anchor="middle">Dumb switches, smart controller</text>
+      </svg>
+      <div class="diagram-label">Fig 11.1 — Traditional vs SDN Architecture</div>
+    </div>
+
+    <h3>11.2 Network Function Virtualization (NFV)</h3>
+    <p>NFV virtualizes network functions (firewalls, load balancers, WAN optimizers, IDS) that traditionally ran on dedicated hardware appliances. These become software running on standard x86 servers. Benefits: faster deployment, lower costs, flexible scaling. NFV and SDN are complementary — SDN controls the network; NFV virtualizes the functions.</p>
+
+    <h3>11.3 Edge Computing & Fog Networking</h3>
+    <p>Edge computing processes data near the source (at the "edge") rather than sending everything to centralized cloud data centres. This dramatically reduces latency for real-time applications (autonomous vehicles, industrial IoT, AR). Fog computing extends edge computing by adding a distributed layer between edge devices and cloud.</p>
+
+    <h3>11.4 AI in Network Management</h3>
+    <p>AI/ML is transforming network operations (NetOps): <em>AIOps</em> uses machine learning for anomaly detection, predictive failure analysis, and automated root-cause analysis. Intent-Based Networking (IBN) allows administrators to describe desired outcomes in natural language; the AI translates intent into network configurations automatically.</p>
+
+    <h3>11.5 Blockchain in Networking</h3>
+    <p>Blockchain applications in networking include: decentralized DNS (resistant to censorship/poisoning), secure IoT device identity management, transparent routing verification, and decentralized VPNs (dVPNs). The trustless, immutable ledger model addresses several longstanding network security challenges.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-title">Unit 11 Assessment</div>
+    <div class="quiz-sub">Emerging Technologies · 4 Questions</div>
+    <div class="quiz-q" id="q11_1">
+      <div class="q-num">Q1 <span class="q-type">Multiple Choice</span></div>
+      <div class="q-text">In SDN architecture, the "southbound interface" connects which two components?</div>
+      <div class="mc-options">
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">A. SDN Controller and business applications</button>
+        <button class="mc-opt" onclick="checkMC(this,'correct','q11_1')">B. SDN Controller and network devices (switches/routers)</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">C. Network devices and end-user computers</button>
+        <button class="mc-opt" onclick="checkMC(this,'wrong','q11_1')">D. Cloud providers and on-premise networks</button>
+      </div>
+      <div class="answer-reveal" id="q11_1_reveal"><strong>Correct: B.</strong> SDN has three interfaces: Northbound (Controller ↔ Applications, typically REST API), Southbound (Controller ↔ Network Devices, e.g., OpenFlow), and East/Westbound (between Controllers in distributed SDN).</div>
+    </div>
+    <div class="quiz-q" id="q11_2">
+      <div class="q-num">Q2 <span class="q-type">True / False</span></div>
+      <div class="q-text">NFV and SDN are the same technology — both virtualize network hardware and centralize control.</div>
+      <div class="tf-options">
+        <button class="tf-btn" onclick="checkTF(this,false,'q11_2')">TRUE</button>
+        <button class="tf-btn" onclick="checkTF(this,true,'q11_2')">FALSE</button>
+      </div>
+      <div class="answer-reveal" id="q11_2_reveal"><strong>False.</strong> They are distinct but complementary. SDN separates control plane from data plane to enable programmable network control. NFV virtualizes network functions (firewalls, load balancers) from proprietary hardware to software on standard servers. They can be deployed independently or together.</div>
+    </div>
+    <div class="quiz-q" id="q11_3">
+      <div class="q-num">Q3 <span class="q-type">Fill in the Blank</span></div>
+      <div class="q-text">Edge computing processes data __________ to its source rather than sending it to centralized cloud data centres, drastically reducing latency.</div>
+      <input class="fitb-input" id="fitb11_3" placeholder="Proximity word...">
+      <button class="check-btn" onclick="checkFITB('fitb11_3',['close','near','closer','nearer','locally'],'q11_3_reveal')">Check</button>
+      <div class="answer-reveal" id="q11_3_reveal"><strong>Answer: close/near (to).</strong> Edge computing shifts compute workloads from centralized data centres to locations physically close to where data is generated — enabling sub-millisecond response times required by autonomous vehicles, industrial automation, and AR/VR applications.</div>
+    </div>
+    <div class="quiz-q" id="q11_4">
+      <div class="q-num">Q4 <span class="q-type">Short Answer</span></div>
+      <div class="q-text">Explain Intent-Based Networking (IBN). How does it change the role of network administrators compared to traditional network management?</div>
+      <textarea class="short-input" id="short11_4" placeholder="Write your answer..."></textarea>
+      <button class="check-btn" onclick="revealShort('q11_4_reveal')">View Model Answer</button>
+      <div class="answer-reveal" id="q11_4_reveal"><strong>Model Answer:</strong> IBN is an approach where administrators specify what the network should accomplish (the "intent") rather than how to configure individual devices. An AI/ML system translates the high-level intent into device-specific configurations, deploys them, continuously verifies the network is achieving the intent, and remediates deviations automatically. Traditional admin: manually configure 200 routers with explicit CLI commands (error-prone, slow). IBN admin: declare "all guest VLAN traffic must be isolated and rate-limited to 10 Mbps" — the system handles implementation. This shifts the administrator's role from low-level device operator to high-level policy architect, enabling faster deployment, consistent enforcement, and proactive troubleshooting through continuous closed-loop verification.</div>
+    </div>
+    <div class="quiz-score-area">
+      <button class="submit-btn" onclick="scoreQuiz('u11',4)">Submit Unit 11 Quiz</button>
+      <div class="score-display" id="u11_score"></div>
+      <br><button class="mark-done-btn" id="done_u11" onclick="markDone('u11',10)">✓ Mark Unit Complete</button>
+    </div>
+  </div>
+</div>
+`;
+
+document.getElementById('remaining-units').innerHTML = remainingHTML;
+
+// ========== FINAL EXAM ==========
+const finalQs = [
+  {type:'mc',q:'A network uses 10.0.0.0/8. How many usable host addresses are available?',opts:['16,777,214','65,534','1,048,576','16,777,216'],ans:0,rev:'2^24 - 2 = 16,777,214. /8 leaves 24 bits for hosts. Subtract 2 for network and broadcast addresses.'},
+  {type:'tf',q:'A router strips the Layer 2 (Ethernet) frame header when forwarding a packet between different networks, replacing it with a new frame for the next hop.',ans:true,rev:'Correct. Routers operate at Layer 3. They decapsulate the L2 frame, examine the L3 IP header, make a routing decision, then re-encapsulate with a NEW L2 header appropriate for the next-hop network.'},
+  {type:'mc',q:'Using VLSM on 172.16.0.0/24, you need a subnet for exactly 30 hosts. What is the most efficient prefix length?',opts:['/25','/26','/27','/28'],ans:2,rev:'/27 gives 2^5 - 2 = 30 usable hosts — exactly the minimum required. /26 would give 62 hosts (wasteful). /28 gives only 14 hosts (insufficient).'},
+  {type:'mc',q:'Which routing protocol uses Dijkstra\'s Shortest Path First (SPF) algorithm and is classified as a link-state protocol?',opts:['RIP v2','BGP','EIGRP','OSPF'],ans:3,rev:'OSPF (Open Shortest Path First) is a link-state protocol — each router maintains a complete topology map (LSDB) and runs Dijkstra\'s algorithm to compute the shortest path tree.'},
+  {type:'tf',q:'UDP provides flow control through its sliding window mechanism, preventing fast senders from overwhelming slow receivers.',ans:false,rev:'False. UDP has NO flow control, NO congestion control, and NO error recovery. It is a simple, lightweight, connectionless protocol. Only TCP provides sliding window flow control.'},
+  {type:'mc',q:'What is the wildcard mask for the /28 subnet 192.168.1.48/28?',opts:['0.0.0.224','0.0.0.32','0.0.0.15','0.0.0.7'],ans:2,rev:'/28 = 255.255.255.240. Wildcard = 255.255.255.255 - 255.255.255.240 = 0.0.0.15. Binary: 240 = 11110000, so wildcard last octet = 00001111 = 15.'},
+  {type:'mc',q:'Shannon\'s theorem states the channel capacity. For B=6000Hz and S/N=63, what is the maximum capacity?',opts:['24,000 bps','36,000 bps','42,000 bps','48,000 bps'],ans:1,rev:'C = 6000 × log₂(64) = 6000 × 6 = 36,000 bps. Note: log₂(64) = 6 because 2⁶ = 64. S/N = 63, so 1+S/N = 64.'},
+  {type:'tf',q:'HTTPS traffic uses port 443 and provides encryption through TLS, while standard HTTP uses port 80 with no encryption.',ans:true,rev:'Correct. HTTP (port 80) is plaintext — all data visible to anyone on the network. HTTPS (port 443) wraps HTTP in TLS, providing confidentiality, integrity, and server authentication.'},
+  {type:'mc',q:'In the TCP three-way handshake, which flags are set in the SECOND packet (from server to client)?',opts:['SYN only','ACK only','SYN + ACK','FIN + ACK'],ans:2,rev:'Step 2 of the handshake: Server responds with SYN-ACK — SYN to synchronize its own sequence number (y), ACK to acknowledge the client\'s SYN (ack = x+1). Both flags are set.'},
+  {type:'mc',q:'Which type of cryptography does RSA-2048 represent, and what is its primary use in TLS?',opts:['Symmetric — bulk data encryption','Asymmetric — key exchange and digital signatures','Hashing — data integrity verification','Stream cipher — real-time encryption'],ans:1,rev:'RSA is asymmetric (public/private key pair). In TLS, it is used for the key exchange phase — the server\'s RSA key pair authenticates the server via its certificate, and may be used to establish the session key.'},
+  {type:'mc',q:'In SDN, the component that maintains a global view of the network topology and translates high-level policies into device-level forwarding rules is called the:',opts:['Southbound Interface','Data Plane','SDN Controller','Northbound API'],ans:2,rev:'The SDN Controller is the "brain" — it maintains the network-wide view (topology), makes routing/policy decisions, and pushes flow rules to network devices via the southbound interface (e.g., OpenFlow).'},
+  {type:'tf',q:'WPA3 uses the same 4-way handshake as WPA2 but with stronger AES-256 encryption, making the key exchange more secure.',ans:false,rev:'False. WPA3 replaces the vulnerable 4-way PMKID handshake with SAE (Simultaneous Authentication of Equals / Dragonfly), which provides forward secrecy and is resistant to offline dictionary attacks — a completely different mechanism, not just stronger encryption.'},
+  {type:'mc',q:'A /30 subnet is most commonly used for which type of network link?',opts:['University LAN with 200 students','Server farm with 25 servers','Point-to-point WAN link between two routers','VLAN with guest access'],ans:2,rev:'/30 provides 4 addresses: network, 2 usable hosts, broadcast. Exactly 2 hosts = exactly what a point-to-point WAN link between two routers requires. This is the standard for WAN interfaces.'},
+  {type:'mc',q:'Which layer of the OSI model is responsible for converting data into electrical, optical, or radio signals for transmission?',opts:['Layer 2 — Data Link','Layer 3 — Network','Layer 1 — Physical','Layer 4 — Transport'],ans:2,rev:'Layer 1 (Physical) handles the conversion of bits into physical signals — electrical voltages (copper), light pulses (fibre), or radio waves (wireless). It has no concept of addressing or error correction.'},
+  {type:'mc',q:'NFV (Network Function Virtualization) primarily addresses which problem in traditional network infrastructure?',opts:['Slow routing convergence times','Dependency on expensive proprietary hardware appliances for network functions','Lack of encryption in wireless networks','IPv4 address exhaustion'],ans:1,rev:'NFV decouples network functions (firewall, NAT, IDS, load balancer) from proprietary, expensive hardware appliances and runs them as software (VNFs — Virtual Network Functions) on standard x86 servers. This reduces CapEx, accelerates deployment, and enables elastic scaling.'},
+];
+
+function buildFinal(){
+  const c = document.getElementById('finalContainer');
+  finalQs.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className='quiz-q'; d.id=`fq_${i}`;
+    let opts = q.type==='mc'
+      ? `<div class="mc-options">${q.opts.map((o,j)=>`<button class="mc-opt" onclick="checkMC(this,'${j===q.ans?'correct':'wrong'}','fq_${i}')">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div>`
+      : `<div class="tf-options"><button class="tf-btn" onclick="checkTF(this,${q.ans===true},'fq_${i}')">TRUE</button><button class="tf-btn" onclick="checkTF(this,${q.ans===false},'fq_${i}')">FALSE</button></div>`;
+    d.innerHTML=`<div class="q-num">Q${i+1} <span class="q-type">${q.type==='mc'?'Multiple Choice':'True / False'}</span></div><div class="q-text">${q.q}</div>${opts}<div class="answer-reveal" id="fq_${i}_reveal"><strong>Explanation:</strong> ${q.rev}</div>`;
+    c.appendChild(d);
+  });
+}
+buildFinal();
+
+// ========== QUIZ LOGIC ==========
+function checkMC(btn,result,qId){
+  const btns=btn.parentElement.querySelectorAll('.mc-opt');
+  btns.forEach(b=>{b.disabled=true;});
+  btn.classList.add(result);
+  const r=document.getElementById(qId+'_reveal');
+  if(r) r.classList.add('show');
+}
+function checkTF(btn,isCorrect,qId){
+  const btns=btn.parentElement.querySelectorAll('.tf-btn');
+  btns.forEach(b=>b.disabled=true);
+  btn.classList.add(isCorrect?'correct':'wrong');
+  const r=document.getElementById(qId+'_reveal');
+  if(r) r.classList.add('show');
+}
+function checkFITB(inputId,answers,revealId){
+  const input=document.getElementById(inputId);
+  const val=input.value.trim().toLowerCase();
+  const ok=answers.some(a=>val.includes(a.toLowerCase()));
+  input.classList.add(ok?'correct':'wrong');
+  input.disabled=true;
+  const r=document.getElementById(revealId);
+  if(r) r.classList.add('show');
+}
+function revealShort(revealId){
+  const r=document.getElementById(revealId);
+  if(r) r.classList.add('show');
+}
+function scoreQuiz(uid,total){
+  const sd=document.getElementById(uid+'_score');
+  sd.style.display='block';
+  const correct=document.querySelectorAll(`#${uid} .mc-opt.correct, #${uid} .tf-btn.correct, #${uid} .fitb-input.correct`).length;
+  const pct=Math.round((correct/total)*100);
+  const grade=pct>=90?'DISTINCTION':pct>=75?'CREDIT':pct>=60?'PASS':'RETRY';
+  sd.innerHTML=`<div class="score-num">${correct}/${total}</div><div class="score-lbl">${pct}% // ${grade}</div>`;
+}
+function scoreFinal(){
+  const total=finalQs.length;
+  const correct=document.querySelectorAll('#final-exam .mc-opt.correct, #final-exam .tf-btn.correct').length;
+  const pct=Math.round((correct/total)*100);
+  const grade=pct>=90?'🏆 DISTINCTION':pct>=75?'🥇 CREDIT':pct>=60?'✅ PASS':'📚 RETRY';
+  const sd=document.getElementById('final_score');
+  sd.style.display='block';
+  sd.innerHTML=`<div class="score-num">${correct}/${total}</div><div class="score-lbl">${pct}% // ${grade}</div>`;
+  finalQs.forEach((_,i)=>{
+    const r=document.getElementById(`fq_${i}_reveal`);
+    if(r) r.classList.add('show');
+  });
+}
+
+// ========== PROGRESS ==========
+const TOTAL=11;
+let completed=JSON.parse(localStorage.getItem('ict201_prog')||'[]');
+function updateProgress(){
+  const pct=Math.round((completed.length/TOTAL)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressLabel').textContent=`${completed.length} of ${TOTAL} units completed`;
+  const navBtns=document.querySelectorAll('.nav-btn');
+  navBtns.forEach((b,i)=>{
+    if(i<TOTAL && completed.includes(i)) b.classList.add('done');
+    else b.classList.remove('done');
+  });
+}
+function markDone(uid,idx){
+  if(!completed.includes(idx)){
+    completed.push(idx);
+    localStorage.setItem('ict201_prog',JSON.stringify(completed));
+  }
+  const btn=document.getElementById('done_'+uid);
+  if(btn){btn.classList.add('completed');btn.textContent='✓ Unit Completed!';}
+  updateProgress();
+}
+const uMap=['u1','u2','u3','u4','u5','u6','u7','u8','u9','u10','u11'];
+completed.forEach(idx=>{
+  const btn=document.getElementById('done_'+uMap[idx]);
+  if(btn){btn.classList.add('completed');btn.textContent='✓ Unit Completed!';}
+});
+updateProgress();
+
+// ========== NAVIGATION ==========
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ========== SCROLL ANIMATION ==========
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+},{threshold:0.04});
+document.querySelectorAll('.chapter').forEach(c=>obs.observe(c));
+setTimeout(()=>document.querySelectorAll('.chapter').forEach(c=>obs.observe(c)),600);
+</script>
+</body>
+</html>
