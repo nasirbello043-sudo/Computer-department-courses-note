@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GEN 113 – Use of Library and Study Skills</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --cream: #ede6d5;
+    --accent: #7a3b1e;
+    --rule: #c5b89a;
+    --muted: #6b5e4c;
+    --highlight: #e8dcc8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(180,160,120,0.07) 28px, rgba(180,160,120,0.07) 29px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 6rem;
+  }
+
+  /* ── HEADER ── */
+  .doc-header {
+    border-top: 4px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    padding: 2.2rem 0 1.6rem;
+    margin-bottom: 2.8rem;
+    text-align: center;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .course-code {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 3rem;
+    border-radius: 2px;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+
+  .toc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .toc ol {
+    padding-left: 1.2rem;
+  }
+
+  .toc li {
+    margin: 0.22rem 0;
+    font-size: 0.88rem;
+  }
+
+  .toc a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .toc a:hover { opacity: 0.7; text-decoration: underline; }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.45rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .sub-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.6rem 0 0.5rem;
+  }
+
+  .sub-sub-heading {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 1.2rem 0 0.35rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    margin-bottom: 0.3rem;
+    font-size: 0.97rem;
+  }
+
+  /* Nested bullets */
+  li > ul, li > ol { margin-top: 0.3rem; }
+
+  /* ── PAGE NUMBER DIVIDERS ── */
+  .page-break {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 2rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .page-break::before, .page-break::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── TABLE ── */
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .ref-table th {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    padding: 0.55rem 1rem;
+    text-align: left;
+  }
+
+  .ref-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .ref-table tr:nth-child(even) td { background: var(--highlight); }
+
+  /* ── BLOCKQUOTE / DEFINITION BOX ── */
+  .def-box {
+    background: var(--cream);
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0 1.2rem;
+    font-style: italic;
+    font-size: 0.94rem;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scroll-reveal trigger via JS */
+  .section { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .section.visible { opacity: 1; transform: none; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    border-top: 2px solid var(--rule);
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .page-wrapper { padding: 1.5rem 1.2rem 4rem; }
+    .doc-title { font-size: 1.7rem; }
+    .section-heading { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <span class="course-code">GEN 113</span>
+    <h1 class="doc-title">Use of Library and Study Skills</h1>
+  </header>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc" aria-label="Table of Contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#intro">1.0 Introduction</a></li>
+      <li><a href="#definition">1.1 Definition of Library</a></li>
+      <li><a href="#history">1.2 Brief History of Library</a></li>
+      <li><a href="#types">Types of Library and Their Functions</a></li>
+      <li><a href="#resources">Library Resources or Materials</a></li>
+      <li><a href="#print">Print Material</a></li>
+      <li><a href="#nonprint">Non-Print Material</a></li>
+      <li><a href="#electronic">Electronic Material / Resources</a></li>
+      <li><a href="#other">Other Material</a></li>
+      <li><a href="#reference">Reference Materials</a></li>
+    </ol>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 1
+  ══════════════════════════════════════════════════════ -->
+  <section class="section" id="intro">
+    <h2 class="section-heading">1.0 Introduction</h2>
+    <p>The purpose of instruction on library use to fresher's in academic environment is to enable the students gain knowledge of the resources and services which the academic library has to offer for his or her academic benefit. As a new student it is necessary to assist you in adjusting and adapting to the challenges of academic library environment. Therefore, the aim of this course is to expose you to the proper use of the library and its resources through the acquisition of skills of identification, location, retrieval and exploration of information resources both printed and electronics.</p>
+  </section>
+
+  <section class="section" id="definition">
+    <h2 class="section-heading">1.1 Definition of Library</h2>
+    <p>Traditionally, a library is defined as physical space (house) emphasizing physical (print) collections. Importance is on storage and preservation of physical items particularly books and periodicals. Information is physically gathered in one place and users must visit the library to use the resources. However, the introduction of ICT, which brought about the introduction of new formats of information, has given the concept of library a new definition. According to Adeniran (2017) it can be define as 'A place where information resources are accessed and information services are provided by professionals who specialise in identifying, collecting, organizing, processing, information sources as well as interpreting information needs'.</p>
+    <p>Library can also be define as 'A collection of books and non-book materials, which have been carefully selected and organized for the use of patrons or community of users'. With advent of ICT, the system (Library) has assumed more elaborate definitions by different scholars, based content and context of usage.</p>
+  </section>
+
+  <section class="section" id="history">
+    <h2 class="section-heading">1.2 Brief History of Library</h2>
+    <p>In earliest time, there was no distinction between a record room and a library, in this sense, libraries can be said to have existed for almost as long as records have been kept. However, the first libraries appeared 5000 years ago in the ancient Mesopotamia, in southwest Asian regions of the world. Before the invention of book, most information were written on lay tablets, papyrus scrolls, parchment rolls and so on. The various religions such as Islam and Christianity also contributed to the development by converting their collections to libraries.</p>
+  </section>
+
+  <div class="page-break">Page 2</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 2
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <p>The ancient Greeks propelled the idea of library through their heightened interest in literary intellectual life. The Greek government was the first to sponsor public libraries. The Alexandria library was a renowned in the third century.</p>
+    <p>In Nigeria, the history of library can be traced back to the 1930s when the government established the division of West African Library Association (WALA). The effort and activities of this association was gear toward producing national library. Prior to the establishment of national library, there was already a library at university of Ibadan established in 1948. There was another library in the Easter region established in 1959. The establishment of library advisory committee in 1050s led to rechristening of WALA to the Nigeria Library Association (NLA) in 1962. The national library of Nigeria became a reality when the country attained independence. In September 1964, the government passed the first literary-related legislation which was the National Library Act later became the National Library Decree No 29 of 1970. Consequently, the National Library of Nigeria came into existence.</p>
+  </section>
+
+  <section class="section" id="types">
+    <h2 class="section-heading">Types of Library and Their Functions</h2>
+    <p>The following are types of libraries:</p>
+
+    <h3 class="sub-heading">The Public Library</h3>
+    <p>The public libraries are government owned and funded at state level with its presence in state capital and branches in local government headquarters. The public libraries are headed by the State Library Director. This type of library is for every type of users; it has collections that meet information needs of farmers, lawyers, Doctors, engineers, business men and all other members of the public. Example of a Public library is the State Library, Enugu, Imo State Library, Imo, etc.</p>
+
+    <h3 class="sub-heading">The School Library</h3>
+    <p>The School Libraries are established in pre-primary, primary and secondary schools by the school authorities to support teaching and learning and help pupils and students develop reading habits at tender age. The nature and size of a particular school library collection will depend on many factors such as school's objective and philosophy, school's programmes and activities, pupil's needs and interests. Some school libraries function as a learning resource centre and it is headed by a Teacher Librarian.</p>
+  </section>
+
+  <div class="page-break">Page 3</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 3
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="sub-heading">The Academic Library</h3>
+    <p>These are libraries established by tertiary institutions like Colleges of Education, Polytechnics and Universities. They are established as an integral part of a tertiary institution with the responsibility to meet the information and research needs of its students, faculty and staff. Their collections are tailored towards the achievement of institutional goals of teaching, learning and research.</p>
+
+    <h3 class="sub-heading">The National Library</h3>
+    <p>National Library: National Library is the apex library of a nation. It is established by a country to serve as a National Library. The National library is called the National Librarian. The library has legal right to collect documents issued in a country such as books, periodicals and other information material for the preservation of compiling National bibliography of a Nation. It also has the responsibility for issuing ISBN and a country's intellectual output for posterity. It is usually established and funded by the executive arm of the National library at the national level with branches spread across the nation. The person in charge of the National library is called the National Librarian.</p>
+
+    <h3 class="sub-heading">The Special Library</h3>
+    <p>Special Libraries are libraries established to meet special information needs of its users. As the name implies, they provide special services to special Institutions to meet professional information needs. Everything about the library is special: collections, subjects, users and often for a limited group of users. The special library is headed by a professional librarian. Examples of such libraries include: law libraries and medical libraries.</p>
+    <p>The purpose of such collection is to foster personal development, research, references and consultancy services. Sometimes, the collections of a private library are bequeathed by the owners to public or academic libraries. Examples are Nwafor Orizu Library, Nnowi; Eni Njoku Memorial Library donated to the University of Nigeria, Nsukka; Ikejiani collection bequeathed to the college of medicine of UNN etc.</p>
+
+    <h3 class="sub-heading">Private or Personal Library</h3>
+    <p>These are individuals' collection of information materials. The purpose of such collection is to foster personal development, research, references and consultancy services. Sometimes, the collections of a private library are bequeathed by the owners to public or academic libraries. Examples are Nwafor Orizu Library, Nnowi; Eni Njoku Memorial Library donated to the University of Nigeria, Nsukka; Ikejiani collection bequeathed to the college of medicine of UNN etc.</p>
+
+    <h3 class="sub-heading">Community Library</h3>
+    <p>These are libraries established and used in the community through communal efforts. They are essential grassroots institutions that provide educational, cultural, and informational resources to local communities, particularly in underserved areas. They promote literacy, lifelong learning, and community engagement while preserving local culture and history.</p>
+  </section>
+
+  <div class="page-break">Page 4</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 4
+  ══════════════════════════════════════════════════════ -->
+  <section class="section" id="resources">
+    <h2 class="section-heading">Library Resources or Materials</h2>
+
+    <h3 class="sub-heading">Virtual Library</h3>
+    <p>This offers an up-to-date and relevant information with the World Wide Web (Www). This is because the information has direct application to daily activities. This library, as a universal library as many readers from across the globe can simultaneously assess a single file through internet connectivity and user accessibility of the library.</p>
+
+    <h3 class="sub-heading">Electronic Library</h3>
+    <p>An e-library, also known as a digital library or an electronic library, is a library that provides access to digital information resources, such as e-books, e-journals, e-theses, e-reports, and other online materials.</p>
+
+    <h3 class="sub-heading">Digital Library</h3>
+    <p>A digital library, also referred to as an online library, an internet library, a digital repository, a digital collection, is an online database of digital resources that can include text, still images, audio, video, digital documents, or other digital media formats.</p>
+  </section>
+
+  <section class="section" id="print">
+    <h2 class="section-heading">Library Resources or Materials</h2>
+
+    <h3 class="sub-heading">Print Material</h3>
+    <p>The library materials are records of human knowledge on paper or any other form for easy physical handling, storing, use and preservation over the years. The information contained in the documents, namely, the print and the non-print form. As further classified and explain below;</p>
+    <p>Historically, libraries have been dependent on printed material to build collection. In a library we find a variety of printed material in various forms, which are:</p>
+    <ul>
+      <li>Books</li>
+      <li>Periodicals</li>
+      <li>Newspapers</li>
+      <li>Reference books</li>
+      <li>Dissertations and theses</li>
+      <li>Standards</li>
+      <li>Maps</li>
+      <li>Reports etc.</li>
+      <li>Patents</li>
+    </ul>
+  </section>
+
+  <div class="page-break">Page 5</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 5
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="sub-heading">Books</h3>
+    <p>A book is defined as a written or printed literary work, which is separately published and has an independent physical existence, with pages fastened along one side and enclosed between protective covers. In libraries, books are referred to as monographs. Oxford dictionary defines a book as 'a written or printed work consisting of pages glued or sewn together along one side and bound in covers'. Books can be categorize as follows:</p>
+
+    <h4 class="sub-sub-heading">a) Simple Book</h4>
+    <p>If the subject is continuous and written by one or more authors, the book is a simple book. Example: Physical Basis of Inheritance by Shukla, A. N.</p>
+
+    <h4 class="sub-sub-heading">b) Composite Book</h4>
+    <p>It is a book with contributions by more than one author and the subject may or may not be dealt continuously. In a composite book, each contribution has a distinct title and is independent. Example: Every right for every child: Governance and Accountability – a collection of 9 articles. Edited by E.G. Thukral.</p>
+
+    <h4 class="sub-sub-heading">c) Single-volume Book</h4>
+    <p>A book in one volume or single volume is known as a single-volume book. Example: Fundamentals of DBMS by M. L. Gillenson.</p>
+
+    <h4 class="sub-sub-heading">d) Multi-volume Book</h4>
+    <p>A book in more than one volume is called a multi-volume book. Besides this, there is continuous pagination in different volumes of the set. Example: The Handbook of artificial intelligence, in Volumes 1 to 4 by A. Barr &amp; E. A. Feigenbaum.</p>
+
+    <h4 class="sub-sub-heading">e) General Book</h4>
+    <p>A general book is one which is read for information in a general way. It is not related to any specific subject. General books can be fiction or non-fiction books. Example: Treasure Island by Robert Louis Stevenson Theory of Religion by R. Stark.</p>
+  </section>
+
+  <div class="page-break">Page 6</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 6
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h4 class="sub-sub-heading">f) Text Book</h4>
+    <p>A text book is a text book supporting any teaching programme or belonging to some course curriculum, referred to as a text book. Example: AACR-2, An introduction to Anglo-American Cataloguing Rules by E. Hunter Elements of Algebra by L. Euler.</p>
+
+    <h4 class="sub-sub-heading">g) Reference Book</h4>
+    <p>It is a book meant only for consulting or referring to for some specific piece of information. Reference books help library users to find answers to are not questions. These books are not issued and taken home. All these books have the letter "R" in their call number. In other words these books are found in the special reference section or near the reference desk. In other words these books are kept in the library only for reference.</p>
+  </section>
+
+  <section class="section">
+    <h3 class="sub-heading">Periodicals</h3>
+    <p>A periodical is a publication with a distinctive title which appears at stated or regular intervals, without prior decision as to when the last issue shall appear. It contains articles, editorials, features, columns, stories or other writings, by several contributors. The periodicals are important sources for current information on any subject. Periodicals are also referred to as serials. Example are Journals, Newspapers, magazines annual Reports etc.</p>
+
+    <p><strong>Type of Periodicals:</strong></p>
+    <p>The different type of periodicals are:</p>
+
+    <h4 class="sub-sub-heading">a) Scholarly periodicals</h4>
+    <p>Those meant to increase knowledge in a field, give information concerning research findings; present new ideas and to invite discussion. This category of periodicals is usually published by professional or scholarly associations, research and academic institutions. Examples: Annals of Library and Information Studies, Human Resources Journal, the Journal of Health Science.</p>
+
+    <h4 class="sub-sub-heading">b) Trade journals</h4>
+    <p>To increase practical knowledge/information in an industry/ profession, provide industry news, contacts and updates concerning the industry. Trade journals are published by trade or professional associations/ organizations and corporate or commercial organizations. Examples: Indian Trade Journal, Publishers Weekly, PC World, the International Trade Journal.</p>
+
+    <h4 class="sub-sub-heading">c) Popular and general interest periodicals</h4>
+    <p>To act as a vehicle for advertisers, provide general interest information, for entertainment and to sell products. These are usually brought out by commercial organizations or specific interest groups. Examples: Readers Digest, Newsweek.</p>
+  </section>
+
+  <div class="page-break">Page 7</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 7
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="sub-heading">Newspapers</h3>
+    <p>A newspaper is a scheduled/daily publication containing news of current events, informative articles, diverse features, editorials, and advertising. It is usually printed and relatively inexpensive, low-grade paper known as the newsprint. It is a publication issued periodically, usually daily or weekly containing most recent news. They play a vital role in shaping of the public opinion. Newspapers usually meet the following four criteria:</p>
+  </section>
+
+  <section class="section" id="nonprint">
+    <h2 class="section-heading">Non-Print Material</h2>
+    <p>Non-print materials are defined as any material pertaining to, or consisting of other than the printed matter. These are rapidly becoming important information and learning resource materials for the modern libraries. Non-print materials differ from printed materials in several ways. One of the main differences is that a machine is involve in reading information from a non-print material. Non-print materials are important as well as popular sources of information around the world due to their unmatchable merits. These are:</p>
+    <ul>
+      <li>Economy of space</li>
+      <li>Portability and easy transportation</li>
+      <li>Monotonous topics made interesting and easy to understand</li>
+      <li>Condensation of text helps in quick transmission, thereby saving time in learning</li>
+      <li>Quick and easy to grasp and remember in order to use the non-print materials.</li>
+    </ul>
+
+    <p>The following equipment is required in the libraries:</p>
+    <ul>
+      <li><strong>a) Computer systems and related equipment and furniture</strong></li>
+      <li><strong>b) Projectors</strong> – film projectors, overhead projectors, slide projectors</li>
+      <li><strong>c) Audio and video equipment</strong> – CD players, Digital recorders, Digital video recorders, Tape recorders, headphones, speakers, etc.</li>
+      <li><strong>d) Cameras and related equipment</strong></li>
+      <li><strong>e) Miscellaneous equipment</strong> – Screens, cords, adaptors, microphones and microphone stands, etc.</li>
+    </ul>
+  </section>
+
+  <div class="page-break">Page 8</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 8
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="sub-heading">Audio-Visual Materials</h3>
+    <p>Audio-visual material is a generic term to describe information content held in storage and transmission media and formats that use images and sounds rather than more sometimes in addition to textual matter. These materials include:</p>
+    <ul>
+      <li>Audio cassettes</li>
+      <li>Motion Picture</li>
+      <li>Videotapes</li>
+      <li>Films</li>
+      <li>Slides</li>
+      <li>CD-ROM</li>
+      <li>DVDs</li>
+    </ul>
+
+    <h4 class="sub-sub-heading">a) Audiocassettes</h4>
+    <p>The audio cassette, also called a compact cassette is a magnetic tape sound recording format. Its uses range from portable audio to home recording to data storage for early microcomputers. Between 1970s and late 1990s, the cassette was one of the most common recording format. It was then replaced by the CD-ROM.</p>
+
+    <h4 class="sub-sub-heading">b) Videotapes</h4>
+    <p>A videotape is a recording of images and sound on magnetic tape. These are flat formats for pre-recorded music and other audio. It was then replaced by DVDs and Blu-ray discs. Videocassette recorders (VCRs) were used to record and play the video clips on a television set. This technology is presently obsolete and is also used for storing scientific or medical data.</p>
+
+    <h4 class="sub-sub-heading">c) Motion picture films</h4>
+    <p>A film, also called a movie or motion picture film, is a series of still or moving images. It is produced by recording photographic images with cameras, or by creating images using animation techniques or visual effects. Film is considered to be an important art form, a source of popular entertainment and a powerful method for educating people. The visual effects give films a power of communication in the most effective manner. This makes films a popular material in libraries.</p>
+  </section>
+
+  <div class="page-break">Page 9</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 9
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h4 class="sub-sub-heading">d) Slides</h4>
+    <p>A slide is a specially mounted individual transparency, intended for projection onto a screen, using a slide projector. This allows the photograph to be viewed by a large audience at once. However, with introduction of modern technologies, this technique is becoming obsolete. They are more effective and flexible to use.</p>
+
+    <h4 class="sub-sub-heading">e) Microforms</h4>
+    <p>Microforms: Microforms, either films or paper, contain micro reproduction of documents for transmission, storage, reading and printing. Microform images are commonly reduced to about one twenty-fifth of the original document size. Three common formats are microfilm (reels), microcards and microfiche (flat sheets). Microforms were very useful for archival purposes. However, with the help of a microform reader. Microforms can be read only with the help of a microform reader. Presently, documents are scanned and stored electronically. This is due to the reason that presently, everyone prefers to use power point presentations as they once using a slide projector. advancements in computer technology, especially digitization of materials, the process of producing and using microforms has undergone tremendous changes.</p>
+
+    <h4 class="sub-sub-heading">f) CD-ROMs</h4>
+    <p>A CD-ROM (an acronym of Compact Disc Read-only Memory) is a pre-pressed compact disc that contains data accessible to a computer for data storage, music playback and videos. Earlier CD were read only but presently, it is possible to write (i.e., store data) on the compact disc. The storage capacity of a CD-ROM is huge as it can easily store an entire multi-volume encyclopaedia with images, plus audio and video clips. The CDs can be used to play both audio CDs. The DVDs can be used to play audio and video on a computer system or a computer system or cassettes and CDs.</p>
+
+    <h4 class="sub-sub-heading">g) DVDs</h4>
+    <p>DVDs DVD stands for Digital Versatile/Video Disc. DVD is an optical disc storage format which has higher storage capacity than Compact Disc while having the same dimensions. DVD have been adopted by movie and home entertainment distributors and have replaced Video cassettes and CDs.</p>
+
+    <h4 class="sub-sub-heading">h) Photographs and Drawings</h4>
+    <p>These include illustrations from books, periodicals, newspapers and at times pictures produced by commercial companies. The photographs can be scanned with the help of scanners and used at suitable places with various texts. The drawings, on the other hand, can be drawn on computer with the help of a DTP package and used suitably.</p>
+  </section>
+
+  <div class="page-break">Page 10</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 10
+  ══════════════════════════════════════════════════════ -->
+  <section class="section" id="electronic">
+    <h2 class="section-heading">Electronic Material / Resources</h2>
+
+    <h3 class="sub-heading">Computers and Related Electronic Resources</h3>
+    <p>Electronic resources have come to play a central role in modern libraries for offering better services to the users. Electronic resource can be defined as, any library material that is made available electronically. These are thus, those library resources which include documents in electronic or e-format that can be accessed locally or via the internet. Many reference books are also available in electronic format.</p>
+    <p>Electronic resources, referred to as e-resources, have added value to the libraries for offering better services to the users. Electronic resource can be defined as, any library material that is made available electronically. These are thus, those library resources which include documents in electronic or e-format that can be accessed locally or via the internet. Many reference books are also available in electronic format.</p>
+    <p>Many of the electronic resources are available free to anyone over the Internet but some are commercial resources, which are available against payment. Some of the electronic resources are mention below.</p>
+
+    <h4 class="sub-sub-heading">a) Electronic Books (e-books)</h4>
+    <p>An electronic book, also referred to as e-book, digital book or even e-edition, is a book-length publication in digital form. It consists of text, images, or both and produced, published, and readable on computers or other electronic devices. Sometimes, the equivalent of a conventional printed book is also available as e-book. E-books are usually read on dedicated e-book readers. Some personal computers, laptops and some mobile phones can also be used to read e-books.</p>
+    <p>Personal computers, laptops and some mobile phones can also be used to read e-books. Benefits of e-books over printed books are:</p>
+    <ul>
+      <li>Immediate accessibility – no waiting for delivery</li>
+      <li>Searchable</li>
+      <li>Can be bookmarked</li>
+      <li>Easily portable than heavy printed books and occupies less space.</li>
+      <li>We can store a whole library of e-books on our desktop, laptop or a handheld device while moving about or travelling. Examples of e-books are: Treasure Island by Robert Louis Stevenson, a free e-book which can be downloaded from http://www.feedbooks.com</li>
+    </ul>
+    <p>Oxford Advanced Learner's Dictionary, e-book edition is the popular e-book edition of the Oxford Dictionary available at http://www.mobipocket.com.</p>
+  </section>
+
+  <div class="page-break">Page 11</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 11
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <p>http://www.amazon.com/<br/>http://www.literature.org/</p>
+
+    <h4 class="sub-sub-heading">b) Electronic Journals (e-journals)</h4>
+    <p>Electronic journals, also known as e-journals, e-journals or electronic serials, are scholarly journals that can be accessed via electronic transmission. This means that they are usually published on the web. They are specialized form of electronic documents with the purpose of providing material for academic research and study.</p>
+    <p>The e-journals are formatted just like journal articles in traditional printed journals. Some electronic journals are online-only journals, some consist of the online equivalent of a printed journal. Most commercial e-journals are subscription based or allow paper-view access. An increasing number of journals are now available online, as open access journals, requiring no subscription and offering free full-text articles.</p>
+
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li>Music Educators Journal, bimonthly access via JSTOR</li>
+      <li>Annals of Library and Information Studies, quarterly Access via NISCAIR website http://www.niscair.res.in</li>
+      <li>Elsevier Science – http://www.elsevier.com/ and http://sciencedirect.com/</li>
+      <li>Springer Science Online (Electronic books and journals) – http://www.springer.de/-</li>
+      <li>Blackwell Scientific Journals – http://blacksci.co.uk/</li>
+    </ul>
+
+    <h4 class="sub-sub-heading">E-Databases</h4>
+    <p>An e-database is an organized collection or information, of a particular subject or multi-disciplinary subject areas. The information of an e-database can be searched and retrieved electronically. E-database can be bibliographic or full text. Its contents include journal articles, newspaper articles, book reviews and conferences proceedings, etc. It is usually updated on a daily, weekly, monthly or quarterly basis.</p>
+
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li>PubMed – http://www.ncbi.nlm.nih.gov/PubMed/</li>
+      <li>UNESCO Social Science Database – http://www.unesco.org/most/dare.htm</li>
+      <li>Educational resources – http://www.eric.ed.gov/</li>
+    </ul>
+  </section>
+
+  <div class="page-break">Page 12</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 12
+  ══════════════════════════════════════════════════════ -->
+  <section class="section" id="other">
+    <h2 class="section-heading">Other Material</h2>
+    <p>We have learnt about various forms of library material in the previous sections. However, besides various print and non-print material, already discussed, there are some more types of library materials you should know about. These includes:</p>
+    <p>OCLC FirstSearch (Humanities) - http://www.oclc.org/firstsearch<br/>Social Science Research Network - http://www.ssrn.com</p>
+
+    <h3 class="sub-heading">a) Standards</h3>
+    <p>Standards are documents prepared by an authority to specify a product, material, process, being used by services sector. Initially used first for industrial products, these documents later began control and efficiency. They provide guidelines for standardization in products and other activities. Standards enable us to exchange products or services internationally and standards. Some organizations that nationally are International Organization for Standardization (ISO), Standard Organisation of Nigeria (SON) Example: ISO 2709 Standard for Bibliographic Record Formats.</p>
+
+    <h3 class="sub-heading">b) Patents</h3>
+    <p>A patent is an exclusive right granted for an invention, which is a product or a process that provides, in general, a new way of doing something, or offers a new technical solution to a problem. It means to protect intellectual property rights. It is considered as a unique source of information for scientific and technical information. Example: A method of producing ZP1 protein Process for the formulation of a single dose vaccine.</p>
+
+    <h3 class="sub-heading">c) Pamphlets</h3>
+    <p>A pamphlet is an unbound booklet, consisting of usually a single sheet of paper, that is printed on both sides and folded. It is also called a leaflet and it may consist of a few pages that are folded in half and stapled at the crease to make a simple book. Pamphlets are considered to be ephemeral material and usually provide information on topic of interest and are not intended to be exhaustive in nature. Example: Pamphlet of a new car to be launched.</p>
+  </section>
+
+  <div class="page-break">Page 13</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 13
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <p>Like pamphlets, posters are also very useful, especially in areas where there is easy access to modern communication media. It is a direct way of communication. It is rather expensive. Posters should be put up on places where they can be seen clearly.</p>
+
+    <h4 class="sub-sub-heading">e) Reports</h4>
+    <p>A report is a textual work, usually of writing, speech, television or film, made with the specific intention of relaying information or recounting events in a presentable form. Libraries usually acquire reports about some work just completed or to be started in future. Some examples of reports are: scientific reports, census reports, recommendation reports, white papers, annual reports, progress reports, inspection reports, etc.</p>
+
+    <h4 class="sub-sub-heading">f) Dissertations and Thesis</h4>
+    <p>A dissertation or thesis is a document submitted in support of an academic degree presenting the author's research and findings. Its purpose is to inform and present scholarly information. This category of documents are usually collected by academic or special libraries.</p>
+
+    <h4 class="sub-sub-heading">g) Maps, Globes and Charts</h4>
+    <p>The location of any place or feature on the earth's surface can be shown on a map or a globe. A map is usually drawn on a flat surface and a globe on a spherical surface. Charts can be pictures, diagrams, floor plans, layouts, flowchart, etc.</p>
+  </section>
+
+  <section class="section" id="reference">
+    <h2 class="section-heading">Reference Materials</h2>
+    <p>Reference sources/materials are information sources designed to be consulted for a particular piece of information rather than read through. Reference materials are often arranged alphabetically, topically, or chronologically for easy access and use. Some contain cross referenced information and more than one index. You can take a moment to look through the explanatory or how-to-use instructions, provide background information; or direct you to additional information sources.</p>
+    <p>Reference sources such as dictionaries, encyclopaedias, almanacs, atlases, etc. are research tools that can help you with your paper or project work.</p>
+    <ul>
+      <li>Reference sources are not scholarly (peer reviewed). In most libraries, reference sources do not circulate and are located in a separate reference collection marked, 'For Reference Only'. They are usually NOT borrowed out for whatever reason. This practice makes reference sources readily available and easily accessible.</li>
+    </ul>
+
+    <p>There exists thousands of reference materials in both electronic forms covering practically every subject and are categorized into groups with a particular focus.</p>
+
+    <h3 class="sub-heading">Quick Guide for Selecting the Right Type of Reference Source/materials</h3>
+  </section>
+
+  <div class="page-break">Page 14</div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE 14
+  ══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="sub-heading">Types of Reference Sources/materials</h3>
+
+    <table class="ref-table" aria-label="Quick Guide for Selecting Reference Sources">
+      <thead>
+        <tr>
+          <th>General information/Overview of topic Words</th>
+          <th>Quick Guide for Selecting the Right Type of Reference Source/materials</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>General information/Overview of topic Words</td>
+          <td>Encyclopedias</td>
+        </tr>
+        <tr>
+          <td>Names &amp; addresses of people, organizations, institutions, companies</td>
+          <td>Dictionaries</td>
+        </tr>
+        <tr>
+          <td>Profiles of people</td>
+          <td>Directories</td>
+        </tr>
+        <tr>
+          <td>Places/Maps</td>
+          <td>Biographical Dictionaries</td>
+        </tr>
+        <tr>
+          <td>Facts and Statistics</td>
+          <td>Gazetteers or Atlases</td>
+        </tr>
+        <tr>
+          <td>Formula, Tables, How-To-Do-It</td>
+          <td>Almanacs</td>
+        </tr>
+        <tr>
+          <td>A person's work</td>
+          <td>Handbooks and Manuals</td>
+        </tr>
+        <tr>
+          <td>Dates, outlines, historical timelines</td>
+          <td>Reviews or Criticisms</td>
+        </tr>
+        <tr>
+          <td>Periodical Articles</td>
+          <td>Historical tables, Chronologies, Historical yearbooks</td>
+        </tr>
+        <tr>
+          <td>Books and other sources</td>
+          <td>Indexes or Abstracts</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Bibliographies or Guides to Literature…</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <p>GEN 113 &mdash; Use of Library and Study Skills &mdash; Pages 1–14</p>
+  </footer>
+
+</div><!-- /.page-wrapper -->
+
+<script>
+  // Scroll-reveal for sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
