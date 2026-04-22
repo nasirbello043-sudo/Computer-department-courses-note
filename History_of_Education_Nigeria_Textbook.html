@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History of Education in Nigeria — Interactive Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0c08;
+  --bg2: #17140d;
+  --bg3: #1f1b12;
+  --gold: #c9933a;
+  --gold2: #e8b45a;
+  --cream: #f0e8d5;
+  --text: #ddd3b8;
+  --muted: #8a7e65;
+  --accent: #4a9f7e;
+  --accent2: #d4624a;
+  --border: #2e2818;
+  --shadow: 0 4px 32px rgba(0,0,0,0.6);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR NAV ── */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: 270px; height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding-bottom: 40px;
+  transition: transform 0.3s ease;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sidebar-header {
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+}
+.sidebar-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--gold2);
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+.sidebar-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-section { padding: 12px 0; }
+.nav-section-title {
+  padding: 8px 20px 4px;
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.nav-link {
+  display: block;
+  padding: 9px 20px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.nav-link:hover, .nav-link.active {
+  background: rgba(201,147,58,0.08);
+  border-left-color: var(--gold);
+  color: var(--gold2);
+}
+.nav-link.glossary-nav {
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-link.glossary-nav:hover { border-left-color: var(--accent); color: var(--accent); }
+
+/* ── MAIN CONTENT ── */
+#main {
+  margin-left: 270px;
+  min-height: 100vh;
+}
+
+.page { display: none; padding: 50px 60px; max-width: 900px; }
+.page.active { display: block; }
+
+/* ── COVER PAGE ── */
+#page-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,147,58,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(74,159,126,0.04) 0%, transparent 50%);
+}
+.cover-inner { max-width: 600px; padding: 60px 40px; }
+.cover-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  border-radius: 2px;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.cover-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--gold2);
+  margin-bottom: 24px;
+}
+.cover-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.cover-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 40px;
+}
+.cover-features {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.cover-feat {
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.btn-start {
+  display: inline-block;
+  padding: 14px 40px;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 700;
+}
+.btn-start:hover { background: var(--gold2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,147,58,0.3); }
+
+/* ── CHAPTER PAGES ── */
+.chapter-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+  margin-bottom: 36px;
+}
+.chapter-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.chapter-desc {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Content blocks */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold2);
+  margin: 36px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.sub-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 24px 0 10px;
+}
+p { margin-bottom: 16px; }
+ul, ol { padding-left: 24px; margin-bottom: 16px; }
+li { margin-bottom: 8px; }
+strong { color: var(--cream); }
+
+/* Key term highlight */
+.kt {
+  color: var(--gold2);
+  background: rgba(201,147,58,0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  border-bottom: 1px dashed var(--gold);
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.kt:hover {
+  background: rgba(201,147,58,0.2);
+  color: var(--gold);
+}
+
+/* Info box */
+.info-box {
+  background: var(--bg3);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+}
+.info-box .info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.info-box p { margin: 0; font-size: 15px; color: var(--text); }
+
+/* Table */
+.styled-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.styled-table th {
+  background: var(--bg3);
+  color: var(--gold2);
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.styled-table td {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.styled-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+/* Summary/Details ─ "Need to Know" */
+.need-to-know {
+  margin: 36px 0 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg2);
+}
+.need-to-know summary {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a2f25, #1e2a1c);
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.need-to-know summary::-webkit-details-marker { display: none; }
+.need-to-know summary::before {
+  content: '▶';
+  font-size: 9px;
+  transition: transform 0.2s;
+}
+.need-to-know[open] summary::before { transform: rotate(90deg); }
+.need-to-know summary:hover { background: linear-gradient(135deg, #1f3a2e, #233020); }
+.need-to-know-body {
+  padding: 20px 24px;
+}
+.need-to-know-body ul { list-style: none; padding: 0; }
+.need-to-know-body ul li {
+  padding: 6px 0 6px 20px;
+  position: relative;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.need-to-know-body ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+.need-to-know-body .def-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.need-to-know-body .def-item strong { color: var(--gold2); }
+.need-to-know-body .def-item p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+
+/* ── QUIZ SECTION ── */
+.quiz-section {
+  margin: 40px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg2);
+}
+.quiz-header {
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #1e1228, #160e22);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quiz-header h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #b088e8;
+}
+.quiz-body { padding: 24px; }
+
+.quiz-q {
+  margin-bottom: 28px;
+  padding: 18px;
+  background: var(--bg3);
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s;
+}
+.quiz-q.correct { border-left-color: var(--accent); background: rgba(74,159,126,0.06); }
+.quiz-q.wrong { border-left-color: var(--accent2); background: rgba(212,98,74,0.06); }
+
+.quiz-q .q-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.q-level.easy { color: var(--accent); }
+.q-level.medium { color: var(--gold); }
+.q-level.hard { color: var(--accent2); }
+.q-level.vhard { color: #e870a0; }
+
+.quiz-q .q-text {
+  color: var(--cream);
+  font-size: 15px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  transition: all 0.2s;
+  text-align: left;
+}
+.quiz-opt:hover { background: rgba(201,147,58,0.08); border-color: var(--gold); color: var(--gold2); }
+.quiz-opt.selected-correct { background: rgba(74,159,126,0.15); border-color: var(--accent); color: var(--accent); }
+.quiz-opt.selected-wrong { background: rgba(212,98,74,0.15); border-color: var(--accent2); color: var(--accent2); }
+.quiz-opt.show-correct { background: rgba(74,159,126,0.1); border-color: var(--accent); color: var(--accent); }
+.quiz-opt:disabled { cursor: default; }
+
+.q-feedback {
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: none;
+}
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: rgba(74,159,126,0.1); color: var(--accent); }
+.q-feedback.wrong { background: rgba(212,98,74,0.1); color: var(--accent2); }
+
+.quiz-controls {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--bg3);
+}
+.btn-quiz {
+  padding: 9px 22px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.btn-quiz:hover { border-color: var(--gold); color: var(--gold); }
+.btn-quiz.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 700; }
+.btn-quiz.primary:hover { background: var(--gold2); }
+
+.quiz-score {
+  padding: 12px 24px;
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  display: none;
+}
+.quiz-score.show { display: block; }
+.quiz-score span { color: var(--gold2); font-weight: 700; }
+
+/* ── GLOSSARY PAGE ── */
+#page-glossary .gloss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.gloss-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+.gloss-card:hover { border-color: var(--gold); }
+.gloss-card.highlighted { border-color: var(--gold2); }
+.gloss-term {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--gold2);
+  margin-bottom: 6px;
+}
+.gloss-term.bounce {
+  animation: bounce 0.4s ease infinite alternate;
+  color: var(--gold);
+}
+@keyframes bounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-5px) scale(1.04); }
+}
+.gloss-def { font-size: 13.5px; color: var(--text); line-height: 1.6; }
+.gloss-search {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 8px;
+}
+.gloss-search:focus { border-color: var(--gold); }
+.gloss-search::placeholder { color: var(--muted); }
+.gloss-filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.gloss-filter {
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  background: var(--bg3);
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.gloss-filter.active, .gloss-filter:hover { border-color: var(--gold); color: var(--gold2); background: rgba(201,147,58,0.08); }
+
+/* ── MOBILE TOGGLE ── */
+#menu-btn {
+  display: none;
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 200;
+  background: var(--gold);
+  border: none;
+  width: 40px; height: 40px;
+  border-radius: 4px;
+  color: var(--bg);
+  font-size: 18px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 270px; right: 0;
+  height: 3px;
+  background: var(--border);
+  z-index: 50;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--accent));
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* Page navigation */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.page-nav-btn {
+  padding: 10px 24px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.page-nav-btn:hover { border-color: var(--gold); color: var(--gold2); }
+.page-nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+@media (max-width: 900px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; }
+  .progress-bar { left: 0; }
+  #menu-btn { display: flex; }
+  .page { padding: 60px 20px 30px; }
+  .cover-title { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<button id="menu-btn" onclick="toggleSidebar()">☰</button>
+
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <h1>History of Education in Nigeria</h1>
+    <p>Interactive Textbook</p>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a class="nav-link" onclick="showPage('cover')">🏠 Home</a>
+    <a class="nav-link glossary-nav" onclick="showPage('glossary')">📖 Glossary of Terms</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Chapters</div>
+    <a class="nav-link" onclick="showPage('ch1')">Ch.1 — Concept & Rationale</a>
+    <a class="nav-link" onclick="showPage('ch2')">Ch.2 — Ancient Greek & Rome</a>
+    <a class="nav-link" onclick="showPage('ch3')">Ch.3 — African Traditional Ed.</a>
+    <a class="nav-link" onclick="showPage('ch4')">Ch.4 — Islamic Education</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="main">
+
+<!-- ═══════════════════════════════════════════════════ COVER -->
+<div class="page active" id="page-cover" style="padding:0; max-width:100%;">
+  <div style="min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse at 30% 60%, rgba(201,147,58,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 20%, rgba(74,159,126,0.05) 0%, transparent 50%);">
+    <div class="cover-inner">
+      <div class="cover-badge">Academic Textbook · Nigeria</div>
+      <div class="cover-title">History of<br>Education</div>
+      <div class="cover-subtitle">in Nigeria</div>
+      <div class="cover-divider"></div>
+      <p class="cover-desc">An interactive study companion covering the evolution of education in Nigeria — from Ancient Greek and Roman practices, through African Traditional Education, to Islamic and Western educational systems.</p>
+      <div class="cover-features">
+        <div class="cover-feat">📚 4 Chapters</div>
+        <div class="cover-feat">🧪 Per-Chapter Quizzes</div>
+        <div class="cover-feat">💡 Need-to-Know Summaries</div>
+        <div class="cover-feat">📖 Glossary of Terms</div>
+      </div>
+      <button class="btn-start" onclick="showPage('ch1')">Start Reading →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ CHAPTER 1 -->
+<div class="page" id="page-ch1">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter One</div>
+    <div class="chapter-title">Concept and Rationale for History of Education</div>
+    <div class="chapter-desc">Pages 1–7 · Understanding what education means and why we study its history</div>
+  </div>
+
+  <p>Education has no single <span class="kt" onclick="goGloss('definition')">definition</span>; the term has been defined and described in various ways by authors, philosophers, psychologists, sociologists, and <span class="kt" onclick="goGloss('educationist')">educationists</span>. Education therefore means different things to different people depending on environment and time.</p>
+
+  <p>It is perceived to be a <span class="kt" onclick="goGloss('universal')">universal</span> phenomenon that people use to determine their level of development since time <span class="kt" onclick="goGloss('immemorial')">immemorial</span>. It is equally described as an instrument for national development, unity and stability.</p>
+
+  <div class="info-box">
+    <div class="info-label">Scholar Quote — Fafunwa (1974)</div>
+    <p>"A people with no knowledge of their past would suffer from <span class="kt" onclick="goGloss('collective amnesia')">collective amnesia</span>, groping blindly into the future without guide-posts of precedence to shape their course."</p>
+  </div>
+
+  <p><strong>Adesina (1985)</strong> defines education as a tool for the <span class="kt" onclick="goGloss('integration')">integration</span> of the individual effectively into society, so that the individual can achieve self-realization, develop national consciousness, promote unity and strive for social, economic, scientific, cultural and technical progress.</p>
+
+  <p><strong>Nduka (1982)</strong>, in his book <em>Western Education and the Nigerian Cultural Background</em>, relates education to culture, defining it as the process of cultural <span class="kt" onclick="goGloss('transmission')">transmission</span> — embracing people's art, music, literature, philosophy, religion, commerce, political organization, science and technology. Education thus, is <span class="kt" onclick="goGloss('holistic')">holistic</span>.</p>
+
+  <p><strong>Osokoya (1987)</strong> defines education as a continuous process which the society establishes to assist its members into the future. Education is the leading out of the in-born powers and <span class="kt" onclick="goGloss('potentialities')">potentialities</span> of individuals and the acquisition of skills, <span class="kt" onclick="goGloss('aptitudes')">aptitudes</span>, and <span class="kt" onclick="goGloss('competencies')">competencies</span> necessary for self-realization.</p>
+
+  <div class="info-box">
+    <div class="info-label">Summary Definition</div>
+    <p>Education can be described as an attempt made by each society to assist its members to become functional and to maintain or promote the inherited culture of that society.</p>
+  </div>
+
+  <div class="section-title">Forms / Kinds of Education</div>
+  <p>Educationists have classified education into three broad areas:</p>
+
+  <div class="sub-title">a. Non-Formal Education</div>
+  <p>An organized, systematic and coherent educational activity but outside the established school system. This type of education is received in an open system — it deals with <span class="kt" onclick="goGloss('apprenticeship')">apprenticeship</span> and involves the acquisition of skills. It is flexible in terms of admission, curriculum, place, method, and duration.</p>
+
+  <div class="sub-title">b. Informal Education</div>
+  <p>Education that is not <span class="kt" onclick="goGloss('institutionalized')">institutionalized</span>. Usually referred to as traditional education. Informal education does not require the construction of any <span class="kt" onclick="goGloss('syllabus')">syllabus</span>, scheme of work or lesson note. It is given through the apprenticeship system but also includes the influences of elders, parents and siblings. No formal teachers or classroom are required. No certificate is needed.</p>
+
+  <div class="sub-title">c. Formal Education</div>
+  <p>The formalized type of education which was brought to Nigeria by missionaries towards the middle of the nineteenth century. It is systematic, organized and sequentially structured, arranged in stages and received within the four walls of the educational institution. There is time limit, age limit, and a fixed curriculum. Examples include Islamic Education and Western Education.</p>
+
+  <div class="section-title">Rationale for History of Education</div>
+  <p>The rationale for studying the history of education in Nigeria is to understand how education was in Nigeria and other nations of the world — e.g. ancient Greece and Romans. This enables a <span class="kt" onclick="goGloss('comparative study')">comparative study</span> of these nations.</p>
+
+  <ul>
+    <li>To develop an adequate national developmental plan, studying previous educational systems becomes relevant.</li>
+    <li>It facilitates the review of former or <span class="kt" onclick="goGloss('inadequate')">inadequate</span> policies and leads to the formulation of more fine-tuned ones.</li>
+    <li>It enables one to know how much involvement the government, community, and NGOs have had in the funding of education.</li>
+    <li>It enables one to see and analyse the enrolment/population of school-age children.</li>
+    <li>From history, we know that Nigeria's education system and curriculum were both derived from the British system since Nigeria was a British colony up to 1960.</li>
+    <li>It was shortly before independence that people began to question the <span class="kt" onclick="goGloss('relevance')">relevance</span> of the existing curriculum to a Nigerian environment — this culminated in the National Curriculum Conference of 1969.</li>
+  </ul>
+
+  <details class="need-to-know">
+    <summary>📌 Need to Know — Chapter 1 Key Points</summary>
+    <div class="need-to-know-body">
+      <ul>
+        <li>Education has no single fixed definition — it means different things to different people.</li>
+        <li>Fafunwa says a people with no knowledge of their past suffer from "collective amnesia."</li>
+        <li>There are THREE types of education: Non-formal, Informal, and Formal.</li>
+        <li>Non-formal = organized but outside school. Informal = traditional, no teachers/certificates. Formal = school system with certificates.</li>
+        <li>Nigeria's curriculum was originally British since Nigeria was a British colony until 1960.</li>
+        <li>The 1969 National Curriculum Conference tried to make the curriculum more Nigerian in nature.</li>
+        <li>Studying history of education helps improve current educational policy.</li>
+      </ul>
+      <hr style="border-color:var(--border); margin:16px 0;">
+      <div class="def-item"><strong>Key Scholars:</strong><p>Fafunwa (1974), Adesina (1985), Nduka (1982), Osokoya (1987)</p></div>
+    </div>
+  </details>
+
+  <!-- QUIZ CH1 -->
+  <div class="quiz-section" id="quiz-ch1">
+    <div class="quiz-header">
+      <h3>🎓 Chapter 1 Quiz — Test Your Knowledge</h3>
+    </div>
+    <div class="quiz-body" id="qbody-ch1"></div>
+    <div class="quiz-controls">
+      <button class="btn-quiz primary" onclick="submitQuiz('ch1')">Submit Answers</button>
+      <button class="btn-quiz" onclick="resetQuiz('ch1')">Reset</button>
+    </div>
+    <div class="quiz-score" id="qscore-ch1"></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="page-nav-btn" disabled>← Previous</button>
+    <button class="page-nav-btn" onclick="showPage('ch2')">Chapter 2 →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ CHAPTER 2 -->
+<div class="page" id="page-ch2">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter Two</div>
+    <div class="chapter-title">Educational Practice in Ancient Greek and Roman Empire</div>
+    <div class="chapter-desc">Pages 8–13 · How the ancient world educated its people</div>
+  </div>
+
+  <div class="section-title">Education in Ancient Greek Empire</div>
+  <p>Every society, whether simple or complex, has its own way of educating and training its youth. Greece and Rome are both European nations. Ancient Greece is located at the southeastern part of Europe.</p>
+
+  <p>History records that centuries before Christ, there arose an enlightened <span class="kt" onclick="goGloss('civilization')">civilization</span> noted for its achievements in art, <span class="kt" onclick="goGloss('architecture')">architecture</span>, literature, philosophy, science and government — thus referring to Greece as the "Birth place of Western Civilization."</p>
+
+  <p>The invention of writing by the Greeks was one of their great achievements. Earlier writings used only signs of consonants and moved from right to left. It was the Greeks that added signs to the vowels and changed the direction of writing to go from left to right.</p>
+
+  <div class="info-box">
+    <div class="info-label">Key Fact</div>
+    <p>At about 507 B.C., Athens became the leading city of Greece in physical, political, intellectual and artistic development. The Olympic Games originated from this part of the world.</p>
+  </div>
+
+  <p>Greece is also credited for the production of classical philosophers such as <span class="kt" onclick="goGloss('philosopher')">Plato, Socrates and Aristotle</span> (Shaaba, 2003). These philosophers aimed at raising probable questions and seeking answers to help humanity live a good life.</p>
+
+  <p>Sparta and Athens were the two important cities in Greece. The Greek idea of an educated man was one who was mentally and physically well balanced. Citizens were taught subjects such as art, drama and poetry.</p>
+
+  <div class="section-title">Sparta People (Spartans)</div>
+  <p>The Spartans were warriors and conquest was their major occupation. There were three groups of people in the Spartan city:</p>
+  <ol>
+    <li><strong>The Invaders (Masters)</strong> — People with all civil rights and responsibilities, dominating others in the city.</li>
+    <li><strong>The Perioeci (Dwellers Abound)</strong> — Freemen living in surrounding towns and mountain villages. They did not take part in government and were prohibited from marrying into the master class.</li>
+    <li><strong>The Helots (Slaves)</strong> — Captives of war who were reduced to slavery. They were subjected to <span class="kt" onclick="goGloss('martial law')">martial law</span>, monitored by secret police, and could be killed at any time without trial.</li>
+  </ol>
+
+  <p>In Sparta, the child belonged to the state. When a child was born, it was presented to <span class="kt" onclick="goGloss('ephors')">ephors</span> (government administrators), who judged its fitness to live. Those judged unfit were taken to a designated hillside to die.</p>
+
+  <p>At <strong>seven years</strong>, boys were placed in a boarding school. At <strong>eighteen</strong>, they were ready for strenuous military training for twelve years. At <strong>thirty</strong>, the Spartan was compelled to marry. At <strong>forty-five</strong>, he was relieved of strenuous campaigning. At <strong>sixty</strong>, he became an elder statesman.</p>
+
+  <div class="section-title">Athens People (Athenians)</div>
+  <p>Athenians were very few in number, which made it easy to gather at the Athenian Agora (people's assembly). All Athenians had the right to vote and be voted for into elective offices. The Athenians had no public organized education for girls — unlike the Spartans, education for girls was mainly moral and domestic training given by their mothers.</p>
+
+  <p>School started for Athenian boys at the age of <strong>seven years</strong>. The three types of school available were:</p>
+  <ul>
+    <li><strong>a.</strong> The letters school of reading and writing</li>
+    <li><strong>b.</strong> The music school for lyric, poetry and hyre</li>
+    <li><strong>c.</strong> The gymnastic school or palaestra</li>
+  </ul>
+  <p>The letters and music school were in the morning while the gymnastic school was in the afternoon. The rich Athenian had a man servant called a <span class="kt" onclick="goGloss('padagogue')">padagogue</span> who helped to escort the boys to and from school.</p>
+
+  <p>Between the ages of <strong>eighteen and twenty years</strong>, the Athenian boy was engaged in national military service. Thereafter, the boy was free to choose a career for himself. The Athenian boys usually had their eyes on politics after their military service.</p>
+
+  <div class="section-title">Education in Ancient Roman Empire</div>
+  <p>Early Roman Education had its base in the family. Education emphasized the <span class="kt" onclick="goGloss('3Rs')">3Rs</span> at the primary school level — Reading, Writing and Arithmetic. This is synonymous to the Missionary type of education brought to Nigeria in the 19th century.</p>
+
+  <p>The Romans placed emphasis on <span class="kt" onclick="goGloss('oratorical')">oratorical</span> and military training. In intellectual and artistic matters, Greek leadership was acknowledged. Greek slaves were used as teachers and Greek philosophy was embraced by the Roman <span class="kt" onclick="goGloss('aristocracy')">aristocracy</span>.</p>
+
+  <ul>
+    <li><strong>Primary stage</strong>: Reading, Writing and Arithmetic; patriotism and obedience taught through Roman heroes in prose and poetry.</li>
+    <li><strong>Grammar school</strong>: Followed primary school; stressed oratory training.</li>
+    <li><strong>School of Rhetoric</strong>: Emphasized reading of both Greek and Latin literature.</li>
+  </ul>
+
+  <p>Teaching methods were by lectures, note taking, memorization and citation. Reverend fathers in the early Christian church served as teachers. In the 4th century, St. Jerome translated the Bible into Latin and also established a school for boys. By the 6th century, priests and monks had become custodians of education in Roman society.</p>
+
+  <details class="need-to-know">
+    <summary>📌 Need to Know — Chapter 2 Key Points</summary>
+    <div class="need-to-know-body">
+      <ul>
+        <li>Greece is called the "Birthplace of Western Civilization."</li>
+        <li>The Greeks changed writing direction from right-to-left to left-to-right.</li>
+        <li>Famous Greek philosophers: Plato, Socrates, Aristotle.</li>
+        <li>The Olympic Games originated from Greece.</li>
+        <li>Spartan society had 3 groups: Masters, Perioeci (freemen), and Helots (slaves).</li>
+        <li>In Sparta, the child belonged to the STATE, not just the family.</li>
+        <li>Spartan boys were taken to boarding school at age 7 and began military training at 18.</li>
+        <li>Athenian boys had 3 types of schools: letters, music, and gymnastics.</li>
+        <li>A 'padagogue' was a servant who escorted rich boys to and from school in Athens.</li>
+        <li>Roman education focused on the 3Rs: Reading, Writing, Arithmetic.</li>
+        <li>Roman education had 3 levels: Primary → Grammar School → School of Rhetoric.</li>
+      </ul>
+      <div class="def-item"><strong>ephors</strong><p>Government officials in Sparta who judged newborn babies for fitness to live.</p></div>
+      <div class="def-item"><strong>Agora</strong><p>The people's assembly in Athens where citizens gathered to make decisions.</p></div>
+    </div>
+  </details>
+
+  <!-- QUIZ CH2 -->
+  <div class="quiz-section" id="quiz-ch2">
+    <div class="quiz-header">
+      <h3>🎓 Chapter 2 Quiz — Ancient Greek & Roman Empire</h3>
+    </div>
+    <div class="quiz-body" id="qbody-ch2"></div>
+    <div class="quiz-controls">
+      <button class="btn-quiz primary" onclick="submitQuiz('ch2')">Submit Answers</button>
+      <button class="btn-quiz" onclick="resetQuiz('ch2')">Reset</button>
+    </div>
+    <div class="quiz-score" id="qscore-ch2"></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="page-nav-btn" onclick="showPage('ch1')">← Chapter 1</button>
+    <button class="page-nav-btn" onclick="showPage('ch3')">Chapter 3 →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ CHAPTER 3 -->
+<div class="page" id="page-ch3">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter Three</div>
+    <div class="chapter-title">African Indigenous System of Education (A.T.E)</div>
+    <div class="chapter-desc">Pages 14–42 · African Traditional Education — its aims, methods and impact</div>
+  </div>
+
+  <p>The traditional form of education existed in Africa long before its invasion by the colonial masters. Prior to <span class="kt" onclick="goGloss('colonization')">colonization</span>, the people of Africa had a way of training and educating their young ones and youth so as to function effectively as members of their community.</p>
+
+  <p>In old African society, the warrior, the hunter, the nobleman, the man of character or anyone who combined the latter feature with a specific skill was adjudged to be well-educated and well-integrated citizens of his community. <strong>Functionalism</strong> was the main guiding principle.</p>
+
+  <div class="info-box">
+    <div class="info-label">Fafunwa (1974) on African Traditional Education</div>
+    <p>"African society regarded education as a means to an end and not an end in itself. Education was generally for an immediate induction into society and a preparation for adulthood. African education emphasized social responsibility, job orientation, political participation and spiritual and moral values."</p>
+  </div>
+
+  <p>This type of education is often referred to as the <span class="kt" onclick="goGloss('informal')">informal</span> type of education. Babalola (1964) opined that the <span class="kt" onclick="goGloss('Ijala chant')">Ijala chant</span> was one of the most important intellectual spoken arts developed by the Yoruba people as part of traditional education in Nigeria.</p>
+
+  <div class="section-title">Vocational Aspects — Three Groups (Fafunwa, 1974)</div>
+  <ol>
+    <li><strong>Agricultural Education</strong> — farming, fishing, and veterinary science (animal care and rearing).</li>
+    <li><strong>Trades and Crafts</strong> — weaving, smithing (iron, silver, gold), hunting, carving, sculpturing, painting, building, boat-making, food selling, wine selling, dyeing, etc.</li>
+    <li><strong>Professions</strong> — priesthood, medicine, justice (police messengers, judges), hunting military, chieftaincy, kingship.</li>
+  </ol>
+
+  <div class="section-title">Aims and Objectives of Indigenous Education in Nigeria</div>
+  <p>Fafunwa (1974 and 1982) identified <strong>seven cardinal goals</strong> of traditional African education:</p>
+
+  <ol>
+    <li>To develop the child's latent physical skills;</li>
+    <li>To develop character;</li>
+    <li>To inculcate respect for elders and those in positions of authority;</li>
+    <li>To develop intellectual skills;</li>
+    <li>To acquire specific vocational training and to develop a healthy attitude towards honest labour;</li>
+    <li>To develop a sense of belonging and to participate actively in family and community affairs;</li>
+    <li>To understand, appreciate and promote the <span class="kt" onclick="goGloss('cultural heritage')">cultural heritage</span> of the community at large.</li>
+  </ol>
+
+  <div class="section-title">Explanation of the Seven Goals</div>
+
+  <div class="sub-title">1. Physical Development</div>
+  <p>The African child likes to explore his immediate environment, observe adults in their activities and imitate them by making new discoveries. In traditional African society, the child jumps, climbs trees, dances or performs balancing acts as a natural process of growth.</p>
+  <p>The "Tente" game involves counting of 1, 2, 3, clapping and stretching of the legs — it is popular across African countries and develops the child's counting ability, mental development, and physical fitness.</p>
+
+  <div class="sub-title">2. Character Development</div>
+  <p>African society as a whole lays the greatest emphasis on character training. The absence of <span class="kt" onclick="goGloss('good character')">good character</span> is tolerable as long as good character prevails. The parents, siblings and other members of the family want the child to be honest, sociable, courageous, humble, persevering and of good report.</p>
+  <p>In traditional Nigerian society, character training is held at very high esteem because it is believed that physical education, vocational training, religious education, respect for elders, and co-operative efforts are all considered necessary for the development of "good character."</p>
+
+  <div class="sub-title">3. Respect for Elders, Peers and Constituted Authorities</div>
+  <p>The African child is trained to respect those older than himself. The African has a complicated greeting system. For instance, there are morning, afternoon and evening greetings, special greetings for parents, elders, peers, chiefs, etc.</p>
+  <p>Examples of greetings by ethnic group:</p>
+  <ul>
+    <li><strong>Yoruba</strong>: Young ones prostrate (<em>dobale</em>) for elders; the Oba blesses them by saying "Mo yika otun, mo yika osi"</li>
+    <li><strong>Hausa</strong>: Men raise their clenched right fist to greet a superior; young ones hold the bowl of food while eating together</li>
+    <li><strong>Nupe, Hausa, Fulani</strong>: Men crouch/kneel; women kneel simultaneously</li>
+  </ul>
+
+  <div class="sub-title">4. Intellectual Training</div>
+  <p>Fafunwa (1974) defined "<span class="kt" onclick="goGloss('intellect')">intellect</span>" as the process of reasoning abstractly, power to integrate experience, and <span class="kt" onclick="goGloss('intellectualization')">intellectualization</span>. The main processes of learning are by observation, imitation and participation.</p>
+  <p>The African adolescent learns local geography and history of his community. Local history is taught through folklores, songs, and so on. Botany and zoology are taught through observation; actual instruction is often accompanied by demonstration.</p>
+
+  <p>The Yorubas are known for their use of proverbs. There are 1,200 Yoruba proverbs. Riddles and tongue-twisters represent another set of intellectual exercises. Admissions into professional groups (herbalists, hunters, chiefs, cult leaders, priests) have complex initiation training — this is equated with the modern higher education level.</p>
+
+  <div class="section-title">Counting in Nigerian Languages</div>
+  <table class="styled-table">
+    <thead><tr><th>#</th><th>English</th><th>Yoruba</th><th>Hausa</th><th>Igbo</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>One</td><td>Ookan</td><td>Daya</td><td>Otu</td></tr>
+      <tr><td>2</td><td>Two</td><td>Meji</td><td>Biyu</td><td>Abuo</td></tr>
+      <tr><td>3</td><td>Three</td><td>Meta</td><td>Uku</td><td>Ato</td></tr>
+      <tr><td>4</td><td>Four</td><td>Merin</td><td>Hudu</td><td>Ano</td></tr>
+      <tr><td>5</td><td>Five</td><td>Marun</td><td>Biyar</td><td>Ise</td></tr>
+      <tr><td>6</td><td>Six</td><td>Mefa</td><td>Shido</td><td>Isii</td></tr>
+      <tr><td>7</td><td>Seven</td><td>Meje</td><td>Bakwai</td><td>Asaa</td></tr>
+      <tr><td>8</td><td>Eight</td><td>Mejo</td><td>Takwai</td><td>Asato</td></tr>
+      <tr><td>9</td><td>Nine</td><td>Mesan</td><td>Tara</td><td>Itolu</td></tr>
+      <tr><td>10</td><td>Ten</td><td>Mewa</td><td>Goma</td><td>Iri</td></tr>
+      <tr><td>11</td><td>Eleven</td><td>Mokanla</td><td>Goma sha day</td><td>Iri na out</td></tr>
+      <tr><td>15</td><td>Fifteen</td><td>Meedogun</td><td>Goma sha biyar</td><td>Iri na ise</td></tr>
+      <tr><td>20</td><td>Twenty</td><td>Ogun</td><td>Ashirin</td><td>Iri abuo/ohu</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-title">5. Vocational Training (Detailed)</div>
+  <p>The aim of education in traditional society can be summed up as character training and job orientation. Agricultural education included farming, fishing, and animal husbandry. Children were taught how to test soil quality by dipping a cutlass — if it touches stone, the soil is unsuitable for yam/cassava; if porous, it is suitable for groundnuts/melons.</p>
+
+  <div class="sub-title">6. Community Participation</div>
+  <p>The traditional society cherished the membership of the child to his immediate and extended family as well as the community at large. A newly born baby immediately becomes the child of everyone in the household. Age-groups are generally engaged in communal work — helping members in clearing, planting or harvesting, and road construction.</p>
+
+  <div class="sub-title">7. Promotion of Cultural Heritage</div>
+  <p>Education, whether ancient or modern, aims at perpetuating the culture of the society. Traditional education attaches considerable importance to the promotion of cultural heritage. Culture in traditional society is not TAUGHT but CAUGHT. The child naturally acquires his culture by observing, imitating and mimicking the actions of his elders and siblings in naming ceremonies, coronation of king or chief, yam festival, funeral ceremonies, religious services, marriage ceremonies, annual dance and acrobatic displays.</p>
+
+  <div class="section-title">Contents of Indigenous Education in Nigeria</div>
+  <p>The curriculum of indigenous education includes:</p>
+  <ol>
+    <li><strong>Vocational training/trades and crafts</strong> — weaving, blacksmithing, basket-making, drumming, etc.</li>
+    <li><strong>Physical training</strong> — wrestling, acrobatic displays, climbing, jumping, dancing, singing, etc.</li>
+    <li><strong>Cultural training</strong> — learning about traditions, norms, values, general ways of life of the people.</li>
+    <li><strong>Moral training</strong> — learning to distinguish between acceptable and unacceptable behaviour. Greetings play major roles.</li>
+    <li><strong>Social training/community participation</strong> — training in mutual understanding, co-operation and group participation.</li>
+    <li><strong>Political training</strong> — training in societal laws; maintaining territorial integrity of the community; preparing the individual to defend the community against external attacks.</li>
+    <li><strong>Intellectual training</strong> — local geography and history, arithmetic (counting), poetic training, incantations, proverbs, etc.</li>
+    <li><strong>Agricultural training</strong> — worshipping of past heroes and heroines, ancestors, rivers, mountains, rocks, soil, iron, thunder and many other inanimate objects.</li>
+  </ol>
+
+  <div class="section-title">Teachers, Methods & Evaluation</div>
+
+  <div class="sub-title">The Teachers of Indigenous Education</div>
+  <p>Every adult member of the society is considered a general teacher in the indigenous educational system. However, there are some specific teachers: the mother, the father, other family members, the friends and play mates (peer group), and professionals i.e. masters of some trades and craft and priests and traditional religious leaders.</p>
+
+  <div class="sub-title">Methodology and Technique of Teaching</div>
+  <p>The methodology and techniques of indigenous education are simple but integrated. Methods include demonstration, observation, imitation, story telling, use of proverbs, superstition, learning by doing, group work and competition. Methods also include initiation, fables, rote learning and memorization.</p>
+
+  <div class="sub-title">Teaching Materials</div>
+  <p>Teaching materials are simple and inexpensive and readily available. They include loom, dye, pot, wood, mud, animal skin, hoes, cutlass, bows and arrows, dane guns, nets, fishing etc. Some inanimate objects are also used for worshipping and learning occultism.</p>
+
+  <div class="sub-title">Evaluation</div>
+  <p>Evaluation in indigenous education is done by assessing the child on the spot immediately. Something is done either by reward (praise) or punishment (rebuke).</p>
+
+  <div class="section-title">Merits of Indigenous Education</div>
+  <ol>
+    <li>It allows the society to continue</li>
+    <li>It builds an individual up physically, morally, socially, politically etc.</li>
+    <li>No protocol of being specially trained and certificated before one can teach.</li>
+    <li>Simple methodology of teaching — observation and imitation</li>
+    <li>Simple teaching materials</li>
+    <li>Inexpensive administration and management</li>
+    <li>The recipient is cultured (self discipline)</li>
+  </ol>
+
+  <div class="section-title">Demerits of Indigenous Education</div>
+  <ol>
+    <li>No specific aims and objectives but general ones</li>
+    <li>No classification either by age or compartments</li>
+    <li>No certificated teachers</li>
+    <li>The content/curriculum has no formal planning</li>
+    <li>The method and techniques are too much integrated</li>
+    <li>Evaluation technique is informal and subjective</li>
+    <li>No continuous assessment, rather the recipient is assessed on the spot</li>
+    <li>No written examinations</li>
+  </ol>
+
+  <div class="section-title">Impacts of Indigenous Education on Modern Education</div>
+  <ul>
+    <li>Indigenous languages are learnt in schools</li>
+    <li>Home experiences or family experience allied previous knowledge are carried on to the school system and the school builds on this.</li>
+    <li>Some parents especially western educated ones still train their children in home lessons.</li>
+    <li>Traditional language of the people helps in learning the language of modern education especially in pronunciation e.g. "Table"</li>
+    <li>Poems were being memorized, and in modern education memorization of poems is emphasized.</li>
+  </ul>
+
+  <div class="section-title">Impacts of Modern Education on Indigenous Education</div>
+  <ul>
+    <li>Learners now go to other societies to learn instead of their own society — this encourages initiation into other society.</li>
+    <li>Boarding system has replaced apprenticeship system.</li>
+    <li>Teachers are now certificated and not just anybody in the society; even the teachers of indigenous languages are certificated.</li>
+    <li>Modern education has influenced the traditional ways of life (culture) e.g. in language, dressing, eating, healthcare, delivery system etc.</li>
+    <li>Methodology of teaching/learning has been affected by modern education e.g. children no longer believe in taboos and superstitions used for imparting knowledge in traditional education.</li>
+  </ul>
+
+  <details class="need-to-know">
+    <summary>📌 Need to Know — Chapter 3 Key Points</summary>
+    <div class="need-to-know-body">
+      <ul>
+        <li>African Traditional Education (A.T.E.) existed BEFORE colonization by Europeans.</li>
+        <li>The guiding principle was FUNCTIONALISM — education had a practical purpose.</li>
+        <li>Fafunwa said education was "a means to an end, not an end in itself."</li>
+        <li>There are 7 cardinal goals of traditional education (physical, character, respect, intellectual, vocational, community, cultural).</li>
+        <li>Culture in traditional society is NOT taught but CAUGHT — the child absorbs it by watching adults.</li>
+        <li>The Tente game develops physical and counting skills in African children.</li>
+        <li>The Ijala chant was an important intellectual art of the Yoruba people.</li>
+        <li>There are 1,200 Yoruba proverbs.</li>
+        <li>Vocational training has 3 categories: Agricultural, Trades & Crafts, Professions.</li>
+        <li>In traditional education, EVERY adult is a teacher.</li>
+        <li>Merits: 7 listed. Demerits: 8 listed.</li>
+        <li>Modern education replaced the apprenticeship system with the boarding system.</li>
+      </ul>
+      <div class="def-item"><strong>Functionalism</strong><p>The idea that education should have a practical purpose — it should help people function in their society.</p></div>
+      <div class="def-item"><strong>Cardinal Goals</strong><p>The most important goals — there are 7 of them in African Traditional Education.</p></div>
+    </div>
+  </details>
+
+  <!-- QUIZ CH3 -->
+  <div class="quiz-section" id="quiz-ch3">
+    <div class="quiz-header">
+      <h3>🎓 Chapter 3 Quiz — African Traditional Education</h3>
+    </div>
+    <div class="quiz-body" id="qbody-ch3"></div>
+    <div class="quiz-controls">
+      <button class="btn-quiz primary" onclick="submitQuiz('ch3')">Submit Answers</button>
+      <button class="btn-quiz" onclick="resetQuiz('ch3')">Reset</button>
+    </div>
+    <div class="quiz-score" id="qscore-ch3"></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="page-nav-btn" onclick="showPage('ch2')">← Chapter 2</button>
+    <button class="page-nav-btn" onclick="showPage('ch4')">Chapter 4 →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ CHAPTER 4 -->
+<div class="page" id="page-ch4">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter Four</div>
+    <div class="chapter-title">Islamic Education in Nigeria</div>
+    <div class="chapter-desc">Pages 43–52 · The history, spread and characteristics of Islamic Education</div>
+  </div>
+
+  <p>The word Islam is derived from the Arabic root "<span class="kt" onclick="goGloss('SALAM')">SALAM</span>" which means among other things peace, purity, submission and obedience. In the religious sense, the word Islam means submission to the will of Allah and obedience to His laws. Those who follow or practice the religion are called <span class="kt" onclick="goGloss('Muslims')">Muslims</span>.</p>
+
+  <p>Islam is one of the two major religions practised all over the world (alongside Christianity). Islamic education is closely related to Arabic language because Arabic is the language of the Holy <span class="kt" onclick="goGloss('Quran')">Qu'ran</span> which is the Muslim's reference book.</p>
+
+  <div class="info-box">
+    <div class="info-label">Islam's Contribution to Mathematics</div>
+    <p>Muslims were responsible for introducing the world to Arabic numerals. The Muslim mathematician, <strong>Muhammad Ibn Musa</strong>, was the first to use decimal notation and to give digits the value of position (Fafunwa, 1974:50-51).</p>
+  </div>
+
+  <div class="section-title">History of Islam and Islamic Education in Nigeria</div>
+  <p>The Islamic concept of education is that of a process of guiding and directing the development of the young ones through instruction and discipline so as to enable them live a good life here on earth with good hopes of eternal blessing in heaven. It is an education for practical moral living and preparation for life hereafter.</p>
+
+  <p>Islam came to Hausa land in early 14th century through traders and scholars from North Africa, especially during the reign of <span class="kt" onclick="goGloss('Ali-Yaji')">Ali-Yaji</span> who ruled Kano from 1349–1385. In the 17th century, <strong>KATSINA</strong> produced native scholars who developed Islamic Education. Islamic education was taught simultaneously with Arabic as a language and Islam as a religion.</p>
+
+  <p>The importance of knowledge in Islam cannot be overemphasized. '<span class="kt" onclick="goGloss('ILM')">ILM</span>' in Arabic means knowledge and it is one of the key words in the Holy Qur'an. The Prophet (SAW) had many of his traditions (<span class="kt" onclick="goGloss('hadith')">hadith</span>) emphasizing the importance of knowledge. Teaching Islam to others was considered a duty for which one should expect no reward — this is why many Islamic schools charge little or no fees.</p>
+
+  <div class="section-title">The Spread of Islam and Islamic Education in Nigeria</div>
+  <p>Islam reached the Savannah region of West Africa and northern Nigeria in the 8th century A.D. This date marked the beginning of written history of West Africa. Islam was first spread in <span class="kt" onclick="goGloss('Kanem Borno')">Kanem Borno</span> where its first ruler <strong>Umme Jilmi (1085–1097)</strong> was the first to accept the new faith at the hand of an eminent Muslim scholar Hamed Muhammad Mani.</p>
+
+  <p>Islam did not become a state religion until the reign of <strong>Mai Idris Alooma (1570–1602)</strong>. The spread of Islam also led to the introduction of Islamic Education — without Islamic education, one cannot understand and practice Islam. Therefore, Islamic religion and Islamic education are partners in progress.</p>
+
+  <p>Islam and Islamic education were brought to Hausa land in the early 14th century by traders and scholars. This led to the emergence of two types of schools:</p>
+  <ul>
+    <li>The <strong>Qur'anic Schools</strong> (also known as "Makaranta Allo" or tablet school) — for beginners.</li>
+    <li>The <strong>Ilmi School</strong> — which embraces all aspects of Islamic studies.</li>
+  </ul>
+
+  <p>By 1830, Islam reached Yoruba land from the North through Ilorin. Scholars such as Ahmad Qifu and Uthman bin Abubakar came to Ibadan. <strong>Ilorin</strong> became a centre of Islamic learning with about two hundred Qur'anic schools (<span class="kt" onclick="goGloss('Madrasahs')">Madrasahs</span>). As a result, Qur'anic schools were found in almost every town and small village where there were only a few Muslim families.</p>
+
+  <div class="section-title">Remuneration of the Arabic Teacher</div>
+  <p>The teachers in the traditional Arabic schools depended on charity (<span class="kt" onclick="goGloss('Sadaqah')">Sadaqah</span>) for living; for the teacher is one of those persons to whom 'Sadaqah' is prescribed "Fi Sabil Allah" (in the way of Allah). This noble principle reduced the status of a teacher (<span class="kt" onclick="goGloss('Muallim')">Mu'allim</span>) to that of a mere beggar — he had to wander from place to place looking for charitable Muslims.</p>
+
+  <p>His pupils (Al-Muhajir or emigrant) went door to door asking for charity. These pupils called <span class="kt" onclick="goGloss('Al-muhajir-un')">Al-muhajir-un</span> (emigrants) are believed to have left their homes in search of knowledge (Ilmi). The higher grade of teachers, the <span class="kt" onclick="goGloss('ULAMAS')">ULAMAS</span>, are those deeply learned in the science of the Qur'an and Hadith, Islamic theology and etymology.</p>
+
+  <div class="section-title">Islamic Education in Southern Nigeria</div>
+  <p>The southern part of Nigeria, particularly Yoruba land, was known to Muslims long before Islam actually reached there. By the 17th century, this part of the country was known to Muslims (Fafunwa, 1974). Uthman bin Abubakar, a learned scholar from Katsina, was made Imam of the Ibadan Muslims in 1839.</p>
+
+  <div class="section-title">Characteristics of Qur'anic School</div>
+  <ol>
+    <li>Usually the elementary school built near the Mosque or in the Mallam's hallway, parlour, verandah, under the tree or any convenient place. The <span class="kt" onclick="goGloss('Mallams')">Mallams</span> served as teachers.</li>
+    <li>Children learnt to memorize verses of the Holy Qur'an as well as the Arabic alphabet to enable them read the Qur'an successfully.</li>
+    <li>Admission is not restricted by age or sex but most pupils start between ages four (4) and six (6); they are expected to learn the shorter chapters of the Holy Qur'an through repetition and rote learning.</li>
+    <li>The student-teacher ratio could be very high — as many as forty pupils per Mallam, though attendance could be irregular.</li>
+    <li>The subject matter is principally the Qur'an and Arabic. At this stage, no attempt is made to understand the meaning of what is read.</li>
+    <li>There is no fixed fees charged, although teachers may accept gifts from parents. Mallams normally had their own vocations (farming, weaving) to support themselves.</li>
+    <li>Discipline is usually very strict and various forms of corporal punishments are employed.</li>
+    <li>There are three (3) sessions: morning, afternoon and evening presided over by the Mallams.</li>
+    <li>Most of the Qur'anic schools are run on the discretion of their individual proprietors. There were no uniforms, timetable, class size, duration, curriculum or prescribed qualifications for teachers.</li>
+    <li>Teaching method: The teacher recites the verse from his slate or 'Allo' and pupils repeat it after him — this continues until they thoroughly memorize the whole Qur'an (60 chapters) off by heart.</li>
+    <li>A passing out ceremony (<span class="kt" onclick="goGloss('Wolimah')">Wolimah</span>) is usually organized for students who successfully complete their Qur'anic education. This marks the greatest day in the Mallam's life and the pupils. The graduate recites written chapters or verses to the admiration of the audience.</li>
+  </ol>
+
+  <div class="section-title">Characteristics of "Ilm" School</div>
+  <ol>
+    <li>The Ilm school is the secondary level of Islamic education where the student continues his education.</li>
+    <li>It has a broader, deeper or wider curriculum compared to the Qur'anic school.</li>
+  </ol>
+
+  <details class="need-to-know">
+    <summary>📌 Need to Know — Chapter 4 Key Points</summary>
+    <div class="need-to-know-body">
+      <ul>
+        <li>Islam comes from the Arabic word "SALAM" meaning peace, purity, submission and obedience.</li>
+        <li>Muslims are people who submit to the will of Allah and obey His laws.</li>
+        <li>Arabic is the language of the Holy Qur'an — this is why Islamic education is closely linked to Arabic.</li>
+        <li>Muhammad Ibn Musa was the first to use decimal notation in mathematics.</li>
+        <li>ILM = knowledge in Arabic. It is a key word in the Holy Qur'an.</li>
+        <li>Islam came to Northern Nigeria (Hausa land) in the 14th century.</li>
+        <li>The first ruler to accept Islam in Kanem Borno was Umme Jilmi (1085–1097).</li>
+        <li>Islam became a state religion during Mai Idris Alooma's reign (1570–1602).</li>
+        <li>Two types of Islamic schools: Qur'anic School (beginners) and Ilm School (advanced).</li>
+        <li>Teachers (Mallams) depended on Sadaqah (charity) for their living.</li>
+        <li>ULAMAS are the highest grade teachers — deeply learned in the Qur'an and Hadith.</li>
+        <li>Ilorin became a major centre of Islamic learning.</li>
+        <li>The Wolimah is the passing-out ceremony for Qur'anic school graduates.</li>
+        <li>Qur'anic schools had 11 key characteristics.</li>
+      </ul>
+      <div class="def-item"><strong>Hadith</strong><p>The traditions and sayings of the Prophet Muhammad (SAW).</p></div>
+      <div class="def-item"><strong>Madrasah</strong><p>An Islamic school or place of learning.</p></div>
+    </div>
+  </details>
+
+  <!-- QUIZ CH4 -->
+  <div class="quiz-section" id="quiz-ch4">
+    <div class="quiz-header">
+      <h3>🎓 Chapter 4 Quiz — Islamic Education in Nigeria</h3>
+    </div>
+    <div class="quiz-body" id="qbody-ch4"></div>
+    <div class="quiz-controls">
+      <button class="btn-quiz primary" onclick="submitQuiz('ch4')">Submit Answers</button>
+      <button class="btn-quiz" onclick="resetQuiz('ch4')">Reset</button>
+    </div>
+    <div class="quiz-score" id="qscore-ch4"></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="page-nav-btn" onclick="showPage('ch3')">← Chapter 3</button>
+    <button class="page-nav-btn" onclick="showPage('glossary')">Glossary →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GLOSSARY -->
+<div class="page" id="page-glossary">
+  <div class="chapter-header">
+    <div class="chapter-num">Reference</div>
+    <div class="chapter-title">Glossary of Terms</div>
+    <div class="chapter-desc">Click any highlighted word in the chapters to find its meaning here. Watch it bounce!</div>
+  </div>
+
+  <input type="text" class="gloss-search" id="gloss-search" placeholder="Search for a word..." oninput="filterGloss()">
+
+  <div class="gloss-filter-bar">
+    <button class="gloss-filter active" onclick="filterByChapter('all', this)">All</button>
+    <button class="gloss-filter" onclick="filterByChapter('ch1', this)">Chapter 1</button>
+    <button class="gloss-filter" onclick="filterByChapter('ch2', this)">Chapter 2</button>
+    <button class="gloss-filter" onclick="filterByChapter('ch3', this)">Chapter 3</button>
+    <button class="gloss-filter" onclick="filterByChapter('ch4', this)">Chapter 4</button>
+  </div>
+
+  <div class="gloss-grid" id="gloss-grid"></div>
+
+  <div class="page-nav">
+    <button class="page-nav-btn" onclick="showPage('ch4')">← Chapter 4</button>
+    <button class="page-nav-btn" onclick="showPage('cover')">🏠 Home</button>
+  </div>
+</div>
+
+</div><!-- end #main -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// GLOSSARY DATA
+// ══════════════════════════════════════════════════════════
+const glossaryData = [
+  { term: "definition", chapter: "ch1", def: "A statement that explains the exact meaning of a word or concept. Education has no single definition — many scholars define it differently." },
+  { term: "educationist", chapter: "ch1", def: "An expert in the field of education — someone who studies, teaches, or develops educational theories and systems." },
+  { term: "universal", chapter: "ch1", def: "Something that applies to or is experienced by everyone, everywhere — it is not limited to one place or group of people." },
+  { term: "immemorial", chapter: "ch1", def: "Going back further in time than people can remember. 'Since time immemorial' means 'for a very, very long time.'" },
+  { term: "collective amnesia", chapter: "ch1", def: "When a whole group of people forgets their past history and heritage. Fafunwa said a people without knowledge of their past suffer from this." },
+  { term: "integration", chapter: "ch1", def: "The process of becoming a full and accepted part of a society or group — fitting in and contributing effectively." },
+  { term: "transmission", chapter: "ch1", def: "The passing of something (like culture, knowledge, or values) from one person or generation to another." },
+  { term: "holistic", chapter: "ch1", def: "Dealing with the whole of something — not just parts of it. Holistic education means education of the whole person: mind, body, spirit and social life." },
+  { term: "potentialities", chapter: "ch1", def: "Hidden abilities or talents that a person has but that have not yet been developed or shown." },
+  { term: "aptitudes", chapter: "ch1", def: "Natural abilities or skills that a person has for certain activities. For example, someone might have an aptitude for music or mathematics." },
+  { term: "competencies", chapter: "ch1", def: "The skills and knowledge needed to do something successfully. A competent person can do their job well." },
+  { term: "apprenticeship", chapter: "ch1", def: "A system where a young person learns a trade or skill by working closely with an experienced master of that trade — learning by doing." },
+  { term: "institutionalized", chapter: "ch1", def: "Established as a recognized and official system or organization. Schools and hospitals are institutionalized — they are formal, organized, and officially recognized." },
+  { term: "syllabus", chapter: "ch1", def: "A detailed plan or outline of what will be taught in a course. Schools use a syllabus to plan lessons." },
+  { term: "comparative study", chapter: "ch1", def: "A study that looks at two or more things side by side to find similarities and differences between them." },
+  { term: "inadequate", chapter: "ch1", def: "Not enough or not good enough. An inadequate policy does not fully solve the problem it was created to solve." },
+  { term: "relevance", chapter: "ch1", def: "Being closely connected to or important for what is being discussed or the situation at hand. A relevant curriculum connects to real life." },
+  { term: "civilization", chapter: "ch2", def: "An advanced stage of human society and culture, with developed systems of government, art, science, and writing." },
+  { term: "architecture", chapter: "ch2", def: "The art and science of designing and constructing buildings. The ancient Greeks were famous for their beautiful temples and columns." },
+  { term: "philosopher", chapter: "ch2", def: "A person who studies wisdom, truth, knowledge, and the meaning of life. Famous Greek philosophers include Plato, Socrates, and Aristotle." },
+  { term: "martial law", chapter: "ch2", def: "When the military takes control and normal laws are replaced by strict military rules. People under martial law have very few rights." },
+  { term: "ephors", chapter: "ch2", def: "Government officials (administrators) in ancient Sparta who were responsible for judging newborn babies and deciding if they were fit to live." },
+  { term: "padagogue", chapter: "ch2", def: "A male servant in ancient Athens whose job was to escort wealthy boys to and from school, and sometimes help with their education." },
+  { term: "3Rs", chapter: "ch2", def: "Reading, wRiting, and aRithmetic — the three basic subjects taught in early Roman primary schools and later in Missionary schools in Nigeria." },
+  { term: "oratorical", chapter: "ch2", def: "Relating to the skill of public speaking. Oratorical training taught people how to speak clearly and powerfully in front of large groups." },
+  { term: "aristocracy", chapter: "ch2", def: "The highest class in society — the very wealthy and privileged people, often nobility. In Rome, the aristocracy embraced Greek philosophy and culture." },
+  { term: "colonization", chapter: "ch3", def: "When one country takes control of another country and its people — usually by force. Nigeria was colonized by the British." },
+  { term: "informal", chapter: "ch3", def: "Not following official rules or structures. Informal education happens naturally in everyday life through family, community, and experience." },
+  { term: "Ijala chant", chapter: "ch3", def: "A special form of oral poetry and spoken art developed by the Yoruba people of Nigeria. It is an important intellectual tradition in African culture." },
+  { term: "cultural heritage", chapter: "ch3", def: "The traditions, customs, languages, art, and values that are passed down from one generation to the next within a community or society." },
+  { term: "good character", chapter: "ch3", def: "Having the right moral qualities — being honest, humble, respectful, hardworking, and considerate of others. This was the highest goal in African traditional education." },
+  { term: "intellect", chapter: "ch3", def: "The ability of the mind to think, reason, and understand things. Intellectual training is education that develops the thinking and reasoning skills of a person." },
+  { term: "intellectualization", chapter: "ch3", def: "The process of developing and using the mind to think deeply and reasonably about things — moving from concrete thinking to abstract reasoning." },
+  { term: "SALAM", chapter: "ch4", def: "An Arabic word meaning peace, purity, submission and obedience. The word 'Islam' is derived from this root word." },
+  { term: "Muslims", chapter: "ch4", def: "People who follow the religion of Islam — they submit to the will of Allah and obey His laws as written in the Holy Qur'an." },
+  { term: "Quran", chapter: "ch4", def: "The Holy Book of Muslims — the word of Allah as revealed to the Prophet Muhammad (SAW). It is written in Arabic. Also spelled 'Qur'an'." },
+  { term: "Ali-Yaji", chapter: "ch4", def: "A ruler who ruled Kano from 1349 to 1385. Under his reign, Islam and Islamic education spread into the Hausa land of Northern Nigeria through traders and scholars from North Africa." },
+  { term: "ILM", chapter: "ch4", def: "An Arabic word meaning 'knowledge'. It is a key word in the Holy Qur'an and the basis for why Muslims are encouraged to seek education." },
+  { term: "hadith", chapter: "ch4", def: "The recorded sayings, actions and traditions of the Prophet Muhammad (SAW). Hadiths are used alongside the Qur'an as a guide for Muslim life." },
+  { term: "Kanem Borno", chapter: "ch4", def: "An ancient empire in the Lake Chad area of Africa (now northeastern Nigeria and surrounding countries). It was the first place in Nigeria where Islam was officially accepted as a state religion." },
+  { term: "Sadaqah", chapter: "ch4", def: "Voluntary charity given by Muslims as an act of worship. In traditional Islamic education, teachers depended on Sadaqah from the community for their upkeep." },
+  { term: "Muallim", chapter: "ch4", def: "An Arabic word meaning 'teacher'. In early Islamic education in Nigeria, the Mu'allim depended on charity and had a very low social status." },
+  { term: "Al-muhajir-un", chapter: "ch4", def: "Literally means 'emigrants' or 'migrants' in Arabic. In early Islamic education, these were students who left their homes to travel in search of knowledge (Ilmi)." },
+  { term: "ULAMAS", chapter: "ch4", def: "The highest grade of Islamic teachers — scholars who are deeply learned in the science of the Qur'an, Hadith, Islamic theology and etymology. They were highly respected in Northern Nigeria." },
+  { term: "Madrasahs", chapter: "ch4", def: "Islamic schools or institutions of learning. Ilorin had about 200 Madrasahs (Qur'anic schools), making it a major centre of Islamic learning in Nigeria." },
+  { term: "Mallams", chapter: "ch4", def: "Islamic teachers who run the Qur'anic schools. A single Mallam could teach up to 40 pupils. They relied on charity (Sadaqah) and had their own vocations like farming to support themselves." },
+  { term: "Wolimah", chapter: "ch4", def: "The passing-out (graduation) ceremony for students who successfully complete their Qur'anic education. It is the greatest day for both the Mallam and the graduating student." }
+];
+
+// ══════════════════════════════════════════════════════════
+// QUIZ DATA
+// ══════════════════════════════════════════════════════════
+const quizData = {
+  ch1: [
+    { level:"easy", q:"Which scholar said 'a people with no knowledge of their past would suffer from collective amnesia'?",
+      opts:["Adesina","Nduka","Fafunwa","Osokoya"], ans:2,
+      fb:"Fafunwa (1974) made this famous statement about the importance of knowing your history." },
+    { level:"easy", q:"How many types/forms of education are there?",
+      opts:["Two","Three","Four","Five"], ans:1,
+      fb:"There are THREE forms of education: Non-formal, Informal, and Formal." },
+    { level:"medium", q:"Which type of education does NOT require a syllabus, scheme of work, or lesson note?",
+      opts:["Formal education","Non-formal education","Informal education","Islamic education"], ans:2,
+      fb:"Informal education does not require a syllabus, scheme of work or lesson note — it happens naturally in daily life." },
+    { level:"medium", q:"Nigeria was a British colony until which year?",
+      opts:["1950","1955","1960","1963"], ans:2,
+      fb:"Nigeria was a British colony up to 1960, which is why the education system was derived from the British system." },
+    { level:"hard", q:"Adesina (1985) defined education as a tool for what primary purpose?",
+      opts:["Integration of the individual into society","Memorization of facts","Training of soldiers","Development of trade skills"], ans:0,
+      fb:"Adesina defined education as a tool for the integration of the individual effectively into society." },
+    { level:"hard", q:"Which conference culminated from the attempts to make Nigeria's curriculum more relevant to the Nigerian environment?",
+      opts:["The Lagos Education Summit","The 1969 National Curriculum Conference","The 1925 Memorandum","The Ashby Report Conference"], ans:1,
+      fb:"The 1969 National Curriculum Conference came from efforts to make the curriculum relevant to the Nigeria environment." },
+    { level:"vhard", q:"According to Nduka (1982), in his book 'Western Education and the Nigerian Cultural Background', education is defined as the process of what?",
+      opts:["Memorizing the laws of the land","Cultural transmission using culture to embrace all ideas and values that bind people","Training children in military skills","Teaching reading writing and arithmetic"], ans:1,
+      fb:"Nduka defined education as the process of cultural transmission — using culture to embrace people's art, music, literature, philosophy, religion, commerce and all ideas that bind society." },
+    { level:"vhard", q:"Osokoya (1987) says education leads out the 'in-born powers and potentialities' of individuals. What is this process called?",
+      opts:["Indoctrination","Socialization","Self-realization and leading out of potentialities","National integration"], ans:2,
+      fb:"Osokoya said education is the leading out of in-born powers and potentialities of individuals, including acquisition of skills and competencies needed for self-realization." }
+  ],
+  ch2: [
+    { level:"easy", q:"Greece is often called the 'Birthplace of' what?",
+      opts:["African Civilization","Islamic Civilization","Western Civilization","Eastern Philosophy"], ans:2,
+      fb:"Greece is referred to as the 'Birthplace of Western Civilization' due to its achievements in art, science, philosophy, and government." },
+    { level:"easy", q:"The three types of school available for Athenian boys were letters, music, and what?",
+      opts:["Military","Gymnastic","Art","Religious"], ans:1,
+      fb:"The three types of school for Athenian boys were: letters school (reading/writing), music school (lyric/poetry), and gymnastic school (palaestra)." },
+    { level:"medium", q:"At what age were Spartan boys placed in a boarding school?",
+      opts:["Five","Seven","Ten","Twelve"], ans:1,
+      fb:"Spartan boys were placed in boarding school at the age of SEVEN, where they received military and character education from the state." },
+    { level:"medium", q:"What were the three social groups in Spartan society?",
+      opts:["Masters, Citizens, Slaves","Invaders (Masters), Perioeci (Freemen), Helots (Slaves)","Nobles, Merchants, Workers","Kings, Soldiers, Farmers"], ans:1,
+      fb:"The three groups were: Invaders/Masters (civil rights), Perioeci (freemen in surrounding areas), and Helots (slaves/war captives)." },
+    { level:"hard", q:"The 3Rs in Roman education referred to which subjects?",
+      opts:["Religion, Rhetoric, Reasoning","Reading, wRiting, aRithmetic","Rules, Recitation, Repetition","Rhetoric, Reading, Religion"], ans:1,
+      fb:"The 3Rs stand for Reading, wRiting, and aRithmetic — the basic subjects of Roman primary education, later brought to Nigeria by missionaries." },
+    { level:"hard", q:"What was the role of a 'padagogue' in ancient Athens?",
+      opts:["A schoolmaster who taught all subjects","A government official who judged children","A male servant who escorted rich boys to and from school","A priest who led religious education"], ans:2,
+      fb:"A padagogue was a male servant who helped escort wealthy Athenian boys to and from school each day." },
+    { level:"vhard", q:"Who were the 'ephors' in Sparta and what was their function?",
+      opts:["Military generals who trained soldiers in battle","Government administrators who judged newborn babies for fitness to live","Priests who taught religious education to children","Merchants who funded education in the city"], ans:1,
+      fb:"Ephors were government administrators who examined newborn babies. Those judged unfit were taken to a hillside to die or be rescued by the Perioeci or Helots." },
+    { level:"vhard", q:"In ancient Roman education, which level of school specifically emphasized the reading of both Greek and Latin literature?",
+      opts:["The primary school","The grammar school","The school of rhetoric","The military academy"], ans:2,
+      fb:"The school of rhetoric came after the grammar school stage. It emphasized the reading of both Greek and Latin literature. Teaching methods included lectures, note taking, memorization and citation." }
+  ],
+  ch3: [
+    { level:"easy", q:"What was the main guiding principle of African Traditional Education?",
+      opts:["Memorization","Functionalism","Colonialism","Intellectualism"], ans:1,
+      fb:"FUNCTIONALISM was the main guiding principle — education was meant to have a practical purpose and help people function effectively in society." },
+    { level:"easy", q:"How many cardinal goals of traditional African education did Fafunwa identify?",
+      opts:["Five","Six","Seven","Eight"], ans:2,
+      fb:"Fafunwa (1974 and 1982) identified SEVEN cardinal goals of traditional African education." },
+    { level:"medium", q:"In African traditional education, is culture TAUGHT or CAUGHT?",
+      opts:["Taught formally in schools","Caught — absorbed naturally by observing adults","Both taught and caught equally","Neither taught nor caught"], ans:1,
+      fb:"Culture in traditional society is NOT taught but CAUGHT — the child absorbs it naturally by observing, imitating, and participating in the activities of adults." },
+    { level:"medium", q:"The 'Tente' game was significant because it helped develop what in children?",
+      opts:["Military skills","Counting ability and physical fitness","Religious knowledge","Language fluency only"], ans:1,
+      fb:"The Tente game involves counting 1, 2, 3 with clapping and leg stretching — it develops counting ability (intellectual), mental development, and physical fitness in African children." },
+    { level:"hard", q:"What did Babalola (1964) describe as one of the most important intellectual spoken arts of the Yoruba people?",
+      opts:["The Oro chant","The Ijala chant","The Egungun festival","The Tente game"], ans:1,
+      fb:"Babalola (1964) said the IJALA CHANT was one of the most important intellectual spoken arts developed by the Yoruba people as part of traditional education." },
+    { level:"hard", q:"Which of these is NOT listed as a demerit of indigenous education?",
+      opts:["No written examinations","No certificated teachers","Simple methodology using observation and imitation","No continuous assessment"], ans:2,
+      fb:"'Simple methodology using observation and imitation' is actually a MERIT of indigenous education, not a demerit! The demerits focus on lack of structure, certificates, and formal evaluation." },
+    { level:"vhard", q:"According to the book, how many Yoruba proverbs are specifically mentioned, and what broader role do proverbs play in indigenous intellectual training?",
+      opts:["500 proverbs; used only for entertainment","1,200 proverbs; used as media for developing the child's reasoning power and skill in decision making","2,000 proverbs; used for political purposes only","1,000 proverbs; used to teach counting"], ans:1,
+      fb:"There are specifically 1,200 Yoruba proverbs mentioned. Fafunwa (1974) stated that the Yorubas are known for this and that proverbs constitute a formidable activity used as media for developing the child's reasoning power and skill in decision making." },
+    { level:"vhard", q:"A child who was 'handicapped (lame and hunchback)' in traditional African education was treated in which specific way?",
+      opts:["Excluded from all forms of education","Only taught cultural songs and dances","Taught sedentary occupations such as weaving, carving, blacksmithery so they could contribute their quota to society","Given special spiritual ceremonies to cure their disability"], ans:2,
+      fb:"Traditional education was highly significant because it made provision for EVERY member of society. Handicapped persons (lame and hunchback) were taught sedentary occupations such as weaving, carving, and blacksmithery — this enabled such persons to contribute their own quota towards the development of the society." }
+  ],
+  ch4: [
+    { level:"easy", q:"What does the Arabic root word 'SALAM' (from which Islam is derived) mean?",
+      opts:["War and power","Peace, purity, submission and obedience","Knowledge and wisdom","Faith and prayer"], ans:1,
+      fb:"SALAM means peace, purity, submission and obedience. In the religious sense, Islam means submission to the will of Allah and obedience to His laws." },
+    { level:"easy", q:"What is the name of the passing-out ceremony for Qur'anic school graduates?",
+      opts:["Madrasah","Sadaqah","Wolimah","Ilmi"], ans:2,
+      fb:"The WOLIMAH is the passing-out ceremony organized for students who successfully complete their Qur'anic education. It is the greatest day in the Mallam's life and the pupil's life." },
+    { level:"medium", q:"Islam first came to Hausa land in Nigeria in which century?",
+      opts:["8th century","10th century","12th century","14th century"], ans:3,
+      fb:"Islam and Islamic education came to Hausa land in the early FOURTEENTH (14th) century, brought by traders and scholars from North Africa." },
+    { level:"medium", q:"What does 'ILM' mean in Arabic?",
+      opts:["Prayer","Knowledge","School","Teacher"], ans:1,
+      fb:"ILM means KNOWLEDGE in Arabic. It is one of the key words in the Holy Qur'an. This is why seeking knowledge is so important in Islam." },
+    { level:"hard", q:"Who was the first ruler to accept Islam in Kanem Borno and when did he reign?",
+      opts:["Mai Idris Alooma (1570–1602)","Ali-Yaji (1349–1385)","Umme Jilmi (1085–1097)","Uthman Dan Fodio (1804–1817)"], ans:2,
+      fb:"Umme Jilmi (1085–1097) was the first ruler of Kanem Borno to accept the new faith (Islam) at the hand of an eminent Muslim scholar Hamed Muhammad Mani." },
+    { level:"hard", q:"What was the maximum number of pupils a single Mallam could have in a Qur'anic school?",
+      opts:["Ten","Twenty","Forty","One hundred"], ans:2,
+      fb:"The student-teacher ratio in Qur'anic schools could be very high — a single Mallam could have as many as FORTY pupils, though attendance could be irregular." },
+    { level:"vhard", q:"Who was Muhammad Ibn Musa and what specific mathematical contribution did he make?",
+      opts:["An Arab king who funded Islamic schools in Nigeria","A Muslim mathematician who was the first to use decimal notation and give digits the value of position","A Qur'anic scholar who wrote the first Islamic textbook","A trader who brought Islam to Kanem Borno"], ans:1,
+      fb:"Muhammad Ibn Musa was a Muslim mathematician. He was the first to use decimal notation and to give digits the value of position (place value). Muslims were also responsible for introducing the world to Arabic numerals." },
+    { level:"vhard", q:"Why did the principle of Sadaqah (charity) actually REDUCE the social status of the Arabic teacher (Mu'allim)?",
+      opts:["Because it made teachers too wealthy and lazy","Because teaching Islam was considered a duty for which one should expect no reward — so teachers had to wander begging for food and shelter","Because only low-class people would accept charity","Because the government banned proper payment of teachers"], ans:1,
+      fb:"This noble principle — that teaching Islam is a duty for which no reward should be expected (Fi Sabil Allah — in the way of Allah) — reduced the status of the Mu'allim to that of a mere beggar. He had to wander from place to place looking for charitable Muslims to patronize him, give him food and shelter." }
+  ]
+};
+
+// ══════════════════════════════════════════════════════════
+// PAGE NAVIGATION
+// ══════════════════════════════════════════════════════════
+const pageOrder = ['cover','ch1','ch2','ch3','ch4','glossary'];
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const links = document.querySelectorAll('.nav-link');
+  links.forEach(l => { if(l.onclick && l.onclick.toString().includes("'" + id + "'")) l.classList.add('active'); });
+  const idx = pageOrder.indexOf(id);
+  const pct = idx === 0 ? 0 : Math.round((idx / (pageOrder.length - 1)) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  window.scrollTo(0,0);
+  if(id === 'glossary') renderGlossary();
+  if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ══════════════════════════════════════════════════════════
+// GLOSSARY
+// ══════════════════════════════════════════════════════════
+let currentChFilter = 'all';
+
+function renderGlossary(filter='') {
+  const grid = document.getElementById('gloss-grid');
+  const search = filter.toLowerCase();
+  grid.innerHTML = '';
+  glossaryData
+    .filter(g => (currentChFilter === 'all' || g.chapter === currentChFilter))
+    .filter(g => !search || g.term.toLowerCase().includes(search) || g.def.toLowerCase().includes(search))
+    .sort((a,b) => a.term.localeCompare(b.term))
+    .forEach(g => {
+      const card = document.createElement('div');
+      card.className = 'gloss-card';
+      card.id = 'gloss-' + g.term.replace(/\s+/g,'-').replace(/[^a-z0-9-]/gi,'');
+      card.innerHTML = `<div class="gloss-term" id="gterm-${g.term.replace(/\s+/g,'-').replace(/[^a-z0-9-]/gi,'')}">${g.term}</div><div class="gloss-def">${g.def}</div>`;
+      grid.appendChild(card);
+    });
+}
+
+function filterGloss() {
+  renderGlossary(document.getElementById('gloss-search').value);
+}
+
+function filterByChapter(ch, btn) {
+  currentChFilter = ch;
+  document.querySelectorAll('.gloss-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGlossary(document.getElementById('gloss-search').value);
+}
+
+function goGloss(term) {
+  showPage('glossary');
+  setTimeout(() => {
+    const safeId = term.replace(/\s+/g,'-').replace(/[^a-z0-9-]/gi,'');
+    const card = document.getElementById('gloss-' + safeId);
+    const termEl = document.getElementById('gterm-' + safeId);
+    if (card) {
+      card.scrollIntoView({ behavior:'smooth', block:'center' });
+      card.classList.add('highlighted');
+      if (termEl) {
+        termEl.classList.add('bounce');
+        setTimeout(() => {
+          termEl.classList.remove('bounce');
+          card.classList.remove('highlighted');
+        }, 4000);
+      }
+    }
+  }, 200);
+}
+
+// ══════════════════════════════════════════════════════════
+// QUIZ ENGINE
+// ══════════════════════════════════════════════════════════
+function buildQuiz(chId) {
+  const container = document.getElementById('qbody-' + chId);
+  const questions = quizData[chId];
+  if(!container || !questions) return;
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.id = `q-${chId}-${i}`;
+    const levelLabel = {easy:'⬤ Easy', medium:'⬤ Medium', hard:'⬤ Hard', vhard:'⬤ Very Hard'};
+    const levelClass = {easy:'easy', medium:'medium', hard:'hard', vhard:'vhard'};
+    div.innerHTML = `
+      <div class="q-level ${levelClass[q.level]}">${levelLabel[q.level]}</div>
+      <div class="q-text">Q${i+1}. ${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,oi) => `<button class="quiz-opt" onclick="selectOpt('${chId}',${i},${oi})" data-qi="${i}" data-oi="${oi}">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="q-feedback" id="qfb-${chId}-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+const quizState = {};
+
+function selectOpt(chId, qi, oi) {
+  if(!quizState[chId]) quizState[chId] = {};
+  if(quizState[chId].submitted) return;
+  quizState[chId][qi] = oi;
+  const qDiv = document.getElementById(`q-${chId}-${qi}`);
+  qDiv.querySelectorAll('.quiz-opt').forEach(b => {
+    b.classList.remove('selected-correct','selected-wrong');
+    b.style.opacity = '0.6';
+  });
+  qDiv.querySelectorAll('.quiz-opt')[oi].classList.add('selected-correct');
+  qDiv.querySelectorAll('.quiz-opt')[oi].style.opacity = '1';
+}
+
+function submitQuiz(chId) {
+  if(!quizState[chId]) quizState[chId] = {};
+  quizState[chId].submitted = true;
+  const questions = quizData[chId];
+  let score = 0;
+  questions.forEach((q, i) => {
+    const selected = quizState[chId][i];
+    const qDiv = document.getElementById(`q-${chId}-${i}`);
+    const fb = document.getElementById(`qfb-${chId}-${i}`);
+    const opts = qDiv.querySelectorAll('.quiz-opt');
+    opts.forEach(b => { b.disabled = true; b.style.opacity = '1'; });
+    opts[q.ans].classList.add('show-correct');
+    if(selected === q.ans) {
+      score++;
+      qDiv.classList.add('correct');
+      opts[selected].classList.add('selected-correct');
+      fb.textContent = '✓ Correct! ' + q.fb;
+      fb.className = 'q-feedback show correct';
+    } else if(selected !== undefined) {
+      qDiv.classList.add('wrong');
+      opts[selected].classList.add('selected-wrong');
+      opts[selected].classList.remove('selected-correct');
+      fb.textContent = '✗ Wrong. ' + q.fb;
+      fb.className = 'q-feedback show wrong';
+    } else {
+      fb.textContent = '⚠ Not answered. ' + q.fb;
+      fb.className = 'q-feedback show wrong';
+    }
+  });
+  const scoreEl = document.getElementById('qscore-' + chId);
+  const total = questions.length;
+  const pct = Math.round(score/total*100);
+  let grade = pct >= 80 ? '🏆 Excellent!' : pct >= 60 ? '✅ Good effort!' : pct >= 40 ? '📚 Keep studying!' : '💪 Review this chapter again.';
+  scoreEl.innerHTML = `Your Score: <span>${score}/${total} (${pct}%)</span> — ${grade}`;
+  scoreEl.classList.add('show');
+}
+
+function resetQuiz(chId) {
+  delete quizState[chId];
+  buildQuiz(chId);
+  const scoreEl = document.getElementById('qscore-' + chId);
+  scoreEl.classList.remove('show');
+  scoreEl.innerHTML = '';
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+['ch1','ch2','ch3','ch4'].forEach(buildQuiz);
+renderGlossary();
+</script>
+</body>
+</html>
