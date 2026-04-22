@@ -1,0 +1,3292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to Computer Science — CSC 101</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1008;
+  --paper: #fdf8f0;
+  --cream: #f5ede0;
+  --accent: #c0392b;
+  --gold: #b8860b;
+  --teal: #1a6b6b;
+  --blue: #1e3a5f;
+  --light-blue: #e8f0f8;
+  --diagram-bg: #f0f7f7;
+  --border: #d4c4a8;
+  --shadow: rgba(26,16,8,0.12);
+  --code-bg: #1e2d3d;
+  --code-text: #a8d8ea;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 300px; height: 100vh;
+  background: var(--blue);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 40px;
+  border-right: 4px solid var(--gold);
+  transition: transform 0.3s ease;
+}
+
+#sidebar-header {
+  background: linear-gradient(135deg, #0f1f35 0%, #1e3a5f 100%);
+  padding: 28px 20px 20px;
+  border-bottom: 3px solid var(--gold);
+  text-align: center;
+}
+
+#sidebar-header .course-code {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+#sidebar-header h2 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+#sidebar nav { padding: 12px 0; }
+
+.nav-chapter {
+  display: block;
+  padding: 10px 20px 10px 16px;
+  color: #b0c4d8;
+  text-decoration: none;
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  line-height: 1.4;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.nav-chapter:hover, .nav-chapter.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border-left-color: var(--gold);
+}
+
+.nav-chapter .ch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+
+/* ── MAIN CONTENT ── */
+#main {
+  margin-left: 300px;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+#topbar {
+  background: var(--ink);
+  padding: 14px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+#topbar .title {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+#topbar .progress-bar {
+  flex: 1;
+  max-width: 200px;
+  margin: 0 20px;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#topbar .progress-fill {
+  height: 100%;
+  background: var(--gold);
+  width: 0%;
+  transition: width 0.5s;
+  border-radius: 2px;
+}
+
+#menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ── COVER PAGE ── */
+#cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0f1f35 0%, #1e3a5f 50%, #0f3333 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+#cover::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(184,134,11,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(26,107,107,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cover-grid {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.cover-badge {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  border: 1px solid rgba(184,134,11,0.4);
+  padding: 6px 20px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+#cover h1 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  max-width: 700px;
+}
+
+#cover h1 span { color: var(--gold); }
+
+.cover-subtitle {
+  font-family: 'Source Serif 4', serif;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 50px;
+}
+
+.cover-computer {
+  margin: 30px auto;
+  width: 320px;
+  height: 220px;
+  position: relative;
+}
+
+/* CSS Computer Illustration */
+.comp-monitor {
+  width: 260px;
+  height: 170px;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 3px solid #444;
+  border-radius: 12px 12px 4px 4px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.comp-screen {
+  width: 230px;
+  height: 140px;
+  background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1628 100%);
+  border: 2px solid #333;
+  border-radius: 6px;
+  margin: 12px auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comp-screen::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 18px;
+  background: #1a2a3a;
+  border-bottom: 1px solid #2a3a4a;
+}
+
+.screen-dots {
+  position: absolute;
+  top: 5px; left: 10px;
+  display: flex; gap: 5px;
+}
+
+.screen-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+.screen-dot.red { background: #ff5f57; }
+.screen-dot.yellow { background: #febc2e; }
+.screen-dot.green { background: #28c840; }
+
+.screen-content {
+  margin-top: 18px;
+  padding: 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.screen-line {
+  height: 6px;
+  border-radius: 3px;
+  margin: 5px 8px;
+  background: rgba(100,200,255,0.6);
+}
+
+.screen-line.short { width: 55%; background: rgba(180,230,100,0.5); }
+.screen-line.med { width: 75%; }
+.screen-line.long { width: 90%; }
+.screen-line.blink {
+  width: 8px; height: 14px;
+  background: rgba(100,255,100,0.8);
+  animation: blink 1s infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+.comp-stand {
+  width: 40px; height: 14px;
+  background: linear-gradient(to bottom, #333, #222);
+  margin: 0 auto;
+  border-radius: 0 0 4px 4px;
+}
+
+.comp-base {
+  width: 100px; height: 10px;
+  background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  margin: 0 auto;
+  border-radius: 0 0 6px 6px;
+  border-top: 1px solid #444;
+}
+
+.comp-keyboard {
+  width: 240px;
+  height: 20px;
+  background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+  border: 1px solid #444;
+  border-radius: 4px;
+  margin: 8px auto 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  padding: 3px 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+.key {
+  background: #3a3a3a;
+  border-radius: 2px;
+  height: 10px;
+  border-bottom: 1px solid #555;
+}
+
+.cover-chapters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  max-width: 600px;
+}
+
+.cover-ch-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.start-btn {
+  margin-top: 40px;
+  padding: 16px 48px;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.start-btn:hover {
+  background: #d4a017;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184,134,11,0.4);
+}
+
+/* ── CHAPTER PAGE ── */
+.chapter-page {
+  display: none;
+  padding: 60px 70px 80px;
+  max-width: 900px;
+  animation: fadeIn 0.4s ease;
+}
+
+.chapter-page.active { display: block; }
+
+@keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+.chapter-header {
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 3px solid var(--border);
+  position: relative;
+}
+
+.chapter-header::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 80px; height: 3px;
+  background: var(--accent);
+}
+
+.ch-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.chapter-page h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  color: var(--blue);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.chapter-intro {
+  font-size: 16px;
+  color: #555;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+/* SECTIONS */
+.section { margin-bottom: 50px; }
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 16px;
+  padding-left: 16px;
+  border-left: 4px solid var(--gold);
+}
+
+.section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--teal);
+  margin: 24px 0 10px;
+}
+
+.section p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #2a2a2a;
+  margin-bottom: 14px;
+}
+
+/* DIAGRAM / VISUAL BOXES */
+.diagram-box {
+  background: var(--diagram-bg);
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  padding: 28px;
+  margin: 24px 0;
+  position: relative;
+}
+
+.diagram-box .diagram-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+/* ── GENERATION TIMELINE ── */
+.gen-timeline {
+  display: flex;
+  gap: 0;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+
+.gen-card {
+  flex: 1;
+  min-width: 110px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-right: none;
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.gen-card:first-child { border-radius: 6px 0 0 6px; }
+.gen-card:last-child { border-right: 1px solid var(--border); border-radius: 0 6px 6px 0; }
+.gen-card:hover { background: #fff8ee; }
+
+.gen-card .gen-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.gen-card .gen-era {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  margin: 3px 0;
+}
+
+.gen-card .gen-tech {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.gen-card .gen-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+/* ── IPO DIAGRAM ── */
+.ipo-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+
+.ipo-box {
+  background: var(--blue);
+  color: #fff;
+  padding: 20px 24px;
+  text-align: center;
+  border-radius: 6px;
+  min-width: 120px;
+}
+
+.ipo-box.process { background: var(--accent); }
+.ipo-box.output { background: var(--teal); }
+
+.ipo-box .ipo-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.ipo-box .ipo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ipo-box .ipo-example {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+.ipo-arrow {
+  font-size: 28px;
+  color: var(--gold);
+  margin: 0 6px;
+  font-weight: 900;
+}
+
+/* ── CPU DIAGRAM ── */
+.cpu-diagram {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.cpu-box {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.cpu-main {
+  background: linear-gradient(135deg, #c0392b, #8b2020);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  border: 3px solid var(--gold);
+}
+
+.cpu-main .cpu-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.cpu-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cpu-unit {
+  background: rgba(255,255,255,0.15);
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cpu-io-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cpu-io-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cpu-io-item .io-dot {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cpu-arrow-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cpu-double-arrow {
+  font-size: 18px;
+  color: var(--gold);
+}
+
+/* ── DEVICES GRID ── */
+.devices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.device-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.device-card:hover {
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.device-card .dev-icon { font-size: 30px; margin-bottom: 6px; }
+
+.device-card .dev-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+
+.device-card .dev-desc {
+  font-size: 11px;
+  color: #777;
+  line-height: 1.4;
+}
+
+/* ── SOFTWARE TREE ── */
+.sw-tree {
+  padding: 10px 0;
+}
+
+.sw-root {
+  background: var(--blue);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.sw-branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-left: 24px;
+  border-left: 3px solid var(--gold);
+}
+
+.sw-branch {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sw-branch-header {
+  background: var(--teal);
+  color: #fff;
+  padding: 10px 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sw-branch-items { padding: 10px 14px; }
+
+.sw-item {
+  font-size: 13px;
+  color: #444;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0e8e0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sw-item:last-child { border: none; }
+.sw-item::before { content: '→'; color: var(--gold); font-size: 11px; }
+
+/* ── OS COMPARISON ── */
+.os-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.os-card {
+  border-radius: 10px;
+  padding: 20px 14px;
+  text-align: center;
+  border: 2px solid var(--border);
+  background: #fff;
+}
+
+.os-card .os-icon { font-size: 36px; margin-bottom: 8px; }
+.os-card .os-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.os-card .os-desc { font-size: 12px; color: #666; line-height: 1.5; }
+
+/* ── NUMBER SYSTEMS ── */
+.num-conversion {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--code-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+  overflow-x: auto;
+}
+
+.num-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.num-badge {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.badge-dec { background: #1e5f1e; color: #90ee90; }
+.badge-bin { background: #1e1e5f; color: #90b0ff; }
+.badge-oct { background: #5f3e1e; color: #ffb870; }
+.badge-hex { background: #4a1e5f; color: #d890ff; }
+
+.num-val { font-size: 18px; font-weight: 600; color: #fff; }
+
+/* ── MEMORY HIERARCHY ── */
+.mem-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.mem-level {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s;
+  cursor: default;
+}
+
+.mem-level:hover { transform: scaleX(1.02); }
+
+.mem-level.registers { width: 18%; background: linear-gradient(90deg, #8b0000, #c0392b); }
+.mem-level.cache { width: 32%; background: linear-gradient(90deg, #b8520a, #e67e22); }
+.mem-level.ram { width: 52%; background: linear-gradient(90deg, #1a5276, #2980b9); }
+.mem-level.rom { width: 62%; background: linear-gradient(90deg, #1e5f4a, #27ae60); }
+.mem-level.secondary { width: 80%; background: linear-gradient(90deg, #4a235a, #8e44ad); }
+.mem-level.cloud { width: 95%; background: linear-gradient(90deg, #2c3e50, #546e7a); }
+
+.mem-level .mem-name { font-family: 'Playfair Display', serif; }
+.mem-level .mem-speed { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.85; }
+
+/* ── NETWORK TOPOLOGY ── */
+.topology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.topo-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.topo-visual {
+  height: 130px;
+  background: var(--diagram-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.topo-name {
+  background: var(--blue);
+  color: #fff;
+  padding: 8px 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.topo-desc {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* SVG nodes */
+.node-circle {
+  fill: var(--blue);
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+
+.node-line { stroke: var(--teal); stroke-width: 2; }
+
+/* ── SECURITY THREAT CARDS ── */
+.threat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.threat-card {
+  background: #fff;
+  border-radius: 8px;
+  border-top: 4px solid;
+  padding: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.threat-card.virus { border-top-color: #e74c3c; }
+.threat-card.worm { border-top-color: #e67e22; }
+.threat-card.trojan { border-top-color: #9b59b6; }
+.threat-card.ransom { border-top-color: #c0392b; }
+.threat-card.phish { border-top-color: #2980b9; }
+.threat-card.spy { border-top-color: #16a085; }
+
+.threat-card .threat-icon { font-size: 28px; margin-bottom: 8px; }
+.threat-card .threat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.threat-card .threat-desc { font-size: 12px; color: #555; line-height: 1.6; }
+
+/* ── FLOWCHART ── */
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 10px;
+}
+
+.flow-node {
+  padding: 12px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Source Serif 4', serif;
+  color: #fff;
+  text-align: center;
+}
+
+.flow-node.oval {
+  background: var(--blue);
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.flow-node.rect {
+  background: var(--teal);
+  border-radius: 4px;
+  min-width: 180px;
+}
+
+.flow-node.diamond-wrap {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-node.diamond {
+  background: var(--accent);
+  transform: rotate(45deg);
+  width: 80px;
+  height: 80px;
+  position: absolute;
+}
+
+.flow-node.diamond-wrap span {
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+.flow-arrow {
+  font-size: 22px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* ── EMERGING TECH ── */
+.tech-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.tech-card {
+  border-radius: 10px;
+  padding: 22px 18px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -20%;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+
+.tech-card.ai { background: linear-gradient(135deg, #1a237e, #283593); }
+.tech-card.cloud { background: linear-gradient(135deg, #0d47a1, #1565c0); }
+.tech-card.iot { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
+.tech-card.vr { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+.tech-card.blockchain { background: linear-gradient(135deg, #e65100, #f57c00); }
+.tech-card.robotics { background: linear-gradient(135deg, #b71c1c, #c62828); }
+
+.tech-card .tech-icon { font-size: 36px; margin-bottom: 10px; }
+.tech-card .tech-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tech-card .tech-desc { font-size: 13px; opacity: 0.9; line-height: 1.6; }
+
+/* ── INFO BOX ── */
+.info-box {
+  background: var(--light-blue);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin: 18px 0;
+}
+
+.info-box.gold {
+  background: #fdf8e1;
+  border-left-color: var(--gold);
+}
+
+.info-box.green {
+  background: #e8f5e9;
+  border-left-color: var(--teal);
+}
+
+.info-box.red {
+  background: #fdecea;
+  border-left-color: var(--accent);
+}
+
+.info-box .info-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.info-box p { font-size: 14px; color: #333; margin: 0; line-height: 1.7; }
+
+/* ── TABLE ── */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 16px 0;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.styled-table thead {
+  background: var(--blue);
+  color: #fff;
+}
+
+.styled-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.styled-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  color: #333;
+  vertical-align: top;
+}
+
+.styled-table tr:last-child td { border-bottom: none; }
+.styled-table tr:nth-child(even) td { background: #faf5ed; }
+
+/* ── QUIZ ── */
+.quiz-box {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  margin: 30px 0;
+}
+
+.quiz-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--blue);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.quiz-question {
+  margin-bottom: 20px;
+}
+
+.quiz-question p {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.quiz-option:hover { border-color: var(--blue); background: var(--light-blue); }
+.quiz-option.correct { background: #e8f5e9; border-color: var(--teal); color: var(--teal); }
+.quiz-option.wrong { background: #fdecea; border-color: var(--accent); color: var(--accent); }
+
+.quiz-option input { accent-color: var(--blue); }
+
+.quiz-submit {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.quiz-submit:hover { background: var(--teal); }
+
+.quiz-result {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  display: none;
+}
+
+/* ── CHAPTER NAV ── */
+.chapter-nav {
+  display: flex;
+  gap: 14px;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 2px solid var(--border);
+}
+
+.chapter-nav button {
+  padding: 13px 26px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.btn-prev {
+  background: #fff;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.btn-prev:hover { background: var(--blue); color: #fff; }
+
+.btn-next {
+  background: var(--blue);
+  color: #fff;
+  border: 2px solid var(--blue);
+}
+
+.btn-next:hover { background: var(--teal); border-color: var(--teal); }
+
+/* ── DEFINITION BOX ── */
+.definition {
+  background: linear-gradient(135deg, #fff8e1, #fffde7);
+  border: 2px solid var(--gold);
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  position: relative;
+}
+
+.definition::before {
+  content: '"';
+  position: absolute;
+  top: -10px; left: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.definition .def-term {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.definition p { font-size: 15px; line-height: 1.7; color: #333; margin: 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; }
+  .chapter-page { padding: 40px 24px 60px; }
+  #menu-btn { display: block; }
+  .cpu-diagram { grid-template-columns: 1fr; }
+  .sw-branches { grid-template-columns: 1fr; }
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+}
+
+.overlay.active { display: block; }
+
+/* Generation visuals */
+.gen-visual {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Network device visual */
+.network-devices {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.net-device-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.net-device-card:hover { border-color: var(--teal); }
+.net-device-card .nd-icon { font-size: 28px; margin-bottom: 6px; }
+.net-device-card .nd-name { font-family:'Playfair Display',serif; font-size:13px; font-weight:700; color:var(--blue); margin-bottom:4px; }
+.net-device-card .nd-desc { font-size:11px; color:#666; line-height:1.4; }
+
+/* Binary arithmetic demo */
+.binary-demo {
+  background: var(--code-bg);
+  padding: 20px 26px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--code-text);
+  font-size: 15px;
+  line-height: 2.2;
+  overflow-x: auto;
+}
+
+.bin-row { display: flex; gap: 4px; align-items: center; }
+.bin-label { color: var(--gold); width: 80px; font-size: 12px; }
+.bin-val { letter-spacing: 4px; font-size: 17px; color: #fff; }
+.bin-result { color: #90ee90; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 6px; }
+
+/* Programming flowchart */
+.algo-example {
+  background: var(--diagram-bg);
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+}
+
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="course-code">CSC 101 / ICT 101</div>
+    <h2>Introduction to<br>Computer Science</h2>
+  </div>
+  <nav>
+    <a class="nav-chapter active" onclick="showPage('cover')">
+      <span class="ch-num">COVER</span>Table of Contents
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch1')">
+      <span class="ch-num">CHAPTER 01</span>History & Evolution
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch2')">
+      <span class="ch-num">CHAPTER 02</span>Basic Computer Concepts
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch3')">
+      <span class="ch-num">CHAPTER 03</span>Computer Hardware
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch4')">
+      <span class="ch-num">CHAPTER 04</span>Computer Software
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch5')">
+      <span class="ch-num">CHAPTER 05</span>Operating Systems
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch6')">
+      <span class="ch-num">CHAPTER 06</span>Number Systems & Data
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch7')">
+      <span class="ch-num">CHAPTER 07</span>Memory & Storage
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch8')">
+      <span class="ch-num">CHAPTER 08</span>Networks & Internet
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch9')">
+      <span class="ch-num">CHAPTER 09</span>Microsoft Office & Productivity
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch10')">
+      <span class="ch-num">CHAPTER 10</span>Security & Ethics
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch11')">
+      <span class="ch-num">CHAPTER 11</span>Programming Fundamentals
+    </a>
+    <a class="nav-chapter" onclick="showPage('ch12')">
+      <span class="ch-num">CHAPTER 12</span>Emerging Technologies
+    </a>
+  </nav>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="topbar">
+    <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="title">Introduction to Computer Science</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5)" id="pageIndicator">Cover</div>
+  </div>
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div id="cover" class="active">
+    <div class="cover-grid"></div>
+    <div class="cover-badge">CSC 101 / ICT 101 / COS 101</div>
+    <h1>Introduction to<br><span>Computer Science</span></h1>
+    <div class="cover-subtitle">A Complete Interactive Textbook — 12 Chapters</div>
+
+    <div class="cover-computer">
+      <div class="comp-monitor">
+        <div class="comp-screen">
+          <div class="screen-dots">
+            <div class="screen-dot red"></div>
+            <div class="screen-dot yellow"></div>
+            <div class="screen-dot green"></div>
+          </div>
+          <div class="screen-content">
+            <div class="screen-line long"></div>
+            <div class="screen-line med"></div>
+            <div class="screen-line short"></div>
+            <div class="screen-line long"></div>
+            <div class="screen-line med"></div>
+          </div>
+        </div>
+        <div class="comp-stand"></div>
+        <div class="comp-base"></div>
+      </div>
+      <div class="comp-keyboard">
+        <div class="key"></div><div class="key"></div><div class="key"></div>
+        <div class="key"></div><div class="key"></div><div class="key"></div>
+        <div class="key"></div><div class="key"></div><div class="key"></div>
+        <div class="key"></div><div class="key"></div><div class="key"></div>
+      </div>
+    </div>
+
+    <div class="cover-chapters">
+      <span class="cover-ch-tag">History & Evolution</span>
+      <span class="cover-ch-tag">Hardware</span>
+      <span class="cover-ch-tag">Software</span>
+      <span class="cover-ch-tag">Operating Systems</span>
+      <span class="cover-ch-tag">Number Systems</span>
+      <span class="cover-ch-tag">Memory & Storage</span>
+      <span class="cover-ch-tag">Networking</span>
+      <span class="cover-ch-tag">Security & Ethics</span>
+      <span class="cover-ch-tag">Programming</span>
+      <span class="cover-ch-tag">Emerging Technologies</span>
+    </div>
+    <button class="start-btn" onclick="showPage('ch1')">Begin Reading →</button>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 1 ═══════════════ -->
+  <div id="ch1" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 01</div>
+      <h1>History and Evolution of Computers</h1>
+      <p class="chapter-intro">From ancient counting tools to modern supercomputers — understanding where computers came from helps us appreciate how powerful they have become and where they are heading.</p>
+    </div>
+
+    <div class="section">
+      <h2>1.1 What is a Computer?</h2>
+      <div class="definition">
+        <div class="def-term">Computer</div>
+        <p>A computer is an electronic device that accepts data as input, processes it according to a set of instructions (called a <strong>program</strong>), and produces a meaningful result (output), which it can also store for future use.</p>
+      </div>
+      <p>The word <em>computer</em> originally meant a person who performs calculations. Today it refers to an electronic machine that can perform complex calculations and operations at extremely high speeds without human intervention during the process.</p>
+      <p>A computer is not just a calculator. It can store large amounts of information, run thousands of different programs, communicate with other computers around the world, control machines, and simulate real-world environments. Every smartphone, ATM machine, aircraft navigation system, and hospital monitoring device is a form of computer.</p>
+    </div>
+
+    <div class="section">
+      <h2>1.2 Characteristics of Computers</h2>
+      <p>Computers have several key characteristics that make them indispensable tools in modern life:</p>
+      <table class="styled-table">
+        <thead><tr><th>Characteristic</th><th>Meaning</th><th>Real-World Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Speed</strong></td><td>Computers can process millions of instructions per second (MIPS). Modern CPUs operate at billions of cycles per second (GHz).</td><td>A bank's computer can process thousands of transactions per second that would take a human clerk weeks.</td></tr>
+          <tr><td><strong>Accuracy</strong></td><td>Computers almost never make errors on their own. Errors in output are usually the result of incorrect input or bad program instructions (GIGO — Garbage In, Garbage Out).</td><td>A weather forecast computer runs millions of accurate calculations; errors come from imprecise weather sensor data, not the machine.</td></tr>
+          <tr><td><strong>Storage</strong></td><td>Computers can store vast amounts of data indefinitely — text, images, videos, programs — and retrieve them in milliseconds.</td><td>A modern hard drive can store over 1 million books worth of text data.</td></tr>
+          <tr><td><strong>Diligence</strong></td><td>Unlike humans, computers do not get tired, bored, or lose concentration. They perform the same task with identical performance at 3am as at 9am.</td><td>A satellite computer calculates its position every second, 24/7, for years without rest.</td></tr>
+          <tr><td><strong>Versatility</strong></td><td>The same computer can perform wildly different tasks by simply running different software — from writing documents to playing games to controlling robots.</td><td>Your laptop can be a music studio, word processor, gaming device, and video conferencing tool — all within minutes of each other.</td></tr>
+          <tr><td><strong>Automation</strong></td><td>Once given instructions, computers can carry out long complex tasks automatically without step-by-step human guidance.</td><td>An automated payroll system calculates and pays thousands of employees every month without a person manually doing each calculation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>1.3 Generations of Computers</h2>
+      <p>Computer technology has evolved dramatically over the decades. Historians group this evolution into five distinct <strong>generations</strong>, each defined by a major technological breakthrough:</p>
+
+      <div class="diagram-box">
+        <div class="diagram-title">🖥 The Five Generations of Computers</div>
+        <div class="gen-timeline">
+          <div class="gen-card">
+            <div class="gen-visual">🔌</div>
+            <div class="gen-num">1st</div>
+            <div class="gen-era">1940–1956</div>
+            <div class="gen-tech">Vacuum Tubes<br>ENIAC, UNIVAC<br>Machine language</div>
+          </div>
+          <div class="gen-card">
+            <div class="gen-visual">⚡</div>
+            <div class="gen-num">2nd</div>
+            <div class="gen-era">1956–1963</div>
+            <div class="gen-tech">Transistors<br>IBM 1401<br>Assembly language</div>
+          </div>
+          <div class="gen-card">
+            <div class="gen-visual">🔬</div>
+            <div class="gen-num">3rd</div>
+            <div class="gen-era">1964–1971</div>
+            <div class="gen-tech">Integrated Circuits<br>IBM System/360<br>High-level languages</div>
+          </div>
+          <div class="gen-card">
+            <div class="gen-visual">💾</div>
+            <div class="gen-num">4th</div>
+            <div class="gen-era">1971–Present</div>
+            <div class="gen-tech">Microprocessors<br>IBM PC, Apple Mac<br>Personal computers</div>
+          </div>
+          <div class="gen-card">
+            <div class="gen-visual">🤖</div>
+            <div class="gen-num">5th</div>
+            <div class="gen-era">Present–Future</div>
+            <div class="gen-tech">AI & Parallel Processing<br>Voice recognition<br>Natural language</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>First Generation (1940–1956): Vacuum Tubes</h3>
+      <p>The earliest computers used <strong>vacuum tubes</strong> — glass tubes about the size of a light bulb that controlled the flow of electricity. Machines like ENIAC (Electronic Numerical Integrator and Computer) filled entire rooms, consumed as much power as a small town, and required teams of engineers to maintain. They were programmed using <strong>machine language</strong> — writing instructions directly in 1s and 0s, which was extremely difficult and time-consuming. ENIAC alone contained over 17,000 vacuum tubes and weighed 30 tons.</p>
+
+      <h3>Second Generation (1956–1963): Transistors</h3>
+      <p>The invention of the <strong>transistor</strong> — a tiny electronic switch made of semiconductor material — was a revolution. Transistors were smaller, faster, cheaper, and used far less electricity than vacuum tubes. They also generated less heat and were far more reliable. This generation introduced <strong>assembly language</strong>, which allowed programmers to use short codes (like ADD, MOV) instead of raw binary. Early business computers like the IBM 1401 began to appear in banks and insurance companies.</p>
+
+      <h3>Third Generation (1964–1971): Integrated Circuits</h3>
+      <p>Engineers discovered they could place multiple transistors, resistors, and capacitors on a single small chip of silicon — creating an <strong>Integrated Circuit (IC)</strong>. This made computers even smaller, faster, and cheaper. IBM's System/360 became the first family of computers designed to run the same software across different hardware sizes. High-level programming languages like FORTRAN and COBOL became standard, allowing scientists and business people to write programs without deep technical knowledge of the machine.</p>
+
+      <h3>Fourth Generation (1971–Present): Microprocessors</h3>
+      <p>Intel's invention of the <strong>microprocessor</strong> in 1971 placed an entire CPU on a single chip the size of a thumbnail. This was the birth of the <strong>personal computer</strong>. The Apple II (1977), IBM PC (1981), and Apple Macintosh (1984) brought computing into homes and schools. Graphical operating systems, the internet, and the World Wide Web all emerged from this generation. Today's smartphones contain processors billions of times more powerful than the room-sized computers of the 1950s.</p>
+
+      <h3>Fifth Generation (Present–Future): Artificial Intelligence</h3>
+      <p>The fifth generation focuses on computers that can <strong>learn, reason, and solve problems</strong> — capabilities once thought uniquely human. Technologies like natural language processing (talking to your phone), machine learning (Netflix recommendations), facial recognition, and autonomous vehicles define this era. Quantum computing — which uses quantum physics instead of traditional binary electronics — promises to solve in seconds problems that would take today's fastest computers millions of years.</p>
+    </div>
+
+    <div class="section">
+      <h2>1.4 Types of Computers</h2>
+
+      <h3>By Technology: Analog, Digital, and Hybrid</h3>
+      <table class="styled-table">
+        <thead><tr><th>Type</th><th>How It Works</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Analog Computer</strong></td><td>Works with continuous physical quantities like voltage, pressure, or temperature. Represents data as a continuously varying signal rather than discrete numbers.</td><td>Speedometer in a car, thermometer, old-style aircraft altimeters</td></tr>
+          <tr><td><strong>Digital Computer</strong></td><td>Works with discrete values — essentially all data is represented as combinations of 0s and 1s (binary). All modern computers are digital.</td><td>Laptops, smartphones, calculators, servers</td></tr>
+          <tr><td><strong>Hybrid Computer</strong></td><td>Combines features of both analog and digital computers. Uses analog components for certain measurements and digital components for calculation and control.</td><td>Hospital ICU monitoring systems, petrol pumps, scientific research equipment</td></tr>
+        </tbody>
+      </table>
+
+      <h3>By Size and Power</h3>
+      <div class="devices-grid">
+        <div class="device-card">
+          <div class="dev-icon">📱</div>
+          <div class="dev-name">Microcomputer</div>
+          <div class="dev-desc">Personal computers, laptops, tablets, and smartphones. Designed for individual use. Most common type.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🖥️</div>
+          <div class="dev-name">Minicomputer</div>
+          <div class="dev-desc">Mid-range computers used by departments within large organisations. Supports multiple users simultaneously.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🏢</div>
+          <div class="dev-name">Mainframe</div>
+          <div class="dev-desc">Very large, powerful computers used by banks, airlines, and governments to process millions of transactions daily.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">⚡</div>
+          <div class="dev-name">Supercomputer</div>
+          <div class="dev-desc">The fastest and most powerful computers on Earth. Used for weather forecasting, nuclear simulations, and scientific research.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🔧</div>
+          <div class="dev-name">Embedded Computer</div>
+          <div class="dev-desc">Tiny computers built into everyday devices — washing machines, car engines, medical devices, and traffic lights.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">☁️</div>
+          <div class="dev-name">Server</div>
+          <div class="dev-desc">Powerful computers that store and provide data and services to other computers over a network or the internet.</div>
+        </div>
+      </div>
+
+      <div class="info-box gold">
+        <div class="info-title">💡 Real-World Context</div>
+        <p>When you watch a YouTube video, the video is stored on Google's massive <strong>server farms</strong> containing hundreds of thousands of computers. When you use your phone to watch it, that's a <strong>microcomputer</strong>. The weather forecast shown before the video was computed on a <strong>supercomputer</strong>. All three types working together — this is how modern computing works.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>1.5 Fields Where Computers Are Used</h2>
+      <p>Computers have transformed virtually every field of human activity. Here are some of the most important applications:</p>
+      <table class="styled-table">
+        <thead><tr><th>Field</th><th>How Computers Are Used</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🏥 Medicine & Healthcare</strong></td><td>Patient record management, MRI and X-ray analysis, robotic surgery, drug discovery, hospital monitoring systems, and telemedicine consultations.</td></tr>
+          <tr><td><strong>🎓 Education</strong></td><td>E-learning platforms, computer-based testing, virtual classrooms, research databases, and educational simulations.</td></tr>
+          <tr><td><strong>🏦 Banking & Finance</strong></td><td>ATM transactions, online banking, fraud detection, stock market trading, loan management, and international money transfers.</td></tr>
+          <tr><td><strong>✈️ Transportation</strong></td><td>Airline reservations, GPS navigation, air traffic control, self-driving vehicles, train scheduling, and logistics management.</td></tr>
+          <tr><td><strong>🎬 Entertainment</strong></td><td>Video games, movie production (CGI effects), music production, streaming services, virtual reality experiences.</td></tr>
+          <tr><td><strong>🌾 Agriculture</strong></td><td>Soil analysis, crop monitoring using drones, automated irrigation systems, weather prediction for farming, and supply chain management.</td></tr>
+          <tr><td><strong>🔬 Science & Research</strong></td><td>Climate modelling, genome sequencing, space exploration, physics simulations, and big data analysis.</td></tr>
+          <tr><td><strong>🏭 Manufacturing</strong></td><td>Computer-aided design (CAD), robotic assembly lines, quality control, inventory management, and supply chain optimisation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quiz-box">
+      <h3>📝 Chapter 1 Review Quiz</h3>
+      <div class="quiz-question">
+        <p>1. Which generation of computers used vacuum tubes as the main technology?</p>
+        <div class="quiz-options">
+          <label class="quiz-option"><input type="radio" name="q1" value="b"> Second Generation</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="a"> First Generation</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="c"> Third Generation</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="d"> Fourth Generation</label>
+        </div>
+      </div>
+      <div class="quiz-question">
+        <p>2. A computer that combines both analog and digital features is called:</p>
+        <div class="quiz-options">
+          <label class="quiz-option"><input type="radio" name="q2" value="a"> Supercomputer</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="b"> Mainframe</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="c"> Hybrid Computer</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="d"> Microcomputer</label>
+        </div>
+      </div>
+      <div class="quiz-question">
+        <p>3. The ability of a computer to perform the same task without getting tired is called:</p>
+        <div class="quiz-options">
+          <label class="quiz-option"><input type="radio" name="q3" value="a"> Speed</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="b"> Accuracy</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="c"> Versatility</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="d"> Diligence</label>
+        </div>
+      </div>
+      <button class="quiz-submit" onclick="gradeQuiz('ch1')">Submit Answers</button>
+      <div class="quiz-result" id="result-ch1"></div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-next" onclick="showPage('ch2')">Chapter 2: Basic Concepts →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 2 ═══════════════ -->
+  <div id="ch2" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 02</div>
+      <h1>Basic Computer Concepts</h1>
+      <p class="chapter-intro">Before diving into hardware and software, it's essential to understand the core ideas that govern how every computer system works — from the difference between data and information, to the fundamental cycle of computing.</p>
+    </div>
+
+    <div class="section">
+      <h2>2.1 Data vs. Information</h2>
+      <p>These two words are often used interchangeably, but in computing they have very specific and distinct meanings:</p>
+
+      <div class="definition">
+        <div class="def-term">Data</div>
+        <p><strong>Data</strong> is raw, unprocessed facts and figures without context or meaning. Data by itself tells us nothing useful. It is the input that is fed into a computer for processing.</p>
+      </div>
+
+      <div class="definition">
+        <div class="def-term">Information</div>
+        <p><strong>Information</strong> is data that has been processed, organised, and given context so that it becomes meaningful and useful to the person receiving it.</p>
+      </div>
+
+      <table class="styled-table">
+        <thead><tr><th>Data (Raw Input)</th><th>Processing</th><th>Information (Meaningful Output)</th></tr></thead>
+        <tbody>
+          <tr><td>67, 82, 45, 90, 71</td><td>Calculate average</td><td>"The class average score is 71%"</td></tr>
+          <tr><td>37.2, 38.1, 36.9, 39.0</td><td>Compare to normal (37°C)</td><td>"Patient has a fever of 39.0°C — above normal"</td></tr>
+          <tr><td>1200, 800, 1500, 950</td><td>Sum and label</td><td>"Total monthly sales: ₦4,450"</td></tr>
+          <tr><td>Male, 52, Lagos, 180cm</td><td>Organise into a record</td><td>"Patient record: Male, Age 52, Lagos, Height 180cm"</td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-box green">
+        <div class="info-title">📌 Key Insight</div>
+        <p>Think of it this way: if you receive a phone number "08012345678" without a name, that is just <strong>data</strong>. But when your phone shows "Mum calling", that is <strong>information</strong> — the data has been given context and meaning.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>2.2 The IPO Cycle</h2>
+      <p>Every computer operation — no matter how simple or complex — follows a fundamental three-step cycle called the <strong>IPO Cycle</strong>: Input → Process → Output. Some textbooks extend this to IPOS (adding Storage).</p>
+
+      <div class="diagram-box">
+        <div class="diagram-title">⚙ The IPO Cycle — How Every Computer Works</div>
+        <div class="ipo-flow">
+          <div class="ipo-box">
+            <div class="ipo-label">STEP 1</div>
+            <div class="ipo-title">INPUT</div>
+            <div class="ipo-example">Keyboard · Mouse<br>Microphone · Scanner<br>Sensor · Camera</div>
+          </div>
+          <div class="ipo-arrow">→</div>
+          <div class="ipo-box process">
+            <div class="ipo-label">STEP 2</div>
+            <div class="ipo-title">PROCESS</div>
+            <div class="ipo-example">CPU calculates<br>Program executes<br>Data is transformed</div>
+          </div>
+          <div class="ipo-arrow">→</div>
+          <div class="ipo-box output">
+            <div class="ipo-label">STEP 3</div>
+            <div class="ipo-title">OUTPUT</div>
+            <div class="ipo-example">Monitor · Printer<br>Speaker · Projector<br>Screen display</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Understanding the IPO Cycle Through Real Examples</h3>
+      <table class="styled-table">
+        <thead><tr><th>Scenario</th><th>Input</th><th>Process</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>Writing a document</td><td>Typing on keyboard</td><td>Word processor formats text</td><td>Formatted text on screen</td></tr>
+          <tr><td>Paying with ATM</td><td>PIN + amount entered</td><td>Bank server verifies and deducts</td><td>Cash dispensed + receipt printed</td></tr>
+          <tr><td>Playing music</td><td>Song file selected by clicking</td><td>Media player decodes audio data</td><td>Sound through speakers</td></tr>
+          <tr><td>Google search</td><td>Search query typed</td><td>Google's algorithm searches billions of pages</td><td>List of relevant websites displayed</td></tr>
+          <tr><td>Face unlock on phone</td><td>Camera captures your face</td><td>AI compares face to stored template</td><td>Phone unlocked (or denied)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>2.3 Components of a Computer System</h2>
+      <p>A complete computer system is made up of four interrelated components. Remove any one of them and the system cannot function properly:</p>
+      <table class="styled-table">
+        <thead><tr><th>Component</th><th>Description</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🔧 Hardware</strong></td><td>All the physical, tangible parts of a computer — everything you can touch and see.</td><td>Monitor, CPU, keyboard, hard drive, RAM chips</td></tr>
+          <tr><td><strong>💿 Software</strong></td><td>Programs and instructions that tell the hardware what to do. Software has no physical form — it exists as data.</td><td>Windows OS, Microsoft Word, Chrome browser, games</td></tr>
+          <tr><td><strong>👤 People (Liveware)</strong></td><td>The humans who design, operate, program, and maintain computer systems. No computer system works without humans.</td><td>Programmers, system administrators, users, IT support</td></tr>
+          <tr><td><strong>📋 Data</strong></td><td>The raw facts and figures that computers store and process. Data is what gives the hardware and software a purpose.</td><td>Student records, transaction logs, photos, emails, documents</td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <div class="info-title">🔗 How They Work Together</div>
+        <p>Think of it like a restaurant: <strong>Hardware</strong> = the kitchen equipment; <strong>Software</strong> = the recipes; <strong>People</strong> = the chefs and waiters; <strong>Data</strong> = the ingredients. You need all four to serve a meal — just as you need all four to run a computer system.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>2.4 Capabilities and Limitations of Computers</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;">
+        <div class="info-box green">
+          <div class="info-title">✅ Capabilities</div>
+          <p>• Process data at incredible speeds<br>• Store vast amounts of information<br>• Perform repetitive tasks tirelessly<br>• Multitask — run many programs at once<br>• Communicate globally via networks<br>• Simulate complex real-world events<br>• Automate routine tasks completely</p>
+        </div>
+        <div class="info-box red">
+          <div class="info-title">❌ Limitations</div>
+          <p>• Cannot think or feel — no common sense<br>• Cannot work without electricity (power dependent)<br>• Cannot learn on its own without being programmed<br>• Subject to viruses and hacking<br>• Cannot make ethical or moral judgments<br>• Expensive to purchase and maintain<br>• Creates dependency and social isolation</p>
+        </div>
+      </div>
+
+      <p>It is important to understand that <strong>computers are tools, not intelligent beings</strong>. A computer will faithfully execute any instruction it is given — even a harmful or incorrect one. The intelligence, ethics, and judgment must come from the humans who design, program, and operate them.</p>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch1')">← Chapter 1</button>
+      <button class="btn-next" onclick="showPage('ch3')">Chapter 3: Hardware →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 3 ═══════════════ -->
+  <div id="ch3" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 03</div>
+      <h1>Computer Hardware</h1>
+      <p class="chapter-intro">Hardware is everything physical about a computer — every chip, wire, screen, and button. Understanding hardware means understanding the actual machine beneath all the software.</p>
+    </div>
+
+    <div class="section">
+      <h2>3.1 What is Hardware?</h2>
+      <div class="definition">
+        <div class="def-term">Hardware</div>
+        <p>Hardware refers to all the physical, tangible components of a computer system — the parts you can see, touch, and physically handle. Hardware is useless without software to tell it what to do, and software is useless without hardware to run on.</p>
+      </div>
+      <p>Hardware is broadly divided into four categories: <strong>Input devices</strong> (bring data in), <strong>Processing devices</strong> (work on the data), <strong>Output devices</strong> (display results), and <strong>Storage devices</strong> (save data).</p>
+    </div>
+
+    <div class="section">
+      <h2>3.2 Input Devices</h2>
+      <p>An <strong>input device</strong> is any hardware component that allows a user to enter data or instructions into a computer. Without input devices, a computer would have no way of receiving information from the outside world.</p>
+
+      <div class="devices-grid">
+        <div class="device-card">
+          <div class="dev-icon">⌨️</div>
+          <div class="dev-name">Keyboard</div>
+          <div class="dev-desc">The most common input device. Each key press sends a signal to the CPU. Keyboards have letter keys, number keys, function keys (F1–F12), and special keys (Ctrl, Alt, Del).</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🖱️</div>
+          <div class="dev-name">Mouse</div>
+          <div class="dev-desc">A pointing device that moves a cursor on screen. It detects movement on a surface and translates it to cursor movement. Has left/right click buttons and a scroll wheel.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🖨️</div>
+          <div class="dev-name">Scanner</div>
+          <div class="dev-desc">Converts physical documents and photos into digital images by shining light across the surface and measuring reflectance. Used in offices, hospitals, and libraries.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🎤</div>
+          <div class="dev-name">Microphone</div>
+          <div class="dev-desc">Converts sound waves into electrical signals that a computer can process. Used for voice commands, recording, and video calls. Works with speech-recognition software.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🕹️</div>
+          <div class="dev-name">Joystick</div>
+          <div class="dev-desc">A lever-based controller that inputs direction and movement data. Primarily used for gaming and also for controlling aircraft simulators and industrial machinery.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📷</div>
+          <div class="dev-name">Camera / Webcam</div>
+          <div class="dev-desc">Captures images and video and converts them into digital data. Used for facial recognition, video conferencing, surveillance, and photography.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">👆</div>
+          <div class="dev-name">Touch Screen</div>
+          <div class="dev-desc">Both an input AND output device. Detects the position of finger touches on its surface. Used in smartphones, ATMs, point-of-sale systems, and tablets.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📲</div>
+          <div class="dev-name">Barcode Reader</div>
+          <div class="dev-desc">Scans the black-and-white patterns on barcodes using a laser beam, converting them into product codes. Used in supermarkets, warehouses, and hospitals.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3.3 Output Devices</h2>
+      <p>An <strong>output device</strong> is any hardware that presents processed data from the computer to the user in a form that humans can understand — visually, as sound, or as a physical object.</p>
+
+      <div class="devices-grid">
+        <div class="device-card">
+          <div class="dev-icon">🖥️</div>
+          <div class="dev-name">Monitor (VDU)</div>
+          <div class="dev-desc">The primary visual output device. Displays text, images, and video using millions of tiny pixels. Modern monitors are LCD or OLED. Measured diagonally in inches.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🖨️</div>
+          <div class="dev-name">Printer</div>
+          <div class="dev-desc">Produces hard copies (physical printouts) of documents and images. Types include inkjet (home use), laser (office), dot-matrix (receipts/invoices), and 3D printers.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">🔊</div>
+          <div class="dev-name">Speakers</div>
+          <div class="dev-desc">Convert digital audio signals into sound waves we can hear. Used for music, alerts, voice responses, and video audio. Quality measured in watts and frequency range.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📽️</div>
+          <div class="dev-name">Projector</div>
+          <div class="dev-desc">Projects computer screen output onto a large surface. Used in classrooms, boardrooms, and cinemas for presentations and large-format display.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📠</div>
+          <div class="dev-name">Plotter</div>
+          <div class="dev-desc">A precision output device that draws vector graphics using pens or cutting tools. Used by architects, engineers, and designers for blueprints and technical drawings.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📟</div>
+          <div class="dev-name">Headphones</div>
+          <div class="dev-desc">Personal audio output devices worn over the ears. Provide private listening and are used with computers, phones, and audio equipment.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3.4 The Central Processing Unit (CPU)</h2>
+      <p>The <strong>CPU (Central Processing Unit)</strong> is the most important component of a computer. It is often called the <em>brain of the computer</em> — though unlike a brain, it has no intelligence; it simply executes instructions very, very fast.</p>
+
+      <div class="diagram-box">
+        <div class="diagram-title">🧠 Inside the CPU — How It Connects to Everything</div>
+        <div class="cpu-diagram">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px;text-align:center">INPUT SIDE</div>
+            <div class="cpu-io-list">
+              <div class="cpu-io-item"><div class="io-dot"></div>Keyboard input</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Mouse clicks</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Storage read</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Network data</div>
+            </div>
+          </div>
+          <div class="cpu-main">
+            <div class="cpu-title">CPU</div>
+            <div class="cpu-sub">
+              <div class="cpu-unit">🧮 ALU<br><small style="opacity:0.8;font-size:10px">Arithmetic & Logic Unit</small></div>
+              <div class="cpu-unit">🎛️ CU<br><small style="opacity:0.8;font-size:10px">Control Unit</small></div>
+              <div class="cpu-unit">📋 Registers<br><small style="opacity:0.8;font-size:10px">Tiny fast memory</small></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px;text-align:center">OUTPUT SIDE</div>
+            <div class="cpu-io-list">
+              <div class="cpu-io-item"><div class="io-dot"></div>Screen display</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Audio output</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Storage write</div>
+              <div class="cpu-io-item"><div class="io-dot"></div>Network send</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>The Arithmetic and Logic Unit (ALU)</h3>
+      <p>The <strong>ALU</strong> is the calculating engine inside the CPU. It performs two types of operations:</p>
+      <p><strong>Arithmetic operations:</strong> Addition, subtraction, multiplication, and division. Every calculation a computer makes — from adding two numbers to rendering a 3D game scene — ultimately reduces to these basic arithmetic operations performed billions of times per second.</p>
+      <p><strong>Logical operations:</strong> Comparisons such as "Is A greater than B?", "Is A equal to B?", "AND", "OR", "NOT". These comparisons are what allow computers to make decisions — if a password matches, grant access; if a file size is too large, show a warning.</p>
+
+      <h3>The Control Unit (CU)</h3>
+      <p>The <strong>Control Unit</strong> acts like the manager of the CPU. It does not perform calculations itself but instead <em>directs and coordinates</em> all the other components. The CU fetches the next instruction from memory, decodes it to understand what needs to happen, then signals the correct components (ALU, memory, I/O) to carry out that instruction. It then moves on to the next instruction — this cycle happening billions of times per second.</p>
+
+      <h3>CPU Performance Factors</h3>
+      <table class="styled-table">
+        <thead><tr><th>Factor</th><th>What It Means</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Clock Speed (GHz)</strong></td><td>How many instruction cycles the CPU completes per second. 1 GHz = 1 billion cycles per second.</td><td>A 3.5 GHz processor runs 3.5 billion cycles per second.</td></tr>
+          <tr><td><strong>Number of Cores</strong></td><td>Modern CPUs have multiple cores — each core is like a separate processor. More cores = more tasks handled simultaneously.</td><td>A quad-core CPU can run 4 tasks truly simultaneously.</td></tr>
+          <tr><td><strong>Cache Size</strong></td><td>Small, ultra-fast memory built directly into the CPU chip to hold frequently-used data.</td><td>L1, L2, L3 cache. More cache = faster performance.</td></tr>
+          <tr><td><strong>Architecture (bit width)</strong></td><td>64-bit CPUs can handle more data per cycle than 32-bit CPUs and can address much more RAM.</td><td>Most modern computers use 64-bit architecture.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>3.5 Storage Devices</h2>
+      <p>Storage devices hold data permanently or semi-permanently, even when the computer is turned off. There are two types:</p>
+
+      <h3>Primary Storage (Main Memory)</h3>
+      <p>Primary storage is directly accessible by the CPU at very high speeds. It is used to hold currently running programs and their data. Primary storage includes <strong>RAM</strong> and <strong>ROM</strong> (covered in detail in Chapter 7).</p>
+
+      <h3>Secondary Storage</h3>
+      <p>Secondary storage retains data even without power. It has much higher capacity but slower access times than primary storage.</p>
+      <div class="devices-grid">
+        <div class="device-card">
+          <div class="dev-icon">💽</div>
+          <div class="dev-name">HDD (Hard Disk Drive)</div>
+          <div class="dev-desc">Uses spinning magnetic disks to store data. Large capacity (up to 20TB+), affordable, but slower than SSD. Fragile — spinning parts can break if dropped.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">⚡</div>
+          <div class="dev-name">SSD (Solid State Drive)</div>
+          <div class="dev-desc">Uses flash memory chips with no moving parts. Much faster, quieter, and more durable than HDD. More expensive per GB. Standard in modern laptops.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">💾</div>
+          <div class="dev-name">USB Flash Drive</div>
+          <div class="dev-desc">Portable flash memory in a small plug-in device. Capacities range from 4GB to 2TB. Convenient for transferring files between computers.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">💿</div>
+          <div class="dev-name">Optical Disc (CD/DVD/Blu-ray)</div>
+          <div class="dev-desc">Data stored using laser-burned pits on a reflective surface. CDs hold ~700MB, DVDs ~4.7GB, Blu-ray ~25GB. Used for movies, software distribution, and archiving.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📼</div>
+          <div class="dev-name">Magnetic Tape</div>
+          <div class="dev-desc">Long strips of magnetic film that store data sequentially. Very high capacity and cheap per GB, but slow access. Used for long-term backups in large organizations.</div>
+        </div>
+        <div class="device-card">
+          <div class="dev-icon">📱</div>
+          <div class="dev-name">Memory Card (SD Card)</div>
+          <div class="dev-desc">Small removable flash storage used in cameras, phones, and tablets. Available in multiple speed classes and capacities from 2GB to 1TB.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3.6 Ports and Connectors</h2>
+      <p>Ports are sockets on the outside of a computer where you plug in external devices. They allow communication between the computer and peripherals:</p>
+      <table class="styled-table">
+        <thead><tr><th>Port/Connector</th><th>Purpose</th><th>Where Used</th></tr></thead>
+        <tbody>
+          <tr><td><strong>USB (A, C, Micro)</strong></td><td>Universal connection for keyboards, mice, flash drives, phones, and more. USB-C is the newest, reversible type.</td><td>All modern computers, phones, tablets</td></tr>
+          <tr><td><strong>HDMI</strong></td><td>High-Definition Multimedia Interface — transmits high-quality video AND audio in a single cable.</td><td>Connecting computer to TV, monitor, or projector</td></tr>
+          <tr><td><strong>VGA</strong></td><td>Older analog video connector for monitors. Lower quality than HDMI. Still found on older projectors.</td><td>Legacy monitors and projectors</td></tr>
+          <tr><td><strong>3.5mm Audio Jack</strong></td><td>Carries analog audio signals for headphones and microphones.</td><td>Laptops, desktops, phones (older models)</td></tr>
+          <tr><td><strong>Ethernet (RJ-45)</strong></td><td>Physical network connection for wired internet. Fast and stable.</td><td>Desktops, routers, servers</td></tr>
+          <tr><td><strong>DisplayPort</strong></td><td>High-performance video/audio connector for monitors. Supports very high refresh rates for gaming.</td><td>Desktop PCs, gaming monitors</td></tr>
+          <tr><td><strong>SD Card Slot</strong></td><td>Slot for inserting SD memory cards to read/write data directly.</td><td>Laptops, cameras</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch2')">← Chapter 2</button>
+      <button class="btn-next" onclick="showPage('ch4')">Chapter 4: Software →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 4 ═══════════════ -->
+  <div id="ch4" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 04</div>
+      <h1>Computer Software</h1>
+      <p class="chapter-intro">If hardware is the body of a computer, software is its soul. Software consists of the instructions that bring hardware to life — without software, even the most powerful computer is nothing but an expensive collection of metal and plastic.</p>
+    </div>
+
+    <div class="section">
+      <h2>4.1 What is Software?</h2>
+      <div class="definition">
+        <div class="def-term">Software</div>
+        <p>Software is a collection of programs, data, and instructions that tell computer hardware how to perform specific tasks. Unlike hardware, software has no physical form — it exists as digital data stored on disks or in memory.</p>
+      </div>
+      <p>Software is written by programmers using programming languages. A simple mobile app might contain thousands of lines of code, while a modern operating system like Windows contains hundreds of millions of lines. Every feature you use on a computer — scrolling, clicking, watching video, sending email — is the result of software executing instructions.</p>
+    </div>
+
+    <div class="section">
+      <h2>4.2 Types of Software</h2>
+
+      <div class="diagram-box">
+        <div class="diagram-title">🗂 Software Classification Tree</div>
+        <div class="sw-tree">
+          <div class="sw-root">SOFTWARE</div>
+          <div class="sw-branches">
+            <div class="sw-branch">
+              <div class="sw-branch-header">⚙️ System Software</div>
+              <div class="sw-branch-items">
+                <div class="sw-item">Operating Systems (Windows, Linux)</div>
+                <div class="sw-item">Device Drivers</div>
+                <div class="sw-item">Utility Programs</div>
+                <div class="sw-item">BIOS / Firmware</div>
+                <div class="sw-item">Language Translators</div>
+              </div>
+            </div>
+            <div class="sw-branch">
+              <div class="sw-branch-header">📱 Application Software</div>
+              <div class="sw-branch-items">
+                <div class="sw-item">Word Processors (Word, Docs)</div>
+                <div class="sw-item">Spreadsheets (Excel, Sheets)</div>
+                <div class="sw-item">Browsers (Chrome, Firefox)</div>
+                <div class="sw-item">Games & Multimedia</div>
+                <div class="sw-item">Accounting & Business Apps</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>System Software</h3>
+      <p><strong>System software</strong> is the group of programs that manage and control the computer hardware and create the environment for application software to run. Users rarely interact with system software directly — it works mostly in the background.</p>
+      <p>The most important system software is the <strong>Operating System (OS)</strong>. When you turn on a computer, the OS loads first, sets everything up, and stays running as long as the computer is on. It acts as the bridge between the hardware and all other software. Without the OS, no application can run.</p>
+      <p><strong>Device drivers</strong> are special programs that allow the OS to communicate with specific hardware. For example, when you plug in a printer, a printer driver tells the OS exactly how to send data to that specific printer model. Without the driver, the OS would not know how to talk to the device.</p>
+      <p><strong>Utility programs</strong> are tools that help maintain, optimise, and protect the computer. Examples include antivirus software, disk defragmenters, file compression tools (like WinZip), backup utilities, and disk formatting tools.</p>
+
+      <h3>Application Software</h3>
+      <p><strong>Application software</strong> (or simply "apps") are programs designed to help users perform specific real-world tasks. They run on top of the operating system and use the OS as an intermediary to access hardware resources.</p>
+      <table class="styled-table">
+        <thead><tr><th>Category</th><th>Examples</th><th>What They Do</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Word Processors</strong></td><td>Microsoft Word, Google Docs, LibreOffice Writer</td><td>Create, format, edit, and print text documents — reports, letters, essays.</td></tr>
+          <tr><td><strong>Spreadsheet Software</strong></td><td>Microsoft Excel, Google Sheets, LibreOffice Calc</td><td>Organise data in tables, perform calculations, create charts and financial models.</td></tr>
+          <tr><td><strong>Presentation Software</strong></td><td>PowerPoint, Google Slides, Keynote</td><td>Create visual slide shows for presentations, lectures, and pitches.</td></tr>
+          <tr><td><strong>Database Software</strong></td><td>Microsoft Access, MySQL, Oracle</td><td>Store, retrieve, and manage large collections of structured data.</td></tr>
+          <tr><td><strong>Web Browsers</strong></td><td>Google Chrome, Firefox, Safari, Edge</td><td>Navigate and display websites and web applications on the internet.</td></tr>
+          <tr><td><strong>Media Players</strong></td><td>VLC, Windows Media Player, Spotify</td><td>Play audio and video files in various formats.</td></tr>
+          <tr><td><strong>Graphics Software</strong></td><td>Adobe Photoshop, CorelDRAW, GIMP</td><td>Create, edit, and manipulate images and graphic designs.</td></tr>
+          <tr><td><strong>Accounting Software</strong></td><td>QuickBooks, Sage, Tally</td><td>Manage financial records, invoices, payroll, and business accounts.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>4.3 Programming Languages</h2>
+      <p>Software is written in <strong>programming languages</strong> — formal languages that allow humans to give instructions to computers. These languages are divided into two broad categories:</p>
+
+      <h3>Low-Level Languages</h3>
+      <p><strong>Machine language (1st generation language)</strong> is the only language a computer directly understands. It consists entirely of <strong>binary code</strong> — sequences of 0s and 1s. Every instruction the CPU executes is ultimately in machine language. Writing programs directly in machine language is extremely difficult and error-prone for humans.</p>
+      <p><strong>Assembly language (2nd generation language)</strong> uses short alphabetical codes (called mnemonics) like <code>MOV</code>, <code>ADD</code>, <code>JMP</code> to represent machine language instructions. It is slightly easier to write than machine language but still requires detailed knowledge of the specific CPU architecture. Assembly is still used today for device drivers, embedded systems, and performance-critical code.</p>
+
+      <h3>High-Level Languages</h3>
+      <p><strong>High-level languages (3rd generation and above)</strong> are designed to be human-readable and easy to write. They use English-like keywords and mathematical notation. High-level code must be <em>translated</em> into machine language before the CPU can execute it.</p>
+      <table class="styled-table">
+        <thead><tr><th>Language</th><th>Primary Use</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Python</strong></td><td>General purpose, AI/ML, data science, education</td><td>Instagram backend, machine learning models, automation</td></tr>
+          <tr><td><strong>Java</strong></td><td>Enterprise software, Android apps</td><td>Banking systems, Android applications</td></tr>
+          <tr><td><strong>JavaScript</strong></td><td>Web development (frontend and backend)</td><td>Interactive websites, web apps, Node.js servers</td></tr>
+          <tr><td><strong>C / C++</strong></td><td>System programming, games, performance software</td><td>Windows OS kernel, game engines, embedded systems</td></tr>
+          <tr><td><strong>SQL</strong></td><td>Database querying and management</td><td>Retrieving records from databases</td></tr>
+          <tr><td><strong>HTML/CSS</strong></td><td>Web page structure and styling</td><td>Every website on the internet</td></tr>
+          <tr><td><strong>BASIC</strong></td><td>Education and beginner programming</td><td>Early home computers; learning programming concepts</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Language Translators</h3>
+      <p>Because CPUs only understand machine language, high-level programs must be converted. This is done by special programs called <strong>translators</strong>:</p>
+      <table class="styled-table">
+        <thead><tr><th>Translator</th><th>How It Works</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Compiler</strong></td><td>Translates the entire program at once into machine code before execution. The compiled program runs very fast. Errors are reported after complete translation.</td><td>C, C++, Java compilers</td></tr>
+          <tr><td><strong>Interpreter</strong></td><td>Translates and executes the program one line at a time. Easier to debug but slower in execution. Stops at first error.</td><td>Python interpreter, JavaScript engines</td></tr>
+          <tr><td><strong>Assembler</strong></td><td>Translates assembly language into machine language.</td><td>NASM, MASM assemblers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>4.4 Relationship Between Hardware and Software</h2>
+      <p>Hardware and software are completely interdependent — neither can function without the other:</p>
+      <div class="info-box gold">
+        <div class="info-title">🔄 The Hardware-Software Relationship</div>
+        <p><strong>Software gives hardware purpose.</strong> A monitor without display software shows nothing. A hard drive without file system software stores nothing readable. A CPU without an operating system executes nothing useful. Conversely, the most sophisticated software is worthless without physical hardware to run it on. They are two halves of a complete system, always working together.</p>
+      </div>
+      <p>Modern computers use a <strong>layered model</strong>: Hardware at the bottom, then firmware/BIOS, then the operating system, then utility/system applications, and finally user applications at the top. Each layer communicates only with the layers directly above and below it.</p>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch3')">← Chapter 3</button>
+      <button class="btn-next" onclick="showPage('ch5')">Chapter 5: Operating Systems →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 5 ═══════════════ -->
+  <div id="ch5" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 05</div>
+      <h1>Operating Systems</h1>
+      <p class="chapter-intro">The operating system is the master program that manages everything else. Without it, your computer is a box of dormant circuits. With it, you have a powerful machine that can run thousands of applications simultaneously.</p>
+    </div>
+
+    <div class="section">
+      <h2>5.1 What is an Operating System?</h2>
+      <div class="definition">
+        <div class="def-term">Operating System (OS)</div>
+        <p>An Operating System is a collection of system software programs that manage computer hardware resources, provide common services for application programs, and act as an intermediary between users and the hardware. It is the first program loaded when a computer starts and the last to stop when it shuts down.</p>
+      </div>
+      <p>Think of the OS as the <strong>government of a country</strong>. Just as a government manages shared national resources (roads, electricity, courts) so that citizens can use them fairly and safely, the OS manages shared computer resources (CPU time, memory, storage, network) so that all running programs can use them fairly and securely.</p>
+    </div>
+
+    <div class="section">
+      <h2>5.2 Functions of an Operating System</h2>
+      <table class="styled-table">
+        <thead><tr><th>Function</th><th>Detailed Explanation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Process Management</strong></td><td>The OS decides which program gets CPU time and for how long. When you run multiple programs simultaneously, the OS rapidly switches the CPU between them so fast it appears they're all running at once — this is called <em>multitasking</em>.</td></tr>
+          <tr><td><strong>Memory Management</strong></td><td>The OS allocates RAM to each running program, ensures programs don't overwrite each other's memory, and frees memory when a program closes. It also manages virtual memory — using hard drive space as extra RAM when physical RAM is full.</td></tr>
+          <tr><td><strong>File Management</strong></td><td>The OS organises data on storage devices into files and folders, handles reading and writing data, manages file permissions (who can read/modify what), and maintains the file system structure.</td></tr>
+          <tr><td><strong>Device Management</strong></td><td>The OS communicates with all hardware devices through drivers. It manages input from keyboards and mice, controls output to monitors and printers, and handles storage read/write operations.</td></tr>
+          <tr><td><strong>User Interface</strong></td><td>The OS provides the visual environment through which users interact with the computer — either a graphical desktop (GUI) or a text-based command line (CLI).</td></tr>
+          <tr><td><strong>Security & Access Control</strong></td><td>The OS enforces user accounts, passwords, file permissions, and protects system files from unauthorized modification. It also manages network security at the system level.</td></tr>
+          <tr><td><strong>Error Handling</strong></td><td>The OS detects and handles hardware/software errors gracefully — showing error messages instead of crashing, preventing one failing program from crashing the whole system.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>5.3 Types of Operating Systems</h2>
+      <table class="styled-table">
+        <thead><tr><th>Type</th><th>How It Works</th><th>Example Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Batch OS</strong></td><td>Jobs are collected into batches and processed one after another without user interaction. No user is logged in while processing happens.</td><td>Old mainframe computers for payroll processing</td></tr>
+          <tr><td><strong>Multi-user OS</strong></td><td>Multiple users can use the same computer simultaneously, each with their own session and resources. The OS ensures users don't interfere with each other.</td><td>University computer servers; Linux servers</td></tr>
+          <tr><td><strong>Real-Time OS (RTOS)</strong></td><td>Processes data instantly with near-zero delay. Used where timing is critical — a late response is as bad as no response.</td><td>Airplane autopilot, cardiac monitors, missile guidance</td></tr>
+          <tr><td><strong>Distributed OS</strong></td><td>Controls a network of computers that work together as one system. Tasks are spread across multiple machines for efficiency and reliability.</td><td>Google's data centers, cloud computing platforms</td></tr>
+          <tr><td><strong>Embedded OS</strong></td><td>Tiny, specialized OS built into a device that performs one specific function. Very low power consumption and minimal resources.</td><td>Smart TVs, washing machines, car engine control units</td></tr>
+          <tr><td><strong>Mobile OS</strong></td><td>Designed for touchscreen portable devices, optimized for battery life, app stores, and wireless connectivity.</td><td>Android (Google), iOS (Apple)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>5.4 Popular Operating Systems</h2>
+      <div class="os-grid">
+        <div class="os-card">
+          <div class="os-icon">🪟</div>
+          <div class="os-name">Microsoft Windows</div>
+          <div class="os-desc">Most widely used desktop OS globally. User-friendly GUI, massive software compatibility, widely used in offices and homes. Versions: Windows 10, Windows 11.</div>
+        </div>
+        <div class="os-card">
+          <div class="os-icon">🍎</div>
+          <div class="os-name">Apple macOS</div>
+          <div class="os-desc">Used exclusively on Apple Mac computers. Known for sleek design, stability, and tight hardware-software integration. Popular with designers and creatives.</div>
+        </div>
+        <div class="os-card">
+          <div class="os-icon">🐧</div>
+          <div class="os-name">Linux</div>
+          <div class="os-desc">Free and open-source OS. Extremely powerful, secure, and customizable. Powers most of the world's web servers, Android phones, and supercomputers.</div>
+        </div>
+        <div class="os-card">
+          <div class="os-icon">🤖</div>
+          <div class="os-name">Android</div>
+          <div class="os-desc">Based on Linux. Powers over 70% of the world's smartphones. Open source, highly customizable, massive app ecosystem via Google Play Store.</div>
+        </div>
+        <div class="os-card">
+          <div class="os-icon">📱</div>
+          <div class="os-name">Apple iOS</div>
+          <div class="os-desc">Powers iPhones and iPads. Closed, tightly controlled ecosystem. Known for security, smooth performance, and strict App Store quality standards.</div>
+        </div>
+        <div class="os-card">
+          <div class="os-icon">☁️</div>
+          <div class="os-name">Chrome OS</div>
+          <div class="os-desc">Google's lightweight OS designed for Chromebooks. Primarily web-based — most apps run in the Chrome browser. Fast boot time, affordable hardware.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>5.5 GUI vs. CLI</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;">
+        <div class="info-box">
+          <div class="info-title">🖥 GUI — Graphical User Interface</div>
+          <p>Uses visual elements like icons, windows, menus, and buttons. Users interact by pointing and clicking with a mouse. Highly intuitive and beginner-friendly. Examples: Windows desktop, macOS Finder, Android home screen. The concept was pioneered by Xerox, popularized by Apple, and adopted by Microsoft.</p>
+        </div>
+        <div class="info-box green">
+          <div class="info-title">⌨️ CLI — Command Line Interface</div>
+          <p>Users type text commands directly into a terminal window. Requires memorization of commands but gives precise, powerful control over the system. Faster for experienced users and essential for servers. Examples: Windows Command Prompt, PowerShell, Linux Terminal (bash).</p>
+        </div>
+      </div>
+      <div class="num-conversion" style="font-size:13px;line-height:1.9">
+        <div style="color:var(--gold);margin-bottom:10px;font-size:11px;letter-spacing:2px">EXAMPLE CLI COMMANDS (Linux/Terminal)</div>
+        <div><span style="color:#90ee90">ls</span> <span style="color:#aaa">— list all files in current directory</span></div>
+        <div><span style="color:#90ee90">cd Documents</span> <span style="color:#aaa">— change into the Documents folder</span></div>
+        <div><span style="color:#90ee90">mkdir NewFolder</span> <span style="color:#aaa">— create a new folder named NewFolder</span></div>
+        <div><span style="color:#90ee90">cp file.txt backup.txt</span> <span style="color:#aaa">— copy file.txt to backup.txt</span></div>
+        <div><span style="color:#90ee90">rm oldfile.txt</span> <span style="color:#aaa">— permanently delete oldfile.txt</span></div>
+        <div><span style="color:#90ee90">pwd</span> <span style="color:#aaa">— print the current working directory path</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>5.6 File Management and Directory Structure</h2>
+      <p>The OS organises all stored data into a hierarchical <strong>file system</strong> — like a tree of folders branching downward. The topmost folder is called the <strong>root directory</strong>. Every file on a computer has a unique <strong>path</strong> — an address that tells the OS exactly where to find it.</p>
+      <div class="num-conversion" style="font-size:13px;line-height:2">
+        <div style="color:var(--gold);margin-bottom:10px;font-size:11px;letter-spacing:2px">DIRECTORY STRUCTURE EXAMPLE</div>
+        <div style="color:#fff">C:\  <span style="color:#aaa">(Root — Windows drive)</span></div>
+        <div style="color:#fff;padding-left:20px">├── Users\</div>
+        <div style="color:#fff;padding-left:40px">├── <span style="color:#90b0ff">John\</span></div>
+        <div style="color:#fff;padding-left:60px">├── <span style="color:#90ee90">Documents\</span>  <span style="color:#aaa">→ C:\Users\John\Documents\</span></div>
+        <div style="color:#fff;padding-left:60px">├── <span style="color:#90ee90">Pictures\</span></div>
+        <div style="color:#fff;padding-left:60px">└── <span style="color:#90ee90">Downloads\</span></div>
+        <div style="color:#fff;padding-left:20px">└── Program Files\</div>
+        <div style="color:#fff;padding-left:20px">├── Windows\  <span style="color:#aaa">(OS system files)</span></div>
+      </div>
+      <p>A <strong>file</strong> is a named collection of related data stored on a disk. Files have names and <strong>extensions</strong> that indicate their type: <code>.docx</code> = Word document, <code>.jpg</code> = image, <code>.mp4</code> = video, <code>.exe</code> = executable program, <code>.pdf</code> = PDF document.</p>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch4')">← Chapter 4</button>
+      <button class="btn-next" onclick="showPage('ch6')">Chapter 6: Number Systems →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 6 ═══════════════ -->
+  <div id="ch6" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 06</div>
+      <h1>Number Systems and Data Representation</h1>
+      <p class="chapter-intro">Every piece of data in a computer — text, images, sound, video — is ultimately stored as patterns of 0s and 1s. Understanding number systems is the key to understanding how computers think at the most fundamental level.</p>
+    </div>
+
+    <div class="section">
+      <h2>6.1 Why Do Computers Use Binary?</h2>
+      <p>Computers are built from billions of tiny electronic switches called <strong>transistors</strong>. Each transistor has only two states: <strong>ON</strong> (conducting electricity) or <strong>OFF</strong> (not conducting). This physical reality directly maps to the binary number system, where <strong>1 = ON</strong> and <strong>0 = OFF</strong>.</p>
+      <div class="info-box gold">
+        <div class="info-title">💡 Why Not Use Decimal (10 digits)?</div>
+        <p>A two-state system is the most reliable and simplest to build in electronics. If we tried to use 10 different voltage levels (for digits 0–9), tiny fluctuations in voltage would cause errors constantly. With just two states (on/off, high/low), the system is robust and nearly error-free — even with electrical interference.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>6.2 The Four Number Systems</h2>
+
+      <div class="diagram-box">
+        <div class="diagram-title">🔢 Number Systems — Same Value, Different Representations</div>
+        <div class="num-conversion">
+          <div style="color:var(--gold);margin-bottom:14px;font-size:11px;letter-spacing:2px">COUNTING FROM 0 TO 15</div>
+          <div class="num-row">
+            <span class="num-badge badge-dec">DEC</span>
+            <span class="num-badge badge-bin">BIN</span>
+            <span class="num-badge badge-oct">OCT</span>
+            <span class="num-badge badge-hex">HEX</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,80px);gap:4px;margin-top:8px;">
+            <span style="color:#90ee90">0</span><span style="color:#90b0ff">0000</span><span style="color:#ffb870">0</span><span style="color:#d890ff">0</span>
+            <span style="color:#90ee90">1</span><span style="color:#90b0ff">0001</span><span style="color:#ffb870">1</span><span style="color:#d890ff">1</span>
+            <span style="color:#90ee90">2</span><span style="color:#90b0ff">0010</span><span style="color:#ffb870">2</span><span style="color:#d890ff">2</span>
+            <span style="color:#90ee90">3</span><span style="color:#90b0ff">0011</span><span style="color:#ffb870">3</span><span style="color:#d890ff">3</span>
+            <span style="color:#90ee90">4</span><span style="color:#90b0ff">0100</span><span style="color:#ffb870">4</span><span style="color:#d890ff">4</span>
+            <span style="color:#90ee90">5</span><span style="color:#90b0ff">0101</span><span style="color:#ffb870">5</span><span style="color:#d890ff">5</span>
+            <span style="color:#90ee90">8</span><span style="color:#90b0ff">1000</span><span style="color:#ffb870">10</span><span style="color:#d890ff">8</span>
+            <span style="color:#90ee90">10</span><span style="color:#90b0ff">1010</span><span style="color:#ffb870">12</span><span style="color:#d890ff">A</span>
+            <span style="color:#90ee90">15</span><span style="color:#90b0ff">1111</span><span style="color:#ffb870">17</span><span style="color:#d890ff">F</span>
+            <span style="color:#90ee90">16</span><span style="color:#90b0ff">10000</span><span style="color:#ffb870">20</span><span style="color:#d890ff">10</span>
+          </div>
+        </div>
+      </div>
+
+      <h3>Decimal Number System (Base 10)</h3>
+      <p>The decimal system is what humans use in everyday life. It uses <strong>10 digits</strong>: 0, 1, 2, 3, 4, 5, 6, 7, 8, and 9. The value of each digit depends on its <strong>position</strong> (place value). Moving one position left multiplies the value by 10.</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">DECIMAL EXAMPLE: 3 4 5</div>
+        <div>3 × 10² + 4 × 10¹ + 5 × 10⁰</div>
+        <div>= 3 × 100 + 4 × 10 + 5 × 1</div>
+        <div style="color:#90ee90">= 300 + 40 + 5 = 345</div>
+      </div>
+
+      <h3>Binary Number System (Base 2)</h3>
+      <p>The binary system uses only <strong>2 digits</strong>: 0 and 1. Each position represents a power of 2. Moving one position left doubles the value. This is the native language of all digital computers.</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">BINARY EXAMPLE: 1 0 1 1 0 1 = ?</div>
+        <div>1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰</div>
+        <div>= 32 + 0 + 8 + 4 + 0 + 1</div>
+        <div style="color:#90ee90">= 45 in decimal</div>
+      </div>
+
+      <h3>Octal Number System (Base 8)</h3>
+      <p>Uses digits <strong>0 through 7</strong>. Each octal digit represents exactly 3 binary digits. Octal was historically used in early computers and Unix file permissions. Each position represents a power of 8.</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">OCTAL EXAMPLE: 5 7 3 = ?</div>
+        <div>5×8² + 7×8¹ + 3×8⁰</div>
+        <div>= 5×64 + 7×8 + 3×1</div>
+        <div style="color:#90ee90">= 320 + 56 + 3 = 379 in decimal</div>
+      </div>
+
+      <h3>Hexadecimal Number System (Base 16)</h3>
+      <p>Uses <strong>16 symbols</strong>: digits 0–9 and letters A–F (where A=10, B=11, C=12, D=13, E=14, F=15). Each hexadecimal digit represents exactly 4 binary digits. Extensively used in computing for memory addresses, colour codes in web design (#FF5733), and representing binary data compactly.</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">HEX EXAMPLE: 2 A F = ?</div>
+        <div>2×16² + A×16¹ + F×16⁰</div>
+        <div>= 2×256 + 10×16 + 15×1</div>
+        <div style="color:#90ee90">= 512 + 160 + 15 = 687 in decimal</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>6.3 Number System Conversions</h2>
+
+      <h3>Decimal to Binary: Division by 2</h3>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">CONVERT 25 (DECIMAL) → BINARY</div>
+        <div>25 ÷ 2 = 12 remainder <span style="color:#90ee90">1</span></div>
+        <div>12 ÷ 2 = 6  remainder <span style="color:#90ee90">0</span></div>
+        <div>6  ÷ 2 = 3  remainder <span style="color:#90ee90">0</span></div>
+        <div>3  ÷ 2 = 1  remainder <span style="color:#90ee90">1</span></div>
+        <div>1  ÷ 2 = 0  remainder <span style="color:#90ee90">1</span></div>
+        <div style="margin-top:8px">Read remainders UPWARD: <span style="color:#90ee90;font-size:18px;letter-spacing:4px">11001</span></div>
+        <div style="color:#aaa">Verify: 16+8+0+0+1 = 25 ✓</div>
+      </div>
+
+      <h3>Binary to Decimal: Powers of 2</h3>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">CONVERT 11001 (BINARY) → DECIMAL</div>
+        <div style="letter-spacing:6px;color:#90b0ff;font-size:17px">1 1 0 0 1</div>
+        <div style="letter-spacing:5px;color:#aaa;font-size:12px">↓ ↓ ↓ ↓ ↓</div>
+        <div>16 + 8 + 0 + 0 + 1 = <span style="color:#90ee90">25</span></div>
+      </div>
+
+      <h3>Binary Arithmetic</h3>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:12px">BINARY ADDITION RULES</div>
+        <div>0 + 0 = 0</div>
+        <div>0 + 1 = 1</div>
+        <div>1 + 0 = 1</div>
+        <div>1 + 1 = 10  <span style="color:#aaa">(write 0, carry 1)</span></div>
+        <div>1 + 1 + 1 = 11  <span style="color:#aaa">(write 1, carry 1)</span></div>
+        <div style="margin-top:14px;color:var(--gold);font-size:11px;letter-spacing:2px">EXAMPLE: 1011 + 0110</div>
+        <div class="bin-row"><span class="bin-label">First:</span><span class="bin-val">1 0 1 1</span></div>
+        <div class="bin-row"><span class="bin-label">Second:</span><span class="bin-val">0 1 1 0</span></div>
+        <div class="bin-row bin-result"><span class="bin-label">Result:</span><span class="bin-val">1 0 0 0 1</span><span style="color:#aaa;font-size:12px;margin-left:10px">= 17 decimal</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>6.4 Data Representation — ASCII and Unicode</h2>
+      <p>How does a computer store the letter "A" or the symbol "@"? Text characters are stored as numbers. Two major encoding standards define which number represents which character:</p>
+
+      <h3>ASCII (American Standard Code for Information Interchange)</h3>
+      <p>ASCII uses 7 bits to represent 128 characters — enough for the English alphabet (upper and lowercase), digits 0–9, punctuation marks, and control characters. Developed in the 1960s, ASCII became the universal standard for text in computers.</p>
+      <table class="styled-table">
+        <thead><tr><th>Character</th><th>ASCII Decimal</th><th>ASCII Binary</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td>65</td><td>01000001</td></tr>
+          <tr><td>a</td><td>97</td><td>01100001</td></tr>
+          <tr><td>0</td><td>48</td><td>00110000</td></tr>
+          <tr><td>Space</td><td>32</td><td>00100000</td></tr>
+          <tr><td>!</td><td>33</td><td>00100001</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Unicode</h3>
+      <p>ASCII was limited to English. <strong>Unicode</strong> was created to represent characters from ALL the world's writing systems — including Arabic, Chinese, Hindi, Yoruba, emojis, and mathematical symbols. Unicode can represent over 1 million characters using between 8 and 32 bits per character (UTF-8, UTF-16, UTF-32 formats). It has become the global standard for all modern software.</p>
+
+      <div class="info-box gold">
+        <div class="info-title">🌍 Unicode in Action</div>
+        <p>When you type "Hello" in English, "مرحبا" in Arabic, "你好" in Chinese, and "😊" as an emoji — all of these in the same document — Unicode is what makes that possible. Without Unicode, most modern multilingual websites and apps could not exist.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>6.5 Units of Data Storage</h2>
+      <table class="styled-table">
+        <thead><tr><th>Unit</th><th>Size</th><th>Real-World Equivalent</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bit (b)</strong></td><td>1 binary digit (0 or 1)</td><td>A single on/off switch</td></tr>
+          <tr><td><strong>Byte (B)</strong></td><td>8 bits</td><td>One character of text (e.g., the letter "A")</td></tr>
+          <tr><td><strong>Kilobyte (KB)</strong></td><td>1,024 bytes</td><td>A short text message; a paragraph of text</td></tr>
+          <tr><td><strong>Megabyte (MB)</strong></td><td>1,024 KB</td><td>A 3-minute MP3 song (~3.5 MB); a photo (~2–5 MB)</td></tr>
+          <tr><td><strong>Gigabyte (GB)</strong></td><td>1,024 MB</td><td>A DVD movie (~4.7 GB); ~1,000 photos</td></tr>
+          <tr><td><strong>Terabyte (TB)</strong></td><td>1,024 GB</td><td>A home computer hard drive; ~250,000 photos</td></tr>
+          <tr><td><strong>Petabyte (PB)</strong></td><td>1,024 TB</td><td>All data generated by Facebook daily; ~200 million photos</td></tr>
+          <tr><td><strong>Exabyte (EB)</strong></td><td>1,024 PB</td><td>All data stored in all data centres combined</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch5')">← Chapter 5</button>
+      <button class="btn-next" onclick="showPage('ch7')">Chapter 7: Memory & Storage →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 7 ═══════════════ -->
+  <div id="ch7" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 07</div>
+      <h1>Computer Memory and Storage</h1>
+      <p class="chapter-intro">Memory and storage are not the same thing — and confusing them is one of the most common mistakes beginners make. This chapter explains exactly where data lives inside a computer and why it matters.</p>
+    </div>
+
+    <div class="section">
+      <h2>7.1 Memory vs. Storage — The Key Difference</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;">
+        <div class="info-box">
+          <div class="info-title">🧠 MEMORY (RAM)</div>
+          <p><strong>Temporary, fast, expensive per GB.</strong><br>Holds data that the CPU is CURRENTLY using. Everything is lost when you turn off the computer. Think of RAM as your <em>desk</em> — the workspace where you spread out papers you're actively working on.</p>
+        </div>
+        <div class="info-box green">
+          <div class="info-title">💾 STORAGE (HDD/SSD)</div>
+          <p><strong>Permanent, slower, cheap per GB.</strong><br>Holds data PERMANENTLY even without power. Your files, photos, programs, and the OS are all on storage. Think of storage as your <em>filing cabinet</em> — where you keep things for the long term.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>7.2 The Memory Hierarchy</h2>
+      <p>Computer memory is organised in a hierarchy — faster and more expensive at the top, slower and cheaper at the bottom. The CPU always tries to find data in the fastest available location first.</p>
+
+      <div class="diagram-box">
+        <div class="diagram-title">🏔 Memory Hierarchy — Speed vs. Capacity vs. Cost</div>
+        <div class="mem-hierarchy">
+          <div class="mem-level registers">
+            <span class="mem-name">Registers</span>
+            <span class="mem-speed">~1ns · bytes</span>
+          </div>
+          <div class="mem-level cache">
+            <span class="mem-name">Cache (L1/L2/L3)</span>
+            <span class="mem-speed">2–10ns · MB</span>
+          </div>
+          <div class="mem-level ram">
+            <span class="mem-name">RAM (Main Memory)</span>
+            <span class="mem-speed">60–100ns · GB</span>
+          </div>
+          <div class="mem-level rom">
+            <span class="mem-name">ROM (Read-Only Memory)</span>
+            <span class="mem-speed">Persistent · KB–MB</span>
+          </div>
+          <div class="mem-level secondary">
+            <span class="mem-name">Secondary Storage (SSD/HDD)</span>
+            <span class="mem-speed">0.1–10ms · TB</span>
+          </div>
+          <div class="mem-level cloud">
+            <span class="mem-name">Cloud Storage / Magnetic Tape</span>
+            <span class="mem-speed">Seconds-minutes · PB</span>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:12px;color:#555;margin-top:10px">↑ Faster, smaller, more expensive &nbsp;&nbsp;|&nbsp;&nbsp; Slower, larger, cheaper ↓</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>7.3 RAM — Random Access Memory</h2>
+      <div class="definition">
+        <div class="def-term">RAM (Random Access Memory)</div>
+        <p>RAM is the computer's primary working memory. It is called "random access" because any byte of memory can be accessed directly in the same amount of time, regardless of its location — unlike a tape which must be fast-forwarded to find data.</p>
+      </div>
+      <p>When you open a program, it is <strong>loaded from storage (HDD/SSD) into RAM</strong>. The CPU then reads from and writes to RAM as it executes the program. The more RAM a computer has, the more programs it can run simultaneously without slowing down.</p>
+      <p>RAM is <strong>volatile</strong> — its contents are completely erased the moment the computer loses power. This is why you must save your work before closing a program. If the power cuts out before saving, any unsaved work in RAM is lost forever.</p>
+      <table class="styled-table">
+        <thead><tr><th>Type of RAM</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DRAM (Dynamic RAM)</strong></td><td>The most common type. Must be continuously refreshed thousands of times per second to maintain stored data. Used as main system RAM.</td></tr>
+          <tr><td><strong>SRAM (Static RAM)</strong></td><td>Faster and more expensive than DRAM. Does not need refreshing. Used for CPU cache memory (L1, L2, L3 cache).</td></tr>
+          <tr><td><strong>DDR4 / DDR5</strong></td><td>The current standards for laptop and desktop RAM. DDR5 is the latest, offering higher speeds and lower power consumption than DDR4.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>7.4 ROM — Read-Only Memory</h2>
+      <div class="definition">
+        <div class="def-term">ROM (Read-Only Memory)</div>
+        <p>ROM is a type of memory whose contents are permanently written during manufacturing and cannot normally be changed by the computer's ordinary operations. Unlike RAM, ROM retains its contents permanently even without power — it is non-volatile.</p>
+      </div>
+      <p>The most important use of ROM is storing the <strong>BIOS (Basic Input/Output System)</strong> — the first program that runs when you turn on a computer. The BIOS initialises all the hardware components, checks that they're working correctly (POST — Power-On Self Test), and then loads the operating system from storage into RAM.</p>
+      <p>Modern computers use <strong>UEFI (Unified Extensible Firmware Interface)</strong> instead of the old BIOS — a more advanced firmware stored in flash memory that can be updated.</p>
+    </div>
+
+    <div class="section">
+      <h2>7.5 Cache Memory</h2>
+      <p><strong>Cache memory</strong> is a small amount of extremely fast SRAM built directly into or very close to the CPU chip. Its purpose is to reduce the time the CPU spends waiting for data from the much slower RAM.</p>
+      <p>The CPU uses a principle called <strong>locality of reference</strong> — programs tend to use the same data and instructions repeatedly. The cache stores recently and frequently used data so the CPU can access it in 1–3 nanoseconds instead of the 60–100 nanoseconds for RAM access.</p>
+      <p>There are three levels: <strong>L1 cache</strong> is the smallest (32–64KB) and fastest — built right onto the CPU core. <strong>L2 cache</strong> is larger (256KB–2MB) and slightly slower. <strong>L3 cache</strong> is shared between all cores (4–64MB) and is the largest but slowest of the three.</p>
+    </div>
+
+    <div class="section">
+      <h2>7.6 Virtual Memory</h2>
+      <p><strong>Virtual memory</strong> is a memory management technique where the OS uses part of the hard drive (or SSD) as an extension of RAM. When physical RAM fills up, the OS temporarily moves the least recently used data from RAM to a <strong>page file</strong> (or swap file) on the hard drive.</p>
+      <p>This allows the computer to run more programs than would physically fit in RAM. The downside is that hard drive access is far slower than RAM — which is why computers with insufficient RAM become noticeably slow (the hard drive light blinks constantly as the OS frantically swaps data in and out).</p>
+      <div class="info-box red">
+        <div class="info-title">⚠️ Important Distinction</div>
+        <p>Virtual memory is NOT the same as storage. Virtual memory is a technique that uses storage <em>as if</em> it were slow extra RAM. The data stored in virtual memory is still temporary — it is deleted when you close programs. Permanent data is stored in storage regardless of virtual memory.</p>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch6')">← Chapter 6</button>
+      <button class="btn-next" onclick="showPage('ch8')">Chapter 8: Networks →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 8 ═══════════════ -->
+  <div id="ch8" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 08</div>
+      <h1>Computer Networks and the Internet</h1>
+      <p class="chapter-intro">The moment computers were connected to each other, their usefulness multiplied exponentially. Today, the internet connects billions of devices globally — making networking arguably the most transformative aspect of computing.</p>
+    </div>
+
+    <div class="section">
+      <h2>8.1 What is a Computer Network?</h2>
+      <div class="definition">
+        <div class="def-term">Computer Network</div>
+        <p>A computer network is a collection of two or more computers and other devices (phones, printers, servers) connected together to share resources, exchange data, and communicate. Networks can be as small as two computers in the same room or as large as the global internet connecting billions of devices.</p>
+      </div>
+      <p>Before networks, data had to be physically carried between computers on floppy disks or tapes. Networks eliminated this bottleneck, enabling instant data sharing, centralised resource management, and global communication.</p>
+    </div>
+
+    <div class="section">
+      <h2>8.2 Types of Networks</h2>
+      <table class="styled-table">
+        <thead><tr><th>Type</th><th>Full Name</th><th>Coverage Area</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PAN</strong></td><td>Personal Area Network</td><td>A few metres — personal space</td><td>Bluetooth connecting your phone to earbuds</td></tr>
+          <tr><td><strong>LAN</strong></td><td>Local Area Network</td><td>Single building or campus</td><td>School computer lab network; home WiFi</td></tr>
+          <tr><td><strong>MAN</strong></td><td>Metropolitan Area Network</td><td>A city or metropolitan area</td><td>City-wide government network; university campus</td></tr>
+          <tr><td><strong>WAN</strong></td><td>Wide Area Network</td><td>Countries or continents</td><td>The Internet; a corporation's global office network</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>8.3 Network Topologies</h2>
+      <p>A <strong>network topology</strong> describes the physical or logical arrangement of devices in a network — how they are connected to each other.</p>
+
+      <div class="topology-grid">
+        <div class="topo-card">
+          <div class="topo-visual">
+            <svg width="160" height="100" viewBox="0 0 160 100">
+              <line x1="10" y1="50" x2="150" y2="50" class="node-line"/>
+              <circle cx="10" cy="50" r="10" class="node-circle"/><text x="7" y="54" fill="#fff" font-size="9">A</text>
+              <circle cx="50" cy="50" r="10" class="node-circle"/><text x="47" y="54" fill="#fff" font-size="9">B</text>
+              <circle cx="90" cy="50" r="10" class="node-circle"/><text x="87" y="54" fill="#fff" font-size="9">C</text>
+              <circle cx="130" cy="50" r="10" class="node-circle"/><text x="127" y="54" fill="#fff" font-size="9">D</text>
+              <rect x="3" y="70" width="14" height="8" fill="#555"/>
+            </svg>
+          </div>
+          <div class="topo-name">Bus Topology</div>
+          <div class="topo-desc">All devices connect to a single central cable (the bus). Simple and cheap. If the main cable fails, the entire network stops. Best for small networks.</div>
+        </div>
+        <div class="topo-card">
+          <div class="topo-visual">
+            <svg width="160" height="110" viewBox="0 0 160 110">
+              <circle cx="80" cy="55" r="12" fill="#b8860b" stroke="#fff" stroke-width="2"/>
+              <text x="76" y="59" fill="#fff" font-size="9" font-weight="bold">HUB</text>
+              <line x1="80" y1="43" x2="80" y2="15" class="node-line"/>
+              <line x1="92" y1="55" x2="130" y2="30" class="node-line"/>
+              <line x1="92" y1="55" x2="130" y2="80" class="node-line"/>
+              <line x1="80" y1="67" x2="80" y2="95" class="node-line"/>
+              <line x1="68" y1="55" x2="30" y2="30" class="node-line"/>
+              <line x1="68" y1="55" x2="30" y2="80" class="node-line"/>
+              <circle cx="80" cy="15" r="8" class="node-circle"/>
+              <circle cx="130" cy="30" r="8" class="node-circle"/>
+              <circle cx="130" cy="80" r="8" class="node-circle"/>
+              <circle cx="80" cy="95" r="8" class="node-circle"/>
+              <circle cx="30" cy="30" r="8" class="node-circle"/>
+              <circle cx="30" cy="80" r="8" class="node-circle"/>
+            </svg>
+          </div>
+          <div class="topo-name">Star Topology</div>
+          <div class="topo-desc">All devices connect to a central hub or switch. Most common in modern LANs. If one device fails, others are unaffected. If the hub fails, all stop.</div>
+        </div>
+        <div class="topo-card">
+          <div class="topo-visual">
+            <svg width="160" height="110" viewBox="0 0 160 110">
+              <circle cx="80" cy="55" r="40" fill="none" stroke="#1a6b6b" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="80" cy="15" r="9" class="node-circle"/>
+              <circle cx="115" cy="35" r="9" class="node-circle"/>
+              <circle cx="115" cy="75" r="9" class="node-circle"/>
+              <circle cx="80" cy="95" r="9" class="node-circle"/>
+              <circle cx="45" cy="75" r="9" class="node-circle"/>
+              <circle cx="45" cy="35" r="9" class="node-circle"/>
+            </svg>
+          </div>
+          <div class="topo-name">Ring Topology</div>
+          <div class="topo-desc">Each device connects to exactly two others, forming a closed loop. Data travels in one direction. A single break disrupts the entire ring.</div>
+        </div>
+        <div class="topo-card">
+          <div class="topo-visual">
+            <svg width="160" height="110" viewBox="0 0 160 110">
+              <line x1="30" y1="30" x2="130" y2="30" class="node-line"/>
+              <line x1="30" y1="30" x2="130" y2="80" class="node-line"/>
+              <line x1="30" y1="30" x2="80" y2="80" class="node-line"/>
+              <line x1="130" y1="30" x2="30" y2="80" class="node-line"/>
+              <line x1="130" y1="30" x2="80" y2="80" class="node-line"/>
+              <line x1="30" y1="80" x2="80" y2="80" class="node-line"/>
+              <line x1="80" y1="80" x2="130" y2="80" class="node-line"/>
+              <circle cx="30" cy="30" r="9" class="node-circle"/>
+              <circle cx="130" cy="30" r="9" class="node-circle"/>
+              <circle cx="30" cy="80" r="9" class="node-circle"/>
+              <circle cx="80" cy="80" r="9" class="node-circle"/>
+              <circle cx="130" cy="80" r="9" class="node-circle"/>
+            </svg>
+          </div>
+          <div class="topo-name">Mesh Topology</div>
+          <div class="topo-desc">Every device connects to every other device. Extremely reliable — multiple paths for data. Very expensive due to the large number of cables needed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>8.4 Network Devices</h2>
+      <div class="network-devices">
+        <div class="net-device-card">
+          <div class="nd-icon">📡</div>
+          <div class="nd-name">Router</div>
+          <div class="nd-desc">Connects different networks together and directs data packets to their correct destinations. Your home router connects your LAN to the internet WAN.</div>
+        </div>
+        <div class="net-device-card">
+          <div class="nd-icon">🔀</div>
+          <div class="nd-name">Switch</div>
+          <div class="nd-desc">Connects multiple devices within the same LAN. Smarter than a hub — it sends data only to the intended recipient device, not to all devices.</div>
+        </div>
+        <div class="net-device-card">
+          <div class="nd-icon">🔌</div>
+          <div class="nd-name">Hub</div>
+          <div class="nd-desc">The older, simpler version of a switch. Broadcasts all incoming data to every connected device. Creates network congestion. Largely replaced by switches.</div>
+        </div>
+        <div class="net-device-card">
+          <div class="nd-icon">📶</div>
+          <div class="nd-name">Modem</div>
+          <div class="nd-desc">Modulator-Demodulator. Converts digital computer signals into analog signals for transmission over telephone/cable lines and vice versa. Your connection to the ISP.</div>
+        </div>
+        <div class="net-device-card">
+          <div class="nd-icon">🃏</div>
+          <div class="nd-name">NIC</div>
+          <div class="nd-desc">Network Interface Card. A hardware component (built into or added to a computer) that enables it to connect to a network. Has a unique MAC address.</div>
+        </div>
+        <div class="net-device-card">
+          <div class="nd-icon">🔒</div>
+          <div class="nd-name">Firewall</div>
+          <div class="nd-desc">Monitors and controls incoming/outgoing network traffic based on security rules. Acts as a security barrier between a trusted internal network and untrusted external networks.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>8.5 Internet, Intranet, and Extranet</h2>
+      <table class="styled-table">
+        <thead><tr><th>Network</th><th>Definition</th><th>Who Can Access</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Internet</strong></td><td>The global public network of networks, connecting billions of devices worldwide using the TCP/IP protocol.</td><td>Anyone in the world with a connection</td><td>www.google.com, YouTube, Email</td></tr>
+          <tr><td><strong>Intranet</strong></td><td>A private network within an organization that uses internet technologies but is accessible only to authorized employees.</td><td>Only employees/members of the organization</td><td>A company's internal employee portal</td></tr>
+          <tr><td><strong>Extranet</strong></td><td>An extended intranet that allows specific external parties (suppliers, partners, customers) to access selected parts of an organization's internal network.</td><td>Employees + specific authorized outsiders</td><td>A supplier portal for checking inventory levels</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>8.6 How the Internet Works</h2>
+      <h3>IP Addresses</h3>
+      <p>Every device on the internet has a unique <strong>IP address (Internet Protocol address)</strong> — a numerical label that identifies it on the network. IPv4 uses four numbers (0–255) separated by dots: e.g., <code>192.168.1.1</code>. IPv6 uses a longer hexadecimal format to accommodate the billions of new internet-connected devices.</p>
+
+      <h3>DNS — Domain Name System</h3>
+      <p>Humans remember names, not numbers. <strong>DNS</strong> acts like the internet's phone book — it translates human-readable domain names (like <code>www.google.com</code>) into machine-readable IP addresses (like <code>142.250.185.46</code>). When you type a web address, your computer first queries a DNS server to get the IP address, then connects to that IP address.</p>
+
+      <h3>HTTP and HTTPS</h3>
+      <p><strong>HTTP (HyperText Transfer Protocol)</strong> is the set of rules governing how web browsers request web pages from servers and how servers respond. <strong>HTTPS</strong> is the secure version — all data is <strong>encrypted</strong> before transmission, so that no one intercepting the connection can read it. Look for the padlock icon in your browser — it indicates you're using HTTPS.</p>
+
+      <h3>Internet Services</h3>
+      <table class="styled-table">
+        <thead><tr><th>Service</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>WWW (World Wide Web)</strong></td><td>System of interlinked hypertext documents (web pages) accessed via browsers. The Web runs ON the internet but is not the same as the internet.</td></tr>
+          <tr><td><strong>Email</strong></td><td>Electronic messages sent and received over the internet using protocols like SMTP (sending), IMAP, and POP3 (receiving).</td></tr>
+          <tr><td><strong>FTP (File Transfer Protocol)</strong></td><td>Used to transfer files between computers over a network. Still used by web developers to upload website files to servers.</td></tr>
+          <tr><td><strong>VoIP (Voice over IP)</strong></td><td>Technology that transmits voice calls over the internet instead of traditional phone lines. Examples: WhatsApp calls, Zoom, Skype.</td></tr>
+          <tr><td><strong>Social Media</strong></td><td>Platforms that allow users to create profiles, share content, and interact with others. Examples: Facebook, Twitter/X, Instagram, TikTok.</td></tr>
+          <tr><td><strong>Cloud Computing</strong></td><td>Accessing computing resources (storage, software, servers) over the internet on demand rather than running them locally.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch7')">← Chapter 7</button>
+      <button class="btn-next" onclick="showPage('ch9')">Chapter 9: Microsoft Office →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 9 ═══════════════ -->
+  <div id="ch9" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 09</div>
+      <h1>Microsoft Office and Productivity Software</h1>
+      <p class="chapter-intro">Productivity software transforms computers from powerful machines into everyday tools. Microsoft Office is the world's most widely used productivity suite — mastering it is a fundamental skill for students and professionals alike.</p>
+    </div>
+
+    <div class="section">
+      <h2>9.1 Microsoft Word — Word Processing</h2>
+      <div class="definition">
+        <div class="def-term">Word Processor</div>
+        <p>A word processor is software for creating, editing, formatting, and printing text-based documents. Microsoft Word is the world's most popular word processor, used by hundreds of millions of people daily.</p>
+      </div>
+      <h3>Key Features of Microsoft Word</h3>
+      <table class="styled-table">
+        <thead><tr><th>Feature</th><th>What It Does</th><th>Where You'd Use It</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Formatting</strong></td><td>Change font, size, colour, bold, italic, underline, alignment (left/center/right/justify).</td><td>Making a title stand out, creating a professional letter</td></tr>
+          <tr><td><strong>Spell Check & Grammar</strong></td><td>Automatically underlines spelling errors (red) and grammar mistakes (blue/green). Right-click for suggestions.</td><td>Proofreading assignments and reports</td></tr>
+          <tr><td><strong>Styles & Headings</strong></td><td>Apply consistent formatting using pre-defined styles (Heading 1, Heading 2, Normal, etc.) throughout a document.</td><td>Long reports, theses, structured documents</td></tr>
+          <tr><td><strong>Tables</strong></td><td>Insert rows and columns of cells to organise data visually.</td><td>Timetables, comparison tables, data presentation</td></tr>
+          <tr><td><strong>Mail Merge</strong></td><td>Combine a template letter with a list of names/addresses to automatically generate personalised letters for each person.</td><td>Sending result letters to hundreds of students</td></tr>
+          <tr><td><strong>Track Changes</strong></td><td>Shows who made what changes to a document, with old and new text shown side by side. Others can accept or reject changes.</td><td>Collaborating on a document with a teacher or team</td></tr>
+          <tr><td><strong>Table of Contents</strong></td><td>Automatically generates a linked table of contents from document headings.</td><td>Long reports, dissertations, textbooks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>9.2 Microsoft Excel — Spreadsheets</h2>
+      <div class="definition">
+        <div class="def-term">Spreadsheet</div>
+        <p>A spreadsheet is a grid of rows and columns (called cells) used to organise, calculate, and analyse data. Microsoft Excel is the world's leading spreadsheet application, essential in business, finance, science, and engineering.</p>
+      </div>
+      <p>An Excel spreadsheet is organised into a <strong>workbook</strong> (the file), which contains one or more <strong>worksheets</strong> (individual grids). Each worksheet has rows (numbered 1, 2, 3…) and columns (lettered A, B, C…). Each intersection of a row and column is a <strong>cell</strong>, identified by its column letter + row number (e.g., cell B4 is in column B, row 4).</p>
+      <h3>Essential Excel Skills</h3>
+      <div class="num-conversion" style="font-size:13px;line-height:2.2">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">COMMON EXCEL FORMULAS</div>
+        <div><span style="color:#90ee90">=SUM(A1:A10)</span> <span style="color:#aaa">— adds up all values from A1 to A10</span></div>
+        <div><span style="color:#90ee90">=AVERAGE(B1:B10)</span> <span style="color:#aaa">— calculates the average of B1 to B10</span></div>
+        <div><span style="color:#90ee90">=MAX(C1:C20)</span> <span style="color:#aaa">— finds the largest value in the range</span></div>
+        <div><span style="color:#90ee90">=MIN(C1:C20)</span> <span style="color:#aaa">— finds the smallest value in the range</span></div>
+        <div><span style="color:#90ee90">=COUNT(D1:D50)</span> <span style="color:#aaa">— counts how many cells contain numbers</span></div>
+        <div><span style="color:#90ee90">=IF(A1>50,"Pass","Fail")</span> <span style="color:#aaa">— returns "Pass" if A1>50, else "Fail"</span></div>
+        <div><span style="color:#90ee90">=VLOOKUP(E1,A:C,2,FALSE)</span> <span style="color:#aaa">— looks up a value in a table and returns a result</span></div>
+      </div>
+      <p>Excel can also create <strong>charts and graphs</strong> (bar charts, pie charts, line graphs) from data to make patterns and trends visually clear. The <strong>PivotTable</strong> feature allows complex data summarisation and analysis without writing any code.</p>
+    </div>
+
+    <div class="section">
+      <h2>9.3 Microsoft PowerPoint — Presentations</h2>
+      <p>PowerPoint is used to create visual slide presentations for teaching, business meetings, conferences, and pitches. A PowerPoint file is called a <strong>presentation</strong>, and it contains individual <strong>slides</strong>.</p>
+      <table class="styled-table">
+        <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Slide Layouts</strong></td><td>Pre-designed arrangements for content — title slide, content slide, two-column layout, blank slide, etc.</td></tr>
+          <tr><td><strong>Themes</strong></td><td>Pre-designed visual styles (colours, fonts, backgrounds) that apply consistently to all slides for a professional look.</td></tr>
+          <tr><td><strong>Animations</strong></td><td>Effects that control how individual elements (text, images) appear on a slide — fade in, fly in, zoom, etc.</td></tr>
+          <tr><td><strong>Transitions</strong></td><td>Visual effects between slides — fade, wipe, push, zoom. Used to keep audience attention.</td></tr>
+          <tr><td><strong>Presenter View</strong></td><td>Shows the speaker's notes and the next slide on the presenter's screen while the audience sees only the current slide.</td></tr>
+          <tr><td><strong>Slide Master</strong></td><td>A master template that controls the design of all slides at once — change the master and all slides update automatically.</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box gold">
+        <div class="info-title">📌 Best Practice</div>
+        <p>Effective presentations follow the <strong>"6×6 rule"</strong> — no more than 6 bullet points per slide, and no more than 6 words per bullet. Slides should support your speech, not replace it. Audiences read slides OR listen to the speaker — they cannot do both at once.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>9.4 Microsoft Access — Database Management</h2>
+      <p><strong>Microsoft Access</strong> is a database management system (DBMS) included in some versions of Microsoft Office. It allows users to create and manage structured databases — collections of related data organised into tables.</p>
+      <p>Unlike Excel (which stores data in a flat grid), Access stores data in multiple linked <strong>tables</strong> connected by <strong>relationships</strong>. For example, a school database might have a Students table, a Courses table, and an Enrolment table — all linked together. This allows complex queries that would be impossible in a spreadsheet.</p>
+      <p>Access uses <strong>SQL (Structured Query Language)</strong> behind the scenes to query and manipulate data, but provides a visual interface so non-programmers can build queries, forms, and reports without writing code.</p>
+    </div>
+
+    <div class="section">
+      <h2>9.5 Google Workspace — Cloud Alternatives</h2>
+      <p><strong>Google Workspace</strong> (formerly G Suite) is Google's free, cloud-based alternative to Microsoft Office. All files are stored online (Google Drive) and can be edited by multiple people simultaneously from different devices — a major advantage over traditional desktop software.</p>
+      <table class="styled-table">
+        <thead><tr><th>Google App</th><th>Microsoft Equivalent</th><th>Key Difference</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Google Docs</strong></td><td>Microsoft Word</td><td>Real-time collaboration — multiple people can type simultaneously. Auto-saves every second.</td></tr>
+          <tr><td><strong>Google Sheets</strong></td><td>Microsoft Excel</td><td>Cloud-based spreadsheet with similar formulas and charting. Excellent for shared data entry.</td></tr>
+          <tr><td><strong>Google Slides</strong></td><td>Microsoft PowerPoint</td><td>Cloud-based presentations. Easy to share via link; no software installation needed.</td></tr>
+          <tr><td><strong>Google Forms</strong></td><td>No direct equivalent</td><td>Creates online surveys and quizzes that automatically collect responses into Google Sheets.</td></tr>
+          <tr><td><strong>Google Drive</strong></td><td>OneDrive</td><td>15GB free cloud storage accessible from any device. Syncs files automatically.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch8')">← Chapter 8</button>
+      <button class="btn-next" onclick="showPage('ch10')">Chapter 10: Security & Ethics →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 10 ═══════════════ -->
+  <div id="ch10" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 10</div>
+      <h1>Computer Security and Ethics</h1>
+      <p class="chapter-intro">As computers store more of our personal, financial, and professional data, security becomes essential. Understanding threats and ethical responsibilities is no longer optional — it is a fundamental life skill in the digital age.</p>
+    </div>
+
+    <div class="section">
+      <h2>10.1 Types of Computer Threats</h2>
+      <div class="threat-grid">
+        <div class="threat-card virus">
+          <div class="threat-icon">🦠</div>
+          <div class="threat-name">Computer Virus</div>
+          <div class="threat-desc">A malicious program that attaches itself to legitimate files and replicates when those files are opened or shared. Like a biological virus, it spreads from host to host. Can corrupt or delete files, slow down the computer, and crash systems.</div>
+        </div>
+        <div class="threat-card worm">
+          <div class="threat-icon">🪱</div>
+          <div class="threat-name">Worm</div>
+          <div class="threat-desc">Similar to a virus, but a worm spreads automatically across networks WITHOUT needing to attach to a file. It self-replicates and can consume all available network bandwidth, crashing entire network infrastructures.</div>
+        </div>
+        <div class="threat-card trojan">
+          <div class="threat-icon">🐴</div>
+          <div class="threat-name">Trojan Horse</div>
+          <div class="threat-desc">Disguises itself as a legitimate, useful program to trick users into installing it. Once installed, it secretly performs malicious actions — opening backdoors for hackers, stealing passwords, or downloading more malware.</div>
+        </div>
+        <div class="threat-card ransom">
+          <div class="threat-icon">💰</div>
+          <div class="threat-name">Ransomware</div>
+          <div class="threat-desc">Encrypts all files on a victim's computer, making them completely inaccessible. The attacker then demands a ransom (usually in cryptocurrency) for the decryption key. Hospitals, schools, and governments have been devastated by ransomware attacks.</div>
+        </div>
+        <div class="threat-card phish">
+          <div class="threat-icon">🎣</div>
+          <div class="threat-name">Phishing</div>
+          <div class="threat-desc">Fraudulent emails, messages, or websites that impersonate legitimate organisations (banks, government agencies) to trick users into revealing passwords, credit card numbers, or other sensitive information.</div>
+        </div>
+        <div class="threat-card spy">
+          <div class="threat-icon">🕵️</div>
+          <div class="threat-name">Spyware</div>
+          <div class="threat-desc">Secretly monitors and records user activity — keystrokes, browsing history, passwords, and screenshots — without the user's knowledge. This data is then secretly sent to attackers.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>10.2 How Malware Spreads</h2>
+      <p>Understanding how malware spreads is the first step in preventing infection:</p>
+      <table class="styled-table">
+        <thead><tr><th>Spread Method</th><th>How It Works</th><th>Prevention</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Email Attachments</strong></td><td>Malicious files disguised as invoices, photos, or documents attached to emails. Opening the file executes the malware.</td><td>Never open attachments from unknown senders; scan attachments before opening.</td></tr>
+          <tr><td><strong>Infected USB Drives</strong></td><td>Malware on a USB drive can automatically install when plugged into a computer via autorun features.</td><td>Disable autorun; scan USB drives before accessing. Never use unknown USB drives.</td></tr>
+          <tr><td><strong>Malicious Downloads</strong></td><td>Downloading software from unofficial/piracy sites that contains hidden malware bundled with the desired program.</td><td>Download software only from official websites and app stores.</td></tr>
+          <tr><td><strong>Drive-by Downloads</strong></td><td>Simply visiting a compromised website can trigger automatic malware download through browser vulnerabilities.</td><td>Keep browser updated; use security browser extensions.</td></tr>
+          <tr><td><strong>Social Engineering</strong></td><td>Tricking a person (not a machine) into taking an action — clicking a link, installing software, or revealing a password.</td><td>Security education; verify before you click or share.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>10.3 Protection and Defence</h2>
+
+      <h3>Antivirus Software</h3>
+      <p>Antivirus software scans files and programs for known malware signatures and suspicious behaviour. Modern antivirus (also called "internet security suites") provides real-time protection — scanning files as they're downloaded or opened. Popular examples include Avast, Kaspersky, Norton, Windows Defender, and ESET. Antivirus must be kept updated constantly because new threats emerge daily.</p>
+
+      <h3>Firewalls</h3>
+      <p>A <strong>firewall</strong> is a security system (hardware or software) that monitors and controls all incoming and outgoing network traffic based on a set of security rules. It acts as a barrier between your trusted internal network and untrusted external networks (like the internet). Firewalls block unauthorized connection attempts while allowing legitimate traffic through. All modern operating systems include a built-in software firewall.</p>
+
+      <h3>Data Backup and Recovery</h3>
+      <p>Data backup involves creating copies of important files and storing them in a safe, separate location. If the original data is lost (due to hardware failure, ransomware, accidental deletion, or disaster), the backup can be used to restore it.</p>
+      <p>The industry standard is the <strong>3-2-1 Backup Rule</strong>: Keep <strong>3</strong> copies of your data, on <strong>2</strong> different media types (e.g., SSD + external drive), with <strong>1</strong> copy stored off-site (e.g., cloud storage). This protects against almost any single point of failure.</p>
+
+      <h3>Password Security</h3>
+      <p>A strong password is your first line of defense. A strong password should be at least 12 characters long, contain uppercase and lowercase letters, numbers, and symbols, and should NOT be based on personal information (birthday, name, etc.) or be a simple dictionary word. Use a different password for every important account. A <strong>password manager</strong> (like Bitwarden or LastPass) can generate and securely remember unique strong passwords for all your accounts.</p>
+
+      <div class="info-box red">
+        <div class="info-title">⚠️ The Weakest Link</div>
+        <p>Most successful cyberattacks do not defeat technology — they defeat <em>people</em>. Social engineering, phishing, and weak passwords account for the majority of data breaches. <strong>Security awareness and good habits are more powerful than any software tool.</strong></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>10.4 Cybercrime and Cybersecurity</h2>
+      <p><strong>Cybercrime</strong> refers to criminal activities carried out using computers or the internet as tools, targets, or both. Common cybercrimes include identity theft, financial fraud, cyberbullying, hacking, corporate espionage, and online scams.</p>
+      <p><strong>Cybersecurity</strong> is the practice of protecting computers, servers, networks, and data from digital attacks and unauthorized access. Cybersecurity is now a massive industry employing millions of professionals worldwide — from ethical hackers who test systems for vulnerabilities to security analysts who monitor networks 24/7.</p>
+    </div>
+
+    <div class="section">
+      <h2>10.5 Ethical Use of Computers and the Internet</h2>
+      <p>Just because something is <em>technically possible</em> with a computer does not mean it is <em>ethical or legal</em>. Computer ethics is the set of moral principles that govern the use of computers.</p>
+      <table class="styled-table">
+        <thead><tr><th>Ethical Issue</th><th>Explanation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Copyright and Intellectual Property</strong></td><td>Software, music, films, books, and written content are protected by copyright law. Downloading or distributing copyrighted content without permission is <em>illegal</em>, even if it is technically easy to do. Always use licensed software and respect creators' rights.</td></tr>
+          <tr><td><strong>Privacy</strong></td><td>People have a right to privacy online. Accessing others' private communications, files, or data without permission is unethical and illegal. Respect that others' personal information is not yours to share or access.</td></tr>
+          <tr><td><strong>Plagiarism</strong></td><td>Copying others' work (text, code, designs) and presenting it as your own is academic and professional dishonesty. Always cite sources and give proper credit.</td></tr>
+          <tr><td><strong>Cyberbullying</strong></td><td>Using digital communication to harass, threaten, or humiliate others. Causes severe psychological harm. Illegal in many countries.</td></tr>
+          <tr><td><strong>Digital Footprint</strong></td><td>Everything you do online leaves a permanent trace. Think carefully before posting — content shared online is difficult or impossible to truly delete and can affect your reputation, employment, and relationships years later.</td></tr>
+          <tr><td><strong>Responsible AI Use</strong></td><td>Avoid using AI to create misinformation, deepfakes, or content designed to harm others. Acknowledge AI assistance in your work where appropriate.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch9')">← Chapter 9</button>
+      <button class="btn-next" onclick="showPage('ch11')">Chapter 11: Programming →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 11 ═══════════════ -->
+  <div id="ch11" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 11</div>
+      <h1>Programming Fundamentals</h1>
+      <p class="chapter-intro">Programming is the art of instructing a computer to solve problems. Before writing a single line of code, every great programmer first learns to think algorithmically — breaking problems down into clear, logical steps.</p>
+    </div>
+
+    <div class="section">
+      <h2>11.1 What is a Program?</h2>
+      <div class="definition">
+        <div class="def-term">Program</div>
+        <p>A program is a precise set of instructions written in a programming language that tells a computer exactly what steps to perform in what order to accomplish a specific task. Programs are also called <em>software</em>.</p>
+      </div>
+      <p><strong>Programming (or coding)</strong> is the process of designing and writing these instructions. A programmer must think very precisely — computers follow instructions <em>exactly as written</em>, with no interpretation or common sense. If the instruction says "add 5", the computer adds 5 — not 4, not 6, not "approximately 5".</p>
+    </div>
+
+    <div class="section">
+      <h2>11.2 Algorithms</h2>
+      <div class="definition">
+        <div class="def-term">Algorithm</div>
+        <p>An algorithm is a finite, ordered set of well-defined instructions for solving a particular problem or accomplishing a specific task. Every program is ultimately an implementation of an algorithm.</p>
+      </div>
+      <p>A good algorithm must be: <strong>Clear</strong> (each step is unambiguous), <strong>Finite</strong> (it ends after a finite number of steps), <strong>Input</strong> (it accepts zero or more inputs), <strong>Output</strong> (it produces at least one result), and <strong>Effective</strong> (every step must be achievable).</p>
+
+      <h3>Example: Algorithm for Making Tea</h3>
+      <div class="algo-example">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--teal);margin-bottom:10px">ALGORITHM: Make a Cup of Tea</div>
+        <p style="font-size:14px;margin-bottom:6px"><strong>START</strong></p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">1. Pour water into kettle</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">2. Switch kettle ON</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">3. WHILE water is not boiling, WAIT</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">4. Place tea bag in cup</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">5. Pour boiling water into cup</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">6. Wait 3 minutes</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">7. Remove tea bag</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">8. IF user wants sugar THEN add sugar</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">9. IF user wants milk THEN add milk</p>
+        <p style="font-size:14px;margin:4px 0;padding-left:16px">10. Stir and serve</p>
+        <p style="font-size:14px;margin-top:6px"><strong>END</strong></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>11.3 Flowcharts</h2>
+      <p>A <strong>flowchart</strong> is a diagram that visually represents the steps of an algorithm using standard symbols connected by arrows. Flowcharts help programmers plan their logic before writing code.</p>
+      <table class="styled-table">
+        <thead><tr><th>Symbol</th><th>Shape</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Oval / Rounded Rectangle</strong></td><td>⬭</td><td>Start / End (Terminal) — marks the beginning and end of the flowchart</td></tr>
+          <tr><td><strong>Rectangle</strong></td><td>▬</td><td>Process — an action, calculation, or instruction (e.g., "Calculate Total")</td></tr>
+          <tr><td><strong>Diamond (Rhombus)</strong></td><td>◇</td><td>Decision — a yes/no question that causes the flow to branch (e.g., "Is score ≥ 50?")</td></tr>
+          <tr><td><strong>Parallelogram</strong></td><td>▱</td><td>Input/Output — reading data from user or displaying a result</td></tr>
+          <tr><td><strong>Arrow (Flow Line)</strong></td><td>→</td><td>Shows the direction of flow from one step to the next</td></tr>
+        </tbody>
+      </table>
+
+      <div class="diagram-box">
+        <div class="diagram-title">📊 Flowchart Example — Determine Pass or Fail</div>
+        <div class="flowchart">
+          <div class="flow-node oval">START</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node rect">Input student score</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node rect">Read score from user</div>
+          <div class="flow-arrow">↓</div>
+          <div style="position:relative;text-align:center;width:200px;margin:0 auto">
+            <div style="width:130px;height:65px;background:var(--accent);transform:rotate(45deg);margin:0 auto;border-radius:4px"></div>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:13px;font-weight:600;line-height:1.3">Score<br>≥ 50?</div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:60px;align-items:flex-start;margin-top:10px">
+            <div style="text-align:center">
+              <div style="color:var(--teal);font-size:12px;font-weight:600">YES ↙</div>
+              <div class="flow-arrow" style="display:block">↓</div>
+              <div class="flow-node rect" style="background:var(--teal)">Print "PASS"</div>
+            </div>
+            <div style="text-align:center">
+              <div style="color:var(--accent);font-size:12px;font-weight:600">NO ↘</div>
+              <div class="flow-arrow" style="display:block">↓</div>
+              <div class="flow-node rect" style="background:var(--accent)">Print "FAIL"</div>
+            </div>
+          </div>
+          <div class="flow-arrow" style="margin-top:10px">↓</div>
+          <div class="flow-node oval">END</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>11.4 Pseudocode</h2>
+      <p><strong>Pseudocode</strong> is an informal way of describing a program's logic using plain English mixed with simple programming-like constructs. It is not actual code that runs — it is a planning tool. Pseudocode is easier to write than real code and can be understood by people who don't know the specific programming language.</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">PSEUDOCODE: Find largest of three numbers</div>
+        <div>BEGIN</div>
+        <div style="padding-left:20px">INPUT num1, num2, num3</div>
+        <div style="padding-left:20px">SET largest = num1</div>
+        <div style="padding-left:20px">IF num2 > largest THEN</div>
+        <div style="padding-left:40px">SET largest = num2</div>
+        <div style="padding-left:20px">END IF</div>
+        <div style="padding-left:20px">IF num3 > largest THEN</div>
+        <div style="padding-left:40px">SET largest = num3</div>
+        <div style="padding-left:20px">END IF</div>
+        <div style="padding-left:20px;color:#90ee90">OUTPUT "The largest number is: " + largest</div>
+        <div>END</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>11.5 Introduction to Python</h2>
+      <p>Python is the most beginner-friendly and widely-used programming language in the world today. It reads almost like plain English, making it ideal for learning programming concepts. Python is used in web development, data science, artificial intelligence, automation, and scientific research.</p>
+
+      <h3>Variables and Data Types</h3>
+      <p>A <strong>variable</strong> is a named storage location in memory that holds a value. The value can change during program execution (hence "variable"). Every variable stores a specific <strong>data type</strong>:</p>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">PYTHON — VARIABLES & DATA TYPES</div>
+        <div><span style="color:#90ee90">name</span> <span style="color:#aaa">=</span> <span style="color:#ffb870">"Chidi"</span>         <span style="color:#555"># String (text)</span></div>
+        <div><span style="color:#90ee90">age</span> <span style="color:#aaa">=</span> <span style="color:#90b0ff">17</span>               <span style="color:#555"># Integer (whole number)</span></div>
+        <div><span style="color:#90ee90">gpa</span> <span style="color:#aaa">=</span> <span style="color:#90b0ff">3.75</span>             <span style="color:#555"># Float (decimal number)</span></div>
+        <div><span style="color:#90ee90">is_student</span> <span style="color:#aaa">=</span> <span style="color:#d890ff">True</span>     <span style="color:#555"># Boolean (True or False)</span></div>
+        <div style="margin-top:8px"><span style="color:#90ee90">print</span>(<span style="color:#ffb870">"Hello, "</span> + name)   <span style="color:#555"># Output: Hello, Chidi</span></div>
+      </div>
+
+      <h3>Conditions (if/elif/else)</h3>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">PYTHON — CONDITIONAL STATEMENTS</div>
+        <div><span style="color:#90ee90">score</span> = <span style="color:#90b0ff">72</span></div>
+        <div style="margin-top:4px"><span style="color:#d890ff">if</span> score >= <span style="color:#90b0ff">70</span>:</div>
+        <div style="padding-left:20px"><span style="color:#90ee90">print</span>(<span style="color:#ffb870">"Distinction"</span>)</div>
+        <div><span style="color:#d890ff">elif</span> score >= <span style="color:#90b0ff">50</span>:</div>
+        <div style="padding-left:20px"><span style="color:#90ee90">print</span>(<span style="color:#ffb870">"Pass"</span>)</div>
+        <div><span style="color:#d890ff">else</span>:</div>
+        <div style="padding-left:20px"><span style="color:#90ee90">print</span>(<span style="color:#ffb870">"Fail"</span>)</div>
+        <div style="margin-top:8px;color:#90ee90"># Output: Distinction</div>
+      </div>
+
+      <h3>Loops</h3>
+      <div class="binary-demo">
+        <div style="color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:10px">PYTHON — FOR LOOP AND WHILE LOOP</div>
+        <div style="color:#aaa;font-size:11px">FOR LOOP — repeat for each item in a sequence:</div>
+        <div><span style="color:#d890ff">for</span> i <span style="color:#d890ff">in</span> <span style="color:#90ee90">range</span>(<span style="color:#90b0ff">1</span>, <span style="color:#90b0ff">6</span>):</div>
+        <div style="padding-left:20px"><span style="color:#90ee90">print</span>(i)  <span style="color:#555"># Prints 1, 2, 3, 4, 5</span></div>
+        <div style="margin-top:10px;color:#aaa;font-size:11px">WHILE LOOP — repeat while a condition is true:</div>
+        <div><span style="color:#90ee90">count</span> = <span style="color:#90b0ff">0</span></div>
+        <div><span style="color:#d890ff">while</span> count < <span style="color:#90b0ff">5</span>:</div>
+        <div style="padding-left:20px"><span style="color:#90ee90">print</span>(<span style="color:#ffb870">"Count is: "</span>, count)</div>
+        <div style="padding-left:20px">count += <span style="color:#90b0ff">1</span>  <span style="color:#555"># count = count + 1</span></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch10')">← Chapter 10</button>
+      <button class="btn-next" onclick="showPage('ch12')">Chapter 12: Emerging Tech →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CHAPTER 12 ═══════════════ -->
+  <div id="ch12" class="chapter-page">
+    <div class="chapter-header">
+      <div class="ch-label">Chapter 12</div>
+      <h1>Emerging Technologies</h1>
+      <p class="chapter-intro">Technology is accelerating faster than at any point in human history. The technologies emerging today will reshape every industry, profession, and aspect of daily life within your lifetime. Understanding them is no longer optional — it is essential.</p>
+    </div>
+
+    <div class="section">
+      <h2>12.1 Overview of Emerging Technologies</h2>
+      <div class="tech-cards">
+        <div class="tech-card ai">
+          <div class="tech-icon">🧠</div>
+          <div class="tech-name">Artificial Intelligence</div>
+          <div class="tech-desc">Machines that simulate human intelligence — learning, reasoning, and problem-solving.</div>
+        </div>
+        <div class="tech-card cloud">
+          <div class="tech-icon">☁️</div>
+          <div class="tech-name">Cloud Computing</div>
+          <div class="tech-desc">Accessing computing resources over the internet on demand, without local hardware.</div>
+        </div>
+        <div class="tech-card iot">
+          <div class="tech-icon">🌐</div>
+          <div class="tech-name">Internet of Things</div>
+          <div class="tech-desc">Everyday objects connected to the internet, collecting and sharing data automatically.</div>
+        </div>
+        <div class="tech-card vr">
+          <div class="tech-icon">🥽</div>
+          <div class="tech-name">Virtual & Augmented Reality</div>
+          <div class="tech-desc">Immersive digital environments (VR) and digital overlays on the real world (AR).</div>
+        </div>
+        <div class="tech-card blockchain">
+          <div class="tech-icon">🔗</div>
+          <div class="tech-name">Blockchain</div>
+          <div class="tech-desc">A decentralised, tamper-proof digital ledger for recording transactions transparently.</div>
+        </div>
+        <div class="tech-card robotics">
+          <div class="tech-icon">🤖</div>
+          <div class="tech-name">Robotics & Automation</div>
+          <div class="tech-desc">Machines that perform physical tasks autonomously, guided by AI and sensors.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>12.2 Artificial Intelligence (AI) and Machine Learning</h2>
+      <p><strong>Artificial Intelligence (AI)</strong> refers to computer systems capable of performing tasks that normally require human intelligence — such as understanding speech, recognising images, making decisions, and translating languages.</p>
+      <p><strong>Machine Learning (ML)</strong> is a branch of AI in which systems learn from data rather than being explicitly programmed. Instead of a programmer writing rules like "if the email contains the word 'prize', mark it as spam", a machine learning system analyses thousands of spam emails and learns by itself what patterns indicate spam.</p>
+      <p><strong>Deep Learning</strong> is a further specialisation that uses artificial neural networks — systems loosely inspired by the human brain — to learn from massive datasets. Deep learning powers facial recognition, autonomous vehicles, real-time translation, and AI image generation.</p>
+
+      <h3>AI Applications You Use Today</h3>
+      <table class="styled-table">
+        <thead><tr><th>AI Application</th><th>Where You See It</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Voice Assistants</strong></td><td>Siri, Google Assistant, Alexa — understand and respond to natural language speech.</td></tr>
+          <tr><td><strong>Recommendation Systems</strong></td><td>Netflix, YouTube, Spotify — suggest content based on your viewing/listening history.</td></tr>
+          <tr><td><strong>Spam Filters</strong></td><td>Gmail automatically separates spam from real emails using AI trained on billions of messages.</td></tr>
+          <tr><td><strong>Facial Recognition</strong></td><td>Phone face unlock, Facebook photo tagging, airport security, and law enforcement.</td></tr>
+          <tr><td><strong>Medical Diagnosis</strong></td><td>AI systems can detect cancer in X-rays and MRI scans with accuracy comparable to specialist doctors.</td></tr>
+          <tr><td><strong>Large Language Models</strong></td><td>ChatGPT, Claude, Gemini — AI systems that generate human-like text, answer questions, and assist with writing and coding.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>12.3 Cloud Computing</h2>
+      <p><strong>Cloud computing</strong> delivers computing services — servers, storage, databases, networking, software, analytics, and more — over the internet ("the cloud"). Instead of owning physical servers or data centres, organisations rent computing resources from cloud providers.</p>
+      <table class="styled-table">
+        <thead><tr><th>Service Model</th><th>What Is Provided</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IaaS</strong> (Infrastructure as a Service)</td><td>Virtual servers, storage, and networking. User manages OS and above.</td><td>Amazon Web Services (AWS), Microsoft Azure, Google Cloud</td></tr>
+          <tr><td><strong>PaaS</strong> (Platform as a Service)</td><td>Development environment with tools, runtime, database. Developer focuses on code only.</td><td>Heroku, Google App Engine, Microsoft Azure App Service</td></tr>
+          <tr><td><strong>SaaS</strong> (Software as a Service)</td><td>Complete software applications delivered over the internet. No installation needed.</td><td>Gmail, Google Docs, Zoom, Salesforce, Dropbox, Office 365</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box gold">
+        <div class="info-title">💡 Cloud in Daily Life</div>
+        <p>When you use Google Drive to store your school project, stream a movie on Netflix, use Gmail for email, or back up your phone photos to iCloud — you are using cloud computing. The data and software live on powerful servers in data centres, not on your device.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>12.4 Internet of Things (IoT)</h2>
+      <p>The <strong>Internet of Things (IoT)</strong> refers to the network of physical devices — from household appliances to industrial machinery — embedded with sensors, software, and connectivity that enable them to collect and exchange data over the internet without human intervention.</p>
+      <p>A smart home might have an IoT thermostat that learns your temperature preferences and adjusts automatically, smart bulbs you control from your phone, a refrigerator that tracks expiry dates and orders groceries automatically, and door locks you can unlock remotely. All these devices communicate through the internet, creating an intelligent, responsive environment.</p>
+      <p>IoT applications extend into agriculture (soil sensors that automate irrigation), healthcare (wearable devices that monitor heart rate and blood sugar), manufacturing (factory equipment that self-diagnoses faults), and smart cities (traffic lights that optimise flow in real time).</p>
+    </div>
+
+    <div class="section">
+      <h2>12.5 Virtual Reality (VR) and Augmented Reality (AR)</h2>
+      <p><strong>Virtual Reality (VR)</strong> completely replaces the user's real-world environment with a computer-generated 3D environment. When wearing a VR headset (like Meta Quest or PlayStation VR), the user is completely immersed in a digital world — they can look around in all directions, move through the virtual space, and interact with virtual objects. VR is used in gaming, military training, medical education, architecture visualization, and therapy for phobias and PTSD.</p>
+      <p><strong>Augmented Reality (AR)</strong> overlays digital information and images onto the real world without blocking it out. Looking through your phone's camera while using AR, you see the real world plus digital additions — arrows guiding you to a destination, furniture appearing in your room before you buy it, or information appearing when you point your camera at a product. Examples include Snapchat filters, Pokémon GO, and IKEA's room-planning app.</p>
+      <p><strong>Mixed Reality (MR)</strong> goes further — digital objects interact with the real world, not just overlay it. Microsoft's HoloLens allows engineers to see and manipulate a holographic 3D model of a machine while standing in front of the real machine.</p>
+    </div>
+
+    <div class="section">
+      <h2>12.6 Blockchain Technology</h2>
+      <p>A <strong>blockchain</strong> is a type of database that stores information differently from traditional databases. Data is stored in blocks, which are chained together chronologically and permanently. Once data is recorded in a block, it cannot be altered without changing all subsequent blocks — making the record tamper-evident.</p>
+      <p>Blockchains are <strong>decentralised</strong> — instead of being stored on one central server, thousands of copies exist on computers around the world simultaneously. There is no single authority controlling it. Any change must be agreed upon by the majority of the network.</p>
+      <p>The most famous application of blockchain is <strong>cryptocurrency</strong> (like Bitcoin and Ethereum), which uses blockchain to record financial transactions without the need for banks. Other applications include supply chain tracking (verifying that products are authentic), digital voting systems, medical records, and smart contracts (automatically executing agreements when conditions are met).</p>
+    </div>
+
+    <div class="section">
+      <h2>12.7 Robotics and Automation</h2>
+      <p><strong>Robotics</strong> is the field of engineering focused on designing and building robots — programmable machines that can carry out physical tasks. Modern robots are increasingly guided by AI, allowing them to adapt to changing conditions rather than just executing fixed sequences.</p>
+      <p>Industrial robots in car factories weld, paint, and assemble vehicles with precision and speed no human can match. <strong>Surgical robots</strong> (like the Da Vinci system) allow surgeons to perform minimally invasive procedures with greater precision through tiny incisions. Delivery drones carry packages to homes. Agricultural robots harvest crops. Security robots patrol buildings at night.</p>
+      <p><strong>Automation</strong> is the broader concept of using technology to perform tasks with minimal human input. Software automation (using programs to automatically perform repetitive digital tasks) is as significant as physical robotics — automating data entry, report generation, customer emails, and financial transactions.</p>
+    </div>
+
+    <div class="section">
+      <h2>12.8 The Future of Computing</h2>
+      <p><strong>Quantum computing</strong> represents the next major leap. While classical computers use bits (0 or 1), quantum computers use <strong>qubits</strong> which can exist in multiple states simultaneously (a concept called <em>superposition</em>). This allows quantum computers to solve certain categories of problems millions of times faster than the best classical supercomputers. Applications include breaking current encryption, drug discovery, climate modelling, and financial optimisation.</p>
+      <p><strong>Edge computing</strong> processes data closer to where it is generated (on the device or nearby server) rather than sending it all to a distant cloud data centre. This reduces latency and bandwidth requirements, critical for real-time IoT applications like autonomous vehicles and industrial automation.</p>
+      <p>The convergence of AI, IoT, robotics, 5G networks, and quantum computing promises a future where intelligent, connected machines manage much of the world's infrastructure autonomously — presenting both enormous opportunity and profound challenges around employment, privacy, and the ethical governance of technology.</p>
+
+      <div class="info-box">
+        <div class="info-title">🎓 Final Thought</div>
+        <p>You are studying computer science at a pivotal moment in history. The technologies covered in this textbook — from binary numbers to artificial intelligence — are not just academic subjects. They are the tools with which your generation will tackle climate change, cure diseases, connect the disconnected, and shape what it means to be human in the 21st century. <strong>Master the fundamentals, and you have the foundation to build almost anything.</strong></p>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="btn-prev" onclick="showPage('ch11')">← Chapter 11</button>
+      <button class="btn-next" onclick="showPage('cover')">↑ Back to Contents</button>
+    </div>
+  </div>
+
+</div><!-- end #main -->
+
+<script>
+const PAGES = ['cover','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12'];
+const PAGE_NAMES = ['Cover','Chapter 1','Chapter 2','Chapter 3','Chapter 4','Chapter 5','Chapter 6','Chapter 7','Chapter 8','Chapter 9','Chapter 10','Chapter 11','Chapter 12'];
+
+function showPage(id) {
+  // Hide all
+  document.querySelectorAll('.chapter-page, #cover').forEach(p => {
+    p.classList.remove('active');
+    if (p.id !== 'cover') p.style.display = 'none';
+  });
+  document.getElementById('cover').style.display = 'none';
+
+  // Show target
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.style.display = id === 'cover' ? 'flex' : 'block';
+  if (id !== 'cover') target.classList.add('active');
+  else target.style.display = 'flex';
+
+  // Update nav highlight
+  document.querySelectorAll('.nav-chapter').forEach((a, i) => {
+    a.classList.remove('active');
+    if (i === PAGES.indexOf(id)) a.classList.add('active');
+  });
+
+  // Update progress
+  const idx = PAGES.indexOf(id);
+  const pct = idx === 0 ? 0 : Math.round((idx / (PAGES.length - 1)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('pageIndicator').textContent = PAGE_NAMES[idx] || id;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('active');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+}
+
+// Quiz grading
+const answers = {
+  ch1: { q1: 'a', q2: 'c', q3: 'd' }
+};
+
+function gradeQuiz(chId) {
+  const correct = answers[chId];
+  if (!correct) return;
+  let score = 0;
+  let total = Object.keys(correct).length;
+  
+  Object.keys(correct).forEach(q => {
+    const selected = document.querySelector(`input[name="${q}"]:checked`);
+    const opts = document.querySelectorAll(`input[name="${q}"]`);
+    opts.forEach(opt => {
+      const label = opt.closest('.quiz-option');
+      label.classList.remove('correct','wrong');
+    });
+    if (selected) {
+      const selLabel = selected.closest('.quiz-option');
+      if (selected.value === correct[q]) {
+        selLabel.classList.add('correct');
+        score++;
+      } else {
+        selLabel.classList.add('wrong');
+        // Highlight correct
+        opts.forEach(opt => {
+          if (opt.value === correct[q]) opt.closest('.quiz-option').classList.add('correct');
+        });
+      }
+    }
+  });
+  
+  const resultEl = document.getElementById(`result-${chId}`);
+  resultEl.style.display = 'block';
+  const pct = Math.round((score/total)*100);
+  if (pct === 100) {
+    resultEl.style.background = '#e8f5e9';
+    resultEl.style.color = '#1a6b6b';
+    resultEl.textContent = `🎉 Perfect! ${score}/${total} — Excellent work!`;
+  } else if (pct >= 60) {
+    resultEl.style.background = '#fff8e1';
+    resultEl.style.color = '#b8860b';
+    resultEl.textContent = `✅ Good effort! ${score}/${total} — Review the highlighted answers.`;
+  } else {
+    resultEl.style.background = '#fdecea';
+    resultEl.style.color = '#c0392b';
+    resultEl.textContent = `📖 Score: ${score}/${total} — Please re-read the chapter and try again.`;
+  }
+}
+
+// Init
+showPage('cover');
+</script>
+</body>
+</html>
