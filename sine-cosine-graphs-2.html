@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sine & Cosine Graphs</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: #111118;
+    --border: #1e1e2e;
+    --sin: #00e5ff;
+    --cos: #ff4d8d;
+    --grid: #1a1a2a;
+    --text: #e0e0f0;
+    --muted: #555570;
+    --accent: #7c3aed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 16px 60px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--sin) 0%, var(--cos) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 4px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .graph-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 28px 20px 28px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+  }
+
+  .toggle input { display: none; }
+
+  .toggle-dot {
+    width: 42px;
+    height: 24px;
+    border-radius: 12px;
+    background: var(--grid);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .toggle-dot::after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--muted);
+    top: 3px; left: 3px;
+    transition: all 0.2s;
+  }
+
+  .toggle.sin-toggle input:checked + .toggle-dot { border-color: var(--sin); }
+  .toggle.cos-toggle input:checked + .toggle-dot { border-color: var(--cos); }
+  .toggle.sin-toggle input:checked + .toggle-dot::after { background: var(--sin); transform: translateX(18px); }
+  .toggle.cos-toggle input:checked + .toggle-dot::after { background: var(--cos); transform: translateX(18px); }
+
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .info-bar {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 14px;
+  }
+
+  .canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    cursor: crosshair;
+  }
+
+  #tooltip {
+    position: absolute;
+    background: #14141f;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 2;
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+  }
+
+  #tooltip .tt-sin { color: var(--sin); }
+  #tooltip .tt-cos { color: var(--cos); }
+  #tooltip .tt-deg { color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
+
+  .key-values {
+    margin-top: 24px;
+    overflow-x: auto;
+  }
+
+  .key-values h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+
+  th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--grid);
+  }
+
+  td.sin-val { color: var(--sin); }
+  td.cos-val { color: var(--cos); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sine &amp; Cosine Graphs</h1>
+  <p>Interactive Trigonometric Functions Viewer</p>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" data-range="0">−180° ≤ θ ≤ 180°</button>
+    <button class="tab-btn" data-range="1">−90° ≤ θ ≤ 90°</button>
+    <button class="tab-btn" data-range="2">−360° ≤ θ ≤ 0°</button>
+  </div>
+
+  <div class="graph-panel">
+    <div class="controls">
+      <label class="toggle sin-toggle">
+        <input type="checkbox" id="showSin" checked>
+        <span class="toggle-dot"></span>
+        <span class="legend-dot" style="background:var(--sin)"></span>
+        sin θ
+      </label>
+      <label class="toggle cos-toggle">
+        <input type="checkbox" id="showCos" checked>
+        <span class="toggle-dot"></span>
+        <span class="legend-dot" style="background:var(--cos)"></span>
+        cos θ
+      </label>
+      <div class="info-bar" id="rangeLabel">Range: −180° to 180°</div>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="graph" width="2400" height="1000"></canvas>
+      <div id="tooltip">
+        <div class="tt-deg" id="tt-deg"></div>
+        <div class="tt-sin" id="tt-sin"></div>
+        <div class="tt-cos" id="tt-cos"></div>
+      </div>
+    </div>
+
+    <div class="key-values">
+      <h3>Key Values</h3>
+      <table id="keyTable">
+        <thead>
+          <tr>
+            <th>θ (degrees)</th>
+            <th>sin θ</th>
+            <th>cos θ</th>
+          </tr>
+        </thead>
+        <tbody id="keyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const RANGES = [
+  { min: -180, max: 180, label: '−180° to 180°', step: 30 },
+  { min: -90,  max: 90,  label: '−90° to 90°',   step: 15 },
+  { min: -360, max: 0,   label: '−360° to 0°',   step: 45 },
+];
+
+let currentRange = 0;
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const PAD = { top: 60, right: 70, bottom: 80, left: 90 };
+
+function toRad(d) { return d * Math.PI / 180; }
+function fmt(n) { return n.toFixed(4); }
+
+function draw() {
+  const range = RANGES[currentRange];
+  const showSin = document.getElementById('showSin').checked;
+  const showCos = document.getElementById('showCos').checked;
+
+  const gW = W - PAD.left - PAD.right;
+  const gH = H - PAD.top - PAD.bottom;
+
+  function xOf(deg) { return PAD.left + (deg - range.min) / (range.max - range.min) * gW; }
+  function yOf(val) { return PAD.top + (1 - val) / 2 * gH; }
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, W, H);
+
+  const gridStep = range.step;
+
+  for (let d = range.min; d <= range.max; d += gridStep) {
+    const x = xOf(d);
+    ctx.beginPath();
+    ctx.moveTo(x, PAD.top);
+    ctx.lineTo(x, PAD.top + gH);
+    ctx.strokeStyle = d === 0 ? '#2e2e44' : '#151522';
+    ctx.lineWidth = d === 0 ? 2 : 1;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x, PAD.top + gH);
+    ctx.lineTo(x, PAD.top + gH + 10);
+    ctx.strokeStyle = '#2e2e44'; ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.fillStyle = '#666680';
+    ctx.font = '28px Space Mono, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(d + '°', x, PAD.top + gH + 50);
+  }
+
+  for (let v = -1; v <= 1; v += 0.5) {
+    const y = yOf(v);
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, y);
+    ctx.lineTo(PAD.left + gW, y);
+    ctx.strokeStyle = v === 0 ? '#2e2e44' : '#151522';
+    ctx.lineWidth = v === 0 ? 2 : 1;
+    ctx.setLineDash(v === 0 ? [] : [10, 10]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.moveTo(PAD.left - 10, y);
+    ctx.lineTo(PAD.left, y);
+    ctx.strokeStyle = '#2e2e44'; ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.fillStyle = '#666680';
+    ctx.font = '28px Space Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(1), PAD.left - 18, y + 10);
+  }
+
+  ctx.strokeStyle = '#2e2e44';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(PAD.left, PAD.top, gW, gH);
+
+  ctx.fillStyle = '#555570';
+  ctx.font = '28px Space Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('θ  (degrees)', PAD.left + gW / 2, H - 8);
+
+  ctx.save();
+  ctx.translate(22, PAD.top + gH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Value', 0, 0);
+  ctx.restore();
+
+  function plotCurve(color, valFn) {
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i <= 3000; i++) {
+      const deg = range.min + (range.max - range.min) * i / 3000;
+      const x = xOf(deg);
+      const y = yOf(valFn(toRad(deg)));
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 5;
+    ctx.lineJoin = 'round';
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 14;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  if (showCos) plotCurve('#ff4d8d', Math.cos);
+  if (showSin) plotCurve('#00e5ff', Math.sin);
+
+  const keyAngles = getKeyAngles(range);
+  keyAngles.forEach(deg => {
+    const x = xOf(deg);
+    if (showSin) {
+      const y = yOf(Math.sin(toRad(deg)));
+      ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#00e5ff';
+      ctx.shadowColor = '#00e5ff'; ctx.shadowBlur = 10;
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
+    if (showCos) {
+      const y = yOf(Math.cos(toRad(deg)));
+      ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#ff4d8d';
+      ctx.shadowColor = '#ff4d8d'; ctx.shadowBlur = 10;
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
+  });
+
+  const lx = PAD.left + 24, ly = PAD.top + 32;
+  ctx.font = 'bold 30px Space Mono, monospace';
+  ctx.textAlign = 'left';
+  if (showSin) {
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 5;
+    ctx.shadowColor = '#00e5ff'; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 55, ly); ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#00e5ff';
+    ctx.fillText('sin θ', lx + 68, ly + 11);
+  }
+  if (showCos) {
+    const offset = showSin ? 65 : 0;
+    ctx.strokeStyle = '#ff4d8d'; ctx.lineWidth = 5;
+    ctx.shadowColor = '#ff4d8d'; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.moveTo(lx, ly + offset); ctx.lineTo(lx + 55, ly + offset); ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#ff4d8d';
+    ctx.fillText('cos θ', lx + 68, ly + offset + 11);
+  }
+
+  canvas._xOf = xOf;
+  canvas._range = range;
+}
+
+function getKeyAngles(range) {
+  const all = [-360,-315,-270,-225,-180,-135,-90,-45,0,45,90,135,180,225,270,315,360];
+  return all.filter(d => d >= range.min && d <= range.max);
+}
+
+function buildTable() {
+  const range = RANGES[currentRange];
+  const body = document.getElementById('keyBody');
+  body.innerHTML = '';
+  getKeyAngles(range).forEach(deg => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${deg}°</td>
+      <td class="sin-val">${fmt(Math.sin(toRad(deg)))}</td>
+      <td class="cos-val">${fmt(Math.cos(toRad(deg)))}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+function updateLabel() {
+  document.getElementById('rangeLabel').textContent = 'Range: ' + RANGES[currentRange].label;
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRange = +btn.dataset.range;
+    updateLabel(); draw(); buildTable();
+  });
+});
+
+document.getElementById('showSin').addEventListener('change', draw);
+document.getElementById('showCos').addEventListener('change', draw);
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = W / rect.width;
+  const cx = (e.clientX - rect.left) * scaleX;
+  const range = canvas._range || RANGES[0];
+  const gW = W - PAD.left - PAD.right;
+  const deg = range.min + (cx - PAD.left) / gW * (range.max - range.min);
+
+  if (deg < range.min || deg > range.max) {
+    document.getElementById('tooltip').style.display = 'none';
+    return;
+  }
+
+  const tt = document.getElementById('tooltip');
+  tt.style.display = 'block';
+  const tx = e.clientX - rect.left + 16;
+  const ty = e.clientY - rect.top - 10;
+  tt.style.left = (tx > rect.width - 180 ? tx - 170 : tx) + 'px';
+  tt.style.top = ty + 'px';
+  document.getElementById('tt-deg').textContent = 'θ = ' + deg.toFixed(1) + '°';
+  document.getElementById('tt-sin').textContent = 'sin θ = ' + Math.sin(toRad(deg)).toFixed(4);
+  document.getElementById('tt-cos').textContent = 'cos θ = ' + Math.cos(toRad(deg)).toFixed(4);
+});
+
+canvas.addEventListener('mouseleave', () => {
+  document.getElementById('tooltip').style.display = 'none';
+});
+
+draw(); buildTable(); updateLabel();
+</script>
+</body>
+</html>
