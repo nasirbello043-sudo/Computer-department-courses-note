@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vector Mathematics — Complete Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --paper: #faf6ef;
+    --cream: #f2ead8;
+    --gold: #c8973a;
+    --gold-light: #e8c97a;
+    --red: #b5341e;
+    --blue: #1e3a6e;
+    --blue-light: #2e5a9e;
+    --green: #1e5a3e;
+    --margin: #e8dfc8;
+    --rule: #d4c9b0;
+    --shadow: rgba(26,18,9,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #2a1f0f;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, #3a2a12 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, #1a1005 0%, transparent 60%);
+  }
+
+  /* COVER */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-book {
+    background: var(--paper);
+    width: min(700px, 95vw);
+    min-height: 90vh;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: -8px 0 0 #c4a96a, -12px 4px 30px rgba(0,0,0,0.6), 8px 8px 60px rgba(0,0,0,0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 50px;
+    border-left: 6px solid var(--gold);
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 31px, var(--rule) 31px, var(--rule) 32px),
+      linear-gradient(to right, var(--margin) 0px, var(--margin) 80px, transparent 80px);
+  }
+
+  .cover-ornament {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+  .cover-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 900;
+    color: var(--blue);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .cover-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--red);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .cover-divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+
+  .cover-toc {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
+  }
+
+  .cover-toc h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: var(--cream);
+    border-color: var(--gold);
+  }
+
+  .toc-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 1rem;
+    min-width: 28px;
+  }
+
+  .toc-name {
+    font-size: 0.9rem;
+    color: var(--blue);
+    flex: 1;
+  }
+
+  .toc-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--rule);
+    margin: 0 8px;
+  }
+
+  .toc-page {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+  }
+
+  .cover-btn {
+    margin-top: 40px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(30,58,110,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .cover-btn:hover {
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(30,58,110,0.4);
+  }
+
+  /* MAIN TEXTBOOK */
+  #textbook {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* TOP NAV */
+  .top-nav {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 20px var(--shadow);
+    border-left: 4px solid var(--gold);
+  }
+
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--blue);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+  }
+
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-left: auto;
+  }
+
+  /* CHAPTER PAGE */
+  .chapter-page {
+    display: none;
+  }
+
+  .chapter-page.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* BOOK PAGE STYLE */
+  .book-page {
+    background: var(--paper);
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: -4px 0 0 var(--gold), 0 8px 40px var(--shadow);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 31px, var(--rule) 31px, var(--rule) 32px),
+      linear-gradient(to right, var(--margin) 0px, var(--margin) 70px, transparent 70px);
+  }
+
+  .page-content {
+    padding: 40px 40px 40px 90px;
+  }
+
+  .chapter-header {
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+
+  .chapter-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 900;
+    color: var(--blue);
+    line-height: 1.2;
+  }
+
+  .chapter-tagline {
+    font-style: italic;
+    color: var(--red);
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+
+  /* CONTENT STYLES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 30px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--red);
+    margin: 20px 0 8px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: linear-gradient(135deg, #e8f0fa, #f0f5ff);
+    border: 1px solid #b0c4e8;
+    border-left: 4px solid var(--blue);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .def-box .def-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--blue-light);
+    margin-bottom: 6px;
+  }
+
+  .def-box p { margin: 0; font-size: 0.9rem; }
+
+  /* THEOREM BOX */
+  .theorem-box {
+    background: linear-gradient(135deg, #fef9e8, #fff8e0);
+    border: 1px solid #e8c97a;
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .theorem-box .thm-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  /* FORMULA BOX */
+  .formula-box {
+    background: #1a1209;
+    color: #e8dfc8;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    border: 1px solid #c8973a;
+    position: relative;
+  }
+
+  .formula-box::before {
+    content: 'FORMULA';
+    position: absolute;
+    top: -1px;
+    right: 16px;
+    background: var(--gold);
+    color: #1a1209;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 0 0 4px 4px;
+    letter-spacing: 0.15em;
+  }
+
+  .formula-box .highlight { color: var(--gold-light); }
+  .formula-box .comment { color: #8a7a60; font-style: italic; }
+
+  /* EXAMPLE BOX */
+  .example-box {
+    background: linear-gradient(135deg, #f0faf4, #e8f5ee);
+    border: 1px solid #90c8a8;
+    border-left: 4px solid var(--green);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .example-box .ex-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .example-box p { margin-bottom: 8px; font-size: 0.9rem; }
+
+  .step { 
+    display: flex; 
+    gap: 12px; 
+    margin: 8px 0;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    background: var(--green);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content { font-size: 0.9rem; line-height: 1.7; }
+
+  /* NOTE */
+  .note {
+    background: #fff8f0;
+    border: 1px solid #f0c8a0;
+    border-left: 4px solid var(--red);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    font-style: italic;
+  }
+
+  .note strong { color: var(--red); font-style: normal; }
+
+  /* VISUAL VECTOR */
+  .vector-visual {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    background: #e8f0fa;
+    border: 1px solid #b0c4e8;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  /* TABLE */
+  .math-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.88rem;
+  }
+
+  .math-table th {
+    background: var(--blue);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+
+  .math-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .math-table tr:nth-child(even) td { background: var(--cream); }
+
+  /* EXAM SECTION */
+  .exam-section {
+    background: #1a1209;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 10px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+
+  .exam-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .exam-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 4px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .exam-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--paper);
+    font-style: italic;
+  }
+
+  .exam-instructions {
+    font-size: 0.8rem;
+    color: #8a7a60;
+    margin-top: 8px;
+  }
+
+  .exam-question {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .q-text {
+    color: var(--paper);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .q-number {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+
+  .options {
+    display: grid;
+    gap: 8px;
+  }
+
+  .option-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,151,58,0.25);
+    border-radius: 4px;
+    padding: 12px 16px;
+    color: #c8b898;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    background: rgba(200,151,58,0.1);
+    border-color: var(--gold);
+    color: var(--paper);
+  }
+
+  .option-btn.correct {
+    background: rgba(30,90,62,0.4);
+    border-color: #4caf80;
+    color: #a0e8c0;
+  }
+
+  .option-btn.wrong {
+    background: rgba(181,52,30,0.3);
+    border-color: #e06050;
+    color: #f0a090;
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* SOLUTION PANEL */
+  .solution-panel {
+    display: none;
+    background: rgba(200,151,58,0.06);
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 14px;
+    animation: slideDown 0.3s ease;
+  }
+
+  .solution-panel.show { display: block; }
+
+  @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+
+  .solution-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .solution-step {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    align-items: flex-start;
+  }
+
+  .sol-bullet {
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    min-width: 20px;
+    margin-top: 3px;
+  }
+
+  .sol-text {
+    color: #d4c4a0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .sol-formula {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #e8c97a;
+    border-left: 3px solid var(--gold);
+  }
+
+  .sol-answer {
+    background: rgba(30,90,62,0.25);
+    border: 1px solid #4caf80;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-top: 14px;
+    color: #a0e8c0;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .score-bar {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .score-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .score-label { color: #8a7a60; font-size: 0.85rem; margin-top: 4px; }
+
+  .reset-btn {
+    background: var(--gold);
+    color: #1a1209;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 4px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 14px;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { background: var(--gold-light); }
+
+  /* PAGE FOOTER */
+  .page-footer {
+    text-align: center;
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--rule);
+    margin: 0 40px 0 90px;
+  }
+
+  /* NEXT CHAPTER BTN */
+  .chapter-nav {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    justify-content: space-between;
+  }
+
+  .ch-btn {
+    background: var(--paper);
+    border: 1px solid var(--gold);
+    color: var(--blue);
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-style: italic;
+  }
+
+  .ch-btn:hover { background: var(--gold); color: white; }
+  .ch-btn:disabled { opacity: 0.4; cursor: default; }
+
+  /* PROGRESS */
+  .progress-strip {
+    height: 4px;
+    background: rgba(200,151,58,0.15);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  @media (max-width: 600px) {
+    .page-content { padding: 24px 20px 24px 24px; }
+    .book-page { background-image: none; }
+    .page-footer { margin: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div id="cover">
+  <div class="cover-book">
+    <div class="cover-ornament">⟨ v ⟩</div>
+    <div class="cover-label">Complete Course Textbook</div>
+    <div class="cover-title">Vector<br>Mathematics</div>
+    <div class="cover-subtitle">From First Principles to Coordinate Geometry</div>
+    <div class="cover-divider"></div>
+
+    <div class="cover-toc">
+      <h3>Table of Contents</h3>
+      <div class="toc-item" onclick="openChapter(0)"><span class="toc-num">I</span><span class="toc-name">Concept of Vectors</span><span class="toc-dots"></span><span class="toc-page">Ch. 1</span></div>
+      <div class="toc-item" onclick="openChapter(1)"><span class="toc-num">II</span><span class="toc-name">Vectors in 3 Directions</span><span class="toc-dots"></span><span class="toc-page">Ch. 2</span></div>
+      <div class="toc-item" onclick="openChapter(2)"><span class="toc-num">III</span><span class="toc-name">Angles Between Vectors</span><span class="toc-dots"></span><span class="toc-page">Ch. 3</span></div>
+      <div class="toc-item" onclick="openChapter(3)"><span class="toc-num">IV</span><span class="toc-name">Vector Operations</span><span class="toc-dots"></span><span class="toc-page">Ch. 4</span></div>
+      <div class="toc-item" onclick="openChapter(4)"><span class="toc-num">V</span><span class="toc-name">Unit Vectors & Magnitude</span><span class="toc-dots"></span><span class="toc-page">Ch. 5</span></div>
+      <div class="toc-item" onclick="openChapter(5)"><span class="toc-num">VI</span><span class="toc-name">Vectors in Differentiation</span><span class="toc-dots"></span><span class="toc-page">Ch. 6</span></div>
+      <div class="toc-item" onclick="openChapter(6)"><span class="toc-num">VII</span><span class="toc-name">Coordinate Geometry</span><span class="toc-dots"></span><span class="toc-page">Ch. 7</span></div>
+    </div>
+
+    <button class="cover-btn" onclick="openChapter(0)">Begin Reading →</button>
+  </div>
+</div>
+
+<!-- ===== TEXTBOOK ===== -->
+<div id="textbook">
+
+  <div class="top-nav">
+    <button class="nav-btn" onclick="goHome()">◀ Cover</button>
+    <div id="chapterBtns"></div>
+    <span class="nav-title" id="navTitle">Chapter 1</span>
+  </div>
+
+  <div class="progress-strip"><div class="progress-fill" id="progressFill" style="width:14%"></div></div>
+
+  <!-- ========== CHAPTER 1 ========== -->
+  <div class="chapter-page active" id="ch0">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter I</div>
+          <div class="chapter-title">Concept of Vectors</div>
+          <div class="chapter-tagline">Understanding what vectors are and why they matter</div>
+        </div>
+
+        <div class="section-title">1.1 What Is a Vector?</div>
+        <p>In everyday life, we describe many quantities simply by their size — temperature, mass, time, speed. These are called <strong>scalar quantities</strong>. But many physical phenomena cannot be fully described by magnitude alone. When we say "a car is moving at 60 km/h," we might also need to know <em>in which direction</em> it is moving. This is where vectors become essential.</p>
+
+        <div class="def-box">
+          <div class="def-label">Definition — Vector</div>
+          <p>A <strong>vector</strong> is a mathematical object that has both <strong>magnitude</strong> (size) and <strong>direction</strong>. It is represented geometrically as a directed line segment (an arrow), where the length of the arrow represents the magnitude and the arrowhead indicates the direction.</p>
+        </div>
+
+        <div class="def-box">
+          <div class="def-label">Definition — Scalar</div>
+          <p>A <strong>scalar</strong> is a quantity described by magnitude only, with no associated direction. Examples include temperature (25°C), mass (10 kg), and time (5 seconds).</p>
+        </div>
+
+        <div class="section-title">1.2 Notation and Representation</div>
+        <p>Vectors are written using bold letters such as <strong>a</strong>, <strong>b</strong>, <strong>v</strong>, or with an arrow overhead such as <span class="vector-visual">→a</span>. The magnitude of vector <strong>a</strong> is written as |<strong>a</strong>| or simply <em>a</em> (italicised).</p>
+
+        <p>A vector from point A to point B is written as <span class="vector-visual">→AB</span>. Point A is the <em>initial point</em> (tail) and point B is the <em>terminal point</em> (head).</p>
+
+        <div class="section-title">1.3 Types of Vectors</div>
+
+        <table class="math-table">
+          <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+          <tr><td><strong>Zero Vector</strong></td><td>Magnitude = 0, no defined direction</td><td><strong>0</strong> = (0, 0, 0)</td></tr>
+          <tr><td><strong>Unit Vector</strong></td><td>Magnitude = 1</td><td>î, ĵ, k̂</td></tr>
+          <tr><td><strong>Position Vector</strong></td><td>Points from origin O to point P</td><td><span class="vector-visual">→OP</span></td></tr>
+          <tr><td><strong>Equal Vectors</strong></td><td>Same magnitude and direction</td><td><strong>a</strong> = <strong>b</strong></td></tr>
+          <tr><td><strong>Negative Vector</strong></td><td>Same magnitude, opposite direction</td><td>−<strong>a</strong></td></tr>
+          <tr><td><strong>Parallel Vectors</strong></td><td>Same or opposite direction</td><td><strong>a</strong> ∥ <strong>b</strong></td></tr>
+          <tr><td><strong>Collinear Vectors</strong></td><td>Lie on the same line</td><td></td></tr>
+          <tr><td><strong>Coplanar Vectors</strong></td><td>Lie in the same plane</td><td></td></tr>
+        </table>
+
+        <div class="section-title">1.4 Physical Examples of Vectors</div>
+        <p>Vectors appear constantly in physics and engineering. Key examples include:</p>
+        <p><strong>Displacement</strong> — A person walks 5 km North. Both the 5 km and the direction "North" are needed. Compare this to <em>distance</em> (scalar), which only says "5 km."</p>
+        <p><strong>Velocity</strong> — A ball moves at 10 m/s to the East. Speed (10 m/s) is scalar; velocity (10 m/s East) is a vector.</p>
+        <p><strong>Force</strong> — Gravity pulls you downward with a force of 600 N. The downward direction is critical.</p>
+        <p><strong>Acceleration</strong>, <strong>momentum</strong>, <strong>electric field</strong>, and <strong>magnetic flux</strong> are all vectors.</p>
+
+        <div class="section-title">1.5 Column Vector Notation</div>
+        <p>In 2D space, a vector can be written as a column matrix. If a vector <strong>v</strong> moves 3 units in the x-direction and 4 units in the y-direction:</p>
+
+        <div class="formula-box">
+<span class="highlight">v</span> = <span class="highlight">[ 3 ]</span>   <span class="comment">← x-component</span>
+    <span class="highlight">[ 4 ]</span>   <span class="comment">← y-component</span>
+
+<span class="comment">General 2D form:</span>
+<span class="highlight">v</span> = (x, y)  or  <span class="highlight">v</span> = xî + yĵ
+
+<span class="comment">General 3D form:</span>
+<span class="highlight">v</span> = (x, y, z)  or  <span class="highlight">v</span> = xî + yĵ + zk̂
+        </div>
+
+        <div class="section-title">1.6 Geometric Interpretation</div>
+        <p>Geometrically, a vector is drawn as an arrow. The key insight is that <strong>a vector does not have a fixed location</strong> — only its magnitude and direction matter. Two arrows of equal length pointing in the same direction represent the <em>same vector</em>, regardless of where they are drawn on a page. This property is called <strong>free vector</strong>.</p>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 1.1</div>
+          <p><strong>Question:</strong> A displacement vector goes from point A(1, 2) to point B(4, 6). Find the vector <span class="vector-visual">→AB</span> and its magnitude.</p>
+          <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Find vector components:</strong> Subtract initial from terminal point.<br><span class="vector-visual">→AB</span> = B − A = (4−1, 6−2) = (3, 4)</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Find magnitude:</strong> Use Pythagorean theorem.<br>|<span class="vector-visual">→AB</span>| = √(3² + 4²) = √(9 + 16) = √25 = <strong>5</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Conclusion:</strong> The vector is (3, 4) with magnitude 5 units.</div></div>
+        </div>
+
+        <div class="note"><strong>Key Insight:</strong> Equal vectors have the same direction and magnitude but can be positioned anywhere in space. The position does not define the vector — only its components do.</div>
+
+        <div class="section-title">1.7 Scalar vs Vector Comparison</div>
+        <table class="math-table">
+          <tr><th>Scalar Quantity</th><th>Vector Quantity</th></tr>
+          <tr><td>Speed: 60 km/h</td><td>Velocity: 60 km/h North</td></tr>
+          <tr><td>Distance: 10 m</td><td>Displacement: 10 m East</td></tr>
+          <tr><td>Mass: 5 kg</td><td>Force: 20 N downward</td></tr>
+          <tr><td>Temperature: 30°C</td><td>Electric field: 500 V/m East</td></tr>
+          <tr><td>Energy: 100 J</td><td>Momentum: 50 kg·m/s North</td></tr>
+        </table>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter I · Concept of Vectors</div>
+    </div>
+
+    <!-- CHAPTER 1 EXAM -->
+    <div class="exam-section" id="exam0">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter I Examination</div>
+        <div class="exam-title">Concept of Vectors</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="exam-question" id="eq0_1">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">Which of the following is a vector quantity?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(0,1,0,false)">A. Temperature</button>
+          <button class="option-btn" onclick="answer(0,1,1,false)">B. Mass</button>
+          <button class="option-btn" onclick="answer(0,1,2,true)">C. Velocity</button>
+          <button class="option-btn" onclick="answer(0,1,3,false)">D. Time</button>
+        </div>
+        <div class="solution-panel" id="sol0_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">To identify a vector, ask: does this quantity need BOTH a magnitude AND a direction to be fully described?</div></div>
+          <div class="solution-step"><div class="sol-bullet">✗</div><div class="sol-text"><strong>Temperature (A):</strong> "It is 30°C" — no direction needed. This is a scalar.</div></div>
+          <div class="solution-step"><div class="sol-bullet">✗</div><div class="sol-text"><strong>Mass (B):</strong> "The object has 10 kg" — no direction. Scalar.</div></div>
+          <div class="solution-step"><div class="sol-bullet">✓</div><div class="sol-text"><strong>Velocity (C):</strong> "The car moves at 60 km/h North." Both magnitude (60 km/h) and direction (North) are required. This is a vector.</div></div>
+          <div class="solution-step"><div class="sol-bullet">✗</div><div class="sol-text"><strong>Time (D):</strong> "5 seconds" — purely magnitude, no direction. Scalar.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — Velocity (requires magnitude + direction)</div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="exam-question" id="eq0_2">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">A displacement vector goes from A(2, 3) to B(7, 9). What is the vector <strong>AB</strong>?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(0,2,0,false)">A. (9, 12)</button>
+          <button class="option-btn" onclick="answer(0,2,1,true)">B. (5, 6)</button>
+          <button class="option-btn" onclick="answer(0,2,2,false)">C. (−5, −6)</button>
+          <button class="option-btn" onclick="answer(0,2,3,false)">D. (2, 3)</button>
+        </div>
+        <div class="solution-panel" id="sol0_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The vector from A to B is found by subtracting the coordinates of A from B (terminal minus initial):</div></div>
+          <div class="sol-formula">→AB = B − A = (7 − 2, 9 − 3) = (5, 6)</div>
+          <div class="solution-step"><div class="sol-bullet">!</div><div class="sol-text"><strong>Common mistake:</strong> Option A adds the coordinates — that's wrong. Option C gives vector BA (backwards). Option D is just point A's coordinates.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — (5, 6)</div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="exam-question" id="eq0_3">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">What is the magnitude of vector <strong>v</strong> = (6, 8)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(0,3,0,false)">A. 7</button>
+          <button class="option-btn" onclick="answer(0,3,1,false)">B. 14</button>
+          <button class="option-btn" onclick="answer(0,3,2,true)">C. 10</button>
+          <button class="option-btn" onclick="answer(0,3,3,false)">D. √14</button>
+        </div>
+        <div class="solution-panel" id="sol0_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The magnitude of a 2D vector (x, y) is found using the Pythagorean theorem:</div></div>
+          <div class="sol-formula">|v| = √(x² + y²) = √(6² + 8²) = √(36 + 64) = √100 = 10</div>
+          <div class="solution-step"><div class="sol-bullet">!</div><div class="sol-text">Note: (6, 8, 10) is a classic Pythagorean triple. Memorise 3-4-5 and its multiples: 6-8-10, 5-12-13, etc.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — 10</div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="exam-question" id="eq0_4">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Which statement about a zero vector is TRUE?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(0,4,0,false)">A. It has magnitude 1 and no direction</button>
+          <button class="option-btn" onclick="answer(0,4,1,true)">B. It has magnitude 0 and no defined direction</button>
+          <button class="option-btn" onclick="answer(0,4,2,false)">C. It is the same as a unit vector</button>
+          <button class="option-btn" onclick="answer(0,4,3,false)">D. It always points in the positive direction</button>
+        </div>
+        <div class="solution-panel" id="sol0_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The zero vector <strong>0</strong> = (0, 0) or (0, 0, 0) has all components equal to zero.</div></div>
+          <div class="sol-formula">|0| = √(0² + 0²) = 0</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Since it has no length, there is no meaningful direction to assign. Its direction is undefined (or indeterminate).</div></div>
+          <div class="solution-step"><div class="sol-bullet">✗</div><div class="sol-text">Option A describes a unit vector (magnitude = 1). Option C is wrong — a unit vector has magnitude 1. Option D is nonsense.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — Magnitude 0, no defined direction</div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="exam-question" id="eq0_5">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">Two vectors are said to be equal if they have:</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(0,5,0,false)">A. The same magnitude only</button>
+          <button class="option-btn" onclick="answer(0,5,1,false)">B. The same direction only</button>
+          <button class="option-btn" onclick="answer(0,5,2,true)">C. The same magnitude AND direction</button>
+          <button class="option-btn" onclick="answer(0,5,3,false)">D. The same starting point</button>
+        </div>
+        <div class="solution-panel" id="sol0_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Vector equality requires BOTH conditions simultaneously:</div></div>
+          <div class="solution-step"><div class="sol-bullet">1.</div><div class="sol-text"><strong>Equal magnitudes:</strong> |a| = |b|</div></div>
+          <div class="solution-step"><div class="sol-bullet">2.</div><div class="sol-text"><strong>Equal directions:</strong> They point the same way</div></div>
+          <div class="solution-step"><div class="sol-bullet">!</div><div class="sol-text">Crucially, they do NOT need to start at the same point. Free vectors can be placed anywhere in space. Their starting position is irrelevant to equality.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — Same magnitude AND direction</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score0" style="display:none">
+        <div class="score-display" id="scoreText0"></div>
+        <div class="score-label">Chapter I Score</div>
+        <button class="reset-btn" onclick="resetExam(0)">Retake Exam</button>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="ch-btn" disabled>◀ Previous</button>
+      <button class="ch-btn" onclick="openChapter(1)">Chapter II: Vectors in 3D ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 2 ========== -->
+  <div class="chapter-page" id="ch1">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter II</div>
+          <div class="chapter-title">Representation of Vectors in 3 Directions</div>
+          <div class="chapter-tagline">Mastering 3-dimensional vector space with i, j, k components</div>
+        </div>
+
+        <div class="section-title">2.1 Three-Dimensional Space</div>
+        <p>While 2D vectors are useful, the real world exists in three dimensions. To represent any point or direction in 3D space, we need three coordinate axes: the x-axis (horizontal), y-axis (vertical), and z-axis (depth). These three axes are mutually perpendicular — each is at 90° to the others.</p>
+
+        <div class="def-box">
+          <div class="def-label">Definition — 3D Vector</div>
+          <p>A <strong>3D vector</strong> is written as <strong>v</strong> = (x, y, z) where x, y, and z are the components along the three coordinate axes. Equivalently, <strong>v</strong> = xî + yĵ + zk̂, where î, ĵ, k̂ are unit vectors along x, y, z axes respectively.</p>
+        </div>
+
+        <div class="section-title">2.2 The Standard Basis Vectors</div>
+        <p>The three standard basis vectors are the building blocks of 3D vector space. Every vector in 3D can be written as a combination of these:</p>
+
+        <div class="formula-box">
+<span class="highlight">î</span> = (1, 0, 0)   <span class="comment">← unit vector along x-axis</span>
+<span class="highlight">ĵ</span> = (0, 1, 0)   <span class="comment">← unit vector along y-axis</span>
+<span class="highlight">k̂</span> = (0, 0, 1)   <span class="comment">← unit vector along z-axis</span>
+
+Any vector: <span class="highlight">v</span> = xî + yĵ + zk̂ = (x, y, z)
+
+Example: (3, -2, 5) = 3î − 2ĵ + 5k̂
+        </div>
+
+        <div class="section-title">2.3 Magnitude in 3D</div>
+        <p>The magnitude (length) of a 3D vector extends the Pythagorean theorem into the third dimension. For a vector <strong>v</strong> = (x, y, z):</p>
+
+        <div class="formula-box">
+|<span class="highlight">v</span>| = √(x² + y² + z²)
+
+<span class="comment">Example: v = (2, 3, 6)</span>
+|v| = √(2² + 3² + 6²) = √(4 + 9 + 36) = √49 = <span class="highlight">7</span>
+        </div>
+
+        <div class="section-title">2.4 Direction Cosines</div>
+        <p>A 3D vector makes angles with each of the three axes. These angles α, β, γ (alpha, beta, gamma) and their cosines are called <strong>direction cosines</strong>. They describe the orientation of the vector in space.</p>
+
+        <div class="formula-box">
+cos α = x/|v|   <span class="comment">← angle with x-axis</span>
+cos β = y/|v|   <span class="comment">← angle with y-axis</span>
+cos γ = z/|v|   <span class="comment">← angle with z-axis</span>
+
+<span class="comment">Key property:</span>
+cos²α + cos²β + cos²γ = <span class="highlight">1</span>   <span class="comment">(always true!)</span>
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 2.1 — Direction Cosines</div>
+          <p><strong>Find the direction cosines of v = (2, 3, 6)</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">Find magnitude: |v| = √(4+9+36) = √49 = 7</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">cos α = 2/7, cos β = 3/7, cos γ = 6/7</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">Verify: (2/7)² + (3/7)² + (6/7)² = 4/49 + 9/49 + 36/49 = 49/49 = 1 ✓</div></div>
+        </div>
+
+        <div class="section-title">2.5 Position Vectors</div>
+        <p>Every point P(x, y, z) in 3D space has a <strong>position vector</strong> <span class="vector-visual">→OP</span> from the origin O(0,0,0) to P. This gives a unique vector for every location in space.</p>
+
+        <div class="formula-box">
+P = (a, b, c)  →  position vector <span class="highlight">→OP</span> = aî + bĵ + ck̂
+
+Vector between two points:
+<span class="highlight">→AB</span> = B − A = (b₁−a₁)î + (b₂−a₂)ĵ + (b₃−a₃)k̂
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 2.2 — Vector Between Points</div>
+          <p><strong>A = (1, 2, 3) and B = (4, 0, 7). Find vector AB and its magnitude.</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">→AB = (4−1)î + (0−2)ĵ + (7−3)k̂ = 3î − 2ĵ + 4k̂</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">|→AB| = √(3² + (−2)² + 4²) = √(9 + 4 + 16) = √29 ≈ 5.39</div></div>
+        </div>
+
+        <div class="section-title">2.6 Adding Vectors in 3D</div>
+        <p>3D vector addition works component by component, exactly like 2D but with an extra z-component:</p>
+
+        <div class="formula-box">
+<span class="highlight">a</span> + <span class="highlight">b</span> = (a₁+b₁, a₂+b₂, a₃+b₃)
+
+Example: (1,2,3) + (4,5,6) = (5,7,9)
+        </div>
+
+        <div class="note"><strong>Right-Hand Rule:</strong> To set up a 3D coordinate system correctly, point your right hand's fingers along x, curl them toward y — your thumb points in the z direction. This is the standard right-handed coordinate system used in mathematics and physics.</div>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter II · Vectors in 3 Directions</div>
+    </div>
+
+    <!-- CH2 EXAM -->
+    <div class="exam-section" id="exam1">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter II Examination</div>
+        <div class="exam-title">Vectors in 3 Directions</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">What is the magnitude of vector <strong>v</strong> = (1, 2, 2)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(1,1,0,false)">A. 5</button>
+          <button class="option-btn" onclick="answer(1,1,1,true)">B. 3</button>
+          <button class="option-btn" onclick="answer(1,1,2,false)">C. √5</button>
+          <button class="option-btn" onclick="answer(1,1,3,false)">D. 9</button>
+        </div>
+        <div class="solution-panel" id="sol1_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|v| = √(1² + 2² + 2²) = √(1 + 4 + 4) = √9 = 3</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Note (1, 2, 2) is a 3D Pythagorean triple (1² + 2² + 2² = 9 = 3²). Other classics: (3,4,0)=5, (2,3,6)=7.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — 3</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">The standard basis vector ĵ equals:</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(1,2,0,false)">A. (1, 0, 0)</button>
+          <button class="option-btn" onclick="answer(1,2,1,true)">B. (0, 1, 0)</button>
+          <button class="option-btn" onclick="answer(1,2,2,false)">C. (0, 0, 1)</button>
+          <button class="option-btn" onclick="answer(1,2,3,false)">D. (1, 1, 0)</button>
+        </div>
+        <div class="solution-panel" id="sol1_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The three standard basis vectors correspond to the axes:</div></div>
+          <div class="sol-formula">î = (1,0,0) ← x-axis
+ĵ = (0,1,0) ← y-axis  ✓
+k̂ = (0,0,1) ← z-axis</div>
+          <div class="sol-answer">✓ Correct Answer: B — (0, 1, 0)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">Given A(1,0,2) and B(4,3,2), what is vector <strong>→AB</strong>?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(1,3,0,false)">A. (5, 3, 4)</button>
+          <button class="option-btn" onclick="answer(1,3,1,true)">B. (3, 3, 0)</button>
+          <button class="option-btn" onclick="answer(1,3,2,false)">C. (−3, −3, 0)</button>
+          <button class="option-btn" onclick="answer(1,3,3,false)">D. (4, 3, 2)</button>
+        </div>
+        <div class="solution-panel" id="sol1_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">→AB = B − A = (4−1, 3−0, 2−2) = (3, 3, 0)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Always: Terminal point MINUS initial point. Option C would be vector BA (reversed). Option A adds coordinates.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — (3, 3, 0)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Which property of direction cosines is ALWAYS true?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(1,4,0,false)">A. cos α + cos β + cos γ = 1</button>
+          <button class="option-btn" onclick="answer(1,4,1,true)">B. cos²α + cos²β + cos²γ = 1</button>
+          <button class="option-btn" onclick="answer(1,4,2,false)">C. cos α = cos β = cos γ</button>
+          <button class="option-btn" onclick="answer(1,4,3,false)">D. cos α · cos β · cos γ = 0</button>
+        </div>
+        <div class="solution-panel" id="sol1_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">If direction cosines are l = x/|v|, m = y/|v|, n = z/|v|, then:</div></div>
+          <div class="sol-formula">l² + m² + n² = x²/|v|² + y²/|v|² + z²/|v|²
+= (x² + y² + z²)/|v|² = |v|²/|v|² = 1</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">This identity holds for any vector with any direction. Option A uses simple sum (not squares) — that is NOT always 1.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — cos²α + cos²β + cos²γ = 1</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">Vector <strong>v</strong> = 2î − 3ĵ + 5k̂ written in component form is:</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(1,5,0,false)">A. (3, 2, 5)</button>
+          <button class="option-btn" onclick="answer(1,5,1,false)">B. (2, 3, 5)</button>
+          <button class="option-btn" onclick="answer(1,5,2,true)">C. (2, −3, 5)</button>
+          <button class="option-btn" onclick="answer(1,5,3,false)">D. (−2, 3, −5)</button>
+        </div>
+        <div class="solution-panel" id="sol1_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The i, j, k notation directly maps to x, y, z components:</div></div>
+          <div class="sol-formula">v = 2î − 3ĵ + 5k̂
+  → x-component = 2  (coefficient of î)
+  → y-component = −3  (coefficient of ĵ, note the minus sign!)
+  → z-component = 5  (coefficient of k̂)
+  → Component form: (2, −3, 5)</div>
+          <div class="sol-answer">✓ Correct Answer: C — (2, −3, 5)</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score1" style="display:none">
+        <div class="score-display" id="scoreText1"></div>
+        <div class="score-label">Chapter II Score</div>
+        <button class="reset-btn" onclick="resetExam(1)">Retake Exam</button>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(0)">◀ Chapter I</button>
+      <button class="ch-btn" onclick="openChapter(2)">Chapter III ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 3 ========== -->
+  <div class="chapter-page" id="ch2">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter III</div>
+          <div class="chapter-title">Angle Between Two Vectors</div>
+          <div class="chapter-tagline">The dot product, projection, and geometric angles</div>
+        </div>
+
+        <div class="section-title">3.1 The Dot Product</div>
+        <p>One of the most powerful tools in vector mathematics is the <strong>dot product</strong> (also called the scalar product or inner product). It multiplies two vectors and produces a single number (scalar). Its geometric meaning is deeply connected to the angle between the vectors.</p>
+
+        <div class="formula-box">
+<span class="comment">Algebraic definition:</span>
+<span class="highlight">a · b</span> = a₁b₁ + a₂b₂ + a₃b₃
+
+<span class="comment">Geometric definition:</span>
+<span class="highlight">a · b</span> = |a| |b| cos θ
+
+<span class="comment">Therefore, angle formula:</span>
+cos θ = <span class="highlight">(a · b)</span> / (|a| |b|)
+
+θ = arccos[ (a · b) / (|a| |b|) ]
+        </div>
+
+        <div class="section-title">3.2 Properties of the Dot Product</div>
+        <table class="math-table">
+          <tr><th>Property</th><th>Formula</th><th>Meaning</th></tr>
+          <tr><td>Commutative</td><td>a·b = b·a</td><td>Order doesn't matter</td></tr>
+          <tr><td>Distributive</td><td>a·(b+c) = a·b + a·c</td><td>Works with addition</td></tr>
+          <tr><td>Scalar factor</td><td>(λa)·b = λ(a·b)</td><td>Scalars pull out</td></tr>
+          <tr><td>Self dot</td><td>a·a = |a|²</td><td>Gives magnitude squared</td></tr>
+          <tr><td>Perpendicular</td><td>a·b = 0</td><td>Vectors are orthogonal</td></tr>
+          <tr><td>Parallel same dir</td><td>a·b = |a||b|</td><td>θ = 0°</td></tr>
+          <tr><td>Parallel opp dir</td><td>a·b = −|a||b|</td><td>θ = 180°</td></tr>
+        </table>
+
+        <div class="section-title">3.3 Basis Vector Dot Products</div>
+        <div class="formula-box">
+î·î = 1,  ĵ·ĵ = 1,  k̂·k̂ = 1   <span class="comment">(parallel, angle=0°)</span>
+î·ĵ = 0,  ĵ·k̂ = 0,  î·k̂ = 0   <span class="comment">(perpendicular, angle=90°)</span>
+        </div>
+
+        <div class="section-title">3.4 Finding the Angle — Full Process</div>
+        <div class="example-box">
+          <div class="ex-label">Worked Example 3.1</div>
+          <p><strong>Find the angle between a = (1, 2, 2) and b = (2, 1, -2)</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Compute dot product:</strong> a·b = (1)(2)+(2)(1)+(2)(−2) = 2+2−4 = 0</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Find magnitudes:</strong> |a| = √(1+4+4) = 3 and |b| = √(4+1+4) = 3</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Apply formula:</strong> cos θ = 0/(3·3) = 0</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Result:</strong> θ = arccos(0) = 90°. These vectors are perpendicular!</div></div>
+        </div>
+
+        <div class="section-title">3.5 Projection of a Vector</div>
+        <p>The <strong>scalar projection</strong> of vector <strong>a</strong> onto vector <strong>b</strong> is how much of <strong>a</strong> lies in the direction of <strong>b</strong>. The <strong>vector projection</strong> gives the actual projected vector.</p>
+
+        <div class="formula-box">
+<span class="comment">Scalar projection of a onto b:</span>
+comp_b(a) = <span class="highlight">(a · b)</span> / |b|
+
+<span class="comment">Vector projection of a onto b:</span>
+proj_b(a) = <span class="highlight">[(a · b) / |b|²]</span> · b
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 3.2 — Projection</div>
+          <p><strong>Find the projection of a = (3, 4) onto b = (1, 0)</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">a·b = 3(1)+4(0) = 3</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">|b|² = 1² + 0² = 1</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">proj_b(a) = (3/1)(1,0) = (3,0)</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">Geometric meaning: the shadow of (3,4) on the x-axis is (3,0). Makes sense!</div></div>
+        </div>
+
+        <div class="note"><strong>Orthogonality Test:</strong> If a·b = 0, the vectors are perpendicular (orthogonal). This is a fast and powerful test used constantly in linear algebra and physics.</div>
+
+        <div class="section-title">3.6 Angle Ranges and Signs</div>
+        <table class="math-table">
+          <tr><th>Angle θ</th><th>cos θ</th><th>a·b</th><th>Geometric Meaning</th></tr>
+          <tr><td>0°</td><td>1</td><td>|a||b|</td><td>Same direction (parallel)</td></tr>
+          <tr><td>0° to 90°</td><td>positive</td><td>positive</td><td>Acute angle</td></tr>
+          <tr><td>90°</td><td>0</td><td>0</td><td>Perpendicular (orthogonal)</td></tr>
+          <tr><td>90° to 180°</td><td>negative</td><td>negative</td><td>Obtuse angle</td></tr>
+          <tr><td>180°</td><td>-1</td><td>−|a||b|</td><td>Opposite directions</td></tr>
+        </table>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter III · Angle Between Two Vectors</div>
+    </div>
+
+    <!-- CH3 EXAM -->
+    <div class="exam-section" id="exam2">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter III Examination</div>
+        <div class="exam-title">Angle Between Two Vectors</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">Find the dot product of <strong>a</strong> = (1, 3, −2) and <strong>b</strong> = (4, −1, 2).</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(2,1,0,false)">A. 5</button>
+          <button class="option-btn" onclick="answer(2,1,1,false)">B. 3</button>
+          <button class="option-btn" onclick="answer(2,1,2,true)">C. −3</button>
+          <button class="option-btn" onclick="answer(2,1,3,false)">D. 0</button>
+        </div>
+        <div class="solution-panel" id="sol2_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">a · b = (1)(4) + (3)(−1) + (−2)(2)
+       = 4 − 3 − 4
+       = −3</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Multiply matching components then sum. Sign matters: (−2)(2) = −4, not +4.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — −3</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">If <strong>a · b</strong> = 0 and neither vector is zero, what can you conclude?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(2,2,0,false)">A. They are parallel</button>
+          <button class="option-btn" onclick="answer(2,2,1,true)">B. They are perpendicular</button>
+          <button class="option-btn" onclick="answer(2,2,2,false)">C. They are equal</button>
+          <button class="option-btn" onclick="answer(2,2,3,false)">D. They are anti-parallel</button>
+        </div>
+        <div class="solution-panel" id="sol2_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">a · b = |a||b|cos θ = 0
+Since |a| ≠ 0 and |b| ≠ 0:
+→ cos θ = 0  →  θ = 90°</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">θ = 90° means the vectors are perpendicular (orthogonal). This is the key orthogonality test.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — Perpendicular</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">Find the angle between <strong>a</strong> = (1, 0, 0) and <strong>b</strong> = (0, 1, 0).</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(2,3,0,false)">A. 0°</button>
+          <button class="option-btn" onclick="answer(2,3,1,true)">B. 90°</button>
+          <button class="option-btn" onclick="answer(2,3,2,false)">C. 45°</button>
+          <button class="option-btn" onclick="answer(2,3,3,false)">D. 180°</button>
+        </div>
+        <div class="solution-panel" id="sol2_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">a · b = (1)(0) + (0)(1) + (0)(0) = 0
+|a| = 1,  |b| = 1
+cos θ = 0 / (1·1) = 0
+θ = arccos(0) = 90°</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">These are actually î and ĵ — the standard x and y unit vectors. They are always perpendicular by construction.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — 90°</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Vectors <strong>a</strong> = (3, 4) and <strong>b</strong> = (3, 4). What is the angle between them?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(2,4,0,true)">A. 0°</button>
+          <button class="option-btn" onclick="answer(2,4,1,false)">B. 45°</button>
+          <button class="option-btn" onclick="answer(2,4,2,false)">C. 90°</button>
+          <button class="option-btn" onclick="answer(2,4,3,false)">D. 180°</button>
+        </div>
+        <div class="solution-panel" id="sol2_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">a · b = 9 + 16 = 25
+|a| = |b| = √(9+16) = 5
+cos θ = 25 / (5 × 5) = 25/25 = 1
+θ = arccos(1) = 0°</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Identical vectors point in exactly the same direction. The angle between a vector and itself is always 0°.</div></div>
+          <div class="sol-answer">✓ Correct Answer: A — 0°</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">What is the scalar projection of <strong>a</strong> = (4, 3) onto <strong>b</strong> = (1, 0)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(2,5,0,true)">A. 4</button>
+          <button class="option-btn" onclick="answer(2,5,1,false)">B. 3</button>
+          <button class="option-btn" onclick="answer(2,5,2,false)">C. 5</button>
+          <button class="option-btn" onclick="answer(2,5,3,false)">D. 7</button>
+        </div>
+        <div class="solution-panel" id="sol2_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">scalar proj = (a · b) / |b|
+a · b = (4)(1) + (3)(0) = 4
+|b| = √(1+0) = 1
+scalar proj = 4/1 = 4</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">b = (1,0) is the x-axis unit vector î. Projecting onto it gives just the x-component of a, which is 4. Geometrically this makes perfect sense.</div></div>
+          <div class="sol-answer">✓ Correct Answer: A — 4</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score2" style="display:none">
+        <div class="score-display" id="scoreText2"></div>
+        <div class="score-label">Chapter III Score</div>
+        <button class="reset-btn" onclick="resetExam(2)">Retake Exam</button>
+      </div>
+    </div>
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(1)">◀ Chapter II</button>
+      <button class="ch-btn" onclick="openChapter(3)">Chapter IV ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 4 ========== -->
+  <div class="chapter-page" id="ch3">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter IV</div>
+          <div class="chapter-title">Vector Operations</div>
+          <div class="chapter-tagline">Sum, subtraction, scalar multiplication, and the cross product</div>
+        </div>
+
+        <div class="section-title">4.1 Vector Addition</div>
+        <p>Vectors are added component by component. Geometrically, this corresponds to the <strong>triangle law</strong> or <strong>parallelogram law</strong> of addition.</p>
+
+        <div class="formula-box">
+<span class="highlight">a + b</span> = (a₁+b₁, a₂+b₂, a₃+b₃)
+
+<span class="comment">Parallelogram Law: Place vectors tail-to-tail.</span>
+<span class="comment">The diagonal of the parallelogram = a + b</span>
+
+<span class="comment">Triangle Law: Place head-to-tail.</span>
+<span class="comment">The closing side from first tail to last head = a + b</span>
+        </div>
+
+        <div class="section-title">4.2 Vector Subtraction</div>
+        <p>Subtracting vector <strong>b</strong> from <strong>a</strong> is the same as adding the negative of <strong>b</strong>:</p>
+
+        <div class="formula-box">
+<span class="highlight">a − b</span> = a + (−b) = (a₁−b₁, a₂−b₂, a₃−b₃)
+
+<span class="comment">−b has the same magnitude as b but opposite direction</span>
+        </div>
+
+        <div class="section-title">4.3 Scalar Multiplication</div>
+        <p>Multiplying a vector by a scalar (number) scales its magnitude. If the scalar is negative, it also reverses the direction.</p>
+
+        <div class="formula-box">
+λ<span class="highlight">a</span> = (λa₁, λa₂, λa₃)
+
+|λ<span class="highlight">a</span>| = |λ| · |<span class="highlight">a</span>|
+
+<span class="comment">If λ > 0: same direction, scaled magnitude</span>
+<span class="comment">If λ < 0: opposite direction, scaled magnitude</span>
+<span class="comment">If λ = 0: zero vector</span>
+<span class="comment">If λ = 1: unchanged</span>
+<span class="comment">If λ = -1: reversed direction (negative vector)</span>
+        </div>
+
+        <div class="section-title">4.4 The Cross Product</div>
+        <p>Unlike the dot product (which gives a scalar), the <strong>cross product</strong> of two 3D vectors gives a new <strong>vector</strong> that is perpendicular to both original vectors.</p>
+
+        <div class="formula-box">
+<span class="highlight">a × b</span> = |  î   ĵ   k̂  |
+              | a₁  a₂  a₃ |
+              | b₁  b₂  b₃ |
+
+= î(a₂b₃ − a₃b₂) − ĵ(a₁b₃ − a₃b₁) + k̂(a₁b₂ − a₂b₁)
+
+|<span class="highlight">a × b</span>| = |a| |b| sin θ   <span class="comment">(area of parallelogram)</span>
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 4.1 — Cross Product</div>
+          <p><strong>Find a × b where a = (1, 2, 3) and b = (4, 5, 6)</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">î component: (2)(6) − (3)(5) = 12 − 15 = −3</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">ĵ component: −[(1)(6) − (3)(4)] = −[6−12] = −(−6) = 6</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">k̂ component: (1)(5) − (2)(4) = 5 − 8 = −3</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">Result: a × b = (−3, 6, −3)</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-content">Verify perpendicular: (−3,6,−3)·(1,2,3) = −3+12−9 = 0 ✓</div></div>
+        </div>
+
+        <div class="section-title">4.5 Properties Comparison</div>
+        <table class="math-table">
+          <tr><th>Property</th><th>Dot Product (a·b)</th><th>Cross Product (a×b)</th></tr>
+          <tr><td>Result type</td><td>Scalar (number)</td><td>Vector</td></tr>
+          <tr><td>Commutative</td><td>a·b = b·a ✓</td><td>a×b = −(b×a) ✗</td></tr>
+          <tr><td>Parallel vectors</td><td>|a||b| (maximum)</td><td>0 (zero vector)</td></tr>
+          <tr><td>Perpendicular</td><td>0</td><td>|a||b| (maximum)</td></tr>
+          <tr><td>Geometric meaning</td><td>Projection · length</td><td>Area of parallelogram</td></tr>
+        </table>
+
+        <div class="section-title">4.6 Linear Combinations</div>
+        <p>A <strong>linear combination</strong> of vectors uses both addition and scalar multiplication to create new vectors:</p>
+
+        <div class="formula-box">
+<span class="highlight">r</span> = α<span class="highlight">a</span> + β<span class="highlight">b</span> + γ<span class="highlight">c</span>   <span class="comment">(α,β,γ are scalars)</span>
+
+<span class="comment">Example: r = 2(1,0,1) + 3(0,1,0) − (1,1,1)</span>
+= (2,0,2) + (0,3,0) − (1,1,1)
+= (2+0−1, 0+3−1, 2+0−1)
+= <span class="highlight">(1, 2, 1)</span>
+        </div>
+
+        <div class="note"><strong>Right-Hand Rule for Cross Product:</strong> Point your right hand's fingers from <strong>a</strong> toward <strong>b</strong>, curl them. Your thumb points in the direction of <strong>a×b</strong>.</div>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter IV · Vector Operations</div>
+    </div>
+
+    <!-- CH4 EXAM -->
+    <div class="exam-section" id="exam3">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter IV Examination</div>
+        <div class="exam-title">Vector Operations</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">Given <strong>a</strong> = (2, −1, 3) and <strong>b</strong> = (1, 4, −2), find <strong>a + b</strong>.</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(3,1,0,true)">A. (3, 3, 1)</button>
+          <button class="option-btn" onclick="answer(3,1,1,false)">B. (1, −5, 5)</button>
+          <button class="option-btn" onclick="answer(3,1,2,false)">C. (3, −5, 1)</button>
+          <button class="option-btn" onclick="answer(3,1,3,false)">D. (2, −4, −6)</button>
+        </div>
+        <div class="solution-panel" id="sol3_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">a + b = (2+1, −1+4, 3+(−2))
+      = (3, 3, 1)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Add each component separately. −1+4 = 3 (not −5). 3+(−2) = 1 (not 5).</div></div>
+          <div class="sol-answer">✓ Correct Answer: A — (3, 3, 1)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">Find 3<strong>a</strong> − 2<strong>b</strong> where <strong>a</strong> = (1, 2, 0) and <strong>b</strong> = (3, 0, 1).</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(3,2,0,false)">A. (−3, 6, −2)</button>
+          <button class="option-btn" onclick="answer(3,2,1,true)">B. (−3, 6, −2)</button>
+          <button class="option-btn" onclick="answer(3,2,2,false)">C. (9, 6, 2)</button>
+          <button class="option-btn" onclick="answer(3,2,3,false)">D. (0, 4, −1)</button>
+        </div>
+        <div class="solution-panel" id="sol3_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">3a = 3(1,2,0) = (3, 6, 0)
+2b = 2(3,0,1) = (6, 0, 2)
+3a − 2b = (3−6, 6−0, 0−2) = (−3, 6, −2)</div>
+          <div class="sol-answer">✓ Correct Answer: A/B — (−3, 6, −2)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">What is the result of <strong>a × a</strong> for any vector <strong>a</strong>?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(3,3,0,false)">A. |a|²</button>
+          <button class="option-btn" onclick="answer(3,3,1,false)">B. 1</button>
+          <button class="option-btn" onclick="answer(3,3,2,true)">C. Zero vector (0, 0, 0)</button>
+          <button class="option-btn" onclick="answer(3,3,3,false)">D. 2a</button>
+        </div>
+        <div class="solution-panel" id="sol3_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|a × a| = |a||a|sin(0°) = |a|² × 0 = 0</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The cross product magnitude is |a||b|sinθ. When crossing a vector with itself, θ = 0°, and sin(0°) = 0. So the magnitude is zero, giving the zero vector.</div></div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Contrast: a·a = |a|² (this is the dot product with itself).</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — Zero vector</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">If <strong>a</strong> = (0, 0, 4) and you multiply by scalar λ = −2, what is the result?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(3,4,0,false)">A. (0, 0, 8)</button>
+          <button class="option-btn" onclick="answer(3,4,1,true)">B. (0, 0, −8)</button>
+          <button class="option-btn" onclick="answer(3,4,2,false)">C. (0, 0, 2)</button>
+          <button class="option-btn" onclick="answer(3,4,3,false)">D. (0, 0, 4)</button>
+        </div>
+        <div class="solution-panel" id="sol3_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">λa = −2 × (0, 0, 4) = (−2×0, −2×0, −2×4) = (0, 0, −8)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Multiply each component by λ. Since λ = −2 is negative, the z-component flips from +4 to −8. The vector now points in the opposite z-direction with twice the length.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — (0, 0, −8)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">What does the magnitude of a cross product |<strong>a × b</strong>| represent geometrically?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(3,5,0,false)">A. The length of vector a</button>
+          <button class="option-btn" onclick="answer(3,5,1,true)">B. Area of the parallelogram formed by a and b</button>
+          <button class="option-btn" onclick="answer(3,5,2,false)">C. The dot product</button>
+          <button class="option-btn" onclick="answer(3,5,3,false)">D. The projection of a onto b</button>
+        </div>
+        <div class="solution-panel" id="sol3_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|a × b| = |a||b|sin θ
+
+Area of parallelogram = base × height = |a| × |b|sinθ
+
+Therefore: |a × b| = Area of the parallelogram</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">This geometric interpretation makes the cross product incredibly useful in physics (torque = r × F) and for finding surface areas in calculus.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — Area of the parallelogram</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score3" style="display:none">
+        <div class="score-display" id="scoreText3"></div>
+        <div class="score-label">Chapter IV Score</div>
+        <button class="reset-btn" onclick="resetExam(3)">Retake Exam</button>
+      </div>
+    </div>
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(2)">◀ Chapter III</button>
+      <button class="ch-btn" onclick="openChapter(4)">Chapter V ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 5 ========== -->
+  <div class="chapter-page" id="ch4">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter V</div>
+          <div class="chapter-title">Unit Vectors & Magnitude</div>
+          <div class="chapter-tagline">Normalisation, direction, and vector decomposition</div>
+        </div>
+
+        <div class="section-title">5.1 What Is a Unit Vector?</div>
+        <p>A <strong>unit vector</strong> is a vector with a magnitude of exactly 1. Unit vectors capture pure direction — they tell you where something points without saying how far. They are denoted with a hat: <strong>â</strong> (read "a-hat").</p>
+
+        <div class="formula-box">
+Unit vector in direction of <span class="highlight">a</span>:
+
+â = <span class="highlight">a</span> / |<span class="highlight">a</span>|
+
+<span class="comment">Proof it has magnitude 1:</span>
+|â| = |a/|a|| = |a|/|a| = 1  ✓
+        </div>
+
+        <div class="section-title">5.2 Normalising a Vector</div>
+        <p>The process of converting a vector to a unit vector is called <strong>normalisation</strong> or <strong>normalizing</strong>. It is one of the most common operations in vector mathematics, physics, and computer graphics.</p>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 5.1 — Normalisation</div>
+          <p><strong>Find the unit vector in the direction of v = (3, 4, 0)</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">Find magnitude: |v| = √(9 + 16 + 0) = √25 = 5</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">Divide each component by magnitude: v̂ = (3/5, 4/5, 0/5) = (0.6, 0.8, 0)</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">Verify: |v̂| = √(0.36 + 0.64 + 0) = √1 = 1 ✓</div></div>
+        </div>
+
+        <div class="section-title">5.3 Magnitude in 2D and 3D</div>
+        <div class="formula-box">
+<span class="comment">2D magnitude:</span>
+|<span class="highlight">v</span>| = √(x² + y²)
+
+<span class="comment">3D magnitude:</span>
+|<span class="highlight">v</span>| = √(x² + y² + z²)
+
+<span class="comment">nD magnitude:</span>
+|<span class="highlight">v</span>| = √(v₁² + v₂² + ... + vₙ²)
+
+<span class="comment">Also called: length, norm, or Euclidean distance from origin</span>
+        </div>
+
+        <div class="section-title">5.4 Vector Decomposition</div>
+        <p>Any vector can be <strong>decomposed</strong> (broken down) into components along the coordinate axes. This is the reverse of combining unit vectors:</p>
+
+        <div class="formula-box">
+<span class="highlight">v</span> = vₓî + vyĵ + vzk̂
+
+where:
+vₓ = |v|cos α   <span class="comment">(x-component)</span>
+vy = |v|cos β   <span class="comment">(y-component)</span>
+vz = |v|cos γ   <span class="comment">(z-component)</span>
+
+<span class="comment">In 2D: vₓ = |v|cosθ, vy = |v|sinθ</span>
+        </div>
+
+        <div class="section-title">5.5 Application: Finding Vector from Magnitude and Direction</div>
+        <div class="example-box">
+          <div class="ex-label">Worked Example 5.2</div>
+          <p><strong>A force has magnitude 10 N at angle 30° to the x-axis in the xy-plane. Write as a vector.</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">x-component: Fx = 10 cos(30°) = 10 × (√3/2) = 5√3 ≈ 8.66 N</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">y-component: Fy = 10 sin(30°) = 10 × (1/2) = 5 N</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">F = (5√3)î + 5ĵ ≈ 8.66î + 5ĵ</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">Verify: |F| = √((5√3)²+5²) = √(75+25) = √100 = 10 ✓</div></div>
+        </div>
+
+        <div class="section-title">5.6 Important Special Magnitudes</div>
+        <table class="math-table">
+          <tr><th>Vector</th><th>Magnitude</th><th>Note</th></tr>
+          <tr><td>(3, 4)</td><td>5</td><td>3-4-5 triangle</td></tr>
+          <tr><td>(5, 12)</td><td>13</td><td>5-12-13 triangle</td></tr>
+          <tr><td>(1, 1)</td><td>√2</td><td>45° diagonal</td></tr>
+          <tr><td>(1, 1, 1)</td><td>√3</td><td>Space diagonal of unit cube</td></tr>
+          <tr><td>(2, 3, 6)</td><td>7</td><td>Classic 3D triple</td></tr>
+          <tr><td>(1, 2, 2)</td><td>3</td><td>Pythagorean triple</td></tr>
+        </table>
+
+        <div class="note"><strong>Critical Point:</strong> A zero vector (0,0,0) has no unit vector — you cannot normalise the zero vector since division by zero is undefined. Always check that a vector is non-zero before normalising.</div>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter V · Unit Vectors & Magnitude</div>
+    </div>
+
+    <!-- CH5 EXAM -->
+    <div class="exam-section" id="exam4">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter V Examination</div>
+        <div class="exam-title">Unit Vectors & Magnitude</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">Find the unit vector of <strong>v</strong> = (0, 3, 4).</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(4,1,0,false)">A. (0, 3, 4)</button>
+          <button class="option-btn" onclick="answer(4,1,1,true)">B. (0, 3/5, 4/5)</button>
+          <button class="option-btn" onclick="answer(4,1,2,false)">C. (0, 1/3, 1/4)</button>
+          <button class="option-btn" onclick="answer(4,1,3,false)">D. (0, 0.6, 0.4)</button>
+        </div>
+        <div class="solution-panel" id="sol4_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|v| = √(0² + 3² + 4²) = √(0 + 9 + 16) = √25 = 5
+
+v̂ = v / |v| = (0/5, 3/5, 4/5) = (0, 0.6, 0.8)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Check: |v̂| = √(0 + 9/25 + 16/25) = √(25/25) = 1 ✓</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — (0, 3/5, 4/5)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">What is the magnitude of the unit vector (1/√3, 1/√3, 1/√3)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(4,2,0,false)">A. √3</button>
+          <button class="option-btn" onclick="answer(4,2,1,true)">B. 1</button>
+          <button class="option-btn" onclick="answer(4,2,2,false)">C. 3</button>
+          <button class="option-btn" onclick="answer(4,2,3,false)">D. 1/3</button>
+        </div>
+        <div class="solution-panel" id="sol4_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|(1/√3, 1/√3, 1/√3)| = √((1/√3)² + (1/√3)² + (1/√3)²)
+= √(1/3 + 1/3 + 1/3)
+= √(3/3)
+= √1 = 1</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">This is the unit vector along the main diagonal of the cube. All unit vectors have magnitude exactly 1 — that's the definition!</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — 1</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">A vector has magnitude 13. Its x-component is 5 and y-component is 12. What is its z-component?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(4,3,0,true)">A. 0</button>
+          <button class="option-btn" onclick="answer(4,3,1,false)">B. 6</button>
+          <button class="option-btn" onclick="answer(4,3,2,false)">C. 4</button>
+          <button class="option-btn" onclick="answer(4,3,3,false)">D. 12</button>
+        </div>
+        <div class="solution-panel" id="sol4_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">|v|² = x² + y² + z²
+13² = 5² + 12² + z²
+169 = 25 + 144 + z²
+169 = 169 + z²
+z² = 0
+z = 0</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">(5, 12, 13) is a classic Pythagorean triple: 5² + 12² = 169 = 13². So z = 0, meaning this vector lies entirely in the xy-plane.</div></div>
+          <div class="sol-answer">✓ Correct Answer: A — 0</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Which vector is already a unit vector?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(4,4,0,false)">A. (1, 1, 1)</button>
+          <button class="option-btn" onclick="answer(4,4,1,false)">B. (2, 0, 0)</button>
+          <button class="option-btn" onclick="answer(4,4,2,true)">C. (0, 0, 1)</button>
+          <button class="option-btn" onclick="answer(4,4,3,false)">D. (0.5, 0.5, 0.5)</button>
+        </div>
+        <div class="solution-panel" id="sol4_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">Check each magnitude:
+A: |(1,1,1)| = √3 ≈ 1.73  ✗
+B: |(2,0,0)| = 2           ✗
+C: |(0,0,1)| = √(0+0+1) = 1 ✓
+D: |(0.5,0.5,0.5)| = √(0.75) ≈ 0.87 ✗</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">(0,0,1) is k̂, the standard z-axis unit vector. It has exactly magnitude 1.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — (0, 0, 1)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">A vector has magnitude 6 and makes angle 60° with the x-axis (in 2D). What is its x-component?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(4,5,0,false)">A. 6</button>
+          <button class="option-btn" onclick="answer(4,5,1,false)">B. 3√3</button>
+          <button class="option-btn" onclick="answer(4,5,2,true)">C. 3</button>
+          <button class="option-btn" onclick="answer(4,5,3,false)">D. 6√3</button>
+        </div>
+        <div class="solution-panel" id="sol4_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">vₓ = |v| cos θ = 6 × cos(60°) = 6 × 0.5 = 3
+
+Note: cos(60°) = 1/2 = 0.5 (memorise this!)
+sin(60°) = √3/2 ≈ 0.866
+
+So the full vector is: v = (3, 6sin60°) = (3, 3√3)</div>
+          <div class="sol-answer">✓ Correct Answer: C — 3</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score4" style="display:none">
+        <div class="score-display" id="scoreText4"></div>
+        <div class="score-label">Chapter V Score</div>
+        <button class="reset-btn" onclick="resetExam(4)">Retake Exam</button>
+      </div>
+    </div>
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(3)">◀ Chapter IV</button>
+      <button class="ch-btn" onclick="openChapter(5)">Chapter VI ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 6 ========== -->
+  <div class="chapter-page" id="ch5">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter VI</div>
+          <div class="chapter-title">Application of Vectors in Differentiation</div>
+          <div class="chapter-tagline">Vector calculus, derivatives, curves, and rates of change</div>
+        </div>
+
+        <div class="section-title">6.1 Vector-Valued Functions</div>
+        <p>A <strong>vector-valued function</strong> assigns a vector to each value of a parameter (usually time t). Instead of a single output, it gives a vector output. These functions describe motion, curves, and changing directions in space.</p>
+
+        <div class="formula-box">
+<span class="highlight">r</span>(t) = f(t)î + g(t)ĵ + h(t)k̂
+
+<span class="comment">Example: position of a particle:</span>
+<span class="highlight">r</span>(t) = t²î + sin(t)ĵ + e^t k̂
+
+<span class="comment">At t=0: r(0) = 0î + 0ĵ + 1k̂ = (0, 0, 1)</span>
+        </div>
+
+        <div class="section-title">6.2 Differentiating a Vector Function</div>
+        <p>The derivative of a vector function is taken component by component, just like differentiating each scalar component independently. This gives the rate of change of the vector.</p>
+
+        <div class="formula-box">
+If <span class="highlight">r</span>(t) = f(t)î + g(t)ĵ + h(t)k̂
+
+Then: <span class="highlight">r'</span>(t) = f'(t)î + g'(t)ĵ + h'(t)k̂
+
+<span class="comment">This is the velocity vector if r(t) is position.</span>
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 6.1 — Differentiation</div>
+          <p><strong>Given r(t) = (t³)î + (4t²)ĵ + (2t)k̂, find velocity r'(t) and acceleration r''(t).</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Velocity:</strong> r'(t) = 3t²î + 8tĵ + 2k̂</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Acceleration:</strong> r''(t) = 6tî + 8ĵ + 0k̂ = 6tî + 8ĵ</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content"><strong>At t=1:</strong> r'(1) = 3î + 8ĵ + 2k̂, speed = √(9+64+4) = √77</div></div>
+        </div>
+
+        <div class="section-title">6.3 Tangent Vectors</div>
+        <p>The derivative <strong>r'(t)</strong> gives the <strong>tangent vector</strong> to the curve at each point. It points in the direction the curve is moving at that instant. The unit tangent vector <strong>T</strong>(t) = r'(t)/|r'(t)|.</p>
+
+        <div class="section-title">6.4 Rules for Vector Derivatives</div>
+        <div class="formula-box">
+<span class="comment">Sum rule:</span>
+d/dt [<span class="highlight">a</span>(t) + <span class="highlight">b</span>(t)] = <span class="highlight">a'</span>(t) + <span class="highlight">b'</span>(t)
+
+<span class="comment">Scalar multiplication:</span>
+d/dt [f(t)<span class="highlight">a</span>(t)] = f'(t)<span class="highlight">a</span>(t) + f(t)<span class="highlight">a'</span>(t)
+
+<span class="comment">Dot product:</span>
+d/dt [<span class="highlight">a</span>·<span class="highlight">b</span>] = <span class="highlight">a'</span>·<span class="highlight">b</span> + <span class="highlight">a</span>·<span class="highlight">b'</span>
+
+<span class="comment">Cross product:</span>
+d/dt [<span class="highlight">a</span>×<span class="highlight">b</span>] = <span class="highlight">a'</span>×<span class="highlight">b</span> + <span class="highlight">a</span>×<span class="highlight">b'</span>   <span class="comment">(order matters!)</span>
+        </div>
+
+        <div class="section-title">6.5 Arc Length of a Vector Curve</div>
+        <p>The arc length (total distance along a curve) from t=a to t=b is found by integrating the speed:</p>
+
+        <div class="formula-box">
+L = ∫ₐᵇ |<span class="highlight">r'</span>(t)| dt = ∫ₐᵇ √(f'² + g'² + h'²) dt
+        </div>
+
+        <div class="section-title">6.6 Physical Interpretation</div>
+        <table class="math-table">
+          <tr><th>Vector Function</th><th>Name</th><th>Physical Meaning</th></tr>
+          <tr><td>r(t)</td><td>Position</td><td>Where the particle is at time t</td></tr>
+          <tr><td>r'(t) = v(t)</td><td>Velocity</td><td>Rate of change of position</td></tr>
+          <tr><td>|r'(t)|</td><td>Speed</td><td>Magnitude of velocity (scalar)</td></tr>
+          <tr><td>r''(t) = a(t)</td><td>Acceleration</td><td>Rate of change of velocity</td></tr>
+          <tr><td>r'''(t) = j(t)</td><td>Jerk</td><td>Rate of change of acceleration</td></tr>
+        </table>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 6.2 — Arc Length</div>
+          <p><strong>Find the arc length of r(t) = (cos t)î + (sin t)ĵ from t=0 to t=π.</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">r'(t) = (−sin t)î + (cos t)ĵ</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">|r'(t)| = √(sin²t + cos²t) = √1 = 1</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">L = ∫₀^π 1 dt = π ≈ 3.14</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">This is half the circumference of a unit circle (radius=1, half-circle = π·1 = π) ✓</div></div>
+        </div>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter VI · Vectors in Differentiation</div>
+    </div>
+
+    <!-- CH6 EXAM -->
+    <div class="exam-section" id="exam5">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter VI Examination</div>
+        <div class="exam-title">Vectors in Differentiation</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">Given <strong>r</strong>(t) = t²î + t³ĵ + 4k̂, find <strong>r'</strong>(t).</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(5,1,0,false)">A. t²î + t³ĵ</button>
+          <button class="option-btn" onclick="answer(5,1,1,true)">B. 2tî + 3t²ĵ</button>
+          <button class="option-btn" onclick="answer(5,1,2,false)">C. 2tî + 3t²ĵ + 4k̂</button>
+          <button class="option-btn" onclick="answer(5,1,3,false)">D. 2î + 6tĵ</button>
+        </div>
+        <div class="solution-panel" id="sol5_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">r(t) = t²î + t³ĵ + 4k̂
+
+Differentiate each component:
+d/dt(t²) = 2t
+d/dt(t³) = 3t²
+d/dt(4)  = 0  ← constant disappears!
+
+r'(t) = 2tî + 3t²ĵ + 0k̂ = 2tî + 3t²ĵ</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The constant 4k̂ has zero derivative (constants don't change). Option C keeps the 4k̂ — that's the mistake. Option D is r''(t) (second derivative).</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — 2tî + 3t²ĵ</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">What does the derivative <strong>r'</strong>(t) of a position vector represent physically?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(5,2,0,false)">A. Acceleration</button>
+          <button class="option-btn" onclick="answer(5,2,1,true)">B. Velocity</button>
+          <button class="option-btn" onclick="answer(5,2,2,false)">C. Position</button>
+          <button class="option-btn" onclick="answer(5,2,3,false)">D. Arc length</button>
+        </div>
+        <div class="solution-panel" id="sol5_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">r(t) = position
+r'(t) = v(t) = velocity (1st derivative)
+r''(t) = a(t) = acceleration (2nd derivative)
+r'''(t) = j(t) = jerk (3rd derivative)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The first derivative of position with respect to time is velocity — how fast and in what direction the object moves.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — Velocity</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">Given <strong>r</strong>(t) = (e^t)î + (t²)ĵ, find the speed |<strong>r'</strong>(t)| at t = 0.</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(5,3,0,true)">A. 1</button>
+          <button class="option-btn" onclick="answer(5,3,1,false)">B. √2</button>
+          <button class="option-btn" onclick="answer(5,3,2,false)">C. e</button>
+          <button class="option-btn" onclick="answer(5,3,3,false)">D. 2</button>
+        </div>
+        <div class="solution-panel" id="sol5_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">r(t) = eᵗî + t²ĵ
+r'(t) = eᵗî + 2tĵ
+
+At t = 0:
+r'(0) = e⁰î + 2(0)ĵ = 1î + 0ĵ = (1, 0)
+
+Speed = |r'(0)| = √(1² + 0²) = √1 = 1</div>
+          <div class="sol-answer">✓ Correct Answer: A — 1</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Which rule applies when differentiating a dot product <strong>a</strong>(t)·<strong>b</strong>(t)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(5,4,0,false)">A. d/dt(a·b) = a'·b'</button>
+          <button class="option-btn" onclick="answer(5,4,1,true)">B. d/dt(a·b) = a'·b + a·b'</button>
+          <button class="option-btn" onclick="answer(5,4,2,false)">C. d/dt(a·b) = (a+b)'</button>
+          <button class="option-btn" onclick="answer(5,4,3,false)">D. d/dt(a·b) = a·b'</button>
+        </div>
+        <div class="solution-panel" id="sol5_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">The dot product obeys the Product Rule (same as scalar calculus):
+
+d/dt[a(t)·b(t)] = a'(t)·b(t) + a(t)·b'(t)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">This is just the product rule from calculus applied to vectors. Important: both the cross product and dot product follow this pattern. For cross product, order matters: d/dt(a×b) = a'×b + a×b' (NOT b'×a + b×a').</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — a'·b + a·b'</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">If <strong>r</strong>(t) = cos(t)î + sin(t)ĵ traces a circle, what is the arc length from t=0 to t=2π?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(5,5,0,false)">A. π</button>
+          <button class="option-btn" onclick="answer(5,5,1,false)">B. 4π</button>
+          <button class="option-btn" onclick="answer(5,5,2,true)">C. 2π</button>
+          <button class="option-btn" onclick="answer(5,5,3,false)">D. 1</button>
+        </div>
+        <div class="solution-panel" id="sol5_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">r'(t) = −sin(t)î + cos(t)ĵ
+
+|r'(t)| = √(sin²t + cos²t) = √1 = 1
+
+L = ∫₀^{2π} 1 dt = 2π</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">r(t) = (cos t, sin t) is a unit circle (radius = 1). Circumference = 2πr = 2π(1) = 2π. The arc length formula confirms this perfectly.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — 2π</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score5" style="display:none">
+        <div class="score-display" id="scoreText5"></div>
+        <div class="score-label">Chapter VI Score</div>
+        <button class="reset-btn" onclick="resetExam(5)">Retake Exam</button>
+      </div>
+    </div>
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(4)">◀ Chapter V</button>
+      <button class="ch-btn" onclick="openChapter(6)">Chapter VII ▶</button>
+    </div>
+  </div>
+
+  <!-- ========== CHAPTER 7 ========== -->
+  <div class="chapter-page" id="ch6">
+    <div class="book-page">
+      <div class="page-content">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter VII</div>
+          <div class="chapter-title">Coordinate Geometry</div>
+          <div class="chapter-tagline">Lines, planes, distances, and geometric applications of vectors</div>
+        </div>
+
+        <div class="section-title">7.1 Equation of a Line in 3D</div>
+        <p>In 3D, a line is uniquely determined by a <strong>point on the line</strong> and a <strong>direction vector</strong>. There are three standard forms for a line equation.</p>
+
+        <div class="formula-box">
+<span class="comment">Vector form:</span>
+<span class="highlight">r</span> = <span class="highlight">a</span> + t<span class="highlight">d</span>   <span class="comment">(t is any real number)</span>
+
+<span class="comment">Parametric form:</span>
+x = a₁ + td₁
+y = a₂ + td₂
+z = a₃ + td₃
+
+<span class="comment">Symmetric form (if d₁,d₂,d₃ ≠ 0):</span>
+(x−a₁)/d₁ = (y−a₂)/d₂ = (z−a₃)/d₃ = t
+
+<span class="comment">where a = (a₁,a₂,a₃) is a point, d = (d₁,d₂,d₃) is direction</span>
+        </div>
+
+        <div class="section-title">7.2 Equation of a Plane</div>
+        <p>A plane in 3D is uniquely determined by a <strong>point on the plane</strong> and a <strong>normal vector</strong> (perpendicular to the plane).</p>
+
+        <div class="formula-box">
+<span class="comment">If n = (A, B, C) is normal and P₀(x₀,y₀,z₀) is on the plane:</span>
+
+A(x−x₀) + B(y−y₀) + C(z−z₀) = 0
+
+<span class="comment">Standard form:</span>
+<span class="highlight">Ax + By + Cz = D</span>   where D = Ax₀ + By₀ + Cz₀
+
+<span class="comment">Vector dot product form:</span>
+<span class="highlight">n · (r − a)</span> = 0
+        </div>
+
+        <div class="example-box">
+          <div class="ex-label">Worked Example 7.1 — Plane Equation</div>
+          <p><strong>Find the equation of a plane through P(1,2,3) with normal n = (2,−1,4).</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">Use: A(x−x₀) + B(y−y₀) + C(z−z₀) = 0</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">2(x−1) + (−1)(y−2) + 4(z−3) = 0</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">2x − 2 − y + 2 + 4z − 12 = 0</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">2x − y + 4z = 12</div></div>
+        </div>
+
+        <div class="section-title">7.3 Distance from a Point to a Plane</div>
+        <div class="formula-box">
+Distance from point P(x₀,y₀,z₀) to plane Ax+By+Cz=D:
+
+d = <span class="highlight">|Ax₀ + By₀ + Cz₀ − D|</span> / √(A² + B² + C²)
+        </div>
+
+        <div class="section-title">7.4 Distance Between Two Points</div>
+        <div class="formula-box">
+d(A, B) = |<span class="highlight">→AB</span>| = √((b₁−a₁)² + (b₂−a₂)² + (b₃−a₃)²)
+
+<span class="comment">Example: A(1,2,3), B(4,6,3)</span>
+d = √((4−1)² + (6−2)² + (3−3)²) = √(9+16+0) = √25 = 5
+        </div>
+
+        <div class="section-title">7.5 Midpoint Formula</div>
+        <div class="formula-box">
+Midpoint M of segment AB:
+
+M = (<span class="highlight">A + B</span>) / 2 = ((a₁+b₁)/2, (a₂+b₂)/2, (a₃+b₃)/2)
+        </div>
+
+        <div class="section-title">7.6 Angle Between Two Planes</div>
+        <p>The angle between two planes equals the angle between their normal vectors:</p>
+
+        <div class="formula-box">
+cos θ = |<span class="highlight">n₁ · n₂</span>| / (|n₁| |n₂|)
+
+<span class="comment">Planes are parallel if n₁ × n₂ = 0 (normals parallel)</span>
+<span class="comment">Planes are perpendicular if n₁ · n₂ = 0 (normals perpendicular)</span>
+        </div>
+
+        <div class="section-title">7.7 Intersection of Line and Plane</div>
+        <div class="example-box">
+          <div class="ex-label">Worked Example 7.2</div>
+          <p><strong>Find where line r = (1,0,2) + t(3,1,−1) meets plane 2x + y − z = 6.</strong></p>
+          <div class="step"><div class="step-num">1</div><div class="step-content">Substitute parametric form: x=1+3t, y=t, z=2−t</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content">Into plane: 2(1+3t) + (t) − (2−t) = 6</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content">2 + 6t + t − 2 + t = 6 → 8t = 6 → t = 3/4</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-content">Point: (1+9/4, 3/4, 2−3/4) = (13/4, 3/4, 5/4)</div></div>
+        </div>
+
+        <div class="section-title">7.8 Section Formula</div>
+        <p>The point dividing segment AB in ratio m:n from A:</p>
+
+        <div class="formula-box">
+P = (<span class="highlight">mB + nA</span>) / (m + n)
+
+<span class="comment">Internal division (between A and B): m,n same sign</span>
+<span class="comment">External division (outside segment): m,n different signs</span>
+        </div>
+
+        <div class="note"><strong>Summary of Key Distances:</strong> Point-to-point uses Pythagorean theorem. Point-to-plane uses the formula with absolute value. Point-to-line requires the cross product formula. Line-to-line (parallel) uses the same point-to-plane method after finding the plane.</div>
+
+      </div>
+      <div class="page-footer">Vector Mathematics · Chapter VII · Coordinate Geometry</div>
+    </div>
+
+    <!-- CH7 EXAM -->
+    <div class="exam-section" id="exam6">
+      <div class="exam-header">
+        <div class="exam-badge">Chapter VII Examination</div>
+        <div class="exam-title">Coordinate Geometry</div>
+        <div class="exam-instructions">Select your answer — a full worked solution will appear instantly</div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 1 of 5</div>
+        <div class="q-text">What is the distance between A(1, 2, 3) and B(4, 6, 3)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(6,1,0,true)">A. 5</button>
+          <button class="option-btn" onclick="answer(6,1,1,false)">B. √34</button>
+          <button class="option-btn" onclick="answer(6,1,2,false)">C. 7</button>
+          <button class="option-btn" onclick="answer(6,1,3,false)">D. √29</button>
+        </div>
+        <div class="solution-panel" id="sol6_1">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">d = √((4−1)² + (6−2)² + (3−3)²)
+= √(3² + 4² + 0²)
+= √(9 + 16 + 0)
+= √25 = 5</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The z-components are both 3, so z-difference = 0. This reduces to a 2D distance problem in the xy-plane. Classic 3-4-5 triangle!</div></div>
+          <div class="sol-answer">✓ Correct Answer: A — 5</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 2 of 5</div>
+        <div class="q-text">What is the midpoint of A(2, 4, 6) and B(8, 0, 2)?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(6,2,0,false)">A. (6, 4, 8)</button>
+          <button class="option-btn" onclick="answer(6,2,1,true)">B. (5, 2, 4)</button>
+          <button class="option-btn" onclick="answer(6,2,2,false)">C. (3, 2, 4)</button>
+          <button class="option-btn" onclick="answer(6,2,3,false)">D. (10, 4, 8)</button>
+        </div>
+        <div class="solution-panel" id="sol6_2">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">M = ((2+8)/2, (4+0)/2, (6+2)/2)
+= (10/2, 4/2, 8/2)
+= (5, 2, 4)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">Average each coordinate separately. Option C divides by 2 before adding (wrong order). Option D adds without dividing.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — (5, 2, 4)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 3 of 5</div>
+        <div class="q-text">A plane has equation 3x − y + 2z = 10. What is the normal vector to this plane?</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(6,3,0,false)">A. (10, 10, 10)</button>
+          <button class="option-btn" onclick="answer(6,3,1,false)">B. (3, 1, 2)</button>
+          <button class="option-btn" onclick="answer(6,3,2,true)">C. (3, −1, 2)</button>
+          <button class="option-btn" onclick="answer(6,3,3,false)">D. (−3, 1, −2)</button>
+        </div>
+        <div class="solution-panel" id="sol6_3">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">For plane Ax + By + Cz = D:
+Normal vector n = (A, B, C)
+
+Plane: 3x − 1y + 2z = 10
+  A = 3, B = −1, C = 2
+
+Normal vector = (3, −1, 2)</div>
+          <div class="solution-step"><div class="sol-bullet">!</div><div class="sol-text">Option B = (3, 1, 2) loses the minus sign on y. The coefficient of y is −1, not +1. Always read the sign carefully from the plane equation.</div></div>
+          <div class="sol-answer">✓ Correct Answer: C — (3, −1, 2)</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 4 of 5</div>
+        <div class="q-text">Two planes are perpendicular if their normal vectors satisfy:</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(6,4,0,false)">A. n₁ × n₂ = 0</button>
+          <button class="option-btn" onclick="answer(6,4,1,true)">B. n₁ · n₂ = 0</button>
+          <button class="option-btn" onclick="answer(6,4,2,false)">C. n₁ = n₂</button>
+          <button class="option-btn" onclick="answer(6,4,3,false)">D. |n₁| = |n₂|</button>
+        </div>
+        <div class="solution-panel" id="sol6_4">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">Planes are perpendicular ↔ normals are perpendicular
+Normals perpendicular ↔ dot product = 0
+
+n₁ · n₂ = 0  ✓
+
+Parallel planes ↔ n₁ × n₂ = 0  (normals are parallel)
+Same magnitude ≠ same direction (tells us nothing about angles)</div>
+          <div class="solution-step"><div class="sol-bullet">→</div><div class="sol-text">The relationship between planes is entirely determined by their normals. Perpendicular planes → perpendicular normals → zero dot product.</div></div>
+          <div class="sol-answer">✓ Correct Answer: B — n₁ · n₂ = 0</div>
+        </div>
+      </div>
+
+      <div class="exam-question">
+        <div class="q-number">Question 5 of 5</div>
+        <div class="q-text">Find the distance from point P(1, 0, 0) to the plane x + y + z = 3.</div>
+        <div class="options">
+          <button class="option-btn" onclick="answer(6,5,0,false)">A. 1</button>
+          <button class="option-btn" onclick="answer(6,5,1,false)">B. 2</button>
+          <button class="option-btn" onclick="answer(6,5,2,true)">C. 2/√3</button>
+          <button class="option-btn" onclick="answer(6,5,3,false)">D. √3</button>
+        </div>
+        <div class="solution-panel" id="sol6_5">
+          <div class="solution-label">▶ Complete Worked Solution</div>
+          <div class="sol-formula">Plane: x + y + z = 3  →  A=1, B=1, C=1, D=3
+Point: P(1, 0, 0)
+
+d = |Ax₀ + By₀ + Cz₀ − D| / √(A² + B² + C²)
+= |1(1) + 1(0) + 1(0) − 3| / √(1 + 1 + 1)
+= |1 + 0 + 0 − 3| / √3
+= |−2| / √3
+= 2/√3  ≈ 1.155</div>
+          <div class="sol-answer">✓ Correct Answer: C — 2/√3</div>
+        </div>
+      </div>
+
+      <div class="score-bar" id="score6" style="display:none">
+        <div class="score-display" id="scoreText6"></div>
+        <div class="score-label">Chapter VII Score</div>
+        <button class="reset-btn" onclick="resetExam(6)">Retake Exam</button>
+      </div>
+    </div>
+    <div class="chapter-nav">
+      <button class="ch-btn" onclick="openChapter(5)">◀ Chapter VI</button>
+      <button class="ch-btn" disabled>End of Textbook ✓</button>
+    </div>
+  </div>
+
+</div><!-- end textbook -->
+
+<script>
+  // State tracking
+  const examState = {};
+  for(let c=0; c<7; c++){
+    examState[c] = { answered: 0, correct: 0, total: 5 };
+  }
+
+  const chapterTitles = [
+    'I — Concept of Vectors',
+    'II — Vectors in 3D',
+    'III — Angle Between Vectors',
+    'IV — Vector Operations',
+    'V — Unit Vectors & Magnitude',
+    'VI — Vectors in Differentiation',
+    'VII — Coordinate Geometry'
+  ];
+
+  // Build chapter nav buttons
+  const btnContainer = document.getElementById('chapterBtns');
+  chapterTitles.forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (i===0 ? ' active' : '');
+    btn.textContent = 'Ch.' + (i+1);
+    btn.id = 'navbtn'+i;
+    btn.onclick = () => openChapter(i);
+    btnContainer.appendChild(btn);
+  });
+
+  function goHome(){
+    document.getElementById('cover').style.display = 'flex';
+    document.getElementById('textbook').style.display = 'none';
+  }
+
+  function openChapter(idx){
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('textbook').style.display = 'block';
+
+    document.querySelectorAll('.chapter-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('ch'+idx).classList.add('active');
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('navbtn'+idx).classList.add('active');
+
+    document.getElementById('navTitle').textContent = 'Chapter ' + chapterTitles[idx];
+    document.getElementById('progressFill').style.width = Math.round(((idx+1)/7)*100) + '%';
+
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function answer(chapter, qNum, optIdx, isCorrect){
+    const qId = 'eq'+chapter+'_'+qNum;
+    const solId = 'sol'+chapter+'_'+qNum;
+    const qEl = document.getElementById(qId);
+    
+    // If already answered, ignore
+    const btns = qEl ? qEl.querySelectorAll('.option-btn') : 
+                       document.querySelectorAll('#exam'+chapter+' .exam-question:nth-child('+(qNum+2)+') .option-btn');
+    
+    // Disable all buttons in this question
+    const allBtns = document.querySelectorAll('#exam'+chapter+' .exam-question .option-btn');
+    // Find the question's buttons
+    const questionBtns = findQuestionBtns(chapter, qNum);
+    
+    questionBtns.forEach((btn, i) => {
+      btn.disabled = true;
+      if(i === optIdx){
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      }
+      // If wrong answer selected, highlight correct
+      if(!isCorrect && btn.onclick){
+        const onclickStr = btn.getAttribute('onclick') || '';
+        if(onclickStr.includes(',true)')){
+          btn.classList.add('correct');
+        }
+      }
+    });
+
+    // Show solution
+    const sol = document.getElementById(solId);
+    if(sol) sol.classList.add('show');
+
+    // Update score
+    examState[chapter].answered++;
+    if(isCorrect) examState[chapter].correct++;
+
+    if(examState[chapter].answered === examState[chapter].total){
+      showScore(chapter);
+    }
+  }
+
+  function findQuestionBtns(chapter, qNum){
+    const examEl = document.getElementById('exam'+chapter);
+    const questions = examEl.querySelectorAll('.exam-question');
+    const qIndex = qNum - 1;
+    if(questions[qIndex]){
+      return questions[qIndex].querySelectorAll('.option-btn');
+    }
+    return [];
+  }
+
+  function showScore(chapter){
+    const s = examState[chapter];
+    const el = document.getElementById('score'+chapter);
+    const txt = document.getElementById('scoreText'+chapter);
+    el.style.display = 'block';
+    txt.textContent = s.correct + '/' + s.total;
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  function resetExam(chapter){
+    const examEl = document.getElementById('exam'+chapter);
+    // Re-enable all buttons
+    examEl.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('correct', 'wrong');
+    });
+    // Hide solutions
+    examEl.querySelectorAll('.solution-panel').forEach(p => p.classList.remove('show'));
+    // Hide score
+    document.getElementById('score'+chapter).style.display = 'none';
+    // Reset state
+    examState[chapter] = { answered: 0, correct: 0, total: 5 };
+  }
+</script>
+</body>
+</html>
