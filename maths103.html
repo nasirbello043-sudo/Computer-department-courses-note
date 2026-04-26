@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vector Mathematics — Complete Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #1a1209;
+    --cream: #fdf8f0;
+    --paper: #f5efe3;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --rust: #8b3a1e;
+    --teal: #1a6b6b;
+    --teal-light: #2a9090;
+    --border: #d4c4a0;
+    --formula-bg: #1a2535;
+    --formula-text: #e8d5a3;
+    --example-bg: #f0ebe0;
+    --step-bg: #e8f4f0;
+    --step-border: #2a9090;
+    --answer-bg: #1a3525;
+    --answer-text: #a8e0c0;
+    --shadow: rgba(30,15,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* ── COVER ── */
+  #cover {
+    min-height: 100vh;
+    background: var(--formula-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(200,146,42,0.04) 0px,
+      rgba(200,146,42,0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+  }
+  .cover-tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+  #cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  #cover h1 span { color: var(--gold); }
+  .cover-subtitle {
+    color: rgba(253,248,240,0.6);
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+  .cover-toc {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    max-width: 860px;
+    width: 100%;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-toc-item {
+    background: rgba(200,146,42,0.1);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--formula-text);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+  }
+  .cover-toc-item:hover {
+    background: rgba(200,146,42,0.25);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .cover-toc-item .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .start-btn {
+    background: var(--gold);
+    color: var(--formula-bg);
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    z-index: 1;
+  }
+  .start-btn:hover { background: var(--gold-light); transform: scale(1.04); }
+
+  /* ── LAYOUT ── */
+  #app { display: none; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--formula-bg);
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-logo {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid rgba(200,146,42,0.2);
+  }
+  .sidebar-logo h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .sidebar-logo span { color: var(--gold); }
+  .sidebar-nav { padding: 1rem 0; flex: 1; }
+  .nav-item {
+    display: block;
+    padding: 0.65rem 1.25rem;
+    color: rgba(253,248,240,0.65);
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    line-height: 1.35;
+  }
+  .nav-item:hover { color: var(--cream); background: rgba(200,146,42,0.08); }
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(200,146,42,0.1);
+  }
+  .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    opacity: 0.6;
+    display: block;
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: 280px;
+    min-height: 100vh;
+    background: var(--cream);
+  }
+
+  /* ── TOPBAR ── */
+  #topbar {
+    position: sticky;
+    top: 0;
+    background: rgba(253,248,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+  }
+  .menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+  }
+  #progress-bar {
+    height: 3px;
+    background: var(--gold);
+    position: fixed;
+    top: 0; left: 280px;
+    z-index: 200;
+    transition: width 0.4s;
+  }
+
+  /* ── CONTENT ── */
+  #content {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* ── TOPIC HEADER ── */
+  .topic-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .topic-number {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .topic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+
+  /* ── PROSE ── */
+  .prose h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--rust);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 2rem 0 0.75rem;
+  }
+  .prose p { margin-bottom: 1.1rem; }
+  .prose ul, .prose ol {
+    margin: 0.75rem 0 1.1rem 1.5rem;
+  }
+  .prose li { margin-bottom: 0.4rem; }
+  .prose strong { color: var(--rust); font-weight: 600; }
+  .prose em { font-style: italic; color: var(--teal); }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: var(--formula-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .formula-box::before {
+    content: 'FORMULA';
+    position: absolute;
+    top: 0.6rem; right: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .formula-box .formula-label {
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    margin-bottom: 0.6rem;
+    opacity: 0.9;
+  }
+  .formula-box .formula-math {
+    color: var(--formula-text);
+    font-size: 1.15rem;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    line-height: 1.9;
+  }
+  .formula-box .formula-math .var { color: #a8d8ea; }
+  .formula-box .formula-math .op  { color: var(--gold-light); }
+
+  /* ── DERIVATION BOX ── */
+  .derivation {
+    background: #f0f7f7;
+    border: 1px solid var(--teal-light);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+  }
+  .derivation-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .derivation-title::before {
+    content: '∴';
+    font-size: 1.2rem;
+  }
+
+  /* ── EXAMPLES SECTION ── */
+  .examples-section {
+    margin: 2.5rem 0;
+  }
+  .examples-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .examples-section-title::before {
+    content: '✎';
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+
+  /* ── EXAMPLE CARD ── */
+  .example {
+    background: var(--example-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .example-header {
+    background: var(--formula-bg);
+    color: var(--formula-text);
+    padding: 0.8rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .example-num {
+    background: var(--gold);
+    color: var(--formula-bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .example-question {
+    font-style: italic;
+    font-size: 0.97rem;
+    color: var(--formula-text);
+  }
+  .example-body { padding: 1.25rem 1.5rem; }
+
+  /* ── STEP ── */
+  .step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-border);
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1rem;
+  }
+  .step-num {
+    background: var(--teal);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .step-content { flex: 1; font-size: 0.95rem; line-height: 1.7; }
+  .step-content .math {
+    display: inline-block;
+    font-style: italic;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    background: rgba(26,107,107,0.07);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    margin: 0.15rem 0;
+  }
+
+  .answer-box {
+    background: var(--answer-bg);
+    color: var(--answer-text);
+    border-radius: 8px;
+    padding: 0.85rem 1.25rem;
+    margin-top: 0.5rem;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .answer-box::before {
+    content: '✓';
+    background: #2a9060;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Q&A SECTION ── */
+  .qa-section {
+    margin-top: 3.5rem;
+    border-top: 3px double var(--border);
+    padding-top: 2rem;
+  }
+  .qa-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .qa-title span {
+    background: var(--rust);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+  .qa-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .qa-question {
+    background: var(--paper);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    transition: background 0.2s;
+  }
+  .qa-question:hover { background: #ede6d6; }
+  .qa-q-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .qa-chevron {
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .qa-chevron.open { transform: rotate(180deg); }
+  .qa-answer {
+    display: none;
+    padding: 1.25rem 1.5rem;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .qa-answer.visible { display: block; }
+  .qa-answer .step { margin-bottom: 0.75rem; }
+
+  /* ── NAV BUTTONS ── */
+  .topic-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .topic-nav-btn {
+    background: var(--formula-bg);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1.5rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    max-width: 260px;
+  }
+  .topic-nav-btn:hover { background: var(--teal); }
+  .topic-nav-btn.right { text-align: right; margin-left: auto; }
+  .topic-nav-btn small {
+    display: block;
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ── NOTE / INFO BOX ── */
+  .note {
+    background: #fff8e8;
+    border: 1px solid #e0c070;
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.2rem 0;
+    font-size: 0.93rem;
+  }
+  .note strong { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    #progress-bar { left: 0; }
+    .menu-btn { display: block; }
+    #content { padding: 2rem 1rem 5rem; }
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+  }
+  .overlay.active { display: block; }
+
+  /* Utility */
+  .highlight { background: rgba(200,146,42,0.15); padding: 0.1rem 0.3rem; border-radius: 3px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.93rem; }
+  th { background: var(--formula-bg); color: var(--formula-text); padding: 0.6rem 0.9rem; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+  td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--paper); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ COVER ════════════════════════════════ -->
+<div id="cover">
+  <p class="cover-tag">Complete Student Textbook</p>
+  <h1>Vector <span>Mathematics</span></h1>
+  <p class="cover-subtitle">From Concepts to Applications — Every Step Shown</p>
+  <div class="cover-toc">
+    <div class="cover-toc-item" onclick="startBook(0)">
+      <span class="num">Topic 01</span>Concept of Vector
+    </div>
+    <div class="cover-toc-item" onclick="startBook(1)">
+      <span class="num">Topic 02</span>Representation of Vectors in 3 Directions
+    </div>
+    <div class="cover-toc-item" onclick="startBook(2)">
+      <span class="num">Topic 03</span>Angle Between Two Vectors
+    </div>
+    <div class="cover-toc-item" onclick="startBook(3)">
+      <span class="num">Topic 04</span>Sum, Subtraction &amp; Multiplication
+    </div>
+    <div class="cover-toc-item" onclick="startBook(4)">
+      <span class="num">Topic 05</span>Magnitude of Two Vectors
+    </div>
+    <div class="cover-toc-item" onclick="startBook(5)">
+      <span class="num">Topic 06</span>Application of Vector in Differentiation
+    </div>
+    <div class="cover-toc-item" onclick="startBook(6)">
+      <span class="num">Topic 07</span>Coordinate Geometry
+    </div>
+  </div>
+  <button class="start-btn" onclick="startBook(0)">Begin Reading →</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ════════════════════════════════ APP ════════════════════════════════ -->
+<div id="app">
+  <div id="progress-bar" style="width:0%"></div>
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="sidebar-logo">
+      <h2>Vector <span>Mathematics</span></h2>
+      <small style="color:rgba(253,248,240,0.4);font-size:0.78rem;">Complete Textbook</small>
+    </div>
+    <div class="sidebar-nav" id="sidebarNav"></div>
+  </nav>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div id="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <span id="topbar-title" style="font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;"></span>
+      <span id="topbar-page" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--gold);"></span>
+    </div>
+    <div id="content"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  HELPER BUILDERS
+// ══════════════════════════════════════════════
+function formulaBox(label, lines) {
+  return `<div class="formula-box">
+    <div class="formula-label">${label}</div>
+    <div class="formula-math">${lines.join('<br>')}</div>
+  </div>`;
+}
+function derivation(title, content) {
+  return `<div class="derivation"><div class="derivation-title">${title}</div>${content}</div>`;
+}
+function step(n, html) {
+  return `<div class="step"><div class="step-num">${n}</div><div class="step-content">${html}</div></div>`;
+}
+function math(s) { return `<span class="math">${s}</span>`; }
+function answer(s) { return `<div class="answer-box">${s}</div>`; }
+function exampleCard(n, question, steps, ans) {
+  return `<div class="example">
+    <div class="example-header">
+      <span class="example-num">Example ${n}</span>
+      <span class="example-question">${question}</span>
+    </div>
+    <div class="example-body">
+      ${steps}
+      ${answer(ans)}
+    </div>
+  </div>`;
+}
+function examplesSection(title, cards) {
+  return `<div class="examples-section">
+    <div class="examples-section-title">${title}</div>
+    ${cards}
+  </div>`;
+}
+function qaItem(n, q, answerHTML) {
+  return `<div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span class="qa-q-num">Q${n}.</span>
+      <span style="flex:1">${q}</span>
+      <span class="qa-chevron">▼</span>
+    </div>
+    <div class="qa-answer">${answerHTML}</div>
+  </div>`;
+}
+function qaSection(items) {
+  return `<div class="qa-section">
+    <div class="qa-title">Practice Questions &amp; Answers <span>Q&amp;A</span></div>
+    ${items}
+  </div>`;
+}
+
+// ══════════════════════════════════════════════
+//  TOPICS DATA
+// ══════════════════════════════════════════════
+const topics = [
+
+// ─── TOPIC 1 ───────────────────────────────
+{
+  number: "Topic 01",
+  title: "Concept of Vector",
+  content: () => `
+<div class="prose">
+<h2>1.1 What is a Vector?</h2>
+<p>In mathematics and physics, quantities are divided into two fundamental types: <strong>scalars</strong> and <strong>vectors</strong>.</p>
+<ul>
+  <li>A <strong>scalar</strong> is a quantity that has only <em>magnitude</em> (size). Examples: temperature, mass, speed, time.</li>
+  <li>A <strong>vector</strong> is a quantity that has both <em>magnitude</em> and <em>direction</em>. Examples: displacement, velocity, force, acceleration.</li>
+</ul>
+
+<h2>1.2 Notation</h2>
+<p>Vectors are written in several ways:</p>
+<ul>
+  <li>Bold letter: <strong>a</strong>, <strong>b</strong>, <strong>F</strong></li>
+  <li>Letter with arrow: <em>→</em> above it, e.g. <strong>ā</strong></li>
+  <li>As a directed line segment: <strong>AB</strong> (from point A to point B)</li>
+</ul>
+<p>The <strong>magnitude</strong> (length) of vector <strong>a</strong> is written as |<strong>a</strong>| or simply <em>a</em>.</p>
+
+<h2>1.3 Geometric Representation</h2>
+<p>A vector is represented geometrically as an arrow:</p>
+<ul>
+  <li>The <strong>tail</strong> (starting point) is the <em>initial point</em>.</li>
+  <li>The <strong>head</strong> (ending point) is the <em>terminal point</em>.</li>
+  <li>The <strong>length</strong> of the arrow represents the magnitude.</li>
+  <li>The <strong>direction</strong> the arrow points represents the direction of the vector.</li>
+</ul>
+
+<h2>1.4 Types of Vectors</h2>
+<table>
+  <tr><th>Type</th><th>Description</th></tr>
+  <tr><td>Zero Vector (<strong>0</strong>)</td><td>Magnitude = 0, no direction</td></tr>
+  <tr><td>Unit Vector (û)</td><td>Magnitude = 1</td></tr>
+  <tr><td>Equal Vectors</td><td>Same magnitude AND same direction</td></tr>
+  <tr><td>Negative Vector (−<strong>a</strong>)</td><td>Same magnitude, opposite direction</td></tr>
+  <tr><td>Parallel Vectors</td><td>Same or opposite direction</td></tr>
+  <tr><td>Position Vector</td><td>Vector from the origin O to a point P</td></tr>
+  <tr><td>Free Vector</td><td>Can be placed anywhere; only magnitude and direction matter</td></tr>
+</table>
+
+<h2>1.5 Unit Vector Formula</h2>
+<p>A unit vector is a vector with magnitude 1 that points in the same direction as a given vector. For any non-zero vector <strong>a</strong>, its unit vector is:</p>
+${formulaBox("Unit Vector Formula", [
+  "<var>â</var> &nbsp;=&nbsp; <span class='op'>a</span> / |<span class='op'>a</span>|",
+  "where |<span class='op'>a</span>| is the magnitude of vector <span class='op'>a</span>"
+])}
+
+${derivation("Derivation of the Unit Vector Formula", `
+<p>We want a vector that:</p>
+<ol>
+  <li>Points in the same direction as <strong>a</strong></li>
+  <li>Has magnitude exactly 1</li>
+</ol>
+<p>If we divide any vector by its own magnitude, the result has magnitude 1:</p>
+${step(1, `Start with vector ${math("a")}`)}
+${step(2, `Magnitude of the unit vector = ${math("|a / |a||")}`)}
+${step(3, `Using the property that ${math("|k·a| = |k|·|a|")}, we get:`)}
+${step(4, `${math("|a / |a|| = (1/|a|) · |a| = 1")} ✓`)}
+<p>So dividing <strong>a</strong> by its magnitude gives a vector of magnitude 1 in the same direction.</p>
+`)}
+
+${examplesSection("Examples — Unit Vector", `
+${exampleCard(1, "Find the unit vector of <strong>a</strong> = (3, 4).",
+  step(1, `Identify components: ${math("a = (3, 4)")}`) +
+  step(2, `Find the magnitude: ${math("|a| = √(3² + 4²)")}`) +
+  step(3, `Compute the squares: ${math("3² = 9,  4² = 16")}`) +
+  step(4, `Add the squares: ${math("9 + 16 = 25")}`) +
+  step(5, `Take the square root: ${math("|a| = √25 = 5")}`) +
+  step(6, `Divide each component by the magnitude: ${math("â = (3/5, 4/5)")}`) +
+  step(7, `Verify: ${math("|â| = √((3/5)² + (4/5)²) = √(9/25 + 16/25) = √(25/25) = √1 = 1 ✓")}`),
+  "â = (3/5, 4/5) or equivalently â = (0.6, 0.8)")}
+
+${exampleCard(2, "Find the unit vector of <strong>b</strong> = (−5, 12).",
+  step(1, `Write the vector: ${math("b = (−5, 12)")}`) +
+  step(2, `Find the magnitude: ${math("|b| = √((−5)² + 12²)")}`) +
+  step(3, `Compute squares: ${math("(−5)² = 25,  12² = 144")}`) +
+  step(4, `Add: ${math("25 + 144 = 169")}`) +
+  step(5, `Square root: ${math("|b| = √169 = 13")}`) +
+  step(6, `Unit vector: ${math("b̂ = (−5/13, 12/13)")}`),
+  "b̂ = (−5/13, 12/13)")}
+
+${exampleCard(3, "Find the unit vector of <strong>c</strong> = (1, 1, 1).",
+  step(1, `Write the vector: ${math("c = (1, 1, 1)")}`) +
+  step(2, `Find the magnitude: ${math("|c| = √(1² + 1² + 1²)")}`) +
+  step(3, `Compute squares: ${math("1 + 1 + 1 = 3")}`) +
+  step(4, `Square root: ${math("|c| = √3")}`) +
+  step(5, `Unit vector: ${math("ĉ = (1/√3, 1/√3, 1/√3)")}`) +
+  step(6, `Rationalise: ${math("ĉ = (√3/3, √3/3, √3/3)")}`),
+  "ĉ = (√3/3, √3/3, √3/3) ≈ (0.577, 0.577, 0.577)")}
+
+${exampleCard(4, "Find the unit vector of <strong>d</strong> = (6, 0).",
+  step(1, `Write the vector: ${math("d = (6, 0)")}`) +
+  step(2, `Magnitude: ${math("|d| = √(6² + 0²)")}`) +
+  step(3, `Compute: ${math("= √(36 + 0) = √36 = 6")}`) +
+  step(4, `Unit vector: ${math("d̂ = (6/6, 0/6) = (1, 0)")}`) +
+  step(5, `This makes sense because d points along the positive x-axis.`),
+  "d̂ = (1, 0)")}
+`)}
+
+${qaSection(
+  qaItem(1, "Define a vector and give two real-life examples.", `
+    <p>A <strong>vector</strong> is a mathematical quantity that has both <strong>magnitude</strong> (size) and <strong>direction</strong>.</p>
+    <ul>
+      <li><strong>Velocity</strong>: "60 km/h heading North" — this has both size (60 km/h) and direction (North).</li>
+      <li><strong>Force</strong>: "10 N pushing to the right" — size (10 N) and direction (right).</li>
+    </ul>`) +
+  qaItem(2, "What is the difference between a scalar and a vector?", `
+    <table>
+      <tr><th>Scalar</th><th>Vector</th></tr>
+      <tr><td>Only magnitude</td><td>Magnitude AND direction</td></tr>
+      <tr><td>E.g. mass (5 kg)</td><td>E.g. force (5 N downward)</td></tr>
+      <tr><td>Added by ordinary algebra</td><td>Added by vector rules</td></tr>
+    </table>`) +
+  qaItem(3, "Find the unit vector of a = (8, 6).", `
+    ${step(1, `Magnitude: ${math("|a| = √(8² + 6²) = √(64 + 36) = √100 = 10")}`)}
+    ${step(2, `Unit vector: ${math("â = (8/10, 6/10) = (0.8, 0.6)")}`)}
+    ${answer("â = (0.8, 0.6)")}`) +
+  qaItem(4, "What is a zero vector? What is its magnitude?", `<p>A <strong>zero vector</strong> (written <strong>0</strong>) is a vector whose magnitude is 0 and has no defined direction. Every component is 0. Example in 2D: <strong>0</strong> = (0, 0). Its magnitude = 0.</p>`) +
+  qaItem(5, "What is a position vector?", `<p>A <strong>position vector</strong> is a vector drawn from the <strong>origin O</strong> to a specific point P. If P = (x, y, z), then the position vector <strong>OP</strong> = (x, y, z). It locates a point relative to the origin.</p>`)
+)}
+</div>`
+},
+
+// ─── TOPIC 2 ───────────────────────────────
+{
+  number: "Topic 02",
+  title: "Representation of Vectors in 3 Directions",
+  content: () => `
+<div class="prose">
+<h2>2.1 The Three-Dimensional Coordinate System</h2>
+<p>In 3D space, every point is located using three mutually perpendicular axes:</p>
+<ul>
+  <li><strong>x-axis</strong> — horizontal (left/right)</li>
+  <li><strong>y-axis</strong> — vertical (up/down)</li>
+  <li><strong>z-axis</strong> — depth (in/out of the page)</li>
+</ul>
+<p>These three axes meet at the <strong>origin O = (0, 0, 0)</strong>.</p>
+
+<h2>2.2 Standard Unit Vectors (i, j, k)</h2>
+<p>Three special unit vectors define the coordinate directions:</p>
+<table>
+  <tr><th>Unit Vector</th><th>Direction</th><th>Components</th></tr>
+  <tr><td><strong>i</strong> (or î)</td><td>Along the positive x-axis</td><td>(1, 0, 0)</td></tr>
+  <tr><td><strong>j</strong> (or ĵ)</td><td>Along the positive y-axis</td><td>(0, 1, 0)</td></tr>
+  <tr><td><strong>k</strong> (or k̂)</td><td>Along the positive z-axis</td><td>(0, 0, 1)</td></tr>
+</table>
+
+<h2>2.3 Expressing Any Vector Using i, j, k</h2>
+<p>Any vector <strong>a</strong> in 3D space can be written as a combination of the unit vectors <strong>i</strong>, <strong>j</strong>, and <strong>k</strong>:</p>
+${formulaBox("3D Vector Representation", [
+  "<var>a</var> &nbsp;=&nbsp; <span class='op'>a₁</span><var>i</var> + <span class='op'>a₂</span><var>j</var> + <span class='op'>a₃</span><var>k</var>",
+  "or equivalently:  <var>a</var> = (<span class='op'>a₁</span>, <span class='op'>a₂</span>, <span class='op'>a₃</span>)",
+  "where a₁, a₂, a₃ are the <em>components</em> (scalar values)"
+])}
+
+${derivation("Why This Works", `
+${step(1, `Consider a vector from the origin to point P = (a₁, a₂, a₃)`)}
+${step(2, `Moving ${math("a₁")} units along x: contribution is ${math("a₁·i = (a₁, 0, 0)")}`)}
+${step(3, `Moving ${math("a₂")} units along y: contribution is ${math("a₂·j = (0, a₂, 0)")}`)}
+${step(4, `Moving ${math("a₃")} units along z: contribution is ${math("a₃·k = (0, 0, a₃)")}`)}
+${step(5, `Total vector = sum of the three contributions:`)}
+${step(6, `${math("a = (a₁,0,0) + (0,a₂,0) + (0,0,a₃) = (a₁, a₂, a₃)")} ✓`)}
+`)}
+
+<h2>2.4 Magnitude of a 3D Vector</h2>
+<p>The magnitude (length) of a 3D vector is found using the 3D extension of Pythagoras' theorem:</p>
+${formulaBox("3D Magnitude Formula", [
+  "|<var>a</var>| &nbsp;=&nbsp; √(<span class='op'>a₁²</span> + <span class='op'>a₂²</span> + <span class='op'>a₃²</span>)"
+])}
+
+${derivation("Derivation — Extending Pythagoras to 3D", `
+${step(1, `In 2D: distance from origin to (a₁, a₂) is ${math("d = √(a₁² + a₂²)")}`)}
+${step(2, `Now add a third dimension. First find the 2D distance in the xy-plane: ${math("d_xy = √(a₁² + a₂²)")}`)}
+${step(3, `This horizontal distance ${math("d_xy")} and the vertical height ${math("a₃")} form a right triangle.`)}
+${step(4, `Apply Pythagoras again: ${math("|a|² = d_xy² + a₃²")}`)}
+${step(5, `Substitute: ${math("|a|² = (√(a₁² + a₂²))² + a₃² = a₁² + a₂² + a₃²")}`)}
+${step(6, `Take square root: ${math("|a| = √(a₁² + a₂² + a₃²)")} ✓`)}
+`)}
+
+${examplesSection("Examples — 3D Vector Representation & Magnitude", `
+${exampleCard(1, "Write the vector from origin to P(2, 3, 5) in ijk form and find its magnitude.",
+  step(1, `Point is P = (2, 3, 5)`) +
+  step(2, `In ijk form: ${math("a = 2i + 3j + 5k")}`) +
+  step(3, `Magnitude: ${math("|a| = √(2² + 3² + 5²)")}`) +
+  step(4, `Compute squares: ${math("2² = 4,  3² = 9,  5² = 25")}`) +
+  step(5, `Sum: ${math("4 + 9 + 25 = 38")}`) +
+  step(6, `|a| = √38`),
+  "|a| = √38 ≈ 6.16")}
+
+${exampleCard(2, "A vector is given as b = −i + 4j − 2k. State its components and find |b|.",
+  step(1, `From ${math("b = −1i + 4j − 2k")}:`) +
+  step(2, `Components: ${math("b₁ = −1,  b₂ = 4,  b₃ = −2")}`) +
+  step(3, `Magnitude: ${math("|b| = √((−1)² + 4² + (−2)²)")}`) +
+  step(4, `Compute squares: ${math("(−1)² = 1,  4² = 16,  (−2)² = 4")}`) +
+  step(5, `Sum: ${math("1 + 16 + 4 = 21")}`) +
+  step(6, `|b| = √21`),
+  "|b| = √21 ≈ 4.58")}
+
+${exampleCard(3, "Point A = (1, 2, 3) and point B = (4, 6, 3). Find vector AB in ijk form.",
+  step(1, `Vector from A to B: ${math("AB = B − A")}`) +
+  step(2, `Subtract x-components: ${math("4 − 1 = 3")}`) +
+  step(3, `Subtract y-components: ${math("6 − 2 = 4")}`) +
+  step(4, `Subtract z-components: ${math("3 − 3 = 0")}`) +
+  step(5, `In ijk form: ${math("AB = 3i + 4j + 0k = 3i + 4j")}`) +
+  step(6, `Magnitude: ${math("|AB| = √(3² + 4² + 0²) = √(9+16+0) = √25 = 5")}`),
+  "AB = 3i + 4j,  |AB| = 5")}
+
+${exampleCard(4, "Given c = 6i − 8j + 0k, find the unit vector ĉ.",
+  step(1, `${math("c = (6, −8, 0)")}`) +
+  step(2, `Magnitude: ${math("|c| = √(6² + (−8)² + 0²)")}`) +
+  step(3, `Compute: ${math("= √(36 + 64 + 0) = √100 = 10")}`) +
+  step(4, `Unit vector: ${math("ĉ = c / |c| = (6/10, −8/10, 0/10)")}`) +
+  step(5, `Simplify: ${math("ĉ = (0.6, −0.8, 0)")}`),
+  "ĉ = 0.6i − 0.8j")}
+
+${exampleCard(5, "Find vector OP and |OP| where O is the origin and P = (−3, 0, 4).",
+  step(1, `Position vector: ${math("OP = P − O = (−3, 0, 4) − (0,0,0)")}`) +
+  step(2, `So ${math("OP = (−3, 0, 4)")}`) +
+  step(3, `In ijk form: ${math("OP = −3i + 0j + 4k = −3i + 4k")}`) +
+  step(4, `Magnitude: ${math("|OP| = √((−3)² + 0² + 4²)")}`) +
+  step(5, `Compute: ${math("= √(9 + 0 + 16) = √25 = 5")}`),
+  "OP = −3i + 4k,  |OP| = 5")}
+`)}
+
+${qaSection(
+  qaItem(1, "What do the unit vectors i, j, and k represent?", `<p><strong>i</strong> = (1,0,0): unit vector along the positive x-axis.<br><strong>j</strong> = (0,1,0): unit vector along the positive y-axis.<br><strong>k</strong> = (0,0,1): unit vector along the positive z-axis.<br>Any 3D vector can be written as a linear combination of these three.</p>`) +
+  qaItem(2, "Write a = (−2, 5, 3) in ijk form.", `${step(1, `${math("a = −2i + 5j + 3k")}`)} ${answer("a = −2i + 5j + 3k")}`) +
+  qaItem(3, "Find the magnitude of d = 2i − 3j + 6k.", `
+    ${step(1, `Components: ${math("d₁ = 2, d₂ = −3, d₃ = 6")}`)}
+    ${step(2, `${math("|d| = √(2² + (−3)² + 6²)")}`)}
+    ${step(3, `${math("= √(4 + 9 + 36) = √49 = 7")}`)}
+    ${answer("|d| = 7")}`) +
+  qaItem(4, "Given A = (1,1,1) and B = (4,5,1), find vector AB.", `
+    ${step(1, `${math("AB = B − A = (4−1, 5−1, 1−1) = (3, 4, 0)")}`)}
+    ${step(2, `In ijk form: ${math("AB = 3i + 4j")}`)}
+    ${answer("AB = 3i + 4j")}`) +
+  qaItem(5, "Why must the three coordinate axes be perpendicular to each other?", `<p>They must be <strong>mutually perpendicular</strong> (orthogonal) so that each axis is completely independent of the others. This means moving along one axis does not affect the position on the other axes. This property ensures that the decomposition of any vector into its components is <em>unique</em> and <em>unambiguous</em>.</p>`)
+)}
+</div>`
+},
+
+// ─── TOPIC 3 ───────────────────────────────
+{
+  number: "Topic 03",
+  title: "Angle Between Two Vectors",
+  content: () => `
+<div class="prose">
+<h2>3.1 The Dot Product (Scalar Product)</h2>
+<p>Before finding the angle between two vectors, we need to understand the <strong>dot product</strong>. The dot product of two vectors <strong>a</strong> and <strong>b</strong> is a <em>scalar</em> (a single number).</p>
+
+<h2>3.2 Dot Product — Algebraic Definition</h2>
+${formulaBox("Dot Product (Component Form)", [
+  "<var>a</var> · <var>b</var> &nbsp;=&nbsp; <span class='op'>a₁b₁</span> + <span class='op'>a₂b₂</span> + <span class='op'>a₃b₃</span>",
+  "If <var>a</var> = (a₁, a₂, a₃) and <var>b</var> = (b₁, b₂, b₃)"
+])}
+
+<h2>3.3 Dot Product — Geometric Definition</h2>
+${formulaBox("Dot Product (Geometric Form)", [
+  "<var>a</var> · <var>b</var> &nbsp;=&nbsp; |<var>a</var>| |<var>b</var>| cos θ",
+  "where θ is the angle between the two vectors (0° ≤ θ ≤ 180°)"
+])}
+
+<h2>3.4 Angle Between Two Vectors — Formula</h2>
+<p>Combining both definitions and solving for θ:</p>
+${formulaBox("Angle Between Two Vectors", [
+  "cos θ &nbsp;=&nbsp; (<var>a</var> · <var>b</var>) / (|<var>a</var>| · |<var>b</var>|)",
+  "",
+  "∴ &nbsp; θ &nbsp;=&nbsp; cos⁻¹ [ (<var>a</var> · <var>b</var>) / (|<var>a</var>| · |<var>b</var>|) ]"
+])}
+
+${derivation("Full Derivation of the Angle Formula", `
+${step(1, `From the geometric definition: ${math("a · b = |a||b|cosθ")}`)}
+${step(2, `Divide both sides by ${math("|a||b|")} (assuming neither is a zero vector):`)}
+${step(3, `${math("(a · b) / (|a||b|) = cosθ")}`)}
+${step(4, `Apply the inverse cosine (arccos) to both sides:`)}
+${step(5, `${math("θ = cos⁻¹ [(a · b) / (|a||b|)]")} ✓`)}
+<p class="note"><strong>Note:</strong> The angle θ is always between 0° and 180°.</p>
+<p>Special cases:</p>
+<ul>
+  <li>If ${math("a · b = 0")} → θ = 90° (vectors are <em>perpendicular</em>)</li>
+  <li>If ${math("a · b > 0")} → θ is acute (less than 90°)</li>
+  <li>If ${math("a · b < 0")} → θ is obtuse (greater than 90°)</li>
+</ul>
+`)}
+
+${examplesSection("Examples — Angle Between Two Vectors", `
+${exampleCard(1, "Find the angle between a = (1, 0) and b = (0, 1).",
+  step(1, `Compute the dot product: ${math("a · b = (1)(0) + (0)(1)")}`) +
+  step(2, `${math("a · b = 0 + 0 = 0")}`) +
+  step(3, `Magnitude of a: ${math("|a| = √(1² + 0²) = √1 = 1")}`) +
+  step(4, `Magnitude of b: ${math("|b| = √(0² + 1²) = √1 = 1")}`) +
+  step(5, `Apply the formula: ${math("cosθ = 0 / (1 × 1) = 0")}`) +
+  step(6, `Apply inverse cosine: ${math("θ = cos⁻¹(0) = 90°")}`),
+  "θ = 90° (the vectors are perpendicular)")}
+
+${exampleCard(2, "Find the angle between a = (2, 1) and b = (1, 2).",
+  step(1, `Dot product: ${math("a · b = (2)(1) + (1)(2)")}`) +
+  step(2, `${math("= 2 + 2 = 4")}`) +
+  step(3, `|a| = √(4 + 1) = √5`) +
+  step(4, `|b| = √(1 + 4) = √5`) +
+  step(5, `${math("cosθ = 4 / (√5 × √5) = 4/5 = 0.8")}`) +
+  step(6, `${math("θ = cos⁻¹(0.8)")}`) +
+  step(7, `${math("θ ≈ 36.87°")}`),
+  "θ ≈ 36.87°")}
+
+${exampleCard(3, "Find the angle between a = (1, 2, 2) and b = (2, 1, −2).",
+  step(1, `Dot product: ${math("a · b = (1)(2) + (2)(1) + (2)(−2)")}`) +
+  step(2, `${math("= 2 + 2 − 4 = 0")}`) +
+  step(3, `|a| = √(1 + 4 + 4) = √9 = 3`) +
+  step(4, `|b| = √(4 + 1 + 4) = √9 = 3`) +
+  step(5, `${math("cosθ = 0 / (3 × 3) = 0/9 = 0")}`) +
+  step(6, `${math("θ = cos⁻¹(0) = 90°")}`),
+  "θ = 90° (vectors are perpendicular)")}
+
+${exampleCard(4, "Find the angle between a = (3, 4, 0) and b = (1, 0, 0).",
+  step(1, `Dot product: ${math("a · b = (3)(1) + (4)(0) + (0)(0)")}`) +
+  step(2, `${math("= 3 + 0 + 0 = 3")}`) +
+  step(3, `|a| = √(9 + 16 + 0) = √25 = 5`) +
+  step(4, `|b| = √(1 + 0 + 0) = 1`) +
+  step(5, `${math("cosθ = 3 / (5 × 1) = 3/5 = 0.6")}`) +
+  step(6, `${math("θ = cos⁻¹(0.6) ≈ 53.13°")}`),
+  "θ ≈ 53.13°")}
+
+${exampleCard(5, "Find the angle between a = (1, −1, 0) and b = (1, 1, 0).",
+  step(1, `Dot product: ${math("a · b = (1)(1) + (−1)(1) + (0)(0)")}`) +
+  step(2, `${math("= 1 − 1 + 0 = 0")}`) +
+  step(3, `|a| = √(1 + 1 + 0) = √2`) +
+  step(4, `|b| = √(1 + 1 + 0) = √2`) +
+  step(5, `${math("cosθ = 0 / (√2 × √2) = 0/2 = 0")}`) +
+  step(6, `${math("θ = cos⁻¹(0) = 90°")}`),
+  "θ = 90°")}
+`)}
+
+${qaSection(
+  qaItem(1, "What is the dot product and what kind of result does it give?", `<p>The <strong>dot product</strong> (also called the scalar product) of two vectors gives a <strong>scalar</strong> (a plain number, not a vector). It is calculated by multiplying matching components and adding:<br>${math("a · b = a₁b₁ + a₂b₂ + a₃b₃")}</p>`) +
+  qaItem(2, "If the dot product of two vectors is zero, what does that tell you?", `<p>If ${math("a · b = 0")}, then ${math("cosθ = 0")}, which means θ = 90°. The two vectors are <strong>perpendicular</strong> (orthogonal) to each other.</p>`) +
+  qaItem(3, "Find the angle between a = (1, 1) and b = (1, −1).", `
+    ${step(1, `${math("a · b = (1)(1) + (1)(−1) = 1 − 1 = 0")}`)}
+    ${step(2, `Since the dot product = 0, the angle is 90°.`)}
+    ${answer("θ = 90°")}`) +
+  qaItem(4, "Find the angle between a = (2, 0, 0) and b = (1, 1, 0).", `
+    ${step(1, `${math("a · b = (2)(1) + (0)(1) + (0)(0) = 2")}`)}
+    ${step(2, `${math("|a| = √(4+0+0) = 2")}`)}
+    ${step(3, `${math("|b| = √(1+1+0) = √2")}`)}
+    ${step(4, `${math("cosθ = 2 / (2·√2) = 2/(2√2) = 1/√2 ≈ 0.7071")}`)}
+    ${step(5, `${math("θ = cos⁻¹(1/√2) = 45°")}`)}
+    ${answer("θ = 45°")}`) +
+  qaItem(5, "Can the angle between two vectors be greater than 180°? Explain.", `<p>No. By convention, the angle θ between two vectors is always in the range <strong>0° ≤ θ ≤ 180°</strong>. The formula ${math("θ = cos⁻¹[(a·b)/(|a||b|)]")} always produces a value in this range, since cos⁻¹ returns values between 0° and 180°.</p>`)
+)}
+</div>`
+},
+
+// ─── TOPIC 4 ───────────────────────────────
+{
+  number: "Topic 04",
+  title: "Sum, Subtraction & Multiplication (Scalar & Vector)",
+  content: () => `
+<div class="prose">
+<h2>4.1 Vector Addition</h2>
+<p>To add two vectors, add their corresponding components:</p>
+${formulaBox("Vector Addition Formula", [
+  "<var>a</var> + <var>b</var> &nbsp;=&nbsp; (<span class='op'>a₁ + b₁</span>, <span class='op'>a₂ + b₂</span>, <span class='op'>a₃ + b₃</span>)"
+])}
+<p>Geometrically, place the tail of <strong>b</strong> at the head of <strong>a</strong>. The sum <strong>a + b</strong> is the vector from the tail of <strong>a</strong> to the head of <strong>b</strong> (Triangle Law).</p>
+
+<h2>4.2 Vector Subtraction</h2>
+${formulaBox("Vector Subtraction Formula", [
+  "<var>a</var> − <var>b</var> &nbsp;=&nbsp; (<span class='op'>a₁ − b₁</span>, <span class='op'>a₂ − b₂</span>, <span class='op'>a₃ − b₃</span>)"
+])}
+<p>Subtracting <strong>b</strong> is the same as adding the negative vector <strong>−b</strong>.</p>
+
+<h2>4.3 Scalar Multiplication</h2>
+<p>Multiplying a vector by a scalar (number) λ stretches or shrinks it:</p>
+${formulaBox("Scalar Multiplication Formula", [
+  "λ<var>a</var> &nbsp;=&nbsp; (<span class='op'>λa₁</span>, <span class='op'>λa₂</span>, <span class='op'>λa₃</span>)"
+])}
+<p>If λ > 0, direction stays the same. If λ < 0, direction reverses. If λ = 0, result is the zero vector.</p>
+
+<h2>4.4 Dot Product (Scalar Product) — Review</h2>
+${formulaBox("Dot Product", [
+  "<var>a</var> · <var>b</var> &nbsp;=&nbsp; <span class='op'>a₁b₁ + a₂b₂ + a₃b₃</span> &nbsp; (gives a scalar)"
+])}
+
+<h2>4.5 Cross Product (Vector Product)</h2>
+<p>The cross product of two vectors gives a <em>vector</em> that is perpendicular to both:</p>
+${formulaBox("Cross Product Formula", [
+  "<var>a</var> × <var>b</var> &nbsp;=&nbsp; ( <span class='op'>a₂b₃ − a₃b₂</span>,  <span class='op'>a₃b₁ − a₁b₃</span>,  <span class='op'>a₁b₂ − a₂b₁</span> )",
+  "",
+  "Equivalently (determinant form):",
+  "| <var>i</var>   <var>j</var>   <var>k</var>  |",
+  "| a₁  a₂  a₃ |",
+  "| b₁  b₂  b₃ |"
+])}
+
+${derivation("Derivation — Cross Product via Determinant", `
+${step(1, `Write the 3×3 determinant with i, j, k in the top row:`)}
+${step(2, `Expand along the first row:`)}
+${step(3, `i-component: ${math("+i(a₂b₃ − a₃b₂)")} (cofactor of i)`)}
+${step(4, `j-component: ${math("−j(a₁b₃ − a₃b₁)")} (cofactor of j, with minus sign)`)}
+${step(5, `k-component: ${math("+k(a₁b₂ − a₂b₁)")} (cofactor of k)`)}
+${step(6, `∴ ${math("a × b = (a₂b₃−a₃b₂)i − (a₁b₃−a₃b₁)j + (a₁b₂−a₂b₁)k")} ✓`)}
+<div class="note"><strong>Key properties:</strong> a × b = −(b × a);   a × a = 0;   if a × b = 0, vectors are parallel</div>
+`)}
+
+${examplesSection("Examples — Vector Operations", `
+${exampleCard(1, "Given a = (2, 3, 1) and b = (1, −1, 4). Find a + b and a − b.",
+  step(1, `Addition: ${math("a + b = (2+1, 3+(−1), 1+4)")}`) +
+  step(2, `Compute each component: ${math("x: 2+1=3,  y: 3−1=2,  z: 1+4=5")}`) +
+  step(3, `So ${math("a + b = (3, 2, 5)")}`) +
+  step(4, `Subtraction: ${math("a − b = (2−1, 3−(−1), 1−4)")}`) +
+  step(5, `Compute: ${math("x: 2−1=1,  y: 3+1=4,  z: 1−4=−3")}`) +
+  step(6, `So ${math("a − b = (1, 4, −3)")}`),
+  "a + b = (3, 2, 5) and a − b = (1, 4, −3)")}
+
+${exampleCard(2, "Given a = (4, −2, 3). Find 3a and −2a.",
+  step(1, `Scalar multiplication by 3: ${math("3a = 3·(4, −2, 3)")}`) +
+  step(2, `Multiply each component by 3: ${math("(3×4, 3×−2, 3×3)")}`) +
+  step(3, `${math("3a = (12, −6, 9)")}`) +
+  step(4, `Scalar multiplication by −2: ${math("−2a = −2·(4, −2, 3)")}`) +
+  step(5, `Multiply each component by −2: ${math("(−2×4, −2×−2, −2×3)")}`) +
+  step(6, `${math("−2a = (−8, 4, −6)")}`),
+  "3a = (12, −6, 9) and −2a = (−8, 4, −6)")}
+
+${exampleCard(3, "Compute the dot product of a = (1, 2, 3) and b = (4, −1, 2).",
+  step(1, `${math("a · b = a₁b₁ + a₂b₂ + a₃b₃")}`) +
+  step(2, `Multiply first components: ${math("1 × 4 = 4")}`) +
+  step(3, `Multiply second components: ${math("2 × (−1) = −2")}`) +
+  step(4, `Multiply third components: ${math("3 × 2 = 6")}`) +
+  step(5, `Sum: ${math("4 + (−2) + 6 = 8")}`),
+  "a · b = 8")}
+
+${exampleCard(4, "Find a × b where a = (1, 2, 3) and b = (4, 5, 6).",
+  step(1, `Using formula: ${math("a × b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁)")}`) +
+  step(2, `i-component: ${math("a₂b₃ − a₃b₂ = (2)(6) − (3)(5) = 12 − 15 = −3")}`) +
+  step(3, `j-component: ${math("a₃b₁ − a₁b₃ = (3)(4) − (1)(6) = 12 − 6 = 6")}`) +
+  step(4, `k-component: ${math("a₁b₂ − a₂b₁ = (1)(5) − (2)(4) = 5 − 8 = −3")}`) +
+  step(5, `So ${math("a × b = (−3, 6, −3)")}`),
+  "a × b = (−3, 6, −3) = −3i + 6j − 3k")}
+
+${exampleCard(5, "Verify that (a × b) is perpendicular to a, using a = (1,2,3) and b = (4,5,6).",
+  step(1, `From Example 4: ${math("a × b = (−3, 6, −3)")}`) +
+  step(2, `To verify perpendicular to a, compute: ${math("a · (a × b)")}`) +
+  step(3, `${math("= (1)(−3) + (2)(6) + (3)(−3)")}`) +
+  step(4, `${math("= −3 + 12 − 9")}`) +
+  step(5, `${math("= 0 ✓")} — so a × b ⊥ a`),
+  "a · (a × b) = 0, confirming perpendicularity")}
+`)}
+
+${qaSection(
+  qaItem(1, "State two properties of the cross product that are different from the dot product.", `<ol>
+    <li>The <strong>cross product</strong> gives a <em>vector</em> result, while the dot product gives a <em>scalar</em> result.</li>
+    <li>The cross product is <strong>anti-commutative</strong>: a × b = −(b × a), while the dot product is commutative: a · b = b · a.</li>
+  </ol>`) +
+  qaItem(2, "If a = (2, 1, 0) and b = (0, 3, 1), find a + b, a − b, and 2a − 3b.", `
+    ${step(1, `${math("a + b = (2+0, 1+3, 0+1) = (2, 4, 1)")}`)}
+    ${step(2, `${math("a − b = (2−0, 1−3, 0−1) = (2, −2, −1)")}`)}
+    ${step(3, `${math("2a = (4, 2, 0)")}`)}
+    ${step(4, `${math("3b = (0, 9, 3)")}`)}
+    ${step(5, `${math("2a − 3b = (4−0, 2−9, 0−3) = (4, −7, −3)")}`)}
+    ${answer("a+b=(2,4,1); a−b=(2,−2,−1); 2a−3b=(4,−7,−3)")}`) +
+  qaItem(3, "Find a × b where a = (2, 0, 1) and b = (0, 1, 2).", `
+    ${step(1, `i: ${math("(0)(2)−(1)(1) = 0−1 = −1")}`)}
+    ${step(2, `j: ${math("(1)(0)−(2)(2) = 0−4 = −4")}`)}
+    ${step(3, `k: ${math("(2)(1)−(0)(0) = 2−0 = 2")}`)}
+    ${answer("a × b = (−1, −4, 2)")}`) +
+  qaItem(4, "What happens to a vector when multiplied by scalar −1?", `<p>Multiplying by −1 reverses the direction of the vector (the magnitude stays the same): ${math("−1 · a = −a")} has the same length as <strong>a</strong> but points in the opposite direction.</p>`) +
+  qaItem(5, "Prove that a · (b + c) = a · b + a · c (distributive law).", `
+    ${step(1, `Let ${math("a=(a₁,a₂,a₃), b=(b₁,b₂,b₃), c=(c₁,c₂,c₃)")}`)}
+    ${step(2, `${math("b + c = (b₁+c₁, b₂+c₂, b₃+c₃)")}`)}
+    ${step(3, `${math("a·(b+c) = a₁(b₁+c₁) + a₂(b₂+c₂) + a₃(b₃+c₃)")}`)}
+    ${step(4, `Expand: ${math("= a₁b₁+a₁c₁ + a₂b₂+a₂c₂ + a₃b₃+a₃c₃")}`)}
+    ${step(5, `Rearrange: ${math("= (a₁b₁+a₂b₂+a₃b₃) + (a₁c₁+a₂c₂+a₃c₃)")}`)}
+    ${step(6, `${math("= a·b + a·c ✓")}`)}`)
+)}
+</div>`
+},
+
+// ─── TOPIC 5 ───────────────────────────────
+{
+  number: "Topic 05",
+  title: "Magnitude of Two Vectors",
+  content: () => `
+<div class="prose">
+<h2>5.1 What is Magnitude?</h2>
+<p>The <strong>magnitude</strong> (also called <em>length</em> or <em>modulus</em>) of a vector is the distance from its starting point (tail) to its ending point (head). It is always a non-negative real number.</p>
+<p>In this topic we study how to find and <strong>compare the magnitudes of two vectors</strong> — that is, given two vectors <strong>a</strong> and <strong>b</strong>, we find |<strong>a</strong>| and |<strong>b</strong>| separately and then work with them together.</p>
+
+<h2>5.2 Magnitude Formula — 2D</h2>
+${formulaBox("Magnitude of a 2D Vector", [
+  "If <var>a</var> = (a₁, a₂), then  |<var>a</var>| = √(a₁² + a₂²)",
+  "If <var>b</var> = (b₁, b₂), then  |<var>b</var>| = √(b₁² + b₂²)"
+])}
+
+<h2>5.3 Magnitude Formula — 3D</h2>
+${formulaBox("Magnitude of a 3D Vector", [
+  "If <var>a</var> = (a₁, a₂, a₃), then  |<var>a</var>| = √(a₁² + a₂² + a₃²)",
+  "If <var>b</var> = (b₁, b₂, b₃), then  |<var>b</var>| = √(b₁² + b₂² + b₃²)"
+])}
+
+${derivation("Derivation of Both Formulas from Pythagoras' Theorem", `
+<p><strong>2D Case:</strong></p>
+${step(1, `Draw vector a = (a₁, a₂) from the origin. It makes a right triangle with legs a₁ (horizontal) and a₂ (vertical).`)}
+${step(2, `By Pythagoras' theorem: ${math("hypotenuse² = a₁² + a₂²")}`)}
+${step(3, `The hypotenuse IS the magnitude: ${math("|a|² = a₁² + a₂²")}`)}
+${step(4, `Take the positive square root: ${math("|a| = √(a₁² + a₂²)")} ✓`)}
+<p style="margin-top:1rem"><strong>3D Case:</strong></p>
+${step(5, `For b = (b₁, b₂, b₃), first find the 2D diagonal in the xy-plane: ${math("d = √(b₁² + b₂²)")}`)}
+${step(6, `Now d and b₃ form another right triangle (in the vertical plane).`)}
+${step(7, `Apply Pythagoras again: ${math("|b|² = d² + b₃²")}`)}
+${step(8, `Substitute d²: ${math("|b|² = (b₁² + b₂²) + b₃² = b₁² + b₂² + b₃²")}`)}
+${step(9, `Take the positive square root: ${math("|b| = √(b₁² + b₂² + b₃²)")} ✓`)}
+`)}
+
+<h2>5.4 Comparing the Magnitudes of Two Vectors</h2>
+<p>Once we compute |<strong>a</strong>| and |<strong>b</strong>|, we can:</p>
+<ul>
+  <li>Determine which vector is <strong>longer</strong> or <strong>shorter</strong></li>
+  <li>Check if they are <strong>equal in length</strong> (|<strong>a</strong>| = |<strong>b</strong>|) — note they don't need to point the same way</li>
+  <li>Find their <strong>sum of magnitudes</strong>: |<strong>a</strong>| + |<strong>b</strong>|</li>
+  <li>Find the <strong>magnitude of their sum</strong>: |<strong>a</strong> + <strong>b</strong>|</li>
+  <li>Find the <strong>magnitude of their difference</strong>: |<strong>a</strong> − <strong>b</strong>|</li>
+</ul>
+
+<h2>5.5 Key Relationships Between |a|, |b| and |a + b|</h2>
+${formulaBox("Triangle Inequality (Two Vectors)", [
+  "|<var>a</var> + <var>b</var>| &nbsp;≤&nbsp; |<var>a</var>| + |<var>b</var>|",
+  "",
+  "Equality holds only when a and b point in the SAME direction."
+])}
+${formulaBox("Magnitude of Difference", [
+  "|<var>a</var> − <var>b</var>| &nbsp;≥&nbsp; | |<var>a</var>| − |<var>b</var>| |",
+  "",
+  "(The magnitude of a−b is at least the absolute difference of the two magnitudes)"
+])}
+
+${derivation("Proof of the Triangle Inequality for Two Vectors", `
+${step(1, `We want to show ${math("|a + b|² ≤ (|a| + |b|)²")}`)}
+${step(2, `Expand the left side: ${math("|a+b|² = (a+b)·(a+b)")}`)}
+${step(3, `${math("= a·a + 2(a·b) + b·b")}`)}
+${step(4, `${math("= |a|² + 2(a·b) + |b|²")}`)}
+${step(5, `We know that ${math("a·b ≤ |a||b|")} (by Cauchy-Schwarz inequality)`)}
+${step(6, `So: ${math("|a+b|² ≤ |a|² + 2|a||b| + |b|²")}`)}
+${step(7, `Factor the right side: ${math("= (|a| + |b|)²")}`)}
+${step(8, `Taking square roots: ${math("|a+b| ≤ |a| + |b|")} ✓`)}
+`)}
+
+<h2>5.6 Properties of Magnitude (of Two Vectors)</h2>
+<ul>
+  <li>|<strong>a</strong>| = 0 ⟺ <strong>a</strong> = <strong>0</strong> &nbsp;(zero vector)</li>
+  <li>|<strong>a</strong>| = |−<strong>a</strong>| &nbsp;(negating a vector keeps its length)</li>
+  <li>|λ<strong>a</strong>| = |λ| · |<strong>a</strong>| &nbsp;(scalar stretches the length)</li>
+  <li>|<strong>a</strong> + <strong>b</strong>| ≤ |<strong>a</strong>| + |<strong>b</strong>| &nbsp;(triangle inequality)</li>
+  <li>|<strong>a</strong> − <strong>b</strong>| = |<strong>b</strong> − <strong>a</strong>| &nbsp;(distance is symmetric)</li>
+</ul>
+
+${examplesSection("Examples — Magnitude of Two Vectors", `
+${exampleCard(1,
+  "Given a = (3, 4) and b = (5, 12). Find |a| and |b|, then determine which is larger.",
+  step(1, `Find |a|: apply formula ${math("|a| = √(a₁² + a₂²)")}`) +
+  step(2, `Substitute: ${math("|a| = √(3² + 4²)")}`) +
+  step(3, `Compute each square: ${math("3² = 9,  4² = 16")}`) +
+  step(4, `Add the squares: ${math("9 + 16 = 25")}`) +
+  step(5, `Take the square root: ${math("|a| = √25 = 5")}`) +
+  step(6, `Now find |b|: ${math("|b| = √(5² + 12²)")}`) +
+  step(7, `Compute each square: ${math("5² = 25,  12² = 144")}`) +
+  step(8, `Add the squares: ${math("25 + 144 = 169")}`) +
+  step(9, `Take the square root: ${math("|b| = √169 = 13")}`) +
+  step(10, `Compare: ${math("|a| = 5")} and ${math("|b| = 13")}, so |b| > |a|`),
+  "|a| = 5, |b| = 13 — vector b is longer")}
+
+${exampleCard(2,
+  "Given a = (2, −3, 6) and b = (1, 2, −2). Find |a| and |b|, and verify whether |a| = |b|.",
+  step(1, `Find |a|: ${math("|a| = √(a₁² + a₂² + a₃²)")}`) +
+  step(2, `Substitute: ${math("|a| = √(2² + (−3)² + 6²)")}`) +
+  step(3, `Compute each square: ${math("2² = 4,  (−3)² = 9,  6² = 36")}`) +
+  step(4, `Add: ${math("4 + 9 + 36 = 49")}`) +
+  step(5, `${math("|a| = √49 = 7")}`) +
+  step(6, `Find |b|: ${math("|b| = √(1² + 2² + (−2)²)")}`) +
+  step(7, `Compute each square: ${math("1² = 1,  2² = 4,  (−2)² = 4")}`) +
+  step(8, `Add: ${math("1 + 4 + 4 = 9")}`) +
+  step(9, `${math("|b| = √9 = 3")}`) +
+  step(10, `Compare: ${math("|a| = 7 ≠ 3 = |b|")}, so they are NOT equal in magnitude.`),
+  "|a| = 7, |b| = 3 — not equal")}
+
+${exampleCard(3,
+  "For a = (6, 0) and b = (0, 6), find |a|, |b|, |a + b| and verify the triangle inequality.",
+  step(1, `Find |a|: ${math("|a| = √(6² + 0²) = √36 = 6")}`) +
+  step(2, `Find |b|: ${math("|b| = √(0² + 6²) = √36 = 6")}`) +
+  step(3, `Find a + b: ${math("a + b = (6+0, 0+6) = (6, 6)")}`) +
+  step(4, `Find |a + b|: ${math("|a + b| = √(6² + 6²)")}`) +
+  step(5, `Compute: ${math("= √(36 + 36) = √72")}`) +
+  step(6, `Simplify: ${math("√72 = √(36 × 2) = 6√2 ≈ 8.485")}`) +
+  step(7, `Check triangle inequality: ${math("|a| + |b| = 6 + 6 = 12")}`) +
+  step(8, `Is ${math("6√2 ≤ 12")}? → ${math("8.485 ≤ 12")} ✓`),
+  "|a|=6, |b|=6, |a+b|=6√2 ≈ 8.485 ≤ 12 ✓")}
+
+${exampleCard(4,
+  "Find |a − b| and |b − a| for a = (4, 1, 0) and b = (1, 5, 0). Show they are equal.",
+  step(1, `Compute a − b: ${math("a − b = (4−1, 1−5, 0−0) = (3, −4, 0)")}`) +
+  step(2, `|a − b|: ${math("|a−b| = √(3² + (−4)² + 0²)")}`) +
+  step(3, `${math("= √(9 + 16 + 0) = √25 = 5")}`) +
+  step(4, `Compute b − a: ${math("b − a = (1−4, 5−1, 0−0) = (−3, 4, 0)")}`) +
+  step(5, `|b − a|: ${math("|b−a| = √((−3)² + 4² + 0²)")}`) +
+  step(6, `${math("= √(9 + 16 + 0) = √25 = 5")}`) +
+  step(7, `Conclusion: ${math("|a−b| = |b−a| = 5")} ✓ — distance is always symmetric`),
+  "|a−b| = |b−a| = 5 ✓")}
+
+${exampleCard(5,
+  "Two vectors a = (1, 2, 2) and b = (2, 1, −2) are given. Find |a|, |b|, |a+b| and |a−b|. Compare |a+b| and |a−b|.",
+  step(1, `Find |a|: ${math("|a| = √(1² + 2² + 2²) = √(1+4+4) = √9 = 3")}`) +
+  step(2, `Find |b|: ${math("|b| = √(2² + 1² + (−2)²) = √(4+1+4) = √9 = 3")}`) +
+  step(3, `Note: |a| = |b| = 3 — both vectors have the same magnitude!`) +
+  step(4, `Compute a + b: ${math("a+b = (1+2, 2+1, 2+(−2)) = (3, 3, 0)")}`) +
+  step(5, `|a+b|: ${math("= √(3²+3²+0²) = √(9+9) = √18 = 3√2 ≈ 4.243")}`) +
+  step(6, `Compute a − b: ${math("a−b = (1−2, 2−1, 2−(−2)) = (−1, 1, 4)")}`) +
+  step(7, `|a−b|: ${math("= √((−1)²+1²+4²) = √(1+1+16) = √18 = 3√2 ≈ 4.243")}`) +
+  step(8, `So |a+b| = |a−b| = 3√2. This happens when |a| = |b|.`),
+  "|a|=|b|=3; |a+b|=|a−b|=3√2 ≈ 4.243")}
+`)}
+
+${qaSection(
+  qaItem(1, "What is the difference between the magnitude of the sum |a+b| and the sum of magnitudes |a|+|b|?", `
+    <p><strong>|a+b|</strong> is found by first adding the two vectors component-by-component, then finding the magnitude of the result. This depends on the <em>direction</em> of both vectors.</p>
+    <p><strong>|a|+|b|</strong> is simply adding the two separate magnitudes (two plain numbers). This is always ≥ |a+b| (triangle inequality).</p>
+    <p>They are equal ONLY when a and b point in exactly the same direction.</p>`) +
+  qaItem(2, "Given a = (8, 6) and b = (−6, 8). Find |a|, |b|. Are they equal?", `
+    ${step(1, `${math("|a| = √(8²+6²) = √(64+36) = √100 = 10")}`)}
+    ${step(2, `${math("|b| = √((−6)²+8²) = √(36+64) = √100 = 10")}`)}
+    ${step(3, `${math("|a| = |b| = 10")} ✓ — equal magnitudes but different directions`)}
+    ${answer("|a| = |b| = 10")}`) +
+  qaItem(3, "For a = (1, 0, 0) and b = (0, 1, 0), find |a+b| and compare to |a|+|b|.", `
+    ${step(1, `${math("|a| = 1,  |b| = 1")}`)}
+    ${step(2, `${math("a+b = (1,1,0)")}`)}
+    ${step(3, `${math("|a+b| = √(1+1+0) = √2 ≈ 1.414")}`)}
+    ${step(4, `${math("|a|+|b| = 1+1 = 2")}`)}
+    ${step(5, `${math("√2 < 2")} ✓ Triangle inequality holds`)}
+    ${answer("|a+b| = √2 ≈ 1.414 < 2 = |a|+|b|")}`) +
+  qaItem(4, "Find |a−b| for a = (5, 3, 1) and b = (2, 7, 1).", `
+    ${step(1, `${math("a−b = (5−2, 3−7, 1−1) = (3, −4, 0)")}`)}
+    ${step(2, `${math("|a−b| = √(3²+(−4)²+0²) = √(9+16) = √25 = 5")}`)}
+    ${answer("|a−b| = 5")}`) +
+  qaItem(5, "If |a| = |b| for two vectors, does that mean a = b? Explain.", `
+    <p><strong>No.</strong> Equal magnitudes do NOT mean equal vectors. For example, a = (3, 4) and b = (−3, −4) both have magnitude 5, but they point in completely opposite directions. Two vectors are equal only if they have BOTH the same magnitude AND the same direction (i.e., all corresponding components are equal).</p>`)
+)}
+</div>`
+},
+
+// ─── TOPIC 6 ───────────────────────────────
+{
+  number: "Topic 06",
+  title: "Application of Vector in Differentiation",
+  content: () => `
+<div class="prose">
+<h2>6.1 Vector Functions</h2>
+<p>A <strong>vector function</strong> (or vector-valued function) maps a scalar (usually time <em>t</em>) to a vector. It is written as:</p>
+${formulaBox("Vector Function", [
+  "<var>r</var>(t) &nbsp;=&nbsp; f(t)<var>i</var> + g(t)<var>j</var> + h(t)<var>k</var>",
+  "or equivalently:  <var>r</var>(t) = (f(t), g(t), h(t))"
+])}
+<p>Each component f(t), g(t), h(t) is an ordinary scalar function of t.</p>
+
+<h2>6.2 Differentiating a Vector Function</h2>
+<p>The derivative of a vector function is found by differentiating each component separately:</p>
+${formulaBox("Derivative of a Vector Function", [
+  "<var>r</var>'(t) = d<var>r</var>/dt &nbsp;=&nbsp; f'(t)<var>i</var> + g'(t)<var>j</var> + h'(t)<var>k</var>"
+])}
+
+${derivation("Derivation from First Principles", `
+${step(1, `Definition of derivative: ${math("r'(t) = lim[Δt→0] [r(t+Δt) − r(t)] / Δt")}`)}
+${step(2, `${math("r(t+Δt) = f(t+Δt)i + g(t+Δt)j + h(t+Δt)k")}`)}
+${step(3, `${math("r(t+Δt) − r(t) = [f(t+Δt)−f(t)]i + [g(t+Δt)−g(t)]j + [h(t+Δt)−h(t)]k")}`)}
+${step(4, `Divide by Δt: ${math("[r(t+Δt)−r(t)]/Δt = [f(t+Δt)−f(t)]/Δt · i + ... ")}`)}
+${step(5, `Take the limit as Δt → 0:`)}
+${step(6, `${math("r'(t) = f'(t)i + g'(t)j + h'(t)k")} ✓`)}
+`)}
+
+<h2>6.3 Physical Interpretation</h2>
+<ul>
+  <li>If <strong>r</strong>(t) is the <em>position</em> vector, then <strong>r'</strong>(t) is the <em>velocity</em> vector.</li>
+  <li><strong>r''</strong>(t) is the <em>acceleration</em> vector.</li>
+  <li>|<strong>r'</strong>(t)| gives the <em>speed</em> (magnitude of velocity).</li>
+</ul>
+
+<h2>6.4 Differentiating Dot Products</h2>
+${formulaBox("Product Rule for Dot Products", [
+  "d/dt [<var>a</var>(t) · <var>b</var>(t)] &nbsp;=&nbsp; <var>a</var>'(t) · <var>b</var>(t) + <var>a</var>(t) · <var>b</var>'(t)"
+])}
+
+<h2>6.5 Differentiating Cross Products</h2>
+${formulaBox("Product Rule for Cross Products", [
+  "d/dt [<var>a</var>(t) × <var>b</var>(t)] &nbsp;=&nbsp; <var>a</var>'(t) × <var>b</var>(t) + <var>a</var>(t) × <var>b</var>'(t)"
+])}
+
+${examplesSection("Examples — Vector Differentiation", `
+${exampleCard(1, "Differentiate r(t) = (t², 3t, t³).",
+  step(1, `Identify each component: ${math("f(t) = t²,  g(t) = 3t,  h(t) = t³")}`) +
+  step(2, `Differentiate f(t): ${math("f'(t) = 2t")}`) +
+  step(3, `Differentiate g(t): ${math("g'(t) = 3")}`) +
+  step(4, `Differentiate h(t): ${math("h'(t) = 3t²")}`) +
+  step(5, `Combine: ${math("r'(t) = 2ti + 3j + 3t²k")}`),
+  "r'(t) = 2ti + 3j + 3t²k")}
+
+${exampleCard(2, "Find the velocity and speed at t = 1 for r(t) = (sin t, cos t, t).",
+  step(1, `Differentiate each component:`) +
+  step(2, `${math("d/dt(sin t) = cos t")}`) +
+  step(3, `${math("d/dt(cos t) = −sin t")}`) +
+  step(4, `${math("d/dt(t) = 1")}`) +
+  step(5, `Velocity: ${math("r'(t) = (cos t, −sin t, 1)")}`) +
+  step(6, `At t = 1: ${math("r'(1) = (cos1, −sin1, 1)")}`) +
+  step(7, `cos(1) ≈ 0.5403,   −sin(1) ≈ −0.8415`) +
+  step(8, `${math("r'(1) ≈ (0.5403, −0.8415, 1)")}`) +
+  step(9, `Speed = |r'(1)| = √(0.5403² + 0.8415² + 1²)`) +
+  step(10, `= √(0.2919 + 0.7081 + 1) = √2 ≈ 1.414`),
+  "Speed at t=1 is √2 ≈ 1.414")}
+
+${exampleCard(3, "Find r''(t) for r(t) = (e^t, t², sin t).",
+  step(1, `First derivative:`) +
+  step(2, `${math("r'(t) = (e^t, 2t, cos t)")}`) +
+  step(3, `Differentiate again:`) +
+  step(4, `${math("d/dt(e^t) = e^t")}`) +
+  step(5, `${math("d/dt(2t) = 2")}`) +
+  step(6, `${math("d/dt(cos t) = −sin t")}`) +
+  step(7, `Second derivative: ${math("r''(t) = (e^t, 2, −sin t)")}`),
+  "r''(t) = (e^t, 2, −sin t)")}
+
+${exampleCard(4, "If a(t) = (t, 1, 0) and b(t) = (0, t, 1), differentiate a(t) · b(t).",
+  step(1, `Method 1 — Direct compute then differentiate:`) +
+  step(2, `${math("a · b = (t)(0) + (1)(t) + (0)(1) = 0 + t + 0 = t")}`) +
+  step(3, `${math("d/dt(t) = 1")}`) +
+  step(4, `Method 2 — Product rule: ${math("d/dt[a·b] = a'·b + a·b'")}`) +
+  step(5, `${math("a'(t) = (1, 0, 0)")}`) +
+  step(6, `${math("b'(t) = (0, 1, 0)")}`) +
+  step(7, `${math("a' · b = (1)(0)+(0)(t)+(0)(1) = 0")}`) +
+  step(8, `${math("a · b' = (t)(0)+(1)(1)+(0)(0) = 1")}`) +
+  step(9, `${math("d/dt[a·b] = 0 + 1 = 1 ✓")} (both methods agree)`),
+  "d/dt(a · b) = 1")}
+
+${exampleCard(5, "A particle moves with r(t) = (t³, t², 2t). Find its velocity and acceleration at t = 2.",
+  step(1, `Velocity: ${math("r'(t) = (3t², 2t, 2)")}`) +
+  step(2, `At t = 2: ${math("r'(2) = (3×4, 2×2, 2) = (12, 4, 2)")}`) +
+  step(3, `Acceleration: ${math("r''(t) = (6t, 2, 0)")}`) +
+  step(4, `At t = 2: ${math("r''(2) = (6×2, 2, 0) = (12, 2, 0)")}`) +
+  step(5, `Speed at t=2: ${math("|r'(2)| = √(144 + 16 + 4) = √164 = 2√41")}`),
+  "v(2) = (12, 4, 2);  a(2) = (12, 2, 0);  speed = 2√41")}
+`)}
+
+${qaSection(
+  qaItem(1, "What is a vector function?", `<p>A <strong>vector function</strong> assigns a vector to each value of a scalar parameter (usually time t). It is written as ${math("r(t) = f(t)i + g(t)j + h(t)k")}, where f, g, h are ordinary scalar functions. As t varies, r(t) traces a curve in space.</p>`) +
+  qaItem(2, "Differentiate r(t) = (t⁴, e^t, ln t).", `
+    ${step(1, `f(t) = t⁴  →  ${math("f'(t) = 4t³")}`)}
+    ${step(2, `g(t) = e^t  →  ${math("g'(t) = e^t")}`)}
+    ${step(3, `h(t) = ln t  →  ${math("h'(t) = 1/t")}`)}
+    ${answer("r'(t) = 4t³i + e^t j + (1/t)k")}`) +
+  qaItem(3, "What does the derivative of a position vector represent physically?", `<p>The derivative of a position vector <strong>r</strong>(t) with respect to time t gives the <strong>velocity vector</strong> <strong>v</strong>(t) = <strong>r'</strong>(t). Its direction is the direction of motion; its magnitude is the <strong>speed</strong>. The second derivative <strong>r''</strong>(t) gives the <strong>acceleration</strong>.</p>`) +
+  qaItem(4, "Differentiate r(t) = (cos 2t, sin 2t, 3t).", `
+    ${step(1, `${math("d/dt(cos2t) = −2sin2t")}`)}
+    ${step(2, `${math("d/dt(sin2t) = 2cos2t")}`)}
+    ${step(3, `${math("d/dt(3t) = 3")}`)}
+    ${answer("r'(t) = −2sin2t · i + 2cos2t · j + 3k")}`) +
+  qaItem(5, "For r(t) = (t, t², t³), find r'(t) and the speed at t = 1.", `
+    ${step(1, `${math("r'(t) = (1, 2t, 3t²)")}`)}
+    ${step(2, `At t=1: ${math("r'(1) = (1, 2, 3)")}`)}
+    ${step(3, `Speed = ${math("|r'(1)| = √(1+4+9) = √14")}`)}
+    ${answer("Speed at t=1 = √14 ≈ 3.742")}`)
+)}
+</div>`
+},
+
+// ─── TOPIC 7 ───────────────────────────────
+{
+  number: "Topic 07",
+  title: "Coordinate Geometry using Vectors",
+  content: () => `
+<div class="prose">
+<h2>7.1 Position Vectors and Points</h2>
+<p>Every point P = (x, y, z) in space has a <strong>position vector</strong> <strong>OP</strong> = xi + yj + zk drawn from the origin O.</p>
+<p>The vector from point A to point B is:</p>
+${formulaBox("Vector Between Two Points", [
+  "<var>AB</var> &nbsp;=&nbsp; <span class='op'>OB</span> − <span class='op'>OA</span> &nbsp;=&nbsp; <var>b</var> − <var>a</var>"
+])}
+
+<h2>7.2 Midpoint of a Line Segment</h2>
+${formulaBox("Midpoint Formula (Vectors)", [
+  "Midpoint M &nbsp;=&nbsp; (<var>a</var> + <var>b</var>) / 2",
+  "or in coordinates:  M = ((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2)"
+])}
+
+${derivation("Derivation of Midpoint Formula", `
+${step(1, `The midpoint M is halfway along AB from A.`)}
+${step(2, `Position vector of M: ${math("OM = OA + (1/2)AB")}`)}
+${step(3, `${math("= a + (1/2)(b − a)")}`)}
+${step(4, `${math("= a + (1/2)b − (1/2)a")}`)}
+${step(5, `${math("= (1/2)a + (1/2)b")}`)}
+${step(6, `${math("= (a + b)/2")} ✓`)}
+`)}
+
+<h2>7.3 Section Formula (Dividing a Line in Ratio m:n)</h2>
+${formulaBox("Section Formula", [
+  "Point P dividing AB in ratio m:n:",
+  "<var>OP</var> &nbsp;=&nbsp; (<span class='op'>m·b</span> + <span class='op'>n·a</span>) / (m + n)",
+  "(internal division)"
+])}
+
+<h2>7.4 Equation of a Line (Vector Form)</h2>
+<p>A line passing through point A (position vector <strong>a</strong>) with direction <strong>d</strong>:</p>
+${formulaBox("Vector Equation of a Line", [
+  "<var>r</var> &nbsp;=&nbsp; <var>a</var> + t<var>d</var>,  &nbsp; t ∈ ℝ",
+  "Parametric form:  x = a₁ + td₁,  y = a₂ + td₂,  z = a₃ + td₃"
+])}
+
+<h2>7.5 Equation of a Plane (Vector Form)</h2>
+${formulaBox("Vector Equation of a Plane", [
+  "<var>r</var> · <var>n</var> &nbsp;=&nbsp; <var>a</var> · <var>n</var>",
+  "where <var>n</var> is the normal vector to the plane and <var>a</var> is any point on the plane.",
+  "",
+  "Scalar form:  n₁x + n₂y + n₃z = d"
+])}
+
+<h2>7.6 Distance Between Two Points</h2>
+${formulaBox("Distance Formula", [
+  "|<var>AB</var>| &nbsp;=&nbsp; |<var>b</var> − <var>a</var>| &nbsp;=&nbsp; √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)"
+])}
+
+${examplesSection("Examples — Coordinate Geometry", `
+${exampleCard(1, "Find the midpoint of A = (1, 3, 5) and B = (7, −1, 3).",
+  step(1, `Midpoint formula: ${math("M = (a + b)/2")}`) +
+  step(2, `Add corresponding coordinates: ${math("(1+7, 3+(−1), 5+3)")}`) +
+  step(3, `${math("= (8, 2, 8)")}`) +
+  step(4, `Divide by 2: ${math("M = (8/2, 2/2, 8/2)")}`) +
+  step(5, `${math("M = (4, 1, 4)")}`),
+  "M = (4, 1, 4)")}
+
+${exampleCard(2, "Find the point P that divides AB in the ratio 2:1, where A = (1, 2, 3) and B = (4, 5, 6).",
+  step(1, `Section formula: ${math("OP = (m·b + n·a)/(m+n)")}`) +
+  step(2, `Here m = 2, n = 1`) +
+  step(3, `${math("m·b = 2·(4,5,6) = (8,10,12)")}`) +
+  step(4, `${math("n·a = 1·(1,2,3) = (1,2,3)")}`) +
+  step(5, `Sum: ${math("(8+1, 10+2, 12+3) = (9, 12, 15)")}`) +
+  step(6, `Divide by m+n=3: ${math("(9/3, 12/3, 15/3) = (3, 4, 5)")}`),
+  "P = (3, 4, 5)")}
+
+${exampleCard(3, "Write the vector equation of the line through A(2, 1, 0) with direction d = (1, 2, 3).",
+  step(1, `Position vector of A: ${math("a = 2i + j + 0k")}`) +
+  step(2, `Direction vector: ${math("d = i + 2j + 3k")}`) +
+  step(3, `Line equation: ${math("r = a + td")}`) +
+  step(4, `${math("r = (2i + j) + t(i + 2j + 3k)")}`) +
+  step(5, `Expand: ${math("r = (2+t)i + (1+2t)j + (3t)k")}`) +
+  step(6, `Parametric: ${math("x = 2+t,  y = 1+2t,  z = 3t")}`),
+  "r = (2+t, 1+2t, 3t)")}
+
+${exampleCard(4, "Find the distance between P(1, 2, 3) and Q(4, 6, 3).",
+  step(1, `Vector PQ = Q − P = (4−1, 6−2, 3−3)`) +
+  step(2, `${math("PQ = (3, 4, 0)")}`) +
+  step(3, `Distance = |PQ| = √(3² + 4² + 0²)`) +
+  step(4, `${math("= √(9 + 16 + 0)")}`) +
+  step(5, `${math("= √25 = 5")}`),
+  "Distance = 5")}
+
+${exampleCard(5, "Find the equation of the plane through A(1, 0, 0) with normal n = (2, 3, −1).",
+  step(1, `Vector equation of plane: ${math("r · n = a · n")}`) +
+  step(2, `Compute ${math("a · n")}:`) +
+  step(3, `${math("a · n = (1)(2) + (0)(3) + (0)(−1) = 2")}`) +
+  step(4, `So the equation is: ${math("r · (2, 3, −1) = 2")}`) +
+  step(5, `Scalar form: ${math("2x + 3y − z = 2")}`),
+  "Plane equation: 2x + 3y − z = 2")}
+`)}
+
+${qaSection(
+  qaItem(1, "What is a position vector?", `<p>A <strong>position vector</strong> of a point P is the vector drawn from the <strong>origin O</strong> to P. If P = (x, y, z), then the position vector is ${math("OP = xi + yj + zk")}. It locates the point relative to the origin.</p>`) +
+  qaItem(2, "Find the midpoint of C(−2, 4, 6) and D(8, 0, 2).", `
+    ${step(1, `${math("M = ((−2+8)/2, (4+0)/2, (6+2)/2)")}`)}
+    ${step(2, `${math("= (6/2, 4/2, 8/2)")}`)}
+    ${step(3, `${math("= (3, 2, 4)")}`)}
+    ${answer("M = (3, 2, 4)")}`) +
+  qaItem(3, "Write the vector equation of the line through A(0,1,2) and B(3,4,5).", `
+    ${step(1, `Direction vector: ${math("d = B − A = (3−0, 4−1, 5−2) = (3, 3, 3)")}`)}
+    ${step(2, `Simplify d: ${math("d = 3(1,1,1)")} → direction (1,1,1)`)}
+    ${step(3, `Position vector of A: ${math("a = (0, 1, 2)")}`)}
+    ${step(4, `Line: ${math("r = (0,1,2) + t(3,3,3)")}`)}
+    ${answer("r = (3t, 1+3t, 2+3t)")}`) +
+  qaItem(4, "Point P divides AB in ratio 3:2 where A=(2,4,0) and B=(7,9,5). Find P.", `
+    ${step(1, `m=3, n=2`)}
+    ${step(2, `${math("3b = 3(7,9,5) = (21,27,15)")}`)}
+    ${step(3, `${math("2a = 2(2,4,0) = (4,8,0)")}`)}
+    ${step(4, `${math("Sum = (25, 35, 15)")}`)}
+    ${step(5, `${math("P = (25/5, 35/5, 15/5) = (5, 7, 3)")}`)}
+    ${answer("P = (5, 7, 3)")}`) +
+  qaItem(5, "What is the normal vector to a plane, and how is it used in the plane equation?", `<p>The <strong>normal vector n</strong> to a plane is a vector that is <strong>perpendicular</strong> to every vector lying in the plane. The plane equation ${math("r · n = d")} (or scalar: ${math("n₁x + n₂y + n₃z = d")}) uses n to define the plane's orientation. Any point r on the plane satisfies this equation.</p>`)
+)}
+</div>`
+}
+
+]; // end topics array
+
+// ══════════════════════════════════════════════
+//  APP LOGIC
+// ══════════════════════════════════════════════
+let currentTopic = 0;
+
+function startBook(idx) {
+  currentTopic = idx;
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  buildSidebar();
+  renderTopic(currentTopic);
+}
+
+function buildSidebar() {
+  const nav = document.getElementById('sidebarNav');
+  nav.innerHTML = topics.map((t, i) =>
+    `<div class="nav-item ${i===currentTopic?'active':''}" onclick="goTo(${i})">
+      <span class="nav-num">${t.number}</span>${t.title}
+    </div>`
+  ).join('');
+}
+
+function updateProgress() {
+  const pct = ((currentTopic + 1) / topics.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function goTo(idx) {
+  currentTopic = idx;
+  renderTopic(idx);
+  closeSidebar();
+  window.scrollTo(0,0);
+}
+
+function renderTopic(idx) {
+  const t = topics[idx];
+  document.getElementById('topbar-title').textContent = t.title;
+  document.getElementById('topbar-page').textContent = `${idx+1} / ${topics.length}`;
+  updateProgress();
+
+  // Update sidebar active
+  document.querySelectorAll('.nav-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+
+  const prevBtn = idx > 0
+    ? `<button class="topic-nav-btn" onclick="goTo(${idx-1})"><small>← Previous</small>${topics[idx-1].title}</button>`
+    : '';
+  const nextBtn = idx < topics.length-1
+    ? `<button class="topic-nav-btn right" onclick="goTo(${idx+1})"><small>Next →</small>${topics[idx+1].title}</button>`
+    : `<button class="topic-nav-btn right" onclick="document.getElementById('cover').style.display='flex';document.getElementById('app').style.display='none'"><small>Finished!</small>Back to Contents</button>`;
+
+  document.getElementById('content').innerHTML = `
+    <div class="topic-header">
+      <div class="topic-number">${t.number}</div>
+      <div class="topic-title">${t.title}</div>
+    </div>
+    ${t.content()}
+    <div class="topic-nav">${prevBtn}${nextBtn}</div>
+  `;
+}
+
+function toggleQA(el) {
+  const ans = el.nextElementSibling;
+  const chev = el.querySelector('.qa-chevron');
+  ans.classList.toggle('visible');
+  chev.classList.toggle('open');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('active');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+}
+</script>
+</body>
+</html>
