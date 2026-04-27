@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complex Numbers — Complete Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #faf6ef;
+    --cream: #f2ead8;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --red: #c0392b;
+    --blue: #1a4a7a;
+    --blue-light: #2e6da4;
+    --green: #1a6b3c;
+    --purple: #5c2d91;
+    --shadow: rgba(26,18,8,0.12);
+    --rule: #d4c9b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e8e0d0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── COVER ── */
+  #cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 38px,
+      rgba(200,146,42,0.08) 38px, rgba(200,146,42,0.08) 39px
+    );
+  }
+  #cover::after {
+    content: 'ℂ';
+    position: absolute;
+    font-size: 600px;
+    color: rgba(200,146,42,0.04);
+    font-family: 'Playfair Display', serif;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .cover-border {
+    border: 2px solid var(--gold);
+    padding: 60px 50px;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    width: 100%;
+  }
+  .cover-border::before, .cover-border::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: var(--gold-light);
+    border-style: solid;
+  }
+  .cover-border::before { top: -4px; left: -4px; border-width: 2px 0 0 2px; }
+  .cover-border::after { bottom: -4px; right: -4px; border-width: 0 2px 2px 0; }
+
+  .cover-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .cover-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--gold-light);
+    margin-bottom: 40px;
+  }
+  .cover-divider {
+    width: 60px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+  }
+  .cover-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  .cover-topic {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    color: rgba(250,246,239,0.7);
+    letter-spacing: 1px;
+  }
+  .cover-topic span {
+    color: var(--gold);
+    margin-right: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .start-btn {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 16px 48px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .start-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ── MAIN BOOK ── */
+  #book { display: none; }
+
+  .book-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ── NAV ── */
+  .top-nav {
+    background: var(--ink);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--paper);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .nav-title span { color: var(--gold); }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .nav-tab {
+    background: transparent;
+    border: 1px solid rgba(200,146,42,0.3);
+    color: rgba(250,246,239,0.6);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover, .nav-tab.active {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+  .back-cover {
+    background: transparent;
+    border: 1px solid rgba(200,146,42,0.4);
+    color: var(--gold);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .back-cover:hover { background: rgba(200,146,42,0.1); }
+
+  /* ── SECTIONS ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    background: var(--paper);
+    border-radius: 2px;
+    box-shadow: 0 4px 24px var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+  .page::before {
+    content: '';
+    position: absolute;
+    left: 56px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(200,146,42,0.25);
+  }
+  .page-lines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      180deg, transparent, transparent 31px,
+      rgba(180,160,120,0.15) 31px, rgba(180,160,120,0.15) 32px
+    );
+    pointer-events: none;
+  }
+  .page-content {
+    padding: 48px 48px 48px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CHAPTER HEADER ── */
+  .chapter-header {
+    background: var(--ink);
+    padding: 40px 48px 40px 80px;
+    position: relative;
+  }
+  .chapter-header::before {
+    content: '';
+    position: absolute;
+    left: 56px; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(200,146,42,0.4);
+  }
+  .chapter-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .chapter-desc {
+    font-size: 15px;
+    color: rgba(250,246,239,0.6);
+    font-style: italic;
+    max-width: 500px;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 24px 0 8px;
+  }
+  p {
+    line-height: 1.85;
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: #2a1e0a;
+  }
+  strong { color: var(--blue); font-weight: 600; }
+
+  /* ── DEFINITION BOX ── */
+  .def-box {
+    background: linear-gradient(135deg, #f8f2e2, #faf6ef);
+    border-left: 4px solid var(--gold);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .def-box::before {
+    content: 'DEFINITION';
+    position: absolute;
+    top: -9px; left: 16px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+  }
+  .def-box .formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 600;
+    margin: 8px 0 4px;
+  }
+
+  /* ── THEOREM BOX ── */
+  .theorem-box {
+    background: linear-gradient(135deg, #eef4fb, #f5f9ff);
+    border-left: 4px solid var(--blue);
+    border-top: 1px solid #c8ddf0;
+    border-bottom: 1px solid #c8ddf0;
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .theorem-box::before {
+    content: 'KEY RULE';
+    position: absolute;
+    top: -9px; left: 16px;
+    background: var(--blue);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+  }
+
+  /* ── NOTE BOX ── */
+  .note-box {
+    background: #fef9f0;
+    border-left: 4px solid var(--gold-light);
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #5a4010;
+  }
+  .note-box strong { color: var(--gold); font-style: normal; }
+
+  /* ── EXAMPLE ── */
+  .example {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .example-header {
+    background: var(--ink);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .example-num {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    letter-spacing: 1px;
+  }
+  .example-q {
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .example-body {
+    padding: 20px 24px;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin: 10px 0;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--blue);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2a1e0a;
+  }
+  .math-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--blue);
+    background: rgba(26,74,122,0.05);
+    padding: 8px 14px;
+    margin: 8px 0;
+    border-left: 3px solid var(--blue-light);
+    display: block;
+  }
+  .math-line.result {
+    border-left-color: var(--green);
+    color: var(--green);
+    background: rgba(26,107,60,0.06);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .math-line.sub {
+    color: #666;
+    background: rgba(0,0,0,0.03);
+    border-left-color: #ccc;
+    font-size: 13px;
+  }
+  .answer-box {
+    background: var(--green);
+    color: white;
+    padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .answer-box::before { content: '✓ ANSWER:'; font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
+
+  /* ── TABLE ── */
+  .powers-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 16px 0;
+  }
+  .powers-table th {
+    background: var(--blue);
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .powers-table td {
+    padding: 10px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .powers-table tr:nth-child(even) td { background: rgba(0,0,0,0.03); }
+  .powers-table tr:hover td { background: rgba(200,146,42,0.08); }
+
+  /* ── REMEMBER BOX ── */
+  .remember {
+    background: linear-gradient(135deg, #fdf0f0, #fff5f5);
+    border: 1px solid #f0c0c0;
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .remember::before {
+    content: '⚠ REMEMBER';
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  /* ── I-POWERS ── */
+  .i-cycle {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .i-card {
+    background: var(--ink);
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 80px;
+  }
+  .i-card .power { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; }
+  .i-card .equals { color: rgba(250,246,239,0.5); font-size: 11px; letter-spacing: 1px; margin: 4px 0; }
+  .i-card .value { color: var(--paper); font-family: 'JetBrains Mono', monospace; font-size: 16px; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .section-rule::before, .section-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .section-rule-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── ARGAND DIAGRAM ── */
+  .canvas-wrap {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 20px;
+    margin: 20px 0;
+  }
+  canvas { display: block; margin: 0 auto; }
+
+  /* ── CONJUGATE TABLE ── */
+  .conj-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+  .conj-table th {
+    background: var(--blue);
+    color: white;
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .conj-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .conj-table .pos { color: var(--blue); font-weight: 600; }
+  .conj-table .neg { color: var(--red); font-weight: 600; }
+  .conj-table tr:hover td { background: rgba(200,146,42,0.06); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    padding: 12px 48px 12px 80px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cream);
+  }
+  .page-footer span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #a08040;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .page-content { padding: 32px 24px 32px 40px; }
+    .page::before { left: 28px; }
+    .chapter-header { padding: 32px 24px 32px 40px; }
+    .chapter-header::before { left: 28px; }
+    .page-footer { padding: 12px 24px 12px 40px; }
+    .nav-tabs { gap: 2px; }
+    .nav-tab { padding: 4px 8px; font-size: 9px; }
+    .cover-border { padding: 32px 24px; }
+    .i-cycle { gap: 6px; }
+    .i-card { min-width: 60px; padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ COVER ══════════════ -->
+<div id="cover">
+  <div class="cover-border">
+    <div class="cover-tag">Mathematics · Pure · Year One</div>
+    <div class="cover-title">Complex<br>Numbers</div>
+    <div class="cover-sub">A Complete Study Textbook</div>
+    <div class="cover-divider"></div>
+    <div class="cover-topics">
+      <div class="cover-topic"><span>01</span>Concept of Complex Numbers</div>
+      <div class="cover-topic"><span>02</span>Algebra of Complex Numbers</div>
+      <div class="cover-topic"><span>03</span>Argand Diagrams</div>
+      <div class="cover-topic"><span>04</span>De Moivre's Theorem</div>
+      <div class="cover-topic"><span>05</span>nth Roots of Unity</div>
+    </div>
+    <button class="start-btn" onclick="openBook()">Open Textbook →</button>
+  </div>
+</div>
+
+<!-- ══════════════ BOOK ══════════════ -->
+<div id="book">
+  <div class="top-nav">
+    <div class="nav-title"><span>ℂ</span> Complex Numbers</div>
+    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection(0)">01 Concept</button>
+        <button class="nav-tab" onclick="showSection(1)">02 Algebra</button>
+        <button class="nav-tab" onclick="showSection(2)">03 Argand</button>
+        <button class="nav-tab" onclick="showSection(3)">04 De Moivre</button>
+        <button class="nav-tab" onclick="showSection(4)">05 Roots</button>
+      </div>
+      <button class="back-cover" onclick="closebook()">✕ Cover</button>
+    </div>
+  </div>
+
+  <div class="book-wrap">
+
+    <!-- ══════ SECTION 1: CONCEPT ══════ -->
+    <div class="section active" id="sec-0">
+      <div class="page">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter 01</div>
+          <div class="chapter-title">Concept of<br>Complex Numbers</div>
+          <div class="chapter-desc">Understanding what complex numbers are, where they come from, and how to identify their parts</div>
+        </div>
+        <div class="page-lines"></div>
+        <div class="page-content">
+
+          <h2>1.1 What is a Complex Number?</h2>
+          <p>When you try to solve an equation like <strong>x² = −1</strong>, you run into a problem. No real number multiplied by itself gives a negative answer. To solve this kind of equation, mathematicians introduced a new idea — the <strong>imaginary unit</strong>.</p>
+
+          <div class="def-box">
+            <p>The imaginary unit is defined as:</p>
+            <div class="formula">i = √(−1)   which means   i² = −1</div>
+            <p style="margin-top:8px; font-size:14px;">Any number that comes with √(−) in it stands as √(−1), so we write it as <strong>i</strong>.</p>
+          </div>
+
+          <p>A <strong>Complex Number</strong> is any number that combines a real part and an imaginary part together. We write it as:</p>
+
+          <div class="def-box">
+            <div class="formula">Z = x + iy</div>
+            <p style="margin-top:10px; font-size:14px;">
+              — <strong>Z</strong> is the complex number<br>
+              — <strong>x</strong> is the Real Part, written as Re(Z)<br>
+              — <strong>y</strong> is the Imaginary Part, written as Im(Z)<br>
+              — <strong>i</strong> is the imaginary unit, i = √(−1)
+            </p>
+          </div>
+
+          <div class="note-box">
+            <strong>Note:</strong> The imaginary part is just the number <em>y</em>, not <em>iy</em>. For example in Z = 3 + 5i, the imaginary part Im(Z) = 5, not 5i.
+          </div>
+
+          <h2>1.2 Examples — Identifying Real and Imaginary Parts</h2>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 1</div>
+              <div class="example-q">Z₁ = 2 + 3i — Find the real and imaginary parts</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Look at the number: Z₁ = 2 + 3i</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">The number before the imaginary unit is the real part</div></div>
+              <span class="math-line">Re(Z₁) = 2</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">The number attached to i is the imaginary part</div></div>
+              <span class="math-line">Im(Z₁) = 3</span>
+              <div class="answer-box">Re(Z₁) = 2   and   Im(Z₁) = 3</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 2</div>
+              <div class="example-q">Z₂ = −4 − 5i — Find the real and imaginary parts</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Look at the number: Z₂ = −4 − 5i</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">The real part is −4 (it keeps its negative sign)</div></div>
+              <span class="math-line">Re(Z₂) = −4</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">The imaginary part is −5 (it also keeps its negative sign)</div></div>
+              <span class="math-line">Im(Z₂) = −5</span>
+              <div class="answer-box">Re(Z₂) = −4   and   Im(Z₂) = −5</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 3</div>
+              <div class="example-q">Z₃ = 5 − 3i — Find the real and imaginary parts</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Look at the number: Z₃ = 5 − 3i</div></div>
+              <span class="math-line">Re(Z₃) = 5</span>
+              <span class="math-line">Im(Z₃) = −3</span>
+              <div class="answer-box">Re(Z₃) = 5   and   Im(Z₃) = −3</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 4</div>
+              <div class="example-q">Z₄ = 7 (a real number only) — Find the real and imaginary parts</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Z₄ = 7 + 0i (the imaginary part is simply zero)</div></div>
+              <span class="math-line">Re(Z₄) = 7</span>
+              <span class="math-line">Im(Z₄) = 0</span>
+              <div class="answer-box">Re(Z₄) = 7   and   Im(Z₄) = 0</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 5</div>
+              <div class="example-q">Z₅ = 4i (imaginary only) — Find the real and imaginary parts</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Z₅ = 0 + 4i (the real part is simply zero)</div></div>
+              <span class="math-line">Re(Z₅) = 0</span>
+              <span class="math-line">Im(Z₅) = 4</span>
+              <div class="answer-box">Re(Z₅) = 0   and   Im(Z₅) = 4</div>
+            </div>
+          </div>
+
+          <h2>1.3 Powers of i — The Cycle</h2>
+          <p>The imaginary unit <strong>i</strong> follows a repeating cycle when you raise it to different powers. Since i² = −1, we can work out every power from there.</p>
+
+          <div class="i-cycle">
+            <div class="i-card"><div class="power">i¹</div><div class="equals">equals</div><div class="value">i</div></div>
+            <div class="i-card"><div class="power">i²</div><div class="equals">equals</div><div class="value">−1</div></div>
+            <div class="i-card"><div class="power">i³</div><div class="equals">equals</div><div class="value">−i</div></div>
+            <div class="i-card"><div class="power">i⁴</div><div class="equals">equals</div><div class="value">1</div></div>
+            <div class="i-card"><div class="power">i⁵</div><div class="equals">equals</div><div class="value">i</div></div>
+            <div class="i-card"><div class="power">i⁶</div><div class="equals">equals</div><div class="value">−1</div></div>
+          </div>
+          <div class="note-box"><strong>Pattern:</strong> After every 4 steps the cycle resets: i → −1 → −i → 1 → i → −1 → … and so on forever.</div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 6</div>
+              <div class="example-q">Simplify i³</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write i³ as a product: i³ = i × i × i</div></div>
+              <span class="math-line">i³ = i × i × i</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Group the first two: i × i = i² = −1</div></div>
+              <span class="math-line">i³ = i² × i</span>
+              <span class="math-line">i³ = (−1) × i</span>
+              <div class="answer-box">i³ = −i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 7</div>
+              <div class="example-q">Simplify i⁵</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Break i⁵ into parts we know</div></div>
+              <span class="math-line">i⁵ = i² × i³</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Substitute the values we know: i² = −1, i³ = −i</div></div>
+              <span class="math-line">i⁵ = (−1) × (−i)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Negative × negative = positive</div></div>
+              <span class="math-line result">i⁵ = i</span>
+              <div class="note-box" style="margin-top:10px;"><strong>Note:</strong> i⁵ is just i — no need to write it differently!</div>
+              <div class="answer-box">i⁵ = i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 8</div>
+              <div class="example-q">Simplify i⁸</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Break i⁸ into parts</div></div>
+              <span class="math-line">i⁸ = i⁵ × i³</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Substitute: i⁵ = i and i³ = −i</div></div>
+              <span class="math-line">i⁸ = (i) × (−i)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Multiply: i × (−i) = −i²</div></div>
+              <span class="math-line">i⁸ = −i²</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Substitute i² = −1</div></div>
+              <span class="math-line">i⁸ = −(−1)</span>
+              <div class="answer-box">i⁸ = 1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 9</div>
+              <div class="example-q">Simplify i²⁰</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Break into three equal parts</div></div>
+              <span class="math-line">i²⁰ = i²⁰ ÷ break as i² × i² × i² × i² × i² × i² × i² × i² × i² × i²  (ten times)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Simpler: group as i²⁰ = (i⁴)⁵</div></div>
+              <span class="math-line">i²⁰ = (i⁴)⁵</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">We know i⁴ = 1, so 1 raised to any power is still 1</div></div>
+              <span class="math-line">i²⁰ = (1)⁵</span>
+              <div class="answer-box">i²⁰ = 1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 10</div>
+              <div class="example-q">Simplify i⁶⁰</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Break i⁶⁰ into equal chunks</div></div>
+              <span class="math-line">i⁶⁰ = i²⁰ × i²⁰ × i²⁰</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">From Example 9 above, we found i²⁰ = 1</div></div>
+              <span class="math-line">i⁶⁰ = 1 × 1 × 1</span>
+              <div class="answer-box">i⁶⁰ = 1</div>
+            </div>
+          </div>
+
+          <div class="remember">
+            The powers of i always follow this 4-step cycle: i¹ = i, i² = −1, i³ = −i, i⁴ = 1, then it repeats. To simplify any high power of i, divide the power by 4 and look at the remainder.
+          </div>
+
+        </div>
+        <div class="page-footer">
+          <span>Complex Numbers Textbook</span>
+          <span>Chapter 01 — Concept</span>
+        </div>
+      </div>
+    </div><!-- end section 1 -->
+
+    <!-- ══════ SECTION 2: ALGEBRA ══════ -->
+    <div class="section" id="sec-1">
+      <div class="page">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter 02</div>
+          <div class="chapter-title">Algebra of<br>Complex Numbers</div>
+          <div class="chapter-desc">Addition, subtraction, multiplication and division — with full working shown every time</div>
+        </div>
+        <div class="page-lines"></div>
+        <div class="page-content">
+
+          <!-- CONJUGATE -->
+          <h2>2.1 Conjugate of a Complex Number</h2>
+          <p>The <strong>conjugate</strong> of a complex number Z is written as <strong>Z̄</strong> (Z-bar). To find the conjugate, you simply <strong>change the sign of the imaginary part</strong>. The real part stays exactly the same.</p>
+
+          <div class="def-box">
+            <p>If Z = x + iy, then the conjugate is:</p>
+            <div class="formula">Z̄ = x − iy</div>
+            <p style="margin-top:8px; font-size:14px;">Positive imaginary → becomes Negative &nbsp;|&nbsp; Negative imaginary → becomes Positive</p>
+          </div>
+
+          <table class="conj-table">
+            <tr><th>Complex Number Z</th><th>Conjugate Z̄</th><th>What changed</th></tr>
+            <tr><td>Z₁ = 3 + 2i</td><td class="neg">Z̄₁ = 3 − 2i</td><td>+2i became −2i</td></tr>
+            <tr><td>Z₂ = −3 + 4i</td><td class="neg">Z̄₂ = −3 − 4i</td><td>+4i became −4i</td></tr>
+            <tr><td>Z₃ = −2 − 3i</td><td class="pos">Z̄₃ = −2 + 3i</td><td>−3i became +3i</td></tr>
+            <tr><td>Z₄ = 5 − 7i</td><td class="pos">Z̄₄ = 5 + 7i</td><td>−7i became +7i</td></tr>
+            <tr><td>Z₅ = 4 + 0i</td><td>Z̄₅ = 4 + 0i</td><td>No change (no imaginary)</td></tr>
+          </table>
+
+          <!-- ADDITION -->
+          <div class="section-rule"><div class="section-rule-text">Addition</div></div>
+          <h2>2.2 Addition of Complex Numbers</h2>
+          <p>To add two complex numbers, you <strong>add the real parts together</strong> and <strong>add the imaginary parts together</strong> separately. Never mix real and imaginary parts.</p>
+
+          <div class="theorem-box">
+            <p>If Z₁ = x₁ + iy₁ and Z₂ = x₂ + iy₂, then:</p>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--blue); margin-top:8px;">
+              Z₁ + Z₂ = (x₁ + x₂) + (y₁ + y₂)i
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 1</div>
+              <div class="example-q">If Z₁ = 3 + 2i and Z₂ = 2 + 4i, find Z₁ + Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the addition</div></div>
+              <span class="math-line">Z₁ + Z₂ = (3 + 2i) + (2 + 4i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Group the real parts together and the imaginary parts together</div></div>
+              <span class="math-line">= (3 + 2) + (2 + 4)i</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Do the arithmetic in each bracket</div></div>
+              <span class="math-line">= 5 + 6i</span>
+              <div class="answer-box">Z₁ + Z₂ = 5 + 6i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 2</div>
+              <div class="example-q">If Z₁ = 3 + 2i and Z₃ = 2 − i, find Z₁ + Z₃</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the addition</div></div>
+              <span class="math-line">Z₁ + Z₃ = (3 + 2i) + (2 − i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Group real parts: 3 + 2 = 5 &nbsp;|&nbsp; Group imaginary parts: 2 + (−1) = 1</div></div>
+              <span class="math-line">= (3 + 2) + (2 + (−1))i</span>
+              <span class="math-line">= (5) + (1)i</span>
+              <div class="answer-box">Z₁ + Z₃ = 5 + i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 3</div>
+              <div class="example-q">If Z₁ = −4 + 3i and Z₂ = 6 − 5i, find Z₁ + Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the addition</div></div>
+              <span class="math-line">Z₁ + Z₂ = (−4 + 3i) + (6 − 5i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Group real parts: −4 + 6 = 2 &nbsp;|&nbsp; Group imaginary parts: 3 + (−5) = −2</div></div>
+              <span class="math-line">= (−4 + 6) + (3 + (−5))i</span>
+              <span class="math-line">= (2) + (−2)i</span>
+              <div class="answer-box">Z₁ + Z₂ = 2 − 2i</div>
+            </div>
+          </div>
+
+          <!-- SUBTRACTION -->
+          <div class="section-rule"><div class="section-rule-text">Subtraction</div></div>
+          <h2>2.3 Subtraction of Complex Numbers</h2>
+          <p>To subtract, you <strong>subtract the real parts</strong> and <strong>subtract the imaginary parts</strong>. Be very careful with the signs when the second number has negatives.</p>
+
+          <div class="theorem-box">
+            <p>If Z₁ = x₁ + iy₁ and Z₂ = x₂ + iy₂, then:</p>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--blue); margin-top:8px;">
+              Z₁ − Z₂ = (x₁ − x₂) + (y₁ − y₂)i
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 4</div>
+              <div class="example-q">If Z₁ = 3 + 4i and Z₂ = 2 − i, find Z₁ − Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the subtraction</div></div>
+              <span class="math-line">Z₁ − Z₂ = (3 + 4i) − (2 − i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand the brackets — be careful: minus × minus = plus</div></div>
+              <span class="math-line">= 3 + 4i − 2 + i</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Group real parts: 3 − 2 = 1 &nbsp;|&nbsp; Group imaginary parts: 4 + 1 = 5</div></div>
+              <span class="math-line">= (3 − 2) + (4 + 1)i</span>
+              <span class="math-line">= 1 + 5i</span>
+              <div class="answer-box">Z₁ − Z₂ = 1 + 5i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 5</div>
+              <div class="example-q">If Z₁ = 6 + 5i and Z₂ = 2 + 3i, find Z₁ − Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the subtraction</div></div>
+              <span class="math-line">Z₁ − Z₂ = (6 + 5i) − (2 + 3i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand: remove the brackets, change signs of the second group</div></div>
+              <span class="math-line">= 6 + 5i − 2 − 3i</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Group real: 6 − 2 = 4 &nbsp;|&nbsp; Group imaginary: 5 − 3 = 2</div></div>
+              <span class="math-line">= (6 − 2) + (5 − 3)i</span>
+              <span class="math-line">= 4 + 2i</span>
+              <div class="answer-box">Z₁ − Z₂ = 4 + 2i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 6</div>
+              <div class="example-q">If Z₂ = 2 + 3i and Z₁ = 6 + 5i, find Z₂ − Z₁</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out — note the order is reversed now</div></div>
+              <span class="math-line">Z₂ − Z₁ = (2 + 3i) − (6 + 5i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand the brackets</div></div>
+              <span class="math-line">= 2 + 3i − 6 − 5i</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Group real: 2 − 6 = −4 &nbsp;|&nbsp; Group imaginary: 3 − 5 = −2</div></div>
+              <span class="math-line">= (2 − 6) + (3 − 5)i</span>
+              <span class="math-line">= −4 + (−2)i</span>
+              <div class="answer-box">Z₂ − Z₁ = −4 − 2i</div>
+            </div>
+          </div>
+
+          <!-- MULTIPLICATION -->
+          <div class="section-rule"><div class="section-rule-text">Multiplication</div></div>
+          <h2>2.4 Multiplication of Complex Numbers</h2>
+          <p>To multiply, you use the <strong>FOIL method</strong> (First, Outside, Inside, Last) — exactly like expanding double brackets in algebra. The key step is always replacing <strong>i² with −1</strong> at the end.</p>
+
+          <div class="theorem-box">
+            <p>Multiply out every bracket fully, then replace i² = −1, then collect like terms.</p>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--blue); margin-top:8px;">
+              Remember: i² = −1 always!
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 7</div>
+              <div class="example-q">If Z₁ = 2 + 3i and Z₂ = 4 − 8i, find Z₁ × Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the multiplication</div></div>
+              <span class="math-line">Z₁ × Z₂ = (2 + 3i)(4 − 8i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand using FOIL — multiply each term in the first bracket by each term in the second</div></div>
+              <span class="math-line sub">First: 2 × 4 = 8</span>
+              <span class="math-line sub">Outside: 2 × (−8i) = −16i</span>
+              <span class="math-line sub">Inside: 3i × 4 = 12i</span>
+              <span class="math-line sub">Last: 3i × (−8i) = −24i²</span>
+              <span class="math-line">= 8 − 16i + 12i − 24i²</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Replace i² with −1: −24i² = −24 × (−1) = +24</div></div>
+              <span class="math-line">= 8 − 16i + 12i + 24</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Group real parts: 8 + 24 = 32 &nbsp;|&nbsp; Group imaginary: −16i + 12i = −4i</div></div>
+              <span class="math-line">= (8 + 24) + (−16 + 12)i</span>
+              <span class="math-line">= 32 + (−4)i</span>
+              <div class="answer-box">Z₁ × Z₂ = 32 − 4i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 8</div>
+              <div class="example-q">If Z₁ = 3 + 4i and Z₂ = 2 − i, find Z₁ × Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write out the multiplication</div></div>
+              <span class="math-line">Z₁ × Z₂ = (3 + 4i)(2 − i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand using FOIL</div></div>
+              <span class="math-line sub">First: 3 × 2 = 6</span>
+              <span class="math-line sub">Outside: 3 × (−i) = −3i</span>
+              <span class="math-line sub">Inside: 4i × 2 = 8i</span>
+              <span class="math-line sub">Last: 4i × (−i) = −4i²</span>
+              <span class="math-line">= 6 − 3i + 8i − 4i²</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Replace i² = −1: −4i² = −4 × (−1) = +4</div></div>
+              <span class="math-line">= 6 − 3i + 8i + 4</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Group: real = 6 + 4 = 10 &nbsp;|&nbsp; imaginary = −3 + 8 = 5</div></div>
+              <span class="math-line">= 10 + 5i</span>
+              <div class="answer-box">Z₁ × Z₂ = 10 + 5i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 9</div>
+              <div class="example-q">If Z₁ = 3 + 4i, find Z̄₁ × Z₁ (Z₁ times its own conjugate)</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">First find the conjugate: Z₁ = 3 + 4i, so Z̄₁ = 3 − 4i</div></div>
+              <span class="math-line">Z̄₁ × Z₁ = (3 − 4i)(3 + 4i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand using FOIL</div></div>
+              <span class="math-line sub">First: 3 × 3 = 9</span>
+              <span class="math-line sub">Outside: 3 × 4i = 12i</span>
+              <span class="math-line sub">Inside: −4i × 3 = −12i</span>
+              <span class="math-line sub">Last: −4i × 4i = −16i²</span>
+              <span class="math-line">= 9 + 12i − 12i − 16i²</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">The +12i and −12i cancel out. Replace i² = −1</div></div>
+              <span class="math-line">= 9 + 0 − 16(−1)</span>
+              <span class="math-line">= 9 + 16</span>
+              <div class="answer-box">Z̄₁ × Z₁ = 25 (a real number — always happens with conjugate pairs!)</div>
+            </div>
+          </div>
+
+          <!-- DIVISION -->
+          <div class="section-rule"><div class="section-rule-text">Division</div></div>
+          <h2>2.5 Division of Complex Numbers</h2>
+          <p>To divide complex numbers, you <strong>multiply both the top and bottom by the conjugate of the denominator</strong>. This makes the bottom become a real number (no i), which you can then divide normally.</p>
+
+          <div class="theorem-box">
+            <p>Steps for division:</p>
+            <p style="font-size:14px; margin-top:8px; line-height:1.9;">
+              1. Find the conjugate of the denominator (bottom number)<br>
+              2. Multiply both top and bottom by that conjugate<br>
+              3. Expand both top and bottom using FOIL<br>
+              4. Replace i² = −1 everywhere<br>
+              5. Simplify to get a + bi form
+            </p>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 10</div>
+              <div class="example-q">If Z₁ = 3 + 2i and Z₂ = 1 − i, find Z₁ ÷ Z₂</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write as a fraction</div></div>
+              <span class="math-line">Z₁/Z₂ = (3 + 2i) / (1 − i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">The conjugate of the bottom (1 − i) is (1 + i). Multiply top and bottom by (1 + i)</div></div>
+              <span class="math-line">= (3 + 2i)(1 + i) / (1 − i)(1 + i)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Expand the TOP using FOIL</div></div>
+              <span class="math-line sub">Top: (3 + 2i)(1 + i)</span>
+              <span class="math-line sub">First: 3 × 1 = 3</span>
+              <span class="math-line sub">Outside: 3 × i = 3i</span>
+              <span class="math-line sub">Inside: 2i × 1 = 2i</span>
+              <span class="math-line sub">Last: 2i × i = 2i²</span>
+              <span class="math-line">Top = 3 + 3i + 2i + 2i²</span>
+              <span class="math-line">Top = 3 + 3i + 2i + 2(−1)</span>
+              <span class="math-line">Top = 3 + 5i − 2</span>
+              <span class="math-line">Top = 1 + 5i</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Expand the BOTTOM using FOIL</div></div>
+              <span class="math-line sub">Bottom: (1 − i)(1 + i)</span>
+              <span class="math-line sub">First: 1 × 1 = 1</span>
+              <span class="math-line sub">Outside: 1 × i = i</span>
+              <span class="math-line sub">Inside: −i × 1 = −i</span>
+              <span class="math-line sub">Last: −i × i = −i²</span>
+              <span class="math-line">Bottom = 1 + i − i − i²</span>
+              <span class="math-line">Bottom = 1 + 0 − (−1)</span>
+              <span class="math-line">Bottom = 1 + 1 = 2</span>
+              <div class="step"><div class="step-num">5</div><div class="step-content">Put it together: Top ÷ Bottom</div></div>
+              <span class="math-line">= (1 + 5i) / 2</span>
+              <span class="math-line">= 1/2 + 5/2 · i</span>
+              <div class="answer-box">Z₁/Z₂ = 1/2 + 5/2 i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 11</div>
+              <div class="example-q">If Z₁ = 3 + 4i and Z₂ = 2 − i, find Z₂/Z₁</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Write as a fraction (Z₂ on top, Z₁ on bottom)</div></div>
+              <span class="math-line">Z₂/Z₁ = (2 − i) / (3 + 4i)</span>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Conjugate of bottom (3 + 4i) is (3 − 4i). Multiply both by (3 − 4i)</div></div>
+              <span class="math-line">= (2 − i)(3 − 4i) / (3 + 4i)(3 − 4i)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Expand the TOP</div></div>
+              <span class="math-line sub">First: 2 × 3 = 6</span>
+              <span class="math-line sub">Outside: 2 × (−4i) = −8i</span>
+              <span class="math-line sub">Inside: (−i) × 3 = −3i</span>
+              <span class="math-line sub">Last: (−i) × (−4i) = 4i²</span>
+              <span class="math-line">Top = 6 − 8i − 3i + 4i²</span>
+              <span class="math-line">Top = 6 − 11i + 4(−1)</span>
+              <span class="math-line">Top = 6 − 11i − 4</span>
+              <span class="math-line">Top = 2 − 11i</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Expand the BOTTOM</div></div>
+              <span class="math-line sub">First: 3 × 3 = 9</span>
+              <span class="math-line sub">Outside: 3 × (−4i) = −12i</span>
+              <span class="math-line sub">Inside: 4i × 3 = 12i</span>
+              <span class="math-line sub">Last: 4i × (−4i) = −16i²</span>
+              <span class="math-line">Bottom = 9 − 12i + 12i − 16i²</span>
+              <span class="math-line">Bottom = 9 + 0 − 16(−1)</span>
+              <span class="math-line">Bottom = 9 + 16 = 25</span>
+              <div class="step"><div class="step-num">5</div><div class="step-content">Divide each part by 25</div></div>
+              <span class="math-line">= (2 − 11i) / 25</span>
+              <span class="math-line">= 2/25 − 11/25 · i</span>
+              <div class="answer-box">Z₂/Z₁ = 2/25 − 11/25 i</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="page-footer">
+          <span>Complex Numbers Textbook</span>
+          <span>Chapter 02 — Algebra</span>
+        </div>
+      </div>
+    </div><!-- end section 2 -->
+
+    <!-- ══════ SECTION 3: ARGAND ══════ -->
+    <div class="section" id="sec-2">
+      <div class="page">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter 03</div>
+          <div class="chapter-title">Argand<br>Diagrams</div>
+          <div class="chapter-desc">Plotting complex numbers visually on a coordinate plane — seeing the real and imaginary parts as axes</div>
+        </div>
+        <div class="page-lines"></div>
+        <div class="page-content">
+
+          <h2>3.1 What is an Argand Diagram?</h2>
+          <p>An Argand Diagram is like a coordinate graph, but instead of x and y axes, we use the <strong>Real axis</strong> (horizontal) and the <strong>Imaginary axis</strong> (vertical). Every complex number Z = x + iy becomes a point at position <strong>(x, y)</strong> on this diagram.</p>
+
+          <div class="def-box">
+            <div class="formula">Z = x + iy   →   Point (x, y) on Argand Diagram</div>
+            <p style="margin-top:8px; font-size:14px;">
+              — The <strong>x value</strong> (real part) tells you how far to go LEFT or RIGHT<br>
+              — The <strong>y value</strong> (imaginary part) tells you how far to go UP or DOWN
+            </p>
+          </div>
+
+          <h2>3.2 Interactive Argand Diagram</h2>
+          <p>The diagram below plots several complex numbers. Each point shows a complex number as a position in the plane.</p>
+
+          <div class="canvas-wrap">
+            <canvas id="argandCanvas" width="500" height="400"></canvas>
+          </div>
+
+          <h2>3.3 Plotting Examples — Step by Step</h2>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 1</div>
+              <div class="example-q">Plot Z₁ = 3 + 2i on the Argand Diagram</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Identify the real part: Re(Z₁) = 3 → go 3 units to the RIGHT on the real axis</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Identify the imaginary part: Im(Z₁) = 2 → go 2 units UP on the imaginary axis</div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Mark the point where these meet</div></div>
+              <span class="math-line">Z₁ = 3 + 2i   →   Point at (3, 2)</span>
+              <div class="answer-box">Plot the point at coordinates (3, 2) — 3 right, 2 up</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 2</div>
+              <div class="example-q">Plot Z₂ = −3 + 4i on the Argand Diagram</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Re(Z₂) = −3 → go 3 units to the LEFT</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Im(Z₂) = 4 → go 4 units UP</div></div>
+              <span class="math-line">Z₂ = −3 + 4i   →   Point at (−3, 4)</span>
+              <div class="answer-box">Plot the point at coordinates (−3, 4) — 3 left, 4 up</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 3</div>
+              <div class="example-q">Plot Z₃ = −2 − 3i on the Argand Diagram</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Re(Z₃) = −2 → go 2 units to the LEFT</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Im(Z₃) = −3 → go 3 units DOWN (negative imaginary goes down)</div></div>
+              <span class="math-line">Z₃ = −2 − 3i   →   Point at (−2, −3)</span>
+              <div class="answer-box">Plot the point at coordinates (−2, −3) — 2 left, 3 down</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 4</div>
+              <div class="example-q">Plot Z₄ = 4 − 2i on the Argand Diagram</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Re(Z₄) = 4 → go 4 units to the RIGHT</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Im(Z₄) = −2 → go 2 units DOWN</div></div>
+              <span class="math-line">Z₄ = 4 − 2i   →   Point at (4, −2)</span>
+              <div class="answer-box">Plot the point at coordinates (4, −2) — 4 right, 2 down</div>
+            </div>
+          </div>
+
+          <h2>3.4 Modulus — The Distance from the Origin</h2>
+          <p>The <strong>modulus</strong> of a complex number Z = x + iy is written |Z| and it tells you the <strong>distance from the origin (0,0) to the point Z</strong> on the Argand diagram. We find it using Pythagoras' theorem.</p>
+
+          <div class="def-box">
+            <p>If Z = x + iy, then:</p>
+            <div class="formula">|Z| = √(x² + y²)</div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 5</div>
+              <div class="example-q">Find the modulus of Z = 3 + 4i</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Identify: x = 3, y = 4</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Apply the formula</div></div>
+              <span class="math-line">|Z| = √(x² + y²)</span>
+              <span class="math-line">|Z| = √(3² + 4²)</span>
+              <span class="math-line">|Z| = √(9 + 16)</span>
+              <span class="math-line">|Z| = √25</span>
+              <div class="answer-box">|Z| = 5</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 6</div>
+              <div class="example-q">Find the modulus of Z = −5 + 12i</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Identify: x = −5, y = 12</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Apply the formula (squares remove the negative)</div></div>
+              <span class="math-line">|Z| = √((−5)² + 12²)</span>
+              <span class="math-line">|Z| = √(25 + 144)</span>
+              <span class="math-line">|Z| = √169</span>
+              <div class="answer-box">|Z| = 13</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="page-footer">
+          <span>Complex Numbers Textbook</span>
+          <span>Chapter 03 — Argand Diagrams</span>
+        </div>
+      </div>
+    </div><!-- end section 3 -->
+
+    <!-- ══════ SECTION 4: DE MOIVRE ══════ -->
+    <div class="section" id="sec-3">
+      <div class="page">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter 04</div>
+          <div class="chapter-title">De Moivre's<br>Theorem</div>
+          <div class="chapter-desc">The most powerful tool in complex numbers — raising complex numbers to any power elegantly</div>
+        </div>
+        <div class="page-lines"></div>
+        <div class="page-content">
+
+          <h2>4.1 Polar Form of a Complex Number</h2>
+          <p>Before using De Moivre's theorem, we must understand the <strong>polar form</strong> of a complex number. Every complex number Z = x + iy can also be written using its modulus r and argument θ (the angle it makes with the positive real axis).</p>
+
+          <div class="def-box">
+            <p>The polar form of Z = x + iy is:</p>
+            <div class="formula">Z = r(cos θ + i sin θ)</div>
+            <p style="margin-top:10px; font-size:14px;">
+              Where:<br>
+              — r = |Z| = √(x² + y²) &nbsp;&nbsp; (the modulus)<br>
+              — θ = arg(Z) = tan⁻¹(y/x) &nbsp;&nbsp; (the argument — the angle)
+            </p>
+          </div>
+
+          <h2>4.2 De Moivre's Theorem — The Statement</h2>
+
+          <div class="def-box">
+            <p>If Z = r(cos θ + i sin θ), then for any integer n:</p>
+            <div class="formula">Zⁿ = rⁿ(cos nθ + i sin nθ)</div>
+            <p style="margin-top:10px; font-size:14px;">
+              In words: raise the modulus to the power n, and multiply the angle by n.<br>
+              <strong>That is the whole theorem.</strong>
+            </p>
+          </div>
+
+          <div class="note-box"><strong>Why it is beautiful:</strong> Without this theorem, computing something like (cos 20° + i sin 20°)⁹ would require multiplying complex numbers nine times. With De Moivre's theorem, you just write cos(180°) + i sin(180°) in one step!</div>
+
+          <h2>4.3 Examples — Applying De Moivre's Theorem</h2>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 1</div>
+              <div class="example-q">Use De Moivre's theorem to simplify (cos 30° + i sin 30°)⁶</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Here r = 1 (the modulus is 1) and θ = 30° and n = 6</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Apply De Moivre's: raise r to the power 6 and multiply angle by 6</div></div>
+              <span class="math-line">= 1⁶ × (cos(6 × 30°) + i sin(6 × 30°))</span>
+              <span class="math-line">= 1 × (cos 180° + i sin 180°)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Evaluate: cos 180° = −1 and sin 180° = 0</div></div>
+              <span class="math-line">= 1 × (−1 + i × 0)</span>
+              <span class="math-line">= −1 + 0i</span>
+              <div class="answer-box">(cos 30° + i sin 30°)⁶ = −1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 2</div>
+              <div class="example-q">Simplify (cos 45° + i sin 45°)⁴</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">r = 1, θ = 45°, n = 4</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Apply De Moivre's: multiply angle by 4</div></div>
+              <span class="math-line">= 1⁴ × (cos(4 × 45°) + i sin(4 × 45°))</span>
+              <span class="math-line">= 1 × (cos 180° + i sin 180°)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">cos 180° = −1 and sin 180° = 0</div></div>
+              <span class="math-line">= −1 + 0i</span>
+              <div class="answer-box">(cos 45° + i sin 45°)⁴ = −1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 3</div>
+              <div class="example-q">Simplify (cos 60° + i sin 60°)³</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">r = 1, θ = 60°, n = 3</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Multiply angle by 3: 3 × 60° = 180°</div></div>
+              <span class="math-line">= cos(3 × 60°) + i sin(3 × 60°)</span>
+              <span class="math-line">= cos 180° + i sin 180°</span>
+              <span class="math-line">= −1 + 0i</span>
+              <div class="answer-box">(cos 60° + i sin 60°)³ = −1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 4</div>
+              <div class="example-q">Simplify (cos 40° + i sin 40°)⁹</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">r = 1, θ = 40°, n = 9</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Multiply angle by 9: 9 × 40° = 360°</div></div>
+              <span class="math-line">= cos(9 × 40°) + i sin(9 × 40°)</span>
+              <span class="math-line">= cos 360° + i sin 360°</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">cos 360° = 1 and sin 360° = 0</div></div>
+              <span class="math-line">= 1 + 0i</span>
+              <div class="answer-box">(cos 40° + i sin 40°)⁹ = 1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 5</div>
+              <div class="example-q">Simplify (cos 20° + i sin 20°)⁹</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">r = 1, θ = 20°, n = 9</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Multiply angle by 9: 9 × 20° = 180°</div></div>
+              <span class="math-line">= cos 180° + i sin 180°</span>
+              <span class="math-line">= −1 + 0i</span>
+              <div class="answer-box">(cos 20° + i sin 20°)⁹ = −1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 6</div>
+              <div class="example-q">Simplify [2(cos 30° + i sin 30°)]³</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">Here r = 2, θ = 30°, n = 3</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Raise modulus to the power 3: 2³ = 8 &nbsp;|&nbsp; Multiply angle by 3: 3 × 30° = 90°</div></div>
+              <span class="math-line">= 2³ × (cos(3 × 30°) + i sin(3 × 30°))</span>
+              <span class="math-line">= 8 × (cos 90° + i sin 90°)</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">cos 90° = 0 and sin 90° = 1</div></div>
+              <span class="math-line">= 8 × (0 + i × 1)</span>
+              <span class="math-line">= 8 × (i)</span>
+              <div class="answer-box">[2(cos 30° + i sin 30°)]³ = 8i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 7</div>
+              <div class="example-q">Expand cos 3θ and sin 3θ using De Moivre's Theorem</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">By De Moivre's theorem: (cos θ + i sin θ)³ = cos 3θ + i sin 3θ</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Expand the left side using algebra. Let c = cos θ and s = sin θ for shorthand</div></div>
+              <span class="math-line">(cos θ + i sin θ)³ = (c + is)³</span>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Expand using binomial or step by step: first (c + is)² then multiply by (c + is)</div></div>
+              <span class="math-line sub">Step A: (c + is)² = c² + 2c(is) + (is)²</span>
+              <span class="math-line sub">= c² + 2ics + i²s²</span>
+              <span class="math-line sub">= c² + 2ics − s²</span>
+              <span class="math-line sub">= (c² − s²) + 2ics</span>
+              <span class="math-line sub">Step B: Multiply by (c + is)</span>
+              <span class="math-line sub">= [(c²−s²) + 2ics] × (c + is)</span>
+              <span class="math-line sub">= c(c²−s²) + is(c²−s²) + 2ic²s + 2i²cs²</span>
+              <span class="math-line sub">= c³−cs² + i·s·c²−is³ + 2ic²s − 2cs²</span>
+              <span class="math-line sub">= (c³ − cs² − 2cs²) + i(sc² − s³ + 2c²s)</span>
+              <span class="math-line">= (c³ − 3cs²) + i(3c²s − s³)</span>
+              <div class="step"><div class="step-num">4</div><div class="step-content">Compare real parts and imaginary parts to De Moivre's result</div></div>
+              <span class="math-line">cos 3θ = cos³θ − 3cosθ·sin²θ</span>
+              <span class="math-line">sin 3θ = 3cos²θ·sinθ − sin³θ</span>
+              <div class="answer-box">cos 3θ = cos³θ − 3cosθsin²θ &nbsp;|&nbsp; sin 3θ = 3cos²θsinθ − sin³θ</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="page-footer">
+          <span>Complex Numbers Textbook</span>
+          <span>Chapter 04 — De Moivre's Theorem</span>
+        </div>
+      </div>
+    </div><!-- end section 4 -->
+
+    <!-- ══════ SECTION 5: NTH ROOTS ══════ -->
+    <div class="section" id="sec-4">
+      <div class="page">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter 05</div>
+          <div class="chapter-title">nth Roots<br>of Unity</div>
+          <div class="chapter-desc">Finding all complex solutions to Zⁿ = 1 — they form a perfect geometric pattern on the unit circle</div>
+        </div>
+        <div class="page-lines"></div>
+        <div class="page-content">
+
+          <h2>5.1 What are the nth Roots of Unity?</h2>
+          <p>The <strong>nth roots of unity</strong> are all the complex numbers Z that satisfy the equation <strong>Zⁿ = 1</strong>. There are exactly <strong>n solutions</strong>, and when you plot them on the Argand diagram, they form equally-spaced points on a circle of radius 1 centred at the origin.</p>
+
+          <div class="def-box">
+            <p>The nth roots of unity are found using the formula:</p>
+            <div class="formula">Z_k = cos(2kπ/n) + i sin(2kπ/n)</div>
+            <p style="margin-top:10px; font-size:14px;">
+              where k = 0, 1, 2, 3, … , (n−1)<br>
+              Each value of k gives one root. There are n roots in total.
+            </p>
+          </div>
+
+          <div class="note-box"><strong>In degrees:</strong> The formula becomes Z_k = cos(360°k/n) + i sin(360°k/n). Each root is separated from the next by an angle of 360°/n on the unit circle.</div>
+
+          <h2>5.2 Examples — Finding nth Roots of Unity</h2>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 1</div>
+              <div class="example-q">Find the 2nd roots of unity (square roots of 1)</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">n = 2, so k goes from 0 to 1 (giving us 2 roots)</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Each root is separated by 360°/2 = 180°</div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Find each root:</div></div>
+              <span class="math-line">k = 0: Z₀ = cos(0°) + i sin(0°) = 1 + 0i = 1</span>
+              <span class="math-line">k = 1: Z₁ = cos(180°) + i sin(180°) = −1 + 0i = −1</span>
+              <div class="answer-box">The 2nd roots of unity are: 1 and −1</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 2</div>
+              <div class="example-q">Find the 4th roots of unity (all Z where Z⁴ = 1)</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">n = 4, so k goes from 0 to 3 (giving 4 roots)</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Each root is separated by 360°/4 = 90°</div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Find each root using the formula</div></div>
+              <span class="math-line">k = 0: Z₀ = cos(0°) + i sin(0°)</span>
+              <span class="math-line sub">= cos 0° + i sin 0° = 1 + 0i = 1</span>
+              <span class="math-line">k = 1: Z₁ = cos(90°) + i sin(90°)</span>
+              <span class="math-line sub">= 0 + i(1) = i</span>
+              <span class="math-line">k = 2: Z₂ = cos(180°) + i sin(180°)</span>
+              <span class="math-line sub">= −1 + 0i = −1</span>
+              <span class="math-line">k = 3: Z₃ = cos(270°) + i sin(270°)</span>
+              <span class="math-line sub">= 0 + i(−1) = −i</span>
+              <div class="answer-box">The 4th roots of unity are: 1, i, −1, −i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 3</div>
+              <div class="example-q">Find the 3rd roots of unity (cube roots of 1)</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">n = 3, so k goes from 0 to 2 (giving 3 roots)</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Each root is separated by 360°/3 = 120°</div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Find each root</div></div>
+              <span class="math-line">k = 0: Z₀ = cos(0°) + i sin(0°) = 1 + 0i = 1</span>
+              <span class="math-line">k = 1: Z₁ = cos(120°) + i sin(120°)</span>
+              <span class="math-line sub">cos 120° = −1/2 &nbsp;&nbsp; sin 120° = √3/2</span>
+              <span class="math-line sub">Z₁ = −1/2 + (√3/2)i</span>
+              <span class="math-line">k = 2: Z₂ = cos(240°) + i sin(240°)</span>
+              <span class="math-line sub">cos 240° = −1/2 &nbsp;&nbsp; sin 240° = −√3/2</span>
+              <span class="math-line sub">Z₂ = −1/2 − (√3/2)i</span>
+              <div class="answer-box">3rd roots of unity: 1,  −½ + (√3/2)i,  −½ − (√3/2)i</div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-header">
+              <div class="example-num">EX 4</div>
+              <div class="example-q">Find the 6th roots of unity</div>
+            </div>
+            <div class="example-body">
+              <div class="step"><div class="step-num">1</div><div class="step-content">n = 6, so k goes from 0 to 5 (giving 6 roots)</div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-content">Each root is separated by 360°/6 = 60°</div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-content">Find each root</div></div>
+              <span class="math-line">k = 0: Z₀ = cos 0° + i sin 0° = 1</span>
+              <span class="math-line">k = 1: Z₁ = cos 60° + i sin 60° = 1/2 + (√3/2)i</span>
+              <span class="math-line">k = 2: Z₂ = cos 120° + i sin 120° = −1/2 + (√3/2)i</span>
+              <span class="math-line">k = 3: Z₃ = cos 180° + i sin 180° = −1</span>
+              <span class="math-line">k = 4: Z₄ = cos 240° + i sin 240° = −1/2 − (√3/2)i</span>
+              <span class="math-line">k = 5: Z₅ = cos 300° + i sin 300° = 1/2 − (√3/2)i</span>
+              <div class="answer-box">6 roots evenly spaced at 60° apart around the unit circle</div>
+            </div>
+          </div>
+
+          <h2>5.3 Interactive — nth Roots on the Unit Circle</h2>
+          <div class="canvas-wrap">
+            <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
+              <label style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--blue);">Show roots of unity for n =</label>
+              <select id="rootsN" onchange="drawRoots()" style="font-family:'JetBrains Mono',monospace; padding:6px 12px; border:1px solid var(--rule); background:var(--paper); font-size:13px;">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected>4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <canvas id="rootsCanvas" width="500" height="400"></canvas>
+          </div>
+
+          <div class="remember">
+            Key facts about nth roots of unity: (1) There are always exactly n roots. (2) They are all equally spaced by 360°/n degrees apart. (3) They all lie on the unit circle (radius = 1). (4) One root is always Z = 1 (at angle 0°). (5) When you add all the roots together, they always sum to zero.
+          </div>
+
+        </div>
+        <div class="page-footer">
+          <span>Complex Numbers Textbook</span>
+          <span>Chapter 05 — nth Roots of Unity</span>
+        </div>
+      </div>
+    </div><!-- end section 5 -->
+
+  </div><!-- book-wrap -->
+</div><!-- book -->
+
+<script>
+  // ── NAVIGATION ──
+  function openBook() {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('book').style.display = 'block';
+    setTimeout(() => { drawArgand(); drawRoots(); }, 100);
+  }
+  function closebook() {
+    document.getElementById('book').style.display = 'none';
+    document.getElementById('cover').style.display = 'flex';
+  }
+  function showSection(idx) {
+    document.querySelectorAll('.section').forEach((s,i) => {
+      s.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.nav-tab').forEach((t,i) => {
+      t.classList.toggle('active', i === idx);
+    });
+    window.scrollTo(0,0);
+    if (idx === 2) setTimeout(drawArgand, 200);
+    if (idx === 4) setTimeout(drawRoots, 200);
+  }
+
+  // ── ARGAND DIAGRAM ──
+  function drawArgand() {
+    const canvas = document.getElementById('argandCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W/2, cy = H/2;
+    const scale = 45;
+    ctx.clearRect(0,0,W,H);
+
+    // background
+    ctx.fillStyle = '#f8f3ea';
+    ctx.fillRect(0,0,W,H);
+
+    // grid
+    ctx.strokeStyle = 'rgba(180,160,120,0.2)';
+    ctx.lineWidth = 1;
+    for (let x = -5; x <= 5; x++) {
+      ctx.beginPath(); ctx.moveTo(cx+x*scale,0); ctx.lineTo(cx+x*scale,H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,cy+x*scale); ctx.lineTo(W,cy+x*scale); ctx.stroke();
+    }
+
+    // axes
+    ctx.strokeStyle = '#1a1208'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
+
+    // axis labels
+    ctx.fillStyle = '#1a1208'; ctx.font = '12px JetBrains Mono';
+    ctx.fillText('Re', W-24, cy-8);
+    ctx.fillText('Im', cx+8, 14);
+
+    // tick marks and numbers
+    ctx.font = '10px JetBrains Mono'; ctx.fillStyle = '#888';
+    for (let x = -4; x <= 4; x++) {
+      if (x !== 0) {
+        ctx.fillText(x, cx+x*scale-5, cy+14);
+        ctx.fillText(x === 1 ? '' : x, cx+4, cy-x*scale+4);
+        if (x !== 0) ctx.fillText(x, cx+4, cy-x*scale+4);
+      }
+    }
+
+    // points to plot
+    const points = [
+      { z: [3,2],  label: 'Z₁ = 3+2i',   color: '#c8922a' },
+      { z: [-3,4], label: 'Z₂ = −3+4i',  color: '#1a4a7a' },
+      { z: [-2,-3],label: 'Z₃ = −2−3i',  color: '#c0392b' },
+      { z: [4,-2], label: 'Z₄ = 4−2i',   color: '#1a6b3c' },
+      { z: [0,3],  label: 'Z₅ = 3i',     color: '#5c2d91' },
+      { z: [5,0],  label: 'Z₆ = 5',      color: '#c0392b' },
+    ];
+
+    points.forEach(p => {
+      const px = cx + p.z[0]*scale;
+      const py = cy - p.z[1]*scale;
+      // dashed lines
+      ctx.setLineDash([4,3]); ctx.strokeStyle = p.color+'66'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(px,cy); ctx.lineTo(px,py); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,py); ctx.lineTo(px,py); ctx.stroke();
+      ctx.setLineDash([]);
+      // dot
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(px,py,6,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(px,py,6,0,Math.PI*2); ctx.stroke();
+      // label
+      ctx.fillStyle = p.color; ctx.font = 'bold 11px Source Serif 4, serif';
+      const lx = p.z[0] >= 0 ? px+10 : px-80;
+      const ly = p.z[1] >= 0 ? py-10 : py+18;
+      ctx.fillText(p.label, lx, ly);
+    });
+  }
+
+  // ── ROOTS OF UNITY ──
+  function drawRoots() {
+    const canvas = document.getElementById('rootsCanvas');
+    if (!canvas) return;
+    const n = parseInt(document.getElementById('rootsN').value);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W/2, cy = H/2;
+    const r = 150;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#f8f3ea'; ctx.fillRect(0,0,W,H);
+
+    // grid
+    ctx.strokeStyle = 'rgba(180,160,120,0.2)'; ctx.lineWidth = 1;
+    for (let x = -3; x <= 3; x++) {
+      const s = r/1.2;
+      ctx.beginPath(); ctx.moveTo(cx+x*s,0); ctx.lineTo(cx+x*s,H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,cy+x*s); ctx.lineTo(W,cy+x*s); ctx.stroke();
+    }
+
+    // axes
+    ctx.strokeStyle = '#1a1208'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
+    ctx.fillStyle = '#1a1208'; ctx.font = '12px JetBrains Mono';
+    ctx.fillText('Re', W-24, cy-8); ctx.fillText('Im', cx+8, 14);
+
+    // unit circle
+    ctx.strokeStyle = 'rgba(200,146,42,0.4)'; ctx.lineWidth = 1.5; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // polygon lines connecting the roots
+    const colors = ['#c8922a','#1a4a7a','#c0392b','#1a6b3c','#5c2d91','#d35400','#2980b9','#8e44ad','#16a085','#2c3e50','#e74c3c','#f39c12'];
+    ctx.strokeStyle = 'rgba(200,146,42,0.25)'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let k = 0; k <= n; k++) {
+      const angle = (2*Math.PI*k/n) - Math.PI/2;
+      const px = cx + r*Math.cos(angle + Math.PI/2);
+      const py = cy - r*Math.sin(angle + Math.PI/2);
+      if (k === 0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    // plot each root
+    for (let k = 0; k < n; k++) {
+      const angle = 2*Math.PI*k/n;
+      const px = cx + r*Math.cos(angle);
+      const py = cy - r*Math.sin(angle);
+      const color = colors[k % colors.length];
+
+      // line from origin
+      ctx.strokeStyle = color+'55'; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(px,py); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // dot
+      ctx.fillStyle = color;
+      ctx.beginPath(); ctx.arc(px,py,7,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(px,py,7,0,Math.PI*2); ctx.stroke();
+
+      // label
+      const deg = Math.round(360*k/n);
+      const lx = px + (px > cx ? 10 : -60);
+      const ly = py + (py > cy ? 16 : -10);
+      ctx.fillStyle = color; ctx.font = 'bold 10px JetBrains Mono';
+      ctx.fillText(`k=${k} (${deg}°)`, lx, ly);
+    }
+
+    // title
+    ctx.fillStyle = '#1a1208'; ctx.font = 'bold 13px Source Serif 4, serif';
+    ctx.fillText(`${n}th roots of unity — ${n} equally spaced points`, cx-140, H-14);
+  }
+</script>
+</body>
+</html>
