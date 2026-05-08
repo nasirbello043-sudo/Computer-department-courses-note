@@ -1,0 +1,3057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Momentum — Complete Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0d1f3c;
+    --blue: #1a4a8a;
+    --accent: #e8a020;
+    --gold: #f0c040;
+    --cream: #fdf8f0;
+    --light: #f5f0e8;
+    --text: #1a1a2e;
+    --muted: #5a6070;
+    --formula-bg: #0d1f3c;
+    --formula-border: #e8a020;
+    --example-bg: #f0f7ff;
+    --example-border: #1a4a8a;
+    --step-bg: #fff8e8;
+    --step-border: #e8a020;
+    --answer-bg: #e8f5e9;
+    --answer-border: #2e7d32;
+    --q-bg: #f3e5f5;
+    --q-border: #6a1b9a;
+    --sidebar-w: 280px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────────────────── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--navy);
+    color: #c8d8f0;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid var(--accent);
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid rgba(232,160,32,0.3);
+    background: linear-gradient(180deg, #0d2a50 0%, var(--navy) 100%);
+  }
+
+  .sidebar-header .book-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .sidebar-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .sidebar-header p {
+    font-size: 11px;
+    color: #8aa0c0;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .toc-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 14px 20px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  .toc-item {
+    display: block;
+    padding: 8px 20px 8px 24px;
+    color: #a0b8d8;
+    text-decoration: none;
+    font-size: 12.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .toc-item:hover, .toc-item.active {
+    background: rgba(232,160,32,0.1);
+    color: #fff;
+    border-left-color: var(--accent);
+  }
+
+  .toc-item .num {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    margin-right: 6px;
+  }
+
+  .toc-sub {
+    padding-left: 38px;
+    font-size: 11.5px;
+    color: #7090b0;
+  }
+
+  /* ── MAIN CONTENT ─────────────────────────────────────────────── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    max-width: 860px;
+    padding: 0 48px 80px;
+    position: relative;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 60%, #0d2a50 100%);
+    color: white;
+    padding: 60px 48px 50px;
+    margin: 0 -48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(232,160,32,0.12);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 25px solid rgba(232,160,32,0.08);
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 15px;
+    color: #a0c0e0;
+    max-width: 540px;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    position: relative;
+  }
+
+  .hero-badge {
+    background: rgba(232,160,32,0.2);
+    border: 1px solid rgba(232,160,32,0.4);
+    color: var(--gold);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── CHAPTER / SECTION ────────────────────────────────────────── */
+  .chapter {
+    margin-bottom: 70px;
+    scroll-margin-top: 24px;
+  }
+
+  .chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .chapter-num {
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .chapter-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .section {
+    margin-bottom: 36px;
+    scroll-margin-top: 24px;
+  }
+
+  .section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--blue);
+    margin-bottom: 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--accent);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── FORMULA BOX ──────────────────────────────────────────────── */
+  .formula-box {
+    background: var(--formula-bg);
+    border: 2px solid var(--formula-border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .formula-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+  }
+
+  .formula-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .formula-main {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    letter-spacing: 1px;
+  }
+
+  .formula-legend {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(232,160,32,0.25);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px;
+  }
+
+  .formula-legend span {
+    font-size: 13px;
+    color: #a0c0e0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .formula-legend span b { color: var(--gold); }
+
+  /* ── DERIVATION ───────────────────────────────────────────────── */
+  .derivation {
+    background: #0a1628;
+    border: 1px solid rgba(232,160,32,0.3);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .derivation-title {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .derivation-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: #d0e4f8;
+  }
+
+  .derivation-step:last-child { border-bottom: none; }
+  .derivation-step .eq { color: #fff; font-weight: 600; min-width: 200px; }
+  .derivation-step .why { color: #6080a0; font-size: 12px; font-style: italic; font-family: 'Source Serif 4', serif; }
+
+  /* ── EXAMPLES ─────────────────────────────────────────────────── */
+  .examples-section {
+    margin: 28px 0;
+  }
+
+  .examples-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--example-bg);
+    border: 1px solid var(--example-border);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .example-card {
+    background: var(--example-bg);
+    border: 1.5px solid var(--example-border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .example-header {
+    background: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .example-header .ex-num {
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .example-header .ex-title {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .example-body { padding: 16px 20px; }
+
+  .given-box {
+    background: #e8f0ff;
+    border-left: 4px solid var(--blue);
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+
+  .given-box .given-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--blue);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .given-box p { margin: 2px 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #1a3060; }
+
+  .solution-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #6a4000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .step-box {
+    background: var(--step-bg);
+    border: 1px solid #e0c080;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+
+  .step-box .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #a06000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .step-box .step-explain {
+    font-size: 13.5px;
+    color: #3a2800;
+    line-height: 1.6;
+  }
+
+  .step-box .step-math {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: #1a3060;
+    background: rgba(255,255,255,0.7);
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .final-answer {
+    background: #1a4a1a;
+    color: #90ee90;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .final-answer::before { content: '✓'; font-size: 18px; }
+
+  /* ── QUESTIONS ────────────────────────────────────────────────── */
+  .questions-section {
+    background: var(--q-bg);
+    border: 2px solid var(--q-border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 40px;
+  }
+
+  .questions-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid rgba(106,27,154,0.25);
+  }
+
+  .questions-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--q-border);
+    border: none;
+    padding: 0;
+  }
+
+  .questions-header .q-icon {
+    background: var(--q-border);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .question-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(106,27,154,0.12);
+    padding-bottom: 18px;
+  }
+
+  .question-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .question-text {
+    font-size: 14.5px;
+    color: #2a0a3a;
+    margin-bottom: 8px;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+  }
+
+  .question-text .q-num {
+    background: var(--q-border);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-top: 2px;
+    white-space: nowrap;
+    height: fit-content;
+  }
+
+  .answer-toggle {
+    background: none;
+    border: 1.5px solid var(--q-border);
+    color: var(--q-border);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s;
+    margin-bottom: 8px;
+  }
+
+  .answer-toggle:hover {
+    background: var(--q-border);
+    color: white;
+  }
+
+  .answer-box {
+    display: none;
+    background: var(--answer-bg);
+    border: 1.5px solid var(--answer-border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: #1a3a1a;
+    line-height: 1.7;
+  }
+
+  .answer-box.show { display: block; }
+
+  .answer-box .ans-step {
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(46,125,50,0.15);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  .answer-box .ans-step:last-child { border-bottom: none; }
+
+  /* ── INFO BOXES ───────────────────────────────────────────────── */
+  .info-box {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .info-box.note { background: #e3f2fd; border-left: 4px solid #1565c0; }
+  .info-box.warning { background: #fff3e0; border-left: 4px solid #e65100; }
+  .info-box.tip { background: #e8f5e9; border-left: 4px solid #2e7d32; }
+
+  .info-box .icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .info-box .content { color: #1a1a2e; }
+  .info-box .content strong { display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── TABLE ────────────────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  th {
+    background: var(--navy);
+    color: var(--gold);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:nth-child(even) td { background: #f0f0f8; }
+
+  /* ── PROGRESS BAR ─────────────────────────────────────────────── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 1000;
+    transition: width 0.2s;
+  }
+
+  /* ── MOBILE TOGGLE ────────────────────────────────────────────── */
+  #menu-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: var(--navy);
+    color: var(--gold);
+    border: 2px solid var(--accent);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    #sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 0 20px 60px; }
+    .hero { margin: 0 -20px 32px; padding: 40px 24px 36px; }
+    .hero h1 { font-size: 36px; }
+    #menu-toggle { display: flex; }
+  }
+
+  /* ── BACK TO TOP ──────────────────────────────────────────────── */
+  #back-top {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--navy);
+    color: var(--gold);
+    border: 2px solid var(--accent);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+    transition: all 0.2s;
+  }
+
+  #back-top:hover { background: var(--accent); color: var(--navy); }
+  #back-top.show { display: flex; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <span class="book-icon">⚛</span>
+    <h2>Linear Momentum</h2>
+    <p>Complete Physics Textbook</p>
+  </div>
+
+  <div class="toc-label">Table of Contents</div>
+
+  <a class="toc-item" onclick="scrollTo('ch1')"><span class="num">01</span> Foundation Concepts</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch1-def')">· Definition of Momentum</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch1-units')">· Units &amp; Vector Nature</a>
+
+  <a class="toc-item" onclick="scrollTo('ch2')"><span class="num">02</span> Newton's Laws &amp; Momentum</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch2-2nd')">· Second Law</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch2-3rd')">· Third Law</a>
+
+  <a class="toc-item" onclick="scrollTo('ch3')"><span class="num">03</span> Impulse</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch3-def')">· Impulse-Momentum Theorem</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch3-graph')">· Force-Time Graphs</a>
+
+  <a class="toc-item" onclick="scrollTo('ch4')"><span class="num">04</span> Conservation of Momentum</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch4-law')">· The Law</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch4-apply')">· 1D &amp; 2D Problems</a>
+
+  <a class="toc-item" onclick="scrollTo('ch5')"><span class="num">05</span> Types of Collisions</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch5-elastic')">· Elastic Collisions</a>
+  <a class="toc-item toc-sub" onclick="scrollTo('ch5-inelastic')">· Inelastic Collisions</a>
+
+  <a class="toc-item" onclick="scrollTo('ch6')"><span class="num">06</span> Explosions</a>
+  <a class="toc-item" onclick="scrollTo('ch7')"><span class="num">07</span> Momentum in 2D</a>
+  <a class="toc-item" onclick="scrollTo('ch8')"><span class="num">08</span> Centre of Mass</a>
+  <a class="toc-item" onclick="scrollTo('ch9')"><span class="num">09</span> Rocket Propulsion</a>
+  <a class="toc-item" onclick="scrollTo('ch10')"><span class="num">10</span> Real-Life Applications</a>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">Physics Textbook · Complete Study Guide</div>
+    <h1>Linear <span>Momentum</span></h1>
+    <p class="hero-sub">A comprehensive guide covering all subtopics — with full derivations, step-by-step worked examples, and practice questions with complete answers.</p>
+    <div class="hero-meta">
+      <span class="hero-badge">10 Chapters</span>
+      <span class="hero-badge">60+ Examples</span>
+      <span class="hero-badge">70+ Questions</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 1: FOUNDATION CONCEPTS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 01</span>
+      <h2>Foundation Concepts</h2>
+    </div>
+
+    <div class="section" id="ch1-def">
+      <h3>1.1 Definition of Linear Momentum</h3>
+      <p>Linear momentum is a fundamental concept in physics that describes the quantity of motion an object possesses. It depends on two things: how massive the object is and how fast it is moving. A heavy, fast-moving truck has much more momentum than a slow, light bicycle.</p>
+      <p>Momentum is <strong>always</strong> a vector quantity — this means it has both a size (magnitude) and a direction. The direction of momentum is always the same as the direction of the object's velocity.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 1 — Linear Momentum</div>
+        <div class="formula-main">p = m × v</div>
+        <div class="formula-legend">
+          <span><b>p</b> = linear momentum (kg·m/s)</span>
+          <span><b>m</b> = mass of the object (kg)</span>
+          <span><b>v</b> = velocity of the object (m/s)</span>
+        </div>
+      </div>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — p = mv</div>
+
+        <!-- Example 1 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">A car moving on a highway</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass of car, m = 1200 kg</p>
+              <p>velocity of car, v = 25 m/s (eastward)</p>
+              <p>Find: momentum p = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write down the formula</div>
+              <div class="step-explain">We need to find momentum. The formula for momentum is:</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Identify and write all known values</div>
+              <div class="step-explain">From the question we know the mass and the velocity:</div>
+              <span class="step-math">m = 1200 kg,  v = 25 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute values into the formula</div>
+              <div class="step-explain">Replace m and v with their values:</div>
+              <span class="step-math">p = 1200 × 25</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Perform the multiplication</div>
+              <span class="step-math">p = 30,000 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — State the direction (momentum is a vector)</div>
+              <div class="step-explain">Since velocity is eastward, momentum is also eastward.</div>
+            </div>
+            <div class="final-answer">p = 30,000 kg·m/s  eastward</div>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">A football being kicked</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass of football, m = 0.45 kg</p>
+              <p>velocity after kick, v = 30 m/s</p>
+              <p>Find: momentum p = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Write all known quantities</div>
+              <span class="step-math">m = 0.45 kg,  v = 30 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute into formula</div>
+              <span class="step-math">p = 0.45 × 30</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate the result</div>
+              <span class="step-math">p = 13.5 kg·m/s</span>
+            </div>
+            <div class="final-answer">p = 13.5 kg·m/s</div>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 3</span>
+            <span class="ex-title">Finding mass from momentum and velocity</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>momentum, p = 500 kg·m/s</p>
+              <p>velocity, v = 20 m/s</p>
+              <p>Find: mass m = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Start with the momentum formula</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Rearrange to make mass (m) the subject</div>
+              <div class="step-explain">Divide both sides of the equation by v:</div>
+              <span class="step-math">m = p ÷ v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute known values</div>
+              <span class="step-math">m = 500 ÷ 20</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Divide to get mass</div>
+              <span class="step-math">m = 25 kg</span>
+            </div>
+            <div class="final-answer">m = 25 kg</div>
+          </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 4</span>
+            <span class="ex-title">Finding velocity from momentum and mass</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass of a truck, m = 5000 kg</p>
+              <p>momentum, p = 75,000 kg·m/s</p>
+              <p>Find: velocity v = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Rearrange to make velocity (v) the subject</div>
+              <div class="step-explain">Divide both sides by m:</div>
+              <span class="step-math">v = p ÷ m</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute all values</div>
+              <span class="step-math">v = 75,000 ÷ 5,000</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate velocity</div>
+              <span class="step-math">v = 15 m/s</span>
+            </div>
+            <div class="final-answer">v = 15 m/s</div>
+          </div>
+        </div>
+
+        <!-- Example 5 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 5</span>
+            <span class="ex-title">Comparing momenta of two objects</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Object A: mass = 2 kg, velocity = 10 m/s</p>
+              <p>Object B: mass = 5 kg, velocity = 4 m/s</p>
+              <p>Find: Which has greater momentum?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula for both objects</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate momentum of Object A</div>
+              <span class="step-math">p_A = 2 × 10 = 20 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate momentum of Object B</div>
+              <span class="step-math">p_B = 5 × 4 = 20 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Compare the results</div>
+              <div class="step-explain">Both objects have the same momentum (20 kg·m/s), even though Object A is lighter and faster while Object B is heavier and slower.</div>
+            </div>
+            <div class="final-answer">p_A = p_B = 20 kg·m/s  (Equal momenta)</div>
+          </div>
+        </div>
+
+        <!-- Example 6 -->
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 6</span>
+            <span class="ex-title">Momentum with negative velocity (opposite direction)</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass of ball, m = 0.5 kg</p>
+              <p>velocity, v = −15 m/s (moving leftward, taking right as positive)</p>
+              <p>Find: momentum p = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">p = m × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Note the sign of velocity</div>
+              <div class="step-explain">The negative sign tells us the ball moves in the leftward (negative) direction. We keep this sign in our calculation.</div>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute values</div>
+              <span class="step-math">p = 0.5 × (−15)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate</div>
+              <span class="step-math">p = −7.5 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Interpret the sign</div>
+              <div class="step-explain">The negative value means the momentum is directed to the LEFT — momentum has both magnitude (7.5) and direction (leftward).</div>
+            </div>
+            <div class="final-answer">p = −7.5 kg·m/s  (7.5 kg·m/s to the left)</div>
+          </div>
+        </div>
+
+      </div><!-- end examples -->
+    </div><!-- end section -->
+
+    <div class="section" id="ch1-units">
+      <h3>1.2 Units and Vector Nature of Momentum</h3>
+      <p>The SI unit of momentum is the <strong>kilogram metre per second (kg·m/s)</strong>. This unit can also be written as a Newton-second (N·s), because 1 N·s = 1 kg·m/s.</p>
+      <p>Because momentum is a vector, when two objects move in opposite directions, we assign one direction as positive and the other as negative. This is crucial in collision and explosion problems.</p>
+
+      <table>
+        <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Vector or Scalar?</th></tr>
+        <tr><td>Momentum</td><td>p</td><td>kg·m/s or N·s</td><td>Vector</td></tr>
+        <tr><td>Mass</td><td>m</td><td>kg</td><td>Scalar</td></tr>
+        <tr><td>Velocity</td><td>v</td><td>m/s</td><td>Vector</td></tr>
+        <tr><td>Speed</td><td>v</td><td>m/s</td><td>Scalar</td></tr>
+      </table>
+
+      <div class="info-box note">
+        <span class="icon">📌</span>
+        <div class="content">
+          <strong>Important Note</strong>
+          Momentum always has the same direction as velocity. If an object moves to the right, its momentum points to the right. If it moves downward, its momentum points downward.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH1 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 1 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Define linear momentum and state its SI unit. Is momentum a scalar or vector quantity? Explain why.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          Linear momentum is the product of an object's mass and its velocity: p = mv. Its SI unit is kg·m/s (also written N·s). Momentum is a VECTOR quantity because it has both magnitude and direction. Since velocity is a vector and mass is a scalar, multiplying them gives a vector — the momentum always points in the same direction as the velocity.
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 70 kg person runs at 5 m/s northward. Calculate their momentum.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Formula: p = m × v</div>
+          <div class="ans-step">Substitute: p = 70 × 5</div>
+          <div class="ans-step">Calculate: p = 350 kg·m/s</div>
+          <div class="ans-step">Direction: northward (same as velocity)</div>
+          <div class="ans-step">∴ p = 350 kg·m/s northward</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> An object has momentum of 180 kg·m/s and a velocity of 12 m/s. What is its mass?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Formula: p = mv  →  m = p ÷ v</div>
+          <div class="ans-step">Substitute: m = 180 ÷ 12</div>
+          <div class="ans-step">Calculate: m = 15 kg</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> A 0.15 kg cricket ball is bowled at 40 m/s. Calculate the momentum of the ball.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Formula: p = m × v</div>
+          <div class="ans-step">Substitute: p = 0.15 × 40</div>
+          <div class="ans-step">Calculate: p = 6 kg·m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> Two balls: Ball X has mass 3 kg and velocity 8 m/s; Ball Y has mass 6 kg and velocity 4 m/s. Compare their momenta. What conclusion can you draw?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">p_X = 3 × 8 = 24 kg·m/s</div>
+          <div class="ans-step">p_Y = 6 × 4 = 24 kg·m/s</div>
+          <div class="ans-step">Conclusion: Both balls have equal momentum (24 kg·m/s). This shows that a lighter, faster object can have the same momentum as a heavier, slower object.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q6</span> A car has momentum 48,000 kg·m/s and mass 1,600 kg. What is the speed of the car?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Formula: p = mv  →  v = p ÷ m</div>
+          <div class="ans-step">Substitute: v = 48,000 ÷ 1,600</div>
+          <div class="ans-step">v = 30 m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q7</span> Explain why momentum is described as "relatively permanent" compared to kinetic energy during a collision.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          Momentum is conserved in ALL collisions (as long as no external forces act on the system) — this is the Law of Conservation of Momentum. Kinetic energy, however, may be lost during inelastic collisions (converted to heat, sound, or deformation). So while momentum is always conserved, kinetic energy is not — making momentum more "reliable" in collision analysis.
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q8</span> A 2000 kg vehicle travels at −10 m/s (taking forward as positive). What does the negative sign tell us about its momentum?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">p = m × v = 2000 × (−10) = −20,000 kg·m/s</div>
+          <div class="ans-step">The negative sign means the vehicle's momentum is in the BACKWARD direction — opposite to the defined positive (forward) direction.</div>
+          <div class="ans-step">Magnitude of momentum = 20,000 kg·m/s, directed backward.</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 1 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 2: NEWTON'S LAWS & MOMENTUM -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 02</span>
+      <h2>Newton's Laws &amp; Momentum</h2>
+    </div>
+
+    <div class="section" id="ch2-2nd">
+      <h3>2.1 Newton's Second Law in Terms of Momentum</h3>
+      <p>Newton's Second Law is most generally stated not as F = ma, but as: <em>the net force on an object equals the rate of change of momentum</em>. This is actually the original form Newton wrote.</p>
+      <p>If the mass of an object remains constant, then changing momentum means changing velocity, which is acceleration — and this gives us the familiar F = ma.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 2 — Newton's Second Law (Momentum Form)</div>
+        <div class="formula-main">F = Δp ÷ Δt = (mv − mu) ÷ Δt</div>
+        <div class="formula-legend">
+          <span><b>F</b> = net force (N)</span>
+          <span><b>Δp</b> = change in momentum (kg·m/s)</span>
+          <span><b>Δt</b> = time interval (s)</span>
+          <span><b>mv</b> = final momentum</span>
+          <span><b>mu</b> = initial momentum</span>
+        </div>
+      </div>
+
+      <div class="derivation">
+        <div class="derivation-title">▸ Derivation: From F = ma to F = Δp/Δt</div>
+        <div class="derivation-step">
+          <span class="eq">F = m × a</span>
+          <span class="why">Newton's 2nd Law (familiar form)</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">a = (v − u) ÷ Δt</span>
+          <span class="why">Definition of acceleration (change in velocity / time)</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">F = m × (v − u) ÷ Δt</span>
+          <span class="why">Substituting acceleration into F = ma</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">F = (mv − mu) ÷ Δt</span>
+          <span class="why">Expanding: m×v = final momentum, m×u = initial momentum</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">F = Δp ÷ Δt</span>
+          <span class="why">Since Δp = mv − mu (change in momentum), this is the final form</span>
+        </div>
+      </div>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — F = Δp/Δt</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Force needed to stop a moving ball</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass, m = 0.5 kg</p>
+              <p>initial velocity, u = 20 m/s</p>
+              <p>final velocity, v = 0 m/s (stopped)</p>
+              <p>time taken, Δt = 0.1 s</p>
+              <p>Find: force F = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">F = (mv − mu) ÷ Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate initial momentum (mu)</div>
+              <span class="step-math">mu = 0.5 × 20 = 10 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate final momentum (mv)</div>
+              <span class="step-math">mv = 0.5 × 0 = 0 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate change in momentum (Δp)</div>
+              <span class="step-math">Δp = mv − mu = 0 − 10 = −10 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Substitute into force formula</div>
+              <span class="step-math">F = −10 ÷ 0.1 = −100 N</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Interpret the sign</div>
+              <div class="step-explain">The negative sign means the force acts OPPOSITE to the initial motion — this makes sense because the force is stopping (decelerating) the ball. The magnitude of the stopping force is 100 N.</div>
+            </div>
+            <div class="final-answer">F = 100 N (opposing direction of motion)</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Calculating force on an accelerating car</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass, m = 800 kg</p>
+              <p>initial velocity, u = 10 m/s</p>
+              <p>final velocity, v = 30 m/s</p>
+              <p>time, Δt = 5 s</p>
+              <p>Find: net force F = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">F = (mv − mu) ÷ Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate initial momentum</div>
+              <span class="step-math">mu = 800 × 10 = 8,000 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate final momentum</div>
+              <span class="step-math">mv = 800 × 30 = 24,000 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Find change in momentum</div>
+              <span class="step-math">Δp = 24,000 − 8,000 = 16,000 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Divide by time to get force</div>
+              <span class="step-math">F = 16,000 ÷ 5 = 3,200 N</span>
+            </div>
+            <div class="final-answer">F = 3,200 N (in direction of motion)</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 3</span>
+            <span class="ex-title">Time taken for a force to change momentum</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>net force, F = 500 N</p>
+              <p>change in momentum, Δp = 2,000 kg·m/s</p>
+              <p>Find: time Δt = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">F = Δp ÷ Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Rearrange to make Δt the subject</div>
+              <div class="step-explain">Multiply both sides by Δt, then divide both sides by F:</div>
+              <span class="step-math">Δt = Δp ÷ F</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute values</div>
+              <span class="step-math">Δt = 2,000 ÷ 500</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate the time</div>
+              <span class="step-math">Δt = 4 seconds</span>
+            </div>
+            <div class="final-answer">Δt = 4 s</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 4</span>
+            <span class="ex-title">A goalkeeper catching a penalty kick</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass of ball, m = 0.45 kg</p>
+              <p>ball velocity before catch, u = −25 m/s (toward goalkeeper)</p>
+              <p>ball velocity after catch, v = 0 m/s</p>
+              <p>time of contact, Δt = 0.2 s</p>
+              <p>Find: average force on the ball</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula</div>
+              <span class="step-math">F = (mv − mu) ÷ Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate initial momentum</div>
+              <span class="step-math">mu = 0.45 × (−25) = −11.25 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate final momentum</div>
+              <span class="step-math">mv = 0.45 × 0 = 0 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Change in momentum</div>
+              <span class="step-math">Δp = 0 − (−11.25) = +11.25 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Calculate force</div>
+              <span class="step-math">F = 11.25 ÷ 0.2 = 56.25 N</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Interpret direction</div>
+              <div class="step-explain">The positive force is directed away from the goalkeeper (opposing the ball's incoming direction).</div>
+            </div>
+            <div class="final-answer">F = 56.25 N (directed away from goalkeeper)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="ch2-3rd">
+      <h3>2.2 Newton's Third Law and Momentum</h3>
+      <p>Newton's Third Law states: <em>"For every action, there is an equal and opposite reaction."</em> In terms of momentum, this means: when two objects interact, the momentum gained by one is exactly equal in size but opposite in direction to the momentum lost by the other. This is why momentum is conserved in all interactions.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 3 — Newton's Third Law (Momentum Form)</div>
+        <div class="formula-main">F_AB = −F_BA  →  Δp_A = −Δp_B</div>
+        <div class="formula-legend">
+          <span><b>F_AB</b> = force A exerts on B</span>
+          <span><b>F_BA</b> = force B exerts on A</span>
+          <span><b>Δp_A</b> = change in momentum of A</span>
+          <span><b>Δp_B</b> = change in momentum of B</span>
+        </div>
+      </div>
+
+      <div class="info-box tip">
+        <span class="icon">💡</span>
+        <div class="content">
+          <strong>Key Insight</strong>
+          Newton's 3rd Law is the reason momentum is conserved! When A pushes B with force F for time Δt, then B pushes back on A with force −F for the same time Δt. The momentum changes are equal and opposite, so the total momentum of the system stays the same.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH2 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 2 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> State Newton's Second Law of Motion in terms of momentum (not F = ma).</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Newton's Second Law states that the net force acting on an object is equal to the rate of change of momentum of that object. Mathematically: F = Δp ÷ Δt = (mv − mu) ÷ Δt. This is the most general and original form of Newton's 2nd Law.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 60 kg skater increases velocity from 2 m/s to 8 m/s in 3 seconds. Calculate the net force acting on the skater.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">F = (mv − mu) ÷ Δt</div>
+          <div class="ans-step">Initial momentum: mu = 60 × 2 = 120 kg·m/s</div>
+          <div class="ans-step">Final momentum: mv = 60 × 8 = 480 kg·m/s</div>
+          <div class="ans-step">Δp = 480 − 120 = 360 kg·m/s</div>
+          <div class="ans-step">F = 360 ÷ 3 = 120 N</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> A force of 200 N acts on a 10 kg object for 5 seconds. By how much does the momentum change?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">F = Δp ÷ Δt  →  Δp = F × Δt</div>
+          <div class="ans-step">Δp = 200 × 5 = 1,000 kg·m/s</div>
+          <div class="ans-step">The momentum increases by 1,000 kg·m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> Explain using Newton's Third Law why when a gun fires a bullet, the gun recoils (kicks back).</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">When the gun fires, it exerts a large forward force on the bullet. By Newton's 3rd Law, the bullet exerts an equal and opposite (backward) force on the gun. This backward force causes the gun to recoil — moving backward with momentum equal in magnitude to the bullet's forward momentum. The total momentum of the system (gun + bullet) remains zero, as it was before firing.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> A 1,500 kg car decelerates from 20 m/s to rest in 4 seconds. Find the braking force applied.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">F = (mv − mu) ÷ Δt</div>
+          <div class="ans-step">mu = 1500 × 20 = 30,000 kg·m/s</div>
+          <div class="ans-step">mv = 1500 × 0 = 0 kg·m/s</div>
+          <div class="ans-step">Δp = 0 − 30,000 = −30,000 kg·m/s</div>
+          <div class="ans-step">F = −30,000 ÷ 4 = −7,500 N</div>
+          <div class="ans-step">Braking force = 7,500 N (opposing motion)</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 2 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 3: IMPULSE -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 03</span>
+      <h2>Impulse</h2>
+    </div>
+
+    <div class="section" id="ch3-def">
+      <h3>3.1 Definition and the Impulse-Momentum Theorem</h3>
+      <p>Impulse is the product of a force and the time during which that force acts. It measures the overall "push" given to an object. A large force acting for a short time can produce the same impulse as a small force acting for a long time — and both will produce the same change in momentum.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 4 — Impulse</div>
+        <div class="formula-main">J = F × Δt</div>
+        <div class="formula-legend">
+          <span><b>J</b> = impulse (N·s or kg·m/s)</span>
+          <span><b>F</b> = net force (N)</span>
+          <span><b>Δt</b> = time interval (s)</span>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 5 — Impulse-Momentum Theorem</div>
+        <div class="formula-main">J = Δp = mv − mu</div>
+        <div class="formula-legend">
+          <span><b>J</b> = impulse (N·s)</span>
+          <span><b>Δp</b> = change in momentum (kg·m/s)</span>
+          <span><b>mv</b> = final momentum</span>
+          <span><b>mu</b> = initial momentum</span>
+        </div>
+      </div>
+
+      <div class="derivation">
+        <div class="derivation-title">▸ Derivation: Impulse-Momentum Theorem</div>
+        <div class="derivation-step">
+          <span class="eq">F = Δp ÷ Δt</span>
+          <span class="why">Newton's 2nd Law (rate of change of momentum)</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">F × Δt = Δp</span>
+          <span class="why">Multiply both sides by Δt</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">J = Δp</span>
+          <span class="why">Since Impulse J = F × Δt, substitute to get the theorem</span>
+        </div>
+        <div class="derivation-step">
+          <span class="eq">F × Δt = mv − mu</span>
+          <span class="why">Expanding Δp = final momentum − initial momentum</span>
+        </div>
+      </div>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — Impulse</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Impulse from a known force and time</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>force applied, F = 150 N</p>
+              <p>time of application, Δt = 0.4 s</p>
+              <p>Find: impulse J = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the formula for impulse</div>
+              <span class="step-math">J = F × Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Identify all given values</div>
+              <span class="step-math">F = 150 N,  Δt = 0.4 s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute values into formula</div>
+              <span class="step-math">J = 150 × 0.4</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Multiply to find impulse</div>
+              <span class="step-math">J = 60 N·s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — State meaning</div>
+              <div class="step-explain">An impulse of 60 N·s means the object's momentum changes by 60 kg·m/s in the direction of the force.</div>
+            </div>
+            <div class="final-answer">J = 60 N·s</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Using Impulse-Momentum Theorem to find final velocity</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass, m = 5 kg</p>
+              <p>initial velocity, u = 3 m/s</p>
+              <p>force, F = 20 N</p>
+              <p>time, Δt = 2 s</p>
+              <p>Find: final velocity v = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the Impulse-Momentum Theorem</div>
+              <span class="step-math">F × Δt = mv − mu</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate the impulse (left side)</div>
+              <span class="step-math">J = F × Δt = 20 × 2 = 40 N·s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate initial momentum (mu)</div>
+              <span class="step-math">mu = 5 × 3 = 15 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Set up the equation using the theorem</div>
+              <span class="step-math">40 = (5 × v) − 15</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Solve for final velocity v</div>
+              <span class="step-math">5v = 40 + 15 = 55</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Divide to get v</div>
+              <span class="step-math">v = 55 ÷ 5 = 11 m/s</span>
+            </div>
+            <div class="final-answer">v = 11 m/s</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 3</span>
+            <span class="ex-title">Airbag safety — why longer contact time reduces force</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>A 70 kg person moving at 15 m/s stops in a crash.</p>
+              <p>Scenario A (no airbag): stop time Δt = 0.02 s</p>
+              <p>Scenario B (with airbag): stop time Δt = 0.2 s</p>
+              <p>Find: Force in each scenario</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Calculate change in momentum (same for both)</div>
+              <span class="step-math">Δp = mv − mu = (70 × 0) − (70 × 15) = −1,050 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Force in Scenario A (no airbag)</div>
+              <span class="step-math">F_A = Δp ÷ Δt = 1,050 ÷ 0.02 = 52,500 N</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Force in Scenario B (with airbag)</div>
+              <span class="step-math">F_B = Δp ÷ Δt = 1,050 ÷ 0.2 = 5,250 N</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Compare the forces</div>
+              <div class="step-explain">The airbag reduces the force by a factor of 10 — from 52,500 N down to 5,250 N. This is why airbags save lives: same impulse (same change in momentum), but much longer time = much smaller force on the body.</div>
+            </div>
+            <div class="final-answer">Without airbag: 52,500 N  |  With airbag: 5,250 N</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 4</span>
+            <span class="ex-title">Finding the time of contact from impulse data</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>impulse, J = 90 N·s</p>
+              <p>average force during contact, F = 450 N</p>
+              <p>Find: time of contact Δt = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the impulse formula</div>
+              <span class="step-math">J = F × Δt</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Rearrange for Δt</div>
+              <div class="step-explain">Divide both sides by F:</div>
+              <span class="step-math">Δt = J ÷ F</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute values</div>
+              <span class="step-math">Δt = 90 ÷ 450</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate</div>
+              <span class="step-math">Δt = 0.2 s</span>
+            </div>
+            <div class="final-answer">Δt = 0.2 s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="ch3-graph">
+      <h3>3.2 Force-Time Graphs and Impulse</h3>
+      <p>When force varies over time, we cannot simply multiply F × Δt. Instead, the impulse is equal to the <strong>area under the Force-Time graph</strong>. This is a very important concept for exam questions involving graphs.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 6 — Impulse from Force-Time Graph</div>
+        <div class="formula-main">J = Area under F-t graph</div>
+        <div class="formula-legend">
+          <span><b>Rectangle:</b> Area = base × height = Δt × F</span>
+          <span><b>Triangle:</b> Area = ½ × base × height = ½ × Δt × F_max</span>
+          <span><b>Trapezoid:</b> Area = ½ × (F₁ + F₂) × Δt</span>
+        </div>
+      </div>
+
+      <div class="info-box warning">
+        <span class="icon">⚠</span>
+        <div class="content">
+          <strong>Exam Tip</strong>
+          In a Force-Time graph, ALWAYS identify the shape under the curve first (rectangle, triangle, or trapezoid) before calculating the area. Each shape has a different area formula.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH3 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 3 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Define impulse and state the Impulse-Momentum Theorem clearly.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Impulse (J) is the product of force and the time for which the force acts: J = F × Δt. The unit of impulse is N·s (Newton-second), which is the same as kg·m/s. The Impulse-Momentum Theorem states that the impulse acting on an object equals the change in momentum of that object: J = Δp = mv − mu. This means impulse causes and equals the change in momentum.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 0.2 kg ball hits a wall at 10 m/s and bounces back at 8 m/s. The contact time is 0.05 s. Find the impulse and the average force exerted by the wall on the ball.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Taking direction toward wall as positive: u = +10 m/s, v = −8 m/s</div>
+          <div class="ans-step">Δp = mv − mu = (0.2 × −8) − (0.2 × 10) = −1.6 − 2 = −3.6 kg·m/s</div>
+          <div class="ans-step">Impulse J = Δp = −3.6 N·s (magnitude = 3.6 N·s away from wall)</div>
+          <div class="ans-step">F = Δp ÷ Δt = 3.6 ÷ 0.05 = 72 N (away from wall)</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Why does a cricket player move their hands backward when catching a fast ball? Explain using impulse theory.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">By moving the hands backward, the player increases the time (Δt) over which the ball comes to rest. Since Impulse = F × Δt = Δp, and Δp is fixed (the ball must stop), increasing Δt means the average force F on the hands must DECREASE. This reduces the pain and risk of injury. Same principle applies to airbags, crumple zones, and gym mats.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> A force of 300 N acts on a 15 kg object for 6 seconds. If the object starts from rest, what is its final velocity?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Using J = mv − mu and J = F × Δt</div>
+          <div class="ans-step">J = 300 × 6 = 1,800 N·s</div>
+          <div class="ans-step">mu = 15 × 0 = 0 (starts from rest)</div>
+          <div class="ans-step">1,800 = 15v − 0</div>
+          <div class="ans-step">v = 1,800 ÷ 15 = 120 m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> A Force-Time graph shows a triangular shape with a base of 4 s and a peak force of 600 N. Calculate the impulse.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">For a triangle: Area = ½ × base × height</div>
+          <div class="ans-step">J = ½ × 4 × 600</div>
+          <div class="ans-step">J = ½ × 2400 = 1,200 N·s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q6</span> A 1,200 kg car is brought from 25 m/s to rest. Calculate: (a) the change in momentum, (b) the impulse, and (c) the braking force if the car stops in 5 seconds.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">(a) Δp = mv − mu = (1200×0) − (1200×25) = −30,000 kg·m/s</div>
+          <div class="ans-step">(b) Impulse J = Δp = −30,000 N·s (magnitude = 30,000 N·s)</div>
+          <div class="ans-step">(c) F = Δp ÷ Δt = 30,000 ÷ 5 = 6,000 N (braking force)</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 3 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 4: CONSERVATION OF MOMENTUM -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 04</span>
+      <h2>Conservation of Linear Momentum</h2>
+    </div>
+
+    <div class="section" id="ch4-law">
+      <h3>4.1 The Law of Conservation of Momentum</h3>
+      <p>This is one of the most powerful laws in all of physics. It states that in an isolated system (where no external forces act), the total momentum before any event equals the total momentum after that event. Collisions, explosions, and separations all obey this law.</p>
+      <p>An <strong>isolated system</strong> is one where no net external force acts. Gravity and normal force often cancel each other, making horizontal motion effectively isolated.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 7 — Conservation of Momentum</div>
+        <div class="formula-main">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</div>
+        <div class="formula-legend">
+          <span><b>m₁, m₂</b> = masses of objects 1 and 2</span>
+          <span><b>u₁, u₂</b> = initial velocities</span>
+          <span><b>v₁, v₂</b> = final velocities</span>
+          <span><b>Left side</b> = total momentum before</span>
+          <span><b>Right side</b> = total momentum after</span>
+        </div>
+      </div>
+
+      <div class="info-box note">
+        <span class="icon">📌</span>
+        <div class="content">
+          <strong>Conditions for Conservation</strong>
+          Conservation of momentum applies ONLY when: (1) The system is closed (no mass enters or leaves), and (2) No net external force acts on the system. Internal forces between the objects do NOT affect conservation — they cancel out by Newton's 3rd Law.
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="ch4-apply">
+      <h3>4.2 Applying Conservation of Momentum</h3>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — Conservation of Momentum</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Two trolleys colliding and sticking together</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Trolley 1: m₁ = 4 kg, u₁ = 6 m/s (rightward)</p>
+              <p>Trolley 2: m₂ = 2 kg, u₂ = 0 m/s (at rest)</p>
+              <p>After collision: they stick together</p>
+              <p>Find: common velocity v after collision</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write the conservation of momentum formula</div>
+              <div class="step-explain">Since they stick together, they have a COMMON final velocity v:</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = (m₁ + m₂) × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate total initial momentum (left side)</div>
+              <span class="step-math">(4 × 6) + (2 × 0) = 24 + 0 = 24 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Set up equation for right side</div>
+              <span class="step-math">(4 + 2) × v = 6v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Write the complete equation</div>
+              <span class="step-math">24 = 6v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Solve for v</div>
+              <span class="step-math">v = 24 ÷ 6 = 4 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — State direction</div>
+              <div class="step-explain">The result is positive, so the combined object moves in the original rightward direction of Trolley 1.</div>
+            </div>
+            <div class="final-answer">v = 4 m/s rightward</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Two moving objects colliding — finding final velocity of one</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Ball A: m₁ = 3 kg, u₁ = 8 m/s</p>
+              <p>Ball B: m₂ = 5 kg, u₂ = 2 m/s (same direction)</p>
+              <p>After collision: v₁ = 4 m/s</p>
+              <p>Find: final velocity of Ball B, v₂ = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Write conservation of momentum formula</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate left side (total initial momentum)</div>
+              <span class="step-math">(3 × 8) + (5 × 2) = 24 + 10 = 34 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate known part of right side (m₁v₁)</div>
+              <span class="step-math">m₁v₁ = 3 × 4 = 12 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Set up equation</div>
+              <span class="step-math">34 = 12 + 5v₂</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Solve for v₂</div>
+              <span class="step-math">5v₂ = 34 − 12 = 22</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Divide to find v₂</div>
+              <span class="step-math">v₂ = 22 ÷ 5 = 4.4 m/s</span>
+            </div>
+            <div class="final-answer">v₂ = 4.4 m/s (in original direction)</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 3</span>
+            <span class="ex-title">Head-on collision (objects moving toward each other)</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Object A: m₁ = 6 kg, u₁ = +10 m/s (rightward)</p>
+              <p>Object B: m₂ = 4 kg, u₂ = −5 m/s (leftward)</p>
+              <p>After collision: they stick together</p>
+              <p>Find: common velocity v = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Note the direction signs carefully</div>
+              <div class="step-explain">Rightward = positive (+), leftward = negative (−). Object B moves leftward so u₂ = −5 m/s.</div>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Write the formula (stick together = common velocity)</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = (m₁ + m₂) × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate total initial momentum</div>
+              <span class="step-math">(6 × 10) + (4 × −5) = 60 + (−20) = 60 − 20 = 40 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Set up and solve equation</div>
+              <span class="step-math">(6 + 4) × v = 40</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Calculate v</div>
+              <span class="step-math">10v = 40  →  v = 40 ÷ 10 = 4 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Interpret the sign</div>
+              <div class="step-explain">Positive result means the combined object moves RIGHTWARD — in the direction that Object A was originally moving.</div>
+            </div>
+            <div class="final-answer">v = 4 m/s rightward</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 4</span>
+            <span class="ex-title">Recoil — a person jumping off a boat</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Mass of person, m₁ = 60 kg</p>
+              <p>Mass of boat, m₂ = 120 kg</p>
+              <p>Initially everything at rest (u = 0 for both)</p>
+              <p>Person jumps with velocity v₁ = +5 m/s</p>
+              <p>Find: velocity of boat v₂ = ?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — State initial total momentum</div>
+              <div class="step-explain">Everything is at rest, so total initial momentum = zero.</div>
+              <span class="step-math">Total initial momentum = 0 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Write conservation equation</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute initial values (both at rest)</div>
+              <span class="step-math">0 + 0 = (60 × 5) + (120 × v₂)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Expand the right side</div>
+              <span class="step-math">0 = 300 + 120v₂</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Solve for v₂</div>
+              <span class="step-math">120v₂ = −300</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Calculate v₂</div>
+              <span class="step-math">v₂ = −300 ÷ 120 = −2.5 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 7 — Interpret result</div>
+              <div class="step-explain">The negative sign means the boat moves in the OPPOSITE direction to the person — the boat moves backward as the person jumps forward.</div>
+            </div>
+            <div class="final-answer">v₂ = 2.5 m/s backward (opposite to person's jump)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH4 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 4 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> State the Law of Conservation of Momentum and give TWO conditions under which it applies.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">The Law of Conservation of Momentum states that the total linear momentum of a system remains constant (does not change) provided no net external force acts on the system. Conditions: (1) The system must be closed — no mass enters or leaves. (2) No net external force acts on the system — internal forces between objects in the system do not count because they cancel out by Newton's 3rd Law.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 5 kg object moving at 10 m/s collides with a 3 kg object at rest. They stick together. Find their common velocity after collision.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">m₁u₁ + m₂u₂ = (m₁ + m₂)v</div>
+          <div class="ans-step">(5 × 10) + (3 × 0) = (5 + 3) × v</div>
+          <div class="ans-step">50 = 8v</div>
+          <div class="ans-step">v = 50 ÷ 8 = 6.25 m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Object A (2 kg, 6 m/s rightward) hits Object B (4 kg, 1 m/s rightward). After the collision, A moves at 2 m/s rightward. Find B's final velocity.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</div>
+          <div class="ans-step">(2×6) + (4×1) = (2×2) + 4v₂</div>
+          <div class="ans-step">12 + 4 = 4 + 4v₂</div>
+          <div class="ans-step">16 − 4 = 4v₂  →  12 = 4v₂</div>
+          <div class="ans-step">v₂ = 3 m/s rightward</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> A 80 kg astronaut in space pushes off from a 400 kg spacecraft at 2 m/s. If both were initially at rest, what is the spacecraft's recoil velocity?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Initial total momentum = 0 (both at rest)</div>
+          <div class="ans-step">0 = m₁v₁ + m₂v₂</div>
+          <div class="ans-step">0 = (80 × 2) + (400 × v₂)</div>
+          <div class="ans-step">0 = 160 + 400v₂</div>
+          <div class="ans-step">v₂ = −160 ÷ 400 = −0.4 m/s</div>
+          <div class="ans-step">Spacecraft moves at 0.4 m/s in opposite direction to astronaut.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> Two objects of 3 kg and 5 kg move toward each other at 4 m/s and 2 m/s respectively. After collision they stick together. Find the final velocity and direction.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Let rightward = positive: u₁ = +4 m/s, u₂ = −2 m/s</div>
+          <div class="ans-step">(3×4) + (5×−2) = (3+5)v</div>
+          <div class="ans-step">12 + (−10) = 8v</div>
+          <div class="ans-step">2 = 8v  →  v = 0.25 m/s</div>
+          <div class="ans-step">Positive result: moves rightward (direction of the 3 kg object)</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q6</span> Distinguish between internal forces and external forces in the context of conservation of momentum. Which one affects conservation?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Internal forces are forces that objects within the system exert on each other (e.g., collision forces between two balls). By Newton's 3rd Law, these forces always come in equal and opposite pairs, so they cancel — they do NOT change the total momentum of the system. External forces are forces from outside the system (e.g., friction, air resistance, gravity from outside). External forces CAN change the total momentum. Conservation only holds when external forces are zero or balanced.</div>
+      </div>
+    </div>
+  </div><!-- end chapter 4 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 5: TYPES OF COLLISIONS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 05</span>
+      <h2>Types of Collisions</h2>
+    </div>
+
+    <p>Not all collisions are the same. While momentum is ALWAYS conserved in every type of collision (in an isolated system), kinetic energy behaves differently depending on the type of collision.</p>
+
+    <table>
+      <tr><th>Type</th><th>Momentum Conserved?</th><th>Kinetic Energy Conserved?</th><th>Objects After</th></tr>
+      <tr><td>Elastic</td><td>✅ Yes</td><td>✅ Yes</td><td>Separate (bounce off)</td></tr>
+      <tr><td>Inelastic</td><td>✅ Yes</td><td>❌ No (some lost)</td><td>Separate</td></tr>
+      <tr><td>Perfectly Inelastic</td><td>✅ Yes</td><td>❌ No (maximum lost)</td><td>Stick together</td></tr>
+    </table>
+
+    <div class="section" id="ch5-elastic">
+      <h3>5.1 Elastic Collisions</h3>
+      <p>In an elastic collision, both momentum AND kinetic energy are perfectly conserved. The objects bounce off each other without any permanent deformation or energy loss. This is an ideal situation — perfectly elastic collisions rarely happen in real life but are a useful model (e.g., billiard balls, gas molecules).</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 8 — Elastic Collision (Momentum + KE both conserved)</div>
+        <div class="formula-main">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</div>
+        <div class="formula-legend">
+          <span><b>AND</b></span>
+          <span><b>½m₁u₁² + ½m₂u₂²</b> = <b>½m₁v₁² + ½m₂v₂²</b></span>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 9 — Elastic Collision Velocity Equations (Equal masses or derivation result)</div>
+        <div class="formula-main">v₁ = (m₁−m₂)u₁ + 2m₂u₂) ÷ (m₁+m₂)</div>
+        <div class="formula-legend">
+          <span><b>v₂</b> = (2m₁u₁ + (m₂−m₁)u₂) ÷ (m₁+m₂)</span>
+          <span>These give final velocities directly without needing two simultaneous equations</span>
+        </div>
+      </div>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — Elastic Collisions</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Equal mass elastic collision (special case)</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Ball 1: m₁ = 2 kg, u₁ = 10 m/s</p>
+              <p>Ball 2: m₂ = 2 kg, u₂ = 0 m/s (at rest)</p>
+              <p>Elastic collision</p>
+              <p>Find: v₁ and v₂</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — For equal masses in elastic collision, the result is: Ball 1 stops, Ball 2 moves with Ball 1's original velocity</div>
+              <div class="step-explain">This is a famous result. When two objects of equal mass collide elastically and one is at rest, they exchange velocities — the moving one stops and the stationary one moves at the original speed.</div>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Verify with momentum formula</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Substitute (assuming v₁ = 0, v₂ = 10)</div>
+              <span class="step-math">(2×10) + (2×0) = (2×0) + (2×10)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Check: left side = right side</div>
+              <span class="step-math">20 = 20 ✓ (Momentum conserved)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Also check KE</div>
+              <span class="step-math">½(2)(10²) = 100 J   |   ½(2)(10²) = 100 J ✓</span>
+            </div>
+            <div class="final-answer">v₁ = 0 m/s  |  v₂ = 10 m/s</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Elastic collision with unequal masses</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>m₁ = 4 kg, u₁ = 8 m/s</p>
+              <p>m₂ = 2 kg, u₂ = 2 m/s (same direction)</p>
+              <p>Elastic collision</p>
+              <p>Find: v₁ and v₂</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Use elastic collision velocity formula for v₁</div>
+              <span class="step-math">v₁ = [(m₁−m₂)u₁ + 2m₂u₂] ÷ (m₁+m₂)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Substitute all values for v₁</div>
+              <span class="step-math">v₁ = [(4−2)×8 + 2×2×2] ÷ (4+2)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate numerator step by step</div>
+              <span class="step-math">(2×8) + (4×2) = 16 + 8 = 24</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Divide by (m₁+m₂) = 6</div>
+              <span class="step-math">v₁ = 24 ÷ 6 = 4 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Use formula for v₂</div>
+              <span class="step-math">v₂ = [2m₁u₁ + (m₂−m₁)u₂] ÷ (m₁+m₂)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Substitute for v₂</div>
+              <span class="step-math">v₂ = [2×4×8 + (2−4)×2] ÷ 6 = [64 + (−4)] ÷ 6 = 60 ÷ 6 = 10 m/s</span>
+            </div>
+            <div class="final-answer">v₁ = 4 m/s  |  v₂ = 10 m/s (both rightward)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="ch5-inelastic">
+      <h3>5.2 Inelastic and Perfectly Inelastic Collisions</h3>
+      <p>In an inelastic collision, momentum is conserved but kinetic energy is NOT fully conserved. Some kinetic energy is converted into other forms — heat, sound, or deformation energy. Real-world collisions (car crashes, ball hitting clay) are inelastic.</p>
+      <p>A <strong>perfectly inelastic collision</strong> is the extreme case where the objects stick together after the collision, moving as one unit. This results in the MAXIMUM possible loss of kinetic energy, though momentum is still conserved.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Formula 10 — Perfectly Inelastic Collision</div>
+        <div class="formula-main">m₁u₁ + m₂u₂ = (m₁ + m₂) × v</div>
+        <div class="formula-legend">
+          <span><b>v</b> = common final velocity (both objects)</span>
+          <span><b>KE lost</b> = KE_before − KE_after</span>
+          <span><b>KE</b> = ½mv²</span>
+        </div>
+      </div>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — Inelastic Collisions</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Finding kinetic energy lost in a perfectly inelastic collision</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>m₁ = 3 kg, u₁ = 10 m/s</p>
+              <p>m₂ = 2 kg, u₂ = 0 m/s</p>
+              <p>They stick together after collision</p>
+              <p>Find: (a) final velocity v, (b) KE lost</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Find final velocity using momentum conservation</div>
+              <span class="step-math">m₁u₁ + m₂u₂ = (m₁ + m₂) × v</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Calculate initial total momentum</div>
+              <span class="step-math">(3 × 10) + (2 × 0) = 30 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Solve for v</div>
+              <span class="step-math">(3 + 2) × v = 30  →  5v = 30  →  v = 6 m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate KE before collision</div>
+              <span class="step-math">KE_before = ½ × 3 × 10² + ½ × 2 × 0² = ½ × 3 × 100 = 150 J</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Calculate KE after collision</div>
+              <span class="step-math">KE_after = ½ × (3+2) × 6² = ½ × 5 × 36 = 90 J</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Find KE lost</div>
+              <span class="step-math">KE_lost = KE_before − KE_after = 150 − 90 = 60 J</span>
+            </div>
+            <div class="final-answer">v = 6 m/s  |  KE lost = 60 J</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Verifying whether a collision is elastic or inelastic</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>m₁ = 2 kg: u₁ = 5 m/s → v₁ = 1 m/s</p>
+              <p>m₂ = 2 kg: u₂ = 1 m/s → v₂ = 5 m/s</p>
+              <p>Is this collision elastic or inelastic?</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Check momentum conservation</div>
+              <span class="step-math">Before: (2×5) + (2×1) = 10 + 2 = 12 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Momentum after</div>
+              <span class="step-math">After: (2×1) + (2×5) = 2 + 10 = 12 kg·m/s ✓</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Check KE before</div>
+              <span class="step-math">KE_before = ½(2)(5²) + ½(2)(1²) = 25 + 1 = 26 J</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Check KE after</div>
+              <span class="step-math">KE_after = ½(2)(1²) + ½(2)(5²) = 1 + 25 = 26 J ✓</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Conclusion</div>
+              <div class="step-explain">Both momentum AND kinetic energy are conserved. This is an ELASTIC collision. The objects simply exchanged velocities (equal mass elastic collision rule).</div>
+            </div>
+            <div class="final-answer">ELASTIC collision — both momentum and KE are conserved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH5 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 5 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Clearly distinguish between elastic and inelastic collisions. Which type conserves kinetic energy?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">In an elastic collision, BOTH momentum and kinetic energy are conserved — objects bounce off each other with no energy loss. Example: billiard balls. In an inelastic collision, only momentum is conserved; kinetic energy is lost to heat, sound, or deformation. In a perfectly inelastic collision, objects stick together and the maximum possible KE is lost. Only elastic collisions conserve kinetic energy.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 6 kg object at 8 m/s hits a 4 kg object at rest. They stick together. Find: (a) final velocity, (b) initial KE, (c) final KE, (d) KE lost.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">(a) (6×8) + 0 = (6+4)v  →  48 = 10v  →  v = 4.8 m/s</div>
+          <div class="ans-step">(b) KE_i = ½(6)(8²) = ½(6)(64) = 192 J</div>
+          <div class="ans-step">(c) KE_f = ½(10)(4.8²) = ½(10)(23.04) = 115.2 J</div>
+          <div class="ans-step">(d) KE_lost = 192 − 115.2 = 76.8 J</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Two equal-mass balls collide elastically. Ball 1 moves at 6 m/s and Ball 2 is at rest. What are their velocities after the collision?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">For equal-mass elastic collision: the objects exchange velocities.</div>
+          <div class="ans-step">Ball 1 final velocity: v₁ = 0 m/s (stops)</div>
+          <div class="ans-step">Ball 2 final velocity: v₂ = 6 m/s (moves at original speed of Ball 1)</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> A 1 kg ball moving at 4 m/s hits a 3 kg ball at rest. After the elastic collision, Ball 1 has velocity 2 m/s backward. Find Ball 2's final velocity and verify momentum conservation.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Initial momentum: (1×4) + (3×0) = 4 kg·m/s</div>
+          <div class="ans-step">After: (1×−2) + (3×v₂) = 4</div>
+          <div class="ans-step">−2 + 3v₂ = 4  →  3v₂ = 6  →  v₂ = 2 m/s</div>
+          <div class="ans-step">Check: (1×−2) + (3×2) = −2 + 6 = 4 ✓ Momentum conserved</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> What is the coefficient of restitution (e)? What value does it have for (a) a perfectly elastic collision and (b) a perfectly inelastic collision?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">The coefficient of restitution (e) is the ratio of the relative velocity of separation to the relative velocity of approach after a collision: e = (v₂ − v₁) ÷ (u₁ − u₂). It measures how "bouncy" a collision is. (a) Perfectly elastic: e = 1 (objects bounce back with same relative speed). (b) Perfectly inelastic: e = 0 (objects stick together, no separation). Real collisions have 0 &lt; e &lt; 1.</div>
+      </div>
+    </div>
+  </div><!-- end chapter 5 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 6: EXPLOSIONS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 06</span>
+      <h2>Explosions</h2>
+    </div>
+
+    <p>An explosion is the reverse of a perfectly inelastic collision. Objects that are initially together (at rest or moving) fly apart. Conservation of momentum still applies — this is what makes rocket science possible.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 11 — Explosion from Rest</div>
+      <div class="formula-main">0 = m₁v₁ + m₂v₂</div>
+      <div class="formula-legend">
+        <span><b>Total initial momentum = 0</b> (system at rest before explosion)</span>
+        <span><b>m₁v₁ = −m₂v₂</b> (fragments move in opposite directions)</span>
+        <span><b>|m₁v₁|</b> = <b>|m₂v₂|</b> (equal magnitudes, opposite directions)</span>
+      </div>
+    </div>
+
+    <div class="examples-section">
+      <div class="examples-label">▸ WORKED EXAMPLES — Explosions</div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 1</span>
+          <span class="ex-title">A gun firing a bullet (recoil)</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>mass of bullet, m₁ = 0.02 kg</p>
+            <p>mass of gun, m₂ = 2 kg</p>
+            <p>velocity of bullet, v₁ = +400 m/s (forward)</p>
+            <p>Both initially at rest</p>
+            <p>Find: recoil velocity of gun, v₂ = ?</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — State initial total momentum</div>
+            <div class="step-explain">Gun and bullet are both at rest before firing, so total initial momentum = 0.</div>
+            <span class="step-math">Total initial p = 0 kg·m/s</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Write conservation equation</div>
+            <span class="step-math">0 = m₁v₁ + m₂v₂</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Substitute known values</div>
+            <span class="step-math">0 = (0.02 × 400) + (2 × v₂)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Simplify the left side</div>
+            <span class="step-math">0 = 8 + 2v₂</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 5 — Solve for v₂</div>
+            <span class="step-math">2v₂ = −8  →  v₂ = −4 m/s</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 6 — Interpret the result</div>
+            <div class="step-explain">The negative sign confirms the gun recoils BACKWARD (opposite to the bullet's forward motion). The gun moves at 4 m/s backward.</div>
+          </div>
+          <div class="final-answer">v₂ = 4 m/s backward (recoil velocity)</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 2</span>
+          <span class="ex-title">A bomb exploding into two fragments</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>Total mass before explosion = 10 kg (at rest)</p>
+            <p>Fragment A: mass = 4 kg, velocity = ? (rightward)</p>
+            <p>Fragment B: mass = 6 kg, velocity = −15 m/s (leftward)</p>
+            <p>Find: velocity of Fragment A</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Total initial momentum = 0 (at rest)</div>
+            <span class="step-math">Total initial p = 0</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Write conservation equation</div>
+            <span class="step-math">0 = m_A × v_A + m_B × v_B</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Substitute values</div>
+            <span class="step-math">0 = (4 × v_A) + (6 × −15)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Expand</div>
+            <span class="step-math">0 = 4v_A − 90</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 5 — Solve for v_A</div>
+            <span class="step-math">4v_A = 90  →  v_A = 90 ÷ 4 = 22.5 m/s</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 6 — Confirm direction</div>
+            <div class="step-explain">Fragment A moves rightward (+22.5 m/s), Fragment B moves leftward (−15 m/s). They move in opposite directions, as expected in an explosion.</div>
+          </div>
+          <div class="final-answer">v_A = 22.5 m/s rightward</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 3</span>
+          <span class="ex-title">Rocket propulsion in space</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>Initial mass of rocket + fuel = 5,000 kg (at rest)</p>
+            <p>Mass of exhaust ejected = 500 kg at velocity = −200 m/s (backward)</p>
+            <p>Remaining rocket mass = 4,500 kg</p>
+            <p>Find: velocity of rocket after ejecting exhaust</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Initial state: everything at rest, p_total = 0</div>
+            <span class="step-math">p_total = 0</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Write conservation equation</div>
+            <span class="step-math">0 = m_rocket × v_rocket + m_exhaust × v_exhaust</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Substitute values</div>
+            <span class="step-math">0 = (4500 × v_rocket) + (500 × −200)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Simplify</div>
+            <span class="step-math">0 = 4500 v_rocket − 100,000</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 5 — Solve for rocket velocity</div>
+            <span class="step-math">4500 v_rocket = 100,000</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 6 — Divide</div>
+            <span class="step-math">v_rocket = 100,000 ÷ 4500 ≈ 22.2 m/s (forward)</span>
+          </div>
+          <div class="final-answer">Rocket velocity ≈ 22.2 m/s forward</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH6 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 6 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Explain why a gun recoils when fired. Use the Law of Conservation of Momentum in your answer.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Before firing, both gun and bullet are at rest — total momentum = 0. When the gun fires, it gives the bullet a large forward momentum. By conservation of momentum, the total must remain zero. Therefore, the gun must receive an equal and opposite (backward) momentum to balance the bullet's forward momentum. This backward motion of the gun is called recoil. Gun recoil: m_gun × v_gun = −m_bullet × v_bullet.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 5 kg object at rest explodes into two pieces: a 2 kg piece and a 3 kg piece. If the 3 kg piece moves at 10 m/s to the right, find the velocity of the 2 kg piece.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Initial p = 0 (at rest)</div>
+          <div class="ans-step">0 = (2 × v₁) + (3 × 10)</div>
+          <div class="ans-step">0 = 2v₁ + 30</div>
+          <div class="ans-step">2v₁ = −30  →  v₁ = −15 m/s</div>
+          <div class="ans-step">The 2 kg piece moves at 15 m/s to the LEFT.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> A 0.05 kg bullet is fired from a 3 kg rifle. The bullet leaves at 300 m/s. Calculate the recoil velocity of the rifle.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">0 = (0.05 × 300) + (3 × v_rifle)</div>
+          <div class="ans-step">0 = 15 + 3v_rifle</div>
+          <div class="ans-step">v_rifle = −15 ÷ 3 = −5 m/s</div>
+          <div class="ans-step">The rifle recoils at 5 m/s backward.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> How does rocket propulsion work in space where there is nothing to push against? Explain using momentum conservation.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">A rocket works by ejecting exhaust gases backward at high speed. By conservation of momentum, the rocket gains an equal and opposite (forward) momentum. The rocket does NOT need anything external to push against — it creates its own reaction by throwing mass backward. This is why rockets can work in the vacuum of space: F_rocket = −F_exhaust (Newton's 3rd Law), and total momentum is conserved throughout the flight.</div>
+      </div>
+    </div>
+  </div><!-- end chapter 6 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 7: MOMENTUM IN 2D -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 07</span>
+      <h2>Momentum in Two Dimensions</h2>
+    </div>
+
+    <p>When objects move in two dimensions (e.g., colliding at angles, not head-on), we must deal with both horizontal and vertical components of momentum separately. The key principle remains the same — total momentum is conserved in EACH direction independently.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 12 — Conservation of Momentum in 2D</div>
+      <div class="formula-main">x-direction: m₁u₁ₓ + m₂u₂ₓ = m₁v₁ₓ + m₂v₂ₓ</div>
+      <div class="formula-legend">
+        <span><b>y-direction:</b>  m₁u₁ᵧ + m₂u₂ᵧ = m₁v₁ᵧ + m₂v₂ᵧ</span>
+        <span><b>x-component:</b>  p_x = p × cos(θ)</span>
+        <span><b>y-component:</b>  p_y = p × sin(θ)</span>
+        <span><b>Resultant:</b>  |p| = √(p_x² + p_y²)</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>7.1 Resolving Momentum into Components</h3>
+      <p>When an object moves at an angle θ to the horizontal, its momentum has two components. We split it into horizontal (x) and vertical (y) parts using trigonometry, just like we do with forces and velocities.</p>
+
+      <div class="examples-section">
+        <div class="examples-label">▸ WORKED EXAMPLES — 2D Momentum</div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 1</span>
+            <span class="ex-title">Object moving at an angle — resolving momentum</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>mass, m = 3 kg</p>
+              <p>speed, v = 10 m/s at 30° above horizontal</p>
+              <p>Find: horizontal and vertical components of momentum</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Calculate total momentum magnitude</div>
+              <span class="step-math">p = m × v = 3 × 10 = 30 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Find horizontal component (x)</div>
+              <div class="step-explain">Use cosine because the horizontal component is adjacent to the angle:</div>
+              <span class="step-math">p_x = p × cos(30°) = 30 × cos(30°)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Calculate cos(30°) = 0.866</div>
+              <span class="step-math">p_x = 30 × 0.866 = 25.98 kg·m/s ≈ 26.0 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Find vertical component (y)</div>
+              <div class="step-explain">Use sine because the vertical component is opposite to the angle:</div>
+              <span class="step-math">p_y = p × sin(30°) = 30 × sin(30°)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Calculate sin(30°) = 0.5</div>
+              <span class="step-math">p_y = 30 × 0.5 = 15 kg·m/s</span>
+            </div>
+            <div class="final-answer">p_x = 26.0 kg·m/s  |  p_y = 15 kg·m/s</div>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-header">
+            <span class="ex-num">EX 2</span>
+            <span class="ex-title">Two-dimensional collision — finding resultant momentum</span>
+          </div>
+          <div class="example-body">
+            <div class="given-box">
+              <div class="given-title">Given</div>
+              <p>Object A: p_x = 20 kg·m/s, p_y = 0</p>
+              <p>Object B: p_x = 0, p_y = 15 kg·m/s</p>
+              <p>Find: total resultant momentum (magnitude and direction)</p>
+            </div>
+            <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+            <div class="step-box">
+              <div class="step-label">Step 1 — Add x-components of momentum</div>
+              <span class="step-math">Total p_x = 20 + 0 = 20 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 2 — Add y-components of momentum</div>
+              <span class="step-math">Total p_y = 0 + 15 = 15 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 3 — Use Pythagoras to find resultant magnitude</div>
+              <span class="step-math">|p| = √(p_x² + p_y²) = √(20² + 15²)</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 4 — Calculate</div>
+              <span class="step-math">|p| = √(400 + 225) = √625 = 25 kg·m/s</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 5 — Find direction angle (θ from horizontal)</div>
+              <span class="step-math">tan(θ) = p_y ÷ p_x = 15 ÷ 20 = 0.75</span>
+            </div>
+            <div class="step-box">
+              <div class="step-label">Step 6 — Calculate angle</div>
+              <span class="step-math">θ = tan⁻¹(0.75) ≈ 36.9°</span>
+            </div>
+            <div class="final-answer">|p| = 25 kg·m/s at 36.9° above horizontal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH7 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 7 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Why must we apply conservation of momentum separately in the x-direction and y-direction for 2D problems?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Because momentum is a vector quantity, we cannot simply add magnitudes. Each direction is independent — conservation applies separately in each direction. The x-component of total momentum is conserved, and the y-component of total momentum is conserved. We use this because vector addition requires resolving into perpendicular components before combining.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A 4 kg object moves at 5 m/s at 60° above horizontal. Find the horizontal and vertical components of its momentum.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Total momentum: p = 4 × 5 = 20 kg·m/s</div>
+          <div class="ans-step">Horizontal: p_x = 20 × cos(60°) = 20 × 0.5 = 10 kg·m/s</div>
+          <div class="ans-step">Vertical: p_y = 20 × sin(60°) = 20 × 0.866 = 17.32 kg·m/s</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Two objects collide. After collision, Object 1 has p_x = 12 kg·m/s and p_y = 9 kg·m/s. Find the resultant momentum and its direction.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">|p| = √(12² + 9²) = √(144 + 81) = √225 = 15 kg·m/s</div>
+          <div class="ans-step">θ = tan⁻¹(9 ÷ 12) = tan⁻¹(0.75) ≈ 36.9°</div>
+          <div class="ans-step">Resultant: 15 kg·m/s at 36.9° above horizontal</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 7 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 8: CENTRE OF MASS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 08</span>
+      <h2>Centre of Mass</h2>
+    </div>
+
+    <p>The centre of mass (COM) is the single point where the entire mass of a system can be considered to be concentrated for the purpose of analyzing motion. It behaves as if all the mass were located at that one point and all external forces acted there.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 13 — Centre of Mass Position</div>
+      <div class="formula-main">x_COM = (m₁x₁ + m₂x₂) ÷ (m₁ + m₂)</div>
+      <div class="formula-legend">
+        <span><b>x_COM</b> = position of centre of mass</span>
+        <span><b>x₁, x₂</b> = positions of each mass</span>
+        <span><b>m₁, m₂</b> = masses of each object</span>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 14 — Velocity of Centre of Mass</div>
+      <div class="formula-main">v_COM = (m₁v₁ + m₂v₂) ÷ (m₁ + m₂)</div>
+      <div class="formula-legend">
+        <span><b>v_COM</b> = velocity of the centre of mass</span>
+        <span>= total momentum ÷ total mass</span>
+        <span>This velocity does NOT change unless an external force acts</span>
+      </div>
+    </div>
+
+    <div class="examples-section">
+      <div class="examples-label">▸ WORKED EXAMPLES — Centre of Mass</div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 1</span>
+          <span class="ex-title">Finding the centre of mass of two objects</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>m₁ = 3 kg at position x₁ = 2 m</p>
+            <p>m₂ = 6 kg at position x₂ = 8 m</p>
+            <p>Find: position of centre of mass</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Write the centre of mass formula</div>
+            <span class="step-math">x_COM = (m₁x₁ + m₂x₂) ÷ (m₁ + m₂)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Calculate numerator</div>
+            <span class="step-math">(3 × 2) + (6 × 8) = 6 + 48 = 54</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Calculate denominator (total mass)</div>
+            <span class="step-math">m₁ + m₂ = 3 + 6 = 9 kg</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Divide numerator by denominator</div>
+            <span class="step-math">x_COM = 54 ÷ 9 = 6 m</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 5 — Interpret the result</div>
+            <div class="step-explain">The COM is at 6 m — closer to the heavier 6 kg mass (at 8 m) than to the lighter 3 kg mass (at 2 m). The COM always lies closer to the heavier mass.</div>
+          </div>
+          <div class="final-answer">x_COM = 6 m from the origin</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 2</span>
+          <span class="ex-title">Finding velocity of the centre of mass</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>m₁ = 4 kg, v₁ = 6 m/s (rightward)</p>
+            <p>m₂ = 8 kg, v₂ = 3 m/s (rightward)</p>
+            <p>Find: v_COM = ?</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Write the velocity of COM formula</div>
+            <span class="step-math">v_COM = (m₁v₁ + m₂v₂) ÷ (m₁ + m₂)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Calculate numerator (total momentum)</div>
+            <span class="step-math">(4 × 6) + (8 × 3) = 24 + 24 = 48 kg·m/s</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Calculate total mass (denominator)</div>
+            <span class="step-math">4 + 8 = 12 kg</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Divide</div>
+            <span class="step-math">v_COM = 48 ÷ 12 = 4 m/s</span>
+          </div>
+          <div class="final-answer">v_COM = 4 m/s rightward</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH8 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 8 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> What is the centre of mass? Why is it a useful concept in physics?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">The centre of mass (COM) is the average position of all the mass in a system, weighted by how much mass is at each location. It is useful because: (1) The entire system behaves as if all its mass were concentrated at the COM. (2) External forces cause the COM to accelerate — we can analyze complex systems as if they were single particles. (3) In an isolated system (no external forces), the COM moves at constant velocity (or stays at rest).</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> Two masses — 5 kg at x = 1 m and 10 kg at x = 7 m — are placed on a ruler. Find the position of the centre of mass.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">x_COM = (m₁x₁ + m₂x₂) ÷ (m₁ + m₂)</div>
+          <div class="ans-step">x_COM = (5×1 + 10×7) ÷ (5+10)</div>
+          <div class="ans-step">x_COM = (5 + 70) ÷ 15 = 75 ÷ 15 = 5 m</div>
+          <div class="ans-step">The COM is at 5 m — closer to the heavier 10 kg mass.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Two objects (3 kg at 10 m/s and 7 kg at 4 m/s, same direction) collide. What is the velocity of the centre of mass before the collision? What is it after?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">v_COM = (m₁v₁ + m₂v₂) ÷ (m₁ + m₂) = (3×10 + 7×4) ÷ 10 = (30+28) ÷ 10 = 5.8 m/s</div>
+          <div class="ans-step">BEFORE collision: v_COM = 5.8 m/s</div>
+          <div class="ans-step">AFTER collision: v_COM is STILL 5.8 m/s</div>
+          <div class="ans-step">Reason: No external forces act, so total momentum is conserved, meaning v_COM does not change regardless of what happens during the collision.</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 8 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 9: ROCKET PROPULSION -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch9">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 09</span>
+      <h2>Rocket Propulsion &amp; Variable Mass Systems</h2>
+    </div>
+
+    <p>Rockets are a perfect real-world application of conservation of momentum. Unlike cars that push against the ground, rockets push against their own ejected exhaust gas. This means they can work in the vacuum of space where there is nothing external to push against.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 15 — Thrust Force of a Rocket</div>
+      <div class="formula-main">F_thrust = v_exhaust × (Δm ÷ Δt)</div>
+      <div class="formula-legend">
+        <span><b>F_thrust</b> = thrust force on rocket (N)</span>
+        <span><b>v_exhaust</b> = speed of exhaust gas relative to rocket (m/s)</span>
+        <span><b>Δm/Δt</b> = mass flow rate of exhaust (kg/s)</span>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">▸ Formula 16 — Tsiolkovsky Rocket Equation</div>
+      <div class="formula-main">Δv = v_exhaust × ln(m_i ÷ m_f)</div>
+      <div class="formula-legend">
+        <span><b>Δv</b> = change in rocket velocity (m/s)</span>
+        <span><b>v_exhaust</b> = exhaust velocity (m/s)</span>
+        <span><b>m_i</b> = initial total mass (rocket + fuel)</span>
+        <span><b>m_f</b> = final mass (rocket without fuel)</span>
+        <span><b>ln</b> = natural logarithm</span>
+      </div>
+    </div>
+
+    <div class="examples-section">
+      <div class="examples-label">▸ WORKED EXAMPLES — Rocket Propulsion</div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 1</span>
+          <span class="ex-title">Calculating rocket thrust force</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>exhaust speed, v_ex = 2,500 m/s</p>
+            <p>mass flow rate, Δm/Δt = 200 kg/s</p>
+            <p>Find: thrust force F = ?</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Write the thrust formula</div>
+            <span class="step-math">F = v_exhaust × (Δm ÷ Δt)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Identify all given values</div>
+            <span class="step-math">v_exhaust = 2,500 m/s,  Δm/Δt = 200 kg/s</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Substitute into formula</div>
+            <span class="step-math">F = 2,500 × 200</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Multiply to find thrust</div>
+            <span class="step-math">F = 500,000 N = 500 kN</span>
+          </div>
+          <div class="final-answer">F_thrust = 500,000 N (500 kN)</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header">
+          <span class="ex-num">EX 2</span>
+          <span class="ex-title">Using the Tsiolkovsky equation to find Δv</span>
+        </div>
+        <div class="example-body">
+          <div class="given-box">
+            <div class="given-title">Given</div>
+            <p>initial mass (with fuel), m_i = 10,000 kg</p>
+            <p>final mass (without fuel), m_f = 2,000 kg</p>
+            <p>exhaust velocity, v_ex = 3,000 m/s</p>
+            <p>Find: change in velocity Δv = ?</p>
+          </div>
+          <div class="solution-title">▸ FULL STEP-BY-STEP SOLUTION</div>
+          <div class="step-box">
+            <div class="step-label">Step 1 — Write the Tsiolkovsky equation</div>
+            <span class="step-math">Δv = v_ex × ln(m_i ÷ m_f)</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 2 — Calculate the mass ratio</div>
+            <span class="step-math">m_i ÷ m_f = 10,000 ÷ 2,000 = 5</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 3 — Take the natural logarithm of 5</div>
+            <span class="step-math">ln(5) ≈ 1.609</span>
+          </div>
+          <div class="step-box">
+            <div class="step-label">Step 4 — Multiply by exhaust velocity</div>
+            <span class="step-math">Δv = 3,000 × 1.609 = 4,827 m/s</span>
+          </div>
+          <div class="final-answer">Δv ≈ 4,827 m/s</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CH9 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 9 — Practice Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> Explain how a rocket accelerates in the vacuum of space where there is nothing to push against.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">A rocket carries its own fuel and burns it to produce exhaust gas. The rocket engine ejects this gas backward at extremely high speed. By conservation of momentum, the rocket gains an equal and opposite forward momentum. By Newton's 3rd Law, the ejected gas pushes the rocket forward. No external surface is needed — the rocket creates its own reaction mass (the exhaust). This is the fundamental principle that allows space travel.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> A rocket ejects gas at 3,000 m/s at a rate of 50 kg/s. Calculate the thrust force produced.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">F = v_exhaust × (Δm/Δt)</div>
+          <div class="ans-step">F = 3,000 × 50</div>
+          <div class="ans-step">F = 150,000 N = 150 kN</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> Why does a rocket need to carry a large amount of fuel compared to its payload? Refer to the rocket equation in your answer.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">The Tsiolkovsky equation shows that Δv = v_ex × ln(m_i/m_f). To achieve a large Δv (needed for space travel), the mass ratio m_i/m_f must be very large — meaning the initial mass (with fuel) must be much greater than the final mass. Most of the initial mass is fuel. For example, to double the rocket's speed, the mass ratio must be about e^1 ≈ 2.7 — meaning you need 1.7 kg of fuel for every 1 kg of rocket. For orbital velocity, mass ratios of 10:1 or more are typical.</div>
+      </div>
+    </div>
+  </div><!-- end chapter 9 -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHAPTER 10: REAL-LIFE APPLICATIONS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="chapter" id="ch10">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 10</span>
+      <h2>Real-Life Applications of Momentum</h2>
+    </div>
+
+    <p>Linear momentum principles are found everywhere in the real world. Understanding momentum helps engineers design safer vehicles, sports scientists improve performance, and physicists understand the universe. Here are the key applications you must know.</p>
+
+    <div class="section">
+      <h3>10.1 Car Safety — Crumple Zones, Airbags, Seatbelts</h3>
+      <p>All car safety features work on the same impulse principle: <strong>increasing the time of impact reduces the force on passengers</strong>. Since J = F × Δt = Δp, and Δp is fixed (the car must stop), a larger Δt means a smaller F.</p>
+      <ul style="padding-left:24px; line-height:2;">
+        <li><strong>Crumple zones:</strong> The front of the car is designed to collapse and crumple, increasing the time of the crash and reducing peak force on passengers.</li>
+        <li><strong>Airbags:</strong> Inflate instantly and provide a soft cushion, increasing stopping time from ~0.02 s to ~0.2 s, reducing force by 10×.</li>
+        <li><strong>Seatbelts:</strong> Spread force over a larger area of the body and allow slight stretching to increase stopping time.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>10.2 Sports Applications</h3>
+      <p>Momentum concepts explain many phenomena in sports:</p>
+      <ul style="padding-left:24px; line-height:2;">
+        <li><strong>Cricket/Baseball:</strong> Following through on a hit increases contact time, increasing impulse, giving the ball more momentum.</li>
+        <li><strong>Catching:</strong> Moving hands back when catching reduces the stopping force.</li>
+        <li><strong>Karate:</strong> Striking quickly (small Δt) with the same impulse creates a very large force — enough to break boards.</li>
+        <li><strong>High jump:</strong> Deep foam mats increase stopping time, reducing force on landing.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>10.3 Billiard/Snooker Ball Collisions</h3>
+      <p>Billiard balls approximate elastic collisions — they bounce off each other with very little energy loss. Players exploit this by predicting angles and final velocities using conservation of momentum in 2D.</p>
+    </div>
+
+    <div class="section">
+      <h3>10.4 Jet Engines and Propulsion</h3>
+      <p>Jet engines work by taking in air at the front and ejecting it at the back at high speed. The backward ejected air creates a forward thrust on the aircraft — exactly like a rocket but using atmospheric oxygen instead of carrying its own oxidizer.</p>
+
+      <div class="formula-box">
+        <div class="formula-label">▸ Summary Table — Applications of Momentum</div>
+        <div class="formula-main" style="font-size:14px; padding:8px 0;">Key Formula: J = FΔt = Δp</div>
+      </div>
+
+      <table>
+        <tr><th>Application</th><th>How Momentum Applies</th><th>Effect</th></tr>
+        <tr><td>Airbags</td><td>Increase Δt</td><td>Reduce F</td></tr>
+        <tr><td>Crumple zones</td><td>Increase Δt</td><td>Reduce F</td></tr>
+        <tr><td>Karate strike</td><td>Decrease Δt</td><td>Increase F</td></tr>
+        <tr><td>Gun recoil</td><td>Conservation of p</td><td>Gun moves backward</td></tr>
+        <tr><td>Rocket</td><td>Ejects mass backward</td><td>Gains forward p</td></tr>
+        <tr><td>Catching a ball</td><td>Increase Δt</td><td>Reduce force on hand</td></tr>
+      </table>
+    </div>
+
+    <!-- FINAL QUESTIONS CH10 -->
+    <div class="questions-section">
+      <div class="questions-header">
+        <div class="q-icon">?</div>
+        <h3>Chapter 10 — Final Comprehensive Questions</h3>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q1</span> A car of mass 1,000 kg traveling at 20 m/s crashes into a wall and stops in 0.1 s. Calculate the average force on the car. How would crumple zones help?</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">Δp = mv − mu = (1000×0) − (1000×20) = −20,000 kg·m/s</div>
+          <div class="ans-step">F = Δp ÷ Δt = 20,000 ÷ 0.1 = 200,000 N (200 kN)</div>
+          <div class="ans-step">With crumple zones (Δt = 0.5 s): F = 20,000 ÷ 0.5 = 40,000 N</div>
+          <div class="ans-step">Crumple zones reduce force from 200,000 N to 40,000 N — 5× safer!</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q2</span> Explain why a karate expert can break a thick board with their hand, using impulse and momentum concepts.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">The karate expert's hand has a fixed amount of momentum change (Δp) from fast-moving to stop. By striking very quickly (very small Δt), the force F = Δp/Δt becomes extremely large. The expert trains to make contact very briefly and retract quickly, maximizing force. Also, they aim to hit THROUGH the board, not at the surface — this maintains high velocity during contact, keeping Δp large.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q3</span> A 70 kg goalkeeper dives to catch a 0.45 kg ball moving at 20 m/s. The goalkeeper catches it and skids for 2 seconds on the ground with friction force 50 N. (a) Find momentum of ball before catch. (b) After catching, find their combined velocity (ignore goalkeeper's initial velocity). (c) Find final velocity after 2 s of sliding.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">(a) p_ball = 0.45 × 20 = 9 kg·m/s</div>
+          <div class="ans-step">(b) Conservation: 9 = (70 + 0.45) × v  →  v = 9 ÷ 70.45 ≈ 0.128 m/s</div>
+          <div class="ans-step">(c) F = ma → a = 50 ÷ 70.45 = 0.71 m/s² (deceleration)</div>
+          <div class="ans-step">v_final = v − a×t = 0.128 − (0.71 × 2) = 0.128 − 1.42 = negative</div>
+          <div class="ans-step">→ They stop before 2 s (friction is too strong). They stop when v = 0.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q4</span> List all the conditions that must be satisfied for the law of conservation of momentum to hold. Give one example where it does NOT hold and explain why.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">Conditions: (1) The system must be isolated — no net external force acts on it. (2) The system is closed — no mass enters or leaves. Example where it does NOT hold: A ball rolling along the ground slows down and stops. Momentum is NOT conserved here because friction from the ground is an external force acting on the ball — it removes momentum from the ball. The ball-ground system together would conserve momentum, but the ball alone does not.</div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q5</span> Summarize ALL the different types of collisions in a table showing: type, whether momentum is conserved, whether KE is conserved, and whether objects stick together.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">ELASTIC: Momentum ✓ | KE ✓ | Objects separate | Example: billiard balls</div>
+          <div class="ans-step">INELASTIC: Momentum ✓ | KE ✗ (some lost) | Objects separate | Example: most real collisions</div>
+          <div class="ans-step">PERFECTLY INELASTIC: Momentum ✓ | KE ✗ (maximum lost) | Objects stick together | Example: car crash, clay</div>
+          <div class="ans-step">NOTE: Momentum is ALWAYS conserved in all collision types (provided no external forces). Only KE varies.</div>
+        </div>
+      </div>
+
+      <div class="question-item">
+        <div class="question-text"><span class="q-num">Q6</span> A 2 kg ball moving at 5 m/s east collides with a 3 kg ball at rest. They stick together. The combined object then slides on a rough surface with deceleration of 0.5 m/s² for 3 seconds. Find: (a) velocity just after collision, (b) final velocity after 3 s of sliding.</div>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer-box">
+          <div class="ans-step">(a) Conservation: (2×5) + 0 = (2+3)v  →  10 = 5v  →  v = 2 m/s eastward</div>
+          <div class="ans-step">(b) v_final = v − a×t = 2 − (0.5 × 3) = 2 − 1.5 = 0.5 m/s eastward</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end chapter 10 -->
+
+  <div style="text-align:center; padding:40px 0 20px; color:var(--muted); font-size:13px; border-top: 1px solid #ddd; margin-top:40px;">
+    <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--navy); margin-bottom:8px;">Linear Momentum — Complete Textbook</div>
+    <div>10 Chapters · All Formulas Derived · Full Step-by-Step Solutions · Answers Included</div>
+    <div style="margin-top:8px; color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px;">PHYSICS STUDY GUIDE</div>
+  </div>
+
+</main>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / total) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+
+    const btn = document.getElementById('back-top');
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
+
+    // Active TOC
+    document.querySelectorAll('.chapter').forEach(ch => {
+      const rect = ch.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        document.querySelectorAll('.toc-item').forEach(t => t.classList.remove('active'));
+        const id = ch.id;
+        document.querySelectorAll('.toc-item').forEach(t => {
+          if (t.getAttribute('onclick') && t.getAttribute('onclick').includes(id)) {
+            t.classList.add('active');
+          }
+        });
+      }
+    });
+  });
+
+  // Scroll to section
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // Toggle answers
+  function toggleAnswer(btn) {
+    const box = btn.nextElementSibling;
+    box.classList.toggle('show');
+    btn.textContent = box.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+  }
+</script>
+
+</body>
+</html>
