@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 6 — Electricity &amp; Magnetism | Physics Textbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #1c1c1c;
+  --ink-soft: #333333;
+  --muted: #6b6b6b;
+  --paper: #fdfcf9;
+  --paper-panel: #f5f3ee;
+  --rule: #cfcabf;
+  --rule-light: #e6e2d8;
+  --navy: #22405f;
+  --navy-pale: #eaeff3;
+  --wine: #6b3a3a;
+  --wine-pale: #f4ece9;
+  --olive: #4c5b3a;
+  --olive-pale: #eef1e8;
+  --ochre: #8a6416;
+  --ochre-pale: #f6efdf;
+  --max-w: 900px;
+  --sidebar-w: 230px;
+}
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--paper); color: var(--ink-soft); font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; line-height: 1.8; }
+.book-wrap { display:flex; min-height:100vh; }
+
+/* Sidebar: plain, like a table of contents */
+.sidebar { width: var(--sidebar-w); flex-shrink:0; background:#fff; border-right:1px solid var(--rule); position:sticky; top:0; height:100vh; overflow-y:auto; padding-bottom:40px; }
+.sidebar-title { padding:22px 20px 16px; border-bottom:1px solid var(--rule); font-family:'Inter',sans-serif; }
+.sidebar-title .eyebrow { font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); font-weight:600; }
+.sidebar-title .title { font-family:'Source Serif 4',serif; font-weight:700; font-size:1.15rem; color:var(--ink); margin-top:4px; }
+.progress-wrap { padding:16px 20px 12px; border-bottom:1px solid var(--rule); }
+.progress-label { font-family:'Inter',sans-serif; font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; display:flex; justify-content:space-between; margin-bottom:6px; }
+.progress-track { background: var(--rule-light); height:4px; border-radius:2px; overflow:hidden; }
+.progress-fill { background: var(--navy); height:100%; width:0%; transition:width .3s; }
+.sidebar nav { padding:8px 0; }
+.sidebar nav a { display:block; padding:7px 20px; text-decoration:none; font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--ink-soft); border-left:2px solid transparent; }
+.sidebar nav a:hover, .sidebar nav a.active { color: var(--navy); border-left-color: var(--navy); background: var(--navy-pale); }
+.sidebar nav a.done { color: var(--muted); }
+.sidebar nav a.done::before { content:'— '; }
+.sidebar nav .nav-section { font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:700; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; padding:16px 20px 4px; }
+
+.book-main { flex:1; min-width:0; }
+.chapter-header { padding:56px 60px 40px; border-bottom: 3px double var(--rule); }
+.chapter-header .ch-label { font-family:'Inter',sans-serif; font-weight:600; font-size:0.78rem; letter-spacing:2.5px; text-transform:uppercase; color: var(--muted); margin-bottom:10px; }
+.chapter-header h1 { font-family:'Source Serif 4',serif; font-weight:700; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--ink); line-height:1.2; margin-bottom:14px; max-width:760px; }
+.chapter-header p { color: var(--muted); font-size:0.98rem; max-width:640px; font-style:italic; }
+.header-tools { display:flex; gap:10px; margin-top:20px; }
+.tool-btn { font-family:'Inter',sans-serif; font-weight:600; font-size:0.76rem; background:#fff; color:var(--navy); border:1px solid var(--navy); padding:7px 14px; border-radius:3px; cursor:pointer; }
+.tool-btn:hover { background: var(--navy-pale); }
+
+.content { max-width: var(--max-w); margin:0 auto; padding: 44px 44px 90px; }
+.section { margin-bottom:56px; padding-bottom:44px; border-bottom:1px solid var(--rule-light); }
+.section:last-child { border-bottom:none; }
+.section-eyebrow { font-family:'Inter',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--navy); margin-bottom:6px; }
+.section h2 { font-family:'Source Serif 4',serif; font-weight:700; font-size:clamp(1.3rem,2.2vw,1.65rem); color:var(--ink); margin-bottom:6px; line-height:1.25; }
+.section .subtitle-friendly { font-family:'Inter',sans-serif; font-size:0.86rem; color:var(--muted); font-style:italic; margin-bottom:20px; }
+.subsection { margin-top:30px; }
+.subsection h3 { font-family:'Source Serif 4',serif; font-weight:700; font-size:1.12rem; color:var(--ink); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid var(--rule-light); }
+.subsection h4 { font-family:'Inter',sans-serif; font-weight:700; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.8px; color:var(--navy); margin:20px 0 10px; }
+p { margin-bottom:14px; }
+
+/* Definition / note boxes — plain bordered panels, no gradients */
+.def-box { background: var(--paper-panel); border-left:3px solid var(--navy); padding:14px 20px; margin:16px 0; }
+.def-box.wine { border-left-color: var(--wine); background: var(--wine-pale); }
+.def-box.ochre { border-left-color: var(--ochre); background: var(--ochre-pale); }
+.def-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--navy); margin-bottom:6px; }
+.def-box.wine .def-label { color: var(--wine); }
+.def-box.ochre .def-label { color: var(--ochre); }
+
+.analogy-box { border:1px solid var(--rule); border-left:3px solid var(--muted); padding:14px 20px; margin:16px 0; background:#fff; }
+.analogy-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+
+.why-box { border:1px solid var(--navy); padding:16px 20px; margin:18px 0; background:#fff; }
+.why-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--navy); margin-bottom:6px; }
+
+/* Glossary — plain, native tooltip, no popup gimmick */
+.gterm { border-bottom:1px dotted var(--navy); color:var(--navy); font-weight:600; cursor:help; }
+
+/* Formula box — plain, textbook-style */
+.formula-box { background:#fff; border:1px solid var(--ink); padding:16px 22px; margin:18px 0; }
+.formula-box.wine { border-color: var(--wine); }
+.formula-box.ochre { border-color: var(--ochre); }
+.f-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.f-eq { font-family:'Fira Mono',monospace; font-size:1.1rem; color:var(--ink); }
+.f-vars { font-family:'Inter',sans-serif; font-size:0.8rem; color:var(--muted); margin-top:10px; line-height:1.7; }
+
+/* Types grid — plain cards */
+.types-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1px; background: var(--rule); border:1px solid var(--rule); margin:16px 0; }
+.type-card { background:#fff; padding:14px 16px; }
+.type-card .tc-name { font-family:'Inter',sans-serif; font-weight:700; font-size:0.85rem; color:var(--navy); margin-bottom:5px; }
+.type-card p { font-size:0.85rem; color:var(--muted); margin-bottom:0; }
+
+.char-list { list-style:none; margin:14px 0; }
+.char-list li { padding:9px 0 9px 20px; position:relative; border-bottom:1px solid var(--rule-light); font-size:0.94rem; }
+.char-list li:last-child { border-bottom:none; }
+.char-list li::before { content:'–'; position:absolute; left:0; color:var(--navy); font-weight:700; }
+
+.applications-box { border:1px solid var(--olive); background: var(--olive-pale); padding:14px 20px; margin:16px 0; }
+.applications-box .app-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--olive); margin-bottom:8px; }
+.applications-box ul { padding-left:18px; }
+.applications-box li { margin-bottom:6px; font-size:0.92rem; }
+
+.adv-disadv-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); margin:16px 0; }
+.adv-box, .disadv-box { background:#fff; padding:14px 18px; }
+.adv-box .ad-label, .disadv-box .ad-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+.adv-box .ad-label { color: var(--olive); } .disadv-box .ad-label { color: var(--wine); }
+.adv-box ul, .disadv-box ul { padding-left:16px; }
+.adv-box li, .disadv-box li { font-size:0.86rem; margin-bottom:5px; }
+@media (max-width:700px) { .adv-disadv-grid { grid-template-columns:1fr; } }
+
+/* Worked examples — example-card containing individually labeled step-boxes */
+.example-card { border:1px solid var(--ink); margin:22px 0; background:#fff; }
+.example-header { background: var(--navy); padding:10px 18px; display:flex; align-items:baseline; gap:10px; }
+.example-header.wine { background: var(--wine); }
+.example-header.ochre { background: var(--ochre); }
+.ex-num { font-family:'Inter',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color: rgba(255,255,255,0.7); }
+.ex-title { font-family:'Inter',sans-serif; font-weight:700; font-size:0.86rem; color:#fff; }
+.example-body { padding:18px 22px; }
+
+.given-box { background: var(--paper-panel); padding:12px 16px; margin-bottom:16px; border-left:3px solid var(--rule); }
+.given-title { font-family:'Inter',sans-serif; font-size:0.68rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700; }
+.given-box p { font-family:'Fira Mono',monospace; font-size:0.86rem; margin-bottom:3px; color:var(--ink-soft); }
+
+.solution-title { font-family:'Inter',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--navy); margin: 14px 0 10px; }
+
+.step-box { border-left:2px solid var(--rule); padding:4px 0 4px 14px; margin-bottom:12px; }
+.step-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.82rem; color:var(--navy); margin-bottom:4px; }
+.step-explain { font-size:0.88rem; color:var(--muted); margin-bottom:5px; }
+.step-math { display:block; font-family:'Fira Mono',monospace; font-size:0.92rem; color:var(--ink); background: var(--paper-panel); padding:6px 12px; margin-top:2px; }
+
+.final-answer { border:1.5px solid var(--olive); background: var(--olive-pale); padding:12px 18px; margin-top:16px; font-family:'Fira Mono',monospace; font-weight:600; font-size:0.95rem; }
+.final-answer .fa-label { display:block; font-family:'Inter',sans-serif; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--olive); margin-bottom:5px; font-weight:700; }
+
+.mistake-box { border-left:3px solid var(--wine); background: var(--wine-pale); padding:10px 18px; margin-top:14px; }
+.mistake-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--wine); margin-bottom:5px; }
+.mistake-box p { margin-bottom:0; font-size:0.88rem; }
+
+/* Video embed */
+.video-embed { margin:20px 0; border:1px solid var(--rule); background:#fff; }
+.video-embed-label { font-family:'Inter',sans-serif; font-weight:700; font-size:0.68rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); padding:10px 16px; border-bottom:1px solid var(--rule-light); }
+.video-link { display:flex; align-items:center; gap:14px; padding:14px 16px; text-decoration:none; color:var(--ink); }
+.video-link:hover { background: var(--paper-panel); }
+.video-thumb { position:relative; width:160px; min-width:160px; aspect-ratio:16/9; background:#000 center/cover no-repeat; flex-shrink:0; }
+.video-thumb::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:0; height:0; border-style:solid; border-width:10px 0 10px 16px; border-color:transparent transparent transparent #fff; filter: drop-shadow(0 0 2px rgba(0,0,0,0.6)); }
+.video-link-text .vt-title { font-family:'Inter',sans-serif; font-weight:700; font-size:0.9rem; margin-bottom:4px; }
+.video-link-text .vt-sub { font-family:'Inter',sans-serif; font-size:0.76rem; color:var(--muted); }
+
+/* Calculator — styled as a plain "interactive check" box */
+.calc-box { border:1px dashed var(--rule); background: var(--paper-panel); padding:18px 22px; margin:20px 0; }
+.calc-title { font-family:'Inter',sans-serif; font-weight:700; font-size:0.84rem; color:var(--navy); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px; }
+.calc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:14px; }
+.calc-field label { display:block; font-family:'Inter',sans-serif; font-size:0.72rem; color:var(--muted); margin-bottom:4px; }
+.calc-field input { width:100%; padding:7px 9px; border:1px solid var(--rule); background:#fff; font-family:'Fira Mono',monospace; font-size:0.88rem; }
+.calc-field input:focus { outline:1px solid var(--navy); }
+.calc-btn { font-family:'Inter',sans-serif; font-weight:600; font-size:0.8rem; background:var(--navy); color:#fff; border:none; padding:8px 18px; cursor:pointer; }
+.calc-btn:hover { background:#1a3049; }
+.calc-result { margin-top:12px; padding:10px 14px; background:#fff; border:1px solid var(--rule); display:none; }
+.calc-result.show { display:block; }
+.calc-steps { font-family:'Fira Mono',monospace; font-size:0.82rem; line-height:1.8; white-space:pre-line; }
+
+/* Practice question sets (short-answer, not the 7 examples) */
+.question-section { border:1px solid var(--ink); margin-top:24px; }
+.qs-header { background: var(--ink); padding:12px 20px; }
+.qs-title { font-family:'Inter',sans-serif; font-weight:700; color:#fff; font-size:0.88rem; }
+.qs-body { padding:18px 22px; }
+.question-item { margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--rule-light); }
+.question-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.q-top-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.q-num { font-family:'Inter',sans-serif; font-weight:700; font-size:0.8rem; color:var(--navy); }
+.tier-badge { font-family:'Inter',sans-serif; font-weight:600; font-size:0.62rem; letter-spacing:0.5px; text-transform:uppercase; padding:2px 8px; border:1px solid; }
+.tier-foundation { color:var(--olive); border-color:var(--olive); }
+.tier-core { color:var(--navy); border-color:var(--navy); }
+.tier-stretch { color:var(--wine); border-color:var(--wine); }
+.answer-box { width:100%; min-height:56px; border:1px solid var(--rule); padding:8px 10px; font-family:'Source Serif 4',serif; font-size:0.9rem; resize:vertical; background:#fff; }
+.reveal { margin-top:8px; }
+.reveal summary { cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:0.78rem; color:var(--navy); }
+.reveal-body { margin-top:8px; background: var(--paper-panel); padding:12px 16px; font-size:0.9rem; }
+
+.summary-box { border:2px solid var(--ink); padding:26px 30px; margin-top:20px; }
+.summary-box h4 { font-family:'Source Serif 4',serif; font-weight:700; font-size:1.1rem; margin-bottom:14px; }
+.summary-box ul { padding-left:18px; }
+.summary-box li { margin-bottom:8px; font-size:0.92rem; }
+
+body.print-mode .sidebar, body.print-mode .header-tools, body.print-mode .calc-box, body.print-mode .scroll-top, body.print-mode .reveal summary { display:none !important; }
+body.print-mode .content { max-width:100%; }
+body.print-mode .reveal-body { display:block !important; }
+.scroll-top { position:fixed; bottom:24px; right:24px; width:40px; height:40px; background:var(--navy); color:#fff; border:none; font-size:1.1rem; cursor:pointer; opacity:0; pointer-events:none; transition:.2s; }
+.scroll-top.show { opacity:1; pointer-events:auto; }
+@media (max-width:900px) { .book-wrap { flex-direction:column; } .sidebar { width:100%; height:auto; position:relative; } .content { padding:30px 18px 60px; } .chapter-header { padding:36px 20px 28px; } }
+</style>
+</head>
+<body>
+<div class="book-wrap">
+<aside class="sidebar">
+  <div class="sidebar-title"><div class="eyebrow">Physics Textbook</div><div class="title">Chapter 6</div></div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Progress</span><span id="progressPct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <nav id="sideNav">
+    <div class="nav-section">Electrostatics</div>
+    <a href="#s1" data-track>6.1 Force in Nature</a>
+    <a href="#s2" data-track>6.2 Electric Charge &amp; Charging</a>
+    <a href="#s3" data-track>6.3 Coulomb's Law &amp; Superposition</a>
+    <a href="#s4" data-track>6.4 Electric Field &amp; Potential</a>
+    <a href="#s5" data-track>6.5 Capacitance</a>
+    <a href="#s6" data-track>6.6 Electric Dipoles</a>
+    <a href="#s7" data-track>6.7 Energy in the Electric Field</a>
+    <a href="#s8" data-track>6.8 Conductors &amp; Insulators</a>
+    <div class="nav-section">DC Circuits</div>
+    <a href="#s9" data-track>6.9 Current, Voltage &amp; Resistance</a>
+    <a href="#s10" data-track>6.10 Ohm's Law</a>
+    <a href="#s11" data-track>6.11 Resistor Combinations</a>
+    <a href="#s12" data-track>6.12 Analysing DC Circuits</a>
+    <div class="nav-section">Wrap Up</div>
+    <a href="#summary" data-track>Chapter Summary</a>
+  </nav>
+</aside>
+<main class="book-main">
+  <header class="chapter-header">
+    <div class="ch-label">Chapter 6 · Part 1 of 3</div>
+    <h1>Electricity &amp; Magnetism: Electrostatics &amp; DC Circuits</h1>
+    <p>A complete treatment of static and current electricity, with every calculation shown as a full, unskipped sequence of steps.</p>
+    <div class="header-tools">
+      <button class="tool-btn" onclick="togglePrint()">Print-friendly mode</button>
+      <button class="tool-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">Start reading</button>
+    </div>
+  </header>
+  <div class="content">
+    <section class="section" id="s1">
+      <div class="section-eyebrow">6.1</div>
+      <h2>Force in Nature</h2>
+      <p class="subtitle-friendly">Where does "electric force" fit among all the forces in the universe?</p>
+
+      <p>Physicists have found that every push and pull ever observed can be traced back to just <strong>four fundamental forces</strong>: gravity, the electromagnetic force, the strong nuclear force, and the weak nuclear force. Two of these act only inside the atomic nucleus; two act over long distances and shape everyday life.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — The Four Fundamental Forces of Nature</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=k1jaDh97Q_g" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/k1jaDh97Q_g/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">The Four Fundamental Forces of Nature</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <h4>The Four Fundamental Forces</h4>
+      <div class="types-grid">
+        <div class="type-card"><div class="tc-name">Gravitational Force</div><p>Acts between any two masses. Always attractive, extremely weak, infinite range.</p></div>
+        <div class="type-card"><div class="tc-name">Electromagnetic Force</div><p>Acts between electric charges. Attractive or repulsive, about 10³⁶ times stronger than gravity. The subject of this chapter.</p></div>
+        <div class="type-card"><div class="tc-name">Strong Nuclear Force</div><p>Binds protons and neutrons in the nucleus. Very strong, very short range.</p></div>
+        <div class="type-card"><div class="tc-name">Weak Nuclear Force</div><p>Responsible for radioactive decay. Weaker than the strong force, very short range.</p></div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0">The <strong>electromagnetic force</strong> is the force between electrically charged particles. This chapter unpacks it in detail — first as electrostatics (charges at rest), then as current electricity, and in later parts as magnetism.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> To see why physicists bother separating these four forces at all, picture yourself holding a small magnet near a paperclip lying on a table. The magnet lifts the paperclip clean off the surface — beating Earth's entire gravitational pull with a piece of metal you can hold in one hand. That single demonstration tells you something important: the electromagnetic force, weak as a fridge magnet feels, is astronomically stronger than gravity at the scale of everyday objects. The only reason gravity feels dominant in daily life is that Earth's mass is enormous, while most objects around you are electrically neutral overall (their positive and negative charges cancel out), so the electromagnetic force mostly disappears from view — except when it doesn't, as with your fridge magnet.</p>
+
+      <p>Now picture zooming in past atoms, into the nucleus itself. Protons, all positively charged, are crammed together there — and by Coulomb's Law (which you'll meet properly in section 6.3), they should be violently repelling each other. They don't fly apart because an even stronger force, the strong nuclear force, is gripping them together at that tiny range. Zoom out just slightly further — beyond the nucleus — and the strong force vanishes almost to nothing, leaving the electromagnetic force to govern everything from chemical bonds to the electricity in your walls. This is the pattern worth remembering: each of the four forces "wins" in its own regime of distance and scale, and understanding electricity means understanding exactly where the electromagnetic force's regime begins and ends.</p>
+
+      <div class="why-box">
+        <div class="why-label">Why it matters</div>
+        <p>Gravity shapes planets and galaxies; the electromagnetic force shapes chemistry, biology, and every circuit ever built. Almost every piece of technology you use runs on it.</p>
+      </div>
+    </section>
+
+    <section class="section" id="s2">
+      <div class="section-eyebrow">6.2</div>
+      <h2>Electrostatics: Electric Charge and Its Properties</h2>
+      <p class="subtitle-friendly">Meet the actor at the centre of this chapter: electric charge.</p>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0"><strong>Electric charge</strong> is a fundamental property of matter that causes it to experience a force in an electromagnetic field. Charge comes in two types — positive and negative — carried respectively (in ordinary matter) by protons and electrons.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Every atom is built from a nucleus of protons and neutrons, surrounded by electrons. Protons carry positive charge, electrons carry negative charge, and neutrons carry none at all. In a normal, neutral atom, the number of protons exactly equals the number of electrons, so their charges cancel out and the atom shows no charge to the outside world. "Charging" an object is really just disturbing this balance — either stripping electrons away (leaving a surplus of protons, so the object reads positive) or piling extra electrons on (leaving a surplus of electrons, so the object reads negative). Nothing is created or destroyed in this process; charge only ever moves from one place to another, which is exactly what "charge is conserved" means in practice.</p>
+
+      <p>The "like repels, unlike attracts" rule becomes intuitive once you picture it this way: bring two negatively-charged objects together, and you're really bringing two clouds of surplus electrons close to each other. Electrons already repel each other (they're both negative), so the two objects push apart. Bring a positive and a negative object together instead, and the negative object's surplus electrons are drawn toward the positive object's deficit — an attraction. This single mental picture, of counting surplus and deficit electrons, explains everything else you'll read about charge in this section.</p>
+
+      <h4>Characteristics (Properties) of Charge</h4>
+      <ul class="char-list">
+        <li><strong>Like charges repel, unlike charges attract.</strong></li>
+        <li><strong>Charge is quantised</strong> — it always comes in whole-number multiples of e = 1.6 × 10⁻¹⁹ C.</li>
+        <li><strong>Charge is conserved</strong> — the total charge in a closed system never changes.</li>
+        <li><strong>Charge is a scalar</strong> — magnitude and sign only, no direction.</li>
+        <li><strong>Charge is measured in coulombs (C)</strong>; everyday charges are usually µC or nC.</li>
+      </ul>
+
+      <div class="subsection">
+        <h3>Types of Charging</h3>
+        <p>An object becomes "charged" when it gains an excess or deficit of electrons. There are three everyday methods:</p>
+        <div class="types-grid">
+          <div class="type-card"><div class="tc-name">1. Friction</div><p>Rubbing two different materials transfers electrons from one surface to the other.</p></div>
+          <div class="type-card"><div class="tc-name">2. Conduction (Contact)</div><p>A charged object touches a neutral conductor; charge is shared, giving the same sign result.</p></div>
+          <div class="type-card"><div class="tc-name">3. Induction</div><p>A charged object is brought near (not touching) a neutral conductor, then it is earthed, giving the opposite sign result.</p></div>
+        </div>
+
+        <div class="adv-disadv-grid">
+          <div class="adv-box"><div class="ad-label">Advantages</div><ul>
+            <li>Friction is simple and needs no equipment.</li>
+            <li>Conduction is fast and predictable.</li>
+            <li>Induction doesn't deplete the original charged object.</li>
+          </ul></div>
+          <div class="disadv-box"><div class="ad-label">Disadvantages</div><ul>
+            <li>Friction gives small, hard-to-control charge.</li>
+            <li>Conduction reduces the charge on the original object (shared, not copied).</li>
+            <li>Induction needs more steps (earthing) and only works on conductors.</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="applications-box">
+        <div class="app-label">Applications</div>
+        <ul>
+          <li>Photocopiers and laser printers charge a drum to attract toner.</li>
+          <li>Electrostatic precipitators charge smoke particles to remove them from factory exhaust.</li>
+          <li>Spray painting charges paint droplets for even, low-waste coverage.</li>
+        </ul>
+      </div>
+
+      <div class="mistake-box">
+        <div class="mistake-label">Common mistake</div>
+        <p>Mixing up conduction and induction. Remember: conduction = touching (same sign result); induction = no touching (opposite sign result).</p>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Charging by Friction, Contact and Induction</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=art4Y3ErGl0" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/art4Y3ErGl0/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Charging by friction, contact and induction</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Charge from Electron Transfer</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Electrons lost by rod, n = 5 × 10¹² (rod loses electrons to silk)</p><p>Elementary charge, e = 1.6 × 10⁻¹⁹ C</p><p>Find: charge on the rod, Q = ?</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write down the formula</div><div class="step-explain">Charge is quantised, so total charge is the number of elementary charges transferred:</div><span class="step-math">Q = n × e</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute known values</div><span class="step-math">Q = (5 × 10¹²) × (1.6 × 10⁻¹⁹)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the coefficients, then combine the powers of ten</div><div class="step-explain">5 × 1.6 = 8; powers: 10¹² × 10⁻¹⁹ = 10⁻⁷</div><span class="step-math">Q = 8 × 10⁻⁷ C</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Determine the sign</div><div class="step-explain">The rod <em>lost</em> electrons, so it has a deficit of negative charge — it is left positively charged.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Q = +8 × 10⁻⁷ C</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Sharing Charge by Conduction</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Charge on rod before contact, Q = +8 µC</p><p>Charge on identical neutral sphere = 0 µC</p><p>Find: final charge on each sphere after touching</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recognise the type of charging</div><div class="step-explain">The objects touch directly, so this is charging by conduction. Total charge is conserved and shared equally between two identical conductors.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find the total charge before sharing</div><span class="step-math">Q_total = (+8 µC) + (0 µC) = +8 µC</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide the total equally between the two identical spheres</div><span class="step-math">Q_each = 8 µC ÷ 2 = 4 µC</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Each sphere ends with +4 µC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Charging by Induction</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>A negatively charged rod is brought near (not touching) a neutral metal sphere. The sphere is earthed while the rod stays nearby, then the earth wire is removed, then the rod is taken away.</p><p>Find: the final sign of charge on the sphere</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Consider the effect of bringing the rod near</div><div class="step-explain">The rod's negative charge repels the sphere's free electrons to the far side, leaving the near side positive and the far side negative (charge separation, no net charge yet).</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Consider what happens while earthed</div><div class="step-explain">The repelled electrons on the far side can now escape down the earth wire to the ground.</div></div>
+          <div class="step-box"><div class="step-label">Step 3 — Remove the earth wire</div><div class="step-explain">This traps the sphere with a permanent deficit of electrons, while the rod is still nearby holding the remaining charge in place.</div></div>
+          <div class="step-box"><div class="step-label">Step 4 — Remove the rod</div><div class="step-explain">With the rod gone, the remaining positive charge spreads evenly over the sphere.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>The sphere is left positively charged.</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Conduction Between Unequal Charges</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Sphere A charge = +6 µC</p><p>Sphere B charge = −2 µC</p><p>Spheres are identical in size; they touch, then separate</p><p>Find: final charge on each sphere</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Apply conservation of charge</div><div class="step-explain">Total charge before contact equals total charge after contact:</div><span class="step-math">Q_total = (+6 µC) + (−2 µC) = +4 µC</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Share equally (identical conductors)</div><span class="step-math">Q_each = 4 µC ÷ 2 = 2 µC</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Each sphere ends with +2 µC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 5</span><span class="ex-title">Why Friction Between Identical Materials Fails</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Two pieces of the same plastic are rubbed together.</p><p>Find: why little or no charge builds up</p></div>
+          <div class="solution-title">Full Step-by-Step Reasoning</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recall what friction charging needs</div><div class="step-explain">Charging by friction relies on one material holding electrons more strongly than the other (a difference in electron affinity).</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Compare the two materials</div><div class="step-explain">Since both pieces are identical, they have equal electron affinity — neither "wins" the tug-of-war for electrons.</div></div>
+          <div class="step-box"><div class="step-label">Step 3 — Conclude</div><div class="step-explain">Electrons that transfer one way are just as likely to transfer back, so no significant net charge builds up on either surface.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>No noticeable charge, because both materials have equal electron affinity.</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 6</span><span class="ex-title">Number of Electrons Transferred</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Charge gained by a balloon, Q = −4 × 10⁻⁸ C</p><p>Elementary charge, e = 1.6 × 10⁻¹⁹ C</p><p>Find: number of electrons transferred onto the balloon</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Start from Q = n × e and rearrange for n</div><span class="step-math">n = Q / e</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the magnitudes (ignore sign for counting electrons)</div><span class="step-math">n = (4 × 10⁻⁸) / (1.6 × 10⁻¹⁹)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide the coefficients, then the powers of ten</div><div class="step-explain">4 ÷ 1.6 = 2.5; powers: 10⁻⁸ ÷ 10⁻¹⁹ = 10¹¹</div><span class="step-math">n = 2.5 × 10¹¹ electrons</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>n = 2.5 × 10¹¹ electrons transferred onto the balloon</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 7</span><span class="ex-title">Induction on Two Neighbouring Spheres</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Two identical neutral metal spheres, X and Y, touch each other. A negatively charged rod is brought near X (not touching). While the rod is still there, the spheres are separated, then the rod is removed.</p><p>Find: the final charge type on each sphere</p></div>
+          <div class="solution-title">Full Step-by-Step Reasoning</div>
+          <div class="step-box"><div class="step-label">Step 1 — Consider the effect of the rod on the touching pair</div><div class="step-explain">The rod repels free electrons in the combined X–Y conductor away from X, toward Y (electrons move away from the negative rod).</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Separate the spheres while the rod is still present</div><div class="step-explain">Separating now "locks in" the charge distribution: X is left with a deficit of electrons, Y with a surplus.</div></div>
+          <div class="step-box"><div class="step-label">Step 3 — Remove the rod</div><div class="step-explain">With no rod nearby, each sphere's trapped imbalance remains as its own net charge.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Sphere X (nearer the rod) ends up positively charged; sphere Y ends up negatively charged.</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="s3">
+      <div class="section-eyebrow">6.3</div>
+      <h2>Coulomb's Law and the Principle of Superposition</h2>
+      <p class="subtitle-friendly">The one formula that tells you exactly how hard two charges push or pull on each other.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Coulomb's Law: Net Electric Force and Point Charges</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=r9tSLVc-1vo" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/r9tSLVc-1vo/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Coulomb's Law</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0"><strong>Coulomb's Law</strong> states that the force between two point charges is directly proportional to the product of their charges and inversely proportional to the square of the distance between them.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Imagine two small charged balls hanging from threads, both carrying a positive charge. As you bring them closer together, you'd feel a growing push apart. Move them twice as close, and that push doesn't just double — it quadruples, because the force depends on the <em>square</em> of the distance, not the distance itself. This is what makes Coulomb's Law an "inverse-square law," the same mathematical shape gravity follows between planets.</p>
+
+      <p>Now suppose one ball carries three times as much charge as the other originally did. The push between them also grows — but only in direct proportion. Triple one charge, and the force triples; triple both, and the force grows ninefold. This is the "directly proportional to the product of the charges" part of the law: each charge contributes its own multiplying effect to the total force.</p>
+
+      <p>What decides whether the two balls push apart or pull together is simply whether their charges match. Two positives, or two negatives, always push apart. A positive and a negative always pull together. Coulomb's Law captures all three of these ideas — how charge size, distance, and charge sign combine — in a single formula.</p>
+
+      <h4>Characteristics of Coulomb's Law</h4>
+      <ul class="char-list">
+        <li><strong>Inverse-square relationship:</strong> doubling the distance cuts the force to a quarter.</li>
+        <li><strong>Directly proportional to each charge:</strong> doubling either charge doubles the force.</li>
+        <li><strong>Acts along the line joining the charges.</strong></li>
+        <li><strong>Obeys Newton's third law:</strong> equal and opposite forces on each charge.</li>
+        <li><strong>Depends on the medium</strong> between the charges (via the constant k).</li>
+      </ul>
+
+      <div class="formula-box">
+        <div class="f-label">Coulomb's Law</div>
+        <div class="f-eq">F = k·q₁·q₂ / r²</div>
+        <div class="f-vars">F = force (N) &nbsp;|&nbsp; q₁, q₂ = charges (C) &nbsp;|&nbsp; r = separation (m) &nbsp;|&nbsp; k = 9 × 10⁹ N·m²/C²<br>Like signs → repulsion. Unlike signs → attraction.</div>
+      </div>
+
+      <div class="applications-box">
+        <div class="app-label">Applications</div>
+        <ul>
+          <li>Explains atomic structure — why electrons are bound to the nucleus.</li>
+          <li>Used in ion traps and mass spectrometers to control charged particles.</li>
+          <li>Underlies electrostatic precipitators and photocopiers.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3>The Principle of Superposition</h3>
+        <div class="def-box">
+          <div class="def-label">Definition</div>
+          <p style="margin-bottom:0">When a charge feels forces from more than one other charge, the net force is the <em>vector sum</em> of each individual Coulomb force, calculated separately.</p>
+        </div>
+        <p><strong>Explanation.</strong> Suppose a charge sits between two other charges, one pulling it left and one pushing it further left too. Superposition simply says: work out each force exactly as if the other charge weren't there, then add the results together like ordinary vectors — same direction adds, opposite direction subtracts, and forces at an angle combine using Pythagoras or trigonometry. Nothing about Coulomb's Law changes when more charges are present; you just repeat the same calculation once per pair of charges, then combine.</p>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Force Between Two Point Charges</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q1 = +3 × 10⁻⁶ C</p><p>q2 = +5 × 10⁻⁶ C</p><p>r = 0.2 m</p><p>k = 9 × 10⁹ N·m²/C²</p><p>Find: force F between them</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write down the formula</div><span class="step-math">F = k·q1·q2 / r²</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the known values</div><span class="step-math">F = (9×10⁹)(3×10⁻⁶)(5×10⁻⁶) / (0.2)²</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the numerator: coefficients first, then powers of ten</div><div class="step-explain">9 × 3 × 5 = 135; powers: 10⁹ × 10⁻⁶ × 10⁻⁶ = 10⁻³</div><span class="step-math">Numerator = 135 × 10⁻³ = 0.135</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Work out the denominator</div><span class="step-math">(0.2)² = 0.04</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Divide numerator by denominator</div><span class="step-math">F = 0.135 / 0.04 = 3.375 N</span></div>
+          <div class="step-box"><div class="step-label">Step 6 — Determine the nature of the force</div><div class="step-explain">Both charges are positive (like charges), so the force is repulsive.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F = 3.375 N, repulsive</div>
+          <div class="mistake-box"><div class="mistake-label">Common mistake</div><p>Forgetting to convert µC to C, or squaring the whole denominator expression instead of just r.</p></div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Force Between Unlike Charges</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q1 = +2 × 10⁻⁶ C</p><p>q2 = −4 × 10⁻⁶ C</p><p>r = 0.1 m</p><p>Find: magnitude and nature of the force</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write down the formula</div><span class="step-math">F = k·q1·q2 / r²</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the magnitudes</div><span class="step-math">F = (9×10⁹)(2×10⁻⁶)(4×10⁻⁶) / (0.1)²</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the numerator</div><div class="step-explain">9 × 2 × 4 = 72; powers: 10⁹ × 10⁻⁶ × 10⁻⁶ = 10⁻³</div><span class="step-math">Numerator = 72 × 10⁻³ = 0.072</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Work out the denominator</div><span class="step-math">(0.1)² = 0.01</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Divide</div><span class="step-math">F = 0.072 / 0.01 = 7.2 N</span></div>
+          <div class="step-box"><div class="step-label">Step 6 — Determine the nature of the force</div><div class="step-explain">Opposite signs, so the force is attractive.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F = 7.2 N, attractive</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Finding an Unknown Charge</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Two identical charges q, each</p><p>r = 0.3 m</p><p>F = 0.9 N (repulsive)</p><p>Find: q</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula for identical charges</div><span class="step-math">F = k·q² / r²</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Rearrange to make q² the subject</div><span class="step-math">q² = F·r² / k</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Substitute the values</div><span class="step-math">q² = (0.9 × 0.3²) / (9×10⁹)</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Work out 0.3² and multiply by 0.9</div><span class="step-math">0.3² = 0.09;&nbsp;&nbsp; 0.9 × 0.09 = 0.081</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Divide by k</div><span class="step-math">q² = 0.081 / (9×10⁹) = 9×10⁻¹²</span></div>
+          <div class="step-box"><div class="step-label">Step 6 — Take the square root of both sides</div><span class="step-math">q = √(9×10⁻¹²) = 3×10⁻⁶ C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>q = 3 µC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Effect of Doubling the Distance</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Original force, F = 2 N at r = 0.4 m</p><p>New distance = 0.8 m (doubled)</p><p>Find: new force, without recalculating from scratch</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recall the proportionality relationship</div><div class="step-explain">Coulomb's Law gives F ∝ 1/r² — force is inversely proportional to the square of distance.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Work out the scale factor for doubling r</div><span class="step-math">New factor = 1/(2)² = 1/4</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Apply the scale factor to the original force</div><span class="step-math">F_new = 2 N × 1/4 = 0.5 N</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F_new = 0.5 N</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 5</span><span class="ex-title">Force in a Medium Other Than Air</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q1 = q2 = +6 × 10⁻⁶ C</p><p>r = 0.5 m</p><p>Relative permittivity, εᵣ = 4</p><p>Find: force F in this medium</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find the medium's constant</div><div class="step-explain">A medium reduces Coulomb's constant by a factor of εᵣ:</div><span class="step-math">k_medium = k_air / εᵣ = (9×10⁹) / 4 = 2.25×10⁹</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Write Coulomb's Law with k_medium</div><span class="step-math">F = k_medium · q1 · q2 / r²</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Substitute the values</div><span class="step-math">F = (2.25×10⁹)(6×10⁻⁶)(6×10⁻⁶) / (0.5)²</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Multiply the numerator</div><div class="step-explain">2.25 × 6 × 6 = 81; powers: 10⁹ × 10⁻⁶ × 10⁻⁶ = 10⁻³</div><span class="step-math">Numerator = 81 × 10⁻³ = 0.081</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Work out the denominator and divide</div><span class="step-math">(0.5)² = 0.25;&nbsp;&nbsp; F = 0.081 / 0.25 = 0.324 N</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F = 0.324 N, repulsive</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 6</span><span class="ex-title">Superposition — Three Charges on a Line</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q1 = +2 µC at x = 0</p><p>q2 = +3 µC at x = 0.2 m</p><p>q3 = −4 µC at x = 0.5 m</p><p>Find: net force on q2</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find the force on q2 from q1</div><div class="step-explain">Distance q1 to q2 = 0.2 m. Both positive → repels q2 in the +x direction.</div><span class="step-math">F₁₂ = (9×10⁹)(2×10⁻⁶)(3×10⁻⁶)/(0.2)² = 0.054/0.04 = 1.35 N (+x)</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find the force on q2 from q3</div><div class="step-explain">Distance q2 to q3 = 0.3 m. Opposite signs → attracts q2 toward q3, also +x.</div><span class="step-math">F₃₂ = (9×10⁹)(3×10⁻⁶)(4×10⁻⁶)/(0.3)² = 0.108/0.09 = 1.2 N (+x)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Add the two forces (same direction)</div><span class="step-math">F_net = 1.35 + 1.2 = 2.55 N</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F_net = 2.55 N in the +x direction</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 7</span><span class="ex-title">Superposition at Right Angles</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Two charges of +5 µC each at opposite corners of a square of side 0.3 m</p><p>A +2 µC charge sits at a third corner (adjacent to both)</p><p>Find: net force on the +2 µC charge</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Identify the distances</div><div class="step-explain">The +2 µC charge is 0.3 m from each +5 µC charge along the two adjacent sides of the square.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find the magnitude of each individual force</div><span class="step-math">F = (9×10⁹)(5×10⁻⁶)(2×10⁻⁶)/(0.3)² = 0.09/0.09 = 1 N</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Recognise the two forces act at right angles</div><div class="step-explain">Both are repulsive and act along the two perpendicular sides of the square.</div></div>
+          <div class="step-box"><div class="step-label">Step 4 — Combine perpendicular forces using Pythagoras</div><span class="step-math">F_net = √(1² + 1²) = √2 ≈ 1.41 N</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>F_net ≈ 1.41 N, directed along the square's diagonal, away from both charges</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="s4">
+      <div class="section-eyebrow">6.4</div>
+      <h2>Electric Field and Electric Potential</h2>
+      <p class="subtitle-friendly">How a charge "reaches out" and affects the space around it.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Physics 2: Electric Force, Field &amp; Potential</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=rHgKLIYcZOI" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/rHgKLIYcZOI/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Electric Field and Potential</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="subsection">
+        <h3>Electric Field</h3>
+        <div class="def-box">
+          <div class="def-label">Definition</div>
+          <p style="margin-bottom:0">An <strong>electric field</strong> is the region of space around a charge in which another charge would experience a force. It is a <em>vector</em>, pointing away from positive charges and toward negative charges.</p>
+        </div>
+        <p><strong>Explanation.</strong> A field is a way of describing "what's here, even if nothing is here to feel it yet." A positive charge sitting alone in a room doesn't need anything else nearby to have an effect — it quietly sets up a field filling the space around it, the way a heater changes the temperature of a room whether or not anyone walks in to feel it. If you then bring a second, small "test" charge into that space, the field tells you exactly which way it will be pushed or pulled, and how hard, at every point. This is why field strength is defined as E = F/q — it's the force <em>per unit of test charge</em>, stripping away the size of the test charge so that what's left describes only the space itself.</p>
+        <h4>Types of Electric Fields</h4>
+        <div class="types-grid">
+          <div class="type-card"><div class="tc-name">Uniform Field</div><p>Same magnitude and direction everywhere — e.g. between parallel charged plates.</p></div>
+          <div class="type-card"><div class="tc-name">Radial Field</div><p>Produced by a single point charge; spreads out and weakens with distance.</p></div>
+        </div>
+        <div class="formula-box">
+          <div class="f-label">Electric Field Formulas</div>
+          <div class="f-eq">E = F / q &nbsp;&nbsp;&nbsp;&nbsp; E = k·Q / r²</div>
+          <div class="f-vars">E = field strength (N/C) &nbsp;|&nbsp; F = force on test charge (N) &nbsp;|&nbsp; q = test charge (C) &nbsp;|&nbsp; Q = source charge (C) &nbsp;|&nbsp; r = distance (m)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Electric Potential</h3>
+        <div class="def-box">
+          <div class="def-label">Definition</div>
+          <p style="margin-bottom:0"><strong>Electric potential (V)</strong> at a point is the work done per unit charge bringing a small positive test charge from infinity to that point. It is a <em>scalar</em>, measured in volts.</p>
+        </div>
+        <p><strong>Explanation.</strong> Potential is best understood by comparison to height in gravity. Lifting a ball higher off the ground stores more gravitational potential energy in it, ready to be released as it falls. In exactly the same way, pushing a positive charge closer to another positive charge (against its repulsion) stores more electric potential energy in it, ready to be released the moment you let go and it shoots away. Electric potential, V, is simply that stored energy measured "per unit charge," so it describes the point in space itself rather than any particular charge sitting there — much like how a hill has a height whether or not a ball happens to be resting on it. This is also why potential is a scalar (just a number, no direction), whereas the electric field is a vector.</p>
+        <div class="formula-box">
+          <div class="f-label">Electric Potential Formulas</div>
+          <div class="f-eq">V = k·Q / r &nbsp;&nbsp;&nbsp;&nbsp; V = W / q</div>
+          <div class="f-vars">V = potential (V) &nbsp;|&nbsp; W = work done (J) &nbsp;|&nbsp; q = charge moved (C)</div>
+        </div>
+      </div>
+
+      <div class="applications-box">
+        <div class="app-label">Applications</div>
+        <ul>
+          <li>Field: Faraday cages, lightning rods, shielding electronics.</li>
+          <li>Potential: batteries, power supplies, voltage ratings.</li>
+          <li>Both: particle accelerators steer and speed up charged particles.</li>
+        </ul>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Field and Potential from a Point Charge</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 6 × 10⁻⁶ C</p><p>r = 0.3 m</p><p>k = 9 × 10⁹ N·m²/C²</p><p>Find: (a) E, (b) V</p></div>
+          <div class="solution-title">Full Step-by-Step Solution — Part (a) Electric Field</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">E = kQ / r²</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">E = (9×10⁹)(6×10⁻⁶) / (0.3)²</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the numerator</div><span class="step-math">9 × 6 = 54; 10⁹ × 10⁻⁶ = 10³ &nbsp;→&nbsp; Numerator = 54 × 10³ = 54,000</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Divide by r² = 0.09</div><span class="step-math">E = 54,000 / 0.09 = 6×10⁵ N/C</span></div>
+          <div class="solution-title">Part (b) Electric Potential</div>
+          <div class="step-box"><div class="step-label">Step 5 — Write the formula</div><span class="step-math">V = kQ / r</span></div>
+          <div class="step-box"><div class="step-label">Step 6 — Substitute and divide by r = 0.3 (not squared)</div><span class="step-math">V = 54,000 / 0.3 = 1.8×10⁵ V</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>E = 6×10⁵ N/C &nbsp;|&nbsp; V = 1.8×10⁵ V</div>
+          <div class="mistake-box"><div class="mistake-label">Common mistake</div><p>Mixing up the two formulas — field uses r², potential uses r.</p></div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Field from Force on a Test Charge</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Test charge, q = +2 × 10⁻⁶ C</p><p>Force experienced, F = 0.6 N</p><p>Find: field strength E</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">E = F / q</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">E = 0.6 / (2×10⁻⁶)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide</div><span class="step-math">E = 300,000 N/C = 3×10⁵ N/C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>E = 3×10⁵ N/C</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Combined Field and Potential Calculation</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 4 × 10⁻⁶ C</p><p>r = 0.5 m</p><p>Find: E and V</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find E</div><span class="step-math">E = kQ/r² = (9×10⁹)(4×10⁻⁶)/(0.25) = 36,000/0.25 = 1.44×10⁵ N/C</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find V</div><span class="step-math">V = kQ/r = (9×10⁹)(4×10⁻⁶)/0.5 = 36,000/0.5 = 7.2×10⁴ V</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>E = 1.44×10⁵ N/C &nbsp;|&nbsp; V = 7.2×10⁴ V</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Work Done Moving a Charge</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Charge, q = +3 × 10⁻⁶ C</p><p>Potential at the point, V = 5000 V</p><p>Find: work done W bringing it from infinity</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Start from V = W/q and rearrange</div><span class="step-math">W = V × q</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">W = 5000 × (3×10⁻⁶)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply</div><span class="step-math">W = 0.015 J = 1.5×10⁻² J</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>W = 1.5×10⁻² J</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 5</span><span class="ex-title">Finding the Source Charge from the Field</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>E = 4×10⁴ N/C at r = 0.2 m</p><p>Find: the charge Q producing this field</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Start from E = kQ/r² and rearrange</div><span class="step-math">Q = E·r² / k</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Work out r²</div><span class="step-math">r² = 0.2² = 0.04</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply E by r²</div><span class="step-math">4×10⁴ × 0.04 = 1600</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Divide by k</div><span class="step-math">Q = 1600 / (9×10⁹) ≈ 1.78×10⁻⁷ C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Q ≈ 0.178 µC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 6</span><span class="ex-title">Potential at the Midpoint Between Two Opposite Charges</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q1 = +5 µC, q2 = −5 µC, separated by 0.4 m</p><p>Find: potential at the midpoint</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find the distance to each charge from the midpoint</div><span class="step-math">r = 0.4/2 = 0.2 m (to each charge)</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find potential due to q1</div><span class="step-math">V₁ = (9×10⁹)(5×10⁻⁶)/0.2 = 2.25×10⁵ V</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Find potential due to q2</div><span class="step-math">V₂ = (9×10⁹)(−5×10⁻⁶)/0.2 = −2.25×10⁵ V</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Add the two potentials (potential is a scalar)</div><span class="step-math">V = V₁ + V₂ = 2.25×10⁵ − 2.25×10⁵ = 0 V</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>V = 0 V at the midpoint</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 7</span><span class="ex-title">Work Done Moving Between Two Potentials</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Charge, q = +8 × 10⁻⁶ C</p><p>V_initial = 2×10⁴ V, V_final = 6×10⁴ V</p><p>Find: work done, and who does it</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the work-done formula</div><span class="step-math">W = q(V_final − V_initial)</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find the potential difference</div><span class="step-math">V_final − V_initial = 6×10⁴ − 2×10⁴ = 4×10⁴ V</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Substitute and multiply</div><span class="step-math">W = (8×10⁻⁶)(4×10⁴) = 0.32 J</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Interpret the sign</div><div class="step-explain">The charge moves to a higher potential and is positive, so positive work must be done against the field by an external agent — like lifting a mass to greater height.</div></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>W = 0.32 J, done by an external agent</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="s5">
+      <div class="section-eyebrow">6.5</div>
+      <h2>Capacitance</h2>
+      <p class="subtitle-friendly">How well can a device "store" separated charge?</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Capacitors: Basic Introduction</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=BimpNou0orc" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/BimpNou0orc/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Capacitors Basic Introduction</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0"><strong>Capacitance (C)</strong> is the ability of a capacitor to store electric charge per unit of potential difference across it. Measured in farads (F); in practice, µF, nF, or pF.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Picture two metal plates facing each other with a small gap between them, connected to a battery. The battery pushes electrons onto one plate (making it negative) and pulls electrons off the other (making it positive). As charge piles up, the plates start repelling any more charge from arriving — it gets harder and harder to add more, the same way a bucket gets harder to fill as the water level rises. Capacitance is a measure of exactly how much charge a particular capacitor can hold before that "pushback" reaches a given voltage: a wide, closely-spaced pair of plates can store far more charge at the same voltage than a narrow, widely-spaced pair, which is exactly why capacitance depends on plate area (A) and plate separation (d) in the formula.</p>
+
+      <p>The dielectric material between the plates matters too. Certain materials, when placed in an electric field, become mildly "polarised" themselves, partially cancelling the field between the plates. This lets the battery push even more charge onto the plates before reaching the same voltage — which is why inserting a dielectric with a higher relative permittivity, εᵣ, always increases capacitance.</p>
+
+      <h4>Types of Capacitors</h4>
+      <div class="types-grid">
+        <div class="type-card"><div class="tc-name">Parallel-Plate</div><p>Two flat plates separated by a dielectric — the simplest form.</p></div>
+        <div class="type-card"><div class="tc-name">Electrolytic</div><p>Thin oxide dielectric, high capacitance in small size, polarised.</p></div>
+        <div class="type-card"><div class="tc-name">Ceramic</div><p>Small, cheap, non-polarised, very common.</p></div>
+        <div class="type-card"><div class="tc-name">Variable</div><p>Capacitance adjustable by changing overlap area — used in tuning circuits.</p></div>
+      </div>
+
+      <div class="formula-box">
+        <div class="f-label">Capacitance Formulas</div>
+        <div class="f-eq">C = Q / V &nbsp;&nbsp;&nbsp;&nbsp; C = ε₀·εᵣ·A / d</div>
+        <div class="f-vars">C = capacitance (F) &nbsp;|&nbsp; Q = charge (C) &nbsp;|&nbsp; V = voltage (V) &nbsp;|&nbsp; ε₀ = 8.85×10⁻¹² F/m &nbsp;|&nbsp; εᵣ = relative permittivity &nbsp;|&nbsp; A = plate area (m²) &nbsp;|&nbsp; d = plate separation (m)</div>
+      </div>
+
+      <div class="adv-disadv-grid">
+        <div class="adv-box"><div class="ad-label">Advantages</div><ul><li>Charges and discharges very quickly.</li><li>Very long lifespan.</li><li>No chemical reactions involved.</li></ul></div>
+        <div class="disadv-box"><div class="ad-label">Disadvantages</div><ul><li>Stores far less total energy than a battery.</li><li>Voltage drops as it discharges.</li><li>Electrolytic types can fail if reversed.</li></ul></div>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Charge Stored on a Capacitor</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>C = 220 × 10⁻⁶ F</p><p>V = 9 V</p><p>Find: charge Q stored</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange C = Q/V for Q</div><span class="step-math">Q = C × V</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">Q = 220×10⁻⁶ × 9</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply</div><span class="step-math">Q = 1980×10⁻⁶ C = 1.98×10⁻³ C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Q = 1.98 mC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Finding Capacitance from Charge and Voltage</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 5 × 10⁻⁴ C</p><p>V = 5 V</p><p>Find: C</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">C = Q / V</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute and divide</div><span class="step-math">C = (5×10⁻⁴) / 5 = 1×10⁻⁴ F</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>C = 100 µF</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Parallel-Plate Capacitance</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>A = 0.02 m², d = 0.001 m, εᵣ = 1 (air), ε₀ = 8.85×10⁻¹² F/m</p><p>Find: C</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">C = ε₀ εᵣ A / d</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">C = (8.85×10⁻¹² × 1 × 0.02) / 0.001</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the numerator</div><span class="step-math">8.85×10⁻¹² × 0.02 = 1.77×10⁻¹³</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Divide by d</div><span class="step-math">C = 1.77×10⁻¹³ / 0.001 = 1.77×10⁻¹⁰ F</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>C = 177 pF</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Effect of Halving Plate Separation</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Original C = 40 pF; d is halved, all else unchanged</p><p>Find: new capacitance</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recall the proportionality</div><div class="step-explain">C ∝ 1/d, so halving d doubles C.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Apply the scale factor</div><span class="step-math">C_new = 40 pF × 2 = 80 pF</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>C_new = 80 pF</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 5</span><span class="ex-title">Inserting a Dielectric</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Original air-gap C = 60 pF; dielectric εᵣ = 5 fills the gap; V held at 10 V</p><p>Find: new C and new Q</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Apply C ∝ εᵣ</div><span class="step-math">C_new = 60 pF × 5 = 300 pF</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find the new charge using Q = CV</div><span class="step-math">Q = (300×10⁻¹²)(10) = 3×10⁻⁹ C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>C_new = 300 pF, Q_new = 3 nC</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 6</span><span class="ex-title">Finding Plate Separation</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>A = 0.05 m², air dielectric, Q = 8.85×10⁻¹⁰ C at V = 5 V</p><p>Find: plate separation d</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find C from C = Q/V</div><span class="step-math">C = (8.85×10⁻¹⁰) / 5 = 1.77×10⁻¹⁰ F</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Rearrange C = ε₀εᵣA/d for d</div><span class="step-math">d = ε₀ εᵣ A / C</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Substitute (εᵣ = 1 for air)</div><span class="step-math">d = (8.85×10⁻¹² × 1 × 0.05) / (1.77×10⁻¹⁰)</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Multiply the numerator</div><span class="step-math">8.85×10⁻¹² × 0.05 = 4.425×10⁻¹³</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Divide</div><span class="step-math">d = 4.425×10⁻¹³ / 1.77×10⁻¹⁰ = 2.5×10⁻³ m</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>d = 2.5 mm</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 7</span><span class="ex-title">Charge on a Capacitor After Voltage Change</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>C = 47 µF; voltage increased from 3 V to 9 V</p><p>Find: change in charge stored</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find charge at the initial voltage</div><span class="step-math">Q1 = CV1 = 47×10⁻⁶ × 3 = 1.41×10⁻⁴ C</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find charge at the final voltage</div><span class="step-math">Q2 = CV2 = 47×10⁻⁶ × 9 = 4.23×10⁻⁴ C</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Find the change</div><span class="step-math">ΔQ = Q2 − Q1 = 4.23×10⁻⁴ − 1.41×10⁻⁴ = 2.82×10⁻⁴ C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>ΔQ = 2.82×10⁻⁴ C (282 µC increase)</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="s6">
+      <div class="section-eyebrow">6.6</div>
+      <h2>Electric Dipoles</h2>
+      <p class="subtitle-friendly">What happens when a positive and a negative charge sit close together?</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Torque on a Dipole in a Uniform Electric Field</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=F7GKrCTeNpw" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/F7GKrCTeNpw/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Electric Dipole</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0">An <strong>electric dipole</strong> is a pair of equal and opposite point charges, +q and −q, separated by a small distance d. It is characterised by its <strong>dipole moment</strong>, a vector pointing from the negative to the positive charge.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Many real molecules aren't charged overall, but their positive and negative charge isn't distributed evenly either. A water molecule, for example, has its oxygen atom pulling electrons slightly more strongly than its two hydrogen atoms, leaving the oxygen end slightly negative and the hydrogen end slightly positive — even though the molecule as a whole is neutral. This "lopsided" charge distribution is exactly what a dipole models: not a single big charge, but a small separation between an equal amount of positive and negative charge. The dipole moment, p = qd, captures both how much charge is separated and how far apart it sits, combined into one vector that points from the negative end toward the positive end — which is also the direction the molecule tends to line up when an external electric field is applied.</p>
+
+      <div class="formula-box">
+        <div class="f-label">Dipole Moment</div>
+        <div class="f-eq">p = q × d</div>
+        <div class="f-vars">p = dipole moment (C·m) &nbsp;|&nbsp; q = magnitude of each charge (C) &nbsp;|&nbsp; d = separation (m)</div>
+      </div>
+
+      <div class="applications-box">
+        <div class="app-label">Applications</div>
+        <ul>
+          <li>Water molecules are natural dipoles — this is why water dissolves salts and why water molecules stick together.</li>
+          <li>Microwave ovens heat food by making dipolar water molecules rotate rapidly in an oscillating field.</li>
+        </ul>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Calculating a Dipole Moment</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>q = 2 × 10⁻⁹ C</p><p>d = 3 × 10⁻³ m</p><p>Find: dipole moment p</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">p = q × d</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">p = (2×10⁻⁹) × (3×10⁻³)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply coefficients, then combine powers of ten</div><div class="step-explain">2 × 3 = 6; powers: 10⁻⁹ × 10⁻³ = 10⁻¹²</div><span class="step-math">p = 6 × 10⁻¹² C·m</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>p = 6×10⁻¹² C·m, pointing from the negative to the positive charge</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Finding the Separation from the Dipole Moment</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>p = 1.2 × 10⁻¹¹ C·m</p><p>q = 4 × 10⁻⁹ C</p><p>Find: separation d</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange p = qd for d</div><span class="step-math">d = p / q</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">d = (1.2×10⁻¹¹) / (4×10⁻⁹)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide coefficients, then powers of ten</div><div class="step-explain">1.2 ÷ 4 = 0.3; powers: 10⁻¹¹ ÷ 10⁻⁹ = 10⁻²</div><span class="step-math">d = 0.3 × 10⁻² m = 3×10⁻³ m</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>d = 3 mm</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s7">
+      <div class="section-eyebrow">6.7</div>
+      <h2>Energy Stored in an Electric Field</h2>
+      <p class="subtitle-friendly">Separating charge takes work — and that work is stored, not lost.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Energy Stored in a Capacitor (Derivation)</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=bfW04jsoqJg" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/bfW04jsoqJg/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Energy Stored in a Capacitor</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0">Charging a capacitor means doing work against the growing repulsion of charge already on its plates. This work is stored as <strong>electrical potential energy</strong> in the field between the plates.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Think about pushing the first bit of charge onto an empty capacitor plate — it's easy, since the plate starts out neutral and offers no resistance. But each additional bit of charge you push on has to fight the repulsion of all the charge that arrived before it, so the "cost" of adding charge keeps rising as the plate fills up. This is exactly like blowing up a balloon: the first breath is easy, but each further breath takes more effort as the balloon stretches tighter. All that effort doesn't vanish — it's stored as potential energy in the compressed electric field between the plates, ready to be released the moment the capacitor is allowed to discharge (which is exactly how a camera flash releases its stored energy in a fraction of a second).</p>
+
+      <div class="formula-box">
+        <div class="f-label">Energy Stored in a Capacitor</div>
+        <div class="f-eq">U = ½QV &nbsp;=&nbsp; ½CV² &nbsp;=&nbsp; Q²/2C</div>
+        <div class="f-vars">U = energy (J) &nbsp;|&nbsp; Q = charge (C) &nbsp;|&nbsp; V = voltage (V) &nbsp;|&nbsp; C = capacitance (F)</div>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Energy from Capacitance and Voltage</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>C = 470 × 10⁻⁶ F</p><p>V = 12 V</p><p>Find: energy stored U</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Choose the formula matching the given quantities</div><span class="step-math">U = ½CV²</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Square the voltage first</div><span class="step-math">V² = 12² = 144</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply C by V²</div><span class="step-math">470×10⁻⁶ × 144 = 67,680×10⁻⁶ = 0.06768</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Multiply by ½</div><span class="step-math">U = 0.5 × 0.06768 = 0.03384 J</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>U ≈ 33.8 mJ</div>
+          <div class="mistake-box"><div class="mistake-label">Common mistake</div><p>Forgetting to square V before multiplying — only V is squared, not C.</p></div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Energy from Charge and Voltage</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 2 × 10⁻³ C</p><p>V = 6 V</p><p>Find: energy stored U</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Choose the matching formula</div><span class="step-math">U = ½QV</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">U = ½ × (2×10⁻³) × 6</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply</div><span class="step-math">U = ½ × 0.012 = 0.006 J</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>U = 6×10⁻³ J</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Energy from Charge and Capacitance</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 6 × 10⁻⁴ C</p><p>C = 30 × 10⁻⁶ F</p><p>Find: energy stored U</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Choose the matching formula</div><span class="step-math">U = Q² / 2C</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Square Q</div><span class="step-math">Q² = (6×10⁻⁴)² = 36×10⁻⁸</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide by 2C</div><span class="step-math">2C = 60×10⁻⁶;&nbsp;&nbsp; U = (36×10⁻⁸)/(60×10⁻⁶)</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Simplify the division</div><span class="step-math">U = 0.6×10⁻² = 6×10⁻³ J</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>U = 6×10⁻³ J</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Effect of Doubling the Voltage</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Original energy stored, U = 2 J at voltage V</p><p>Voltage is doubled, capacitance unchanged</p><p>Find: new energy stored</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recall U ∝ V²</div><div class="step-explain">Since U = ½CV² and C is fixed, energy scales with the square of voltage.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Apply the scale factor for doubling V</div><span class="step-math">Scale factor = 2² = 4</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply the original energy</div><span class="step-math">U_new = 2 J × 4 = 8 J</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>U_new = 8 J</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 5</span><span class="ex-title">Finding Voltage from Stored Energy</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>U = 0.09 J</p><p>C = 200 × 10⁻⁶ F</p><p>Find: voltage V</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Start from U = ½CV² and rearrange</div><span class="step-math">V² = 2U / C</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">V² = (2 × 0.09) / (200×10⁻⁶) = 0.18 / (200×10⁻⁶)</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide</div><span class="step-math">V² = 900</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Take the square root</div><span class="step-math">V = √900 = 30 V</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>V = 30 V</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s8">
+      <div class="section-eyebrow">6.8</div>
+      <h2>Conductors and Insulators</h2>
+      <p class="subtitle-friendly">Why charge flows freely through some materials and barely moves through others.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Conductors and Insulators (Khan Academy)</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=ZgDIX2GOaxQ" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/ZgDIX2GOaxQ/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Conductors and Insulators</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0">A <strong>conductor</strong> has many free electrons that move easily through it, allowing charge to flow — metals like copper are typical examples. An <strong>insulator</strong> has tightly bound electrons, so charge cannot flow through it easily — rubber, glass, and plastic are typical examples.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Inside a metal, the outermost electrons of each atom aren't strongly tied to any single nucleus — they're shared across the whole structure, drifting almost like a fluid that fills the spaces between fixed metal ions. This "sea of electrons" is why metals conduct so well: apply even a small voltage, and the whole sea shifts slightly, creating a current, since the electrons were never firmly anchored in the first place. In an insulator, by contrast, every electron is tightly bound to its own atom (or shared only within a single molecule), with no spare electrons free to drift. Apply the same voltage, and almost nothing happens — the electrons simply aren't free to move far enough to constitute a meaningful current. Semiconductors sit in the middle: their electrons are normally bound like an insulator's, but a small amount of energy (heat, light, or an applied voltage) can free just enough of them to let a controllable trickle of current flow, which is exactly the property that makes transistors possible.</p>
+
+      <h4>Types of Electrical Materials</h4>
+      <div class="types-grid">
+        <div class="type-card"><div class="tc-name">Conductors</div><p>Free electrons move easily. Examples: copper, aluminium, silver.</p></div>
+        <div class="type-card"><div class="tc-name">Insulators</div><p>Electrons tightly bound. Examples: rubber, glass, plastic.</p></div>
+        <div class="type-card"><div class="tc-name">Semiconductors</div><p>Conduct a little; conductivity finely controllable. Examples: silicon, germanium.</p></div>
+      </div>
+
+      <div class="adv-disadv-grid">
+        <div class="adv-box"><div class="ad-label">Advantages</div><ul><li>Conductors: efficient current flow, low energy loss.</li><li>Insulators: safety — prevent shocks and short circuits.</li></ul></div>
+        <div class="disadv-box"><div class="ad-label">Disadvantages</div><ul><li>Conductors: can cause shocks or short circuits if exposed.</li><li>Insulators: cannot carry current when it's actually needed.</li></ul></div>
+      </div>
+
+      <div class="applications-box">
+        <div class="app-label">Applications</div>
+        <ul>
+          <li>House wiring uses a copper conductor wrapped in a plastic insulator.</li>
+          <li>Semiconductors are the backbone of transistors and computer chips.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section" id="s9">
+      <div class="section-eyebrow">6.9</div>
+      <h2>DC Circuits: Current, Voltage and Resistance</h2>
+      <p class="subtitle-friendly">The three quantities behind every circuit calculation.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Voltage, Current, and Resistance</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=08YugQce9OA" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/08YugQce9OA/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Voltage Current Resistance</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box"><div class="def-label">Current (I)</div><p style="margin-bottom:0"><strong>Electric current</strong> is the rate of flow of charge past a point. I = Q/t, measured in amperes (A).</p></div>
+      <div class="def-box"><div class="def-label">Voltage (V)</div><p style="margin-bottom:0"><strong>Voltage</strong> is the energy transferred per unit charge between two points. Measured in volts (V).</p></div>
+      <div class="def-box"><div class="def-label">Resistance (R)</div><p style="margin-bottom:0"><strong>Resistance</strong> is the opposition a component offers to current flow. Measured in ohms (Ω).</p></div>
+
+      <p><strong>Explanation.</strong> A useful mental model here is water flowing through a network of pipes. Current is how much water passes a point every second — the actual flow rate. Voltage is the pressure difference pushing that water along — supplied, in an electrical circuit, by a battery or power supply, the way a pump supplies pressure in a plumbing system. Resistance is anything that makes the pipe harder to flow through — a narrow section, a valve, a rough surface — and in a circuit, this role is played by components like resistors, bulbs, and even the wires themselves (though wires are designed to have very little resistance). These three quantities are always linked, and the exact relationship between them is Ohm's Law, which is the very next section.</p>
+
+      <div class="formula-box">
+        <div class="f-label">Current Formula</div>
+        <div class="f-eq">I = Q / t</div>
+        <div class="f-vars">I = current (A) &nbsp;|&nbsp; Q = charge (C) &nbsp;|&nbsp; t = time (s)</div>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Current from Charge and Time</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 15 C</p><p>t = 5 s</p><p>Find: current I</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">I = Q / t</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">I = 15 / 5</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide</div><span class="step-math">I = 3 A</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>I = 3 A</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Charge from Current and Time</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>I = 2.5 A</p><p>t = 40 s</p><p>Find: charge Q that flows</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange I = Q/t for Q</div><span class="step-math">Q = I × t</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">Q = 2.5 × 40</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Multiply</div><span class="step-math">Q = 100 C</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>Q = 100 C</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Time for a Given Charge to Flow</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Q = 60 C</p><p>I = 4 A</p><p>Find: time t</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange I = Q/t for t</div><span class="step-math">t = Q / I</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute and divide</div><span class="step-math">t = 60 / 4 = 15 s</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>t = 15 s</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s10">
+      <div class="section-eyebrow">6.10</div>
+      <h2>Ohm's Law</h2>
+      <p class="subtitle-friendly">The single most-used equation in circuit analysis.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Ohm's Law Explained</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=_rSHqvjDksg" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/_rSHqvjDksg/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Ohm's Law</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <p style="margin-bottom:0"><strong>Ohm's Law</strong> states that, at constant temperature, the current through a conductor is directly proportional to the voltage across it.</p>
+      </div>
+
+      <p><strong>Explanation.</strong> Go back to the water-pipe picture: if you increase the pressure (voltage) pushing water through a pipe of fixed width, more water flows through per second (current) — and the increase is directly proportional, so doubling the pressure doubles the flow, provided the pipe itself (resistance) doesn't change. Resistance is the constant that links the two: a wide, unobstructed pipe (low resistance) lets a lot of current flow for a given voltage, while a narrow, obstructed pipe (high resistance) only allows a little current for that same voltage. This is exactly what V = IR captures — voltage is what you supply, resistance is a fixed property of the component, and current is whatever results from dividing one by the other.</p>
+
+      <div class="formula-box">
+        <div class="f-label">Ohm's Law</div>
+        <div class="f-eq">V = I × R</div>
+        <div class="f-vars">V = voltage (V) &nbsp;|&nbsp; I = current (A) &nbsp;|&nbsp; R = resistance (Ω) &nbsp;|&nbsp; Rearranged: I = V/R,&nbsp; R = V/I</div>
+      </div>
+
+      <div class="calc-box">
+        <div class="calc-title">Try it yourself — Ohm's Law calculator</div>
+        <p style="font-family:'Inter',sans-serif; font-size:0.8rem; color:var(--muted); margin-bottom:10px;">Fill in any two values, leave the one you want to find blank.</p>
+        <div class="calc-grid">
+          <div class="calc-field"><label>Voltage V (V)</label><input type="number" id="ov"/></div>
+          <div class="calc-field"><label>Current I (A)</label><input type="number" id="oi"/></div>
+          <div class="calc-field"><label>Resistance R (Ω)</label><input type="number" id="or_"/></div>
+        </div>
+        <button class="calc-btn" onclick="calcOhm()">Calculate</button>
+        <div class="calc-result" id="ohmResult"></div>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Finding Current</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>R = 25 Ω</p><p>V = 10 V</p><p>Find: current I</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange V = IR for I</div><span class="step-math">I = V / R</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">I = 10 / 25</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Divide</div><span class="step-math">I = 0.4 A</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>I = 0.4 A</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Finding Voltage</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>I = 3 A</p><p>R = 8 Ω</p><p>Find: voltage V</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the formula</div><span class="step-math">V = I × R</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute and multiply</div><span class="step-math">V = 3 × 8 = 24 V</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>V = 24 V</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Finding Resistance</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>V = 12 V</p><p>I = 0.5 A</p><p>Find: resistance R</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Rearrange V = IR for R</div><span class="step-math">R = V / I</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute and divide</div><span class="step-math">R = 12 / 0.5 = 24 Ω</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R = 24 Ω</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Effect of Doubling Resistance</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>Original current I = 2 A at fixed voltage V; resistance doubled</p><p>Find: new current</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Recall I ∝ 1/R at fixed V</div><div class="step-explain">From I = V/R, doubling R halves I.</div></div>
+          <div class="step-box"><div class="step-label">Step 2 — Apply the scale factor</div><span class="step-math">I_new = 2 A × ½ = 1 A</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>I_new = 1 A</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s11">
+      <div class="section-eyebrow">6.11</div>
+      <h2>Resistor Combinations</h2>
+      <p class="subtitle-friendly">Two ways to wire resistors together — with very different results.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Series and Parallel Circuits Explained</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=wejz5s31Cts" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/wejz5s31Cts/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Series and Parallel Circuits</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <h4>Types of Resistor Combinations</h4>
+      <div class="types-grid">
+        <div class="type-card"><div class="tc-name">Series</div><p>End-to-end connection; same current through each resistor; resistances add.</p></div>
+        <div class="type-card"><div class="tc-name">Parallel</div><p>Same two nodes; same voltage across each; current splits; combined resistance drops below the smallest resistor.</p></div>
+      </div>
+
+      <p><strong>Explanation.</strong> In a series connection, resistors are chained one after another, so every electron travelling around the circuit has to pass through all of them in turn — there's only one possible path. Each resistor adds its own obstruction to that single path, so the total resistance is simply the sum of them all, exactly like adding more speed bumps one after another along the same road. In a parallel connection, by contrast, the resistors sit side by side, each offering its own separate path between the same two points. Adding another resistor in parallel is like opening another lane on the road: it gives current an additional route to take, so the overall resistance to traffic actually goes down, not up — which is why the parallel formula combines resistances as reciprocals rather than adding them directly, and why the combined result is always smaller than the smallest individual resistor.</p>
+
+      <div class="formula-box">
+        <div class="f-label">Series Resistance</div>
+        <div class="f-eq">R_total = R₁ + R₂ + R₃ + ...</div>
+      </div>
+      <div class="formula-box">
+        <div class="f-label">Parallel Resistance</div>
+        <div class="f-eq">1/R_total = 1/R₁ + 1/R₂ + 1/R₃ + ...</div>
+      </div>
+
+      <div class="calc-box">
+        <div class="calc-title">Try it yourself — Two-resistor combiner</div>
+        <div class="calc-grid">
+          <div class="calc-field"><label>R₁ (Ω)</label><input type="number" id="rr1"/></div>
+          <div class="calc-field"><label>R₂ (Ω)</label><input type="number" id="rr2"/></div>
+        </div>
+        <button class="calc-btn" onclick="calcResistors()">Calculate series &amp; parallel totals</button>
+        <div class="calc-result" id="resResult"></div>
+      </div>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Series Combination</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>R₁ = 2 Ω, R₂ = 4 Ω, R₃ = 6 Ω, all in series</p><p>Find: total resistance</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the series formula</div><span class="step-math">R_total = R1 + R2 + R3</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute and add</div><span class="step-math">R_total = 2 + 4 + 6 = 12 Ω</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 12 Ω</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Parallel Combination</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>R₁ = 6 Ω, R₂ = 3 Ω, in parallel</p><p>Find: total resistance</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the parallel formula</div><span class="step-math">1/R_total = 1/R1 + 1/R2</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Substitute the values</div><span class="step-math">1/R_total = 1/6 + 1/3</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Give both fractions a common denominator (6)</div><span class="step-math">1/R_total = 1/6 + 2/6 = 3/6</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Simplify the fraction</div><span class="step-math">1/R_total = 1/2</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Flip both sides to solve for R_total</div><span class="step-math">R_total = 2 Ω</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 2 Ω</div>
+          <div class="mistake-box"><div class="mistake-label">Common mistake</div><p>Forgetting to flip 1/R_total at the end — the parallel result must always be smaller than the smallest resistor.</p></div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Parallel Combination — Unequal Resistors</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>R₁ = 4 Ω, R₂ = 12 Ω, in parallel</p><p>Find: total resistance</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Write the parallel formula</div><span class="step-math">1/R_total = 1/4 + 1/12</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Common denominator (12)</div><span class="step-math">1/R_total = 3/12 + 1/12 = 4/12</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Simplify</div><span class="step-math">1/R_total = 1/3</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Flip to find R_total</div><span class="step-math">R_total = 3 Ω</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 3 Ω</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 4</span><span class="ex-title">Mixed Series-Parallel Group</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>R₁ = 5 Ω in series with (R₂ = 6 Ω parallel R₃ = 3 Ω)</p><p>Find: total resistance</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Combine the parallel pair first</div><span class="step-math">1/R_p = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2 → R_p = 2 Ω</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Add the series resistor to the parallel result</div><span class="step-math">R_total = R1 + R_p = 5 + 2 = 7 Ω</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 7 Ω</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s12">
+      <div class="section-eyebrow">6.12</div>
+      <h2>Analysing DC Circuits</h2>
+      <p class="subtitle-friendly">Putting current, voltage, resistance, and combinations together.</p>
+
+      <div class="video-embed">
+        <div class="video-embed-label">Watch — Series and Parallel Circuit Analysis</div>
+        <a class="video-link" href="https://www.youtube.com/watch?v=wejz5s31Cts" target="_blank" rel="noopener">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/wejz5s31Cts/mqdefault.jpg')"></div>
+          <div class="video-link-text"><div class="vt-title">Circuit Analysis</div><div class="vt-sub">Tap to watch on YouTube ↗</div></div>
+        </a>
+      </div>
+
+      <p>A reliable method for any circuit:</p>
+      <ul style="padding-left:20px; margin-bottom:16px;">
+        <li style="margin-bottom:8px;"><strong>Step 1 —</strong> Simplify: combine series/parallel resistors into a single total.</li>
+        <li style="margin-bottom:8px;"><strong>Step 2 —</strong> Apply Ohm's law to the simplified circuit to find total current.</li>
+        <li style="margin-bottom:8px;"><strong>Step 3 —</strong> Work back branch by branch, using shared current (series) or shared voltage (parallel).</li>
+      </ul>
+
+      <p><strong>Explanation.</strong> A circuit with a mix of series and parallel resistors can look intimidating at first, but the trick is to work from the outside in — the same way you'd solve a complicated bracketed expression in maths by dealing with the innermost brackets first. Any parallel block can be replaced, temporarily, by a single equivalent resistor using the parallel formula; once that's done, the circuit looks purely series, and you simply add resistances as normal. This lets you find one single total resistance for the entire circuit, from which the total current follows immediately from Ohm's law. The final step reverses the simplification: since you know the total current and where it splits, you can work back into the original parallel block and find exactly how much current (or voltage) each individual branch actually carries.</p>
+
+      <h4>Worked Examples</h4>
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 1</span><span class="ex-title">Full Circuit Analysis</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>V = 12 V; R1 = 4 Ω in series with (R2 = 6 Ω parallel R3 = 3 Ω)</p><p>Find: (a) total resistance, (b) total current, (c) current through R2</p></div>
+          <div class="solution-title">Part (a) — Total Resistance</div>
+          <div class="step-box"><div class="step-label">Step 1 — Combine the parallel pair</div><span class="step-math">1/R_p = 1/6 + 1/3 = 3/6 = 1/2 → R_p = 2 Ω</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Add the series resistor</div><span class="step-math">R_total = R1 + R_p = 4 + 2 = 6 Ω</span></div>
+          <div class="solution-title">Part (b) — Total Current</div>
+          <div class="step-box"><div class="step-label">Step 3 — Apply Ohm's law to the whole circuit</div><span class="step-math">I_total = V / R_total = 12 / 6 = 2 A</span></div>
+          <div class="solution-title">Part (c) — Current Through R2</div>
+          <div class="step-box"><div class="step-label">Step 4 — Find the voltage across the parallel block</div><div class="step-explain">All 2 A passes through R1 first, so:</div><span class="step-math">V_p = I_total × R_p = 2 × 2 = 4 V</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Apply Ohm's law to the R2 branch alone</div><div class="step-explain">Both branches in a parallel block share the same voltage (4 V):</div><span class="step-math">I₂ = V_p / R2 = 4 / 6 = 0.667 A</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 6 Ω &nbsp;|&nbsp; I_total = 2 A &nbsp;|&nbsp; I (through R2) ≈ 0.667 A</div>
+          <div class="mistake-box"><div class="mistake-label">Common mistake</div><p>Applying the total current directly to R2. Inside a parallel block current splits — always find the block's voltage first.</p></div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 2</span><span class="ex-title">Series-Only Circuit</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>V = 6 V; two 4 Ω resistors in series</p><p>Find: current and voltage across each resistor</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Find total resistance</div><span class="step-math">R_total = 4 + 4 = 8 Ω</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Find total current</div><span class="step-math">I = V / R_total = 6 / 8 = 0.75 A</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Find voltage across each resistor</div><div class="step-explain">Same current flows through both in series:</div><span class="step-math">V_each = I × R = 0.75 × 4 = 3 V</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Check the voltages add up to the source</div><span class="step-math">3 V + 3 V = 6 V ✓</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>I = 0.75 A; 3 V across each resistor</div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-header"><span class="ex-num">Ex 3</span><span class="ex-title">Series-Parallel with Equal Parallel Resistors</span></div>
+        <div class="example-body">
+          <div class="given-box"><div class="given-title">Given</div><p>V = 10 V; R1 = 2 Ω in series with two 8 Ω resistors in parallel</p><p>Find: total resistance, total current, current through each 8 Ω resistor</p></div>
+          <div class="solution-title">Full Step-by-Step Solution</div>
+          <div class="step-box"><div class="step-label">Step 1 — Combine the parallel pair</div><span class="step-math">1/R_p = 1/8 + 1/8 = 2/8 = 1/4 → R_p = 4 Ω</span></div>
+          <div class="step-box"><div class="step-label">Step 2 — Add the series resistor</div><span class="step-math">R_total = 2 + 4 = 6 Ω</span></div>
+          <div class="step-box"><div class="step-label">Step 3 — Find total current</div><span class="step-math">I_total = 10 / 6 = 1.667 A</span></div>
+          <div class="step-box"><div class="step-label">Step 4 — Find voltage across the parallel block</div><span class="step-math">V_p = I_total × R_p = 1.667 × 4 = 6.667 V</span></div>
+          <div class="step-box"><div class="step-label">Step 5 — Find current through each 8 Ω branch</div><span class="step-math">I_each = V_p / 8 = 6.667 / 8 = 0.833 A</span></div>
+          <div class="step-box"><div class="step-label">Step 6 — Check the branch currents add up</div><span class="step-math">0.833 + 0.833 = 1.667 A ✓</span></div>
+          <div class="final-answer"><span class="fa-label">Final Answer</span>R_total = 6 Ω; I_total = 1.667 A; 0.833 A through each 8 Ω resistor</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="summary-box" id="summary">
+      <h4>Chapter 6, Part 1 Summary — Electrostatics &amp; DC Circuits</h4>
+      <ul>
+        <li><strong>Charge:</strong> + and − types, quantised (e = 1.6×10⁻¹⁹ C), always conserved.</li>
+        <li><strong>Charging methods:</strong> friction, conduction (same sign), induction (opposite sign).</li>
+        <li><strong>Coulomb's Law:</strong> F = kq₁q₂/r²; superposition adds forces as vectors.</li>
+        <li><strong>Field:</strong> E = F/q = kQ/r² (vector). <strong>Potential:</strong> V = kQ/r = W/q (scalar).</li>
+        <li><strong>Capacitance:</strong> C = Q/V; energy U = ½QV = ½CV² = Q²/2C.</li>
+        <li><strong>Dipole moment:</strong> p = q·d, negative to positive.</li>
+        <li><strong>Conductors, insulators, semiconductors</strong> differ in how freely electrons move.</li>
+        <li><strong>Ohm's Law:</strong> V = IR. Series: R_total = ΣR. Parallel: 1/R_total = Σ(1/R).</li>
+        <li><strong>Circuit analysis:</strong> simplify → total current via Ohm's law → work back branch by branch.</li>
+      </ul>
+    </div>
+  </div><!-- /content -->
+</main>
+</div><!-- /book-wrap -->
+
+<button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const btn = document.getElementById('scrollBtn');
+window.addEventListener('scroll', () => { btn.classList.toggle('show', window.scrollY > 400); });
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[data-track]');
+const visited = new Set();
+function updateProgress() {
+  const pct = Math.round((visited.size / navLinks.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        const match = a.getAttribute('href') === '#' + e.target.id;
+        a.classList.toggle('active', match);
+        if (match) { a.classList.add('done'); visited.add(a.getAttribute('href')); }
+      });
+      updateProgress();
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+function togglePrint() {
+  document.body.classList.toggle('print-mode');
+}
+
+function calcOhm() {
+  const vEl = document.getElementById('ov'), iEl = document.getElementById('oi'), rEl = document.getElementById('or_');
+  let v = parseFloat(vEl.value), i = parseFloat(iEl.value), r = parseFloat(rEl.value);
+  const box = document.getElementById('ohmResult');
+  const filled = [!isNaN(v), !isNaN(i), !isNaN(r)].filter(Boolean).length;
+  if (filled !== 2) { box.innerHTML = 'Fill in exactly two fields, leave the one you want to find blank.'; box.classList.add('show'); return; }
+  let msg = '';
+  if (isNaN(v)) { v = i * r; msg = `V = I × R\nV = ${i} × ${r}\nV = ${v.toPrecision(4)} V`; }
+  else if (isNaN(i)) { i = v / r; msg = `I = V / R\nI = ${v} / ${r}\nI = ${i.toPrecision(4)} A`; }
+  else { r = v / i; msg = `R = V / I\nR = ${v} / ${i}\nR = ${r.toPrecision(4)} Ω`; }
+  box.innerHTML = `<div class="calc-steps">${msg}</div>`;
+  box.classList.add('show');
+}
+function calcResistors() {
+  const r1 = parseFloat(document.getElementById('rr1').value);
+  const r2 = parseFloat(document.getElementById('rr2').value);
+  const box = document.getElementById('resResult');
+  if (isNaN(r1) || isNaN(r2)) { box.innerHTML = 'Enter both resistor values.'; box.classList.add('show'); return; }
+  const series = r1 + r2;
+  const parallel = (r1 * r2) / (r1 + r2);
+  box.innerHTML = `<div class="calc-steps">Series: R = R1 + R2 = ${r1} + ${r2} = ${series.toPrecision(4)} Ω
+Parallel: R = (R1×R2)/(R1+R2) = (${r1}×${r2})/(${r1}+${r2}) = ${parallel.toPrecision(4)} Ω</div>`;
+  box.classList.add('show');
+}
+</script>
+</body>
+</html>
