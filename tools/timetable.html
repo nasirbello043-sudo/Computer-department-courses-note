@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timetable &mdash; Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1b4332;--green-mid:#2d6a4f;--green-soft:#40916c;
+  --gold:#c9a84c;--gold-light:#e9c46a;
+  --canvas:#f4f2ed;--surface:#fff;--border:#e2ddd4;
+  --text:#1a1a1a;--text-mid:#4a4a4a;--text-soft:#8a8782;
+  --bottom-h:62px;
+}
+html,body{height:100%;font-family:"Inter",sans-serif;background:var(--canvas);color:var(--text)}
+body{display:flex;flex-direction:column;min-height:100vh;padding-bottom:var(--bottom-h)}
+
+/* HEADER */
+.hdr{background:var(--green);position:sticky;top:0;z-index:300;box-shadow:0 2px 16px rgba(0,0,0,0.25);flex-shrink:0}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px;gap:10px}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.back-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;flex-shrink:0}
+.back-btn:hover{background:rgba(255,255,255,0.14)}
+.hdr-title{font-size:0.95rem;font-weight:600;color:#fff}
+.hdr-sub{font-size:0.58rem;color:var(--gold);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-top:1px}
+.hdr-actions{display:flex;gap:6px;align-items:center}
+.hdr-btn{padding:6px 12px;border-radius:7px;font-family:"Inter",sans-serif;font-size:0.72rem;font-weight:600;border:none;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.hdr-btn.outline{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)}
+.hdr-btn.outline:hover{background:rgba(255,255,255,0.15);color:#fff}
+.hdr-btn.gold{background:var(--gold);color:#111;font-weight:700}
+.hdr-btn.gold:hover{background:var(--gold-light)}
+.hdr-rule{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light) 40%,transparent)}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;padding:20px 16px 32px}
+
+/* SETUP CARD */
+.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
+.setup-title{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);margin-bottom:14px}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.setup-grid.three{grid-template-columns:1fr 1fr 1fr}
+.form-grp{display:flex;flex-direction:column;gap:4px}
+.form-grp label{font-size:0.68rem;font-weight:600;color:var(--text-mid)}
+.form-grp input,.form-grp select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:"Inter",sans-serif;font-size:0.82rem;color:var(--text);background:var(--surface);outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%}
+.form-grp input:focus,.form-grp select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(27,67,50,0.08)}
+.form-grp input::placeholder{color:var(--text-soft)}
+
+/* TABS */
+.tab-row{display:flex;gap:6px;margin-bottom:18px}
+.tab{padding:8px 18px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-mid);transition:all 0.15s}
+.tab.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* GENERATE SECTION */
+.gen-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px;display:none}
+.gen-card.show{display:block}
+.gen-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.gen-btn{width:100%;padding:11px;background:var(--green);color:#fff;border:none;border-radius:9px;font-family:"Inter",sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:background 0.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.gen-btn:hover{background:var(--green-mid)}
+
+/* TIMETABLE */
+.tt-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.tt-header-bar{background:var(--green);padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.tt-name{font-family:"Playfair Display",Georgia,serif;font-size:1rem;font-weight:700;color:#fff}
+.tt-meta{font-size:0.65rem;color:rgba(255,255,255,0.5);margin-top:2px}
+.tt-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:520px}
+thead th{background:rgba(27,67,50,0.06);padding:8px 6px;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-soft);text-align:center;border-bottom:2px solid var(--border)}
+thead th.time-col{width:56px;text-align:center}
+tbody tr:nth-child(even){background:rgba(0,0,0,0.015)}
+tbody tr:hover{background:rgba(27,67,50,0.03)}
+.time-cell{padding:8px 6px;font-size:0.65rem;font-weight:600;color:var(--text-soft);text-align:center;border-right:2px solid var(--border);white-space:nowrap;background:rgba(27,67,50,0.03)}
+.class-cell{padding:5px 4px;border:1px solid transparent;vertical-align:top;min-width:80px;position:relative}
+.class-input{width:100%;border:none;background:transparent;font-family:"Inter",sans-serif;font-size:0.72rem;color:var(--text);padding:4px 6px;border-radius:6px;outline:none;resize:none;min-height:48px;transition:background 0.15s;line-height:1.4}
+.class-input::placeholder{color:#ccc;font-size:0.68rem}
+.class-input:focus{background:rgba(27,67,50,0.05)}
+.class-input.has-content{background:rgba(27,67,50,0.06);color:var(--green);font-weight:500}
+
+/* COLOR PICKER per cell */
+.cell-wrap{position:relative}
+.cell-color-bar{height:3px;border-radius:2px;margin-bottom:2px;transition:height 0.15s}
+.cell-wrap:focus-within .cell-color-bar{height:4px}
+
+/* PRINT STYLES */
+@media print{
+  .hdr,.bottom-nav,.tab-row,.setup-card,.gen-card,.no-print{display:none!important}
+  body{padding:0;background:#fff}
+  .main{padding:0}
+  .tt-wrap{border:none;border-radius:0;box-shadow:none}
+  .tt-header-bar{background:#1b4332!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .class-input{border:none!important;background:transparent!important}
+  table{min-width:100%}
+  thead th{background:#f4f2ed!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .time-cell{background:#f4f2ed!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--bottom-h);background:var(--green);border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-around;z-index:400;box-shadow:0 -4px 20px rgba(0,0,0,0.2)}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:10px;text-decoration:none;color:rgba(255,255,255,0.45);transition:all 0.15s;border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif}
+.nav-item.active{color:#fff}
+.nav-ic-wrap{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
+.nav-item.active .nav-ic-wrap{background:rgba(201,168,76,0.18)}
+.nav-lbl{font-size:0.55rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+
+@media(min-width:701px){
+  .bottom-nav{display:none}
+  body{padding-bottom:0}
+  .main{padding:24px 32px 40px}
+  .setup-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-left">
+      <a class="back-btn" href="../index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <div>
+        <div class="hdr-title">Timetable</div>
+        <div class="hdr-sub">Learning Hub</div>
+      </div>
+    </div>
+    <div class="hdr-actions">
+      <button class="hdr-btn outline no-print" onclick="clearAll()">Clear</button>
+      <button class="hdr-btn gold no-print" onclick="printTT()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:inline;margin-right:4px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print PDF
+      </button>
+    </div>
+  </div>
+  <div class="hdr-rule"></div>
+</header>
+
+<main class="main">
+
+  <!-- SETUP -->
+  <div class="setup-card no-print">
+    <div class="setup-title">Timetable Settings</div>
+    <div class="setup-grid" style="margin-bottom:10px">
+      <div class="form-grp">
+        <label>Your Name</label>
+        <input type="text" id="tt-name" placeholder="e.g. Nasir Bello" oninput="updateHeader()">
+      </div>
+      <div class="form-grp">
+        <label>Department</label>
+        <input type="text" id="tt-dept" placeholder="e.g. Computer Science" oninput="updateHeader()">
+      </div>
+      <div class="form-grp">
+        <label>Level</label>
+        <select id="tt-level" onchange="updateHeader()">
+          <option>100 Level</option><option>200 Level</option>
+          <option>300 Level</option><option>400 Level</option>
+        </select>
+      </div>
+      <div class="form-grp">
+        <label>Semester</label>
+        <select id="tt-sem" onchange="updateHeader()">
+          <option>First Semester</option><option>Second Semester</option>
+        </select>
+      </div>
+    </div>
+    <div class="setup-grid three">
+      <div class="form-grp">
+        <label>Start Time</label>
+        <input type="time" id="tt-start" value="08:00" onchange="buildTable()">
+      </div>
+      <div class="form-grp">
+        <label>End Time</label>
+        <input type="time" id="tt-end" value="17:00" onchange="buildTable()">
+      </div>
+      <div class="form-grp">
+        <label>Slot Duration</label>
+        <select id="tt-slot" onchange="buildTable()">
+          <option value="30">30 minutes</option>
+          <option value="60" selected>1 hour</option>
+          <option value="90">1.5 hours</option>
+          <option value="120">2 hours</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-row no-print">
+    <button class="tab active" id="tab-manual" onclick="switchTab('manual')">
+      &#9998; Manual Entry
+    </button>
+    <button class="tab" id="tab-generate" onclick="switchTab('generate')">
+      &#10024; Auto Generate
+    </button>
+  </div>
+
+  <!-- GENERATE PANEL -->
+  <div class="gen-card" id="gen-panel">
+    <div class="setup-title">Auto Generate</div>
+    <p style="font-size:0.8rem;color:var(--text-soft);margin-bottom:14px;line-height:1.6">Enter your courses below and we will place them across the week for you. You can edit them after.</p>
+    <div id="gen-courses"></div>
+    <button class="hdr-btn outline" style="margin-top:10px;margin-bottom:14px;font-size:0.78rem" onclick="addGenCourse()">+ Add Course</button>
+    <button class="gen-btn" onclick="autoGenerate()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      Generate Timetable
+    </button>
+  </div>
+
+  <!-- TIMETABLE -->
+  <div class="tt-wrap">
+    <div class="tt-header-bar">
+      <div>
+        <div class="tt-name" id="tt-display-name">My Weekly Timetable</div>
+        <div class="tt-meta" id="tt-display-meta">Federal College of Education, Kontagora</div>
+      </div>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.6)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <div class="tt-scroll">
+      <table id="tt-table"></table>
+    </div>
+  </div>
+
+  <p class="no-print" style="font-size:0.72rem;color:var(--text-soft);text-align:center;margin-top:4px">
+    Your timetable is saved automatically. Tap any cell to edit.
+  </p>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a class="nav-item" href="../index.html">
+    <div class="nav-ic-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </div>
+    <span class="nav-lbl">Home</span>
+  </a>
+  <a class="nav-item" href="calculator.html">
+    <div class="nav-ic-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/>
+        <line x1="8" y1="10" x2="8" y2="10" stroke-width="3"/><line x1="12" y1="10" x2="12" y2="10" stroke-width="3"/><line x1="16" y1="10" x2="16" y2="10" stroke-width="3"/>
+        <line x1="8" y1="14" x2="8" y2="14" stroke-width="3"/><line x1="12" y1="14" x2="12" y2="14" stroke-width="3"/><line x1="16" y1="14" x2="16" y2="14" stroke-width="3"/>
+        <line x1="8" y1="18" x2="8" y2="18" stroke-width="3"/><line x1="12" y1="18" x2="12" y2="18" stroke-width="3"/><line x1="16" y1="18" x2="16" y2="18" stroke-width="3"/>
+      </svg>
+    </div>
+    <span class="nav-lbl">Calc</span>
+  </a>
+  <a class="nav-item active" href="timetable.html">
+    <div class="nav-ic-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+    </div>
+    <span class="nav-lbl">Timetable</span>
+  </a>
+  <a class="nav-item" href="../gpa.html">
+    <div class="nav-ic-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+      </svg>
+    </div>
+    <span class="nav-lbl">GPA</span>
+  </a>
+  <a class="nav-item" href="notepad.html">
+    <div class="nav-ic-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+    </div>
+    <span class="nav-lbl">Notes</span>
+  </a>
+</nav>
+
+<script>
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+const COLORS = ["#1b4332","#2d6a4f","#5b21b6","#1e40af","#92400e","#7c3aed","#065f46","#9d174d"];
+const STORAGE_KEY = "fce-timetable";
+const SETTINGS_KEY = "fce-tt-settings";
+
+let slots = [];
+let cellData = {};
+let genCourseList = [];
+
+// ── TIME UTILS ──
+function timeToMins(t){ const [h,m]=t.split(":").map(Number); return h*60+m; }
+function minsToTime(m){ const h=Math.floor(m/60); const mn=m%60; return `${String(h).padStart(2,"0")}:${String(mn).padStart(2,"0")}`; }
+function fmtTime(t){
+  const [h,m]=t.split(":").map(Number);
+  const ampm=h>=12?"PM":"AM"; const h12=h%12||12;
+  return `${h12}:${String(m).padStart(2,"0")} ${ampm}`;
+}
+
+// ── BUILD TABLE ──
+function buildTable(){
+  const start = timeToMins(document.getElementById("tt-start").value||"08:00");
+  const end   = timeToMins(document.getElementById("tt-end").value||"17:00");
+  const slot  = parseInt(document.getElementById("tt-slot").value||"60");
+  slots = [];
+  for(let t=start; t<end; t+=slot) slots.push(minsToTime(t));
+
+  const table = document.getElementById("tt-table");
+  // Head
+  let thead = "<thead><tr><th class='time-col'>Time</th>";
+  DAYS.forEach(d => thead += `<th>${d.slice(0,3)}</th>`);
+  thead += "</tr></thead>";
+
+  // Body
+  let tbody = "<tbody>";
+  slots.forEach(s => {
+    const endT = minsToTime(timeToMins(s)+slot);
+    tbody += `<tr><td class="time-cell">${fmtTime(s)}<br><span style="font-size:0.58rem;opacity:0.6">${fmtTime(endT)}</span></td>`;
+    DAYS.forEach(d => {
+      const key = `${d}-${s}`;
+      const val = cellData[key]||"";
+      const hasContent = val.trim()!=="";
+      tbody += `<td class="class-cell"><div class="cell-wrap">
+        <div class="cell-color-bar" id="bar-${key}" style="background:${hasContent?getCellColor(val):"transparent"}"></div>
+        <textarea class="class-input${hasContent?" has-content":""}" 
+          id="cell-${key}" 
+          placeholder="Add class..." 
+          rows="2"
+          onchange="saveCell('${key}',this.value)"
+          oninput="onCellInput('${key}',this)"
+        >${val}</textarea>
+      </div></td>`;
+    });
+    tbody += "</tr>";
+  });
+  tbody += "</tbody>";
+  table.innerHTML = thead + tbody;
+  saveSettings();
+}
+
+function getCellColor(val){
+  // consistent color per course name
+  let hash=0; for(let c of val) hash=(hash*31+c.charCodeAt(0))&0xffffffff;
+  return COLORS[Math.abs(hash)%COLORS.length]+"33";
+}
+
+function onCellInput(key, el){
+  const val = el.value;
+  const has = val.trim()!=="";
+  el.classList.toggle("has-content", has);
+  const bar = document.getElementById("bar-"+key);
+  if(bar) bar.style.background = has ? getCellColor(val) : "transparent";
+  cellData[key] = val;
+  saveCells();
+}
+
+function saveCell(key, val){
+  cellData[key]=val;
+  saveCells();
+}
+
+// ── PERSISTENCE ──
+function saveCells(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(cellData)); }
+function saveSettings(){
+  const s={
+    start:document.getElementById("tt-start").value,
+    end:document.getElementById("tt-end").value,
+    slot:document.getElementById("tt-slot").value,
+    name:document.getElementById("tt-name").value,
+    dept:document.getElementById("tt-dept").value,
+    level:document.getElementById("tt-level").value,
+    sem:document.getElementById("tt-sem").value,
+  };
+  localStorage.setItem(SETTINGS_KEY,JSON.stringify(s));
+}
+function loadData(){
+  const cells = localStorage.getItem(STORAGE_KEY);
+  if(cells) cellData = JSON.parse(cells);
+  const settings = localStorage.getItem(SETTINGS_KEY);
+  if(settings){
+    const s=JSON.parse(settings);
+    if(s.start) document.getElementById("tt-start").value=s.start;
+    if(s.end)   document.getElementById("tt-end").value=s.end;
+    if(s.slot)  document.getElementById("tt-slot").value=s.slot;
+    if(s.name)  document.getElementById("tt-name").value=s.name;
+    if(s.dept)  document.getElementById("tt-dept").value=s.dept;
+    if(s.level) document.getElementById("tt-level").value=s.level;
+    if(s.sem)   document.getElementById("tt-sem").value=s.sem;
+  }
+}
+
+// ── HEADER ──
+function updateHeader(){
+  const name = document.getElementById("tt-name").value;
+  const dept = document.getElementById("tt-dept").value;
+  const level = document.getElementById("tt-level").value;
+  const sem = document.getElementById("tt-sem").value;
+  document.getElementById("tt-display-name").textContent =
+    name ? name+"'s Timetable" : "My Weekly Timetable";
+  document.getElementById("tt-display-meta").textContent =
+    [dept,level,sem].filter(Boolean).join(" · ") || "Federal College of Education, Kontagora";
+  saveSettings();
+}
+
+// ── AUTO GENERATE ──
+function addGenCourse(){
+  const id = Date.now();
+  genCourseList.push(id);
+  const wrap = document.getElementById("gen-courses");
+  const row = document.createElement("div");
+  row.id = "gcourse-"+id;
+  row.style.cssText="display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-bottom:8px;align-items:center";
+  row.innerHTML=`
+    <input type="text" placeholder="e.g. COS 204 — Object Oriented Programming" 
+      style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:Inter,sans-serif;font-size:0.8rem;outline:none;width:100%">
+    <select style="padding:8px;border:1px solid var(--border);border-radius:8px;font-size:0.78rem;font-family:Inter,sans-serif">
+      <option>1x/week</option><option selected>2x/week</option><option>3x/week</option>
+    </select>
+    <button onclick="removeGenCourse(${id})" 
+      style="width:30px;height:30px;border-radius:7px;border:1px solid #fca5a5;background:#fef2f2;color:#ef4444;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center">
+      &times;
+    </button>`;
+  wrap.appendChild(row);
+}
+
+function removeGenCourse(id){
+  document.getElementById("gcourse-"+id)?.remove();
+  genCourseList=genCourseList.filter(i=>i!==id);
+}
+
+function autoGenerate(){
+  const rows = document.getElementById("gen-courses").querySelectorAll("div[id^=gcourse]");
+  if(!rows.length){ alert("Add at least one course first."); return; }
+  // Clear existing
+  cellData={};
+  // Collect courses
+  const courses=[];
+  rows.forEach(r=>{
+    const name=r.querySelector("input").value.trim();
+    const freq=parseInt(r.querySelector("select").value);
+    if(name) courses.push({name,freq});
+  });
+  // Place courses across days and slots
+  let dayIdx=0;
+  let slotIdx=0;
+  courses.forEach(course=>{
+    let placed=0;
+    let attempts=0;
+    while(placed<course.freq && attempts<50){
+      const day=DAYS[dayIdx%7];
+      const slot=slots[slotIdx%slots.length];
+      const key=`${day}-${slot}`;
+      if(!cellData[key]){
+        cellData[key]=course.name;
+        placed++;
+        dayIdx+=2; // spread across days
+      }
+      slotIdx++;
+      attempts++;
+    }
+    slotIdx=0;
+    dayIdx++;
+  });
+  saveCells();
+  buildTable();
+  switchTab("manual");
+}
+
+// ── TABS ──
+function switchTab(tab){
+  document.getElementById("tab-manual").classList.toggle("active",tab==="manual");
+  document.getElementById("tab-generate").classList.toggle("active",tab==="generate");
+  document.getElementById("gen-panel").classList.toggle("show",tab==="generate");
+}
+
+// ── CLEAR ──
+function clearAll(){
+  if(!confirm("Clear all classes from your timetable?")) return;
+  cellData={};
+  saveCells();
+  buildTable();
+}
+
+// ── PRINT ──
+function printTT(){
+  window.print();
+}
+
+// ── BOOT ──
+loadData();
+buildTable();
+updateHeader();
+// Add a default gen course row
+addGenCourse();
+</script>
+</body>
+</html>
