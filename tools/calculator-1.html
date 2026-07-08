@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Calculator &mdash; Learning Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -10,99 +10,161 @@
 :root{
   --green:#1b4332;--green-mid:#2d6a4f;--green-soft:#40916c;
   --gold:#c9a84c;--gold-light:#e9c46a;
-  --canvas:#f4f2ed;--surface:#fff;--border:#e2ddd4;
-  --text:#1a1a1a;--text-mid:#4a4a4a;--text-soft:#8a8782;
+  --hdr-h:57px;
   --bottom-h:62px;
-  /* calculator */
-  --calc-bg:#111816;
-  --calc-surface:#1a2420;
-  --calc-border:#2a3a34;
-  --btn-num:#1e2e28;
-  --btn-num-h:#263830;
+  --calc-bg:#0f1a16;
+  --display-bg:#0a1210;
+  --btn-num:#1a2e26;
   --btn-op:#2d6a4f;
-  --btn-op-h:#40916c;
-  --btn-fn:#162820;
-  --btn-fn-h:#1e3530;
+  --btn-fn:#111e18;
+  --btn-sci:#0e1914;
   --btn-eq:#c9a84c;
-  --btn-eq-h:#e9c46a;
-  --btn-text:#ffffff;
-  --btn-text-dim:rgba(255,255,255,0.65);
-  --display-bg:#0d1512;
+  --btn-clear:#3d1515;
 }
-html,body{height:100%;overflow:hidden}
-body{background:var(--canvas);color:var(--text);font-family:"Inter",sans-serif;display:flex;flex-direction:column;min-height:100vh;padding-bottom:var(--bottom-h)}
+html,body{
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  position:fixed;
+  top:0;left:0;
+}
+body{
+  background:var(--calc-bg);
+  font-family:"Inter",sans-serif;
+  display:flex;
+  flex-direction:column;
+}
 
-/* HEADER */
-.hdr{background:var(--green);flex-shrink:0;box-shadow:0 2px 16px rgba(0,0,0,0.25)}
-.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px}
-.hdr-left{display:flex;align-items:center;gap:10px}
-.back-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;flex-shrink:0}
-.back-btn:hover{background:rgba(255,255,255,0.14)}
-.hdr-title{font-family:"Inter",sans-serif;font-size:0.95rem;font-weight:600;color:#fff}
-.hdr-sub{font-size:0.58rem;color:var(--gold);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-top:1px}
-.mode-tabs{display:flex;gap:4px;background:rgba(0,0,0,0.2);border-radius:8px;padding:3px}
-.mode-tab{padding:5px 12px;border-radius:6px;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.15s;border:none;background:transparent;font-family:"Inter",sans-serif}
+/* ── HEADER ── */
+.hdr{
+  background:var(--green);
+  height:var(--hdr-h);
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 2px 16px rgba(0,0,0,0.3);
+  z-index:10;
+}
+.hdr-inner{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+}
+.hdr-left{display:flex;align-items:center;gap:9px}
+.back-btn{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.8);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:background 0.15s;flex-shrink:0;
+}
+.hdr-title{font-size:0.92rem;font-weight:600;color:#fff;line-height:1.2}
+.hdr-sub{font-size:0.56rem;color:var(--gold);font-weight:600;letter-spacing:0.12em;text-transform:uppercase}
+.mode-tabs{display:flex;gap:3px;background:rgba(0,0,0,0.25);border-radius:8px;padding:3px}
+.mode-tab{
+  padding:5px 14px;border-radius:6px;font-size:0.68rem;font-weight:600;
+  color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;
+  border:none;background:transparent;font-family:"Inter",sans-serif;
+}
 .mode-tab.active{background:var(--gold);color:#111;font-weight:700}
-.hdr-rule{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light) 40%,transparent)}
+.hdr-rule{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light) 40%,transparent);flex-shrink:0}
 
-/* CALCULATOR WRAPPER */
-.calc-wrapper{flex:1;display:flex;flex-direction:column;background:var(--calc-bg);overflow:hidden}
+/* ── DISPLAY ── */
+.display{
+  background:var(--display-bg);
+  padding:12px 18px 10px;
+  flex-shrink:0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.disp-angle{
+  font-size:0.6rem;font-weight:700;letter-spacing:0.14em;
+  color:rgba(255,255,255,0.2);text-transform:uppercase;margin-bottom:4px;
+}
+.disp-history{
+  font-family:"JetBrains Mono",monospace;font-size:0.65rem;
+  color:rgba(255,255,255,0.2);text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  min-height:14px;margin-bottom:2px;
+}
+.disp-expr{
+  font-family:"JetBrains Mono",monospace;font-size:0.85rem;
+  color:rgba(255,255,255,0.38);text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  min-height:18px;margin-bottom:6px;
+}
+.disp-main{
+  font-family:"JetBrains Mono",monospace;font-size:2.6rem;
+  font-weight:300;color:#fff;text-align:right;line-height:1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:-0.02em;transition:font-size 0.1s;
+}
+.disp-main.sm{font-size:1.8rem}
+.disp-main.xs{font-size:1.2rem}
 
-/* DISPLAY */
-.display{background:var(--display-bg);padding:16px 20px 12px;flex-shrink:0;border-bottom:1px solid var(--calc-border)}
-.display-history{font-family:"JetBrains Mono",monospace;font-size:0.75rem;color:rgba(255,255,255,0.25);min-height:18px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:4px}
-.display-expr{font-family:"JetBrains Mono",monospace;font-size:1rem;color:rgba(255,255,255,0.45);min-height:22px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:6px;letter-spacing:0.02em}
-.display-main{font-family:"JetBrains Mono",monospace;font-size:2.4rem;font-weight:300;color:#fff;text-align:right;line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.02em;transition:font-size 0.1s}
-.display-main.small{font-size:1.6rem}
-.display-main.xsmall{font-size:1.1rem}
+/* ── KEYPAD ── */
+.keypad{
+  flex:1;
+  display:grid;
+  padding:8px 6px 6px;
+  gap:6px;
+  overflow:hidden;
+  /* rows/cols set by JS */
+}
 
-/* KEYPAD */
-.keypad{flex:1;display:grid;padding:10px 8px 8px;gap:7px;overflow:hidden}
-.keypad.basic{grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(5,1fr)}
-.keypad.sci{grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(6,1fr)}
+/* ── BUTTONS ── */
+.btn{
+  border:none;border-radius:12px;cursor:pointer;
+  font-family:"Inter",sans-serif;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.08s,filter 0.08s;
+  position:relative;overflow:hidden;
+  user-select:none;-webkit-tap-highlight-color:transparent;
+  line-height:1.1;
+}
+.btn:active{transform:scale(0.92);filter:brightness(1.2)}
 
-/* BUTTONS */
-.btn{border:none;border-radius:12px;cursor:pointer;font-family:"Inter",sans-serif;font-weight:600;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.1s;position:relative;overflow:hidden;user-select:none;-webkit-tap-highlight-color:transparent;letter-spacing:0.01em}
-.btn::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,0);transition:background 0.1s}
-.btn:active::after{background:rgba(255,255,255,0.12)}
-.btn:active{transform:scale(0.95)}
+.btn-num{background:var(--btn-num);color:#fff;font-size:1.3rem;font-weight:500}
+.btn-op {background:var(--btn-op);color:#fff;font-size:1.3rem}
+.btn-fn {background:var(--btn-fn);color:rgba(255,255,255,0.7);font-size:0.9rem}
+.btn-sci{background:var(--btn-sci);color:rgba(255,255,255,0.6);font-size:0.75rem;border:1px solid rgba(255,255,255,0.05)}
+.btn-eq {background:var(--btn-eq);color:#111;font-size:1.5rem;font-weight:700}
+.btn-clear{background:var(--btn-clear);color:#ff6b6b;font-size:1rem;font-weight:700}
+.btn-del{background:var(--btn-fn);color:rgba(255,255,255,0.7);font-size:1rem}
+.btn-zero{font-size:1.3rem}
 
-.btn-num{background:var(--btn-num);color:var(--btn-text)}
-.btn-num:hover{background:var(--btn-num-h)}
-.btn-zero{grid-column:span 2}
-
-.btn-op{background:var(--btn-op);color:#fff}
-.btn-op:hover{background:var(--btn-op-h)}
-
-.btn-fn{background:var(--btn-fn);color:rgba(255,255,255,0.75);font-size:0.78rem}
-.btn-fn:hover{background:var(--btn-fn-h);color:#fff}
-
-.btn-fn-sci{background:#0f1e18;color:rgba(255,255,255,0.65);font-size:0.72rem;border:1px solid rgba(255,255,255,0.06)}
-.btn-fn-sci:hover{background:#162820;color:rgba(255,255,255,0.9)}
-
-.btn-eq{background:var(--btn-eq);color:#111;font-size:1.1rem}
-.btn-eq:hover{background:var(--btn-eq-h)}
-
-.btn-clear{background:#3d1515;color:#ff6b6b;font-weight:700}
-.btn-clear:hover{background:#4d1a1a}
-
-.btn-del{background:var(--btn-fn);color:rgba(255,255,255,0.75)}
-.btn-del:hover{background:var(--btn-fn-h)}
-
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--bottom-h);background:var(--green);border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-around;z-index:400;box-shadow:0 -4px 20px rgba(0,0,0,0.2)}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 14px;border-radius:10px;text-decoration:none;color:rgba(255,255,255,0.45);transition:all 0.15s;border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif}
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  height:var(--bottom-h);
+  background:var(--green);
+  border-top:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:space-around;
+  flex-shrink:0;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.2);
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 10px;border-radius:10px;text-decoration:none;
+  color:rgba(255,255,255,0.4);transition:all 0.15s;
+  border:none;background:transparent;cursor:pointer;
+  font-family:"Inter",sans-serif;
+}
 .nav-item.active{color:#fff}
-.nav-ic-wrap{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
-.nav-item.active .nav-ic-wrap{background:rgba(201,168,76,0.18)}
-.nav-lbl{font-size:0.55rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.nav-ic-wrap{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-item.active .nav-ic-wrap{background:rgba(201,168,76,0.2)}
+.nav-lbl{font-size:0.52rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
 
-@media(min-width:701px){
-  .bottom-nav{display:none}
-  body{padding-bottom:0}
-  .calc-wrapper{max-width:420px;margin:20px auto;border-radius:20px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.4)}
-  html,body{overflow:auto;background:var(--canvas)}
-  .hdr{border-radius:0}
+@media(min-width:600px){
+  html,body{position:static;overflow:auto;height:auto}
+  body{min-height:100vh;background:#1a2a24}
+  .hdr{position:sticky;top:0;z-index:100}
+  .keypad{min-height:360px}
+  .bottom-nav{position:sticky;bottom:0}
 }
 </style>
 </head>
@@ -112,10 +174,8 @@ body{background:var(--canvas);color:var(--text);font-family:"Inter",sans-serif;d
 <header class="hdr">
   <div class="hdr-inner">
     <div class="hdr-left">
-      <a class="back-btn" href="../index.html" title="Home">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
+      <a class="back-btn" href="../index.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
       </a>
       <div>
         <div class="hdr-title">Calculator</div>
@@ -130,19 +190,20 @@ body{background:var(--canvas);color:var(--text);font-family:"Inter",sans-serif;d
   <div class="hdr-rule"></div>
 </header>
 
-<!-- CALCULATOR -->
-<div class="calc-wrapper">
-  <div class="display">
-    <div class="display-history" id="disp-history">&nbsp;</div>
-    <div class="display-expr" id="disp-expr">&nbsp;</div>
-    <div class="display-main" id="disp-main">0</div>
-  </div>
-  <div class="keypad basic" id="keypad"></div>
+<!-- DISPLAY -->
+<div class="display">
+  <div class="disp-angle" id="disp-angle">DEG</div>
+  <div class="disp-history" id="disp-history">&nbsp;</div>
+  <div class="disp-expr" id="disp-expr">&nbsp;</div>
+  <div class="disp-main" id="disp-main">0</div>
 </div>
+
+<!-- KEYPAD -->
+<div class="keypad" id="keypad"></div>
 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
-  <a class="nav-item" href="../index.html" title="Home">
+  <a class="nav-item" href="../index.html">
     <div class="nav-ic-wrap">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
@@ -150,11 +211,10 @@ body{background:var(--canvas);color:var(--text);font-family:"Inter",sans-serif;d
     </div>
     <span class="nav-lbl">Home</span>
   </a>
-  <a class="nav-item active" href="calculator.html" title="Calculator">
+  <a class="nav-item active" href="calculator.html">
     <div class="nav-ic-wrap">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="2" width="16" height="20" rx="2"/>
-        <line x1="8" y1="6" x2="16" y2="6"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/>
         <line x1="8" y1="10" x2="8" y2="10" stroke-width="3"/><line x1="12" y1="10" x2="12" y2="10" stroke-width="3"/><line x1="16" y1="10" x2="16" y2="10" stroke-width="3"/>
         <line x1="8" y1="14" x2="8" y2="14" stroke-width="3"/><line x1="12" y1="14" x2="12" y2="14" stroke-width="3"/><line x1="16" y1="14" x2="16" y2="14" stroke-width="3"/>
         <line x1="8" y1="18" x2="8" y2="18" stroke-width="3"/><line x1="12" y1="18" x2="12" y2="18" stroke-width="3"/><line x1="16" y1="18" x2="16" y2="18" stroke-width="3"/>
@@ -162,284 +222,233 @@ body{background:var(--canvas);color:var(--text);font-family:"Inter",sans-serif;d
     </div>
     <span class="nav-lbl">Calc</span>
   </a>
-  <a class="nav-item" href="../gpa.html" title="GPA">
+  <a class="nav-item " href="timetable.html">
     <div class="nav-ic-wrap">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
       </svg>
     </div>
-    <span class="nav-lbl">GPA</span>
+    <span class="nav-lbl">Timetable</span>
   </a>
-  <a class="nav-item" href="timer.html" title="Timer">
+  <a class="nav-item " href="updates.html">
     <div class="nav-ic-wrap">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
     </div>
-    <span class="nav-lbl">Timer</span>
+    <span class="nav-lbl">Updates</span>
   </a>
-  <a class="nav-item" href="notepad.html" title="Notes">
+  <a class="nav-item " href="study.html">
     <div class="nav-ic-wrap">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
     </div>
-    <span class="nav-lbl">Notes</span>
+    <span class="nav-lbl">Study</span>
   </a>
 </nav>
 
 <script>
-// ── STATE ──
-let currentMode = "basic";
-let display = "0";
-let expression = "";
-let history = "";
-let justEvaled = false;
-let angleMode = "deg"; // deg | rad
+let mode="basic",display="0",expression="",history="",justEvaled=false,angleMode="deg";
 
-// ── BUTTON LAYOUTS ──
-const basicLayout = [
+const basicLayout=[
   {l:"AC",  c:"btn-clear", a:"clear"},
   {l:"+/-", c:"btn-fn",    a:"negate"},
   {l:"%",   c:"btn-fn",    a:"percent"},
-  {l:"÷",   c:"btn-op",    a:"op", v:"/"},
-  {l:"7",   c:"btn-num",   a:"num", v:"7"},
-  {l:"8",   c:"btn-num",   a:"num", v:"8"},
-  {l:"9",   c:"btn-num",   a:"num", v:"9"},
-  {l:"×",   c:"btn-op",    a:"op", v:"*"},
-  {l:"4",   c:"btn-num",   a:"num", v:"4"},
-  {l:"5",   c:"btn-num",   a:"num", v:"5"},
-  {l:"6",   c:"btn-num",   a:"num", v:"6"},
-  {l:"−",   c:"btn-op",    a:"op", v:"-"},
-  {l:"1",   c:"btn-num",   a:"num", v:"1"},
-  {l:"2",   c:"btn-num",   a:"num", v:"2"},
-  {l:"3",   c:"btn-num",   a:"num", v:"3"},
-  {l:"+",   c:"btn-op",    a:"op",  v:"+", rs:2},
-  {l:"0",   c:"btn-num btn-zero", a:"num", v:"0"},
+  {l:"÷",   c:"btn-op",    a:"op",v:"/"},
+  {l:"7",   c:"btn-num",   a:"num",v:"7"},
+  {l:"8",   c:"btn-num",   a:"num",v:"8"},
+  {l:"9",   c:"btn-num",   a:"num",v:"9"},
+  {l:"×",   c:"btn-op",    a:"op",v:"*"},
+  {l:"4",   c:"btn-num",   a:"num",v:"4"},
+  {l:"5",   c:"btn-num",   a:"num",v:"5"},
+  {l:"6",   c:"btn-num",   a:"num",v:"6"},
+  {l:"−",   c:"btn-op",    a:"op",v:"-"},
+  {l:"1",   c:"btn-num",   a:"num",v:"1"},
+  {l:"2",   c:"btn-num",   a:"num",v:"2"},
+  {l:"3",   c:"btn-num",   a:"num",v:"3"},
+  {l:"+",   c:"btn-op",    a:"op",v:"+",rs:2},
+  {l:"0",   c:"btn-num btn-zero",a:"num",v:"0",cs:2},
   {l:".",   c:"btn-num",   a:"dot"},
   {l:"⌫",   c:"btn-del",   a:"del"},
   {l:"=",   c:"btn-eq",    a:"eval"},
 ];
 
-const sciLayout = [
-  {l:"AC",   c:"btn-clear",   a:"clear"},
-  {l:"(",    c:"btn-fn-sci",  a:"paren", v:"("},
-  {l:")",    c:"btn-fn-sci",  a:"paren", v:")"},
-  {l:"⌫",    c:"btn-del",     a:"del"},
-  {l:"÷",    c:"btn-op",      a:"op", v:"/"},
+const sciLayout=[
+  {l:"AC",    c:"btn-clear",  a:"clear"},
+  {l:"DEG",   c:"btn-sci",    a:"angle",id:"angle-btn"},
+  {l:"(",     c:"btn-sci",    a:"paren",v:"("},
+  {l:")",     c:"btn-sci",    a:"paren",v:")"},
+  {l:"⌫",     c:"btn-del",    a:"del"},
+  {l:"÷",     c:"btn-op",     a:"op",v:"/"},
 
-  {l:"sin",  c:"btn-fn-sci",  a:"fn", v:"sin"},
-  {l:"cos",  c:"btn-fn-sci",  a:"fn", v:"cos"},
-  {l:"tan",  c:"btn-fn-sci",  a:"fn", v:"tan"},
-  {l:"xʸ",   c:"btn-fn-sci",  a:"op", v:"**"},
-  {l:"×",    c:"btn-op",      a:"op", v:"*"},
+  {l:"sin",   c:"btn-sci",    a:"fn",v:"sin"},
+  {l:"cos",   c:"btn-sci",    a:"fn",v:"cos"},
+  {l:"tan",   c:"btn-sci",    a:"fn",v:"tan"},
+  {l:"xʸ",    c:"btn-sci",    a:"op",v:"**"},
+  {l:"√x",    c:"btn-sci",    a:"fn",v:"sqrt"},
+  {l:"×",     c:"btn-op",     a:"op",v:"*"},
 
-  {l:"sin⁻¹",c:"btn-fn-sci", a:"fn", v:"asin"},
-  {l:"cos⁻¹",c:"btn-fn-sci", a:"fn", v:"acos"},
-  {l:"tan⁻¹",c:"btn-fn-sci", a:"fn", v:"atan"},
-  {l:"√",    c:"btn-fn-sci",  a:"fn", v:"sqrt"},
-  {l:"−",    c:"btn-op",      a:"op", v:"-"},
+  {l:"sin⁻¹", c:"btn-sci",   a:"fn",v:"asin"},
+  {l:"cos⁻¹", c:"btn-sci",   a:"fn",v:"acos"},
+  {l:"tan⁻¹", c:"btn-sci",   a:"fn",v:"atan"},
+  {l:"x²",    c:"btn-sci",    a:"fn",v:"sq"},
+  {l:"1/x",   c:"btn-sci",    a:"fn",v:"inv"},
+  {l:"−",     c:"btn-op",     a:"op",v:"-"},
 
-  {l:"log",  c:"btn-fn-sci",  a:"fn", v:"log"},
-  {l:"ln",   c:"btn-fn-sci",  a:"fn", v:"ln"},
-  {l:"π",    c:"btn-fn-sci",  a:"const", v:String(Math.PI)},
-  {l:"e",    c:"btn-fn-sci",  a:"const", v:String(Math.E)},
-  {l:"+",    c:"btn-op",      a:"op", v:"+"},
+  {l:"log",   c:"btn-sci",    a:"fn",v:"log"},
+  {l:"ln",    c:"btn-sci",    a:"fn",v:"ln"},
+  {l:"π",     c:"btn-sci",    a:"const",v:String(Math.PI)},
+  {l:"e",     c:"btn-sci",    a:"const",v:String(Math.E)},
+  {l:"%",     c:"btn-fn",     a:"percent"},
+  {l:"+",     c:"btn-op",     a:"op",v:"+"},
 
-  {l:"7",    c:"btn-num",     a:"num", v:"7"},
-  {l:"8",    c:"btn-num",     a:"num", v:"8"},
-  {l:"9",    c:"btn-num",     a:"num", v:"9"},
-  {l:"%",    c:"btn-fn",      a:"percent"},
-  {l:"+/-",  c:"btn-fn",      a:"negate"},
-
-  {l:"4",    c:"btn-num",     a:"num", v:"4"},
-  {l:"5",    c:"btn-num",     a:"num", v:"5"},
-  {l:"6",    c:"btn-num",     a:"num", v:"6"},
-  {l:"1/x",  c:"btn-fn-sci",  a:"fn", v:"inv"},
-  {l:"x²",   c:"btn-fn-sci",  a:"fn", v:"sq"},
-
-  {l:"1",    c:"btn-num",     a:"num", v:"1"},
-  {l:"2",    c:"btn-num",     a:"num", v:"2"},
-  {l:"3",    c:"btn-num",     a:"num", v:"3"},
-  {l:".",    c:"btn-num",     a:"dot"},
-  {l:"=",    c:"btn-eq",      a:"eval", rs:2},
-
-  {l:"0",    c:"btn-num btn-zero", a:"num", v:"0"},
-  {l:"RAD",  c:"btn-fn-sci",  a:"angle"},
+  {l:"7",     c:"btn-num",    a:"num",v:"7"},
+  {l:"8",     c:"btn-num",    a:"num",v:"8"},
+  {l:"9",     c:"btn-num",    a:"num",v:"9"},
+  {l:"4",     c:"btn-num",    a:"num",v:"4"},
+  {l:"5",     c:"btn-num",    a:"num",v:"5"},
+  {l:"6",     c:"btn-num",    a:"num",v:"6"},
+  {l:"1",     c:"btn-num",    a:"num",v:"1"},
+  {l:"2",     c:"btn-num",    a:"num",v:"2"},
+  {l:"3",     c:"btn-num",    a:"num",v:"3"},
+  {l:"0",     c:"btn-num btn-zero",a:"num",v:"0",cs:2},
+  {l:".",     c:"btn-num",    a:"dot"},
+  {l:"+/-",   c:"btn-fn",     a:"negate"},
+  {l:"=",     c:"btn-eq",     a:"eval",cs:2},
 ];
 
-// ── RENDER KEYPAD ──
 function renderKeypad(){
-  const kp = document.getElementById("keypad");
-  const layout = currentMode === "basic" ? basicLayout : sciLayout;
-  kp.className = "keypad " + currentMode;
-  kp.innerHTML = "";
-  layout.forEach(b => {
-    const el = document.createElement("button");
-    el.className = "btn " + b.c;
-    el.innerHTML = b.l;
-    if(b.rs) el.style.gridRow = "span " + b.rs;
-    if(b.a === "angle") el.id = "angle-btn";
-    el.addEventListener("click", () => handleAction(b));
+  const kp=document.getElementById("keypad");
+  const layout=mode==="basic"?basicLayout:sciLayout;
+  const cols=mode==="basic"?4:6;
+  kp.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  kp.innerHTML="";
+  layout.forEach(b=>{
+    const el=document.createElement("button");
+    el.className="btn "+b.c;
+    el.innerHTML=b.l;
+    if(b.rs) el.style.gridRow="span "+b.rs;
+    if(b.cs) el.style.gridColumn="span "+b.cs;
+    if(b.id) el.id=b.id;
+    el.addEventListener("click",()=>handle(b));
     kp.appendChild(el);
   });
 }
 
-// ── HANDLE ACTION ──
-function handleAction(b){
-  const a = b.a;
-  if(a === "num"){
-    if(justEvaled){ display = b.v; expression = ""; justEvaled = false; }
-    else{ display = display === "0" ? b.v : display + b.v; }
-    updateDisplay();
-  }
-  else if(a === "dot"){
-    if(justEvaled){ display = "0."; expression = ""; justEvaled = false; }
-    else if(!display.includes(".")){ display += "."; }
-    updateDisplay();
-  }
-  else if(a === "op"){
-    justEvaled = false;
-    expression = (expression || display) + " " + b.l + " ";
-    display = "0";
-    updateDisplay();
-  }
-  else if(a === "fn"){
-    applyFn(b.v);
-  }
-  else if(a === "const"){
-    display = b.v;
-    justEvaled = false;
-    updateDisplay();
-  }
-  else if(a === "paren"){
-    if(justEvaled){ expression = display + b.v; display = "0"; justEvaled = false; }
-    else{ expression += (display !== "0" ? display : "") + b.v; display = "0"; }
-    updateDisplay();
-  }
-  else if(a === "clear"){
-    display = "0"; expression = ""; history = ""; justEvaled = false;
-    updateDisplay();
-  }
-  else if(a === "del"){
-    if(justEvaled){ display = "0"; justEvaled = false; }
-    else if(display.length > 1){ display = display.slice(0,-1); }
-    else{ display = "0"; }
-    updateDisplay();
-  }
-  else if(a === "negate"){
-    if(display !== "0") display = display.startsWith("-") ? display.slice(1) : "-" + display;
-    updateDisplay();
-  }
-  else if(a === "percent"){
-    const val = parseFloat(display);
-    display = String(val / 100);
-    updateDisplay();
-  }
-  else if(a === "angle"){
-    angleMode = angleMode === "deg" ? "rad" : "deg";
-    document.getElementById("angle-btn").innerHTML = angleMode === "deg" ? "DEG" : "RAD";
-  }
-  else if(a === "eval"){
-    evaluate();
-  }
+function handle(b){
+  const a=b.a;
+  if(a==="num"){
+    if(justEvaled){display=b.v;expression="";justEvaled=false;}
+    else{display=display==="0"?b.v:display+b.v;}
+    upd();
+  }else if(a==="dot"){
+    if(justEvaled){display="0.";expression="";justEvaled=false;}
+    else if(!display.includes(".")){display+=".";}
+    upd();
+  }else if(a==="op"){
+    justEvaled=false;
+    expression=(expression||display)+" "+b.l+" ";
+    display="0";upd();
+  }else if(a==="fn"){applyFn(b.v);
+  }else if(a==="const"){
+    display=b.v;justEvaled=false;upd();
+  }else if(a==="paren"){
+    if(justEvaled){expression=display+b.v;display="0";justEvaled=false;}
+    else{expression+=(display!=="0"?display:"")+b.v;display="0";}
+    upd();
+  }else if(a==="clear"){
+    display="0";expression="";history="";justEvaled=false;upd();
+  }else if(a==="del"){
+    if(justEvaled){display="0";justEvaled=false;}
+    else if(display.length>1){display=display.slice(0,-1);}
+    else{display="0";}
+    upd();
+  }else if(a==="negate"){
+    if(display!=="0")display=display.startsWith("-")?display.slice(1):"-"+display;
+    upd();
+  }else if(a==="percent"){
+    display=String(parseFloat(display)/100);upd();
+  }else if(a==="angle"){
+    angleMode=angleMode==="deg"?"rad":"deg";
+    const btn=document.getElementById("angle-btn");
+    if(btn)btn.innerHTML=angleMode.toUpperCase();
+    document.getElementById("disp-angle").textContent=angleMode.toUpperCase();
+  }else if(a==="eval"){evaluate();}
 }
 
 function applyFn(fn){
-  let val = parseFloat(display);
+  const val=parseFloat(display);
+  const toRad=v=>angleMode==="deg"?v*Math.PI/180:v;
+  const fromRad=v=>angleMode==="deg"?v*180/Math.PI:v;
   let result;
-  const toRad = v => angleMode === "deg" ? v * Math.PI / 180 : v;
-  const fromRad = v => angleMode === "deg" ? v * 180 / Math.PI : v;
   switch(fn){
-    case "sin":  result = Math.sin(toRad(val)); break;
-    case "cos":  result = Math.cos(toRad(val)); break;
-    case "tan":  result = Math.tan(toRad(val)); break;
-    case "asin": result = fromRad(Math.asin(val)); break;
-    case "acos": result = fromRad(Math.acos(val)); break;
-    case "atan": result = fromRad(Math.atan(val)); break;
-    case "sqrt": result = Math.sqrt(val); break;
-    case "log":  result = Math.log10(val); break;
-    case "ln":   result = Math.log(val); break;
-    case "inv":  result = 1 / val; break;
-    case "sq":   result = val * val; break;
-    default: return;
+    case"sin":result=Math.sin(toRad(val));break;
+    case"cos":result=Math.cos(toRad(val));break;
+    case"tan":result=Math.tan(toRad(val));break;
+    case"asin":result=fromRad(Math.asin(val));break;
+    case"acos":result=fromRad(Math.acos(val));break;
+    case"atan":result=fromRad(Math.atan(val));break;
+    case"sqrt":result=Math.sqrt(val);break;
+    case"log":result=Math.log10(val);break;
+    case"ln":result=Math.log(val);break;
+    case"inv":result=1/val;break;
+    case"sq":result=val*val;break;
+    default:return;
   }
-  history = fn + "(" + formatNum(val) + ")";
-  display = formatNum(result);
-  expression = "";
-  justEvaled = true;
-  updateDisplay();
+  history=fn+"("+fmt(val)+") =";
+  display=fmt(result);expression="";justEvaled=true;upd();
 }
 
 function evaluate(){
   try{
-    const opMap = {"÷":"/","×":"*","−":"-"};
-    let expr = (expression + display).replace(/[÷×−]/g, m => opMap[m]||m);
-    // handle ** (power)
-    let result = Function('"use strict"; return (' + expr + ')')();
-    history = expression + display + " =";
-    display = formatNum(result);
-    expression = "";
-    justEvaled = true;
-    updateDisplay();
-  }catch(e){
-    display = "Error";
-    justEvaled = true;
-    updateDisplay();
-  }
+    const opMap={"÷":"/","×":"*","−":"-"};
+    let expr=(expression+display).replace(/[÷×−]/g,m=>opMap[m]||m);
+    let result=Function('"use strict"; return ('+expr+')')();
+    history=expression+display+" =";
+    display=fmt(result);expression="";justEvaled=true;upd();
+  }catch(e){display="Error";justEvaled=true;upd();}
 }
 
-function formatNum(n){
-  if(!isFinite(n)) return "Error";
-  // round to avoid floating point noise
-  const rounded = parseFloat(n.toPrecision(12));
-  const str = String(rounded);
-  return str.length > 14 ? rounded.toExponential(6) : str;
+function fmt(n){
+  if(!isFinite(n))return"Error";
+  const r=parseFloat(n.toPrecision(12));
+  const s=String(r);
+  return s.length>14?r.toExponential(6):s;
 }
 
-function updateDisplay(){
-  const main = document.getElementById("disp-main");
-  const expr = document.getElementById("disp-expr");
-  const hist = document.getElementById("disp-history");
-  main.textContent = display;
-  expr.textContent = expression || " ";
-  hist.textContent = history || " ";
-  // shrink font for long numbers
-  main.classList.remove("small","xsmall");
-  if(display.length > 14) main.classList.add("xsmall");
-  else if(display.length > 9) main.classList.add("small");
+function upd(){
+  const m=document.getElementById("disp-main");
+  document.getElementById("disp-expr").textContent=expression||"\u00a0";
+  document.getElementById("disp-history").textContent=history||"\u00a0";
+  m.textContent=display;
+  m.classList.remove("sm","xs");
+  if(display.length>14)m.classList.add("xs");
+  else if(display.length>9)m.classList.add("sm");
 }
 
-// ── MODE SWITCH ──
-function setMode(mode){
-  currentMode = mode;
-  document.getElementById("tab-basic").classList.toggle("active", mode==="basic");
-  document.getElementById("tab-sci").classList.toggle("active", mode==="sci");
+function setMode(m){
+  mode=m;
+  document.getElementById("tab-basic").classList.toggle("active",m==="basic");
+  document.getElementById("tab-sci").classList.toggle("active",m==="sci");
   renderKeypad();
 }
 
-// ── KEYBOARD SUPPORT ──
-document.addEventListener("keydown", e => {
-  const map = {
-    "0":"0","1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9",
-    ".":"dot","Enter":"eval","=":"eval","Backspace":"del","Escape":"clear",
-    "+":"+","-":"-","*":"*","/":"/"
-  };
+document.addEventListener("keydown",e=>{
+  const map={"0":"0","1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9",
+    ".":"dot","Enter":"eval","=":"eval","Backspace":"del","Escape":"clear"};
   if(e.key in map){
-    const k = map[e.key];
-    if("0123456789".includes(k)) handleAction({a:"num",v:k});
-    else if(k==="dot") handleAction({a:"dot"});
-    else if(k==="eval") handleAction({a:"eval"});
-    else if(k==="del") handleAction({a:"del"});
-    else if(k==="clear") handleAction({a:"clear"});
-    else handleAction({a:"op",v:k,l:k});
+    const k=map[e.key];
+    if("0123456789".includes(k))handle({a:"num",v:k});
+    else handle({a:k});
+  }else if(["+","-","*","/"].includes(e.key)){
+    handle({a:"op",v:e.key,l:e.key});
   }
 });
 
-// BOOT
 renderKeypad();
-updateDisplay();
+upd();
 </script>
 </body>
 </html>
