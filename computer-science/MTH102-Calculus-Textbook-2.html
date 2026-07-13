@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slope &amp; Area — MTH 102 Calculus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" defer></script>
+<style>
+:root{
+  --ink:#0E1E22;
+  --paper:#F6F4EC;
+  --paper-2:#ECE7D8;
+  --teal:#1F9E7F;
+  --orange:#D9743A;
+  --text:#1B1B18;
+  --slate:#57677A;
+  --line:#DBD4C1;
+  --good:#2E7D5B;
+  --bad:#B4432F;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65;font-size:16px;}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;color:var(--ink);margin:0 0 .5em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+::selection{background:var(--teal);color:#fff;}
+
+#shell{display:flex;min-height:100vh;}
+#sidebar{width:300px;flex-shrink:0;background:var(--ink);color:#CBD8D5;position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0 60px;border-right:1px solid #071215;}
+#sidebar::-webkit-scrollbar{width:8px;}
+#sidebar::-webkit-scrollbar-thumb{background:#1C3237;border-radius:4px;}
+.brand{padding:0 24px 20px;border-bottom:1px solid #1C3237;margin-bottom:8px;}
+.brand .mark{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.brand .terminal{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px 2px rgba(31,158,127,.55);}
+.brand h1{color:#F2EFE2;font-size:1.2rem;margin:0;line-height:1.2;}
+.brand p{font-size:.76rem;color:#7C9490;margin:6px 0 0;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
+.part-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);padding:18px 24px 8px;}
+.nav-item{display:block;padding:8px 24px 8px 22px;font-size:.86rem;color:#A6BAB5;text-decoration:none;border-left:2px solid transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.nav-item .num{font-family:'JetBrains Mono',monospace;color:#59736E;margin-right:8px;font-size:.78rem;}
+.nav-item:hover{background:#15282C;color:#EDE7D4;}
+.nav-item.active{color:#F7F2E4;border-left-color:var(--teal);background:#15282C;}
+.nav-item.active .num{color:var(--teal);}
+
+#main{flex:1;min-width:0;}
+.page{display:none;}
+.page.active{display:block;}
+
+.cover{min-height:100vh;background:radial-gradient(circle at 15% 20%, rgba(31,158,127,.12), transparent 40%), linear-gradient(180deg,var(--ink) 0%, #081418 100%);color:#F2EFE2;display:flex;flex-direction:column;justify-content:center;padding:80px 90px;position:relative;overflow:hidden;}
+.cover .trace{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.35;pointer-events:none;}
+.cover .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--teal);font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px;}
+.cover h1{color:#F7F2E4;font-size:clamp(2.4rem,6vw,4.8rem);line-height:1;margin-bottom:24px;max-width:16ch;}
+.cover h1 em{font-style:italic;color:var(--teal);}
+.cover .sub{font-size:1.1rem;color:#A9BDB8;max-width:48ch;margin-bottom:40px;}
+.cover .meta-row{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid #1C3237;padding-top:26px;margin-top:10px;}
+.cover .meta-row div{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#7C9490;}
+.cover .meta-row div b{display:block;color:#E4DEC8;font-size:1rem;font-family:'Fraunces',serif;font-weight:600;margin-bottom:4px;}
+.cover .start-btn{display:inline-flex;align-items:center;gap:10px;margin-top:40px;background:var(--teal);color:#08201A;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;padding:14px 26px;border-radius:2px;width:fit-content;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;}
+.cover .start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(31,158,127,.3);}
+
+.chapter{max-width:840px;margin:0 auto;padding:70px 48px 120px;}
+.chapter-head{border-bottom:3px solid var(--ink);padding-bottom:22px;margin-bottom:36px;}
+.chapter-head .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.chapter-head h2{font-size:2.2rem;margin-bottom:8px;}
+.chapter-head .desc{color:var(--slate);font-size:1rem;max-width:60ch;}
+.contents-strip{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 10px;}
+.contents-strip span{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--slate);background:var(--paper-2);border:1px solid var(--line);padding:4px 9px;border-radius:2px;}
+
+.objectives{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:0 4px 4px 0;padding:20px 24px;margin:28px 0 10px;}
+.objectives .tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block;}
+.objectives ul{margin:0;padding-left:20px;}
+.objectives li{margin-bottom:6px;font-size:.94rem;}
+
+section.block{margin:40px 0;}
+section.block h3{font-size:1.3rem;display:flex;align-items:center;gap:10px;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:16px;}
+section.block h3 .dot{width:7px;height:7px;background:var(--orange);border-radius:50%;flex-shrink:0;}
+section.block h4{font-size:1.02rem;color:var(--orange);margin:20px 0 8px;}
+p{margin:0 0 14px;}
+ul,ol{margin:0 0 14px;padding-left:22px;}
+li{margin-bottom:6px;}
+
+.callout{background:var(--paper-2);border-left:3px solid var(--teal);padding:16px 20px;margin:20px 0;border-radius:0 2px 2px 0;}
+.callout .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;display:block;}
+.callout.warn{border-left-color:var(--bad);}
+.callout.warn .tag{color:var(--bad);}
+.callout.trick{border-left-color:var(--good);}
+.callout.trick .tag{color:var(--good);}
+
+.formula-sheet{background:var(--ink);color:#EAE4D0;padding:24px 28px;border-radius:4px;margin:24px 0;}
+.formula-sheet .tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block;}
+.formula-sheet table{width:100%;border-collapse:collapse;}
+.formula-sheet td{padding:8px 6px;border-bottom:1px solid #1C3237;font-size:.92rem;vertical-align:top;}
+.formula-sheet td:first-child{width:46%;font-family:'JetBrains Mono',monospace;color:#F2EFE2;}
+.formula-sheet td:last-child{color:#A6BAB5;font-size:.85rem;}
+
+.example{border:1px solid var(--line);background:#FCFBF6;border-radius:3px;margin:22px 0;overflow:hidden;}
+.example .ex-head{background:var(--paper-2);padding:10px 18px;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);}
+.example .ex-body{padding:18px 20px;}
+.example .ex-body b{color:var(--ink);}
+.step{margin:0 0 14px;padding-left:16px;border-left:2px solid var(--line);}
+.step .step-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+
+table.data-table{width:100%;border-collapse:collapse;margin:18px 0;}
+table.data-table th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);border-bottom:2px solid var(--ink);padding:8px 10px;}
+table.data-table td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:.92rem;}
+
+.quiz-block{margin:44px 0;border-top:3px solid var(--ink);padding-top:26px;}
+.quiz-intro{color:var(--slate);font-size:.92rem;margin-bottom:20px;}
+.q{margin-bottom:14px;border:1px solid var(--line);border-radius:3px;background:#FCFBF6;}
+.q .q-text{padding:14px 18px;font-weight:500;cursor:pointer;display:flex;gap:10px;font-size:.94rem;}
+.q .q-text .qn{font-family:'JetBrains Mono',monospace;color:var(--orange);flex-shrink:0;}
+.q-options{padding:0 18px 14px 46px;display:none;}
+.q-options.open{display:block;}
+.opt{padding:8px 12px;margin:4px 0;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:.9rem;transition:background .12s;}
+.opt:hover{background:var(--paper-2);}
+.opt.correct{border-color:var(--good);background:#E7F3EC;color:#1E5B3F;font-weight:600;}
+.opt.incorrect{border-color:var(--bad);background:#FBE9E5;color:#8A3122;}
+.ans-note{margin-top:8px;font-size:.85rem;color:var(--slate);padding:10px 12px;background:var(--paper-2);border-radius:3px;display:none;}
+.ans-note.open{display:block;}
+
+.plain-list{border:1px solid var(--line);border-radius:3px;background:#FCFBF6;margin:16px 0;}
+.plain-list li{list-style:none;padding:12px 18px;border-bottom:1px solid var(--line);font-size:.93rem;}
+.plain-list li:last-child{border-bottom:none;}
+.plain-list .qn{font-family:'JetBrains Mono',monospace;color:var(--orange);margin-right:8px;}
+
+.toc-page{padding:70px 60px 120px;max-width:1000px;margin:0 auto;}
+.toc-part h3{font-family:'JetBrains Mono',monospace;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;font-size:.9rem;border:none;margin-bottom:16px;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.toc-card{border:1px solid var(--line);background:#FCFBF6;padding:16px 18px;border-radius:3px;cursor:pointer;transition:border-color .15s,transform .15s;}
+.toc-card:hover{border-color:var(--orange);transform:translateX(3px);}
+.toc-card .n{font-family:'JetBrains Mono',monospace;color:var(--orange);font-size:.78rem;}
+.toc-card h4{margin:6px 0 0;font-size:1.02rem;color:var(--ink);}
+
+.chapter-nav{display:flex;justify-content:space-between;margin-top:60px;padding-top:24px;border-top:1px solid var(--line);}
+.chapter-nav button{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:none;border:1px solid var(--line);padding:10px 16px;border-radius:3px;cursor:pointer;color:var(--ink);}
+.chapter-nav button:hover{background:var(--ink);color:#F2EFE2;border-color:var(--ink);}
+
+#nav-toggle{display:none;position:fixed;top:14px;left:14px;z-index:50;background:var(--ink);color:var(--teal);border:none;width:42px;height:42px;border-radius:4px;font-size:1.2rem;cursor:pointer;}
+@media(max-width:880px){
+  #sidebar{position:fixed;left:-300px;z-index:40;transition:left .2s;box-shadow:0 0 40px rgba(0,0,0,.4);}
+  #sidebar.open{left:0;}
+  #nav-toggle{display:block;}
+  .chapter{padding:70px 22px 100px;}
+  .cover{padding:100px 26px 60px;}
+  .toc-grid{grid-template-columns:1fr;}
+  .toc-page{padding:70px 22px 100px;}
+}
+</style>
+</head>
+<body>
+
+<button id="nav-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<div id="shell">
+  <nav id="sidebar">
+    <div class="brand">
+      <div class="mark"><span class="terminal"></span><h1>Slope &amp; Area</h1></div>
+      <p>MTH 102 — Differential &amp; Integral Calculus</p>
+    </div>
+    <a class="nav-item" data-target="cover" onclick="go('cover')">⌂ Cover &amp; Contents</a>
+    <div class="part-label">Course Chapters</div>
+    <a class="nav-item" data-target="ch1" onclick="go('ch1')"><span class="num">01</span>Functions of a Real Variable</a>
+    <a class="nav-item" data-target="ch2" onclick="go('ch2')"><span class="num">02</span>The Derivative as a Limit</a>
+    <a class="nav-item" data-target="ch3" onclick="go('ch3')"><span class="num">03</span>Techniques of Differentiation</a>
+    <a class="nav-item" data-target="ch4" onclick="go('ch4')"><span class="num">04</span>Extreme Curve Sketching</a>
+    <a class="nav-item" data-target="ch5" onclick="go('ch5')"><span class="num">05</span>Integration as Inverse of Diff.</a>
+    <a class="nav-item" data-target="ch6" onclick="go('ch6')"><span class="num">06</span>Methods of Integration</a>
+    <a class="nav-item" data-target="ch7" onclick="go('ch7')"><span class="num">07</span>Definite Integration</a>
+    <a class="nav-item" data-target="ch8" onclick="go('ch8')"><span class="num">08</span>Applications of Integration</a>
+  </nav>
+
+  <main id="main">
+  <div class="page active" id="page-cover">
+    <div class="cover">
+      <svg class="trace" viewBox="0 0 800 600" preserveAspectRatio="none">
+        <path d="M0,500 Q200,500 300,300 T600,80 L800,60" stroke="#1F9E7F" stroke-width="1.5" fill="none"/>
+        <path d="M0,100 Q250,100 350,250 T700,520" stroke="#D9743A" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div class="eyebrow">NBZ Academy · University Mathematics Series</div>
+      <h1>Slope &amp; Area<br><em>MTH 102 — Calculus</em></h1>
+      <p class="sub">Eight chapters, one continuous idea — from what a function even is, through the derivative, to the integral that undoes it and everything you can build with both.</p>
+      <button class="start-btn" onclick="go('ch1')">Begin — Chapter 1 →</button>
+      <div class="meta-row">
+        <div><b>8</b>Chapters</div>
+        <div><b>50+</b>Worked Examples</div>
+        <div><b>160+</b>Practice Items</div>
+        <div><b>Beginner → Exam-Ready</b>Level</div>
+      </div>
+    </div>
+    <div class="toc-page">
+      <div class="toc-part">
+        <h3>Course Contents</h3>
+        <div class="toc-grid" id="toc-p1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 1 ================= -->
+  <div class="page" id="page-ch1">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 01</div>
+        <h2>Functions of a Real Variable</h2>
+        <p class="desc">Calculus is the study of how functions change. Before we can study change, we need to be completely solid on what a function is, how to read one, and how to manipulate one — that's this whole chapter.</p>
+        <div class="contents-strip">
+          <span>Definition of a function</span><span>Real numbers &amp; intervals</span><span>Domain &amp; range</span><span>Types of functions</span>
+          <span>Function notation</span><span>Graphs</span><span>Composition</span><span>Inverse functions</span><span>Transformations</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>State the formal definition of a function and test whether a given relation qualifies as one.</li>
+          <li>Work confidently with real number intervals (open, closed, half-open, infinite) and interval notation.</li>
+          <li>Find the domain and range of algebraic, rational, and root functions.</li>
+          <li>Classify functions by type (linear, quadratic, polynomial, rational, root, piecewise, even/odd).</li>
+          <li>Use function notation f(x) to evaluate, substitute, and interpret functions.</li>
+          <li>Sketch and read graphs of common functions, including using the vertical line test.</li>
+          <li>Compute the composition of two functions, f∘g, and state its domain.</li>
+          <li>Find the inverse of a one-to-one function and verify it algebraically.</li>
+          <li>Apply transformations (shifts, stretches, reflections) to a base graph.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.1 Definition of a Function</h3>
+        <p>A <b>function</b> is a rule that assigns to every input value exactly one output value. If $f$ is a function, and $x$ is a valid input, then $f(x)$ denotes the single output value that $f$ produces for that $x$. The key word is "exactly one" — a rule that gives one input two different outputs is not a function.</p>
+        <div class="callout trick">
+          <span class="tag">Vertical Line Test</span>
+          On a graph, if you can draw any vertical line that crosses the curve more than once, the curve is NOT a function of x — because that would mean one x-value has two different y-outputs.
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.2 Real Numbers and Intervals</h3>
+        <p>The real numbers ℝ include all rational numbers (fractions of integers) and all irrational numbers (like $\sqrt2$ and $\pi$) — essentially every point on the number line. An <b>interval</b> is a connected stretch of the real line, written with brackets that show whether the endpoints are included:</p>
+        <table class="data-table">
+          <tr><th>Notation</th><th>Meaning</th><th>Includes endpoints?</th></tr>
+          <tr><td>$(a,b)$</td><td>all x with $a<x<b$</td><td>No — open interval</td></tr>
+          <tr><td>$[a,b]$</td><td>all x with $a\le x\le b$</td><td>Yes — closed interval</td></tr>
+          <tr><td>$[a,b)$</td><td>all x with $a\le x<b$</td><td>Left only — half-open</td></tr>
+          <tr><td>$(a,\infty)$</td><td>all x with $x>a$</td><td>No, and unbounded above</td></tr>
+          <tr><td>$(-\infty,\infty)$</td><td>all real numbers</td><td>Unbounded both ways</td></tr>
+        </table>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.3 Domain and Range</h3>
+        <p>The <b>domain</b> of a function is the complete set of allowed input values (x-values) for which the function produces a valid, real output. The <b>range</b> is the complete set of output values (y-values) the function actually produces.</p>
+        <p>Three things routinely restrict a domain, and every domain question in this course reduces to checking for these:</p>
+        <ul>
+          <li><b>Division by zero</b> — any x that makes a denominator zero must be excluded.</li>
+          <li><b>Square roots (or any even root) of a negative number</b> — the expression under the root must be $\ge 0$.</li>
+          <li><b>Logarithms of zero or a negative number</b> — the argument of a log must be $>0$ (this becomes relevant once logarithmic functions appear later in the course).</li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.4 Types of Functions</h3>
+        <table class="data-table">
+          <tr><th>Type</th><th>General form</th><th>Example</th></tr>
+          <tr><td>Linear</td><td>$f(x)=mx+c$</td><td>$f(x)=3x-2$</td></tr>
+          <tr><td>Quadratic</td><td>$f(x)=ax^2+bx+c$</td><td>$f(x)=x^2-4x+3$</td></tr>
+          <tr><td>Polynomial</td><td>$f(x)=a_nx^n+\dots+a_0$</td><td>$f(x)=x^3-2x+1$</td></tr>
+          <tr><td>Rational</td><td>$f(x)=p(x)/q(x)$</td><td>$f(x)=\dfrac{1}{x-2}$</td></tr>
+          <tr><td>Root (radical)</td><td>$f(x)=\sqrt[n]{g(x)}$</td><td>$f(x)=\sqrt{x+1}$</td></tr>
+          <tr><td>Piecewise</td><td>different rule on different intervals</td><td>$f(x)=\begin{cases}x^2 & x<0\\x+1&x\ge0\end{cases}$</td></tr>
+        </table>
+        <p>Functions are also classified by symmetry: an <b>even function</b> satisfies $f(-x)=f(x)$ (symmetric about the y-axis, like $x^2$); an <b>odd function</b> satisfies $f(-x)=-f(x)$ (symmetric about the origin, like $x^3$). Most functions are neither.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.5 Function Notation</h3>
+        <p>$f(x)$ is read "f of x," and means "the output of function f when the input is x." It does NOT mean f multiplied by x. Substituting a specific value: $f(3)$ means replace every x in the formula with 3 and simplify.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.6 Graphs of Functions</h3>
+        <p>The graph of $y=f(x)$ is the set of all points $(x,f(x))$ plotted on the coordinate plane. Reading a graph well means being able to find $f(a)$ by locating $x=a$ and reading off the height of the curve there, and being able to solve $f(x)=b$ by locating the height $y=b$ and reading off the x-value(s) where the curve reaches it.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.7 Composition of Functions</h3>
+        <p>The <b>composition</b> $(f\circ g)(x) = f(g(x))$ means: first apply g to x, then apply f to whatever g produced. Order matters enormously — $f(g(x))$ and $g(f(x))$ are generally different functions.</p>
+        <div class="formula-sheet">
+          <span class="tag">Composition</span>
+          <table>
+            <tr><td>$(f\circ g)(x)=f(g(x))$</td><td>apply g first, then f</td></tr>
+            <tr><td>Domain of $f\circ g$</td><td>all x in the domain of g, such that g(x) is in the domain of f</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.8 Inverse Functions</h3>
+        <p>The <b>inverse</b> $f^{-1}$ of a function f "undoes" f: if $f(a)=b$, then $f^{-1}(b)=a$. An inverse exists only if f is one-to-one (passes the horizontal line test — each output comes from only one input).</p>
+        <div class="formula-sheet">
+          <span class="tag">Finding an Inverse — Standard Method</span>
+          <table>
+            <tr><td>1. Write $y=f(x)$</td><td>start</td></tr>
+            <tr><td>2. Swap x and y</td><td>reflects the roles of input/output</td></tr>
+            <tr><td>3. Solve for y</td><td>this new y is $f^{-1}(x)$</td></tr>
+          </table>
+        </div>
+        <p>Check: $f(f^{-1}(x))=x$ and $f^{-1}(f(x))=x$ must both hold for a correct inverse.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.9 Transformations of Graphs</h3>
+        <table class="data-table">
+          <tr><th>Transformation</th><th>Effect on $y=f(x)$</th></tr>
+          <tr><td>$f(x)+k$</td><td>shifts graph UP by k (k&gt;0)</td></tr>
+          <tr><td>$f(x)-k$</td><td>shifts graph DOWN by k</td></tr>
+          <tr><td>$f(x+k)$</td><td>shifts graph LEFT by k</td></tr>
+          <tr><td>$f(x-k)$</td><td>shifts graph RIGHT by k</td></tr>
+          <tr><td>$-f(x)$</td><td>reflects graph over the x-axis</td></tr>
+          <tr><td>$f(-x)$</td><td>reflects graph over the y-axis</td></tr>
+          <tr><td>$a\cdot f(x)$, $a>1$</td><td>stretches graph vertically</td></tr>
+          <tr><td>$f(ax)$, $a>1$</td><td>compresses graph horizontally</td></tr>
+        </table>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>1.10 Real-Life Applications</h3>
+        <ul>
+          <li>Cost functions in economics: $C(x)$ = cost to produce x units.</li>
+          <li>Population growth models expressed as a function of time.</li>
+          <li>Conversion functions (e.g. Celsius to Fahrenheit, currency exchange).</li>
+          <li>Physics: position, velocity, and acceleration are all functions of time — the foundation for Chapter 2.</li>
+        </ul>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Finding the Domain of a Rational Function</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the domain of $f(x)=\dfrac{x+1}{x^2-9}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify what could restrict the domain</span>This is a rational function (a fraction), so the only restriction is: the denominator cannot equal zero.</div>
+          <div class="step"><span class="step-label">Step 2 — Set the denominator equal to zero</span>$x^2-9=0$.</div>
+          <div class="step"><span class="step-label">Step 3 — Solve for x</span>$x^2=9 \Rightarrow x=\pm3$. These are the values that must be excluded.</div>
+          <div class="step"><span class="step-label">Step 4 — Write the domain</span>The domain is all real numbers except $x=3$ and $x=-3$: $\{x\in\mathbb R : x\ne\pm3\}$, or in interval notation, $(-\infty,-3)\cup(-3,3)\cup(3,\infty)$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Domain of a Square Root Function</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the domain of $f(x)=\sqrt{5-2x}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify the restriction</span>This is a square root, so whatever is under the root must be greater than or equal to zero.</div>
+          <div class="step"><span class="step-label">Step 2 — Set up the inequality</span>$5-2x\ge0$.</div>
+          <div class="step"><span class="step-label">Step 3 — Solve the inequality</span>Subtract 5 from both sides: $-2x\ge-5$. Divide both sides by $-2$, and remember to FLIP the inequality sign when dividing by a negative number: $x\le\dfrac52$.</div>
+          <div class="step"><span class="step-label">Step 4 — Write the domain</span>$x\le2.5$, or in interval notation, $\left(-\infty,\dfrac52\right]$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Evaluating a Function</div>
+        <div class="ex-body">
+          <p><b>Q:</b> If $f(x)=2x^2-3x+4$, find $f(-2)$.</p>
+          <div class="step"><span class="step-label">Step 1 — Write down the formula</span>$f(x)=2x^2-3x+4$.</div>
+          <div class="step"><span class="step-label">Step 2 — Replace every x with $-2$</span>$f(-2)=2(-2)^2-3(-2)+4$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate the exponent first</span>$(-2)^2=4$, so we now have $2(4)-3(-2)+4$.</div>
+          <div class="step"><span class="step-label">Step 4 — Carry out the multiplications</span>$2(4)=8$ and $-3(-2)=6$, giving $8+6+4$.</div>
+          <div class="step"><span class="step-label">Step 5 — Add the results</span>$8+6+4=18$. So $f(-2)=18$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Composition of Functions</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Given $f(x)=x^2+1$ and $g(x)=2x-3$, find $(f\circ g)(x)$ and evaluate it at $x=2$.</p>
+          <div class="step"><span class="step-label">Step 1 — Understand what's being asked</span>$(f\circ g)(x)$ means $f(g(x))$ — plug the ENTIRE function g(x) into f wherever f has an x.</div>
+          <div class="step"><span class="step-label">Step 2 — Write out g(x) to substitute</span>$g(x)=2x-3$.</div>
+          <div class="step"><span class="step-label">Step 3 — Substitute g(x) into f(x)</span>$f(x)=x^2+1$ becomes $f(g(x))=(2x-3)^2+1$.</div>
+          <div class="step"><span class="step-label">Step 4 — Expand $(2x-3)^2$</span>$(2x-3)^2=(2x-3)(2x-3)=4x^2-6x-6x+9=4x^2-12x+9$.</div>
+          <div class="step"><span class="step-label">Step 5 — Add the remaining +1</span>$(f\circ g)(x)=4x^2-12x+9+1=4x^2-12x+10$.</div>
+          <div class="step"><span class="step-label">Step 6 — Evaluate at x = 2</span>$(f\circ g)(2)=4(2)^2-12(2)+10=4(4)-24+10=16-24+10=2$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Finding an Inverse Function</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the inverse of $f(x)=\dfrac{3x-2}{5}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Replace f(x) with y</span>$y=\dfrac{3x-2}{5}$.</div>
+          <div class="step"><span class="step-label">Step 2 — Swap x and y</span>This reflects the input/output roles: $x=\dfrac{3y-2}{5}$.</div>
+          <div class="step"><span class="step-label">Step 3 — Clear the fraction</span>Multiply both sides by 5: $5x=3y-2$.</div>
+          <div class="step"><span class="step-label">Step 4 — Isolate the y-term</span>Add 2 to both sides: $5x+2=3y$.</div>
+          <div class="step"><span class="step-label">Step 5 — Solve for y</span>Divide both sides by 3: $y=\dfrac{5x+2}{3}$.</div>
+          <div class="step"><span class="step-label">Step 6 — Write the final answer</span>$f^{-1}(x)=\dfrac{5x+2}{3}$.</div>
+          <div class="step"><span class="step-label">Step 7 — Verify (optional but recommended)</span>Check $f(f^{-1}(x))$: $f\left(\dfrac{5x+2}{3}\right)=\dfrac{3\left(\frac{5x+2}{3}\right)-2}{5}=\dfrac{(5x+2)-2}{5}=\dfrac{5x}{5}=x$. ✓ Confirmed correct.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Testing Even, Odd, or Neither</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Determine whether $f(x)=x^3-4x$ is even, odd, or neither.</p>
+          <div class="step"><span class="step-label">Step 1 — Recall the tests</span>Even: $f(-x)=f(x)$. Odd: $f(-x)=-f(x)$.</div>
+          <div class="step"><span class="step-label">Step 2 — Compute f(−x)</span>Replace every x with $-x$: $f(-x)=(-x)^3-4(-x)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Simplify each term</span>$(-x)^3=-x^3$ and $-4(-x)=4x$. So $f(-x)=-x^3+4x$.</div>
+          <div class="step"><span class="step-label">Step 4 — Compare to f(x) and to −f(x)</span>$f(x)=x^3-4x$. Is $f(-x)=f(x)$? No, since $-x^3+4x\ne x^3-4x$ in general. Now check $-f(x)=-(x^3-4x)=-x^3+4x$.</div>
+          <div class="step"><span class="step-label">Step 5 — Conclude</span>$f(-x)=-x^3+4x=-f(x)$ — this matches exactly, so $f(x)$ is an <b>odd</b> function.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Applying a Graph Transformation</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Starting from $f(x)=x^2$, describe the transformation that produces $g(x)=-2(x+3)^2+5$, and find the new vertex.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify the base function</span>$f(x)=x^2$, the standard upward parabola with vertex at (0,0).</div>
+          <div class="step"><span class="step-label">Step 2 — Read the horizontal shift</span>The $(x+3)$ inside the square means a shift LEFT by 3 units (recall: $f(x+k)$ shifts left).</div>
+          <div class="step"><span class="step-label">Step 3 — Read the vertical stretch and reflection</span>The coefficient $-2$ in front does two things: the "2" stretches the graph vertically (makes it narrower), and the negative sign reflects it over the x-axis (flips it upside-down, opening downward).</div>
+          <div class="step"><span class="step-label">Step 4 — Read the vertical shift</span>The "+5" at the end shifts the whole graph UP by 5 units.</div>
+          <div class="step"><span class="step-label">Step 5 — Combine to find the new vertex</span>Starting vertex (0,0): shift left 3 → (−3, 0); shift up 5 → (−3, 5). The reflection and stretch don't move the vertex itself, only reshape the curve around it.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final answer</span>$g(x)$ is $f(x)=x^2$ shifted left 3, reflected over the x-axis, vertically stretched by factor 2, and shifted up 5. New vertex: $(-3,5)$, opening downward.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 1</span>
+        <table>
+          <tr><td>Domain restrictions</td><td>denominator ≠ 0; expression under even root ≥ 0; log argument &gt; 0</td></tr>
+          <tr><td>$(f\circ g)(x)=f(g(x))$</td><td>composition — apply g first</td></tr>
+          <tr><td>$f(-x)=f(x)$</td><td>even function test</td></tr>
+          <tr><td>$f(-x)=-f(x)$</td><td>odd function test</td></tr>
+          <tr><td>Inverse method</td><td>y=f(x) → swap x,y → solve for y</td></tr>
+          <tr><td>$f(x\pm k)$</td><td>horizontal shift (∓ direction — left for +k, right for −k)</td></tr>
+          <tr><td>$f(x)\pm k$</td><td>vertical shift (± direction matches sign)</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (18)</h3>
+        <div id="ch1-quiz"></div>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>Exercises</h3>
+        <ol class="plain-list" style="list-style:decimal;padding-left:0;">
+          <li>Find the domain of $f(x)=\dfrac{\sqrt{x+4}}{x-1}$ (combines both a root restriction and a denominator restriction).</li>
+          <li>Given $f(x)=3x+1$ and $g(x)=x^2-2$, find both $(f\circ g)(x)$ and $(g\circ f)(x)$, and show they are different.</li>
+          <li>Find the inverse of $f(x)=\sqrt{x-4}$, stating any domain restriction needed for the inverse to be valid.</li>
+          <li>Describe, in words, the sequence of transformations that turns $y=\sqrt{x}$ into $y=3\sqrt{x-2}+1$.</li>
+          <li>A taxi company charges a flat $\$2$ plus $\$0.50$ per km. Write this as a function C(d), state a sensible domain, and find C(12).</li>
+        </ol>
+      </section>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch1')">← Cover</button>
+        <button onclick="nextChapter('ch1')">Chapter 2 — The Derivative as a Limit →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 2 ================= -->
+  <div class="page" id="page-ch2">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 02</div>
+        <h2>The Derivative as a Limit</h2>
+        <p class="desc">This is where calculus actually begins. Every technique in Chapter 3 is really just a shortcut for the single idea built here: the derivative as a limit of a difference quotient.</p>
+        <div class="contents-strip">
+          <span>Limits</span><span>Continuity</span><span>Definition of the derivative</span><span>Difference quotient</span>
+          <span>Rate of change</span><span>Tangent line</span><span>Velocity &amp; acceleration</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Evaluate limits by direct substitution, factoring, and rationalizing.</li>
+          <li>Evaluate limits as x → ∞ for rational functions.</li>
+          <li>Determine whether a function is continuous at a point using the three-part definition.</li>
+          <li>State and apply the formal (limit) definition of the derivative.</li>
+          <li>Use the difference quotient to compute a derivative from first principles.</li>
+          <li>Interpret the derivative as an instantaneous rate of change and as the slope of a tangent line.</li>
+          <li>Apply the derivative to velocity and acceleration problems.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.1 Limits</h3>
+        <p>The <b>limit</b> of $f(x)$ as $x$ approaches $a$, written $\lim_{x\to a}f(x)$, is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $a$ — regardless of whether $f$ is actually defined at $a$ itself. This distinction (what happens NEAR a point, versus what happens AT the point) is the entire reason limits are useful.</p>
+        <div class="callout trick">
+          <span class="tag">Three Standard Techniques</span>
+          (1) <b>Direct substitution</b> — try plugging in x=a first; if it gives a real number, you're done. (2) <b>Factor and cancel</b> — if substitution gives 0/0, factor numerator and denominator and cancel the common factor. (3) <b>Rationalize</b> — if a square root is causing the 0/0 form, multiply by the conjugate.
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.2 Continuity</h3>
+        <p>A function $f$ is <b>continuous</b> at $x=a$ if all three of the following hold:</p>
+        <ol>
+          <li>$f(a)$ is defined (the function actually has a value at a).</li>
+          <li>$\lim_{x\to a}f(x)$ exists (the function approaches a single value from both sides).</li>
+          <li>$\lim_{x\to a}f(x)=f(a)$ (the limit matches the actual function value).</li>
+        </ol>
+        <p>If any one of these three fails, the function is discontinuous at that point — common types are removable (a hole), jump (piecewise mismatch), or infinite (vertical asymptote) discontinuities.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.3 Definition of the Derivative</h3>
+        <p>The <b>derivative</b> of $f$ at $x$, written $f'(x)$, is defined as the limit of the difference quotient as the interval shrinks to zero:</p>
+        <div class="formula-sheet">
+          <span class="tag">Formal Definition</span>
+          <table>
+            <tr><td>$f'(x)=\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$</td><td>the derivative "from first principles"</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.4 The Difference Quotient</h3>
+        <p>Before taking the limit, $\dfrac{f(x+h)-f(x)}{h}$ is called the <b>difference quotient</b> — it computes the average rate of change (slope of a secant line) between two points on the curve, $x$ and $x+h$. As $h\to0$, those two points merge into one, and the secant line's slope becomes the tangent line's slope: the derivative.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.5 Rate of Change</h3>
+        <p>The derivative $f'(x)$ measures the <b>instantaneous rate of change</b> of $f$ at the point $x$ — how fast the output is changing per unit change in input, at that exact instant. This is the single most important interpretation of the derivative and the one that makes it useful across every branch of science: it can mean speed, growth rate, marginal cost, or infection rate, depending on what $f$ represents.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.6 Tangent Line</h3>
+        <p>Once you know $f'(a)$, the slope of the tangent line to $y=f(x)$ at the point $(a,f(a))$, you can write the tangent line's equation using point-slope form:</p>
+        <div class="formula-sheet">
+          <span class="tag">Tangent Line Equation</span>
+          <table>
+            <tr><td>$y-f(a)=f'(a)(x-a)$</td><td>point-slope form, using the derivative as the slope</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>2.7 Velocity and Acceleration</h3>
+        <p>If $s(t)$ describes an object's position at time $t$, then its <b>velocity</b> is the derivative of position, and its <b>acceleration</b> is the derivative of velocity (equivalently, the second derivative of position):</p>
+        <div class="formula-sheet">
+          <span class="tag">Motion</span>
+          <table>
+            <tr><td>$v(t)=s'(t)$</td><td>velocity = rate of change of position</td></tr>
+            <tr><td>$a(t)=v'(t)=s''(t)$</td><td>acceleration = rate of change of velocity</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Direct Substitution</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\lim_{x\to2}\dfrac{x^2-4}{x-2}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Try direct substitution first</span>Plug $x=2$ directly into the expression: $\dfrac{2^2-4}{2-2}=\dfrac{0}{0}$. This is an "indeterminate form" — it doesn't tell us the answer, it tells us we need another method.</div>
+          <div class="step"><span class="step-label">Step 2 — Factor the numerator</span>$x^2-4$ is a difference of squares: $x^2-4=(x-2)(x+2)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite the limit with the factored form</span>$\lim_{x\to2}\dfrac{(x-2)(x+2)}{x-2}$.</div>
+          <div class="step"><span class="step-label">Step 4 — Cancel the common factor $(x-2)$</span>Since $x\to2$ means $x$ gets close to but never equals 2, $x-2\ne0$, so cancelling is valid: $\lim_{x\to2}(x+2)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Now substitute directly</span>$2+2=4$. So the limit is $4$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Limit at Infinity</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\lim_{x\to\infty}\dfrac{5x^2+3x}{x}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Simplify the expression algebraically first</span>Split the fraction term by term: $\dfrac{5x^2+3x}{x}=\dfrac{5x^2}{x}+\dfrac{3x}{x}=5x+3$.</div>
+          <div class="step"><span class="step-label">Step 2 — Take the limit of the simplified expression</span>$\lim_{x\to\infty}(5x+3)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Reason about the behavior as x grows without bound</span>As $x\to\infty$, the term $5x$ grows without bound (gets arbitrarily large), and adding 3 doesn't change that behavior.</div>
+          <div class="step"><span class="step-label">Step 4 — State the conclusion</span>The limit does not approach a finite number — it diverges to $+\infty$. We write $\lim_{x\to\infty}\dfrac{5x^2+3x}{x}=\infty$ (the limit does not exist as a finite value).</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Direct Substitution (Polynomial)</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\lim_{x\to3}(x^2-2x-3)$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize this is a polynomial</span>Polynomials are continuous everywhere, so the limit as $x\to a$ always equals direct substitution — no special technique is needed.</div>
+          <div class="step"><span class="step-label">Step 2 — Substitute x = 3</span>$(3)^2-2(3)-3$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate the exponent</span>$3^2=9$, giving $9-2(3)-3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Carry out the multiplication</span>$2(3)=6$, giving $9-6-3$.</div>
+          <div class="step"><span class="step-label">Step 5 — Combine the numbers</span>$9-6-3=0$. So the limit is $0$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Factoring a Quadratic Denominator</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\lim_{x\to1}\dfrac{x^2-1}{x-1}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Try direct substitution</span>$\dfrac{1^2-1}{1-1}=\dfrac{0}{0}$, indeterminate — need another technique.</div>
+          <div class="step"><span class="step-label">Step 2 — Factor the numerator as a difference of squares</span>$x^2-1=(x-1)(x+1)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite the limit</span>$\lim_{x\to1}\dfrac{(x-1)(x+1)}{x-1}$.</div>
+          <div class="step"><span class="step-label">Step 4 — Cancel the common factor</span>$\lim_{x\to1}(x+1)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Substitute x = 1</span>$1+1=2$. So the limit is $2$.</div>
+          <div class="callout"><span class="tag">Note</span>This is a good comparison to a similar-looking expression, $\dfrac{x^2+1}{x-1}$, which does NOT simplify this way — its numerator never factors to cancel with $(x-1)$, so that limit is genuinely undefined (the function blows up near x=1). Always check whether the numerator actually factors before assuming a hole exists.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Testing Continuity</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Is $f(x)=\begin{cases}x^2 & x\ne2\\5&x=2\end{cases}$ continuous at $x=2$?</p>
+          <div class="step"><span class="step-label">Step 1 — Check condition 1: is f(2) defined?</span>Yes, by the piecewise rule, $f(2)=5$.</div>
+          <div class="step"><span class="step-label">Step 2 — Check condition 2: does the limit exist as x→2?</span>For $x\ne2$, $f(x)=x^2$, so $\lim_{x\to2}f(x)=\lim_{x\to2}x^2=4$. The limit exists and equals 4 (note: the limit only cares about values NEAR 2, so the special value at exactly $x=2$ doesn't affect this calculation).</div>
+          <div class="step"><span class="step-label">Step 3 — Check condition 3: does the limit equal f(2)?</span>The limit is 4, but $f(2)=5$. These do NOT match.</div>
+          <div class="step"><span class="step-label">Step 4 — Conclude</span>Since condition 3 fails, $f$ is discontinuous at $x=2$ — specifically, this is a "removable discontinuity" (a hole in the graph at x=2, with a single misplaced point at (2,5)).</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Derivative from First Principles</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Use the limit definition to find $f'(x)$ for $f(x)=x^2+3x$.</p>
+          <div class="step"><span class="step-label">Step 1 — Write down the definition</span>$f'(x)=\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$.</div>
+          <div class="step"><span class="step-label">Step 2 — Compute f(x+h)</span>Replace every x in $f(x)=x^2+3x$ with $(x+h)$: $f(x+h)=(x+h)^2+3(x+h)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Expand $(x+h)^2+3(x+h)$</span>$(x+h)^2=x^2+2xh+h^2$, and $3(x+h)=3x+3h$. So $f(x+h)=x^2+2xh+h^2+3x+3h$.</div>
+          <div class="step"><span class="step-label">Step 4 — Subtract f(x)</span>$f(x+h)-f(x)=(x^2+2xh+h^2+3x+3h)-(x^2+3x)$. The $x^2$ terms cancel and the $3x$ terms cancel, leaving $2xh+h^2+3h$.</div>
+          <div class="step"><span class="step-label">Step 5 — Divide by h</span>$\dfrac{2xh+h^2+3h}{h}$. Every term in the numerator has a factor of h, so divide each term by h: $2x+h+3$.</div>
+          <div class="step"><span class="step-label">Step 6 — Take the limit as h → 0</span>$\lim_{h\to0}(2x+h+3)=2x+0+3=2x+3$.</div>
+          <div class="step"><span class="step-label">Step 7 — State the result</span>$f'(x)=2x+3$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Equation of a Tangent Line</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the equation of the tangent line to $f(x)=x^2+3x$ (from Example 6) at $x=1$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the point on the curve</span>$f(1)=1^2+3(1)=1+3=4$. The point is $(1,4)$.</div>
+          <div class="step"><span class="step-label">Step 2 — Find the slope using the derivative found in Example 6</span>$f'(x)=2x+3$, so $f'(1)=2(1)+3=5$. The slope of the tangent line is 5.</div>
+          <div class="step"><span class="step-label">Step 3 — Apply point-slope form</span>$y-f(a)=f'(a)(x-a)$ becomes $y-4=5(x-1)$.</div>
+          <div class="step"><span class="step-label">Step 4 — Distribute the right-hand side</span>$y-4=5x-5$.</div>
+          <div class="step"><span class="step-label">Step 5 — Solve for y</span>Add 4 to both sides: $y=5x-5+4=5x-1$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final equation</span>The tangent line is $y=5x-1$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Velocity and Acceleration</div>
+        <div class="ex-body">
+          <p><b>Q:</b> A particle's position is $s(t)=t^3-6t^2+9t$ (metres, t in seconds). Find its velocity and acceleration at $t=2$, and state whether it's speeding up or slowing down.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the velocity function</span>$v(t)=s'(t)$. Differentiate term by term (using the power rule, formalized fully in Chapter 3): $s'(t)=3t^2-12t+9$.</div>
+          <div class="step"><span class="step-label">Step 2 — Evaluate velocity at t = 2</span>$v(2)=3(2)^2-12(2)+9=3(4)-24+9=12-24+9=-3\ \text{m/s}$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find the acceleration function</span>$a(t)=v'(t)$: differentiate $3t^2-12t+9$ term by term: $a(t)=6t-12$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate acceleration at t = 2</span>$a(2)=6(2)-12=12-12=0\ \text{m/s}^2$.</div>
+          <div class="step"><span class="step-label">Step 5 — Interpret the result</span>At $t=2$, velocity is $-3$ m/s (particle moving in the negative direction) and acceleration is exactly $0$ m/s² — at this precise instant the particle's velocity is momentarily not changing (it's at a local extreme of velocity, not of position).</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 2</span>
+        <table>
+          <tr><td>$f'(x)=\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$</td><td>derivative from first principles</td></tr>
+          <tr><td>Difference quotient</td><td>$\dfrac{f(x+h)-f(x)}{h}$, average rate of change</td></tr>
+          <tr><td>$y-f(a)=f'(a)(x-a)$</td><td>tangent line equation</td></tr>
+          <tr><td>$v(t)=s'(t)$</td><td>velocity</td></tr>
+          <tr><td>$a(t)=v'(t)=s''(t)$</td><td>acceleration</td></tr>
+          <tr><td>Continuity at a</td><td>f(a) defined AND limit exists AND they're equal</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Problems (20)</h3>
+        <div id="ch2-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch2')">← Chapter 1</button>
+        <button onclick="nextChapter('ch2')">Chapter 3 — Techniques of Differentiation →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 3 ================= -->
+  <div class="page" id="page-ch3">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 03</div>
+        <h2>Techniques of Differentiation</h2>
+        <p class="desc">Nobody uses first-principles limits every time they need a derivative — that would be painfully slow. This chapter gives you the shortcut rules, derived once and reused forever.</p>
+        <div class="contents-strip">
+          <span>Constant rule</span><span>Power rule</span><span>Product rule</span><span>Quotient rule</span>
+          <span>Chain rule</span><span>Implicit differentiation</span><span>Logarithmic differentiation</span><span>Higher-order derivatives</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Apply the constant and power rules to differentiate polynomial terms instantly.</li>
+          <li>Apply the product rule to differentiate a product of two functions.</li>
+          <li>Apply the quotient rule to differentiate a ratio of two functions.</li>
+          <li>Apply the chain rule to differentiate composite functions.</li>
+          <li>Use implicit differentiation to find dy/dx when y is not isolated.</li>
+          <li>Use logarithmic differentiation for functions with variable exponents or complicated products/quotients.</li>
+          <li>Compute second and higher-order derivatives.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.1 Constant Rule</h3>
+        <div class="formula-sheet">
+          <span class="tag">Constant Rule</span>
+          <table><tr><td>$\dfrac{d}{dx}[c]=0$</td><td>the derivative of any constant is zero — a constant never changes, so its rate of change is 0</td></tr></table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.2 Power Rule</h3>
+        <div class="formula-sheet">
+          <span class="tag">Power Rule</span>
+          <table><tr><td>$\dfrac{d}{dx}[x^n]=nx^{n-1}$</td><td>bring the exponent down as a coefficient, then reduce the exponent by 1</td></tr></table>
+        </div>
+        <p>Combined with the constant multiple rule ($\frac{d}{dx}[c\cdot f(x)]=c\cdot f'(x)$) and the sum rule ($\frac{d}{dx}[f(x)\pm g(x)]=f'(x)\pm g'(x)$), the power rule lets you differentiate any polynomial term by term instantly.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.3 Product Rule</h3>
+        <div class="formula-sheet">
+          <span class="tag">Product Rule</span>
+          <table><tr><td>$\dfrac{d}{dx}[u\cdot v]=u'v+uv'$</td><td>"first times derivative of second, PLUS second times derivative of first"</td></tr></table>
+        </div>
+        <div class="callout warn"><span class="tag">Common Mistake</span>It's tempting to just multiply the two derivatives, $u'v'$ — this is wrong. The product rule always has TWO terms added together.</div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.4 Quotient Rule</h3>
+        <div class="formula-sheet">
+          <span class="tag">Quotient Rule</span>
+          <table><tr><td>$\dfrac{d}{dx}\left[\dfrac{u}{v}\right]=\dfrac{u'v-uv'}{v^2}$</td><td>"low d-high minus high d-low, over low squared" — a classic memory chant</td></tr></table>
+        </div>
+        <p>Order matters here — unlike the product rule, swapping $u'v$ and $uv'$ gives the wrong (negative) answer, so the subtraction order must be exact.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.5 Chain Rule</h3>
+        <div class="formula-sheet">
+          <span class="tag">Chain Rule</span>
+          <table><tr><td>$\dfrac{d}{dx}[f(g(x))]=f'(g(x))\cdot g'(x)$</td><td>"derivative of the outside (leaving inside alone) times derivative of the inside"</td></tr></table>
+        </div>
+        <p>The chain rule is needed any time you're differentiating a function-inside-a-function — for example $(3x+1)^5$, $\sin(x^2)$, or $\sqrt{2x-3}$.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.6 Implicit Differentiation</h3>
+        <p>Some equations, like $x^2+y^2=25$, define $y$ as a function of $x$ without solving for $y$ explicitly. To differentiate, treat $y$ as an unknown function of $x$: differentiate both sides with respect to $x$, applying the chain rule to every $y$-term (since $y$ is really $y(x)$, each $y$ term picks up a $\dfrac{dy}{dx}$ factor), then algebraically solve for $\dfrac{dy}{dx}$.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.7 Logarithmic Differentiation</h3>
+        <p>For functions with a variable in the exponent (like $x^x$), or very complicated products/quotients, taking the natural log of both sides first turns multiplication into addition and exponents into multipliers — often making the derivative dramatically easier to find. Steps: take $\ln$ of both sides, differentiate implicitly, then solve for $\dfrac{dy}{dx}$ (multiplying back through by the original $y$).</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>3.8 Higher-Order Derivatives</h3>
+        <p>Differentiating $f'(x)$ again gives the <b>second derivative</b> $f''(x)$; differentiating again gives the third, and so on. Notation: $f'(x), f''(x), f'''(x), f^{(4)}(x), \dots$ or equivalently $\dfrac{dy}{dx}, \dfrac{d^2y}{dx^2}, \dfrac{d^3y}{dx^3},\dots$. As seen in Chapter 2, the second derivative of position is acceleration — higher-order derivatives generally describe how the rate of change is itself changing.</p>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Power Rule on a Polynomial</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $f(x)=4x^5-3x^3+7x-9$.</p>
+          <div class="step"><span class="step-label">Step 1 — Differentiate each term separately (sum rule)</span>We handle $4x^5$, $-3x^3$, $7x$, and $-9$ one at a time.</div>
+          <div class="step"><span class="step-label">Step 2 — Apply the power rule to $4x^5$</span>Bring down the 5, reduce the exponent by 1: $5\times4x^{5-1}=20x^4$.</div>
+          <div class="step"><span class="step-label">Step 3 — Apply the power rule to $-3x^3$</span>$3\times(-3)x^{3-1}=-9x^2$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the power rule to $7x$ (which is $7x^1$)</span>$1\times7x^{1-1}=7x^0=7$.</div>
+          <div class="step"><span class="step-label">Step 5 — Apply the constant rule to $-9$</span>The derivative of any constant is 0.</div>
+          <div class="step"><span class="step-label">Step 6 — Combine all the pieces</span>$f'(x)=20x^4-9x^2+7+0=20x^4-9x^2+7$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Product Rule</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $f(x)=(3x^2+1)(2x-5)$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify u and v</span>Let $u=3x^2+1$ and $v=2x-5$.</div>
+          <div class="step"><span class="step-label">Step 2 — Find u′</span>$u'=\dfrac{d}{dx}[3x^2+1]=6x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find v′</span>$v'=\dfrac{d}{dx}[2x-5]=2$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the product rule formula $u'v+uv'$</span>$f'(x)=(6x)(2x-5)+(3x^2+1)(2)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Expand the first term</span>$(6x)(2x-5)=12x^2-30x$.</div>
+          <div class="step"><span class="step-label">Step 6 — Expand the second term</span>$(3x^2+1)(2)=6x^2+2$.</div>
+          <div class="step"><span class="step-label">Step 7 — Add the two expanded terms together</span>$f'(x)=12x^2-30x+6x^2+2$.</div>
+          <div class="step"><span class="step-label">Step 8 — Combine like terms</span>$12x^2+6x^2=18x^2$, so $f'(x)=18x^2-30x+2$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Quotient Rule</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $f(x)=\dfrac{x^2+1}{3x-2}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify u and v</span>$u=x^2+1$ (the "high" / numerator), $v=3x-2$ (the "low" / denominator).</div>
+          <div class="step"><span class="step-label">Step 2 — Find u′</span>$u'=2x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find v′</span>$v'=3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the quotient rule formula $\frac{u'v-uv'}{v^2}$</span>$f'(x)=\dfrac{(2x)(3x-2)-(x^2+1)(3)}{(3x-2)^2}$.</div>
+          <div class="step"><span class="step-label">Step 5 — Expand the first product in the numerator</span>$(2x)(3x-2)=6x^2-4x$.</div>
+          <div class="step"><span class="step-label">Step 6 — Expand the second product in the numerator</span>$(x^2+1)(3)=3x^2+3$.</div>
+          <div class="step"><span class="step-label">Step 7 — Subtract the second expansion from the first</span>$6x^2-4x-(3x^2+3)=6x^2-4x-3x^2-3=3x^2-4x-3$.</div>
+          <div class="step"><span class="step-label">Step 8 — Write the final derivative</span>$f'(x)=\dfrac{3x^2-4x-3}{(3x-2)^2}$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Chain Rule</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $f(x)=(4x^3-5x)^6$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify the outer and inner functions</span>Outer function: "raise something to the 6th power." Inner function: $g(x)=4x^3-5x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate the outer function first, leaving the inside untouched</span>Using the power rule on the outer layer: $6(4x^3-5x)^5$.</div>
+          <div class="step"><span class="step-label">Step 3 — Differentiate the inner function separately</span>$g'(x)=\dfrac{d}{dx}[4x^3-5x]=12x^2-5$.</div>
+          <div class="step"><span class="step-label">Step 4 — Multiply the outer derivative by the inner derivative</span>$f'(x)=6(4x^3-5x)^5\cdot(12x^2-5)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Write the final, simplified form</span>$f'(x)=6(12x^2-5)(4x^3-5x)^5$. (Left in factored form — this is standard practice, since expanding would be extremely messy and gains nothing.)</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Implicit Differentiation</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\dfrac{dy}{dx}$ given $x^2+y^2=25$.</p>
+          <div class="step"><span class="step-label">Step 1 — Differentiate both sides of the equation with respect to x</span>$\dfrac{d}{dx}[x^2]+\dfrac{d}{dx}[y^2]=\dfrac{d}{dx}[25]$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate $x^2$ using the power rule</span>$\dfrac{d}{dx}[x^2]=2x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Differentiate $y^2$ using the chain rule (since y is a function of x)</span>Treat y as $y(x)$: $\dfrac{d}{dx}[y^2]=2y\cdot\dfrac{dy}{dx}$ (power rule on the outside, times the derivative of the inside, which is $\frac{dy}{dx}$).</div>
+          <div class="step"><span class="step-label">Step 4 — Differentiate the constant on the right</span>$\dfrac{d}{dx}[25]=0$.</div>
+          <div class="step"><span class="step-label">Step 5 — Assemble the differentiated equation</span>$2x+2y\dfrac{dy}{dx}=0$.</div>
+          <div class="step"><span class="step-label">Step 6 — Isolate the term containing dy/dx</span>Subtract $2x$ from both sides: $2y\dfrac{dy}{dx}=-2x$.</div>
+          <div class="step"><span class="step-label">Step 7 — Solve for dy/dx</span>Divide both sides by $2y$: $\dfrac{dy}{dx}=\dfrac{-2x}{2y}=-\dfrac{x}{y}$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Logarithmic Differentiation</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $y=x^x$ (for $x>0$).</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize why standard rules don't directly apply</span>The power rule needs a constant exponent, and the exponential rule (Chapter 6 onward) needs a constant base — here BOTH the base and exponent are the variable x, so neither rule alone works.</div>
+          <div class="step"><span class="step-label">Step 2 — Take the natural log of both sides</span>$\ln y=\ln(x^x)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Use the log power rule to bring the exponent down</span>$\ln(x^x)=x\ln x$, so now: $\ln y=x\ln x$.</div>
+          <div class="step"><span class="step-label">Step 4 — Differentiate both sides with respect to x</span>Left side (chain rule, since y depends on x): $\dfrac{d}{dx}[\ln y]=\dfrac1y\dfrac{dy}{dx}$. Right side (product rule, since it's $x$ times $\ln x$): $\dfrac{d}{dx}[x\ln x]=(1)\ln x+x\cdot\dfrac1x=\ln x+1$.</div>
+          <div class="step"><span class="step-label">Step 5 — Write the differentiated equation</span>$\dfrac1y\dfrac{dy}{dx}=\ln x+1$.</div>
+          <div class="step"><span class="step-label">Step 6 — Solve for dy/dx by multiplying both sides by y</span>$\dfrac{dy}{dx}=y(\ln x+1)$.</div>
+          <div class="step"><span class="step-label">Step 7 — Substitute back the original expression for y</span>Since $y=x^x$: $\dfrac{dy}{dx}=x^x(\ln x+1)$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Combining Product Rule and Chain Rule</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Differentiate $f(x)=x^2(3x-1)^4$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify this as a product of two functions</span>$u=x^2$ and $v=(3x-1)^4$ — the product rule is the outer structure here.</div>
+          <div class="step"><span class="step-label">Step 2 — Find u′ using the power rule</span>$u'=2x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find v′ using the chain rule (since v is a composite function)</span>Outer derivative: $4(3x-1)^3$. Inner derivative: $\dfrac{d}{dx}[3x-1]=3$. Multiply: $v'=4(3x-1)^3\cdot3=12(3x-1)^3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the product rule formula $u'v+uv'$</span>$f'(x)=(2x)(3x-1)^4+(x^2)\cdot12(3x-1)^3$.</div>
+          <div class="step"><span class="step-label">Step 5 — Factor out the common factor $(3x-1)^3$</span>Both terms share $(3x-1)^3$ and both share a factor of x: $f'(x)=(3x-1)^3\left[2x(3x-1)+12x^2\right]$.</div>
+          <div class="step"><span class="step-label">Step 6 — Simplify inside the brackets</span>$2x(3x-1)=6x^2-2x$, so the bracket becomes $6x^2-2x+12x^2=18x^2-2x$.</div>
+          <div class="step"><span class="step-label">Step 7 — Write the final factored derivative</span>$f'(x)=(3x-1)^3(18x^2-2x)$, which can also be written as $2x(3x-1)^3(9x-1)$ after factoring out $2x$ from the bracket.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Higher-Order Derivatives</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $f''(x)$ for $f(x)=2x^4-9x^3+6x-1$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the first derivative f′(x) term by term</span>$\dfrac{d}{dx}[2x^4]=8x^3$; $\dfrac{d}{dx}[-9x^3]=-27x^2$; $\dfrac{d}{dx}[6x]=6$; $\dfrac{d}{dx}[-1]=0$.</div>
+          <div class="step"><span class="step-label">Step 2 — Combine to write f′(x)</span>$f'(x)=8x^3-27x^2+6$.</div>
+          <div class="step"><span class="step-label">Step 3 — Differentiate f′(x) again to find f″(x), term by term</span>$\dfrac{d}{dx}[8x^3]=24x^2$; $\dfrac{d}{dx}[-27x^2]=-54x$; $\dfrac{d}{dx}[6]=0$ (constant).</div>
+          <div class="step"><span class="step-label">Step 4 — Combine to write the final second derivative</span>$f''(x)=24x^2-54x$.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 3</span>
+        <table>
+          <tr><td>$\dfrac{d}{dx}[c]=0$</td><td>constant rule</td></tr>
+          <tr><td>$\dfrac{d}{dx}[x^n]=nx^{n-1}$</td><td>power rule</td></tr>
+          <tr><td>$(uv)'=u'v+uv'$</td><td>product rule</td></tr>
+          <tr><td>$\left(\dfrac uv\right)'=\dfrac{u'v-uv'}{v^2}$</td><td>quotient rule</td></tr>
+          <tr><td>$[f(g(x))]'=f'(g(x))\cdot g'(x)$</td><td>chain rule</td></tr>
+          <tr><td>Implicit method</td><td>differentiate both sides; every y-term gets a chain-rule $\frac{dy}{dx}$ factor; solve for $\frac{dy}{dx}$</td></tr>
+          <tr><td>Log-diff method</td><td>take ln of both sides; differentiate implicitly; multiply back by y</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (24)</h3>
+        <div id="ch3-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch3')">← Chapter 2</button>
+        <button onclick="nextChapter('ch3')">Chapter 4 — Extreme Curve Sketching →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 4 ================= -->
+  <div class="page" id="page-ch4">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 04</div>
+        <h2>Extreme Curve Sketching</h2>
+        <p class="desc">This is the payoff chapter for everything so far — using the first and second derivatives to fully understand and sketch the shape of a curve, and to solve real optimization problems.</p>
+        <div class="contents-strip">
+          <span>Critical points</span><span>Increasing/decreasing</span><span>Local max/min</span><span>Concavity</span>
+          <span>Inflection points</span><span>First derivative test</span><span>Second derivative test</span><span>Asymptotes</span><span>Optimization</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Find the critical points of a function by solving f'(x)=0 or locating where f'(x) is undefined.</li>
+          <li>Determine intervals where a function is increasing or decreasing using the sign of f'(x).</li>
+          <li>Classify critical points as local maxima, local minima, or neither, using the first or second derivative test.</li>
+          <li>Determine concavity and locate inflection points using the sign of f''(x).</li>
+          <li>Find horizontal and vertical asymptotes of a rational function.</li>
+          <li>Combine all of the above into a complete, accurate curve sketch.</li>
+          <li>Solve real-world optimization problems by setting up and analyzing an appropriate function.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.1 Critical Points</h3>
+        <p>A <b>critical point</b> of $f$ is any x-value in the domain where $f'(x)=0$ or $f'(x)$ is undefined. These are the only candidates for local maxima or minima — a smooth function cannot turn from increasing to decreasing (or vice versa) anywhere else.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.2 Increasing and Decreasing Functions</h3>
+        <div class="formula-sheet">
+          <span class="tag">Sign of f′(x)</span>
+          <table>
+            <tr><td>$f'(x)>0$ on an interval</td><td>f is increasing there</td></tr>
+            <tr><td>$f'(x)<0$ on an interval</td><td>f is decreasing there</td></tr>
+          </table>
+        </div>
+        <p>To find these intervals: locate all critical points, use them to split the number line into pieces, then test a sample point from each piece in $f'(x)$ to see whether it's positive or negative there.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.3 First Derivative Test</h3>
+        <p>At a critical point $x=c$: if $f'(x)$ changes from positive to negative there, $f$ has a <b>local maximum</b> at $c$. If $f'(x)$ changes from negative to positive, $f$ has a <b>local minimum</b>. If $f'(x)$ doesn't change sign, $c$ is neither (often a saddle-type flat point).</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.4 Concavity and Inflection Points</h3>
+        <div class="formula-sheet">
+          <span class="tag">Sign of f″(x)</span>
+          <table>
+            <tr><td>$f''(x)>0$ on an interval</td><td>concave UP (shaped like a cup, ∪)</td></tr>
+            <tr><td>$f''(x)<0$ on an interval</td><td>concave DOWN (shaped like a cap, ∩)</td></tr>
+          </table>
+        </div>
+        <p>An <b>inflection point</b> is a point where concavity actually switches (from up to down, or down to up) — found where $f''(x)=0$ or is undefined, AND the sign of $f''(x)$ genuinely changes there (just like critical points, not every candidate turns out to be a true inflection point).</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.5 Second Derivative Test</h3>
+        <p>An alternative to the first derivative test, often faster: at a critical point $x=c$ where $f'(c)=0$, if $f''(c)>0$, $f$ has a local <b>minimum</b> at $c$ (concave up, cup-shaped, bottom of a valley). If $f''(c)<0$, $f$ has a local <b>maximum</b> (concave down, top of a hill). If $f''(c)=0$, the test is inconclusive — fall back to the first derivative test.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.6 Asymptotes</h3>
+        <table class="data-table">
+          <tr><th>Type</th><th>How to find it</th></tr>
+          <tr><td>Vertical asymptote</td><td>values of x where the denominator = 0 (and the numerator doesn't also vanish there)</td></tr>
+          <tr><td>Horizontal asymptote</td><td>evaluate $\lim_{x\to\pm\infty}f(x)$; compare degrees of numerator/denominator for rational functions</td></tr>
+        </table>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.7 Complete Curve Sketching — the Checklist</h3>
+        <ol>
+          <li>Find the domain (and any asymptotes from Section 4.6).</li>
+          <li>Find intercepts (set $x=0$ for y-intercept; set $f(x)=0$ for x-intercepts).</li>
+          <li>Find $f'(x)$, locate critical points, and determine increasing/decreasing intervals.</li>
+          <li>Classify each critical point using the first or second derivative test.</li>
+          <li>Find $f''(x)$, determine concavity intervals, and locate inflection points.</li>
+          <li>Plot the key points and sketch the curve using all the collected information.</li>
+        </ol>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>4.8 Optimization Problems</h3>
+        <p>Real-world optimization problems ask you to maximize or minimize some quantity subject to a constraint. Standard approach: (1) write a formula for the quantity to be optimized in terms of one variable, using the constraint to eliminate any extra variables; (2) differentiate and find critical points; (3) use the first or second derivative test to confirm a max or min; (4) check the answer makes sense in context (e.g., a length can't be negative).</p>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Finding Critical Points</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the critical points of $f(x)=x^3-3x^2-9x+5$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find f′(x) using the power rule</span>$f'(x)=3x^2-6x-9$.</div>
+          <div class="step"><span class="step-label">Step 2 — Set f′(x) equal to zero</span>$3x^2-6x-9=0$.</div>
+          <div class="step"><span class="step-label">Step 3 — Factor out the common factor of 3</span>$3(x^2-2x-3)=0$, so $x^2-2x-3=0$.</div>
+          <div class="step"><span class="step-label">Step 4 — Factor the quadratic</span>Find two numbers multiplying to $-3$ and adding to $-2$: those are $-3$ and $1$. So $(x-3)(x+1)=0$.</div>
+          <div class="step"><span class="step-label">Step 5 — Solve for x</span>$x=3$ or $x=-1$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the critical points</span>The critical points are at $x=-1$ and $x=3$ (f'(x) is a polynomial, so it's defined everywhere — no additional undefined-derivative points to check).</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Increasing/Decreasing Intervals &amp; First Derivative Test</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Using $f(x)=x^3-3x^2-9x+5$ from Example 1, find the intervals of increase/decrease, and classify each critical point.</p>
+          <div class="step"><span class="step-label">Step 1 — Recall the critical points and the derivative</span>From Example 1: $f'(x)=3(x-3)(x+1)$, critical points at $x=-1,3$.</div>
+          <div class="step"><span class="step-label">Step 2 — Use the critical points to divide the number line into three intervals</span>$(-\infty,-1)$, $(-1,3)$, and $(3,\infty)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Test a sample point in $(-\infty,-1)$, say x=-2</span>$f'(-2)=3(-2-3)(-2+1)=3(-5)(-1)=15>0$. So f is increasing on $(-\infty,-1)$.</div>
+          <div class="step"><span class="step-label">Step 4 — Test a sample point in $(-1,3)$, say x=0</span>$f'(0)=3(0-3)(0+1)=3(-3)(1)=-9<0$. So f is decreasing on $(-1,3)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Test a sample point in $(3,\infty)$, say x=4</span>$f'(4)=3(4-3)(4+1)=3(1)(5)=15>0$. So f is increasing on $(3,\infty)$.</div>
+          <div class="step"><span class="step-label">Step 6 — Apply the first derivative test at each critical point</span>At $x=-1$: f' changes from + to − (increasing → decreasing) → local MAXIMUM. At $x=3$: f' changes from − to + (decreasing → increasing) → local MINIMUM.</div>
+          <div class="step"><span class="step-label">Step 7 — Find the actual y-values of these points</span>$f(-1)=(-1)^3-3(-1)^2-9(-1)+5=-1-3+9+5=10$. $f(3)=27-27-27+5=-22$. So local max at $(-1,10)$, local min at $(3,-22)$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Concavity and Inflection Points</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the concavity intervals and inflection point(s) of $f(x)=x^3-3x^2-9x+5$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find f″(x) by differentiating f′(x)=3x²-6x-9</span>$f''(x)=6x-6$.</div>
+          <div class="step"><span class="step-label">Step 2 — Set f″(x) equal to zero to find candidate inflection points</span>$6x-6=0\Rightarrow x=1$.</div>
+          <div class="step"><span class="step-label">Step 3 — Test a point to the left of x=1, say x=0</span>$f''(0)=6(0)-6=-6<0$, so f is concave DOWN on $(-\infty,1)$.</div>
+          <div class="step"><span class="step-label">Step 4 — Test a point to the right of x=1, say x=2</span>$f''(2)=6(2)-6=6>0$, so f is concave UP on $(1,\infty)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Confirm the sign genuinely changes at x=1</span>Concavity switches from down to up exactly at $x=1$, confirming this is a true inflection point (not just a candidate).</div>
+          <div class="step"><span class="step-label">Step 6 — Find the y-coordinate of the inflection point</span>$f(1)=1-3-9+5=-6$. Inflection point: $(1,-6)$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Second Derivative Test</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Use the second derivative test to classify the critical points of $f(x)=x^3-3x^2-9x+5$ (cross-check against Example 2).</p>
+          <div class="step"><span class="step-label">Step 1 — Recall f″(x) and the critical points</span>$f''(x)=6x-6$; critical points at $x=-1$ and $x=3$.</div>
+          <div class="step"><span class="step-label">Step 2 — Evaluate f″ at x=-1</span>$f''(-1)=6(-1)-6=-6-6=-12$.</div>
+          <div class="step"><span class="step-label">Step 3 — Interpret the sign at x=-1</span>$f''(-1)=-12<0$, so f is concave down there → local MAXIMUM. This matches Example 2 exactly.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate f″ at x=3</span>$f''(3)=6(3)-6=18-6=12$.</div>
+          <div class="step"><span class="step-label">Step 5 — Interpret the sign at x=3</span>$f''(3)=12>0$, so f is concave up there → local MINIMUM. Also matches Example 2.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Finding Asymptotes</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find all vertical and horizontal asymptotes of $f(x)=\dfrac{2x^2}{x^2-4}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find vertical asymptotes by setting the denominator to zero</span>$x^2-4=0\Rightarrow x=\pm2$.</div>
+          <div class="step"><span class="step-label">Step 2 — Confirm the numerator does not also vanish at those points</span>At $x=2$: numerator $=2(4)=8\ne0$. At $x=-2$: numerator $=2(4)=8\ne0$. Both are genuine vertical asymptotes (not removable holes).</div>
+          <div class="step"><span class="step-label">Step 3 — For the horizontal asymptote, compare the degree of numerator and denominator</span>Both numerator ($2x^2$) and denominator ($x^2-4$) have degree 2 — when degrees are equal, the horizontal asymptote is the ratio of the leading coefficients.</div>
+          <div class="step"><span class="step-label">Step 4 — Compute the ratio of leading coefficients</span>Leading coefficient of numerator = 2; leading coefficient of denominator = 1. Ratio = $2/1=2$.</div>
+          <div class="step"><span class="step-label">Step 5 — State the final asymptotes</span>Vertical asymptotes: $x=2$ and $x=-2$. Horizontal asymptote: $y=2$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Complete Curve Sketch</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Summarize a complete sketch description of $f(x)=x^3-3x^2-9x+5$ using all results from Examples 1–4.</p>
+          <div class="step"><span class="step-label">Step 1 — Domain</span>All real numbers (it's a polynomial).</div>
+          <div class="step"><span class="step-label">Step 2 — y-intercept</span>$f(0)=5$, so the curve crosses the y-axis at $(0,5)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Increasing/decreasing behavior (from Example 2)</span>Increasing on $(-\infty,-1)$, decreasing on $(-1,3)$, increasing again on $(3,\infty)$.</div>
+          <div class="step"><span class="step-label">Step 4 — Local extrema (from Examples 2 &amp; 4)</span>Local maximum at $(-1,10)$; local minimum at $(3,-22)$.</div>
+          <div class="step"><span class="step-label">Step 5 — Concavity (from Example 3)</span>Concave down on $(-\infty,1)$, concave up on $(1,\infty)$, with inflection point at $(1,-6)$.</div>
+          <div class="step"><span class="step-label">Step 6 — Assemble the description</span>The curve rises from the bottom-left, peaks at $(-1,10)$, falls through the inflection point $(1,-6)$ (where it switches from bending down to bending up), bottoms out at $(3,-22)$, then rises again toward the top-right — the classic S-shaped cubic curve.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Optimization: Maximum Area</div>
+        <div class="ex-body">
+          <p><b>Q:</b> A farmer has 200 m of fencing to enclose a rectangular field against an existing straight wall (so only 3 sides need fencing). Find the dimensions that maximize the enclosed area.</p>
+          <div class="step"><span class="step-label">Step 1 — Define variables and write the constraint</span>Let $x$ = width of the two sides perpendicular to the wall, $y$ = length of the side parallel to the wall. Fencing used: $2x+y=200$.</div>
+          <div class="step"><span class="step-label">Step 2 — Write the quantity to be maximized</span>Area $A=xy$.</div>
+          <div class="step"><span class="step-label">Step 3 — Use the constraint to eliminate y</span>From $2x+y=200$: $y=200-2x$.</div>
+          <div class="step"><span class="step-label">Step 4 — Substitute into the area formula, so A depends on only one variable</span>$A(x)=x(200-2x)=200x-2x^2$.</div>
+          <div class="step"><span class="step-label">Step 5 — Differentiate A(x) and find critical points</span>$A'(x)=200-4x$. Set equal to zero: $200-4x=0\Rightarrow x=50$.</div>
+          <div class="step"><span class="step-label">Step 6 — Confirm this is a maximum using the second derivative test</span>$A''(x)=-4<0$ for all x — always concave down, confirming $x=50$ gives a maximum.</div>
+          <div class="step"><span class="step-label">Step 7 — Find y and the maximum area, and check the answer makes sense</span>$y=200-2(50)=100$. Maximum area $=xy=50\times100=5000\ \text{m}^2$. Both dimensions are positive, which makes physical sense.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Optimization: Minimum Cost (Box)</div>
+        <div class="ex-body">
+          <p><b>Q:</b> An open-top box is to be made from a square sheet of cardboard by cutting equal squares of side $x$ from each corner and folding up the sides. If the sheet is 12 cm on each side, find the value of $x$ that maximizes the box's volume.</p>
+          <div class="step"><span class="step-label">Step 1 — Set up the dimensions of the resulting box</span>After cutting squares of side $x$ from each corner and folding up: base side length $=12-2x$, height $=x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Write the volume as a function of x</span>$V(x)=x(12-2x)^2$.</div>
+          <div class="step"><span class="step-label">Step 3 — Expand $(12-2x)^2$ before differentiating</span>$(12-2x)^2=144-48x+4x^2$, so $V(x)=x(144-48x+4x^2)=144x-48x^2+4x^3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Differentiate V(x)</span>$V'(x)=144-96x+12x^2$.</div>
+          <div class="step"><span class="step-label">Step 5 — Set V′(x)=0 and simplify</span>$12x^2-96x+144=0$. Divide every term by 12: $x^2-8x+12=0$.</div>
+          <div class="step"><span class="step-label">Step 6 — Factor the quadratic</span>Two numbers multiplying to 12, adding to $-8$: those are $-6$ and $-2$. $(x-6)(x-2)=0$, so $x=6$ or $x=2$.</div>
+          <div class="step"><span class="step-label">Step 7 — Reject the value that doesn't make physical sense</span>If $x=6$, the base side would be $12-2(6)=0$ — a box with zero base area, which isn't a valid box. So $x=2$ is the physically meaningful critical point.</div>
+          <div class="step"><span class="step-label">Step 8 — Confirm x=2 is a maximum using the second derivative test</span>$V''(x)=-96+24x$. At $x=2$: $V''(2)=-96+48=-48<0$, confirming a maximum. Maximum volume: $V(2)=2(12-4)^2=2(64)=128\ \text{cm}^3$.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 4</span>
+        <table>
+          <tr><td>Critical points</td><td>$f'(x)=0$ or $f'(x)$ undefined</td></tr>
+          <tr><td>Increasing/decreasing</td><td>sign of $f'(x)$: + increasing, − decreasing</td></tr>
+          <tr><td>First derivative test</td><td>sign change +→− is a max; −→+ is a min</td></tr>
+          <tr><td>Second derivative test</td><td>$f''(c)<0$ → max; $f''(c)>0$ → min; $=0$ inconclusive</td></tr>
+          <tr><td>Concavity</td><td>sign of $f''(x)$: + concave up, − concave down</td></tr>
+          <tr><td>Inflection point</td><td>$f''(x)=0$ (or undefined) AND concavity actually changes</td></tr>
+          <tr><td>Vertical asymptote</td><td>denominator = 0, numerator ≠ 0 there</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (22)</h3>
+        <div id="ch4-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch4')">← Chapter 3</button>
+        <button onclick="nextChapter('ch4')">Chapter 5 — Integration as the Inverse of Differentiation →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 5 ================= -->
+  <div class="page" id="page-ch5">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 05</div>
+        <h2>Integration as the Inverse of Differentiation</h2>
+        <p class="desc">We spent four chapters learning to go from a function to its derivative. Now we reverse direction: given a derivative, find the function it came from.</p>
+        <div class="contents-strip">
+          <span>Antiderivatives</span><span>Indefinite integrals</span><span>Basic integration rules</span><span>Integration constants</span><span>Checking by differentiation</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Define an antiderivative and explain why it's never unique.</li>
+          <li>Use correct indefinite integral notation, including the constant of integration.</li>
+          <li>Apply the basic integration rules (power rule, constant multiple, sum/difference) to polynomials.</li>
+          <li>Explain the necessity of "+C" in every indefinite integral.</li>
+          <li>Verify an integration result is correct by differentiating the answer.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>5.1 Antiderivatives</h3>
+        <p>An <b>antiderivative</b> of $f(x)$ is any function $F(x)$ such that $F'(x)=f(x)$. Integration is the process of finding an antiderivative — it's the reverse operation of differentiation, in exactly the way that squaring and square-rooting are reverses of each other.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>5.2 Indefinite Integrals</h3>
+        <p>The notation $\int f(x)\,dx$ (the "indefinite integral") represents the entire family of antiderivatives of $f(x)$. The $dx$ signals which variable we're integrating with respect to; the $\int$ symbol is a stretched "S," historically standing for "sum" (a connection made precise in Chapter 7).</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>5.3 Basic Integration Rules</h3>
+        <div class="formula-sheet">
+          <span class="tag">Basic Rules</span>
+          <table>
+            <tr><td>$\int x^n\,dx=\dfrac{x^{n+1}}{n+1}+C\ (n\ne-1)$</td><td>power rule for integration — reverse of the differentiation power rule</td></tr>
+            <tr><td>$\int c\,dx = cx+C$</td><td>integral of a constant</td></tr>
+            <tr><td>$\int c\cdot f(x)\,dx = c\int f(x)\,dx$</td><td>constant multiple rule</td></tr>
+            <tr><td>$\int[f(x)\pm g(x)]\,dx=\int f(x)\,dx\pm\int g(x)\,dx$</td><td>sum/difference rule</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>5.4 The Constant of Integration</h3>
+        <p>Because the derivative of any constant is zero (Chapter 3), $F(x)$ and $F(x)+5$ have exactly the same derivative — so if $F(x)$ is one antiderivative of $f(x)$, so is $F(x)+C$ for literally any constant C. This is why every indefinite integral must end with "+C": without it, you're only reporting ONE member of an infinite family of correct answers, not the complete general answer.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>5.5 Checking Answers by Differentiation</h3>
+        <p>Because integration and differentiation are inverse operations, you can always verify an integration result: differentiate your answer, and if you get back the original integrand, your integration was correct. This is the single most reliable way to catch integration mistakes and should become a habit.</p>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Basic Power Rule Integration</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int x^4\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify n in the power rule</span>Here $x^4$ means $n=4$.</div>
+          <div class="step"><span class="step-label">Step 2 — Increase the exponent by 1</span>New exponent: $4+1=5$.</div>
+          <div class="step"><span class="step-label">Step 3 — Divide by the new exponent</span>$\dfrac{x^5}{5}$.</div>
+          <div class="step"><span class="step-label">Step 4 — Add the constant of integration</span>$\int x^4\,dx=\dfrac{x^5}{5}+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Polynomial with Multiple Terms</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int(6x^3-4x+5)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Split the integral term by term using the sum/difference rule</span>$\int6x^3\,dx-\int4x\,dx+\int5\,dx$.</div>
+          <div class="step"><span class="step-label">Step 2 — Integrate the first term using the power rule</span>$\int6x^3\,dx=6\cdot\dfrac{x^4}{4}=\dfrac{6x^4}{4}=\dfrac{3x^4}{2}$.</div>
+          <div class="step"><span class="step-label">Step 3 — Integrate the second term</span>$\int4x\,dx=4\cdot\dfrac{x^2}{2}=2x^2$.</div>
+          <div class="step"><span class="step-label">Step 4 — Integrate the third term (constant rule for integration)</span>$\int5\,dx=5x$.</div>
+          <div class="step"><span class="step-label">Step 5 — Combine all three results, adding a SINGLE constant of integration at the end</span>$\int(6x^3-4x+5)\,dx=\dfrac{3x^4}{2}-2x^2+5x+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Integrating Negative and Fractional Powers</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\left(\dfrac{3}{x^2}+2\sqrt x\right)dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Rewrite each term with exponent notation, ready for the power rule</span>$\dfrac{3}{x^2}=3x^{-2}$ and $2\sqrt x=2x^{1/2}$.</div>
+          <div class="step"><span class="step-label">Step 2 — Split into two integrals</span>$\int3x^{-2}\,dx+\int2x^{1/2}\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Apply the power rule to $3x^{-2}$</span>New exponent: $-2+1=-1$. $\int3x^{-2}\,dx=3\cdot\dfrac{x^{-1}}{-1}=-3x^{-1}=-\dfrac3x$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the power rule to $2x^{1/2}$</span>New exponent: $\frac12+1=\frac32$. $\int2x^{1/2}\,dx=2\cdot\dfrac{x^{3/2}}{3/2}=2\cdot\dfrac23x^{3/2}=\dfrac43x^{3/2}$.</div>
+          <div class="step"><span class="step-label">Step 5 — Combine both results with a single +C</span>$\int\left(\dfrac{3}{x^2}+2\sqrt x\right)dx=-\dfrac3x+\dfrac43x^{3/2}+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Expanding Before Integrating</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int(2x-3)(x+4)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize there's no direct product rule for integration, so expand first</span>Unlike differentiation, integration has no simple "product rule" — multiply out the expression before integrating.</div>
+          <div class="step"><span class="step-label">Step 2 — Expand $(2x-3)(x+4)$</span>$2x\cdot x+2x\cdot4-3\cdot x-3\cdot4=2x^2+8x-3x-12$.</div>
+          <div class="step"><span class="step-label">Step 3 — Combine like terms</span>$2x^2+5x-12$.</div>
+          <div class="step"><span class="step-label">Step 4 — Integrate the resulting polynomial term by term</span>$\int(2x^2+5x-12)\,dx=2\cdot\dfrac{x^3}{3}+5\cdot\dfrac{x^2}{2}-12x$.</div>
+          <div class="step"><span class="step-label">Step 5 — Simplify and add the constant</span>$\int(2x-3)(x+4)\,dx=\dfrac{2x^3}{3}+\dfrac{5x^2}{2}-12x+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Finding a Specific Antiderivative (Initial Condition)</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $F(x)$ given $F'(x)=3x^2-4x$ and $F(1)=5$.</p>
+          <div class="step"><span class="step-label">Step 1 — Integrate F′(x) to find the general antiderivative</span>$F(x)=\int(3x^2-4x)\,dx=3\cdot\dfrac{x^3}{3}-4\cdot\dfrac{x^2}{2}+C=x^3-2x^2+C$.</div>
+          <div class="step"><span class="step-label">Step 2 — Use the given initial condition F(1)=5 to find C</span>Substitute $x=1$: $F(1)=(1)^3-2(1)^2+C=1-2+C=-1+C$.</div>
+          <div class="step"><span class="step-label">Step 3 — Set this equal to the known value and solve for C</span>$-1+C=5\Rightarrow C=6$.</div>
+          <div class="step"><span class="step-label">Step 4 — Write the specific (particular) antiderivative</span>$F(x)=x^3-2x^2+6$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Verifying an Integration by Differentiating Back</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Verify that $\int(4x^3-6x)\,dx=x^4-3x^2+C$ is correct.</p>
+          <div class="step"><span class="step-label">Step 1 — State the check strategy</span>If the integration is correct, differentiating the right-hand side should return exactly the original integrand, $4x^3-6x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate $x^4-3x^2+C$ term by term</span>$\dfrac{d}{dx}[x^4]=4x^3$; $\dfrac{d}{dx}[-3x^2]=-6x$; $\dfrac{d}{dx}[C]=0$.</div>
+          <div class="step"><span class="step-label">Step 3 — Combine the differentiated terms</span>$4x^3-6x+0=4x^3-6x$.</div>
+          <div class="step"><span class="step-label">Step 4 — Compare to the original integrand</span>This exactly matches $4x^3-6x$, the function we started with inside the integral.</div>
+          <div class="step"><span class="step-label">Step 5 — Conclude</span>The integration is confirmed CORRECT.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Splitting a Fraction Before Integrating</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\dfrac{6x^3-4x^2+2x}{2x}\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize this fraction should be split term by term first</span>Since every term in the numerator shares the denominator $2x$, divide each one individually rather than trying to integrate the whole fraction at once.</div>
+          <div class="step"><span class="step-label">Step 2 — Divide each numerator term by 2x</span>$\dfrac{6x^3}{2x}=3x^2$; $\dfrac{-4x^2}{2x}=-2x$; $\dfrac{2x}{2x}=1$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite the integral using the simplified polynomial</span>$\int(3x^2-2x+1)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 4 — Integrate term by term</span>$3\cdot\dfrac{x^3}{3}-2\cdot\dfrac{x^2}{2}+1\cdot x=x^3-x^2+x$.</div>
+          <div class="step"><span class="step-label">Step 5 — Write the final answer with +C</span>$\int\dfrac{6x^3-4x^2+2x}{2x}\,dx=x^3-x^2+x+C$.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 5</span>
+        <table>
+          <tr><td>$\int x^n\,dx=\dfrac{x^{n+1}}{n+1}+C$</td><td>$n\ne-1$ (the $n=-1$ case needs $\ln|x|$, covered in Chapter 6)</td></tr>
+          <tr><td>$\int c\,dx=cx+C$</td><td>constant</td></tr>
+          <tr><td>$\int cf(x)\,dx=c\int f(x)\,dx$</td><td>constant multiple</td></tr>
+          <tr><td>$\int[f\pm g]\,dx=\int f\,dx\pm\int g\,dx$</td><td>sum/difference</td></tr>
+          <tr><td>Verification</td><td>differentiate the answer; must return the original integrand</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (16)</h3>
+        <div id="ch5-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch5')">← Chapter 4</button>
+        <button onclick="nextChapter('ch5')">Chapter 6 — Methods of Integration →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 6 ================= -->
+  <div class="page" id="page-ch6">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 06</div>
+        <h2>Methods of Integration</h2>
+        <p class="desc">The basic power rule only gets you so far. This chapter builds the full integration toolkit — substitution, parts, partial fractions, and trig techniques — for handling anything more complicated than a plain polynomial.</p>
+        <div class="contents-strip">
+          <span>Substitution</span><span>Integration by parts</span><span>Partial fractions</span><span>Trigonometric integrals</span>
+          <span>Trigonometric substitution</span><span>Reduction formulas</span><span>Mixed practice</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Recognize when u-substitution applies and execute it correctly, including changing the differential.</li>
+          <li>Apply integration by parts, choosing u and dv wisely using the LIATE guideline.</li>
+          <li>Decompose a rational function into partial fractions and integrate each piece.</li>
+          <li>Integrate standard trigonometric functions and simple trig combinations.</li>
+          <li>Use trigonometric substitution to handle integrals containing $\sqrt{a^2-x^2}$ type expressions.</li>
+          <li>Recognize when a reduction formula simplifies a repeated-pattern integral.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.1 Substitution (u-Substitution)</h3>
+        <p><b>Substitution</b> is the integration counterpart of the chain rule. When the integrand contains a function and (up to a constant) its derivative, replace the inner function with a new variable $u$ to simplify the integral.</p>
+        <div class="formula-sheet">
+          <span class="tag">Substitution Method</span>
+          <table>
+            <tr><td>1. Choose $u=g(x)$ (usually the "inside" of a composite function)</td><td>pick the piece whose derivative also appears</td></tr>
+            <tr><td>2. Find $du=g'(x)\,dx$</td><td>differentiate u</td></tr>
+            <tr><td>3. Rewrite the ENTIRE integral in terms of u only</td><td>no x should remain</td></tr>
+            <tr><td>4. Integrate with respect to u, then substitute back $u=g(x)$</td><td>return to the original variable</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.2 Integration by Parts</h3>
+        <p><b>Integration by parts</b> is the integration counterpart of the product rule, used when the integrand is a product of two different types of functions:</p>
+        <div class="formula-sheet">
+          <span class="tag">Integration by Parts</span>
+          <table>
+            <tr><td>$\int u\,dv = uv-\int v\,du$</td><td>choose u and dv from the integrand</td></tr>
+          </table>
+        </div>
+        <div class="callout trick">
+          <span class="tag">LIATE Guideline</span>
+          Choose u to be whichever type appears earliest in: <b>L</b>ogarithmic, <b>I</b>nverse trig, <b>A</b>lgebraic, <b>T</b>rigonometric, <b>E</b>xponential. Whatever's left becomes dv.
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.3 Partial Fractions</h3>
+        <p>When integrating a rational function whose denominator factors into simpler pieces, <b>partial fraction decomposition</b> splits the single complicated fraction into a sum of simpler fractions, each easy to integrate on its own.</p>
+        <div class="formula-sheet">
+          <span class="tag">Partial Fractions — Linear Factors</span>
+          <table>
+            <tr><td>$\dfrac{p(x)}{(x-a)(x-b)}=\dfrac{A}{x-a}+\dfrac{B}{x-b}$</td><td>solve for A, B by clearing denominators and matching coefficients (or substituting convenient x-values)</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.4 Trigonometric Integrals</h3>
+        <div class="formula-sheet">
+          <span class="tag">Standard Trig Integrals</span>
+          <table>
+            <tr><td>$\int\sin x\,dx=-\cos x+C$</td><td></td></tr>
+            <tr><td>$\int\cos x\,dx=\sin x+C$</td><td></td></tr>
+            <tr><td>$\int\sec^2x\,dx=\tan x+C$</td><td></td></tr>
+            <tr><td>$\int\sin^2x\,dx=\dfrac x2-\dfrac{\sin2x}4+C$</td><td>uses the identity $\sin^2x=\frac{1-\cos2x}2$</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.5 Trigonometric Substitution</h3>
+        <p>When an integrand contains $\sqrt{a^2-x^2}$, $\sqrt{a^2+x^2}$, or $\sqrt{x^2-a^2}$, substituting $x$ with an appropriate trig function turns the awkward square root into a clean trig expression via the Pythagorean identity:</p>
+        <div class="formula-sheet">
+          <span class="tag">Trig Substitution Patterns</span>
+          <table>
+            <tr><td>$\sqrt{a^2-x^2}$</td><td>let $x=a\sin\theta$</td></tr>
+            <tr><td>$\sqrt{a^2+x^2}$</td><td>let $x=a\tan\theta$</td></tr>
+            <tr><td>$\sqrt{x^2-a^2}$</td><td>let $x=a\sec\theta$</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>6.6 Reduction Formulas</h3>
+        <p>A <b>reduction formula</b> expresses an integral involving $x^n$ (or $\sin^nx$, etc.) in terms of a similar integral with a lower power, letting you step down repeatedly until you reach a base case you already know how to integrate. Example: $\int x^ne^x\,dx=x^ne^x-n\int x^{n-1}e^x\,dx$, derived via repeated integration by parts.</p>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Basic Substitution</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int2x(x^2+3)^5\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Choose u to be the inner function</span>Let $u=x^2+3$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate u to find du</span>$du=2x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Notice this matches exactly what's in the integral</span>The integral already contains $2x\,dx$, which is precisely $du$ — a perfect substitution candidate.</div>
+          <div class="step"><span class="step-label">Step 4 — Rewrite the entire integral in terms of u</span>$\int2x(x^2+3)^5\,dx=\int u^5\,du$.</div>
+          <div class="step"><span class="step-label">Step 5 — Integrate using the power rule</span>$\int u^5\,du=\dfrac{u^6}{6}+C$.</div>
+          <div class="step"><span class="step-label">Step 6 — Substitute back $u=x^2+3$</span>$\int2x(x^2+3)^5\,dx=\dfrac{(x^2+3)^6}{6}+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Substitution Requiring an Adjustment Constant</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int x(x^2+1)^4\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Choose u</span>Let $u=x^2+1$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate to find du</span>$du=2x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Notice the integral only has $x\,dx$, not $2x\,dx$ — a mismatch by a factor of 2</span>Solve for $x\,dx$ instead: $x\,dx=\dfrac{du}{2}$.</div>
+          <div class="step"><span class="step-label">Step 4 — Substitute both u and the adjusted differential</span>$\int x(x^2+1)^4\,dx=\int u^4\cdot\dfrac{du}{2}=\dfrac12\int u^4\,du$.</div>
+          <div class="step"><span class="step-label">Step 5 — Integrate</span>$\dfrac12\cdot\dfrac{u^5}{5}=\dfrac{u^5}{10}$.</div>
+          <div class="step"><span class="step-label">Step 6 — Substitute back and add C</span>$\int x(x^2+1)^4\,dx=\dfrac{(x^2+1)^5}{10}+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Integration by Parts</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int x\,e^x\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize this as a product needing integration by parts</span>x (algebraic) times $e^x$ (exponential) — no substitution works here since neither is the derivative of the other.</div>
+          <div class="step"><span class="step-label">Step 2 — Choose u and dv using LIATE</span>Algebraic comes before Exponential in LIATE, so let $u=x$ and $dv=e^x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find du and v</span>$du=dx$ (differentiate u); $v=\int e^x\,dx=e^x$ (integrate dv).</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the integration by parts formula $\int u\,dv=uv-\int v\,du$</span>$\int xe^x\,dx=x\cdot e^x-\int e^x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 5 — Integrate the remaining, simpler integral</span>$\int e^x\,dx=e^x$.</div>
+          <div class="step"><span class="step-label">Step 6 — Combine and add the constant</span>$\int xe^x\,dx=xe^x-e^x+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Integration by Parts with a Logarithm</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\ln x\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize the trick: treat this as a product of ln x and 1</span>Rewrite as $\int(\ln x)(1)\,dx$ to fit the integration by parts pattern.</div>
+          <div class="step"><span class="step-label">Step 2 — Choose u and dv using LIATE</span>Logarithmic comes first in LIATE, so $u=\ln x$ and $dv=1\,dx = dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find du and v</span>$du=\dfrac1x\,dx$ (derivative of ln x); $v=x$ (integral of 1).</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the formula $uv-\int v\,du$</span>$\int\ln x\,dx=x\ln x-\int x\cdot\dfrac1x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 5 — Simplify the remaining integral</span>$x\cdot\dfrac1x=1$, so the remaining integral is $\int1\,dx=x$.</div>
+          <div class="step"><span class="step-label">Step 6 — Combine and add C</span>$\int\ln x\,dx=x\ln x-x+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Partial Fractions</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\dfrac{5x-1}{(x-1)(x+2)}\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Set up the partial fraction decomposition</span>$\dfrac{5x-1}{(x-1)(x+2)}=\dfrac{A}{x-1}+\dfrac{B}{x+2}$.</div>
+          <div class="step"><span class="step-label">Step 2 — Clear the denominators by multiplying both sides by $(x-1)(x+2)$</span>$5x-1=A(x+2)+B(x-1)$.</div>
+          <div class="step"><span class="step-label">Step 3 — Substitute a convenient value of x to eliminate B: let x=1</span>$5(1)-1=A(1+2)+B(0)\Rightarrow4=3A\Rightarrow A=\dfrac43$.</div>
+          <div class="step"><span class="step-label">Step 4 — Substitute a convenient value of x to eliminate A: let x=−2</span>$5(-2)-1=A(0)+B(-2-1)\Rightarrow-11=-3B\Rightarrow B=\dfrac{11}3$.</div>
+          <div class="step"><span class="step-label">Step 5 — Rewrite the original integral using the decomposition</span>$\int\left(\dfrac{4/3}{x-1}+\dfrac{11/3}{x+2}\right)dx$.</div>
+          <div class="step"><span class="step-label">Step 6 — Integrate each simple fraction (standard log-integral form)</span>$\dfrac43\ln|x-1|+\dfrac{11}3\ln|x+2|+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Trigonometric Integral Using an Identity</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\sin^2x\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize there's no direct antiderivative rule for $\sin^2x$</span>We need to rewrite it using a trigonometric identity first.</div>
+          <div class="step"><span class="step-label">Step 2 — Apply the half-angle identity</span>$\sin^2x=\dfrac{1-\cos2x}{2}$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite the integral using this identity</span>$\int\dfrac{1-\cos2x}{2}\,dx=\dfrac12\int(1-\cos2x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 4 — Split into two simpler integrals</span>$\dfrac12\left[\int1\,dx-\int\cos2x\,dx\right]$.</div>
+          <div class="step"><span class="step-label">Step 5 — Integrate each piece (the second needs substitution, u=2x, du=2dx)</span>$\int1\,dx=x$; $\int\cos2x\,dx=\dfrac12\sin2x$ (chain-rule adjustment for the inner "2x").</div>
+          <div class="step"><span class="step-label">Step 6 — Combine and simplify</span>$\dfrac12\left[x-\dfrac12\sin2x\right]+C=\dfrac x2-\dfrac{\sin2x}4+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Trigonometric Substitution</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int\dfrac{dx}{\sqrt{9-x^2}}$.</p>
+          <div class="step"><span class="step-label">Step 1 — Match the pattern to the correct substitution</span>The form $\sqrt{a^2-x^2}$ with $a=3$ calls for $x=3\sin\theta$.</div>
+          <div class="step"><span class="step-label">Step 2 — Differentiate the substitution to find dx</span>$dx=3\cos\theta\,d\theta$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite $9-x^2$ in terms of θ</span>$9-x^2=9-9\sin^2\theta=9(1-\sin^2\theta)=9\cos^2\theta$ (Pythagorean identity), so $\sqrt{9-x^2}=3\cos\theta$.</div>
+          <div class="step"><span class="step-label">Step 4 — Substitute everything into the integral</span>$\int\dfrac{3\cos\theta\,d\theta}{3\cos\theta}$.</div>
+          <div class="step"><span class="step-label">Step 5 — Cancel the identical factors of $3\cos\theta$</span>$\int1\,d\theta=\theta+C$.</div>
+          <div class="step"><span class="step-label">Step 6 — Convert back to x using $x=3\sin\theta \Rightarrow \theta=\sin^{-1}(x/3)$</span>$\int\dfrac{dx}{\sqrt{9-x^2}}=\sin^{-1}\left(\dfrac x3\right)+C$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Choosing the Right Method (Mixed Practice)</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find $\int x^2\ln x\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Identify this as a product needing integration by parts (logarithm × polynomial)</span>Neither substitution nor a basic rule applies directly.</div>
+          <div class="step"><span class="step-label">Step 2 — Choose u and dv using LIATE</span>Logarithmic before Algebraic: $u=\ln x$, $dv=x^2\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find du and v</span>$du=\dfrac1x\,dx$; $v=\int x^2\,dx=\dfrac{x^3}3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the formula $uv-\int v\,du$</span>$\int x^2\ln x\,dx=\ln x\cdot\dfrac{x^3}3-\int\dfrac{x^3}3\cdot\dfrac1x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 5 — Simplify the remaining integral</span>$\dfrac{x^3}3\cdot\dfrac1x=\dfrac{x^2}3$, so we need $\int\dfrac{x^2}3\,dx=\dfrac13\cdot\dfrac{x^3}3=\dfrac{x^3}9$.</div>
+          <div class="step"><span class="step-label">Step 6 — Combine both pieces and add C</span>$\int x^2\ln x\,dx=\dfrac{x^3\ln x}3-\dfrac{x^3}9+C$.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 6</span>
+        <table>
+          <tr><td>Substitution</td><td>$u=g(x)$, $du=g'(x)dx$, rewrite fully in u, integrate, substitute back</td></tr>
+          <tr><td>$\int u\,dv=uv-\int v\,du$</td><td>integration by parts</td></tr>
+          <tr><td>LIATE</td><td>Log, Inverse trig, Algebraic, Trig, Exponential — priority order for choosing u</td></tr>
+          <tr><td>Partial fractions</td><td>$\dfrac{p(x)}{(x-a)(x-b)}=\dfrac A{x-a}+\dfrac B{x-b}$</td></tr>
+          <tr><td>$x=a\sin\theta$</td><td>trig sub for $\sqrt{a^2-x^2}$</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (22)</h3>
+        <div id="ch6-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch6')">← Chapter 5</button>
+        <button onclick="nextChapter('ch6')">Chapter 7 — Definite Integration →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 7 ================= -->
+  <div class="page" id="page-ch7">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 07</div>
+        <h2>Definite Integration</h2>
+        <p class="desc">Indefinite integrals give you a family of functions. Definite integrals give you a number — and that number turns out to mean "area," connecting integration to geometry through one of the most important theorems in all of mathematics.</p>
+        <div class="contents-strip">
+          <span>Riemann sums</span><span>Fundamental Theorem of Calculus</span><span>Evaluating definite integrals</span>
+          <span>Properties of definite integrals</span><span>Average value</span><span>Numerical integration</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Explain how a Riemann sum approximates the area under a curve, and how it becomes exact as n → ∞.</li>
+          <li>State and apply the Fundamental Theorem of Calculus to evaluate definite integrals directly.</li>
+          <li>Evaluate definite integrals using antiderivatives and the evaluation bracket notation.</li>
+          <li>Apply the standard properties of definite integrals (reversal, additivity, constant multiples).</li>
+          <li>Compute the average value of a function over an interval.</li>
+          <li>Understand the basic idea of numerical integration (Trapezoidal Rule) as a fallback when no antiderivative is available.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.1 Riemann Sums</h3>
+        <p>To approximate the area under a curve $y=f(x)$ between $x=a$ and $x=b$, slice the region into $n$ thin vertical rectangles, each of width $\Delta x=\frac{b-a}{n}$, with height given by the function's value at some point in each strip. Adding up all the rectangle areas gives a <b>Riemann sum</b> — an approximation that gets more accurate as $n$ increases and the rectangles get thinner.</p>
+        <div class="formula-sheet">
+          <span class="tag">Riemann Sum</span>
+          <table>
+            <tr><td>$\sum_{i=1}^{n}f(x_i)\,\Delta x$</td><td>sum of rectangle areas, $\Delta x=(b-a)/n$</td></tr>
+            <tr><td>$\int_a^bf(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x$</td><td>the definite integral IS the exact limit of this sum</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.2 The Fundamental Theorem of Calculus</h3>
+        <p>This is the single result that ties Chapters 2–6 (differentiation and antiderivatives) directly to area, and it's why integration and differentiation are studied together as "calculus" rather than as two separate subjects.</p>
+        <div class="formula-sheet">
+          <span class="tag">Fundamental Theorem of Calculus (Part 2 — the computational version)</span>
+          <table>
+            <tr><td>$\int_a^bf(x)\,dx=F(b)-F(a)$</td><td>where $F$ is any antiderivative of $f$ (i.e. $F'=f$)</td></tr>
+          </table>
+        </div>
+        <p>This is genuinely remarkable: instead of computing an infinite Riemann sum, you can now find area by simply finding one antiderivative and subtracting its values at the two endpoints.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.3 Evaluating Definite Integrals</h3>
+        <p>Standard notation: $\Big[F(x)\Big]_a^b$ means "evaluate $F(x)$ at $x=b$, then subtract its value at $x=a$." Practical procedure: find the antiderivative (ignore +C — it cancels out in the subtraction), then evaluate at the upper limit and subtract the value at the lower limit.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.4 Properties of Definite Integrals</h3>
+        <div class="formula-sheet">
+          <span class="tag">Key Properties</span>
+          <table>
+            <tr><td>$\int_a^bf(x)\,dx=-\int_b^af(x)\,dx$</td><td>reversing the limits flips the sign</td></tr>
+            <tr><td>$\int_a^af(x)\,dx=0$</td><td>zero-width interval, zero area</td></tr>
+            <tr><td>$\int_a^bf(x)\,dx=\int_a^cf(x)\,dx+\int_c^bf(x)\,dx$</td><td>additivity across an intermediate point c</td></tr>
+            <tr><td>$\int_a^bk\,f(x)\,dx=k\int_a^bf(x)\,dx$</td><td>constant multiple</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.5 Average Value of a Function</h3>
+        <div class="formula-sheet">
+          <span class="tag">Average Value</span>
+          <table>
+            <tr><td>$f_{avg}=\dfrac{1}{b-a}\int_a^bf(x)\,dx$</td><td>the "height" of a rectangle with the same base [a,b] and the same area as the region under f</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>7.6 Numerical Integration (Trapezoidal Rule)</h3>
+        <p>Some functions have no elementary antiderivative at all (like $e^{-x^2}$), so the Fundamental Theorem can't be applied directly — instead, we approximate. The <b>Trapezoidal Rule</b> improves on plain rectangles by using trapezoids to hug the curve more closely:</p>
+        <div class="formula-sheet">
+          <span class="tag">Trapezoidal Rule</span>
+          <table>
+            <tr><td>$\int_a^bf(x)\,dx\approx\dfrac{\Delta x}{2}\Big[f(x_0)+2f(x_1)+\dots+2f(x_{n-1})+f(x_n)\Big]$</td><td>$\Delta x=(b-a)/n$; interior points doubled, endpoints single</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Basic Definite Integral</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\int_1^3(2x+1)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the antiderivative (ignore +C for definite integrals)</span>$\int(2x+1)\,dx=x^2+x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Write using evaluation bracket notation</span>$\Big[x^2+x\Big]_1^3$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate at the upper limit x=3</span>$3^2+3=9+3=12$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate at the lower limit x=1</span>$1^2+1=1+1=2$.</div>
+          <div class="step"><span class="step-label">Step 5 — Subtract: (upper) − (lower)</span>$12-2=10$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final result</span>$\int_1^3(2x+1)\,dx=10$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Definite Integral of a Polynomial</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\int_0^2(3x^2-2x+1)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the antiderivative term by term</span>$\int(3x^2-2x+1)\,dx=x^3-x^2+x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Write with evaluation brackets</span>$\Big[x^3-x^2+x\Big]_0^2$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate at the upper limit x=2</span>$2^3-2^2+2=8-4+2=6$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate at the lower limit x=0</span>$0^3-0^2+0=0$.</div>
+          <div class="step"><span class="step-label">Step 5 — Subtract</span>$6-0=6$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the result</span>$\int_0^2(3x^2-2x+1)\,dx=6$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Definite Integral Requiring Substitution</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\int_0^2x(x^2+1)^3\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Choose u for substitution</span>$u=x^2+1$, so $du=2x\,dx\Rightarrow x\,dx=\dfrac{du}2$.</div>
+          <div class="step"><span class="step-label">Step 2 — Convert the limits of integration to u-values (this avoids converting back to x later)</span>When $x=0$: $u=0^2+1=1$. When $x=2$: $u=2^2+1=5$.</div>
+          <div class="step"><span class="step-label">Step 3 — Rewrite the entire integral in terms of u, including the new limits</span>$\int_1^5u^3\cdot\dfrac{du}2=\dfrac12\int_1^5u^3\,du$.</div>
+          <div class="step"><span class="step-label">Step 4 — Find the antiderivative</span>$\dfrac12\cdot\dfrac{u^4}4=\dfrac{u^4}8$.</div>
+          <div class="step"><span class="step-label">Step 5 — Evaluate between the NEW limits, 1 and 5 (no need to convert back to x)</span>$\Big[\dfrac{u^4}8\Big]_1^5=\dfrac{5^4}8-\dfrac{1^4}8=\dfrac{625}8-\dfrac18=\dfrac{624}8$.</div>
+          <div class="step"><span class="step-label">Step 6 — Simplify the final fraction</span>$\dfrac{624}8=78$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Applying Additivity Across an Interior Point</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Given $\int_0^5f(x)\,dx=20$ and $\int_0^3f(x)\,dx=8$, find $\int_3^5f(x)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Write the additivity property with c=3</span>$\int_0^5f(x)\,dx=\int_0^3f(x)\,dx+\int_3^5f(x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 2 — Substitute the known values</span>$20=8+\int_3^5f(x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Solve for the unknown integral</span>$\int_3^5f(x)\,dx=20-8=12$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Average Value of a Function</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the average value of $f(x)=x^2$ on the interval $[1,4]$.</p>
+          <div class="step"><span class="step-label">Step 1 — Write the average value formula</span>$f_{avg}=\dfrac1{b-a}\int_a^bf(x)\,dx$, with $a=1$, $b=4$.</div>
+          <div class="step"><span class="step-label">Step 2 — Compute the definite integral first</span>$\int_1^4x^2\,dx=\Big[\dfrac{x^3}3\Big]_1^4=\dfrac{64}3-\dfrac13=\dfrac{63}3=21$.</div>
+          <div class="step"><span class="step-label">Step 3 — Compute $b-a$</span>$4-1=3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Divide the integral's value by $(b-a)$</span>$f_{avg}=\dfrac{21}3=7$.</div>
+          <div class="step"><span class="step-label">Step 5 — State the result</span>The average value of $f(x)=x^2$ on $[1,4]$ is $7$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Definite Integral by Integration by Parts</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Evaluate $\int_0^1xe^x\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the antiderivative first (using integration by parts, from Chapter 6 Example 3)</span>$\int xe^x\,dx=xe^x-e^x+C$.</div>
+          <div class="step"><span class="step-label">Step 2 — Write with evaluation brackets (drop C)</span>$\Big[xe^x-e^x\Big]_0^1$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate at the upper limit x=1</span>$1\cdot e^1-e^1=e-e=0$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate at the lower limit x=0</span>$0\cdot e^0-e^0=0-1=-1$.</div>
+          <div class="step"><span class="step-label">Step 5 — Subtract (upper) − (lower)</span>$0-(-1)=1$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final result</span>$\int_0^1xe^x\,dx=1$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Using the Reversal Property</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Given $\int_2^6f(x)\,dx=15$, find $\int_6^2f(x)\,dx$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recall the reversal property</span>$\int_a^bf(x)\,dx=-\int_b^af(x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 2 — Apply it directly, matching a=2, b=6</span>$\int_6^2f(x)\,dx=-\int_2^6f(x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Substitute the known value</span>$\int_6^2f(x)\,dx=-15$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Trapezoidal Rule (Numerical Integration)</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Use the Trapezoidal Rule with $n=4$ to approximate $\int_0^4x^2\,dx$, and compare to the exact value.</p>
+          <div class="step"><span class="step-label">Step 1 — Compute Δx</span>$\Delta x=\dfrac{b-a}n=\dfrac{4-0}4=1$.</div>
+          <div class="step"><span class="step-label">Step 2 — List the x-values (n+1 points, spaced by Δx)</span>$x_0=0,\ x_1=1,\ x_2=2,\ x_3=3,\ x_4=4$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate f(x)=x² at each point</span>$f(0)=0,\ f(1)=1,\ f(2)=4,\ f(3)=9,\ f(4)=16$.</div>
+          <div class="step"><span class="step-label">Step 4 — Apply the Trapezoidal Rule formula, doubling interior points</span>$\int_0^4x^2\,dx\approx\dfrac12\Big[f(0)+2f(1)+2f(2)+2f(3)+f(4)\Big]$.</div>
+          <div class="step"><span class="step-label">Step 5 — Substitute the values</span>$\dfrac12\Big[0+2(1)+2(4)+2(9)+16\Big]=\dfrac12\Big[0+2+8+18+16\Big]=\dfrac12(44)=22$.</div>
+          <div class="step"><span class="step-label">Step 6 — Compare against the exact value using the Fundamental Theorem</span>Exact: $\int_0^4x^2\,dx=\Big[\dfrac{x^3}3\Big]_0^4=\dfrac{64}3\approx21.33$. The trapezoidal approximation (22) is close but slightly overestimates, as expected since trapezoids slightly overshoot a concave-up curve like $x^2$.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 7</span>
+        <table>
+          <tr><td>$\int_a^bf(x)\,dx=\lim_{n\to\infty}\sum f(x_i)\Delta x$</td><td>Riemann sum definition</td></tr>
+          <tr><td>$\int_a^bf(x)\,dx=F(b)-F(a)$</td><td>Fundamental Theorem of Calculus</td></tr>
+          <tr><td>$\int_a^bf\,dx=-\int_b^af\,dx$</td><td>reversal property</td></tr>
+          <tr><td>$\int_a^bf=\int_a^cf+\int_c^bf$</td><td>additivity</td></tr>
+          <tr><td>$f_{avg}=\dfrac1{b-a}\int_a^bf(x)\,dx$</td><td>average value</td></tr>
+          <tr><td>Trapezoidal Rule</td><td>$\frac{\Delta x}2[f(x_0)+2f(x_1)+\dots+f(x_n)]$</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (18)</h3>
+        <div id="ch7-quiz"></div>
+      </div>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch7')">← Chapter 6</button>
+        <button onclick="nextChapter('ch7')">Chapter 8 — Applications of Integration →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 8 ================= -->
+  <div class="page" id="page-ch8">
+    <div class="chapter">
+      <div class="chapter-head">
+        <div class="eyebrow">Chapter 08</div>
+        <h2>Applications of Integration</h2>
+        <p class="desc">The capstone chapter. Everything from Chapters 5–7 gets put to work here — finding areas, volumes of 3D solids, and physical quantities like work and center of mass.</p>
+        <div class="contents-strip">
+          <span>Area under a curve</span><span>Area between curves</span><span>Volumes of solids</span><span>Disk method</span>
+          <span>Washer method</span><span>Shell method</span><span>Arc length</span><span>Surface area</span><span>Physics applications</span>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <span class="tag">Chapter Objectives</span>
+        <ul>
+          <li>Compute the area under a single curve and between two curves using definite integrals.</li>
+          <li>Find the volume of a solid of revolution using the disk method.</li>
+          <li>Find the volume of a solid of revolution with a hole using the washer method.</li>
+          <li>Find the volume of a solid of revolution using the shell method, and know when to prefer it over disks/washers.</li>
+          <li>Compute arc length and surface area of revolution (as extension topics).</li>
+          <li>Apply integration to physics problems: work done by a variable force, and center of mass.</li>
+        </ul>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.1 Area Under a Curve</h3>
+        <p>For $f(x)\ge0$ on $[a,b]$, the area between the curve and the x-axis is simply $\int_a^bf(x)\,dx$ (this is exactly the geometric meaning behind Chapter 7). If $f(x)$ dips below the x-axis anywhere in the interval, that portion contributes negatively to the integral — so for TRUE area (always positive), you must take $\int_a^b|f(x)|\,dx$, which in practice means splitting the interval at any x-intercepts and taking the absolute value of each negative piece.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.2 Area Between Two Curves</h3>
+        <div class="formula-sheet">
+          <span class="tag">Area Between Curves</span>
+          <table>
+            <tr><td>$A=\int_a^b\big[f(x)-g(x)\big]\,dx$</td><td>where $f(x)\ge g(x)$ on $[a,b]$ — always (top curve) minus (bottom curve)</td></tr>
+          </table>
+        </div>
+        <p>Finding the limits $a$ and $b$ usually means first solving $f(x)=g(x)$ to locate the curves' intersection points.</p>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.3–8.5 Volumes of Solids of Revolution</h3>
+        <p>Rotating a 2D region around an axis sweeps out a 3D solid. Three related techniques, chosen based on the shape of the cross-sections perpendicular to the axis:</p>
+        <div class="formula-sheet">
+          <span class="tag">Disk Method</span>
+          <table><tr><td>$V=\pi\int_a^b[f(x)]^2\,dx$</td><td>region bounded by f(x) and the axis of rotation, no gap — solid disk cross-sections</td></tr></table>
+        </div>
+        <div class="formula-sheet">
+          <span class="tag">Washer Method</span>
+          <table><tr><td>$V=\pi\int_a^b\Big([f(x)]^2-[g(x)]^2\Big)\,dx$</td><td>region between two curves rotated — a disk with a hole (washer) cross-section; f = outer radius, g = inner radius</td></tr></table>
+        </div>
+        <div class="formula-sheet">
+          <span class="tag">Shell Method</span>
+          <table><tr><td>$V=2\pi\int_a^bx\cdot f(x)\,dx$</td><td>rotating about a vertical axis when slicing vertically is easier than horizontally — cylindrical shell cross-sections</td></tr></table>
+        </div>
+        <div class="callout trick">
+          <span class="tag">Choosing a Method</span>
+          Disk/washer: slice PERPENDICULAR to the axis of rotation. Shell: slice PARALLEL to the axis of rotation. When solving for the other variable would be messy or impossible, shells usually save you the trouble.
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.6 Arc Length (Optional)</h3>
+        <div class="formula-sheet">
+          <span class="tag">Arc Length</span>
+          <table><tr><td>$L=\int_a^b\sqrt{1+[f'(x)]^2}\,dx$</td><td>length of the curve y=f(x) from x=a to x=b</td></tr></table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.7 Surface Area of Revolution (Optional)</h3>
+        <div class="formula-sheet">
+          <span class="tag">Surface Area</span>
+          <table><tr><td>$S=2\pi\int_a^bf(x)\sqrt{1+[f'(x)]^2}\,dx$</td><td>surface area generated by rotating y=f(x) about the x-axis</td></tr></table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.8 Physics Applications — Work</h3>
+        <p>For a variable force $F(x)$ acting along a straight line, the work done moving an object from $x=a$ to $x=b$ is:</p>
+        <div class="formula-sheet">
+          <span class="tag">Work (Variable Force)</span>
+          <table><tr><td>$W=\int_a^bF(x)\,dx$</td><td>generalizes the constant-force formula W=Fd to a force that changes with position</td></tr></table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3><span class="dot"></span>8.9 Physics Applications — Center of Mass</h3>
+        <p>For a thin rod along the x-axis with linear density $\rho(x)$ (mass per unit length), the total mass and the center of mass are:</p>
+        <div class="formula-sheet">
+          <span class="tag">Center of Mass</span>
+          <table>
+            <tr><td>$M=\int_a^b\rho(x)\,dx$</td><td>total mass</td></tr>
+            <tr><td>$\bar x=\dfrac1M\int_a^bx\,\rho(x)\,dx$</td><td>center of mass — the balance point of the rod</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <h3 style="margin-top:50px;"><span class="dot" style="display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;"></span> Worked Examples — Step by Step</h3>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 1 — Area Under a Curve</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the area under $f(x)=4-x^2$ between $x=-2$ and $x=2$.</p>
+          <div class="step"><span class="step-label">Step 1 — Confirm f(x) ≥ 0 on this interval (so a plain integral gives true area)</span>$f(-2)=0$, $f(0)=4$, $f(2)=0$ — the curve stays at or above the x-axis throughout $[-2,2]$, touching zero only at the endpoints.</div>
+          <div class="step"><span class="step-label">Step 2 — Set up the definite integral</span>$A=\int_{-2}^2(4-x^2)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Find the antiderivative</span>$4x-\dfrac{x^3}3$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate at the upper limit x=2</span>$4(2)-\dfrac{2^3}3=8-\dfrac83=\dfrac{24}3-\dfrac83=\dfrac{16}3$.</div>
+          <div class="step"><span class="step-label">Step 5 — Evaluate at the lower limit x=-2</span>$4(-2)-\dfrac{(-2)^3}3=-8-\dfrac{-8}3=-8+\dfrac83=\dfrac{-24}3+\dfrac83=\dfrac{-16}3$.</div>
+          <div class="step"><span class="step-label">Step 6 — Subtract (upper) − (lower)</span>$\dfrac{16}3-\left(\dfrac{-16}3\right)=\dfrac{32}3$. So the area is $\dfrac{32}3$ square units.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 2 — Area Between Two Curves</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the area between $f(x)=x+2$ and $g(x)=x^2$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find the intersection points by setting f(x)=g(x)</span>$x+2=x^2\Rightarrow x^2-x-2=0$.</div>
+          <div class="step"><span class="step-label">Step 2 — Factor and solve</span>$(x-2)(x+1)=0\Rightarrow x=2$ or $x=-1$. These become the limits of integration.</div>
+          <div class="step"><span class="step-label">Step 3 — Determine which curve is on top between the intersections (test x=0)</span>$f(0)=0+2=2$; $g(0)=0^2=0$. Since $f(0)>g(0)$, $f(x)=x+2$ is the TOP curve on this interval.</div>
+          <div class="step"><span class="step-label">Step 4 — Set up the area integral, top minus bottom</span>$A=\int_{-1}^2\big[(x+2)-x^2\big]\,dx$.</div>
+          <div class="step"><span class="step-label">Step 5 — Find the antiderivative</span>$\dfrac{x^2}2+2x-\dfrac{x^3}3$.</div>
+          <div class="step"><span class="step-label">Step 6 — Evaluate at the upper limit x=2</span>$\dfrac42+4-\dfrac83=2+4-\dfrac83=6-\dfrac83=\dfrac{18}3-\dfrac83=\dfrac{10}3$.</div>
+          <div class="step"><span class="step-label">Step 7 — Evaluate at the lower limit x=-1</span>$\dfrac12-2-\dfrac{-1}3=0.5-2+\dfrac13=-1.5+\dfrac13=-\dfrac32+\dfrac13=-\dfrac96+\dfrac26=-\dfrac76$.</div>
+          <div class="step"><span class="step-label">Step 8 — Subtract (upper) − (lower)</span>$\dfrac{10}3-\left(-\dfrac76\right)=\dfrac{20}6+\dfrac76=\dfrac{27}6=\dfrac92$. The area is $\dfrac92$ square units.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 3 — Disk Method</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the volume of the solid formed by rotating $f(x)=\sqrt x$ about the x-axis, from $x=0$ to $x=4$.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize this fits the disk method (rotating a single curve about the axis it touches)</span>The region between $f(x)=\sqrt x$ and the x-axis, rotated about the x-axis, sweeps out solid disks.</div>
+          <div class="step"><span class="step-label">Step 2 — Set up the disk method formula</span>$V=\pi\int_0^4[f(x)]^2\,dx=\pi\int_0^4(\sqrt x)^2\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Simplify the integrand</span>$(\sqrt x)^2=x$, so $V=\pi\int_0^4x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 4 — Find the antiderivative</span>$\dfrac{x^2}2$.</div>
+          <div class="step"><span class="step-label">Step 5 — Evaluate between the limits</span>$\pi\Big[\dfrac{x^2}2\Big]_0^4=\pi\left(\dfrac{16}2-0\right)=\pi(8)$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final volume</span>$V=8\pi$ cubic units.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 4 — Washer Method</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the volume when the region between $f(x)=x+2$ (outer) and $g(x)=x^2$ (inner), on the interval found in Example 2 ($x=-1$ to $x=2$), is rotated about the x-axis.</p>
+          <div class="step"><span class="step-label">Step 1 — Recognize the washer method applies (region between two curves, rotated)</span>Rotating creates a hole down the middle — a washer, not a solid disk.</div>
+          <div class="step"><span class="step-label">Step 2 — Set up the washer formula, outer radius squared minus inner radius squared</span>$V=\pi\int_{-1}^2\Big[(x+2)^2-(x^2)^2\Big]\,dx$.</div>
+          <div class="step"><span class="step-label">Step 3 — Expand $(x+2)^2$</span>$(x+2)^2=x^2+4x+4$.</div>
+          <div class="step"><span class="step-label">Step 4 — Expand $(x^2)^2$</span>$(x^2)^2=x^4$.</div>
+          <div class="step"><span class="step-label">Step 5 — Write the simplified integrand</span>$V=\pi\int_{-1}^2(x^2+4x+4-x^4)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 6 — Find the antiderivative</span>$\dfrac{x^3}3+2x^2+4x-\dfrac{x^5}5$.</div>
+          <div class="step"><span class="step-label">Step 7 — Evaluate at the upper limit x=2</span>$\dfrac83+2(4)+4(2)-\dfrac{32}5=\dfrac83+8+8-\dfrac{32}5=\dfrac83+16-\dfrac{32}5$. Common denominator 15: $\dfrac{40}{15}+\dfrac{240}{15}-\dfrac{96}{15}=\dfrac{184}{15}$.</div>
+          <div class="step"><span class="step-label">Step 8 — Evaluate at the lower limit x=-1 and subtract, then multiply by π</span>At $x=-1$: $\dfrac{-1}3+2-4-\dfrac{-1}5=-\dfrac13+2-4+\dfrac15$. Common denominator 15: $-\dfrac5{15}+\dfrac{30}{15}-\dfrac{60}{15}+\dfrac3{15}=-\dfrac{32}{15}$. Subtracting: $\dfrac{184}{15}-\left(-\dfrac{32}{15}\right)=\dfrac{216}{15}$. So $V=\pi\cdot\dfrac{216}{15}=\dfrac{216\pi}{15}=\dfrac{72\pi}5$.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 5 — Shell Method</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the volume when the region bounded by $f(x)=x^2$, the x-axis, and $x=2$ is rotated about the y-axis.</p>
+          <div class="step"><span class="step-label">Step 1 — Explain why shells are preferred here over disks/washers</span>Rotating about the y-axis with a curve given as $y=x^2$ would require solving for x in terms of y ($x=\sqrt y$) to use disks — shells let us integrate directly in x instead, avoiding that extra algebra.</div>
+          <div class="step"><span class="step-label">Step 2 — Set up the shell method formula</span>$V=2\pi\int_a^bx\cdot f(x)\,dx$, with $a=0$, $b=2$, $f(x)=x^2$.</div>
+          <div class="step"><span class="step-label">Step 3 — Substitute f(x)</span>$V=2\pi\int_0^2x\cdot x^2\,dx=2\pi\int_0^2x^3\,dx$.</div>
+          <div class="step"><span class="step-label">Step 4 — Find the antiderivative</span>$\dfrac{x^4}4$.</div>
+          <div class="step"><span class="step-label">Step 5 — Evaluate between the limits</span>$2\pi\Big[\dfrac{x^4}4\Big]_0^2=2\pi\left(\dfrac{16}4-0\right)=2\pi(4)$.</div>
+          <div class="step"><span class="step-label">Step 6 — State the final volume</span>$V=8\pi$ cubic units.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 6 — Work Done by a Variable Force</div>
+        <div class="ex-body">
+          <p><b>Q:</b> A spring exerts a restoring force $F(x)=15x$ N when stretched $x$ metres (a form of Hooke's Law). Find the work done stretching it from $x=0$ to $x=0.5$ m.</p>
+          <div class="step"><span class="step-label">Step 1 — Set up the work integral</span>$W=\int_a^bF(x)\,dx=\int_0^{0.5}15x\,dx$.</div>
+          <div class="step"><span class="step-label">Step 2 — Find the antiderivative</span>$15\cdot\dfrac{x^2}2=\dfrac{15x^2}2$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate at the upper limit x=0.5</span>$\dfrac{15(0.5)^2}2=\dfrac{15(0.25)}2=\dfrac{3.75}2=1.875$.</div>
+          <div class="step"><span class="step-label">Step 4 — Evaluate at the lower limit x=0</span>$\dfrac{15(0)^2}2=0$.</div>
+          <div class="step"><span class="step-label">Step 5 — Subtract and state the answer with units</span>$W=1.875-0=1.875\ \text{J}$ (joules, since force is in newtons and distance in metres).</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 7 — Center of Mass of a Rod</div>
+        <div class="ex-body">
+          <p><b>Q:</b> A thin rod lies along $[0,4]$ with linear density $\rho(x)=3x+1$ (kg/m). Find the total mass and the center of mass.</p>
+          <div class="step"><span class="step-label">Step 1 — Set up the total mass integral</span>$M=\int_0^4(3x+1)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 2 — Find the antiderivative</span>$\dfrac{3x^2}2+x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Evaluate between the limits to find M</span>$\Big[\dfrac{3x^2}2+x\Big]_0^4=\left(\dfrac{3(16)}2+4\right)-0=(24+4)=28$. So $M=28$ kg.</div>
+          <div class="step"><span class="step-label">Step 4 — Set up the numerator integral for center of mass</span>$\int_0^4x(3x+1)\,dx=\int_0^4(3x^2+x)\,dx$.</div>
+          <div class="step"><span class="step-label">Step 5 — Find this antiderivative</span>$x^3+\dfrac{x^2}2$.</div>
+          <div class="step"><span class="step-label">Step 6 — Evaluate between the limits</span>$\Big[x^3+\dfrac{x^2}2\Big]_0^4=\left(64+8\right)-0=72$.</div>
+          <div class="step"><span class="step-label">Step 7 — Divide by the total mass M to find the center of mass</span>$\bar x=\dfrac{72}{28}=\dfrac{18}7\approx2.57$ m.</div>
+          <div class="step"><span class="step-label">Step 8 — Sanity-check the answer</span>Since the rod gets denser toward $x=4$ (density increases with x), the balance point being past the geometric midpoint (x=2) makes physical sense.</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="ex-head">Worked Example 8 — Arc Length</div>
+        <div class="ex-body">
+          <p><b>Q:</b> Find the arc length of $f(x)=\dfrac23x^{3/2}$ from $x=0$ to $x=3$.</p>
+          <div class="step"><span class="step-label">Step 1 — Find f′(x)</span>$f'(x)=\dfrac23\cdot\dfrac32x^{1/2}=x^{1/2}=\sqrt x$.</div>
+          <div class="step"><span class="step-label">Step 2 — Square f′(x)</span>$[f'(x)]^2=x$.</div>
+          <div class="step"><span class="step-label">Step 3 — Set up the arc length integral</span>$L=\int_0^3\sqrt{1+x}\,dx$.</div>
+          <div class="step"><span class="step-label">Step 4 — Use substitution: let u=1+x</span>$du=dx$; when $x=0,u=1$; when $x=3,u=4$.</div>
+          <div class="step"><span class="step-label">Step 5 — Rewrite and integrate in terms of u</span>$\int_1^4\sqrt u\,du=\int_1^4u^{1/2}\,du=\Big[\dfrac23u^{3/2}\Big]_1^4$.</div>
+          <div class="step"><span class="step-label">Step 6 — Evaluate at the limits</span>$\dfrac23(4)^{3/2}-\dfrac23(1)^{3/2}=\dfrac23(8)-\dfrac23(1)=\dfrac{16}3-\dfrac23=\dfrac{14}3$.</div>
+          <div class="step"><span class="step-label">Step 7 — State the final arc length</span>$L=\dfrac{14}3$ units.</div>
+        </div>
+      </div>
+
+      <div class="formula-sheet">
+        <span class="tag">Formula Sheet — Chapter 8</span>
+        <table>
+          <tr><td>$A=\int_a^b[f(x)-g(x)]\,dx$</td><td>area between curves (top minus bottom)</td></tr>
+          <tr><td>$V=\pi\int_a^b[f(x)]^2\,dx$</td><td>disk method</td></tr>
+          <tr><td>$V=\pi\int_a^b\big([f]^2-[g]^2\big)\,dx$</td><td>washer method</td></tr>
+          <tr><td>$V=2\pi\int_a^bx\,f(x)\,dx$</td><td>shell method</td></tr>
+          <tr><td>$L=\int_a^b\sqrt{1+[f'(x)]^2}\,dx$</td><td>arc length</td></tr>
+          <tr><td>$W=\int_a^bF(x)\,dx$</td><td>work by a variable force</td></tr>
+          <tr><td>$\bar x=\dfrac1M\int_a^bx\rho(x)\,dx$</td><td>center of mass</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-block">
+        <h3><span class="dot"></span>Practice Questions (20)</h3>
+        <div id="ch8-quiz"></div>
+      </div>
+
+      <section class="block">
+        <h3><span class="dot"></span>End of Course</h3>
+        <p>That's the full arc of MTH 102: from what a function is, through the derivative as instantaneous rate of change, the full differentiation toolkit, curve sketching, integration as the reverse process, the integration toolkit, definite integrals as area, and finally real applications in geometry and physics. Every later course you take — differential equations, multivariable calculus, applied statistics — builds directly on what's in these eight chapters.</p>
+      </section>
+
+      <div class="chapter-nav">
+        <button onclick="prevChapter('ch8')">← Chapter 7</button>
+        <button onclick="go('cover')">Back to Cover ⌂</button>
+      </div>
+    </div>
+  </div>
+
+  <!--CHAPTER_INSERT_POINT-->
+
+  </main>
+</div>
+
+<script>
+const chapters = [
+ {id:'ch1',n:'01',t:"Functions of a Real Variable"},
+ {id:'ch2',n:'02',t:"The Derivative as a Limit"},
+ {id:'ch3',n:'03',t:"Techniques of Differentiation"},
+ {id:'ch4',n:'04',t:"Extreme Curve Sketching"},
+ {id:'ch5',n:'05',t:"Integration as the Inverse of Differentiation"},
+ {id:'ch6',n:'06',t:"Methods of Integration"},
+ {id:'ch7',n:'07',t:"Definite Integration"},
+ {id:'ch8',n:'08',t:"Applications of Integration"}
+];
+function buildTOC(){
+  const p1 = document.getElementById('toc-p1');
+  chapters.forEach((c)=>{
+    const card = document.createElement('div');
+    card.className='toc-card';
+    card.onclick=()=>go(c.id);
+    card.innerHTML = `<span class="n">${c.n}</span><h4>${c.t}</h4>`;
+    p1.appendChild(card);
+  });
+}
+buildTOC();
+
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const navEl = document.querySelector(`.nav-item[data-target="${id}"]`);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+  document.getElementById('sidebar').classList.remove('open');
+}
+function toggleQ(el){
+  const opts = el.nextElementSibling;
+  opts.classList.toggle('open');
+}
+function pick(el, isCorrect){
+  const group = el.parentElement;
+  if(group.dataset.answered) return;
+  group.dataset.answered = "1";
+  group.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  el.classList.add(isCorrect ? 'correct' : 'incorrect');
+  const note = group.querySelector('.ans-note');
+  if(note) note.classList.add('open');
+  if(!isCorrect){
+    const correctEl = group.querySelector('.opt[data-correct="1"]');
+    if(correctEl) correctEl.classList.add('correct');
+  }
+}
+function nextChapter(curr){
+  const idx = chapters.findIndex(c=>c.id===curr);
+  if(idx<chapters.length-1) go(chapters[idx+1].id);
+}
+function prevChapter(curr){
+  const idx = chapters.findIndex(c=>c.id===curr);
+  if(idx>0) go(chapters[idx-1].id); else go('cover');
+}
+function renderQuiz(containerId, data){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  let html = '';
+  data.forEach((item,i)=>{
+    html += `<div class="q"><div class="q-text" onclick="toggleQ(this)"><span class="qn">Q${i+1}.</span><span>${item.q}</span></div><div class="q-options" data-answered="">`;
+    item.options.forEach((opt,j)=>{
+      html += `<div class="opt" data-correct="${j===item.correct?1:0}" onclick="pick(this, ${j===item.correct})">${opt}</div>`;
+    });
+    html += `<div class="ans-note">${item.note||''}</div></div></div>`;
+  });
+  el.innerHTML = html;
+}
+const Q1 = [
+{q:"A function assigns to every input:", options:["Exactly one output","At least two outputs","No output","A random output"], correct:0, note:"That's the defining property of a function — one input, one output."},
+{q:"Which test determines if a graph represents a function?", options:["Horizontal line test","Vertical line test","Origin test","Slope test"], correct:1, note:"If a vertical line crosses the graph more than once, it's not a function."},
+{q:"The interval [2,5) includes:", options:["2 but not 5","5 but not 2","Both 2 and 5","Neither 2 nor 5"], correct:0, note:"Square bracket = included, round bracket = excluded. [2,5): 2 included, 5 excluded."},
+{q:"The domain of f(x) = 1/(x-3) is:", options:["All real numbers","All real numbers except 3","All real numbers except 0","Only x > 3"], correct:1, note:"Denominator can't be zero, so x ≠ 3."},
+{q:"The domain of f(x) = √(x-2) is:", options:["x ≥ 2","x ≤ 2","x > 2 only","All real numbers"], correct:0, note:"Expression under the root must be ≥ 0: x−2≥0 → x≥2."},
+{q:"An even function satisfies:", options:["f(-x) = f(x)","f(-x) = -f(x)","f(x) = 0","f(-x) = 1/f(x)"], correct:0, note:"Even functions are symmetric about the y-axis."},
+{q:"An odd function satisfies:", options:["f(-x) = f(x)","f(-x) = -f(x)","f(x) = x","f(-x) = 0"], correct:1, note:"Odd functions are symmetric about the origin."},
+{q:"f(x) = 2x² - 5x + 3 is an example of a:", options:["Linear function","Quadratic function","Rational function","Root function"], correct:1, note:"General quadratic form ax²+bx+c."},
+{q:"(f∘g)(x) means:", options:["f(x)·g(x)","f(x)+g(x)","f(g(x))","g(f(x))"], correct:2, note:"Composition applies g first, then f, to the result."},
+{q:"If f(x)=x+1 and g(x)=x², then (f∘g)(2) equals:", options:["3","5","9","4"], correct:1, note:"g(2)=4, then f(4)=4+1=5."},
+{q:"An inverse function f⁻¹ exists only if f is:", options:["Even","Odd","One-to-one","Quadratic"], correct:2, note:"One-to-one functions pass the horizontal line test, guaranteeing a valid inverse."},
+{q:"The standard method to find an inverse is:", options:["Differentiate f(x)","Swap x and y in y=f(x), then solve for y","Square both sides","Set f(x) = 0"], correct:1, note:"Swap x,y then solve for the new y — that's f⁻¹(x)."},
+{q:"f(x+3) compared to f(x) represents a shift:", options:["Right by 3","Left by 3","Up by 3","Down by 3"], correct:1, note:"f(x+k) shifts LEFT by k."},
+{q:"f(x) - 4 compared to f(x) represents a shift:", options:["Up by 4","Down by 4","Left by 4","Right by 4"], correct:1, note:"Subtracting outside the function shifts the graph DOWN."},
+{q:"-f(x) compared to f(x) represents:", options:["A reflection over the x-axis","A reflection over the y-axis","A vertical stretch","No change"], correct:0, note:"Negating the output flips the graph over the x-axis."},
+{q:"f(-x) compared to f(x) represents:", options:["A reflection over the x-axis","A reflection over the y-axis","A horizontal shift","A vertical shift"], correct:1, note:"Negating the input flips the graph over the y-axis."},
+{q:"If f(x) = √(2x+6), what is the domain?", options:["x ≥ -3","x ≤ -3","x ≥ 3","All real numbers"], correct:0, note:"2x+6≥0 → x≥-3."},
+{q:"A piecewise function is one that:", options:["Has no domain","Uses different formulas on different intervals","Is always linear","Cannot be graphed"], correct:1, note:"Piecewise functions switch rules depending on which interval x falls into."}
+];
+renderQuiz('ch1-quiz', Q1);
+const Q2 = [
+{q:"lim(x→a) f(x) describes:", options:["The value f(a) always","The value f(x) approaches as x gets close to a","The derivative of f at a","The area under f"], correct:1, note:"A limit describes approach behavior, not necessarily the actual value at a."},
+{q:"If direct substitution gives 0/0, this result is called:", options:["The final answer","An indeterminate form, requiring another technique","Proof the limit doesn't exist","A continuity violation"], correct:1, note:"0/0 signals you need to factor, rationalize, or use another method."},
+{q:"lim(x→2) (x²-4)/(x-2) equals:", options:["0","2","4","Undefined"], correct:2, note:"Factor to (x-2)(x+2)/(x-2), cancel, substitute: 2+2=4."},
+{q:"For a function to be continuous at x=a, which condition is NOT required?", options:["f(a) is defined","The limit as x→a exists","The limit equals f(a)","f'(a) exists"], correct:3, note:"Continuity doesn't require differentiability — only the three limit/value conditions."},
+{q:"The formal (limit) definition of the derivative is:", options:["f'(x) = lim(h→0) [f(x+h)-f(x)]/h","f'(x) = f(x+h) - f(x)","f'(x) = lim(x→0) f(x)/x","f'(x) = f(x)/x"], correct:0, note:"This is the difference quotient's limit as h→0."},
+{q:"The difference quotient computes:", options:["The derivative directly","The average rate of change between two points (slope of secant line)","The area under a curve","The domain of a function"], correct:1, note:"Before taking the limit, it's the slope of a secant line."},
+{q:"As h→0 in the difference quotient, the secant line becomes:", options:["A vertical line","The tangent line","A horizontal line","Undefined"], correct:1, note:"The two points merge, and the secant's slope becomes the tangent's slope."},
+{q:"The derivative f'(x) represents:", options:["The area under f(x)","The instantaneous rate of change of f at x","The average value of f","The domain of f"], correct:1, note:"This is the core interpretation of the derivative."},
+{q:"The equation of a tangent line uses which form?", options:["Slope-intercept only","Point-slope: y - f(a) = f'(a)(x-a)","Standard form only","Quadratic form"], correct:1, note:"Point-slope form directly uses the point (a, f(a)) and slope f'(a)."},
+{q:"If s(t) is position, then velocity v(t) is:", options:["s(t) itself","s'(t)","s''(t)","1/s(t)"], correct:1, note:"Velocity is the first derivative of position."},
+{q:"Acceleration a(t) is related to position s(t) by:", options:["a(t) = s(t)","a(t) = s'(t)","a(t) = s''(t)","a(t) = 1/s(t)"], correct:2, note:"Acceleration is the second derivative of position (derivative of velocity)."},
+{q:"lim(x→3)(x²-2x-3) equals:", options:["0","3","6","9"], correct:0, note:"Direct substitution (polynomial, continuous everywhere): 9-6-3=0."},
+{q:"lim(x→∞) (5x²+3x)/x behaves as:", options:["Approaches 0","Approaches 5","Approaches 3","Diverges (grows without bound)"], correct:3, note:"Simplifies to 5x+3, which grows without bound as x→∞."},
+{q:"A removable discontinuity looks like:", options:["A vertical asymptote","A jump between two pieces","A single 'hole' in the graph","A horizontal asymptote"], correct:2, note:"When the limit exists but doesn't match f(a), you get a hole, not a break or asymptote."},
+{q:"Which technique is used when direct substitution on a square root expression gives 0/0?", options:["Factoring only","Rationalizing (multiply by the conjugate)","Ignoring the square root","Taking the derivative"], correct:1, note:"Rationalizing clears the square root, often revealing a cancelable factor."},
+{q:"For f(x)=x²+3x, using first principles gives f'(x) equal to:", options:["x²+3","2x+3","2x","3x"], correct:1, note:"Worked in Example 6: f'(x) = 2x+3."},
+{q:"A jump discontinuity occurs when:", options:["The left-hand and right-hand limits are equal","The left-hand and right-hand limits differ","f(a) is undefined only","The function is a polynomial"], correct:1, note:"Mismatched one-sided limits mean the overall two-sided limit doesn't exist — a jump."},
+{q:"Polynomials are continuous:", options:["Only at x=0","Nowhere","Everywhere on their domain (all real numbers)","Only for positive x"], correct:2, note:"Polynomials have no denominators, roots, or breaks — continuous everywhere."},
+{q:"If f'(a) = 0 at a point, the tangent line there is:", options:["Vertical","Horizontal","Undefined","Always y=x"], correct:1, note:"Zero slope means a horizontal tangent line."},
+{q:"A particle has velocity v(t)=0 and acceleration a(t)=0 at the same instant. This most likely means:", options:["The particle is accelerating rapidly","The particle is momentarily at rest with no changing velocity at that instant","The position function is undefined","The particle has infinite speed"], correct:1, note:"Both derivatives being zero simultaneously indicates a very still instant in the motion."}
+];
+renderQuiz('ch2-quiz', Q2);
+const Q3 = [
+{q:"The derivative of a constant is:", options:["1","The constant itself","0","Undefined"], correct:2, note:"Constants never change, so their rate of change is zero."},
+{q:"The power rule states d/dx[xⁿ] equals:", options:["nx^(n-1)","x^(n-1)","nx^n","x^(n+1)"], correct:0, note:"Bring the exponent down, reduce it by 1."},
+{q:"d/dx[5x³] equals:", options:["5x²","15x²","15x³","5x⁴"], correct:1, note:"Constant multiple: 3×5=15, exponent 3-1=2: 15x²."},
+{q:"The product rule formula is:", options:["u'v'","u'v + uv'","u'v - uv'","uv"], correct:1, note:"Two terms added, each with one factor differentiated."},
+{q:"The quotient rule formula is:", options:["u'v + uv'","(u'v - uv')/v²","(uv' - u'v)/v²","u'/v'"], correct:1, note:"'Low d-high minus high d-low, over low squared.'"},
+{q:"The chain rule is used when differentiating:", options:["A sum of two functions","A composite function (function inside a function)","A single power term","A constant"], correct:1, note:"Composite functions like (3x+1)^5 require the chain rule."},
+{q:"The chain rule formula is:", options:["f'(x)·g'(x)","f'(g(x))·g'(x)","f(g'(x))","f'(x)+g'(x)"], correct:1, note:"Derivative of the outside (at the inside), times derivative of the inside."},
+{q:"Implicit differentiation is used when:", options:["y is explicitly solved for x","The equation relates x and y without y isolated","There are no variables","Only constants are present"], correct:1, note:"Equations like x²+y²=25 need implicit differentiation since y isn't isolated."},
+{q:"In implicit differentiation, differentiating a y² term gives:", options:["2y","2y·dy/dx","y²","2x"], correct:1, note:"Chain rule applies since y is a function of x: power rule times dy/dx."},
+{q:"Logarithmic differentiation is especially useful for:", options:["Simple polynomials","Functions with variable exponents like x^x","Constant functions","Linear functions only"], correct:1, note:"Neither power rule nor exponential rule alone handles a variable base AND exponent."},
+{q:"The second derivative is found by:", options:["Integrating f(x) twice","Differentiating f(x) once","Differentiating f'(x) again","Squaring f(x)"], correct:2, note:"f''(x) is the derivative of the derivative."},
+{q:"d/dx[(4x³-5x)⁶] requires which rule primarily?", options:["Product rule only","Quotient rule only","Chain rule","Constant rule only"], correct:2, note:"This is a composite function — power of an inner expression — chain rule applies."},
+{q:"For f(x)=(3x²+1)(2x-5), using the product rule, u' equals:", options:["6x","2x-5","2","3x²+1"], correct:0, note:"u=3x²+1, so u'=6x by the power rule."},
+{q:"d/dx[x²+1)/(3x-2)] uses which rule?", options:["Product rule","Quotient rule","Chain rule only","Constant rule"], correct:1, note:"A ratio of two functions requires the quotient rule."},
+{q:"A common mistake in the product rule is:", options:["Adding the two terms","Multiplying u' and v' directly instead of using u'v+uv'","Using the power rule on u","Using the chain rule on v"], correct:1, note:"The product rule is NOT u'v' — it's the sum u'v+uv'."},
+{q:"For x²+y²=25, differentiating implicitly and solving for dy/dx gives:", options:["dy/dx = x/y","dy/dx = -x/y","dy/dx = y/x","dy/dx = -y/x"], correct:1, note:"2x+2y(dy/dx)=0 → dy/dx = -x/y."},
+{q:"To differentiate y=x^x, the first step in logarithmic differentiation is:", options:["Differentiate directly using the power rule","Take the natural log of both sides","Take the square root of both sides","Set y=0"], correct:1, note:"ln y = x ln x turns the tricky exponent into a product, solvable with product+chain rules."},
+{q:"d/dx[8x³-27x²+6] (the second derivative step) gives:", options:["24x²-54x","24x²-27x","8x²-54x","24x-54"], correct:0, note:"Differentiate term by term: 24x² - 54x + 0."},
+{q:"Which rule combination is needed for f(x)=x²(3x-1)⁴?", options:["Only the power rule","Product rule combined with chain rule","Only the quotient rule","Only implicit differentiation"], correct:1, note:"It's a product of x² and a composite function (3x-1)⁴, requiring both rules together."},
+{q:"d/dx[7] equals:", options:["7","1","0","x"], correct:2, note:"Constant rule: derivative of any constant is 0."},
+{q:"The notation f''(x) refers to:", options:["The first derivative","The second derivative","The inverse function","The original function squared"], correct:1, note:"Two prime marks indicate the second derivative."},
+{q:"In the quotient rule, the denominator of the result is:", options:["v","v²","u²","uv"], correct:1, note:"Always v squared in the quotient rule."},
+{q:"d/dx[6] where 6 is a standalone constant term equals:", options:["6","1","0","6x"], correct:2, note:"Constant rule again — always zero for a bare constant."},
+{q:"Given f(x)=4x⁵-3x³+7x-9, what is f'(x)?", options:["20x⁴-9x²+7","20x⁴-9x²-9","5x⁴-3x²+7","20x⁴-3x²+7"], correct:0, note:"Power rule term by term: 20x⁴-9x²+7 (constant -9 drops to 0)."}
+];
+renderQuiz('ch3-quiz', Q3);
+const Q4 = [
+{q:"A critical point occurs where:", options:["f(x)=0","f'(x)=0 or is undefined","f''(x)=0 only","f(x) is undefined only"], correct:1, note:"Critical points are candidates for local extrema — where the derivative vanishes or doesn't exist."},
+{q:"If f'(x) > 0 on an interval, f is:", options:["Decreasing","Increasing","Constant","Undefined"], correct:1, note:"Positive derivative means the function is rising."},
+{q:"If f'(x) < 0 on an interval, f is:", options:["Increasing","Decreasing","Constant","Undefined"], correct:1, note:"Negative derivative means the function is falling."},
+{q:"The first derivative test classifies a critical point as a local max when f':", options:["Changes from − to +","Changes from + to −","Stays positive","Stays zero"], correct:1, note:"Increasing then decreasing (+ to −) means a peak — local max."},
+{q:"The first derivative test classifies a critical point as a local min when f':", options:["Changes from + to −","Changes from − to +","Stays negative","Never changes"], correct:1, note:"Decreasing then increasing (− to +) means a valley — local min."},
+{q:"If f''(x) > 0, the function is:", options:["Concave down","Concave up","Linear","Undefined"], correct:1, note:"Positive second derivative means cup-shaped, concave up."},
+{q:"If f''(x) < 0, the function is:", options:["Concave up","Concave down","Linear","Constant"], correct:1, note:"Negative second derivative means cap-shaped, concave down."},
+{q:"An inflection point occurs where:", options:["f'(x)=0 only","Concavity actually changes sign","f(x)=0","The function is undefined"], correct:1, note:"A genuine switch in concavity direction defines an inflection point."},
+{q:"In the second derivative test, if f''(c) < 0 at a critical point c, this indicates:", options:["A local minimum","A local maximum","An inflection point","No conclusion possible"], correct:1, note:"Concave down at a critical point means it's a peak — local max."},
+{q:"In the second derivative test, if f''(c) = 0, the test is:", options:["Conclusive: always a max","Conclusive: always a min","Inconclusive — use the first derivative test instead","Proof there's no critical point"], correct:2, note:"A zero second derivative doesn't tell you the type — fall back to the first derivative test."},
+{q:"A vertical asymptote of a rational function typically occurs where:", options:["The numerator is zero","The denominator is zero (and numerator isn't also zero there)","Both numerator and denominator are zero","Neither is ever zero"], correct:1, note:"Denominator zero with nonzero numerator creates a vertical asymptote."},
+{q:"For f(x)=x³-3x²-9x+5, the critical points are:", options:["x=1, x=2","x=-1, x=3","x=0, x=3","x=-3, x=1"], correct:1, note:"From Example 1: f'(x)=3(x-3)(x+1)=0 → x=3 or x=-1."},
+{q:"For the same function, the local maximum occurs at:", options:["x=3","x=-1","x=1","x=0"], correct:1, note:"f' changes + to − at x=-1, giving a local max there."},
+{q:"For the same function, the local minimum occurs at:", options:["x=-1","x=3","x=1","x=0"], correct:1, note:"f' changes − to + at x=3, giving a local min there."},
+{q:"The inflection point of f(x)=x³-3x²-9x+5 is at:", options:["x=-1","x=3","x=1","x=0"], correct:2, note:"f''(x)=6x-6=0 → x=1, and concavity genuinely switches there."},
+{q:"For f(x)=2x²/(x²-4), the vertical asymptotes are at:", options:["x=0","x=±2","x=±4","x=2 only"], correct:1, note:"Denominator x²-4=0 → x=±2, numerator nonzero there."},
+{q:"For the same function, comparing equal degrees in numerator and denominator, the horizontal asymptote is:", options:["y=0","y=1","y=2","y=4"], correct:2, note:"Ratio of leading coefficients: 2/1 = 2."},
+{q:"In an optimization problem, the first step is usually to:", options:["Immediately differentiate any random formula","Define variables and write an equation for the quantity to optimize, using the constraint","Guess the answer","Skip straight to the second derivative test"], correct:1, note:"Setting up the correct single-variable function is the essential first step."},
+{q:"In the fencing optimization example (200m, 3 sides), the maximizing width x was:", options:["25 m","50 m","100 m","200 m"], correct:1, note:"A'(x)=200-4x=0 → x=50."},
+{q:"In the same fencing problem, the maximum enclosed area was:", options:["2500 m²","5000 m²","10000 m²","20000 m²"], correct:1, note:"A = xy = 50 × 100 = 5000 m²."},
+{q:"In the box-folding optimization example (12cm sheet), why was x=6 rejected?", options:["It gave a negative volume","It made the base side length zero, not a valid box","It made the height negative","It wasn't a critical point"], correct:1, note:"12-2(6)=0 — the base would have zero area, physically invalid."},
+{q:"The complete curve sketching checklist includes finding intercepts, critical points, concavity, and:", options:["Only the y-intercept","Domain and asymptotes","Only the second derivative","Random sample points with no structure"], correct:1, note:"Domain and asymptotes are essential parts of a complete, accurate sketch."}
+];
+renderQuiz('ch4-quiz', Q4);
+const Q5 = [
+{q:"An antiderivative of f(x) is a function F(x) such that:", options:["F(x) = f(x)","F'(x) = f(x)","F''(x) = f(x)","f(x) = 0"], correct:1, note:"F is an antiderivative of f if differentiating F gives back f."},
+{q:"The indefinite integral ∫f(x)dx represents:", options:["A single specific antiderivative","The entire family of antiderivatives of f","The derivative of f","The domain of f"], correct:1, note:"The +C accounts for the whole family, not just one member."},
+{q:"The power rule for integration states ∫xⁿdx equals:", options:["nx^(n-1)+C","x^(n+1)/(n+1)+C","x^n/n+C","nx^n+C"], correct:1, note:"Increase the exponent by 1, then divide by the new exponent."},
+{q:"Why must every indefinite integral include '+C'?", options:["It's just a formatting convention with no real meaning","Because constants vanish under differentiation, so infinitely many antiderivatives exist","Because C always equals zero","Because integration requires a variable named C"], correct:1, note:"Any two antiderivatives of the same function differ only by a constant."},
+{q:"∫x⁴dx equals:", options:["x⁵/5 + C","x³/3 + C","5x⁵+C","x⁵+C"], correct:0, note:"Power rule: exponent 4→5, divide by 5."},
+{q:"∫5dx equals:", options:["5+C","5x+C","x+C","0+C"], correct:1, note:"Integral of a constant c is cx+C."},
+{q:"The best way to verify an integration result is to:", options:["Integrate it again","Differentiate the answer and check it matches the original integrand","Guess","Set it equal to zero"], correct:1, note:"Differentiation undoes integration — a direct verification method."},
+{q:"∫(6x³-4x+5)dx equals:", options:["3x⁴/2 - 2x² + 5x + C","6x⁴-4x²+5x+C","3x⁴-2x²+5+C","x⁴/2-2x²+5x+C"], correct:0, note:"Term by term power rule: 6x³→3x⁴/2, -4x→-2x², 5→5x."},
+{q:"When integrating a product like (2x-3)(x+4), the correct approach is to:", options:["Use a product rule for integrals directly","Expand the product first, then integrate term by term","Integrate each factor separately and multiply results","Ignore one of the factors"], correct:1, note:"There's no simple product rule for integration — expand first."},
+{q:"3/x² rewritten with exponent notation for integration is:", options:["3x²","3x⁻²","-3x²","3x⁻¹"], correct:1, note:"1/x² = x⁻², so 3/x² = 3x⁻²."},
+{q:"∫3x⁻²dx equals:", options:["-3/x + C","3/x + C","-3x⁻¹+C is wrong; correct is -3/x + C","6x⁻³+C"], correct:0, note:"Power rule: exponent -2→-1, divide by -1: -3x⁻¹ = -3/x."},
+{q:"A 'particular' antiderivative (as opposed to the general one) is found by:", options:["Ignoring +C entirely","Using a given initial condition to solve for the specific value of C","Always setting C=0","Differentiating twice"], correct:1, note:"An initial condition like F(1)=5 pins down the exact value of C."},
+{q:"If F'(x)=3x²-4x and F(1)=5, then C equals:", options:["5","6","-1","1"], correct:1, note:"F(x)=x³-2x²+C; F(1)=-1+C=5 → C=6."},
+{q:"∫2√x dx, rewriting √x as x^(1/2), gives an exponent after integration of:", options:["1/2","3/2","-1/2","2"], correct:1, note:"Power rule increases the exponent by 1: 1/2+1=3/2."},
+{q:"When a fraction like (6x³-4x²+2x)/(2x) appears in an integral, the best first step is:", options:["Integrate the numerator and denominator separately then divide results","Divide each term of the numerator by the denominator to simplify first","Ignore the denominator","Multiply through by 2x"], correct:1, note:"Simplifying algebraically before integrating avoids unnecessary complexity."},
+{q:"∫(4x³-6x)dx equals:", options:["x⁴-3x²+C","4x⁴-6x²+C","x⁴-6x²+C","x³-3x+C"], correct:0, note:"Power rule term by term: 4x³→x⁴, -6x→-3x²."}
+];
+renderQuiz('ch5-quiz', Q5);
+const Q6 = [
+{q:"Substitution is the integration counterpart of which differentiation rule?", options:["Product rule","Chain rule","Quotient rule","Constant rule"], correct:1, note:"Substitution reverses the chain rule."},
+{q:"In substitution, after choosing u=g(x), the next step is to find:", options:["u itself again","du = g'(x)dx","The integral immediately","f(u)"], correct:1, note:"Differentiating u gives the du needed to rewrite dx in terms of u."},
+{q:"Integration by parts is the counterpart of which differentiation rule?", options:["Chain rule","Product rule","Power rule","Quotient rule"], correct:1, note:"∫u dv = uv − ∫v du mirrors the product rule."},
+{q:"The LIATE guideline helps you choose:", options:["Which variable to integrate with respect to","Which factor to call u in integration by parts","The value of the constant C","Whether to use substitution"], correct:1, note:"LIATE ranks function types to prioritize as u."},
+{q:"In LIATE, which type has the highest priority for u?", options:["Exponential","Trigonometric","Logarithmic","Algebraic"], correct:2, note:"L comes first: Logarithmic, Inverse trig, Algebraic, Trig, Exponential."},
+{q:"Partial fractions are used to integrate:", options:["Any polynomial","Rational functions whose denominator factors into simpler pieces","Trigonometric functions only","Exponential functions only"], correct:1, note:"Splitting a complex fraction into simpler ones makes each piece easy to integrate."},
+{q:"∫sin x dx equals:", options:["cos x + C","-cos x + C","sin x + C","-sin x + C"], correct:1, note:"The antiderivative of sin x is -cos x."},
+{q:"∫cos x dx equals:", options:["-sin x + C","sin x + C","-cos x + C","cos x + C"], correct:1, note:"The antiderivative of cos x is sin x."},
+{q:"∫sec²x dx equals:", options:["sec x + C","tan x + C","cot x + C","-tan x + C"], correct:1, note:"This is a standard trig integral: derivative of tan x is sec²x."},
+{q:"For an integral containing √(a²-x²), the recommended substitution is:", options:["x = a tanθ","x = a secθ","x = a sinθ","x = a cosθ"], correct:2, note:"x = a sinθ makes a²-x² simplify via the Pythagorean identity to a²cos²θ."},
+{q:"For √(a²+x²), the recommended trig substitution is:", options:["x = a sinθ","x = a tanθ","x = a secθ","x = a cotθ"], correct:1, note:"x = a tanθ simplifies a²+x² to a²sec²θ."},
+{q:"A reduction formula is useful when:", options:["The integral has only constants","The integral involves a repeated pattern that can step down to a simpler case","There's no way to integrate at all","Only for definite integrals"], correct:1, note:"Reduction formulas express a complex power integral in terms of a lower power, repeatable to a known base case."},
+{q:"∫2x(x²+3)⁵dx using substitution u=x²+3 simplifies to:", options:["∫u⁵du","∫2u⁵du","∫u⁵/2 du","∫u⁶du"], correct:0, note:"du=2x dx exactly matches the 2x dx already present, giving a clean ∫u⁵du."},
+{q:"∫x(x²+1)⁴dx requires an adjustment factor of:", options:["2","1/2","4","1/4"], correct:1, note:"du=2x dx, but integral only has x dx, so x dx = du/2, introducing a factor of 1/2."},
+{q:"∫xe^x dx, using integration by parts with u=x, dv=e^x dx, equals:", options:["xe^x + e^x + C","xe^x - e^x + C","x²e^x/2 + C","e^x + C"], correct:1, note:"∫xe^x dx = xe^x − ∫e^x dx = xe^x − e^x + C."},
+{q:"∫ln x dx equals:", options:["x ln x + C","x ln x - x + C","ln x - x + C","1/x + C"], correct:1, note:"Using u=ln x, dv=dx: x ln x − ∫x·(1/x)dx = x ln x − x + C."},
+{q:"To integrate sin²x, the standard technique is to:", options:["Integrate directly with the power rule","Use the identity sin²x = (1-cos2x)/2 first","Use partial fractions","Use trig substitution"], correct:1, note:"The half-angle identity converts sin²x into an easily integrable form."},
+{q:"∫dx/√(9-x²), using x=3sinθ, simplifies after substitution to:", options:["∫3dθ","∫1dθ","∫cosθ dθ","∫sinθ dθ"], correct:1, note:"The 3cosθ terms in numerator and denominator cancel exactly, leaving ∫1dθ."},
+{q:"The final answer for ∫dx/√(9-x²) is:", options:["sin⁻¹(x/3) + C","cos⁻¹(x/3) + C","tan⁻¹(x/3) + C","3sin⁻¹(x) + C"], correct:0, note:"θ = sin⁻¹(x/3) after converting back from the substitution."},
+{q:"For ∫(5x-1)/[(x-1)(x+2)]dx using partial fractions, substituting x=1 into 5x-1=A(x+2)+B(x-1) gives:", options:["A=4/3","B=4/3","A=11/3","B=-11/3"], correct:0, note:"At x=1: 4=3A → A=4/3 (the B term vanishes since x-1=0)."},
+{q:"When integrating x²ln x using integration by parts, the correct choice for dv is:", options:["ln x dx","x² dx","1 dx","x dx"], correct:1, note:"u=ln x (Logarithmic priority in LIATE), so dv is what's left: x²dx."},
+{q:"Which method is generally used FIRST when facing an unfamiliar integral?", options:["Trigonometric substitution always","Check if a simple substitution (chain rule reversal) applies","Partial fractions always","Reduction formulas always"], correct:1, note:"Substitution is usually the fastest check before reaching for more specialized techniques."}
+];
+renderQuiz('ch6-quiz', Q6);
+const Q7 = [
+{q:"A Riemann sum approximates area using:", options:["Circles","Rectangles (or trapezoids)","Triangles only","Points with no width"], correct:1, note:"Riemann sums slice the region into thin rectangles and add their areas."},
+{q:"As n → ∞ in a Riemann sum, the approximation becomes:", options:["Less accurate","Exactly equal to the definite integral","Undefined","Always zero"], correct:1, note:"The definite integral IS defined as this limit."},
+{q:"The Fundamental Theorem of Calculus states ∫ₐᵇf(x)dx equals:", options:["F(a) - F(b)","F(b) - F(a)","F(a) + F(b)","F(b)/F(a)"], correct:1, note:"Evaluate the antiderivative at the upper limit minus the lower limit."},
+{q:"When evaluating a definite integral, the constant of integration C:", options:["Must always be included","Cancels out and can be omitted","Equals the answer","Is always negative"], correct:1, note:"C appears in both F(b)+C and F(a)+C, and cancels in the subtraction."},
+{q:"∫ₐᵃ f(x)dx (same upper and lower limit) equals:", options:["Undefined","1","0","Infinity"], correct:2, note:"A zero-width interval encloses zero area."},
+{q:"Reversing the limits of a definite integral:", options:["Doubles the value","Has no effect","Flips the sign of the result","Makes it undefined"], correct:2, note:"∫ₐᵇf = -∫ᵦᵃf."},
+{q:"The additivity property states ∫ₐᵇf = ∫ₐᶜf + ", options:["∫ᶜᵇf","∫ᵇᶜf","-∫ᶜᵇf","∫ₐᵃf"], correct:0, note:"Splitting the interval at c: ∫ₐᶜf + ∫ᶜᵇf = ∫ₐᵇf."},
+{q:"The average value formula is:", options:["∫ₐᵇf(x)dx","(b-a)∫ₐᵇf(x)dx","(1/(b-a))∫ₐᵇf(x)dx","f(b)-f(a)"], correct:2, note:"Average value = integral divided by the width of the interval."},
+{q:"∫₁³(2x+1)dx equals:", options:["8","10","12","6"], correct:1, note:"Antiderivative x²+x; [9+3]-[1+1]=12-2=10."},
+{q:"When substitution is used in a DEFINITE integral, the most efficient approach is to:", options:["Always convert back to x before evaluating","Convert the limits of integration to u-values, then evaluate directly in u","Ignore the limits entirely","Skip substitution for definite integrals"], correct:1, note:"Converting the bounds to u avoids the extra step of substituting back to x."},
+{q:"∫₀²x(x²+1)³dx, converting limits to u=x²+1, gives new limits of:", options:["0 to 2","1 to 5","0 to 5","1 to 4"], correct:1, note:"At x=0, u=1; at x=2, u=5."},
+{q:"The Trapezoidal Rule improves on basic rectangles by using:", options:["Circles","Triangles","Trapezoids to better hug the curve","Random shapes"], correct:2, note:"Trapezoids account for the slope of the curve within each strip, unlike flat-topped rectangles."},
+{q:"The Trapezoidal Rule is used when:", options:["Any integral can be solved exactly with antiderivatives","A function has no elementary antiderivative, requiring approximation","The interval has zero width","Only for indefinite integrals"], correct:1, note:"Numerical methods are a fallback when the Fundamental Theorem can't be applied directly."},
+{q:"In the Trapezoidal Rule formula, interior points are:", options:["Ignored","Counted once","Doubled (coefficient of 2)","Tripled"], correct:2, note:"Interior points get a coefficient of 2, endpoints get coefficient 1."},
+{q:"Given ∫₀⁵f(x)dx=20 and ∫₀³f(x)dx=8, then ∫₃⁵f(x)dx equals:", options:["28","12","8","20"], correct:1, note:"20 = 8 + ∫₃⁵f(x)dx → ∫₃⁵f(x)dx = 12."},
+{q:"The average value of f(x)=x² on [1,4] equals:", options:["7","21","3","63"], correct:0, note:"∫₁⁴x²dx=21, divided by (4-1)=3, gives 7."},
+{q:"∫₀¹xe^x dx equals:", options:["0","1","e","e-1"], correct:1, note:"[xe^x - e^x] from 0 to 1: (e-e) - (0-1) = 0-(-1) = 1."},
+{q:"If ∫₂⁶f(x)dx = 15, then ∫₆²f(x)dx equals:", options:["15","-15","0","30"], correct:1, note:"Reversal property: swapping limits flips the sign."}
+];
+renderQuiz('ch7-quiz', Q7);
+const Q8 = [
+{q:"The area under a curve f(x)≥0 from a to b is given by:", options:["f(b)-f(a)","∫ₐᵇf(x)dx","f'(x)","∫ₐᵇf'(x)dx"], correct:1, note:"This is the direct geometric meaning of the definite integral."},
+{q:"The area between two curves f(x) and g(x), where f≥g, is:", options:["∫[f(x)+g(x)]dx","∫[f(x)-g(x)]dx","∫[g(x)-f(x)]dx","f(x)·g(x)"], correct:1, note:"Always top curve minus bottom curve."},
+{q:"To find the limits of integration for area between two curves, you typically:", options:["Guess reasonable values","Solve f(x)=g(x) to find intersection points","Use x=0 and x=1 always","Differentiate both functions"], correct:1, note:"Intersection points mark where the region begins and ends."},
+{q:"The disk method formula for volume is:", options:["V=π∫[f(x)]²dx","V=2π∫x f(x)dx","V=∫f(x)dx","V=π∫f(x)dx"], correct:0, note:"Volume from solid circular cross-sections, radius f(x)."},
+{q:"The washer method is used when:", options:["Rotating a single curve with no gap","Rotating the region between two curves, creating a hole","Only for arc length","Only for surface area"], correct:1, note:"A washer has an inner and outer radius, unlike a solid disk."},
+{q:"The shell method formula is:", options:["V=π∫[f(x)]²dx","V=2π∫x f(x)dx","V=∫√(1+[f'(x)]²)dx","V=πr²h"], correct:1, note:"Cylindrical shell volumes, integrated parallel to the axis of rotation."},
+{q:"Disk/washer methods slice ___ to the axis of rotation, while shells slice ___ to it.", options:["Parallel; perpendicular","Perpendicular; parallel","Both parallel","Both perpendicular"], correct:1, note:"Disks/washers: perpendicular slices. Shells: parallel slices."},
+{q:"The arc length formula is:", options:["L=∫√(1+[f'(x)]²)dx","L=∫f(x)dx","L=π∫[f(x)]²dx","L=f(b)-f(a)"], correct:0, note:"Derived from the Pythagorean theorem applied to infinitesimal curve segments."},
+{q:"Work done by a variable force F(x) from a to b is:", options:["W=F(b)-F(a)","W=∫ₐᵇF(x)dx","W=F·d always with constant F","W=ma"], correct:1, note:"Generalizes W=Fd to a force that varies with position."},
+{q:"The center of mass formula for a rod with density ρ(x) is:", options:["x̄=∫ρ(x)dx","x̄=(1/M)∫x ρ(x)dx","x̄=M/∫ρ(x)dx","x̄=ρ(x)/M"], correct:1, note:"Divide the 'moment' integral by the total mass M."},
+{q:"For f(x)=4-x² from x=-2 to x=2, the area under the curve is:", options:["16/3","32/3","8","4"], correct:1, note:"Computed in Example 1: [4x-x³/3] from -2 to 2 = 32/3."},
+{q:"For the area between f(x)=x+2 and g(x)=x², the intersection points are:", options:["x=0, x=1","x=-1, x=2","x=-2, x=1","x=1, x=3"], correct:1, note:"x²-x-2=0 factors to (x-2)(x+1)=0, giving x=2 and x=-1."},
+{q:"Rotating f(x)=√x about the x-axis from 0 to 4 using the disk method gives a volume of:", options:["4π","8π","16π","32π"], correct:1, note:"V=π∫₀⁴x dx = π[x²/2] from 0 to 4 = π(8) = 8π."},
+{q:"When would you prefer the shell method over the washer method?", options:["When solving for x in terms of y would be messy or difficult","Never — washers are always easier","Only for straight lines","Only when there's no axis of rotation"], correct:0, note:"Shells let you integrate in the original variable, avoiding an awkward inverse."},
+{q:"A spring with F(x)=15x stretched from 0 to 0.5m does work equal to:", options:["7.5 J","3.75 J","1.875 J","15 J"], correct:2, note:"W=∫₀^0.5 15x dx = [15x²/2] from 0 to 0.5 = 1.875 J."},
+{q:"For a rod on [0,4] with density ρ(x)=3x+1, the total mass is:", options:["12 kg","20 kg","28 kg","36 kg"], correct:2, note:"M=∫₀⁴(3x+1)dx = [3x²/2+x] from 0 to 4 = 24+4 = 28."},
+{q:"For the same rod, the center of mass is approximately:", options:["2.0 m","2.57 m","3.0 m","1.5 m"], correct:1, note:"x̄=72/28 ≈ 2.57 m — past the midpoint since density increases toward x=4."},
+{q:"Surface area of revolution about the x-axis uses the formula:", options:["S=2π∫f(x)√(1+[f'(x)]²)dx","S=π∫[f(x)]²dx","S=∫f(x)dx","S=2π∫x f(x)dx"], correct:0, note:"Combines the circumference (2πf(x)) with the arc length element."},
+{q:"If f(x) dips below the x-axis on part of [a,b], computing TRUE (positive) area requires:", options:["Just using ∫ₐᵇf(x)dx directly, sign included","Splitting at the x-intercepts and taking |value| of negative pieces","Ignoring the negative parts entirely","Doubling the positive part only"], correct:1, note:"A plain integral would let negative area cancel positive area — true area needs absolute values."},
+{q:"In the washer method formula V=π∫([f(x)]²-[g(x)]²)dx, f(x) represents:", options:["The inner radius","The outer radius","The axis of rotation","The arc length"], correct:1, note:"f is the outer (larger) radius, g is the inner (smaller) radius of the washer."}
+];
+renderQuiz('ch8-quiz', Q8);
+/*QUIZ_DATA_INSERT*/
+</script>
+</body>
+</html>
