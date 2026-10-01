@@ -1,0 +1,121 @@
+{
+ "title": "Debugging Techniques and Error Handling",
+ "summary": "This lesson introduces systematic ways to find and fix bugs in code and explains how to handle errors gracefully. Students will learn common debugging tools, strategies, and the use of try‑except blocks.",
+ "sections": [
+  {
+   "heading": "Why Debugging Matters",
+   "body": "Even simple programs can contain mistakes that cause them to crash or give wrong results. Debugging is the process of locating and correcting those mistakes, which helps you write reliable software.\n\nGood debugging habits also teach you how to think logically about problems and improve your overall coding skills.",
+   "code": ""
+  },
+  {
+   "heading": "Basic Debugging Strategies",
+   "body": "1. **Read the error message** – Most languages show a line number and a description of the problem.\n2. **Print statements** – Insert `print()` calls to display variable values at key points.\n3. **Divide and conquer** – Comment out sections of code to isolate the faulty part.\n\nThese steps let you narrow down the cause without changing too much of the program at once.",
+   "code": "print('Value of x before division:', x)\nresult = a / b  # may raise ZeroDivisionError"
+  },
+  {
+   "heading": "Using an IDE Debugger",
+   "body": "Modern IDEs have built‑in debuggers that let you set breakpoints, step through code line by line, and watch variable values in real time. Start the debugger, pause execution at a breakpoint, and examine the program state.\n\nPractice: Open your IDE, set a breakpoint on the line that calculates a sum, and use \"Step Over\" to see how the total changes.",
+   "code": ""
+  },
+  {
+   "heading": "Error Handling with Try‑Except",
+   "body": "Instead of letting a program crash, you can catch expected errors and respond gracefully. The `try` block runs code that might fail; the `except` block runs if an error occurs.\n\nExample: When reading user input, you can catch a `ValueError` if the user types a non‑numeric string, then ask them to try again.",
+   "code": "while True:\n    try:\n        age = int(input('Enter your age: '))\n        break\n    except ValueError:\n        print('Please enter a valid number.')"
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "Bug",
+   "meaning": "A mistake or flaw in a program that causes it to behave incorrectly."
+  },
+  {
+   "term": "Breakpoint",
+   "meaning": "A marker in the code where the debugger pauses execution."
+  },
+  {
+   "term": "Stack trace",
+   "meaning": "A list of function calls that shows where an error occurred."
+  },
+  {
+   "term": "Exception",
+   "meaning": "An event that disrupts normal program flow, usually signaled by an error."
+  },
+  {
+   "term": "Try‑Except",
+   "meaning": "A construct that attempts code and handles specified errors if they arise."
+  },
+  {
+   "term": "Logging",
+   "meaning": "Recording messages about program execution to help diagnose problems later."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the first step you should take when an error message appears?",
+   "options": [
+    "Run the program again",
+    "Ignore it",
+    "Read the message and note the line number",
+    "Delete the code"
+   ],
+   "answer": 2,
+   "why": "The message tells you where and what went wrong."
+  },
+  {
+   "q": "Which of the following is NOT a typical use of a breakpoint?",
+   "options": [
+    "To pause execution",
+    "To automatically fix bugs",
+    "To inspect variable values",
+    "To step through code"
+   ],
+   "answer": 1,
+   "why": "Breakpoints help you examine code, not fix it automatically."
+  },
+  {
+   "q": "What does the `except` block do in a try‑except statement?",
+   "options": [
+    "Execute code that might cause an error",
+    "Handle the error if it occurs",
+    "Skip the entire program",
+    "Print the source code"
+   ],
+   "answer": 1,
+   "why": "The `except` block runs only when an error is raised."
+  },
+  {
+   "q": "Which debugging technique involves adding statements that display variable values?",
+   "options": [
+    "Logging",
+    "Refactoring",
+    "Compilation",
+    "Encryption"
+   ],
+   "answer": 0,
+   "why": "Logging or print statements show internal state during execution."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a bug?",
+   "back": "A mistake in code that makes a program behave incorrectly."
+  },
+  {
+   "front": "Define breakpoint.",
+   "back": "A marker that tells the debugger to pause execution at a specific line."
+  },
+  {
+   "front": "What is an exception?",
+   "back": "An error that interrupts normal program flow and can be caught with try‑except."
+  },
+  {
+   "front": "Purpose of try‑except.",
+   "back": "To attempt risky code and handle possible errors without crashing."
+  },
+  {
+   "front": "How does logging help debugging?",
+   "back": "It records messages about program execution, making it easier to trace problems later."
+  }
+ ],
+ "reviewed": false
+}

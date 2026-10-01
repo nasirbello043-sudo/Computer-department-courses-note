@@ -1,0 +1,121 @@
+{
+ "title": "Basic Input and Output Operations",
+ "summary": "Learn how programs receive data from users and display results. Master the use of input() and print() functions with formatting.",
+ "sections": [
+  {
+   "heading": "Why Input and Output Matter",
+   "body": "Programs are not useful if they cannot interact with people. Input lets a program get information, such as a name or a number, while output shows results back to the user.\n\nIn Python, the built‑in functions `input()` and `print()` handle most everyday I/O needs. Understanding them is the first step toward building interactive applications.",
+   "code": ""
+  },
+  {
+   "heading": "Reading Text with input()",
+   "body": "The `input()` function pauses the program and waits for the user to type something, then returns that text as a string. You can give a prompt inside the parentheses to guide the user.\n\nRemember that everything from `input()` is a string, even if the user types digits. To work with numbers you must convert the string using `int()` or `float()`.",
+   "code": "name = input(\"Enter your name: \")\nage_str = input(\"Enter your age: \")\nage = int(age_str)\nprint(\"Hello,\", name, \"you are\", age, \"years old.\")"
+  },
+  {
+   "heading": "Displaying Data with print()",
+   "body": "`print()` writes text to the console. You can pass several items separated by commas; Python adds a space between them automatically. For more control, use f‑strings or the `format()` method.\n\nYou can also change the end‑of‑line character with the `end` parameter, which is useful for creating progress bars or single‑line updates.",
+   "code": "score = 85\nprint(f\"Your score is {score}%\")\nfor i in range(5):\n    print(i, end=\" \")\nprint(\"Done\")"
+  },
+  {
+   "heading": "Simple I/O Exercise",
+   "body": "Write a program that asks for two numbers, adds them, and prints the sum. This combines reading strings, converting them to numbers, performing arithmetic, and showing the result.\n\nTry to add error handling later, but for now assume the user enters valid numbers.",
+   "code": "a = int(input(\"First number: \"))\nb = int(input(\"Second number: \"))\nresult = a + b\nprint(\"The sum is\", result)"
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "input()",
+   "meaning": "A function that reads a line of text from the user and returns it as a string."
+  },
+  {
+   "term": "print()",
+   "meaning": "A function that outputs text or other data to the console."
+  },
+  {
+   "term": "type conversion",
+   "meaning": "Changing data from one type to another, e.g., using int() to turn a string into an integer."
+  },
+  {
+   "term": "f‑string",
+   "meaning": "A string literal prefixed with f that allows embedding expressions inside curly braces."
+  },
+  {
+   "term": "end parameter",
+   "meaning": "An optional argument to print() that specifies what to print after the last value (default is a newline)."
+  },
+  {
+   "term": "format()",
+   "meaning": "A method that inserts values into a string using placeholders like {}."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What type does input() return?",
+   "options": [
+    "int",
+    "float",
+    "string",
+    "bool"
+   ],
+   "answer": 2,
+   "why": "input() always returns a string, even if the user types numbers."
+  },
+  {
+   "q": "Which code correctly prints the variable score inside a sentence?",
+   "options": [
+    "print('Your score is', score)",
+    "print('Your score is ' + score)",
+    "print(f'Your score is {score}%')",
+    "print('Your score is {score}%')"
+   ],
+   "answer": 2,
+   "why": "f‑strings evaluate the expression inside {} and produce the desired output."
+  },
+  {
+   "q": "How can you change the line ending of print() to a space?",
+   "options": [
+    "print('text', sep=' ')",
+    "print('text', end=' ')",
+    "print('text', newline=' ')",
+    "print('text', line=' ')"
+   ],
+   "answer": 1,
+   "why": "The end parameter defines what is printed after the last value."
+  },
+  {
+   "q": "What will the following code output?\n\nx = input('Enter: ')\nprint('You typed', x)",
+   "options": [
+    "It prints the prompt and then the entered text.",
+    "It prints only the entered text.",
+    "It prints an error because input() needs conversion.",
+    "It prints nothing."
+   ],
+   "answer": 0,
+   "why": "The code prints the prompt, waits for input, then displays the entered text."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What does input() do?",
+   "back": "It reads a line from the user and returns it as a string."
+  },
+  {
+   "front": "How do you convert a string to an integer?",
+   "back": "Use int(string)."
+  },
+  {
+   "front": "Write a print statement using an f‑string to show variable name.",
+   "back": "print(f\"Hello, {name}\")"
+  },
+  {
+   "front": "What is the default value of the end parameter in print()?",
+   "back": "A newline character (\"\\n\")."
+  },
+  {
+   "front": "How can you print multiple items on the same line without spaces?",
+   "back": "Use print(item1, item2, sep='') or concatenate strings."
+  }
+ ],
+ "reviewed": false
+}
