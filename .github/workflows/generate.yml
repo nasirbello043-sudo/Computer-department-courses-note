@@ -8,7 +8,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,7 +17,8 @@ jobs:
       - run: python generate.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-      - run: |
+      - if: always()
+        run: |
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
