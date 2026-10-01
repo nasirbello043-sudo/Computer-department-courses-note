@@ -1,0 +1,173 @@
+{
+ "title": "Limits and Intuition",
+ "summary": "Lesson 1 introduces the idea of a limit, showing how to estimate it from graphs and tables, and explains why limits are the foundation of calculus. Students will develop intuition for approaching values and see how limits lead to derivatives and integrals.",
+ "sections": [
+  {
+   "heading": "What Is a Limit?",
+   "body": "**What Is a Limit?**  \n\nIn everyday language a *limit* describes what value a process gets closer and closer to, without necessarily ever reaching it.  \nFor a function $f(x)$, the limit asks: *What number does $f(x)$ approach when the input $x$ moves nearer to a particular point $a$?*  \n\nWe write this idea as  \n\n\\[\n\\lim_{x\\to a} f(x)=L ,\n\\]\n\nwhich reads “the limit of $f(x)$ as $x$ approaches $a$ equals $L$.”  \nThe symbol $L$ is the **candidate limit**. It is the number that the function values $f(x)$ get arbitrarily close to when $x$ is taken sufficiently close to $a$, from either side of $a$.  \n\nA limit does **not** require $f(a)$ to exist. For example, the function  \n\n\\[\nf(x)=\\frac{x^2-1}{x-1}\n\\]\n\nis undefined at $x=1$ because the denominator is zero. Yet, if we simplify algebraically we get  \n\n\\[\nf(x)=\\frac{(x-1)(x+1)}{x-1}=x+1\\qquad (x\\neq 1),\n\\]\n\nso as $x$ gets close to $1$, $f(x)$ behaves like $x+1$, which approaches $2$. Hence  \n\n\\[\n\\boxed{\\displaystyle \\lim_{x\\to 1}\\frac{x^2-1}{x-1}=2 } .\n\\]\n\nThe key idea is that the **behaviour** of the function near $a$ matters, not the exact value at $a$.\n\n---\n\n### Fully Worked Example  \n\nFind $\\displaystyle \\lim_{x\\to 3}\\frac{2x^2-18}{x-3}$.\n\n1. **Check direct substitution.**  \n   Plugging $x=3$ gives $\\frac{2\\cdot 9-18}{0}= \\frac{0}{0}$, an indeterminate form. We must simplify.\n\n2. **Factor the numerator.**  \n   $2x^2-18 = 2(x^2-9)=2(x-3)(x+3)$.\n\n3. **Cancel the common factor $(x-3)$.**  \n   \\[\n   \\frac{2(x-3)(x+3)}{x-3}=2(x+3),\\qquad x\\neq 3.\n   \\]\n\n4. **Take the limit of the simplified expression.**  \n   \\[\n   \\lim_{x\\to 3}2(x+3)=2(3+3)=12.\n   \\]\n\nThus  \n\n\\[\n\\boxed{\\displaystyle \\lim_{x\\to 3}\\frac{2x^2-18}{x-3}=12 } .\n\\]\n\nThe limit exists even though the original fraction is undefined at $x=3$.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** $\\displaystyle \\lim_{x\\to -2}\\frac{x^2-4}{x+2}$  \n\n   **Solution:**  \n   Direct substitution gives $0/0$. Factor numerator: $x^2-4=(x-2)(x+2)$. Cancel $(x+2)$ (for $x\\neq -2$) to obtain $x-2$.  \n   $\\displaystyle \\lim_{x\\to -2}(x-2)= -2-2 = -4$.  \n\n2. **Problem:** $\\displaystyle \\lim_{x\\to 0}\\frac{\\sin x}{x}$  \n\n   **Solution:**  \n   This is a classic limit. Using the squeeze theorem or the known small‑angle approximation, $\\displaystyle \\lim_{x\\to 0}\\frac{\\sin x}{x}=1$.  \n\n3. **Problem:** $\\displaystyle \\lim_{x\\to 5}\\left(3x^2-7x+2\\right)$  \n\n   **Solution:**  \n   The function is a polynomial, continuous everywhere. Substitute $x=5$:  \n   $3(5)^2-7(5)+2 = 75-35+2 = 42$.  \n\n4. **Problem:** $\\displaystyle \\lim_{x\\to 1}\\frac{x^3-1}{x-1}$  \n\n   **Solution:**  \n   Direct substitution gives $0/0$. Factor numerator as a difference of cubes: $x^3-1=(x-1)(x^2+x+1)$. Cancel $(x-1)$ (for $x\\neq1$) to get $x^2+x+1$.  \n   Evaluate at $x=1$: $1^2+1+1 = 3$.  \n\nThese examples illustrate how limits capture the *nearby* behavior of functions, a cornerstone for the calculus concepts that follow.",
+   "code": ""
+  },
+  {
+   "heading": "Visualizing Limits on a Graph",
+   "body": "When we look at the graph of a function $f(x)$, the **limit** describes what value the function is getting close to as $x$ approaches a certain number $a$.  \nThe important idea is that we do **not** need the function to actually reach that value at $x=a$; we only care about the behavior **near** $a$.\n\n### Reading a graph near a point  \n\n1. **Pick a point $a$ on the $x$‑axis.**  \n2. **Move leftward** (values a little smaller than $a$). Observe the $y$‑values that the curve approaches. This is the **left‑hand limit**, written $\\displaystyle\\lim_{x\\to a^-}f(x)$.  \n3. **Move rightward** (values a little larger than $a$). Observe the $y$‑values that the curve approaches. This is the **right‑hand limit**, written $\\displaystyle\\lim_{x\\to a^+}f(x)$.  \n\nIf the two approaches settle on the **same number**, the overall limit $\\displaystyle\\lim_{x\\to a}f(x)$ exists and equals that number.  \nIf the left‑hand and right‑hand limits are different, or if one side shoots off to $+\\infty$ or $-\\infty$, the limit **does not exist** (often abbreviated DNE).\n\n### Worked example  \n\nConsider the piecewise graph below (imagine a V‑shaped curve that meets at $(2,3)$, but the left branch is open at the point while the right branch is closed).\n\n| $x$ | $f(x)$ (from the graph) |\n|-----|------------------------|\n| $1.9$ | $2.8$ |\n| $1.99$| $2.98$ |\n| $2.01$| $3.02$ |\n| $2.1$ | $3.2$ |\n\n**Step 1 – Left‑hand approach**  \nAs $x$ gets closer to $2$ from the left ($1.9, 1.99,\\dots$), the $y$‑values approach $3$ from below.  \nThus $\\displaystyle\\lim_{x\\to 2^-}f(x)=3$.\n\n**Step 2 – Right‑hand approach**  \nFrom the right ($2.01, 2.1,\\dots$), the $y$‑values also approach $3$, now from above.  \nThus $\\displaystyle\\lim_{x\\to 2^+}f(x)=3$.\n\n**Step 3 – Combine**  \nSince both one‑sided limits equal $3$, the two‑sided limit exists:  \n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to 2}f(x)=3}\n\\]\n\nNotice that the actual function value $f(2)$ might be $4$ (if the point is plotted higher) or even undefined (if the point is missing). The limit cares only about the surrounding behavior.\n\n### When a limit fails  \n\n* **Jump discontinuity:** left‑hand limit $=1$, right‑hand limit $=4$. The overall limit DNE.  \n* **Vertical asymptote:** as $x\\to 0$, $f(x)=\\frac{1}{x}$ goes to $+\\infty$ from the right and $-\\infty$ from the left – no finite limit.  \n\n---\n\n## Practice problems  \n\n1. **Problem:** From the graph of $g(x)$, as $x\\to -1$ the curve approaches $y=2$ from both sides. Find $\\displaystyle\\lim_{x\\to -1}g(x)$.  \n\n   **Solution:** Both one‑sided limits equal $2$, so the limit exists and is $2$.  \n\n2. **Problem:** The graph of $h(x)$ shows a jump at $x=0$: $\\displaystyle\\lim_{x\\to0^-}h(x)=5$, $\\displaystyle\\lim_{x\\to0^+}h(x)= -3$. Determine $\\displaystyle\\lim_{x\\to0}h(x)$.  \n\n   **Solution:** Left‑hand and right‑hand limits differ, therefore the limit does **not exist** (DNE).  \n\n3. **Problem:** For the function $k(x)=\\frac{1}{x-3}$, the graph has a vertical asymptote at $x=3$. Describe the limit as $x\\to3$.  \n\n   **Solution:** As $x\\to3^-$, $k(x)\\to -\\infty$; as $x\\to3^+$, $k(x)\\to +\\infty$. Since the one‑sided limits are infinite and opposite, $\\displaystyle\\lim_{x\\to3}k(x)$ does not exist (the function blows up).  \n\n4. **Problem:** A graph shows a curve that approaches $y=0$ from both sides as $x\\to4$, but the point $(4,0)$ is missing. Find $\\displaystyle\\lim_{x\\to4}f(x)$ and $f(4)$.  \n\n   **Solution:** The approaching $y$‑value is $0$, so $\\displaystyle\\lim_{x\\to4}f(x)=0$. Because the point is missing, $f(4)$ is **undefined**.  \n\nThese examples illustrate how a simple visual inspection can tell us whether a limit exists and what its value is. Practice reading graphs carefully; the picture often tells the story faster than algebra.",
+   "code": ""
+  },
+  {
+   "heading": "Estimating Limits Numerically",
+   "body": "When we want to know the limit of a function $f(x)$ as $x$ approaches a number $a$, one simple method is to **estimate the limit numerically**.  \nWe choose $x$‑values that get closer and closer to $a$ from the left (values smaller than $a$) and from the right (values larger than $a$).  \nBy plugging these $x$‑values into $f$ we obtain a list of function values.  \nIf the numbers on both sides settle down to the same value, that common value is a good guess for the limit.\n\n---\n\n### Step‑by‑step procedure  \n\n1. **Pick a target point** $a$ where you want $\\displaystyle\\lim_{x\\to a}f(x)$.  \n2. **Choose a sequence of $x$‑values** approaching $a$ from the left: $a-\\Delta$, $a-\\frac{\\Delta}{10}$, $a-\\frac{\\Delta}{100},\\dots$  \n3. **Choose a sequence from the right**: $a+\\frac{\\Delta}{100}$, $a+\\frac{\\Delta}{10}$, $a+\\Delta$, …  \n4. **Compute $f(x)$** for each chosen $x$.  \n5. **Make a table** and look for a pattern.  \n6. **Guess the limit** as the number that the rows seem to approach.\n\n---\n\n### Worked example  \n\nFind $\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}$.\n\n| $x$ (left) | $f(x)=\\dfrac{x^{2}-4}{x-2}$ | $x$ (right) | $f(x)$ |\n|------------|----------------------------|-------------|--------|\n| 1.9        | $\\dfrac{1.9^{2}-4}{1.9-2}= \\dfrac{3.61-4}{-0.1}= \\dfrac{-0.39}{-0.1}=3.9$ | 2.1 | $\\dfrac{2.1^{2}-4}{2.1-2}= \\dfrac{4.41-4}{0.1}= \\dfrac{0.41}{0.1}=4.1$ |\n| 1.99       | $\\dfrac{1.99^{2}-4}{1.99-2}= \\dfrac{3.9601-4}{-0.01}= \\dfrac{-0.0399}{-0.01}=3.99$ | 2.01 | $\\dfrac{2.01^{2}-4}{2.01-2}= \\dfrac{4.0401-4}{0.01}= \\dfrac{0.0401}{0.01}=4.01$ |\n| 1.999      | $\\dfrac{1.999^{2}-4}{1.999-2}= \\dfrac{3.996001-4}{-0.001}= \\dfrac{-0.003999}{-0.001}=3.999$ | 2.001 | $\\dfrac{2.001^{2}-4}{2.001-2}= \\dfrac{4.004001-4}{0.001}= \\dfrac{0.004001}{0.001}=4.001$ |\n\n**Observation:** As $x$ gets nearer to $2$ from either side, $f(x)$ gets closer to $4$.  \n**Numerical estimate:** $\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}=4$.\n\n(Algebraically, the expression simplifies to $x+2$, so the limit is indeed $4$.)\n\n---\n\n### Practice problems  \n\nBelow are four limit problems. For each, follow the numerical‑estimation steps and then check the answer with a short algebraic justification.\n\n---\n\n#### 1. $\\displaystyle\\lim_{x\\to 0}\\frac{\\sin x}{x}$  \n\n**Table**\n\n| $x$ (left) | $\\frac{\\sin x}{x}$ | $x$ (right) | $\\frac{\\sin x}{x}$ |\n|------------|-------------------|-------------|-------------------|\n| $-0.1$     | $0.9983$          | $0.1$       | $0.9983$ |\n| $-0.01$    | $0.999983$        | $0.01$      | $0.999983$ |\n| $-0.001$   | $0.99999983$      | $0.001$     | $0.99999983$ |\n\n**Guess:** The values approach $1$.  \n\n**Algebraic check:** Using the standard limit $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1$.  \n\n**Answer:** $1$.\n\n---\n\n#### 2. $\\displaystyle\\lim_{x\\to 3}\\frac{x^{2}-9}{x-3}$  \n\n**Table**\n\n| $x$ (left) | $f(x)$ | $x$ (right) | $f(x)$ |\n|------------|--------|-------------|--------|\n| $2.9$      | $5.9$  | $3.1$       | $6.1$ |\n| $2.99$     | $5.99$ | $3.01$      | $6.01$ |\n| $2.999$    | $5.999$| $3.001$     | $6.001$ |\n\n**Guess:** Limit appears to be $6$.  \n\n**Algebraic check:** $\\frac{x^{2}-9}{x-3}=\\frac{(x-3)(x+3)}{x-3}=x+3$, so $\\displaystyle\\lim_{x\\to3}=3+3=6$.  \n\n**Answer:** $6$.\n\n---\n\n#### 3. $\\displaystyle\\lim_{x\\to 0}\\frac{e^{x}-1}{x}$  \n\n**Table**\n\n| $x$ (left) | $f(x)$ | $x$ (right) | $f(x)$ |\n|------------|--------|-------------|--------|\n| $-0.1$     | $0.9516$| $0.1$       | $1.0517$ |\n| $-0.01$    | $0.9950$| $0.01$      | $1.0050$ |\n| $-0.001$   | $0.9995$| $0.001$     | $1.0010$ |\n\n**Guess:** Values are heading toward $1$.  \n\n**Algebraic check:** The derivative of $e^{x}$ at $0$ is $e^{0}=1$, giving the same limit.  \n\n**Answer:** $1$.\n\n---\n\n#### 4. $\\displaystyle\\lim_{x\\to 1}\\frac{x^{3}-1}{x-1}$  \n\n**Table**\n\n| $x$ (left) | $f(x)$ | $x$ (right) | $f(x)$ |\n|------------|--------|-------------|--------|\n| $0.9$      | $2.71$ | $1.1$       | $3.31$ |\n| $0.99$     | $2.9701$| $1.01$     | $3.0301$ |\n| $0.999$    | $2.9970$| $1.001$    | $3.0030$ |\n\n**Guess:** The numbers approach $3$.  \n\n**Algebraic check:** Factor $x^{3}-1=(x-1)(x^{2}+x+1)$, so $f(x)=x^{2}+x+1$. Hence $\\displaystyle\\lim_{x\\to1}=1^{2}+1+1=3$.  \n\n**Answer:** $3$.\n\n---  \n\nBy creating tables of values that get ever closer to the target point, you can **see** the limit forming. This numerical intuition is especially useful when the algebraic simplification is not obvious.",
+   "code": ""
+  },
+  {
+   "heading": "Common Limit Situations",
+   "body": "**Common Limit Situations**\n\nWhen you first meet limits, it helps to look at a few simple types of functions.  \nBelow are three families of functions that appear often in early calculus, together with the typical limit behaviour you will see.\n\n---\n\n### 1. Constant functions  \n\nA constant function has the same value everywhere:  \n\n\\[\nf(x)=c\\qquad\\text{(where \\(c\\) is a number).}\n\\]\n\nBecause the output never changes, the limit as \\(x\\) approaches any number \\(a\\) is just that constant:\n\n\\[\n\\lim_{x\\to a} f(x)=\\lim_{x\\to a} c = c .\n\\]\n\n*Example.*  \nLet \\(f(x)=5\\). Then  \n\n\\[\n\\lim_{x\\to 2} f(x)=5,\\qquad \\lim_{x\\to -3} f(x)=5 .\n\\]\n\nNo matter where you look, the limit is the same as the function’s value.\n\n---\n\n### 2. Linear functions  \n\nA linear function has the form  \n\n\\[\nf(x)=mx+b,\n\\]\n\nwhere \\(m\\) is the slope and \\(b\\) is the \\(y\\)-intercept.  \nLinear functions are continuous everywhere, so the limit at any point equals the function value:\n\n\\[\n\\lim_{x\\to a} (mx+b)=ma+b .\n\\]\n\n*Example.*  \nFor \\(g(x)=3x-4\\),\n\n\\[\n\\lim_{x\\to 1} g(x)=3(1)-4=-1 .\n\\]\n\nYou can think of the limit as “plugging in” the point because there is no break or hole in the graph.\n\n---\n\n### 3. Simple rational functions  \n\nA rational function is a ratio of two polynomials:\n\n\\[\nh(x)=\\frac{p(x)}{q(x)} .\n\\]\n\nIf the denominator \\(q(a)\\neq0\\), the function is continuous at \\(x=a\\) and the limit is obtained by direct substitution:\n\n\\[\n\\lim_{x\\to a}\\frac{p(x)}{q(x)}=\\frac{p(a)}{q(a)} .\n\\]\n\nTwo special situations arise when the denominator *does* become zero.\n\n#### a) Removable discontinuity  \n\nSometimes both numerator and denominator vanish at the same point, e.g.\n\n\\[\nr(x)=\\frac{x^{2}-4}{x-2}.\n\\]\n\nFactor the numerator:\n\n\\[\nr(x)=\\frac{(x-2)(x+2)}{x-2}.\n\\]\n\nFor every \\(x\\neq2\\) the factor \\((x-2)\\) cancels, leaving  \n\n\\[\nr(x)=x+2\\qquad (x\\neq2).\n\\]\n\nThe graph has a “hole” at \\(x=2\\). The limit exists because the simplified expression approaches a single value:\n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to 2} r(x)=2+2=4 } .\n\\]\n\nEven though \\(r(2)\\) is undefined, the limit is 4.\n\n#### b) Jump discontinuity  \n\nIf the denominator goes to zero while the numerator approaches a non‑zero number, the function can jump to \\(+\\infty\\) or \\(-\\infty\\).  \n\nConsider  \n\n\\[\ns(x)=\\frac{1}{x}.\n\\]\n\nAs \\(x\\) approaches \\(0\\) from the right, the values become very large positive numbers:\n\n\\[\n\\lim_{x\\to 0^{+}} \\frac{1}{x}=+\\infty .\n\\]\n\nFrom the left, the values become large negative numbers:\n\n\\[\n\\lim_{x\\to 0^{-}} \\frac{1}{x}=-\\infty .\n\\]\n\nBecause the left‑hand and right‑hand limits differ, the (two‑sided) limit \\(\\displaystyle\\lim_{x\\to0}\\frac{1}{x}\\) **does not exist**. This is a classic **jump discontinuity**.\n\n---\n\n### Fully worked example  \n\nFind the limit  \n\n\\[\n\\lim_{x\\to 3}\\frac{x^{2}-9}{x-3}.\n\\]\n\n**Step 1 – Identify the problem.** Direct substitution gives \\(\\frac{0}{0}\\), an indeterminate form.\n\n**Step 2 – Factor the numerator.**  \n\n\\[\nx^{2}-9=(x-3)(x+3).\n\\]\n\n**Step 3 – Cancel the common factor** (valid for \\(x\\neq3\\)):\n\n\\[\n\\frac{x^{2}-9}{x-3}= \\frac{(x-3)(x+3)}{x-3}=x+3\\qquad (x\\neq3).\n\\]\n\n**Step 4 – Take the limit of the simplified expression.**  \n\n\\[\n\\lim_{x\\to3}(x+3)=3+3=6.\n\\]\n\n**Conclusion:**  \n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to3}\\frac{x^{2}-9}{x-3}=6 } .\n\\]\n\nThe original function has a removable hole at \\(x=3\\); after removing the hole, the limit is simply the value of the line \\(y=x+3\\) at that point.  \n\n---  \n\n**Practice problems**\n\n1. **Problem:** \\(\\displaystyle\\lim_{x\\to -1}\\frac{x^{2}+2x+1}{x+1}\\)  \n   **Solution:** Factor numerator \\((x+1)^{2}\\). Cancel \\((x+1)\\) (for \\(x\\neq-1\\)). Limit becomes \\(\\lim_{x\\to-1}(x+1)=0\\).\n\n2. **Problem:** \\(\\displaystyle\\lim_{x\\to 0}\\frac{\\sin x}{x}\\)  \n   **Solution:** This is a standard limit; using the squeeze theorem or the unit‑circle argument gives \\(\\boxed{1}\\).\n\n3. **Problem:** \\(\\displaystyle\\lim_{x\\to 2^{+}}\\frac{1}{x-2}\\)  \n   **Solution:** As \\(x\\) approaches 2 from the right, denominator is a small positive number, so the fraction grows without bound. Limit is \\(+\\infty\\).\n\n4. **Problem:** \\(\\displaystyle\\lim_{x\\to 5}\\bigl(4x-7\\bigr)\\)  \n   **Solution:** Linear functions are continuous, so just substitute \\(x=5\\): \\(4(5)-7=20-7=13\\). Hence the limit is \\(\\boxed{13}\\).",
+   "code": ""
+  },
+  {
+   "heading": "Why Limits Matter in Calculus",
+   "body": "**Why Limits Matter in Calculus**\n\nIn calculus the two most important ideas – the **derivative** and the **integral** – are *definitions* that use limits.  \nUnderstanding limits tells us how to talk about an **instantaneous rate of change** and about the **total accumulated area** even when the picture is not obvious.\n\n---\n\n### Derivative as a limit  \n\nThe derivative of a function $f$ at a point $x=a$ is the limit of the average rate of change as the interval shrinks:\n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n\\]\n\nThe fraction $\\dfrac{f(a+h)-f(a)}{h}$ is the slope of the secant line through $(a,f(a))$ and $(a+h,f(a+h))$.  \nWhen $h$ gets smaller, the secant line approaches the **tangent line**, whose slope is the instantaneous rate of change.  \nIf the limit exists, we have a well‑defined derivative; if the limit does not exist, the function has no tangent (for example, a corner or a vertical jump).\n\n**Worked example – derivative of $f(x)=x^{2}$ at $x=3$**\n\n1. Write the difference quotient:  \n   \\[\n   \\frac{f(3+h)-f(3)}{h}=\\frac{(3+h)^{2}-3^{2}}{h}.\n   \\]\n\n2. Expand the numerator:  \n   \\[\n   (3+h)^{2}=9+6h+h^{2},\\qquad 3^{2}=9,\n   \\]  \n   so the fraction becomes \\(\\dfrac{9+6h+h^{2}-9}{h}=\\dfrac{6h+h^{2}}{h}\\).\n\n3. Factor $h$:  \n   \\[\n   \\frac{h(6+h)}{h}=6+h.\n   \\]\n\n4. Take the limit as $h\\to0$:  \n   \\[\n   f'(3)=\\lim_{h\\to0}(6+h)=6.\n   \\]\n\nThus the slope of the tangent to $y=x^{2}$ at $x=3$ is $6$, which matches the general formula $f'(x)=2x$.\n\n---\n\n### Integral as a limit  \n\nThe definite integral of $f$ from $a$ to $b$ is the limit of the sum of areas of thin rectangles:\n\n\\[\n\\int_{a}^{b} f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^{n} f(x_i^{*})\\;\\Delta x,\n\\]\n\nwhere $\\Delta x=\\dfrac{b-a}{n}$ and $x_i^{*}$ is any point in the $i$‑th subinterval.  \nAs $n$ grows, the rectangles become narrower, and the sum approaches the **exact accumulated area** under the curve.  \nIf the limit exists, the function is **integrable** on $[a,b]$.\n\n**Worked example – area under $f(x)=2x$ from $0$ to $3$**\n\n1. Choose $n$ equal subintervals: $\\Delta x=\\dfrac{3-0}{n}= \\frac{3}{n}$.\n\n2. Use right endpoints: $x_i^{*}=i\\Delta x = \\frac{3i}{n}$.\n\n3. Form the Riemann sum:  \n   \\[\n   S_n=\\sum_{i=1}^{n} f\\!\\left(\\frac{3i}{n}\\right)\\Delta x\n       =\\sum_{i=1}^{n} 2\\!\\left(\\frac{3i}{n}\\right)\\!\\left(\\frac{3}{n}\\right)\n       =\\frac{18}{n^{2}}\\sum_{i=1}^{n} i.\n   \\]\n\n4. Use $\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$:  \n   \\[\n   S_n=\\frac{18}{n^{2}}\\cdot\\frac{n(n+1)}{2}=9\\frac{n+1}{n}.\n   \\]\n\n5. Take the limit as $n\\to\\infty$:  \n   \\[\n   \\int_{0}^{3}2x\\,dx=\\lim_{n\\to\\infty}9\\frac{n+1}{n}=9.\n   \\]\n\nThe exact area is $9$, which agrees with the antiderivative method $\\int 2x\\,dx = x^{2}+C$, giving $3^{2}-0^{2}=9$.\n\n---\n\n### Practice Problems\n\n1. **Find** $\\displaystyle\\lim_{x\\to2}\\frac{x^{2}-4}{x-2}$.  \n\n   *Solution:* Factor numerator: $x^{2}-4=(x-2)(x+2)$. Cancel $(x-2)$, leaving $\\lim_{x\\to2}(x+2)=4$.\n\n2. **Compute** the derivative of $g(x)=\\sqrt{x}$ at $x=9$ using the limit definition.  \n\n   *Solution:*  \n   \\[\n   g'(9)=\\lim_{h\\to0}\\frac{\\sqrt{9+h}-3}{h}\n        =\\lim_{h\\to0}\\frac{(\\sqrt{9+h}-3)(\\sqrt{9+h}+3)}{h(\\sqrt{9+h}+3)}\n        =\\lim_{h\\to0}\\frac{h}{h(\\sqrt{9+h}+3)}=\\frac{1}{6}.\n   \\]\n\n3. **Evaluate** $\\displaystyle\\int_{1}^{4} (3x^{2})\\,dx$ as a limit of Riemann sums.  \n\n   *Solution:* $\\Delta x=\\frac{3}{n}$, right endpoints $x_i^{*}=1+i\\Delta x$.  \n   Sum: $S_n=\\sum_{i=1}^{n}3(1+i\\Delta x)^{2}\\Delta x$. Expand, use formulas for $\\sum i$ and $\\sum i^{2}$, simplify, and take $n\\to\\infty$ to obtain $ \\int_{1}^{4}3x^{2}dx = [x^{3}]_{1}^{4}=64-1=63$.\n\n4. **Determine** whether $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}$ exists and find its value.  \n\n   *Solution:* Using the squeeze theorem, $ \\cos x \\le \\frac{\\sin x}{x} \\le 1$ for $x>0$, and both bounds approach $1$ as $x\\to0$. Hence the limit exists and equals $1$.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "**Practice Problems**\n\n1. **Estimate the limit of** $f(x)=\\dfrac{x^{2}-4}{x-2}$ **as** $x\\to 2$ **using a table.**  \n\n   *Solution.*  \n   First build a table of values close to $x=2$.\n\n   | $x$ | $f(x)=\\dfrac{x^{2}-4}{x-2}$ |\n   |-----|----------------------------|\n   | 1.9 | $\\dfrac{1.9^{2}-4}{1.9-2}= \\dfrac{3.61-4}{-0.1}= \\dfrac{-0.39}{-0.1}=3.9$ |\n   | 1.99| $\\dfrac{1.99^{2}-4}{1.99-2}= \\dfrac{3.9601-4}{-0.01}= \\dfrac{-0.0399}{-0.01}=3.99$ |\n   | 1.999| $\\dfrac{1.999^{2}-4}{1.999-2}= \\dfrac{3.996001-4}{-0.001}= \\dfrac{-0.003999}{-0.001}=3.999$ |\n   | 2.1 | $\\dfrac{2.1^{2}-4}{2.1-2}= \\dfrac{4.41-4}{0.1}= \\dfrac{0.41}{0.1}=4.1$ |\n   | 2.01| $\\dfrac{2.01^{2}-4}{2.01-2}= \\dfrac{4.0401-4}{0.01}= \\dfrac{0.0401}{0.01}=4.01$ |\n   | 2.001| $\\dfrac{2.001^{2}-4}{2.001-2}= \\dfrac{4.004001-4}{0.001}= \\dfrac{0.004001}{0.001}=4.001$ |\n\n   As $x$ gets closer to $2$ from either side, the function values approach $4$.  \n   Therefore  \n   $$\\boxed{\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}=4}.$$  \n\n   *Why does this work?* The expression simplifies algebraically:  \n   $$\\frac{x^{2}-4}{x-2}= \\frac{(x-2)(x+2)}{x-2}=x+2,\\qquad x\\neq2.$$  \n   Hence the limit equals $2+2=4$.\n\n2. **From the graph of** $g(x)$ **given, state the limit as** $x\\to 3$ **from the left and from the right.**  \n\n   *Solution.*  \n   The graph shows a solid point at $(3,2)$ and a hollow circle at $(3,5)$.  \n   - Approaching $3$ **from the left** ($x\\to3^{-}$) the curve heads toward the y‑value $5$.  \n   - Approaching $3$ **from the right** ($x\\to3^{+}$) the curve heads toward the y‑value $2$.  \n\n   Thus  \n   $$\\displaystyle\\lim_{x\\to3^{-}}g(x)=5,\\qquad \\displaystyle\\lim_{x\\to3^{+}}g(x)=2.$$  \n\n   Because the two one‑sided limits are different, the two‑sided limit $\\displaystyle\\lim_{x\\to3}g(x)$ does **not** exist.\n\n3. **Decide whether the limit of** $h(x)=\\dfrac{1}{x}$ **exists as** $x\\to0$ **and explain why.**  \n\n   *Solution.*  \n   Examine the behavior from each side:  \n\n   - As $x\\to0^{+}$, $1/x$ becomes arbitrarily large positive, so $\\displaystyle\\lim_{x\\to0^{+}}h(x)=+\\infty$.  \n   - As $x\\to0^{-}$, $1/x$ becomes arbitrarily large negative, so $\\displaystyle\\lim_{x\\to0^{-}}h(x)=-\\infty$.  \n\n   The left‑hand and right‑hand limits are not equal (they even have opposite signs). Therefore the two‑sided limit **does not exist**. In formal terms, we write  \n   $$\\displaystyle\\lim_{x\\to0}\\frac{1}{x}\\ \\text{does not exist}.$$\n\n4. **Find the limit** $\\displaystyle\\lim_{x\\to1}\\frac{\\sqrt{x+3}-2}{x-1}$ **by rationalizing the numerator.**  \n\n   *Solution.*  \n   Direct substitution gives $0/0$, an indeterminate form. Multiply numerator and denominator by the conjugate:  \n\n   \\[\n   \\frac{\\sqrt{x+3}-2}{x-1}\\cdot\\frac{\\sqrt{x+3}+2}{\\sqrt{x+3}+2}\n   =\\frac{(\\sqrt{x+3})^{2}-2^{2}}{(x-1)(\\sqrt{x+3}+2)}\n   =\\frac{x+3-4}{(x-1)(\\sqrt{x+3}+2)}\n   =\\frac{x-1}{(x-1)(\\sqrt{x+3}+2)}.\n   \\]\n\n   Cancel the common factor $x-1$ (valid for $x\\neq1$):  \n\n   \\[\n   =\\frac{1}{\\sqrt{x+3}+2}.\n   \\]\n\n   Now take the limit as $x\\to1$:  \n\n   \\[\n   \\displaystyle\\lim_{x\\to1}\\frac{1}{\\sqrt{x+3}+2}\n   =\\frac{1}{\\sqrt{1+3}+2}\n   =\\frac{1}{\\sqrt{4}+2}\n   =\\frac{1}{2+2}\n   =\\frac{1}{4}.\n   \\]\n\n   Hence  \n   $$\\boxed{\\displaystyle\\lim_{x\\to1}\\frac{\\sqrt{x+3}-2}{x-1}= \\frac14}.$$",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value that a function approaches as the input gets arbitrarily close to a certain point."
+  },
+  {
+   "term": "candidate limit",
+   "meaning": "The number L that is proposed to be the limit of f(x) as x approaches a."
+  },
+  {
+   "term": "left-hand limit",
+   "meaning": "The limit of f(x) as x approaches a from values smaller than a, written lim_{x->a-} f(x)."
+  },
+  {
+   "term": "right-hand limit",
+   "meaning": "The limit of f(x) as x approaches a from values larger than a, written lim_{x->a+} f(x)."
+  },
+  {
+   "term": "continuous",
+   "meaning": "A function is continuous at a point if its limit there exists and equals the function's value."
+  },
+  {
+   "term": "numerical estimation of limits",
+   "meaning": "Approximating a limit by evaluating the function at points that get closer and closer to the target point."
+  },
+  {
+   "term": "derivative as a limit",
+   "meaning": "The instantaneous rate of change defined by lim_{h->0} (f(a+h)-f(a))/h."
+  },
+  {
+   "term": "hole",
+   "meaning": "A point where a function is undefined but the limit exists, often shown as a missing point on a graph."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the limit of the constant function f(x)=7 as x approaches any number?",
+   "options": [
+    "7",
+    "0",
+    "Does not exist",
+    "Depends on x"
+   ],
+   "answer": 0,
+   "why": "A constant function always equals its constant value, so the limit is that constant."
+  },
+  {
+   "q": "For f(x) = (x^2-1)/(x-1), what is lim_{x->1} f(x)?",
+   "options": [
+    "1",
+    "2",
+    "Does not exist",
+    "0"
+   ],
+   "answer": 1,
+   "why": "Simplifying gives f(x)=x+1 for x≠1, so the limit as x approaches 1 is 1+1=2."
+  },
+  {
+   "q": "Which of the following must be true for lim_{x->a} f(x) to exist?",
+   "options": [
+    "Left-hand and right-hand limits are equal",
+    "f(a) is defined",
+    "f is linear",
+    "Derivative at a exists"
+   ],
+   "answer": 0,
+   "why": "The overall limit exists only when both one-sided limits exist and are the same."
+  },
+  {
+   "q": "In a table of values, which pattern indicates the limit is approaching 4?",
+   "options": [
+    "Values 3.9, 3.99, 3.999, 4.1, 4.01, 4.001",
+    "Values 5, 6, 7, 8",
+    "Values -1, -2, -3",
+    "Values 0, 0, 0"
+   ],
+   "answer": 0,
+   "why": "The numbers get closer to 4 from both sides, showing convergence to 4."
+  },
+  {
+   "q": "What does the derivative formula f'(a)=lim_{h->0} (f(a+h)-f(a))/h represent?",
+   "options": [
+    "Average rate of change over a finite interval",
+    "Instantaneous rate of change at a",
+    "Area under the curve",
+    "Value of the function at a"
+   ],
+   "answer": 1,
+   "why": "The limit of the average rate as the interval shrinks gives the instantaneous rate of change."
+  },
+  {
+   "q": "If a graph has a hole at x=3 but the curve approaches y=5 there, what is lim_{x->3} f(x)?",
+   "options": [
+    "5",
+    "undefined",
+    "3",
+    "Does not exist"
+   ],
+   "answer": 0,
+   "why": "The limit depends on the approaching values, which are 5, even though the function is not defined at 3."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definition of a limit",
+   "back": "The number L that f(x) gets arbitrarily close to as x approaches a."
+  },
+  {
+   "front": "Left-hand limit notation",
+   "back": "lim_{x->a-} f(x)"
+  },
+  {
+   "front": "Right-hand limit notation",
+   "back": "lim_{x->a+} f(x)"
+  },
+  {
+   "front": "When does a limit exist?",
+   "back": "When the left-hand and right-hand limits exist and are equal."
+  },
+  {
+   "front": "How to estimate a limit numerically",
+   "back": "Choose x-values closer to a from both sides, compute f(x), and see if the values settle to a single number."
+  },
+  {
+   "front": "Limit of a constant function",
+   "back": "It is the constant itself."
+  },
+  {
+   "front": "Derivative as a limit",
+   "back": "f'(a)=lim_{h->0} (f(a+h)-f(a))/h"
+  },
+  {
+   "front": "What is a hole in a graph?",
+   "back": "A point where the function is undefined but the limit exists, shown as a missing point."
+  }
+ ],
+ "reviewed": false
+}
