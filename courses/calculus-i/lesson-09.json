@@ -1,0 +1,178 @@
+{
+ "title": "Techniques of Integration",
+ "summary": "This lesson introduces four main techniques for finding antiderivatives and approximating integrals, showing when and how to use each method. Students will learn substitution, integration by parts, partial fractions, and basic numerical integration, then apply them in practice problems.",
+ "sections": [
+  {
+   "heading": "1. Review of Basic Integration Concepts",
+   "body": "In this part we quickly **review the basic ideas** that you will need later when you learn more advanced integration techniques.\n\n---\n\n### Antiderivatives  \n\nAn **antiderivative** of a function $f(x)$ is any function $F(x)$ whose derivative equals $f(x)$:  \n\n\\[\nF'(x)=f(x).\n\\]\n\nBecause the derivative of a constant is $0$, every antiderivative is determined only up to an added constant. We therefore write the most general antiderivative as  \n\n\\[\n\\int f(x)\\,dx = F(x)+C,\n\\]\n\nwhere $C$ is the **constant of integration**.  \n\n*Example.*  \nFind $\\displaystyle\\int 3x^{2}\\,dx$.  \nWe look for a function whose derivative is $3x^{2}$. The power rule for differentiation tells us that  \n\n\\[\n\\frac{d}{dx}\\bigl(x^{3}\\bigr)=3x^{2}.\n\\]\n\nHence an antiderivative is $F(x)=x^{3}$, and the indefinite integral is  \n\n\\[\n\\int 3x^{2}\\,dx = x^{3}+C.\n\\]\n\n---\n\n### Definite vs. Indefinite Integrals  \n\nThe **indefinite integral** $\\displaystyle\\int f(x)\\,dx$ represents a whole family of antiderivatives, as shown above.  \n\nA **definite integral** $\\displaystyle\\int_{a}^{b} f(x)\\,dx$ gives a single number: the signed area under the curve $y=f(x)$ from $x=a$ to $x=b$. The Fundamental Theorem of Calculus connects the two concepts:\n\n\\[\n\\int_{a}^{b} f(x)\\,dx = F(b)-F(a),\n\\]\n\nwhere $F$ is any antiderivative of $f$. The constant $C$ cancels out, so we never need to write it when evaluating a definite integral.\n\n*Worked example.*  \nEvaluate $\\displaystyle\\int_{1}^{4} (2x+5)\\,dx$.\n\n1. Find an antiderivative of $2x+5$.  \n   \\[\n   \\int (2x+5)\\,dx = x^{2}+5x + C.\n   \\]\n\n2. Apply the Fundamental Theorem of Calculus:  \n\n   \\[\n   \\int_{1}^{4} (2x+5)\\,dx = \\bigl[\\,x^{2}+5x\\,\\bigr]_{1}^{4}\n   = (4^{2}+5\\cdot4) - (1^{2}+5\\cdot1)\n   = (16+20) - (1+5)\n   = 36 - 6 = 30.\n   \\]\n\nSo the signed area between $x=1$ and $x=4$ under the line $y=2x+5$ is $30$.\n\n---\n\n### Practice Problems  \n\nBelow are four problems that reinforce the ideas above. Each solution shows every step, so you can see exactly how the rules are applied.\n\n---\n\n**Problem 1.** Find $\\displaystyle\\int (4x^{3}-7)\\,dx$.\n\n**Solution.**  \nIntegrate term‑by‑term using the power rule:\n\n\\[\n\\int 4x^{3}\\,dx = 4\\cdot\\frac{x^{4}}{4}=x^{4},\\qquad\n\\int (-7)\\,dx = -7x.\n\\]\n\nThus  \n\n\\[\n\\int (4x^{3}-7)\\,dx = x^{4}-7x + C.\n\\]\n\n---\n\n**Problem 2.** Evaluate $\\displaystyle\\int_{0}^{2} (3t^{2}+2t)\\,dt$.\n\n**Solution.**  \nFirst find an antiderivative:\n\n\\[\n\\int (3t^{2}+2t)\\,dt = t^{3}+t^{2}+C.\n\\]\n\nNow apply the Fundamental Theorem:\n\n\\[\n\\bigl[t^{3}+t^{2}\\bigr]_{0}^{2}\n= (2^{3}+2^{2})-(0^{3}+0^{2})\n= (8+4)-0 = 12.\n\\]\n\nSo the definite integral equals $12$.\n\n---\n\n**Problem 3.** Determine the constant $C$ if $F(x)=\\frac{1}{2}x^{2}+C$ is an antiderivative of $f(x)=x$ and $F(3)=10$.\n\n**Solution.**  \nPlug $x=3$ into $F$:\n\n\\[\nF(3)=\\frac{1}{2}(3)^{2}+C = \\frac{9}{2}+C.\n\\]\n\nSet this equal to $10$:\n\n\\[\n\\frac{9}{2}+C = 10 \\;\\Longrightarrow\\; C = 10-\\frac{9}{2}= \\frac{20-9}{2}= \\frac{11}{2}.\n\\]\n\nThus $C=\\dfrac{11}{2}$.\n\n---\n\n**Problem 4.** Compute $\\displaystyle\\int_{-1}^{1} (5 - x^{2})\\,dx$.\n\n**Solution.**  \nFind an antiderivative:\n\n\\[\n\\int (5 - x^{2})\\,dx = 5x - \\frac{x^{3}}{3}+C.\n\\]\n\nEvaluate from $-1$ to $1$:\n\n\\[\n\\bigl[5x - \\tfrac{x^{3}}{3}\\bigr]_{-1}^{1}\n= \\left(5(1)-\\frac{1^{3}}{3}\\right) - \\left(5(-1)-\\frac{(-1)^{3}}{3}\\right)\n= \\left(5-\\frac13\\right) - \\left(-5+\\frac13\\right)\n= 5-\\frac13 +5-\\frac13\n= 10 - \\frac{2}{3}\n= \\frac{30-2}{3}= \\frac{28}{3}.\n\\]\n\nHence the definite integral equals $\\displaystyle\\frac{28}{3}$.",
+   "code": ""
+  },
+  {
+   "heading": "2. Substitution (u‑substitution)",
+   "body": "**2. Substitution (u‑substitution)**  \n\nThe idea of **u‑substitution** is the same as the chain rule in differentiation: we look for an inner function whose derivative also appears in the integrand. By rewriting the integral in terms of a new variable $u$, the integral often becomes much simpler.\n\n---\n\n### How to choose a substitution  \n\n1. **Spot a composite function** – look for something like $f(g(x))\\cdot g'(x)$.  \n2. **Set $u = g(x)$** – choose the inner part $g(x)$ as the new variable.  \n3. **Compute $du$** – differentiate $u$ to get $du = g'(x)\\,dx$.  \n4. **Replace** – express every $x$‑term and $dx$ in the original integral with $u$ and $du$.  \n5. **Integrate** – the integral should now be a basic one in $u$.  \n6. **Substitute back** – replace $u$ with the original expression $g(x)$.\n\n---\n\n### Simple example  \n\nEvaluate  \n\\[\n\\int 2x\\cos\\!\\left(x^{2}\\right)\\,dx .\n\\]\n\n**Step 1 – Choose $u$**  \nThe inner function is $x^{2}$, and its derivative $2x$ is also present. Set  \n\\[\nu = x^{2}.\n\\]\n\n**Step 2 – Compute $du$**  \n\\[\ndu = 2x\\,dx \\quad\\Longrightarrow\\quad 2x\\,dx = du.\n\\]\n\n**Step 3 – Rewrite the integral**  \n\\[\n\\int 2x\\cos\\!\\left(x^{2}\\right)\\,dx = \\int \\cos(u)\\,du .\n\\]\n\n**Step 4 – Integrate in $u$**  \n\\[\n\\int \\cos(u)\\,du = \\sin(u) + C .\n\\]\n\n**Step 5 – Substitute back**  \n\\[\n\\sin(u) + C = \\sin\\!\\left(x^{2}\\right) + C .\n\\]\n\nSo  \n\\[\n\\boxed{\\displaystyle \\int 2x\\cos\\!\\left(x^{2}\\right)\\,dx = \\sin\\!\\left(x^{2}\\right) + C } .\n\\]\n\n---\n\n### More practice  \n\nBelow are four integrals that can be solved by u‑substitution. Each is followed by a complete worked solution.\n\n---\n\n#### Problem 1  \n\\[\n\\int x\\,e^{x^{2}}\\,dx\n\\]\n\n**Solution**  \nLet $u = x^{2}$, then $du = 2x\\,dx$ or $x\\,dx = \\tfrac12 du$.  \n\\[\n\\int x e^{x^{2}}dx = \\int e^{u}\\,\\frac12 du = \\frac12\\int e^{u}du = \\frac12 e^{u}+C = \\frac12 e^{x^{2}}+C .\n\\]\n\n---\n\n#### Problem 2  \n\\[\n\\int \\frac{3}{\\sqrt{1-4x}}\\,dx\n\\]\n\n**Solution**  \nSet $u = 1-4x$. Then $du = -4\\,dx$ or $dx = -\\tfrac14 du$.  \n\\[\n\\int \\frac{3}{\\sqrt{1-4x}}dx = 3\\int \\frac{1}{\\sqrt{u}}\\left(-\\frac14\\right)du = -\\frac34\\int u^{-1/2}du .\n\\]  \nIntegrate: $-\\frac34\\cdot 2u^{1/2}+C = -\\frac32\\sqrt{u}+C = -\\frac32\\sqrt{1-4x}+C$.\n\n---\n\n#### Problem 3  \n\\[\n\\int \\frac{\\ln x}{x}\\,dx\n\\]\n\n**Solution**  \nChoose $u = \\ln x$. Then $du = \\frac{1}{x}dx$, so $\\frac{dx}{x}=du$.  \n\\[\n\\int \\frac{\\ln x}{x}dx = \\int u\\,du = \\frac{u^{2}}{2}+C = \\frac{(\\ln x)^{2}}{2}+C .\n\\]\n\n---\n\n#### Problem 4  \n\\[\n\\int \\sin(5t)\\,dt\n\\]\n\n**Solution**  \nLet $u = 5t$, then $du = 5\\,dt$ or $dt = \\frac{1}{5}du$.  \n\\[\n\\int \\sin(5t)dt = \\int \\sin(u)\\,\\frac{1}{5}du = \\frac15\\int \\sin(u)du = -\\frac15\\cos(u)+C = -\\frac15\\cos(5t)+C .\n\\]\n\n---  \n\nThese examples illustrate the systematic steps of **u‑substitution**: identify the inner function, replace it with $u$, adjust $dx$, integrate, and finally return to the original variable. With practice, choosing the right $u$ becomes quick and reliable.",
+   "code": ""
+  },
+  {
+   "heading": "3. Integration by Parts",
+   "body": "**Integration by Parts**\n\nThe **integration by parts** formula comes from the product rule for differentiation. It is written as  \n\n\\[\n\\int u\\,dv = uv - \\int v\\,du .\n\\]\n\nHere **\\(u\\)** is a function whose derivative \\(du\\) is simpler, and **\\(dv\\)** is the remaining part of the integrand whose antiderivative \\(v\\) we can find easily.\n\n### How to choose \\(u\\) and \\(dv\\)\n\nA common guideline is the **LIATE** rule (order of preference for \\(u\\)):\n\n1. **L**ogarithmic functions – e.g., \\(\\ln x\\)  \n2. **I**nverse trigonometric – e.g., \\(\\arctan x\\)  \n3. **A**lgebraic – e.g., \\(x^2\\)  \n4. **T**rigonometric – e.g., \\(\\sin x\\)  \n5. **E**xponential – e.g., \\(e^x\\)\n\nPick the first type that appears in the integrand for \\(u\\); the rest becomes \\(dv\\).\n\n### Example 1: \\(\\displaystyle \\int x e^{x}\\,dx\\)\n\n1. Choose \\(u = x\\) (algebraic) → \\(du = dx\\).  \n2. Then \\(dv = e^{x}\\,dx\\) → \\(v = e^{x}\\).\n\nApply the formula:\n\n\\[\n\\int x e^{x}\\,dx = uv - \\int v\\,du\n= x e^{x} - \\int e^{x}\\,dx\n= x e^{x} - e^{x} + C .\n\\]\n\n### Example 2: \\(\\displaystyle \\int \\ln(x)\\,dx\\)\n\n1. Let \\(u = \\ln(x)\\) (logarithmic) → \\(du = \\frac{1}{x}\\,dx\\).  \n2. Then \\(dv = dx\\) → \\(v = x\\).\n\nNow\n\n\\[\n\\int \\ln(x)\\,dx = uv - \\int v\\,du\n= x\\ln(x) - \\int x\\cdot\\frac{1}{x}\\,dx\n= x\\ln(x) - \\int 1\\,dx\n= x\\ln(x) - x + C .\n\\]\n\nThe key step is turning a difficult integral into a simpler one.\n\n---\n\n### Practice Problems\n\n#### 1. \\(\\displaystyle \\int x^{2} e^{x}\\,dx\\)\n\n**Solution**\n\n- Choose \\(u = x^{2}\\) → \\(du = 2x\\,dx\\).  \n- \\(dv = e^{x}\\,dx\\) → \\(v = e^{x}\\).\n\n\\[\n\\int x^{2} e^{x}\\,dx = x^{2}e^{x} - \\int e^{x}(2x)\\,dx .\n\\]\n\nThe remaining integral \\(\\int 2x e^{x}\\,dx\\) needs integration by parts again:\n\n- New \\(u = 2x\\) → \\(du = 2\\,dx\\).  \n- New \\(dv = e^{x}\\,dx\\) → \\(v = e^{x}\\).\n\n\\[\n\\int 2x e^{x}\\,dx = 2x e^{x} - \\int 2 e^{x}\\,dx = 2x e^{x} - 2 e^{x}.\n\\]\n\nPutting everything together:\n\n\\[\n\\int x^{2} e^{x}\\,dx = x^{2}e^{x} - \\big(2x e^{x} - 2 e^{x}\\big) + C\n= e^{x}\\big(x^{2} - 2x + 2\\big) + C .\n\\]\n\n---\n\n#### 2. \\(\\displaystyle \\int \\frac{\\ln x}{x^{2}}\\,dx\\)\n\n**Solution**\n\n- Let \\(u = \\ln x\\) → \\(du = \\frac{1}{x}\\,dx\\).  \n- Then \\(dv = \\frac{1}{x^{2}}dx = x^{-2}dx\\) → \\(v = -x^{-1}\\).\n\n\\[\n\\int \\frac{\\ln x}{x^{2}}dx = uv - \\int v\\,du\n= -\\frac{\\ln x}{x} - \\int\\!\\left(-\\frac{1}{x}\\right)\\!\\frac{1}{x}\\,dx\n= -\\frac{\\ln x}{x} + \\int \\frac{1}{x^{2}}dx\n= -\\frac{\\ln x}{x} - \\frac{1}{x} + C .\n\\]\n\n---\n\n#### 3. \\(\\displaystyle \\int e^{x}\\cos x\\,dx\\)\n\n**Solution**\n\nFirst choice: \\(u = e^{x}\\) → \\(du = e^{x}dx\\); \\(dv = \\cos x\\,dx\\) → \\(v = \\sin x\\).\n\n\\[\n\\int e^{x}\\cos x\\,dx = e^{x}\\sin x - \\int \\sin x\\,e^{x}dx .\n\\]\n\nThe new integral \\(\\int e^{x}\\sin x\\,dx\\) again needs parts:\n\nTake \\(u = e^{x}\\), \\(dv = \\sin x\\,dx\\) → \\(v = -\\cos x\\).\n\n\\[\n\\int e^{x}\\sin x\\,dx = -e^{x}\\cos x + \\int e^{x}\\cos x\\,dx .\n\\]\n\nNow we have the original integral on both sides. Let \\(I = \\int e^{x}\\cos x\\,dx\\). Then  \n\n\\[\nI = e^{x}\\sin x - \\big(-e^{x}\\cos x + I\\big)\n\\]\n\\[\nI = e^{x}\\sin x + e^{x}\\cos x - I .\n\\]\n\nAdd \\(I\\) to both sides:\n\n\\[\n2I = e^{x}(\\sin x + \\cos x) \\quad\\Longrightarrow\\quad\nI = \\frac{e^{x}}{2}(\\sin x + \\cos x) + C .\n\\]\n\n---\n\n#### 4. \\(\\displaystyle \\int \\arctan x \\,dx\\)\n\n**Solution**\n\n- Choose \\(u = \\arctan x\\) (inverse trig) → \\(du = \\frac{1}{1+x^{2}}dx\\).  \n- \\(dv = dx\\) → \\(v = x\\).\n\n\\[\n\\int \\arctan x\\,dx = x\\arctan x - \\int \\frac{x}{1+x^{2}}dx .\n\\]\n\nFor the remaining integral, set \\(w = 1+x^{2}\\) → \\(dw = 2x\\,dx\\), so  \n\n\\[\n\\int \\frac{x}{1+x^{2}}dx = \\frac{1}{2}\\int \\frac{dw}{w}= \\frac{1}{2}\\ln|w| = \\frac{1}{2}\\ln(1+x^{2}).\n\\]\n\nThus\n\n\\[\n\\int \\arctan x\\,dx = x\\arctan x - \\frac{1}{2}\\ln(1+x^{2}) + C .\n\\]",
+   "code": ""
+  },
+  {
+   "heading": "4. Partial Fraction Decomposition",
+   "body": "**Partial Fraction Decomposition**\n\nWhen the integrand is a *rational function* (a polynomial divided by another polynomial), we can often rewrite it as a sum of simpler fractions. Each simpler fraction is easy to integrate. The steps are:\n\n1. **Factor the denominator** completely into linear factors \\((x-a)\\) and irreducible quadratic factors \\((x^{2}+bx+c)\\).  \n2. **Write the decomposition**:  \n   - For each distinct linear factor \\((x-a)\\) use a term \\(\\displaystyle \\frac{A}{x-a}\\).  \n   - If the linear factor is repeated \\((x-a)^{k}\\), use \\(\\displaystyle \\frac{A_{1}}{x-a}+\\frac{A_{2}}{(x-a)^{2}}+\\dots+\\frac{A_{k}}{(x-a)^{k}}\\).  \n   - For each irreducible quadratic factor \\((x^{2}+bx+c)\\) use \\(\\displaystyle \\frac{Bx+C}{x^{2}+bx+c}\\).  \n   - If the quadratic factor is repeated, add higher‑power terms similarly.  \n3. **Solve for the unknown constants** \\(A,\\,B,\\,C,\\dots\\) by clearing denominators and equating coefficients of like powers of \\(x\\) (or by plugging convenient values of \\(x\\)).  \n4. **Integrate each term** using basic formulas:\n   \\[\n   \\int \\frac{dx}{x-a}= \\ln|x-a|+C,\\qquad\n   \\int \\frac{dx}{(x-a)^{n}}= -\\frac{1}{(n-1)(x-a)^{\\,n-1}}+C\\;(n\\neq1),\n   \\]\n   \\[\n   \\int \\frac{Bx+C}{x^{2}+bx+c}\\,dx = \\frac{B}{2}\\ln|x^{2}+bx+c|+\\frac{2C-Bb}{\\sqrt{4c-b^{2}}}\\arctan\\!\\left(\\frac{2x+b}{\\sqrt{4c-b^{2}}}\\right)+C.\n   \\]\n\n---\n\n### Fully worked example  \n\nIntegrate  \n\\[\n\\int \\frac{2x+3}{x^{2}-x-2}\\,dx .\n\\]\n\n**Step 1 – Factor the denominator**  \n\\[\nx^{2}-x-2=(x-2)(x+1).\n\\]\n\n**Step 2 – Set up the decomposition**  \n\\[\n\\frac{2x+3}{(x-2)(x+1)}=\\frac{A}{x-2}+\\frac{B}{x+1}.\n\\]\n\n**Step 3 – Solve for \\(A\\) and \\(B\\)**  \n\nMultiply by \\((x-2)(x+1)\\):\n\\[\n2x+3 = A(x+1)+B(x-2).\n\\]\n\nExpand:\n\\[\n2x+3 = (A+B)x + (A-2B).\n\\]\n\nMatch coefficients:\n\n\\[\n\\begin{cases}\nA+B = 2,\\\\\nA-2B = 3.\n\\end{cases}\n\\]\n\nSolve: from the first equation \\(A = 2-B\\). Substitute into the second:\n\\[\n(2-B)-2B = 3 \\;\\Longrightarrow\\; 2-3B = 3 \\;\\Longrightarrow\\; -3B = 1 \\;\\Longrightarrow\\; B = -\\frac13.\n\\]\nThen \\(A = 2-(-\\frac13)=\\frac{7}{3}\\).\n\n**Step 4 – Write the integral as a sum**  \n\\[\n\\int \\frac{2x+3}{x^{2}-x-2}\\,dx\n= \\int\\left(\\frac{7/3}{x-2}-\\frac{1/3}{x+1}\\right)dx.\n\\]\n\n**Step 5 – Integrate each term**  \n\\[\n\\int \\frac{7/3}{x-2}\\,dx = \\frac{7}{3}\\ln|x-2|,\\qquad\n\\int \\frac{-1/3}{x+1}\\,dx = -\\frac{1}{3}\\ln|x+1|.\n\\]\n\n**Result**  \n\\[\n\\boxed{\\displaystyle \\int \\frac{2x+3}{x^{2}-x-2}\\,dx\n= \\frac{7}{3}\\ln|x-2|-\\frac{1}{3}\\ln|x+1|+C }.\n\\]\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\int \\frac{4x-5}{x^{2}-4}\\,dx\n\\]\n\n**Solution**  \n\nFactor denominator: \\(x^{2}-4=(x-2)(x+2)\\).  \nDecompose: \\(\\displaystyle \\frac{4x-5}{(x-2)(x+2)}=\\frac{A}{x-2}+\\frac{B}{x+2}\\).  \n\nClear denominators: \\(4x-5=A(x+2)+B(x-2)\\).  \n\nExpand: \\(4x-5=(A+B)x+(2A-2B)\\).  \n\nMatch:  \n\\(A+B=4\\), \\(2A-2B=-5\\) → \\(A-B=-\\frac52\\).  \n\nSolve: Adding equations gives \\(2A= \\frac{3}{2}\\) → \\(A=\\frac34\\).  \nThen \\(B=4-A= \\frac{13}{4}\\).  \n\nIntegral:  \n\\[\n\\int\\left(\\frac{3/4}{x-2}+\\frac{13/4}{x+2}\\right)dx\n= \\frac34\\ln|x-2|+\\frac{13}{4}\\ln|x+2|+C.\n\\]\n\n---\n\n### Problem 2  \n\\[\n\\int \\frac{3}{x^{2}+4x+5}\\,dx\n\\]\n\n**Solution**  \n\nComplete the square: \\(x^{2}+4x+5=(x+2)^{2}+1\\).  \n\nWrite as \\(\\displaystyle \\frac{3}{(x+2)^{2}+1}\\).  \n\nUse the standard form \\(\\int \\frac{dx}{u^{2}+a^{2}}=\\frac{1}{a}\\arctan\\frac{u}{a}\\).  \n\nLet \\(u=x+2\\), \\(a=1\\).  \n\nIntegral = \\(3\\int \\frac{du}{u^{2}+1}=3\\arctan(u)+C=3\\arctan(x+2)+C.\\)\n\n---\n\n### Problem 3  \n\\[\n\\int \\frac{x+1}{x^{3}-x}\\,dx\n\\]\n\n**Solution**  \n\nFactor denominator: \\(x^{3}-x = x(x-1)(x+1)\\).  \n\nDecompose:  \n\\[\n\\frac{x+1}{x(x-1)(x+1)}=\\frac{A}{x}+\\frac{B}{x-1}+\\frac{C}{x+1}.\n\\]\n\nMultiply through:  \n\\(x+1 = A(x-1)(x+1)+B x(x+1)+C x(x-1).\\)\n\nSet \\(x=0\\): \\(1 = A(-1)(1) \\Rightarrow A = -1.\\)  \nSet \\(x=1\\): \\(2 = B\\cdot1\\cdot2 \\Rightarrow B =1.\\)  \nSet \\(x=-1\\): \\(0 = C(-1)(-2) \\Rightarrow C =0.\\)\n\nThus integrand = \\(-\\frac{1}{x}+\\frac{1}{x-1}\\).  \n\nIntegral: \\(-\\ln|x|+\\ln|x-1|+C = \\ln\\left|\\frac{x-1}{x}\\right|+C.\\)\n\n---\n\n### Problem 4  \n\\[\n\\int \\frac{5x^{2}+3x+2}{(x-1)^{2}(x+2)}\\,dx\n\\]\n\n**Solution**  \n\nBecause \\((x-1)^{2}\\) is repeated, write  \n\\[\n\\frac{5x^{2}+3x+2}{(x-1)^{2}(x+2)}=\n\\frac{A}{x-1}+\\frac{B}{(x-1)^{2}}+\\frac{C}{x+2}.\n\\]\n\nClear denominators:  \n\\(5x^{2}+3x+2 = A(x-1)(x+2)+B(x+2)+C(x-1)^{2}.\\)\n\nExpand each term:  \n\n\\(A(x^{2}+x-2) + Bx+2B + C(x^{2}-2x+1).\\)\n\nCollect coefficients:  \n\n\\[\nx^{2}: \\; A + C = 5,\\\\\nx^{1}: \\; A + B -2C = 3,\\\\\nx^{0}: \\; -2A + 2B + C = 2.\n\\]\n\nSolve the linear system:  \n\nFrom first, \\(C = 5-A.\\)  \n\nInsert into second: \\(A + B -2(5-A)=3 \\Rightarrow A + B -10 +2A =3 \\Rightarrow 3A + B =13.\\)  \n\nInsert \\(C\\) into third: \\(-2A + 2B + (5-A)=2 \\Rightarrow -3A +2B = -3 \\Rightarrow 3A -2B =3.\\)\n\nNow solve  \n\\[\n\\begin{cases}\n3A + B =13,\\\\\n3A -2B =3.\n\\end{cases}\n\\]\n\nSubtract second from first: \\(3B =10 \\Rightarrow B = \\frac{10}{3}.\\)  \n\nThen \\(3A =13 - B = 13 - \\frac{10}{3}= \\frac{29}{3}\\) → \\(A = \\frac{29}{9}.\\)  \n\nFinally \\(C = 5 - A = 5 - \\frac{29}{9}= \\frac{16}{9}.\\)\n\nThus  \n\\[\n\\int\\left(\\frac{29/9}{x-1}+\\frac{10/3}{(x-1)^{2}}+\\frac{16/9}{x+2}\\right)dx\n= \\frac{29}{9}\\ln|x-1| -\\frac{10}{3}\\frac{1}{x-1}+ \\frac{16}{9}\\ln|x+2|+C.\n\\]\n\n---",
+   "code": ""
+  },
+  {
+   "heading": "5. Numerical Integration Methods",
+   "body": "**5. Numerical Integration Methods**  \n\nWhen a function $f(x)$ does not have an elementary antiderivative, we can still estimate the area under its curve on an interval $[a,b]$.  \nThe idea is to replace the curve by simple shapes (rectangles or trapezoids) whose areas we can compute exactly.  \nThe interval is divided into $n$ subintervals of equal width  \n\n\\[\n\\Delta x=\\frac{b-a}{n}.\n\\]\n\nFor each subinterval we choose a sample point and use the value $f(\\text{sample})$ to build the shape.\n\n---\n\n### Left‑endpoint rule  \n\nUse the left endpoint of each subinterval: $x_i=a+i\\Delta x\\;(i=0,\\dots ,n-1)$.  \n\n\\[\n\\boxed{L_n=\\Delta x\\sum_{i=0}^{n-1} f(x_i)}\n\\]\n\n---\n\n### Right‑endpoint rule  \n\nUse the right endpoint: $x_i=a+i\\Delta x\\;(i=1,\\dots ,n)$.  \n\n\\[\n\\boxed{R_n=\\Delta x\\sum_{i=1}^{n} f(x_i)}\n\\]\n\n---\n\n### Midpoint rule  \n\nUse the midpoint of each subinterval: $x_i=a+\\left(i-\\tfrac12\\right)\\Delta x\\;(i=1,\\dots ,n)$.  \n\n\\[\n\\boxed{M_n=\\Delta x\\sum_{i=1}^{n} f\\!\\left(a+\\Bigl(i-\\tfrac12\\Bigr)\\Delta x\\right)}\n\\]\n\n---\n\n### Trapezoidal rule  \n\nJoin the left and right endpoints of each subinterval, forming a trapezoid.  \n\n\\[\n\\boxed{T_n=\\frac{\\Delta x}{2}\\Bigl[f(a)+2\\sum_{i=1}^{n-1}f(x_i)+f(b)\\Bigr]}\n\\]\n\n---\n\n#### Fully worked example  \n\nEstimate $\\displaystyle\\int_{0}^{2} e^{-x^2}\\,dx$ using $n=4$ subintervals.\n\n1. Compute $\\Delta x=\\frac{2-0}{4}=0.5$.  \n2. **Left‑endpoint** points: $x_0=0,\\;x_1=0.5,\\;x_2=1.0,\\;x_3=1.5$.  \n\n\\[\nL_4=0.5\\bigl[f(0)+f(0.5)+f(1.0)+f(1.5)\\bigr]\n      =0.5\\bigl[1+e^{-0.25}+e^{-1}+e^{-2.25}\\bigr]\n      \\approx0.5(1+0.7788+0.3679+0.1054)=1.126.\n\\]\n\n3. **Right‑endpoint** points: $x_1=0.5,\\;x_2=1.0,\\;x_3=1.5,\\;x_4=2.0$.  \n\n\\[\nR_4=0.5\\bigl[e^{-0.25}+e^{-1}+e^{-2.25}+e^{-4}\\bigr]\n      \\approx0.5(0.7788+0.3679+0.1054+0.0183)=0.635.\n\\]\n\n4. **Midpoint** points: $x_i=0.25,0.75,1.25,1.75$.  \n\n\\[\nM_4=0.5\\bigl[e^{-0.0625}+e^{-0.5625}+e^{-1.5625}+e^{-3.0625}\\bigr]\n      \\approx0.5(0.9394+0.5698+0.2096+0.0469)=0.883.\n\\]\n\n5. **Trapezoidal** rule:  \n\n\\[\nT_4=\\frac{0.5}{2}\\Bigl[f(0)+2\\bigl(f(0.5)+f(1.0)+f(1.5)\\bigr)+f(2)\\Bigr]\n\\]\n\\[\n\\approx0.25\\bigl[1+2(0.7788+0.3679+0.1054)+0.0183\\bigr]=0.880.\n\\]\n\nThe true value is about $0.882$, so the midpoint and trapezoidal rules are already quite accurate.\n\n---\n\n### Practice problems  \n\n**Problem 1**  \nApproximate $\\displaystyle\\int_{1}^{3} \\frac{1}{x}\\,dx$ with $n=2$ using the left‑endpoint rule.  \n\n**Solution**  \n$\\Delta x=\\frac{3-1}{2}=1$.  \nLeft points: $x_0=1$, $x_1=2$.  \n\n\\[\nL_2=1\\bigl[f(1)+f(2)\\bigr]=1\\bigl[1+\\tfrac12\\bigr]=1.5.\n\\]\n\n---\n\n**Problem 2**  \nUse the right‑endpoint rule with $n=4$ to estimate $\\displaystyle\\int_{0}^{\\pi} \\sin x\\,dx$.  \n\n**Solution**  \n$\\Delta x=\\frac{\\pi-0}{4}=\\frac{\\pi}{4}$.  \nRight points: $x_i=i\\Delta x$, $i=1,\\dots,4$.  \n\n\\[\nR_4=\\frac{\\pi}{4}\\bigl[\\sin(\\tfrac{\\pi}{4})+\\sin(\\tfrac{\\pi}{2})+\\sin(\\tfrac{3\\pi}{4})+\\sin(\\pi)\\bigr]\n\\]\n\\[\n=\\frac{\\pi}{4}\\bigl[\\tfrac{\\sqrt2}{2}+1+\\tfrac{\\sqrt2}{2}+0\\bigr]\n=\\frac{\\pi}{4}\\bigl[1+\\sqrt2\\bigr]\\approx1.896.\n\\]\n\nThe exact integral equals $2$, so the estimate is close.\n\n---\n\n**Problem 3**  \nCompute the midpoint approximation with $n=3$ for $\\displaystyle\\int_{0}^{6} x^2\\,dx$.  \n\n**Solution**  \n$\\Delta x=2$.  \nMidpoints: $x_1=1$, $x_2=3$, $x_3=5$.  \n\n\\[\nM_3=2\\bigl[1^2+3^2+5^2\\bigr]=2(1+9+25)=70.\n\\]\n\nThe exact value is $\\frac{6^3}{3}=72$, so the error is $2$.\n\n---\n\n**Problem 4**  \nApply the trapezoidal rule with $n=5$ to $\\displaystyle\\int_{0}^{1} \\sqrt{1+x^3}\\,dx$.  \n\n**Solution**  \n$\\Delta x=\\frac{1}{5}=0.2$.  \nValues:  \n\n\\[\n\\begin{aligned}\nf(0)&=\\sqrt{1}=1,\\\\\nf(0.2)&=\\sqrt{1+0.008}=1.00399,\\\\\nf(0.4)&=\\sqrt{1+0.064}=1.031,\\\\\nf(0.6)&=\\sqrt{1+0.216}=1.104,\\\\\nf(0.8)&=\\sqrt{1+0.512}=1.229,\\\\\nf(1)&=\\sqrt{2}=1.414.\n\\end{aligned}\n\\]\n\n\\[\nT_5=\\frac{0.2}{2}\\Bigl[1+2(1.00399+1.031+1.104+1.229)+1.414\\Bigr]\n\\]\n\\[\n=\\0.1\\bigl[1+2(4.368)+1.414\\bigr]=0.1(1+8.736+1.414)=1.115.\n\\]\n\nA numerical integration tool gives $1.119$, confirming the trapezoidal estimate is accurate to three decimal places.",
+   "code": ""
+  },
+  {
+   "heading": "6. Choosing the Right Technique",
+   "body": "**Choosing the Right Technique**  \n\nWhen you look at an integral, ask a series of quick questions. The answers point you toward the most promising method.\n\n| Question | Yes → Try … | No → Go to next question |\n|----------|-------------|--------------------------|\n| 1. Does the integrand contain a function and its derivative (e.g., $f(g(x))g'(x)$)? | **u‑substitution** |  |\n| 2. Is the integrand a product of two functions where one becomes simpler when differentiated (e.g., $x\\sin x$, $e^x\\ln x$)? | **Integration by parts** |  |\n| 3. Is the integrand a rational function (a ratio of polynomials) and the denominator can be factored? | **Partial‑fraction decomposition** |  |\n| 4. Does the integrand involve a product of a polynomial and an exponential or trigonometric function, repeated after one integration by parts? | **Repeated integration by parts** (or look for a reduction formula) |  |\n| 5. Is the integrand a complicated expression that resists algebraic tricks, but you only need an approximate value? | **Numerical methods** (Trapezoidal rule, Simpson’s rule) |  |\n| 6. None of the above? | Try a **combination** of the above techniques or look up a special integral table. |  |\n\nA quick **checklist** you can keep on your desk:\n\n1. **Identify** any inner function whose derivative is present → *u‑substitution*.  \n2. **Spot** a product where one factor simplifies on differentiation → *integration by parts*.  \n3. **Check** if the integrand is a rational function → *partial fractions*.  \n4. **Notice** repeated patterns after one integration by parts → *reduction or repeated parts*.  \n5. **Need** only a number, not a formula? → *numerical integration*.  \n\n---\n\n### Worked Example: Choose the technique and integrate  \n\n\\[\n\\int x\\,e^{x^2}\\,dx\n\\]\n\n**Step 1 – Look for a derivative inside.**  \nThe exponent $x^2$ has derivative $2x$, which is almost the $x$ outside the exponential. This suggests **u‑substitution**.\n\n**Step 2 – Set the substitution.**  \nLet $u = x^2 \\;\\Rightarrow\\; du = 2x\\,dx \\;\\Rightarrow\\; \\frac{1}{2}du = x\\,dx$.\n\n**Step 3 – Rewrite the integral.**  \n\n\\[\n\\int x\\,e^{x^2}\\,dx = \\int e^{u}\\,\\frac{1}{2}\\,du = \\frac12\\int e^{u}\\,du.\n\\]\n\n**Step 4 – Integrate in $u$.**  \n\n\\[\n\\frac12\\int e^{u}\\,du = \\frac12 e^{u}+C.\n\\]\n\n**Step 5 – Return to $x$.**  \n\n\\[\n\\boxed{\\frac12 e^{x^2}+C}.\n\\]\n\nThe decision tree led us directly to u‑substitution, and the integral was solved in three tidy steps.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** $\\displaystyle\\int \\ln x \\,dx$  \n   **Solution:** Use integration by parts. Let $u=\\ln x$, $dv=dx$. Then $du=\\frac1x dx$, $v=x$.  \n   \\[\n   \\int \\ln x\\,dx = x\\ln x - \\int x\\cdot\\frac1x\\,dx = x\\ln x - \\int 1\\,dx = x\\ln x - x + C.\n   \\]\n\n2. **Problem:** $\\displaystyle\\int \\frac{2x+3}{x^2+3x+2}\\,dx$  \n   **Solution:** The denominator factors: $x^2+3x+2=(x+1)(x+2)$. Decompose:  \n   \\[\n   \\frac{2x+3}{(x+1)(x+2)} = \\frac{A}{x+1}+\\frac{B}{x+2}.\n   \\]  \n   Solving $2x+3 = A(x+2)+B(x+1)$ gives $A=1$, $B=1$.  \n   \\[\n   \\int\\frac{2x+3}{x^2+3x+2}dx = \\int\\!\\left(\\frac1{x+1}+\\frac1{x+2}\\right)dx = \\ln|x+1|+\\ln|x+2|+C.\n   \\]\n\n3. **Problem:** $\\displaystyle\\int x^2\\cos x\\,dx$  \n   **Solution:** Use integration by parts twice. First set $u=x^2$, $dv=\\cos x\\,dx$. Then $du=2x\\,dx$, $v=\\sin x$.  \n   \\[\n   \\int x^2\\cos x\\,dx = x^2\\sin x - \\int 2x\\sin x\\,dx.\n   \\]  \n   Apply parts again to $\\int 2x\\sin x\\,dx$ with $u=2x$, $dv=\\sin x\\,dx$: $du=2dx$, $v=-\\cos x$.  \n   \\[\n   \\int 2x\\sin x\\,dx = -2x\\cos x + \\int 2\\cos x\\,dx = -2x\\cos x + 2\\sin x.\n   \\]  \n   Combine:  \n   \\[\n   \\int x^2\\cos x\\,dx = x^2\\sin x +2x\\cos x -2\\sin x + C.\n   \\]\n\n4. **Problem:** Approximate $\\displaystyle\\int_{0}^{1} e^{-x^2}\\,dx$ using Simpson’s rule with $n=4$ (step $h=0.25$).  \n   **Solution:** Values: $f(0)=1$, $f(0.25)=e^{-0.0625}=0.9394$, $f(0.5)=e^{-0.25}=0.7788$, $f(0.75)=e^{-0.5625}=0.5698$, $f(1)=e^{-1}=0.3679$.  \n   Simpson’s formula:  \n   \\[\n   \\frac{h}{3}\\big[f_0+f_4+4(f_1+f_3)+2f_2\\big]\n   =\\frac{0.25}{3}\\big[1+0.3679+4(0.9394+0.5698)+2(0.7788)\\big]\n   \\approx0.7468.\n   \\]  \n   So $\\displaystyle\\int_{0}^{1} e^{-x^2}dx\\approx0.747$ (actual value $0.7468$).",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "**Practice Problems**\n\nBelow are four integrals that require different techniques.  \nFor each problem a complete, step‑by‑step solution is shown.  \nRead the solution carefully; notice how the **choice of technique** follows naturally from the form of the integrand.\n\n---\n\n### 1.  $\\displaystyle\\int \\sin(3x)\\,dx$\n\n**Solution (u‑substitution).**  \n\n1. Identify the inner function: $u = 3x$.  \n2. Differentiate: $du = 3\\,dx \\;\\Rightarrow\\; dx = \\dfrac{du}{3}$.  \n3. Substitute:  \n\n\\[\n\\int \\sin(3x)\\,dx = \\int \\sin(u)\\,\\frac{du}{3}\n                 = \\frac{1}{3}\\int \\sin(u)\\,du .\n\\]\n\n4. Integrate: $\\displaystyle\\int \\sin(u)\\,du = -\\cos(u)+C$.  \n5. Replace $u$ by $3x$:  \n\n\\[\n\\boxed{\\int \\sin(3x)\\,dx = -\\frac{1}{3}\\cos(3x)+C } .\n\\]\n\n---\n\n### 2.  $\\displaystyle\\int x\\ln(x)\\,dx$\n\n**Solution (integration by parts).**  \n\nRecall the formula $\\displaystyle\\int u\\,dv = uv-\\int v\\,du$.\n\n1. Choose $u = \\ln(x)$ (so $du = \\frac{1}{x}dx$) and $dv = x\\,dx$ (so $v = \\frac{x^{2}}{2}$).  \n2. Apply the formula:\n\n\\[\n\\int x\\ln(x)\\,dx = \\frac{x^{2}}{2}\\ln(x)-\\int \\frac{x^{2}}{2}\\cdot\\frac{1}{x}\\,dx\n                 = \\frac{x^{2}}{2}\\ln(x)-\\frac{1}{2}\\int x\\,dx .\n\\]\n\n3. Integrate the remaining simple integral: $\\displaystyle\\int x\\,dx = \\frac{x^{2}}{2}$.  \n4. Combine terms:\n\n\\[\n\\int x\\ln(x)\\,dx = \\frac{x^{2}}{2}\\ln(x)-\\frac{1}{2}\\cdot\\frac{x^{2}}{2}+C\n                 = \\frac{x^{2}}{2}\\bigl(\\ln(x)-\\tfrac12\\bigr)+C .\n\\]\n\n\\[\n\\boxed{\\int x\\ln(x)\\,dx = \\frac{x^{2}}{2}\\Bigl(\\ln(x)-\\frac12\\Bigr)+C } .\n\\]\n\n---\n\n### 3.  $\\displaystyle\\int \\frac{5}{x^{2}+4}\\,dx$\n\n**Solution (standard form).**  \n\nThe denominator is a sum of squares: $x^{2}+4 = x^{2}+2^{2}$.  \nRecall $\\displaystyle\\int \\frac{dx}{x^{2}+a^{2}} = \\frac{1}{a}\\arctan\\!\\left(\\frac{x}{a}\\right)+C$.\n\n1. Factor the constant:  \n\n\\[\n\\int \\frac{5}{x^{2}+4}\\,dx = 5\\int \\frac{dx}{x^{2}+2^{2}} .\n\\]\n\n2. Apply the formula with $a=2$:\n\n\\[\n5\\cdot\\frac{1}{2}\\arctan\\!\\left(\\frac{x}{2}\\right)+C\n   = \\frac{5}{2}\\arctan\\!\\left(\\frac{x}{2}\\right)+C .\n\\]\n\n\\[\n\\boxed{\\int \\frac{5}{x^{2}+4}\\,dx = \\frac{5}{2}\\arctan\\!\\left(\\frac{x}{2}\\right)+C } .\n\\]\n\n---\n\n### 4.  Trapezoidal approximation of $\\displaystyle\\int_{0}^{1} e^{-x^{2}}dx$ with $n=4$\n\n**Solution (numerical integration).**  \n\nThe trapezoidal rule with $n$ subintervals of equal width $h$ gives  \n\n\\[\n\\int_{a}^{b}f(x)dx \\approx \\frac{h}{2}\\Bigl[f(x_{0})+2\\sum_{k=1}^{n-1}f(x_{k})+f(x_{n})\\Bigr],\n\\]\nwhere $h=\\dfrac{b-a}{n}$.\n\n1. Here $a=0$, $b=1$, $n=4$, so $h=\\frac{1-0}{4}=0.25$.  \n2. Nodes: $x_{0}=0$, $x_{1}=0.25$, $x_{2}=0.50$, $x_{3}=0.75$, $x_{4}=1$.  \n3. Evaluate $f(x)=e^{-x^{2}}$:\n\n\\[\n\\begin{aligned}\nf(0)   &= e^{0}=1,\\\\\nf(0.25)&=e^{-0.0625}\\approx0.9394,\\\\\nf(0.50)&=e^{-0.25}\\approx0.7788,\\\\\nf(0.75)&=e^{-0.5625}\\approx0.5698,\\\\\nf(1)   &=e^{-1}\\approx0.3679.\n\\end{aligned}\n\\]\n\n4. Plug into the formula:\n\n\\[\n\\begin{aligned}\n\\int_{0}^{1} e^{-x^{2}}dx &\\approx \n\\frac{0.25}{2}\\Bigl[1+2(0.9394+0.7788+0.5698)+0.3679\\Bigr] \\\\\n&=0.125\\Bigl[1+2(2.2879)+0.3679\\Bigr] \\\\\n&=0.125\\Bigl[1+4.5758+0.3679\\Bigr] \\\\\n&=0.125\\,(5.9437) \\approx 0.743 .\n\\end{aligned}\n\\]\n\n\\[\n\\boxed{\\displaystyle\\int_{0}^{1} e^{-x^{2}}dx \\;\\approx\\;0.743\\text{ (trapezoidal, }n=4)} .\n\\]\n\n---\n\nThese four problems illustrate **u‑substitution**, **integration by parts**, a **standard antiderivative**, and a **numerical method**. Practising each will help you recognise which technique to apply in future integrals.",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "antiderivative",
+   "meaning": "a function whose derivative equals the given function"
+  },
+  {
+   "term": "indefinite integral",
+   "meaning": "the set of all antiderivatives, written as integral of f(x) dx equals F(x)+C"
+  },
+  {
+   "term": "definite integral",
+   "meaning": "the signed area under a curve between two limits, written as integral from a to b of f(x) dx"
+  },
+  {
+   "term": "u‑substitution",
+   "meaning": "a method that replaces a part of the integrand with a new variable u to simplify the integral"
+  },
+  {
+   "term": "integration by parts",
+   "meaning": "a technique based on the product rule, using the formula integral u dv = u v minus integral v du"
+  },
+  {
+   "term": "partial fraction decomposition",
+   "meaning": "rewriting a rational function as a sum of simpler fractions that are easy to integrate"
+  },
+  {
+   "term": "numerical integration",
+   "meaning": "approximating the value of a definite integral using shapes like rectangles or trapezoids"
+  },
+  {
+   "term": "LIATE rule",
+   "meaning": "a guideline for choosing u in integration by parts: Logarithmic, Inverse trig, Algebraic, Trig, Exponential"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the constant added to an antiderivative called?",
+   "options": [
+    "integration constant",
+    "derivative constant",
+    "limit constant",
+    "factor constant"
+   ],
+   "answer": 0,
+   "why": "It is denoted by C and accounts for all possible vertical shifts."
+  },
+  {
+   "q": "Which technique is best when the integrand contains f(g(x)) times g'(x)?",
+   "options": [
+    "partial fractions",
+    "u‑substitution",
+    "integration by parts",
+    "trapezoidal rule"
+   ],
+   "answer": 1,
+   "why": "The derivative of the inner function appears, matching the u‑substitution pattern."
+  },
+  {
+   "q": "In integration by parts, which part of the LIATE list should be chosen first for u?",
+   "options": [
+    "Exponential",
+    "Trig",
+    "Algebraic",
+    "Logarithmic"
+   ],
+   "answer": 3,
+   "why": "LIATE orders preference, so Logarithmic functions are chosen before others."
+  },
+  {
+   "q": "When integrating 2x cos(x^2) dx, what substitution should be made?",
+   "options": [
+    "u = x",
+    "u = cos(x^2)",
+    "u = x^2",
+    "u = sin(x)"
+   ],
+   "answer": 2,
+   "why": "u = x^2 makes du = 2x dx, matching the integrand."
+  },
+  {
+   "q": "What is the purpose of partial fraction decomposition?",
+   "options": [
+    "To factor polynomials",
+    "To convert a rational function into simpler fractions",
+    "To find limits",
+    "To approximate integrals"
+   ],
+   "answer": 1,
+   "why": "It breaks a complex rational function into easy‑to‑integrate pieces."
+  },
+  {
+   "q": "Which rule gives the left‑endpoint approximation formula?",
+   "options": [
+    "Ln = delta x sum f(x_i) from i=1 to n",
+    "Ln = delta x sum f(x_i) from i=0 to n-1",
+    "Ln = delta x sum f(midpoints)",
+    "Ln = (b-a)/n"
+   ],
+   "answer": 1,
+   "why": "Left‑endpoint uses i=0 to n‑1 for the sample points."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define antiderivative",
+   "back": "A function F(x) whose derivative F'(x) equals the given function f(x)."
+  },
+  {
+   "front": "Write the general form of an indefinite integral",
+   "back": "Integral of f(x) dx equals F(x) plus C."
+  },
+  {
+   "front": "State the u‑substitution steps in brief",
+   "back": "Choose u, compute du, rewrite integral in u, integrate, substitute back."
+  },
+  {
+   "front": "Give the integration by parts formula",
+   "back": "Integral u dv equals u v minus integral v du."
+  },
+  {
+   "front": "What does the LIATE rule stand for?",
+   "back": "Logarithmic, Inverse trig, Algebraic, Trig, Exponential."
+  },
+  {
+   "front": "When to use partial fraction decomposition?",
+   "back": "When integrating a rational function whose denominator can be factored into linear or irreducible quadratics."
+  },
+  {
+   "front": "Name two basic numerical integration rules",
+   "back": "Left‑endpoint rule and trapezoidal rule (also right‑endpoint and midpoint)."
+  },
+  {
+   "front": "How to decide which technique to apply to an integral?",
+   "back": "Ask a series of questions: derivative present → u‑substitution; product with simplifiable part → integration by parts; rational function → partial fractions; otherwise consider numerical methods."
+  }
+ ],
+ "reviewed": false
+}

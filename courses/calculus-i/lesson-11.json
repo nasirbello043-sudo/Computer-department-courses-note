@@ -1,0 +1,178 @@
+{
+ "title": "focus",
+ "summary": "Lesson 11 introduces the concept of focus in calculus, explaining how to identify and concentrate on the most important features of a problem. It connects focus with limits, derivatives, and integrals to improve problem‑solving efficiency.",
+ "sections": [
+  {
+   "heading": "What is Focus in Calculus?",
+   "body": "**What is Focus in Calculus?**  \n\nIn many calculus problems we are faced with several quantities – functions, variables, constants – that can all be written down at once. **Focus** means deliberately picking the *single* element that actually drives the problem forward. By keeping our attention on that key variable or function, the algebra and the reasoning become much clearer, and we avoid unnecessary detours.\n\nThink of a detective story: the whole plot revolves around the main clue. If the detective spends time on every piece of evidence equally, the case never gets solved. In calculus the “clue’’ is the variable or function that changes the most, or that appears in the limit, derivative, or integral we need to evaluate. Once we have identified it, we rewrite the whole problem in terms of that element and everything else becomes a simple side‑note.\n\nWhy does this help?  \n\n1. **Simplifies algebra** – expressions often collapse when written with a single symbol.  \n2. **Reduces mistakes** – fewer symbols mean fewer chances to mis‑place a sign or exponent.  \n3. **Guides intuition** – we can see how the answer behaves as the focused quantity grows or shrinks.  \n\nBelow is a fully worked example that shows the whole process of focusing, from spotting the key variable to reaching the final answer.\n\n---\n\n### Worked Example: Computing a Limit by Focusing on the Dominant Term  \n\nFind  \n\\[\n\\lim_{x\\to 0}\\frac{\\sin(5x)-5x}{x^{3}} .\n\\]\n\n**Step 1 – Identify the focus.**  \nWhen \\(x\\) is very small, the sine function can be approximated by its Taylor series:  \n\\[\n\\sin(5x)=5x-\\frac{(5x)^{3}}{3!}+O(x^{5}).\n\\]  \nThe dominant terms that will survive after subtraction are the ones up to \\(x^{3}\\). Hence the **focus** is the cubic term \\(-\\frac{(5x)^{3}}{6}\\).\n\n**Step 2 – Rewrite the numerator using the focus.**  \n\\[\n\\sin(5x)-5x = \\Bigl(5x-\\frac{125x^{3}}{6}+O(x^{5})\\Bigr)-5x\n            = -\\frac{125x^{3}}{6}+O(x^{5}).\n\\]\n\n**Step 3 – Form the fraction and cancel the common factor.**  \n\\[\n\\frac{\\sin(5x)-5x}{x^{3}}\n   = \\frac{-\\frac{125x^{3}}{6}+O(x^{5})}{x^{3}}\n   = -\\frac{125}{6}+O(x^{2}).\n\\]\n\n**Step 4 – Take the limit.**  \nAs \\(x\\to0\\), the \\(O(x^{2})\\) term vanishes, leaving  \n\\[\n\\boxed{-\\dfrac{125}{6}}.\n\\]\n\nThe problem becomes trivial once we **focus** on the cubic term of the series; all other higher‑order terms disappear in the limit.\n\n---\n\n### Practice Problems  \n\n1. **Problem:**  \n   \\[\n   \\lim_{t\\to\\infty}\\frac{e^{2t}-e^{t}}{e^{2t}} .\n   \\]  \n\n   **Solution:**  \n   Focus on the highest exponential, \\(e^{2t}\\). Write the numerator as \\(e^{2t}(1-e^{-t})\\). The fraction becomes  \n   \\[\n   \\frac{e^{2t}(1-e^{-t})}{e^{2t}} = 1-e^{-t}.\n   \\]  \n   As \\(t\\to\\infty\\), \\(e^{-t}\\to0\\). Hence the limit is \\(\\boxed{1}\\).\n\n2. **Problem:**  \n   Find the derivative of \\(f(x)=\\ln(3x^{2}+2)\\) at \\(x=1\\).  \n\n   **Solution:**  \n   Focus on the inner function \\(g(x)=3x^{2}+2\\). By the chain rule,  \n   \\[\n   f'(x)=\\frac{1}{g(x)}\\cdot g'(x)=\\frac{1}{3x^{2}+2}\\cdot 6x.\n   \\]  \n   At \\(x=1\\):  \n   \\[\n   f'(1)=\\frac{6\\cdot1}{3\\cdot1^{2}+2}= \\frac{6}{5}= \\boxed{\\tfrac{6}{5}}.\n   \\]\n\n3. **Problem:**  \n   Evaluate \\(\\displaystyle\\int_{0}^{1} (4x^{3}-2x) \\,dx\\).  \n\n   **Solution:**  \n   Focus on integrating term‑by‑term.  \n   \\[\n   \\int_{0}^{1}4x^{3}\\,dx = 4\\left[\\frac{x^{4}}{4}\\right]_{0}^{1}=1,\n   \\qquad\n   \\int_{0}^{1}2x\\,dx = 2\\left[\\frac{x^{2}}{2}\\right]_{0}^{1}=1.\n   \\]  \n   Subtract: \\(1-1= \\boxed{0}\\).\n\n4. **Problem:**  \n   Compute \\(\\displaystyle\\lim_{x\\to0}\\frac{1-\\cos(7x)}{x^{2}}\\).  \n\n   **Solution:**  \n   Focus on the series for cosine: \\(\\cos(7x)=1-\\frac{(7x)^{2}}{2}+O(x^{4})\\).  \n   Then  \n   \\[\n   1-\\cos(7x)=\\frac{49x^{2}}{2}+O(x^{4}).\n   \\]  \n   Divide by \\(x^{2}\\):  \n   \\[\n   \\frac{1-\\cos(7x)}{x^{2}} = \\frac{49}{2}+O(x^{2}).\n   \\]  \n   Taking \\(x\\to0\\) gives the limit \\(\\boxed{\\dfrac{49}{2}}\\).",
+   "code": ""
+  },
+  {
+   "heading": "Choosing the Right Variable",
+   "body": "When we solve a problem in calculus, the first decision is **which quantity will be our independent variable**.  \nChoosing the right variable makes limits, derivatives, and integrals much easier to set up and to interpret.\n\n---\n\n### Why the choice matters  \n\n* The independent variable is the one that **changes freely** while the other quantities depend on it.  \n* A good choice often turns a messy expression into a simple one, or lets us use familiar formulas.  \n* A poor choice can hide the relationship we need and lead to algebraic mistakes.\n\n---\n\n### Common situations  \n\n| Situation | Typical independent variable | Reason |\n|-----------|-----------------------------|--------|\n| Motion of a car | **time** $t$ | Position $s(t)$, speed $v(t)=\\frac{ds}{dt}$, acceleration $a(t)=\\frac{dv}{dt}$ are naturally expressed as functions of time. |\n| Population growth | **time** $t$ | Resources, birth‑rate, etc., evolve over years. |\n| Water draining from a tank | **height** $h$ of the water surface | The rate of outflow depends on the current height, not directly on time. |\n| Cost of producing $x$ items | **quantity** $x$ | Marginal cost is $\\frac{dC}{dx}$, the change in cost per extra unit. |\n\n---\n\n### Worked example: Distance vs. time  \n\nA runner starts from rest and accelerates uniformly at $2\\ \\text{m/s}^2$ for $5$ seconds, then continues at the final speed.  \nWe want the **total distance** after $12$ seconds.\n\n1. **Identify the natural variable.**  \n   The motion is described most directly by **time** $t$, because acceleration and speed are given per second.\n\n2. **Write the speed function.**  \n   During the first $5$ s, acceleration $a=2$ gives  \n   $$v(t)=a t = 2t \\qquad (0\\le t\\le5).$$  \n\n   After $5$ s the speed is constant:  \n   $$v(t)=v(5)=2\\cdot5=10\\ \\text{m/s} \\qquad (5<t\\le12).$$\n\n3. **Integrate to find distance.**  \n   Distance $s(t)=\\int_0^{t} v(\\tau)\\,d\\tau$.\n\n   *First interval* $0\\le t\\le5$:  \n   $$s_1(t)=\\int_0^{t} 2\\tau\\,d\\tau = \\left[\\tau^2\\right]_0^{t}=t^{2}.$$\n\n   At $t=5$, $s_1(5)=25\\ \\text{m}$.\n\n   *Second interval* $5<t\\le12$:  \n   $$s_2(t)=s_1(5)+\\int_5^{t} 10\\,d\\tau = 25 + 10(t-5).$$\n\n4. **Evaluate at $t=12$.**  \n   $$s(12)=25+10(12-5)=25+70=95\\ \\text{m}.$$\n\n**Result:** The runner travels $95$ meters in $12$ seconds.  \nChoosing **time** as the independent variable let us write a single piecewise speed function and integrate it directly.\n\n---\n\n### Practice problems  \n\n1. **Problem:** A bacteria colony doubles every hour. If there are $500$ bacteria at $t=0$, write the population $P(t)$ as a function of time $t$ (hours) and find the limit $\\displaystyle\\lim_{t\\to 3^-}P(t)$.  \n\n   **Solution:** The growth is exponential: $P(t)=500\\cdot2^{t}$.  \n   The limit as $t\\to3^{-}$ is simply $P(3)=500\\cdot2^{3}=500\\cdot8=4000$.\n\n2. **Problem:** Water drains from a cylindrical tank so that the height $h$ (meters) drops at a rate $\\displaystyle\\frac{dh}{dt}=-0.3\\sqrt{h}$. Find the height after $4$ minutes, given $h(0)=9$ m.  \n\n   **Solution:** Treat $h$ as the independent variable’s **function of time**. Separate variables:  \n   $$\\frac{dh}{\\sqrt{h}}=-0.3\\,dt.$$  \n   Integrate: $\\displaystyle 2\\sqrt{h} = -0.3t + C$.  \n   At $t=0$, $2\\sqrt{9}=6=C$.  \n   So $2\\sqrt{h}=6-0.3t$.  \n   At $t=4$, $2\\sqrt{h}=6-1.2=4.8$, thus $\\sqrt{h}=2.4$ and $h=5.76$ m.\n\n3. **Problem:** The cost $C$ (dollars) to produce $x$ widgets is $C(x)=0.05x^{2}+20x+500$. Find the **marginal cost** when $x=100$.  \n\n   **Solution:** Marginal cost is $C'(x)$. Differentiate: $C'(x)=0.10x+20$.  \n   At $x=100$, $C'(100)=0.10(100)+20=10+20=30$ dollars per widget.\n\n4. **Problem:** A car’s fuel efficiency $E$ (km per liter) depends on speed $v$ (km/h) as $E(v)=\\frac{500}{v+10}$. Determine the speed that **maximizes** distance traveled in a 2‑hour trip.  \n\n   **Solution:** Distance $D(v)=E(v)\\cdot v\\cdot2 = 2v\\frac{500}{v+10}= \\frac{1000v}{v+10}$.  \n   Differentiate w.r.t. $v$:  \n   $$D'(v)=\\frac{1000(v+10)-1000v}{(v+10)^{2}}=\\frac{10000}{(v+10)^{2}}.$$  \n   $D'(v)>0$ for all $v>0$, so $D$ increases with $v$.  \n   However, realistic speeds are limited; the maximum feasible speed (e.g., $v=120$ km/h) gives the greatest distance.  \n\nThese problems illustrate how picking **time**, **height**, **quantity**, or **speed** as the independent variable leads to clear, solvable calculus expressions.",
+   "code": ""
+  },
+  {
+   "heading": "Focusing When Computing Limits",
+   "body": "When we talk about **focus** in calculus, we mean looking closely at the part of an expression that actually decides the value of a limit.  \nOften a complicated formula contains many terms, but only one or two of them matter when the variable gets very large or very small. By **isolating** that decisive part, we can compute limits quickly and avoid unnecessary algebra.\n\n---\n\n### Isolating the decisive part  \n\n1. **Identify the variable that is approaching a special value** (usually $0$ or $\\infty$).  \n2. **Rank the terms** according to how fast they grow or shrink as the variable moves toward that value.  \n3. **Keep the dominant term(s)** and discard the rest, because they become negligible in the limit.  \n\nThis process is called **dominant‑term analysis**. It works for rational functions, radicals, exponentials, and trigonometric expressions.\n\n---\n\n### Example 1 – Algebraic simplification  \n\nFind  \n\n\\[\n\\lim_{x\\to\\infty}\\frac{5x^{3}+2x^{2}-7}{3x^{3}-4x+1}.\n\\]\n\n**Step 1 – Identify the dominant power.**  \nBoth numerator and denominator are polynomials. The highest power of $x$ in each is $x^{3}$.\n\n**Step 2 – Factor out $x^{3}$.**  \n\n\\[\n\\frac{5x^{3}+2x^{2}-7}{3x^{3}-4x+1}\n= \\frac{x^{3}\\bigl(5+2/x-7/x^{3}\\bigr)}{x^{3}\\bigl(3-4/x^{2}+1/x^{3}\\bigr)}.\n\\]\n\n**Step 3 – Cancel the common factor $x^{3}$.**  \n\n\\[\n= \\frac{5+2/x-7/x^{3}}{3-4/x^{2}+1/x^{3}}.\n\\]\n\n**Step 4 – Let $x\\to\\infty$.**  \nAll terms containing $1/x$, $1/x^{2}$, $1/x^{3}$ vanish:\n\n\\[\n\\lim_{x\\to\\infty}\\frac{5+2/x-7/x^{3}}{3-4/x^{2}+1/x^{3}}\n= \\frac{5}{3}.\n\\]\n\nThe **focus** was on the $x^{3}$ terms; everything else became irrelevant.\n\n---\n\n### Example 2 – Dominant term in a radical  \n\nCompute  \n\n\\[\n\\lim_{x\\to0^{+}}\\frac{\\sqrt{x+1}-1}{x}.\n\\]\n\n**Step 1 – Recognize the indeterminate form $0/0$.**  \n\n**Step 2 – Use a series‑type focus:** for small $x$, $\\sqrt{1+x}\\approx 1+\\frac{x}{2}$ (the linear term dominates).\n\n**Step 3 – Replace the radical with its dominant approximation.**  \n\n\\[\n\\frac{\\sqrt{x+1}-1}{x}\\;\\approx\\;\\frac{1+\\frac{x}{2}-1}{x}\n= \\frac{x/2}{x}= \\frac12.\n\\]\n\n**Step 4 – Confirm by algebraic manipulation (rationalising).**  \n\n\\[\n\\frac{\\sqrt{x+1}-1}{x}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n= \\frac{x}{x\\bigl(\\sqrt{x+1}+1\\bigr)} = \\frac{1}{\\sqrt{x+1}+1}\n\\to \\frac{1}{2}.\n\\]\n\nThus the limit is $\\boxed{\\tfrac12}$, and the **focus** was the first‑order term of the square‑root expansion.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\lim_{n\\to\\infty}\\frac{4n^{4}+n^{2}}{2n^{4}-5n^{3}+1}.\n\\]\n\n**Solution** – Factor $n^{4}$ from numerator and denominator, cancel, and let $n\\to\\infty$:\n\n\\[\n\\frac{4+1/n^{2}}{2-5/n+1/n^{4}}\\to\\frac{4}{2}=2.\n\\]\n\n---\n\n### Problem 2  \n\\[\n\\lim_{x\\to0}\\frac{e^{3x}-1}{x}.\n\\]\n\n**Solution** – Use the series $e^{3x}=1+3x+\\frac{(3x)^{2}}{2!}+\\dots$; the dominant term after subtraction is $3x$:\n\n\\[\n\\frac{1+3x+\\dots-1}{x}= \\frac{3x+\\dots}{x}\\to3.\n\\]\n\n---\n\n### Problem 3  \n\\[\n\\lim_{x\\to\\infty}\\frac{\\ln(x^{2}+1)}{\\ln x}.\n\\]\n\n**Solution** – For large $x$, $x^{2}+1\\approx x^{2}$, so  \n\n\\[\n\\ln(x^{2}+1)\\approx\\ln x^{2}=2\\ln x.\n\\]\n\nHence the limit is $\\displaystyle\\frac{2\\ln x}{\\ln x}\\to2$.\n\n---\n\n### Problem 4  \n\\[\n\\lim_{x\\to0^{+}}\\frac{x}{\\sqrt{x+1}-1}.\n\\]\n\n**Solution** – Rationalise the denominator:\n\n\\[\n\\frac{x}{\\sqrt{x+1}-1}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n= \\frac{x(\\sqrt{x+1}+1)}{x}= \\sqrt{x+1}+1\\to 2.\n\\]\n\nThe **focus** in each problem was the term that grows (or shrinks) fastest as the variable approaches the limit point. By zeroing in on that term, the limit becomes immediate.",
+   "code": ""
+  },
+  {
+   "heading": "Focusing in Differentiation",
+   "body": "When we **differentiate**, the goal is to find the rate at which a *specific* part of the expression changes.  \nOften an expression contains pieces that are constant with respect to the variable we are differentiating.  \nBy **focusing** on the part that actually varies, we can ignore the rest and avoid unnecessary work.\n\n---\n\n### Spot the variable\n\n1. **Identify the independent variable** (usually $x$ or $t$).  \n2. **Mark every factor that contains this variable**. Anything that does not contain it is a constant for the purpose of differentiation.  \n\n*Example:* In $f(x)=5x^2\\sin(3)$, the factor $\\sin(3)$ is a constant because it does not involve $x$. The whole function simplifies to $f(x)=5\\sin(3)\\,x^2$, and we only need to differentiate $x^2$.\n\n---\n\n### Product rule with focus\n\nIf $f(x)=g(x)\\,h(x)$, the product rule says  \n\n$$\\frac{d}{dx}[g(x)h(x)]=g'(x)h(x)+g(x)h'(x).$$  \n\nWhen one factor is constant, its derivative is $0$, and the rule collapses to a single term.\n\n**Worked example**\n\nDifferentiate  \n\n$$F(x)=\\bigl(4x^3+2\\bigr)\\,\\bigl(7\\bigl)\\bigr).$$  \n\n1. **Identify the variable:** $x$ appears only in the first factor $4x^3+2$.  \n2. **Treat the second factor as constant:** $7$ has derivative $0$.  \n3. Apply the product rule:  \n\n\\[\n\\begin{aligned}\nF'(x) &= (4x^3+2)'\\cdot 7 + (4x^3+2)\\cdot 7' \\\\\n      &= (12x^2)\\cdot 7 + (4x^3+2)\\cdot 0 \\\\\n      &= 84x^2.\n\\end{aligned}\n\\]\n\nThe whole differentiation reduces to differentiating the *only* variable‑dependent factor.\n\n---\n\n### Chain rule with focus\n\nFor a composition $f(x)=\\phi\\bigl(g(x)\\bigr)$, the chain rule gives  \n\n$$f'(x)=\\phi'\\bigl(g(x)\\bigr)\\,g'(x).$$  \n\nIf $\\phi$ is a simple constant factor, we can pull it out first.\n\n**Worked example**\n\nDifferentiate  \n\n$$H(x)=3\\bigl(\\cos(5x^2)\\bigr).$$  \n\n1. **Separate constant:** $3$ is constant.  \n2. Apply the chain rule to $\\cos(5x^2)$:  \n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}\\cos(5x^2) &= -\\sin(5x^2)\\cdot (5x^2)' \\\\\n                        &= -\\sin(5x^2)\\cdot 10x.\n\\end{aligned}\n\\]\n\n3. Multiply by the constant $3$:  \n\n\\[\nH'(x)=3\\bigl[-\\sin(5x^2)\\cdot 10x\\bigr]= -30x\\sin(5x^2).\n\\]\n\nAgain, the only part we needed to differentiate was the inner function $5x^2$.\n\n---\n\n### Practice problems\n\n**1.** Differentiate $P(x)=\\bigl(2x^4-5x\\bigr)\\,9$.\n\n*Solution:*  \nThe factor $9$ is constant.  \n$P'(x)=9\\,(2x^4-5x)' = 9\\,(8x^3-5)=72x^3-45$.\n\n---\n\n**2.** Differentiate $Q(t)=\\displaystyle 4\\bigl(e^{3t}+1\\bigr)$.\n\n*Solution:*  \nConstant $4$ pulls out.  \n$\\frac{d}{dt}(e^{3t}+1)=3e^{3t}+0=3e^{3t}$.  \nThus $Q'(t)=4\\cdot 3e^{3t}=12e^{3t}$.\n\n---\n\n**3.** Differentiate $R(x)=\\bigl(\\sin x\\bigr)\\,(5)$.\n\n*Solution:*  \n$5$ is constant.  \n$R'(x)=5\\cos x$.\n\n---\n\n**4.** Differentiate $S(x)=\\bigl(x^2+1\\bigr)^3$.\n\n*Solution:*  \nUse the chain rule. Let $u=x^2+1$, so $S=u^3$.  \n$u' = 2x$, and $\\frac{d}{du}u^3 = 3u^2$.  \nTherefore $S'(x)=3u^2\\cdot u' = 3(x^2+1)^2\\cdot 2x = 6x\\,(x^2+1)^2$.\n\n---\n\nBy **focusing** on the variable‑dependent parts and treating everything else as a constant, differentiation becomes a quick, systematic process. This habit saves time and reduces errors, especially in longer expressions.",
+   "code": ""
+  },
+  {
+   "heading": "Focusing in Integration",
+   "body": "When you **integrate**, the hardest part is often spotting which *technique* will make the problem easy.  \nThink of the integrand as a sentence: some words belong together and hint at a particular rule.  \nThe goal of **focus** is to isolate that “keyword” part, apply the right method, and then bring the rest back in.\n\n---\n\n### 1. Look for a **substitution** pattern  \n\nA substitution works when the integrand contains a function *and* its derivative (up to a constant).  \nTypical clues:\n\n* A factor like $f'(x)$ multiplied by $f(x)$, e.g. $\\int 2x\\cos(x^2)\\,dx$.\n* A composite function where the inner part’s derivative is present, e.g. $\\int \\frac{e^{3x}}{1+e^{6x}}\\,dx$.\n\n**Step‑by‑step**\n\n1. Identify a piece $u = g(x)$ whose derivative $g'(x)$ also appears.\n2. Rewrite $dx = \\frac{du}{g'(x)}$ and replace every $g(x)$ by $u$.\n3. Integrate in $u$, then substitute back $u=g(x)$.\n\n---\n\n### 2. Spot a **integration‑by‑parts** (IBP) situation  \n\nIBP is useful when the integrand is a product of a *polynomial‑type* factor and a *trigonometric, exponential, or logarithmic* factor.  \nThe mnemonic **LIATE** (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) helps choose $u$ (the part to differentiate) and $dv$ (the part to integrate).\n\n**Step‑by‑step**\n\n1. Write the integrand as $u\\,dv$.\n2. Compute $du = u'\\,dx$ and $v = \\int dv$.\n3. Apply $\\displaystyle \\int u\\,dv = uv - \\int v\\,du$.\n4. Simplify; sometimes a second IBP is needed.\n\n---\n\n### 3. Detect a **partial‑fraction** (PF) case  \n\nPF works for rational functions where the denominator factors into linear or irreducible quadratics and the degree of the numerator is lower than the denominator.\n\n**Step‑by‑step**\n\n1. Ensure the fraction is *proper*; if not, perform polynomial long division first.\n2. Factor the denominator completely.\n3. Write the fraction as a sum of unknown constants (or linear terms) over each factor.\n4. Solve for the constants (by equating coefficients or plugging convenient $x$ values).\n5. Integrate each simple term; $\\int \\frac{1}{x-a}\\,dx = \\ln|x-a|$, $\\int \\frac{1}{x^2+b^2}\\,dx = \\frac{1}{b}\\arctan\\frac{x}{b}$, etc.\n\n---\n\n### 4. Worked example – **choose the right technique**\n\n\\[\n\\int \\frac{x\\;e^{x^2}}{1+e^{2x^2}}\\,dx\n\\]\n\n**Step 1 – Look for substitution.**  \nThe denominator contains $e^{2x^2} = (e^{x^2})^2$.  \nLet  \n\n\\[\nu = e^{x^2}\\qquad\\Rightarrow\\qquad du = 2x e^{x^2}\\,dx.\n\\]\n\nOur integrand has $x e^{x^2}\\,dx$, which is $\\frac12 du$.\n\n**Step 2 – Rewrite the integral.**\n\n\\[\n\\int \\frac{x e^{x^2}}{1+e^{2x^2}}\\,dx\n   = \\int \\frac{\\frac12\\,du}{1+u^{2}}\n   = \\frac12\\int \\frac{du}{1+u^{2}}.\n\\]\n\n**Step 3 – Integrate in $u$.**\n\n\\[\n\\frac12\\int \\frac{du}{1+u^{2}} = \\frac12\\arctan u + C.\n\\]\n\n**Step 4 – Substitute back.**\n\n\\[\n\\boxed{\\displaystyle \\int \\frac{x e^{x^2}}{1+e^{2x^2}}\\,dx\n      = \\frac12\\arctan\\!\\big(e^{x^2}\\big)+C }.\n\\]\n\nThe key was **focusing** on the piece $e^{x^2}$ whose derivative $2x e^{x^2}$ appeared.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\int \\frac{3x^2}{(x^3+2)^4}\\,dx\n\\]\n\n**Solution**  \nLet $u = x^3+2$, $du = 3x^2\\,dx$.  \nIntegral becomes $\\displaystyle \\int u^{-4}\\,du = \\frac{u^{-3}}{-3}+C = -\\frac{1}{3(x^3+2)^3}+C$.\n\n---\n\n### Problem 2  \n\\[\n\\int x\\cos(x^2)\\,dx\n\\]\n\n**Solution**  \nSet $u = x^2$, $du = 2x\\,dx \\;\\Rightarrow\\; x\\,dx = \\tfrac12 du$.  \nIntegral $= \\frac12\\int \\cos u\\,du = \\frac12\\sin u + C = \\frac12\\sin(x^2)+C$.\n\n---\n\n### Problem 3  \n\\[\n\\int \\ln x \\,dx\n\\]\n\n**Solution** (IBP)  \nWrite $u = \\ln x$ (so $du = \\frac{1}{x}dx$) and $dv = dx$ (so $v = x$).  \n\\[\n\\int \\ln x\\,dx = x\\ln x - \\int x\\cdot\\frac{1}{x}\\,dx = x\\ln x - \\int 1\\,dx = x\\ln x - x + C.\n\\]\n\n---\n\n### Problem 4  \n\\[\n\\int \\frac{2x+5}{x^2+5x+6}\\,dx\n\\]\n\n**Solution**  \nDenominator factors: $x^2+5x+6=(x+2)(x+3)$.  \nWrite partial fractions:  \n\n\\[\n\\frac{2x+5}{(x+2)(x+3)} = \\frac{A}{x+2}+\\frac{B}{x+3}.\n\\]\n\nMultiply out: $2x+5 = A(x+3)+B(x+2)$.  \nSet $x=-2$: $2(-2)+5 = A(1) \\Rightarrow A = 1$.  \nSet $x=-3$: $2(-3)+5 = B(-1) \\Rightarrow B = 1$.  \n\nThus integral $= \\int\\!\\left(\\frac{1}{x+2}+\\frac{1}{x+3}\\right)dx = \\ln|x+2|+\\ln|x+3|+C$.\n\n---\n\nThese problems illustrate how **focus** helps you pick the right tool—substitution, integration‑by‑parts, or partial fractions—so the integral becomes straightforward.",
+   "code": ""
+  },
+  {
+   "heading": "Applying Focus to Real‑World Problems",
+   "body": "**Applying Focus to Real‑World Problems**\n\nIn many applications we are not interested in the whole function, but in a *specific* quantity that tells us what we need.  By **focusing** on the right variable we can turn a complicated problem into a simple one.\n\n---\n\n### Physics – Velocity from Position  \n\nSuppose a particle moves along a line with position (in metres) given by  \n\n\\[\ns(t)=4t^{3}-3t^{2}+2t .\n\\]\n\nWe want its **instantaneous velocity** at \\(t=2\\) s.  \nThe velocity is the derivative of position, so we *focus* on the limit that defines the derivative:\n\n\\[\nv(2)=\\lim_{h\\to 0}\\frac{s(2+h)-s(2)}{h}.\n\\]\n\n**Step‑by‑step**\n\n1. Compute \\(s(2)=4(2)^{3}-3(2)^{2}+2(2)=32-12+4=24\\).  \n2. Expand \\(s(2+h)=4(2+h)^{3}-3(2+h)^{2}+2(2+h)\\).  \n   \\[\n   \\begin{aligned}\n   (2+h)^{3}&=8+12h+6h^{2}+h^{3},\\\\\n   (2+h)^{2}&=4+4h+h^{2}.\n   \\end{aligned}\n   \\]\n   Hence  \n   \\[\n   s(2+h)=4(8+12h+6h^{2}+h^{3})-3(4+4h+h^{2})+2(2+h).\n   \\]\n3. Simplify:  \n   \\[\n   s(2+h)=32+48h+24h^{2}+4h^{3}-12-12h-3h^{2}+4+2h\n   =24+38h+21h^{2}+4h^{3}.\n   \\]\n4. Form the difference quotient:  \n   \\[\n   \\frac{s(2+h)-s(2)}{h}= \\frac{(24+38h+21h^{2}+4h^{3})-24}{h}\n   =\\frac{38h+21h^{2}+4h^{3}}{h}=38+21h+4h^{2}.\n   \\]\n5. Take the limit as \\(h\\to0\\):  \n   \\[\n   v(2)=\\lim_{h\\to0}(38+21h+4h^{2})=38\\ \\text{m/s}.\n   \\]\n\nBy **focusing** on the derivative limit we avoided differentiating the whole polynomial first; the algebraic cancellation became immediate.\n\n---\n\n### Biology – Growth Rate of a Species  \n\nA bacterial colony follows the logistic model  \n\n\\[\nP(t)=\\frac{500}{1+9e^{-0.6t}},\n\\]\n\nwhere \\(P\\) is the population after \\(t\\) days.  The **instantaneous growth rate** is \\(P'(t)\\).  Rather than differentiate the whole fraction, we focus on the *exponential part*.\n\nLet \\(u(t)=1+9e^{-0.6t}\\).  Then \\(P(t)=500\\,u^{-1}\\) and  \n\n\\[\nP'(t)=500\\cdot(-1)u^{-2}\\,u'(t).\n\\]\n\nCompute \\(u'(t)=9(-0.6)e^{-0.6t}=-5.4e^{-0.6t}\\).  Thus  \n\n\\[\nP'(t)= -500\\,\\frac{-5.4e^{-0.6t}}{(1+9e^{-0.6t})^{2}}\n      =\\frac{2700e^{-0.6t}}{(1+9e^{-0.6t})^{2}}.\n\\]\n\nAt \\(t=3\\) days, \\(e^{-0.6\\cdot3}=e^{-1.8}\\approx0.165\\).  \n\n\\[\nP'(3)=\\frac{2700(0.165)}{(1+9\\cdot0.165)^{2}}\n      =\\frac{445.5}{(1+1.485)^{2}}\n      =\\frac{445.5}{2.485^{2}}\n      \\approx\\frac{445.5}{6.18}\\approx72.1\\ \\text{cells/day}.\n\\]\n\nFocusing on the inner exponential reduced the differentiation to a single product‑rule step.\n\n---\n\n### Economics – Marginal Cost  \n\nA factory’s total cost (in dollars) for producing \\(q\\) units is  \n\n\\[\nC(q)=0.02q^{3}-0.9q^{2}+150q+500.\n\\]\n\nThe **marginal cost** is \\(C'(q)\\).  Instead of expanding the whole cubic, we focus on the power rule:\n\n\\[\nC'(q)=0.02\\cdot3q^{2}-0.9\\cdot2q+150=0.06q^{2}-1.8q+150.\n\\]\n\nFor \\(q=20\\) units,  \n\n\\[\nC'(20)=0.06(400)-1.8(20)+150=24-36+150=138\\ \\text{dollars per unit}.\n\\]\n\nHere the focus on the derivative turned a costly algebraic expansion into a few straightforward multiplications.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** A car’s position is \\(s(t)=5t^{2}+3t\\) metres. Find its velocity at \\(t=4\\) s.  \n\n   **Solution:**  \n   \\[\n   v(t)=\\frac{d}{dt}s(t)=10t+3\\;\\Rightarrow\\;v(4)=10(4)+3=43\\ \\text{m/s}.\n   \\]\n\n2. **Problem:** A population follows \\(P(t)=\\frac{200}{1+4e^{-0.5t}}\\). Compute the growth rate at \\(t=2\\).  \n\n   **Solution:**  \n   Set \\(u=1+4e^{-0.5t}\\). Then \\(P=200u^{-1}\\) and \\(u'=-2e^{-0.5t}\\).  \n   \\[\n   P' =200(-1)u^{-2}u' =\\frac{400e^{-0.5t}}{(1+4e^{-0.5t})^{2}}.\n   \\]  \n   At \\(t=2\\), \\(e^{-1}=0.3679\\).  \n   \\[\n   P'(2)=\\frac{400(0.3679)}{(1+4\\cdot0.3679)^{2}}\n        =\\frac{147.2}{(1+1.4716)^{2}}\n        =\\frac{147.2}{2.4716^{2}}\n        \\approx\\frac{147.2}{6.11}\\approx24.1\\ \\text{units/time}.\n   \\]\n\n3. **Problem:** Total cost \\(C(q)=0.01q^{3}+0.5q^{2}+30q+200\\). Find marginal cost when \\(q=15\\).  \n\n   **Solution:**  \n   \\[\n   C'(q)=0.03q^{2}+1.0q+30\\;\\Rightarrow\\;C'(15)=0.03(225)+15+30=6.75+15+30=51.75.\n   \\]\n\n4. **Problem:** A projectile’s height is \\(h(t)= -4.9t^{2}+20t+5\\) metres. Determine the instant when the height is increasing fastest.  \n\n   **Solution:**  \n   Velocity \\(v(t)=h'(t)=-9.8t+20\\). Acceleration \\(a(t)=v'(t)=-9.8\\) (constant negative).  \n   Since acceleration is negative, the velocity is decreasing; the maximum height increase occurs at the start, \\(t=0\\).  \n   At \\(t=0\\), \\(v(0)=20\\ \\text{m/s}\\) – the greatest upward speed.  \n\nThese examples show how **focusing** on the relevant derivative or limit streamlines calculations across physics, biology, and economics.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "What is **Focus** in Calculus?  \nIn many problems we are asked to find a limit, a derivative, or an integral, but the expression often contains several parts that are not needed for the final answer. **Focus** means identifying the part of the expression that actually determines the result and ignoring the rest. By “zooming in’’ on the relevant piece we simplify the algebra and avoid unnecessary work.\n\n### Choosing the Right Variable  \nWhen a function involves several variables, pick the one that changes while the others stay constant. For a limit like  \n\n$$\\lim_{x\\to 2}\\frac{x^2-4}{x-2},$$  \n\nthe **focus** is the factor that becomes zero in the denominator, i.e., the term $(x-2)$.  \n\n### Focusing When Computing Limits  \n**Example (fully worked):**  \n\nFind  \n\n$$\\lim_{x\\to 3}\\frac{x^3-27}{x-3}.$$  \n\n1. **Identify the focus.** The denominator $x-3$ goes to $0$, so we look for the same factor in the numerator.  \n2. **Factor the numerator:**  \n\n   $$x^3-27 = (x-3)(x^2+3x+9)$$  \n\n   (difference of cubes).  \n3. **Cancel the common factor:**  \n\n   $$\\frac{(x-3)(x^2+3x+9)}{x-3}=x^2+3x+9,$$  \n\n   for $x\\neq 3$.  \n4. **Evaluate the remaining expression at $x=3$:**  \n\n   $$3^2+3\\cdot3+9 = 9+9+9 = 27.$$  \n\nHence  \n\n$$\\boxed{ \\displaystyle \\lim_{x\\to 3}\\frac{x^3-27}{x-3}=27 }.$$  \n\nThe focus was the factor $(x-3)$; once it was removed the limit became trivial.\n\n### Focusing in Differentiation  \nWhen differentiating a product, the **focus** is often the factor that contains the variable we are differentiating with respect to. For  \n\n$$f(x)= (x^2+1)\\sin x,$$  \n\nthe derivative is  \n\n$$f'(x)=2x\\sin x+(x^2+1)\\cos x,$$  \n\nwhere each term comes from focusing on one factor at a time (product rule).\n\n### Focusing in Integration  \nIn an integral like  \n\n$$\\int \\frac{2x}{x^2+1}\\,dx,$$  \n\nthe substitution $u=x^2+1$ makes the **focus** the denominator. With $du=2x\\,dx$ the integral becomes  \n\n$$\\int \\frac{1}{u}\\,du = \\ln|u|+C = \\ln(x^2+1)+C.$$\n\n### Applying Focus to Real‑World Problems  \nSuppose a tank drains at a rate $R(t)=\\frac{5}{t+2}$ liters per minute. To find the total volume lost from $t=0$ to $t=4$, we integrate  \n\n$$\\int_0^4 \\frac{5}{t+2}\\,dt.$$  \n\nThe **focus** is the denominator $t+2$; a simple substitution $u=t+2$ gives  \n\n$$5\\ln|t+2|\\Big|_0^4 =5\\big(\\ln6-\\ln2\\big)=5\\ln3.$$\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nFind  \n\n$$\\lim_{x\\to 1}\\frac{x^4-1}{x-1}.$$  \n\n**Solution:**  \nFactor $x^4-1=(x-1)(x^3+x^2+x+1)$. Cancel $(x-1)$ and evaluate the remaining polynomial at $x=1$:  \n\n$$1+1+1+1=4.$$  \n\nSo the limit is **4**.\n\n### Problem 2  \nDifferentiate  \n\n$$g(x)=\\frac{x^2}{\\sqrt{x+1}}.$$  \n\n**Solution:**  \nWrite $g(x)=x^2 (x+1)^{-1/2}$. Use the product rule, focusing on each factor:  \n\n$$g'(x)=2x (x+1)^{-1/2}+x^2\\left(-\\frac12\\right)(x+1)^{-3/2}.$$  \n\nCombine:  \n\n$$g'(x)=\\frac{2x}{\\sqrt{x+1}}-\\frac{x^2}{2(x+1)^{3/2}}.$$\n\n### Problem 3  \nEvaluate  \n\n$$\\int \\frac{3x}{x^2+4}\\,dx.$$  \n\n**Solution:**  \nLet $u=x^2+4$, then $du=2x\\,dx$. Rewrite $3x\\,dx=\\frac32\\,du$. The integral becomes  \n\n$$\\frac32\\int \\frac{1}{u}\\,du =\\frac32\\ln|u|+C =\\frac32\\ln(x^2+4)+C.$$\n\n### Problem 4  \nA car’s speed is $v(t)=\\frac{60}{t+2}$ km/h for $0\\le t\\le 3$ hours. Find the distance traveled.  \n\n**Solution:**  \nDistance $= \\displaystyle\\int_0^3 \\frac{60}{t+2}\\,dt$.  \nFocus on the denominator: set $u=t+2$, $du=dt$. Limits change: $u(0)=2$, $u(3)=5$.  \n\n$$\\int_2^5 \\frac{60}{u}\\,du =60\\ln u\\Big|_2^5 =60(\\ln5-\\ln2)=60\\ln\\frac{5}{2}\\ \\text{km}.$$  \n\nEach problem first isolates the **focus** (the part that drives the computation) and then proceeds with the standard technique.",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "focus",
+   "meaning": "Identifying the single variable, function, or term that determines the outcome of a limit, derivative, or integral."
+  },
+  {
+   "term": "independent variable",
+   "meaning": "The quantity that is allowed to change freely while other quantities are expressed in terms of it."
+  },
+  {
+   "term": "dominant term",
+   "meaning": "The part of an expression that grows fastest (or shrinks slowest) and therefore controls the value of a limit."
+  },
+  {
+   "term": "substitution",
+   "meaning": "A technique where you set u equal to a function whose derivative also appears, simplifying the integral."
+  },
+  {
+   "term": "product rule",
+   "meaning": "A differentiation rule: d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)."
+  },
+  {
+   "term": "constant with respect to x",
+   "meaning": "Any factor that does not contain the variable x, and therefore has derivative zero."
+  },
+  {
+   "term": "limit definition of derivative",
+   "meaning": "v(a) = limit as h->0 of [f(a+h) - f(a)] / h."
+  },
+  {
+   "term": "side note",
+   "meaning": "Elements of a problem that are not the focus and can be treated as constants or ignored during the main computation."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the term 'focus' refer to in calculus problem solving?",
+   "options": [
+    "Choosing the hardest part of the problem",
+    "Identifying the single element that determines the result",
+    "Writing all variables in the same equation",
+    "Using the most advanced theorem"
+   ],
+   "answer": 1,
+   "why": "Focus means picking the key variable or term that drives the solution."
+  },
+  {
+   "q": "When solving a limit, which term is usually the focus?",
+   "options": [
+    "The term that becomes infinite",
+    "The term that cancels the denominator",
+    "The term that approaches zero in the denominator",
+    "The term with the highest power of x"
+   ],
+   "answer": 2,
+   "why": "The denominator term that goes to zero determines the need for simplification."
+  },
+  {
+   "q": "In the integral int 2x cos(x^2) dx, what is the appropriate substitution?",
+   "options": [
+    "u = x",
+    "u = cos(x^2)",
+    "u = x^2",
+    "u = 2x"
+   ],
+   "answer": 2,
+   "why": "u = x^2 makes du = 2x dx, matching the integrand."
+  },
+  {
+   "q": "Which of the following is a constant with respect to x?",
+   "options": [
+    "5x^2",
+    "sin(3)",
+    "x+7",
+    "log(x)"
+   ],
+   "answer": 1,
+   "why": "sin(3) does not contain x, so its derivative is zero."
+  },
+  {
+   "q": "What is the product rule for differentiation?",
+   "options": [
+    "d/dx[g(x)h(x)] = g'(x)h'(x)",
+    "d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)",
+    "d/dx[g(x)h(x)] = g(x)h(x)",
+    "d/dx[g(x)h(x)] = g'(x) + h'(x)"
+   ],
+   "answer": 1,
+   "why": "The product rule adds the derivative of each factor multiplied by the other factor."
+  },
+  {
+   "q": "In the limit lim x->infinity (3x^2 + 5x) / (2x^2 - x), which term is dominant?",
+   "options": [
+    "3x^2 in the numerator and 2x^2 in the denominator",
+    "5x in the numerator and -x in the denominator",
+    "The constant terms 5 and -1",
+    "All terms are equally important"
+   ],
+   "answer": 0,
+   "why": "The highest‑power terms control the behavior as x grows large."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define 'focus' in the context of calculus.",
+   "back": "It is the process of picking the single variable, function, or term that actually determines the result of a limit, derivative, or integral."
+  },
+  {
+   "front": "Why choose the right independent variable?",
+   "back": "A good choice simplifies limits, derivatives, and integrals, while a poor choice can hide relationships and cause errors."
+  },
+  {
+   "front": "What is a dominant term?",
+   "back": "The part of an expression that grows fastest (or shrinks slowest) and therefore decides the value of a limit."
+  },
+  {
+   "front": "When is substitution useful in integration?",
+   "back": "When the integrand contains a function and its derivative (up to a constant), allowing you to set u = that function."
+  },
+  {
+   "front": "State the product rule.",
+   "back": "d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)."
+  },
+  {
+   "front": "What does 'constant with respect to x' mean?",
+   "back": "Any term that does not contain x; its derivative with respect to x is zero."
+  },
+  {
+   "front": "Write the limit definition of the derivative.",
+   "back": "f'(a) = limit as h->0 of [f(a+h) - f(a)] / h."
+  },
+  {
+   "front": "How does focusing help when computing limits?",
+   "back": "It lets you isolate the decisive part of the expression, discard negligible terms, and compute the limit quickly."
+  }
+ ],
+ "reviewed": false
+}

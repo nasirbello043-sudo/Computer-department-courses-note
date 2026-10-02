@@ -1,0 +1,178 @@
+{
+ "title": "derivatives",
+ "summary": "This lesson introduces the derivative as a rate of change, explains how to compute it using basic rules, and shows its geometric meaning. It also connects derivatives to real‑world applications in physics, biology, and economics.",
+ "sections": [
+  {
+   "heading": "Recap of Derivative Concept and Notation",
+   "body": "The **derivative** measures how a quantity changes *instantly* at a particular point.  \nThink of a car’s speedometer: it tells you the **instantaneous rate of change** of the car’s position with respect to time. In calculus we do the same for any function \\(f(x)\\).\n\n---\n\n### Instantaneous rate of change  \n\nFor a function \\(f\\) and a point \\(x=a\\), the average rate of change on the interval \\([a, a+h]\\) is  \n\n\\[\n\\frac{f(a+h)-f(a)}{h}.\n\\]\n\nIf we let the interval shrink (\\(h\\to 0\\)), the average rate approaches the **instantaneous** rate. This limit, if it exists, is the **derivative** of \\(f\\) at \\(a\\):\n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n\\tag{1}\n\\]\n\nWhen the limit exists for every \\(a\\) in an interval, we write the **derivative function**  \n\n\\[\nf'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.\n\\]\n\n---\n\n### Common notation  \n\n| Symbol | Meaning |\n|--------|---------|\n| \\(f'(x)\\) | Derivative of \\(f\\) with respect to \\(x\\) |\n| \\(\\displaystyle\\frac{dy}{dx}\\) | Same as \\(f'(x)\\) when \\(y=f(x)\\) |\n| \\(\\displaystyle\\frac{d}{dx}\\bigl[g(x)\\bigr]\\) | Operator that “takes the derivative of” \\(g(x)\\) |\n\nAll three notations are interchangeable; choose the one that fits the context.\n\n---\n\n### Worked example  \n\nFind the derivative of \\(f(x)=3x^{2}-5x+2\\) using the limit definition (1).\n\n1. **Write the difference quotient**\n\n   \\[\n   \\frac{f(x+h)-f(x)}{h}\n   =\\frac{\\bigl[3(x+h)^{2}-5(x+h)+2\\bigr]-\\bigl[3x^{2}-5x+2\\bigr]}{h}.\n   \\]\n\n2. **Expand the numerator**\n\n   \\[\n   3(x^{2}+2xh+h^{2})-5x-5h+2-3x^{2}+5x-2\n   =3x^{2}+6xh+3h^{2}-5x-5h+2-3x^{2}+5x-2.\n   \\]\n\n   Simplify:\n\n   \\[\n   =6xh+3h^{2}-5h.\n   \\]\n\n3. **Factor out \\(h\\)**\n\n   \\[\n   \\frac{6xh+3h^{2}-5h}{h}=6x+3h-5.\n   \\]\n\n4. **Take the limit as \\(h\\to 0\\)**\n\n   \\[\n   f'(x)=\\lim_{h\\to 0}(6x+3h-5)=6x-5.\n   \\]\n\nSo the derivative function is  \n\n\\[\n\\boxed{f'(x)=6x-5}.\n\\]\n\n---\n\n### Practice problems  \n\n#### 1.  Find the derivative of \\(g(x)=\\sqrt{x}+4\\) using the limit definition.  \n\n**Solution**  \n\\[\ng'(x)=\\lim_{h\\to0}\\frac{\\sqrt{x+h}+4-(\\sqrt{x}+4)}{h}\n      =\\lim_{h\\to0}\\frac{\\sqrt{x+h}-\\sqrt{x}}{h}.\n\\]  \nMultiply numerator and denominator by the conjugate \\(\\sqrt{x+h}+\\sqrt{x}\\):  \n\n\\[\n\\frac{(\\sqrt{x+h}-\\sqrt{x})(\\sqrt{x+h}+\\sqrt{x})}{h(\\sqrt{x+h}+\\sqrt{x})}\n =\\frac{(x+h)-x}{h(\\sqrt{x+h}+\\sqrt{x})}\n =\\frac{1}{\\sqrt{x+h}+\\sqrt{x}}.\n\\]  \nNow let \\(h\\to0\\):  \n\n\\[\ng'(x)=\\frac{1}{2\\sqrt{x}}.\n\\]\n\n---\n\n#### 2.  Differentiate \\(h(t)=\\dfrac{5t^{3}}{2t-1}\\) using the quotient rule.  \n\n**Solution**  \nQuotient rule: \\(\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^{2}}\\).  \nLet \\(u=5t^{3}\\), \\(v=2t-1\\). Then \\(u'=15t^{2}\\), \\(v'=2\\).  \n\n\\[\nh'(t)=\\frac{15t^{2}(2t-1)-5t^{3}(2)}{(2t-1)^{2}}\n      =\\frac{30t^{3}-15t^{2}-10t^{3}}{(2t-1)^{2}}\n      =\\frac{20t^{3}-15t^{2}}{(2t-1)^{2}}\n      =\\frac{5t^{2}(4t-3)}{(2t-1)^{2}}.\n\\]\n\n---\n\n#### 3.  Compute \\(\\displaystyle\\frac{d}{dx}\\bigl[\\sin(x^{2})\\bigr]\\) using the chain rule.  \n\n**Solution**  \nChain rule: \\(\\displaystyle\\frac{d}{dx}f(g(x))=f'(g(x))\\cdot g'(x)\\).  \nTake \\(f(u)=\\sin u\\) (so \\(f'(u)=\\cos u\\)) and \\(g(x)=x^{2}\\) (so \\(g'(x)=2x\\)).  \n\n\\[\n\\frac{d}{dx}\\sin(x^{2})=\\cos(x^{2})\\cdot 2x=2x\\cos(x^{2}).\n\\]\n\n---\n\n#### 4.  Find \\(\\displaystyle\\frac{dy}{dx}\\) if \\(x^{2}+y^{2}=25\\) (implicit differentiation).  \n\n**Solution**  \nDifferentiate both sides with respect to \\(x\\):  \n\n\\[\n\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(y^{2})=\\frac{d}{dx}(25)\n\\quad\\Longrightarrow\\quad\n2x+2y\\frac{dy}{dx}=0.\n\\]  \nSolve for \\(\\dfrac{dy}{dx}\\):  \n\n\\[\n2y\\frac{dy}{dx}=-2x\\;\\Longrightarrow\\;\n\\frac{dy}{dx}=-\\frac{x}{y}.\n\\]\n\n---",
+   "code": ""
+  },
+  {
+   "heading": "Derivative as Slope of the Tangent Line",
+   "body": "The **derivative** of a function at a point tells us the **slope of the tangent line** to the graph at that point.  \nThink of the curve $y=f(x)$ as being made up of tiny straight pieces. When we zoom in very close to a point $(a,f(a))$, the curve looks almost like a straight line. The slope of that line is exactly $f'(a)$.\n\n---\n\n### Linear approximation\n\nIf we move a small amount $\\Delta x$ away from $a$, the change in $y$ is approximately  \n\n\\[\n\\Delta y \\approx f'(a)\\,\\Delta x .\n\\]\n\nThe line  \n\n\\[\nL(x)=f(a)+f'(a)(x-a)\n\\]\n\nis called the **linear approximation** or **tangent line** at $x=a$.  \nFor very small $\\Delta x$, $L(a+\\Delta x)$ is almost the same as $f(a+\\Delta x)$.\n\n---\n\n### Why the limit definition works\n\nThe formal definition  \n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}\n\\]\n\nmeasures the **average slope** of the secant line joining $(a,f(a))$ and $(a+h,f(a+h))$ and then squeezes $h$ to zero.  \nAs $h$ shrinks, the secant line becomes the tangent line, and the limit gives its exact slope.\n\n---\n\n## Worked example\n\nFind the derivative of $f(x)=x^{2}+3x$ at the point $x=2$ and write the equation of the tangent line.\n\n1. **Compute the derivative** using basic rules:  \n\n   \\[\n   f'(x)=\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(3x)=2x+3.\n   \\]\n\n2. **Evaluate at $x=2$**:  \n\n   \\[\n   f'(2)=2(2)+3=7.\n   \\]\n\n   So the slope of the tangent at $(2,f(2))$ is $7$.\n\n3. **Find the point** $(2,f(2))$:  \n\n   \\[\n   f(2)=2^{2}+3(2)=4+6=10.\n   \\]\n\n4. **Write the tangent line** using point‑slope form  \n\n   \\[\n   y-10=7(x-2)\\quad\\Longrightarrow\\quad y=7x-4.\n   \\]\n\nThe line $y=7x-4$ just touches the parabola $y=x^{2}+3x$ at $(2,10)$ and has the same instantaneous slope there.\n\n---\n\n## Practice problems\n\n### Problem 1  \nFind $f'(x)$ for $f(x)=\\sqrt{x}$ and give the slope at $x=4$.\n\n**Solution**  \nWrite $f(x)=x^{1/2}$.  \n\\[\nf'(x)=\\frac12 x^{-1/2}=\\frac{1}{2\\sqrt{x}}.\n\\]  \nAt $x=4$, $f'(4)=\\frac{1}{2\\sqrt{4}}=\\frac{1}{4}$.\n\n---\n\n### Problem 2  \nFor $g(x)=\\dfrac{5x}{x^{2}+1}$, compute $g'(x)$ and the equation of the tangent line at $x=1$.\n\n**Solution**  \nUse the quotient rule:  \n\n\\[\ng'(x)=\\frac{(5)(x^{2}+1)-5x(2x)}{(x^{2}+1)^{2}}\n      =\\frac{5x^{2}+5-10x^{2}}{(x^{2}+1)^{2}}\n      =\\frac{5-5x^{2}}{(x^{2}+1)^{2}}.\n\\]  \n\nAt $x=1$,  \n\n\\[\ng'(1)=\\frac{5-5}{(1+1)^{2}}=0.\n\\]  \n\nThe point is $(1,g(1))=(1,\\frac{5}{2})$.  \nSince the slope is $0$, the tangent line is horizontal:  \n\n\\[\ny=\\frac{5}{2}.\n\\]\n\n---\n\n### Problem 3  \nLet $h(x)=\\sin(x^{2})$. Find $h'(x)$ and the slope at $x=\\pi/2$.\n\n**Solution**  \nApply the chain rule:  \n\n\\[\nh'(x)=\\cos(x^{2})\\cdot 2x = 2x\\cos(x^{2}).\n\\]  \n\nAt $x=\\pi/2$,  \n\n\\[\nh'\\!\\left(\\frac{\\pi}{2}\\right)=2\\!\\left(\\frac{\\pi}{2}\\right)\\!\\cos\\!\\left(\\frac{\\pi^{2}}{4}\\right)\n= \\pi\\cos\\!\\left(\\frac{\\pi^{2}}{4}\\right).\n\\]  \n\nThat number is the instantaneous slope there.\n\n---\n\n### Problem 4  \nFind the tangent line to $y= e^{3x}$ at $x=0$.\n\n**Solution**  \nDerivative: $ \\displaystyle \\frac{d}{dx}e^{3x}=3e^{3x}$.  \nAt $x=0$, slope $m=3e^{0}=3$.  \nPoint: $(0,e^{0})=(0,1)$.  \nTangent line using point‑slope:  \n\n\\[\ny-1=3(x-0)\\quad\\Longrightarrow\\quad y=3x+1.\n\\]\n\n---",
+   "code": ""
+  },
+  {
+   "heading": "Basic Differentiation Rules",
+   "body": "**Basic Differentiation Rules**  \n\nWhen we talk about the derivative $f'(x)$ we are asking, “How fast does the function $f(x)$ change at the point $x$?”  The following rules let us find derivatives quickly, without returning to the limit definition each time.\n\n---\n\n### 1. Power Rule  \n\nIf $f(x)=x^n$ where $n$ is any real number, then  \n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,x^n = n x^{\\,n-1}\\,}\n\\]\n\n**Example:**  \nFind the derivative of $f(x)=x^5$.  \n\n\\[\nf'(x)=5x^{5-1}=5x^4 .\n\\]\n\n---\n\n### 2. Constant Multiple Rule  \n\nIf a constant $c$ multiplies a function $g(x)$, the derivative is the constant times the derivative of $g(x)$:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,[c\\,g(x)] = c\\,g'(x)\\,}\n\\]\n\n**Example:**  \nFor $h(x)=3x^2$,  \n\n\\[\nh'(x)=3\\cdot\\frac{d}{dx}x^2 = 3\\cdot 2x = 6x .\n\\]\n\n---\n\n### 3. Sum and Difference Rule  \n\nThe derivative of a sum (or difference) is the sum (or difference) of the derivatives:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,[g(x)\\pm p(x)] = g'(x)\\pm p'(x)\\,}\n\\]\n\n**Example:**  \nLet $k(x)=x^3-4x$.  \n\n\\[\nk'(x)=\\frac{d}{dx}x^3-\\frac{d}{dx}4x = 3x^2-4 .\n\\]\n\n---\n\n### 4. Constant Rule  \n\nThe derivative of a constant number $c$ is zero:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,c = 0\\,}\n\\]\n\n**Example:**  \nIf $m(x)=7$, then $m'(x)=0$.\n\n---\n\n### Fully worked example  \n\nFind the derivative of  \n\n\\[\nF(x)=5x^4-2x^2+7 .\n\\]\n\n**Step 1 – Identify each term.**  \n$5x^4$ is a constant multiple of $x^4$, $-2x^2$ is a constant multiple of $x^2$, and $7$ is a constant.\n\n**Step 2 – Apply the rules term‑by‑term.**  \n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}[5x^4] &= 5\\cdot\\frac{d}{dx}x^4 = 5\\cdot 4x^{3}=20x^{3},\\\\[4pt]\n\\frac{d}{dx}[-2x^2] &= -2\\cdot\\frac{d}{dx}x^2 = -2\\cdot 2x = -4x,\\\\[4pt]\n\\frac{d}{dx}[7] &= 0 .\n\\end{aligned}\n\\]\n\n**Step 3 – Combine the results using the sum rule.**  \n\n\\[\nF'(x)=20x^{3}-4x+0 = 20x^{3}-4x .\n\\]\n\nSo the slope of the tangent line to $y=5x^4-2x^2+7$ at any $x$ is $20x^{3}-4x$.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nFind the derivative of $f(x)=4x^3-5x+2$.\n\n**Solution:**  \n\\[\nf'(x)=4\\cdot3x^{2}-5\\cdot1+0 = 12x^{2}-5 .\n\\]\n\n---\n\n### Problem 2  \nDifferentiate $g(x)=\\displaystyle \\frac{1}{2}x^{\\,\\! -3}+9$.\n\n**Solution:**  \nRewrite $\\frac{1}{2}x^{-3}$ as $\\frac12 x^{-3}$.  \n\\[\ng'(x)=\\frac12\\cdot(-3)x^{-4}+0 = -\\frac{3}{2}x^{-4}.\n\\]\n\n---\n\n### Problem 3  \nCompute the derivative of $h(x)= -7x^{5}+3x^{2}-\\sqrt{2}$.\n\n**Solution:**  \n\\[\nh'(x)= -7\\cdot5x^{4}+3\\cdot2x^{1}+0 = -35x^{4}+6x .\n\\]\n\n---\n\n### Problem 4  \nFind $p'(x)$ for $p(x)=\\displaystyle 6x^{\\frac12}-4$.\n\n**Solution:**  \nRecall $x^{1/2}= \\sqrt{x}$. Apply the power rule:  \n\n\\[\n\\frac{d}{dx}x^{1/2}= \\frac12 x^{-1/2}.\n\\]\n\nThus  \n\n\\[\np'(x)=6\\cdot\\frac12 x^{-1/2}+0 = 3x^{-1/2}= \\frac{3}{\\sqrt{x}} .\n\\]\n\nThese four problems reinforce the **power rule**, **constant multiple rule**, **sum/difference rule**, and **constant rule**. Practice each step until the patterns feel natural.",
+   "code": ""
+  },
+  {
+   "heading": "Product and Quotient Rules",
+   "body": "**Product and Quotient Rules**\n\nWhen a function is built from *two* simpler functions, we often need a shortcut instead of expanding everything.  \nThe **product rule** tells us how to differentiate a product $u(x)v(x)$, and the **quotient rule** does the same for a quotient $\\dfrac{u(x)}{v(x)}$.\n\n---\n\n### Product Rule  \n\nIf  \n\\[\ny = u(x)\\,v(x),\n\\]  \nthen  \n\\[\n\\boxed{y' = u'(x)v(x) + u(x)v'(x)}.\n\\]  \n\n**Why it works:** Write the product as a limit of a difference quotient and add‑subtract the term $u(x)v(x+h)$. After simplifying, the limit splits into two separate limits, each of which is a derivative of one factor.\n\n---\n\n### Quotient Rule  \n\nIf  \n\\[\ny = \\frac{u(x)}{v(x)}\\qquad\\text{with }v(x)\\neq0,\n\\]  \nthen  \n\\[\n\\boxed{y' = \\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^{2}}}.\n\\]  \n\n**Why it works:** Treat the quotient as $u(x)\\cdot [v(x)]^{-1}$ and apply the product rule together with the chain rule for the power $-1$.\n\n---\n\n## Worked Example (Product Rule)\n\nDifferentiate  \n\\[\ny = (3x^{2}+2)(\\sin x).\n\\]\n\n1. Identify the two factors:  \n   $u(x)=3x^{2}+2$, $u'(x)=6x$;  \n   $v(x)=\\sin x$, $v'(x)=\\cos x$.\n\n2. Apply the product rule:  \n   \\[\n   y' = u'(x)v(x)+u(x)v'(x)\n        = (6x)(\\sin x) + (3x^{2}+2)(\\cos x).\n   \\]\n\n3. If desired, factor a common term:  \n   \\[\n   y' = 6x\\sin x + (3x^{2}+2)\\cos x.\n   \\]\n\nThat is the derivative.\n\n---\n\n## Worked Example (Quotient Rule)\n\nFind the derivative of  \n\\[\ny = \\frac{x^{2}+1}{e^{x}}.\n\\]\n\n1. Set $u(x)=x^{2}+1$, $u'(x)=2x$;  \n   $v(x)=e^{x}$, $v'(x)=e^{x}$.\n\n2. Apply the quotient rule:  \n   \\[\n   y' = \\frac{u'v - uv'}{v^{2}}\n        = \\frac{(2x)(e^{x}) - (x^{2}+1)(e^{x})}{(e^{x})^{2}}.\n   \\]\n\n3. Factor $e^{x}$ from the numerator:  \n   \\[\n   y' = \\frac{e^{x}\\bigl[2x-(x^{2}+1)\\bigr]}{e^{2x}}\n        = \\frac{2x - x^{2} - 1}{e^{x}}.\n   \\]\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nDifferentiate $y = (5x^{3}-4x)(\\ln x)$.\n\n**Solution**  \n$u=5x^{3}-4x,\\; u'=15x^{2}-4$; $v=\\ln x,\\; v'=1/x$.  \n\\[\ny' = (15x^{2}-4)\\ln x + (5x^{3}-4x)\\frac{1}{x}\n    = (15x^{2}-4)\\ln x + 5x^{2}-4.\n\\]\n\n---\n\n### Problem 2  \nFind $y'$ if $y = \\dfrac{\\sqrt{x}}{1+x^{2}}$.\n\n**Solution**  \nWrite $\\sqrt{x}=x^{1/2}$, so $u=x^{1/2},\\; u'=\\tfrac12 x^{-1/2}$.  \n$v=1+x^{2},\\; v'=2x$.  \n\\[\ny' = \\frac{u'v - uv'}{v^{2}}\n    = \\frac{\\tfrac12 x^{-1/2}(1+x^{2}) - x^{1/2}(2x)}{(1+x^{2})^{2}}.\n\\]\nSimplify numerator:  \n\\[\n\\frac{(1+x^{2})}{2\\sqrt{x}} - 2x^{3/2}\n = \\frac{1+x^{2} - 4x^{2}}{2\\sqrt{x}}\n = \\frac{1-3x^{2}}{2\\sqrt{x}}.\n\\]\nThus  \n\\[\ny' = \\frac{1-3x^{2}}{2\\sqrt{x}\\,(1+x^{2})^{2}}.\n\\]\n\n---\n\n### Problem 3  \nDifferentiate $y = (e^{x}\\cos x)$.\n\n**Solution**  \n$u=e^{x},\\; u'=e^{x}$; $v=\\cos x,\\; v'=-\\sin x$.  \n\\[\ny' = e^{x}\\cos x + e^{x}(-\\sin x)\n    = e^{x}(\\cos x - \\sin x).\n\\]\n\n---\n\n### Problem 4  \nFind the derivative of $y = \\dfrac{3x^{2}+5}{\\tan x}$.\n\n**Solution**  \n$u=3x^{2}+5,\\; u'=6x$; $v=\\tan x,\\; v'=\\sec^{2}x$.  \n\\[\ny' = \\frac{6x\\tan x - (3x^{2}+5)\\sec^{2}x}{\\tan^{2}x}.\n\\]\nIf we prefer a single trigonometric function, note $\\sec^{2}x = 1+\\tan^{2}x$ and rewrite, but the expression above already gives the correct derivative.",
+   "code": ""
+  },
+  {
+   "heading": "Chain Rule and Implicit Differentiation",
+   "body": "The **chain rule** lets us differentiate a *composite function*—a function inside another function.  \nIf \\(y = f(g(x))\\), the rule states  \n\n\\[\n\\frac{dy}{dx}=f'(g(x))\\cdot g'(x).\n\\]\n\nThink of the outer function \\(f\\) and the inner function \\(g\\) as two steps: first compute \\(u=g(x)\\), then compute \\(y=f(u)\\). The derivative of the whole process is the product of the two separate rates of change.\n\n---\n\n### Worked example: \\(y = \\sin (3x^2+1)\\)\n\n1. **Identify the inner and outer functions**  \n   - Inner: \\(u = 3x^2+1\\)  \n   - Outer: \\(y = \\sin u\\)\n\n2. **Differentiate each part**  \n   - \\( \\dfrac{du}{dx}=6x\\) (derivative of \\(3x^2+1\\))  \n   - \\( \\dfrac{dy}{du}= \\cos u\\) (derivative of \\(\\sin u\\))\n\n3. **Apply the chain rule**  \n   \\[\n   \\frac{dy}{dx}= \\frac{dy}{du}\\cdot\\frac{du}{dx}= \\cos(3x^2+1)\\cdot 6x.\n   \\]\n\n4. **Write the final answer**  \n   \\[\n   \\boxed{\\displaystyle \\frac{d}{dx}\\big[\\sin(3x^2+1)\\big]=6x\\cos(3x^2+1)}.\n   \\]\n\nEvery step is explicit: replace the inner expression, differentiate it, then multiply.\n\n---\n\n### Implicit differentiation\n\nSometimes a function is given **implicitly**, meaning \\(x\\) and \\(y\\) appear together and we cannot easily solve for \\(y\\). We differentiate both sides of the equation with respect to \\(x\\), remembering that \\(y\\) is a function of \\(x\\) (so \\(\\frac{d}{dx}y = y'\\)).\n\n**Example:** Differentiate \\(x^2 + y^2 = 25\\).\n\n1. Differentiate each term:  \n   \\[\n   \\frac{d}{dx}(x^2)=2x,\\qquad \n   \\frac{d}{dx}(y^2)=2y\\,y',\\qquad \n   \\frac{d}{dx}(25)=0.\n   \\]\n\n2. Assemble:  \n   \\[\n   2x + 2y\\,y' = 0.\n   \\]\n\n3. Solve for \\(y'\\):  \n   \\[\n   2y\\,y' = -2x \\;\\Longrightarrow\\; y' = -\\frac{x}{y}.\n   \\]\n\nThus \\(\\displaystyle \\frac{dy}{dx}= -\\frac{x}{y}\\) for any point \\((x,y)\\) on the circle.\n\n---\n\n## Practice problems\n\n### 1. Differentiate \\(h(x)=\\ln\\big((2x+3)^5\\big)\\).\n\n**Solution**  \nLet \\(u = (2x+3)^5\\). Then \\(h=\\ln u\\).  \n\\(u' = 5(2x+3)^4\\cdot 2 =10(2x+3)^4\\).  \n\\(h' = \\frac{1}{u}\\,u' = \\frac{10(2x+3)^4}{(2x+3)^5}= \\frac{10}{2x+3}\\).\n\n---\n\n### 2. Find \\(\\dfrac{dy}{dx}\\) for \\(y^3 = x^2 + 1\\) (implicit).\n\n**Solution**  \nDifferentiate both sides: \\(3y^2 y' = 2x\\).  \nSolve: \\(y' = \\dfrac{2x}{3y^2}\\).\n\n---\n\n### 3. Compute \\(\\displaystyle \\frac{d}{dx}\\big[e^{\\tan x}\\big]\\).\n\n**Solution**  \nOuter: \\(f(u)=e^{u}\\) with \\(f'(u)=e^{u}\\).  \nInner: \\(u=\\tan x\\) with \\(u'=\\sec^2 x\\).  \nChain rule: \\(\\frac{d}{dx}=e^{\\tan x}\\cdot \\sec^2 x\\).\n\n---\n\n### 4. Differentiate implicitly \\(x\\sin y = y\\cos x\\).\n\n**Solution**  \nDifferentiate each side:  \n\nLeft: \\(\\frac{d}{dx}(x\\sin y)=\\sin y + x\\cos y\\,y'\\).  \n\nRight: \\(\\frac{d}{dx}(y\\cos x)=y'\\cos x - y\\sin x\\).  \n\nSet them equal:  \n\\[\n\\sin y + x\\cos y\\,y' = y'\\cos x - y\\sin x.\n\\]\n\nCollect \\(y'\\) terms:  \n\\[\nx\\cos y\\,y' - \\cos x\\,y' = -\\sin y - y\\sin x.\n\\]\n\nFactor \\(y'\\):  \n\\[\ny'(x\\cos y - \\cos x) = -\\sin y - y\\sin x.\n\\]\n\nSolve:  \n\\[\n\\boxed{\\,y' = \\dfrac{-\\sin y - y\\sin x}{\\,x\\cos y - \\cos x\\,}}.\n\\]\n\nThese problems reinforce the **chain rule** and **implicit differentiation** techniques needed for more complex calculus tasks.",
+   "code": ""
+  },
+  {
+   "heading": "Real‑World Applications of Derivatives",
+   "body": "The **derivative** tells us how a quantity changes at an instant.  Below are three everyday contexts where this idea is essential, followed by a worked example and four practice problems with complete solutions.\n\n---\n\n### Real‑World Applications of Derivatives  \n\n1. **Velocity and acceleration** – If the position of a car along a straight road is given by \\(s(t)\\) (metres) at time \\(t\\) (seconds), the **velocity** is the derivative  \n   \\[\n   v(t)=\\frac{ds}{dt}=s'(t)\n   \\]  \n   and the **acceleration** is the derivative of velocity:  \n   \\[\n   a(t)=\\frac{dv}{dt}=v'(t)=s''(t).\n   \\]  \n   A positive acceleration means the car is speeding up; a negative value means it is slowing down.\n\n2. **Population growth rate** – In biology, a simple model for a population \\(P(t)\\) (individuals) is exponential growth: \\(P(t)=P_0e^{kt}\\).  The **instantaneous growth rate** is  \n   \\[\n   \\frac{dP}{dt}=kP_0e^{kt}=kP(t).\n   \\]  \n   The factor \\(k\\) is the *per‑capita* growth rate; if \\(k=0.03\\) per year, the population increases by about \\(3\\%\\) each year.\n\n3. **Marginal cost and revenue** – In economics, if the total cost of producing \\(x\\) units is \\(C(x)\\), the **marginal cost** is the derivative \\(C'(x)\\).  It tells the cost of producing one more unit at the current level of output.  Similarly, the **marginal revenue** is \\(R'(x)\\) when the total revenue is \\(R(x)\\).  When marginal cost equals marginal revenue, profit is maximized.\n\n---\n\n### Worked Example: Finding Velocity and Acceleration  \n\nA ball is thrown upward with height (in metres) described by  \n\\[\ns(t)=20t-5t^{2}.\n\\]\n\n**Step 1 – Velocity:**  \n\\[\nv(t)=\\frac{ds}{dt}= \\frac{d}{dt}\\bigl(20t-5t^{2}\\bigr)=20-10t.\n\\]\n\n**Step 2 – Acceleration:**  \n\\[\na(t)=\\frac{dv}{dt}= \\frac{d}{dt}\\bigl(20-10t\\bigr)=-10\\;\\text{m/s}^{2}.\n\\]\n\n**Interpretation:**  \n- At \\(t=1\\) s, \\(v(1)=20-10(1)=10\\) m/s upward.  \n- The constant acceleration \\(-10\\) m/s² shows gravity pulling the ball down.  \n\n---\n\n### Practice Problems  \n\n#### Problem 1  \nA company’s total cost (in dollars) for producing \\(x\\) gadgets is \\(C(x)=500+20x+0.05x^{2}\\).  \nFind the marginal cost at \\(x=100\\).\n\n**Solution**  \n\\(C'(x)=20+0.10x\\).  \nAt \\(x=100\\): \\(C'(100)=20+0.10(100)=20+10=30\\).  \n**Marginal cost = \\$30 per gadget.**\n\n#### Problem 2  \nThe population of a bacteria culture follows \\(P(t)=200e^{0.4t}\\) (cells), \\(t\\) in hours.  \nWhat is the instantaneous growth rate after 3 hours?\n\n**Solution**  \n\\(P'(t)=0.4\\cdot200e^{0.4t}=80e^{0.4t}\\).  \nAt \\(t=3\\): \\(P'(3)=80e^{1.2}\\approx80(3.320)=265.6\\).  \n**Growth rate ≈ 266 cells per hour.**\n\n#### Problem 3  \nA projectile’s height is \\(h(t)=100t-4.9t^{2}\\) metres.  \nFind the time when the projectile reaches its highest point and the maximum height.\n\n**Solution**  \nVelocity: \\(v(t)=h'(t)=100-9.8t\\).  \nSet \\(v(t)=0\\): \\(100-9.8t=0\\Rightarrow t=\\frac{100}{9.8}\\approx10.20\\) s.  \nMaximum height: \\(h(10.20)=100(10.20)-4.9(10.20)^{2}\\approx1020-510\\approx510\\) m.  \n**Peak at ≈10.2 s, height ≈510 m.**\n\n#### Problem 4  \nTotal revenue from selling \\(x\\) units of a product is \\(R(x)=120x-0.2x^{2}\\).  \nDetermine the production level that maximizes revenue and the maximum revenue amount.\n\n**Solution**  \nMarginal revenue: \\(R'(x)=120-0.4x\\).  \nSet to zero: \\(120-0.4x=0\\Rightarrow x=300\\).  \nSecond derivative: \\(R''(x)=-0.4<0\\) → maximum.  \nMaximum revenue: \\(R(300)=120(300)-0.2(300)^{2}=36\\,000-18\\,000=18\\,000\\).  \n**Produce 300 units for a maximum revenue of \\$18,000.**",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "**Practice Problems**\n\nBelow are four problems that let you practise every rule we have studied.  \nRead each question, try the calculations on your own, then compare with the detailed solution that follows.\n\n---\n\n### Problem 1 – Power and Constant‑Multiple Rules  \n\nFind the derivative of  \n\\[\nf(x)=5x^{4}-3x^{2}+7.\n\\]\n\n**Solution**  \n\n1. Apply the **power rule**: \\(\\dfrac{d}{dx}x^{n}=nx^{\\,n-1}\\).  \n2. Apply the **constant‑multiple rule**: \\(\\dfrac{d}{dx}[c\\cdot g(x)]=c\\cdot g'(x)\\).\n\n\\[\n\\begin{aligned}\nf'(x) &=5\\cdot\\frac{d}{dx}\\bigl(x^{4}\\bigr)-3\\cdot\\frac{d}{dx}\\bigl(x^{2}\\bigr)+\\frac{d}{dx}(7)\\\\[4pt]\n      &=5\\cdot 4x^{3}-3\\cdot 2x+0\\\\[4pt]\n      &=20x^{3}-6x.\n\\end{aligned}\n\\]\n\nSo \\(\\boxed{f'(x)=20x^{3}-6x}\\).\n\n---\n\n### Problem 2 – Product Rule  \n\nLet \\(g(x)= (2x^{3}+1)(\\sin x)\\). Compute \\(g'(x)\\).\n\n**Solution**  \n\nThe **product rule** states \\((uv)'=u'v+uv'\\).\n\n- \\(u(x)=2x^{3}+1\\) → \\(u'(x)=6x^{2}\\).  \n- \\(v(x)=\\sin x\\) → \\(v'(x)=\\cos x\\).\n\nNow substitute:\n\n\\[\n\\begin{aligned}\ng'(x) &= u'v + uv'\\\\\n      &= (6x^{2})(\\sin x) + (2x^{3}+1)(\\cos x)\\\\\n      &= 6x^{2}\\sin x + (2x^{3}+1)\\cos x.\n\\end{aligned}\n\\]\n\nThus \\(\\boxed{g'(x)=6x^{2}\\sin x + (2x^{3}+1)\\cos x}\\).\n\n---\n\n### Problem 3 – Quotient Rule and Chain Rule  \n\nFind the derivative of  \n\\[\nh(x)=\\frac{e^{2x}}{x^{2}+1}.\n\\]\n\n**Solution**  \n\nThe **quotient rule**: \\(\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-u v'}{v^{2}}\\).\n\n- \\(u(x)=e^{2x}\\). Using the **chain rule**, \\(u'(x)=e^{2x}\\cdot 2 = 2e^{2x}\\).  \n- \\(v(x)=x^{2}+1\\). Then \\(v'(x)=2x\\).\n\nPlug into the quotient rule:\n\n\\[\n\\begin{aligned}\nh'(x) &=\\frac{(2e^{2x})(x^{2}+1)-e^{2x}(2x)}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}(x^{2}+1)-2xe^{2x}}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}\\bigl(x^{2}+1-x\\bigr)}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}(x^{2}-x+1)}{(x^{2}+1)^{2}}.\n\\end{aligned}\n\\]\n\nHence \\(\\boxed{h'(x)=\\dfrac{2e^{2x}(x^{2}-x+1)}{(x^{2}+1)^{2}}}\\).\n\n---\n\n### Problem 4 – Implicit Differentiation and Real‑World Interpretation  \n\nThe curve defined implicitly by \\(x^{2}+y^{2}=25\\) represents a circle of radius 5.  \n\n1. Find \\(\\dfrac{dy}{dx}\\) at the point \\((3,4)\\).  \n2. Explain what this derivative tells you about the slope of the tangent line at that point.\n\n**Solution**  \n\n1. Differentiate both sides with respect to \\(x\\). Remember that \\(y\\) is a function of \\(x\\), so \\(\\dfrac{d}{dx}(y^{2})=2y\\,\\dfrac{dy}{dx}\\).\n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(y^{2}) &= \\frac{d}{dx}(25)\\\\\n2x + 2y\\,\\frac{dy}{dx} &= 0.\n\\end{aligned}\n\\]\n\nSolve for \\(\\dfrac{dy}{dx}\\):\n\n\\[\n\\frac{dy}{dx}= -\\frac{x}{y}.\n\\]\n\nAt \\((3,4)\\),\n\n\\[\n\\frac{dy}{dx}\\Big|_{(3,4)} = -\\frac{3}{4}.\n\\]\n\n2. The value \\(-\\frac{3}{4}\\) is the **slope of the tangent line** to the circle at \\((3,4)\\). A negative slope means the tangent line falls as we move to the right. In a real‑world context, if the circle described the path of a particle, the instantaneous direction of motion at that point would be down‑and‑to‑the‑right, making an angle whose tangent is \\(-3/4\\) with the horizontal.\n\n---\n\nThese problems cover **power, constant‑multiple, product, quotient, chain, and implicit differentiation**. Working through them will strengthen your ability to compute derivatives quickly and to interpret the geometric meaning of the results. Keep practicing!",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function at a point, defined as the limit of the average rate of change as the interval approaches zero."
+  },
+  {
+   "term": "Limit definition",
+   "meaning": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h, the formal way to compute a derivative."
+  },
+  {
+   "term": "Power rule",
+   "meaning": "If f(x)=x^n then f'(x)=n*x^(n-1) for any real exponent n."
+  },
+  {
+   "term": "Product rule",
+   "meaning": "If y = u(x)*v(x) then y' = u'(x)*v(x) + u(x)*v'(x)."
+  },
+  {
+   "term": "Quotient rule",
+   "meaning": "If y = u(x)/v(x) then y' = [u'(x)*v(x) - u(x)*v'(x)] / [v(x)]^2."
+  },
+  {
+   "term": "Chain rule",
+   "meaning": "If y = f(g(x)) then dy/dx = f'(g(x)) * g'(x)."
+  },
+  {
+   "term": "Linear approximation",
+   "meaning": "L(x) = f(a) + f'(a)*(x-a), an estimate of f near a using the tangent line."
+  },
+  {
+   "term": "Implicit differentiation",
+   "meaning": "Differentiating an equation involving x and y by treating y as a function of x and applying the chain rule."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the derivative of f(x)=3x^4 - 2x + 5 using the power rule?",
+   "options": [
+    "12x^3 - 2",
+    "3x^3 - 2",
+    "12x^3 + 2",
+    "4x^3 - 2"
+   ],
+   "answer": 0,
+   "why": "Apply n*x^(n-1) to each term: 3*4x^3 = 12x^3, derivative of -2x is -2, constant disappears."
+  },
+  {
+   "q": "If y = (x^2 + 1)(sin x), which expression gives y'?",
+   "options": [
+    "2x*sin x + (x^2+1)*cos x",
+    "(2x+1)*sin x + (x^2+1)*cos x",
+    "2x*cos x + (x^2+1)*sin x",
+    "2x*sin x + (x^2-1)*cos x"
+   ],
+   "answer": 0,
+   "why": "Product rule: u'=2x, v=sin x, u= x^2+1, v'=cos x."
+  },
+  {
+   "q": "Using the quotient rule, find the derivative of h(x)= (e^x)/(x^2).",
+   "options": [
+    "(e^x*x^2 - 2x*e^x)/x^4",
+    "(e^x*x^2 - 2x*e^x)/x^2",
+    "(e^x*x^2 + 2x*e^x)/x^4",
+    "(e^x*x^2 - 2x*e^x)/x^3"
+   ],
+   "answer": 0,
+   "why": "u'=e^x, v'=2x, so (e^x*x^2 - e^x*2x)/x^4."
+  },
+  {
+   "q": "What is the derivative of y = sin(3x^2 + 1)?",
+   "options": [
+    "cos(3x^2+1)*6x",
+    "cos(3x^2+1)*3x",
+    "sin(3x^2+1)*6x",
+    "cos(3x^2+1)*2x"
+   ],
+   "answer": 0,
+   "why": "Chain rule: outer derivative cos(u) times inner derivative 6x."
+  },
+  {
+   "q": "If a function satisfies the relation x^2 + y^2 = 25, what is dy/dx by implicit differentiation?",
+   "options": [
+    "-x/y",
+    "-y/x",
+    "x/y",
+    "y/x"
+   ],
+   "answer": 0,
+   "why": "Differentiate both sides: 2x + 2y*y' = 0 => y' = -x/y."
+  },
+  {
+   "q": "Which of the following best describes a linear approximation of f at a point a?",
+   "options": [
+    "f(a) + f'(a)*(x-a)",
+    "f(a) - f'(a)*(x-a)",
+    "f'(a)*(x-a)",
+    "f(a) * f'(a)"
+   ],
+   "answer": 0,
+   "why": "The tangent line formula is L(x)=f(a)+f'(a)*(x-a)."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Derivative (limit definition)",
+   "back": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h"
+  },
+  {
+   "front": "Power rule",
+   "back": "d/dx x^n = n*x^(n-1)"
+  },
+  {
+   "front": "Product rule",
+   "back": "d/dx [u*v] = u'*v + u*v'"
+  },
+  {
+   "front": "Quotient rule",
+   "back": "d/dx [u/v] = (u'*v - u*v') / v^2"
+  },
+  {
+   "front": "Chain rule",
+   "back": "If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x)"
+  },
+  {
+   "front": "Linear approximation",
+   "back": "L(x) = f(a) + f'(a)*(x-a)"
+  },
+  {
+   "front": "Implicit differentiation",
+   "back": "Treat y as a function of x and differentiate both sides, applying the chain rule to terms with y."
+  },
+  {
+   "front": "Constant multiple rule",
+   "back": "d/dx [c*g(x)] = c * g'(x)"
+  }
+ ],
+ "reviewed": false
+}

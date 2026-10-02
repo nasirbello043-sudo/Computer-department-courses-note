@@ -1,0 +1,178 @@
+{
+ "title": "Apply limits",
+ "summary": "In this lesson students learn how to apply limit concepts to solve real‑world problems and to prepare for using derivatives and integrals in physics, biology, and economics. The focus is on interpreting limits, handling indeterminate forms, and connecting limits to rates of change and accumulation.",
+ "sections": [
+  {
+   "heading": "Review of Limit Basics",
+   "body": "**Review of Limit Basics**\n\nA limit describes the value that a function $f(x)$ approaches as the input $x$ gets arbitrarily close to a certain point $a$. Formally, we write  \n\n\\[\n\\lim_{x\\to a} f(x)=L\n\\]\n\nand mean: *for every* $\\varepsilon>0$ *there exists* $\\delta>0$ *such that*  \n\n\\[\n0<|x-a|<\\delta \\;\\Longrightarrow\\; |f(x)-L|<\\varepsilon .\n\\]\n\nThe symbols $\\varepsilon$ and $\\delta$ are just tiny positive numbers that let us control how close $x$ must be to $a$ and how close $f(x)$ must be to $L$.\n\n---\n\n### One‑sided limits  \n\nSometimes we only care about $x$ approaching $a$ from the left or from the right.  \n\n*Left‑hand limit*:  \n\n\\[\n\\lim_{x\\to a^-} f(x)=L\n\\]\n\nmeans the condition above holds for $x$ with $a-\\delta < x < a$.  \n\n*Right‑hand limit*:  \n\n\\[\n\\lim_{x\\to a^+} f(x)=L\n\\]\n\nmeans it holds for $a < x < a+\\delta$.  \n\nIf the left‑hand and right‑hand limits exist and are equal, the (two‑sided) limit exists and equals that common value.\n\n---\n\n### Common limit laws  \n\nThese laws let us combine simpler limits to find more complicated ones without returning to the $\\varepsilon$–$\\delta$ definition each time.\n\n| Law | Statement |\n|-----|-----------|\n| **Sum** | $\\displaystyle \\lim_{x\\to a}[f(x)+g(x)]=\\lim_{x\\to a}f(x)+\\lim_{x\\to a}g(x)$ |\n| **Product** | $\\displaystyle \\lim_{x\\to a}[f(x)g(x)]=\\big(\\lim_{x\\to a}f(x)\\big)\\big(\\lim_{x\\to a}g(x)\\big)$ |\n| **Quotient** | If $\\displaystyle \\lim_{x\\to a}g(x)\\neq0$, then $\\displaystyle \\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\frac{\\lim_{x\\to a}f(x)}{\\lim_{x\\to a}g(x)}$ |\n| **Power** | $\\displaystyle \\lim_{x\\to a}[f(x)]^n=\\big(\\lim_{x\\to a}f(x)\\big)^n$ for any integer $n\\ge0$ |\n| **Squeeze** | If $h(x)\\le f(x)\\le k(x)$ near $a$ and $\\displaystyle \\lim_{x\\to a}h(x)=\\lim_{x\\to a}k(x)=L$, then $\\displaystyle \\lim_{x\\to a}f(x)=L$ |\n\n---\n\n### When limits do **not** exist  \n\nA limit fails to exist if:\n\n1. The left‑hand and right‑hand limits are different.  \n2. The function oscillates without settling to a single number (e.g., $\\sin(1/x)$ as $x\\to0$).  \n3. The values grow without bound (we say the limit is $+\\infty$ or $-\\infty$, not a finite number).\n\n---\n\n## Fully worked example  \n\nFind  \n\n\\[\n\\lim_{x\\to 3}\\frac{x^2-9}{x-3}.\n\\]\n\n**Step 1 – Direct substitution.**  \nPlugging $x=3$ gives $\\frac{3^2-9}{3-3}= \\frac{0}{0}$, an indeterminate form. We must simplify.\n\n**Step 2 – Factor the numerator.**  \n\n\\[\nx^2-9=(x-3)(x+3).\n\\]\n\nSo  \n\n\\[\n\\frac{x^2-9}{x-3}= \\frac{(x-3)(x+3)}{x-3}.\n\\]\n\n**Step 3 – Cancel the common factor** (valid for $x\\neq3$).  \n\n\\[\n\\frac{(x-3)(x+3)}{x-3}=x+3\\qquad (x\\neq3).\n\\]\n\n**Step 4 – Take the limit of the simplified expression.**  \n\n\\[\n\\lim_{x\\to3}(x+3)=3+3=6.\n\\]\n\nHence  \n\n\\[\n\\boxed{\\displaystyle \\lim_{x\\to3}\\frac{x^2-9}{x-3}=6 }.\n\\]\n\nThe limit exists even though the original fraction was undefined at $x=3$; the function behaves like the line $y=x+3$ near that point.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\lim_{x\\to -2}\\frac{x^2+4x+4}{x+2}.\n\\]\n\n**Solution**  \nFactor numerator: $x^2+4x+4=(x+2)^2$.  \n\n\\[\n\\frac{(x+2)^2}{x+2}=x+2\\;(x\\neq-2).\n\\]  \n\nTake the limit: $\\displaystyle \\lim_{x\\to-2}(x+2)=0$.  \n\n\\[\n\\boxed{0}\n\\]\n\n---\n\n### Problem 2  \n\\[\n\\lim_{x\\to0^+}\\frac{1}{x}.\n\\]\n\n**Solution**  \nAs $x$ approaches $0$ from the right, $1/x$ grows without bound.  \n\n\\[\n\\boxed{+\\infty}\n\\]\n\n---\n\n### Problem 3  \n\\[\n\\lim_{x\\to\\pi}\\sin x.\n\\]\n\n**Solution**  \nSine is continuous everywhere, so we may substitute directly:  \n\n\\[\n\\sin(\\pi)=0.\n\\]  \n\n\\[\n\\boxed{0}\n\\]\n\n---\n\n### Problem 4  \n\\[\n\\lim_{x\\to0}\\frac{\\sin(5x)}{x}.\n\\]\n\n**Solution**  \nUse the standard limit $\\displaystyle \\lim_{u\\to0}\\frac{\\sin u}{u}=1$.  \nLet $u=5x$, then $u\\to0$ as $x\\to0$.\n\n\\[\n\\frac{\\sin(5x)}{x}=5\\frac{\\sin(5x)}{5x}=5\\cdot\\frac{\\sin u}{u}.\n\\]\n\nTaking limits:\n\n\\[\n\\lim_{x\\to0}\\frac{\\sin(5x)}{x}=5\\cdot 1=5.\n\\]  \n\n\\[\n\\boxed{5}\n\\]",
+   "code": ""
+  },
+  {
+   "heading": "Limits in Physical Motion",
+   "body": "In physics a **limit** tells us what a quantity is doing as time gets very close to a particular instant.  \nWhen we write  \n\n\\[\n\\lim_{t\\to t_0} s(t)=L,\n\\]\n\nwe are saying that the position \\(s(t)\\) approaches the value \\(L\\) as the clock ticks toward \\(t_0\\).  \nIf the limit exists, we can use it to define **instantaneous velocity** and **instantaneous acceleration**.\n\n---\n\n### Instantaneous velocity  \n\nThe average velocity of an object on the interval \\([t,\\,t+h]\\) is  \n\n\\[\nv_{\\text{avg}}(t,h)=\\frac{s(t+h)-s(t)}{h}.\n\\]\n\nIf we let the interval shrink (\\(h\\to0\\)), the average velocity approaches the **instantaneous velocity**:\n\n\\[\nv(t)=\\lim_{h\\to0}\\frac{s(t+h)-s(t)}{h}=s'(t).\n\\]\n\nThus the derivative of the position function gives the velocity at the exact moment \\(t\\).\n\n---\n\n### Instantaneous acceleration  \n\nAcceleration is the rate of change of velocity.  Starting from the definition of average acceleration,\n\n\\[\na_{\\text{avg}}(t,h)=\\frac{v(t+h)-v(t)}{h},\n\\]\n\nthe limit as \\(h\\to0\\) gives the **instantaneous acceleration**:\n\n\\[\na(t)=\\lim_{h\\to0}\\frac{v(t+h)-v(t)}{h}=v'(t)=s''(t).\n\\]\n\nSo the second derivative of the position function tells us how quickly the velocity is changing at a specific instant.\n\n---\n\n## Worked example  \n\nA particle moves along a line with position (in meters) given by  \n\n\\[\ns(t)=4t^{3}-3t^{2}+2,\n\\]\n\nwhere \\(t\\) is measured in seconds.\n\n**Step 1 – Find the velocity function.**  \nUse the limit definition of the derivative:\n\n\\[\nv(t)=\\lim_{h\\to0}\\frac{s(t+h)-s(t)}{h}.\n\\]\n\nInstead of expanding the limit each time, we differentiate directly (the limit *is* the derivative):\n\n\\[\n\\begin{aligned}\ns'(t) &= \\frac{d}{dt}\\bigl(4t^{3}-3t^{2}+2\\bigr)\\\\\n      &= 12t^{2}-6t.\n\\end{aligned}\n\\]\n\nThus  \n\n\\[\nv(t)=12t^{2}-6t.\n\\]\n\n**Step 2 – Find the acceleration function.**  \n\n\\[\na(t)=v'(t)=\\frac{d}{dt}\\bigl(12t^{2}-6t\\bigr)=24t-6.\n\\]\n\n**Step 3 – Evaluate at a specific instant, say \\(t=1\\) s.**  \n\n\\[\n\\begin{aligned}\nv(1) &= 12(1)^{2}-6(1)=12-6=6\\ \\text{m/s},\\\\[4pt]\na(1) &= 24(1)-6=18\\ \\text{m/s}^{2}.\n\\end{aligned}\n\\]\n\n**Interpretation.**  \nAt the exact moment \\(t=1\\) s the particle is moving forward at \\(6\\) m/s, and its speed is increasing by \\(18\\) m/s each second. The limits we took guarantee that these numbers describe the motion *exactly* at that instant, not an average over a time interval.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nA car’s position is \\(s(t)=5t^{2}+3t\\) (meters, \\(t\\) in seconds).  \nFind the instantaneous velocity at \\(t=2\\) s.\n\n**Solution**  \n\\(v(t)=s'(t)=10t+3\\).  \n\\(v(2)=10(2)+3=23\\) m/s.\n\n---\n\n### Problem 2  \nThe height of a ball thrown upward is \\(h(t)=20t-4.9t^{2}\\) (meters).  \nCompute the acceleration at any time \\(t\\).\n\n**Solution**  \nFirst derivative (velocity): \\(h'(t)=20-9.8t\\).  \nSecond derivative (acceleration): \\(a(t)=h''(t)=-9.8\\) m/s\\(^2\\).  \nThe acceleration is constant, equal to the gravitational acceleration (downward).\n\n---\n\n### Problem 3  \nA particle moves according to \\(x(t)=\\sqrt{t+4}\\).  \nFind the instantaneous velocity at \\(t=5\\) s using the limit definition.\n\n**Solution**  \n\\[\nv(5)=\\lim_{h\\to0}\\frac{\\sqrt{5+h+4}-\\sqrt{5+4}}{h}\n     =\\lim_{h\\to0}\\frac{\\sqrt{9+h}-3}{h}.\n\\]\n\nMultiply numerator and denominator by the conjugate:\n\n\\[\n\\frac{\\sqrt{9+h}-3}{h}\\cdot\\frac{\\sqrt{9+h}+3}{\\sqrt{9+h}+3}\n =\\frac{(9+h)-9}{h\\bigl(\\sqrt{9+h}+3\\bigr)}\n =\\frac{1}{\\sqrt{9+h}+3}.\n\\]\n\nNow let \\(h\\to0\\):  \n\n\\[\nv(5)=\\frac{1}{\\sqrt{9}+3}=\\frac{1}{3+3}=\\frac{1}{6}\\ \\text{m/s}.\n\\]\n\n---\n\n### Problem 4  \nA satellite’s radial distance from Earth’s center is \\(r(t)=7t^{2}+2\\) (kilometres).  \nFind both the instantaneous velocity and acceleration at \\(t=3\\) s.\n\n**Solution**  \nVelocity: \\(v(t)=r'(t)=14t\\).  \n\\(v(3)=14(3)=42\\) km/s.\n\nAcceleration: \\(a(t)=v'(t)=14\\) km/s\\(^2\\) (constant).  \n\nSo at \\(t=3\\) s the satellite is moving outward at \\(42\\) km/s and its outward speed is increasing by \\(14\\) km/s each second.",
+   "code": ""
+  },
+  {
+   "heading": "Biological Growth Models",
+   "body": "Biological growth often follows simple mathematical patterns that can be described with **exponential** or **logistic** functions.  \nBy applying limits we can predict what happens to a population **as time $t$ becomes very large** (i.e., $t\\to\\infty$).  \n\n---\n\n### Exponential growth  \n\nA population that reproduces without any constraints can be modeled by  \n\n\\[\nP(t)=P_0\\,e^{rt},\n\\]\n\nwhere  \n\n* $P_0$ is the initial size,  \n* $r>0$ is the constant growth rate,  \n* $e$ is the base of natural logarithms.  \n\nTo find the **long‑term behavior**, evaluate  \n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\lim_{t\\to\\infty}P_0e^{rt}.\n\\]\n\nBecause $e^{rt}\\to\\infty$ when $r>0$, the limit is  \n\n\\[\n\\boxed{\\infty}.\n\\]\n\nThus an unrestricted exponential model predicts unbounded growth.\n\n---\n\n### Logistic growth  \n\nReal populations face limited resources. A common model is  \n\n\\[\nP(t)=\\frac{K}{1+Ae^{-rt}},\n\\]\n\nwhere  \n\n* $K$ is the **carrying capacity** (maximum sustainable size),  \n* $A=\\frac{K-P_0}{P_0}$ depends on the initial condition,  \n* $r>0$ is the intrinsic growth rate.  \n\n**Goal:** Determine $\\displaystyle\\lim_{t\\to\\infty}P(t)$ and interpret it.\n\n\\[\n\\begin{aligned}\n\\lim_{t\\to\\infty}P(t)\n&=\\lim_{t\\to\\infty}\\frac{K}{1+Ae^{-rt}}\\\\[4pt]\n&=\\frac{K}{1+ A\\cdot\\underbrace{\\lim_{t\\to\\infty}e^{-rt}}_{0}}\\\\[4pt]\n&=\\frac{K}{1+0}=K.\n\\end{aligned}\n\\]\n\nThe limit equals the **carrying capacity** $K$, showing that the population settles at a stable size.\n\n---\n\n### Fully worked example  \n\nA bacterial culture starts with $P_0=200$ cells. Its growth follows the logistic law  \n\n\\[\nP(t)=\\frac{5000}{1+24e^{-0.8t}}.\n\\]\n\n1. **Identify the carrying capacity.**  \n   The numerator $K=5000$ cells, so $K=5000$.\n\n2. **Compute the long‑term limit.**  \n\n\\[\n\\begin{aligned}\n\\lim_{t\\to\\infty}P(t)\n&=\\lim_{t\\to\\infty}\\frac{5000}{1+24e^{-0.8t}}\\\\\n&=\\frac{5000}{1+24\\cdot0}\\\\\n&=5000.\n\\end{aligned}\n\\]\n\n3. **Interpretation.**  \n   As $t$ grows, the population approaches **5 000 cells**, the environment’s carrying capacity.  \n\n4. **Check the early‑time behavior (optional).**  \n   At $t=0$,  \n\n\\[\nP(0)=\\frac{5000}{1+24}= \\frac{5000}{25}=200,\n\\]\n\nwhich matches the given $P_0$, confirming the model’s consistency.\n\n---\n\n### Practice problems  \n\n**Problem 1**  \nA fish population follows $P(t)=\\dfrac{800}{1+3e^{-0.5t}}$. Find $\\displaystyle\\lim_{t\\to\\infty}P(t)$ and state its ecological meaning.  \n\n*Solution.*  \n\\[\n\\lim_{t\\to\\infty}P(t)=\\frac{800}{1+3\\cdot0}=800.\n\\]  \nThe population will settle at **800 fish**, the lake’s carrying capacity.\n\n---\n\n**Problem 2**  \nAn uncontrolled tumor grows exponentially: $V(t)=V_0e^{0.03t}$ with $V_0=1\\text{ cm}^3$. What is $\\displaystyle\\lim_{t\\to\\infty}V(t)$?  \n\n*Solution.*  \nSince $e^{0.03t}\\to\\infty$,  \n\n\\[\n\\lim_{t\\to\\infty}V(t)=\\infty.\n\\]  \nThe model predicts unbounded tumor volume, highlighting the need for treatment.\n\n---\n\n**Problem 3**  \nA plant species spreads with $N(t)=\\dfrac{1500}{1+9e^{-t}}$. Determine the time $t$ when the population reaches half the carrying capacity.  \n\n*Solution.*  \nHalf of $K=1500$ is $750$. Set $N(t)=750$:\n\n\\[\n750=\\frac{1500}{1+9e^{-t}}\\;\\Longrightarrow\\;1+9e^{-t}=2\\;\\Longrightarrow\\;9e^{-t}=1\\;\\Longrightarrow\\;e^{-t}= \\frac19.\n\\]\n\nTake natural logs:\n\n\\[\n-t=\\ln\\!\\left(\\frac19\\right)=-\\ln 9\\;\\Longrightarrow\\;t=\\ln 9\\approx2.20.\n\\]\n\nSo after **≈2.2 time units** the population is half of $K$.\n\n---\n\n**Problem 4**  \nA virus count follows $V(t)=\\dfrac{10^6}{1+e^{-0.4(t-5)}}$. Compute the limit as $t\\to -\\infty$ and as $t\\to\\infty$, and explain the two limits.  \n\n*Solution.*  \n\n- As $t\\to -\\infty$, $e^{-0.4(t-5)}=e^{0.4(5-t)}\\to\\infty$, so  \n\n\\[\n\\lim_{t\\to -\\infty}V(t)=\\frac{10^6}{1+\\infty}=0.\n\\]\n\n  The virus count starts essentially at **zero**.\n\n- As $t\\to\\infty$, $e^{-0.4(t-5)}\\to0$, thus  \n\n\\[\n\\lim_{t\\to\\infty}V(t)=\\frac{10^6}{1+0}=10^6.\n\\]\n\n  The population approaches the **carrying capacity** of one million virions.  \n\nThese limits describe the infection’s onset and its eventual plateau.",
+   "code": ""
+  },
+  {
+   "heading": "Economic Cost and Revenue Analysis",
+   "body": "In economics a **cost** or **revenue** function tells us how total expense or total income changes as a firm produces more units.  The *average* cost $C_{\\text{avg}}(q)=\\dfrac{C(q)}{q}$ gives the cost per unit when $q$ items are made.  The **marginal cost** $C'(q)$ is the *instantaneous* increase in total cost when production is increased by one more unit.  Mathematically we obtain it as a limit of the average‑cost slope:\n\n\\[\nC'(q)=\\lim_{\\Delta q\\to 0}\\frac{C(q+\\Delta q)-C(q)}{\\Delta q}\n      =\\lim_{\\Delta q\\to 0}\\frac{C_{\\text{avg}}(q+\\Delta q)-C_{\\text{avg}}(q)}{\\Delta q}\\,q .\n\\]\n\nA similar story holds for **revenue**.  If $R(q)$ is total revenue, the average revenue is $R_{\\text{avg}}(q)=\\dfrac{R(q)}{q}$ and the **marginal revenue** $R'(q)$ is\n\n\\[\nR'(q)=\\lim_{\\Delta q\\to 0}\\frac{R(q+\\Delta q)-R(q)}{\\Delta q}.\n\\]\n\nBoth marginal quantities are limits that give the *instantaneous* rate of change, just as the derivative does in physics or biology.\n\n---\n\n### Worked Example  \n\nA company’s total cost (in thousands of dollars) for producing $q$ thousand widgets is  \n\n\\[\nC(q)=5q^{2}+20q+100 .\n\\]\n\n1. **Average cost**  \n\n\\[\nC_{\\text{avg}}(q)=\\frac{C(q)}{q}=5q+20+\\frac{100}{q}.\n\\]\n\n2. **Marginal cost** – take the derivative of $C(q)$ (the limit definition of the derivative).  \n\n\\[\nC'(q)=\\lim_{\\Delta q\\to 0}\\frac{C(q+\\Delta q)-C(q)}{\\Delta q}\n     =\\frac{d}{dq}\\bigl(5q^{2}+20q+100\\bigr)=10q+20 .\n\\]\n\n3. **Interpretation**  \n   At $q=4$ (i.e., 4 000 widgets) the marginal cost is  \n\n\\[\nC'(4)=10(4)+20=60\\text{ thousand dollars per thousand widgets}\n      =\\$60\\text{ per widget}.\n\\]\n\nThus producing one more thousand widgets around $q=4$ will increase total cost by about \\$60 000.\n\n4. **Check with the limit of average cost**  \n\n\\[\n\\begin{aligned}\n\\lim_{\\Delta q\\to 0}\\frac{C_{\\text{avg}}(4+\\Delta q)-C_{\\text{avg}}(4)}{\\Delta q}\n&=\\frac{d}{dq}\\bigl(5q+20+\\frac{100}{q}\\bigr)_{q=4} \\\\\n&=5-\\frac{100}{q^{2}}\\Big|_{q=4}=5-\\frac{100}{16}=5-6.25=-1.25 .\n\\end{aligned}\n\\]\n\nMultiplying by $q=4$ gives $-1.25\\cdot4=-5$, which is the *change* in average cost per unit, not the total marginal cost.  The correct marginal cost comes directly from $C'(q)$, confirming that limits of **average** quantities must be handled carefully.\n\n---\n\n### Practice Problems  \n\n**1.** Total cost: $C(q)=3q^{2}+15q+50$.  \n*Find the marginal cost at $q=5$.*\n\n**Solution:**  \n$C'(q)=6q+15$, so $C'(5)=6(5)+15=45$ (thousand dollars per thousand units).\n\n---\n\n**2.** Total revenue: $R(q)=200q-0.5q^{2}$.  \n*Compute marginal revenue when $q=80$.*\n\n**Solution:**  \n$R'(q)=200- q$, thus $R'(80)=200-80=120$ (dollars per unit).\n\n---\n\n**3.** Average cost $C_{\\text{avg}}(q)=4+\\frac{200}{q}$.  \n*Find the marginal cost function $C'(q)$ using the limit definition.*\n\n**Solution:**  \nFirst write $C(q)=q\\,C_{\\text{avg}}(q)=4q+200$.  \nDifferentiate: $C'(q)=4$.  Hence marginal cost is constant $4$ (dollars per unit).\n\n---\n\n**4.** A firm’s total revenue is $R(q)=500\\ln(q+1)$.  \n*Determine the marginal revenue at $q=9$.*\n\n**Solution:**  \n$R'(q)=\\frac{500}{q+1}$ (by the derivative of $\\ln$).  \nEvaluate: $R'(9)=\\frac{500}{10}=50$ dollars per unit.\n\nThese problems illustrate how **limits** turn average economic quantities into **instantaneous** rates, giving the marginal cost and marginal revenue that businesses use for decision‑making.",
+   "code": ""
+  },
+  {
+   "heading": "Handling Indeterminate Forms",
+   "body": "**Handling Indeterminate Forms**\n\nWhen a limit produces the symbols $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, the expression is called an **indeterminate form**. The value cannot be read directly; we must transform the limit into a form that can be evaluated. The most systematic tool is **L’Hôpital’s Rule**.\n\n---\n\n### L’Hôpital’s Rule  \n\nIf  \n\n\\[\n\\lim_{x\\to a} f(x)=0\\quad\\text{and}\\quad \\lim_{x\\to a} g(x)=0,\n\\]\n\nor  \n\n\\[\n\\lim_{x\\to a} f(x)=\\pm\\infty\\quad\\text{and}\\quad \\lim_{x\\to a} g(x)=\\pm\\infty,\n\\]\n\nand the derivatives $f'(x)$ and $g'(x)$ exist near $a$, then  \n\n\\[\n\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\n\\lim_{x\\to a}\\frac{f'(x)}{g'(x)},\n\\]\n\nprovided the right‑hand limit exists (or is $\\pm\\infty$).  \nThe rule may be applied repeatedly until the limit is no longer indeterminate.\n\n**Important:** Before using L’Hôpital, always try algebraic simplifications—factoring, rationalising, or using trigonometric identities—because they often remove the indeterminate form without differentiation.\n\n---\n\n### Fully worked example  \n\nFind  \n\n\\[\n\\lim_{x\\to 2}\\frac{x^{2}-4}{\\sin (x-2)} .\n\\]\n\n1. **Check the form.**  \n   \\[\n   \\lim_{x\\to 2}(x^{2}-4)=2^{2}-4=0,\\qquad\n   \\lim_{x\\to 2}\\sin (x-2)=\\sin 0=0.\n   \\]  \n   The limit is $\\frac{0}{0}$, an indeterminate form.\n\n2. **Simplify first.**  \n   Factor the numerator: $x^{2}-4=(x-2)(x+2)$.  \n   The expression becomes  \n\n   \\[\n   \\frac{(x-2)(x+2)}{\\sin (x-2)}.\n   \\]\n\n   Notice the common factor $(x-2)$. Write  \n\n   \\[\n   \\frac{(x-2)(x+2)}{\\sin (x-2)}=\n   (x+2)\\,\\frac{x-2}{\\sin (x-2)}.\n   \\]\n\n3. **Use a known limit.**  \n   The standard limit $\\displaystyle\\lim_{u\\to 0}\\frac{u}{\\sin u}=1$.  \n   Here $u=x-2\\to 0$, so  \n\n   \\[\n   \\lim_{x\\to 2}\\frac{x-2}{\\sin (x-2)}=1.\n   \\]\n\n4. **Combine the results.**  \n\n   \\[\n   \\lim_{x\\to 2}(x+2)\\cdot 1 = 2+2 = 4.\n   \\]\n\nThus  \n\n\\[\n\\boxed{\\,\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{\\sin (x-2)} = 4\\,}.\n\\]\n\nNo differentiation was needed because the algebraic simplification removed the indeterminate form.\n\n---\n\n### Practice problems  \n\n#### 1.  \n\\[\n\\lim_{x\\to 0}\\frac{e^{x}-1}{x}.\n\\]\n\n**Solution:**  \nBoth numerator and denominator go to $0$. Apply L’Hôpital:  \n\n\\[\n\\lim_{x\\to 0}\\frac{(e^{x})'}{(x)'}=\\lim_{x\\to 0}e^{x}=e^{0}=1.\n\\]\n\n---\n\n#### 2.  \n\\[\n\\lim_{x\\to \\infty}\\frac{\\ln x}{\\sqrt{x}}.\n\\]\n\n**Solution:**  \nAs $x\\to\\infty$, $\\ln x\\to\\infty$ and $\\sqrt{x}\\to\\infty$ → $\\frac{\\infty}{\\infty}$.  \nDifferentiate numerator and denominator:\n\n\\[\n\\lim_{x\\to\\infty}\\frac{(\\ln x)'}{(\\sqrt{x})'}=\n\\lim_{x\\to\\infty}\\frac{1/x}{\\frac{1}{2}x^{-1/2}}=\n\\lim_{x\\to\\infty}\\frac{2}{\\sqrt{x}}=0.\n\\]\n\n---\n\n#### 3.  \n\\[\n\\lim_{x\\to 0}\\frac{1-\\cos x}{x^{2}}.\n\\]\n\n**Solution:**  \nBoth go to $0$ → $\\frac{0}{0}$. First simplify using the identity $1-\\cos x = 2\\sin^{2}\\!\\frac{x}{2}$:\n\n\\[\n\\frac{1-\\cos x}{x^{2}}=\\frac{2\\sin^{2}\\!\\frac{x}{2}}{x^{2}}\n=2\\left(\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\right)^{2}\\frac{1}{4}\n= \\frac{1}{2}\\left(\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\right)^{2}.\n\\]\n\nAs $x\\to0$, $\\displaystyle\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\to1$, so the limit is $\\frac12$.\n\n---\n\n#### 4.  \n\\[\n\\lim_{x\\to 1}\\frac{x^{3}-1}{x^{2}-1}.\n\\]\n\n**Solution:**  \nFactor both numerator and denominator:\n\n\\[\nx^{3}-1=(x-1)(x^{2}+x+1),\\qquad\nx^{2}-1=(x-1)(x+1).\n\\]\n\nCancel the common factor $(x-1)$:\n\n\\[\n\\frac{x^{2}+x+1}{x+1}.\n\\]\n\nNow substitute $x=1$:\n\n\\[\n\\frac{1^{2}+1+1}{1+1}= \\frac{3}{2}.\n\\]\n\nThus the limit equals $\\displaystyle\\frac{3}{2}$.",
+   "code": ""
+  },
+  {
+   "heading": "Connecting Limits to Derivatives and Integrals",
+   "body": "The **derivative** and the **definite integral** are not new ideas – they are built directly from limits.  \nUnderstanding this connection helps you see why calculus works and how to use it safely.\n\n---\n\n### Derivative as a limit of a difference quotient  \n\nFor a function $f(x)$ the derivative at a point $a$ is defined by  \n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n\\]\n\nThe fraction $\\dfrac{f(a+h)-f(a)}{h}$ is called the **difference quotient**.  \nAs $h$ gets smaller, the secant line through $(a,f(a))$ and $(a+h,f(a+h))$ tilts closer to the tangent line at $a$. The limit tells us the exact slope of that tangent.\n\n#### Worked example  \n\nFind the derivative of $f(x)=3x^{2}+2x$ at $x=1$ using the limit definition.\n\n1. Write the difference quotient:  \n\n   \\[\n   \\frac{f(1+h)-f(1)}{h}\n   =\\frac{[3(1+h)^{2}+2(1+h)]-[3(1)^{2}+2(1)]}{h}.\n   \\]\n\n2. Expand the numerator:  \n\n   \\[\n   3(1+2h+h^{2})+2+2h-3-2\n   =3+6h+3h^{2}+2+2h-5\n   =8h+3h^{2}.\n   \\]\n\n3. Divide by $h$:  \n\n   \\[\n   \\frac{8h+3h^{2}}{h}=8+3h.\n   \\]\n\n4. Take the limit as $h\\to0$:  \n\n   \\[\n   \\lim_{h\\to0}(8+3h)=8.\n   \\]\n\nHence $f'(1)=8$. (In fact $f'(x)=6x+2$, and plugging $x=1$ also gives $8$.)\n\n---\n\n### Integral as a limit of Riemann sums  \n\nThe **definite integral** of $f$ from $a$ to $b$ is the limit of the sum of areas of thin rectangles:\n\n\\[\n\\int_{a}^{b} f(x)\\,dx\n=\\lim_{n\\to\\infty}\\sum_{i=1}^{n} f(x_i^{*})\\Delta x,\n\\]\n\nwhere $\\Delta x=\\dfrac{b-a}{n}$ and $x_i^{*}$ is any point in the $i$‑th subinterval.  \nWhen $n$ grows, the rectangles become thinner and the sum approaches the exact area under the curve.\n\n#### Worked example  \n\nCompute $\\displaystyle\\int_{0}^{2} (4x)\\,dx$ using a Riemann sum with right endpoints.\n\n1. Partition $[0,2]$ into $n$ equal parts: $\\Delta x=\\frac{2}{n}$.\n\n2. Right endpoint of the $i$‑th subinterval: $x_i=i\\Delta x=\\frac{2i}{n}$.\n\n3. Form the sum:  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}4x_i\\,\\Delta x\n   =\\sum_{i=1}^{n}4\\left(\\frac{2i}{n}\\right)\\frac{2}{n}\n   =\\frac{16}{n^{2}}\\sum_{i=1}^{n} i.\n   \\]\n\n4. Use $\\displaystyle\\sum_{i=1}^{n}i=\\frac{n(n+1)}{2}$:  \n\n   \\[\n   S_n=\\frac{16}{n^{2}}\\cdot\\frac{n(n+1)}{2}\n   =8\\frac{n+1}{n}.\n   \\]\n\n5. Take the limit as $n\\to\\infty$:  \n\n   \\[\n   \\lim_{n\\to\\infty}8\\frac{n+1}{n}=8.\n   \\]\n\nThus $\\displaystyle\\int_{0}^{2}4x\\,dx=8$, which matches the antiderivative method ($\\frac{4x^{2}}{2}\\big|_{0}^{2}=8$).\n\n---\n\n### Practice problems  \n\n1. **Problem:** Use the limit definition to find $f'(2)$ for $f(x)=x^{3}-5x$.  \n\n   **Solution:**  \n\n   \\[\n   \\frac{f(2+h)-f(2)}{h}\n   =\\frac{(2+h)^{3}-5(2+h)-\\big(2^{3}-5\\cdot2\\big)}{h}\n   =\\frac{8+12h+6h^{2}+h^{3}-10-5h-8+10}{h}\n   =\\frac{7h+6h^{2}+h^{3}}{h}=7+6h+h^{2}.\n   \\]  \n   $\\displaystyle\\lim_{h\\to0}(7+6h+h^{2})=7$, so $f'(2)=7$.\n\n2. **Problem:** Evaluate $\\displaystyle\\int_{1}^{3}(2x+1)\\,dx$ via a Riemann sum (left endpoints).  \n\n   **Solution:** $\\Delta x=\\frac{2}{n}$, $x_i=1+\\frac{2(i-1)}{n}$.  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}\\bigl[2x_i+1\\bigr]\\Delta x\n   =\\frac{2}{n}\\sum_{i=1}^{n}\\Bigl[2\\Bigl(1+\\frac{2(i-1)}{n}\\Bigr)+1\\Bigr]\n   =\\frac{2}{n}\\sum_{i=1}^{n}\\Bigl(3+\\frac{4(i-1)}{n}\\Bigr).\n   \\]  \n   Split the sum:  \n\n   \\[\n   =\\frac{2}{n}\\Bigl[3n+\\frac{4}{n}\\sum_{i=1}^{n}(i-1)\\Bigr]\n   =\\frac{2}{n}\\Bigl[3n+\\frac{4}{n}\\frac{(n-1)n}{2}\\Bigr]\n   =6+4\\frac{n-1}{n}.\n   \\]  \n   Limit $n\\to\\infty$: $6+4=10$. Hence the integral equals $10$.\n\n3. **Problem:** Show that the derivative of $g(x)=\\sqrt{x}$ at $x=4$ equals $\\dfrac{1}{4}$ using limits.  \n\n   **Solution:**  \n\n   \\[\n   g'(4)=\\lim_{h\\to0}\\frac{\\sqrt{4+h}-\\sqrt{4}}{h}\n   =\\lim_{h\\to0}\\frac{\\sqrt{4+h}-2}{h}\\cdot\\frac{\\sqrt{4+h}+2}{\\sqrt{4+h}+2}\n   =\\lim_{h\\to0}\\frac{(4+h)-4}{h\\bigl(\\sqrt{4+h}+2\\bigr)}\n   =\\lim_{h\\to0}\\frac{1}{\\sqrt{4+h}+2}\n   =\\frac{1}{4}.\n   \\]\n\n4. **Problem:** Compute $\\displaystyle\\int_{0}^{\\pi}\\sin x\\,dx$ as a limit of right‑endpoint Riemann sums.  \n\n   **Solution:** $\\Delta x=\\frac{\\pi}{n}$, $x_i=\\frac{i\\pi}{n}$.  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right)\\frac{\\pi}{n}\n   =\\frac{\\pi}{n}\\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right).\n   \\]  \n   The sum is a known telescoping form:  \n\n   \\[\n   \\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right)\n   =\\cot\\!\\left(\\frac{\\pi}{2n}\\right).\n   \\]  \n   (Derivation uses the identity $\\sin a = \\frac{\\cos(a-\\frac{\\pi}{2})-\\cos(a+\\frac{\\pi}{2})}{2}$.)  \n\n   Thus $S_n=\\frac{\\pi}{n}\\cot\\!\\left(\\frac{\\pi}{2n}\\right)$.  \n\n   As $n\\to\\infty$, $\\frac{\\pi}{2n}\\to0$ and $\\cot\\theta\\sim\\frac{1}{\\theta}$, so  \n\n   \\[\n   \\lim_{n\\to\\infty}S_n=\\lim_{n\\to\\infty}\\frac{\\pi}{n}\\cdot\\frac{2n}{\\pi}=2.\n   \\]  \n\n   Therefore $\\displaystyle\\int_{0}^{\\pi}\\sin x\\,dx=2$, matching the antiderivative $[-\\cos x]_{0}^{\\pi}=2$.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "**Practice Problems**\n\n---\n\n### 1. Instantaneous velocity of \\(s(t)=5t^{2}-3t+2\\) at \\(t=4\\)\n\nThe instantaneous velocity is the derivative \\(v(t)=s'(t)\\).\n\n\\[\n\\begin{aligned}\ns'(t) &= \\frac{d}{dt}\\bigl(5t^{2}-3t+2\\bigr) \\\\\n      &= 10t-3 .\n\\end{aligned}\n\\]\n\nNow evaluate at \\(t=4\\):\n\n\\[\nv(4)=10(4)-3=40-3=37 .\n\\]\n\n\\[\n\\boxed{v(4)=37\\text{ units per time}}\n\\]\n\n---\n\n### 2. Limit of a population model  \n\n\\[\nP(t)=\\frac{1000}{1+9e^{-0.3t}},\\qquad t\\to\\infty .\n\\]\n\nAs \\(t\\to\\infty\\), the exponential term \\(e^{-0.3t}\\to0\\).  \nThus the denominator approaches \\(1+9\\cdot0=1\\).\n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\frac{1000}{1}=1000 .\n\\]\n\nThe model predicts the population will level off at **1000 individuals**.\n\n---\n\n### 3. Marginal cost from the total‑cost function  \n\nTotal cost: \\(C(q)=0.02q^{3}-0.5q^{2}+30q+200\\).\n\nThe **marginal cost** is the derivative \\(C'(q)\\):\n\n\\[\n\\begin{aligned}\nC'(q) &= \\frac{d}{dq}\\bigl(0.02q^{3}-0.5q^{2}+30q+200\\bigr)\\\\\n      &= 0.06q^{2}-1.0q+30 .\n\\end{aligned}\n\\]\n\nSo the marginal cost when producing \\(q\\) units is  \n\n\\[\n\\boxed{C'(q)=0.06q^{2}-q+30\\text{ (dollars per unit)}} .\n\\]\n\nIf a specific quantity is required, just substitute the value of \\(q\\).\n\n---\n\n### 4. Evaluate \\(\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}\\) using L'Hôpital's Rule  \n\nBoth numerator and denominator go to \\(0\\) as \\(x\\to0\\); we have a \\(0/0\\) indeterminate form, so L'Hôpital's Rule applies:\n\n\\[\n\\lim_{x\\to0}\\frac{\\sin x}{x}\n   =\\lim_{x\\to0}\\frac{\\frac{d}{dx}\\sin x}{\\frac{d}{dx}x}\n   =\\lim_{x\\to0}\\frac{\\cos x}{1}\n   =\\cos 0 = 1 .\n\\]\n\nHence  \n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1}.\n\\]\n\n---\n\n### 5. Approximate the area under \\(f(x)=x^{2}\\) from \\(0\\) to \\(2\\) with a Riemann sum (4 equal subintervals) and relate to the definite integral  \n\n**Step 1: Determine subinterval width**  \n\\[\n\\Delta x=\\frac{2-0}{4}=0.5 .\n\\]\n\n**Step 2: Choose sample points** (use right‑endpoints for simplicity)  \n\n\\[\nx_{1}=0.5,\\; x_{2}=1.0,\\; x_{3}=1.5,\\; x_{4}=2.0 .\n\\]\n\n**Step 3: Evaluate the function at each sample point**  \n\n\\[\nf(0.5)=0.25,\\; f(1.0)=1,\\; f(1.5)=2.25,\\; f(2.0)=4 .\n\\]\n\n**Step 4: Form the Riemann sum**  \n\n\\[\n\\begin{aligned}\nS &=\\sum_{i=1}^{4} f(x_i)\\,\\Delta x \\\\\n  &= (0.25+1+2.25+4)\\times0.5 \\\\\n  &= 7.5 \\times 0.5 = 3.75 .\n\\end{aligned}\n\\]\n\nSo the **approximate area** is \\(3.75\\).\n\n**Step 5: Compare with the exact definite integral**  \n\n\\[\n\\int_{0}^{2} x^{2}\\,dx = \\left[\\frac{x^{3}}{3}\\right]_{0}^{2}\n= \\frac{8}{3}\\approx 2.6667 .\n\\]\n\nThe Riemann sum with only four subintervals overestimates the true area because we used right‑endpoints on an increasing function. Refining the partition (more subintervals or using left‑endpoints) would bring the sum closer to the exact value \\( \\frac{8}{3}\\).",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value a function approaches as the input gets arbitrarily close to a point"
+  },
+  {
+   "term": "epsilon-delta definition",
+   "meaning": "A formal way to describe limits using two small positive numbers epsilon and delta"
+  },
+  {
+   "term": "one-sided limit",
+   "meaning": "A limit taken only from the left (x→a-) or right (x→a+) of a point"
+  },
+  {
+   "term": "instantaneous velocity",
+   "meaning": "The derivative of the position function, giving speed at an exact moment"
+  },
+  {
+   "term": "L'Hopital's rule",
+   "meaning": "A method for evaluating indeterminate forms 0/0 or ∞/∞ by differentiating numerator and denominator"
+  },
+  {
+   "term": "marginal cost",
+   "meaning": "The derivative of the total cost function, representing the cost of producing one more unit"
+  },
+  {
+   "term": "logistic growth model",
+   "meaning": "A population model that levels off at a carrying capacity K as time goes to infinity"
+  },
+  {
+   "term": "derivative as limit",
+   "meaning": "The slope of the tangent line defined by the limit of the difference quotient as h approaches 0"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the epsilon-delta definition of a limit guarantee?",
+   "options": [
+    "The function equals the limit at the point",
+    "The function stays within epsilon of the limit whenever x is within delta of the point",
+    "The derivative exists",
+    "The function is continuous"
+   ],
+   "answer": 1,
+   "why": "It states that if 0<|x-a|<delta then |f(x)-L|<epsilon."
+  },
+  {
+   "q": "Which of the following is a right-hand limit notation?",
+   "options": [
+    "lim x->a- f(x)",
+    "lim x->a+ f(x)",
+    "lim x->a f(x)",
+    "lim x->a^* f(x)"
+   ],
+   "answer": 1,
+   "why": "The plus sign indicates approaching from the right."
+  },
+  {
+   "q": "If s(t)=5t^2-3t+2, what is the instantaneous velocity at t=4?",
+   "options": [
+    "37",
+    "40",
+    "33",
+    "45"
+   ],
+   "answer": 0,
+   "why": "Derivative is 10t-3, evaluate at 4 gives 37."
+  },
+  {
+   "q": "Using L'Hopital's rule, what is the limit of (sin x)/x as x approaches 0?",
+   "options": [
+    "0",
+    "1",
+    "undefined",
+    "infinity"
+   ],
+   "answer": 1,
+   "why": "Both numerator and denominator go to 0, differentiate to get cos x / 1, limit is 1."
+  },
+  {
+   "q": "In the logistic model P(t)=K/(1+Ae^{-rt}), what does P(t) approach as t→∞?",
+   "options": [
+    "0",
+    "K",
+    "A",
+    "∞"
+   ],
+   "answer": 1,
+   "why": "The exponential term vanishes, leaving denominator 1, so P(t)→K."
+  },
+  {
+   "q": "The marginal cost function C'(q) is the limit of which expression?",
+   "options": [
+    "(C(q+Δq)-C(q))/Δq as Δq→0",
+    "C(q)/q",
+    "C(q+Δq)-C(q)",
+    "∫C(q) dq"
+   ],
+   "answer": 0,
+   "why": "Marginal cost is defined as the limit of the average cost change as the change in quantity goes to zero."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Limit",
+   "back": "The value a function approaches as x gets arbitrarily close to a point."
+  },
+  {
+   "front": "One-sided limit",
+   "back": "A limit taken only from the left (x→a-) or right (x→a+) side of a point."
+  },
+  {
+   "front": "Epsilon-delta definition",
+   "back": "For every epsilon>0 there exists delta>0 such that 0<|x-a|<delta implies |f(x)-L|<epsilon."
+  },
+  {
+   "front": "Instantaneous velocity",
+   "back": "The derivative of position with respect to time; v(t)=lim h→0 (s(t+h)-s(t))/h."
+  },
+  {
+   "front": "L'Hopital's rule",
+   "back": "If a limit gives 0/0 or ∞/∞, differentiate numerator and denominator and take the limit of the new fraction."
+  },
+  {
+   "front": "Derivative as a limit",
+   "back": "f'(a)=lim h→0 (f(a+h)-f(a))/h, the slope of the tangent line at a."
+  },
+  {
+   "front": "Logistic growth model",
+   "back": "P(t)=K/(1+Ae^{-rt}); predicts a population that approaches the carrying capacity K as time grows."
+  },
+  {
+   "front": "Marginal cost",
+   "back": "C'(q)=lim Δq→0 (C(q+Δq)-C(q))/Δq, the cost of producing one additional unit."
+  }
+ ],
+ "reviewed": false
+}
