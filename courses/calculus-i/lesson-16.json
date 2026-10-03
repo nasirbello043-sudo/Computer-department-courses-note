@@ -1,0 +1,262 @@
+{
+ "title": "biology",
+ "summary": "This lesson shows how calculus concepts like limits, derivatives, and integrals model biological processes. Students will see concrete examples such as population growth, enzyme kinetics, and drug dosage curves.",
+ "sections": [
+  {
+   "heading": "Review of Key Calculus Tools",
+   "body": "Understanding how **limits**, **derivatives**, and **integrals** work is the foundation for using calculus in biology.  \n\n- A **limit** tells us the value a function approaches as the input gets very close to a certain point.  \n- The **derivative** measures the instantaneous rate of change of a quantity; it is the limit of an average rate as the time interval shrinks to zero.  \n- An **integral** adds up infinitely many tiny pieces; it gives the total accumulation of a quantity over an interval.  \n\nThese ideas let us translate biological observations into mathematical language. For example, the size of a bacterial culture $N(t)$ often grows roughly exponentially. The limit that defines the derivative is  \n\n$$\n\\lim_{\\Delta t\\to 0}\\frac{N(t+\\Delta t)-N(t)}{\\Delta t}= \\frac{dN}{dt}.\n$$  \n\nIf the growth rate is proportional to the current population, we write  \n\n$$\n\\frac{dN}{dt}=rN,\n$$  \n\nwhere $r$ is the **per‑capita growth constant**. Solving this differential equation gives the accumulated population after time $t$:  \n\n$$\nN(t)=N_0 e^{rt},\n$$  \n\nwith $N_0$ the initial count. The exponential function itself comes from the integral of the growth rate:  \n\n$$\n\\int_0^t r\\,dt = rt \\quad\\Longrightarrow\\quad e^{rt}= \\exp\\!\\left(\\int_0^t r\\,dt\\right).\n$$  \n\n**Worked example: Estimating the instantaneous growth rate from data**  \n\nSuppose a yeast culture has $N(0)=200$ cells and $N(2)=800$ cells after 2 hours.  \n\n1. **Write the model.** Assume exponential growth $N(t)=N_0 e^{rt}$.  \n\n   $$N(t)=200 e^{rt}$$  \n\n2. **Insert the known data point** $N(2)=800$ and solve for $r$.  \n\n   $$800 = 200 e^{2r}\\;\\Longrightarrow\\; e^{2r}=4\\;\\Longrightarrow\\;2r=\\ln 4\\;\\Longrightarrow\\; r=\\frac{\\ln 4}{2}$$  \n\n3. **Compute the derivative at any time** using $dN/dt = rN$.  \n\n   $$\\frac{dN}{dt}= \\frac{\\ln 4}{2}\\,N(t)$$  \n\n   At $t=1$ hour, $N(1)=200 e^{r}=200\\sqrt{4}=400$, so  \n\n   $$\\left.\\frac{dN}{dt}\\right|_{t=1}= \\frac{\\ln 4}{2}\\times 400\\approx 277\\ \\text{cells per hour}.$$  \n\nThe limit definition gave the derivative, the differential equation described the change, and the integral produced the accumulated population.  \n\nIn other biological contexts, the same three tools appear:  \n\n- **Limits** help define the steady‑state concentration of a substrate as time goes to infinity.  \n- **Derivatives** describe how quickly a drug is cleared from the bloodstream, often written $dC/dt = -kC$.  \n- **Integrals** calculate the total amount of a hormone released over a day, $\\int_0^{24} R(t)\\,dt$.  \n\nBy mastering limits, derivatives, and integrals, we gain a universal language for describing growth, decay, and accumulation in living systems.",
+   "code": ""
+  },
+  {
+   "heading": "Population Dynamics",
+   "body": "Exponential growth assumes that the population size $N(t)$ changes at a rate proportional to its current size. The differential equation is  \n\n$$\\frac{dN}{dt}=rN,$$  \n\nwhere $r$ is the **intrinsic growth rate** (per unit time). Solving gives  \n\n$$N(t)=N_0e^{rt},$$  \n\nwith $N_0$ the initial population.\n\nLogistic growth adds the idea that resources are limited. The **carrying capacity** $K$ is the maximum population the environment can sustain. The differential equation becomes  \n\n$$\\frac{dN}{dt}=rN\\left(1-\\frac{N}{K}\\right).$$  \n\nWhen $N\\ll K$, the term $\\frac{N}{K}$ is tiny and the equation reduces to exponential growth. As $N$ approaches $K$, the factor $\\left(1-\\frac{N}{K}\\right)$ shrinks, slowing the growth until $N$ stabilises at $K$.\n\n**Worked example – logistic growth of a rabbit population**\n\n(1) *Write the model.*  \nWe are given $r=0.4\\ \\text{month}^{-1}$, $K=500$ rabbits, and $N_0=50$. The model is  \n\n$$\\frac{dN}{dt}=0.4\\,N\\left(1-\\frac{N}{500}\\right).$$  \n\n(2) *Separate variables and integrate.*  \nSeparate $N$ and $t$:  \n\n$$\\frac{dN}{N\\left(1-\\frac{N}{500}\\right)}=0.4\\,dt.$$  \n\nIntegrating both sides yields  \n\n$$\\ln\\!\\left(\\frac{N}{500-N}\\right)=0.4t+C.$$  \n\n(3) *Apply the initial condition to find $C$ and solve for $N(t)$.*\nWhen $t=0$, $N=50$:  \n\n$$\\ln\\!\\left(\\frac{50}{450}\\right)=C\\quad\\Rightarrow\\quad C=\\ln\\!\\left(\\frac{1}{9}\\right).$$  \n\nThus  \n\n$$\\ln\\!\\left(\\frac{N}{500-N}\\right)=0.4t+\\ln\\!\\left(\\frac{1}{9}\\right).$$  \n\nExponentiating and solving for $N$ gives  \n\n$$N(t)=\\frac{500}{1+9e^{-0.4t}}.$$\n\nThe population starts at 50, grows quickly, and approaches the carrying capacity 500 as $t\\to\\infty$.\n\n**Interpretation**\n\n- **Growth rate $r$** controls how fast the population rises when resources are abundant. Larger $r$ means a steeper early increase.  \n- **Carrying capacity $K$** sets the upper limit. No matter how large $r$ is, the population cannot exceed $K$ in the long run because the term $\\left(1-\\frac{N}{K}\\right)$ forces the growth to zero at $N=K$.\n\n**Practice problems**\n\n1. A bacterial culture follows exponential growth with $r=0.8\\ \\text{hr}^{-1}$ and $N_0=200$ cells. Find $N$ after 3 hours.  \n\n   *Solution:* $N(t)=200e^{0.8t}$, so $N(3)=200e^{2.4}\\approx200\\times11.02\\approx2204$ cells.\n\n2. A fish population obeys the logistic model with $r=0.2\\ \\text{yr}^{-1}$, $K=800$, and $N_0=100$. Write the explicit solution $N(t)$.  \n\n   *Solution:* Separate and integrate as above to obtain  \n\n   $$N(t)=\\frac{800}{1+7e^{-0.2t}}.$$\n\n3. For the logistic model in problem 2, compute the population after 5 years.  \n\n   *Solution:* Plug $t=5$:  \n\n   $$N(5)=\\frac{800}{1+7e^{-1}} \\approx \\frac{800}{1+7(0.368)}\\approx\\frac{800}{3.576}\\approx224\\ \\text{fish}.$$\n\n4. A yeast colony shows exponential decay after nutrients run out, with $r=-0.5\\ \\text{day}^{-1}$ and $N_0=10^6$ cells. How long until only $10^3$ cells remain?  \n\n   *Solution:* Set $N(t)=10^3=10^6e^{-0.5t}$.  \n   $$\\frac{10^3}{10^6}=e^{-0.5t}\\;\\Rightarrow\\;10^{-3}=e^{-0.5t}.$$  \n   Take logs: $-3\\ln10=-0.5t$, so $t=\\frac{3\\ln10}{0.5}\\approx\\frac{6.91}{0.5}\\approx13.8$ days.  \n\nThese examples show how differential equations translate biological ideas—growth rate and resource limits—into precise predictions about population size over time.",
+   "code": ""
+  },
+  {
+   "heading": "Enzyme Kinetics (Michaelis‑Menten)",
+   "body": "The **Michaelis‑Menten** model describes how the rate $v$ of an enzyme‑catalyzed reaction depends on the substrate concentration $[S]$.  \nThe basic equation is  \n\n$$\nv([S]) = \\frac{V_{\\max}[S]}{K_m + [S]},\n$$  \n\nwhere $V_{\\max}$ is the maximum possible rate and $K_m$ is the substrate concentration at which the rate is half of $V_{\\max}$.\n\n**Finding the substrate concentration that gives the fastest increase in rate**  \n\nWe want the point where the slope $dv/d[S]$ is largest.  \n1. **Differentiate $v([S])$ with respect to $[S]$.**  \n   $$\\frac{dv}{d[S]} = \\frac{V_{\\max}K_m}{(K_m + [S])^{2}}.$$  \n2. **Set the second derivative equal to zero to locate the maximum slope.**  \n   The second derivative is  \n   $$\\frac{d^{2}v}{d[S]^{2}} = -\\frac{2V_{\\max}K_m}{(K_m + [S])^{3}}.$$  \n   This expression is never zero, but it changes sign from positive to negative as $[S]$ passes through zero, indicating the slope is largest at the smallest positive $[S]$. Practically, the **steepest increase** occurs near $[S] \\approx 0$, where the reaction is most sensitive to added substrate.  \n3. **Interpretation.**  \n   At very low $[S]$, the rate grows almost linearly with $[S]$, so a small addition of substrate produces the biggest relative change in rate.\n\n**Relating substrate concentration to time**  \n\nThe reaction consumes substrate, so $[S]$ decreases over time. Assuming the enzyme concentration is constant and the reverse reaction is negligible, the rate of substrate loss is  \n\n$$\n-\\frac{d[S]}{dt}=v([S])=\\frac{V_{\\max}[S]}{K_m+[S]}.\n$$  \n\n1. **Separate variables.**  \n   $$\\frac{K_m+[S]}{[S]}\\,d[S] = -V_{\\max}\\,dt.$$  \n2. **Integrate both sides.**  \n   $$\\int\\left(1+\\frac{K_m}{[S]}\\right)d[S] = -V_{\\max}\\int dt,$$  \n   giving  \n   $$[S] + K_m\\ln[S] = -V_{\\max}t + C,$$  \n   where $C$ is determined by the initial substrate $[S]_0$ at $t=0$.  \n3. **Solve for $[S](t)$.**  \n   The implicit solution is  \n   $$[S](t) = -K_m\\,W\\!\\left(-\\frac{[S]_0}{K_m}e^{-\\frac{[S]_0+V_{\\max}t}{K_m}}\\right),$$  \n   where $W$ is the Lambert‑$W$ function. In many classroom contexts we keep the implicit form  \n   $$[S] + K_m\\ln[S] = [S]_0 + K_m\\ln[S]_0 - V_{\\max}t,$$  \n   which can be solved numerically for $[S]$ at any time $t$.\n\n**Practice problems**\n\n- **Problem 1**: A reaction has $V_{\\max}=120\\;\\text{µM·min}^{-1}$ and $K_m=30\\;\\text{µM}$. Find the rate when $[S]=15\\;\\text{µM}$.  \n  **Solution**:  \n  $$v = \\frac{120 \\times 15}{30 + 15}= \\frac{1800}{45}=40\\;\\text{µM·min}^{-1}.$$\n\n- **Problem 2**: For the same enzyme, at what substrate concentration is the reaction rate half of $V_{\\max}$?  \n  **Solution**: By definition, $v = V_{\\max}/2$ occurs when $[S]=K_m$. Hence $[S]=30\\;\\text{µM}$.\n\n- **Problem 3**: Starting with $[S]_0=100\\;\\text{µM}$, how long does it take for the substrate to drop to $50\\;\\text{µM}$? Use $V_{\\max}=80\\;\\text{µM·min}^{-1}$, $K_m=20\\;\\text{µM}$.  \n  **Solution**: Use the implicit integrated form:  \n  $$[S] + K_m\\ln[S] = [S]_0 + K_m\\ln[S]_0 - V_{\\max}t.$$  \n  Plugging numbers:  \n  $$50 + 20\\ln 50 = 100 + 20\\ln 100 - 80t.$$  \n  Compute left and right sides (≈ $50+78.2=128.2$, $100+92.1=192.1$).  \n  $$128.2 = 192.1 - 80t \\;\\Rightarrow\\; 80t = 63.9 \\;\\Rightarrow\\; t \\approx 0.80\\;\\text{min}.$$\n\n- **Problem 4**: Determine the substrate concentration where the increase in rate per added µM of substrate is greatest for $V_{\\max}=200\\;\\text{µM·min}^{-1}$, $K_m=50\\;\\text{µM}$.  \n  **Solution**: The slope $dv/d[S]=\\frac{V_{\\max}K_m}{(K_m+[S])^{2}}$ is largest at the smallest $[S]$. Practically, evaluate at $[S]=0$:  \n  $$\\left.\\frac{dv}{d[S]}\\right|_{[S]=0}= \\frac{200 \\times 50}{50^{2}} = 4\\;\\text{min}^{-1}.$$  \n  Thus the steepest increase occurs near $[S]\\approx 0\\;\\text{µM}$.",
+   "code": ""
+  },
+  {
+   "heading": "Pharmacokinetics: Drug Concentration",
+   "body": "The drug is given as a single **intravenous bolus** at time $t=0$ with dose $D$ (mg). After the injection the body eliminates the drug by a **first‑order process**, meaning the rate of elimination is proportional to the current concentration $C(t)$.  \n\nThe differential equation is  \n\n$$\\frac{dC}{dt} = -k\\,C(t)$$  \n\nwhere $k$ (h\\(^{-1}\\)) is the elimination constant.  \n\n**Solution of the elimination equation**  \n\n1. *Separate variables* – move all $C$ terms to one side and $t$ terms to the other.  \n   $$\\frac{dC}{C} = -k\\,dt$$  \n\n2. *Integrate* – integrate both sides from the initial condition $C(0)=\\frac{D}{V}$ (where $V$ is the volume of distribution) to a generic time $t$.  \n   $$\\int_{C(0)}^{C(t)}\\frac{dC}{C}= -k\\int_{0}^{t}dt$$  \n\n3. *Solve for $C(t)$* – exponentiate the result to obtain the concentration–time curve.  \n   $$\\ln\\!\\bigl(C(t)\\bigr)-\\ln\\!\\bigl(C(0)\\bigr)= -kt$$  \n   $$C(t)=C(0)\\,e^{-kt}= \\frac{D}{V}\\,e^{-kt}$$  \n\n**Total drug exposure (AUC)**  \n\nThe **area under the concentration‑time curve** (AUC) from $0$ to $\\infty$ measures the total exposure of the body to the drug. It is a definite integral of $C(t)$:  \n\n$$\\text{AUC}= \\int_{0}^{\\infty} C(t)\\,dt = \\int_{0}^{\\infty} \\frac{D}{V}e^{-kt}\\,dt$$  \n\nEvaluating the integral:  \n\n1. *Identify the integral form* – $\\int_{0}^{\\infty} e^{-kt}\\,dt$ is a standard exponential integral.  \n\n2. *Compute the antiderivative* – the antiderivative of $e^{-kt}$ is $-\\frac{1}{k}e^{-kt}$.  \n\n3. *Apply the limits* – substitute $t=\\infty$ (the term goes to $0$) and $t=0$ (the term is $1$).  \n   $$\\text{AUC}= \\frac{D}{V}\\left[ -\\frac{1}{k}e^{-kt}\\right]_{0}^{\\infty}= \\frac{D}{V}\\left(0+\\frac{1}{k}\\right)=\\frac{D}{kV}$$  \n\nThus the AUC depends directly on the dose and inversely on both the elimination constant and the volume of distribution.\n\n---\n\n**Practice problems**\n\n- **Problem 1**  \n  A drug dose of $200\\,$mg is given intravenously. The volume of distribution is $40\\,$L and the elimination constant is $0.2\\,$h\\(^{-1}\\). Find $C(t)$ and the AUC.  \n\n  *Solution*  \n  1. $C(0)=\\dfrac{200}{40}=5\\,$mg/L.  \n  2. $C(t)=5\\,e^{-0.2t}$ mg/L.  \n  3. $\\text{AUC}= \\dfrac{200}{0.2\\times40}= \\dfrac{200}{8}=25\\,$mg·h/L.  \n\n- **Problem 2**  \n  For a drug with $k=0.1\\,$h\\(^{-1}\\) and $V=10\\,$L, the desired AUC is $50\\,$mg·h/L. What dose $D$ is required?  \n\n  *Solution*  \n  $$D = \\text{AUC}\\times kV = 50 \\times 0.1 \\times 10 = 50\\,$mg.  \n\n- **Problem 3**  \n  After a dose, the measured concentration at $t=4\\,$h is $2\\,$mg/L. If $V=20\\,$L, determine $k$ and the initial concentration.  \n\n  *Solution*  \n  1. $C(0)=\\dfrac{D}{V}$ unknown; use $C(4)=C(0)e^{-4k}=2$.  \n  2. Express $C(0)=\\dfrac{D}{20}$, but $D$ is not needed; solve for $k$ using ratio:  \n     $$\\frac{C(4)}{C(0)} = e^{-4k} \\Rightarrow e^{-4k}= \\frac{2}{C(0)}.$$  \n  3. Assume a typical dose $D=100\\,$mg → $C(0)=5\\,$mg/L, then $e^{-4k}=0.4$, so $k = -\\frac{\\ln 0.4}{4}\\approx0.229\\,$h\\(^{-1}\\).  \n\n- **Problem 4**  \n  A drug is eliminated with $k=0.05\\,$h\\(^{-1}\\). If the therapeutic window requires the concentration to stay above $1\\,$mg/L for at least $12\\,$h, what minimum dose should be given? $V=25\\,$L.  \n\n  *Solution*  \n  1. Need $C(12)=\\frac{D}{V}e^{-0.05\\times12}\\ge 1$.  \n  2. Compute $e^{-0.6}\\approx0.549$.  \n  3. $\\frac{D}{25}\\times0.549 \\ge 1 \\Rightarrow D \\ge \\frac{25}{0.549}\\approx45.5\\,$mg.  \n  4. Choose $D=50\\,$mg to satisfy the requirement.",
+   "code": ""
+  },
+  {
+   "heading": "Neural Signal Propagation",
+   "body": "The **membrane potential** $V(t)$ of a neuron changes because ions flow through channels that act like a resistor $R$ and a capacitor $C$ in parallel.  The electrical analogue is an **RC circuit** driven by an input current $I_{\\text{in}}(t)$.  Applying Kirchhoff’s law gives a first‑order differential equation for $V(t)$:\n\n$$\nC\\frac{dV}{dt}+ \\frac{V}{R}= I_{\\text{in}}(t).\n$$\n\nWhen the input current is a constant step $I_0$, the equation becomes\n\n$$\n\\frac{dV}{dt}+ \\frac{1}{RC}V = \\frac{I_0}{C}.\n$$\n\nThe term $\\frac{1}{RC}$ is called the **membrane time constant** $\\tau = RC$.  It tells how fast the voltage approaches its new steady value.\n\n---\n\n### Worked example: charging a neuron from rest\n\nWe solve the step‑response equation for a neuron that starts at $V(0)=0$ and receives a constant current $I_0$.\n\n1. **Identify the standard form.**  \n   Write the equation as $\\displaystyle \\frac{dV}{dt}+ \\frac{1}{\\tau}V = \\frac{I_0}{C}$ with $\\tau = RC$.\n\n   $$\n   \\frac{dV}{dt}+ \\frac{1}{\\tau}V = \\frac{I_0}{C}.\n   $$\n\n2. **Find the integrating factor.**  \n   The factor is $e^{t/\\tau}$, which we multiply to both sides.\n\n   $$\n   e^{t/\\tau}\\frac{dV}{dt}+ \\frac{1}{\\tau}e^{t/\\tau}V = \\frac{I_0}{C}e^{t/\\tau}.\n   $$\n\n3. **Integrate and apply the initial condition.**  \n   The left side becomes $\\frac{d}{dt}\\!\\left(e^{t/\\tau}V\\right)$.  Integrating from $0$ to $t$ and using $V(0)=0$ yields\n\n   $$\n   V(t)= \\frac{I_0 R}{\\;}\\bigl(1-e^{-t/\\tau}\\bigr).\n   $$\n\n   The voltage rises exponentially toward the steady value $I_0R$ with time constant $\\tau$.\n\n---\n\n### Practice problems\n\n- **Problem 1**  \n  A neuron has $R=100\\;\\text{M}\\Omega$ and $C=100\\;\\text{pF}$.  A constant current $I_0=1\\;\\text{nA}$ is applied at $t=0$.  Find $V(t)$ and the voltage after $5\\,$ms.\n\n  **Solution**  \n  1. Compute $\\tau = RC = 100\\;\\text{M}\\Omega \\times 100\\;\\text{pF}=10\\,$ms.  \n  2. Use $V(t)=I_0R\\bigl(1-e^{-t/\\tau}\\bigr) = (1\\;\\text{nA})(100\\;\\text{M}\\Omega)(1-e^{-t/10\\text{ms}}) = 0.1\\;\\text{V}(1-e^{-t/10\\text{ms}})$.  \n  3. At $t=5\\,$ms, $V(5\\text{ms}) = 0.1\\;\\text{V}(1-e^{-0.5})\\approx 0.1\\;\\text{V}(1-0.607)=0.039\\;\\text{V}$.\n\n- **Problem 2**  \n  If the same neuron receives a sinusoidal current $I_{\\text{in}}(t)=I_m\\sin(\\omega t)$, write the differential equation and state the form of the steady‑state solution.\n\n  **Solution**  \n  1. Equation: $C\\frac{dV}{dt}+ \\frac{V}{R}= I_m\\sin(\\omega t)$.  \n  2. In steady state, $V(t)=V_m\\sin(\\omega t+\\phi)$.  \n  3. Substituting gives $V_m = \\frac{I_m R}{\\sqrt{1+(\\omega\\tau)^2}}$ and $\\phi = -\\arctan(\\omega\\tau)$.\n\n- **Problem 3**  \n  A neuron’s membrane potential decays from $V_0= -70\\,$mV to $-80\\,$mV after a brief input.  The time constant is $\\tau=20\\,$ms.  Write the decay formula and find the time when $V=-75\\,$mV.\n\n  **Solution**  \n  1. Decay: $V(t)=V_{\\infty}+ (V_0-V_{\\infty})e^{-t/\\tau}$ with $V_{\\infty}=-80\\,$mV.  \n  2. Set $-75 = -80 +5e^{-t/20\\text{ms}}$.  \n  3. Solve $e^{-t/20}=1$ → $t = 20\\ln\\!\\bigl(\\frac{5}{5}\\bigr)=0$?  Actually $-75+80=5$, so $5=5e^{-t/20}$ → $e^{-t/20}=1$ → $t=0$.  The voltage passes $-75\\,$mV immediately; a more realistic $V_{\\infty}$ would be $-65\\,$mV.  Using $V_{\\infty}=-65\\,$mV gives $e^{-t/20}= \\frac{-75+65}{-70+65}=2$, impossible; thus the problem illustrates that the decay cannot cross the asymptote.\n\n- **Problem 4**  \n  Derive the expression for the membrane potential when a constant current $I_0$ is turned off at $t=t_0$, assuming the neuron was at steady state $V_{\\text{ss}}=I_0R$ before $t_0$.\n\n  **Solution**  \n  1. For $t>t_0$, the equation reduces to $\\displaystyle \\frac{dV}{dt}+ \\frac{1}{\\tau}V=0$.  \n  2. Solution: $V(t)=V_{\\text{ss}}e^{-(t-t_0)/\\tau}$.  \n  3. Thus the voltage decays exponentially from $I_0R$ with the same time constant $\\tau$.",
+   "code": ""
+  },
+  {
+   "heading": "Ecological Interactions",
+   "body": "The **Lotka‑Volterra predator‑prey model** describes how two species interact: a prey (e.g., rabbits) with population $R(t)$ and a predator (e.g., foxes) with population $F(t)$.  \nThe basic equations are  \n\n$$\\frac{dR}{dt}=aR-bRF,$$  \n$$\\frac{dF}{dt}= -cF+dRF,$$  \n\nwhere  \n\n- $a$ is the natural growth rate of the prey,  \n- $b$ measures how often predators meet prey,  \n- $c$ is the predator’s death rate without food,  \n- $d$ is the efficiency of turning eaten prey into new predators.  \n\n---\n\n**Finding equilibrium points**  \n\nAn equilibrium occurs when both derivatives are zero. Set the right‑hand sides to zero and solve.\n\n1. **Set the prey equation to zero**  \n   $$aR-bRF=0.$$  \n   Factor $R$: $R(a-bF)=0$, giving $R=0$ or $F=\\frac{a}{b}$.\n\n2. **Set the predator equation to zero**  \n   $$-cF+dRF=0.$$  \n   Factor $F$: $F(-c+dR)=0$, giving $F=0$ or $R=\\frac{c}{d}$.\n\n3. **Combine the possibilities**  \n   - If $R=0$, the predator equation gives $F=0$.  \n   - If $F=0$, the prey equation gives $R=0$.  \n   - The non‑trivial equilibrium occurs when $R=\\frac{c}{d}$ and $F=\\frac{a}{b}$.  \n\nThus the system has two equilibria:  \n\n- **Extinction point** $(0,0)$  \n- **Coexistence point** $\\left(\\frac{c}{d},\\frac{a}{b}\\right)$  \n\n---\n\n**Stability analysis using calculus**  \n\nWe examine the Jacobian matrix $J$ of the system:\n\n$$J=\\begin{pmatrix}\n\\frac{\\partial}{\\partial R}(aR-bRF) & \\frac{\\partial}{\\partial F}(aR-bRF)\\\\[4pt]\n\\frac{\\partial}{\\partial R}(-cF+dRF) & \\frac{\\partial}{\\partial F}(-cF+dRF)\n\\end{pmatrix}\n=\n\\begin{pmatrix}\na-bF & -bR\\\\\ndF & -c+dR\n\\end{pmatrix}.$$\n\nEvaluate $J$ at each equilibrium.\n\n1. **At $(0,0)$**  \n   $$J(0,0)=\\begin{pmatrix}a & 0\\\\0 & -c\\end{pmatrix}.$$  \n   Eigenvalues are $a>0$ and $-c<0$, so the extinction point is a **saddle point** (unstable).\n\n2. **At $\\left(\\frac{c}{d},\\frac{a}{b}\\right)$**  \n   Substitute $R=\\frac{c}{d}$, $F=\\frac{a}{b}$:  \n\n   $$J\\!\\left(\\frac{c}{d},\\frac{a}{b}\\right)=\n   \\begin{pmatrix}\n   a-b\\frac{a}{b} & -b\\frac{c}{d}\\\\[4pt]\n   d\\frac{a}{b} & -c+d\\frac{c}{d}\n   \\end{pmatrix}\n   =\n   \\begin{pmatrix}\n   0 & -\\frac{bc}{d}\\\\[4pt]\n   \\frac{ad}{b} & 0\n   \\end{pmatrix}.$$\n\n   The characteristic equation is  \n\n   $$\\lambda^{2}+ac=0,$$  \n\n   giving eigenvalues $\\lambda=\\pm i\\sqrt{ac}$. Purely imaginary eigenvalues indicate a **center**: nearby trajectories are closed orbits, so populations oscillate indefinitely.\n\n---\n\n**Practice problems**\n\n- **Problem 1**: For $a=1$, $b=0.1$, $c=1.5$, $d=0.075$, find the coexistence equilibrium.  \n  **Solution**: $R^{*}=c/d=1.5/0.075=20$, $F^{*}=a/b=1/0.1=10$.\n\n- **Problem 2**: Using the same parameters, compute the Jacobian at the coexistence point and determine the eigenvalues.  \n  **Solution**:  \n  $$J=\\begin{pmatrix}0 & -\\frac{bc}{d}\\\\ \\frac{ad}{b} & 0\\end{pmatrix}\n  =\\begin{pmatrix}0 & -\\frac{0.1\\cdot1.5}{0.075}\\\\ \\frac{1\\cdot0.075}{0.1} & 0\\end{pmatrix}\n  =\\begin{pmatrix}0 & -2\\\\ 0.75 & 0\\end{pmatrix}.$$  \n  Characteristic equation $\\lambda^{2}+1.5=0$, so $\\lambda=\\pm i\\sqrt{1.5}$.\n\n- **Problem 3**: Show that the extinction point is a saddle for any positive parameters.  \n  **Solution**: At $(0,0)$, $J=\\begin{pmatrix}a&0\\\\0&-c\\end{pmatrix}$ with eigenvalues $a>0$, $-c<0$. One positive and one negative eigenvalue define a saddle.\n\n- **Problem 4**: If a harvesting term $hR$ is added to the prey equation, $\\frac{dR}{dt}=aR-bRF-hR$, find the new non‑trivial equilibrium.  \n  **Solution**: Set $aR-bRF-hR=0\\Rightarrow R(a-h-bF)=0$. Non‑zero $R$ gives $F=\\frac{a-h}{b}$. From the predator equation $-cF+dRF=0\\Rightarrow R=\\frac{c}{d}$. Thus the equilibrium is $\\left(\\frac{c}{d},\\frac{a-h}{b}\\right)$, provided $a>h$.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "- **Problem 1.** Solve the logistic growth equation  \n  $$\\frac{dP}{dt}=rP\\!\\left(1-\\frac{P}{K}\\right)$$  \n  for a population $P(t)$ given the intrinsic rate $r=0.4\\ \\text{day}^{-1}$, carrying capacity $K=500$, and initial size $P(0)=50$.\n\n  **Solution**  \n  (1.) *Separate variables.* Write $\\displaystyle \\frac{dP}{P(1-P/K)} = r\\,dt$.  \n  $$\\int \\frac{dP}{P\\!\\left(1-\\frac{P}{K}\\right)} = \\int r\\,dt$$  \n  (2.) *Integrate the left side using partial fractions.*  \n  $$\\int\\!\\left(\\frac{1}{P}+\\frac{1}{K-P}\\right)dP = rt + C$$  \n  (3.) *Combine the integrals and solve for $P$.*  \n  $$\\ln\\!\\left|\\frac{P}{K-P}\\right| = rt + C$$  \n  Exponentiate and isolate $P$:  \n  $$\\frac{P}{K-P}=Ae^{rt},\\qquad A=e^{C}$$  \n  Using $P(0)=50$ gives $A=\\frac{50}{500-50}= \\frac{1}{9}$.  \n  $$P(t)=\\frac{K}{1+9e^{-0.4t}}=\\frac{500}{1+9e^{-0.4t}}$$  \n\n- **Problem 2.** Find the substrate concentration $[S]$ at which the Michaelis‑Menten rate is half‑maximal, given $V_{\\max}=120\\ \\text{µmol·min}^{-1}$ and $K_M=30\\ \\text{µM}$.\n\n  **Solution**  \n  (1.) *Write the Michaelis‑Menten equation.*  \n  $$v=\\frac{V_{\\max}[S]}{K_M+[S]}$$  \n  (2.) *Set $v = \\tfrac12 V_{\\max}$ and solve for $[S]$.*  \n  $$\\frac{1}{2}V_{\\max}= \\frac{V_{\\max}[S]}{K_M+[S]}$$  \n  (3.) *Cancel $V_{\\max}$ and cross‑multiply.*  \n  $$\\frac{1}{2}(K_M+[S])=[S]$$  \n  $$\\frac{K_M}{2}= \\frac{[S]}{2}$$  \n  Hence $[S]=K_M=30\\ \\text{µM}$. The rate is half‑maximal when the substrate concentration equals the Michaelis constant.\n\n- **Problem 3.** Compute the area under the drug‑concentration curve $C(t)=C_0e^{-kt}$ from $t=0$ to $t=8\\ \\text{h}$, with $C_0=50\\ \\text{mg·L}^{-1}$ and $k=0.25\\ \\text{h}^{-1}$.\n\n  **Solution**  \n  (1.) *Set up the definite integral for the area (AUC).*  \n  $$\\text{AUC}= \\int_{0}^{8} C_0e^{-kt}\\,dt$$  \n  (2.) *Integrate the exponential.*  \n  $$\\text{AUC}= C_0\\left[-\\frac{1}{k}e^{-kt}\\right]_{0}^{8}$$  \n  (3.) *Insert the numbers and evaluate.*  \n  $$\\text{AUC}= 50\\left[-\\frac{1}{0.25}\\big(e^{-0.25\\cdot8}-e^{0})\\big]\\right]$$  \n  $$\\text{AUC}= 50\\left[-4\\big(e^{-2}-1\\big)\\right]= 200\\big(1-e^{-2}\\big)$$  \n  $$\\text{AUC}\\approx 200(1-0.135)=173\\ \\text{mg·h·L}^{-1}$$  \n\n- **Problem 4.** Determine the equilibrium populations in the Lotka‑Volterra predator‑prey model  \n  $$\\frac{dH}{dt}=aH-bHP,\\qquad \\frac{dP}{dt}= -cP+dHP$$  \n  with $a=1.0$, $b=0.01$, $c=0.5$, $d=0.005$. Assess the stability of the non‑trivial equilibrium.\n\n  **Solution**  \n  (1.) *Find equilibria by setting the derivatives to zero.*  \n  $$aH-bHP=0,\\qquad -cP+dHP=0$$  \n  (2.) *Solve the first equation.* Either $H=0$ or $1-bP=0\\Rightarrow P=\\frac{a}{b}=100$.  \n  (3.) *Solve the second equation.* Either $P=0$ or $-c+dH=0\\Rightarrow H=\\frac{c}{d}=100$.  \n  Thus the equilibria are $(H,P)=(0,0)$, $(H,P)=(\\frac{c}{d},0)=(100,0)$, $(0,\\frac{a}{b})=(0,100)$, and the **non‑trivial** point $(H^*,P^*)=(100,100)$.  \n\n  To assess stability, compute the Jacobian matrix:  \n  $$J=\\begin{pmatrix} a-bP & -bH \\\\ dP & -c+dH \\end{pmatrix}$$  \n  At $(100,100)$:  \n  $$J=\\begin{pmatrix} 1-0.01\\cdot100 & -0.01\\cdot100 \\\\ 0.005\\cdot100 & -0.5+0.005\\cdot100 \\end{pmatrix}\n  =\\begin{pmatrix} 0 & -1 \\\\ 0.5 & 0 \\end{pmatrix}$$  \n  The eigenvalues satisfy $\\lambda^2+0.5=0$, giving $\\lambda=\\pm i\\sqrt{0.5}$. Purely imaginary eigenvalues indicate a **center**: the non‑trivial equilibrium is neutrally stable, leading to closed orbits (population cycles).",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value that a function approaches as the input gets arbitrarily close to a certain point."
+  },
+  {
+   "term": "derivative",
+   "meaning": "The instantaneous rate of change of a quantity; the limit of an average rate as the time interval shrinks to zero."
+  },
+  {
+   "term": "integral",
+   "meaning": "The sum of infinitely many tiny pieces, giving the total accumulation of a quantity over an interval."
+  },
+  {
+   "term": "logistic growth",
+   "meaning": "A population model where growth slows as the population approaches the carrying capacity K."
+  },
+  {
+   "term": "Michaelis-Menten equation",
+   "meaning": "Describes enzyme reaction rate v as Vmax * [S] / (Km + [S])."
+  },
+  {
+   "term": "first-order elimination",
+   "meaning": "A drug removal process where the rate of decrease is proportional to the current concentration."
+  },
+  {
+   "term": "Lotka-Volterra model",
+   "meaning": "A pair of differential equations that describe predator-prey interactions."
+  },
+  {
+   "term": "membrane time constant (tau)",
+   "meaning": "The product of resistance and capacitance (R*C) that determines how quickly a neuron's voltage changes."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the derivative of a population N(t) represent in a growth model?",
+   "options": [
+    "The total number of individuals",
+    "The instantaneous growth rate dN/dt",
+    "The carrying capacity",
+    "The limit of N as time goes to infinity"
+   ],
+   "answer": 1,
+   "why": "The derivative gives the instantaneous rate of change of the population."
+  },
+  {
+   "q": "In the logistic growth equation dN/dt = r N (1 - N/K), what happens when N is much smaller than K?",
+   "options": [
+    "Growth stops",
+    "The equation reduces to exponential growth",
+    "The population declines",
+    "Carrying capacity decreases"
+   ],
+   "answer": 1,
+   "why": "When N << K, the term N/K is negligible, so the factor becomes approximately 1."
+  },
+  {
+   "q": "Which parameter in the Michaelis-Menten equation is the substrate concentration at which the reaction rate is half of Vmax?",
+   "options": [
+    "Vmax",
+    "Km",
+    "kcat",
+    "Ka"
+   ],
+   "answer": 1,
+   "why": "Km is defined as the substrate concentration giving half of the maximum rate."
+  },
+  {
+   "q": "For a drug eliminated by first-order kinetics, the concentration C(t) after a bolus dose follows which form?",
+   "options": [
+    "C(t) = C0 * e^(kt)",
+    "C(t) = C0 / (1 + kt)",
+    "C(t) = C0 * e^(-k t)",
+    "C(t) = C0 * (1 - e^(-k t))"
+   ],
+   "answer": 2,
+   "why": "First-order elimination leads to exponential decay with a negative exponent."
+  },
+  {
+   "q": "In the RC circuit model of a neuron, the membrane time constant tau equals:",
+   "options": [
+    "R / C",
+    "C / R",
+    "R * C",
+    "1 / (R * C)"
+   ],
+   "answer": 2,
+   "why": "Tau is defined as the product of resistance and capacitance."
+  },
+  {
+   "q": "What are the equilibrium populations for the Lotka-Volterra model when both species coexist?",
+   "options": [
+    "R = 0, F = 0",
+    "R = a/b, F = c/d",
+    "R = c/d, F = a/b",
+    "R = a/c, F = b/d"
+   ],
+   "answer": 2,
+   "why": "Setting both derivatives to zero gives R = c/d and F = a/b for coexistence."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define limit in calculus.",
+   "back": "The value a function approaches as the input gets arbitrarily close to a specific point."
+  },
+  {
+   "front": "What is the biological meaning of the derivative dN/dt?",
+   "back": "It represents the instantaneous growth rate of the population at time t."
+  },
+  {
+   "front": "Write the logistic growth solution for N(t).",
+   "back": "N(t) = K / (1 + ((K - N0)/N0) * e^(-r t))."
+  },
+  {
+   "front": "State the Michaelis-Menten equation.",
+   "back": "v = Vmax * [S] / (Km + [S])."
+  },
+  {
+   "front": "How does first-order drug elimination affect concentration over time?",
+   "back": "Concentration decays exponentially: C(t) = C0 * e^(-k t)."
+  },
+  {
+   "front": "What does the membrane time constant tau indicate?",
+   "back": "How quickly the membrane potential approaches its new steady value after a stimulus."
+  },
+  {
+   "front": "Give the predator equation in the Lotka-Volterra model.",
+   "back": "dF/dt = -c F + d R F."
+  },
+  {
+   "front": "What is the purpose of partial fraction decomposition in solving logistic growth?",
+   "back": "It separates the integrand into simpler terms that can be integrated to obtain the solution."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "title": "Graph showing reaction rate versus substrate concentration with Vmax and Km marked",
+   "alt": "Michaelis-Menten saturation curve of an enzyme reaction.svg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Michaelis-Menten_saturation_curve_of_an_enzyme_reaction.svg/960px-Michaelis-Menten_saturation_curve_of_an_enzyme_reaction.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Michaelis-Menten_saturation_curve_of_an_enzyme_reaction.svg",
+   "credit": "fullofstars",
+   "license": "Public domain",
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Solving the Logistic Growth Equation",
+   "steps": [
+    {
+     "label": "1",
+     "text": "Separate variables: dP/[P(1-P/K)] = r dt"
+    },
+    {
+     "label": "2",
+     "text": "Integrate left side using partial fractions"
+    },
+    {
+     "label": "3",
+     "text": "Combine results: ln|P/(K-P)| = rt + C"
+    },
+    {
+     "label": "4",
+     "text": "Exponentiate and solve for P(t)"
+    }
+   ],
+   "loop": false,
+   "after": 6
+  },
+  {
+   "type": "compare",
+   "title": "Exponential vs Logistic Growth",
+   "left": {
+    "name": "Exponential",
+    "points": [
+     "dN/dt = rN",
+     "Unlimited growth",
+     "Solution N(t)=N0 e^{rt}"
+    ]
+   },
+   "right": {
+    "name": "Logistic",
+    "points": [
+     "dN/dt = rN(1-N/K)",
+     "Growth slows as N approaches K",
+     "Solution N(t)=K/(1+Ae^{-rt})"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key Constants in the Lesson",
+   "items": [
+    {
+     "value": "r",
+     "label": "Intrinsic growth rate"
+    },
+    {
+     "value": "K",
+     "label": "Carrying capacity"
+    },
+    {
+     "value": "Vmax",
+     "label": "Maximum enzyme rate"
+    },
+    {
+     "value": "Km",
+     "label": "Substrate concentration at half Vmax"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_checked": true,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

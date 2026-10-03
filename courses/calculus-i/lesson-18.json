@@ -1,0 +1,252 @@
+{
+ "title": "reinforcing confidence in using calculus tools.",
+ "summary": "This lesson consolidates students' ability to apply limits, derivatives, and integrals confidently across various contexts. It reviews key concepts, common pitfalls, and provides strategies for accurate problem solving.",
+ "sections": [
+  {
+   "heading": "Quick Review of Core Concepts",
+   "body": "**Limits** describe the behavior of a function as the input approaches a particular value.  \nIf $f(x)$ gets arbitrarily close to $L$ when $x$ gets arbitrarily close to $a$, we write  \n\n$$\\lim_{x\\to a} f(x)=L.$$  \n\n*Interpretation*: Think of $L$ as the height the graph is trying to reach near $x=a$, even if the function is not defined at $a$.\n\n**Derivatives** measure the instantaneous rate of change of a function.  \nThe derivative of $f$ at $a$ is  \n\n$$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$  \n\n*Interpretation*: $f'(a)$ is the slope of the tangent line to the curve at $x=a$, telling how fast $y$ is changing with respect to $x$.\n\n**Integrals** accumulate quantities over an interval.  \nThe definite integral of $f$ from $a$ to $b$ is  \n\n$$\\int_{a}^{b} f(x)\\,dx,$$  \n\nwhich represents the signed area under the curve between $x=a$ and $x=b$.\n\n*Interpretation*: If $f(x)$ is a speed, the integral gives the total distance traveled; if $f(x)$ is a density, the integral gives total mass.\n\nWhen to use each tool:\n\n- Use a **limit** when you need to understand behavior near a point, such as checking continuity or evaluating indeterminate forms.\n- Use a **derivative** when the problem asks for a rate, an optimal point (maximum/minimum), or the slope of a tangent.\n- Use an **integral** when the problem involves accumulation, area, volume, or reversing a derivative (antiderivative).\n\n**Worked example: Find the derivative of $f(x)=3x^2-5$ at $x=2$.**  \n\n1. *Set up the limit definition.*  \n   $$f'(2)=\\lim_{h\\to 0}\\frac{f(2+h)-f(2)}{h}.$$  \n\n2. *Substitute the function and simplify the numerator.*  \n   $$\\frac{(3(2+h)^2-5)-(3\\cdot2^2-5)}{h}\n     =\\frac{3(4+4h+h^2)-5- (12-5)}{h}\n     =\\frac{12+12h+3h^2-5-7}{h}\n     =\\frac{12h+3h^2}{h}.$$  \n\n3. *Cancel $h$ and take the limit.*  \n   $$\\lim_{h\\to 0}(12+3h)=12.$$  \n\nThus $f'(2)=12$, meaning the slope of $y=3x^2-5$ at $x=2$ is $12$.\n\n**Worked example: Evaluate $\\displaystyle\\int_{0}^{3} (2x+1)\\,dx$.**  \n\n1. *Find an antiderivative of the integrand.*  \n   $$\\int (2x+1)\\,dx = x^2 + x + C.$$  \n\n2. *Apply the Fundamental Theorem of Calculus.*  \n   $$\\int_{0}^{3} (2x+1)\\,dx = \\bigl[x^2 + x\\bigr]_{0}^{3}.$$  \n\n3. *Compute the difference of the antiderivative at the bounds.*  \n   $$\\bigl(3^2 + 3\\bigr) - \\bigl(0^2 + 0\\bigr)=9+3=12.$$  \n\nSo the signed area under $y=2x+1$ from $0$ to $3$ is $12$.\n\nRemember: **limits** set the stage, **derivatives** give instantaneous change, and **integrals** sum up change. Recognizing the question type quickly tells you which tool to reach for.",
+   "code": ""
+  },
+  {
+   "heading": "Common Mistakes and How to Avoid Them",
+   "body": "- **Sign mistakes** are the most frequent source of error, especially when differentiating or integrating odd‑powered functions.  \n  Example: differentiate $f(x)=x^3-5x$.  \n  (1) Write the power rule: $\\frac{d}{dx}x^n = n x^{\\,n-1}$.  \n  (2) Apply it to each term: $\\frac{d}{dx}x^3 = 3x^2$, $\\frac{d}{dx}(-5x) = -5$.  \n  (3) Combine:  \n  $$f'(x)=3x^2-5.$$  \n  A common slip is to write $+5$ instead of $-5$. After finishing, **re‑check the sign of every term** by substituting a simple value (e.g., $x=1$) and confirming that the derivative matches the slope of the original function.\n\n- **Forgetting the chain rule** when a function is composed.  \n  Example: differentiate $g(x)=\\sin(3x^2)$.  \n  (1) Identify the outer function $h(u)=\\sin u$ and inner function $u=3x^2$.  \n  (2) Differentiate each: $h'(u)=\\cos u$, $u'=6x$.  \n  (3) Multiply:  \n  $$g'(x)=\\cos(3x^2)\\cdot6x=6x\\cos(3x^2).$$  \n  Students often write $g'(x)=\\cos(3x^2)$, omitting the factor $6x$. To avoid this, **always write down the inner derivative before multiplying**.\n\n- **Mis‑applying limits** in continuity or L’Hôpital’s rule.  \n  Example: evaluate $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}$.  \n  (1) Recognize the standard limit $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1$.  \n  (2) No algebraic manipulation is needed; the limit is directly $1$.  \n  A typical error is to substitute $x=0$ first, obtaining $0/0$, and then claim the limit is $0$. Remember **the limit concerns the behavior as $x$ approaches the point, not the value at the point**.\n\n- **Dropping absolute values** when integrating $1/x$.  \n  Example: compute $\\displaystyle\\int\\frac{1}{x}\\,dx$.  \n  (1) Recall the antiderivative of $1/x$ is $\\ln|x|+C$.  \n  (2) Write the result:  \n  $$\\int\\frac{1}{x}\\,dx=\\ln|x|+C.$$  \n  Forgetting the bars leads to $\\ln x$, which is undefined for $x<0$. After integration, **verify the domain of the original integrand** and insert absolute values if needed.\n\n- **Skipping verification** of intermediate steps.  \n  After each differentiation or integration, plug a simple number (e.g., $x=1$ or $x=2$) into both the original expression and the result. If the slopes or areas do not match, revisit the previous step. This quick check catches sign errors, missing factors, and domain issues before they propagate.\n\n**General checklist**  \n- Write down the rule you are using before applying it.  \n- Keep track of signs and constants separately.  \n- Identify inner and outer functions for the chain rule.  \n- State the limit form before substituting.  \n- Include absolute values when required.  \n- Perform a brief “plug‑in” test after each major step.  \n\nFollowing this systematic pause after every calculation dramatically reduces careless mistakes and builds confidence in using calculus tools.",
+   "code": ""
+  },
+  {
+   "heading": "Strategic Problem‑Solving Workflow",
+   "body": "- **Understand the question** – Read the problem carefully. Identify what is given, what is asked, and which variable(s) you need to find. Write a short sentence summarizing the goal.\n\n- **Choose the right calculus tool** – Decide whether the problem needs a derivative, an integral, a limit, or a combination. Look for keywords: “rate of change”, “area”, “maximum/minimum”, “accumulation”.\n\n- **Set up the equations** – Translate the word problem into mathematical statements. Define symbols for unknowns, write the function that models the situation, and express any conditions (initial values, boundaries).\n\n- **Compute** – Carry out the differentiation or integration. Simplify algebraically, apply known formulas, and keep track of constants of integration.\n\n- **Verify results** – Check units, plug the answer back into the original condition, and confirm that the solution makes sense in the context.\n\n**Worked example**\n\nWe want the maximum height of a ball thrown upward with initial speed $v_0=20\\,$m/s from ground level.  \n\n1. *Understand the question* – Find the highest point the ball reaches.  \n   $$\\text{Goal: maximize } h(t).$$  \n\n2. *Choose the right tool* – Height is a function of time; the maximum occurs where the velocity (derivative of height) is zero. Use differentiation.  \n\n3. *Set up the equation* – With constant gravity $g=9.8\\,$m/s\\(^2\\),  \n   $$h(t)=v_0 t-\\frac{1}{2}gt^{2}.$$  \n\n4. *Compute* – Differentiate:  \n   $$h'(t)=v_0-g t.$$  \n   Set $h'(t)=0$:  \n   $$0=20-9.8 t \\;\\Rightarrow\\; t=\\frac{20}{9.8}\\approx2.04\\text{ s}.$$  \n   Find height at this time:  \n   $$h_{\\max}=20(2.04)-\\frac{1}{2}(9.8)(2.04)^{2}\\approx20.4\\text{ m}.$$  \n\n5. *Verify* – The velocity changes sign from positive to negative at $t\\approx2.04\\,$s, confirming a maximum. The height is positive and reasonable for the given speed.\n\n**Practice problems**\n\n1. *Problem*: A rectangular garden 8 m long has width $w$ meters. Its area must be $96\\,$m\\(^2\\). Find the rate at which the width changes with respect to the length, $dw/d\\ell$, when $\\ell=8\\,$m.  \n\n   *Solution*:  \n   - Goal: find $dw/d\\ell$ given $A=\\ell w=96$.  \n   - Differentiate implicitly: $$\\frac{d}{d\\ell}(\\ell w)=\\frac{d}{d\\ell}(96) \\;\\Rightarrow\\; w+\\ell\\frac{dw}{d\\ell}=0.$$  \n   - Solve for $dw/d\\ell$: $$\\frac{dw}{d\\ell}=-\\frac{w}{\\ell}.$$  \n   - At $\\ell=8$, $w=96/8=12$. Hence $$\\frac{dw}{d\\ell}=-\\frac{12}{8}=-1.5\\ \\text{m/m}.$$\n\n2. *Problem*: Find the total distance traveled by a particle moving along a line with velocity $v(t)=3t^{2}-12t+9$ for $0\\le t\\le4$.  \n\n   *Solution*:  \n   - Goal: integrate speed $|v(t)|$.  \n   - Find zeros of $v$: $3t^{2}-12t+9=0\\Rightarrow t=1$ and $t=3$.  \n   - Split interval: $$\\int_{0}^{1}v(t)\\,dt+\\int_{1}^{3}-v(t)\\,dt+\\int_{3}^{4}v(t)\\,dt.$$  \n   - Compute each integral (antiderivative $t^{3}-6t^{2}+9t$):  \n     $$\\Big[t^{3}-6t^{2}+9t\\Big]_{0}^{1}=1-6+9=4,$$  \n     $$-\\Big[t^{3}-6t^{2}+9t\\Big]_{1}^{3}=-(27-54+27- (1-6+9))=-(0-4) =4,$$  \n     $$\\Big[t^{3}-6t^{2}+9t\\Big]_{3}^{4}=64-96+36-(27-54+27)=4.$$  \n   - Total distance $=4+4+4=12\\,$units.\n\n3. *Problem*: Determine the area under $f(x)=\\sqrt{x}$ from $x=1$ to $x=9$.  \n\n   *Solution*:  \n   - Goal: evaluate $\\displaystyle\\int_{1}^{9}\\sqrt{x}\\,dx$.  \n   - Write integrand as $x^{1/2}$. Antiderivative: $\\frac{2}{3}x^{3/2}$.  \n   - Compute: $$\\frac{2}{3}\\Big[ x^{3/2}\\Big]_{1}^{9}= \\frac{2}{3}\\big(9^{3/2}-1^{3/2}\\big)=\\frac{2}{3}(27-1)=\\frac{52}{3}\\approx17.33.$$\n\n4. *Problem*: A tank is being filled so that the water height $h(t)$ satisfies $\\displaystyle\\frac{dh}{dt}=0.5\\sqrt{h}$, $h(0)=0$. Find $h$ after $t=4$ minutes.  \n\n   *Solution*:  \n   - Goal: solve the differential equation.  \n   - Separate variables: $$\\frac{dh}{\\sqrt{h}}=0.5\\,dt.$$  \n   - Integrate: $$2\\sqrt{h}=0.5t+C.$$  \n   - Use $h(0)=0$ to find $C=0$. Thus $2\\sqrt{h}=0.5t$.  \n   - Solve for $h$: $$\\sqrt{h}=0.25t \\;\\Rightarrow\\; h=(0.25t)^{2}=0.0625t^{2}.$$  \n   - At $t=4$: $$h=0.0625(4)^{2}=0.0625\\cdot16=1\\ \\text{meter}.$$",
+   "code": ""
+  },
+  {
+   "heading": "Confidence‑Boosting Techniques",
+   "body": "When you finish a calculus problem, a quick **sanity check** can tell you whether the answer is reasonable before you move on.\n\n- **Estimation** – replace complicated numbers with round ones and see if the size of the result makes sense.  \n- **Dimensional analysis** – keep track of the units (or the “type” of quantity) through each step; the final unit must match the quantity you are solving for.  \n- **Reasonableness test** – compare the answer to known limits, extreme cases, or simple geometric intuition.\n\n### Worked example – Estimating an area under a curve  \n\nFind an approximate value for  \n\n$$\\int_{0}^{2} \\sqrt{1+x^3}\\,dx$$  \n\n1. **Replace the integrand with a simple bound.**  \n   For $0\\le x\\le2$, $1\\le 1+x^3\\le 9$, so $\\sqrt{1+x^3}$ lies between $1$ and $3$.  \n\n   $$1\\le \\sqrt{1+x^3}\\le 3$$  \n\n2. **Use the bounds to estimate the integral.**  \n   Multiply each bound by the interval length $2$:  \n\n   $$2\\cdot1 \\le \\int_{0}^{2}\\sqrt{1+x^3}\\,dx \\le 2\\cdot3$$  \n\n   $$2 \\le \\text{integral} \\le 6$$  \n\n3. **Pick a middle value for a quick estimate.**  \n   The average of the bounds is $4$, so a reasonable estimate is  \n\n   $$\\int_{0}^{2}\\sqrt{1+x^3}\\,dx \\approx 4$$  \n\n   A more precise calculation (using a calculator) gives $4.12$, confirming the estimate is close.\n\n### Worked example – Dimensional check for a physics‑style problem  \n\nA particle moves with position $s(t)=\\frac{1}{2}at^2$, where $a$ has units of $\\text{m/s}^2$. Find its velocity at $t=3\\ \\text{s}$.\n\n1. **Differentiate to get velocity.**  \n\n   $$v(t)=\\frac{d}{dt}\\!\\left(\\frac12 a t^2\\right)=a t$$  \n\n2. **Insert the numbers, keeping units.**  \n\n   $$v(3\\text{s}) = a\\,(3\\text{s})$$  \n\n   If $a=4\\ \\text{m/s}^2$, then  \n\n   $$v(3\\text{s}) = 4\\ \\text{m/s}^2 \\times 3\\text{s}=12\\ \\text{m/s}$$  \n\n3. **Check units.**  \n   $\\text{m/s}^2 \\times \\text{s} = \\text{m/s}$, which is the correct unit for velocity. The answer passes the dimensional test.\n\n### Practice problems  \n\n**1.** Estimate $\\displaystyle\\int_{1}^{4}\\frac{1}{x}\\,dx$.\n\n*Solution.*  \n1. The antiderivative of $1/x$ is $\\ln x$.  \n2. Evaluate exactly: $\\ln4-\\ln1=\\ln4\\approx1.386$.  \n3. For a quick estimate, note that $1/x$ drops from $1$ to $0.25$ on $[1,4]$, so the average height is about $(1+0.25)/2=0.625$. Multiply by width $3$: $0.625\\times3=1.875$, which is higher than the exact value. The estimate tells us the true answer is between $1$ and $2$, confirming $\\approx1.4$ is reasonable.\n\n**2.** Use dimensional analysis to check the derivative of $y=5t^3$ (units: $t$ in seconds, $y$ in meters).\n\n*Solution.*  \n1. Differentiate: $dy/dt =15t^2$.  \n2. Units: $t^2$ has $\\text{s}^2$, multiplied by the constant $15$ (unitless) gives $\\text{m/s}^2$? Actually $y$ is meters, so $dy/dt$ must be meters per second. Since $t$ is in seconds, $t^2$ gives $\\text{s}^2$, but we need $\\text{s}$ in the denominator. The correct derivative is $15t^2$ m/s, because $t^2$ carries $\\text{s}^2$ and the factor $5$ carries $\\text{m/s}^3$ implicitly. The units match, confirming the derivative is plausible.\n\n**3.** Perform a sanity check for $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}$.\n\n*Solution.*  \n1. Use the known limit $=1$.  \n2. Check with a small value, $x=0.1$: $\\sin0.1\\approx0.0998$, ratio $0.0998/0.1=0.998$, close to $1$. The result passes the sanity check.\n\n**4.** Estimate the area under $f(x)=e^{-x}$ from $x=0$ to $x=2$.\n\n*Solution.*  \n1. $e^{-x}$ decreases from $1$ to $e^{-2}\\approx0.135$.  \n2. Approximate with the average height $(1+0.135)/2\\approx0.5675$.  \n3. Multiply by width $2$: $0.5675\\times2\\approx1.135$.  \n4. The exact integral is $1-e^{-2}\\approx0.865$, so our estimate is a bit high but confirms the true area is between $0.8$ and $1.2$, giving confidence in the calculation.",
+   "code": ""
+  },
+  {
+   "heading": "Real‑World Case Studies Revisited",
+   "body": "A falling ball is released from a height of $100\\ \\text{m}$ with no initial velocity.  \nWe want the time it hits the ground and its impact speed.  \n\n1. **Write the motion equations.**  \n   Use constant acceleration $g=9.8\\ \\text{m/s}^2$ downward.  \n   $$s(t)=s_0+v_0t-\\frac12gt^2$$  \n\n2. **Set the final position to zero and solve for $t$.**  \n   With $s_0=100\\ \\text{m}$ and $v_0=0$,  \n   $$0=100-\\frac12(9.8)t^2$$  \n\n3. **Compute the time.**  \n   $$t=\\sqrt{\\frac{2\\cdot100}{9.8}}\\approx4.52\\ \\text{s}$$  \n\n4. **Find the impact speed using $v(t)=v_0-gt$.**  \n   $$v=-9.8(4.52)\\approx-44.3\\ \\text{m/s}$$  \n   The speed is $44.3\\ \\text{m/s}$ downward.  \n\n---\n\nA small town’s rabbit population follows the logistic model  \n$$\\frac{dP}{dt}=rP\\Bigl(1-\\frac{P}{K}\\Bigr)$$  \nwith intrinsic growth rate $r=0.6\\ \\text{yr}^{-1}$ and carrying capacity $K=800$ rabbits.  \nIf $P(0)=200$, find $P(5)$.\n\n1. **Separate variables and integrate.**  \n   $$\\int\\frac{dP}{P(1-P/K)}=r\\int dt$$  \n\n2. **Perform partial‑fraction decomposition.**  \n   $$\\int\\Bigl(\\frac{1}{P}+\\frac{1}{K-P}\\Bigr)dP=r t+C$$  \n\n3. **Exponentiate to solve for $P(t)$.**  \n   $$\\frac{P}{K-P}=Ce^{rt}$$  \n\n4. **Determine the constant $C$ from the initial condition.**  \n   $$\\frac{200}{800-200}=C\\Rightarrow C=\\frac{1}{3}$$  \n\n5. **Write the explicit solution and evaluate at $t=5$.**  \n   $$P(t)=\\frac{K}{1+3e^{-0.6t}}$$  \n   $$P(5)=\\frac{800}{1+3e^{-3}}\\approx\\frac{800}{1+3(0.050)}\\approx\\frac{800}{1.15}\\approx696\\ \\text{rabbits}$$  \n\n---\n\nA company sells gadgets at price $p$ dollars each, with demand $D(p)=1200-20p$.  \nThe production cost per unit is $c(p)=30+0.05p$.  \nFind the price that **maximizes profit**.\n\n1. **Write revenue and cost functions.**  \n   Revenue $R(p)=pD(p)=p(1200-20p)$,  \n   Total cost $C(p)=c(p)D(p)=(30+0.05p)(1200-20p)$.  \n\n2. **Form the profit function $\\Pi(p)=R(p)-C(p)$.**  \n   $$\\Pi(p)=p(1200-20p)-(30+0.05p)(1200-20p)$$  \n\n3. **Simplify and differentiate.**  \n   After expanding,  \n   $$\\Pi(p)= -20p^2+1200p-36000+600p-0.05p(1200-20p)$$  \n   The simplified form is  \n   $$\\Pi(p)=-20p^2+1800p-36000$$  \n   Differentiate:  \n   $$\\Pi'(p)=-40p+1800$$  \n\n4. **Set the derivative to zero and solve for $p$.**  \n   $$-40p+1800=0\\quad\\Rightarrow\\quad p=45$$  \n\n5. **Check that this gives a maximum.**  \n   Second derivative $\\Pi''(p)=-40<0$, confirming a maximum.  \n\nThus the profit‑maximizing price is **\\$45** per gadget.",
+   "code": ""
+  },
+  {
+   "heading": "Peer Teaching and Explanation Practice",
+   "body": "When a student **explains** a solution out loud, they must organise their thoughts, choose the right symbols, and check each logical step. This active process often reveals hidden gaps that silent reading never shows.\n\n- **Start with the goal.** State clearly what the problem asks.  \n- **Identify the tools.** Mention the specific calculus rule you will use (e.g., *Fundamental Theorem of Calculus*, *chain rule*).  \n- **Walk through each algebraic manipulation.** Speak the reason for every substitution or simplification.  \n- **Summarise the answer.** Restate the result in the context of the original question.\n\nBelow are four short problems designed for peer‑teaching sessions. After each problem, a complete worked solution is provided. When you present the solution to a classmate, follow the numbered steps and say the purpose of each step aloud.\n\n---\n\n**Problem 1**  \nFind the derivative of $f(x)=\\sqrt{1+3x^2}$.\n\n**Solution**  \n1. *Identify the outer and inner functions.*  $f(x) = (1+3x^2)^{1/2}$, so the outer function is $u^{1/2}$ and the inner function is $u=1+3x^2$.  \n   $$f'(x)=\\frac12(1+3x^2)^{-1/2}\\cdot\\frac{d}{dx}(1+3x^2)$$  \n2. *Differentiate the inner function.* $\\frac{d}{dx}(1+3x^2)=6x$.  \n   $$f'(x)=\\frac12(1+3x^2)^{-1/2}\\cdot6x$$  \n3. *Simplify.* Multiply the constants and rewrite the power.  \n   $$f'(x)=\\frac{3x}{\\sqrt{1+3x^2}}$$  \n\n---\n\n**Problem 2**  \nEvaluate $\\displaystyle\\int_{0}^{2}(4- x^2)\\,dx$.\n\n**Solution**  \n1. *Find an antiderivative.* Integrate term by term.  \n   $$\\int(4- x^2)\\,dx = 4x-\\frac{x^3}{3}+C$$  \n2. *Apply the Fundamental Theorem of Calculus.* Plug the limits $0$ and $2$.  \n   $$\\Bigl[4x-\\frac{x^3}{3}\\Bigr]_{0}^{2}= \\left(8-\\frac{8}{3}\\right)-\\left(0-0\\right)$$  \n3. *Compute the numeric value.*  \n   $$8-\\frac{8}{3}= \\frac{24-8}{3}= \\frac{16}{3}$$  \n\n---\n\n**Problem 3**  \nDetermine the limit $\\displaystyle\\lim_{x\\to0}\\frac{\\sin(5x)}{x}$.\n\n**Solution**  \n1. *Recall the standard limit.* $\\displaystyle\\lim_{u\\to0}\\frac{\\sin u}{u}=1$.  \n2. *Rewrite the expression to match the standard form.* Let $u=5x$, then $x=\\frac{u}{5}$.  \n   $$\\frac{\\sin(5x)}{x}= \\frac{\\sin u}{u/5}=5\\frac{\\sin u}{u}$$  \n3. *Take the limit.* As $x\\to0$, $u\\to0$, so  \n   $$\\lim_{x\\to0}\\frac{\\sin(5x)}{x}=5\\cdot 1 = 5$$  \n\n---\n\n**Problem 4**  \nFind the area between $y=x^2$ and $y=2x$ from $x=0$ to their intersection point.\n\n**Solution**  \n1. *Locate the intersection.* Solve $x^2=2x\\;\\Rightarrow\\;x(x-2)=0$, so $x=0$ and $x=2$.  \n2. *Set up the integral of the top function minus the bottom function.*  \n   $$A=\\int_{0}^{2}\\bigl(2x - x^2\\bigr)\\,dx$$  \n3. *Integrate.*  \n   $$\\int(2x - x^2)\\,dx = x^2-\\frac{x^3}{3}+C$$  \n4. *Evaluate from $0$ to $2$.*  \n   $$\\Bigl[x^2-\\frac{x^3}{3}\\Bigr]_{0}^{2}= \\left(4-\\frac{8}{3}\\right)-0 = \\frac{12-8}{3}= \\frac{4}{3}$$  \n\n---\n\nWhen you **teach** these solutions, pause after each step to ask your partner if the reasoning is clear. Encourage them to re‑state the step in their own words. This dialogue solidifies the concept for both speakers and listeners, turning a solitary calculation into a shared understanding.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Problems",
+   "body": "- **Problem 1 – Limit**  \n  Evaluate $\\displaystyle \\lim_{x\\to 0}\\frac{\\sin(3x)}{x}$.\n\n  **Solution**  \n  1. *Recognize the standard limit.*  We know $\\displaystyle \\lim_{u\\to0}\\frac{\\sin u}{u}=1$.  \n     $$\\lim_{x\\to0}\\frac{\\sin(3x)}{x}= \\lim_{x\\to0}\\frac{3\\sin(3x)}{3x}$$  \n  2. *Rewrite to match the standard form.*  Factor the constant $3$ out of the numerator and denominator.  \n     $$=3\\;\\lim_{x\\to0}\\frac{\\sin(3x)}{3x}$$  \n  3. *Apply the standard limit.*  As $x\\to0$, $3x\\to0$, so the fraction tends to $1$.  \n     $$=3\\cdot 1=3$$  \n\n  **Answer:** $3$\n\n- **Problem 2 – Derivative Application**  \n  Find the derivative of $f(x)=x^2\\ln x$ for $x>0$.\n\n  **Solution**  \n  1. *Identify the product rule.*  For $u(x)=x^2$ and $v(x)=\\ln x$, $f'(x)=u'v+uv'$.  \n     $$u'(x)=2x,\\qquad v'(x)=\\frac{1}{x}$$  \n  2. *Apply the product rule.*  \n     $$f'(x)= (2x)\\ln x + x^2\\left(\\frac{1}{x}\\right)$$  \n  3. *Simplify the expression.*  \n     $$f'(x)=2x\\ln x + x$$  \n\n  **Answer:** $f'(x)=2x\\ln x + x$\n\n- **Problem 3 – Integral Calculation**  \n  Compute $\\displaystyle \\int (4x^3-2x+5)\\,dx$.\n\n  **Solution**  \n  1. *Integrate term by term.*  Use the power rule $\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$.  \n     $$\\int 4x^3\\,dx = 4\\cdot\\frac{x^{4}}{4}=x^{4}$$  \n  2. *Integrate the remaining terms.*  \n     $$\\int (-2x)\\,dx = -2\\cdot\\frac{x^{2}}{2}= -x^{2}$$  \n     $$\\int 5\\,dx = 5x$$  \n  3. *Combine and add the constant of integration.*  \n     $$\\int (4x^3-2x+5)\\,dx = x^{4}-x^{2}+5x + C$$  \n\n  **Answer:** $x^{4}-x^{2}+5x + C$\n\n- **Problem 4 – Mixed Limit & Derivative**  \n  Let $g(x)=\\frac{e^{2x}-1}{x}$.  \n  (a) Find $\\displaystyle \\lim_{x\\to0}g(x)$.  \n  (b) Using the result, compute $g'(0)$.\n\n  **Solution**  \n  1. *Part (a): Apply L’Hôpital’s Rule.*  Both numerator and denominator go to $0$ as $x\\to0$.  \n     $$\\lim_{x\\to0}\\frac{e^{2x}-1}{x}= \\lim_{x\\to0}\\frac{2e^{2x}}{1}=2e^{0}=2$$  \n  2. *Part (b): Write $g(x)$ as a quotient and differentiate.*  \n     $$g'(x)=\\frac{(2e^{2x})\\cdot x-(e^{2x}-1)}{x^{2}}$$  \n  3. *Evaluate at $x=0$ using the limit from part (a).*  Substitute $x=0$ after simplifying the numerator:  \n     $$g'(0)=\\lim_{x\\to0}\\frac{2xe^{2x}-(e^{2x}-1)}{x^{2}}$$  \n     Apply L’Hôpital again:  \n     $$= \\lim_{x\\to0}\\frac{2e^{2x}+4xe^{2x}-(2e^{2x})}{2x}= \\lim_{x\\to0}\\frac{4xe^{2x}}{2x}=2e^{0}=2$$  \n\n  **Answer:** (a) $2$, (b) $g'(0)=2$",
+   "code": ""
+  }
+ ],
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value a function approaches as the input gets close to a certain point."
+  },
+  {
+   "term": "derivative",
+   "meaning": "The instantaneous rate of change of a function; the slope of the tangent line."
+  },
+  {
+   "term": "integral",
+   "meaning": "The accumulation of quantities over an interval, representing signed area under a curve."
+  },
+  {
+   "term": "chain rule",
+   "meaning": "A method for differentiating a composition of functions by multiplying the derivative of the outer function by the derivative of the inner function."
+  },
+  {
+   "term": "product rule",
+   "meaning": "A rule for differentiating a product of two functions: (uv)' = u'v + uv'."
+  },
+  {
+   "term": "fundamental theorem of calculus",
+   "meaning": "Links differentiation and integration; the derivative of an integral function returns the original integrand."
+  },
+  {
+   "term": "logistic model",
+   "meaning": "A differential equation describing population growth with a carrying capacity, dP/dt = rP(1-P/K)."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the limit lim_{x->a} f(x)=L represent?",
+   "options": [
+    "The exact value of f at a",
+    "The slope of f at a",
+    "The value f approaches near a",
+    "The area under f from 0 to a"
+   ],
+   "answer": 2,
+   "why": "A limit describes the value the function gets arbitrarily close to as x approaches a."
+  },
+  {
+   "q": "Which rule is used to differentiate f(x)=sin(3x^2)?",
+   "options": [
+    "Product rule",
+    "Quotient rule",
+    "Chain rule",
+    "Power rule"
+   ],
+   "answer": 2,
+   "why": "The function is a composition of sin(u) with u=3x^2, requiring the chain rule."
+  },
+  {
+   "q": "In the logistic model dP/dt = rP(1-P/K), what does K represent?",
+   "options": [
+    "Growth rate",
+    "Initial population",
+    "Carrying capacity",
+    "Time variable"
+   ],
+   "answer": 2,
+   "why": "K is the maximum population that the environment can sustain, the carrying capacity."
+  },
+  {
+   "q": "What is the derivative of x^2 ln x for x>0?",
+   "options": [
+    "2x ln x + x",
+    "2x ln x + 1",
+    "2 ln x + x",
+    "2x ln x + x^2"
+   ],
+   "answer": 0,
+   "why": "Using the product rule gives (2x)ln x + x^2*(1/x) = 2x ln x + x."
+  },
+  {
+   "q": "Which technique helps check a calculus answer by comparing units?",
+   "options": [
+    "Estimation",
+    "Dimensional analysis",
+    "Reasonableness test",
+    "Graphing"
+   ],
+   "answer": 1,
+   "why": "Dimensional analysis ensures the final units match the quantity being solved for."
+  },
+  {
+   "q": "The definite integral from a to b of f(x) dx represents:",
+   "options": [
+    "The average value of f on [a,b]",
+    "The signed area under the curve between a and b",
+    "The maximum of f on [a,b]",
+    "The derivative of f at a"
+   ],
+   "answer": 1,
+   "why": "A definite integral gives the signed area under the curve over the interval."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Limit definition",
+   "back": "lim_{x->a} f(x)=L means f(x) gets arbitrarily close to L as x approaches a."
+  },
+  {
+   "front": "Derivative meaning",
+   "back": "The instantaneous rate of change; slope of the tangent line at a point."
+  },
+  {
+   "front": "Integral meaning",
+   "back": "Accumulated quantity; signed area under a curve between two points."
+  },
+  {
+   "front": "Chain rule formula",
+   "back": "If y = h(g(x)), then dy/dx = h'(g(x)) * g'(x)."
+  },
+  {
+   "front": "Product rule formula",
+   "back": "If y = u(x)v(x), then dy/dx = u'(x)v(x) + u(x)v'(x)."
+  },
+  {
+   "front": "Fundamental theorem of calculus",
+   "back": "If F(x)=integral from a to x of f(t) dt, then F'(x)=f(x)."
+  },
+  {
+   "front": "Logistic growth solution concept",
+   "back": "Population grows quickly at first, then slows as it approaches the carrying capacity K."
+  },
+  {
+   "front": "Sanity check technique",
+   "back": "Estimate, check units, or compare to extreme cases to see if an answer is reasonable."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "steps",
+   "title": "Strategic Problem‑Solving Workflow",
+   "steps": [
+    {
+     "label": "1",
+     "text": "Read the problem and note what is given and asked."
+    },
+    {
+     "label": "2",
+     "text": "Choose the calculus tool (derivative, integral, limit)."
+    },
+    {
+     "label": "3",
+     "text": "Translate the situation into equations and define symbols."
+    },
+    {
+     "label": "4",
+     "text": "Perform the calculation and simplify."
+    },
+    {
+     "label": "5",
+     "text": "Check the result with a sanity test."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Common Mistakes",
+   "left": {
+    "name": "Sign Errors",
+    "points": [
+     "Easy to miss when differentiating",
+     "Check by plugging a simple value",
+     "Often occurs with odd powers"
+    ]
+   },
+   "right": {
+    "name": "Forgotten Chain Rule",
+    "points": [
+     "Needed for composed functions",
+     "Remember to multiply by inner derivative",
+     "Verify by re‑deriving stepwise"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Falling Ball Example",
+   "items": [
+    {
+     "value": "100 m",
+     "label": "Initial height"
+    },
+    {
+     "value": "9.8 m/s^2",
+     "label": "Acceleration due to gravity"
+    },
+    {
+     "value": "4.52 s",
+     "label": "Time to hit ground"
+    },
+    {
+     "value": "44.3 m/s",
+     "label": "Impact speed"
+    }
+   ],
+   "after": 4
+  }
+ ],
+ "images_checked": true,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
