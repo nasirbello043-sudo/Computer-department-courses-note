@@ -113,5 +113,73 @@
    "back": "It ensures all parts work correctly and catches hidden bugs."
   }
  ],
- "reviewed": false
+ "reviewed": false,
+ "diagrams": [
+  {
+   "type": "steps",
+   "title": "Main Game Loop",
+   "steps": [
+    {
+     "label": "1",
+     "text": "Generate a random secret number"
+    },
+    {
+     "label": "2",
+     "text": "Ask the user for a guess"
+    },
+    {
+     "label": "3",
+     "text": "Compare guess with secret number"
+    },
+    {
+     "label": "4",
+     "text": "Give feedback (too low, too high, correct)"
+    },
+    {
+     "label": "5",
+     "text": "Repeat until the guess is correct"
+    }
+   ],
+   "loop": true,
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Feedback Options",
+   "left": {
+    "name": "Too Low",
+    "points": [
+     "Guess is smaller than secret",
+     "Tell user \"Too low\""
+    ]
+   },
+   "right": {
+    "name": "Too High",
+    "points": [
+     "Guess is larger than secret",
+     "Tell user \"Too high\""
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Game Statistics",
+   "items": [
+    {
+     "value": "1‑100",
+     "label": "Range of secret number"
+    },
+    {
+     "value": "Attempts",
+     "label": "Counted and shown at the end"
+    },
+    {
+     "value": "Try‑except",
+     "label": "Handles non‑numeric input"
+    }
+   ],
+   "after": 2
+  }
+ ]
 }
