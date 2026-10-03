@@ -51,7 +51,7 @@ figure.dg{margin:14px 0}.im img{width:100%;height:auto;border-radius:8px;backgro
 <script>
 const app=document.getElementById('app');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const get=async u=>{const r=await fetch(u);if(!r.ok)throw new Error(u);return r.json()};
+const get=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u);return r.json()};
 let done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch(e){}
 const store=()=>{try{localStorage.setItem('done',JSON.stringify(done))}catch(e){}};
 const inline=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>');
@@ -101,15 +101,17 @@ const graph=d=>{const f=mkfn(d.fn),x0=+d.xmin,x1=+d.xmax;if(!f||!(x1>x0))return'
 const EXT=['png','jpg','jpeg','webp','svg'];
 const diagram=d=>{const t=`<div class="dg"><div class="dgt">${esc(d.title||'')}</div>`;
   if(d.type==='image'){if(!/^[a-z0-9-]+$/.test(d.file||''))return'';
-    return`<figure class="dg im" hidden><a target="_blank" rel="noopener"><img data-b="${esc(d.file)}" alt="${esc(d.alt||d.title||'')}" loading="lazy"></a><figcaption>${esc(d.title||'')}</figcaption></figure>`}
+    return`<figure class="dg im" hidden><a target="_blank" rel="noopener"><img data-b="${esc(d.file)}" alt="${esc(d.alt||d.title||'')}"></a><figcaption>${esc(d.title||'')}</figcaption></figure>`}
   if(d.type==='steps')return t+'<ol class="st">'+d.steps.map((s,i)=>`<li><span class="n">${i+1}</span><div><b>${inline(s.label)}</b>${s.text?`<div class="soft">${inline(s.text)}</div>`:''}</div></li>`).join('')+'</ol>'+(d.loop?'<div class="lp">&#8635; then it repeats from step 1</div>':'')+'</div>';
   if(d.type==='compare')return t+'<div class="cmp">'+['left','right'].map(k=>`<div><b>${inline(d[k].name)}</b><ul>${d[k].points.map(p=>`<li>${inline(p)}</li>`).join('')}</ul></div>`).join('')+'</div></div>';
   if(d.type==='facts')return t+'<div class="fc">'+d.items.map(i=>`<div><span class="big">${inline(i.value)}</span><span class="soft">${inline(i.label)}</span></div>`).join('')+'</div></div>';
   if(d.type==='parts')return t+'<div class="pt">'+d.items.map(i=>`<div><b>${inline(i.name)}</b><span class="soft">${inline(i.role||'')}</span></div>`).join('')+'</div></div>';
   if(d.type==='graph'){const g=graph(d);return g?t+g+(d.caption?`<p class="soft">${inline(d.caption)}</p>`:'')+'</div>':''}
   return''};
-const loadImgs=()=>app.querySelectorAll('.im img[data-b]').forEach(img=>{let i=0;const f=img.closest('figure'),b=img.dataset.b,go=()=>{img.src=`courses/images/${b}.${EXT[i]}`};
-  img.onload=()=>{f.hidden=false;img.closest('a').href=img.src};img.onerror=()=>{if(++i<EXT.length)go();else f.remove()};go()});
+const loadImgs=()=>app.querySelectorAll('.im img[data-b]').forEach(img=>{const f=img.closest('figure'),b=img.dataset.b;let i=0;
+  const t=new Image(),go=()=>{t.src=`courses/images/${b}.${EXT[i]}`};
+  t.onload=()=>{img.src=t.src;img.closest('a').href=t.src;f.hidden=false};
+  t.onerror=()=>{if(++i<EXT.length)go();else f.remove()};go()});
 const dgs=(d,si)=>(d.diagrams||[]).filter(x=>(Number.isInteger(x.after)?Math.min(Math.max(x.after,0),d.sections.length-1):d.sections.length-1)===si).map(x=>{try{return diagram(x)}catch(e){return''}}).join('');
 async function home(){
   const list=await get('courses/index.json');
