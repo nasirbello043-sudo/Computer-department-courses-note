@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **14** | Uploaded: **34**
+Waiting: **22** | Uploaded: **34**
 
 ## Introduction to Agriculture
 
@@ -288,6 +288,187 @@ Use exactly these text labels, each spelled exactly as written and joined by a t
 - Medium cases
 - Low cases
 - Legend
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 1: Introduction to Organic Chemistry
+
+Save as:
+```
+organic-chemistry-l01-carbon-atom-bonds.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students, titled "Carbon Atom Bonds".
+
+Show: Shows a central carbon atom with four bonds extending outward, each ending in a hydrogen atom, highlighting carbon's tetravalency.
+
+Layout: Carbon atom in the centre, four hydrogen atoms placed at the cardinal points, lines for bonds, labels on each atom.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- C
+- H
+- single bond
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 2: Structure of Carbon Compounds
+
+Save as:
+```
+organic-chemistry-l02-covalent-bond-sharing.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students, titled "Covalent Bond Sharing".
+
+Show: Shows two atoms with their outer electron shells and a shared electron pair between them, highlighting how each atom counts the shared electrons toward a full valence shell.
+
+Layout: Two atoms side‑by‑side with overlapping electron clouds; arrows point to the shared electrons and labels indicate "shared pair" and "valence shell".
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- Atom A
+- Atom B
+- Shared electron pair
+- Valence shell
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 3: Functional Groups I: Hydrocarbons
+
+Save as:
+```
+organic-chemistry-l03-alkane-chain.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students, titled "Alkane Chain".
+
+Show: A simple molecule such as hexane drawn with carbon atoms as circles linked by single lines and hydrogen atoms attached to fill the remaining bonds.
+
+Layout: Carbon backbone in the centre with hydrogen atoms radiating outward; each atom labelled C or H.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- C
+- H
+- single bond
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: Functional Groups II: Halogenated Compounds and Alcohols
+
+Save as:
+```
+organic-chemistry-l04-nucleophilic-substitution-sn2.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students, titled "Nucleophilic Substitution (SN2)".
+
+Show: A step‑by‑step depiction of an SN2 reaction where a nucleophile approaches the carbon bearing the leaving group from the opposite side, the bond to the halogen breaks, and the new bond to the nucleophile forms.
+
+Layout: Three panels: (1) reactants with nucleophile and alkyl halide, (2) transition state showing partial bonds, (3) products with nucleophile attached and halide ion released; arrows indicate motion.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- Nucleophile
+- Leaving group (X)
+- Backside attack
+- Transition state
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+organic-chemistry-l04-alkyl-halide-structure.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students, titled "Alkyl Halide Structure".
+
+Show: A simple carbon chain representing the alkyl group with a single halogen (Cl, Br, I, or F) attached at the end or on the side, illustrating the R–X formula.
+
+Layout: Carbon chain drawn horizontally with a halogen atom at one end; labels point to the R group and the X atom.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- R (alkyl group)
+- X (halogen)
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-variants.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students, titled "Carbonyl Group Variants".
+
+Show: A central carbon atom double‑bonded to oxygen with different attached groups: H for aldehydes, R for ketones, –OH for carboxylic acids, –OR for esters, and –NR₂ for amides.
+
+Layout: Four small structures arranged in a row, each labelled with its name below the drawing.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- C=O
+- H
+- R
+- OH
+- OR
+- NR₂
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 6: Isomerism
+
+Save as:
+```
+organic-chemistry-l06-structural-isomers.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students, titled "Structural Isomers".
+
+Show: Shows a straight‑chain butane molecule and a branched isobutane molecule, both labelled with carbon and hydrogen atoms.
+
+Layout: Two separate structures placed side‑by‑side, each with atom labels and bond lines; arrows point from the formula C4H10 to each structure.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- C
+- H
+- C‑C bond
+- branch
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+organic-chemistry-l06-cis-trans-isomerism.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students, titled "Cis‑Trans Isomerism".
+
+Show: Depicts the double‑bonded carbon atoms; one diagram shows the two methyl groups on the same side (cis) and the other shows them on opposite sides (trans).
+
+Layout: Two drawings placed vertically; each drawing has the double bond in the centre, groups labelled, and a “cis” or “trans” tag above.
+
+Use exactly these text labels, each spelled exactly as written and joined by a thin line to the correct part. Do not add any other words except the title:
+- C=C
+- CH₃ (cis)
+- CH₃ (trans)
+- H
+- double bond
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
