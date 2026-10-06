@@ -467,24 +467,25 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
+### Lesson 7: Reaction Mechanisms Basics
+
 Save as:
 ```
-organic-chemistry-l06-cis-trans-isomerism.png
+organic-chemistry-l07-curved-arrow-example.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational illustration for secondary-school students.
+Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: Depicts the double‑bonded carbon atoms; one diagram shows the two methyl groups on the same side (cis) and the other shows them on opposite sides (trans).
+Show: A simple SN2 reaction where a nucleophile attacks a carbon atom and the leaving group departs in a single concerted step.
 
-Layout: Two drawings placed vertically; each drawing has the double bond in the centre, groups labelled, and a “cis” or “trans” tag above.
+Layout: Reactants on the left, curved arrows in the centre, products on the right; each arrow labelled with its electron flow.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C=C"
-- "CH₃ (cis)"
-- "CH₃ (trans)"
-- "H"
-- "double bond"
+- "OH⁻"
+- "C–Br"
+- "Br⁻"
+- "product"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
