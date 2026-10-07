@@ -1,118 +1,302 @@
 {
  "title": "Variables, Data Types, and Operators",
- "summary": "This lesson explains what variables are, introduces common data types, and shows how to use arithmetic and logical operators. By the end, students can store values, choose appropriate types, and perform basic calculations.",
+ "summary": "This lesson introduces variables, data types, and operators, showing how to store and manipulate data in a program. Students will practice creating variables, choosing appropriate types, and using arithmetic and logical operators.",
+ "objectives": [
+  "Declare and initialize variables of different data types",
+  "Explain the purpose of each basic data type",
+  "Apply arithmetic, assignment, and comparison operators correctly",
+  "Combine operators to form expressions",
+  "Identify and fix common type‑related errors"
+ ],
+ "prerequisites": "Students should have completed the first four lessons, so they know how to write, run, and see output from a simple program.",
+ "why": [
+  "Variables are the building blocks of any program; they let us store information that can change while the program runs. Understanding data types ensures the computer interprets that information correctly, preventing bugs and crashes.",
+  "Operators let us perform calculations, make decisions, and control program flow. Mastering them is essential for everything from simple calculators to complex data analysis in real‑world jobs."
+ ],
  "sections": [
   {
    "heading": "What Is a Variable?",
-   "body": "A variable is a named container that holds a value while a program runs. Think of it like a labeled box where you can put a number, text, or other data and retrieve it later. In most languages you create a variable by writing its type (optional in some languages) and a name, then assign a value using the = sign.\n\nExample: `age = 15` creates a variable called age that stores the number 15. You can change the value later, e.g., `age = age + 1` makes the student one year older.",
-   "code": "age = 15\nage = age + 1\nprint(age)  # Output: 16"
+   "body": "A variable is simply a **named storage location** that a program can use to keep a piece of information while it runs.  \nThink of it like a locker at school: the locker has a number (its name) and you can put something inside it (the value). Later you can open the same locker, take the item out, or replace it with something new. In a computer, the “locker” lives in the computer’s memory, and the program can read from or write to it whenever it needs.\n\nWhen we write code we first **declare** a variable – we tell the computer, “I need a locker and I will call it *x*.”  \nAfter the declaration we usually **assign** a value – we put something into that locker. In many languages this is done in one step:\n\n```python\nx = 10\n```\n\nHere `x` is the variable name, the `=` sign is the **assignment operator**, and `10` is the value we store. The computer reserves a small piece of its memory, records that this piece belongs to the name `x`, and writes the binary representation of the number 10 into that spot.\n\n> **Definition:** A variable is a named place in memory that holds a value which can be changed during program execution.\n\n### How memory works, in simple terms\nYour computer’s memory is a long row of tiny boxes, each able to hold a bit of data. When a program starts, the operating system hands it a block of these boxes. The program’s variables are assigned to specific boxes inside that block. The name you write in the source code (like `x`) is just a label that the compiler or interpreter translates into an address – the exact position of the box in memory.\n\nBecause the address is hidden from you, you never need to count boxes yourself. You just use the name, and the language takes care of finding the right spot.\n\n### Declaring and assigning in different languages\nDifferent programming languages have slightly different syntax, but the idea is the same.\n\n*In Python* (a language that does not require you to state the type first):\n\n```python\nage = 15          # declare and assign at once\n```\n\n*In Java* (you must tell the language what kind of data the variable will hold):\n\n```java\nint age = 15;     // 'int' tells the computer to reserve space for an integer\n```\n\nBoth lines create a variable called `age` and store the number `15` in it. The only difference is that Java explicitly says the variable will hold an **integer** (a whole number), while Python figures that out automatically.\n\n### Why variables are useful\nWithout variables you would have to write the same value over and over again, and you could never keep track of information that changes. Imagine trying to write a program that adds the scores of several games. If you could not store the running total in a variable, you would have to remember the sum yourself and type it manually each time – clearly impractical.\n\n> **In daily life:** A variable is like a notebook page where you write down a number, then later you can erase it and write a new number on the same page.\n\n### Changing a variable’s value\nYou can assign a new value to an existing variable at any time:\n\n```python\nx = 10   # first value\nx = 25   # new value, the old one is overwritten\n```\n\nWhen the second assignment happens, the computer simply writes the new value into the same memory box, replacing the old bits. The old value is lost unless you saved it somewhere else.\n\n> **Remember:** Assigning a new value does not create a new memory location; it updates the existing one.\n\n### A tiny exercise\n1. Declare a variable called `counter` and give it the value `0`.  \n2. Increase its value by `1` three times, printing the result after each step.\n\n```python\ncounter = 0\ncounter = counter + 1   # now 1\nprint(counter)\ncounter = counter + 1   # now 2\nprint(counter)\ncounter = counter + 1   # now 3\nprint(counter)\n```\n\nThe output will be:\n\n```\n1\n2\n3\n```\n\nEach line shows how the same memory box (`counter`) is updated with a new number.\n\n> **Common mistake:** Forgetting the assignment operator (`=`) and writing `x 5` instead of `x = 5`. Without `=`, the program does not know you want to store the value.\n\nUnderstanding variables is the first step toward writing programs that can remember, calculate, and make decisions. Once you are comfortable with naming a storage spot and putting data into it, you are ready to explore the different kinds of data you can store and the operations you can perform on them.",
+   "code": ""
   },
   {
-   "heading": "Common Data Types",
-   "body": "Data types tell the computer what kind of information a variable holds. The most basic types are:\n\n- **Integer (int)**: whole numbers without a decimal point, e.g., 42.\n- **Float (float)**: numbers with a decimal point, e.g., 3.14.\n- **String (str)**: sequences of characters, used for text, e.g., \"Hello\".\n- **Boolean (bool)**: true or false values, used for decisions.\n\nChoosing the right type helps the program run efficiently and prevents errors.",
-   "code": "score = 95          # int\naverage = 89.5       # float\nname = \"Alice\"      # str\nis_passed = True     # bool"
+   "heading": "Basic Data Types",
+   "body": "Imagine you have a set of boxes, and each box can hold a certain kind of thing. In programming a *variable* is a named box, and the *data type* tells the computer what kind of thing can be stored inside that box. Knowing the right type helps the computer use the right amount of memory and lets you write code that behaves predictably.\n\n### Integer – whole numbers  \n\nAn **integer** (often shortened to *int*) is a number without any fractional part. Think of counting apples: 0, 1, 2, 3 … you never write “2.5 apples” when you are just counting whole items. In code you might write:\n\n```python\nage = 17          # age is an integer\nstudents = 42\n```\n\nIntegers are useful whenever you need exact counts, indexes into a list, or loop counters. The computer stores them as a fixed number of bits, so operations like addition and subtraction are very fast.\n\n> **Definition:** An integer is a whole number that can be positive, negative, or zero, with no decimal point.\n\n### Floating‑point number – numbers with fractions  \n\nA **floating‑point number** (often called *float*) can represent values that have a fractional part, like 3.14 or -0.001. It is called “floating‑point” because the decimal point can “float” to different positions depending on the size of the number. Example:\n\n```python\nprice = 19.99          # price is a float\naverage = 7.5\n```\n\nFloats are handy for measurements, scientific calculations, or money (though for real‑world currency you often use a special decimal type to avoid rounding errors). Internally a float is stored in a format that approximates real numbers, so tiny rounding differences can appear.\n\n> **Note:** Floating‑point arithmetic can introduce tiny errors; avoid testing equality of two floats directly.\n\n### Character – a single symbol  \n\nA **character** (or *char*) holds exactly one symbol, such as a letter, digit, or punctuation mark. Think of a single tile in a Scrabble game. In many languages a character is written with single quotes:\n\n```c\nchar grade = 'A';\nchar symbol = '#';\n```\n\nCharacters are useful when you need to examine or manipulate individual letters, like checking whether a user typed ‘y’ or ‘n’.\n\n### String – a sequence of characters  \n\nA **string** is a collection of characters placed next to each other, forming words, sentences, or any text. It is like a chain of beads where each bead is a character. Strings are written with double quotes (or sometimes single quotes) in most languages:\n\n```java\nString name = \"Alice\";\nString greeting = \"Hello, world!\";\n```\n\nStrings let you store names, messages, file paths, and more. You can combine (concatenate) strings with the `+` operator:\n\n$$\n\\text{fullMessage} = \\text{greeting} + \" \" + \\text{name}\n$$\n\nThe result would be `\"Hello, world! Alice\"`.\n\n> **In daily life:** Think of a string as a sentence you write on a piece of paper; each letter is a character, and the whole sentence is the string.\n\n### Boolean – true or false  \n\nA **boolean** (often abbreviated *bool*) can hold only one of two values: `true` or `false`. It is the computer’s way of representing a yes/no, on/off, or correct/incorrect condition. Example:\n\n```javascript\nlet isStudent = true;\nlet hasPassed = false;\n```\n\nBooleans are the backbone of decision‑making in programs. They let you write statements like “if the user is a student, give a discount”.\n\n> **Common mistake:** Treating a number like `0` or an empty string as a boolean automatically; always use explicit `true` or `false` values unless the language defines a clear conversion rule.\n\n### Putting the types together  \n\nWhen you declare a variable, you choose the type that matches the kind of data you expect:\n\n```python\nscore = 85               # int, because scores are whole numbers\ntemperature = 36.6       # float, because temperature can have decimals\ninitial = 'J'            # char, a single letter\nmessage = \"Good job!\"    # string, a whole sentence\npassed = True            # bool, result of a test\n```\n\nIf you later try to store a value that doesn’t fit the declared type, the language will raise an error (or automatically convert, depending on the language). Keeping types consistent prevents bugs and makes your code easier to read.\n\n> **Remember:** Choose the simplest type that accurately describes the data – it saves memory, avoids errors, and makes your program’s intent clear.",
+   "code": ""
   },
   {
-   "heading": "Operators: Doing Work with Values",
-   "body": "Operators let you manipulate variables. Arithmetic operators (+, -, *, /, %) perform math. Comparison operators (==, !=, >, <, >=, <=) compare two values and return a Boolean. Logical operators (and, or, not) combine Boolean results.\n\nUse them to build expressions like `total = price * quantity` or `if age >= 18 and has_id:` to check multiple conditions.",
-   "code": "price = 9.99\nquantity = 3\ntotal = price * quantity\nprint(total)  # Output: 29.97\n\nage = 20\nhas_id = False\neligible = age >= 18 and has_id\nprint(eligible)  # Output: False"
+   "heading": "Choosing the Right Type",
+   "body": "When you write a program you have to tell the computer what kind of information each variable will hold.  \nThink of it like packing a suitcase: you choose a small bag for a pair of socks, a larger one for a sweater, and a very sturdy box for a fragile vase. In programming the “size” and “strength” of a variable are described by its **data type**. Picking the right type keeps your program fast, saves memory, and prevents surprising errors.\n\n### 1. Why the type matters  \n\nA data type tells the computer two things:\n\n1. **How much space** (how many bits) to reserve for the value.  \n2. **What operations** are allowed on that value (e.g., you can add two numbers, but you cannot add two sentences directly).\n\nIf you ask the computer to store a huge number in a tiny type, the value will be **truncated** (cut off) or wrap around, giving a wrong result. Conversely, using a very large type for a tiny piece of data wastes memory and can make calculations slower.\n\n> **Note:** *Choosing a type that is too small can cause overflow, while choosing one that is too large can waste resources.*\n\n### 2. Common primitive types  \n\n| Type | Typical size | What it holds | Example use |\n|------|--------------|---------------|-------------|\n| `int` (integer) | 32 bits (about 2 billion positive or negative) | Whole numbers, no fractions | Counting students, ages |\n| `long` | 64 bits (about 9 quintillion) | Very large whole numbers | Population of a country |\n| `float` | 32 bits, about 7 decimal digits of precision | Approximate real numbers | Temperature with one decimal |\n| `double` | 64 bits, about 15 decimal digits of precision | More accurate real numbers | Scientific calculations |\n| `char` | 8‑16 bits (depends on encoding) | A single character | Letter grades |\n| `boolean` | 1 bit (true/false) | Logical value | Is the door open? |\n\n### 3. Matching the type to the data  \n\n1. **Countable items** – Use an integer type (`int` or `long`). If you know the count will never exceed a few thousand, `int` is enough.  \n2. **Measurements with fractions** – Use a floating‑point type (`float` or `double`). Choose `float` when you only need a few decimal places (e.g., price shown to two cents). Choose `double` for scientific work where more precision matters.  \n3. **Single characters** – Use `char`. It stores one letter, digit, or symbol.  \n4. **Yes/No questions** – Use `boolean`. It can only be `true` or `false`.  \n\n> **In daily life:** *Think of `int` as a whole‑number ruler, `float` as a ruler with millimeter marks, and `boolean` as a light switch that is either on or off.*\n\n### 4. Size and precision  \n\nThe size of a type determines the range of values it can represent. For integers, the range is symmetric around zero:\n\n$$\n\\text{Range of signed } n\\text{-bit integer} = -2^{n-1} \\text{ to } 2^{n-1}-1\n$$\n\nFor floating‑point numbers, the concept of **precision** matters. A `float` can store about 7 decimal digits accurately; any extra digits are rounded. A `double` keeps about 15 digits, so the result of a calculation like\n\n$$\n\\frac{1}{3} \\times 3\n$$\n\nwill be closer to exactly 1 when using `double` than when using `float`.\n\n> **Remember:** *If you need exact decimal values (e.g., money), consider using a fixed‑point type or a special class like `BigDecimal` instead of floating‑point, because binary fractions can introduce tiny errors.*\n\n### 5. Practical tips for choosing  \n\n- **Start simple.** Use the smallest type that comfortably fits your data.  \n- **Think about future growth.** If a counter might later exceed 2 billion, pick `long` from the start.  \n- **Beware of mixing types.** Adding an `int` to a `double` forces the `int` to be converted to a `double`, which can introduce rounding.  \n- **Test edge cases.** Try the smallest and largest values your program might handle to see if overflow occurs.\n\n> **Common mistake:** *Storing a monetary amount in a `float` and then printing it can show 0.999999 instead of 1.00 because of floating‑point rounding.*\n\n### 6. Quick checklist  \n\n- Is the value always a whole number? → `int` or `long`.  \n- Does the value need fractions? → `float` (few decimals) or `double` (more decimals).  \n- Is the value just true/false? → `boolean`.  \n- Will the value ever be larger than the chosen type’s range? → pick a larger type.  \n\nBy matching each piece of data to the most appropriate type, you keep your programs efficient, readable, and less prone to hidden bugs. This habit will serve you well as you move on to more complex programs.",
+   "code": ""
+  },
+  {
+   "heading": "Arithmetic Operators",
+   "body": "Arithmetic operators let a program do the same kind of number tricks we use when we count, share, or split things.  \nThe five basic operators are  \n\n* **addition** `+` – puts two numbers together  \n* **subtraction** `-` – takes one number away from another  \n* **multiplication** `*` – adds a number to itself many times  \n* **division** `/` – splits a number into equal parts  \n* **modulus** `%` – tells what is left over after a division  \n\n> **Definition:** An *operator* is a symbol that tells the computer to perform a specific calculation on one or more values (called *operands*).\n\n---\n\n### Adding and subtracting\n\nThink of addition as putting apples from two baskets into one larger basket.  \nIf `a = 3` and `b = 5`, the expression `a + b` gives `8`.  \n\nSubtraction works the opposite way: it removes apples.  \n`b - a` would be `5 - 3 = 2`.  \n\nBoth operations are **commutative** for addition (order does not matter) but **not** for subtraction (order matters).  \n\n---\n\n### Multiplying and dividing\n\nMultiplication is repeated addition.  \nIf you have `4` groups of `3` candies, you can write `4 * 3` and the result is `12`.  \n\nDivision is the reverse: it asks how many times one number fits into another.  \n`12 / 4` asks “how many groups of 4 are in 12?” and the answer is `3`.  \n\nWhen both numbers are integers (whole numbers), most programming languages give an integer result for `/`.  \nIf you need a fractional answer, at least one operand must be a *floating‑point* number (e.g., `12.0 / 5`).  \n\n---\n\n### The modulus operator\n\nThe modulus `%` tells you the *remainder* after division.  \nImagine you try to share `14` cookies equally among `5` friends. Each friend gets `2` cookies and `4` cookies are left over.  \n\n$$\n14 \\% 5 = 4\n$$  \n\nThe `%` operator is handy for tasks such as checking whether a number is even (`n % 2 == 0`).  \n\n---\n\n### Order of operations\n\nWhen several operators appear in one expression, the computer follows a set of rules called *operator precedence*.  \nThe usual precedence (from highest to lowest) is:\n\n1. Parentheses `()` – anything inside them is calculated first.  \n2. Multiplication `*`, division `/`, and modulus `%`.  \n3. Addition `+` and subtraction `-`.  \n\nIf two operators have the same precedence, the computer works from left to right (this is called *associativity*).  \n\n> **Note:** Always use parentheses when you are unsure about the order; they make your intention clear to both the computer and anyone reading your code.\n\n**Example:**  \n\n```c\nint result = 5 + 2 * 3;   // multiplication first, then addition\n```\n\nThe multiplication `2 * 3` gives `6`, then `5 + 6` yields `11`.  \n\nIf you want the addition to happen first, you write:\n\n```c\nint result = (5 + 2) * 3; // parentheses change the order\n```\n\nNow `5 + 2` is `7`, and `7 * 3` becomes `21`.  \n\n---\n\n### Combining many operators\n\nYou can chain several operations in one line, as long as you respect precedence and use parentheses where needed.  \n\n$$\nresult = (a + b) * (c - d) / e % f\n$$  \n\nThis reads:  \n\n1. Add `a` and `b`.  \n2. Subtract `d` from `c`.  \n3. Multiply the two results.  \n4. Divide by `e`.  \n5. Take the remainder when divided by `f`.  \n\nBecause each step follows the rules above, the computer can evaluate the whole expression correctly.  \n\n> **In daily life:** Think of the expression as a recipe. The order tells you which ingredient to mix first, which to stir together next, and when to add the final pinch of spice. Skipping steps or mixing in the wrong order can change the taste—just like a wrong order of operations changes the numeric result.  \n\n---\n\n### Quick practice\n\n1. What is `7 + 3 * 2`?  \n2. What is `(7 + 3) * 2`?  \n3. What is `20 % 6`?  \n\nTry these on paper first, then type them into a small program to see that the computer agrees.  \n\n> **Common mistake:** Forgetting that `*` and `/` happen before `+` and `-`. Always double‑check with parentheses if the result looks surprising.",
+   "code": ""
+  },
+  {
+   "heading": "Assignment and Compound Operators",
+   "body": "When you first meet a variable, you think of it as a named box that can hold a value.  \nAn **assignment** is the act of putting a value into that box, using the equals sign `=`.  \n\n```python\nscore = 10          # put the number 10 into the box named score\n```\n\nThe simple `=` does one thing: it copies the value on the right‑hand side into the variable on the left‑hand side.  \nOften, however, we want to *change* the value that is already inside the box while we are assigning a new one. Writing the same calculation twice would be clumsy:\n\n```python\nscore = score + 5   # add 5 to the current score\n```\n\nThe line above first reads the current value of `score`, adds 5, and then stores the result back into `score`.  \nProgramming languages provide a shortcut called a **compound operator**. It combines the arithmetic operation and the assignment into a single symbol. The pattern is:\n\n```\nvariable <operator>= expression\n```\n\nwhere `<operator>` can be `+`, `-`, `*`, `/`, or `%`.  \nEach compound operator does exactly the same work as the longer form, but it is shorter and clearer.\n\n> **Definition:** `+=` adds the right‑hand side to the variable and stores the result back in the same variable.  \n> Example: `score += 5` is equivalent to `score = score + 5`.\n\nThe same idea applies to the other operators:\n\n- `-=` subtracts: `lives -= 1` means `lives = lives - 1`.\n- `*=` multiplies: `price *= 0.9` means “reduce the price by 10 %”.\n- `/=` divides: `average /= 4` means “divide the current total by 4”.\n- `%=` takes the remainder: `counter %= 3` means “keep only the remainder after dividing by 3”.\n\nThese operators are useful because they keep the code tidy and reduce the chance of mistakes. Imagine you are keeping track of a bank account balance. Each time you deposit money you could write:\n\n```python\nbalance = balance + deposit\n```\n\nor, more cleanly:\n\n```python\nbalance += deposit\n```\n\nThe second line reads almost like plain English: “add deposit to balance”.\n\n> **In daily life:** Think of a water tank with a tap. Turning the tap on adds water, turning it off removes water. Using `+=` is like saying “fill the tank with 5 liters more” without having to measure the current amount first.\n\n### How the operators work step by step  \n\n1. **Read** the current value stored in the variable.  \n2. **Perform** the arithmetic operation with the right‑hand side expression.  \n3. **Write** the new value back into the same variable.\n\nBecause the read and write happen in one statement, the variable’s value is updated instantly, and no temporary variable is needed.\n\n> **Note:** The division operator `/=` performs *floating‑point* division in most languages, meaning the result can have a decimal part. If you need an integer result, you might use `//=` (integer division) where the language supports it.\n\n### A concrete example\n\n```python\nitems = 7          # start with 7 items\nitems *= 2         # double the amount: now 14\nitems -= 3         # remove 3: now 11\nitems %= 5         # keep only the remainder after dividing by 5: now 1\n```\n\nAfter these four lines, `items` ends up holding the value `1`. Each line performed a calculation and stored the result back into `items` without extra code.\n\n> **Common mistake:** Forgetting that `=` is *assignment*, not equality testing. Writing `if (x = 5)` in many languages will cause an error because the language expects a comparison (`==`) inside the `if`. The same caution applies to compound operators: `x += 5` changes `x`; `x == 5` only checks whether `x` already equals 5.\n\n### Why you should use them\n\n- **Readability:** A single line tells both what you are doing and where the result goes.\n- **Safety:** Less code means fewer places where a typo can introduce a bug.\n- **Performance:** The interpreter or compiler can often generate slightly faster code because the operation is recognized as a single atomic step.\n\n> **Remember:** A compound operator is just a shortcut. If you ever feel unsure, rewrite it in the long form (`x = x + y`) to see that the meaning is exactly the same.\n\nPractice by rewriting simple calculations with compound operators. When you become comfortable, you’ll find your programs shorter and easier to understand.",
+   "code": ""
+  },
+  {
+   "heading": "Comparison and Logical Operators",
+   "body": "When a program needs to decide *what to do next*, it must be able to ask questions and get a clear **yes** or **no** answer.  \nIn programming those answers are represented by the two values **true** and **false**.  \nThe tools that turn ordinary numbers or text into true/false results are **comparison operators** and **logical operators**.\n\n### Comparison operators\n\nA comparison operator looks at two values and checks how they relate to each other.  \nThe result of any comparison is a **boolean** – the word for a true/false value.\n\n| Operator | Meaning (in words) | Example | Result |\n|----------|-------------------|---------|--------|\n| `==`     | *equal to*        | `5 == 5` | true |\n| `!=`     | *not equal to*    | `5 != 3` | true |\n| `<`      | *less than*       | `2 < 7` | true |\n| `>`      | *greater than*    | `9 > 4` | true |\n| `<=`     | *less than or equal to* | `4 <= 4` | true |\n| `>=`     | *greater than or equal to* | `6 >= 8` | false |\n\n> **Definition:** A **comparison operator** evaluates two operands and returns a boolean value (`true` or `false`).\n\nThink of a comparison like checking the height of two friends. If Alice is 160 cm and Bob is 170 cm, the statement “Alice is taller than Bob” (`160 > 170`) is **false**. The computer does exactly the same check, but with numbers, characters, or even whole strings.\n\n#### Why it matters\nPrograms often need to repeat an action **while** a condition holds, or choose one path **if** a condition is true. For example:\n\n```python\nif score >= 60:\n    print(\"You passed!\")\nelse:\n    print(\"Try again.\")\n```\n\nHere `score >= 60` is a comparison that decides which message to show.\n\n### Logical operators\n\nSometimes a single comparison is not enough. You may need to combine several conditions. That is what **logical operators** do. They take boolean values as inputs and produce a new boolean output.\n\n| Operator | Symbol | Meaning (in words) | Example | Result |\n|----------|--------|-------------------|---------|--------|\n| AND      | `&&`   | *both conditions must be true* | `a > 0 && b < 10` | true only if both parts are true |\n| OR       | `||`   | *at least one condition must be true* | `a == 5 || b == 5` | true if either part is true |\n| NOT      | `!`    | *invert the truth value* | `! (a == b)` | true when `a == b` is false |\n\n> **Note:** In many languages (including C, Java, and JavaScript) the symbols are `&&`, `||`, and `!`. In Python the words `and`, `or`, and `not` are used instead, but the ideas are identical.\n\n#### Everyday analogy\nImagine you are allowed to enter a club only if you are **older than 18** **and** you have a **ticket**.  \n- “Older than 18” is one comparison (`age > 18`).  \n- “Has a ticket” is another (`hasTicket == true`).  \n- The rule “both must be true” is exactly the **AND** operator: `age > 18 && hasTicket`.\n\nIf the rule were “you can enter if you are **older than 18** **or** you have a **ticket**,” that would be the **OR** operator.\n\nThe **NOT** operator works like flipping a switch: if a statement says “the light is on” (`lightOn == true`), then `!lightOn` means “the light is **not** on”.\n\n### Combining comparisons and logical operators\n\nYou can nest comparisons inside logical expressions to build complex decisions. Parentheses `()` help group parts and make the order clear, just as in arithmetic.\n\nFor example, to check whether a number `x` is **between** 10 and 20 (including the ends), you write:\n\n$$\n( x >= 10 ) && ( x <= 20 )\n$$\n\nIf `x` is 15, both comparisons are true, so the whole expression is true. If `x` is 25, the second comparison fails, making the whole expression false.\n\n> **Remember:** Logical operators work **only** on boolean values. If you try to use `&&` with a number directly, most languages will first convert the number to a boolean (zero → false, non‑zero → true), which can lead to confusing bugs.\n\n### Common mistake\n\nA frequent error is using a single `=` (assignment) when you meant `==` (equality).  \n\n```c\nif (a = 5) { … }   // assigns 5 to a, then tests the result (always true)\nif (a == 5) { … }  // correctly tests whether a equals 5\n```\n\nThe first line changes the value of `a` and almost always evaluates to true, causing logic to behave unexpectedly.\n\n### Quick practice\n\n1. Write a condition that is true only when a variable `age` is **not** between 13 and 19.  \n   *Hint:* Use `!` and the **AND** operator.  \n\n2. Combine three checks: `score >= 90`, `hasBonus == true`, and `timeLeft > 0`. The whole expression should be true only if **all** three are true.  \n\nThese exercises show how comparison and logical operators turn simple facts into the decisions that drive any program.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together: Small Exercises",
+   "body": "Imagine you have a small grocery store and you want to keep track of how many apples, oranges, and bananas you sell each day.  \nTo do that you will create **variables** (named boxes) that store numbers, choose the right **data type** for each box, and then use **operators** (the symbols that tell the computer to add, compare, or combine values) to calculate totals and make decisions.\n\nBelow are three mini‑tasks that walk you through this process step by step. Follow each instruction carefully, and you will see how the ideas from the lesson fit together in a real‑world problem.\n\n---\n\n### Mini‑Task 1: Count the fruit sold today  \n\n1. **Create three variables** named `apples`, `oranges`, and `bananas`.  \n   *These variables will hold whole numbers, so use the integer type (`int`).*  \n\n   ```python\n   apples = 0\n   oranges = 0\n   bananas = 0\n   ```\n\n2. **Assign the numbers you actually sold.**  \n   Suppose you sold 12 apples, 7 oranges, and 5 bananas.\n\n   ```python\n   apples = 12\n   oranges = 7\n   bananas = 5\n   ```\n\n3. **Calculate the total pieces of fruit sold** and store the result in a new variable called `total_fruit`.\n\n   ```python\n   total_fruit = apples + oranges + bananas\n   ```\n\n   > **Note:** The `+` symbol is an **arithmetic operator** that adds numbers.\n\n4. **Print the total** so you can see the answer.\n\n   ```python\n   print(\"Total fruit sold:\", total_fruit)\n   ```\n\n   If you run the code you should see `Total fruit sold: 24`.\n\n---\n\n### Mini‑Task 2: Compute the day's revenue  \n\nNow you need to know how much money you earned.  \nEach apple costs $0.50, each orange $0.75, and each banana $0.30.\n\n1. **Create three price variables** using the floating‑point type (`float`) because they have cents.\n\n   ```python\n   price_apple = 0.50\n   price_orange = 0.75\n   price_banana = 0.30\n   ```\n\n2. **Calculate the revenue for each fruit** by multiplying the quantity by its price.  \n   Use the multiplication operator `*`.\n\n   ```python\n   revenue_apples = apples * price_apple\n   revenue_oranges = oranges * price_orange\n   revenue_bananas = bananas * price_banana\n   ```\n\n3. **Add the three revenues together** to get the total money earned. Store it in `total_revenue`.\n\n   $$ total\\_revenue = revenue\\_apples + revenue\\_oranges + revenue\\_bananas $$\n\n4. **Show the result** with two decimal places (common for money).\n\n   ```python\n   print(f\"Total revenue: ${total_revenue:.2f}\")\n   ```\n\n   You should see `Total revenue: $13.55`.\n\n   > **In daily life:** Adding up prices is exactly what cash registers do when you buy several items.\n\n---\n\n### Mini‑Task 3: Decide if you met the sales target  \n\nYour store set a goal: sell at least 20 pieces of fruit and earn $15.00 or more.\n\n1. **Create two Boolean variables** (`bool` type) that check each condition.  \n   A Boolean can only be `True` or `False`.\n\n   ```python\n   enough_fruit = total_fruit >= 20\n   enough_money = total_revenue >= 15.00\n   ```\n\n   > **Definition:** `>=` is a **comparison operator** that means “greater than or equal to”.\n\n2. **Combine the two Booleans** with the logical **and** operator `and`.  \n   The store meets the target only if *both* conditions are true.\n\n   ```python\n   target_met = enough_fruit and enough_money\n   ```\n\n3. **Print a friendly message** based on the result.\n\n   ```python\n   if target_met:\n       print(\"Great job! You met the sales target.\")\n   else:\n       print(\"Keep trying – you didn't reach the target yet.\")\n   ```\n\n   Run the program. With the numbers we used, the output will be  \n   `Keep trying – you didn't reach the target yet.` because the revenue is below $15.00.\n\n   > **Common mistake:** Forgetting to use `>=` instead of `>` will make the check too strict, causing a false “missed target” even when you exactly hit the goal.\n\n---\n\n### What you have practiced  \n\n- Declaring variables with the appropriate **data type** (`int`, `float`, `bool`).  \n- Using **arithmetic operators** (`+`, `*`) to compute totals.  \n- Applying **compound operators** (e.g., `+=`) could replace `total_fruit = total_fruit + apples` with `total_fruit += apples`.  \n- Making **comparisons** (`>=`) and combining results with **logical operators** (`and`).  \n- Writing a simple **conditional statement** (`if … else`) that reacts to the computed Booleans.\n\nBy completing these three small exercises, you have taken a real‑world scenario, turned it into variables, chose the right types, and used a chain of operators to reach a useful answer. Keep practicing with different numbers and targets, and soon these steps will feel as natural as counting fruit on a shelf.",
+   "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Adding Two Numbers",
+   "given": "You have two integer variables, `a = 7` and `b = 5`. Find their sum and store it in a new variable `c`.",
+   "steps": [
+    {
+     "label": "Declare",
+     "text": "Declare `c` as an integer to hold the result."
+    },
+    {
+     "label": "Compute",
+     "text": "Use the `+` operator: `c = a + b`. This adds the values of `a` and `b`."
+    },
+    {
+     "label": "Output",
+     "text": "Print `c`. This shows the result of the addition."
+    }
+   ],
+   "answer": "`c = 12`"
+  },
+  {
+   "level": "Medium",
+   "title": "Average of Three Scores",
+   "given": "Three floating‑point variables store test scores: `score1 = 84.5`, `score2 = 76.0`, `score3 = 91.5`. Compute the average and decide if the average is a passing grade (≥ 80).",
+   "steps": [
+    {
+     "label": "Sum",
+     "text": "Calculate total: `total = score1 + score2 + score3`. Adding all scores gives the combined value."
+    },
+    {
+     "label": "Divide",
+     "text": "Compute average: `average = total / 3`. Division gives the mean score."
+    },
+    {
+     "label": "Compare",
+     "text": "Use `>=` to test: `isPass = average >= 80`. This yields a Boolean indicating pass/fail."
+    },
+    {
+     "label": "Output",
+     "text": "Print `average` and `isPass`. Shows the numeric result and the decision."
+    }
+   ],
+   "answer": "`average = 84.0`; `isPass = true` (passing)"
+  },
+  {
+   "level": "Hard",
+   "title": "Salary Calculation with Bonuses and Tax",
+   "given": "An employee’s base salary is stored in `base = 4500.00` (float). They receive a performance bonus of 12 % of the base salary and a yearly allowance of $300. Tax is 18 % of the total gross pay. Compute the net salary and state whether it exceeds $5000.",
+   "steps": [
+    {
+     "label": "Bonus",
+     "text": "`bonus = base * 0.12`. Calculates 12 % of the base."
+    },
+    {
+     "label": "Gross",
+     "text": "`gross = base + bonus + 300`. Adds base, bonus, and allowance."
+    },
+    {
+     "label": "Tax",
+     "text": "`tax = gross * 0.18`. Finds 18 % tax on gross pay."
+    },
+    {
+     "label": "Net",
+     "text": "`net = gross - tax`. Subtracts tax to get net salary."
+    },
+    {
+     "label": "Compare",
+     "text": "`exceeds = net > 5000`. Determines if net salary is above $5000."
+    },
+    {
+     "label": "Output",
+     "text": "Print `net` and `exceeds`. Shows final amount and the decision."
+    }
+   ],
+   "answer": "`net ≈ $5,013.60`; `exceeds = true` (net salary exceeds $5000)."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the value of the variable `x` after executing the following code? ```python x = 5 x = x + 3 ```",
+   "a": "Step 1: `x` is assigned the value 5.\nStep 2: The expression `x + 3` uses the current value of `x` (5) and adds 3, giving 8.\nStep 3: The result (8) is stored back into `x`.\nTherefore, after the two statements, `x` equals **8**."
+  },
+  {
+   "level": "Easy",
+   "q": "Which data type would you use to store the number of students in a class: `int`, `float`, or `str`? Explain why.",
+   "a": "The number of students is a whole number (e.g., 25). The appropriate type is **int** because it represents integer values without a decimal part. `float` is for numbers with fractions, and `str` is for text, so they are not suitable here."
+  },
+  {
+   "level": "Medium",
+   "q": "Evaluate the expression and state its type: ```python result = (7 % 3) * 2 > 4 and not (5 == 5) ```",
+   "a": "Step 1: `7 % 3` gives the remainder of 7 divided by 3, which is **1**.\nStep 2: Multiply by 2 → `1 * 2` = **2**.\nStep 3: Compare `2 > 4` → **False**.\nStep 4: Evaluate `5 == 5` → **True**; applying `not` gives **False**.\nStep 5: Combine with `and`: `False and False` → **False**.\nThe final value of `result` is **False**, and its type is **bool**."
+  },
+  {
+   "level": "Medium",
+   "q": "Write a single line of code that doubles the value of variable `score` using a compound assignment operator.",
+   "a": "The compound operator for addition is `+=`. To double, add the variable to itself:\n```python\nscore += score\n```\nExplanation: If `score` was 10, `score += score` adds 10 to the current 10, resulting in 20."
+  },
+  {
+   "level": "Hard",
+   "q": "Given the following code, what are the final values of `a`, `b`, and `c`? Show each step. ```python a = 4 b = 3 c = a * b + 2 a = b - a b = c // a c = a % b ```",
+   "a": "Step 1: `a = 4`, `b = 3`.\nStep 2: `c = a * b + 2` → `4 * 3 + 2 = 12 + 2 = 14`. So `c = 14`.\nStep 3: `a = b - a` → `3 - 4 = -1`. Now `a = -1`.\nStep 4: `b = c // a` → integer division `14 // -1 = -14`. So `b = -14`.\nStep 5: `c = a % b` → `-1 % -14`. In Python, the result has the same sign as the divisor (`-14`), and `-1 = (-14) * 0 + (-1)`, so the remainder is **-1**. Thus `c = -1`.\nFinal values: `a = -1`, `b = -14`, `c = -1`."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain why the following comparison returns `True` and what type it yields: ```python (5 < 10) == (2 > 1) ```",
+   "a": "Step 1: Evaluate left side `5 < 10` → **True**.\nStep 2: Evaluate right side `2 > 1` → **True**.\nStep 3: Compare the two Boolean results with `==`: `True == True` → **True**.\nThe expression returns the Boolean value **True**, and its type is **bool**."
+  }
+ ],
+ "recap": "This lesson introduced variables as named storage locations, explained basic data types like integers, described how operators perform calculations and comparisons, and showed how assignment and compound operators update variable values. It highlighted the importance of choosing the right data type and demonstrated using these concepts together in simple programming tasks.",
  "key_terms": [
   {
    "term": "Variable",
-   "meaning": "A named storage location that holds a value which can change during program execution."
+   "meaning": "A named place in memory that holds a value."
   },
   {
-   "term": "Data Type",
-   "meaning": "A classification that defines what kind of data a variable can store, such as int, float, str, or bool."
-  },
-  {
-   "term": "Operator",
-   "meaning": "A symbol that tells the computer to perform a specific mathematical, comparison, or logical operation."
+   "term": "Declaration",
+   "meaning": "The act of telling the program a variable exists."
   },
   {
    "term": "Assignment",
-   "meaning": "The act of giving a variable a value using the = sign."
+   "meaning": "Putting a value into a variable using the = operator."
+  },
+  {
+   "term": "Integer",
+   "meaning": "A whole‑number data type without fractional parts."
+  },
+  {
+   "term": "Arithmetic Operator",
+   "meaning": "Symbols such as +, -, *, /, % that perform mathematical operations."
+  },
+  {
+   "term": "Compound Operator",
+   "meaning": "A shortcut that combines an arithmetic operation with assignment (e.g., +=)."
+  },
+  {
+   "term": "Comparison Operator",
+   "meaning": "Operators like ==, !=, <, > that compare two values and return true or false."
   },
   {
    "term": "Boolean",
-   "meaning": "A data type that has only two possible values: True or False."
-  },
-  {
-   "term": "Expression",
-   "meaning": "A combination of variables, literals, and operators that evaluates to a single value."
+   "meaning": "A data type that can be either true or false."
   }
  ],
  "quiz": [
   {
-   "q": "Which of the following is a correct way to create an integer variable named count with the value 10?",
+   "q": "What does the statement \"x = 10\" do?",
    "options": [
-    "count = '10'",
-    "int count = 10;",
-    "count = 10",
-    "count := 10"
+    "Declares a variable named x",
+    "Assigns the value 10 to x",
+    "Compares x with 10",
+    "Adds 10 to x"
    ],
-   "answer": 2,
-   "why": "In most simple languages, you assign a value with = without quotes for numbers."
+   "answer": 1,
+   "why": "It stores the value 10 in the variable x."
   },
   {
-   "q": "What data type would you use to store the text \"Hello, World!\"?",
+   "q": "Which data type would you use to store a person's age?",
    "options": [
-    "int",
     "float",
-    "str",
-    "bool"
+    "string",
+    "int",
+    "boolean"
    ],
    "answer": 2,
-   "why": "Text strings are stored using the string (str) data type."
+   "why": "Age is a whole number, so the integer type is appropriate."
   },
   {
-   "q": "What is the result of the expression `5 > 3 and 2 == 2`?",
+   "q": "What is the result of 7 % 3?",
    "options": [
-    "True",
-    "False",
-    "5",
+    "1",
+    "2",
+    "3",
     "0"
    ],
-   "answer": 0,
-   "why": "Both comparisons are true, so the logical AND yields True."
+   "answer": 1,
+   "why": "The modulus operator returns the remainder; 7 divided by 3 leaves a remainder of 1."
   },
   {
-   "q": "Which operator gives the remainder of a division?",
+   "q": "Which operator combines addition and assignment?",
    "options": [
-    "+",
-    "/",
-    "%",
-    "*"
+    "=",
+    "+= ",
+    "==",
+    "%="
    ],
-   "answer": 2,
-   "why": "The % operator returns the remainder after integer division."
+   "answer": 1,
+   "why": "+= adds the right‑hand value to the variable and assigns the result."
+  },
+  {
+   "q": "What does the comparison \"5 != 3\" evaluate to?",
+   "options": [
+    "true",
+    "false",
+    "5",
+    "3"
+   ],
+   "answer": 0,
+   "why": "5 is not equal to 3, so the expression is true."
+  },
+  {
+   "q": "Which statement correctly declares and initializes an integer variable named count with value 0?",
+   "options": [
+    "int count = 0;",
+    "count = 0;",
+    "var count = 0;",
+    "declare count = 0;"
+   ],
+   "answer": 0,
+   "why": "In many languages, \"int count = 0;\" both declares the variable as an integer and assigns it 0."
   }
  ],
  "flashcards": [
   {
-   "front": "Variable",
-   "back": "A named container that holds a value which can be changed."
+   "front": "What is a variable?",
+   "back": "A named storage location that holds a value during program execution."
   },
   {
-   "front": "int vs. float",
-   "back": "int stores whole numbers; float stores numbers with decimals."
+   "front": "What is the assignment operator?",
+   "back": "The = symbol, used to store a value in a variable."
   },
   {
-   "front": "Boolean values",
-   "back": "True or False, used for logical decisions."
+   "front": "Define integer data type.",
+   "back": "A type that stores whole numbers without fractions."
   },
   {
-   "front": "Arithmetic operator for multiplication",
-   "back": "*"
+   "front": "Name the five basic arithmetic operators.",
+   "back": "+, -, *, /, %"
   },
   {
-   "front": "Comparison operator for 'greater than or equal to'",
-   "back": ">="
+   "front": "What does the += operator do?",
+   "back": "Adds the right‑hand operand to the variable and assigns the result back to that variable."
+  },
+  {
+   "front": "Give an example of a comparison operator and its meaning.",
+   "back": "== means \"equal to\"; it checks if two values are the same."
+  },
+  {
+   "front": "What is a boolean value?",
+   "back": "A value that can be either true or false."
+  },
+  {
+   "front": "Why is choosing the correct data type important?",
+   "back": "It ensures proper memory use and allows appropriate operations on the data."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -133,83 +317,172 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l05-data-type-icons",
-   "title": "Icons that represent the four basic data types.",
-   "alt": "Icons that represent the four basic data types.",
-   "priority": 6,
-   "picture_title": "Data Type Icons",
-   "kind": "labelled diagram",
-   "subject": "Four small pictures: a stack of coins for Integer, a ruler with a decimal mark for Float, a speech bubble for String, and a light switch for Boolean. Each icon is labeled with its type name.",
-   "layout": "Icons arranged in a row, each with a label underneath.",
+   "file": "introduction-to-programming-l05-variable-locker",
+   "title": "A school locker representing a variable that stores a value",
+   "alt": "A school locker representing a variable that stores a value",
+   "priority": 9,
+   "picture_title": "Variable Locker",
+   "kind": "illustration",
+   "subject": "Shows a locker with a name plate (the variable name) and an item inside (the stored value). The locker can be opened to change the item, illustrating assignment.",
+   "layout": "Locker in centre, name plate on front, arrow pointing to item inside, second arrow showing replacement of item",
    "labels": [
-    "Integer",
-    "Float",
-    "String",
-    "Boolean"
+    "Variable name",
+    "Stored value",
+    "Assign"
    ],
-   "after": 1
-  },
-  {
-   "type": "steps",
-   "title": "Creating and Updating a Variable",
-   "steps": [
-    {
-     "label": "Define",
-     "text": "Write the variable name and assign a value"
-    },
-    {
-     "label": "Use",
-     "text": "Read the variable in an expression"
-    },
-    {
-     "label": "Change",
-     "text": "Assign a new value to the same name"
-    }
-   ],
-   "loop": false,
    "after": 0
   },
   {
-   "type": "compare",
-   "title": "Basic Data Types",
-   "left": {
-    "name": "Integer",
-    "points": [
-     "Whole numbers",
-     "No decimal point",
-     "Example: 42"
-    ]
-   },
-   "right": {
-    "name": "Float",
-    "points": [
-     "Numbers with decimals",
-     "Example: 3.14",
-     "Used for measurements"
-    ]
-   },
+   "type": "image",
+   "file": "introduction-to-programming-l05-data-type-boxes",
+   "title": "Different boxes labelled with data types to show what each can hold",
+   "alt": "Different boxes labelled with data types to show what each can hold",
+   "priority": 7,
+   "picture_title": "Data Type Boxes",
+   "kind": "illustration",
+   "subject": "Three boxes of varying sizes labelled Integer, Float, and Text. Each box contains example contents (e.g., 42, 3.14, \"hello\") to demonstrate type constraints.",
+   "layout": "Boxes arranged left to right, each with a label on top and example item inside",
+   "labels": [
+    "Integer",
+    "Float",
+    "Text"
+   ],
    "after": 1
   },
   {
+   "type": "image",
+   "file": "introduction-to-programming-l05-arithmetic-operator-symbols",
+   "title": "Symbols for addition, subtraction, multiplication, division, and modulus",
+   "alt": "Symbols for addition, subtraction, multiplication, division, and modulus",
+   "priority": 6,
+   "picture_title": "Arithmetic Operator Symbols",
+   "kind": "labelled diagram",
+   "subject": "A simple diagram showing the five arithmetic operators with brief visual examples (e.g., 2 + 3 = 5). Helps students link symbols to actions.",
+   "layout": "Row of symbols (+, –, *, /, %) each with a small example underneath",
+   "labels": [
+    "+",
+    "-",
+    "*",
+    "/",
+    "%"
+   ],
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Variable vs Constant",
+   "left": {
+    "name": "Variable",
+    "points": [
+     "Can change value",
+     "Has a name",
+     "Stored in memory"
+    ]
+   },
+   "right": {
+    "name": "Constant",
+    "points": [
+     "Never changes",
+     "No name needed",
+     "Embedded in code"
+    ]
+   },
+   "after": 0
+  },
+  {
    "type": "facts",
-   "title": "Operator Categories",
+   "title": "Basic Data Types",
    "items": [
     {
-     "value": "+ - * / %",
-     "label": "Arithmetic"
+     "value": "int",
+     "label": "Integer (whole numbers)"
     },
     {
-     "value": "== != > < >= <=",
-     "label": "Comparison"
+     "value": "float",
+     "label": "Floating‑point (decimals)"
     },
     {
-     "value": "and or not",
-     "label": "Logical"
+     "value": "bool",
+     "label": "Boolean (true/false)"
+    },
+    {
+     "value": "str",
+     "label": "String (text)"
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Variable Declaration",
+   "items": [
+    {
+     "name": "type",
+     "role": "tells the computer what kind of data"
+    },
+    {
+     "name": "name",
+     "role": "the identifier you use in code"
+    },
+    {
+     "name": "value",
+     "role": "the data stored in the variable"
     }
    ],
    "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Assignment and Compound Operators",
+   "steps": [
+    {
+     "label": "Assign",
+     "text": "Use = to store a value"
+    },
+    {
+     "label": "AddAssign",
+     "text": "Use += to add and store"
+    },
+    {
+     "label": "SubtractAssign",
+     "text": "Use -= to subtract and store"
+    },
+    {
+     "label": "MultiplyAssign",
+     "text": "Use *= to multiply and store"
+    },
+    {
+     "label": "DivideAssign",
+     "text": "Use /= to divide and store"
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Comparison vs Logical Operators",
+   "left": {
+    "name": "Comparison",
+    "points": [
+     "Compare two values",
+     "Return true/false",
+     "Examples: ==, !=, >"
+    ]
+   },
+   "right": {
+    "name": "Logical",
+    "points": [
+     "Combine boolean results",
+     "Return true/false",
+     "Examples: and, or, not"
+    ]
+   }
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

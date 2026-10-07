@@ -1,119 +1,310 @@
 {
  "title": "Building a Small Project: Putting It All Together",
- "summary": "In this final lesson you will combine the concepts learned to create a simple, functional program. You will also learn how to plan, code, test, and improve a small project.",
+ "summary": "In this final lesson, students combine all previously learned concepts to create a small, functional program. They will plan, code, test, and improve a simple project, experiencing the full development cycle.",
+ "objectives": [
+  "Design a small project using variables, control structures, and functions",
+  "Write clean, commented code in the IDE",
+  "Run the program and verify that it works as intended",
+  "Debug any errors using systematic techniques",
+  "Explain how each part of the code fits into the overall program"
+ ],
+ "prerequisites": "Students should already know basic syntax, variables, loops, conditionals, functions, input/output, and basic debugging from the earlier lessons.",
+ "why": [
+  "Building a complete program shows how individual programming pieces work together, turning abstract concepts into something useful you can see and share. This experience mirrors real‑world software development, where a project starts with an idea and ends with a working application.",
+  "Small projects also develop problem‑solving habits: planning, breaking a task into steps, testing, and fixing bugs. These habits are valuable not only in programming but in any field that requires logical thinking and systematic work."
+ ],
  "sections": [
   {
-   "heading": "Project Planning",
-   "body": "Before writing any code, decide what your program will do. A good beginner project is a \"Guess the Number\" game where the computer picks a random number and the user tries to guess it.\n\nWrite down the main steps: generate a random number, ask the user for a guess, compare the guess to the target, give feedback, and repeat until the correct number is guessed.",
+   "heading": "1. Project Overview and Planning",
+   "body": "Imagine you want a tiny computer program that helps you see how much money you have left after you spend on groceries, movies, and other things.  \nWe will call this program a **personal budget calculator**.  \nIt is useful because it lets you check quickly whether you are staying inside the amount of money you decided to spend each month. Think of it like a simple notebook where you write down “income” at the top and then subtract each expense – the program does the same work automatically.\n\n**Step 1 – Write down what the program must do (requirements).**  \nA requirement is a statement of something the program **must** be able to accomplish. For our calculator the main requirements are:\n\n1. Ask the user how much money they earned this month (the *income*).  \n2. Ask the user for several expense amounts (for example, rent, food, transport).  \n3. Add up all the expenses.  \n4. Subtract the total expenses from the income.  \n5. Show the user the remaining money (the *balance*).  \n\n> **Definition:** *Requirement* – a specific function or behavior that the program needs to provide.\n\n**Step 2 – Identify the data the program will need (inputs).**  \n*Input* means any information that the user gives to the program. In our case the inputs are:\n\n- One number for the monthly income.  \n- A list of numbers for each expense.  \n\nWe will also decide how many expenses the user can enter. To keep things simple, let’s allow up to three expenses.  \n\n> **Note:** You can always change the number of expenses later; the planning stage only needs a clear, simple choice.\n\n**Step 3 – Decide what the program has to do with the inputs (processing steps).**  \n*Processing* is the work the program does between receiving the inputs and producing the outputs. For the budget calculator the processing steps are:\n\n1. Store the income in a variable called `income`.  \n2. Store each expense in separate variables (`expense1`, `expense2`, `expense3`).  \n3. Compute the total expense:  \n\n   $$\\text{total\\_expense} = \\text{expense1} + \\text{expense2} + \\text{expense3}$$  \n\n4. Compute the remaining balance:  \n\n   $$\\text{balance} = \\text{income} - \\text{total\\_expense}$$  \n\n5. Prepare a message that tells the user their balance.\n\n> **In daily life:** Adding up grocery prices and then subtracting the sum from the amount of cash you have in your wallet is exactly what the program will mimic.\n\n**Step 4 – Describe what the user will see at the end (outputs).**  \n*Output* is any information the program shows back to the user. Here we need only one output line, for example:\n\n```\nYour remaining balance is: $123.45\n```\n\nIf the balance is negative, we might add a friendly note like “You have spent more than you earned this month.”\n\n> **Common mistake:** Forgetting to convert the user’s typed numbers (which are read as text) into numeric values before doing arithmetic. This makes the program try to add strings instead of numbers and leads to errors.\n\n**Putting the pieces together**  \nNow we have a clear picture:\n\n- **Inputs:** income, up to three expense amounts.  \n- **Processing:** add expenses, subtract from income, create a result message.  \n- **Outputs:** the balance message.\n\nHaving this plan on paper (or on a whiteboard) means you won’t have to guess what to code next. You can check each requirement one by one as you write the program, and you will know exactly where to look if something goes wrong later.\n\n> **Remember:** A good plan breaks a problem into small, manageable parts – inputs, processing, and outputs – before any code is written. This makes the actual coding step much smoother and reduces bugs.",
    "code": ""
   },
   {
-   "heading": "Implementing the Core Logic",
-   "body": "Start a new file in your IDE and import the random module. Create a variable for the secret number using random.randint(1, 100). Then write a while loop that continues until the user guesses correctly.\n\nInside the loop, use input() to read the user's guess, convert it to an integer, and use if‑else statements to tell the user if the guess is too low, too high, or correct.",
-   "code": "import random\nsecret = random.randint(1, 100)\nwhile True:\n    guess = int(input('Enter your guess (1-100): '))\n    if guess < secret:\n        print('Too low!')\n    elif guess > secret:\n        print('Too high!')\n    else:\n        print('Congratulations! You guessed it.')\n        break"
+   "heading": "2. Designing the Algorithm",
+   "body": "Imagine you want the computer to help you manage a simple “To‑Do List” program. Before you type a single line of code, you first decide **what the program must do step by step**. This step is called *designing the algorithm*. An algorithm is just a clear, ordered set of instructions that tells the computer how to solve a problem, much like a recipe tells a chef how to bake a cake.\n\n> **Definition:** An **algorithm** is a precise list of actions that a computer follows to achieve a goal.  \n\nWhy design it first?  \nIf you jump straight into coding, you may forget a required step or create tangled logic that is hard to fix later. Planning the algorithm is like drawing a map before a road trip – you know where to turn, when to stop, and how to reach the destination safely.\n\n### Everyday comparison\nThink of a traffic light controller. It repeatedly checks the current light, waits a set time, then changes to the next color. The controller’s behavior can be described with a simple loop and a few conditionals (if‑else statements). Your To‑Do List will behave similarly: it will keep showing a menu, wait for the user’s choice, and then perform the appropriate action.\n\n### Building the algorithm step by step\n\n1. **Start** the program.  \n2. **Show the main menu** – options:  \n   - `1` Add a task  \n   - `2` View all tasks  \n   - `3` Mark a task as done  \n   - `4` Exit  \n3. **Read the user’s choice**.  \n4. **Decide what to do** based on the choice (this is a *conditional*).  \n5. **Perform the selected action**:  \n   - If the choice is `1`, ask for the task description and store it.  \n   - If the choice is `2`, display every stored task with its status.  \n   - If the choice is `3`, ask for the task number and mark it as done.  \n   - If the choice is `4`, end the program.  \n6. After completing the action (except when exiting), **go back to step 2** so the user can choose again. This repeated return to the menu is a *loop*.\n\n### Pseudocode\n\nBelow is a plain‑English style pseudocode that follows the steps above. Pseudocode is not real code; it uses simple words and symbols to describe the logic, making it easy to translate into any programming language later.\n\n```\nBEGIN\n    CREATE empty list called tasks\n    REPEAT               // start of the main loop\n        DISPLAY \"Menu:\"\n        DISPLAY \"1. Add task\"\n        DISPLAY \"2. View tasks\"\n        DISPLAY \"3. Mark task done\"\n        DISPLAY \"4. Exit\"\n        READ choice\n\n        IF choice == 1 THEN\n            DISPLAY \"Enter task description:\"\n            READ description\n            APPEND (description, NOT_DONE) TO tasks\n            DISPLAY \"Task added.\"\n        ELSE IF choice == 2 THEN\n            IF tasks IS EMPTY THEN\n                DISPLAY \"No tasks yet.\"\n            ELSE\n                FOR each task IN tasks WITH index i DO\n                    DISPLAY i, task.description, task.status\n                END FOR\n            END IF\n        ELSE IF choice == 3 THEN\n            DISPLAY \"Enter task number to mark done:\"\n            READ number\n            IF number IS VALID INDEX IN tasks THEN\n                SET tasks[number].status = DONE\n                DISPLAY \"Task marked as done.\"\n            ELSE\n                DISPLAY \"Invalid number.\"\n            END IF\n        ELSE IF choice == 4 THEN\n            DISPLAY \"Goodbye!\"\n            EXIT REPEAT          // leave the loop\n        ELSE\n            DISPLAY \"Please choose 1‑4.\"\n        END IF\n    UNTIL false               // loop runs until we EXIT\nEND\n```\n\n### Flowchart description (text version)\n\n```\n[Start] → [Show Menu] → [Get Choice] → ──►[Choice = 1?]─Yes─►[Add Task]─┐\n                     │                         │                     │\n                     │                         No                     │\n                     ▼                         ▼                     ▼\n                [Choice = 2?]─Yes─►[View Tasks]   [Choice = 3?]─Yes─►[Mark Done]\n                     │                         │                     │\n                     No                        No                    No\n                     ▼                         ▼                     ▼\n                [Choice = 4?]─Yes─►[Exit]   [Invalid?]─Yes─►[Show Error]←─┘\n                     │\n                     No\n                     ▼\n                [Show Error] → back to [Show Menu]\n```\n\n> **Note:** A **loop** repeats a set of steps until a condition tells it to stop. In this algorithm the loop continues until the user selects option 4.\n\n> **In daily life:** When you wash dishes, you repeat “rinse → scrub → rinse” for each plate until all plates are clean. The “repeat until no plates left” part is exactly what a loop does in a program.\n\n> **Common mistake:** Forgetting to return to the menu after an action. If you omit the step that jumps back to the start of the loop, the program will finish after the first task and the user cannot do anything else.\n\n> **Remember:** Every time you see a decision point (“if the user typed 2…”) you are using a **conditional**. Conditionals let the program choose different paths, just like you decide whether to take an umbrella based on the weather.\n\nWith this algorithm clearly drawn, you now have a solid blueprint. The next lesson will turn each block of pseudocode into real code, one piece at a time.",
+   "code": ""
   },
   {
-   "heading": "Adding Features and Error Handling",
-   "body": "Enhance the game by counting how many attempts the user makes and displaying the total at the end. Wrap the input conversion in a try‑except block to handle non‑numeric entries gracefully.\n\nWhen an error occurs, inform the user and ask for another guess without crashing the program.",
-   "code": "attempts = 0\nwhile True:\n    try:\n        guess = int(input('Enter your guess (1-100): '))\n    except ValueError:\n        print('Please enter a valid number.')\n        continue\n    attempts += 1\n    if guess < secret:\n        print('Too low!')\n    elif guess > secret:\n        print('Too high!')\n    else:\n        print(f'Correct! You needed {attempts} attempts.')\n        break"
+   "heading": "3. Setting Up the Development Environment",
+   "body": "First, think of the development environment as the **workbench** where you will build your program. Just like a carpenter needs a clean table, tools, and a place to store the wood before starting a project, a programmer needs an IDE (Integrated Development Environment), a folder for the files, and a new file where the code will live. Setting these up correctly saves time later and helps you keep everything organized.\n\n**Step 1 – Open the IDE**  \nAn IDE is a special program that combines a text editor, a compiler/interpreter, and useful tools such as a file explorer and a debugger. If you are using **Visual Studio Code (VS Code)**, double‑click its icon on the desktop or launch it from the start menu. When the window appears, you will see a blank editor area in the middle and a sidebar on the left.\n\n> **Definition:** *IDE* – a software application that provides comprehensive facilities to programmers for writing, testing, and debugging code in one place.\n\n**Step 2 – Create a project folder**  \nA project folder is simply a directory on your computer where all the files for one program are stored. Think of it as a dedicated drawer for a single craft project.  \n\n1. Open your file manager (e.g., Windows Explorer, Finder on macOS).  \n2. Navigate to a location where you keep your school work, such as `Documents/Programming`.  \n3. Right‑click and choose **New > Folder**. Name the folder `MyFirstProject`.  \n4. Inside `MyFirstProject`, create a sub‑folder called `src`. The `src` folder will hold the source code files (the files that contain the actual program text).\n\n**Step 3 – Open the folder in the IDE**  \nIn VS Code, go to **File > Open Folder…**, browse to the `MyFirstProject` folder you just made, and click **Select Folder**. The folder’s name now appears in the left sidebar, and you can see the `src` sub‑folder underneath it. Opening the folder tells the IDE where to look for files and where to save new ones.\n\n**Step 4 – Create a new file**  \nA file is a single document that stores text. In programming, a file that ends with `.py` (for Python) or `.js` (for JavaScript) is called a *source file*.  \n\n1. In the sidebar, right‑click the `src` folder.  \n2. Choose **New File**.  \n3. Type `main.py` and press **Enter**. The new file opens in the editor area, ready for you to type code.\n\n> **In daily life:** Creating a new file is like opening a fresh notebook page before you start writing a story. The page is empty, but you can add a title and notes to remind yourself what the story will be about.\n\n**Step 5 – Add a comment describing the project purpose**  \nA comment is a line of text that the computer ignores when it runs the program. Comments are only for humans, to explain what the code does. In Python, a comment starts with the `#` character.\n\nAt the very top of `main.py`, type:\n\n```python\n# MyFirstProject: a simple program that greets the user and shows the current date.\n```\n\nYou have now documented the purpose of the project. Later, if you or a classmate open the file, the comment will instantly tell you what the program is meant to do.\n\n> **Remember:** Always write a short comment at the start of each file. It acts like a label on a drawer, making it easy to find the right piece of code later.\n\n**Step 6 – Save the file**  \nPress **Ctrl + S** (or **Cmd + S** on a Mac) to save. The IDE writes the text you typed to the `main.py` file on disk. Saving frequently prevents loss of work if the computer crashes.\n\n**Step 7 – Verify the setup**  \nTo make sure everything is ready, run a tiny test. In the terminal pane of VS Code (open it with **View > Terminal**), type:\n\n```bash\npython src/main.py\n```\n\nSince the file only contains a comment, nothing will happen, but you should see no error messages. That means the IDE can find the file and the Python interpreter can run it.\n\n> **Common mistake:** Forgetting to open the project folder in the IDE. If you create a file without the folder open, the IDE may save it somewhere else, and later you won’t see it inside `MyFirstProject`. Always double‑check the sidebar to confirm the correct folder is displayed.\n\nYou are now ready to start writing real code inside `main.py`. With the IDE open, the project folder organized, and a clear comment at the top, you have a solid foundation for the rest of the lesson.",
+   "code": ""
   },
   {
-   "heading": "Testing and Debugging",
-   "body": "Run the program several times to check all paths: correct guess on first try, too low, too high, and invalid input. Use print statements or a debugger to verify that the attempt counter updates correctly.\n\nIf a bug appears, read the error message, locate the line, and fix the logic. Remember to test edge cases like guessing 1 or 100.",
+   "heading": "4. Writing the Code Step‑by‑Step",
+   "body": "We will build the program together, one tiny piece at a time.  \nImagine we are writing a simple “grade calculator”. The user tells us the score they earned on a test, the program checks that the score is between 0 and 100, then prints the corresponding letter grade.  \n\n---\n\n**Step 1 – Declare the variables**  \nA *variable* is a named box that stores a value while the program runs.  \n```python\n# variables for the numeric score and the letter grade\nscore = 0          # integer, will hold the number the user types\nletter = \"\"        # string, will hold 'A', 'B', … 'F'\n```\n> **Definition:** *Variable* – a named storage location in a program that can hold data which may change while the program runs.  \n\nWe give each variable a clear name (`score`, `letter`) so anyone reading the code knows what the box is for.  \n\n---\n\n**Step 2 – Read user input**  \n*Input* means data that comes from the person using the program. In Python we use `input()` to ask for it, and `int()` to turn the text into a number.  \n```python\n# ask the user for their test score\nscore_input = input(\"Enter your test score (0‑100): \")\nscore = int(score_input)   # convert the text to an integer\n```\nWhy convert? `input()` always returns a *string* (text). Arithmetic and comparisons need numbers, so we change the type.  \n\n---\n\n**Step 3 – Validate the score with an if‑else block**  \nWe must make sure the entered number is sensible. An *if‑else* statement lets the program choose one of two paths depending on a condition.  \n```python\n# check that the score is within the allowed range\nif 0 <= score <= 100:\n    # the score is valid, we can continue\n    pass\nelse:\n    # the score is out of range – tell the user and stop\n    print(\"Error: score must be between 0 and 100.\")\n    exit()          # end the program early\n```\nThe condition `0 <= score <= 100` reads “score is greater than or equal to 0 **and** less than or equal to 100”.  \n\n> **In daily life:** Think of a school gate that only lets children aged 5‑12 enter. The gate checks the age; if it’s outside the range, the child is turned away.  \n\n---\n\n**Step 4 – Perform the calculation (determine the letter grade)**  \nNow we translate the numeric score into a letter. This is a series of *elif* (else‑if) checks.  \n```python\nif score >= 90:\n    letter = \"A\"\nelif score >= 80:\n    letter = \"B\"\nelif score >= 70:\n    letter = \"C\"\nelif score >= 60:\n    letter = \"D\"\nelse:\n    letter = \"F\"\n```\nEach comparison uses `>=` meaning “greater than or **or equal to**”. The first true condition stops the chain, so the highest possible grade is chosen.  \n\n---\n\n**Step 5 – Display the result**  \n*Output* means showing information back to the user.  \n```python\nprint(f\"Your score of {score} corresponds to a grade of {letter}.\")\n```\nThe `f` before the string creates an *f‑string*, allowing us to embed variable values directly inside the text.  \n\n---\n\n**Step 6 – Put it all together**  \nHere is the complete program with comments that explain each line.  \n```python\n# Grade Calculator – step‑by‑step implementation\n\n# 1. Declare variables\nscore = 0\nletter = \"\"\n\n# 2. Read input from the user\nscore_input = input(\"Enter your test score (0‑100): \")\nscore = int(score_input)   # convert text to integer\n\n# 3. Validate the input\nif 0 <= score <= 100:\n    # 4. Determine the letter grade\n    if score >= 90:\n        letter = \"A\"\n    elif score >= 80:\n        letter = \"B\"\n    elif score >= 70:\n        letter = \"C\"\n    elif score >= 60:\n        letter = \"D\"\n    else:\n        letter = \"F\"\n\n    # 5. Show the result\n    print(f\"Your score of {score} corresponds to a grade of {letter}.\")\nelse:\n    # input was not in the allowed range\n    print(\"Error: score must be between 0 and 100.\")\n    exit()\n```\n> **Remember:** Clear names (`score`, `letter`) and comments make code easier to read and maintain.  \n\n---\n\n**Why this matters**  \nBreaking a program into small, named sections lets us test each part separately. If the program crashes, we can look at the most recent step to find the bug. This disciplined approach is the foundation of reliable software development.  \n\n> **Common mistake:** Forgetting to convert the input string to an integer. The program will then try to compare a string with numbers, causing a runtime error.  \n\nNow you have a complete, well‑commented program that follows a logical flow from input to output. Try changing the grade thresholds or adding a second test score – the same step‑by‑step pattern will guide you.",
+   "code": ""
+  },
+  {
+   "heading": "5. Testing and Debugging",
+   "body": "When you have finished writing the code for your small project, the next important step is **testing** – running the program to see whether it behaves the way you expect – and **debugging**, which means finding and fixing any mistakes (bugs) that appear.\n\n### Why testing matters  \nThink of a recipe you are trying for the first time. After you mix the ingredients, you taste the dish. If it is too salty, you add a little water; if it is under‑cooked, you leave it on the heat a bit longer. Testing a program is the same idea: you give it some data (the “ingredients”), watch what it prints or returns (the “taste”), and then decide whether anything needs to be changed.\n\n### Running the program with different inputs  \nYour program should work not only for the example you used while writing it, but for many possible inputs. For a simple calculator that adds two numbers, try these cases:\n\n1. Positive numbers: `3` and `5` → expected result `8`  \n2. Zero and a number: `0` and `7` → expected result `7`  \n3. Negative numbers: `-4` and `-6` → expected result `-10`  \n4. A positive and a negative number: `9` and `-2` → expected result `7`\n\nWrite down the **expected output** (what you think should appear) before you run the program. Then run the program and note the **actual output** (what really appears). If the two match for every test case, your code is likely correct for those situations.\n\n### Observing expected vs. actual output  \nCreate a small table in your notebook or on a piece of paper:\n\n| Test # | Input A | Input B | Expected | Actual |\n|-------|---------|---------|----------|--------|\n| 1     | 3       | 5       | 8        | 8      |\n| 2     | 0       | 7       | 7        | 7      |\n| 3     | -4      | -6      | -10      | -10    |\n| 4     | 9       | -2      | 7        | 6      |\n\nWhen you see a mismatch (like the last row), you know there is a bug that needs attention.\n\n> **Note:** *A bug is any part of the program that makes it produce the wrong result, crash, or behave strangely.*\n\n### Print‑statement debugging  \nOne of the simplest ways to locate a bug is to insert `print` statements that show the values of variables at key moments. Suppose the last test gave `6` instead of `7`. You might add:\n\n```python\nprint(\"A =\", a)\nprint(\"B =\", b)\nprint(\"Sum =\", a + b)\n```\n\nRun the program again and watch the console. If the printed sum is `6`, you know the error is in the addition line. If the printed values of `a` and `b` are correct, the problem is likely elsewhere (perhaps you accidentally changed a variable later).\n\n> **Definition:** *A `print` statement displays information on the screen while the program is running. It does not change the program’s logic; it only helps you see what is happening inside.*\n\n### Using the IDE’s debugger  \nMost Integrated Development Environments (IDEs) – such as VS Code, PyCharm, or Thonny – have a built‑in **debugger**. A debugger lets you:\n\n1. **Set a breakpoint** – a marker that tells the program to pause execution at a specific line.  \n2. **Step through** the code line by line, watching the values of variables change in real time.  \n3. **Inspect** (look at) any variable’s current value in a side panel.\n\nTo use it, click next to the line number where you suspect the error (this creates a red dot). Then start the program in *debug mode*. When execution stops at the breakpoint, you can hover over `a`, `b`, or any intermediate variable to see its value. If a variable has an unexpected value, you have found the source of the bug.\n\n### Fixing the error  \nOnce you know where the problem is, change the code and run the tests again. Continuing the example, perhaps the addition line mistakenly used subtraction:\n\n```python\n# Wrong\nresult = a - b\n# Correct\nresult = a + b\n```\n\nAfter correcting it, re‑run all four test cases. The table should now show matching expected and actual results.\n\n> **Common mistake:** *Changing the code but forgetting to save the file before running the program again. Always save!*\n\n### When everything works  \nIf every test case passes, you have successfully **validated** your program for the inputs you tried. Validation does not guarantee the program is perfect, but it gives you confidence that the core logic works.\n\n> **Remember:** *Testing is an ongoing habit. Even after you finish a project, run a few more “edge‑case” tests – inputs that are unusual, like very large numbers or empty strings – to be sure your program is robust.*\n\n### Quick checklist for testing and debugging  \n\n- Write down expected results before you run the program.  \n- Test with a variety of inputs, including normal, boundary, and unusual cases.  \n- Compare expected vs. actual output in a table.  \n- Use `print` statements to reveal variable values when needed.  \n- If your IDE has a debugger, set breakpoints and step through the code.  \n- Fix the identified bug, save the file, and re‑run all tests.  \n\nBy following these steps, you turn a mysterious program that sometimes misbehaves into a well‑understood piece of software that you can trust. The same disciplined approach will help you in every future coding project.",
+   "code": ""
+  },
+  {
+   "heading": "6. Adding a Simple Function",
+   "body": "Imagine you have written the same few lines of code many times – for example, a piece that asks the user to type a number and checks that the input really is a number. Every time you copy‑paste those lines, you risk making a tiny mistake, and if you later decide to change the way you check the input you have to edit every copy.  \n\n> **Definition:** A *function* is a named block of code that can be run (called) whenever you need it.  \n> **Note:** Functions can receive *parameters* (values you give them) and can *return* a result (a value they send back).\n\nThink of a function like a kitchen appliance, such as a blender. You put ingredients (parameters) into the blender, press the button, and it gives you a smooth drink (the returned value). You don’t have to rebuild the blender each time you want a smoothie; you just use the same appliance over and over.\n\n### Step 1 – Write the function skeleton\n\nIn Python, a function starts with the keyword `def`, followed by the function name, parentheses containing any parameters, and a colon. The body of the function is indented underneath.\n\n```python\ndef get_number(prompt):\n    \"\"\"Ask the user for a number and keep asking until a valid integer is entered.\"\"\"\n    while True:\n        user_input = input(prompt)\n        if user_input.isdigit():\n            return int(user_input)          # return the integer and exit the function\n        else:\n            print(\"Please enter a valid whole number.\")\n```\n\n- `def` tells Python we are defining a new function.  \n- `get_number` is the name we chose; you can call it anything that makes sense.  \n- `prompt` inside the parentheses is a *parameter*: a piece of information the function needs from the caller.  \n- The triple‑quoted text `\"\"\"…\"\"\"` is a *docstring* – a short description that helps other programmers (and yourself) understand what the function does.\n\n### Step 2 – How parameters work\n\nWhen you later call `get_number(\"Enter your age: \")`, the string `\"Enter your age: \"` is passed into the function and becomes the local variable `prompt`. Inside the function, `input(prompt)` shows exactly that text to the user.  \n\n> **In daily life:** Passing a parameter is like handing a recipe card to a friend. The card (parameter) tells the friend which ingredients to use.\n\nYou can add more parameters if you need extra information. For example, you might want to limit the range of acceptable numbers:\n\n```python\ndef get_number(prompt, min_val=None, max_val=None):\n    while True:\n        user_input = input(prompt)\n        if user_input.isdigit():\n            number = int(user_input)\n            if (min_val is None or number >= min_val) and (max_val is None or number <= max_val):\n                return number\n            else:\n                print(f\"Number must be between {min_val} and {max_val}.\")\n        else:\n            print(\"Please enter a valid whole number.\")\n```\n\nHere `min_val` and `max_val` are optional parameters; they default to `None` (meaning “no limit”) if you don’t supply them.\n\n### Step 3 – Using the returned value\n\nA function can *return* a value with the `return` statement. The code that called the function receives that value and can store it in a variable:\n\n```python\nage = get_number(\"Enter your age: \")\nprint(f\"You are {age} years old.\")\n```\n\nThe variable `age` now holds the integer that the function gave back. You can use it just like any other number.\n\n### Step 4 – Replace repetitive code\n\nSuppose earlier in your project you had this block three times:\n\n```python\nwhile True:\n    n = input(\"Enter a number: \")\n    if n.isdigit():\n        n = int(n)\n        break\n    else:\n        print(\"Invalid input.\")\n```\n\nReplace each block with a single call:\n\n```python\nn = get_number(\"Enter a number: \")\n```\n\nNow the whole program is shorter, easier to read, and any future change to the validation logic only needs to be made inside `get_number`.\n\n> **Common mistake:** Forgetting to `return` a value. If you omit `return`, the function finishes with the default value `None`, which can cause confusing errors later.\n\n### Step 5 – Test the new function\n\nRun your program and try several inputs:\n\n- A correct number like `42` – the function should accept it.  \n- A word like `hello` – the function should ask again.  \n- A number outside a specified range (if you used `min_val`/`max_val`) – it should show the range message.\n\nIf any case does not behave as expected, add a `print` statement inside the function to see what values it is receiving. This is called *debugging*.\n\n> **Remember:** Functions keep your code DRY – *Don’t Repeat Yourself*. One well‑written function can replace many copies of the same code, making your program more reliable and easier to maintain.",
+   "code": ""
+  },
+  {
+   "heading": "7. Final Review and Next Steps",
+   "body": "When you finish writing a small program, the last thing to do is to look at the whole thing as one piece. This is called a **final review**. Think of it like checking a finished puzzle: you turn the picture over, make sure every piece is in the right place, and then decide if you want to add more pieces later.\n\n**Step 1 – Run the whole program once more**  \nStart the program from the very beginning, just as a user would. Watch the output and compare it with what you expected. If the program prints a greeting, asks for a number, calculates a result, and shows the answer, then each part has worked together correctly.\n\n> **Note:** A program that runs without errors but gives the wrong answer is still *logically* incorrect. Always check both the *syntax* (no red squiggles) and the *logic* (the right result).\n\n**Step 2 – Match each part to a concept you have learned**  \n\n| Part of the program | Concept you used |\n|---------------------|------------------|\n| Getting input from the user | `input()` function, type conversion |\n| Repeating a task | `for` or `while` loop |\n| Making a decision | `if … else` statement |\n| Storing temporary data | variables |\n| Breaking the problem into smaller steps | functions (if you added one) |\n\nRead each line of code and ask yourself, “Which concept does this line illustrate?” Write a short note next to it, either in a comment or on a separate sheet of paper. This reinforces the connection between theory and practice.\n\n**Step 3 – Clean up the code**  \n- Remove any print statements you added only for debugging.  \n- Give every variable a clear name (e.g., `total_score` instead of `x`).  \n- Add comments that explain *why* you are doing something, not just *what* you are doing.  \n\n> **Common mistake:** Leaving debugging prints in the final version makes the program noisy and can confuse users.\n\n**Step 4 – Think about extensions**  \nNow that the basic version works, ask yourself: *What could make this program more useful or fun?* Here are three simple ideas that build on the concepts you already know.\n\n1. **Save results to a file** – Instead of only showing the answer on the screen, write it to a text file so the user can look at it later. You would use the `open()` function with mode `\"w\"` (write) and the `write()` method.  \n   $$\\text{file\\_handle.write(str(result) + \"\\n\")}$$  \n\n2. **Add a menu** – Present a list of actions (e.g., “1 = calculate, 2 = show history, 3 = quit”) and let the user choose. This introduces another `while` loop that keeps the program running until the user selects “quit”.  \n\n3. **Create a reusable function** – If you notice that the same calculation appears in several places, wrap it in a function like `def compute_score(data):`. Then call that function whenever you need the result.  \n\n> **Definition:** *Function* – a named block of code that can be run many times with different inputs, returning a result.\n\n**Step 5 – Share and reflect**  \nProgramming is a social activity. Show your finished program to a classmate, a friend, or even a family member. Ask them to try it and tell you what they liked or found confusing. Their feedback can point out hidden bugs or inspire new features.\n\nWhen you explain your project, use the same structure you used for the review:\n\n1. What the program does.  \n2. Which concepts you applied.  \n3. Any challenges you faced and how you solved them.  \n4. One idea for the next version.\n\nWriting this short “project story” helps you solidify your understanding and prepares you for future, larger projects.\n\n> **Remember:** A good programmer never stops looking for ways to improve code. Even tiny changes—renaming a variable, adding a comment, or handling an extra edge case—make the program clearer and more reliable.\n\n**Next steps for you**\n\n- Pick one of the extension ideas and try to implement it this week.  \n- Keep a simple log (a notebook or a digital file) where you record what you added, what worked, and what still needs work.  \n- Join an online community or a school coding club and post your project. Seeing others’ projects will give you fresh ideas and motivate you to keep learning.\n\nBy reviewing, connecting concepts, cleaning up, and planning extensions, you turn a single assignment into a stepping stone toward larger, more creative software. Keep building, keep sharing, and enjoy the process of turning ideas into working code!",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Hello‑World Console App",
+   "given": "Write a program that prints “Hello, World!” on the screen.",
+   "steps": [
+    {
+     "label": "Plan",
+     "text": "Decide the program will have one line of output, no input needed."
+    },
+    {
+     "label": "Algorithm",
+     "text": "Sequence: start → print message → end."
+    },
+    {
+     "label": "Environment",
+     "text": "Open a text editor, create a file hello.py, and run with Python."
+    },
+    {
+     "label": "Code",
+     "text": "Write `print(\"Hello, World!\")` and save."
+    },
+    {
+     "label": "Test",
+     "text": "Execute the file; check that exactly “Hello, World!” appears."
+    }
+   ],
+   "answer": "The program runs successfully and displays **Hello, World!** on the console."
+  },
+  {
+   "level": "Medium",
+   "title": "Temperature Converter GUI",
+   "given": "Build a small graphical app that converts Celsius to Fahrenheit.",
+   "steps": [
+    {
+     "label": "Plan",
+     "text": "Identify inputs (Celsius number) and output (Fahrenheit number)."
+    },
+    {
+     "label": "Algorithm",
+     "text": "1. Read Celsius, 2. Compute F = C × 9/5 + 32, 3. Show result."
+    },
+    {
+     "label": "Environment",
+     "text": "Use Python with Tkinter; create a new .py file."
+    },
+    {
+     "label": "Code",
+     "text": "Write code to create a window, entry box, button, and label; link button to conversion function."
+    },
+    {
+     "label": "Test",
+     "text": "Enter 0, 100, -40; verify outputs 32, 212, -40 respectively."
+    }
+   ],
+   "answer": "The GUI correctly converts any entered Celsius temperature to Fahrenheit."
+  },
+  {
+   "level": "Hard",
+   "title": "Simple To‑Do List with File Save",
+   "given": "Create a command‑line to‑do list program that lets the user add, view, and delete tasks, and saves the list to a file between runs.",
+   "steps": [
+    {
+     "label": "Plan",
+     "text": "Define features: add task, list tasks, remove task by number, load/save file."
+    },
+    {
+     "label": "Algorithm",
+     "text": "Loop: display menu → get choice → perform action → repeat until exit; on start load file, on exit save file."
+    },
+    {
+     "label": "Environment",
+     "text": "Use Python; open a new project folder, create todo.py."
+    },
+    {
+     "label": "Code",
+     "text": "Implement functions: load_tasks(), save_tasks(), add_task(), list_tasks(), delete_task(); write main loop handling user input."
+    },
+    {
+     "label": "Test",
+     "text": "Run program, add three tasks, list them, delete the second, exit, restart program, and confirm remaining tasks persist."
+    }
+   ],
+   "answer": "The program provides all listed functionalities and reliably stores the to‑do list in a file across sessions."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "You want to create a simple “Hello, World!” program in Python as the first step of your project. What are the exact lines of code you need to write, and how do you run it from the command line?",
+   "a": "Step 1: Open a text editor and type the following line:\n```python\nprint(\"Hello, World!\")\n```\nStep 2: Save the file as `hello.py` in a folder you can access from the terminal.\nStep 3: Open a command‑line window (Command Prompt, PowerShell, Terminal, etc.).\nStep 4: Navigate to the folder containing `hello.py` using `cd path/to/folder`.\nStep 5: Run the program by typing `python hello.py` (or `python3 hello.py` if your system distinguishes Python 3).\nStep 6: Press Enter. The output should be:\n```\nHello, World!\n```"
+  },
+  {
+   "level": "Easy",
+   "q": "In your project you need to store a list of five student names and then print each name on a separate line. Write the Python code that creates the list and prints the names using a loop.",
+   "a": "Step 1: Create the list:\n```python\nstudents = [\"Alice\", \"Bob\", \"Charlie\", \"Diana\", \"Ethan\"]\n```\nStep 2: Use a `for` loop to iterate over the list and print each name:\n```python\nfor name in students:\nprint(name)\n```\nStep 3: When the program runs, the output will be:\n```\nAlice\nBob\nCharlie\nDiana\nEthan\n```"
+  },
+  {
+   "level": "Medium",
+   "q": "Your small project is a calculator that adds two numbers entered by the user. Write a Python program that (1) asks the user for the first number, (2) asks for the second number, (3) converts the inputs to integers, (4) adds them, and (5) prints the result in the format “Result: X”. Include error handling for non‑numeric input.",
+   "a": "Step 1: Prompt for the first number and store the input:\n```python\nfirst = input(\"Enter the first number: \")\n```\nStep 2: Prompt for the second number:\n```python\nsecond = input(\"Enter the second number: \")\n```\nStep 3: Convert inputs to integers inside a `try` block to catch errors:\n```python\ntry:\nnum1 = int(first)\nnum2 = int(second)\n```\nStep 4: Perform the addition:\n```python\ntotal = num1 + num2\n```\nStep 5: Print the result:\n```python\nprint(\"Result:\", total)\n```\nStep 6: Add an `except` clause to handle non‑numeric input:\n```python\nexcept ValueError:\nprint(\"Error: Please enter valid integers.\")\n```\nFull program:\n```python\nfirst = input(\"Enter the first number: \")\nsecond = input(\"Enter the second number: \")\ntry:\nnum1 = int(first)\nnum2 = int(second)\ntotal = num1 + num2\nprint(\"Result:\", total)\nexcept ValueError:\nprint(\"Error: Please enter valid integers.\")\n```\nRunning the program with inputs `7` and `5` prints `Result: 12`. If a user types “seven”, the program prints the error message."
+  },
+  {
+   "level": "Medium",
+   "q": "You need to add a function `is_even(n)` to your project that returns `True` if `n` is an even integer and `False` otherwise. Show how to define this function, call it for numbers 1 through 5, and print each result in the format “n is even: True/False”.",
+   "a": "Step 1: Define the function:\n```python\ndef is_even(n):\nreturn n % 2 == 0\n```\nStep 2: Loop over the numbers 1 to 5, call the function, and print the result:\n```python\nfor i in range(1, 6):\nresult = is_even(i)\nprint(f\"{i} is even: {result}\")\n```\nStep 3: Explanation of each line:\n- `def is_even(n):` starts the function definition.\n- `n % 2` computes the remainder when `n` is divided by 2.\n- `== 0` checks if the remainder is zero (meaning even).\n- The function returns `True` or `False`.\n- The `for` loop iterates `i` through 1,2,3,4,5.\n- `f\"{i} is even: {result}\"` creates the required output string.\nOutput when the code runs:\n```\n1 is even: False\n2 is even: True\n3 is even: False\n4 is even: True\n5 is even: False\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "Your project now includes a small text‑based game where the player must guess a secret number between 1 and 100. Write a complete Python program that (1) randomly selects the secret number, (2) repeatedly asks the player for a guess, (3) tells the player whether the guess is too low, too high, or correct, (4) counts the number of attempts, and (5) after a correct guess, prints “Congratulations! You guessed it in X attempts.” Include input validation to ensure the guess is an integer within the range.",
+   "a": "Step 1: Import the `random` module:\n```python\nimport random\n```\nStep 2: Generate the secret number:\n```python\nsecret = random.randint(1, 100)\n```\nStep 3: Initialise an attempt counter:\n```python\nattempts = 0\n```\nStep 4: Start a loop that continues until the correct guess:\n```python\nwhile True:\nguess_input = input(\"Enter your guess (1‑100): \")\n```\nStep 5: Validate the input – it must be an integer in the correct range:\n```python\ntry:\nguess = int(guess_input)\nif not 1 <= guess <= 100:\nprint(\"Please enter a number between 1 and 100.\")\ncontinue\nexcept ValueError:\nprint(\"Invalid input. Please enter an integer.\")\ncontinue\n```\nStep 6: Increment the attempt counter:\n```python\nattempts += 1\n```\nStep 7: Compare the guess with the secret number and give feedback:\n```python\nif guess < secret:\nprint(\"Too low!\")\nelif guess > secret:\nprint(\"Too high!\")\nelse:\nprint(f\"Congratulations! You guessed it in {attempts} attempts.\")\nbreak\n```\nFull program:\n```python\nimport random\nsecret = random.randint(1, 100)\nattempts = 0\nwhile True:\nguess_input = input(\"Enter your guess (1‑100): \")\ntry:\nguess = int(guess_input)\nif not 1 <= guess <= 100:\nprint(\"Please enter a number between 1 and 100.\")\ncontinue\nexcept ValueError:\nprint(\"Invalid input. Please enter an integer.\")\ncontinue\nattempts += 1\nif guess < secret:\nprint(\"Too low!\")\nelif guess > secret:\nprint(\"Too high!\")\nelse:\nprint(f\"Congratulations! You guessed it in {attempts} attempts.\")\nbreak\n```\nWhen run, the program guides the player until the correct number is guessed and then reports the attempt count."
+  },
+  {
+   "level": "Hard",
+   "q": "Extend the previous guessing‑game program by adding a function `play_again()` that asks the user “Play again? (y/n)” after a successful game. The function should return `True` if the user types ‘y’ (case‑insensitive) and `False` for ‘n’. Modify the main loop so that the whole game restarts automatically when `play_again()` returns `True`. Show the complete revised code with comments.",
+   "a": "Step 1: Define the helper function:\n```python\ndef play_again():\n\"\"\"Ask the player if they want to play another round.\"\"\"\nwhile True:\nanswer = input(\"Play again? (y/n): \").strip().lower()\nif answer == 'y':\nreturn True\nelif answer == 'n':\nreturn False\nelse:\nprint(\"Please enter 'y' or 'n'.\")\n```\nStep 2: Put the original game logic inside a function `game_round()` so it can be called repeatedly:\n```python\ndef game_round():\nimport random\nsecret = random.randint(1, 100)\nattempts = 0\nwhile True:\nguess_input = input(\"Enter your guess (1‑100): \")\ntry:\nguess = int(guess_input)\nif not 1 <= guess <= 100:\nprint(\"Please enter a number between 1 and 100.\")\ncontinue\nexcept ValueError:\nprint(\"Invalid input. Please enter an integer.\")\ncontinue\nattempts += 1\nif guess < secret:\nprint(\"Too low!\")\nelif guess > secret:\nprint(\"Too high!\")\nelse:\nprint(f\"Congratulations! You guessed it in {attempts} attempts.\")\nbreak\n```\nStep 3: Create the main control loop that runs `game_round()` and then checks `play_again()`:\n```python\ndef main():\nwhile True:\ngame_round()               # play one full game\nif not play_again():       # ask if the user wants another\nprint(\"Thanks for playing!\")\nbreak                  # exit the program\n```\nStep 4: Add the standard Python entry point:\n```python\nif __name__ == \"__main__\":\nmain()\n```\nFull revised program with comments:\n```python\ndef play_again():\n\"\"\"Ask the player if they want to play another round.\"\"\"\nwhile True:\nanswer = input(\"Play again? (y/n): \").strip().lower()\nif answer == 'y':\nreturn True\nelif answer == 'n':\nreturn False\nelse:\nprint(\"Please enter 'y' or 'n'.\")\ndef game_round():\n\"\"\"Run one round of the guessing game.\"\"\"\nimport random\nsecret = random.randint(1, 100)\nattempts = 0\nwhile True:\nguess_input = input(\"Enter your guess (1‑100): \")\ntry:\nguess = int(guess_input)\nif not 1 <= guess <= 100:\nprint(\"Please enter a number between 1 and 100.\")\ncontinue\nexcept ValueError:\nprint(\"Invalid input. Please enter an integer.\")\ncontinue\nattempts += 1\nif guess < secret:\nprint(\"Too low!\")\nelif guess > secret:\nprint(\"Too high!\")\nelse:\nprint(f\"Congratulations! You guessed it in {attempts} attempts.\")\nbreak\ndef main():\n\"\"\"Control the flow of the whole program.\"\"\"\nwhile True:\ngame_round()               # play one game\nif not play_again():       # ask to play again\nprint(\"Thanks for playing!\")\nbreak                  # stop the program\nif __name__ == \"__main__\":\nmain()\n```\nThe program now repeats the guessing game as many times as the player chooses, handling all input validation and providing clear prompts."
+  }
+ ],
+ "recap": "In this lesson you learned how to plan, design, and build a small personal‑budget calculator program from start to finish. You saw how to write requirements, sketch an algorithm, set up a coding environment, and write code step‑by‑step. The lesson also covered testing, debugging, adding a reusable function, and doing a final review of the whole project.",
  "key_terms": [
   {
+   "term": "Requirement",
+   "meaning": "A statement describing something the program must be able to do."
+  },
+  {
+   "term": "Algorithm",
+   "meaning": "A precise, ordered list of actions that solves a problem."
+  },
+  {
+   "term": "IDE",
+   "meaning": "Integrated Development Environment, a tool that combines a code editor, debugger, and other utilities."
+  },
+  {
    "term": "Variable",
-   "meaning": "A named storage location that holds a value which can change during program execution."
+   "meaning": "A named storage location that holds data which can change while the program runs."
   },
   {
-   "term": "Loop",
-   "meaning": "A control structure that repeats a block of code while a condition remains true."
-  },
-  {
-   "term": "Error handling",
-   "meaning": "Techniques, such as try‑except, used to manage runtime errors without stopping the program."
+   "term": "Function",
+   "meaning": "A reusable block of code that can be called with parameters and may return a value."
   },
   {
    "term": "Debugging",
-   "meaning": "The process of finding and fixing mistakes in code."
+   "meaning": "The process of finding and fixing errors (bugs) in a program."
   },
   {
-   "term": "Random number",
-   "meaning": "A number generated by a program that appears unpredictable, often used in games."
+   "term": "Testing",
+   "meaning": "Running a program with various inputs to check that it works correctly."
+  },
+  {
+   "term": "Final Review",
+   "meaning": "A systematic check of the whole program to ensure all parts work together and meet the requirements."
   }
  ],
  "quiz": [
   {
-   "q": "Which Python statement is used to repeat actions until a condition is met?",
+   "q": "What is the first step when starting a new programming project?",
    "options": [
-    "for",
-    "while",
-    "if",
-    "def"
+    "Write the code immediately",
+    "Define the requirements",
+    "Run the debugger",
+    "Create a function"
    ],
    "answer": 1,
-   "why": "The while loop continues as long as its condition is true."
+   "why": "Defining requirements tells you what the program must do before any code is written."
   },
   {
-   "q": "What does the try‑except block help you avoid?",
+   "q": "Why do we design an algorithm before coding?",
    "options": [
-    "Slow performance",
-    "Syntax errors",
-    "Runtime crashes",
-    "Missing libraries"
-   ],
-   "answer": 2,
-   "why": "It catches runtime errors so the program can continue running."
-  },
-  {
-   "q": "In the Guess the Number game, what variable should store the number of attempts?",
-   "options": [
-    "secret",
-    "guess",
-    "attempts",
-    "counter"
-   ],
-   "answer": 2,
-   "why": "The attempts variable is incremented each time the user makes a guess."
-  },
-  {
-   "q": "Which module provides the function randint() used to generate random numbers?",
-   "options": [
-    "math",
-    "random",
-    "sys",
-    "os"
+    "To avoid syntax errors",
+    "To have a clear step‑by‑step plan",
+    "To test the program faster",
+    "To choose a programming language"
    ],
    "answer": 1,
-   "why": "randint() is part of Python's random module."
+   "why": "An algorithm provides a clear roadmap, preventing missed steps and tangled logic."
+  },
+  {
+   "q": "In an IDE, which component helps you find mistakes in your code?",
+   "options": [
+    "File explorer",
+    "Debugger",
+    "Terminal",
+    "Version control"
+   ],
+   "answer": 1,
+   "why": "The debugger lets you step through code and locate errors."
+  },
+  {
+   "q": "What does a variable represent?",
+   "options": [
+    "A permanent file on disk",
+    "A named box that stores a value",
+    "A comment for the programmer",
+    "A function that runs automatically"
+   ],
+   "answer": 1,
+   "why": "Variables are named storage locations that hold data while the program runs."
+  },
+  {
+   "q": "Which of the following best describes a function?",
+   "options": [
+    "A loop that repeats forever",
+    "A reusable block of code with optional inputs and outputs",
+    "A type of variable that cannot change",
+    "A way to format text on the screen"
+   ],
+   "answer": 1,
+   "why": "A function is a named, reusable piece of code that can accept parameters and return results."
+  },
+  {
+   "q": "During testing, you notice the program gives the wrong answer but no error messages. What type of problem is this?",
+   "options": [
+    "Syntax error",
+    "Logical error",
+    "Runtime error",
+    "Compilation error"
+   ],
+   "answer": 1,
+   "why": "When the program runs without crashing but produces incorrect results, it is a logical error."
   }
  ],
  "flashcards": [
   {
-   "front": "What is a loop?",
-   "back": "A structure that repeats code while a condition is true."
+   "front": "Requirement",
+   "back": "A statement of something the program must be able to accomplish."
   },
   {
-   "front": "How do you handle invalid user input in Python?",
-   "back": "Use a try‑except block around the conversion."
+   "front": "Algorithm",
+   "back": "A step‑by‑step list of actions that tells a computer how to solve a problem."
   },
   {
-   "front": "What function generates a random integer between 1 and 100?",
-   "back": "random.randint(1, 100)"
+   "front": "IDE",
+   "back": "Software that combines a code editor, debugger, and other tools for writing programs."
   },
   {
-   "front": "What does the break statement do inside a loop?",
-   "back": "It exits the loop immediately."
+   "front": "Variable",
+   "back": "A named storage location that can hold different data values while a program runs."
   },
   {
-   "front": "Why is testing important before finishing a project?",
-   "back": "It ensures all parts work correctly and catches hidden bugs."
+   "front": "Function",
+   "back": "A reusable block of code that can be called with parameters and may return a value."
+  },
+  {
+   "front": "Debugging",
+   "back": "The process of locating and fixing bugs (errors) in a program."
+  },
+  {
+   "front": "Testing",
+   "back": "Running a program with various inputs to verify it works as expected."
+  },
+  {
+   "front": "Final Review",
+   "back": "A systematic check of the whole program to ensure all parts meet the requirements and work together."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -141,103 +332,155 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l10-error-handling-illustration",
-   "title": "Depicts how the program catches non‑numeric input and asks the user to try again.",
-   "alt": "Depicts how the program catches non‑numeric input and asks the user to try again.",
-   "priority": 6,
-   "picture_title": "Error Handling Illustration",
+   "file": "introduction-to-programming-l10-ide-workspace",
+   "title": "A typical IDE window showing the file explorer, code editor, and console.",
+   "alt": "A typical IDE window showing the file explorer, code editor, and console.",
+   "priority": 7,
+   "picture_title": "IDE Workspace",
    "kind": "illustration",
-   "subject": "A cartoon of a computer screen showing an error message when a letter is entered, with a speech bubble from the program saying “Please enter a number”.",
-   "layout": "Screen in centre with error popup; character representing the program on the right pointing to the screen; labels for 'try‑except' and 'retry'.",
+   "subject": "The screenshot‑style illustration displays a clean workbench for programming: a folder tree on the left, a central code pane with line numbers, and a bottom panel for output or debugging messages.",
+   "layout": "File explorer on the left, code editor in the centre, console panel at the bottom, each area labelled.",
    "labels": [
-    "Invalid input",
-    "Error message",
-    "Retry prompt"
+    "Folder Tree",
+    "Code Editor",
+    "Console Output"
    ],
    "after": 2
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l10-attempt-counter-display",
-   "title": "Shows the final message that tells the user how many guesses were needed.",
-   "alt": "Shows the final message that tells the user how many guesses were needed.",
-   "priority": 5,
-   "picture_title": "Attempt Counter Display",
-   "kind": "illustration",
-   "subject": "A screenshot‑style illustration of the console output after the correct guess, highlighting the line that reports the total number of attempts.",
-   "layout": "Console window centered, with the final line highlighted in a different colour; arrows point to the number of attempts.",
+   "file": "introduction-to-programming-l10-testing-cycle-flowchart",
+   "title": "The repeatable steps of testing, finding bugs, fixing, and retesting.",
+   "alt": "The repeatable steps of testing, finding bugs, fixing, and retesting.",
+   "priority": 8,
+   "picture_title": "Testing Cycle Flowchart",
+   "kind": "labelled diagram",
+   "subject": "A simple flowchart that guides students through the debugging loop: run program → observe result → compare with expected → if wrong, locate bug → fix code → repeat.",
+   "layout": "Boxes arranged left‑to‑right with arrows connecting them in a loop, each box labelled with the step.",
    "labels": [
-    "Correct! You guessed in X attempts"
+    "Run Program",
+    "Observe Result",
+    "Compare",
+    "Locate Bug",
+    "Fix Code",
+    "Repeat"
    ],
-   "after": 3
+   "after": 4
   },
   {
-   "type": "steps",
-   "title": "Main Game Loop",
-   "steps": [
+   "type": "image",
+   "file": "introduction-to-programming-l10-function-call-diagram",
+   "title": "How a main program calls a reusable function with parameters and receives a result.",
+   "alt": "How a main program calls a reusable function with parameters and receives a result.",
+   "priority": 7,
+   "picture_title": "Function Call Diagram",
+   "kind": "illustration",
+   "subject": "A diagram showing a main block that sends a value to a function block, the function processes the value, and returns a result back to the main block.",
+   "layout": "Two rectangles side by side labeled 'Main Program' and 'Function'; arrows go from main to function (parameter) and back (return value).",
+   "labels": [
+    "Main Program",
+    "Function",
+    "Parameter",
+    "Return Value"
+   ],
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Personal Budget Calculator – Main Parts",
+   "items": [
     {
-     "label": "1",
-     "text": "Generate a random secret number"
+     "name": "Income input",
+     "role": "stores monthly earnings"
     },
     {
-     "label": "2",
-     "text": "Ask the user for a guess"
+     "name": "Expense list",
+     "role": "records each spending item"
     },
     {
-     "label": "3",
-     "text": "Compare guess with secret number"
+     "name": "Total expense",
+     "role": "adds all expenses together"
     },
     {
-     "label": "4",
-     "text": "Give feedback (too low, too high, correct)"
-    },
-    {
-     "label": "5",
-     "text": "Repeat until the guess is correct"
+     "name": "Remaining balance",
+     "role": "subtracts total expense from income"
     }
    ],
-   "loop": true,
    "after": 0
   },
   {
-   "type": "compare",
-   "title": "Feedback Options",
-   "left": {
-    "name": "Too Low",
-    "points": [
-     "Guess is smaller than secret",
-     "Tell user \"Too low\""
-    ]
-   },
-   "right": {
-    "name": "Too High",
-    "points": [
-     "Guess is larger than secret",
-     "Tell user \"Too high\""
-    ]
-   },
+   "type": "steps",
+   "title": "Designing the Algorithm",
+   "steps": [
+    {
+     "label": "Define goal",
+     "text": "What should the program achieve?"
+    },
+    {
+     "label": "List inputs",
+     "text": "Identify data the user will provide"
+    },
+    {
+     "label": "Outline steps",
+     "text": "Write each action in order"
+    },
+    {
+     "label": "Check logic",
+     "text": "Make sure steps cover all cases"
+    }
+   ],
+   "loop": false,
    "after": 1
   },
   {
-   "type": "facts",
-   "title": "Game Statistics",
-   "items": [
+   "type": "steps",
+   "title": "Writing the Code – Core Flow",
+   "steps": [
     {
-     "value": "1‑100",
-     "label": "Range of secret number"
+     "label": "Declare variables",
+     "text": "Create boxes for income, expenses, result"
     },
     {
-     "value": "Attempts",
-     "label": "Counted and shown at the end"
+     "label": "Read input",
+     "text": "Ask user for numbers"
     },
     {
-     "value": "Try‑except",
-     "label": "Handles non‑numeric input"
+     "label": "Calculate",
+     "text": "Add expenses and subtract from income"
+    },
+    {
+     "label": "Display output",
+     "text": "Show remaining balance"
     }
    ],
-   "after": 2
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Repeated Code vs. Function",
+   "left": {
+    "name": "Repeated code",
+    "points": [
+     "Copy‑paste same lines",
+     "Harder to maintain",
+     "More chance of mistakes"
+    ]
+   },
+   "right": {
+    "name": "Function",
+    "points": [
+     "Write once, call many times",
+     "Easier to update",
+     "Cleaner, reusable code"
+    ]
+   },
+   "after": 5
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

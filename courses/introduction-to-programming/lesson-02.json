@@ -1,123 +1,302 @@
 {
  "title": "Understanding Algorithms and Flowcharts",
- "summary": "Algorithms are step‑by‑step instructions that solve a problem, while flowcharts are visual diagrams that show those steps. This lesson explains how to design simple algorithms and translate them into clear flowcharts.",
+ "summary": "This lesson introduces algorithms as step‑by‑step problem‑solving instructions and shows how to represent them with flowcharts. Students will learn the symbols, conventions, and how to translate a simple algorithm into a flowchart and back.",
+ "objectives": [
+  "Identify the purpose and components of an algorithm",
+  "List and draw the basic flowchart symbols",
+  "Convert a written algorithm into a flowchart",
+  "Convert a flowchart back into a written algorithm",
+  "Explain why clear algorithms and flowcharts help programmers"
+ ],
+ "prerequisites": "Students should know the definition of a computer program and have basic reading comprehension; no prior coding experience is required.",
+ "why": [
+  "In real life, algorithms are used everywhere—from cooking recipes to navigation apps—so understanding how to break a problem into clear steps is a valuable skill. Flowcharts give a visual map of those steps, making it easier to spot mistakes before writing code.",
+  "For programmers, a well‑written algorithm saves time and reduces bugs. Teams often share flowcharts to communicate ideas, plan projects, and document how a program works, which is essential in school projects and future careers."
+ ],
  "sections": [
   {
    "heading": "What Is an Algorithm?",
-   "body": "An algorithm is a precise list of actions that leads from a problem to a solution. Think of a recipe: it tells you the exact order of ingredients and steps to bake a cake. In programming, algorithms describe how the computer should process data.\n\nAlgorithms must be clear, finite, and unambiguous so a computer can follow them without confusion.",
+   "body": "An **algorithm** is simply a clear, step‑by‑step recipe that tells a computer (or a person) how to solve a particular problem.  \nThink of it as a list of instructions that starts at the first step, follows each step in order, and stops after a limited number of steps. Because the list is *finite*—it has a beginning and an end—it guarantees that the process will finish and give an answer.\n\n> **Definition:** An algorithm is a finite set of ordered steps that, when followed, solves a specific problem.\n\nWhy do we need such a definition?  When we write programs, the computer can only do what we tell it, and it does everything exactly as instructed.  If the instructions are vague, missing, or go on forever, the computer will either give a wrong result or never stop.  By describing a problem as an algorithm, we make sure the solution is **unambiguous** (no confusion about what to do) and **complete** (covers every possible case).\n\n### Everyday comparison: a cooking recipe\n\nImagine you want to bake chocolate chip cookies.  The recipe you read in a cookbook might look like this:\n\n1. Pre‑heat the oven to 180 °C.  \n2. Mix butter and sugar until smooth.  \n3. Add eggs, one at a time, stirring after each.  \n4. Stir in flour, baking soda, and salt.  \n5. Fold in chocolate chips.  \n6. Scoop dough onto a tray.  \n7. Bake for 12 minutes.  \n8. Let cool before eating.\n\nEach line tells you exactly what to do, in the right order, and the list ends after step 8.  If you follow these steps, you will end up with cookies.  This recipe **is** an algorithm: it solves the problem “how to make chocolate chip cookies” using a finite, ordered set of actions.\n\n> **In daily life:** A recipe, a set of directions to assemble furniture, or a workout routine are all examples of algorithms you use without thinking about it.\n\n### Another everyday example: a route map\n\nSuppose you need to drive from your home to the library.  A simple set of directions might be:\n\n1. Leave the house and turn right onto Oak Street.  \n2. Continue for 2 km, then turn left onto Main Avenue.  \n3. After 500 m, turn right onto Library Road.  \n4. The library will be on your left.\n\nThese directions are an algorithm for the problem “how to get to the library.”  They are **ordered** (you must follow them in sequence) and **finite** (there are only four steps).  If you skip a step or repeat a step forever, you will never reach the library.\n\n> **Note:** An algorithm must have a clear start point (the first step) and a clear end point (the last step).  Anything that loops forever without a stopping condition is **not** a valid algorithm.\n\n### Breaking down the key words\n\n- **Finite** – the list contains a limited number of steps; it does not go on forever.  \n- **Ordered** – the steps must be performed in the given sequence; changing the order can change the result.  \n- **Problem** – the question we want to answer, such as “How do I bake cookies?” or “How do I get to the library?”  \n\nWhen we translate a real‑world task into an algorithm, we are essentially *formalising* the task so that a computer can execute it.  This formalisation is the first step in writing any program.\n\n> **Remember:** An algorithm is a precise, step‑by‑step plan that always ends after a limited number of actions and produces the correct answer to the problem it was designed for.  \n\nUnderstanding this simple idea will make the later topics—like flowcharts and code—much easier, because they are just different ways of showing the same ordered steps.",
    "code": ""
   },
   {
-   "heading": "Writing a Simple Algorithm",
-   "body": "Start by understanding the problem, then break it into small tasks. Write each task as a numbered step. For example, to find the larger of two numbers:\n\n1. Read number A.\n2. Read number B.\n3. If A > B, output A; otherwise output B.\n\nThis list can later be turned into code or a flowchart.",
+   "heading": "Key Characteristics of Good Algorithms",
+   "body": "An algorithm is a step‑by‑step recipe for solving a problem.  \nFor an algorithm to be useful it must have a few important qualities.  \nIf any of these qualities are missing, the algorithm can become confusing,\nrun forever, or give the wrong answer.\n\n> **Definition:** *Clarity* means that each step of the algorithm is written in a way that anyone who reads it can understand exactly what to do.  \nThink of a cooking recipe that says “add two cups of flour” instead of “add some flour”. The clearer the instruction, the less chance there is of making a mistake.\n\nWhy does clarity matter?  When a computer follows an algorithm, it does exactly what the words say—no more, no less.  If a step is vague, the computer cannot guess the intended meaning, and the program will either crash or produce an unexpected result.  In everyday life, a clear set of directions to a new house prevents you from getting lost.\n\n> **Note:** *Finiteness* means the algorithm must finish after a limited number of steps.  \nImagine you are asked to count the number of stars in the sky.  There is no way to finish that task, because the sky has infinitely many stars (or at least far more than you could ever count).  An algorithm that never stops is useless; a computer would run forever and never give you an answer.\n\nTo guarantee finiteness, we often include a condition that tells the algorithm when to stop.  For example, a loop that says “repeat until the counter reaches 10” will always end after at most ten repetitions.\n\n> **In daily life:** *Input* and *output* are the information the algorithm receives and produces.  \nThink of a vending machine: you insert (input) money and a selection code, and the machine gives (output) a snack.  An algorithm must specify what it expects as input and what it will return as output.  Without this, the user does not know how to use the algorithm, and the programmer does not know what to code.\n\nA simple example:  \n\n- **Input:** a list of numbers.  \n- **Output:** the largest number in the list.\n\nThe algorithm must state clearly that it needs a list (the input) and that it will return a single number (the output).\n\n> **Common mistake:** *Effectiveness* means every step can actually be carried out with the tools we have.  \nIf an algorithm asks you to “divide by zero” or “travel faster than the speed of light”, those steps cannot be performed, so the algorithm is ineffective.  In programming, an ineffective step might be trying to read a file that does not exist, or using a variable that has never been given a value.\n\nEffectiveness also implies that each step is simple enough to be executed directly by a computer.  Complex mathematical operations that have no known algorithm (like solving the general quintic equation by radicals) are not effective for a computer unless we use an approximate method.\n\nPutting the five characteristics together, a good algorithm looks like this:\n\n1. **Clear** – each instruction is unambiguous.  \n2. **Finite** – it stops after a known maximum number of steps.  \n3. **Has defined input** – the data it needs are listed.  \n4. **Has defined output** – the result it will produce is described.  \n5. **Effective** – every step can be performed with the available operations.\n\nWhen we write an algorithm, we can check it against these points.  For instance, consider the task “find the sum of the first *n* positive integers”.\n\n$$\n\\text{Sum} = 1 + 2 + 3 + \\dots + n\n$$\n\nA clear, finite, effective algorithm for this task could be:\n\n1. **Input** the number $n$.  \n2. Set $total \\leftarrow 0$.  \n3. Set $i \\leftarrow 1$.  \n4. While $i \\le n$:  \n      a. $total \\leftarrow total + i$  \n      b. $i \\leftarrow i + 1$  \n5. **Output** $total$.\n\nAll five qualities are satisfied: the steps are easy to read, the loop ends when $i$ exceeds $n$, the input ($n$) and output ($total$) are explicit, and each operation (addition, comparison, increment) is something a computer can do.\n\n> **Remember:** When you design your own algorithms, always ask yourself: *Is it clear? Will it stop? What does it need? What does it give back? Can every step be done?*  Answering “yes” to all five questions means you have a good algorithm ready to be turned into a flowchart or a program.",
    "code": ""
   },
   {
    "heading": "Introducing Flowcharts",
-   "body": "A flowchart uses shapes to represent actions (rectangles), decisions (diamonds), and start/end points (ovals). Arrows show the direction of flow. Flowcharts help visualise the algorithm before writing any code.\n\nFor the \"larger of two numbers\" algorithm, the flowchart would start with an oval, then two input rectangles, a decision diamond, and two possible output rectangles.",
+   "body": "Imagine you have a recipe for making a sandwich. The recipe tells you step‑by‑step what to do: take two slices of bread, spread butter, add ham, put the slices together, and so on. If you draw little pictures of each step—bread, butter, ham, a hand spreading—the whole process becomes easier to see at a glance.  \n\nA **flowchart** works the same way for a computer algorithm. It is a picture that shows the order in which the steps of an algorithm happen. Instead of reading a long paragraph of text, you can follow arrows and shapes that tell you what the computer does first, what it does next, and where decisions are made.\n\n> **Definition:** A flowchart is a visual representation of an algorithm, using symbols and arrows to show the sequence of operations and decisions.\n\nWhy does a picture help? Human brains are very good at recognizing patterns and relationships when they are shown visually. When you look at a flowchart, you can instantly see loops (things that repeat), branches (choices the program can make), and the overall flow from start to finish. This reduces the chance of missing a step or mixing up the order.\n\n> **Note:** Visual tools like flowcharts make it easier to spot missing or extra steps because you can trace the arrows from start to finish without having to reread text.\n\nThink of a city map. If you want to drive from home to the library, you could read a list of directions: “turn left, go straight for two blocks, turn right, …”. But a map lets you see the whole route at once, notice shortcuts, and avoid dead‑ends. A flowchart is the “map” of an algorithm. It shows every possible path the program might take, just as a map shows every road you could travel.\n\nWhen we create a flowchart, we use a small set of standard symbols. Each symbol has a clear meaning, so anyone who knows the symbols can read the chart without extra explanation. The most common symbols are:\n\n* **Oval** – marks the **Start** and **End** of the algorithm.\n* **Rectangle** – represents a **process** or an action, such as “add two numbers”.\n* **Diamond** – shows a **decision** that can be true or false, like “Is the score > 90?”.\n* **Parallelogram** – used for **input** or **output**, for example “read a number” or “print the result”.\n* **Arrows** – indicate the **flow** from one step to the next.\n\nBy arranging these symbols and connecting them with arrows, you build a picture that tells the same story as a written algorithm, but often more clearly.\n\n> **In daily life:** When you follow a flowchart for a board game’s rules, you can quickly see what to do after each roll of the dice, just as a computer follows a flowchart to decide its next action.\n\nA flowchart also helps when you work with other people. Suppose you and a classmate are designing a simple calculator program. If you each write your own text description, you might use different words for the same step and get confused. By agreeing on a flowchart, you both see the exact same picture, so you can discuss improvements or spot errors together.\n\nFinally, flowcharts are not just for beginners. Professional software engineers use them to plan complex systems, because a well‑drawn chart can reveal hidden loops or unnecessary branches before any code is written. This saves time and reduces bugs.\n\n> **Remember:** A flowchart is a tool for thinking. Draw it first, then translate it into code; this order often leads to cleaner, more reliable programs.",
    "code": ""
   },
   {
-   "heading": "Creating a Flowchart Step‑by‑Step",
-   "body": "1. Identify the start and end points.\n2. List all actions and decisions.\n3. Choose the correct shape for each item.\n4. Connect the shapes with arrows in the order they occur.\n\nUse a ruler or a digital tool (e.g., draw.io) to keep the diagram neat. A clear flowchart makes debugging easier later on.",
+   "heading": "Basic Flowchart Symbols",
+   "body": "A flowchart is a picture that shows how a program or a process moves from one step to the next.  \nEach picture‑piece, called a **symbol**, tells us what kind of action is happening at that point.  \nBy learning the five core symbols, you can read and draw flowcharts just like you read a map.\n\n**Terminator – the start and the end**  \nThe terminator tells the reader where the flowchart begins and where it finishes.  \nIt looks like a rounded rectangle (a rectangle with curved corners).  \nInside you write words such as **Start**, **Begin**, **End**, or **Stop**.  \nThink of it as the front door and the back door of a house – they mark the entry and exit points.\n\n**Process – a single action**  \nA process symbol is a plain rectangle.  \nIt represents one simple operation, like “add 5 to the total” or “set `counter = 0`”.  \nIf you imagine a kitchen, a process is like a single step in a recipe: “stir the batter”.  \nEvery time you need to do something that changes data, you use a process box.\n\n**Decision – a yes/no question**  \nThe decision symbol is a diamond shape.  \nInside you write a question that can be answered **yes** or **no** (or **true/false**).  \nArrows leave the diamond, each labeled with the answer they correspond to.  \nAn everyday example is the traffic light: “Is the light green?” → **yes** go, **no** stop.  \nDecisions let the flowchart branch into different paths.\n\n**Input/Output – talking with the outside world**  \nThis symbol is a parallelogram, slanted on the top and bottom.  \nIt shows where the program receives data (input) or shows results (output).  \nExamples: “Read user’s name” or “Print total price”.  \nThink of it as a mailbox: you either put a letter in (input) or take one out (output).\n\n**Connector – jumping to another place**  \nA connector is a small circle (sometimes a small labeled oval).  \nIt is used when a line would otherwise cross another line or when the flowchart is too big for one page.  \nThe circle contains a letter or number, and the same label appears at the other end of the jump.  \nIt works like a subway transfer station: you get off at one platform (the first connector) and board another train at the matching platform (the second connector).\n\n> **Definition:** A flowchart symbol is a standardized shape that represents a specific type of step in a process, making the diagram easy to read and share.\n\n> **In daily life:** Think of a flowchart as a recipe card. The terminator is the title (“Start” and “Finish”), process boxes are the cooking steps, the decision diamond is “Is the sauce thick enough?” and the input/output parallelogram is “Add salt” or “Taste the dish”. Connectors are like page numbers that tell you where to continue reading.\n\n> **Common mistake:** Using the wrong shape for a step—e.g., drawing a rectangle for a decision—confuses anyone reading the chart because the visual cue no longer matches the action.\n\n> **Remember:** Keep the symbols consistent: rounded rectangle = terminator, rectangle = process, diamond = decision, parallelogram = input/output, circle = connector. Consistency lets others follow your logic without guessing.\n\nWhen you put these symbols together, you create a clear, step‑by‑step picture of how a program works.  \nStart with a terminator, add processes for calculations, insert decisions where choices are needed, use input/output to interact with the user, and link distant parts with connectors.  \nBy practicing with these five shapes, you’ll soon be able to translate any simple algorithm into a clean, understandable flowchart.",
+   "code": ""
+  },
+  {
+   "heading": "Drawing a Simple Flowchart",
+   "body": "Imagine you have a piece of paper and a pencil, and you want to show someone how to find out whether a number is even.  \nA **flowchart** is just a picture that tells a story step by step, using simple shapes.  \nEach shape has a meaning, and arrows tell you which step comes next.  \nBy drawing a flowchart first, you can see the whole process before you write any code.\n\n### Step 1 – Write the task in plain words  \n\n> **In daily life:** “Check if a number is even” is like looking at a pair of shoes. If the shoes come in twos, you have an even number of shoes; if one is left over, the number is odd.\n\nThe plain‑language description is:  \n\n1. Start.  \n2. Get a number from the user.  \n3. Divide the number by 2 and look at the remainder.  \n4. If the remainder is 0, the number is even; otherwise it is odd.  \n5. Show the result.  \n6. End.\n\n### Step 2 – Choose the right symbols  \n\n| Symbol | Meaning | Shape |\n|--------|---------|-------|\n| **Start/End** | Where the process begins or finishes | Oval |\n| **Input/Output** | Getting data from the user or displaying something | Parallelogram |\n| **Process** | A calculation or assignment | Rectangle |\n| **Decision** | A yes/no question that splits the flow | Diamond |\n\n> **Note:** Do not try to combine two different meanings in one shape; each shape should do only one job.\n\n### Step 3 – Lay out the steps on paper  \n\n1. **Oval** – Write “Start”.  \n2. **Parallelogram** – Write “Enter a number (n)”.  \n3. **Rectangle** – Write “remainder ← n % 2”.  \n   - The symbol “%” means “modulo”, which gives the remainder after division.  \n   - In a sentence you could say: *The remainder is the part left over after dividing n by 2.*  \n4. **Diamond** – Write “remainder = 0?”  \n   - This is the decision point.  \n5. From the diamond draw two arrows:  \n   - **Yes** (remainder is 0) → **Parallelogram** with “Print ‘Even’”.  \n   - **No** (remainder is not 0) → **Parallelogram** with “Print ‘Odd’”.  \n6. Both arrows then lead to a final **Oval** that says “End”.\n\n### Step 4 – Connect the shapes with arrows  \n\nArrows show the order of execution.  \nStart → Input → Process → Decision → (Yes/No) → Output → End.  \nMake sure every shape has at least one arrow coming in and one going out, except the start (only out) and the end (only in).\n\n### Step 5 – Test the flowchart mentally  \n\nPick a number, say 7. Follow the arrows:\n\n- Start → ask for 7 → compute $7 % 2 = 1$ → decision “1 = 0?” → No → print “Odd”.  \n\nNow try 8:\n\n- Compute $8 % 2 = 0$ → decision “0 = 0?” → Yes → print “Even”.  \n\nIf the arrows lead you to the correct answer each time, the flowchart is correct.\n\n> **Remember:** A good flowchart is clear, has only one start and one end, and each decision splits into exactly two paths (yes/no).  \n\n### Step 6 – Turn the picture into a written algorithm  \n\nNow write the same steps in text form, using the same order you drew:\n\n```\n1. Start\n2. Read n\n3. remainder ← n % 2\n4. If remainder = 0 then\n       print \"Even\"\n   else\n       print \"Odd\"\n5. End\n```\n\nYou have just moved from a visual map to a textual description that a computer can later understand as code.\n\n> **Common mistake:** Forgetting to label the arrows “Yes” and “No”. Without those labels, someone reading the chart may not know which way to go after the decision shape.\n\nBy following these small, concrete steps you can draw a correct flowchart for any simple task. The same method works for more complicated problems—just add more process and decision symbols, keep the arrows tidy, and always test the flow with a few examples.",
+   "code": ""
+  },
+  {
+   "heading": "From Flowchart to Written Algorithm",
+   "body": "Imagine you have a picture that shows the steps a computer must follow, and you want to turn that picture into a list of sentences you could read out loud.  \nThat list of sentences is called a **written algorithm**.  \nReading a flowchart and writing the corresponding algorithm is a useful skill because it lets you check that the picture and the text describe the same process, and it helps you explain your ideas to people who prefer words to symbols.\n\n### Step 1 – Look at the start and end points  \nEvery flowchart has a **Start** symbol (usually an oval) and an **End** symbol.  \nThese tell you where the algorithm begins and where it finishes.  \nIn a written algorithm you simply write:\n\n```\nSTART\n    … (steps)\nEND\n```\n\n> **Note:** The words “START” and “END” are not part of the computer language; they are just markers for you, the human reader.\n\n### Step 2 – Follow the arrows in order  \nArrows connect the symbols and show the direction of flow.  \nBegin at the **Start** symbol, then move to the next symbol that the arrow points to.  \nWrite a sentence that describes what that symbol does.\n\n* If the symbol is a **process** (a rectangle), it represents an action such as “add 5 to the total” or “read a number from the keyboard”.  \n  Write it as an imperative sentence: *Add 5 to total* or *Read input into variable `n`*.\n\n* If the symbol is a **decision** (a diamond), it asks a yes/no (or true/false) question, like “Is the number even?”.  \n  In the algorithm you write an **if‑statement**:\n\n  ```\n  IF (condition) THEN\n      … (steps for YES)\n  ELSE\n      … (steps for NO)\n  END IF\n  ```\n\n> **Definition:** *Condition* is a logical expression that can be either true or false, for example `n % 2 == 0`.\n\n### Step 3 – Write the branches of a decision  \nWhen you reach a decision symbol, the flowchart will split into two arrows: one for the **yes** (true) path and one for the **no** (false) path.  \nWrite the two branches as separate blocks under the `IF` statement, keeping the same order as the arrows.\n\nFor example, a flowchart that decides whether a student passes might have:\n\n*Yes arrow* → “Print ‘Pass’”  \n*No arrow* → “Print ‘Fail’”\n\nThe written algorithm becomes:\n\n```\nIF (score >= 50) THEN\n    Print \"Pass\"\nELSE\n    Print \"Fail\"\nEND IF\n```\n\n### Step 4 – Handle loops (repeating parts)  \nA loop is shown by a curved arrow that goes back to an earlier symbol, often together with a decision that decides whether to repeat.  \nIn text this is written as a **while** or **for** loop.\n\nSuppose the flowchart has a decision “More numbers? (yes/no)” that loops back to a process “Read next number”.  \nThe algorithm would look like:\n\n```\nREAD first number into total\nWHILE (more numbers?) DO\n    READ next number into x\n    total = total + x\nEND WHILE\n```\n\n> **In daily life:** Think of a loop like a grocery list you keep checking: you keep adding items until the list is empty, then you stop.\n\n### Step 5 – Finish with the end symbol  \nWhen you finally reach the **End** symbol, write the word `END` in your algorithm.  \nMake sure every opened block (`IF`, `WHILE`, `FOR`) has a matching closing statement (`END IF`, `END WHILE`, `END FOR`). This keeps the structure clear.\n\n### Putting it all together – a complete example  \n\nConsider a simple flowchart that:\n\n1. Starts  \n2. Reads an integer `n`  \n3. Sets `sum = 0`  \n4. Checks “Is `n` > 0?”  \n   * Yes → adds `n` to `sum`, subtracts 1 from `n`, goes back to step 4  \n   * No → goes to step 5  \n5. Prints `sum`  \n6. Ends  \n\nThe written algorithm is:\n\n```\nSTART\nREAD n\nsum = 0\nWHILE (n > 0) DO\n    sum = sum + n\n    n = n - 1\nEND WHILE\nPrint sum\nEND\n```\n\n> **Common mistake:** Forgetting to write the closing `END WHILE` (or `END IF`). Without it the algorithm looks unfinished and can cause confusion.\n\nBy practicing this translation, you will see that a flowchart is just a visual shortcut for the same logical steps you write in words. The two representations reinforce each other, making it easier to spot errors and to explain your ideas to others.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Exercise and Checklist",
+   "body": "Imagine you have to tell a friend how to make a peanut‑butter‑and‑jelly sandwich.  \nFirst you would list the steps in the order they must happen, then you might draw a tiny picture showing each step with arrows.  \nThat is exactly what we are doing now: you will write a **written algorithm** (the list of steps) and a **flowchart** (the picture) for a simple everyday task.  \n\n**Problem:**  \nYour school library wants a computer program that tells a student whether they can borrow a book. The rules are:\n\n1. The student must have a valid library card.  \n2. The student may not have any overdue books.  \n3. The student may not have already borrowed more than 5 books.  \n\nIf all three conditions are true, the program should output **“You may borrow the book.”**  \nIf any condition is false, the program should output **“You cannot borrow the book.”**  \n\nWrite both:\n\n* a step‑by‑step algorithm in plain English, and  \n* a flowchart that uses the basic symbols (oval for start/end, rectangle for process, diamond for decision, arrow for flow).\n\n---\n\n### How to start the algorithm\n\n1. **Read** the student’s library card status (valid or not).  \n2. **Read** whether the student has overdue books (yes or no).  \n3. **Read** how many books the student already has.  \n4. **If** the card is valid **and** there are no overdue books **and** the number of books is ≤ 5, **then** print “You may borrow the book.”  \n5. **Otherwise**, print “You cannot borrow the book.”  \n6. **End** the algorithm.\n\nNotice that step 4 combines three conditions with the word **and**. This means **all** of them must be true at the same time.  \n\n> **Note:** In programming, the word *and* is a logical operator that requires every condition to be true. If even one is false, the whole expression becomes false.\n\n---\n\n### Sketching the flowchart\n\n1. **Start** – draw an oval and write “Start”.  \n2. **Input card status** – rectangle labeled “Enter card status”.  \n3. **Input overdue status** – rectangle labeled “Enter overdue status”.  \n4. **Input number of books** – rectangle labeled “Enter number of books”.  \n5. **Decision** – diamond labeled “Card valid ?  AND  No overdue ?  AND  Books ≤ 5”.  \n   * Draw a **Yes** arrow leading to a rectangle “Print ‘You may borrow the book’”.  \n   * Draw a **No** arrow leading to a rectangle “Print ‘You cannot borrow the book’”.  \n6. Both rectangles then point to an **End** oval.  \n\nMake sure every arrow points in one direction and that the diagram has no loose ends.  \n\n> **In daily life:** Think of a flowchart like a road map. Each symbol is a landmark (start, turn, decision) and the arrows are the roads that guide you from one place to the next.\n\n---\n\n### Self‑evaluation checklist\n\n| ✔️ | Item to check | Why it matters |\n|---|---------------|----------------|\n| 1 | All three inputs (card, overdue, number of books) are asked for before any decision is made. | Guarantees the algorithm has the information it needs. |\n| 2 | The decision uses **and** for all three conditions, not **or**. | Ensures the student can borrow only when **every** rule is satisfied. |\n| 3 | The flowchart contains exactly one start oval and one end oval. | Prevents ambiguous entry or exit points. |\n| 4 | Every rectangle (process) is connected to the next step with an arrow. | Shows the correct order of operations. |\n| 5 | The decision diamond has two clearly labeled arrows: “Yes” and “No”. | Makes the flow of logic easy to follow. |\n| 6 | The output messages in the algorithm match the text inside the flowchart rectangles. | Keeps the written and visual versions consistent. |\n| 7 | No symbols are missing: you used only oval, rectangle, diamond, and arrows. | Demonstrates mastery of the basic flowchart symbols introduced earlier. |\n\nGo through each line of your algorithm and each symbol in your flowchart. If you can tick every box, you have a complete and correct solution.  \n\n> **Remember:** A good algorithm is clear, unambiguous, and finishes in a finite number of steps. A good flowchart mirrors those qualities with clean symbols and straight‑forward arrows.  \n\nNow try it out! Write the algorithm on paper, then draw the flowchart beside it. When you are satisfied, compare your work with the checklist. If any item is unchecked, revise that part until everything lines up. This practice builds the habit of checking your own work—an essential skill for any programmer.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Find the Largest of Three Numbers",
+   "given": "three numbers 12, 7, and 19; decide which is the largest using an algorithm.",
+   "steps": [
+    {
+     "label": "Input",
+     "text": "Read the three numbers and store them."
+    },
+    {
+     "label": "Compare1",
+     "text": "Compare first number (12) with second (7); keep the larger (12)."
+    },
+    {
+     "label": "Compare2",
+     "text": "Compare the kept larger (12) with third number (19); keep the larger (19)."
+    },
+    {
+     "label": "Output",
+     "text": "Print the kept larger number as the largest."
+    }
+   ],
+   "answer": "The largest number is 19."
+  },
+  {
+   "level": "Medium",
+   "title": "Determine if a Student Passes a Course",
+   "given": "a student’s marks: Homework 85, Midterm 74, Final 68; passing requires an average ≥70.",
+   "steps": [
+    {
+     "label": "Input",
+     "text": "Read the three marks."
+    },
+    {
+     "label": "Compute",
+     "text": "Add the marks and divide by 3 to get the average."
+    },
+    {
+     "label": "Decision",
+     "text": "If average ≥70, result is “Pass”; otherwise “Fail”."
+    },
+    {
+     "label": "Output",
+     "text": "Display the result and the calculated average."
+    }
+   ],
+   "answer": "Average = 75.7 → Student Passes the course."
+  },
+  {
+   "level": "Hard",
+   "title": "Create a Flowchart to Sort Three Numbers in Ascending Order",
+   "given": "three distinct numbers 42, 15, 33; produce a flowchart that outputs them from smallest to largest.",
+   "steps": [
+    {
+     "label": "Input",
+     "text": "Read the three numbers."
+    },
+    {
+     "label": "Compare A&B",
+     "text": "If A > B, swap A and B."
+    },
+    {
+     "label": "Compare B&C",
+     "text": "If B > C, swap B and C."
+    },
+    {
+     "label": "Compare A&B (again)",
+     "text": "If A > B, swap A and B (ensures final order)."
+    },
+    {
+     "label": "Output",
+     "text": "Print A, B, C as the sorted sequence."
+    }
+   ],
+   "answer": "Sorted order is 15, 33, 42."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the first step in creating an algorithm for adding two numbers entered by a user?",
+   "a": "1. Identify the goal: we want to add two numbers and show the result.\n2. List the required inputs: the first number and the second number.\n3. Decide the output: the sum of the two numbers.\n4. Write the steps in order:\na. Read the first number.\nb. Read the second number.\nc. Add the two numbers.\nd. Display the sum."
+  },
+  {
+   "level": "Easy",
+   "q": "Which flowchart symbol is used to represent a decision (yes/no) point?",
+   "a": "The diamond shape is the standard flowchart symbol for a decision. It contains a question inside, and the flow splits into two paths: one for “yes” (or true) and one for “no” (or false)."
+  },
+  {
+   "level": "Medium",
+   "q": "Write a short algorithm (in plain English) to find the largest of three numbers (a, b, c). Then draw the corresponding flowchart symbols in order (you do not need to draw the diagram, just list the symbols).",
+   "a": "Algorithm:\n1. Start.\n2. Input a, b, c.\n3. Set max = a.\n4. If b > max, then set max = b.\n5. If c > max, then set max = c.\n6. Output max.\n7. End.\nFlowchart symbols in order:\n- Oval (Start)\n- Parallelogram (Input a, b, c)\n- Rectangle (Set max = a)\n- Diamond (b > max?)\n- Rectangle (Set max = b) – only on “yes” branch\n- Diamond (c > max?)\n- Rectangle (Set max = c) – only on “yes” branch\n- Parallelogram (Output max)\n- Oval (End)"
+  },
+  {
+   "level": "Medium",
+   "q": "Convert the following flowchart steps into a written algorithm: 1. Start 2. Input integer n 3. Set count = 0 4. While n > 0 do: a. Set n = n – 1 b. Set count = count + 1 5. Output count 6. End",
+   "a": "Written algorithm:\n1. Begin.\n2. Read an integer and store it in variable n.\n3. Initialise a counter variable: set count = 0.\n4. Repeat the following while n is greater than 0:\na. Decrease n by 1 (n = n – 1).\nb. Increase count by 1 (count = count + 1).\n5. After the loop ends, display the value of count.\n6. Stop."
+  },
+  {
+   "level": "Hard",
+   "q": "A flowchart uses the following sequence of symbols: - Oval (Start) - Parallelogram (Input X) - Diamond (X ≥ 10?) - Yes branch → Rectangle (Print “High”) → Arrow to End - No branch → Diamond (X ≤ 0?) - Yes branch → Rectangle (Print “Low”) → Arrow to End - No branch → Rectangle (Print “Medium”) → Arrow to End - Oval (End) Write the complete algorithm in pseudocode, then explain why each decision point is necessary for correct classification of X.",
+   "a": "Pseudocode:\n```\nSTART\nINPUT X\nIF X >= 10 THEN\nPRINT \"High\"\nELSE\nIF X <= 0 THEN\nPRINT \"Low\"\nELSE\nPRINT \"Medium\"\nENDIF\nENDIF\nEND\n```\nExplanation of decisions:\n- The first decision (X ≥ 10) checks whether X belongs to the highest category. If true, we can immediately label it “High” and skip further tests, which saves time.\n- If the first test is false, X is less than 10, so we must determine whether it falls in the lowest range or the middle range. The second decision (X ≤ 0) distinguishes the “Low” case from everything else.\n- The final else clause handles all remaining values (0 < X < 10), which are correctly classified as “Medium”. Each decision narrows the possible range, ensuring every possible X gets exactly one label."
+  },
+  {
+   "level": "Hard",
+   "q": "Design an algorithm and a corresponding flowchart (list the symbols in order) to compute the factorial of a non‑negative integer n (n!). Include error handling for negative inputs. Provide the step‑by‑step reasoning for your algorithm.",
+   "a": "Algorithm:\n1. Start.\n2. Input integer n.\n3. If n < 0 then:\na. Print “Error: negative input”.\nb. Go to End.\n4. Set result = 1.\n5. Set i = 1.\n6. While i ≤ n do:\na. Set result = result × i.\nb. Set i = i + 1.\n7. Print “Factorial = ”, result.\n8. End.\nFlowchart symbols in order:\n- Oval (Start)\n- Parallelogram (Input n)\n- Diamond (n < 0?)\n- Yes branch → Parallelogram (Print error) → Arrow to Oval (End)\n- No branch → Rectangle (Set result = 1) → Rectangle (Set i = 1) → Diamond (i ≤ n?)\n- Yes branch → Rectangle (result = result × i) → Rectangle (i = i + 1) → Arrow back to Diamond (i ≤ n?)\n- No branch → Parallelogram (Print result) → Arrow to Oval (End)\n- Oval (End)\nReasoning:\n- Step 3 catches invalid (negative) inputs early, preventing an infinite loop.\n- Factorial is defined as the product of all positive integers up to n, with 0! = 1, so we initialise result to 1.\n- The loop runs from i = 1 through i = n, multiplying the current result by i each iteration.\n- When i exceeds n, the loop stops and the final product stored in result is the factorial, which we then output."
+  }
+ ],
+ "recap": "An algorithm is a finite, ordered set of clear steps that solves a specific problem. Flowcharts are visual versions of algorithms that use symbols and arrows to show the sequence and decisions. Good algorithms are clear, finite, and unambiguous, which makes them reliable for computers. Learning basic flowchart symbols helps translate ideas between pictures and written steps.",
  "key_terms": [
   {
    "term": "Algorithm",
-   "meaning": "A finite set of ordered steps that solves a specific problem."
+   "meaning": "A finite, ordered list of steps that solves a particular problem."
+  },
+  {
+   "term": "Finite",
+   "meaning": "Having a clear beginning and end; the process stops after a limited number of steps."
+  },
+  {
+   "term": "Unambiguous",
+   "meaning": "No confusion about what each step means; the instructions are exact."
   },
   {
    "term": "Flowchart",
-   "meaning": "A diagram that uses symbols to represent the steps and decisions in an algorithm."
+   "meaning": "A diagram that uses symbols and arrows to represent the steps and decisions of an algorithm."
   },
   {
-   "term": "Decision Symbol",
-   "meaning": "A diamond shape in a flowchart that shows a yes/no or true/false choice."
+   "term": "Terminator Symbol",
+   "meaning": "The rounded‑rectangle shape that marks the start or end of a flowchart."
   },
   {
    "term": "Process Symbol",
-   "meaning": "A rectangle in a flowchart that represents an operation or instruction."
+   "meaning": "A rectangular shape that represents a single action or operation in a flowchart."
   },
   {
-   "term": "Start/End Symbol",
-   "meaning": "An oval that marks where the algorithm begins and finishes."
+   "term": "Decision Symbol",
+   "meaning": "A diamond shape that shows a point where a yes/no or true/false choice is made."
   },
   {
-   "term": "Sequential Flow",
-   "meaning": "The order in which steps are executed, shown by arrows in a flowchart."
+   "term": "Clarity",
+   "meaning": "Each step is written so anyone can understand exactly what to do."
   }
  ],
  "quiz": [
   {
-   "q": "Which shape is used for a decision in a flowchart?",
+   "q": "What does it mean for an algorithm to be finite?",
    "options": [
-    "Rectangle",
-    "Oval",
-    "Diamond",
-    "Parallelogram"
-   ],
-   "answer": 2,
-   "why": "A diamond represents a yes/no or true/false decision."
-  },
-  {
-   "q": "What is the first step when creating an algorithm?",
-   "options": [
-    "Write code",
-    "Identify the problem",
-    "Draw a flowchart",
-    "Test the solution"
+    "It can run forever",
+    "It has a clear start and end",
+    "It uses only numbers",
+    "It is written in code"
    ],
    "answer": 1,
-   "why": "Understanding the problem is essential before designing steps."
+   "why": "Finite means the algorithm has a definite beginning and ending point."
   },
   {
-   "q": "In the algorithm to find the larger of two numbers, what happens after the decision step?",
+   "q": "Which flowchart symbol is used to represent a decision?",
    "options": [
-    "Read the numbers again",
-    "Output the smaller number",
-    "Output the larger number",
-    "End the program"
+    "Oval",
+    "Rectangle",
+    "Diamond",
+    "Circle"
    ],
    "answer": 2,
-   "why": "The decision determines which number is larger, which is then output."
+   "why": "A diamond shape indicates a yes/no or true/false decision."
   },
   {
-   "q": "Why are flowcharts useful before writing code?",
+   "q": "Why is clarity important in an algorithm?",
    "options": [
-    "They replace code entirely",
-    "They make the algorithm look pretty",
-    "They help visualize logic and spot errors early",
-    "They are required by all programming languages"
+    "It makes the program run faster",
+    "It prevents the computer from guessing the meaning of vague steps",
+    "It reduces the number of steps",
+    "It allows the algorithm to be infinite"
    ],
-   "answer": 2,
-   "why": "Visualizing logic helps catch mistakes before coding."
+   "answer": 1,
+   "why": "Clear steps ensure the computer can execute exactly what is intended."
+  },
+  {
+   "q": "What symbol marks the start of a flowchart?",
+   "options": [
+    "Diamond",
+    "Rounded rectangle",
+    "Hexagon",
+    "Parallelogram"
+   ],
+   "answer": 1,
+   "why": "The terminator symbol, a rounded rectangle, indicates the start (and end)."
+  },
+  {
+   "q": "In the library borrowing example, which condition is NOT required for a student to borrow a book?",
+   "options": [
+    "Valid library card",
+    "No overdue books",
+    "Borrowed fewer than 5 books",
+    "Has a favorite book"
+   ],
+   "answer": 3,
+   "why": "Having a favorite book is irrelevant to the borrowing rules."
+  },
+  {
+   "q": "Which of the following best describes a process symbol?",
+   "options": [
+    "Shows a loop",
+    "Represents a single action",
+    "Indicates start/end",
+    "Shows input/output"
+   ],
+   "answer": 1,
+   "why": "A process symbol (rectangle) stands for a single operation or action."
   }
  ],
  "flashcards": [
   {
    "front": "Algorithm",
-   "back": "A step‑by‑step set of instructions that solves a problem."
+   "back": "A step‑by‑step, finite set of instructions that solves a specific problem."
+  },
+  {
+   "front": "Finite",
+   "back": "Having a defined beginning and end; the process stops after a limited number of steps."
+  },
+  {
+   "front": "Unambiguous",
+   "back": "Clear and exact; no confusion about what each step means."
   },
   {
    "front": "Flowchart",
-   "back": "A visual diagram using symbols to show the flow of an algorithm."
+   "back": "A visual diagram using symbols and arrows to show the order of steps in an algorithm."
   },
   {
-   "front": "Decision Symbol",
-   "back": "Diamond shape representing a yes/no or true/false choice."
+   "front": "Terminator Symbol",
+   "back": "Rounded rectangle that marks the start or end of a flowchart."
   },
   {
    "front": "Process Symbol",
-   "back": "Rectangle shape representing an action or operation."
+   "back": "Plain rectangle representing a single action or operation."
   },
   {
-   "front": "Start/End Symbol",
-   "back": "Oval shape marking the beginning or end of a flowchart."
+   "front": "Decision Symbol",
+   "back": "Diamond shape indicating a yes/no or true/false choice."
+  },
+  {
+   "front": "Clarity in algorithms",
+   "back": "Each step is written so anyone can understand exactly what to do, preventing errors."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -142,83 +321,167 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l02-flowchart-symbol-guide",
-   "title": "Common symbols used in flowcharts with labels",
-   "alt": "Common symbols used in flowcharts with labels",
-   "priority": 7,
-   "picture_title": "Flowchart Symbol Guide",
-   "kind": "labelled diagram",
-   "subject": "A collection of the basic flowchart shapes: oval for start/end, rectangle for process/action, diamond for decision, parallelogram for input/output, each shown with a short label.",
-   "layout": "Symbols arranged in a horizontal row, each shape centered in its own box with a label underneath.",
+   "file": "introduction-to-programming-l02-even-number-flowchart",
+   "title": "Shows the steps to decide if a number is even using a flowchart.",
+   "alt": "Shows the steps to decide if a number is even using a flowchart.",
+   "priority": 9,
+   "picture_title": "Even Number Flowchart",
+   "kind": "illustration",
+   "subject": "A simple flowchart that starts with an input number, checks the remainder when divided by 2, and branches to ‘Even’ or ‘Odd’ outcomes before ending.",
+   "layout": "Vertical flow from top (Start) to bottom (End) with a decision diamond in the middle and arrows to two terminal rectangles labeled Even and Odd.",
    "labels": [
-    "Start/End",
+    "Start",
+    "Input n",
+    "n mod 2 = 0?",
+    "Even",
+    "Odd",
+    "End"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l02-core-flowchart-symbols",
+   "title": "Illustrates the five basic symbols used in flowcharts.",
+   "alt": "Illustrates the five basic symbols used in flowcharts.",
+   "priority": 8,
+   "picture_title": "Core Flowchart Symbols",
+   "kind": "labelled diagram",
+   "subject": "A collection of the standard flowchart symbols: Terminator (oval), Process (rectangle), Decision (diamond), Input/Output (parallelogram), and Arrow (line with arrowhead). Each symbol is shown with a short example inside.",
+   "layout": "Symbols arranged in a row left‑to‑right, each with a small example text inside and a label underneath.",
+   "labels": [
+    "Terminator",
     "Process",
     "Decision",
-    "Input/Output"
+    "Input/Output",
+    "Arrow"
    ],
-   "after": 1
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l02-library-borrowing-decision",
+   "title": "Flowchart that determines if a student may borrow a book.",
+   "alt": "Flowchart that determines if a student may borrow a book.",
+   "priority": 7,
+   "picture_title": "Library Borrowing Decision",
+   "kind": "illustration",
+   "subject": "A flowchart that begins with ‘Student requests book’, checks if the student has overdue books, then checks if the student has reached the borrowing limit, and finally outputs ‘Allow borrow’ or ‘Deny borrow’.",
+   "layout": "Top‑down flow: Start → Request → Decision (overdue?) → Decision (limit?) → two end terminals (Allow, Deny).",
+   "labels": [
+    "Start",
+    "Request book",
+    "Overdue books?",
+    "Borrow limit reached?",
+    "Allow borrow",
+    "Deny borrow",
+    "End"
+   ],
+   "after": 6
   },
   {
    "type": "facts",
-   "title": "Algorithm Essentials",
+   "title": "Key Characteristics of Good Algorithms",
    "items": [
     {
-     "value": "clear",
-     "label": "must be clear"
+     "value": "Finite",
+     "label": "Stops after a limited number of steps"
     },
     {
-     "value": "finite",
-     "label": "must end"
+     "value": "Definite",
+     "label": "Each step is clear and unambiguous"
     },
     {
-     "value": "unambiguous",
-     "label": "no confusion"
+     "value": "Effective",
+     "label": "Can be carried out with basic operations"
+    },
+    {
+     "value": "Input/Output",
+     "label": "Has defined inputs and produces outputs"
     }
    ],
    "after": 0
   },
   {
-   "type": "steps",
-   "title": "Find Larger of Two Numbers",
-   "steps": [
-    {
-     "label": "1",
-     "text": "Read number A"
-    },
-    {
-     "label": "2",
-     "text": "Read number B"
-    },
-    {
-     "label": "3",
-     "text": "If A > B output A else output B"
-    }
-   ],
-   "loop": false,
-   "after": 1
-  },
-  {
    "type": "compare",
-   "title": "Algorithm vs Flowchart",
+   "title": "Clarity vs. Vagueness in Instructions",
    "left": {
-    "name": "Algorithm",
+    "name": "Clear",
     "points": [
-     "Text list of steps",
-     "Easy to write",
-     "Precise order"
+     "Exact wording",
+     "Easy to follow",
+     "Produces correct result"
     ]
    },
    "right": {
-    "name": "Flowchart",
+    "name": "Vague",
     "points": [
-     "Shapes and arrows",
-     "Visual overview",
-     "Shows decisions"
+     "Ambiguous wording",
+     "Confusing steps",
+     "May cause errors"
     ]
    },
-   "after": 2
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Core Flowchart Symbols",
+   "items": [
+    {
+     "name": "Terminator",
+     "role": "Marks start and end (rounded rectangle)"
+    },
+    {
+     "name": "Process",
+     "role": "Shows a single action or operation (rectangle)"
+    },
+    {
+     "name": "Decision",
+     "role": "Represents a yes/no question (diamond)"
+    },
+    {
+     "name": "Input/Output",
+     "role": "Gets data or displays results (parallelogram)"
+    },
+    {
+     "name": "Arrow",
+     "role": "Indicates flow direction between symbols"
+    }
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Drawing a Simple Flowchart – Check Even Number",
+   "steps": [
+    {
+     "label": "Start",
+     "text": "Place a Terminator labeled Start"
+    },
+    {
+     "label": "Input Number",
+     "text": "Add an Input/Output symbol to get a number"
+    },
+    {
+     "label": "Decision",
+     "text": "Use a Decision diamond: Is number % 2 = 0?"
+    },
+    {
+     "label": "Output Result",
+     "text": "If yes, show \"Even\"; if no, show \"Odd\""
+    },
+    {
+     "label": "End",
+     "text": "Place a Terminator labeled End"
+    }
+   ],
+   "loop": false,
+   "after": 4
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

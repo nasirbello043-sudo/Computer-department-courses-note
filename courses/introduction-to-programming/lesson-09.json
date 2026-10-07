@@ -1,123 +1,306 @@
 {
  "title": "Debugging Techniques and Error Handling",
- "summary": "This lesson introduces systematic ways to find and fix bugs in code and explains how to handle errors gracefully. Students will learn common debugging tools, strategies, and the use of try‑except blocks.",
+ "summary": "In this lesson students learn how to find and fix bugs in their code and how to handle errors gracefully. They will practice using debugging tools and writing robust programs that anticipate problems.",
+ "objectives": [
+  "Identify common syntax and runtime errors in simple programs",
+  "Use print statements and an IDE debugger to locate the source of a bug",
+  "Apply try‑except blocks to handle predictable errors",
+  "Modify code to prevent crashes and provide useful error messages",
+  "Explain how debugging improves program reliability"
+ ],
+ "prerequisites": "Students should already know basic variables, control structures, functions, and how to run a program in the IDE.",
+ "why": [
+  "Debugging is a core skill for any programmer because real‑world code rarely works perfectly on the first try. Being able to locate and fix mistakes saves time, reduces frustration, and leads to more reliable software.",
+  "Error handling prevents programs from crashing when unexpected situations occur, such as missing files or invalid user input. Proper handling makes software safer and more user‑friendly, which is essential in professional and everyday applications."
+ ],
  "sections": [
   {
-   "heading": "Why Debugging Matters",
-   "body": "Even simple programs can contain mistakes that cause them to crash or give wrong results. Debugging is the process of locating and correcting those mistakes, which helps you write reliable software.\n\nGood debugging habits also teach you how to think logically about problems and improve your overall coding skills.",
+   "heading": "What Is a Bug?",
+   "body": "Imagine you sit down to write a short story. You have a clear idea of the plot, but somewhere in the middle you accidentally type “the cat jumpd over the fence” instead of “the cat jumped over the fence.” The story still makes sense, but that one misspelled word changes the meaning and can confuse the reader. In programming, a **bug** is very similar—it is any part of the code that makes the computer do something you did **not** intend.\n\n> **Definition:** A bug is an unintended behavior in a program caused by an error in the source code.\n\nWhy do we care about bugs? Because a computer follows the instructions you give it **exactly**. If one instruction is wrong, the whole program may give the wrong answer, crash, or behave strangely. Unlike a human reader who can guess what you meant, a computer cannot. It will execute the faulty line precisely as written, and the result will reflect that mistake.\n\n### Simple example: a misspelled variable name\n\n```python\ncounter = 0\ncouter += 1      # typo: \"couter\" instead of \"counter\"\nprint(counter)\n```\n\nHere we intended to increase the value of `counter` by one, but we typed `couter`. When Python runs this code, it looks for a variable named `couter`. Because that variable does not exist, the interpreter raises an error:\n\n```\nNameError: name 'couter' is not defined\n```\n\nThe program stops before reaching the `print` statement. The bug is the misspelled variable name, and the error message tells us exactly where the problem is.\n\n### Simple example: a wrong loop condition\n\n```python\ntotal = 0\nfor i in range(5):      # we want to add numbers 1 through 5\n    total += i + 1\nprint(total)            # expected 15, but we get 10\n```\n\nThe intention was to sum the numbers 1 + 2 + 3 + 4 + 5 = 15. However, the loop runs `i` from 0 to 4, and we add `i + 1` each time, which actually gives the same result. If we mistakenly wrote `range(4)` instead, the loop would stop early:\n\n```python\nfor i in range(4):\n    total += i + 1\n```\n\nNow the sum is 1 + 2 + 3 + 4 = 10, not 15. The bug is the **loop condition** (`range(4)` instead of `range(5)`). The program runs without crashing, but it produces the wrong answer—an example of a **logic bug**.\n\n> **Common mistake:** Using the wrong condition in a loop or a misspelled identifier often creates bugs that are hard to notice because the program still runs.\n\n### How to think about bugs\n\nThink of a bug like a tiny pebble in a shoe. You can still walk, but each step is uncomfortable, and if you don’t notice the pebble, it can cause a bigger problem later (blisters, loss of balance). In code, a small typo may cause a crash, while a subtle logic error may give you an incorrect result that you only discover after the program has been used.\n\nWhen you write code, you are giving the computer a set of precise instructions. Every word (called a **keyword**), every name (called a **variable**), and every symbol (like `+`, `=`, `<`) must be correct. If any part is off, the computer follows the wrong path.\n\n> **In daily life:** A bug is like a mis‑wired light switch—pressing it doesn’t turn the light on because the wiring (the code) is wrong.\n\n### Summarising the idea\n\n- **Unintended behavior** means the program does something different from what you expected.\n- Bugs arise from **syntax errors** (like misspelled names) or **logic errors** (like wrong loop conditions).\n- The computer will **exactly** follow the faulty instruction, so the error shows up as a crash, a warning, or an incorrect output.\n\n> **Remember:** A bug is not a mysterious creature; it is simply a mistake in the text you wrote for the computer. Spotting and fixing bugs is a skill you will improve with practice, just like proofreading a story for spelling and grammar.",
    "code": ""
   },
   {
-   "heading": "Basic Debugging Strategies",
-   "body": "1. **Read the error message** – Most languages show a line number and a description of the problem.\n2. **Print statements** – Insert `print()` calls to display variable values at key points.\n3. **Divide and conquer** – Comment out sections of code to isolate the faulty part.\n\nThese steps let you narrow down the cause without changing too much of the program at once.",
-   "code": "print('Value of x before division:', x)\nresult = a / b  # may raise ZeroDivisionError"
-  },
-  {
-   "heading": "Using an IDE Debugger",
-   "body": "Modern IDEs have built‑in debuggers that let you set breakpoints, step through code line by line, and watch variable values in real time. Start the debugger, pause execution at a breakpoint, and examine the program state.\n\nPractice: Open your IDE, set a breakpoint on the line that calculates a sum, and use \"Step Over\" to see how the total changes.",
+   "heading": "Reading Error Messages",
+   "body": "When a program stops working, the computer usually tells us *why* it stopped.  \nThese messages are like a note from the program that points to the part of the code that caused trouble.  \nLearning to read them is the first step in fixing bugs quickly.\n\n**Syntax errors** are the easiest to spot because the interpreter stops before the program even starts to run.  \nA syntax error means the code does not follow the rules of the programming language—much like a sentence that breaks grammar rules and cannot be understood.\n\n```python\n# Example from the “Variables and Types” lesson\nage = 20\nif age > 18\n    print(\"You are an adult\")\n```\n\nWhen we run this, Python prints:\n\n```\n  File \"example.py\", line 3\n    if age > 18\n                 ^\nSyntaxError: invalid syntax\n```\n\n> **Definition:** *Syntax error* – a mistake that makes the code impossible to parse according to the language’s grammar.\n\nWhat the message tells us:\n\n1. **File name** – where the problem lives (`example.py`).  \n2. **Line number** – the exact line (`line 3`).  \n3. **Caret (^)** – points to the character that the parser was expecting something after (`>`).  \n4. **Error type** – `SyntaxError`.  \n5. **Description** – `invalid syntax`.\n\nThe caret is like a teacher’s red pen underlining the word that doesn’t fit. In this case, we forgot the colon (`:`) after the `if` condition. Adding it fixes the error:\n\n```python\nif age > 18:\n    print(\"You are an adult\")\n```\n\n---\n\n**Runtime errors** happen after the program has started, when something goes wrong while it is executing.  \nThink of a car that runs fine until it runs out of fuel; the engine stops, and you get a warning light.\n\n```python\n# Example from the “Lists” lesson\nnumbers = [1, 2, 3]\nprint(numbers[3])\n```\n\nRunning this code yields:\n\n```\nTraceback (most recent call last):\n  File \"example.py\", line 3, in <module>\n    print(numbers[3])\nIndexError: list index out of range\n```\n\n> **Note:** *Runtime error* – an error that occurs while the program is running, often because of unexpected data.\n\nKey parts of the message:\n\n- **Traceback** – a list of calls that led to the error (here only one line).  \n- **File and line** – again tells us where to look (`example.py`, line 3).  \n- **Error type** – `IndexError`.  \n- **Description** – `list index out of range`, meaning we tried to access an element that does not exist.\n\nThe everyday comparison is trying to open the fourth drawer of a three‑drawer cabinet; the drawer isn’t there, so you get an error.\n\nFixing it means using a valid index, for example `print(numbers[2])`, or checking the length first:\n\n```python\nif len(numbers) > 3:\n    print(numbers[3])\nelse:\n    print(\"No fourth element\")\n```\n\n---\n\n**Logical errors** are the trickiest because the program runs without any error messages, but it produces the wrong result.  \nIt’s like following a recipe correctly but ending up with a dish that tastes off because a step was misunderstood.\n\n```python\n# Example from the “Loops” lesson\ntotal = 0\nfor i in range(1, 5):   # we want the sum of 1+2+3+4\n    total = i\nprint(total)\n```\n\nThe output is `4`, not `10`. No error message appears, so we must *trace* the logic.\n\n> **Common mistake:** forgetting to *accumulate* a value inside a loop.\n\nThe problem is that `total = i` overwrites `total` each iteration instead of adding to it. The correct statement is:\n\n```python\ntotal += i   # same as total = total + i\n```\n\nNow the program prints `10`.\n\nWhen you suspect a logical error, read the code line by line and ask yourself:\n\n- What value should each variable hold at this point?  \n- Does the operation match the intention described in the lesson?  \n\nUsing small print statements (or a debugger) can reveal the hidden state.\n\n---\n\n> **Remember:** Error messages give you *where* and *what* went wrong; the rest is up to you to decide *why* it happened and how to fix it. By treating each part of the message like a clue, you turn a confusing crash into a solvable puzzle.",
    "code": ""
   },
   {
-   "heading": "Error Handling with Try‑Except",
-   "body": "Instead of letting a program crash, you can catch expected errors and respond gracefully. The `try` block runs code that might fail; the `except` block runs if an error occurs.\n\nExample: When reading user input, you can catch a `ValueError` if the user types a non‑numeric string, then ask them to try again.",
-   "code": "while True:\n    try:\n        age = int(input('Enter your age: '))\n        break\n    except ValueError:\n        print('Please enter a valid number.')"
+   "heading": "Using Print Statements for Tracing",
+   "body": "When a program does not behave the way you expect, the first thing you want to know is **what is happening inside the code while it runs**.  \nOne of the simplest ways to get that information is to ask the program to *talk* to you by printing values to the screen.  \n\n> **Definition:** *Print statements* are commands that tell the computer to display a piece of text or a variable’s current value on the console (the text window where the program runs).\n\nWhy does this help? Imagine you are trying to find a leak in a garden hose. You could turn the water on and watch the whole hose at once, but it is easier to place a few small buckets at different points and see which bucket fills up. Each bucket tells you “the water has reached here”. A print statement works the same way: it places a tiny “bucket” in your code that shows you the program’s state at that exact spot.\n\n---\n\n### Step‑by‑step example: a tiny calculator\n\nSuppose we want to write a function that adds the numbers from `1` to `n`. The correct result for `n = 5` is `1+2+3+4+5 = 15`. Here is a first draft that contains a subtle bug:\n\n```python\ndef sum_to_n(n):\n    total = 0\n    i = 1\n    while i < n:          # <-- bug: should be <= n\n        total = total + i\n        i = i + 1\n    return total\n```\n\nIf we call `sum_to_n(5)`, the function returns `10` instead of `15`. Let’s use print statements to see why.\n\n#### 1. Print the loop variable `i`\n\nAdd a line inside the `while` loop:\n\n```python\nwhile i < n:\n    print(\"i is now:\", i)   # <-- new line\n    total = total + i\n    i = i + 1\n```\n\nRunning `sum_to_n(5)` now shows:\n\n```\ni is now: 1\ni is now: 2\ni is now: 3\ni is now: 4\n```\n\nWe see that the loop stops **before** `i` becomes `5`. The condition `i < n` stops the loop when `i` reaches `n`. This explains the missing `5` in the sum.\n\n#### 2. Print the running total\n\nNow we also want to watch how `total` changes:\n\n```python\nwhile i < n:\n    print(\"i:\", i, \"total before adding:\", total)\n    total = total + i\n    print(\"total after adding:\", total)\n    i = i + 1\n```\n\nOutput:\n\n```\ni: 1 total before adding: 0\ntotal after adding: 1\ni: 2 total before adding: 1\ntotal after adding: 3\ni: 3 total before adding: 3\ntotal after adding: 6\ni: 4 total before adding: 6\ntotal after adding: 10\n```\n\nNow we can see the exact arithmetic that the program performed. The numbers match the loop’s progress, confirming that the only problem is the loop condition.\n\n#### 3. Fix the bug and verify\n\nChange the condition to `i <= n` and keep the same print statements:\n\n```python\nwhile i <= n:\n    print(\"i:\", i, \"total before adding:\", total)\n    total = total + i\n    print(\"total after adding:\", total)\n    i = i + 1\n```\n\nRunning the corrected function gives:\n\n```\ni: 1 total before adding: 0\ntotal after adding: 1\ni: 2 total before adding: 1\ntotal after adding: 3\ni: 3 total before adding: 3\ntotal after adding: 6\ni: 4 total before adding: 6\ntotal after adding: 10\ni: 5 total before adding: 10\ntotal after adding: 15\n```\n\nNow the final `total` is `15`, as expected.\n\n---\n\n### How to use print statements effectively\n\n1. **Place them right before and after the line you suspect** – this shows the state before the change and after the change.  \n2. **Print both variable names and their values** so you can read the output without guessing.  \n3. **Remove or comment out the prints once the bug is fixed**; leaving many prints in production code can clutter the output and slow the program.\n\n> **Note:** Print statements are great for small scripts, but for large projects you will later learn more powerful tools called *loggers* and *debuggers*.\n\n> **Common mistake:** Forgetting to add a newline (`\\n`) or using the wrong variable name in the print statement. The program will still run, but the output will be confusing or show “NameError”.\n\n> **Remember:** Each print statement is a tiny checkpoint. Think of it as a “snapshot” of the program at that moment, just like a photo captures a scene in real life.\n\nBy inserting a few well‑chosen print statements, you can turn an invisible problem into a visible trail of clues, making debugging as straightforward as following footprints in the sand.",
+   "code": ""
+  },
+  {
+   "heading": "IDE Debugger Basics",
+   "body": "Imagine you are watching a movie, but you can pause it at any moment, look closely at a single frame, and then decide whether to keep watching or go back a few scenes.  \nA **debugger** works the same way for your program: it lets you stop the code while it is running, examine what is happening, and then continue. This is far more powerful than guessing where the problem is by adding lots of `print` statements, because you can see the exact state of every variable at the moment you pause.\n\n### Setting a breakpoint  \n\nA **breakpoint** is simply a marker that tells the debugger, “stop right here.”  \nIn most IDEs (Integrated Development Environments) you set a breakpoint by clicking in the margin next to the line number, or by pressing a shortcut such as `F9`. When the program reaches that line, execution halts before the line is executed.\n\n> **Definition:** A breakpoint is a special instruction that temporarily stops program execution at a chosen line so you can inspect the program’s state.\n\nWhy is this useful? Suppose a function `calculate_total(price, tax)` returns a wrong value. By placing a breakpoint on the line that returns the result, you can look at the values of `price`, `tax`, and any intermediate calculations right before the function finishes. This tells you instantly whether the inputs are what you expect.\n\n### Stepping through code  \n\nOnce the program is paused, you can **step** through it line by line:\n\n* **Step Over** – runs the current line and stops at the next line in the same function. If the current line calls another function, that whole function runs automatically.\n* **Step Into** – goes inside the called function, so you can watch its internal statements.\n* **Step Out** – finishes the current function and stops when control returns to the caller.\n\nThink of stepping like walking through a hallway of rooms. *Step Over* lets you walk straight to the next door, *Step Into* opens the door to explore the next room, and *Step Out* closes the current room and returns you to the hallway.\n\n### Inspecting variables  \n\nWhile the program is paused, the IDE usually shows a **variables pane**. Here you can see the current value of every variable that is in scope (i.e., accessible at that point in the code). You can also hover the mouse over a variable name in the editor to get a tooltip with its value.\n\nIf a variable holds a complex object, the debugger often lets you expand it to see its fields. For example, if `student` is an object with `name`, `age`, and `grades`, you can expand `student` and view each attribute without writing any extra code.\n\n> **Note:** Inspecting variables only works for data that already exists in memory; it cannot show you values that have not been computed yet.\n\n### Resuming execution  \n\nAfter you have looked around, you can **resume** the program. The most common ways are:\n\n* **Continue** – runs the program until the next breakpoint (or until it finishes).\n* **Run to Cursor** – tells the debugger to keep running until it reaches the line where your cursor is placed, even if there is no breakpoint there.\n\nResuming is like pressing “play” on the movie after you have paused it to check a detail.\n\n### Putting it all together  \n\n1. Open the file that contains the suspicious code.  \n2. Click in the margin next to the line where you think the error starts – a red dot appears (the breakpoint).  \n3. Start the debugger (often a green “bug” icon or `F5`).  \n4. When execution stops, look at the variables pane to see the current values.  \n5. Use **Step Over** or **Step Into** to move through the code line by line, watching how values change.  \n6. If you find the mistake, edit the code, remove the breakpoint, and run the program normally again.\n\n> **Common mistake:** Setting a breakpoint on a line that is never reached (for example, inside an `if` block whose condition is false). The debugger will never pause there, leaving you confused about why it seems “stuck.” Always verify that the code path you are interested in will actually be executed.\n\n> **Remember:** A debugger does not change your program’s logic; it only lets you observe it. Use it to confirm assumptions, not to replace good coding habits like writing clear, testable functions.",
+   "code": ""
+  },
+  {
+   "heading": "Common Debugging Strategies",
+   "body": "When a program does not behave the way you expect, the first thing to do is to treat the problem like a puzzle you can solve step by step.  \nInstead of guessing wildly, use a **systematic approach**: break the mystery into smaller, easier pieces, test each piece, and keep track of what you have already checked.  \n\n> **Definition:** *Systematic* means following a clear, ordered method rather than acting randomly.  \n\n### 1. Isolate the problem  \n\nThink of a leaky faucet. You do not replace the whole plumbing system; you first find which pipe is dripping. In code, “isolating” means finding the smallest block of statements that still produces the error.  \n\n- **Start with the error message.** It usually tells you the file and line number where something went wrong.  \n- **Run the program with only the part that surrounds that line.** Comment out (temporarily disable) code that is not related, or move the suspicious code into a separate test function.  \n- If the error disappears, you have narrowed the cause to the code you removed. If it stays, the problem lies elsewhere.  \n\n> **In daily life:** Isolating a bug is like turning off all lights in a house except the one that is flickering; you can see the problem more clearly.\n\n### 2. Simplify the code  \n\nComplex code is like a tangled ball of yarn – the more knots, the harder it is to see where a loose end is. Simplifying means rewriting the code in a clearer, shorter form while preserving its behavior.  \n\n- **Remove unnecessary variables or loops.**  \n- **Replace long expressions with intermediate variables** that have descriptive names.  \n- **Write a tiny example** that does only the essential work.  \n\nFor instance, if a function calculates a discount, you might replace a long chain of calculations with:\n\n$$\n\\text{final\\_price} = \\text{base\\_price} \\times (1 - \\text{discount\\_rate})\n$$  \n\nNow you can test this single line with a few numbers. If the result is wrong, the mistake is in the formula; if it is right, the bug is somewhere else in the surrounding code.\n\n### 3. Check your assumptions  \n\nEvery programmer makes assumptions: “I think this variable is always positive,” or “I assume the list will never be empty.” Bugs often appear when an assumption is false.  \n\n- **Write down each assumption** you are making about the data, the state of the program, or the environment.  \n- **Add explicit checks** (assertions) that will raise an error if the assumption is violated. For example:  \n\n```python\nassert len(items) > 0, \"items must not be empty\"\n```  \n\nIf the program stops with this message, you have discovered a hidden case that you did not consider.  \n\n> **Common mistake:** Forgetting to verify that input data meets the expected format; this leads to crashes later in the program.\n\n### 4. Use a “divide and conquer” mindset  \n\nAfter you have isolated and simplified, you can apply a classic computer‑science technique called *divide and conquer*: split the remaining code into two halves, test each half, and keep the half that still shows the error. Repeat until you are left with a single line that is the culprit.  \n\n- **Run the program with the first half only.**  \n- **If the error disappears, the bug is in the second half;** otherwise it is in the first.  \n\nThis method guarantees that you will find the exact location of the bug in at most $\\log_2 n$ steps, where $n$ is the number of code blocks you started with.\n\n### 5. Document what you have tried  \n\nWriting down each step prevents you from repeating the same checks and helps anyone else who looks at the code. A simple notebook entry might be:\n\n```\n- Checked line 42: variable `count` was -1 (unexpected)\n- Added assertion: count >= 0\n- Isolated function `process_items`; error moved to `load_data`\n```\n\n> **Remember:** A clear record of your debugging process is as valuable as the final fix; it turns a chaotic hunt into a repeatable method.  \n\nBy isolating the problem, simplifying the code, questioning every assumption, and using divide‑and‑conquer, you turn a confusing crash into a series of small, manageable questions. This systematic style not only finds bugs faster but also teaches you to write cleaner, more reliable programs from the start.",
+   "code": ""
+  },
+  {
+   "heading": "Introduction to Error Handling",
+   "body": "When a program runs, things can go wrong that we did not expect.  \nFor example, a program that reads a file may crash if the file does not exist, or if the program does not have permission to open it.  \n**Error handling** is the way we tell the program what to do *instead of* stopping abruptly.  \n\n> **Definition:** *Error handling* is the practice of anticipating possible problems (called *exceptions*) and writing code that deals with them gracefully.\n\n### The idea behind `try‑except`\n\nThink of a `try` block as a **sandbox** where you place code that might raise an exception.  \nIf everything inside the sandbox works, the program continues after the sandbox.  \nIf something goes wrong, Python “throws” an *exception* and immediately jumps to the matching `except` block, where you decide how to respond.\n\n```python\ntry:\n    # code that might cause an error\n    data = open('data.txt')\n    content = data.read()\nexcept FileNotFoundError:\n    # what to do if the file is missing\n    print(\"The file was not found.\")\n```\n\nIn the example, `FileNotFoundError` is a *specific* exception type.  \nWriting the name of the exception after `except` tells Python to catch **only** that kind of problem.  \nIf a different error occurs (for instance, a permission error), it will not be caught by this block and will continue to propagate upward, which is often helpful because it signals a bug you have not considered yet.\n\n> **In daily life:** Imagine you are baking a cake. You *try* to add sugar, but if you realize the sugar jar is empty, you *catch* that situation and decide to use honey instead. You don’t stop baking entirely; you just handle the missing ingredient.\n\n### Catching several exceptions\n\nSometimes one piece of code can raise more than one kind of exception. You can list several `except` clauses:\n\n```python\ntry:\n    data = open('data.txt')\n    content = data.read()\nexcept FileNotFoundError:\n    print(\"File missing – please check the filename.\")\nexcept PermissionError:\n    print(\"You do not have permission to read the file.\")\n```\n\nEach `except` handles a different scenario, keeping the program responsive to various problems.\n\n### The `finally` clause\n\nAfter the `try` and any `except` blocks finish, you may need to clean up resources, such as closing a file.  \nThe `finally` block runs **no matter what**—whether an exception was raised or not. This guarantees that cleanup code is executed.\n\n```python\ntry:\n    data = open('data.txt')\n    content = data.read()\nexcept FileNotFoundError:\n    print(\"The file was not found.\")\nfinally:\n    # This runs whether we succeeded or failed\n    try:\n        data.close()\n    except NameError:\n        # data was never created, so there is nothing to close\n        pass\n```\n\nThe inner `try‑except` inside `finally` protects us from the case where `data` was never assigned because the file could not be opened.\n\n> **Note:** Use `finally` for actions that must happen, such as releasing a lock, closing a network connection, or deleting a temporary file.\n\n### A compact, real‑world example\n\nSuppose we want a function that reads the first line of a configuration file and returns it as a string, or returns a default value if anything goes wrong.\n\n```python\ndef read_first_line(path, default=\"N/A\"):\n    try:\n        file = open(path, 'r')\n        line = file.readline().strip()\n    except (FileNotFoundError, PermissionError) as e:\n        # e holds the exception object; we can log it if we wish\n        print(f\"Warning: {e}\")\n        line = default\n    finally:\n        # Ensure the file is closed if it was opened\n        try:\n            file.close()\n        except NameError:\n            # file was never created\n            pass\n    return line\n```\n\nKey points in this function:\n\n1. The `try` block contains the risky operations: opening the file and reading a line.  \n2. The `except` clause catches two possible exceptions at once using a *tuple* `(FileNotFoundError, PermissionError)`.  \n3. Inside `except` we assign a safe fallback (`default`) so the rest of the program can continue.  \n4. The `finally` block guarantees that the file is closed, preventing resource leaks.\n\n### Why use error handling?\n\n- **User experience:** Instead of a crash, the program can show a helpful message or fallback behavior.  \n- **Safety:** Resources like files or network sockets are always released, avoiding deadlocks or data loss.  \n- **Debugging aid:** By catching specific exceptions, you can log detailed information that helps you find the root cause later.\n\n> **Common mistake:** Writing a bare `except:` without specifying an exception type. This catches *all* exceptions, including ones you did not anticipate (like `KeyboardInterrupt`). It can hide bugs and make debugging harder. Always catch the most specific exception you can.\n\n### Quick checklist\n\n- Put only the code that might fail inside `try`.  \n- List the exact exception types you expect after `except`.  \n- Use `finally` for cleanup that must happen.  \n- Avoid bare `except:`; be specific.  \n\nBy following these steps, you turn unpredictable crashes into controlled, understandable responses, making your programs more robust and user‑friendly.",
+   "code": ""
+  },
+  {
+   "heading": "Best Practices for Robust Code",
+   "body": "When you write a program, you want it to behave well even when something goes wrong. A **robust** program is one that keeps working, tells the user what happened, and does not hide problems. Below are three habits that make your code robust, explained step by step.\n\nFirst, always **write clear error messages**. An error message is the text the program shows when it cannot continue normally. It should answer three questions for the user:\n\n1. **What** went wrong?  \n2. **Why** did it happen?  \n3. **What** can the user do next?\n\nIf the message is vague, the user is left guessing, just like a broken traffic light that only flashes “Error” without telling drivers whether to stop or go. A clear message is like a sign that says, “The road ahead is closed because of construction; take the next exit.”  \n\n> **Definition:** *Error message* – a short piece of text that a program displays when it detects a problem, explaining the problem and often suggesting a fix.\n\nSecond, **validate user input** before you use it. Validation means checking that the data a user typed or selected meets the rules your program expects. For example, if you ask for a year of birth, you should verify that the input is a number and that it falls within a reasonable range (e.g., 1900‑2025). If you skip this step, the program might crash later when it tries to treat a word as a number. Think of validation like a security guard at a club: the guard checks IDs before letting anyone in, preventing trouble inside.\n\n> **In daily life:** *Validating input* is like a cashier double‑checking that the amount of cash you hand over matches the price before completing the sale.\n\nThird, **avoid silent failures**. A silent failure is when something goes wrong but the program gives no feedback at all. The user sees nothing, and the bug stays hidden. This is similar to a car that stops working but does not flash any warning lights – you only notice the problem when you’re already stranded. To prevent silent failures, always handle exceptions (unexpected events) and either fix the problem or report it clearly.\n\n> **Common mistake:** Assuming that “if it doesn’t crash, it works.” Many programs run without crashing but still produce wrong results because errors were ignored.\n\n### Checklist for Writing Robust Code\n\n- **Clear error messages**  \n  - State the problem in plain language.  \n  - Include the cause (e.g., “File not found: `data.txt`”).  \n  - Suggest a next step (e.g., “Check that the file exists in the same folder.”).\n\n- **Input validation**  \n  - Check type (number, string, date).  \n  - Check range or format (e.g., email must contain “@”).  \n  - Provide a helpful message if validation fails.\n\n- **Exception handling**  \n  - Wrap risky operations (file I/O, network calls) in `try … catch` blocks (or language‑specific equivalents).  \n  - Log the exception details for developers.  \n  - Show a user‑friendly message instead of failing silently.\n\n- **Testing**  \n  - Write small tests that feed both correct and incorrect inputs.  \n  - Verify that the program responds with the expected messages.\n\n- **Documentation**  \n  - Comment why a particular check exists.  \n  - Keep error‑message strings together so they can be reviewed easily.\n\n> **Remember:** Robust code is not about preventing every possible error; it is about *detecting* errors early, *communicating* them clearly, and *recovering* gracefully.\n\nBy following these habits, you turn a fragile script that crashes or hides problems into a reliable tool that guides its users and helps you find bugs quickly. The next time you write a function, pause and ask yourself: *Did I tell the user what went wrong? Did I check the input before using it? Did I make sure the program never fails without a message?* If the answer is “yes” to all three, you are on the right track toward robust programming.",
+   "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Find the Syntax Error",
+   "given": "A student writes a Python program to add two numbers but forgets a colon after the `def` line.",
+   "steps": [
+    {
+     "label": "Read error message",
+     "text": "The interpreter shows `SyntaxError: invalid syntax` pointing to the line with `def add(a, b)`; this tells us the line is wrong."
+    },
+    {
+     "label": "Locate the line",
+     "text": "Open the file and go to the indicated line `def add(a, b)`."
+    },
+    {
+     "label": "Identify missing token",
+     "text": "Compare with correct function definition syntax: it must end with a colon (`:`)."
+    },
+    {
+     "label": "Fix the bug",
+     "text": "Add the missing colon: `def add(a, b):`."
+    }
+   ],
+   "answer": "The program now runs without a syntax error."
+  },
+  {
+   "level": "Medium",
+   "title": "Trace a Logic Error with Print Statements",
+   "given": "A function `average(nums)` should return the average of a list, but it always returns `0`.",
+   "steps": [
+    {
+     "label": "Insert prints",
+     "text": "Add `print(\"list:\", nums)` and `print(\"sum:\", total)` inside the function to see intermediate values."
+    },
+    {
+     "label": "Run test case",
+     "text": "Call `average([2, 4, 6])` and observe the printed output."
+    },
+    {
+     "label": "Analyse output",
+     "text": "The printed list is correct, but the printed sum shows `0`, meaning the variable `total` was never updated."
+    },
+    {
+     "label": "Fix the loop",
+     "text": "Change the loop to `for n in nums: total += n` (ensure `total` starts at `0`)."
+    },
+    {
+     "label": "Verify",
+     "text": "Run the test again; prints show `list: [2, 4, 6]` and `sum: 12`, and the function returns `4.0`."
+    }
+   ],
+   "answer": "The corrected `average` function now returns the proper average (e.g., `4.0` for `[2,4,6]`)."
+  },
+  {
+   "level": "Hard",
+   "title": "Use an IDE Debugger to Resolve an Exception and Add Error Handling",
+   "given": "A program reads a filename from the user, opens the file, and counts the lines, but crashes with `FileNotFoundError` if the file does not exist.",
+   "steps": [
+    {
+     "label": "Set breakpoint",
+     "text": "In the IDE, place a breakpoint on the line `with open(filename, 'r') as f:` to pause execution before the error."
+    },
+    {
+     "label": "Run in debug mode",
+     "text": "Start debugging; when execution stops at the breakpoint, inspect the variable `filename`."
+    },
+    {
+     "label": "Step over",
+     "text": "Execute the `open` line step‑by‑step; the IDE shows the `FileNotFoundError` is raised."
+    },
+    {
+     "label": "Add try/except",
+     "text": "Wrap the file‑opening code in `try: ... except FileNotFoundError as e:` and inside the except block print a friendly message."
+    },
+    {
+     "label": "Test both paths",
+     "text": "Run the debugger again with a non‑existent file (see the handled message) and with an existing file (see correct line count)."
+    }
+   ],
+   "answer": "The program now handles missing files gracefully, printing a clear error instead of crashing, and correctly counts lines when the file exists."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a \"bug\" in a program, and why is it important to fix bugs?",
+   "a": "A bug is a mistake or error in the code that makes the program behave incorrectly or crash. It is important to fix bugs because they can cause wrong results, unexpected crashes, or security problems. Fixing bugs ensures the program works as intended and provides a good user experience."
+  },
+  {
+   "level": "Easy",
+   "q": "When you run a Python program and see the error message `NameError: name 'total' is not defined`, what does this tell you and how can you fix it?",
+   "a": "The error tells you that the variable `total` is being used before it has been created. To fix it, you need to define `total` before you use it, for example by adding `total = 0` earlier in the code or by correcting a typo if you meant a different variable name."
+  },
+  {
+   "level": "Medium",
+   "q": "You have the following code. It prints the wrong result. Use print statements to find the mistake and show the corrected code. ```python def add_numbers(a, b): result = a - b return result print(add_numbers(5, 3)) ```",
+   "a": "Step 1 – Add a print inside the function to see the values and the computed result.\n```python\ndef add_numbers(a, b):\nprint(\"a =\", a, \"b =\", b)          # show inputs\nresult = a - b\nprint(\"result before return =\", result)  # show calculation\nreturn result\n```\nRunning this prints:\n```\na = 5 b = 3\nresult before return = 2\n```\nThe function returns 2, but we expect 8 (5 + 3). The mistake is using subtraction (`-`) instead of addition (`+`).\nStep 2 – Fix the line:\n```python\ndef add_numbers(a, b):\nresult = a + b      # corrected operator\nreturn result\n```\nNow `print(add_numbers(5, 3))` outputs `8`, which is the correct result."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain how you would use an IDE’s breakpoint to find why the following loop runs forever. Include the steps you would take. ```python i = 0 while i < 5: print(i) # missing increment ```",
+   "a": "1. Open the file in the IDE (e.g., VS Code, PyCharm).\n2. Click in the margin next to the line `print(i)` to set a breakpoint (a red dot appears).\n3. Start the debugger (usually a green “play” button with a bug icon).\n4. The program stops at the breakpoint before executing `print(i)`.\n5. Inspect the variable `i` in the debugger’s variables pane – it shows `0`.\n6. Press “Step Over” to run `print(i)` and then pause again at the same breakpoint. `i` is still `0`.\n7. Because `i` never changes, the condition `i < 5` stays true, causing an infinite loop.\n8. Add the missing increment `i += 1` after the `print(i)` line, remove the breakpoint, and run again. The loop now prints 0‑4 and stops."
+  },
+  {
+   "level": "Hard",
+   "q": "A function is supposed to read a file and return the number of lines that contain the word “error”. The current implementation raises an exception when the file does not exist, and also crashes if the file is empty. Rewrite the function to handle these cases gracefully, using try‑except and appropriate checks. Show the full corrected code and explain each part. ```python def count_error_lines(filename): f = open(filename, 'r') lines = f.readlines() count = 0 for line in lines: if \"error\" in line: count += 1 return count ```",
+   "a": "1. Wrap the file opening in a try‑except block to catch `FileNotFoundError`.\n2. After opening, check if the file is empty (`if not lines:`) and return 0 instead of crashing.\n3. Use a `with` statement so the file is closed automatically.\nCorrected code:\n```python\ndef count_error_lines(filename):\ntry:\nwith open(filename, 'r') as f:\nlines = f.readlines()\nexcept FileNotFoundError:\n# File does not exist – inform the caller and return 0\nprint(f\"File '{filename}' not found.\")\nreturn 0\n# If the file is empty, lines will be an empty list\nif not lines:\nreturn 0\ncount = 0\nfor line in lines:\nif \"error\" in line.lower():   # make search case‑insensitive\ncount += 1\nreturn count\n```\nExplanation:\n- `try:` attempts to open the file.\n- `except FileNotFoundError:` catches the specific error when the file is missing, prints a friendly message, and returns 0 so the program can continue.\n- `with open(...) as f:` ensures the file is closed automatically.\n- `if not lines:` checks for an empty file; returning 0 avoids later loops on an empty list.\n- `line.lower()` makes the search case‑insensitive, a small robustness improvement.\nNow the function never crashes: missing files and empty files are handled gracefully, and it still correctly counts lines containing “error”."
+  },
+  {
+   "level": "Hard",
+   "q": "You are debugging a piece of code that intermittently raises a `ZeroDivisionError`. The snippet is: ```python import random def compute(): x = random.randint(-5, 5) y = random.randint(1, 10) return (100 / x) + (y / (x - y)) ``` Explain a systematic debugging strategy to locate the exact inputs that cause the error, and modify the function to raise a custom exception with a clear message when division by zero would occur.",
+   "a": "Strategy\n1. **Add logging/print statements** to show the values of `x` and `y` right before each division.\n2. **Run the function many times** (e.g., in a loop) to increase the chance of hitting the problematic case.\n3. When the error occurs, the printed values tell you which combination caused the zero denominator.\nImplementation:\n```python\nimport random\nclass DivisionByZeroError(RuntimeError):\n\"\"\"Custom error raised when a division by zero would happen.\"\"\"\npass\ndef compute():\nx = random.randint(-5, 5)\ny = random.randint(1, 10)\n# Debug prints\nprint(f\"x = {x}, y = {y}\")\n# Check first denominator\nif x == 0:\nraise DivisionByZeroError(\"First division: x is zero (100 / x).\")\n# Check second denominator\nif x - y == 0:\nraise DivisionByZeroError(\"Second division: x - y is zero (y / (x - y)).\")\nreturn (100 / x) + (y / (x - y))\n```\nExplanation of the fix:\n- The two `if` statements test the denominators before performing the division.\n- If a denominator would be zero, a `DivisionByZeroError` is raised with a message that tells exactly which part of the expression failed.\n- The `print` statement (or a proper logger) records the values each call, so you can still see the inputs that led to the exception when it is raised.\nTo systematically find the bad inputs without the custom exception, you could also use a loop:\n```python\nfor _ in range(1000):\ntry:\ncompute()\nexcept ZeroDivisionError:\n# The function already printed x and y, so you know the cause\nbreak\n```\nThis loop runs the function repeatedly until the built‑in `ZeroDivisionError` occurs, and the earlier prints reveal the offending `x` and `y`."
+  }
+ ],
+ "recap": "A bug is an unintended error in code that makes a program behave incorrectly. Reading error messages, using print statements, and employing IDE debuggers help locate bugs. Systematic strategies like isolating the problem and using breakpoints make debugging efficient. Error handling with try‑except lets programs respond gracefully to unexpected situations.",
  "key_terms": [
   {
    "term": "Bug",
-   "meaning": "A mistake or flaw in a program that causes it to behave incorrectly."
+   "meaning": "An unintended behavior in a program caused by a mistake in the source code."
+  },
+  {
+   "term": "Syntax error",
+   "meaning": "A mistake that breaks the language's grammar, preventing the code from being parsed."
+  },
+  {
+   "term": "Print statement",
+   "meaning": "A command that displays text or variable values on the console for tracing program flow."
+  },
+  {
+   "term": "Debugger",
+   "meaning": "A tool that lets you pause program execution, inspect variables, and step through code."
   },
   {
    "term": "Breakpoint",
-   "meaning": "A marker in the code where the debugger pauses execution."
+   "meaning": "A marker set in the code that tells the debugger to stop execution at that line."
   },
   {
-   "term": "Stack trace",
-   "meaning": "A list of function calls that shows where an error occurred."
+   "term": "Isolation",
+   "meaning": "The process of narrowing down the smallest code block that still produces an error."
   },
   {
    "term": "Exception",
-   "meaning": "An event that disrupts normal program flow, usually signaled by an error."
+   "meaning": "An event that occurs during execution indicating an error, which can be caught with try‑except."
   },
   {
-   "term": "Try‑Except",
-   "meaning": "A construct that attempts code and handles specified errors if they arise."
-  },
-  {
-   "term": "Logging",
-   "meaning": "Recording messages about program execution to help diagnose problems later."
+   "term": "Robust code",
+   "meaning": "Program code that handles errors gracefully and continues to work reliably."
   }
  ],
  "quiz": [
   {
-   "q": "What is the first step you should take when an error message appears?",
+   "q": "What does a bug represent in programming?",
    "options": [
-    "Run the program again",
-    "Ignore it",
-    "Read the message and note the line number",
-    "Delete the code"
+    "A feature",
+    "An unintended behavior",
+    "A comment",
+    "A variable"
+   ],
+   "answer": 1,
+   "why": "A bug is an unintended behavior caused by an error in the code."
+  },
+  {
+   "q": "Which type of error stops a program before it runs any code?",
+   "options": [
+    "Runtime error",
+    "Logic error",
+    "Syntax error",
+    "Exception"
    ],
    "answer": 2,
-   "why": "The message tells you where and what went wrong."
+   "why": "Syntax errors prevent the interpreter from parsing the code, so execution never starts."
   },
   {
-   "q": "Which of the following is NOT a typical use of a breakpoint?",
+   "q": "What is the purpose of a print statement when debugging?",
    "options": [
-    "To pause execution",
-    "To automatically fix bugs",
-    "To inspect variable values",
-    "To step through code"
+    "To format output for users",
+    "To change variable values",
+    "To display intermediate values",
+    "To compile the program"
    ],
-   "answer": 1,
-   "why": "Breakpoints help you examine code, not fix it automatically."
+   "answer": 2,
+   "why": "Print statements show the current values of variables, helping trace program flow."
   },
   {
-   "q": "What does the `except` block do in a try‑except statement?",
+   "q": "In an IDE debugger, what does a breakpoint do?",
    "options": [
-    "Execute code that might cause an error",
-    "Handle the error if it occurs",
-    "Skip the entire program",
-    "Print the source code"
+    "Deletes a line of code",
+    "Runs the program faster",
+    "Stops execution at a specific line",
+    "Automatically fixes bugs"
    ],
-   "answer": 1,
-   "why": "The `except` block runs only when an error is raised."
+   "answer": 2,
+   "why": "A breakpoint tells the debugger to pause execution when that line is reached."
   },
   {
-   "q": "Which debugging technique involves adding statements that display variable values?",
+   "q": "Which strategy helps you find the smallest piece of code that still causes an error?",
    "options": [
-    "Logging",
+    "Random testing",
+    "Isolation",
     "Refactoring",
-    "Compilation",
-    "Encryption"
+    "Code beautification"
    ],
-   "answer": 0,
-   "why": "Logging or print statements show internal state during execution."
+   "answer": 1,
+   "why": "Isolation narrows the problem to the smallest code block that reproduces the error."
+  },
+  {
+   "q": "What does the try‑except block allow a program to do?",
+   "options": [
+    "Ignore all errors",
+    "Skip code execution",
+    "Handle exceptions gracefully",
+    "Convert syntax errors into warnings"
+   ],
+   "answer": 2,
+   "why": "try‑except catches exceptions so the program can respond instead of crashing."
   }
  ],
  "flashcards": [
   {
-   "front": "What is a bug?",
-   "back": "A mistake in code that makes a program behave incorrectly."
+   "front": "Bug",
+   "back": "Any part of the code that causes unintended behavior."
   },
   {
-   "front": "Define breakpoint.",
-   "back": "A marker that tells the debugger to pause execution at a specific line."
+   "front": "Syntax error",
+   "back": "A mistake that violates the language's grammar, stopping parsing."
   },
   {
-   "front": "What is an exception?",
-   "back": "An error that interrupts normal program flow and can be caught with try‑except."
+   "front": "Print statement",
+   "back": "Displays text or variable values on the console for debugging."
   },
   {
-   "front": "Purpose of try‑except.",
-   "back": "To attempt risky code and handle possible errors without crashing."
+   "front": "Debugger",
+   "back": "Tool that lets you pause, step through, and inspect program state."
   },
   {
-   "front": "How does logging help debugging?",
-   "back": "It records messages about program execution, making it easier to trace problems later."
+   "front": "Breakpoint",
+   "back": "Marker that tells the debugger to halt execution at a specific line."
+  },
+  {
+   "front": "Isolation (debugging)",
+   "back": "Finding the smallest code segment that still produces the error."
+  },
+  {
+   "front": "Exception",
+   "back": "An error event raised during execution that can be caught with try‑except."
+  },
+  {
+   "front": "Robust code",
+   "back": "Code that handles errors gracefully and continues to work reliably."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -140,37 +323,76 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l09-try-except-flow",
-   "title": "Flow diagram of how try, except, and finally blocks are executed.",
-   "alt": "Flow diagram of how try, except, and finally blocks are executed.",
-   "priority": 7,
-   "picture_title": "Try‑Except Flow",
-   "kind": "labelled diagram",
-   "subject": "Shows the decision path: code enters the try block, if an error occurs control jumps to the matching except block, otherwise it continues, and finally block runs in both cases.",
-   "layout": "Flowchart with boxes for Try, Except, Finally arranged vertically, arrows indicating the flow between them.",
+   "file": "introduction-to-programming-l09-debugger-interface",
+   "title": "A typical IDE debugger showing breakpoints, step controls, and variable watch panel.",
+   "alt": "A typical IDE debugger showing breakpoints, step controls, and variable watch panel.",
+   "priority": 8,
+   "picture_title": "Debugger Interface",
+   "kind": "illustration",
+   "subject": "The screenshot illustrates the main parts of a debugger: where you set breakpoints, how you step through code, and where variable values are displayed.",
+   "layout": "IDE window centered with highlighted breakpoint line on the left, step buttons at the top, and a variable watch pane on the right.",
    "labels": [
-    "Try block",
-    "Error occurs?",
-    "Except block",
-    "Continue",
-    "Finally block"
+    "Breakpoint",
+    "Step Over",
+    "Step Into",
+    "Variable Watch"
    ],
    "after": 3
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l09-print-statement-debugging",
-   "title": "Example of console output with inserted print statements showing variable values.",
-   "alt": "Example of console output with inserted print statements showing variable values.",
-   "priority": 5,
-   "picture_title": "Print Statement Debugging",
-   "kind": "illustration",
-   "subject": "A simple console window displaying the program's output, highlighting the printed variable values that help locate a bug.",
-   "layout": "Console window image with highlighted lines of output and arrows pointing to the printed variables.",
+   "file": "introduction-to-programming-l09-try-except-flow",
+   "title": "Flow diagram of how a program executes code inside a try block and handles exceptions.",
+   "alt": "Flow diagram of how a program executes code inside a try block and handles exceptions.",
+   "priority": 7,
+   "picture_title": "Try‑Except Flow",
+   "kind": "labelled diagram",
+   "subject": "Shows the normal execution path through the try block, the point where an exception may be raised, and the two possible outcomes: catching the exception in an except block or propagating the error.",
+   "layout": "A vertical flowchart: start → try block → (if error) exception → except block → continue; arrows indicate the two paths.",
    "labels": [
-    "print()",
-    "Variable value"
+    "Start",
+    "Try Block",
+    "Exception Raised",
+    "Except Block",
+    "Continue"
    ],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l09-isolate-problem-steps",
+   "title": "Step‑by‑step illustration of isolating a bug by narrowing down code sections.",
+   "alt": "Step‑by‑step illustration of isolating a bug by narrowing down code sections.",
+   "priority": 5,
+   "picture_title": "Isolate Problem Steps",
+   "kind": "illustration",
+   "subject": "Depicts a code file split into sections with checkmarks showing which parts have been tested and a magnifying glass focusing on the problematic segment.",
+   "layout": "Three horizontal code blocks stacked; first two have green checkmarks, the third has a red magnifying glass overlay.",
+   "labels": [
+    "Tested",
+    "Problem Area"
+   ],
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Syntax Error vs Runtime Error",
+   "left": {
+    "name": "Syntax Error",
+    "points": [
+     "Detected before program runs",
+     "Stops execution immediately",
+     "Usually a typo or missing punctuation"
+    ]
+   },
+   "right": {
+    "name": "Runtime Error",
+    "points": [
+     "Detected while program runs",
+     "Stops execution at the point of failure",
+     "Often caused by bad input or logic"
+    ]
+   },
    "after": 1
   },
   {
@@ -178,62 +400,103 @@
    "title": "Basic Debugging Process",
    "steps": [
     {
-     "label": "Read",
-     "text": "Check the error message"
+     "label": "Read Error Message",
+     "text": "Look at the line number and description"
     },
     {
-     "label": "Print",
-     "text": "Add print statements"
+     "label": "Add Print Statements",
+     "text": "Show variable values at key points"
     },
     {
-     "label": "Isolate",
-     "text": "Comment out code sections"
+     "label": "Set Breakpoint",
+     "text": "Pause execution to inspect state"
+    },
+    {
+     "label": "Fix Code",
+     "text": "Correct the identified mistake"
+    },
+    {
+     "label": "Retest",
+     "text": "Run the program again to confirm"
     }
    ],
    "loop": false,
-   "after": 1
-  },
-  {
-   "type": "compare",
-   "title": "Print vs IDE Debugger",
-   "left": {
-    "name": "Print Statements",
-    "points": [
-     "Simple to add",
-     "Works anywhere",
-     "Shows values only"
-    ]
-   },
-   "right": {
-    "name": "IDE Debugger",
-    "points": [
-     "Set breakpoints",
-     "Step through code",
-     "Watch variables"
-    ]
-   },
    "after": 2
   },
   {
    "type": "facts",
-   "title": "Try‑Except Benefits",
+   "title": "Key Definitions",
    "items": [
     {
-     "value": "Prevent crash",
-     "label": "Keeps program running"
+     "value": "Bug",
+     "label": "Unintended behavior caused by code error"
     },
     {
-     "value": "Handle bad input",
-     "label": "Catches ValueError"
+     "value": "Exception",
+     "label": "An error that occurs during program execution"
     },
     {
-     "value": "User feedback",
-     "label": "Ask to retry"
+     "value": "Try‑Except",
+     "label": "Structure to handle exceptions gracefully"
     }
    ],
-   "after": 3
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Try‑Except Structure",
+   "items": [
+    {
+     "name": "try block",
+     "role": "Code that may raise an exception"
+    },
+    {
+     "name": "except block",
+     "role": "Runs when a matching exception occurs"
+    },
+    {
+     "name": "else block",
+     "role": "Runs if no exception was raised"
+    },
+    {
+     "name": "finally block",
+     "role": "Runs no matter what, for cleanup"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "steps",
+   "title": "Robust Coding Practices",
+   "steps": [
+    {
+     "label": "Clear Messages",
+     "text": "Explain what went wrong and why"
+    },
+    {
+     "label": "Validate Input",
+     "text": "Check data before using it"
+    },
+    {
+     "label": "Use Try‑Except",
+     "text": "Catch expected errors safely"
+    },
+    {
+     "label": "Log Errors",
+     "text": "Record details for later debugging"
+    },
+    {
+     "label": "Test Edge Cases",
+     "text": "Run the program with unusual inputs"
+    }
+   ],
+   "loop": false,
+   "after": 6
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

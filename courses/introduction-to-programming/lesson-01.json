@@ -1,114 +1,294 @@
 {
  "title": "What is Programming? An Overview",
- "summary": "Programming is the process of giving instructions to a computer to solve problems. This lesson introduces the basic idea of programming, its purpose, and how it differs from simply using software.",
+ "summary": "Programming is the process of giving computers step‑by‑step instructions to solve problems. This lesson introduces the basic ideas, history, and everyday impact of programming.",
+ "objectives": [
+  "Define what programming means and why it is useful",
+  "Identify common programming languages and their purposes",
+  "Explain the difference between hardware and software",
+  "Describe how a simple program is turned into actions by a computer",
+  "Recognize real‑world examples where programming solves problems"
+ ],
+ "prerequisites": "No prior knowledge of programming is required; students only need basic computer literacy.",
+ "why": [
+  "Programming powers the devices we use every day—smartphones, games, online banking, and even traffic lights. Understanding the basics helps students see how technology works and how they can shape it.",
+  "In many careers, from medicine to entertainment, the ability to think algorithmically and communicate with computers is a valuable skill. Early exposure builds confidence and opens future study or job opportunities."
+ ],
  "sections": [
   {
-   "heading": "Definition of Programming",
-   "body": "Programming is writing a set of commands that a computer can understand and execute. These commands are written in a programming language, which translates human ideas into machine actions.\n\nWhen you program, you break a problem into smaller steps and tell the computer exactly how to perform each step.",
+   "heading": "What Is a Program?",
+   "body": "A program is simply a set of written instructions that tells a computer what to do. Think of it as a list of steps that a computer follows, one after another, to achieve a goal—just like you follow steps in a recipe to bake a cake.\n\nWhen we say “written instructions,” we mean symbols that a computer can understand. These symbols are usually letters, numbers, and special characters arranged in a language that the computer can read. The computer does not understand English or any human language directly; it only understands the precise patterns we give it.\n\n> **Definition:** A **program** is a collection of instructions written in a programming language that a computer can execute to perform a specific task.\n\nWhy do we need such instructions? A computer on its own is a very fast calculator. It can add, subtract, move data, and store information, but it does not know *why* or *when* to do any of those things. Instructions give the computer a purpose and a sequence to follow. Without them, the computer would sit idle, waiting for us to press a button and then doing nothing useful.\n\nTo see how this works, compare a program to a cooking recipe:\n\n| Recipe | Program |\n|--------|----------|\n| List of ingredients | List of variables (places to store data) |\n| Steps like “mix flour and sugar” | Commands like `add(x, y)` |\n| Temperature and time | Loops that repeat actions |\n| Final dish | Desired output (e.g., a displayed picture, a saved file) |\n\nBoth a recipe and a program are written before the action starts. If you skip a step in a recipe—say, you forget to add baking powder—the cake may turn out flat. Similarly, if a program misses an instruction, the computer may produce the wrong result or stop working altogether.\n\nEach part of a program has a name:\n\n- **Instruction** – a single command that tells the computer to do one tiny thing, such as adding two numbers.\n- **Variable** – a named storage location where the program can keep data, like a bowl that holds flour.\n- **Loop** – a set of instructions that repeats, similar to “stir the sauce until it thickens.”\n- **Condition** – a test that decides which instructions to run, like “if the batter is too thick, add milk.”\n\nThese building blocks let us create very simple programs, such as:\n\n$$\n\\text{output} = \\text{add}(2, 3)\n$$\n\nThe line above tells the computer to add the numbers 2 and 3, then store the result (5) in a place called `output`. When the program runs, the computer follows the instruction, performs the addition, and finally makes the result available for us to see.\n\n> **In daily life:** Just as you wouldn’t expect a microwave to bake a cake without a recipe, you shouldn’t expect a computer to solve a problem without a program.\n\nA program can be very short—just a few lines—or it can be millions of lines long, like the software that runs a smartphone. No matter the size, the core idea stays the same: a clear, ordered set of instructions that the computer can execute step by step.\n\n> **Note:** The order of instructions matters. If you tell the computer to “print the result” before you have calculated it, the computer will try to print something that doesn’t exist yet, leading to an error.\n\nWhen we write a program, we usually use a **programming language** (such as Python, Java, or Scratch). These languages provide a friendly way for humans to write instructions, and later tools translate them into the binary code the computer truly understands.\n\n> **Remember:** A program is not magic; it is a precise, human‑written plan that a computer follows exactly as written. Any ambiguity or missing step will cause the computer to behave unexpectedly.",
    "code": ""
   },
   {
-   "heading": "Why We Need Programming",
-   "body": "Computers can only do what they are told. Programming lets us create new tools, automate repetitive tasks, and solve complex problems that would be impossible to do by hand.\n\nFor example, a weather app uses programs to collect data, calculate forecasts, and display the results on your phone.",
+   "heading": "Why Computers Need Instructions",
+   "body": "Computers are machines that do exactly what we tell them to do, no more and no less.  \nWhen we write a program, we are giving the computer a list of tiny actions that it must perform one after another. If any step is missing, ambiguous, or wrong, the computer cannot “guess” what we meant; it will either stop working or produce an unexpected result.\n\n**Why does a computer need precise steps?**  \nA computer’s brain, called the *processor*, works by moving electrical signals through circuits. These circuits can only understand two states: on (1) or off (0). To turn these binary states into useful work, the processor follows a strict set of rules called *instructions*. Each instruction tells the processor to do one very small thing, such as add two numbers, move data from one place to another, or compare two values. Because the processor cannot interpret vague ideas, we must translate our high‑level intention into a long chain of exact instructions.\n\n> **Definition:** *Instruction* – a single, unambiguous command that tells the computer to perform a specific, low‑level operation.\n\n### An everyday analogy\n\nImagine you are teaching a friend how to make a cup of tea. If you simply say, “Make tea,” the friend might not know whether you want black tea, green tea, or herbal tea, nor how much water to use, how long to steep, or whether to add sugar. To guarantee the same result every time, you would break the task into clear, ordered steps:\n\n1. Fill the kettle with 250 ml of water.  \n2. Turn the kettle on and wait until the water boils.  \n3. Place one tea bag in a cup.  \n4. Pour the boiling water into the cup.  \n5. Let the tea steep for 3 minutes.  \n6. Remove the tea bag.  \n7. Add one teaspoon of sugar (optional).  \n8. Stir the drink.  \n\nEach step is precise, leaves no room for interpretation, and must be followed in the given order. If any step is omitted—say, forgetting to boil the water—the final result will be wrong (cold, weak tea). The same principle applies to computers: a program is just a longer version of this step‑by‑step recipe.\n\n### Translating the tea recipe into computer language\n\nWhen we write the tea recipe in a programming language, the computer sees something like:\n\n```python\nwater = 250          # milliliters\nboil(water)          # heat water until it reaches 100°C\ncup = add_tea_bag()\npour(water, cup)\nwait(180)            # seconds = 3 minutes\nremove_tea_bag(cup)\nadd_sugar(cup, 1)    # teaspoons\nstir(cup)\n```\n\nEven though the code looks simple, each line corresponds to a very specific instruction that the processor can execute. The computer does not understand “make tea” as a concept; it only understands the exact commands we give it.\n\n> **In daily life:** Think of a GPS navigation system. It does not decide on its own which road you should take; it follows the map data and the route you asked for, step by step, until you reach the destination.\n\n### What happens if instructions are vague?\n\nSuppose we wrote the following line instead:\n\n```python\nmake_tea()\n```\n\nThe computer would look for a definition of `make_tea`. If none exists, it will raise an *error* and stop. If a definition exists but is incomplete—perhaps it forgets to boil the water—the program will run, but the cup will contain cold water, not tea. This illustrates a *common mistake*:\n\n> **Common mistake:** Assuming the computer can fill in missing details. Always provide every necessary step, even those that seem obvious to a human.\n\n### Why precision matters for larger programs\n\nSmall programs like the tea maker are easy to check manually, but real software can contain thousands or millions of instructions. If any single instruction is wrong, the whole program may crash, produce wrong answers, or behave unpredictably. By insisting on precise, step‑by‑step instructions, programmers can:\n\n- **Test** each part individually (unit testing).  \n- **Debug** by locating the exact line where something goes wrong.  \n- **Maintain** the code, because other programmers can read the clear sequence of actions.\n\n> **Remember:** A computer follows a chain of exact instructions; it never guesses. Writing clear, detailed steps is the foundation of reliable programming.",
    "code": ""
   },
   {
-   "heading": "From Idea to Program",
-   "body": "The typical flow starts with an idea, then you design an algorithm, write code in a language, test it, and finally run it on a computer. Each step refines the solution and catches mistakes early.\n\nThink of it like cooking: you plan the recipe (algorithm), gather ingredients (variables), follow the steps (code), taste and adjust (debug), and serve the dish (run the program).",
+   "heading": "History of Programming",
+   "body": "Programming did not appear overnight. It grew step by step, just like a city that starts with a few huts and later becomes a bustling metropolis. Understanding the history helps us see why we have so many different languages today and why some ideas keep coming back.\n\nIn the very beginning, computers were huge machines that could only understand **binary** – a series of 0s and 1s. Humans could not type those directly, so they used **punch cards**. A punch card is a stiff piece of paper with holes punched in specific positions. Each pattern of holes represented a single instruction or a piece of data. An operator would feed a stack of cards into the computer, and the machine would read the holes as its program.\n\n> **Note:** *Punch cards* were the first practical way to give a computer a set of instructions without wiring each step by hand.\n\nWhy were punch cards useful? Imagine you want to bake a cake. You could write the whole recipe on a single sheet of paper and hand it to a robot chef. If you later want to change the recipe, you would have to rewrite the whole sheet. With punch cards, each card holds one step, so you can add, remove, or reorder steps easily—just like adding or removing pages in a cookbook.\n\nAs computers became a bit more powerful, people realized that writing every instruction in binary or on punch cards was tedious and error‑prone. In the 1950s, the first **high‑level programming languages** were created. A high‑level language lets you write instructions using words that are closer to ordinary English or mathematics, instead of raw 0s and 1s.\n\n* **FORTRAN** (FORmula TRANslation) was introduced in 1957. It was designed for scientists and engineers who needed to solve mathematical problems. Instead of writing a long series of binary operations, a programmer could write something like  \n\n  $$\\text{result} = a \\times b + c$$  \n\n  and the compiler would translate that into machine code.\n\n* **COBOL** (COmmon Business Oriented Language) appeared in 1959. Its goal was to make programming accessible to people who worked with business data, such as payroll or inventory. A COBOL statement might read  \n\n  `ADD SALARY TO TOTAL PAYROLL GIVING NEW‑TOTAL.`  \n\n  which reads almost like a sentence.\n\nThese languages were a huge step forward because they let people think about *what* they wanted the computer to do, not *how* to flip every tiny switch.\n\n> **Definition:** A **compiler** is a program that translates code written in a high‑level language into the computer’s native machine language before the program runs.\n\nThe next big change came in the 1970s and 1980s with the rise of **personal computers** (PCs). Machines like the Apple II, IBM PC, and Commodore 64 brought computing into homes and schools. Because many more people could now own a computer, there was a demand for languages that were easy to learn and quick to try out. This led to languages such as **BASIC** (Beginner’s All‑purpose Symbolic Instruction Code), which let a teenager write a simple game in a single afternoon.\n\nIn the 1990s and 2000s, the internet exploded, and with it came new programming needs: building web pages, handling user interactions, and creating large‑scale software systems. Languages like **Java**, **C++**, **Python**, and **JavaScript** appeared or grew popular.\n\n* **Python** (released in 1991) emphasizes readability. Its syntax looks almost like plain English, e.g., `for item in list: print(item)`. This makes it a favorite for beginners and for rapid development in scientific research.\n\n* **JavaScript** (created in 1995) was built to run inside web browsers, allowing webpages to become interactive. When you click a button and a menu slides down, JavaScript is usually doing the work.\n\nThese modern languages share a common goal: let programmers express ideas quickly while the computer handles the low‑level details.\n\n> **Remember:** The evolution from punch cards → high‑level languages → personal computers → modern languages shows a steady move toward making programming *more human‑friendly* and *more widely accessible*.\n\nToday, you can write a program on a phone, run it in the cloud, or embed it in a tiny sensor. All of these possibilities rest on the same principle discovered decades ago: give a computer a clear set of instructions, and it will follow them exactly. By looking at the timeline, we see how each generation of tools tried to reduce the gap between human thought and machine execution, making programming an ever more powerful skill for everyday life.",
+   "code": ""
+  },
+  {
+   "heading": "Programming Languages Overview",
+   "body": "Programming languages are the tools that let us **talk to computers**.  \nJust as we need a spoken language—English, Spanish, Mandarin—to give instructions to other people, we need a programming language to give instructions to a computer. The computer itself only understands tiny electrical signals called *bits* (0s and 1s). A programming language translates our human ideas into those bits in a way that the computer can follow.\n\n> **Definition:** A *programming language* is a formal set of rules that lets a programmer write instructions that a computer can execute.\n\nWhy do we need many different languages? Think about the variety of jobs people do. A carpenter uses a hammer, a saw, and a drill, each suited to a specific task. Similarly, different programming languages are designed to make certain kinds of work easier, faster, or safer. Some languages are great for handling large amounts of data, others shine when building web pages, and some are close to the hardware so they can control a robot’s motors directly.\n\n### A few popular languages and what they are usually used for\n\n| Language | Typical Use | Why it fits the job |\n|----------|-------------|---------------------|\n| **Python** | Data analysis, scientific computing, machine learning, quick scripts | Its syntax (the way code is written) is simple and reads almost like English, so it lets you write complex ideas with few lines. |\n| **JavaScript** | Interactive web pages, front‑end development, some server‑side work | It runs inside web browsers, so any code you write can instantly affect what a user sees on a webpage. |\n| **Java** | Large enterprise applications, Android apps, teaching object‑oriented concepts | It enforces strict rules that help keep big projects organized and portable across many devices. |\n| **C** | Operating systems, embedded systems, performance‑critical software | It is close to the computer’s hardware, giving the programmer fine‑grained control over memory and speed. |\n| **C#** | Windows desktop apps, game development with Unity, cloud services | It combines the safety of higher‑level languages with powerful libraries for graphics and networking. |\n| **Ruby** | Web applications (especially with the Rails framework) | Its design focuses on developer happiness, allowing rapid building of web services. |\n\n> **In daily life:** Choosing a programming language is like picking the right tool from a toolbox. If you need to tighten a screw, you use a screwdriver, not a hammer. If you need to paint a wall, you use a brush, not a wrench. The same principle applies to code: you pick the language that best matches the problem you are solving.\n\n### How languages differ\n\n1. **Syntax** – the exact words and punctuation you must use. Python, for example, uses indentation (spaces at the start of a line) to show blocks of code, while C uses curly braces `{}`.\n2. **Level of abstraction** – how far the language hides the computer’s low‑level details. High‑level languages like Python hide memory management, whereas low‑level languages like C expose it.\n3. **Execution model** – some languages are *compiled* (turned into machine code before they run) and some are *interpreted* (read and executed line‑by‑line at runtime). This affects speed and how easy it is to test small changes.\n\n> **Note:** A *compiler* translates the whole program into machine code before the computer starts running it, while an *interpreter* translates each line on the fly. Compiled languages (e.g., C) are usually faster; interpreted languages (e.g., Python) are often easier for beginners.\n\n### Putting it together\n\nWhen you start learning to program, you do not need to master every language at once. Begin with one that matches the kind of projects you find exciting. If you enjoy exploring data sets, Python is a friendly entry point. If you love designing interactive websites, JavaScript will let you see results instantly in a browser. As you grow, you will notice patterns that repeat across languages—variables, loops, conditionals—so switching between them becomes smoother.\n\n> **Remember:** The purpose of a programming language is to let you express ideas clearly to a computer. Choose the language that makes your ideas easiest to write, read, and maintain for the task at hand.",
+   "code": ""
+  },
+  {
+   "heading": "From Code to Action: Compilation and Interpretation",
+   "body": "When you write a program you start with **source code** – the words and symbols that you type on the screen.  \nThe computer, however, does not understand those words directly. It only understands tiny instructions called **machine code**, which are just long strings of 0s and 1s.  \nSo something has to change your source code into machine code before the computer can do anything with it. This change is called **translation**.\n\n> **Definition:** *Translation* is the process of turning the program you wrote (source code) into the language the computer understands (machine code).\n\nThere are two main ways to translate a program: **compilation** and **interpretation**. Both achieve the same goal, but they work at different times and in slightly different ways.\n\n### Compilation – a translator that works ahead of time\nThink of a compiler as a professional translator who reads an entire book in English and writes a complete version of the book in French before anyone starts reading it. In programming, a **compiler** reads the whole source file, checks it for mistakes, and produces a separate file that contains only machine code. This new file can be run many times without needing the original source code again.\n\nWhy is this useful?  \n- The computer can run the compiled program very quickly because it already has the machine code ready.  \n- Errors are found once, during the compilation step, so the program will not start if there are serious mistakes.\n\nA simple equation that shows the relationship is  \n\n$$\n\\text{Compiled program} = \\text{Compiler}(\\text{Source code})\n$$\n\nwhere the compiler is a function that takes source code as input and outputs a compiled program.\n\n### Interpretation – an interpreter that works on the spot\nAn interpreter is more like a live interpreter at a conference. As the speaker says each sentence in English, the interpreter immediately says the same sentence in French, word by word. In programming, an **interpreter** reads your source code line by line, translates each line into machine code, and executes it right away. No separate machine‑code file is created.\n\nWhy might you choose this method?  \n- You can test small changes instantly, which is great for learning and for scripts that need to be flexible.  \n- The same source code can run on many different computers without recompiling, as long as each computer has the appropriate interpreter.\n\nThe relationship can be written as  \n\n$$\n\\text{Result of running} = \\text{Interpreter}(\\text{Source code})\n$$\n\n### Putting the ideas together\nBoth compilation and interpretation start with the same source code, but they differ in **when** the translation happens:\n\n| Step | Compiler | Interpreter |\n|------|----------|--------------|\n| Read source code | All at once | One line at a time |\n| Translate to machine code | Before execution | During execution |\n| Produce separate file | Yes (machine code) | No |\n| Run speed | Usually faster | Usually slower |\n\n> **In daily life:** Think of a compiled program like a pre‑cooked meal you can heat up quickly, while an interpreted program is like a chef cooking each dish right in front of you as you order it.\n\n### Common mistake\n> **Common mistake:** Believing that a compiled program never needs any checking after it is built. Even compiled programs can still have logical errors that only appear when they run, so testing is still important.\n\n### Remember\n> **Remember:** The goal of both compilation and interpretation is the same – to turn human‑friendly source code into machine actions. The choice between them depends on factors like speed, flexibility, and the development stage.\n\nBy understanding these two translation methods, you can decide which one fits your project best and appreciate how the simple words you write become the powerful actions a computer performs.",
+   "code": ""
+  },
+  {
+   "heading": "Everyday Examples of Programs",
+   "body": "Imagine you open an app on your phone to add two numbers. Behind the smooth screen you are actually watching a **program** – a set of step‑by‑step instructions that tell the computer exactly what to do.  \n> **Definition:** *A program is a list of commands that a computer follows to solve a specific problem.*\n\nThe problem the calculator app solves is simple: **turn a user’s request for a calculation into the correct answer**. Without a program, the computer would not know how to read the numbers you typed, how to choose the right mathematical operation, or how to display the result. The program takes the raw input, performs the arithmetic, and shows the answer, all in a fraction of a second.\n\nThink of a program like a recipe. A recipe lists ingredients and the order in which to mix them, so anyone who follows it can bake the same cake. In the same way, a program lists data (the ingredients) and operations (the steps) so the computer can produce the same output every time.\n\n---\n\n### Video Game\n\nWhen you play a video game, the program is responsible for many things at once: drawing graphics, detecting when you press a button, moving characters, and keeping score. The problem it solves is **creating an interactive, entertaining experience that reacts to the player’s actions**.\n\nA simple example is a “snake” game. The program must:\n\n1. Draw the snake and the food on the screen.  \n2. Detect which arrow key you press.  \n3. Move the snake in that direction.  \n4. Check if the snake’s head touches the food (to grow the snake) or a wall (to end the game).  \n\nEach of these steps is a small instruction that, when repeated many times per second, makes the game feel alive.  \n\n> **In daily life:** *A video game program is like a director who constantly tells actors (characters) where to move and what to say based on the audience’s (player’s) reactions.*\n\n---\n\n### Traffic‑Light Controller\n\nAt a busy intersection you see lights change from red to green to yellow. A traffic‑light controller program decides **when each light should turn on** so cars and pedestrians can move safely. The problem it solves is *preventing collisions and reducing waiting time*.\n\nThe program works like a timed schedule:\n\n1. Turn the north‑south green light on for 30 seconds.  \n2. Switch it to yellow for 5 seconds.  \n3. Turn it red and give the east‑west direction a green light for 30 seconds.  \n4. Repeat forever.\n\nMore advanced controllers also use sensors to detect cars waiting, adjusting the timing to keep traffic flowing smoothly.  \n\n> **Note:** *Even a tiny program like this must be reliable; a mistake could cause accidents, so engineers test it many times before installation.*\n\n---\n\n### Social‑Media Feed\n\nWhen you scroll through Facebook, Instagram, or TikTok, a program decides **which posts appear at the top of your feed**. The problem it solves is *showing you content you are most likely to enjoy, while keeping the platform engaging*.\n\nThe feed algorithm does many things:\n\n1. Collect data about your past likes, comments, and the people you follow.  \n2. Score each new post based on relevance, recency, and popularity.  \n3. Sort the posts from highest score to lowest.  \n4. Send the ordered list to your phone or computer.\n\nBecause the program runs millions of times each second for millions of users, it must be fast and efficient.  \n\n> **Remember:** *A program is only as good as the problem it solves; if the algorithm ranks irrelevant posts, the user experience suffers.*\n\n---\n\n### Putting It All Together\n\nAll four examples share a common pattern:\n\n- **Input:** the numbers you type, the button you press, the cars waiting, or your past activity.  \n- **Processing:** arithmetic, game logic, timing rules, or scoring formulas.  \n- **Output:** the answer shown, the game screen updated, the light changed, or the feed displayed.\n\nWhen you understand this input‑process‑output cycle, you can see how any program, no matter how big or small, follows the same basic idea. By breaking a real‑world problem into clear steps, programmers turn everyday needs—calculating, playing, traveling safely, staying informed—into instructions a computer can follow.",
+   "code": ""
+  },
+  {
+   "heading": "Key Terms to Remember",
+   "body": "A **program** is simply a set of instructions that tells a computer what to do.  \nThink of it like a recipe: each step tells the cook (the computer) which ingredients to add, how long to stir, and when to bake. Without a clear recipe, the dish would never be finished, just as a computer cannot act without a program.\n\n**code** is the written form of those instructions. It is the text that programmers type, using symbols, words, and numbers that a computer can eventually understand.  \n> **Definition:** *Code* is the human‑readable text that describes a program’s instructions.\n\nA **programming language** is the particular set of rules and symbols that we use to write code. Different languages have different “grammars,” just as English and Spanish have different ways to form sentences.  \n> **Note:** A language does not change what the computer ultimately does; it only changes how we express the instructions.\n\nBefore a computer can follow the code, it must be transformed into a form it can execute directly. This is where **compilers** and **interpreters** come in.\n\n- A **compiler** reads the whole program, translates it all at once into machine language (the 0s and 1s the hardware understands), and saves the result as an executable file. This is like translating an entire book into another language before anyone reads it.  \n- An **interpreter** reads the program line by line, translating each instruction on the fly and executing it immediately. This is similar to a live translator who tells you the meaning of each sentence as you hear it.\n\nBoth methods achieve the same goal—turning code into actions—but they differ in speed and flexibility. Compiled programs often run faster because the translation is done ahead of time, while interpreted programs are easier to test and modify quickly.\n\nAn **algorithm** is a step‑by‑step plan for solving a problem. It is the logical idea behind a program, independent of any specific language. For example, the algorithm for making a cup of tea might be: 1) boil water, 2) place tea bag in cup, 3) pour water, 4) wait, 5) remove bag. The same algorithm can be written in many programming languages.  \n> **In daily life:** An algorithm is like a set of directions on a map; the route stays the same even if you write the directions in English, French, or symbols.\n\n**Software** refers to all the programs and related data that run on a computer. It includes operating systems, applications, and utilities—everything that isn’t the physical machine itself.  \n**Hardware** is the tangible parts of a computer: the processor, memory chips, screen, keyboard, and so on. Hardware executes the instructions that software provides.  \n> **Remember:** Software tells hardware what to do; hardware cannot act without software.\n\nPutting the pieces together, a typical workflow looks like this:\n\n$$\\text{Algorithm} \\;\\xrightarrow{\\text{write in a language}}\\; \\text{Code} \\;\\xrightarrow{\\text{compile / interpret}}\\; \\text{Executable actions on hardware}$$\n\nBelow is a quick glossary of the key terms introduced:\n\n| Term | Simple definition |\n|------|-------------------|\n| **Program** | A complete set of instructions that performs a task. |\n| **Code** | The written text of a program, using a programming language. |\n| **Language** | The set of rules and symbols used to write code. |\n| **Compiler** | A tool that translates all code into machine language before it runs. |\n| **Interpreter** | A tool that translates and runs code line by line. |\n| **Algorithm** | A logical step‑by‑step plan for solving a problem. |\n| **Software** | All the programs and data that run on a computer. |\n| **Hardware** | The physical components of a computer that execute software. |\n\nUnderstanding these words is the first step toward writing your own programs. Each term builds on the previous one, just as you need a recipe, ingredients, and cooking tools before you can bake a cake. Keep this glossary handy, and you’ll find it easier to follow later lessons about how code becomes action.",
    "code": ""
   }
  ],
- "key_terms": [
+ "examples": [
   {
-   "term": "Programming Language",
-   "meaning": "A formal language used to write instructions that a computer can execute."
+   "level": "Easy",
+   "title": "What is a program?",
+   "given": "A student wants to know what a program is and give one simple example.",
+   "steps": [
+    {
+     "label": "Define",
+     "text": "Explain that a program is a set of instructions a computer follows."
+    },
+    {
+     "label": "Example",
+     "text": "Show a short program: “print('Hello, world!')” tells the computer to display text."
+    },
+    {
+     "label": "Reason",
+     "text": "Clarify that each line tells the computer what to do, just like a recipe."
+    }
+   ],
+   "answer": "A program is a list of step‑by‑step instructions for a computer; the example program makes the computer show “Hello, world!”."
   },
   {
-   "term": "Algorithm",
-   "meaning": "A step‑by‑step procedure for solving a specific problem."
+   "level": "Medium",
+   "title": "How does a program become actions? (Compilation vs. Interpretation)",
+   "given": "A learner has a program written in C and wants to know how it runs on a computer.",
+   "steps": [
+    {
+     "label": "Write",
+     "text": "Write a tiny C program that adds two numbers."
+    },
+    {
+     "label": "Compile",
+     "text": "Use a compiler to translate the C code into machine code (binary) that the CPU can execute."
+    },
+    {
+     "label": "Run",
+     "text": "Execute the compiled program; the computer performs the addition and shows the result."
+    },
+    {
+     "label": "Compare",
+     "text": "Explain that an interpreted language (e.g., Python) would read each line and execute it directly without a separate compilation step."
+    }
+   ],
+   "answer": "The C program must be compiled into machine code before running, while an interpreted program is executed line by line; both turn code into actions, but compilation creates a standalone executable."
+  },
+  {
+   "level": "Hard",
+   "title": "Classify programming languages by level and decide which to use for a new project.",
+   "given": "A team must choose a language to develop a mobile game that runs fast and accesses hardware graphics features.",
+   "steps": [
+    {
+     "label": "List",
+     "text": "List language levels: low‑level (assembly), mid‑level (C/C++), high‑level (Python, JavaScript)."
+    },
+    {
+     "label": "Evaluate",
+     "text": "Assess speed and hardware control: low‑level and mid‑level give high performance; high‑level is slower but easier to write."
+    },
+    {
+     "label": "Match",
+     "text": "Match project needs (fast graphics, hardware access) with language strengths."
+    },
+    {
+     "label": "Decide",
+     "text": "Choose C++ (a mid‑level language) because it offers high performance and direct graphics library support while still being manageable."
+    }
+   ],
+   "answer": "For a fast, hardware‑intensive mobile game, a mid‑level language like C++ is the appropriate choice."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a program in simple terms?",
+   "a": "A program is a set of instructions that tells a computer what to do. Think of it like a recipe: each step (instruction) tells the computer how to process data and produce a result."
+  },
+  {
+   "level": "Easy",
+   "q": "Why can’t we just tell a computer what we want in plain English?",
+   "a": "Computers only understand binary code (0s and 1s). Plain English is ambiguous and has many meanings. Therefore we write instructions in a programming language that can be translated into binary so the computer can execute them exactly."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between compiled and interpreted languages, giving one example of each.",
+   "a": "A compiled language is first translated by a compiler into machine code (binary) that the computer can run directly. Example: C++. An interpreted language is read line‑by‑line by an interpreter, which translates each instruction to machine code on the fly. Example: Python. The key difference is when the translation happens: before execution for compiled languages, during execution for interpreted languages."
+  },
+  {
+   "level": "Medium",
+   "q": "List three historical milestones in the development of programming and describe why each was important.",
+   "a": "1. **Assembly language (1940s‑1950s)** – Allowed programmers to use short mnemonic codes instead of raw binary, making coding faster and less error‑prone.\n2. **FORTRAN (1957)** – First high‑level language designed for scientific calculations; introduced concepts like loops and conditionals, expanding programming beyond hardware specialists.\n3. **Object‑Oriented Programming (1970s‑1980s, e.g., Smalltalk, C++)** – Introduced the idea of objects that combine data and behavior, making large software systems easier to design, reuse, and maintain."
+  },
+  {
+   "level": "Hard",
+   "q": "A simple program adds two numbers entered by the user and prints the result. Write pseudocode for this program, then describe how a compiler would transform this pseudocode into an executable program.",
+   "a": "**Pseudocode**\n1. Start\n2. Prompt user: “Enter first number:”\n3. Read input → variable A\n4. Prompt user: “Enter second number:”\n5. Read input → variable B\n6. Compute C = A + B\n7. Display “Result is ” + C\n8. End\n**Compilation steps**\n1. **Lexical analysis** – The compiler scans the source code, breaking it into tokens (keywords, identifiers, operators).\n2. **Syntax analysis** – Tokens are organized into a parse tree according to the language grammar, confirming the structure is correct.\n3. **Semantic analysis** – The compiler checks types (A and B are numbers) and ensures operations like ‘+’ are valid.\n4. **Intermediate code generation** – An abstract representation (e.g., three‑address code) is created: `t1 = read(); t2 = read(); t3 = t1 + t2; write(t3);`.\n5. **Optimization** – The compiler may simplify code, but for this tiny program little change occurs.\n6. **Code generation** – The intermediate code is translated into machine instructions specific to the target CPU.\n7. **Assembly & linking** – Machine code is assembled into an object file and linked with runtime libraries (for I/O).\n8. **Executable file** – The final binary contains the program’s instructions ready to be loaded and run by the operating system."
+  },
+  {
+   "level": "Hard",
+   "q": "Consider the following statement: “A programming language is a formal language that expresses algorithms.” Break down this definition and explain each part with an example.",
+   "a": "**Breakdown**\n- **Formal language** – A set of symbols and rules that are precisely defined, leaving no ambiguity. Example: In Python, the syntax rule that a colon `:` must follow an `if` condition (`if x > 0:`).\n- **Expresses** – Allows us to write down ideas in a way the computer can understand. Example: Writing `total = price * quantity` expresses the calculation of total cost.\n- **Algorithms** – Step‑by‑step procedures for solving a problem. Example: An algorithm to find the largest number in a list:\n1. Set `max` to first element.\n2. For each remaining element, if it is greater than `max`, replace `max`.\n3. After the loop, `max` holds the largest value.\nPutting it together: A programming language provides a clear, rule‑based way (formal language) to write down step‑by‑step solutions (algorithms) that a computer can execute. Python, for instance, lets us write the above algorithm as:\n```python\nmax_val = numbers[0]\nfor n in numbers[1:]:\nif n > max_val:\nmax_val = n\n```"
+  }
+ ],
+ "recap": "A program is a set of precise instructions written in a programming language that tells a computer what to do. Computers need exact steps because they only understand binary signals. Programming languages act as translators between human ideas and machine code, and programs can be turned into executable form by compiling or interpreting. Understanding the history and purpose of programming helps us see why many languages exist and how they are used in everyday apps.",
+ "key_terms": [
+  {
+   "term": "Program",
+   "meaning": "A collection of instructions written in a programming language that a computer can execute to perform a specific task."
+  },
+  {
+   "term": "Programming language",
+   "meaning": "A formal set of rules and symbols that lets programmers write code which can be translated into machine instructions."
   },
   {
    "term": "Code",
-   "meaning": "The written instructions in a programming language."
+   "meaning": "The human‑readable text of instructions written in a programming language."
   },
   {
-   "term": "Debugging",
-   "meaning": "The process of finding and fixing errors in a program."
+   "term": "Compilation",
+   "meaning": "The process of translating the entire source code into machine code before the program runs."
   },
   {
-   "term": "IDE",
-   "meaning": "Integrated Development Environment, a software application that helps write, test, and run code."
+   "term": "Interpretation",
+   "meaning": "The process of translating and executing source code line‑by‑line at runtime."
+  },
+  {
+   "term": "Binary",
+   "meaning": "The base‑2 number system using only 0 and 1, which is how computers represent data and instructions."
+  },
+  {
+   "term": "Punch card",
+   "meaning": "An early method of storing programs as paper cards with holes representing binary data."
+  },
+  {
+   "term": "Processor",
+   "meaning": "The computer's brain that carries out instructions by manipulating electrical signals."
   }
  ],
  "quiz": [
   {
-   "q": "What is the main purpose of programming?",
+   "q": "What is the main purpose of a program?",
    "options": [
-    "To play games",
-    "To give computers instructions",
-    "To design graphics",
-    "To browse the internet"
-   ],
-   "answer": 1,
-   "why": "Programming is about writing instructions that a computer can follow."
-  },
-  {
-   "q": "Which term describes a step‑by‑step solution to a problem?",
-   "options": [
-    "Variable",
-    "Function",
-    "Algorithm",
-    "Compiler"
+    "To store data",
+    "To display graphics",
+    "To give a computer precise instructions",
+    "To connect to the internet"
    ],
    "answer": 2,
-   "why": "An algorithm is a precise sequence of steps to solve a problem."
+   "why": "A program tells the computer exactly what actions to perform."
   },
   {
-   "q": "What does IDE stand for?",
+   "q": "Why can't computers understand human language directly?",
    "options": [
-    "International Development Engine",
-    "Integrated Development Environment",
-    "Interactive Data Editor",
-    "Internal Device Emulator"
+    "They lack memory",
+    "They only process binary signals",
+    "They need a monitor",
+    "They require electricity"
    ],
    "answer": 1,
-   "why": "IDE means Integrated Development Environment."
+   "why": "Computers operate using binary (0s and 1s) and need precise instructions."
   },
   {
-   "q": "Which activity is part of the programming process?",
+   "q": "Which of the following best describes a programming language?",
    "options": [
-    "Cooking dinner",
-    "Debugging code",
-    "Painting a picture",
-    "Listening to music"
+    "A type of hardware",
+    "A set of rules for writing code",
+    "A computer virus",
+    "An operating system"
    ],
    "answer": 1,
-   "why": "Debugging involves locating and fixing errors in code."
+   "why": "A programming language provides the syntax and semantics for writing code."
+  },
+  {
+   "q": "What is the role of a compiler?",
+   "options": [
+    "Run code line by line",
+    "Translate source code into machine code before execution",
+    "Store user data",
+    "Create graphics"
+   ],
+   "answer": 1,
+   "why": "A compiler converts the whole program into machine code ahead of time."
+  },
+  {
+   "q": "How does an interpreter differ from a compiler?",
+   "options": [
+    "It translates code after each line runs",
+    "It compiles faster",
+    "It only works with binary",
+    "It creates hardware"
+   ],
+   "answer": 0,
+   "why": "An interpreter translates and executes code one statement at a time during runtime."
+  },
+  {
+   "q": "What were punch cards used for in early computing?",
+   "options": [
+    "Displaying images",
+    "Storing programs as patterns of holes",
+    "Connecting networks",
+    "Running graphics"
+   ],
+   "answer": 1,
+   "why": "Punch cards held instructions encoded as holes that the computer could read."
   }
  ],
  "flashcards": [
   {
-   "front": "Programming Language",
-   "back": "A language used to write instructions for a computer."
+   "front": "Program",
+   "back": "A set of instructions written in a programming language that a computer can execute."
   },
   {
-   "front": "Algorithm",
-   "back": "A clear, ordered set of steps to solve a problem."
+   "front": "Programming language",
+   "back": "A formal set of rules and symbols for writing code that can be translated into machine instructions."
   },
   {
    "front": "Code",
-   "back": "The actual text written in a programming language."
+   "back": "Human‑readable text of a program written in a programming language."
   },
   {
-   "front": "Debugging",
-   "back": "Finding and fixing mistakes in a program."
+   "front": "Compilation",
+   "back": "Translating the entire source code into machine code before the program runs."
   },
   {
-   "front": "IDE",
-   "back": "Software that helps you write, test, and run code."
+   "front": "Interpretation",
+   "back": "Translating and executing source code line‑by‑line at runtime."
+  },
+  {
+   "front": "Binary",
+   "back": "The base‑2 system (0 and 1) that computers use to represent data and instructions."
+  },
+  {
+   "front": "Punch card",
+   "back": "Early storage medium where holes represented binary instructions for a computer."
+  },
+  {
+   "front": "Processor",
+   "back": "The part of a computer that executes instructions by manipulating electrical signals."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -139,114 +319,123 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l01-algorithm-flowchart",
-   "title": "Shows the steps from idea to running a program.",
-   "alt": "Shows the steps from idea to running a program.",
-   "priority": 7,
-   "picture_title": "Algorithm Flowchart",
+   "file": "introduction-to-programming-l01-program-flow-diagram",
+   "title": "Shows how a program moves from source code to machine actions.",
+   "alt": "Shows how a program moves from source code to machine actions.",
+   "priority": 9,
+   "picture_title": "Program Flow Diagram",
    "kind": "labelled diagram",
-   "subject": "A simple flowchart that visualises the process: start with an idea, design an algorithm, write code, test/debug, and run the program.",
-   "layout": "Vertical flowchart with boxes for each step, arrows connecting them, and brief labels inside each box.",
+   "subject": "A step‑by‑step visual of the translation process: source code → compiler/interpreter → machine code → execution on the processor.",
+   "layout": "Horizontal flow chart with arrows connecting each stage, labels above each box.",
    "labels": [
-    "Idea",
-    "Design Algorithm",
-    "Write Code",
-    "Test/Debug",
-    "Run Program"
+    "Source code",
+    "Compiler/Interpreter",
+    "Machine code",
+    "Processor",
+    "Output"
    ],
-   "after": 2
+   "after": 4
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l01-computer-hardware-overview",
-   "title": "Basic parts of a computer that execute programs.",
-   "alt": "Basic parts of a computer that execute programs.",
-   "priority": 6,
-   "picture_title": "Computer Hardware Overview",
-   "kind": "illustration",
-   "subject": "A labelled illustration of a desktop computer showing the CPU, memory, storage, and input/output devices, helping students see where programs run.",
-   "layout": "Side view of a computer tower with callout lines pointing to each component, each component labeled.",
-   "labels": [
-    "CPU",
-    "RAM",
-    "Hard Drive",
-    "Keyboard",
-    "Monitor"
-   ],
-   "after": 0
-  },
-  {
-   "type": "steps",
-   "title": "From Idea to Program",
-   "steps": [
-    {
-     "label": "1",
-     "text": "Start with an idea"
-    },
-    {
-     "label": "2",
-     "text": "Design an algorithm"
-    },
-    {
-     "label": "3",
-     "text": "Write code"
-    },
-    {
-     "label": "4",
-     "text": "Test and debug"
-    },
-    {
-     "label": "5",
-     "text": "Run the program"
-    }
-   ],
-   "loop": false,
-   "after": 2
-  },
-  {
-   "type": "compare",
-   "title": "Why We Need Programming",
-   "left": {
-    "name": "Without Programming",
-    "points": [
-     "Computers do nothing on their own",
-     "Only manual calculations possible"
-    ]
-   },
-   "right": {
-    "name": "With Programming",
-    "points": [
-     "Create new tools",
-     "Automate repetitive tasks",
-     "Solve complex problems"
-    ]
-   },
+   "file": "introduction-to-programming-l01-computer-processor-close-up",
+   "title": "A photo of a CPU chip that runs the translated instructions.",
+   "alt": "A photo of a CPU chip that runs the translated instructions.",
+   "priority": 7,
+   "picture_title": "Computer Processor Close‑up",
+   "kind": "photo",
+   "subject": "A clear close‑up image of a modern processor (CPU) mounted on a motherboard, illustrating the hardware that executes programs.",
+   "layout": "The chip centered in the frame with surrounding motherboard visible; no labels needed.",
+   "labels": [],
    "after": 1
   },
   {
+   "type": "image",
+   "file": "introduction-to-programming-l01-historical-punch-card",
+   "title": "An example of an early punch‑card used to input binary data.",
+   "alt": "An example of an early punch‑card used to input binary data.",
+   "priority": 6,
+   "picture_title": "Historical Punch Card",
+   "kind": "photo",
+   "subject": "A vintage punch card with rows of holes representing binary data, showing how early programmers gave instructions to computers.",
+   "layout": "Card placed flat on a neutral background; a ruler for scale; no labels required.",
+   "labels": [],
+   "after": 2
+  },
+  {
    "type": "parts",
-   "title": "Definition of Programming",
+   "title": "What a Program Consists Of",
    "items": [
     {
-     "name": "Commands",
-     "role": "Tell the computer what to do"
+     "name": "Source Code",
+     "role": "Human‑readable instructions"
     },
     {
-     "name": "Programming Language",
-     "role": "Translates human ideas into machine actions"
+     "name": "Compiler / Interpreter",
+     "role": "Translates code to machine language"
     },
     {
-     "name": "Algorithm",
-     "role": "Breaks problem into smaller steps"
+     "name": "Machine Code",
+     "role": "Binary instructions the CPU executes"
     },
     {
-     "name": "Execution",
-     "role": "Computer runs the commands"
+     "name": "Executable",
+     "role": "File that runs on the computer"
     }
    ],
    "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Programming Language vs. Natural Language",
+   "left": {
+    "name": "Programming Language",
+    "points": [
+     "Precise syntax",
+     "Executes on a computer",
+     "Limited vocabulary",
+     "No ambiguity"
+    ]
+   },
+   "right": {
+    "name": "Natural Language",
+    "points": [
+     "Flexible grammar",
+     "Used by people",
+     "Rich vocabulary",
+     "Often ambiguous"
+    ]
+   },
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "How a Program Becomes Machine Code",
+   "steps": [
+    {
+     "label": "Write Source Code",
+     "text": "Programmer types code in a language."
+    },
+    {
+     "label": "Translate",
+     "text": "Compiler or interpreter converts it."
+    },
+    {
+     "label": "Generate Machine Code",
+     "text": "Binary instructions are produced."
+    },
+    {
+     "label": "Execute",
+     "text": "CPU runs the machine code."
+    }
+   ],
+   "loop": false,
+   "after": 4
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

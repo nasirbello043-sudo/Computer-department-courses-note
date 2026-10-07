@@ -1,123 +1,294 @@
 {
  "title": "Control Structures: If‑Else and Loops",
- "summary": "This lesson introduces conditional statements and looping constructs that let programs make decisions and repeat actions. Students will learn how to write and use if‑else blocks, while, for, and do‑while loops with clear examples.",
+ "summary": "This lesson introduces conditional statements and loops, showing how programs can make decisions and repeat actions. Students will learn to write and trace if‑else blocks and the three basic loop types.",
+ "objectives": [
+  "Write an if‑else statement to choose between two actions",
+  "Create a while loop that repeats until a condition is false",
+  "Implement a for loop to iterate over a known range",
+  "Combine if‑else with loops to solve simple problems",
+  "Debug common logic errors in conditional and loop structures"
+ ],
+ "prerequisites": "Students should already know how to write basic statements, use variables, and understand simple arithmetic operators.",
+ "why": [
+  "In everyday software, decisions and repetition are everywhere – from showing a warning when a user enters an invalid password to processing each item in a shopping cart. Understanding control structures lets you build programs that react to real‑world situations.",
+  "Control structures are the foundation for more advanced topics such as searching, sorting, and handling user input. Mastering them early makes later learning of algorithms and data structures much easier."
+ ],
  "sections": [
   {
-   "heading": "If‑Else Statements",
-   "body": "An if‑else statement lets a program choose between two paths based on a condition. The condition is a Boolean expression that evaluates to true or false. If the condition is true, the code inside the first block runs; otherwise, the code in the else block runs.\n\nExample: checking a score to decide pass or fail.",
-   "code": "int score = 78;\nif (score >= 60) {\n    System.out.println(\"Pass\");\n} else {\n    System.out.println(\"Fail\");\n}"
+   "heading": "What is a Control Structure?",
+   "body": "A program is a set of instructions that the computer follows, one after another, just like a recipe tells you the steps to bake a cake.  \nIf we let the computer run straight through the list, it will always do the same thing, no matter what data it receives.  \n**Control structures** are the parts of a program that let us change that straight‑line flow. They let the program decide *what to do next* based on information it already knows, or to repeat a set of steps many times.\n\n> **Definition:** A control structure is a language construct that directs the order in which statements are executed, typically by using conditions (to choose between alternatives) or loops (to repeat actions).\n\n### Conditions – choosing a path\n\nThink of standing at a crossroads. A sign might say, “If it is raining, take the left road; otherwise, take the right road.”  \nIn programming we write the same idea with an **if statement**. The word *condition* refers to a test that evaluates to either **true** (the statement is correct) or **false** (the statement is not correct). The computer checks the condition and then follows the branch that matches the result.\n\nFor example, in pseudo‑code:\n\n```\nif temperature > 30\n    print \"It's hot\"\nelse\n    print \"It's not hot\"\n```\n\nHere `temperature > 30` is the condition. If the temperature value stored in memory is larger than 30, the first line after the `if` runs; otherwise the line after `else` runs.\n\n### Repetition – doing something again and again\n\nNow imagine you are sorting a deck of cards. You keep taking the top card, looking at it, and placing it in the correct pile until the deck is empty. You don’t know in advance how many cards you will have to look at, so you repeat the same action **while** a certain condition remains true.\n\nIn code this looks like:\n\n```\nwhile cards remain\n    take top card\n    place in correct pile\n```\n\nThe word **while** introduces a *loop*. The loop’s body (the indented statements) is executed repeatedly as long as its condition stays true. When the condition becomes false, the program exits the loop and continues with the next instruction after it.\n\n### Why control structures matter\n\nWithout them, a program could only perform a single, fixed sequence of actions. Real‑world problems require decisions (“Is the user logged in?”) and repeated work (“Read every line of a file”). Control structures give programs the flexibility to handle different inputs, react to changing situations, and process large amounts of data efficiently.\n\n> **In daily life:** Choosing a route based on traffic, or watering plants every day until the soil is moist, are everyday examples of conditionals and loops.\n\n### Building blocks\n\n1. **Statement** – a single instruction, such as `print \"Hello\"` or `x = x + 1`.  \n2. **Block** – a group of statements that belong together, usually shown by indentation or braces `{}`.  \n3. **Condition** – an expression that evaluates to true or false, e.g., `score >= 60`.  \n4. **Loop** – a structure that repeats a block while a condition stays true (`while`, `for`).  \n\nWhen you combine these building blocks, you can create more complex behavior, such as “If the user is an admin, show the admin panel; otherwise, show the regular dashboard,” or “For each student in the class, calculate the average grade.”\n\n> **Remember:** A control structure does not change the *content* of a statement; it only changes *when* and *how often* that statement runs.\n\n### A simple visual\n\n```\nStart → [Check condition] → Yes → [Do something] → Back to check\n                     ↓ No\n                Continue with rest of program\n```\n\nThe diagram shows that after the condition is checked, the program either repeats the block (a loop) or moves on (an if‑else branch). This picture helps you see that control structures are the “traffic lights” of a program, telling the computer when to stop, go, or turn.\n\n> **Common mistake:** Forgetting to change a variable inside a loop, causing the condition to stay true forever. This creates an *infinite loop* where the program never reaches the next part of the code. Always make sure something inside the loop moves the condition toward false.",
+   "code": ""
   },
   {
-   "heading": "Nested If‑Else and Else‑If Chains",
-   "body": "Sometimes more than two outcomes are needed. You can nest if statements or use else‑if chains to test multiple conditions in order. The first true condition executes, and the rest are skipped.\n\nThis is useful for grading, menu selections, and more.",
-   "code": "int grade = 85;\nif (grade >= 90) {\n    System.out.println(\"A\");\n} else if (grade >= 80) {\n    System.out.println(\"B\");\n} else if (grade >= 70) {\n    System.out.println(\"C\");\n} else {\n    System.out.println(\"D or F\");\n}"
+   "heading": "The If Statement",
+   "body": "Imagine you have a question that can be answered with **yes** or **no**.  \nIn programming, an *if statement* lets the computer ask that same kind of question and then choose one of two paths: one path if the answer is **true** (yes) and another path if the answer is **false** (no).\n\n> **Definition:** An *if statement* is a control structure that executes a block of code only when a given condition evaluates to true.\n\n### The basic shape\n\nIn most languages the syntax looks like this:\n\n```python\nif condition:\n    # code to run when condition is true\n```\n\n- **`if`** – a keyword that tells the computer “start a test”.\n- **`condition`** – an expression that the computer evaluates; it must become either *true* or *false*.\n- The indented lines after the colon are the *block* that runs when the condition is true.\n\n### A concrete example\n\nSuppose we want to tell a student whether they passed a test. The rule is: *score ≥ 60* means pass.\n\n```python\nscore = 73\nif score >= 60:\n    print(\"You passed!\")\n```\n\nHere:\n\n- `score >= 60` is the **condition**.  \n- `>=` means “greater than or equal to”.  \n- The condition evaluates to **true** because 73 is indeed ≥ 60.  \n- Because it is true, the program executes the line `print(\"You passed!\")`.\n\nIf the score were 45, the condition would be false and the program would skip the `print` line, producing no output.\n\n### How the computer decides\n\nWhen the program reaches an *if* statement, it follows these steps:\n\n1. **Evaluate** the condition. This means the computer does the calculation or comparison inside the parentheses (or after `if` in Python).  \n2. **Check** the result: if the result is true, go to step 3; if false, skip to step 4.  \n3. **Execute** the block of code that belongs to the *if*.  \n4. **Continue** with the rest of the program after the block.\n\nYou can think of it like a traffic light for code: **green** (true) lets the car (the block) go forward; **red** (false) makes it stop and wait for the next instruction.\n\n> **In daily life:** An *if* statement works like a door with a lock. If you have the right key (condition true), the door opens and you can go inside (run the block). If you don’t have the key (condition false), the door stays closed and you stay where you are.\n\n### Using logical operators\n\nSometimes a condition needs more than one test. Logical operators let you combine simple tests:\n\n- `and` – both parts must be true.  \n- `or` – at least one part must be true.  \n- `not` – flips true to false and vice‑versa.\n\nExample:\n\n```python\nage = 17\nhas_id = True\nif age >= 18 and has_id:\n    print(\"You may enter the club.\")\n```\n\nThe condition `age >= 18 and has_id` is false because the first part (`age >= 18`) is false, so the block is skipped.\n\n### Minimal example with a false path\n\n```python\ntemperature = 15\nif temperature > 20:\n    print(\"It’s warm outside.\")\nprint(\"End of program.\")\n```\n\nBecause `15 > 20` is false, the `print(\"It’s warm outside.\")` line never runs. The program jumps straight to `print(\"End of program.\")`.\n\n> **Remember:** The block after an *if* runs **only** when the condition is true; otherwise the program continues after the block.\n\n### Why it is useful\n\n- **Decision making:** Programs often need to behave differently depending on user input, sensor data, or calculation results.  \n- **Efficiency:** By skipping code that isn’t needed, the program runs faster and uses fewer resources.  \n- **Readability:** Using an *if* makes the intention of the code clear: “Do this **if** this condition holds”.\n\n> **Common mistake:** Forgetting to indent the block (in languages like Python) or missing the curly braces `{}` (in languages like C/Java). Without proper grouping, the program may execute the wrong statements or produce a syntax error.\n\nIn summary, the *if statement* is the simplest way to give a program a fork in the road. By writing a clear condition and placing the desired actions inside the block, you let the computer choose the correct path automatically.",
+   "code": ""
+  },
+  {
+   "heading": "If‑Else and Else‑If Chains",
+   "body": "When a program reaches an **if‑else** statement it must decide which block of code to run.  \nThink of it as a crossroads: the program looks at a condition (a question that can be true or false) and then chooses one path or another.\n\n### The basic idea\n\n```text\nif (condition) {\n    // do this if the condition is true\n} else {\n    // do that if the condition is false\n}\n```\n\n- **condition** – a logical test that evaluates to *true* or *false*.  \n- **block** – a group of statements surrounded by `{}` that are executed together.\n\nIf the condition is true, the first block runs and the program skips the `else` part.  \nIf the condition is false, the first block is ignored and the `else` block runs instead.\n\n> **Definition:** *If‑else* lets a program choose between two mutually exclusive actions based on a single condition.\n\n### Why we need more than two choices\n\nOften a decision is not just “yes or no”. Imagine a traffic light:\n\n- Green → go  \n- Yellow → slow down  \n- Red → stop  \n\nWe have three possible outcomes, so a single *if‑else* is not enough. This is where **else‑if** chains come in.\n\n### Building an else‑if chain\n\nAn *else‑if* adds extra conditions after the first `if`. The program checks them one by one, stopping at the first true condition.\n\n```text\nif (condition1) {\n    // block A\n} else if (condition2) {\n    // block B\n} else if (condition3) {\n    // block C\n} else {\n    // block D (default)\n}\n```\n\n- The `else if` parts are optional; you can have as many as you need.  \n- The final `else` is also optional; it runs only when none of the previous conditions were true.\n\n> **Note:** The conditions are evaluated **in order**. As soon as one is true, the rest are ignored.\n\n### Real‑life analogy\n\nThink of a vending machine that sells drinks based on the amount of money you insert:\n\n1. If you put in **$2.00 or more**, you can choose any drink.  \n2. Else if you put in **$1.00–$1.99**, you can only choose a small drink.  \n3. Else if you put in **$0.50–$0.99**, you get a water bottle.  \n4. Else you get a message: “Insert more money”.\n\nThe machine checks each range in turn, just like an else‑if chain checks each condition.\n\n### Writing the conditions\n\nConditions are usually built with **comparison operators**:\n\n- `==` (equal to)  \n- `!=` (not equal to)  \n- `<` (less than)  \n- `>` (greater than)  \n- `<=` (less than or equal to)  \n- `>=` (greater than or equal to)\n\nYou can also combine them with logical operators:\n\n- `&&` (and) – both sides must be true  \n- `||` (or) – at least one side must be true  \n\nFor example, to decide a school grade:\n\n$$\n\\text{grade} = \n\\begin{cases}\n\\text{\"A\"} & \\text{if } score \\ge 90 \\\\\n\\text{\"B\"} & \\text{else if } 80 \\le score < 90 \\\\\n\\text{\"C\"} & \\text{else if } 70 \\le score < 80 \\\\\n\\text{\"D\"} & \\text{else if } 60 \\le score < 70 \\\\\n\\text{\"F\"} & \\text{else}\n\\end{cases}\n$$\n\nIn code:\n\n```c\nif (score >= 90) {\n    grade = 'A';\n} else if (score >= 80) {\n    grade = 'B';\n} else if (score >= 70) {\n    grade = 'C';\n} else if (score >= 60) {\n    grade = 'D';\n} else {\n    grade = 'F';\n}\n```\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to use `else if` and writing separate `if` statements.  \nWhen you write several independent `if`s, each condition is checked **independently**, so more than one block can run. In a chain, only one block runs.\n\n```c\n// Wrong: all true conditions will execute\nif (score >= 80) { grade = 'B'; }\nif (score >= 70) { grade = 'C'; }   // overwrites previous grade\n```\n\n### Tips to keep it clear\n\n- Order conditions from most specific to most general.  \n- Use the final `else` as a “catch‑all” for unexpected values.  \n- Keep each condition simple; if it becomes complex, break it into smaller boolean variables with meaningful names.\n\n> **Remember:** An else‑if chain is a *single decision point* with multiple exclusive paths. Only the first true condition’s block runs; everything after it is skipped.",
+   "code": ""
   },
   {
    "heading": "While Loops",
-   "body": "A while loop repeats a block of code as long as a condition remains true. The condition is checked before each iteration, so if it is false at the start, the loop body may never run.\n\nWhile loops are ideal when you don't know in advance how many times you need to repeat something.",
-   "code": "int i = 1;\nwhile (i <= 5) {\n    System.out.println(\"Count: \" + i);\n    i++;\n}"
+   "body": "Imagine you have a jar of marbles and you want to keep taking one out until the jar is empty.  \nYou would:\n\n1. **Check** whether there is still at least one marble in the jar.  \n2. **If** there is, take one out.  \n3. **Then** go back to step 1.\n\nA **while loop** does exactly this in a program: it repeats a block of code **while** a certain condition stays true. The word *while* tells the computer, “keep doing this as long as the condition holds.”\n\n> **Definition:** A *while loop* repeatedly executes its body as long as its condition evaluates to **true**.\n\n---\n\n### The three parts of a while loop\n\n1. **Initialization** – before the loop starts, you give the variables the values they need.  \n2. **Condition check** – the loop looks at a Boolean expression (something that is either true or false). If it is true, the loop runs; if it is false, the loop stops.  \n3. **Update** – inside the loop you change one or more variables so that eventually the condition will become false; otherwise the loop would run forever.\n\nIn most programming languages the syntax looks like this:\n\n$$\n\\text{while (condition) \\{ }\\\\\n\\quad \\text{// body of the loop}\\\\\n\\quad \\text{update; }\\\\\n\\text{\\}}\n$$\n\nThe **condition** is evaluated **before** each iteration, so if it is false the first time, the body never runs at all.\n\n---\n\n### A concrete example in Python\n\n```python\ncounter = 0                 # initialization\nwhile counter < 5:          # condition check\n    print(counter)          # body of the loop\n    counter = counter + 1   # update\n```\n\nWhat happens?\n\n- `counter` starts at 0.  \n- The condition `counter < 5` is true, so the loop prints `0`.  \n- `counter` is increased to 1.  \n- The condition is checked again; it is still true, so the loop prints `1`.  \n- This repeats until `counter` becomes 5. At that point `counter < 5` is false, and the loop ends.\n\nThe output is:\n\n```\n0\n1\n2\n3\n4\n```\n\nNotice that the loop printed numbers **0 through 4** – exactly the values for which the condition held true.\n\n---\n\n### Why use a while loop?\n\n- **Uncertain number of repetitions** – When you don’t know in advance how many times you need to repeat something, a while loop lets the program decide at run‑time.  \n- **Waiting for an event** – For example, keep asking a user for a password until they type the correct one.\n\n> **In daily life:** Think of a traffic light that stays red *while* cars are still waiting. As soon as the queue is empty, the light can turn green. The light’s “while” condition is “cars waiting > 0”.\n\n---\n\n### Common pitfalls\n\nIf you forget to update a variable, the condition may never become false and the program gets stuck in an **infinite loop**. This can freeze your computer or crash the program.\n\n> **Common mistake:** Forgetting the update step, causing the condition to stay true forever.\n\nAnother subtle issue is placing the update **before** the body when you actually need it after. This changes the values you work with inside the loop and can produce off‑by‑one errors (printing one too many or too few items).\n\n---\n\n### Tips for writing safe while loops\n\n- **Initialize** all variables **outside** the loop.  \n- **Write the condition** clearly; use parentheses if it helps readability.  \n- **Update** at least one variable that influences the condition inside the loop.  \n- **Test** the loop with small numbers first to ensure it stops when expected.\n\n> **Remember:** A while loop runs *zero or more* times – never assume it will run at least once.\n\nBy following these steps, you can harness while loops to handle repetitive tasks where the exact number of repetitions is not known ahead of time. They are a fundamental tool in every programmer’s toolbox, enabling programs to react to changing data, user input, or external events.",
+   "code": ""
   },
   {
    "heading": "For Loops",
-   "body": "A for loop combines initialization, condition, and increment in one line, making it concise for counting loops. It is the most common loop when the number of iterations is known.\n\nYou can also use for‑each loops to iterate over arrays or collections.",
-   "code": "for (int j = 0; j < 5; j++) {\n    System.out.println(\"Iteration \" + j);\n}"
+   "body": "A **for loop** is a way to repeat a block of code a known number of times.  \nThink of it like a music playlist that you want to play from the first song to the last, one after another, and then stop automatically. The playlist knows exactly how many songs there are, so it can count them and finish when the last one has played. In programming, a for loop does the same thing: it counts from a start value up to (but usually not past) an end value, doing something each time it counts.\n\n### The parts of a for loop  \n\n1. **Loop counter** – a variable that holds the current count.  \n2. **Start** – the first value the counter takes.  \n3. **End** – the value at which the loop stops.  \n4. **Step** – how much the counter changes after each iteration (usually +1).\n\nA typical for‑loop syntax in many languages looks like this:\n\n```python\nfor i in range(start, end, step):\n    # code to repeat\n```\n\nHere `i` is the loop counter. The function `range(start, end, step)` creates a list of numbers beginning with `start`, adding `step` each time, and stopping **before** `end`.  \n\nIf you prefer the mathematical view, the loop runs for every integer `i` that satisfies  \n\n$$\ni = \\text{start},\\ \\text{start}+ \\text{step},\\ \\text{start}+2\\cdot\\text{step},\\dots < \\text{end}\n$$  \n\n### Why use a for loop?  \n\n- **Predictability** – you know exactly how many times the code will run.  \n- **Clarity** – the start, end, and step are written right next to each other, so anyone reading the code can see the loop’s limits at a glance.  \n- **Efficiency** – the computer can allocate the right amount of memory because the number of iterations is known in advance.\n\n> **Definition:** A for loop repeats a block of code a fixed number of times, using a loop counter that starts at a given value, changes by a fixed step, and stops before reaching an end value.\n\n### Everyday comparison  \n\nImagine you are stacking books on a shelf. You decide to place exactly 5 books, one after another. You start with the first book (counter = 1), place a book, then move to the next position (counter = 2), and continue until you have placed the fifth book (counter = 5). After the fifth book, you stop because you know the shelf can hold only five books. The “for loop” is the mental checklist that tells you “place a book, move to the next spot, repeat until you have placed five books”.\n\n### Simple example  \n\nSuppose you want to print the numbers from 1 to 5:\n\n```python\nfor i in range(1, 6):   # start=1, end=6 (6 is not included), step=1\n    print(i)\n```\n\nOutput:\n\n```\n1\n2\n3\n4\n5\n```\n\nThe loop counter `i` starts at 1, increases by 1 each time, and stops before it reaches 6, so the last printed number is 5.\n\n### Changing the step  \n\nIf you want every second number, set the step to 2:\n\n```python\nfor i in range(0, 10, 2):   # 0, 2, 4, 6, 8\n    print(i)\n```\n\nNow the loop prints 0, 2, 4, 6, and 8. The step tells the loop how far to jump each time.\n\n> **In daily life:** Using a step of 2 is like checking every other locker in a hallway instead of every locker—you skip one each time.\n\n### Using the loop counter inside the body  \n\nThe counter can be used for calculations, indexing lists, or controlling other actions. For example, to compute the sum of the first ten natural numbers:\n\n```python\ntotal = 0\nfor i in range(1, 11):   # 1 through 10\n    total = total + i\nprint(total)   # prints 55\n```\n\nEach iteration adds the current `i` to `total`. After the loop finishes, `total` holds the sum.\n\n> **Remember:** The loop counter is available inside the loop body, so you can use it just like any other variable.\n\n### Common pitfalls  \n\n- Forgetting that the end value is **exclusive** (not included). If you write `range(1,5)`, you get 1‑4, not 1‑5.  \n- Using a step of 0, which would cause an infinite loop because the counter never changes.  \n\n> **Common mistake:** Setting the step to 0 creates an endless loop because the counter never reaches the end value.\n\n### Summary  \n\nA for loop is a compact, readable way to repeat actions a known number of times. You define a start, an end, and a step; the loop counter moves through that range, executing the body each time. By mastering for loops, you can handle repetitive tasks—like processing items in a list, generating patterns, or performing calculations—without writing the same code over and over.",
+   "code": ""
+  },
+  {
+   "heading": "Nested Control Structures",
+   "body": "Imagine you have a recipe that says: *“First, check if the pantry has any eggs. If it does, for each egg you find, decide whether to use it in a cake or in an omelette.”*  \nIn programming this idea is called **nesting** – putting one control structure inside another.  \nWhen a loop (a repeated action) contains an `if‑else` test, the program repeats the test many times.  \nWhen an `if‑else` test contains a loop, the program may repeat an action only for the cases that satisfy the test.  \n\n---\n\n### Why nesting is useful  \n\nNesting lets us handle **more than one condition at a time**.  \nFor example, to print all even numbers from `1` up to a user‑provided limit `N`, we need two things:\n\n1. **Repeat** the work for every number from `1` to `N`. (That is a loop.)  \n2. **Decide** whether the current number is even or odd. (That is an `if‑else` test.)\n\nBy nesting the `if‑else` **inside** the loop, the program checks each number as it goes along and prints only the even ones.\n\n---\n\n### Step‑by‑step construction  \n\n1. **Ask for the limit** `N`.  \n   ```python\n   N = int(input(\"Enter a positive integer: \"))\n   ```\n\n2. **Create a loop** that visits every integer `i` from `1` to `N`.  \n   ```python\n   for i in range(1, N + 1):\n   ```\n\n3. **Inside the loop**, place an `if‑else` that tests whether `i` is even.  \n   A number is even when the remainder after division by `2` is `0`.  \n   The remainder operation is written `i % 2`.  \n\n   ```python\n       if i % 2 == 0:\n           print(i)\n   ```\n\n   The `else` part is optional here; we simply do nothing when the number is odd.\n\nPutting it all together:\n\n```python\nN = int(input(\"Enter a positive integer: \"))\nfor i in range(1, N + 1):\n    if i % 2 == 0:\n        print(i)\n```\n\nWhen you run this program and type `10`, the output is:\n\n```\n2\n4\n6\n8\n10\n```\n\n> **Definition:** *Nested control structures* are control statements (loops or conditionals) placed inside the block of another control statement.\n\n---\n\n### A variation: loop inside an `if‑else`\n\nSometimes the decision comes first. Suppose we only want to list even numbers **if** the user entered a positive limit; otherwise we show a warning and do nothing.\n\n```python\nN = int(input(\"Enter a positive integer: \"))\nif N > 0:\n    # loop runs only when N is positive\n    for i in range(1, N + 1):\n        if i % 2 == 0:\n            print(i)\nelse:\n    print(\"Please enter a number greater than zero.\")\n```\n\nHere the **outer** structure is an `if‑else`. The **inner** structure is a `for` loop that runs only when the condition `N > 0` is true. This pattern is common when we need to validate input before performing any repeated work.\n\n> **In daily life:** Think of a school hallway monitor. First they check (if‑else) whether a student is wearing a uniform. If the answer is “yes”, they then walk (loop) through the hallway checking each student’s shoes. The monitor’s job combines a decision and a repeated action, just like nested structures.\n\n---\n\n### Common pitfalls to avoid  \n\n- **Forgetting indentation** – In Python, the inner block must be indented further than the outer block. If you write the `if` line at the same level as the `for` line, the program will treat them as separate statements and the test will not be repeated.\n- **Using the wrong comparison operator** – To test equality you need `==`, not `=`. Writing `if i % 2 = 0:` will cause a syntax error.\n- **Running an infinite loop** – If you place a `while` loop inside an `if` that never becomes false, the program may never exit. Always make sure the loop’s condition will eventually be false.\n\n> **Common mistake:** Forgetting to update the loop variable inside a `while` loop that is nested in an `if`. This creates an infinite loop because the condition never changes.\n\n---\n\n### Quick checklist  \n\n- Write the **outer** structure first (loop or `if`).  \n- Open a new indented block for the **inner** structure.  \n- Keep the logic simple: test one condition at a time.  \n- Verify that every loop has a clear way to stop.  \n\n> **Remember:** Clear indentation is the visual cue that tells the computer (and other programmers) which statements belong together. When you see a block shifted to the right, think “these lines run inside the thing above them.”  \n\nBy mastering nesting, you can solve problems that require multiple layers of decision‑making and repetition, just like the even‑number printer above. Practice by swapping the order (loop inside `if` vs. `if` inside loop) and by trying other conditions, such as printing numbers divisible by 3 or counting how many even numbers appear. Each new combination builds your confidence in writing flexible, powerful programs.",
+   "code": ""
+  },
+  {
+   "heading": "Common Mistakes and Debugging Tips",
+   "body": "When a program does not behave as you expect, the first thing to check is **where** it went wrong.  \nThink of a program like a recipe you are following step‑by‑step. If the dish tastes odd, you look back at the steps: Did you add too much salt? Did you skip a stirring step? In code, the “ingredients” are the values of variables, and the “steps” are the statements that the computer executes. By watching the values change as the program runs, you can spot the exact point where the logic diverged from what you intended.\n\n> **Common mistake:** *Off‑by‑one errors* happen when a loop runs one time too many or one time too few.  \n> For example, to print the numbers 1 through 5 you might write  \n> ```python\n> for i in range(1, 6):   # correct: stops before 6\n>     print(i)\n> ```  \n> If you mistakenly write `range(1, 5)`, the loop stops at 4, missing the last number.  \n> The word “off‑by‑one” means the loop counter is shifted by exactly one position. This is easy to miss because the code still runs without crashing; it just produces the wrong result.\n\nWhy does this happen? Most loops are built around a *boundary*—the value at which the loop should stop. In many languages the upper bound is **exclusive** (the loop stops *before* reaching it). If you forget that rule, you will either stop early or run one extra iteration. A quick way to avoid the mistake is to write a comment that states the intended range, then double‑check that the loop’s start and end values match the comment.\n\n> **Note:** *Infinite loops* occur when the condition that should end the loop never becomes false.  \n> Imagine a traffic light that never turns red; cars would keep moving forever. In code, an infinite loop looks like this:  \n> ```python\n> while True:\n>     print(\"I never stop\")\n> ```  \n> or a more subtle case:  \n> ```python\n> i = 0\n> while i < 5:\n>     print(i)          # prints 0 forever because i never changes\n> ```  \n> The loop condition (`i < 5`) stays true because `i` is never updated inside the loop. The program appears to hang, and you may have to force‑quit it.\n\nTo prevent infinite loops, always make sure that something inside the loop **modifies** at least one variable that appears in the loop’s condition. A good habit is to write the update statement (`i += 1`, `i = i - 1`, etc.) on the same line as a comment that explains why it moves the loop toward termination.\n\n> **Remember:** *Misplaced braces* (or indentation in languages like Python) change the block of code that belongs to an `if`, `else`, or loop.  \n> In C‑style languages, braces `{}` define the start and end of a block. If you write  \n> ```c\n> for (int i = 0; i < 3; i++)\n>     printf(\"%d\\n\", i);\n>     printf(\"Done\\n\");\n> ```  \n> only the first `printf` is inside the loop; the second runs once after the loop finishes. The intended behavior—printing “Done” after each number—requires braces:  \n> ```c\n> for (int i = 0; i < 3; i++) {\n>     printf(\"%d\\n\", i);\n>     printf(\"Done\\n\");\n> }\n> ```  \n> In Python, the same error appears as wrong indentation. The interpreter will treat the indented lines as the loop body and the unindented line as outside the loop.\n\n**How to trace execution**\n\nThe simplest debugging tool is a *print statement* that shows the values of important variables at each step. Insert a line like `print(\"i =\", i, \"sum =\", total)` inside a loop to watch how `i` and `total` change. By reading the output, you can see whether the loop stops at the right time, whether a variable is being updated, or whether a block of code is being executed unexpectedly.\n\nAnother useful pattern is to label the prints so you know where they came from:\n```python\nprint(\"[Loop start] i =\", i)\n# loop body\nprint(\"[After body] i =\", i, \"condition =\", i < 5)\n```\nWhen the program runs, the labeled messages form a timeline, much like a diary of the program’s thoughts. If the output stops before you expect, you have likely hit an infinite loop. If the numbers skip or repeat, you probably have an off‑by‑one error or a misplaced brace.\n\nIn summary, most bugs in control structures stem from three sources: counting the wrong number of iterations, never reaching a stopping condition, or accidentally grouping statements in the wrong block. By **watching variable values**, **ensuring loop counters move toward the termination condition**, and **checking that braces or indentation match the intended block**, you can quickly locate and fix these common mistakes.",
+   "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Check if a number is positive, negative, or zero",
+   "given": "an integer `n`; determine whether it is positive, negative, or zero",
+   "steps": [
+    {
+     "label": "Input",
+     "text": "Read the value of `n` from the user so we can test it"
+    },
+    {
+     "label": "If‑Else",
+     "text": "If `n > 0` → print “positive”; else if `n < 0` → print “negative”; else → print “zero”"
+    }
+   ],
+   "answer": "The program prints “positive”, “negative”, or “zero” according to the sign of `n`"
+  },
+  {
+   "level": "Medium",
+   "title": "Count how many numbers from 1 to 20 are multiples of 3",
+   "given": "the range 1 to 20; find the count of numbers divisible by 3",
+   "steps": [
+    {
+     "label": "Initialize",
+     "text": "Set a counter `count = 0` to store the total found"
+    },
+    {
+     "label": "Loop",
+     "text": "Use a `for` loop: for `i` in `range(1, 21)`"
+    },
+    {
+     "label": "Condition",
+     "text": "Inside the loop, if `i % 3 == 0` then increment `count` by 1"
+    },
+    {
+     "label": "Output",
+     "text": "After the loop, print the value of `count`"
+    }
+   ],
+   "answer": "The count is 6 (the numbers are 3, 6, 9, 12, 15, 18)"
+  },
+  {
+   "level": "Hard",
+   "title": "Print a right‑angled triangle of asterisks with height n, but stop early if a row would exceed 10 asterisks",
+   "given": "a positive integer `n`; produce rows of `*` where row `i` has `i` asterisks, but stop when a row would need more than 10 asterisks",
+   "steps": [
+    {
+     "label": "Input",
+     "text": "Read `n` from the user to know the maximum height wanted"
+    },
+    {
+     "label": "Loop",
+     "text": "Use a `while` loop with `i = 1` and continue while `i <= n` and `i <= 10`"
+    },
+    {
+     "label": "Print",
+     "text": "Inside the loop, print `'*' * i` to display the current row"
+    },
+    {
+     "label": "Increment",
+     "text": "Increase `i` by 1 to move to the next row"
+    },
+    {
+     "label": "End",
+     "text": "When the loop ends, the triangle is complete or stopped at 10 asterisks"
+    }
+   ],
+   "answer": "The program outputs rows of 1, 2, …, min(n, 10) asterisks, forming a triangle that never exceeds 10 asterisks per row."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Write a program that prints \"Hello\" if the variable `x` is greater than 10, otherwise it prints \"Goodbye\". Show the code and explain why it works.",
+   "a": "\n1. Choose a language; we use Python for simplicity.\n2. The variable `x` is given, e.g., `x = 12`.\n3. Use an if‑else statement:\n```python\nx = 12\nif x > 10:\nprint(\"Hello\")\nelse:\nprint(\"Goodbye\")\n```\n4. Execution:\n- The condition `x > 10` is checked. Since 12 > 10 is true, the first block runs.\n- `print(\"Hello\")` outputs Hello.\n- The else block is skipped.\nIf `x` were 8, the condition would be false, so the else block would run and print Goodbye. The program works because the if‑else structure chooses exactly one of the two possible actions based on the condition."
+  },
+  {
+   "level": "Easy",
+   "q": "What will the following loop print? ```python i = 0 while i < 3: print(i) i = i + 1 ``` Explain each step.",
+   "a": "\n1. Initialise `i` to 0.\n2. Check the condition `i < 3`.\n- First iteration: 0 < 3 → true → enter loop.\n- Print `i` → prints `0`.\n- Increment `i` → `i` becomes 1.\n3. Second iteration: condition `1 < 3` → true.\n- Print `i` → prints `1`.\n- Increment `i` → `i` becomes 2.\n4. Third iteration: condition `2 < 3` → true.\n- Print `i` → prints `2`.\n- Increment `i` → `i` becomes 3.\n5. Fourth check: condition `3 < 3` → false. Loop ends.\nOutput is:\n```\n0\n1\n2\n```"
+  },
+  {
+   "level": "Medium",
+   "q": "Write a program that asks for a number `n` and prints all even numbers from 0 up to (but not including) `n` using a `for` loop. Show the code and a brief explanation.",
+   "a": "\n1. Use Python’s `range` function, which can generate a sequence of numbers.\n2. `range(start, stop, step)` – start at 0, stop at `n`, step by 2 to get only evens.\n```python\nn = int(input(\"Enter a positive integer: \"))\nfor i in range(0, n, 2):\nprint(i)\n```\nExplanation:\n- `int(input(...))` reads the user’s number and converts it to an integer.\n- `range(0, n, 2)` produces 0, 2, 4, … up to the largest even < `n`.\n- The `for` loop iterates over each value `i` and prints it.\nIf the user enters `9`, the loop prints: `0 2 4 6 8` each on its own line."
+  },
+  {
+   "level": "Medium",
+   "q": "Consider the following code snippet. What does it output? Explain why. ```python count = 0 for i in range(1, 5): if i % 2 == 0: continue count = count + i print(count) ```",
+   "a": "\n1. `range(1,5)` generates the list `[1, 2, 3, 4]`.\n2. Loop over each `i`:\n- i = 1: `1 % 2 == 0` is false, so `continue` is not executed. `count = 0 + 1` → `count = 1`.\n- i = 2: `2 % 2 == 0` is true, `continue` skips the rest of this iteration; `count` stays 1.\n- i = 3: `3 % 2 == 0` is false, add 3 → `count = 1 + 3 = 4`.\n- i = 4: `4 % 2 == 0` is true, `continue` skips; `count` stays 4.\n3. After the loop, `print(count)` outputs `4`.\nThe program sums only the odd numbers (1 and 3) because `continue` skips the even ones."
+  },
+  {
+   "level": "Hard",
+   "q": "Write a program that prints a right‑angled triangle of asterisks (`*`). The height of the triangle is given by the user (a positive integer `h`). Use nested loops: an outer `while` loop for the rows and an inner `for` loop for the columns. Show the full code and explain how the loops work together.",
+   "a": "\n1. Read the height `h`.\n2. Use a `while` loop to control the current row number `row`, starting at 1 and ending at `h`.\n3. Inside the `while`, use a `for` loop that runs `row` times to print that many asterisks on the same line.\n4. After the inner loop, print a newline to start the next row.\n```python\nh = int(input(\"Enter the height of the triangle: \"))\nrow = 1\nwhile row <= h:\n# print 'row' asterisks on this line\nfor col in range(row):\nprint(\"*\", end=\"\")   # end=\"\" keeps printing on the same line\nprint()                  # move to the next line after the row is done\nrow += 1                 # go to the next row\n```\nExplanation:\n- `row` starts at 1. The `while` condition `row <= h` ensures we create exactly `h` rows.\n- For each `row`, `range(row)` produces a sequence of length equal to the current row number. The inner `for` iterates that many times, printing an asterisk each time without moving to a new line (`end=\"\"`).\n- After the inner loop finishes, `print()` with no arguments outputs a newline, so the next row starts on a fresh line.\n- `row += 1` increments the row counter, eventually making the `while` condition false and ending the program.\nIf the user enters `4`, the output is:\n```\n*\n**\n***\n****\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "Analyze the following code. It is intended to compute the factorial of a non‑negative integer `n` entered by the user. Identify any logical errors, correct them, and provide the corrected program with an explanation of each change. ```python n = int(input(\"Enter n: \")) result = 1 i = 0 while i < n: result = result * i i = i + 1 print(\"Factorial:\", result) ```",
+   "a": "\n**Identified errors**\n1. The loop starts with `i = 0`. Multiplying by 0 makes `result` become 0 immediately, so the final answer is always 0.\n2. The loop condition `i < n` stops before multiplying by `n`. For factorial we need to multiply by every integer from 1 up to `n` inclusive.\n**Corrected code**\n```python\nn = int(input(\"Enter n: \"))\nresult = 1\ni = 1               # start at 1, not 0\nwhile i <= n:       # include n\nresult = result * i\ni = i + 1\nprint(\"Factorial:\", result)\n```\n**Explanation of changes**\n- `i = 1` ensures the first multiplication uses 1, leaving `result` unchanged on the first iteration (1 × 1 = 1).\n- The condition `i <= n` makes the loop run for i = 1, 2, …, n, which is exactly the definition of `n!`.\n- Inside the loop, `result = result * i` now correctly accumulates the product of all numbers from 1 to `n`.\n**Verification**\n- If `n = 5`, the loop multiplies: 1 × 1 = 1, then × 2 = 2, × 3 = 6, × 4 = 24, × 5 = 120.\n- The program prints `Factorial: 120`, which is the correct value for 5!."
+  }
+ ],
+ "recap": "Control structures let programs decide what to do next or repeat actions. If‑else statements choose between two paths based on a condition, while‑loops repeat as long as a condition stays true, and for‑loops repeat a known number of times. Nesting combines these structures for more complex logic, and common mistakes include off‑by‑one errors.",
  "key_terms": [
   {
+   "term": "Control structure",
+   "meaning": "A language construct that changes the normal sequential flow of execution, using conditions or loops."
+  },
+  {
    "term": "Condition",
-   "meaning": "A Boolean expression that evaluates to true or false, controlling flow."
+   "meaning": "A Boolean expression that evaluates to true or false, used in if‑else and loops."
   },
   {
-   "term": "If‑Else",
-   "meaning": "A statement that executes one block of code if a condition is true, otherwise another block."
+   "term": "If statement",
+   "meaning": "Executes a block of code only when its condition evaluates to true."
   },
   {
-   "term": "Loop",
-   "meaning": "A construct that repeats a block of code multiple times."
+   "term": "If‑else",
+   "meaning": "Chooses between two mutually exclusive blocks: one for true, one for false."
   },
   {
-   "term": "While Loop",
-   "meaning": "Repeats while a condition remains true, checking the condition before each iteration."
+   "term": "While loop",
+   "meaning": "Repeats a block while a condition remains true, checking the condition before each iteration."
   },
   {
-   "term": "For Loop",
-   "meaning": "Repeats a set number of times, with initialization, condition, and increment in one line."
+   "term": "For loop",
+   "meaning": "Repeats a block a known number of times, typically using a counter that increments each iteration."
   },
   {
-   "term": "Nested",
-   "meaning": "Placing one control structure inside another to handle more complex logic."
+   "term": "Nesting",
+   "meaning": "Placing one control structure inside another to handle multiple levels of logic."
+  },
+  {
+   "term": "Off‑by‑one error",
+   "meaning": "A mistake where a loop runs one iteration too many or too few, often due to incorrect start or end values."
   }
  ],
  "quiz": [
   {
-   "q": "What will be printed by the following code?\nint x = 3;\nif (x > 5) {\n    System.out.println(\"A\");\n} else {\n    System.out.println(\"B\");\n}",
+   "q": "What does a control structure do?",
    "options": [
-    "A",
-    "B",
-    "Compilation error",
-    "Nothing"
+    "Stops the program",
+    "Changes the order of execution",
+    "Deletes variables",
+    "Creates graphics"
    ],
    "answer": 1,
-   "why": "The condition x > 5 is false, so the else block runs and prints B."
+   "why": "It directs the flow of execution based on conditions or repetition."
   },
   {
-   "q": "How many times does this loop execute?\nint i = 0;\nwhile (i < 4) {\n    i++;\n}",
+   "q": "In an if‑else statement, when is the else block executed?",
    "options": [
-    "3",
-    "4",
-    "5",
-    "Infinite"
+    "When the condition is true",
+    "When the condition is false",
+    "Always",
+    "Never"
    ],
    "answer": 1,
-   "why": "i starts at 0 and increments until it reaches 4, so the body runs 4 times."
+   "why": "The else block runs only when the if condition evaluates to false."
   },
   {
-   "q": "Which loop is best when the number of iterations is known beforehand?",
+   "q": "Which loop checks its condition before each iteration?",
    "options": [
-    "while",
-    "do‑while",
-    "for",
-    "if‑else"
+    "while loop",
+    "do‑while loop",
+    "for loop",
+    "switch"
    ],
-   "answer": 2,
-   "why": "A for loop is designed for a known count of repetitions."
+   "answer": 0,
+   "why": "A while loop evaluates the condition at the start of each cycle."
   },
   {
-   "q": "What does the else‑if chain allow you to do?",
+   "q": "What is the typical purpose of a for loop?",
    "options": [
-    "Execute multiple blocks simultaneously",
-    "Test several conditions in order",
-    "Repeat code indefinitely",
-    "Declare variables"
+    "Repeat until a condition changes",
+    "Repeat a known number of times",
+    "Execute only once",
+    "Handle errors"
    ],
    "answer": 1,
-   "why": "Else‑if lets you check multiple conditions one after another."
+   "why": "A for loop is designed for a predetermined count of iterations."
+  },
+  {
+   "q": "What is nesting in programming?",
+   "options": [
+    "Writing comments inside code",
+    "Placing one control structure inside another",
+    "Using only if statements",
+    "Running code without loops"
+   ],
+   "answer": 1,
+   "why": "Nesting combines structures to handle multiple logical levels."
+  },
+  {
+   "q": "An off‑by‑one error most often occurs in which situation?",
+   "options": [
+    "Variable naming",
+    "Loop bounds",
+    "String concatenation",
+    "Function return"
+   ],
+   "answer": 1,
+   "why": "Incorrect start or end values cause loops to run one iteration too many or too few."
   }
  ],
  "flashcards": [
   {
-   "front": "If‑else statement",
-   "back": "Executes one block if a condition is true, otherwise another block."
+   "front": "Control structure",
+   "back": "A construct that directs program flow using conditions or loops."
   },
   {
-   "front": "While loop condition check",
-   "back": "Checked before each iteration; loop may not run at all if false initially."
+   "front": "Condition",
+   "back": "A Boolean expression that evaluates to true or false."
   },
   {
-   "front": "For loop components",
-   "back": "Initialization; condition; update (increment/decrement)."
+   "front": "If statement",
+   "back": "Runs a code block only when its condition is true."
   },
   {
-   "front": "Nested control structure",
-   "back": "A control structure placed inside another, e.g., an if inside a while."
+   "front": "If‑else",
+   "back": "Selects between two exclusive blocks based on a condition."
   },
   {
-   "front": "Do‑while loop",
-   "back": "Executes the body first, then checks the condition, guaranteeing at least one run."
+   "front": "While loop",
+   "back": "Repeats a block while its condition remains true, checking before each iteration."
+  },
+  {
+   "front": "For loop",
+   "back": "Repeats a block a set number of times, using a counter."
+  },
+  {
+   "front": "Nesting",
+   "back": "Putting one control structure inside another to handle complex logic."
+  },
+  {
+   "front": "Off‑by‑one error",
+   "back": "A loop runs one iteration too many or too few due to wrong bounds."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -156,83 +327,63 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l06-for-loop-counter",
-   "title": "Shows the three parts of a for loop: start, test, and increment.",
-   "alt": "Shows the three parts of a for loop: start, test, and increment.",
-   "priority": 7,
-   "picture_title": "For Loop Counter",
+   "file": "introduction-to-programming-l06-if-else-decision-flow",
+   "title": "A flowchart showing how a program chooses between the true and false branches of an if‑else statement.",
+   "alt": "A flowchart showing how a program chooses between the true and false branches of an if‑else statement.",
+   "priority": 9,
+   "picture_title": "If‑Else Decision Flow",
    "kind": "illustration",
-   "subject": "A linear diagram with three labeled sections representing initialization, condition check, and increment, linked by arrows to illustrate one iteration.",
-   "layout": "Horizontal sequence: 'Initialize i=0' → arrow → 'i < n?' decision diamond → arrow (yes) to 'Execute body' → arrow to 'i = i + 1' → arrow back to condition.",
+   "subject": "The diagram displays a diamond-shaped condition node with two arrows leading to separate rectangular process blocks labeled ‘True path’ and ‘False path’, then reconverging.",
+   "layout": "Condition diamond at top centre, two arrows branching left and right to process boxes, arrows from both boxes meeting back into a single flow line.",
    "labels": [
-    "Initialize i=0",
-    "i < n?",
-    "Execute body",
-    "i = i + 1"
+    "condition",
+    "true path",
+    "false path",
+    "continue"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l06-while-loop-jar",
+   "title": "A visual metaphor of a while loop using a jar of marbles being emptied step by step.",
+   "alt": "A visual metaphor of a while loop using a jar of marbles being emptied step by step.",
+   "priority": 8,
+   "picture_title": "While Loop Jar",
+   "kind": "illustration",
+   "subject": "A jar filled with marbles beside a hand removing one marble at a time, with a checklist showing ‘check condition → remove marble → repeat’ until the jar is empty.",
+   "layout": "Jar on the left, hand on the right, arrows forming a loop around the jar and hand, with text boxes for each step of the loop.",
+   "labels": [
+    "check",
+    "remove",
+    "repeat",
+    "empty"
    ],
    "after": 3
   },
   {
-   "type": "steps",
-   "title": "If‑Else Decision",
-   "steps": [
-    {
-     "label": "1",
-     "text": "Check condition"
-    },
-    {
-     "label": "2",
-     "text": "If true, run first block"
-    },
-    {
-     "label": "3",
-     "text": "If false, run else block"
-    }
+   "type": "image",
+   "file": "introduction-to-programming-l06-nested-control-example",
+   "title": "An example of a nested if‑else inside a for loop, showing the hierarchy of repeated tests.",
+   "alt": "An example of a nested if‑else inside a for loop, showing the hierarchy of repeated tests.",
+   "priority": 7,
+   "picture_title": "Nested Control Example",
+   "kind": "illustration",
+   "subject": "A series of stacked boxes: the outer box labeled ‘for loop’ contains several inner boxes labeled ‘if‑else’, each with true/false branches, illustrating how the inner test runs each iteration of the outer loop.",
+   "layout": "Large outer rectangle (for loop) with repeated smaller rectangles (if‑else) inside, arrows indicating the flow from the for loop start through each inner if‑else block.",
+   "labels": [
+    "for loop",
+    "if‑else",
+    "true",
+    "false",
+    "iteration"
    ],
-   "loop": false,
-   "after": 0
-  },
-  {
-   "type": "compare",
-   "title": "While Loop vs For Loop",
-   "left": {
-    "name": "While Loop",
-    "points": [
-     "Condition checked before each iteration",
-     "May run zero times",
-     "Good when repeat count unknown"
-    ]
-   },
-   "right": {
-    "name": "For Loop",
-    "points": [
-     "Initialization, condition, increment in one line",
-     "Runs a known number of times",
-     "Common for counting loops"
-    ]
-   },
-   "after": 2
-  },
-  {
-   "type": "facts",
-   "title": "Nested If‑Else / Else‑If Chains",
-   "items": [
-    {
-     "value": "Multiple outcomes",
-     "label": "More than two paths"
-    },
-    {
-     "value": "First true condition runs",
-     "label": "Stops checking further"
-    },
-    {
-     "value": "Used for grading, menus",
-     "label": "Practical examples"
-    }
-   ],
-   "after": 1
+   "after": 5
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

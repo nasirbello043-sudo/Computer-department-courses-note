@@ -1,119 +1,290 @@
 {
  "title": "Working with Functions and Parameters",
- "summary": "This lesson introduces functions as reusable blocks of code and explains how to pass data using parameters. Students will learn to define, call, and test functions in a simple programming language.",
+ "summary": "In this lesson students learn how to define, call, and use functions with parameters to organize code and avoid repetition. They will practice creating simple functions, passing arguments, and returning values.",
+ "objectives": [
+  "Define a function using proper syntax",
+  "Call a function with different arguments",
+  "Explain the difference between parameters and arguments",
+  "Use return statements to get results from functions",
+  "Apply functions to solve a small programming problem"
+ ],
+ "prerequisites": "Students should already understand variables, data types, operators, and basic control structures such as if‑else and loops.",
+ "why": [
+  "Functions let programmers break a large problem into smaller, manageable pieces. This makes code easier to read, test, and reuse, which is essential in real‑world software development where projects can be thousands of lines long.",
+  "In everyday technology—from mobile apps to web services—functions are used to perform repeated tasks like calculating totals, validating input, or formatting data. Knowing how to write and use functions prepares students for more advanced topics such as libraries, APIs, and object‑oriented programming."
+ ],
  "sections": [
   {
-   "heading": "Why Use Functions?",
-   "body": "Functions let you group related statements together, making code easier to read and maintain.\n\nWhen a task repeats, you can write the code once and call the function whenever needed, reducing mistakes and saving time.",
+   "heading": "What Is a Function?",
+   "body": "A function is a small, self‑contained piece of code that does one specific job.  \nThink of it as a tiny machine you can turn on whenever you need that job done, and then turn off again.  \nThe machine does the same thing each time you use it, so you don’t have to write the same instructions over and over.\n\n> **Definition:** A *function* is a reusable block of code that performs a particular task and can be called (or invoked) from other parts of a program.\n\nWhy is this useful?  \nWhen you write a program, you often need to repeat the same set of steps. Without functions you would copy‑paste those steps each time, which makes the program long, hard to read, and easy to break when you change something. With a function you write the steps once, give the function a name, and then ask the program to run that named block whenever it is needed. If you later discover a mistake, you fix the code inside the function only once and every place that uses the function automatically gets the corrected behavior.\n\n### Comparing to a math function\n\nIn mathematics a function also takes an input, does something with it, and gives back an output.  \nFor example, the square function $f(x)=x^2$ takes a number $x$, multiplies it by itself, and returns the result.  \nA programming function works the same way, but instead of numbers it can work with many kinds of data, and instead of a single formula it can contain many statements.\n\n### A very simple programming function (no parameters)\n\nLet’s look at the smallest possible function in Python, a language often used for teaching:\n\n```python\ndef say_hello():\n    print(\"Hello, world!\")\n```\n\n* `def` is a keyword that tells Python we are **defining** (creating) a function.  \n* `say_hello` is the **name** of the function. You can choose any name that follows the language’s naming rules.  \n* The parentheses `()` are empty here because this function does not need any extra information to do its job.  \n* The colon `:` marks the start of the function’s body.  \n* The indented line `print(\"Hello, world!\")` is the **body** – the actual code that runs when the function is called. In this case it tells the computer to display the text *Hello, world!* on the screen.\n\nTo **call** (use) the function, you write its name followed by parentheses:\n\n```python\nsay_hello()\n```\n\nWhen the program reaches this line, it jumps to the function, runs the `print` statement, then returns to the next line after the call. The output will be:\n\n```\nHello, world!\n```\n\n> **In daily life:** A function is like a coffee machine. You press a button (call the function), the machine follows the same steps each time (brew coffee), and you get a cup of coffee (the result). You don’t need to know every internal step; you just use the machine whenever you want coffee.\n\n### What happens behind the scenes?\n\n1. **Definition time** – When the interpreter reads `def say_hello(): …`, it stores the block of code in memory and gives it the label `say_hello`. Nothing happens yet; the function is only *recorded*.\n2. **Call time** – When the program later reaches `say_hello()`, the interpreter looks up the label, jumps to the stored block, executes the statements, and then comes back to continue after the call.\n3. **Return** – After the last statement in the function finishes, the function automatically *returns* to the place where it was called. Since this simple function does not specify a value to return, it returns a special value called `None` (you will learn more about returning values later).\n\n> **Remember:** A function runs only when you *call* it. Defining a function does not execute its code; it just prepares it for later use.\n\n### Benefits in a nutshell\n\n* **Reusability** – Write once, use many times.  \n* **Readability** – A well‑named function tells the reader what the code does without showing all the details.  \n* **Maintainability** – Fix a bug in one place, and every call benefits.  \n* **Organization** – Break a large program into smaller, manageable pieces.\n\n> **Common mistake:** Forgetting the parentheses when you want to *call* a function. Writing `say_hello` alone only refers to the function object; `say_hello()` actually runs the code inside. This often leads to confusing errors where nothing happens or the wrong value is used.",
    "code": ""
   },
   {
-   "heading": "Defining a Simple Function",
-   "body": "A function definition starts with a name, optional parameters in parentheses, and a block of statements.\n\nExample in Python:\n\n```python\n\ndef greet():\n    print(\"Hello from a function!\")\n```",
-   "code": "def greet():\n    print(\"Hello from a function!\")"
+   "heading": "Defining a Function in Code",
+   "body": "When we want a computer to do the same group of actions many times, we give those actions a name and let the computer “call” that name whenever we need the work done.  \nThat named group of actions is called a **function**.  \nThink of a function like a small kitchen appliance: you give it a name (e.g., “toaster”), you put something in (the bread), press a button, and it gives you a result (toast). In programming, the “button” is the **call**, the “bread” are the **arguments**, and the “toast” is the **return value** (if any).\n\n### The basic syntax\n\nIn Python, the word `def` tells the interpreter that we are **defining** a new function.  \nThe general form looks like this:\n\n$$\n\\text{def} \\; \\text{function_name}(\\text{parameter1}, \\text{parameter2}, \\dots): \n$$\n\n- `def` – a keyword that starts a function definition.  \n- `function_name` – any valid identifier you choose; it becomes the name you will use later to call the function.  \n- The parentheses `()` hold **parameters** (sometimes called *formal parameters*). These are placeholders for the values you will later give the function.  \n- The colon `:` marks the end of the header line and tells Python that the next indented block belongs to the function body.  \n\nAfter the header, you write one or more **statements** indented by four spaces (or one tab). Those statements are the steps the function will perform each time it runs.\n\n### A concrete example: a greeting function\n\nLet’s create the simplest possible function: one that prints a friendly greeting. We do not need any parameters for this example because the message is always the same.\n\n```python\ndef say_hello():\n    print(\"Hello, welcome to the programming class!\")\n```\n\nBreakdown of the code line by line:\n\n1. `def say_hello():` – tells Python, “I am defining a function named `say_hello` that takes **no** parameters.”  \n2. The next line is indented (`    `) and starts with `print`. Indentation is crucial; it shows that `print` belongs to the function body.  \n3. `print(\"Hello, welcome to the programming class!\")` – the actual work the function does: it displays the text inside the quotation marks on the screen.\n\nNow that the function exists, we can **call** it anywhere in our program:\n\n```python\nsay_hello()\n```\n\nWhen the interpreter reaches this call, it jumps to the function definition, runs the `print` statement, and then returns to the next line after the call.\n\n> **Definition:** A function is a reusable block of code that performs a specific task and can be executed by calling its name.\n\n> **In daily life:** Think of a function like a vending machine. You press a button (call the function), insert money (provide arguments), and the machine gives you a snack (the result). The machine’s inner workings stay the same each time you use it.\n\n### Why use a function for a greeting?\n\n- **Readability:** Instead of writing the same `print` line over and over, we write it once and give it a clear name. Anyone reading the code sees `say_hello()` and instantly knows a greeting will appear.  \n- **Maintainability:** If we later decide to change the wording, we edit the function in one place, and every call automatically uses the new message.  \n- **Organization:** Functions let us group related actions together, keeping the overall program tidy.\n\n### Small variations\n\nIf we want the greeting to include a person’s name, we add a parameter:\n\n```python\ndef say_hello(name):\n    print(\"Hello, \" + name + \"! Welcome to the programming class.\")\n```\n\nNow the function expects one argument (`name`). When we call it, we supply that argument:\n\n```python\nsay_hello(\"Alice\")\n```\n\nThe output will be:\n\n```\nHello, Alice! Welcome to the programming class.\n```\n\n> **Remember:** The number and order of parameters in the definition must match the number and order of arguments you provide when you call the function.\n\n### A quick checklist when writing a function\n\n1. Start the line with `def`.  \n2. Write a clear, lowercase name using letters, numbers, and underscores (no spaces).  \n3. List any parameters inside parentheses, separated by commas.  \n4. End the header with a colon `:`.  \n5. Indent the body consistently (four spaces is the Python convention).  \n6. End the function with a `return` statement *only if* you need to send a value back; otherwise, the function finishes after the last indented line.\n\n> **Common mistake:** Forgetting the colon after the header or using the wrong indentation level. Python will raise a `SyntaxError` and stop the program, which can be confusing for beginners.\n\nBy mastering this simple pattern—`def` + name + parameters + colon, followed by an indented block—you have the foundation for building more complex functions later on. Practice by writing a few tiny functions of your own, such as one that prints the current date or one that calculates the area of a rectangle. Each new function reinforces the same syntax and helps you think in modular, reusable code.",
+   "code": ""
   },
   {
    "heading": "Parameters and Arguments",
-   "body": "Parameters are placeholders listed in the function definition. When you call the function, you provide arguments that replace those placeholders.\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)  # a=3, b=5\n```",
-   "code": "def add(a, b):\n    return a + b\n\nresult = add(3, 5)"
+   "body": "When we write a function we are creating a little “machine” that can do a job for us.  \nA machine needs something to work on – like a piece of wood for a saw, or a number for a calculator.  \nIn programming the **placeholders** that sit inside the function definition are called **parameters**.  \nWhen we actually use the function, we give it real values; those are called **arguments**.\n\n> **Definition:** A *parameter* is a name that appears in a function’s definition and stands for a value that will be supplied later.  \n> **Definition:** An *argument* is the actual value we pass to the function when we call it.\n\nWhy do we separate the two ideas?  \nThink of a recipe. The recipe lists “ingredients” (the parameters) such as *flour*, *sugar*, and *eggs*. The recipe itself does not contain the exact amounts; it just says “add 1 cup of flour, 2 eggs, …”. When you cook, you decide how much flour you have on hand and you measure it out – those measured amounts are the arguments. By keeping the recipe generic, you can bake many different cakes without rewriting the whole set of steps each time.\n\n### How a parameter looks in code\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name + \"!\")\n```\n\nIn this tiny function, `name` is a **parameter**. It is a placeholder that will receive a value when `greet` is used.\n\n### Supplying an argument\n\n```python\ngreet(\"Alice\")      # \"Alice\" is the argument\ngreet(\"Bob\")        # \"Bob\" is another argument\n```\n\nWhen the interpreter reaches `greet(\"Alice\")`, it copies the argument `\"Alice\"` into the parameter `name`. Inside the function body, every occurrence of `name` now refers to the string `\"Alice\"`.\n\nYou can pass many kinds of data as arguments: numbers, strings, lists, even other functions.\n\n```python\ndef add(a, b):\n    return a + b          # a and b are parameters\n\nresult = add(3, 5)        # 3 and 5 are arguments\n```\n\nThe function `add` has two parameters, `a` and `b`. The call `add(3, 5)` supplies the arguments `3` and `5`. The function computes the sum and returns it. In mathematical form we can write:\n\n$$\n\\text{add}(a, b) = a + b\n$$\n\n### Positional vs. keyword arguments\n\nArguments are usually given **positionally** – the first argument matches the first parameter, the second matches the second, and so on. Python also lets you name the arguments, which is called a **keyword argument**.\n\n```python\ndef describe_pet(animal, name):\n    print(\"I have a \" + animal + \" named \" + name + \".\")\n\ndescribe_pet(\"hamster\", \"Nibbles\")               # positional\ndescribe_pet(animal=\"parrot\", name=\"Polly\")      # keyword\n```\n\nBoth calls do the same thing; the keyword style can make code clearer, especially when a function has many parameters.\n\n> **In daily life:** Imagine a mailbox with slots labeled “To:” and “From:”. The labels are parameters. When you drop a letter in, you fill the slots with actual names – those are arguments.\n\n### What happens if we forget an argument?\n\nIf a function expects two parameters but we give only one argument, the program stops with an error because it does not know what value to use for the missing parameter.\n\n```python\nadd(7)          # Error: missing one argument\n```\n\n> **Common mistake:** Forgetting to supply an argument for every parameter, or mixing up the order of positional arguments.\n\n### Multiple arguments and the *args* shortcut\n\nSometimes we want a function that can accept any number of arguments. Python provides a special syntax `*args` that collects extra positional arguments into a tuple.\n\n```python\ndef total(*numbers):\n    sum = 0\n    for n in numbers:\n        sum += n\n    return sum\n\ntotal(1, 2, 3, 4)   # returns 10\n```\n\nHere `numbers` is not a single value but a collection of all arguments passed after the `*`.\n\n> **Remember:** Parameters are the *names* inside the function definition; arguments are the *values* you give when you call the function. Keeping this distinction clear helps you write reusable, flexible code.",
+   "code": ""
   },
   {
    "heading": "Returning Values",
-   "body": "A function can send a result back to the caller using the `return` statement. The returned value can be stored in a variable or used directly.\n\nIf a function has no `return`, it sends back a special value (e.g., `None` in Python).",
-   "code": "def square(x):\n    return x * x\n\narea = square(4)  # area is 16"
+   "body": "When a function finishes its work, it can give something back to the code that called it.  \nThat “something back” is called a **return value**.  \nThe word *return* is a verb that means “to send back”. In programming, the **return statement** tells the computer, “Here is the result you asked for; give it to the place that called me.”\n\n> **Definition:** A *return statement* ends a function’s execution and sends a value (or nothing) back to the caller.\n\nWhy is this useful? Imagine you are baking a cake. You mix the ingredients, bake the cake, and then you hand the finished cake to your friend. The cake is the result of your work, and your friend can now use it—maybe to eat it or to decorate it. In the same way, a function does some work (like adding numbers) and then *hands* the result back with `return`. The code that called the function can then store the result in a variable, print it, or use it in another calculation.\n\n### The basic shape of a return statement\n\nIn most programming languages the syntax looks like this:\n\n$$\n\\text{return } <value>\n$$\n\n`<value>` can be a number, a string, a list, or even the result of another expression. As soon as the interpreter reaches `return`, the function stops running; any code after `return` is ignored.\n\n### A concrete example: adding two numbers\n\nLet’s write a tiny function that adds two numbers and gives the sum back.\n\n```python\ndef add(a, b):\n    sum = a + b          # calculate the sum\n    return sum           # send the sum back to the caller\n```\n\nStep‑by‑step explanation:\n\n1. `def add(a, b):` – This line **defines** a new function named `add`. The letters `a` and `b` inside the parentheses are *parameters*; they are placeholders for the numbers we will give the function later.\n2. Inside the function we create a new variable called `sum` and set it to `a + b`. This is the actual addition.\n3. `return sum` tells the computer, “The work is done; give the value stored in `sum` back to whoever asked for it.”\n\nNow let’s see how another part of the program can use this function:\n\n```python\nresult = add(4, 7)   # call the function with 4 and 7\nprint(result)        # prints 11\n```\n\nWhen `add(4, 7)` runs, the function receives `a = 4` and `b = 7`. It computes `sum = 11` and then returns that value. The returned value is assigned to the variable `result`, which we later print.\n\n> **In daily life:** Think of a vending machine. You press a button (the *call*), the machine does its work, and then it *returns* a snack. The snack is the return value you can eat or share.\n\n### Returning without a value\n\nIf a function does not need to give anything back, it can still use `return` without a value, or simply omit the statement. In many languages the default return value is a special object called `None` (Python) or `null` (JavaScript, Java). This signals “nothing to give back”.\n\n### When to use `return`\n\n- When you need the result of a calculation later in the program.  \n- When you want to break out of a function early (for example, after finding an error).  \n- When you want to keep the function small and focused on one task.\n\n> **Remember:** The value after `return` is the *only* thing the caller receives. Anything you print inside the function is only for the user’s eyes; it does not become the return value.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to write `return` or writing it after some other code that should never run. If a function reaches the end without a `return`, most languages automatically return `None`/`null`, which can cause confusing bugs when you expect a number.\n\nBy mastering the `return` statement, you give your functions the power to produce results that other parts of your program can reuse, just like a well‑designed tool that hands you exactly what you need after you use it. This makes your code modular, easier to read, and much more flexible.",
+   "code": ""
+  },
+  {
+   "heading": "Scope and Variable Lifetime",
+   "body": "When a program runs, every name you create – like `total`, `price`, or `result` – lives in a *scope*.  \nA scope is simply the part of the program where that name can be seen and used.\n\n> **Definition:** *Scope* is the region of code where a variable (a named storage location) is accessible.\n\n---\n\n### Local variables – the “private” ones\n\nIf you write a variable **inside** a function, it is called a *local* variable.  \nOnly the code inside that same function can read or change it. As soon as the function finishes, the local variable disappears – the computer can reuse that memory for something else.\n\nWhy is this useful? Imagine you are cooking several dishes at once. Each dish has its own bowl for mixing ingredients. You don’t want the sugar from the cake batter to end up in the soup, so each bowl is kept separate. In programming, a function’s local variables are like those separate bowls: they keep data isolated so one part of the program cannot accidentally mess up another part.\n\n```python\ndef add_one(x):\n    result = x + 1          # result is local to add_one\n    return result\n```\n\nHere `result` exists only while `add_one` runs. If we later write another function that also uses a variable named `result`, the two `result`s do not interfere with each other.\n\n---\n\n### Global variables – the “shared” ones\n\nA variable written **outside** any function is called a *global* variable. Every function in the file can see it, unless a local variable with the same name hides it.\n\nThink of a global variable as a communal whiteboard in a classroom. Anyone can read what is written, and anyone can also erase or overwrite it. This can be handy for sharing information, but it also creates the risk that one person (or function) changes the board in a way that surprises another.\n\n```python\ncounter = 0          # global variable\n\ndef increase():\n    global counter   # tell Python we mean the global one\n    counter = counter + 1\n```\n\nThe keyword `global` tells the function to use the shared `counter` instead of creating a new local copy.\n\n---\n\n### Why variables inside a function are separate\n\nWhen the interpreter starts a function call, it creates a fresh *activation record* (a small table) that holds all the local variables for that call. This record is discarded when the function returns. Because each call gets its own record, two calls can run at the same time without stepping on each other’s toes.\n\n```python\ndef multiply(a, b):\n    product = a * b      # product is local\n    return product\n\nx = multiply(2, 3)       # product = 6, then disappears\ny = multiply(5, 4)       # a new product = 20, independent of the first\n```\n\nEven though `multiply` is called twice, the two `product` variables are completely independent.\n\n---\n\n### A common scope error\n\nA frequent mistake is trying to use a local variable outside the function where it was created. Python will raise a `NameError` because the name does not exist in that outer scope.\n\n```python\ndef compute():\n    temp = 10            # temp is local to compute\n    return temp * 2\n\nprint(temp)              # <-- error! temp is not defined here\n```\n\nRunning this code produces:\n\n```\nNameError: name 'temp' is not defined\n```\n\nThe error occurs because `temp` lives only inside `compute`. To fix it, either return the value (as shown) or make `temp` global, but the latter should be used sparingly.\n\n> **Common mistake:** Assuming a variable created inside a function can be used elsewhere without returning it or declaring it global.\n\n---\n\n### Quick checklist\n\n- **Local variables** are created inside functions, disappear when the function ends, and cannot be seen outside.  \n- **Global variables** are created outside functions, can be accessed anywhere, but may cause unexpected interactions.  \n- Use `return` to pass values out of a function instead of relying on globals.  \n- If you need to modify a global variable inside a function, declare it with the `global` keyword.\n\n> **Remember:** Keep most variables local. Treat globals like a shared whiteboard – useful, but easy to clutter.",
+   "code": ""
+  },
+  {
+   "heading": "Practice: Building a Simple Calculator",
+   "body": "Imagine you are at a kitchen counter with four simple tools: a spoon for adding, a knife for subtracting, a whisk for multiplying, and a measuring cup for dividing.  \nEach tool does one job, and you pick the right one depending on the recipe you want to make.  \nIn programming we can do the same thing with **functions** – small blocks of code that perform a single task.  \nBelow we will write four tiny functions (`add`, `subtract`, `multiply`, `divide`) and then a **main program** that asks the user what operation they need and calls the appropriate function.\n\n---\n\n### 1. Write the four operation functions\n\nStart a new file called `calculator.py`.  \nType the first function exactly as shown, then press **Enter** twice before writing the next one.\n\n```python\ndef add(a, b):\n    \"\"\"Return the sum of a and b.\"\"\"\n    return a + b\n```\n\n* `def` tells Python we are **defining** (creating) a function.  \n* `add` is the **name** of the function – you can call it later by this name.  \n* Inside the parentheses we have **parameters** `a` and `b`. Think of them as placeholders for the numbers the user will give us.  \n* The line `return a + b` sends the result back to whoever asked for it.\n\nNow copy the same pattern for the other three operations:\n\n```python\ndef subtract(a, b):\n    \"\"\"Return the difference of a and b.\"\"\"\n    return a - b\n\ndef multiply(a, b):\n    \"\"\"Return the product of a and b.\"\"\"\n    return a * b\n\ndef divide(a, b):\n    \"\"\"Return the quotient of a and b.\"\"\"\n    # protect against division by zero\n    if b == 0:\n        return \"Error: cannot divide by zero\"\n    return a / b\n```\n\n> **Definition:** *Parameter* – a name listed in a function definition that receives a value when the function is called.  \n> **Note:** The `divide` function checks `b == 0` because dividing by zero would crash the program.\n\n---\n\n### 2. Build the main program that talks to the user\n\nBelow the four functions, add a new block of code that will run when the file is executed.\n\n```python\ndef main():\n    print(\"Simple Calculator\")\n    print(\"Choose an operation:\")\n    print(\"1 – Add\")\n    print(\"2 – Subtract\")\n    print(\"3 – Multiply\")\n    print(\"4 – Divide\")\n\n    choice = input(\"Enter the number of the operation (1‑4): \")\n\n    # ask for the two numbers\n    x = float(input(\"Enter the first number: \"))\n    y = float(input(\"Enter the second number: \"))\n\n    if choice == \"1\":\n        result = add(x, y)\n    elif choice == \"2\":\n        result = subtract(x, y)\n    elif choice == \"3\":\n        result = multiply(x, y)\n    elif choice == \"4\":\n        result = divide(x, y)\n    else:\n        result = \"Invalid choice\"\n\n    print(\"Result:\", result)\n\n# This line makes sure main() runs only when we execute this file directly\nif __name__ == \"__main__\":\n    main()\n```\n\n* `input()` reads text that the user types.  \n* `float()` converts that text into a number that can have decimals.  \n* The `if … elif … else` chain selects the correct function based on the user’s choice.  \n* `print()` shows the final answer.\n\n> **In daily life:** Choosing a function is like picking the right kitchen tool – you look at the recipe (user’s choice) and then use the spoon, knife, whisk, or cup accordingly.\n\n---\n\n### 3. Test the program\n\n1. Save the file.  \n2. Open a terminal or command prompt and run `python calculator.py`.  \n3. Follow the prompts, for example choose **3** for multiplication and enter `7` and `8`.  \n4. You should see `Result: 56.0`.\n\nIf anything looks wrong, read the error message carefully – it usually tells you the line number and the type of problem.\n\n> **Common mistake:** Forgetting the colon (`:`) after `def add(a, b)` or after an `if` statement. Python will raise a `SyntaxError` and stop before running any code.\n\n---\n\n### 4. What have we learned?\n\n* Functions let us **reuse** code: the same `add` function could be called many times from different parts of a larger program.  \n* **Parameters** let us pass information *into* a function, while `return` sends a result *out* of it.  \n* A **main program** can coordinate several functions, just like a conductor leads an orchestra.  \n\nNow you have a working calculator built from four tiny, well‑named functions. Try extending it: add a power function, or let the user perform several calculations in a row. The same ideas apply – define a clear function, give it parameters, and call it when needed. Happy coding!",
+   "code": ""
+  },
+  {
+   "heading": "Common Mistakes and Debugging Tips",
+   "body": "When you write a function, the computer follows the steps you gave it **exactly**.  \nIf something goes wrong, it is usually because the function was called in a way that does not match its definition, or because the function’s interior does something unexpected. Below are the most common slip‑ups beginners make, why they happen, and simple ways to spot and fix them.\n\n> **Common mistake:** *Wrong number of arguments*  \nA function declares a certain number of **parameters** (the names that appear inside the parentheses when you define it). Each time you call the function you must supply the same number of **arguments** (the actual values you pass in). If you give too few, Python raises a `TypeError` saying “missing required positional argument”. If you give too many, it says “takes X positional arguments but Y were given”.  \n\n**Why it matters:** Think of a vending machine that expects exactly one coin. If you insert no coin, nothing happens; if you insert two coins, the machine might get confused and reject the request.  \n\n**How to debug:** Insert a `print` statement at the very start of the function to show what it received.\n\n```python\ndef add(a, b):\n    print(\"add called with:\", a, b)   # <-- debugging line\n    return a + b\n```\n\nRun the program. If the console shows only one value, you know you called `add` with a missing argument. Adjust the call, e.g. `add(3, 5)`, and the error disappears.\n\n---\n\n> **Common mistake:** *Missing `return` statement*  \nA function that is supposed to give a result back to the caller must end with a `return` statement. Without it, Python returns the special value `None`. This often leads to confusing errors later when you try to use the result as a number.\n\n**Everyday comparison:** Imagine asking a friend to bring you a book and they come back empty‑handed. You expected a book, but you got nothing—so you can’t read.\n\n**Fix:** Make sure the `return` line is reachable (not inside a conditional that never runs) and that it returns the correct expression.\n\n```python\ndef multiply(x, y):\n    # Wrong: no return\n    product = x * y\n\ndef multiply_fixed(x, y):\n    product = x * y\n    return product          # <-- now the caller receives the value\n```\n\nYou can test by printing the function’s result:\n\n```python\nprint(multiply_fixed(4, 3))   # prints 12\n```\n\nIf you still see `None`, the `return` is missing or placed after a `return` that ends the function early.\n\n---\n\n> **Common mistake:** *Variable shadowing*  \nWhen a variable inside a function has the same name as a variable outside, the inner one **shadows** the outer one. The function works with the inner copy, leaving the outer variable unchanged. This can be surprising when you expect the function to modify a global value.\n\n**Definition:** *Shadowing* means a local variable hides a variable with the same name that exists in an outer scope.\n\n**Analogy:** It’s like having two identical keys—one for your house and one for a locker. If you use the locker key, the house remains locked; the two keys look the same but affect different things.\n\n**How to see it:** Print both variables before and after the function call.\n\n```python\ntotal = 10\n\ndef add_to_total(amount):\n    total = amount   # this creates a new local variable called total\n    print(\"inside:\", total)\n\nprint(\"before:\", total)   # 10\nadd_to_total(5)           # prints inside: 5\nprint(\"after:\", total)    # still 10\n```\n\n**Fix:** Either rename the local variable or tell Python you want to use the outer one with the `global` keyword (use sparingly).\n\n```python\ndef add_to_total(amount):\n    global total\n    total += amount\n```\n\nNow `total` becomes 15 after the call.\n\n---\n\n> **Remember:** *Use print statements or a debugger to watch values step by step*  \nWhen a function misbehaves, the quickest way to understand why is to look at the data it processes. Insert `print` lines before calculations, after conditionals, and just before each `return`. Modern IDEs also offer a **debugger**: set a breakpoint on the first line of the function, run the program, and then step through line by line, watching the variable pane. This visual feedback turns abstract bugs into concrete observations, making it far easier to locate the exact line that needs correction.",
+   "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Add Two Numbers with a Function",
+   "given": "Write a function `add(a, b)` that returns the sum of two numbers; then use it to find the sum of 7 and 5.",
+   "steps": [
+    {
+     "label": "Define function",
+     "text": "Write `def add(a, b):` to create a reusable block that takes two inputs."
+    },
+    {
+     "label": "Return result",
+     "text": "Inside the function, add `return a + b` so the function outputs the sum."
+    },
+    {
+     "label": "Call function",
+     "text": "Execute `result = add(7, 5)` to compute the sum using the defined function."
+    }
+   ],
+   "answer": "The function returns 12."
+  },
+  {
+   "level": "Medium",
+   "title": "Temperature Converter Function",
+   "given": "Create a function `c_to_f(celsius)` that converts Celsius to Fahrenheit; use it to convert 22 °C to Fahrenheit.",
+   "steps": [
+    {
+     "label": "Define function",
+     "text": "Write `def c_to_f(celsius):` to start a function that accepts one temperature value."
+    },
+    {
+     "label": "Compute conversion",
+     "text": "Inside, calculate `fahrenheit = celsius * 9/5 + 32` and `return fahrenheit` to produce the converted value."
+    },
+    {
+     "label": "Call function",
+     "text": "Execute `temp_f = c_to_f(22)` to get the Fahrenheit equivalent."
+    }
+   ],
+   "answer": "The function returns 71.6 °F."
+  },
+  {
+   "level": "Hard",
+   "title": "Simple Calculator with Multiple Operations",
+   "given": "Write a function `calculate(a, b, op)` that performs addition, subtraction, multiplication, or division based on the string `op`; use it to compute 15 ÷ 3.",
+   "steps": [
+    {
+     "label": "Define function with parameters",
+     "text": "Write `def calculate(a, b, op):` to accept two numbers and an operator."
+    },
+    {
+     "label": "Choose operation",
+     "text": "Inside, use `if op == '+': return a + b` etc., handling '+', '-', '*', '/' to select the correct arithmetic."
+    },
+    {
+     "label": "Handle division safely",
+     "text": "Include `elif op == '/': return a / b` ensuring `b` is not zero before dividing."
+    },
+    {
+     "label": "Call function",
+     "text": "Execute `result = calculate(15, 3, '/')` to perform the division."
+    }
+   ],
+   "answer": "The function returns 5."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Write a function called `add` that takes two numbers and returns their sum. Show how to call it with the numbers 3 and 5.",
+   "a": "\n1. Define the function:\n```python\ndef add(a, b):\nreturn a + b\n```\n2. Call the function with 3 and 5 and store the result:\n```python\nresult = add(3, 5)\n```\n3. `result` now holds the value `8`. If we print it:\n```python\nprint(result)   # Output: 8\n```"
+  },
+  {
+   "level": "Easy",
+   "q": "What will be printed by the following code? ```python def greet(name): message = \"Hello, \" + name return message print(greet(\"Alice\")) ```",
+   "a": "\n1. The function `greet` receives the argument `\"Alice\"` and assigns it to the parameter `name`.\n2. Inside the function, `message` becomes `\"Hello, Alice\"`.\n3. The function returns `\"Hello, Alice\"`.\n4. `print` outputs the returned value, so the console shows:\n```\nHello, Alice\n```"
+  },
+  {
+   "level": "Medium",
+   "q": "Write a function `max_of_three` that takes three numbers and returns the largest one. Demonstrate its use with the numbers 7, 2, and 9.",
+   "a": "\n1. Define the function:\n```python\ndef max_of_three(x, y, z):\nif x >= y and x >= z:\nreturn x\nelif y >= x and y >= z:\nreturn y\nelse:\nreturn z\n```\n2. Call the function:\n```python\nlargest = max_of_three(7, 2, 9)\n```\n3. The comparisons:\n- `x` (7) is not ≥ `z` (9), so first `if` fails.\n- `y` (2) is not ≥ `z` (9), so `elif` fails.\n- The `else` clause runs, returning `z`, which is 9.\n4. `largest` now holds `9`. Printing it:\n```python\nprint(largest)   # Output: 9\n```"
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between a parameter and an argument, and illustrate with a function `square(num)` that returns the square of its input.",
+   "a": "\n1. **Parameter** – the variable listed in a function definition. In `def square(num):`, `num` is a parameter.\n2. **Argument** – the actual value you pass to the function when you call it. For example, `square(4)` passes the argument `4`.\n3. Example code:\n```python\ndef square(num):          # num is the parameter\nreturn num * num\nresult = square(4)        # 4 is the argument\nprint(result)             # Output: 16\n```\n4. The function uses the parameter `num` to hold the argument value (4) and returns its square."
+  },
+  {
+   "level": "Hard",
+   "q": "Write a function `calculator(a, b, op)` that takes two numbers `a` and `b`, and a string `op` that can be `\"add\"`, `\"sub\"`, `\"mul\"` or `\"div\"`. The function should perform the requested operation and return the result. Include error handling for division by zero and unknown operations. Show a call that divides 10 by 0 and explain the output.",
+   "a": "\n1. Define the function with error checks:\n```python\ndef calculator(a, b, op):\nif op == \"add\":\nreturn a + b\nelif op == \"sub\":\nreturn a - b\nelif op == \"mul\":\nreturn a * b\nelif op == \"div\":\nif b == 0:\nreturn \"Error: Division by zero\"\nreturn a / b\nelse:\nreturn \"Error: Unknown operation\"\n```\n2. Call the function with division by zero:\n```python\nresult = calculator(10, 0, \"div\")\nprint(result)\n```\n3. Execution steps:\n- `op` is `\"div\"`, so the `elif op == \"div\":` block runs.\n- Inside that block, `b` is checked; `b == 0` is `True`.\n- The function returns the string `\"Error: Division by zero\"`.\n4. The printed output is:\n```\nError: Division by zero\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "Consider the following code. What will be printed and why? ```python def outer(x): y = x * 2 def inner(z): return y + z return inner f = outer(5) print(f(3)) print(f(10)) ```",
+   "a": "\n1. Call `outer(5)`:\n- `x` is 5, so `y = 5 * 2 = 10`.\n- `inner` is defined, capturing the current value of `y` (10) in a closure.\n- `outer` returns the function object `inner`; this is assigned to `f`.\n2. First call `f(3)`:\n- Inside `inner`, `z` is 3.\n- It returns `y + z = 10 + 3 = 13`.\n- `print` outputs `13`.\n3. Second call `f(10)`:\n- `z` is 10.\n- It returns `y + z = 10 + 10 = 20`.\n- `print` outputs `20`.\n4. Therefore the program prints:\n```\n13\n20\n```"
+  }
+ ],
+ "recap": "Functions are reusable blocks of code that perform a specific task. They can receive inputs called parameters (filled by arguments) and optionally return a value. Functions have their own local scope, keeping variables private to the function. Using functions makes code shorter, clearer, and easier to maintain.",
  "key_terms": [
   {
    "term": "Function",
-   "meaning": "A named block of code that performs a specific task."
+   "meaning": "A named block of code that can be called to perform a specific task."
   },
   {
    "term": "Parameter",
-   "meaning": "A variable listed in a function definition to receive input."
+   "meaning": "A variable listed in a function definition that acts as a placeholder for a value."
   },
   {
    "term": "Argument",
-   "meaning": "The actual value passed to a function when it is called."
+   "meaning": "The actual value supplied to a function when it is called."
   },
   {
-   "term": "Return Value",
-   "meaning": "The data a function sends back to the caller using `return`."
+   "term": "Return statement",
+   "meaning": "A statement that ends a function and sends a value back to the caller."
   },
   {
-   "term": "Call",
-   "meaning": "The act of executing a function by its name and providing arguments."
+   "term": "Scope",
+   "meaning": "The region of a program where a variable name can be accessed."
+  },
+  {
+   "term": "Local variable",
+   "meaning": "A variable defined inside a function; it exists only while the function runs."
+  },
+  {
+   "term": "Call (or invoke)",
+   "meaning": "The act of executing a function by using its name and providing arguments."
+  },
+  {
+   "term": "Reusable",
+   "meaning": "The ability to use the same code block many times without rewriting it."
   }
  ],
  "quiz": [
   {
-   "q": "What is the purpose of a parameter in a function?",
+   "q": "What is the purpose of a function in a program?",
    "options": [
-    "To store the function's result",
-    "To receive input values",
-    "To define the function's name",
-    "To end the function"
+    "To store data permanently",
+    "To repeat code without rewriting it",
+    "To create graphics",
+    "To compile the program"
    ],
    "answer": 1,
-   "why": "Parameters act as placeholders for values that will be supplied when the function is called."
+   "why": "Functions let you write a piece of code once and reuse it wherever needed."
   },
   {
-   "q": "Which line correctly calls the function `add` with arguments 7 and 2?",
+   "q": "In the definition `def add(a, b):`, what are `a` and `b`?",
    "options": [
-    "add = 7, 2",
-    "add(7, 2)",
-    "call add 7 2",
-    "add {7,2}"
+    "Return values",
+    "Arguments",
+    "Parameters",
+    "Local variables"
+   ],
+   "answer": 2,
+   "why": "`a` and `b` are placeholders listed in the function definition, i.e., parameters."
+  },
+  {
+   "q": "Which statement sends a result back to the code that called the function?",
+   "options": [
+    "print()",
+    "def",
+    "return",
+    "import"
+   ],
+   "answer": 2,
+   "why": "The `return` statement ends the function and provides a value to the caller."
+  },
+  {
+   "q": "What happens to a local variable after its function finishes?",
+   "options": [
+    "It becomes a global variable",
+    "It is saved for later use",
+    "It disappears and its memory can be reused",
+    "It causes an error"
+   ],
+   "answer": 2,
+   "why": "Local variables exist only during the function execution and are discarded afterward."
+  },
+  {
+   "q": "If a function `divide(x, y)` is called as `divide(10)`, what error will occur?",
+   "options": [
+    "SyntaxError",
+    "NameError",
+    "TypeError for missing argument",
+    "ZeroDivisionError"
+   ],
+   "answer": 2,
+   "why": "The call provides fewer arguments than the function expects, causing a TypeError."
+  },
+  {
+   "q": "Which of the following best describes *scope*?",
+   "options": [
+    "The speed at which a program runs",
+    "The part of the program where a variable can be accessed",
+    "The order of function definitions",
+    "The type of data a variable holds"
    ],
    "answer": 1,
-   "why": "Function calls use the name followed by parentheses containing arguments."
-  },
-  {
-   "q": "What does the `return` statement do?",
-   "options": [
-    "Prints a value to the screen",
-    "Stops the program",
-    "Sends a value back to the caller",
-    "Creates a new variable"
-   ],
-   "answer": 2,
-   "why": "`return` passes a value from the function back to where it was called."
-  },
-  {
-   "q": "If a function has no `return` statement, what does it return by default in Python?",
-   "options": [
-    "0",
-    "Empty string",
-    "None",
-    "False"
-   ],
-   "answer": 2,
-   "why": "Python functions without an explicit `return` give back the special value `None`."
+   "why": "Scope defines where a variable name is visible and usable."
   }
  ],
  "flashcards": [
   {
-   "front": "Define a function in Python.",
-   "back": "Use `def function_name(parameters):` followed by an indented block of code."
+   "front": "Function",
+   "back": "A reusable block of code that performs a specific task and can be called by name."
   },
   {
-   "front": "What is an argument?",
+   "front": "Parameter",
+   "back": "A name listed in a function definition that acts as a placeholder for a value."
+  },
+  {
+   "front": "Argument",
    "back": "The actual value passed to a function when it is called."
   },
   {
-   "front": "How do you return a value from a function?",
-   "back": "Use the `return` keyword followed by the value you want to send back."
+   "front": "Return statement",
+   "back": "Ends a function and optionally sends a value back to the caller."
   },
   {
-   "front": "Can a function call another function? Give an example.",
-   "back": "Yes. Example: `def outer():\n    inner()\n\ndef inner():\n    print('inside')`"
+   "front": "Scope",
+   "back": "The region of code where a variable name is accessible."
   },
   {
-   "front": "What happens if you call a function with the wrong number of arguments?",
-   "back": "Python raises a `TypeError` indicating a mismatch in expected arguments."
+   "front": "Local variable",
+   "back": "A variable defined inside a function; it exists only while that function runs."
+  },
+  {
+   "front": "Calling a function",
+   "back": "Using the function's name followed by parentheses and arguments, e.g., `add(2,3)`."
+  },
+  {
+   "front": "Why use functions?",
+   "back": "They reduce code duplication, make programs easier to read, and simplify debugging."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -134,58 +305,74 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l07-factory-assembly-line",
-   "title": "An assembly line where workers add parts, representing a function processing arguments.",
-   "alt": "An assembly line where workers add parts, representing a function processing arguments.",
-   "priority": 7,
-   "picture_title": "Factory Assembly Line",
+   "file": "introduction-to-programming-l07-function-as-kitchen-appliance",
+   "title": "A toaster representing a function that takes bread (argument) and produces toast (return value).",
+   "alt": "A toaster representing a function that takes bread (argument) and produces toast (return value).",
+   "priority": 8,
+   "picture_title": "Function as Kitchen Appliance",
    "kind": "illustration",
-   "subject": "A simple factory line with a conveyor belt, stations labeled with operations, and input parts entering the line and a finished product exiting. Shows how arguments travel through a function and produce a result.",
-   "layout": "Conveyor belt runs horizontally; input parts on left, stations stacked vertically with labels, final product on right.",
+   "subject": "Shows a kitchen appliance labeled as a function, with arrows indicating input (bread) as arguments and output (toast) as the return value.",
+   "layout": "Toaster in the centre, bread entering from the left, toast exiting to the right, labels on each part.",
    "labels": [
-    "Input A",
-    "Input B",
-    "Processing Station",
-    "Output"
+    "Function",
+    "Argument",
+    "Return"
    ],
-   "after": 2
+   "after": 1
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l07-return-box",
-   "title": "A box labeled 'Return' delivering the result back to the caller.",
-   "alt": "A box labeled 'Return' delivering the result back to the caller.",
-   "priority": 6,
-   "picture_title": "Return Box",
-   "kind": "illustration",
-   "subject": "A cartoon of a person handing a box labeled 'Result' to another person, symbolizing the return statement sending a value back to the code that called the function.",
-   "layout": "Two characters on opposite sides; arrows show the box moving from the function (left) to the caller (right).",
+   "file": "introduction-to-programming-l07-local-vs-global-scope",
+   "title": "Diagram of a program block highlighting where local and global variables are accessible.",
+   "alt": "Diagram of a program block highlighting where local and global variables are accessible.",
+   "priority": 7,
+   "picture_title": "Local vs Global Scope",
+   "kind": "labelled diagram",
+   "subject": "Illustrates a program with a global area and a function block, showing a variable inside the function (local) and one outside (global).",
+   "layout": "Two nested boxes: outer box labeled Global Scope, inner box labeled Function Scope, with variable names placed inside each box.",
    "labels": [
-    "Function",
-    "Return Value",
-    "Caller"
+    "Global Variable",
+    "Local Variable"
    ],
-   "after": 3
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l07-calculator-function-tools",
+   "title": "Four kitchen tools representing add, subtract, multiply, and divide functions.",
+   "alt": "Four kitchen tools representing add, subtract, multiply, and divide functions.",
+   "priority": 6,
+   "picture_title": "Calculator Function Tools",
+   "kind": "photo",
+   "subject": "A photo of a spoon, knife, whisk, and measuring cup arranged side by side, each labeled with the corresponding arithmetic operation.",
+   "layout": "Tools placed in a row from left to right, each with a small label underneath.",
+   "labels": [
+    "Add (Spoon)",
+    "Subtract (Knife)",
+    "Multiply (Whisk)",
+    "Divide (Measuring Cup)"
+   ],
+   "after": 5
   },
   {
    "type": "steps",
-   "title": "How a Function Runs",
+   "title": "Defining a Function",
    "steps": [
     {
-     "label": "Define",
-     "text": "Write the function with def and a name"
+     "label": "Write def line",
+     "text": "Use the keyword def and give the function a name"
     },
     {
-     "label": "Call",
-     "text": "Use the name followed by parentheses"
+     "label": "Add parameters",
+     "text": "List any inputs inside parentheses"
     },
     {
-     "label": "Execute",
-     "text": "Python runs the block inside the function"
+     "label": "Write body",
+     "text": "Indent the code that does the work"
     },
     {
-     "label": "Return",
-     "text": "Send back a value with return (optional)"
+     "label": "Return value (optional)",
+     "text": "Use return to send a result back"
     }
    ],
    "loop": false,
@@ -193,53 +380,71 @@
   },
   {
    "type": "compare",
-   "title": "Parameters vs. Arguments",
+   "title": "Parameters vs Arguments",
    "left": {
-    "name": "Parameters",
+    "name": "Parameter",
     "points": [
-     "Listed in the function definition",
-     "Act as placeholders",
-     "Give names to incoming data"
+     "Appears in the function definition",
+     "Acts as a placeholder",
+     "Gets a value when the function is called"
     ]
    },
    "right": {
-    "name": "Arguments",
+    "name": "Argument",
     "points": [
-     "Provided when calling the function",
-     "Replace the parameters",
-     "Supply actual values"
+     "Provided at the call site",
+     "Supplies the actual value",
+     "Matches a parameter by position or name"
     ]
    },
    "after": 2
   },
   {
    "type": "parts",
-   "title": "Parts of a Simple Function",
+   "title": "Variable Scope",
    "items": [
     {
-     "name": "def keyword",
-     "role": "starts the function definition"
+     "name": "Local variable",
+     "role": "Exists only inside its function"
     },
     {
-     "name": "function name",
-     "role": "identifies the function"
+     "name": "Global variable",
+     "role": "Visible throughout the whole module"
     },
     {
-     "name": "parameter list",
-     "role": "holds placeholders inside ()"
+     "name": "Nonlocal variable",
+     "role": "Defined in an enclosing function, not global"
     },
     {
-     "name": "body",
-     "role": "statements that run when called"
-    },
-    {
-     "name": "return statement",
-     "role": "sends a result back (optional)"
+     "name": "Built‑in name",
+     "role": "Provided by Python, always accessible"
     }
    ],
-   "after": 0
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Return Statement",
+   "items": [
+    {
+     "value": "Ends function execution",
+     "label": "Effect"
+    },
+    {
+     "value": "Sends a value back to the caller",
+     "label": "Purpose"
+    },
+    {
+     "value": "If omitted, returns None",
+     "label": "Default"
+    }
+   ],
+   "after": 3
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

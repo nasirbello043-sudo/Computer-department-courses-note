@@ -1,119 +1,309 @@
 {
  "title": "Writing Your First Program: Hello, World!",
- "summary": "Learn how to create, run, and understand the classic Hello, World! program. This lesson introduces basic syntax, compilation, and execution steps.",
+ "summary": "In this lesson students will write and run their first program that displays \"Hello, World!\" on the screen. They will also learn the basic structure of a program and how to use the IDE to compile and execute code.",
+ "objectives": [
+  "Write a simple program that prints a message",
+  "Explain each part of the program code",
+  "Use the IDE to compile and run the program",
+  "Identify and fix common errors in the first program"
+ ],
+ "prerequisites": "Students should have completed the previous lessons on installing the IDE and basic computer use.",
+ "why": [
+  "Being able to write a \"Hello, World!\" program shows that you can translate an idea into code that a computer understands. This first success builds confidence and demonstrates the core workflow of programming: write, compile, run, and debug.",
+  "In real life, almost every software application starts with a simple program that outputs something. Understanding this process prepares students for more complex tasks like building apps, automating tasks, or analyzing data."
+ ],
  "sections": [
   {
-   "heading": "What is a Hello, World! Program?",
-   "body": "The Hello, World! program is the simplest code you can write in any language. It displays the text \"Hello, World!\" on the screen, showing that the development environment works.\n\nIt is often the first step for beginners because it proves that you can write, compile, and run a program successfully.",
+   "heading": "What \"Hello, World!\" Means",
+   "body": "When you start learning a new language—whether it is spoken, written, or a programming language—the first thing you usually try is a very simple sentence that shows you can make the language work. In programming the classic first sentence is the **“Hello, World!”** program.  \n\nThe phrase *Hello, World!* is just a short piece of text that the computer is asked to display on the screen. Writing this tiny program does three important things at once:\n\n1. **It shows that the computer can understand the language you are using.**  \n   The compiler (the tool that turns your code into something the computer can run) must be able to read the file, translate it, and produce an executable program. If any step fails, you will see an error message right away.\n\n2. **It checks that the whole development environment is set up correctly.**  \n   A development environment includes the editor where you type code, the compiler or interpreter, and the command line or IDE (integrated development environment) you use to run the program. Successfully printing *Hello, World!* means every piece is talking to the others.\n\n3. **It gives you an immediate, visible result.**  \n   Seeing the words *Hello, World!* appear on the screen is a satisfying confirmation that you have written, saved, compiled, and run a program correctly.\n\n> **Definition:** *Hello, World!* – a minimal program that prints the text “Hello, World!” to the screen, used as a first test of a programming language and its tools.\n\n### Why a greeting?\n\nThink of a new kitchen appliance, like a coffee maker. The first thing you do is press the “brew” button with water and coffee grounds already inside. If the machine makes coffee, you know the power is on, the water heats, and the brew cycle works. *Hello, World!* is the programming equivalent of that “brew” button. It does not try to solve a complex problem; it simply exercises the most basic path from code to output.\n\n### What the output looks like\n\nWhen the program runs correctly, the computer’s display (often called the **console** or **terminal**) will show exactly:\n\n```\nHello, World!\n```\n\nThe text appears on its own line, followed by a newline character that moves the cursor to the next line. No extra symbols, no numbers—just the greeting and a line break. If you see anything else, such as error messages or missing words, something in the chain (writing, saving, compiling, or running) needs to be checked.\n\n> **In daily life:** Seeing *Hello, World!* appear is like hearing a car’s engine start after you turn the key. The sound tells you the battery, fuel, and ignition are all working together.\n\n### How the tradition started\n\nThe tradition began in the early 1970s with the book *The C Programming Language* by Brian Kernighan and Dennis Ritchie. Their first example printed “hello, world” in lower‑case letters. Over the decades, almost every programming textbook and tutorial repeats the same example, changing only the language’s syntax. Because it is so widely used, you will encounter *Hello, World!* in almost any new language you try.\n\n> **Note:** The exact spelling and punctuation can vary (e.g., “Hello, world!” or “HELLO, WORLD!”). The important part is that the program produces some visible text, confirming the toolchain works.\n\n### What you learn from it\n\n- **File handling:** You create a text file, give it a name with the correct extension (like `.c`, `.py`, `.java`), and save it.  \n- **Compilation or interpretation:** You run a command such as `gcc hello.c -o hello` (for C) or `python hello.py` (for Python). The system either compiles the code into an executable or interprets it directly.  \n- **Running the program:** You execute the resulting file (`./hello` on Unix‑like systems, `hello.exe` on Windows). The console shows the output.  \n- **Error messages:** If the compiler cannot understand your code, it will point to the line with a problem. Learning to read these messages is a key skill.\n\n> **Common mistake:** Forgetting to add a newline character (`\\n`) at the end of the printed text. Without it, the cursor stays on the same line, which can look odd when you run the program again.\n\n### Summing up\n\nThe *Hello, World!* program is more than a tradition; it is a practical checkpoint. It confirms that you can write code, save it with the right name, translate it into something the computer can execute, and finally see the result on the screen. Once you have this confidence, you can move on to more interesting programs that take input, perform calculations, and interact with the world in richer ways.",
+   "code": ""
+  },
+  {
+   "heading": "Program Structure Overview",
+   "body": "When a computer runs a program it follows a very simple recipe: **read the instructions, do exactly what they say, and show the result**.  \nThink of a program like a cooking recipe. The recipe has a title, a list of ingredients, step‑by‑step directions, and sometimes notes that help you understand why you do something a certain way. In a computer program the same parts appear, just with different names.\n\n**1. Comments – the “notes” of a program**  \nA comment is a line of text that the computer completely ignores when it runs the program. We write comments to explain what the code does, to remind ourselves later, or to help other people read it. In Python a comment starts with the `#` character and continues to the end of the line.\n\n```python\n# This line prints a greeting to the screen\n```\n\n> **Definition:** *Comment* – a non‑executing line that starts with `#` (in Python) and is used only for human readers.\n\n**2. The main function – the “title” and “core steps”**  \nMost programming languages have a special place where execution begins. In Python we usually put the first statements at the top level of the file, but many textbooks introduce a `main()` function to keep things tidy and to show where the program starts. A function is a named block of code that can be called (run) later. The `main` function is conventionally the entry point.\n\n```python\ndef main():\n    # All the important statements go here\n    print(\"Hello, World!\")\n```\n\n> **In daily life:** Think of `main()` as the main hallway of a house. When you open the front door (start the program), you first walk into the hallway before moving into any specific rooms (other functions).\n\n**3. Statements – the “step‑by‑step directions”**  \nA statement is a single instruction that tells the computer to do something: calculate a value, store data, or display output. In our simple program there is only one statement inside `main`: the `print` command. In more complex programs you would have many statements, each on its own line (or separated by a semicolon in some languages).\n\n```python\n    print(\"Hello, World!\")   # this is a statement\n```\n\n> **Note:** Every line that is not a comment or a blank line is a statement. Python uses indentation (spaces at the beginning of a line) to show which statements belong to which block, such as the body of `main()`.\n\n**4. Output command – the “show the result” step**  \nThe `print` function sends text to the screen, which is called *output*. The word inside the parentheses is the *argument*—the piece of information we want to display. In our example the argument is the string `\"Hello, World!\"`. A string is a sequence of characters surrounded by quotation marks.\n\n```python\nprint(\"Hello, World!\")\n```\n\n> **Common mistake:** Forgetting the quotation marks makes Python think you are referring to a variable name, which leads to a `NameError`. Always write `\"Hello, World!\"`, not `Hello, World!`.\n\nPutting all the pieces together, a complete but still very simple Python program looks like this:\n\n```python\n# Simple program that greets the user\ndef main():\n    # Print the greeting to the console\n    print(\"Hello, World!\")\n\n# This tells Python to start execution with the main function\nif __name__ == \"__main__\":\n    main()\n```\n\nThe last two lines are a common Python idiom. `if __name__ == \"__main__\":` checks whether the file is being run directly (as opposed to being imported by another program). If it is, the `main()` function is called, and the program starts executing the statements inside `main`.\n\n> **Remember:** A program’s structure is always the same three‑step pattern – *comments* for notes, a *main* (or equivalent) to hold the core *statements*, and an *output command* to show the result. Once you recognize these parts, reading and writing new programs becomes much easier.",
    "code": ""
   },
   {
    "heading": "Writing the Code",
-   "body": "Open your IDE and create a new file named hello.c (or hello.py for Python). Type the following lines exactly as shown. The program consists of a main function, a print statement, and a return statement.\n\nMake sure to save the file before you try to run it.",
-   "code": "#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}"
-  },
-  {
-   "heading": "Compiling and Running",
-   "body": "To turn the source code into an executable, you must compile it. In a terminal, type `gcc hello.c -o hello` and press Enter. If there are no errors, an executable named hello will appear.\n\nRun the program by typing `./hello`. You should see the message \"Hello, World!\" printed on the screen.",
+   "body": "First, open a plain‑text editor (for example, Notepad on Windows, TextEdit in plain‑text mode on macOS, or any simple code editor).  \nWe will type a very small program in the C language. C is a *programming language*—a set of rules that tells the computer what to do.  \n\nThe program we write will do exactly one thing: display the words **Hello, World!** on the screen.  \nThink of it like writing a short note and putting it on a bulletin board so everyone can read it. The computer’s “bulletin board” is the console window that appears when we run the program.\n\n---\n\n1. **Start with the `#include` line**  \n   ```c\n   #include <stdio.h>\n   ```  \n   > **Definition:** `#include` tells the compiler to copy the contents of another file (called a *header file*) into our program before it is compiled.  \n   The file `stdio.h` contains the definition of the function `printf`, which we will use to print text.  \n\n2. **Write the `main` function header**  \n   ```c\n   int main(void) {\n   ```  \n   * `int` means the function will return an integer value to the operating system when it finishes.  \n   * `main` is the special name of the function where every C program starts executing.  \n   * `void` inside the parentheses means this function does not receive any input values.  \n\n3. **Add the statement that prints the message**  \n   Inside the curly braces `{ }` of `main`, type:  \n   ```c\n   printf(\"Hello, World!\\n\");\n   ```  \n   > **Note:** `printf` is a *function* that sends characters to the console.  \n   * The text we want to show must be inside double quotes `\" \"` so the compiler knows it is a *string literal* (a fixed sequence of characters).  \n   * `\\n` is an *escape sequence* that tells the console to move to a new line after printing, just like pressing **Enter** on a keyboard.  \n\n   **Place the exact text** `Hello, World!` **between the quotes**; any change in spelling or case (capital letters) will change what appears on the screen.\n\n4. **Finish the `main` function**  \n   After the `printf` line, add:  \n   ```c\n   return 0;\n   }\n   ```  \n   * `return 0;` tells the operating system that the program ended successfully.  \n   * The closing brace `}` marks the end of the `main` function.  \n\nPutting it all together, the complete source file looks like this:\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}\n```\n\n> **Common mistake:** Forgetting the semicolon `;` after `printf` or `return 0`. The semicolon ends each statement; without it the compiler will report a syntax error.  \n\n> **Remember:** C is case‑sensitive. `printf`, `Printf`, and `PRINTF` are three different identifiers. Always type them exactly as shown.  \n\nNow you have typed the entire program. Save the file with a name ending in `.c`, for example `hello.c`. This file contains the *source code*—the human‑readable instructions that the compiler will translate into machine code the computer can execute.  \n\nWhen you compile and run this program, the console will show:\n\n```\nHello, World!\n```\n\nJust like posting a note on a board, the program has successfully communicated its message to the viewer.",
    "code": ""
   },
   {
-   "heading": "Understanding the Output",
-   "body": "The text you see is produced by the `printf` function, which sends characters to the standard output (your screen). The \"\\n\" at the end adds a new line so the cursor moves to the next line after printing.\n\nIf you change the text inside the quotes, the program will display whatever you write, letting you experiment with different messages.",
+   "heading": "Saving and Compiling",
+   "body": "When you have typed the three lines of code for **Hello, World!**, the next thing to do is to **save** the file and then **compile** it.  \nSaving tells the computer where to keep the text you wrote, and compiling translates that text into a language the computer can actually run.\n\n> **Definition:** *Saving* means writing the contents of the editor window to a file on your disk. The file must have the correct *extension* (the letters after the dot) so the compiler knows what kind of source code it is.\n\n### 1. Choose the right file name and extension  \n\nIn most programming languages the file name can be anything you like, but the extension is fixed:\n\n| Language | Required extension |\n|----------|-------------------|\n| C        | `.c` |\n| C++      | `.cpp` |\n| Java     | `.java` |\n| Python    | `.py` (no compilation needed) |\n\nIf you are using the C language, for example, you might name the file **hello.c**. The “.c” tells the compiler that this is a C source file.\n\n> **In daily life:** Think of the extension like the label on a mailbox. A letter addressed to “Mr. Smith **(c)**” will be delivered to the **C** department, while “Mr. Smith **(java)**” goes to the Java department. The label makes sure the right people handle it.\n\n### 2. Save the file in the IDE  \n\n1. Click **File → Save As…** (or press `Ctrl+S`).  \n2. In the dialog box, navigate to a folder you can easily find, such as a folder called **Programming** on your Desktop.  \n3. Type the file name with the correct extension, e.g., `hello.c`.  \n4. Press **Save**.\n\nThe IDE may show a small icon next to the file name indicating that the file is now a *source file*.\n\n> **Note:** Some IDEs automatically add the extension for you if you choose the language from a drop‑down menu. If you see a warning like “Missing extension”, go back and add it manually.\n\n### 3. Build / Compile the program  \n\nNow the source file must be turned into an *executable*—a file the computer can run. This step is called **compiling**.\n\n1. Look for a button that says **Build**, **Compile**, or shows a hammer icon.  \n2. Click that button (or press `F7` in many IDEs).  \n\nThe IDE calls the compiler behind the scenes. The compiler reads every line of your source file, checks the syntax, and creates an object file, then links it into an executable (often called `a.out` on Unix or `hello.exe` on Windows).\n\nIf everything is correct, you will see a message such as:\n\n```\nCompilation successful.\n0 errors, 0 warnings.\n```\n\nIf there is a problem, the compiler will print **error messages** that point to the line number and describe the issue, for example:\n\n```\nhello.c:3:5: error: expected ';' before 'return'\n    return 0;\n    ^~~~~~\n```\n\n> **Common mistake:** Forgetting the semicolon (`;`) at the end of a statement. The compiler’s error message will often mention “expected ‘;’”. Adding the missing semicolon and compiling again will fix the error.\n\n### 4. Understanding compiler messages  \n\n- **Error** – the program cannot be turned into an executable until the error is fixed. Errors stop the compilation process.  \n- **Warning** – the program can still be compiled, but the compiler has noticed something that might cause trouble later (e.g., an unused variable). It is good practice to fix warnings, too.  \n- **Info** – optional messages that give extra details, such as the amount of memory used.\n\nWhen you see an error, read the line number, go back to that line in your source file, and compare it with the message. Often the problem is a simple typo.\n\n### 5. What the compiler actually does (a tiny glimpse)  \n\nThe compiler performs three main steps:\n\n$$\n\\text{Source code} \\;\\xrightarrow{\\text{Parsing}}\\; \\text{Intermediate representation} \\;\\xrightarrow{\\text{Optimization}}\\; \\text{Machine code}\n$$\n\n- **Parsing** checks the grammar of the code.  \n- **Optimization** tries to make the program run faster or use less memory.  \n- **Machine code** is the binary that the CPU executes.\n\nYou do not need to understand the details now, but knowing that the compiler is doing a lot of work helps you appreciate why clear, correct code matters.\n\n### 6. Quick checklist before you run the program  \n\n- The file is saved with the correct extension.  \n- You have clicked the **Compile** button and received a “successful” message.  \n- No errors or warnings remain (or you have intentionally ignored a harmless warning).  \n\nOnce these steps are satisfied, you are ready to move on to **Running the Program**, where you will see the famous “Hello, World!” appear on the screen.  \n\n> **Remember:** Saving the file correctly and reading the compiler’s messages are the two most important habits you will develop as a programmer. They keep your code organized and help you fix problems quickly.",
+   "code": ""
+  },
+  {
+   "heading": "Running the Program",
+   "body": "When you have finished writing **Hello, World!** and the compiler has turned your source file into an executable file, the next step is to *run* that executable. Running a program means asking the computer to start the set of instructions you just created and to show you what they do.  \n\nThink of it like a recipe you have written down. After you have prepared all the ingredients (the source code) and followed the cooking steps (the compilation), you finally put the dish in the oven and wait for it to bake. The oven is the computer, the baked dish is the program while it is running, and the timer that tells you when it is ready is the command you type to start the program.\n\n---\n\n> **Definition:** *Executable* – a file that the operating system can load and start directly. After compiling, the file usually has a name like `hello.exe` on Windows or just `hello` on macOS/Linux.\n\n### 1. Open a terminal or command‑prompt window  \n\nA *terminal* (also called a *command prompt* or *shell*) is a text‑based interface where you type commands for the computer to execute.  \n\n- On **Windows**, click the Start menu, type **cmd**, and press **Enter**.  \n- On **macOS**, open **Finder → Applications → Utilities → Terminal**.  \n- On **Linux**, look for **Terminal** in your applications menu.\n\nYou should see a line that ends with a *prompt* (for example `$` or `C:\\>`). This is where you type.\n\n### 2. Navigate to the folder that holds the executable  \n\nYour compiled file is saved in a folder, for example `C:\\Users\\Anna\\Programs` or `/home/anna/programs`. To tell the terminal to look in that folder, you use the `cd` command, which stands for *change directory*.\n\n```\ncd C:\\Users\\Anna\\Programs          # Windows example\ncd /home/anna/programs              # macOS/Linux example\n```\n\nAfter you press **Enter**, the prompt will change to show the new location. This tells the terminal, “From now on, any file you refer to is inside this folder.”\n\n> **Note:** If the folder name contains spaces, put the whole path in quotes, e.g. `cd \"C:\\My Projects\\Hello\"`.\n\n### 3. Run the executable  \n\nNow you are ready to start the program. The command you type depends on the operating system:\n\n- **Windows:** type the file name followed by `.exe`  \n\n  ```\n  hello.exe\n  ```\n\n- **macOS/Linux:** type `./` before the file name to indicate “the file in the current folder”  \n\n  ```\n  ./hello\n  ```\n\nPress **Enter** after the command. The computer loads the executable, follows the instructions inside, and then returns control to you.\n\n### 4. Look at the output window  \n\nIf everything worked, the terminal will instantly show a line that reads:\n\n```\nHello, World!\n```\n\nThat line is the *output* of your program. It appears exactly as you wrote it in the `printf` (C) or `System.out.println` (Java) statement. The program then ends, and the prompt returns, ready for another command.\n\n> **In daily life:** Seeing the message is like hearing a doorbell ring after you press the doorbell button. The button (your command) tells the system to do something, and the ring (the printed text) confirms that the action succeeded.\n\n### 5. Verify the result  \n\nTo be sure the program behaved correctly, check two things:\n\n1. **Exact spelling and punctuation** – the output must be `Hello, World!` with a capital **H**, a comma, a space, a capital **W**, and an exclamation mark.  \n2. **No extra characters** – there should be no stray numbers, symbols, or blank lines before or after the message.\n\nIf the line matches exactly, you have successfully run your first program!\n\n> **Common mistake:** Forgetting the `./` on macOS/Linux. Typing just `hello` will cause the terminal to say “command not found” because it looks for the program in the system’s *PATH* instead of the current folder.\n\n### 6. What to do next  \n\nNow that you can run a program, you can experiment:\n\n- Change the text inside the quotes and run it again to see a different message.  \n- Add another line of code that prints a second sentence, then run the program to watch both lines appear one after the other.  \n\nEach time you edit the source file, you must **re‑compile** (turn the code into an executable again) before you run it. The cycle “edit → compile → run” is the core workflow for any programmer.\n\n> **Remember:** The terminal shows exactly what the program prints; if you don’t see the expected text, go back to the source code, check the spelling, re‑compile, and run again. This loop of testing and fixing is how you learn to write reliable code.",
+   "code": ""
+  },
+  {
+   "heading": "Common Errors and Debugging",
+   "body": "When you type your first program, the computer will try to translate the words you wrote into instructions it can understand.  \nIf something is not exactly right, the translation (the **compiler**) stops and tells you what went wrong.  \nReading these messages is like listening to a friend point out a typo in a text message – the friend tells you *where* the mistake is and *what* kind of mistake it is, so you can fix it quickly.\n\n> **Definition:** *Error message* – a short piece of text that the compiler prints when it cannot understand part of your code. It usually includes a line number and a brief description of the problem.\n\n### 1. Missing semicolon\n\nIn many languages (C, C++, Java, JavaScript) each statement must end with a semicolon `;`.  \nThink of the semicolon as a period at the end of a sentence. Without it, the compiler cannot see where one instruction stops and the next begins.\n\n**Typical error message**\n\n```\nmain.c:5:12: error: expected ';' before 'return'\n```\n\n- `main.c` is the file name.\n- `5:12` means line 5, column 12.\n- The text after the colon explains the problem: the compiler *expected* a semicolon before the word `return`.\n\n**How to fix it**  \nGo to line 5, column 12, and add a `;` at the end of the previous line.\n\n> **Common mistake:** Forgetting the semicolon after a `printf` call, e.g. `printf(\"Hello, World!\")` instead of `printf(\"Hello, World!\");`.\n\n### 2. Wrong file name or extension\n\nThe compiler looks for a file with the exact name you give it. If you type `gcc hello.c` but the file on disk is called `Hello.c` (different capital H) or `hello.cpp`, the compiler cannot find it.\n\n**Typical error message**\n\n```\ngcc: error: hello.c: No such file or directory\n```\n\n- The message says the file you asked for does not exist.\n\n**How to fix it**  \nCheck the spelling and the case (upper‑ vs lower‑case letters) of the file name in your folder. Rename the file or type the correct name in the compile command.\n\n> **In daily life:** This is like trying to open a door with the wrong key – the lock (compiler) will tell you the key doesn’t fit.\n\n### 3. Case‑sensitivity errors\n\nMost programming languages treat identifiers (names of variables, functions, and file names) as case‑sensitive. `main` and `Main` are two different identifiers.\n\n**Typical error message**\n\n```\nmain.c:3:5: error: 'Main' undeclared (first use in this function)\n```\n\n- The compiler says it has never seen a definition for `Main` because you wrote `Main` instead of `main`.\n\n**How to fix it**  \nMake sure you use the exact same spelling, including capital letters, everywhere you refer to the same thing.\n\n> **Remember:** Always copy the exact case of a name the first time you write it, then reuse that spelling.\n\n### 4. Mismatched parentheses or braces\n\nEvery opening parenthesis `(` must have a matching closing parenthesis `)`. The same goes for curly braces `{` and `}` that define blocks of code.\n\n**Typical error message**\n\n```\nmain.c:7:1: error: expected '}' before end of file\n```\n\n- The compiler reached the end of the file but was still waiting for a closing `}`.\n\n**How to fix it**  \nCount the opening and closing symbols in the highlighted line and the lines above it. Add any missing closing symbol.\n\n> **Note:** Many editors highlight matching pairs automatically; use that feature to spot missing symbols quickly.\n\n### 5. Using the wrong function name\n\nIf you type `Println(\"Hello\")` in C, the compiler will not recognize it because the correct function is `printf`.\n\n**Typical error message**\n\n```\nmain.c:4:5: error: 'Println' undeclared (first use in this function)\n```\n\n**How to fix it**  \nCheck the language’s standard library reference (or a cheat‑sheet) for the exact spelling of the function you want to use.\n\n### Reading the whole message\n\nA good error message usually has three parts:\n\n1. **File name** – tells you which file contains the problem.  \n2. **Line and column** – points to the exact location.  \n3. **Description** – explains what the compiler expected versus what it found.\n\nBy following the line number, looking at the column, and then reading the description, you can often fix the error in a single pass.\n\n> **Common mistake:** Ignoring the line number and trying to guess where the problem is. Always start at the line the compiler mentions.\n\n### Quick checklist for debugging\n\n1. Look at the file name and line number.  \n2. Check for a missing `;` at the end of the previous line.  \n3. Verify the case of every identifier.  \n4. Ensure all parentheses and braces are balanced.  \n5. Confirm the file name you typed in the compile command matches the actual file.\n\nWhen you practice reading error messages and applying these steps, they become less intimidating. Soon you’ll be able to spot and fix most mistakes in just a few seconds, letting you move on to writing more interesting programs.",
+   "code": ""
+  },
+  {
+   "heading": "Next Steps",
+   "body": "When you have seen the program print **Hello, World!**, you already know the smallest possible piece of code that can talk to the computer.  \nNow it is time to turn that tiny example into a little playground where you can try ideas, see what changes, and learn how the computer reacts.\n\n### Change the message\n\nThe text inside the quotation marks is called a *string*.  \nA string is just a sequence of characters that the computer treats as one unit.  \nIf you replace the words **Hello, World!** with anything else, the program will print exactly what you wrote.\n\n```c\n#include <stdio.h>\n\nint main() {\n    printf(\"Good morning, class!\\n\");\n    return 0;\n}\n```\n\n> **Note:** The characters `\\n` at the end of the string tell the computer to start a new line after printing. Without it, the next output would appear on the same line.\n\nTry typing different sentences, numbers, or even emojis (if your editor supports them). Each time you compile and run, you will see the new text appear on the screen. This simple experiment shows that *the program does exactly what you tell it to*.\n\n### Add more print statements\n\nA program can contain many `printf` calls, one after another. Each call prints its own string, and the order matters – the computer follows the instructions from top to bottom.\n\n```c\n#include <stdio.h>\n\nint main() {\n    printf(\"First line\\n\");\n    printf(\"Second line\\n\");\n    printf(\"Third line\\n\");\n    return 0;\n}\n```\n\nWhen you run this, the output will be:\n\n```\nFirst line\nSecond line\nThird line\n```\n\n> **In daily life:** Think of a recipe. Each step tells you what to do next. If you add a new step, the dish changes. Similarly, adding a new `printf` changes what the program shows.\n\nYou can experiment with mixing short and long strings, or printing numbers inside a string:\n\n```c\nprintf(\"I have 3 apples.\\n\");\n```\n\nNotice that the number **3** is just a character inside the string, not a mathematical value. If you later learn about variables, you will be able to replace that character with a real number that the program can compute.\n\n### Play with special characters\n\nInside a string you can use *escape sequences* to represent characters that are difficult to type directly. The most common ones are:\n\n- `\\n` – new line  \n- `\\t` – tab (adds a horizontal space)  \n- `\\\\` – a literal backslash  \n- `\\\"` – a literal double quote  \n\nTry combining them:\n\n```c\nprintf(\"Column1\\tColumn2\\n\");\nprintf(\"Value1\\tValue2\\n\");\n```\n\nThe output will line up in two columns because the `\\t` inserts a tab space.\n\n> **Definition:** An *escape sequence* is a backslash (`\\`) followed by a special character that tells the compiler to treat the following character in a special way.\n\n### Experiment with different characters\n\nYou are not limited to letters and numbers. Unicode characters, such as emojis or symbols, can be printed if your source file is saved with UTF‑8 encoding and your console supports them.\n\n```c\nprintf(\"Smile 😊\\n\");\nprintf(\"Heart ♥\\n\");\n```\n\nIf the characters appear as squares or question marks, it means your terminal does not know how to display them – a useful clue that the environment matters as much as the code.\n\n> **Common mistake:** Forgetting to save the source file in UTF‑8 after adding non‑ASCII characters. The compiler will read the bytes incorrectly, and the output will look garbled.\n\n### Keep a small log of what you try\n\nWrite down each change you make, the command you used to compile, and the result you observed. This habit mirrors how scientists record experiments, and it helps you see patterns:\n\n| Change | Compile command | Output |\n|--------|----------------|--------|\n| `\"Hello, World!\"` | `gcc hello.c -o hello` | Hello, World! |\n| `\"Good morning\"` | `gcc hello.c -o hello` | Good morning |\n| Added `\\t` | `gcc hello.c -o hello` | (shows columns) |\n\nSeeing the table grow gives you confidence that you understand cause and effect.\n\n> **Remember:** Small, incremental changes are easier to debug than large rewrites. Change one thing, compile, run, and note the result before moving on.\n\n### What to try next\n\n1. **Change the punctuation** – replace the exclamation mark with a question mark, a period, or nothing at all.  \n2. **Add a second line** that prints your name.  \n3. **Use a tab** to create a simple table of three items.  \n4. **Insert an emoji** or a foreign language word to see how your console handles it.  \n\nEach of these tiny experiments reinforces the idea that *code is a set of precise instructions*, and the computer will follow them exactly as you write them. By playing around, you build intuition that will make later topics—like variables, loops, and conditionals—feel much less mysterious. Happy tinkering!",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Print Hello, World! on screen",
+   "given": "You need a program that displays the text “Hello, World!” on the computer screen.",
+   "steps": [
+    {
+     "label": "Create file",
+     "text": "Open a text editor and create a new file named `hello.c`."
+    },
+    {
+     "label": "Write code",
+     "text": "Type the following lines: ```c #include <stdio.h> int main() { printf(\"Hello, World!\\n\"); return 0; } ```"
+    },
+    {
+     "label": "Save file",
+     "text": "Save the file as `hello.c`."
+    },
+    {
+     "label": "Compile",
+     "text": "Open a terminal and run `gcc hello.c -o hello` to compile the source code into an executable named `hello`."
+    },
+    {
+     "label": "Run program",
+     "text": "Execute `./hello`; the screen shows `Hello, World!`."
+    }
+   ],
+   "answer": "The program prints “Hello, World!” to the screen."
+  },
+  {
+   "level": "Medium",
+   "title": "Modify Hello, World! to greet a user by name",
+   "given": "You want a program that asks for the user's name and then prints “Hello, [name]!”.",
+   "steps": [
+    {
+     "label": "Create file",
+     "text": "Open a text editor and create `greet.c`."
+    },
+    {
+     "label": "Write code",
+     "text": "Type: ```c #include <stdio.h> int main() { char name[50]; printf(\"Enter your name: \"); scanf(\"%49s\", name); printf(\"Hello, %s!\\n\", name); return 0; } ```"
+    },
+    {
+     "label": "Save file",
+     "text": "Save as `greet.c`."
+    },
+    {
+     "label": "Compile",
+     "text": "Run `gcc greet.c -o greet` to produce the executable `greet`."
+    },
+    {
+     "label": "Run program",
+     "text": "Execute `./greet`; type a name when prompted; the program outputs “Hello, [name]!”."
+    }
+   ],
+   "answer": "The program correctly reads a name and prints a personalized greeting."
+  },
+  {
+   "level": "Hard",
+   "title": "Extend Hello, World! to handle multiple languages based on user choice",
+   "given": "You need a program that asks the user to choose a language (1‑English, 2‑Spanish, 3‑French) and then prints “Hello, World!” in that language.",
+   "steps": [
+    {
+     "label": "Create file",
+     "text": "Open a text editor and create `multilang.c`."
+    },
+    {
+     "label": "Write code",
+     "text": "Type: ```c #include <stdio.h> int main() { int choice; printf(\"Select language (1=English, 2=Spanish, 3=French): \"); scanf(\"%d\", &choice); if (choice == 1) printf(\"Hello, World!\\n\"); else if (choice == 2) printf(\"¡Hola, Mundo!\\n\"); else if (choice == 3) printf(\"Bonjour, le monde!\\n\"); else printf(\"Invalid choice.\\n\"); return 0; } ```"
+    },
+    {
+     "label": "Save file",
+     "text": "Save as `multilang.c`."
+    },
+    {
+     "label": "Compile",
+     "text": "Run `gcc multilang.c -o multilang`."
+    },
+    {
+     "label": "Run program",
+     "text": "Execute `./multilang`; enter 1, 2, or 3; the program displays “Hello, World!” in the selected language."
+    }
+   ],
+   "answer": "The program prints the correct greeting for the chosen language or reports an invalid choice."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the purpose of the line `print(\"Hello, World!\")` in a Python program?",
+   "a": "The line `print(\"Hello, World!\")` tells the Python interpreter to display the text Hello, World! on the screen. Step‑by‑step: 1) `print` is a built‑in function that outputs data. 2) The parentheses contain the data to output. 3) `\"Hello, World!\"` is a string literal, the exact characters to show. When the program runs, Python executes this line and the text appears in the console."
+  },
+  {
+   "level": "Easy",
+   "q": "In C, which file extension should you use when saving a source file that contains a “Hello, World!” program?",
+   "a": "Use the `.c` extension. Step‑by‑step: 1) C source files are identified by the `.c` suffix. 2) Saving the file as, for example, `hello.c` tells the compiler it is C code. 3) The compiler will then compile `hello.c` into an executable."
+  },
+  {
+   "level": "Medium",
+   "q": "Write the complete Java program that prints “Hello, World!” and explain each part of the code.",
+   "a": "```java\npublic class HelloWorld {          // 1. Define a public class named HelloWorld\npublic static void main(String[] args) { // 2. Main method – entry point of the program\nSystem.out.println(\"Hello, World!\"); // 3. Print the string to the console\n}                                 // 4. Close main method\n}                                     // 5. Close class definition\n```\nExplanation step‑by‑step:\n1. `public class HelloWorld` creates a class that must have the same name as the file (`HelloWorld.java`).\n2. `public static void main(String[] args)` is the method the JVM calls to start execution.\n3. `System.out.println` writes the given string followed by a newline to the standard output.\n4. The closing braces `}` end the method and the class."
+  },
+  {
+   "level": "Medium",
+   "q": "After compiling a C program named `hello.c` with `gcc hello.c -o hello`, you run `./hello` and see no output. List three possible reasons and how to fix each.",
+   "a": "1) **Missing `printf` call** – The source may not contain `printf(\"Hello, World!\");`. Add the call inside `main`.\n2) **Forgot to include `<stdio.h>`** – Without the header, `printf` may be undefined, leading to a silent failure. Add `#include <stdio.h>` at the top.\n3) **Program exited before flushing output** – If `printf` is used without a newline and the program ends, the buffer might not flush. Change to `printf(\"Hello, World!\\n\");` or call `fflush(stdout);`."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain why the following Python code results in a SyntaxError, and correct it: ```python def main() print(\"Hello, World!\") main() ```",
+   "a": "The error is due to a missing colon after the function definition. Python requires a colon to start the block. Correct code:\n```python\ndef main():               # add colon\nprint(\"Hello, World!\")  # indented block\nmain()\n```\nStep‑by‑step fix: 1) Add `:` after `def main()`. 2) Ensure the `print` line is indented (typically 4 spaces). 3) Call `main()` as shown."
+  },
+  {
+   "level": "Hard",
+   "q": "You are writing a “Hello, World!” program in C++ and want to use the `std::cout` object. Write the program, then describe what each header and namespace directive does and why they are needed.",
+   "a": "```cpp\n#include <iostream>          // 1. Includes the definition of std::cout and related I/O facilities\nusing namespace std;       // 2. Allows us to write cout instead of std::cout\nint main() {                // 3. Entry point of the program\ncout << \"Hello, World!\" << endl; // 4. Sends the string to the standard output, then flushes the line\nreturn 0;               // 5. Returns 0 to indicate successful execution\n}\n```\nExplanation:\n1) `#include <iostream>` tells the compiler to insert the contents of the iostream library, which defines the `std::cout` object used for console output.\n2) `using namespace std;` brings all names from the `std` namespace into the global scope, so we can write `cout` instead of `std::cout`. Without it, we would need the `std::` prefix.\n3) `int main()` defines the main function that the operating system calls to start the program.\n4) `cout << \"Hello, World!\" << endl;` uses the insertion operator `<<` to send the string to the output stream, and `endl` inserts a newline and flushes the buffer.\n5) `return 0;` ends `main` and signals successful completion to the OS."
+  }
+ ],
+ "recap": "The lesson introduces the classic \"Hello, World!\" program as the first step in learning a programming language. It explains why this simple program is important for testing the compiler, development environment, and program structure. The lesson also covers basic concepts such as comments, #include directives, saving and compiling source files, running executables, and common errors like missing semicolons. Finally, it encourages students to modify the message to experiment with strings and basic output.",
  "key_terms": [
   {
-   "term": "Source code",
-   "meaning": "The human‑readable text that you write in a programming language."
+   "term": "Hello, World!",
+   "meaning": "A simple program that displays the text \"Hello, World!\" on the screen, used to verify that a programming setup works."
   },
   {
    "term": "Compiler",
-   "meaning": "A tool that translates source code into machine code that the computer can execute."
+   "meaning": "A tool that translates source code into machine code so the computer can execute the program."
+  },
+  {
+   "term": "Comment",
+   "meaning": "A line of text in code that the computer ignores, used to explain or annotate the program."
+  },
+  {
+   "term": "#include",
+   "meaning": "A directive that tells the compiler to insert the contents of a header file, such as stdio.h, into the source code."
+  },
+  {
+   "term": "Saving",
+   "meaning": "Writing the contents of the editor to a file on disk, usually with a specific file extension."
   },
   {
    "term": "Executable",
-   "meaning": "A file containing machine code that can be run directly by the operating system."
+   "meaning": "A file produced by the compiler that the operating system can run directly, e.g., hello.exe."
   },
   {
-   "term": "Standard output",
-   "meaning": "The default destination (usually the screen) where a program sends its output."
+   "term": "String",
+   "meaning": "A sequence of characters enclosed in quotation marks, treated as a single data item."
   },
   {
-   "term": "Syntax",
-   "meaning": "The set of rules that define how code must be written for a language."
+   "term": "Semicolon",
+   "meaning": "A punctuation mark used in many languages to end a statement, similar to a period in a sentence."
   }
  ],
  "quiz": [
   {
-   "q": "What does the `printf` function do?",
+   "q": "What is the main purpose of writing a \"Hello, World!\" program?",
    "options": [
-    "Reads input from the user",
-    "Writes data to a file",
-    "Displays text on the screen",
-    "Compiles the program"
+    "To learn advanced algorithms",
+    "To test that the compiler and environment are set up correctly",
+    "To create a graphical user interface",
+    "To debug memory leaks"
+   ],
+   "answer": 1,
+   "why": "It verifies that the language, compiler, and development environment work together."
+  },
+  {
+   "q": "In Python, which character starts a comment?",
+   "options": [
+    "//",
+    "/*",
+    "#",
+    "<!--"
    ],
    "answer": 2,
-   "why": "`printf` sends formatted text to the standard output."
+   "why": "The # character begins a comment line in Python."
   },
   {
-   "q": "Which command compiles a C program named hello.c?",
+   "q": "What does the #include <stdio.h> line do in a C program?",
    "options": [
-    "gcc hello.c -o hello",
-    "run hello.c",
-    "execute hello.c",
-    "make hello.c"
-   ],
-   "answer": 0,
-   "why": "`gcc hello.c -o hello` tells the GNU compiler to create an executable called hello."
-  },
-  {
-   "q": "What is the purpose of the `return 0;` line in the main function?",
-   "options": [
-    "It prints the number zero",
-    "It ends the program and signals success",
-    "It starts a loop",
-    "It declares a variable"
+    "It defines the main function",
+    "It adds a library that provides input and output functions",
+    "It compiles the program automatically",
+    "It creates a graphical window"
    ],
    "answer": 1,
-   "why": "Returning 0 tells the operating system that the program finished without errors."
+   "why": "stdio.h contains definitions for functions like printf used for output."
   },
   {
-   "q": "If you change the text inside the quotes to \"Good morning!\", what will the program display?",
+   "q": "Which file extension is required for a C source file?",
    "options": [
-    "Hello, World!",
-    "Good morning!",
-    "An error message",
-    "Nothing"
+    ".cpp",
+    ".java",
+    ".c",
+    ".py"
+   ],
+   "answer": 2,
+   "why": "C source files must end with .c."
+  },
+  {
+   "q": "What does the \\n character do inside a string?",
+   "options": [
+    "It adds a space",
+    "It starts a new line",
+    "It ends the program",
+    "It comments out the rest of the line"
    ],
    "answer": 1,
-   "why": "The string inside the quotes is what `printf` outputs."
+   "why": "\\n is the newline escape sequence."
+  },
+  {
+   "q": "If a C program fails to compile because of a missing semicolon, what is the likely error message?",
+   "options": [
+    "Segmentation fault",
+    "Undefined reference",
+    "Syntax error: expected ';'",
+    "Runtime exception"
+   ],
+   "answer": 2,
+   "why": "The compiler reports a syntax error indicating a missing semicolon."
   }
  ],
  "flashcards": [
   {
-   "front": "Hello, World! program purpose",
-   "back": "To verify that the development environment and language syntax work correctly."
+   "front": "What does a comment do in a program?",
+   "back": "It is ignored by the computer and provides explanations for humans reading the code."
   },
   {
-   "front": "Command to run a compiled program on Unix",
-   "back": "./program_name"
+   "front": "Define \"executable\".",
+   "back": "A file that the operating system can load and run directly, produced after compiling source code."
   },
   {
-   "front": "File extension for C source files",
-   "back": ".c"
+   "front": "What is the purpose of the #include directive?",
+   "back": "It inserts the contents of a header file, giving the program access to predefined functions and definitions."
   },
   {
-   "front": "What does \"\\n\" represent in a string?",
-   "back": "A newline character that moves the cursor to the next line."
+   "front": "Why is the \"Hello, World!\" program important?",
+   "back": "It confirms that the compiler, editor, and runtime environment are correctly set up."
   },
   {
-   "front": "Name of the function where program execution starts in C",
-   "back": "main"
+   "front": "What is a string in programming?",
+   "back": "A sequence of characters enclosed in quotes, treated as a single data item."
+  },
+  {
+   "front": "What does the semicolon signify in C-like languages?",
+   "back": "It marks the end of a statement, similar to a period at the end of a sentence."
+  },
+  {
+   "front": "What file extension should a Python script have?",
+   "back": ".py"
+  },
+  {
+   "front": "What does the \\n escape sequence represent?",
+   "back": "A newline character that moves the cursor to the next line when printed."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -136,97 +326,148 @@
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l04-compiling-in-terminal",
-   "title": "A terminal window where the command gcc hello.c -o hello is entered and the resulting executable appears.",
-   "alt": "A terminal window where the command gcc hello.c -o hello is entered and the resulting executable appears.",
+   "file": "introduction-to-programming-l04-computer-displaying-output",
+   "title": "The screen shows the text “Hello, World!” after the program runs.",
+   "alt": "The screen shows the text “Hello, World!” after the program runs.",
+   "priority": 9,
+   "picture_title": "Computer displaying output",
+   "kind": "photo",
+   "subject": "A real computer monitor with a terminal window that has just printed the phrase Hello, World! This helps students see the final result of their code.",
+   "layout": "The monitor is centered, the terminal window occupies most of the screen, and the printed text is highlighted.",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "introduction-to-programming-l04-simple-text-editor-view",
+   "title": "A plain‑text editor window where the three lines of C code are typed.",
+   "alt": "A plain‑text editor window where the three lines of C code are typed.",
    "priority": 7,
-   "picture_title": "Compiling in Terminal",
+   "picture_title": "Simple text editor view",
    "kind": "illustration",
-   "subject": "A simple drawing of a command‑line interface showing the compile command, a green check‑mark for success, and the new file \"hello\" listed in the directory.",
-   "layout": "Terminal window at the centre with the command line typed; below it a file list with the executable highlighted; arrows link the command to the new file.",
+   "subject": "An illustration of a basic text editor (like Notepad) with the Hello, World! source code visible, showing the editor’s title bar, file name, and the three lines of code.",
+   "layout": "The editor window is shown in the centre with a thin border; the three code lines are displayed inside, each on its own line.",
    "labels": [
-    "Command: gcc hello.c -o hello",
-    "Status: compilation successful",
-    "Executable: hello"
+    "File name",
+    "Code line 1",
+    "Code line 2",
+    "Code line 3"
    ],
    "after": 2
   },
   {
    "type": "image",
-   "file": "introduction-to-programming-l04-program-output",
-   "title": "The screen after running ./hello, displaying the text Hello, World! on its own line.",
-   "alt": "The screen after running ./hello, displaying the text Hello, World! on its own line.",
+   "file": "introduction-to-programming-l04-compile-run-flowchart",
+   "title": "The steps from writing code to seeing the output.",
+   "alt": "The steps from writing code to seeing the output.",
    "priority": 6,
-   "picture_title": "Program Output",
-   "kind": "illustration",
-   "subject": "A mock‑up of a console window showing the prompt, the run command, and the resulting output line with a newline character effect.",
-   "layout": "Console window occupies the centre; the command \"./hello\" is shown on one line, the output \"Hello, World!\" on the next line, with a small arrow indicating the newline.",
+   "picture_title": "Compile‑run flowchart",
+   "kind": "labelled diagram",
+   "subject": "A simple flowchart that visualises the process: write source code → save file → compile → create executable → run → display output.",
+   "layout": "Boxes arranged left‑to‑right with arrows connecting them; each box contains a short label.",
    "labels": [
-    "Run command: ./hello",
-    "Output: Hello, World!",
-    "New line (\\n)"
+    "Write code",
+    "Save file",
+    "Compile",
+    "Executable",
+    "Run",
+    "Output"
    ],
    "after": 3
   },
   {
-   "type": "facts",
-   "title": "Key Elements",
-   "items": [
-    {
-     "value": "Hello, World!",
-     "label": "Printed text"
-    },
-    {
-     "value": "printf",
-     "label": "Output function"
-    },
-    {
-     "value": "\\n",
-     "label": "New line character"
-    }
-   ],
-   "after": 0
-  },
-  {
    "type": "parts",
-   "title": "Program Structure",
+   "title": "Program Structure Overview",
    "items": [
     {
-     "name": "main function",
-     "role": "entry point of the program"
+     "name": "Comments",
+     "role": "Notes ignored by the computer"
     },
     {
-     "name": "printf",
-     "role": "displays text on screen"
+     "name": "Preprocessor Directive",
+     "role": "#include tells the compiler which library to use"
     },
     {
-     "name": "return 0",
-     "role": "ends the program successfully"
+     "name": "main Function",
+     "role": "Entry point where execution starts"
+    },
+    {
+     "name": "printf Call",
+     "role": "Prints text to the screen"
+    },
+    {
+     "name": "return Statement",
+     "role": "Ends the program and returns a status code"
     }
    ],
    "after": 1
   },
   {
    "type": "steps",
-   "title": "Compile and Run",
+   "title": "Saving, Compiling and Running",
    "steps": [
     {
+     "label": "Save File",
+     "text": "Write the code to a file with a .c extension"
+    },
+    {
      "label": "Compile",
-     "text": "gcc hello.c -o hello"
+     "text": "Run the compiler to turn source into an executable"
     },
     {
      "label": "Run",
-     "text": "./hello"
-    },
-    {
-     "label": "Observe",
-     "text": "See \"Hello, World!\" printed"
+     "text": "Execute the program to see Hello, World! on screen"
     }
    ],
    "loop": false,
-   "after": 2
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Hello, World! vs. Modified Message",
+   "left": {
+    "name": "Original",
+    "points": [
+     "printf(\"Hello, World!\\n\");",
+     "Shows the classic first program"
+    ]
+   },
+   "right": {
+    "name": "Modified",
+    "points": [
+     "printf(\"Good morning, class!\\n\");",
+     "Demonstrates how changing the string changes output"
+    ]
+   },
+   "after": 6
+  },
+  {
+   "type": "facts",
+   "title": "File Extension Rules",
+   "items": [
+    {
+     "value": ".c",
+     "label": "C source file"
+    },
+    {
+     "value": ".cpp",
+     "label": "C++ source file"
+    },
+    {
+     "value": ".java",
+     "label": "Java source file"
+    },
+    {
+     "value": ".py",
+     "label": "Python source file"
+    }
+   ],
+   "after": 4
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }
