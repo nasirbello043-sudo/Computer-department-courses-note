@@ -1,199 +1,271 @@
 {
  "title": "Derivatives: Concept and Notation",
- "summary": "This lesson explains the derivative as a rate of change and the slope of a tangent line, and introduces the main notations used in calculus. Students will learn how to interpret these ideas in real‑world contexts.",
+ "summary": "This lesson introduces the derivative as a rate of change and the slope of a tangent line, and explains the common notations f′ and dy/dx. Students will see how these ideas connect to everyday situations like speed and growth.",
+ "objectives": [
+  "Define the derivative as a rate of change and as the slope of a tangent line",
+  "Translate a word problem into a derivative expression",
+  "Identify and use the notations f′(x) and dy/dx correctly",
+  "Estimate a derivative from a table of values or a graph",
+  "Explain why the derivative matters in real‑world contexts"
+ ],
+ "prerequisites": "Students should be comfortable with basic algebra, functions, and plotting points on a coordinate plane.",
+ "why": [
+  "In physics, the derivative tells us how quickly an object's position changes, giving us its velocity and acceleration. Understanding this helps us predict motion and design safe vehicles.",
+  "In biology and economics, rates of change describe population growth, drug concentration, or profit trends. Knowing how to compute and interpret these rates supports better decision‑making and scientific insight."
+ ],
  "sections": [
   {
-   "heading": "Why We Need Derivatives",
-   "body": "Understanding why we need **derivatives** is the first step toward using calculus in real‑world problems.  \nMany quantities we encounter—distance, temperature, population, money—are not static; they change as time passes or as another variable changes. The **derivative** gives us a precise way to measure *how fast* that change occurs at any particular instant.\n\n---\n\n### Change Over Time or Distance  \n\nImagine a car traveling along a straight road. Its position at time $t$ (in seconds) is described by a function $s(t)$ measured in meters. If we want to know **how far the car moves in one second**, we could look at the difference $s(t+1)-s(t)$. But this only tells us the average speed over that whole second. What if the car speeds up or slows down during the interval? We need a way to capture the *instantaneous* speed at a specific moment, say at $t=5$ seconds.  \n\nThe derivative $s'(t)$ provides exactly that: it tells us the car’s speed **at the precise instant** $t$. In symbols,\n\\[\n\\text{instantaneous speed at }t = s'(t)=\\lim_{\\Delta t\\to0}\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}.\n\\]\n\n---\n\n### A Fully Worked Example  \n\n**Problem:** A ball is thrown straight up, and its height above the ground after $t$ seconds is given by  \n\\[\nh(t)=20t-5t^{2}\\quad\\text{(meters)}.\n\\]  \nFind the ball’s velocity at $t=2$ seconds.\n\n**Solution:**  \n\n1. **Write the difference quotient.**  \n   \\[\n   \\frac{h(t+\\Delta t)-h(t)}{\\Delta t}\n   =\\frac{[20(t+\\Delta t)-5(t+\\Delta t)^{2}]-(20t-5t^{2})}{\\Delta t}.\n   \\]\n\n2. **Expand the numerator.**  \n   \\[\n   20t+20\\Delta t-5(t^{2}+2t\\Delta t+(\\Delta t)^{2})-20t+5t^{2}\n   =20\\Delta t-10t\\Delta t-5(\\Delta t)^{2}.\n   \\]\n\n3. **Factor out $\\Delta t$.**  \n   \\[\n   \\frac{\\Delta t\\bigl(20-10t-5\\Delta t\\bigr)}{\\Delta t}\n   =20-10t-5\\Delta t.\n   \\]\n\n4. **Take the limit as $\\Delta t\\to0$.**  \n   \\[\n   h'(t)=\\lim_{\\Delta t\\to0}\\bigl(20-10t-5\\Delta t\\bigr)=20-10t.\n   \\]\n\n5. **Evaluate at $t=2$.**  \n   \\[\n   h'(2)=20-10(2)=20-20=0\\ \\text{m/s}.\n   \\]\n\nThe derivative $h'(t)=20-10t$ gives the **instantaneous velocity** of the ball at any time $t$. At $t=2$ seconds the velocity is $0$ m/s, which is exactly the moment the ball reaches its highest point before falling back down.\n\n---\n\n### Why This Matters  \n\n- **Predicting future behavior:** Knowing the derivative lets us forecast where a moving object will be a moment later.  \n- **Optimizing processes:** In economics, the derivative of a profit function tells us how profit changes with price, helping businesses set optimal prices.  \n- **Understanding natural phenomena:** In biology, the rate at which a population grows (the derivative of the population size) informs conservation strategies.\n\nIn every case, the derivative translates a vague notion of “changing fast” into a concrete number we can calculate, compare, and use to make decisions. By mastering this concept, you gain a powerful tool for analyzing the dynamic world around you.",
+   "heading": "1. Rate of Change in Everyday Language",
+   "body": "Imagine you are watching a car drive down the road. You see the odometer showing how many miles have been traveled and the clock showing how much time has passed. If you want to know **how fast** the car is moving, you compare the change in distance with the change in time.  \nThe phrase *rate of change* simply means “how much one quantity changes when another quantity changes a little.”  \n\n> **Definition:** A *rate of change* tells you how much a variable (like distance) changes for each unit change in another variable (like time).  \n\nWhen the car travels 60 miles in 2 hours, the average speed is  \n\n$$\\text{average speed}= \\frac{\\Delta \\text{distance}}{\\Delta \\text{time}} = \\frac{60\\ \\text{mi}}{2\\ \\text{h}} = 30\\ \\text{mi/h}.$$  \n\nHere the symbol $\\Delta$ (pronounced “delta”) means “change in.” The average speed is a *ratio* of two changes. It gives a single number that summarizes the overall behavior during the whole trip.  \n\nBut what if the car does not travel at a constant speed? Suppose it speeds up, slows down, stops at a traffic light, then speeds up again. The average speed over the whole trip still tells you the overall distance per hour, yet it hides the details of what happened at each moment. To understand the car’s behavior *at a particular instant* we need a way to look at the change over an *infinitely small* time interval.  \n\nThink of a video that shows the car’s motion frame by frame. If you zoom in on one frame, the car’s position hardly changes; the distance covered looks almost like a straight line. As you keep zooming in, the curve of the car’s path becomes flatter and flatter, approaching a straight line that just touches the curve at that instant. That straight line is called the **tangent line**, and its slope (steepness) tells us the instantaneous rate of change – the exact speed at that moment.  \n\n> **In daily life:** The speedometer in a car shows the *instantaneous* speed, not the average speed over a trip. It is the real‑time rate of change of distance with respect to time.  \n\nTo make this idea precise, mathematicians use the concept of a *limit*. They look at the average speed over a very short time interval $\\Delta t$ and then let that interval become smaller and smaller. Symbolically, the instantaneous speed $v$ at time $t$ is written as  \n\n$$v(t)=\\lim_{\\Delta t\\to 0}\\frac{\\Delta s}{\\Delta t},$$  \n\nwhere $\\Delta s$ is the change in distance during the tiny interval $\\Delta t$. The limit tells us what value the fraction $\\frac{\\Delta s}{\\Delta t}$ approaches as the interval shrinks to zero.  \n\nAnother everyday example is the price of a house. Suppose a house cost \\$200,000 in 2020 and \\$220,000 in 2022. The average yearly price increase is  \n\n$$\\frac{\\$220,000-\\$200,000}{2022-2020}= \\frac{\\$20,000}{2\\ \\text{years}} = \\$10,000\\ \\text{per year}.$$  \n\nIf the market is volatile, the price might jump up one year and drop the next. The *instantaneous* rate of price change at a specific year would tell a realtor how fast the price is moving right then, which is useful for making quick decisions.  \n\n> **Note:** The average rate of change uses a *finite* change (like 2 years), while the instantaneous rate of change uses an *infinitesimally* small change, captured by a limit.  \n\nUnderstanding rate of change is the first step toward calculus. It lets us translate everyday observations—how fast a car goes, how quickly a price rises—into precise mathematical language. Once we can write these ideas with symbols, we can manipulate them, predict future behavior, and solve real problems.  \n\n> **Remember:** A rate of change compares two quantities; the *average* version uses a noticeable interval, and the *instantaneous* version uses a limit as the interval shrinks to zero. This distinction is the foundation for the derivative, which we will explore next.",
    "code": ""
   },
   {
-   "heading": "Rate of Change in Real Life",
-   "body": "**Rate of Change in Real Life**\n\nIn everyday life we constantly compare how one quantity changes as another quantity changes.  \nThe **rate of change** tells us exactly how fast something is happening.  \nMathematically, a rate of change is a fraction whose numerator is the change in the quantity we care about and whose denominator is the change in the reference quantity.\n\n---\n\n### Example 1 – Speed of a car  \n\nA car travels $150\\text{ km}$ in $3\\text{ h}$.  \nThe **average speed** is  \n\n\\[\n\\text{speed}= \\frac{\\Delta\\text{distance}}{\\Delta\\text{time}}\n            =\\frac{150\\text{ km}}{3\\text{ h}}\n            =50\\text{ km/h}.\n\\]\n\nIf we wanted the **instantaneous speed** at a particular moment, we would look at the limit of this fraction as the time interval becomes very, very small. That limit is exactly the derivative of the distance‑time function.\n\n---\n\n### Example 2 – Population growth  \n\nA town had $20{,}000$ residents in 2020 and $21{,}500$ residents in 2025.  \nThe **average yearly growth** is  \n\n\\[\n\\text{growth rate}= \\frac{21{,}500-20{,}000}{2025-2020}\n                  =\\frac{1{,}500}{5}\n                  =300\\text{ people per year}.\n\\]\n\nIf the population follows a smooth curve $P(t)$ (where $t$ is measured in years), the **instantaneous growth rate** at year $t$ is $P'(t)$.\n\n---\n\n### Example 3 – Price change of a product  \n\nA bakery sells loaves of bread for $\\$2.00$ each in January. By March the price rises to $\\$2.30$.  \nThe **average price increase per month** is  \n\n\\[\n\\frac{\\$2.30-\\$2.00}{3-1}= \\frac{\\$0.30}{2}= \\$0.15\\text{ per month}.\n\\]\n\nIf the price follows a smooth function $C(m)$ (with $m$ measured in months), the **instantaneous price change** at month $m$ is $C'(m)$.\n\n---\n\n### Fully worked example – Water tank draining\n\nA cylindrical tank holds water. The water height $h(t)$ (in meters) after $t$ minutes is given by  \n\n\\[\nh(t)=5-0.2t.\n\\]\n\n**Step 1 – Identify the quantities.**  \n- $h$ is the water height (the quantity that changes).  \n- $t$ is time (the reference quantity).\n\n**Step 2 – Write the rate of change formula.**  \n\n\\[\n\\frac{dh}{dt}= \\lim_{\\Delta t\\to0}\\frac{h(t+\\Delta t)-h(t)}{\\Delta t}.\n\\]\n\n**Step 3 – Compute the derivative.**  \nBecause $h(t)$ is a linear function, the limit is simply the coefficient of $t$:\n\n\\[\n\\frac{dh}{dt}= -0.2\\;\\text{m/min}.\n\\]\n\n**Step 4 – Interpret the result.**  \nThe water level is falling at a constant rate of $0.2$ meters each minute. After $10$ minutes the height will be  \n\n\\[\nh(10)=5-0.2(10)=3\\text{ m}.\n\\]\n\nThis shows how a real‑world situation translates directly into a derivative, which is a precise **rate of change**.\n\n---\n\n## Practice problems\n\n### Problem 1  \nA cyclist travels $30\\text{ km}$ in $2\\text{ h}$. Assuming the distance $d(t)$ (in km) after $t$ hours is linear, find the instantaneous speed $d'(t)$ and state its units.\n\n**Solution**  \nFor a linear model $d(t)=kt$. The average speed is $30/2=15\\text{ km/h}$, so $k=15$.  \nThus $d'(t)=k=15\\text{ km/h}$. The units are kilometers per hour.\n\n---\n\n### Problem 2  \nThe number of users on a website is modeled by $U(t)=500+40t$, where $t$ is measured in months. Find the rate of change of users per month and predict the number of users after 6 months.\n\n**Solution**  \nDerivative: $U'(t)=40\\text{ users/month}$.  \nAfter $6$ months: $U(6)=500+40(6)=500+240=740$ users.\n\n---\n\n### Problem 3  \nA coffee shop raises the price of a latte from $\\$3.00$ to $\\$3.45$ over a period of $9$ weeks. Assuming a linear price increase $C(w)$ (price in dollars, $w$ weeks), find $C'(w)$ and the price after $4$ weeks.\n\n**Solution**  \nTotal change: $\\Delta C = 0.45$, $\\Delta w = 9$.  \nRate: $C'(w)=\\Delta C/\\Delta w =0.45/9 =0.05\\text{ dollars/week}$.  \nPrice after $4$ weeks: $C(4)=3.00+0.05(4)=3.20$ dollars.\n\n---\n\n### Problem 4  \nA tank drains so that the water height follows $h(t)=8-0.4t$ (meters, minutes).  \n\na) Find the instantaneous draining rate $dh/dt$.  \nb) How long until the tank is empty?\n\n**Solution**  \na) $dh/dt = -0.4\\text{ m/min}$ (the water level falls $0.4$ m each minute).  \nb) Set $h(t)=0$: $8-0.4t=0 \\Rightarrow 0.4t=8 \\Rightarrow t=20$ minutes. The tank empties after $20$ min.",
+   "heading": "2. From Secant Lines to Tangent Lines",
+   "body": "Imagine you have a smooth curve drawn on a piece of paper, like the graph of a function $y=f(x)$.  \nPick two points on that curve, say $P$ at $x=a$ and $Q$ at $x=a+h$.  \nIf you draw a straight line that passes through both $P$ and $Q$, you have created a **secant line**.  \n\nThe word *secant* comes from the Latin *secare*, meaning “to cut”.  \nThe secant line “cuts” the curve at two places.  \nIts slope (how steep it is) tells you the average rate of change of the function between the two $x$‑values $a$ and $a+h$.\n\n> **Definition:** The slope of the secant line through $(a,f(a))$ and $(a+h,f(a+h))$ is  \n> $$m_{\\text{sec}}=\\frac{f(a+h)-f(a)}{(a+h)-a}=\\frac{f(a+h)-f(a)}{h}.$$\n\nWhy do we care about this line?  \nThink of driving a car from mile marker $a$ to mile marker $a+h$.  \nThe secant slope is like the average speed you traveled over that short trip.  \nIf $h$ is large, the average speed may hide what happened in the middle of the trip.  \nIf $h$ is tiny, the average speed becomes a better picture of what you were doing at the exact moment you passed mile marker $a$.\n\nNow imagine we let the second point $Q$ slide closer and closer to $P$ by making $h$ smaller and smaller.  \nEach time we choose a new $h$, we get a new secant line with its own slope.  \nAs $h\\to0$, the two points almost coincide, and the secant line starts to look like a line that just **touches** the curve at $P$ without cutting through it.  \n\nThat limiting line is called the **tangent line**.  \nIt “tangents” the curve – it grazes it at a single point, like a fingertip lightly touching a smooth ball.  \n\n> **Note:** The tangent line is not a secant line; it is the limit of secant lines as the second point approaches the first.\n\nThe slope of this tangent line is what we call the **derivative** of $f$ at $x=a$, written $f'(a)$ or $\\displaystyle\\frac{dy}{dx}\\bigg|_{x=a}$.  \nMathematically, we capture the idea of “letting $h$ get smaller and smaller” with a limit:\n\n$$f'(a)=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}.$$\n\nThis formula says: take the average rate of change over a tiny interval, then shrink that interval until it disappears.  \nIf the limit exists (i.e., settles down to a single number), the curve has a well‑defined tangent line at $a$, and we can talk about its instantaneous rate of change there.\n\n> **In daily life:** Think of a photographer zooming in on a picture.  \n> From far away you see the whole scene (the secant line).  \n> As you zoom in, the picture looks flatter and flatter, until at extreme zoom you see only a tiny patch that appears straight – that flat patch is the tangent line.\n\nWhy is this useful?  \nThe tangent line gives a simple linear approximation to the curve near $a$.  \nIf you need to estimate $f(a+\\Delta x)$ for a very small $\\Delta x$, you can use the tangent line:\n\n$$f(a+\\Delta x)\\approx f(a)+f'(a)\\,\\Delta x.$$\n\nThis approximation is the foundation of many practical calculations, from physics (instantaneous velocity) to economics (marginal cost).\n\n> **Common mistake:** Assuming the tangent line always exists.  \n> Some curves have sharp corners or vertical jumps where the limit above does not settle to a single number; at those points the derivative does not exist, and there is no tangent line.\n\nTo visualise the transition, draw a curve and several secant lines with decreasing $h$: each line gets steeper or flatter, and they all seem to “pivot” around the point $P$.  \nWhen $h$ is essentially zero, the line no longer cuts the curve – it just touches it.  \nThat final line is the tangent, and its slope is the derivative.\n\n> **Remember:** The derivative $f'(a)$ is the slope of the tangent line at $x=a$, obtained as the limit of secant slopes as the two points merge into one.",
    "code": ""
   },
   {
-   "heading": "Slope of a Tangent Line",
-   "body": "When a curve $y=f(x)$ is drawn on a graph, we often want to know how steep the curve is at a particular point.  \nThe idea of a **tangent line** captures this notion. A tangent line is a straight line that touches the curve at exactly one point and points in the same direction as the curve there.  \n\n---\n\n### Why a tangent line tells us the slope  \n\nImagine zooming in on the graph near the point $(a,f(a))$. As we magnify, the curve begins to look more and more like a straight line. In the limit of infinite magnification, the curve **becomes** a line – that line is the tangent.  \n\nThe **slope** of this line is what we call the **derivative** of $f$ at $x=a$, written $f'(a)$.  \n- If the tangent leans upward sharply, the slope is a large positive number.  \n- If it leans downward sharply, the slope is a large negative number.  \n- If the tangent is horizontal, the slope is $0$ and the function is momentarily flat.\n\nThus, the steeper the tangent line, the larger the absolute value of the derivative.\n\n---\n\n### Fully worked example  \n\nFind the derivative of $f(x)=x^{2}$ at the point $x=3$ by using the definition of the tangent slope.\n\n1. **Write the limit definition**  \n   $$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$\n\n2. **Insert $a=3$ and $f(x)=x^{2}$**  \n   $$f'(3)=\\lim_{h\\to 0}\\frac{(3+h)^{2}-3^{2}}{h}.$$\n\n3. **Expand the numerator**  \n   $$(3+h)^{2}=9+6h+h^{2},$$  \n   so  \n   $$\\frac{(3+h)^{2}-9}{h}= \\frac{9+6h+h^{2}-9}{h}= \\frac{6h+h^{2}}{h}.$$\n\n4. **Factor out $h$**  \n   $$\\frac{6h+h^{2}}{h}= \\frac{h(6+h)}{h}=6+h.$$\n\n5. **Take the limit as $h\\to 0$**  \n   $$f'(3)=\\lim_{h\\to 0}(6+h)=6.$$\n\n**Conclusion:** The tangent line at $(3,9)$ has slope $6$, so $f'(3)=6$.\n\n---\n\n### Practice problems  \n\nBelow are four problems. Each is followed by a complete solution so you can check your work.\n\n---\n\n#### 1. Find $f'(2)$ for $f(x)=3x^{2}+2x$.\n\n**Solution**  \n\n\\[\n\\begin{aligned}\nf'(a)&=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}\\\\\nf'(2)&=\\lim_{h\\to0}\\frac{3(2+h)^{2}+2(2+h)-\\bigl[3(2)^{2}+2(2)\\bigr]}{h}\\\\\n&=\\lim_{h\\to0}\\frac{3(4+4h+h^{2})+4+2h- (12+4)}{h}\\\\\n&=\\lim_{h\\to0}\\frac{12+12h+3h^{2}+4+2h-16}{h}\\\\\n&=\\lim_{h\\to0}\\frac{(12h+2h)+3h^{2}}{h}\\\\\n&=\\lim_{h\\to0}(14+3h)=14.\n\\end{aligned}\n\\]\n\nSo $f'(2)=\\boxed{14}$.\n\n---\n\n#### 2. Compute the derivative of $g(x)=\\sqrt{x}$ at $x=4$.\n\n**Solution**  \n\nUse $g'(a)=\\displaystyle\\lim_{h\\to0}\\frac{\\sqrt{a+h}-\\sqrt{a}}{h}$.\n\n\\[\n\\begin{aligned}\ng'(4)&=\\lim_{h\\to0}\\frac{\\sqrt{4+h}-2}{h}\\cdot\\frac{\\sqrt{4+h}+2}{\\sqrt{4+h}+2}\\\\\n&=\\lim_{h\\to0}\\frac{(4+h)-4}{h\\bigl(\\sqrt{4+h}+2\\bigr)}\\\\\n&=\\lim_{h\\to0}\\frac{h}{h\\bigl(\\sqrt{4+h}+2\\bigr)}\\\\\n&=\\lim_{h\\to0}\\frac{1}{\\sqrt{4+h}+2}= \\frac{1}{2+2}= \\frac14.\n\\end{aligned}\n\\]\n\nThus $g'(4)=\\boxed{\\tfrac14}$.\n\n---\n\n#### 3. Determine the slope of the tangent to $h(x)=\\dfrac{1}{x}$ at $x=1$.\n\n**Solution**  \n\n\\[\n\\begin{aligned}\nh'(a)&=\\lim_{h\\to0}\\frac{\\frac{1}{a+h}-\\frac{1}{a}}{h}\n      =\\lim_{h\\to0}\\frac{a-(a+h)}{h\\,a(a+h)}\\\\\n      &=\\lim_{h\\to0}\\frac{-h}{h\\,a(a+h)}=\\lim_{h\\to0}\\frac{-1}{a(a+h)}.\n\\end{aligned}\n\\]\n\nSet $a=1$:\n\n\\[\nh'(1)=\\frac{-1}{1\\cdot1}= -1.\n\\]\n\nSo the tangent line at $(1,1)$ has slope $\\boxed{-1}$.\n\n---\n\n#### 4. Find the derivative of $p(x)=5$ (a constant) at any $x$.\n\n**Solution**  \n\n\\[\np'(a)=\\lim_{h\\to0}\\frac{5-5}{h}= \\lim_{h\\to0}0 =0.\n\\]\n\nTherefore $p'(x)=\\boxed{0}$ for every $x$; a horizontal line has slope zero, matching our intuition.\n\n---",
+   "heading": "3. Defining the Derivative as a Limit",
+   "body": "Imagine you have a curve that shows how far a car has traveled after a certain number of hours.  \nIf you pick two points on that curve, say at time $t=1$ hour and $t=1.5$ hours, you can draw a straight line that connects them.  \nThat line is called a **secant line**. Its slope tells you the average speed of the car between those two moments.\n\n> **Note:** *Secant line* – a straight line that cuts through a curve at two points.\n\nThe slope of the secant line is easy to compute:  \n\n$$\n\\text{slope of secant}=\\frac{f(t_2)-f(t_1)}{t_2-t_1},\n$$  \n\nwhere $f(t)$ is the distance traveled after $t$ hours.  \nFor our example, suppose the car’s distance function is $f(t)=4t^2$ (just a simple rule for illustration).  \nAt $t_1=1$ we have $f(1)=4$, and at $t_2=1.5$ we have $f(1.5)=4(1.5)^2=9$.  \nSo the secant slope is  \n\n$$\n\\frac{9-4}{1.5-1}= \\frac{5}{0.5}=10\\ \\text{miles per hour}.\n$$  \n\nThis number is the **average** speed over the half‑hour interval.\n\nNow ask: what if we let the second point get *closer and closer* to the first point?  \nInstead of $t_2=1.5$, try $t_2=1.1$, then $1.01$, then $1.001$, and so on.  \nEach time we compute a new secant slope:\n\n* $t_2=1.1$: $f(1.1)=4(1.1)^2=4.84$, slope $=\\dfrac{4.84-4}{0.1}=8.4$  \n* $t_2=1.01$: $f(1.01)=4(1.01)^2\\approx4.0804$, slope $=\\dfrac{4.0804-4}{0.01}=8.04$  \n* $t_2=1.001$: $f(1.001)=4(1.001)^2\\approx4.008004$, slope $=\\dfrac{4.008004-4}{0.001}=8.004$  \n\nYou see the numbers are getting closer to $8$.  \nWhen the second point is *infinitely close* to the first, the secant line becomes the **tangent line** – the line that just touches the curve at a single point without cutting through it.  \nThe slope of that tangent line is called the **derivative** of $f$ at $t=1$, written $f'(1)$.\n\n> **Definition:** The derivative of $f$ at $x$ is the limit of the secant slopes as the second point approaches the first:  \n> $$f'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.$$\n\nIn the formula, $h$ represents the tiny horizontal distance between the two points: the second point is at $x+h$, while the first stays at $x$.  \nThe expression $\\frac{f(x+h)-f(x)}{h}$ is exactly the secant slope we computed earlier.  \nTaking the **limit** (the value the expression approaches) as $h$ gets smaller and smaller gives the tangent slope.\n\n> **In daily life:** Think of a photographer zooming in on a picture. From far away, the picture looks blurry, but as you zoom in, the details become clearer. The limit is like zooming in until the picture is sharp enough to see the exact direction of the curve at a single point.\n\nWhy is this useful?  \nThe derivative tells you the *instantaneous* rate of change – the exact speed of the car at a particular moment, not just an average over an interval.  \nIf you know $f'(1)=8$, you can say the car is traveling **exactly** $8$ miles per hour at the 1‑hour mark, even though its speed may be increasing or decreasing before and after that instant.\n\n> **Remember:** A limit is not a guess; it is a precise value that the secant‑slope expression approaches as $h$ becomes arbitrarily small.\n\nA common pitfall is to think you can plug $h=0$ directly into the fraction.  \nIf you do, the denominator becomes $0$, which is undefined.  \nThe limit process avoids this problem by looking at the behavior *as* $h$ approaches $0$, not at $h=0$ itself.\n\n> **Common mistake:** Substituting $h=0$ into $\\frac{f(x+h)-f(x)}{h}$ gives $\\frac{0}{0}$, an indeterminate form. The limit tells us how the fraction behaves *near* zero, providing a meaningful slope.\n\nFinally, let’s compute the derivative for our example function $f(t)=4t^2$ using the limit definition:\n\n$$\n\\begin{aligned}\nf'(t)&=\\lim_{h\\to 0}\\frac{4(t+h)^2-4t^2}{h}\\\\\n&=\\lim_{h\\to 0}\\frac{4(t^2+2th+h^2)-4t^2}{h}\\\\\n&=\\lim_{h\\to 0}\\frac{8th+4h^2}{h}\\\\\n&=\\lim_{h\\to 0}\\bigl(8t+4h\\bigr)=8t.\n\\end{aligned}\n$$\n\nPlugging $t=1$ gives $f'(1)=8$, exactly the number we observed by shrinking $h$ in our table.  \n\nThus, the limit process turns the easy‑to‑compute slope of a secant line into the precise slope of the tangent line, giving us the powerful tool of the derivative.",
    "code": ""
   },
   {
-   "heading": "Introducing Notation",
-   "body": "The **derivative** tells us how a quantity changes at an exact instant.  \nTo talk about this idea we use three common symbols.  \nAll of them represent the same mathematical object – the **instantaneous rate of change** of a function $f$ at a point $x$.\n\n---\n\n### The three notations\n\n| Symbol | Read as | What it means |\n|--------|---------|---------------|\n| $f'(x)$ | “f prime of x” | The derivative of $f$ evaluated at $x$. |\n| $\\displaystyle\\frac{dy}{dx}$ | “dy over dx” | The ratio of an infinitesimal change in $y$ to an infinitesimal change in $x$. |\n| $\\displaystyle\\frac{d}{dx}\\,f(x)$ | “d over dx of f of x” | The operator $\\frac{d}{dx}$ acting on the function $f(x)$. |\n\nAll three give the same number for a given $x$, provided the function is differentiable there.\n\n---\n\n### Why three symbols?\n\n* **$f'(x)$** is compact and works well when we treat the function itself as the main object.\n* **$\\frac{dy}{dx}$** comes from the geometric picture of a tiny rise $dy$ over a tiny run $dx$ on a curve. It is useful when we think of $y$ as a dependent variable.\n* **$\\frac{d}{dx}f(x)$** emphasizes that differentiation is an **operator**: it takes a function and returns a new function. This view is powerful in calculus rules (product rule, chain rule, etc.).\n\n---\n\n### Fully worked example  \n\nFind the derivative of the function  \n\\[\nf(x)=3x^{2}-5x+7\n\\]\nusing each of the three notations.\n\n1. **Using $f'(x)$**  \n\n   Apply the power rule: $\\displaystyle\\frac{d}{dx}x^{n}=nx^{\\,n-1}$.  \n\n   \\[\n   f'(x)=\\frac{d}{dx}(3x^{2})-\\frac{d}{dx}(5x)+\\frac{d}{dx}(7)\n        =3\\cdot2x^{1}-5\\cdot1x^{0}+0\n        =6x-5.\n   \\]\n\n2. **Using $\\displaystyle\\frac{dy}{dx}$**  \n\n   Let $y=f(x)=3x^{2}-5x+7$. Then  \n\n   \\[\n   \\frac{dy}{dx}=6x-5.\n   \\]\n\n   The steps are identical; we simply rename the result as $\\frac{dy}{dx}$.\n\n3. **Using $\\displaystyle\\frac{d}{dx}f(x)$**  \n\n   Write the operator explicitly:  \n\n   \\[\n   \\frac{d}{dx}\\bigl(3x^{2}-5x+7\\bigr)\n   =\\frac{d}{dx}(3x^{2})-\\frac{d}{dx}(5x)+\\frac{d}{dx}(7)\n   =6x-5.\n   \\]\n\nAll three notations give the same derivative function $6x-5$.\n\n---\n\n### Practice problems  \n\nBelow are four problems.  After each problem a complete solution is provided.\n\n---\n\n#### 1.  Find the derivative of $g(x)=\\sqrt{x}+4x^{3}$.\n\n**Solution**  \n\nWrite $\\sqrt{x}=x^{1/2}$.  \n\n\\[\ng'(x)=\\frac{d}{dx}\\bigl(x^{1/2}\\bigr)+\\frac{d}{dx}\\bigl(4x^{3}\\bigr)\n     =\\frac12 x^{-1/2}+4\\cdot3x^{2}\n     =\\frac{1}{2\\sqrt{x}}+12x^{2}.\n\\]\n\nIn notation form: $g'(x)=\\frac{1}{2\\sqrt{x}}+12x^{2}$, $\\displaystyle\\frac{dy}{dx}= \\frac{1}{2\\sqrt{x}}+12x^{2}$, or $\\displaystyle\\frac{d}{dx}g(x)=\\frac{1}{2\\sqrt{x}}+12x^{2}$.\n\n---\n\n#### 2.  If $h(t)=\\dfrac{5}{t^{2}}-3t$, compute $h'(t)$.\n\n**Solution**  \n\nRewrite $\\dfrac{5}{t^{2}}=5t^{-2}$.  \n\n\\[\nh'(t)=5(-2)t^{-3}-3\n     =-10t^{-3}-3\n     =-\\frac{10}{t^{3}}-3.\n\\]\n\nThus $h'(t)=-\\dfrac{10}{t^{3}}-3$ (same in any notation).\n\n---\n\n#### 3.  Let $p(x)=\\ln(x^{2}+1)$. Find $p'(x)$.\n\n**Solution**  \n\nUse the chain rule: $\\displaystyle\\frac{d}{dx}\\ln(u)=\\frac{1}{u}\\,u'$ with $u=x^{2}+1$.  \n\n\\[\np'(x)=\\frac{1}{x^{2}+1}\\cdot(2x)=\\frac{2x}{x^{2}+1}.\n\\]\n\nSo $p'(x)=\\dfrac{2x}{x^{2}+1}$.\n\n---\n\n#### 4.  For $q(x)=e^{3x}-4\\cos x$, determine $q'(x)$.\n\n**Solution**  \n\nDifferentiate term by term.  \n\n* $ \\frac{d}{dx}e^{3x}=3e^{3x}$ (chain rule).  \n* $ \\frac{d}{dx}(-4\\cos x)= -4(-\\sin x)=4\\sin x$.\n\nCombine:\n\n\\[\nq'(x)=3e^{3x}+4\\sin x.\n\\]\n\nHence $q'(x)=3e^{3x}+4\\sin x$.\n\n---",
+   "heading": "4. Common Notations: f′(x) and dy/dx",
+   "body": "When we first meet the derivative, we often write it as a single symbol that looks a bit like a prime mark:  \n\n$$f'(x)$$  \n\nLater textbooks may use a different looking symbol that involves the letters *d* and *y*:  \n\n$$\\frac{dy}{dx}$$  \n\nBoth of these notations describe exactly the same idea – the instantaneous rate of change of a function $f$ at the point $x$.  Below we break down what each part means, why we have two ways to write it, and how you can move freely between them.\n\n> **Definition:** *Derivative* – the limit of the average rate of change (the slope of a secant line) as the two points on the graph get infinitely close.  \n> In symbols, for a function $y = f(x)$, the derivative at $x$ is  \n> $$f'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.$$\n\n### The prime notation $f'(x)$  \n\n1. **$f$** – the name of the original function (for example, $f(x)=x^2$).  \n2. **Prime (′)** – a small mark that tells us “take the derivative of this function”. It is read “f prime”.  \n3. **$(x)$** – the point at which we are evaluating the derivative.  \n\nSo $f'(x)$ reads “the derivative of $f$ evaluated at $x$”.  The prime symbol is compact and works well when we are dealing with many functions, especially in algebraic manipulations.\n\n### The Leibniz notation $\\displaystyle\\frac{dy}{dx}$  \n\n1. **$y$** – the output of the function, often written as $y = f(x)$.  \n2. **$d$** – stands for “infinitesimal change”.  Think of $dy$ as a very tiny change in $y$, and $dx$ as a very tiny change in $x$.  \n3. **$\\frac{dy}{dx}$** – the ratio of these tiny changes.  It is read “dy over dx”.  \n\nLeibniz introduced this form to emphasize the *relationship* between the changes in $y$ and $x$.  It is especially handy when we need to manipulate derivatives algebraically, such as in the chain rule or when separating variables in differential equations.\n\n> **Note:** Although $dy$ and $dx$ look like ordinary fractions, they are not numbers you can cancel in the usual sense.  The notation is a convenient shorthand that behaves like a fraction in many derivative rules, but it always represents the limit process shown in the definition.\n\n### How the two notations are interchangeable  \n\nIf we start with $y = f(x)$, then by definition  \n\n$$\\frac{dy}{dx}=f'(x).$$  \n\nBoth sides give the same numerical value for any specific $x$.  You can move from one form to the other simply by remembering that $y$ stands for $f(x)$.  For example, if $f(x)=\\sin x$, then  \n\n$$f'(x)=\\cos x \\qquad\\text{and}\\qquad \\frac{dy}{dx}=\\cos x,$$  \n\nbecause $y=\\sin x$ and the derivative of $\\sin x$ is $\\cos x$.\n\n> **In daily life:** Think of $f'(x)$ as a *nickname* for the derivative, while $\\frac{dy}{dx}$ is like a *full name* that tells you who is changing (the $y$) and what it is changing with respect to (the $x$).  Just as you can call a friend “Alex” or “Alex Johnson”, you can use either notation depending on what feels clearer in the context.\n\n### When to prefer one over the other  \n\n- Use **$f'(x)$** when you are working mainly with functions and want a tidy expression, such as in tables of derivatives or when writing higher‑order derivatives ($f''(x)$, $f^{(3)}(x)$, …).  \n- Use **$\\frac{dy}{dx}$** when you need to show the connection between variables, for instance in related rates problems (“how fast is the shadow lengthening as a person walks away from a lamp?”) or when applying the chain rule:  \n\n$$\\frac{dy}{dx}= \\frac{dy}{du}\\cdot\\frac{du}{dx}.$$\n\n> **Common mistake:** Forgetting that $y$ must be defined as $f(x)$ before writing $\\frac{dy}{dx}$.  If you write $\\frac{dy}{dx}$ without first stating $y = f(x)$, the symbol has no meaning and can lead to confusion.\n\n### Quick tip to remember  \n\n> **Remember:** $f'(x)$ and $\\displaystyle\\frac{dy}{dx}$ are two faces of the same concept.  Whenever you see one, you can replace it with the other as long as you keep track of what $y$ represents.  This flexibility lets you choose the notation that makes the next step in a problem easiest to see.",
    "code": ""
   },
   {
-   "heading": "Interpreting the Derivative",
-   "body": "The **derivative** of a function tells us how the function behaves at each point.  \nIf we know the sign of the derivative, we can immediately say whether the original\nfunction is going **up**, **down**, or staying **flat**.\n\n---\n\n### Positive derivative → increasing function  \n\nSuppose $f(x)=2x+3$.  \nThe derivative is  \n\n\\[\nf'(x)=\\frac{d}{dx}(2x+3)=2 .\n\\]\n\nBecause $f'(x)=2>0$ for every $x$, the graph of $f$ rises as we move to the right.\nNo matter which interval we look at, the function is **increasing**.\n\n---\n\n### Negative derivative → decreasing function  \n\nTake $g(x)= -x^{2}+4$.  \nFirst find the derivative:\n\n\\[\ng'(x)=\\frac{d}{dx}(-x^{2}+4)=-2x .\n\\]\n\nFor $x>0$, $g'(x)=-2x<0$, so on the interval $(0,\\infty)$ the function is **decreasing**.  \nFor $x<0$, $g'(x)=-2x>0$, so on $(-\\infty,0)$ the function is **increasing**.  \nThe sign change at $x=0$ tells us the graph goes up, reaches a highest point, then goes down.\n\n---\n\n### Zero derivative → flat or turning point  \n\nConsider $h(x)=x^{3}$. Its derivative is  \n\n\\[\nh'(x)=3x^{2}.\n\\]\n\nAt $x=0$, $h'(0)=0$. The slope of the tangent line is horizontal, so the graph is **flat** there.\nBecause $h'(x)$ is positive on both sides of $0$, the function does **not** change direction;\nthe point $x=0$ is an inflection point, not a maximum or minimum.\n\n---\n\n## Fully worked example  \n\n**Problem:** Determine where the function $p(x)=x^{3}-6x^{2}+9x$ is increasing, decreasing, or flat.\n\n**Solution steps**\n\n1. **Find the derivative**  \n   \\[\n   p'(x)=\\frac{d}{dx}(x^{3}-6x^{2}+9x)=3x^{2}-12x+9.\n   \\]\n\n2. **Factor the derivative**  \n   \\[\n   p'(x)=3(x^{2}-4x+3)=3(x-1)(x-3).\n   \\]\n\n3. **Locate critical points** (where $p'(x)=0$)  \n   \\[\n   3(x-1)(x-3)=0 \\;\\Longrightarrow\\; x=1 \\text{ or } x=3.\n   \\]\n\n4. **Test the sign of $p'(x)$ in each interval**  \n\n   * For $x<1$, pick $x=0$: $p'(0)=3( -1)( -3)=9>0$ → **increasing**.  \n   * For $1<x<3$, pick $x=2$: $p'(2)=3(1)(-1)=-3<0$ → **decreasing**.  \n   * For $x>3$, pick $x=4$: $p'(4)=3(3)(1)=9>0$ → **increasing**.\n\n5. **Interpret the zero derivative points**  \n   At $x=1$ and $x=3$, $p'(x)=0$, so the tangent line is horizontal.  \n   The sign change $+$ → $-$ at $x=1$ indicates a **local maximum**;  \n   the sign change $-$ → $+$ at $x=3$ indicates a **local minimum**.\n\n**Conclusion:**  \n- Increasing on $(-\\infty,1)$ and $(3,\\infty)$.  \n- Decreasing on $(1,3)$.  \n- Flat (horizontal tangent) at $x=1$ and $x=3$.\n\n---\n\n## Practice problems  \n\n### 1. $f(x)=5-4x$\n\n**Solution**  \n$f'(x)=-4<0$ for all $x$.  \nThe derivative is always negative, so $f$ is **decreasing everywhere**. No flat points.\n\n---\n\n### 2. $g(x)=x^{2}-8x+15$\n\n**Solution**  \n$g'(x)=2x-8$. Set $g'(x)=0$: $2x-8=0 \\Rightarrow x=4$.  \n\n- For $x<4$, pick $x=2$: $g'(2)= -4<0$ → decreasing.  \n- For $x>4$, pick $x=6$: $g'(6)=4>0$ → increasing.  \n\nThus $g$ **decreases** on $(-\\infty,4)$, **increases** on $(4,\\infty)$, and is **flat** at $x=4$ (a local minimum).\n\n---\n\n### 3. $h(x)=\\sin x$\n\n**Solution**  \n$h'(x)=\\cos x$.  \n\n- $\\cos x>0$ on intervals $(2k\\pi-\\frac{\\pi}{2},\\,2k\\pi+\\frac{\\pi}{2})$, so $h$ is **increasing** there.  \n- $\\cos x<0$ on $(2k\\pi+\\frac{\\pi}{2},\\,2k\\pi+\\frac{3\\pi}{2})$, so $h$ is **decreasing** there.  \n- $\\cos x=0$ at $x=\\frac{\\pi}{2}+k\\pi$, giving **horizontal tangents** (peaks and troughs).\n\n---\n\n### 4. $p(x)=\\dfrac{1}{x}$, $x\\neq0$\n\n**Solution**  \n$p'(x)=\\dfrac{d}{dx}\\left(x^{-1}\\right)=-x^{-2}=-\\frac{1}{x^{2}}$.  \n\nSince $x^{2}>0$ for all $x\\neq0$, $p'(x)=-\\frac{1}{x^{2}}<0$ everywhere in its domain.  \nTherefore $p$ is **decreasing** on $(-\\infty,0)$ and on $(0,\\infty)$.  \nNo points where the derivative is zero, so no flat spots.",
+   "heading": "5. Interpreting the Derivative",
+   "body": "When we write the derivative $f'(x)$ we are really asking a simple question: **“What is happening to the function right now at the point $x$?”**  \nThink of a car traveling on a road. The speedometer tells you the *instantaneous* speed at that exact moment, not the average speed over the last mile. The derivative works the same way for any curve: it tells us the *instantaneous rate of change* of the quantity shown by the graph.\n\n> **Definition:** The sign of the derivative tells us whether the function is going up, going down, or staying level at a particular $x$.\n\n---\n\n### Positive derivative → the function is increasing  \n\nIf $f'(a) > 0$, the tiny change in $f$ when we move a little to the right of $a$ is also positive. In symbols,\n$$\n\\text{If } f'(a) > 0,\\ \\text{then for a small } h>0,\\ f(a+h)-f(a) > 0.\n$$\nSo the graph climbs as we move rightward.  \n\n**Everyday comparison:** Imagine a balloon being filled with air. While you keep blowing, the balloon’s radius gets larger. The rate at which the radius grows at any moment is positive, just like a positive derivative means the “size” (the function value) is getting bigger as you move forward.\n\n---\n\n### Negative derivative → the function is decreasing  \n\nIf $f'(a) < 0$, a tiny step to the right makes the function value drop:\n$$\n\\text{If } f'(a) < 0,\\ \\text{then for a small } h>0,\\ f(a+h)-f(a) < 0.\n$$\nThe graph slopes downward.  \n\n**Everyday comparison:** Think of a melting ice cube. As time passes, its height shrinks. The instantaneous rate at which the height changes is negative, just as a negative derivative tells us the graph is falling at that instant.\n\n---\n\n### Zero derivative → flat or turning point  \n\nWhen $f'(a)=0$, the immediate change is neither up nor down. The graph is *horizontal* at $x=a$. This can happen in two ways:\n\n1. **Flat spot** – the function is level for a while (e.g., the top of a flat tabletop).  \n2. **Turning point** – the function switches from increasing to decreasing (a peak) or from decreasing to increasing (a valley).\n\nMathematically,\n$$\nf'(a)=0 \\quad\\Longrightarrow\\quad \\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}=0.\n$$\nThe limit of the slope of the secant lines becomes zero, so the tangent line is horizontal.\n\n> **In daily life:** A cyclist riding up a hill slows down, stops at the very top, then speeds up going down. At the exact top, the cyclist’s speed is zero for an instant – that moment corresponds to a derivative of zero, marking a turning point from “going up” (positive slope) to “going down” (negative slope).\n\n---\n\n### Why the sign matters  \n\nKnowing whether $f'(x)$ is positive, negative, or zero lets us quickly sketch the shape of a curve without plotting many points. For example, if a temperature‑versus‑time graph has $f'(t)>0$ from 8 am to noon, we can confidently say the temperature is rising during those hours. If later $f'(t)<0$, the temperature is falling. When $f'(t)=0$, we look for a possible high or low point.\n\n> **Note:** A zero derivative does **not** always mean a maximum or minimum. Some functions, like $f(x)=x^3$, have $f'(0)=0$ but keep increasing through the point. Always check the behavior on both sides of the point.\n\n---\n\n### Putting it together  \n\n1. **Positive** → move right → $y$ goes up → graph climbs.  \n2. **Negative** → move right → $y$ goes down → graph falls.  \n3. **Zero** → move right → no immediate change → graph is flat; could be a peak, valley, or a flat stretch.\n\n> **Remember:** The derivative is a *local* description. It tells you what’s happening **right now** at a single $x$, not the overall trend of the whole function.\n\nBy interpreting the sign of $f'(x)$, we translate the abstract language of calculus into concrete statements about growth, decline, and steadiness—just like reading a speedometer tells us whether a car is accelerating, braking, or cruising. This bridge between numbers and everyday experience makes the derivative a powerful tool for understanding change in physics, economics, biology, and countless other fields.",
    "code": ""
   },
   {
-   "heading": "Linking Rate and Slope",
-   "body": "The idea that a **rate** is just the **slope** of a graph is the bridge that lets us move from everyday language (“the car is going 60 km/h”) to the precise language of calculus.  \nConsider a distance‑time graph where the horizontal axis is time $t$ (in seconds) and the vertical axis is distance $s$ (in meters).  \n\n---\n\n### Why the slope equals speed  \n\nThe slope of a line is defined as  \n\n\\[\n\\text{slope}= \\frac{\\Delta y}{\\Delta x}\n\\]\n\nwhere $\\Delta y$ is the change in the vertical coordinate and $\\Delta x$ the change in the horizontal coordinate.  \nOn a distance‑time graph, $\\Delta y$ becomes a change in distance $\\Delta s$ and $\\Delta x$ a change in time $\\Delta t$. Therefore the slope of any **straight** segment of the graph is  \n\n\\[\n\\frac{\\Delta s}{\\Delta t},\n\\]\n\nwhich is exactly the **average speed** over that interval.\n\nIf the motion is not uniform, the graph is curved. The **instantaneous** speed at a particular moment $t_0$ is the slope of the *tangent line* to the curve at $t_0$. In calculus this slope is the derivative  \n\n\\[\nv(t_0)=\\frac{ds}{dt}\\Big|_{t=t_0}.\n\\]\n\nThus **speed = slope of the distance‑time graph**.\n\nThe same reasoning works for any other pair of quantities that change together. For example, if $P(t)$ is the price of a stock and $t$ is time, the slope $\\dfrac{dP}{dt}$ tells us the **rate of price change** at that instant.\n\n---\n\n### Fully worked example  \n\nA cyclist travels along a straight road. Her distance from the start after $t$ seconds is given by  \n\n\\[\ns(t)=4t^{2}+2t \\quad\\text{(meters)}.\n\\]\n\n**Step 1: Find the derivative**  \n\n\\[\n\\frac{ds}{dt}= \\frac{d}{dt}\\bigl(4t^{2}+2t\\bigr)\n            = 8t+2.\n\\]\n\n**Step 2: Interpret the derivative**  \n\nThe expression $8t+2$ gives the cyclist’s instantaneous speed (in m/s) at any time $t$.\n\n**Step 3: Compute the speed at a specific moment**  \n\nAt $t=3\\,$s,\n\n\\[\nv(3)=8(3)+2=24+2=26\\ \\text{m/s}.\n\\]\n\n**Step 4: Verify with the slope of a tangent line**  \n\nPick a tiny interval around $t=3$, say $\\Delta t=0.01$ s.\n\n\\[\n\\Delta s = s(3.01)-s(3)\n         =\\bigl[4(3.01)^{2}+2(3.01)\\bigr]-\\bigl[4(3)^{2}+2(3)\\bigr]\n         \\approx 0.2602\\ \\text{m}.\n\\]\n\n\\[\n\\frac{\\Delta s}{\\Delta t}\\approx\\frac{0.2602}{0.01}=26.02\\ \\text{m/s},\n\\]\n\nwhich is essentially the derivative $26\\,$m/s. The tangent line at $t=3$ therefore has slope $26$, confirming that **speed equals the slope of the distance‑time graph**.\n\n---\n\n### Practice problems  \n\n**1.** A ball is dropped from a height described by $h(t)=100-5t^{2}$ (meters).  \n*Find the instantaneous velocity after $t=2$ s and explain its meaning as a slope.*\n\n**Solution:**  \n\n\\[\n\\frac{dh}{dt}= -10t \\quad\\Rightarrow\\quad v(2)=-10(2)=-20\\ \\text{m/s}.\n\\]  \nThe negative sign shows the ball is moving downward. The slope of the height‑time graph at $t=2$ s is $-20$, i.e., the height is decreasing $20$ m each second at that instant.\n\n---\n\n**2.** A car’s fuel consumption $F$ (liters per hour) depends on speed $v$ (km/h) via $F(v)=0.05v^{2}+0.2v$.  \n*What is the rate of change of fuel use with respect to speed at $v=60$ km/h?*\n\n**Solution:**  \n\n\\[\n\\frac{dF}{dv}=0.10v+0.2\\quad\\Rightarrow\\quad \\frac{dF}{dv}\\Big|_{v=60}=0.10(60)+0.2=6+0.2=6.2\\ \\text{L/(h·km/h)}.\n\\]  \nThus, near $60$ km/h, each additional km/h increases fuel use by about $6.2$ L per hour.\n\n---\n\n**3.** The temperature $T$ (°C) of a chemical reaction changes with time $t$ (minutes) as $T(t)=3t^{3}-12t^{2}+9t+20$.  \n*Find the temperature’s rate of change at $t=2$ min and interpret it.*\n\n**Solution:**  \n\n\\[\n\\frac{dT}{dt}=9t^{2}-24t+9\\quad\\Rightarrow\\quad \\frac{dT}{dt}\\Big|_{t=2}=9(4)-24(2)+9=36-48+9=-3\\ \\text{°C/min}.\n\\]  \nThe negative slope means the temperature is decreasing at $3$ °C per minute at $t=2$ min.\n\n---\n\n**4.** A population of bacteria grows according to $P(t)=500e^{0.3t}$, where $t$ is measured in days.  \n*Determine the instantaneous growth rate on day $5$ and state its relation to the graph’s slope.*\n\n**Solution:**  \n\n\\[\n\\frac{dP}{dt}=500\\cdot0.3e^{0.3t}=150e^{0.3t}.\n\\]  \nAt $t=5$,\n\n\\[\n\\frac{dP}{dt}\\Big|_{t=5}=150e^{1.5}\\approx150(4.4817)=672.3\\ \\text{bacteria/day}.\n\\]  \nThis number is the slope of the population‑time curve at day 5, i.e., the population is increasing by about $672$ bacteria each day at that moment.",
+   "heading": "6. Estimating Derivatives from Tables and Graphs",
+   "body": "When we have a table of values for a function, we can still talk about its **rate of change** even if we do not yet know a formula.  \nThe idea is simple: look at how much the output (the *y‑value*) moves when the input (the *x‑value*) moves a little bit.  \n\n> **Definition:** *Average rate of change* between two points $(x_1,\\,f(x_1))$ and $(x_2,\\,f(x_2))$ is  \n> $$\\frac{f(x_2)-f(x_1)}{\\,x_2-x_1\\,}.$$  \n> It tells us how fast the function is changing on average over that interval.\n\n### Step 1 – Compute an average rate from a table  \n\nSuppose the table below records the height of a plant (in centimeters) measured each day.\n\n| Day $x$ | Height $f(x)$ (cm) |\n|--------|--------------------|\n| 0      | 5                  |\n| 1      | 7.2                |\n| 2      | 9.1                |\n| 3      | 10.5               |\n| 4      | 11.4               |\n\nTo find the average growth between day 0 and day 4, plug the numbers into the definition:\n\n$$\\frac{f(4)-f(0)}{4-0}= \\frac{11.4-5}{4}= \\frac{6.4}{4}=1.6\\ \\text{cm per day}.$$\n\nThis number says that, on average, the plant grew $1.6\\,$cm each day during the four‑day span. It does **not** tell us exactly how fast it grew at a particular instant, but it is a useful first picture.\n\n### Step 2 – Use points that are closer together  \n\nThe average rate over a large interval can hide variations. If the plant grew quickly on day 1 and then slowed, the overall average would miss that detail. To get a better picture of the *instantaneous* rate at, say, day 2, we look at points that are nearer to $x=2$.\n\nTake the points $(1,\\,7.2)$ and $(3,\\,10.5)$. Their average rate is  \n\n$$\\frac{10.5-7.2}{3-1}= \\frac{3.3}{2}=1.65\\ \\text{cm per day}.$$\n\nNow use the even closer points $(1,\\,7.2)$ and $(2,\\,9.1)$:\n\n$$\\frac{9.1-7.2}{2-1}=1.9\\ \\text{cm per day}.$$\n\nAnd the points $(2,\\,9.1)$ and $(3,\\,10.5)$ give  \n\n$$\\frac{10.5-9.1}{3-2}=1.4\\ \\text{cm per day}.$$\n\nNotice how the numbers change as we shrink the interval around day 2. The values $1.9$ and $1.4$ are closer to the true instantaneous growth rate at day 2 than the $1.6$ we got from the whole four‑day span.\n\n> **Note:** The smaller the distance $|x_2-x_1|$, the more the average rate resembles the *instantaneous* rate (the derivative).  \n\n### Step 3 – Form a pattern and estimate the derivative  \n\nIf we keep picking points ever nearer to $x=2$, the average rates will settle toward a single number. In practice, we often stop when the interval is as small as the data allow. From the table, the closest we can get are the intervals of length $1$ (e.g., from day 1 to day 2). We can average the two one‑step rates around day 2:\n\n$$\\frac{1.9 + 1.4}{2}=1.65\\ \\text{cm per day}.$$\n\nThus we **estimate** that the plant’s growth rate at day 2 is about $1.65\\,$cm per day.\n\n> **In daily life:** This method is like checking how fast a car is traveling by looking at the odometer reading after short trips. The shorter the trip, the better the estimate of the car’s speed at a particular moment.\n\n### Why this works  \n\nThe derivative $f'(x)$ is defined as the limit of the average rate as the two $x$‑values get infinitely close:\n\n$$f'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.$$\n\nWhen we cannot take a true limit because we only have discrete data, we mimic the process by choosing smaller and smaller $h$ (the distance between the two $x$‑values). The pattern we observe gives a practical approximation of the limit.\n\n> **Remember:** An estimate improves when the interval $h$ is small, but it also depends on the accuracy of the data. No matter how small $h$ is, noisy measurements can still give a poor estimate.\n\n### Quick tip for tables and graphs  \n\n1. Identify the $x$‑value where you want the derivative.  \n2. Find the two rows (or two points on the graph) that lie just to the left and right of that $x$.  \n3. Compute the average rate using the definition.  \n4. If possible, repeat with a narrower pair of points and compare.  \n\nBy following these steps, you turn a simple list of numbers or a sketch into useful information about how fast something is changing at a particular moment. This skill is the bridge from raw data to the powerful concept of the derivative.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\n1. **Find the slope of the tangent to \\(y = x^{2}\\) at \\(x = 3\\) using the limit definition.**  \n\n   *Solution:*  \n   The derivative at a point \\(a\\) is defined by  \n\n   $$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$  \n\n   Here \\(f(x)=x^{2}\\) and \\(a=3\\). Compute the numerator:\n\n   \\[\n   f(3+h)-f(3)=(3+h)^{2}-3^{2}=9+6h+h^{2}-9=6h+h^{2}.\n   \\]\n\n   Form the difference quotient:\n\n   \\[\n   \\frac{f(3+h)-f(3)}{h}= \\frac{6h+h^{2}}{h}=6+h.\n   \\]\n\n   Take the limit as \\(h\\to 0\\):\n\n   \\[\n   f'(3)=\\lim_{h\\to 0}(6+h)=6.\n   \\]\n\n   Therefore the slope of the tangent line at \\(x=3\\) is **6**. The tangent line itself can be written as  \n\n   \\[\n   y- f(3)=f'(3)(x-3)\\quad\\Longrightarrow\\quad y-9=6(x-3).\n   \\]\n\n2. **If a car travels 150 km in 3 hours, what is its average speed and how does this relate to the derivative?**  \n\n   *Solution:*  \n   Average speed is the total distance divided by total time:\n\n   \\[\n   \\text{Average speed}= \\frac{150\\text{ km}}{3\\text{ h}} = 50\\text{ km/h}.\n   \\]\n\n   In calculus, average speed over an interval \\([t_{0},t_{1}]\\) is the **average rate of change** of the position function \\(s(t)\\):\n\n   \\[\n   \\frac{s(t_{1})-s(t_{0})}{t_{1}-t_{0}}.\n   \\]\n\n   The **derivative** \\(s'(t)\\) gives the *instantaneous* speed at a particular moment. If the car moved at a constant 50 km/h, then \\(s'(t)=50\\) for every \\(t\\). Otherwise, the derivative tells how the speed is changing at each instant.\n\n3. **Sketch a graph of a function with a positive derivative on \\((0,2)\\) and a negative derivative on \\((2,4)\\).**  \n\n   *Solution:*  \n   A simple choice is the piecewise linear function  \n\n   \\[\n   f(x)=\\begin{cases}\n   x+1, & 0\\le x\\le 2,\\\\[4pt]\n   -x+5, & 2< x\\le 4.\n   \\end{cases}\n   \\]\n\n   - On \\((0,2)\\) the slope is \\(+1\\) (positive derivative).  \n   - On \\((2,4)\\) the slope is \\(-1\\) (negative derivative).  \n\n   Plot the two line segments meeting at \\((2,3)\\). The graph rises from \\((0,1)\\) to \\((2,3)\\) and then falls to \\((4,1)\\). The change of sign of the derivative at \\(x=2\\) indicates a local maximum at that point.\n\n4. **A ball is thrown upward with height \\(h(t)=20t-5t^{2}\\) meters after \\(t\\) seconds. Find the velocity at \\(t=2\\) seconds and interpret its meaning.**  \n\n   *Solution:*  \n   Velocity is the derivative of height:\n\n   \\[\n   v(t)=h'(t)=\\frac{d}{dt}(20t-5t^{2})=20-10t.\n   \\]\n\n   Evaluate at \\(t=2\\):\n\n   \\[\n   v(2)=20-10(2)=0\\text{ m/s}.\n   \\]\n\n   The velocity being zero means that at \\(t=2\\) s the ball has reached its highest point; it stops rising and is about to start falling. This instant is exactly where the derivative changes from positive (going up) to negative (coming down).",
+   "heading": "7. Quick Check and Real‑World Application",
+   "body": "> **Note:** A quick check helps you see if you really understand how to turn a formula into a rate and what that rate tells you about the world.\n\nImagine a small car that moves along a straight road. Its position at time $t$ (measured in seconds) is given by the function  \n\n$$s(t)=3t^{2}+2t\\; \\text{meters}.$$\n\nThe function tells you exactly where the car is after any number of seconds.  \nYour task is two‑fold:\n\n1. **Calculate the derivative** $s'(t)$, which is the instantaneous speed of the car at any time $t$.\n2. **Explain in plain language** what the number you obtain means for the car’s motion.\n\n---\n\n### Step 1 – Write down the definition of the derivative\n\nThe derivative of $s(t)$ is the limit of the average speed over a very short time interval.  \nIn symbols  \n\n$$s'(t)=\\lim_{\\Delta t\\to 0}\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}.$$\n\nYou do not need to evaluate the limit from scratch because we already know the basic rule: the derivative of a power $t^{n}$ is $n t^{\\,n-1}$. This rule comes from applying the limit definition repeatedly and is proved in the earlier part of the lesson.\n\n---\n\n### Step 2 – Differentiate term by term\n\nApply the rule to each term of $s(t)$.\n\n* For $3t^{2}$, the exponent $n=2$, so the derivative is $2\\cdot3t^{2-1}=6t$.\n* For $2t$, the exponent $n=1$, so the derivative is $1\\cdot2t^{1-1}=2$.\n\nPutting the pieces together gives  \n\n$$s'(t)=6t+2\\; \\text{meters per second}.$$\n\n---\n\n### Step 3 – Interpret the result\n\nThe expression $6t+2$ tells you the car’s speed at any instant $t$.\n\n* At $t=0$ seconds, $s'(0)=6(0)+2=2\\,$m/s. The car starts moving at 2 m/s.\n* After 3 seconds, $s'(3)=6(3)+2=20\\,$m/s. The car has accelerated and is now going much faster.\n\n> **In daily life:** The derivative is like a speedometer that shows how fast something is changing *right now*, not just over a whole trip. If you only looked at the start and end positions, you would miss the fact that the car speeds up as time goes on.\n\n---\n\n### Step 4 – Write a short explanation\n\n> The derivative $s'(t)=6t+2$ represents the car’s instantaneous speed. Because the formula contains the variable $t$, the speed is not constant; it grows linearly with time. This means the car is accelerating at a steady rate of $6\\,$m/s² (the coefficient of $t$), while the $+2$ tells us the car already has a small initial speed when the timer starts.\n\n---\n\n### Quick check question\n\nA bakery sells loaves of bread. The total revenue $R(q)$ (in dollars) from selling $q$ loaves per day follows the simple model  \n\n$$R(q)=5q-0.01q^{2}.$$\n\n1. Find $R'(q)$, the marginal revenue, using the same steps as above.  \n2. Explain what $R'(50)$ tells the baker about the profit from the 51st loaf.\n\n*Solution sketch:*  \nDifferentiate: $R'(q)=5-0.02q$.  \nEvaluate at $q=50$: $R'(50)=5-0.02(50)=5-1=4$.  \nInterpretation: When the baker has already sold 50 loaves, each additional loaf adds about \\$4 to revenue. The negative $0.02q$ term shows that selling more loaves eventually lowers the extra money earned per loaf because of factors like discounts or higher costs.\n\n> **Remember:** The derivative gives the *instantaneous* rate of change. In physics it is speed or acceleration; in economics it is marginal cost or marginal revenue. Knowing this rate helps you predict what will happen a tiny moment (or unit) later.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Medium",
+   "title": "Tangent to a parabola at a point",
+   "given": "$f(x)=x^{2}$ and the point $x=3$. Find the derivative $f'(3)$ using the limit definition.",
+   "steps": [
+    {
+     "label": "Difference quotient",
+     "text": "Write $\\displaystyle \\frac{f(3+h)-f(3)}{h}= \\frac{(3+h)^{2}-9}{h}$."
+    },
+    {
+     "label": "Simplify",
+     "text": "Expand numerator: $(9+6h+h^{2}-9)=6h+h^{2}$, then $\\frac{6h+h^{2}}{h}=6+h$."
+    },
+    {
+     "label": "Limit",
+     "text": "Take $\\displaystyle \\lim_{h\\to0}(6+h)=6$."
+    }
+   ],
+   "answer": "$f'(3)=6$, so the slope of the tangent line at $x=3$ is $6$."
+  },
+  {
+   "level": "Hard",
+   "title": "Velocity of a falling object from a table",
+   "given": "A table gives the height $s$ (in meters) of a ball dropped from a tower at times $t$ (in seconds): \\[ \\begin{array}{c|c} t & s \\\\ \\hline 0 & 100 \\\\ 1 & 95.1 \\\\ 2 & 80.4 \\\\ 3 & 55.9 \\\\ 4 & 21.6 \\\\ \\end{array} \\] Estimate the instantaneous velocity at $t=2\\,$s using the symmetric difference quotient.",
+   "steps": [
+    {
+     "label": "Choose points",
+     "text": "Use $t=1.9$, $t=2$, $t=2.1$ (values interpolated linearly from the table)."
+    },
+    {
+     "label": "Approximate heights",
+     "text": "$s(1.9)\\approx 82.0\\,$m, $s(2.1)\\approx 78.8\\,$m (by linear interpolation)."
+    },
+    {
+     "label": "Symmetric quotient",
+     "text": "Compute $\\displaystyle v\\approx\\frac{s(2.1)-s(1.9)}{2.1-1.9}=\\frac{78.8-82.0}{0.2}=-16\\ \\text{m/s}$."
+    },
+    {
+     "label": "Interpretation",
+     "text": "The negative sign shows the ball is moving downward; magnitude $16\\ \\text{m/s}$ is the speed."
+    }
+   ],
+   "answer": "The estimated instantaneous velocity at $t=2\\,$s is $-16\\ \\text{m/s}$ (downward)."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $f(x)=3x+5$ using the definition of the derivative.",
+   "a": "\nStep 1: Write the definition\n$$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}.$$\nStep 2: Substitute $f(x)=3x+5$\n$$f'(x)=\\lim_{h\\to0}\\frac{[3(x+h)+5]-[3x+5]}{h}\n=\\lim_{h\\to0}\\frac{3x+3h+5-3x-5}{h}.$$\nStep 3: Simplify the numerator\n$$=\\lim_{h\\to0}\\frac{3h}{h}.$$\nStep 4: Cancel $h$ (for $h\\neq0$)\n$$=\\lim_{h\\to0}3=3.$$\nThus $f'(x)=3$ for every $x$."
+  },
+  {
+   "level": "Easy",
+   "q": "Use a table of values to estimate the derivative of $g(t)=t^2$ at $t=2$. | $t$ | $g(t)$ | |---|---| | 1.9 | 3.61 | | 2.0 | 4.00 | | 2.1 | 4.41 |",
+   "a": "\nStep 1: Approximate the slope of the secant line near $t=2$ using symmetric difference:\n$$g'(2)\\approx\\frac{g(2.1)-g(1.9)}{2.1-1.9}.$$\nStep 2: Plug in the table values\n$$=\\frac{4.41-3.61}{0.2}= \\frac{0.80}{0.2}=4.$$\nStep 3: The exact derivative of $g(t)=t^2$ is $g'(t)=2t$, so $g'(2)=4$, confirming the estimate."
+  },
+  {
+   "level": "Medium",
+   "q": "Find the derivative of $h(x)=\\dfrac{2x^2-5}{x}$ using the limit definition.",
+   "a": "\nStep 1: Rewrite $h(x)$ to simplify:\n$$h(x)=\\frac{2x^2-5}{x}=2x-\\frac{5}{x}.$$\nStep 2: Apply the definition\n$$h'(x)=\\lim_{h\\to0}\\frac{h(x+h)-h(x)}{h}.$$\nStep 3: Compute $h(x+h)$\n$$h(x+h)=2(x+h)-\\frac{5}{x+h}=2x+2h-\\frac{5}{x+h}.$$\nStep 4: Form the difference quotient\n\\[\n\\frac{h(x+h)-h(x)}{h}\n=\\frac{[2x+2h-\\frac{5}{x+h}]-(2x-\\frac{5}{x})}{h}\n=\\frac{2h-\\frac{5}{x+h}+\\frac{5}{x}}{h}.\n\\]\nStep 5: Combine the fractions with a common denominator $(x)(x+h)$\n\\[\n-\\frac{5}{x+h}+\\frac{5}{x}=5\\!\\left(\\frac{1}{x}-\\frac{1}{x+h}\\right)\n=5\\!\\left(\\frac{x+h-x}{x(x+h)}\\right)=\\frac{5h}{x(x+h)}.\n\\]\nStep 6: Substitute back\n\\[\n\\frac{2h+\\frac{5h}{x(x+h)}}{h}=2+\\frac{5}{x(x+h)}.\n\\]\nStep 7: Take the limit $h\\to0$\n\\[\nh'(x)=\\lim_{h\\to0}\\left(2+\\frac{5}{x(x+h)}\\right)=2+\\frac{5}{x^2}.\n\\]\nThus $h'(x)=2+\\dfrac{5}{x^{2}}$."
+  },
+  {
+   "level": "Medium",
+   "q": "The position of a car moving along a straight road is given by $s(t)=4t^{3}-3t^{2}+2$ (meters, $t$ in seconds). Find the instantaneous velocity at $t=2$ seconds.",
+   "a": "\nStep 1: Velocity is the derivative of position: $v(t)=s'(t)=\\lim_{h\\to0}\\frac{s(t+h)-s(t)}{h}$, but we can differentiate directly.\nStep 2: Differentiate term by term using the power rule $ \\frac{d}{dt}(t^{n})=nt^{n-1}$:\n\\[\ns'(t)=4\\cdot3t^{2}-3\\cdot2t+0=12t^{2}-6t.\n\\]\nStep 3: Evaluate at $t=2$:\n\\[\nv(2)=12(2)^{2}-6(2)=12\\cdot4-12=48-12=36\\text{ m/s}.\n\\]\nSo the instantaneous velocity at $t=2$ s is $36\\,$m/s."
+  },
+  {
+   "level": "Hard",
+   "q": "Using the limit definition, find $f'(x)$ for $f(x)=\\sqrt{x}$.",
+   "a": "\nStep 1: Write the definition\n\\[\nf'(x)=\\lim_{h\\to0}\\frac{\\sqrt{x+h}-\\sqrt{x}}{h}.\n\\]\nStep 2: Rationalize the numerator by multiplying numerator and denominator by the conjugate $\\sqrt{x+h}+\\sqrt{x}$:\n\\[\nf'(x)=\\lim_{h\\to0}\\frac{(\\sqrt{x+h}-\\sqrt{x})(\\sqrt{x+h}+\\sqrt{x})}{h(\\sqrt{x+h}+\\sqrt{x})}\n=\\lim_{h\\to0}\\frac{(x+h)-x}{h(\\sqrt{x+h}+\\sqrt{x})}.\n\\]\nStep 3: Simplify the numerator $(x+h)-x=h$:\n\\[\nf'(x)=\\lim_{h\\to0}\\frac{h}{h(\\sqrt{x+h}+\\sqrt{x})}\n=\\lim_{h\\to0}\\frac{1}{\\sqrt{x+h}+\\sqrt{x}}.\n\\]\nStep 4: Let $h\\to0$, then $\\sqrt{x+h}\\to\\sqrt{x}$:\n\\[\nf'(x)=\\frac{1}{2\\sqrt{x}}.\n\\]\nThus the derivative of $\\sqrt{x}$ is $f'(x)=\\dfrac{1}{2\\sqrt{x}}$ for $x>0$."
+  },
+  {
+   "level": "Hard",
+   "q": "A particle moves along a curve $y=\\ln(x)$ for $x>0$. Find the slope of the tangent line at the point where $x= e^{2}$, and write the equation of that tangent line.",
+   "a": "\nStep 1: Differentiate $y=\\ln(x)$ using the definition (or known rule). Using the limit definition:\n\\[\ny'=\\lim_{h\\to0}\\frac{\\ln(x+h)-\\ln(x)}{h}\n=\\lim_{h\\to0}\\frac{\\ln\\!\\left(1+\\frac{h}{x}\\right)}{h}\n=\\frac{1}{x},\n\\]\nso $y'=\\dfrac{1}{x}$.\nStep 2: Evaluate the slope at $x=e^{2}$:\n\\[\nm = y'(e^{2}) = \\frac{1}{e^{2}}.\n\\]\nStep 3: Find the point on the curve:\n\\[\ny = \\ln(e^{2}) = 2.\n\\]\nSo the point is $(e^{2},\\,2)$.\nStep 4: Use point‑slope form $y-y_{0}=m(x-x_{0})$:\n\\[\ny-2 = \\frac{1}{e^{2}}\\bigl(x-e^{2}\\bigr).\n\\]\nStep 5: Optionally, solve for $y$:\n\\[\ny = \\frac{x}{e^{2}} -1 +2 = \\frac{x}{e^{2}} +1.\n\\]\nThus the tangent line at $x=e^{2}$ is $y-2=\\dfrac{1}{e^{2}}(x-e^{2})$, or equivalently $y=\\dfrac{x}{e^{2}}+1\\,. $"
+  }
+ ],
+ "recap": "The lesson introduced the idea of rate of change as how one quantity varies with another, using car speed as an example. It showed how secant lines give average rates and how shrinking the interval leads to the derivative, the instantaneous rate of change. Two common notations, f'(x) and dy/dx, were explained, and the derivative’s sign was linked to increasing or decreasing behavior. Finally, methods for estimating derivatives from tables and real‑world applications were presented.",
  "key_terms": [
   {
-   "term": "Derivative",
-   "meaning": "The instantaneous rate of change of a function at a specific point."
+   "term": "rate of change",
+   "meaning": "how much one variable changes for each unit change in another variable"
   },
   {
-   "term": "Instantaneous rate of change",
-   "meaning": "How fast a quantity changes at an exact moment, found by taking a limit of average rates."
+   "term": "average rate of change",
+   "meaning": "the ratio of change in output to change in input over a finite interval, like the slope of a secant line"
   },
   {
-   "term": "Tangent line",
-   "meaning": "A straight line that touches a curve at one point and has the same direction as the curve there."
+   "term": "secant line",
+   "meaning": "a straight line that cuts a curve at two points and whose slope equals the average rate of change between those points"
   },
   {
-   "term": "Slope",
-   "meaning": "The ratio of vertical change to horizontal change; for a tangent line it equals the derivative."
+   "term": "tangent line",
+   "meaning": "the line that just touches a curve at one point and represents the instantaneous rate of change"
   },
   {
-   "term": "Average speed",
-   "meaning": "Total distance divided by total time; a simple form of a rate of change over a finite interval."
+   "term": "derivative",
+   "meaning": "the limit of the average rate of change as the interval shrinks to zero, giving the instantaneous rate"
   },
   {
-   "term": "Limit definition of derivative",
-   "meaning": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h."
+   "term": "prime notation",
+   "meaning": "f'(x), a compact way to write the derivative of f at x"
   },
   {
-   "term": "f prime notation (f'(x))",
-   "meaning": "A compact way to write the derivative of f with respect to x."
+   "term": "Leibniz notation",
+   "meaning": "dy/dx, a notation that emphasizes the variables involved in the rate of change"
   },
   {
-   "term": "dy/dx notation",
-   "meaning": "A symbolic way to show the ratio of an infinitesimal change in y to an infinitesimal change in x."
+   "term": "sign of the derivative",
+   "meaning": "positive means the function is increasing, negative means decreasing, zero means flat"
   }
  ],
  "quiz": [
   {
-   "q": "What does the derivative of a position function s(t) represent?",
+   "q": "If a car travels 60 miles in 2 hours, what is its average rate of change of distance with respect to time?",
    "options": [
-    "The total distance traveled",
-    "The average speed over a long interval",
-    "The instantaneous speed at a given time",
-    "The acceleration of the object"
+    "20 mi/h",
+    "30 mi/h",
+    "40 mi/h",
+    "50 mi/h"
    ],
-   "answer": 2,
-   "why": "Derivative gives the instantaneous rate of change, which for position is speed."
+   "answer": 1,
+   "why": "Average speed = distance change divided by time change = 60/2 = 30 mi/h."
   },
   {
-   "q": "Which notation represents the derivative as an operator acting on a function?",
+   "q": "What does the slope of the secant line between (a,f(a)) and (a+h,f(a+h)) represent?",
+   "options": [
+    "Instantaneous speed",
+    "Average rate of change over [a,a+h]",
+    "Maximum value of f",
+    "Minimum value of f"
+   ],
+   "answer": 1,
+   "why": "The secant slope equals (f(a+h)-f(a))/h, the average rate of change on that interval."
+  },
+  {
+   "q": "Which notation emphasizes the variables whose change is being measured?",
    "options": [
     "f'(x)",
     "dy/dx",
-    "d/dx f(x)",
-    "df/dx"
+    "lim_{h->0}",
+    "∫ f(x) dx"
+   ],
+   "answer": 1,
+   "why": "dy/dx shows the change in y with respect to the change in x."
+  },
+  {
+   "q": "If f'(x) > 0 at x = 3, what can we say about the graph near x = 3?",
+   "options": [
+    "The graph is decreasing",
+    "The graph is flat",
+    "The graph is increasing",
+    "The graph has a cusp"
    ],
    "answer": 2,
-   "why": "d/dx f(x) shows the operator d/dx applied to f(x)."
+   "why": "A positive derivative means the function is rising as x moves to the right."
   },
   {
-   "q": "If f(x) = 2x + 3, what is f'(x)?",
+   "q": "Given the table values f(1)=5 and f(2)=9, what is the average rate of change between x=1 and x=2?",
    "options": [
-    "2x + 3",
     "2",
     "3",
-    "0"
+    "4",
+    "5"
    ],
-   "answer": 1,
-   "why": "The derivative of a linear function 2x+3 is the constant coefficient 2."
+   "answer": 2,
+   "why": "Average rate = (9-5)/(2-1) = 4."
   },
   {
-   "q": "For g(x) = -x^2 + 4, on which interval is g decreasing?",
+   "q": "For s(t)=3t^2+2t, what is s'(t)?",
    "options": [
-    "(-infinity, 0)",
-    "(0, infinity)",
-    "All real numbers",
-    "Never decreasing"
+    "3t^2+2t",
+    "6t+2",
+    "t^2+2t",
+    "6t^2+2"
    ],
    "answer": 1,
-   "why": "g'(x) = -2x is negative when x > 0, so g decreases on (0, infinity)."
-  },
-  {
-   "q": "What is the slope of the tangent line to y = x^2 at x = 3?",
-   "options": [
-    "3",
-    "6",
-    "9",
-    "12"
-   ],
-   "answer": 1,
-   "why": "Using the limit definition, the derivative at 3 is 2*3 = 6."
-  },
-  {
-   "q": "Why does zooming in on a smooth curve make it look like a straight line?",
-   "options": [
-    "Because the curve actually becomes straight at small scales",
-    "Because the tangent line approximates the curve locally",
-    "Because the axes stretch",
-    "Because the derivative becomes zero"
-   ],
-   "answer": 1,
-   "why": "At very small scales the curve is well approximated by its tangent line."
+   "why": "Derivative of 3t^2 is 6t and of 2t is 2, so s'(t)=6t+2."
   }
  ],
  "flashcards": [
   {
-   "front": "Derivative",
-   "back": "Instantaneous rate of change of a function at a point."
+   "front": "What is a rate of change?",
+   "back": "A measure of how much one variable changes per unit change in another variable."
   },
   {
-   "front": "Tangent line",
-   "back": "Line that touches a curve at one point and shares its direction there."
+   "front": "Define average rate of change.",
+   "back": "The change in the function's output divided by the change in input over a finite interval."
   },
   {
-   "front": "Slope of a line",
-   "back": "Change in y divided by change in x (rise over run)."
+   "front": "What is a secant line?",
+   "back": "A line that intersects a curve at two points; its slope equals the average rate of change between those points."
   },
   {
-   "front": "Average speed formula",
-   "back": "Total distance divided by total time."
+   "front": "What does the tangent line represent?",
+   "back": "The line that just touches the curve at one point and has the same slope as the curve’s instantaneous rate of change there."
   },
   {
-   "front": "Limit definition of derivative",
-   "back": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h."
+   "front": "Write the derivative definition using limit notation.",
+   "back": "f'(x)=lim_{h->0} (f(x+h)-f(x))/h."
   },
   {
-   "front": "f'(x) notation",
-   "back": "Read as 'f prime of x', a compact way to write the derivative."
+   "front": "Difference between f'(x) and dy/dx?",
+   "back": "Both denote the derivative; f'(x) is prime notation, dy/dx is Leibniz notation highlighting the variables."
   },
   {
-   "front": "dy/dx notation",
-   "back": "Read as 'dy over dx', shows the ratio of infinitesimal changes."
+   "front": "What does a positive derivative indicate?",
+   "back": "The function is increasing at that point."
   },
   {
-   "front": "d/dx f(x) notation",
-   "back": "Read as 'd over dx of f of x', the derivative operator applied to f."
+   "front": "How can you estimate a derivative from a table?",
+   "back": "Compute the average rate of change between nearby x-values and use it as an approximation of the instantaneous rate."
   }
  ],
- "reviewed": false,
  "diagrams": [
-  {
-   "type": "image",
-   "file": "calculus-i-l04-car-on-road",
-   "title": "A car moving along a straight road showing its position at different times.",
-   "alt": "A car moving along a straight road showing its position at different times.",
-   "priority": 8,
-   "picture_title": "Car on Road",
-   "kind": "photo",
-   "subject": "A photograph of a car on a highway with distance markers on the road and a clock overlay indicating elapsed time, illustrating how distance changes with time.",
-   "layout": "Car centered in the frame, distance markers to the left and right, clock icon in the top‑right corner.",
-   "labels": [
-    "Car",
-    "Distance markers",
-    "Time"
-   ],
-   "after": 1,
-   "ai": true
-  },
   {
    "type": "image",
    "file": "calculus-i-l04-zoomed-tangent",
@@ -213,81 +285,139 @@
   },
   {
    "type": "image",
-   "file": "calculus-i-l04-speedometer-reading",
-   "title": "A speedometer needle indicating instantaneous speed, linking rate of change to slope.",
-   "alt": "A speedometer needle indicating instantaneous speed, linking rate of change to slope.",
-   "priority": 7,
-   "picture_title": "Speedometer Reading",
-   "kind": "photo",
-   "subject": "A close‑up photo of a vehicle speedometer with the needle pointing to a specific speed value, demonstrating a real‑world example of an instantaneous rate.",
-   "layout": "Speedometer centered, needle highlighted, speed numbers visible around the dial.",
+   "file": "calculus-i-l04-secant-and-tangent-lines",
+   "title": "Shows a curve with a secant line between two points and the tangent line at one point.",
+   "alt": "Shows a curve with a secant line between two points and the tangent line at one point.",
+   "priority": 9,
+   "picture_title": "Secant and Tangent Lines",
+   "kind": "illustration",
+   "subject": "A smooth curve with points P and Q marked; the secant line connects P and Q, while the tangent line touches the curve at P only.",
+   "layout": "Curve runs across the centre, secant line drawn in dashed blue, tangent line in solid red, points labeled P and Q with arrows pointing to the lines.",
    "labels": [
-    "Needle",
-    "Speed value"
+    "P",
+    "Q",
+    "Secant line",
+    "Tangent line"
    ],
-   "after": 5
+   "after": 1
   },
   {
-   "type": "steps",
-   "title": "Finding a Derivative with the Limit Definition",
-   "steps": [
-    {
-     "label": "1",
-     "text": "Write the difference quotient (f(a+h)-f(a))/h"
-    },
-    {
-     "label": "2",
-     "text": "Simplify the expression"
-    },
-    {
-     "label": "3",
-     "text": "Take the limit as h → 0"
-    }
+   "type": "image",
+   "file": "calculus-i-l04-car-odometer-and-clock",
+   "title": "Illustrates how distance and time are measured to find a rate of change.",
+   "alt": "Illustrates how distance and time are measured to find a rate of change.",
+   "priority": 8,
+   "picture_title": "Car Odometer and Clock",
+   "kind": "photo",
+   "subject": "A close‑up photo of a car dashboard showing the odometer reading and a digital clock displaying elapsed time.",
+   "layout": "Odometer on the left side of the image, clock on the right; both have arrows pointing to the numeric displays.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l04-position-vs-time-graph",
+   "title": "A graph of s(t)=3t²+2t with a highlighted tangent line at t=2 seconds.",
+   "alt": "A graph of s(t)=3t²+2t with a highlighted tangent line at t=2 seconds.",
+   "priority": 7,
+   "picture_title": "Position vs. Time Graph",
+   "kind": "illustration",
+   "subject": "The parabola representing the car’s position over time, with a tangent line drawn at the point where t = 2 s to indicate instantaneous speed.",
+   "layout": "Graph occupies the centre; the tangent line is coloured green and labeled; the point (2, s(2)) is marked with a dot and a small label.",
+   "labels": [
+    "t",
+    "s(t)",
+    "Tangent line"
    ],
-   "loop": false,
    "after": 6
   },
   {
    "type": "compare",
-   "title": "Rate of Change vs. Slope of a Tangent",
+   "title": "Secant line vs Tangent line",
    "left": {
-    "name": "Rate of Change",
+    "name": "Secant line",
     "points": [
-     "Δquantity / Δreference",
-     "e.g., km per hour",
-     "Describes real‑world speed"
+     "Cuts the curve at two points",
+     "Slope = (f(a+h)-f(a))/h",
+     "Gives average rate of change"
     ]
    },
    "right": {
-    "name": "Slope of Tangent",
+    "name": "Tangent line",
     "points": [
-     "Δy / Δx on a graph",
-     "Instantaneous when Δx → 0",
-     "Mathematical expression of the same idea"
+     "Touches the curve at one point",
+     "Slope = limit of secant slope as h→0",
+     "Gives instantaneous rate of change"
     ]
    },
-   "after": 5
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Finding the derivative from the definition",
+   "steps": [
+    {
+     "label": "Write the difference quotient",
+     "text": "m_sec = (f(a+h)-f(a))/h"
+    },
+    {
+     "label": "Take the limit",
+     "text": "Derivative f'(a) = lim_{h→0} m_sec"
+    },
+    {
+     "label": "Simplify",
+     "text": "Algebraically reduce the expression"
+    }
+   ],
+   "loop": false,
+   "after": 2
   },
   {
    "type": "facts",
-   "title": "Common Derivative Notations",
+   "title": "Common derivative notations",
    "items": [
     {
      "value": "f'(x)",
-     "label": "f prime of x"
+     "label": "Prime notation"
     },
     {
      "value": "dy/dx",
-     "label": "dy over dx"
+     "label": "Leibniz notation"
     },
     {
-     "value": "d/dx f(x)",
-     "label": "d over dx of f(x)"
+     "value": "df/dx",
+     "label": "General function notation"
     }
    ],
    "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "What the derivative tells us",
+   "items": [
+    {
+     "name": "Sign",
+     "role": "Positive → function increasing"
+    },
+    {
+     "name": "Sign",
+     "role": "Negative → function decreasing"
+    },
+    {
+     "name": "Zero",
+     "role": "Possible local max or min"
+    },
+    {
+     "name": "Magnitude",
+     "role": "Steeper slope = larger rate of change"
+    }
+   ],
+   "after": 4
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

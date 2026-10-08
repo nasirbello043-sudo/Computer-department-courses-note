@@ -1,302 +1,466 @@
 {
  "title": "Derivative Rules",
- "summary": "This lesson introduces the main derivative rules and shows how to apply them step‑by‑step. Students will practice each rule with concrete examples and finish with mixed practice problems.",
+ "summary": "In this lesson students learn the basic derivative rules and how to apply them step‑by‑step. Each rule is illustrated with a concrete example that builds confidence for more complex problems.",
+ "objectives": [
+  "Identify and state the power, constant, sum, product, quotient, and chain rules",
+  "Compute derivatives of polynomial and simple composite functions using each rule",
+  "Combine multiple rules in a single problem correctly",
+  "Explain why each rule works in plain language"
+ ],
+ "prerequisites": "Students should already understand limits, the concept of a derivative, and basic algebraic manipulation.",
+ "why": [
+  "Derivatives describe how quantities change, which is essential in physics for speed and acceleration, in biology for growth rates, and in economics for marginal cost and revenue.",
+  "Knowing the rules lets you turn real‑world situations into mathematical models quickly, saving time and reducing errors when solving problems."
+ ],
  "sections": [
   {
-   "heading": "Power Rule",
-   "body": "The **Power Rule** is one of the simplest and most useful tools for finding derivatives.  \nIf a function is a single power of \\(x\\),\n\n\\[\nf(x)=x^{n},\n\\]\n\nwhere \\(n\\) is any real number, the derivative is obtained by **bringing the exponent down** and then **subtracting one** from the exponent:\n\n\\[\n\\boxed{ \\frac{d}{dx}\\,x^{n}=n\\,x^{\\,n-1} }.\n\\]\n\n---\n\n### Why does it work?\n\nThe rule comes from the limit definition of the derivative, but you do not need to prove it every time.  Memorising the pattern lets you differentiate quickly and focus on more complex problems later.\n\n---\n\n### Simple examples  \n\n1. **\\(n=2\\)**  \n\n   \\[\n   \\frac{d}{dx}x^{2}=2x^{2-1}=2x.\n   \\]\n\n2. **\\(n=3\\)**  \n\n   \\[\n   \\frac{d}{dx}x^{3}=3x^{3-1}=3x^{2}.\n   \\]\n\n3. **\\(n=-1\\)** (the reciprocal function)  \n\n   \\[\n   \\frac{d}{dx}x^{-1}=-1\\,x^{-1-1}=-\\frac{1}{x^{2}}.\n   \\]\n\n---\n\n### Fully worked example  \n\nDifferentiate \\(f(x)=5x^{4}\\).\n\n1. Identify the power of \\(x\\): here \\(n=4\\).  \n2. Apply the Power Rule:  \n\n   \\[\n   \\frac{d}{dx}x^{4}=4x^{3}.\n   \\]\n\n3. Multiply by the constant coefficient \\(5\\) (the **Constant Rule** says constants stay outside the derivative):  \n\n   \\[\n   f'(x)=5\\cdot 4x^{3}=20x^{3}.\n   \\]\n\nSo the derivative is \\(\\boxed{f'(x)=20x^{3}}\\).\n\n---\n\n## Practice problems  \n\n### Problem 1  \nFind \\(\\displaystyle \\frac{d}{dx}\\,x^{5}\\).\n\n**Solution**  \n\nApply the Power Rule with \\(n=5\\):\n\n\\[\n\\frac{d}{dx}x^{5}=5x^{5-1}=5x^{4}.\n\\]\n\n---\n\n### Problem 2  \nFind \\(\\displaystyle \\frac{d}{dx}\\,\\frac{1}{x^{3}}\\).\n\n**Solution**  \n\nRewrite \\(\\frac{1}{x^{3}}=x^{-3}\\).  \nNow use the Power Rule with \\(n=-3\\):\n\n\\[\n\\frac{d}{dx}x^{-3}=-3x^{-3-1}=-3x^{-4}=-\\frac{3}{x^{4}}.\n\\]\n\n---\n\n### Problem 3  \nFind \\(\\displaystyle \\frac{d}{dx}\\,7x^{-2}\\).\n\n**Solution**  \n\nFirst treat the constant \\(7\\) separately (Constant Rule).  \nDifferentiate \\(x^{-2}\\) using the Power Rule:\n\n\\[\n\\frac{d}{dx}x^{-2}=-2x^{-3}.\n\\]\n\nMultiply by the constant:\n\n\\[\n\\frac{d}{dx}7x^{-2}=7(-2x^{-3})=-14x^{-3}=-\\frac{14}{x^{3}}.\n\\]\n\n---\n\n### Problem 4  \nFind \\(\\displaystyle \\frac{d}{dx}\\,(3x^{2}+4x^{-1})\\).\n\n**Solution**  \n\nUse the **Sum Rule**: differentiate each term separately.\n\n* For \\(3x^{2}\\):  \n\n  \\[\n  \\frac{d}{dx}3x^{2}=3\\cdot 2x^{1}=6x.\n  \\]\n\n* For \\(4x^{-1}\\):  \n\n  \\[\n  \\frac{d}{dx}4x^{-1}=4\\cdot(-1)x^{-2}=-4x^{-2}=-\\frac{4}{x^{2}}.\n  \\]\n\nCombine the results:\n\n\\[\n\\frac{d}{dx}(3x^{2}+4x^{-1})=6x-\\frac{4}{x^{2}}.\n\\]\n\n---  \n\nThese exercises illustrate how the **Power Rule** works for positive, negative, and zero exponents, and how it interacts with constants and sums. Practice applying the rule in different contexts to become comfortable with it.",
+   "heading": "1. Review of the Derivative Concept",
+   "body": "The derivative tells us how a quantity changes at a single instant, just as a speedometer shows the car’s speed at this exact moment rather than the average speed over a whole trip.\n\n> **Definition:** The derivative of a function $f$ at a point $x=a$ is  \n> $$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$$  \n> This limit, if it exists, is called the *difference quotient*.  \n\nThe expression $\\frac{f(a+h)-f(a)}{h}$ measures the average change of $f$ over a small interval of length $h$. As $h$ gets smaller, the average change approaches the *instantaneous* change at $x=a$. If the limit settles on a single number, we say the function is *differentiable* at $a$ and that number is the derivative $f'(a)$.\n\nWhy does this matter? In physics, if $s(t)$ gives the position of a moving object at time $t$, then the derivative $s'(t)$ is the object's velocity—how fast the position is changing right now. In economics, if $C(q)$ is the cost of producing $q$ items, then $C'(q)$ tells us the extra cost of making one more item at that production level.\n\n> **In daily life:** Imagine you are walking along a winding path and you pause to look at a map. The map shows the total distance you have walked after each hour (a “distance‑versus‑time” graph). The slope of the line connecting two points on that graph gives your *average* speed between those hours. If you zoom in so closely that the curve looks almost straight, the slope of that tiny line is your *instantaneous* speed—exactly what the derivative captures.\n\nTo see the limit in action, take a simple function $f(x)=x^2$. The difference quotient is  \n\n$$\\frac{(a+h)^2-a^2}{h}=\\frac{a^2+2ah+h^2-a^2}{h}=\\frac{2ah+h^2}{h}=2a+h.$$  \n\nNow let $h$ approach $0$. The term $h$ disappears, leaving $2a$. Therefore  \n\n$$\\frac{d}{dx}x^2\\Big|_{x=a}=2a,$$  \n\nso the derivative function is $f'(x)=2x$. This example shows how the limit removes the “extra” part that depends on $h$, leaving a clean formula that works for every $x$.\n\n> **Note:** The limit must exist from both the left ($h\\to0^-$) and the right ($h\\to0^+$). If the two one‑sided limits give different numbers, the derivative does **not** exist at that point. A classic example is $f(x)=|x|$ at $x=0$: the left‑hand slope is $-1$, the right‑hand slope is $+1$, so no single instantaneous rate exists there.\n\nA few words to clarify:\n\n- *Limit*: the value that a function approaches as its input gets arbitrarily close to a certain point.\n- *Quotient*: the result of division; here we divide the change in $f$ by the change in $x$.\n- *Differentiable*: a property meaning the derivative exists at the point in question.\n\n> **Common mistake:** Forgetting to simplify the difference quotient before taking the limit. If you plug $h=0$ directly into $\\frac{f(a+h)-f(a)}{h}$, you get $\\frac{0}{0}$, an undefined expression. The algebraic simplification (like canceling $h$ in the example) is essential.\n\nOnce you are comfortable with this definition, you can use it as a foundation for the shortcut rules (constant, power, product, etc.) that make finding derivatives much faster. Remember that every rule ultimately comes from the same limit idea, even if we rarely write the limit out each time.  \n\n> **Remember:** The derivative is a *rate*: it tells how fast something changes right now, and it is found by shrinking the interval in the difference quotient until it becomes infinitesimally small.",
    "code": ""
   },
   {
-   "heading": "Constant Rule",
-   "body": "The **constant rule** tells us that the derivative of a number that does not change with \\(x\\) is always zero.  \nIf \\(c\\) is a constant (for example \\(c=5,\\;c=-3,\\;c=\\pi\\)), then  \n\n\\[\n\\frac{d}{dx}\\,c = 0 .\n\\]\n\nWhy?  The derivative measures the rate of change of a function. A constant never changes, so its rate of change is zero everywhere.\n\n---\n\n### How constants factor out of derivatives  \n\nWhen a constant multiplies a function, the constant can be pulled out of the derivative sign.  \nIf \\(c\\) is a constant and \\(f(x)\\) is any differentiable function, then  \n\n\\[\n\\frac{d}{dx}\\bigl(c\\;f(x)\\bigr)=c\\;\\frac{d}{dx}f(x).\n\\]\n\nThis follows directly from the definition of the derivative and the linearity of limits. In practice it means you can treat the constant as a “scale factor’’ that does not affect the shape of the graph.\n\n---\n\n### Fully worked example  \n\nFind the derivative of  \n\n\\[\ng(x)=7\\;x^{3}-4 .\n\\]\n\n**Step 1 – Identify constants.**  \nThe numbers \\(7\\) and \\(-4\\) are constants. The term \\(-4\\) is a constant function, while \\(7\\) multiplies the variable part \\(x^{3}\\).\n\n**Step 2 – Apply the constant rule to the constant term.**  \n\n\\[\n\\frac{d}{dx}(-4)=0 .\n\\]\n\n**Step 3 – Pull the constant \\(7\\) out of the derivative of \\(x^{3}\\).**  \n\n\\[\n\\frac{d}{dx}\\bigl(7x^{3}\\bigr)=7\\;\\frac{d}{dx}\\bigl(x^{3}\\bigr).\n\\]\n\n**Step 4 – Use the power rule on \\(x^{3}\\).**  \n\n\\[\n\\frac{d}{dx}\\bigl(x^{3}\\bigr)=3x^{2}.\n\\]\n\n**Step 5 – Combine the results.**  \n\n\\[\ng'(x)=7\\cdot 3x^{2}+0=21x^{2}.\n\\]\n\nSo the derivative of \\(g(x)=7x^{3}-4\\) is \\(g'(x)=21x^{2}\\).\n\n---\n\n### Practice problems  \n\n1. **Problem:** Differentiate \\(h(x)=12\\).  \n   **Solution:** The function is a constant, so by the constant rule  \n\n   \\[\n   h'(x)=0.\n   \\]\n\n2. **Problem:** Find \\(\\displaystyle \\frac{d}{dx}\\bigl(5x^{2}+9\\bigr)\\).  \n   **Solution:**  \n   \\[\n   \\frac{d}{dx}(5x^{2})=5\\cdot 2x=10x,\\qquad \n   \\frac{d}{dx}(9)=0.\n   \\]  \n   Adding the two results gives  \n\n   \\[\n   \\frac{d}{dx}\\bigl(5x^{2}+9\\bigr)=10x+0=10x.\n   \\]\n\n3. **Problem:** Compute the derivative of \\(p(x)= -3\\; \\sqrt{x}+4\\).  \n   **Solution:** Write \\(\\sqrt{x}=x^{1/2}\\).  \n   \\[\n   \\frac{d}{dx}\\bigl(-3x^{1/2}\\bigr)=-3\\cdot\\frac12 x^{-1/2}=-\\frac{3}{2}x^{-1/2},\n   \\]  \n   and \\(\\frac{d}{dx}(4)=0\\).  \n   Hence  \n\n   \\[\n   p'(x)=-\\frac{3}{2}x^{-1/2}+0=-\\frac{3}{2\\sqrt{x}}.\n   \\]\n\n4. **Problem:** Find the derivative of \\(q(x)=\\displaystyle \\frac{7}{x^{4}}-2\\).  \n   **Solution:** Rewrite \\(\\frac{7}{x^{4}}=7x^{-4}\\).  \n   \\[\n   \\frac{d}{dx}\\bigl(7x^{-4}\\bigr)=7\\cdot(-4)x^{-5}=-28x^{-5},\n   \\]  \n   and \\(\\frac{d}{dx}(-2)=0\\).  \n   Therefore  \n\n   \\[\n   q'(x)=-28x^{-5}+0=-\\frac{28}{x^{5}}.\n   \\]\n\nThese examples show how the **constant rule** works alone and together with the power rule. Whenever you see a number standing alone or multiplying a function, remember to treat it as a constant: its derivative is zero, and it can be factored out of the differentiation process.",
+   "heading": "2. Constant and Power Rules",
+   "body": "When we first meet the derivative, we think of it as “the rate at which something changes.”  \nIf a quantity does **not** change at all, its rate of change must be zero. This is the idea behind the **constant rule**.\n\n> **Definition:** The derivative of a constant function $c$ (where $c$ is a fixed number) is $0$, written  \n> $$\\frac{d}{dx}\\,c = 0.$$\n\nWhy is this true? Imagine a car that stays parked the whole time you watch it. No matter how many minutes pass, the distance it travels never increases, so its speed – the change of distance with respect to time – is $0$. A constant function behaves the same way: its graph is a flat horizontal line, and the slope of that line is $0$.\n\n---\n\n### From constants to powers\n\nNow let us look at functions that are powers of $x$, such as $x^n$, where $n$ is a whole number (positive, zero, or negative). We want a simple rule that tells us the derivative without doing the limit definition each time.  \n\nStart with the definition of the derivative for $f(x)=x^n$:\n\n$$\n\\frac{d}{dx}x^n=\\lim_{h\\to0}\\frac{(x+h)^n-x^n}{h}.\n$$\n\nExpand $(x+h)^n$ using the **binomial theorem** (the rule for expanding powers of a sum). The first two terms of that expansion are\n\n$$(x+h)^n = x^n + n x^{\\,n-1}h + \\text{terms containing }h^2, h^3,\\dots$$\n\nWhen we subtract $x^n$ and divide by $h$, the $x^n$ cancels and every remaining term still has at least one factor of $h$:\n\n$$\n\\frac{(x+h)^n-x^n}{h}= n x^{\\,n-1} + \\underbrace{\\text{terms with }h}_{\\to 0\\text{ as }h\\to0}.\n$$\n\nAs $h$ gets smaller and smaller, those extra terms shrink to $0$. The limit therefore leaves only the first term:\n\n$$\n\\frac{d}{dx}x^n = n x^{\\,n-1}.\n$$\n\nThis is the **power rule**. It tells us that to differentiate $x^n$, we bring the exponent $n$ down in front and then subtract $1$ from the exponent.\n\n> **Remember:** The power rule works for any integer $n$ (positive, zero, or negative). For $n=0$, $x^0=1$ is a constant, and the rule gives $\\frac{d}{dx}1 = 0$, matching the constant rule.\n\n---\n\n### Examples\n\n1. **Cube function** $f(x)=x^3$  \n\n   Apply the power rule with $n=3$:\n\n   $$\n   f'(x)=3x^{3-1}=3x^{2}.\n   $$\n\n   So the slope of the curve $y=x^3$ at any point $x$ is $3x^2$. At $x=2$, the slope is $3\\cdot4=12$.\n\n2. **Quadratic with a coefficient** $g(x)=5x^2$  \n\n   First note that a constant factor (the $5$) can be pulled out of the derivative because differentiation is linear (we will prove this later). Using the power rule on $x^2$:\n\n   $$\n   g'(x)=5\\cdot\\frac{d}{dx}x^2 =5\\cdot 2x^{2-1}=10x.\n   $$\n\n   The graph of $5x^2$ gets steeper twice as fast as the graph of $x^2$ because of the factor $5$.\n\n> **In daily life:** Think of $x^2$ as the area of a square whose side length is $x$. If you increase the side by a tiny amount $dx$, the extra area added is roughly the perimeter $2x$ times $dx$. That perimeter $2x$ is exactly the derivative $d(x^2)/dx$, showing why the rule gives $2x$.\n\n---\n\n### A quick check\n\nIf you ever forget whether the exponent goes up or down, try a simple test. Take $f(x)=x^1=x$. The derivative should be the slope of a straight line with slope $1$, so $f'(x)=1$. Plug $n=1$ into the power rule:\n\n$$\n\\frac{d}{dx}x^1 = 1\\cdot x^{1-1}=1\\cdot x^{0}=1,\n$$\n\nwhich matches our expectation. This sanity check helps avoid the **Common mistake** of writing $n x^{\\,n+1}$ instead of $n x^{\\,n-1}$.\n\n> **Note:** The power rule does **not** apply directly to non‑integer exponents without a more advanced proof, but for the integer cases we need in Calculus I it works perfectly.",
    "code": ""
   },
   {
-   "heading": "Sum (and Difference) Rule",
-   "body": "The **Sum (and Difference) Rule** tells us that the derivative of a sum (or difference) of functions is just the sum (or difference) of their derivatives.  \nIf  \n\n\\[\nf(x)=g(x)\\pm h(x),\n\\]\n\nthen  \n\n\\[\nf'(x)=g'(x)\\pm h'(x).\n\\]\n\nThe rule works for any number of terms, and it lets us differentiate polynomials quickly because each term can be treated separately.\n\n---\n\n### Why the rule works  \n\nThe derivative measures the instantaneous rate of change. Adding two functions adds their rates of change at each point, so the total rate is the sum of the individual rates. The same reasoning applies to subtraction: removing the change of one function subtracts its rate.\n\n---\n\n### Simple polynomial example  \n\nLet  \n\n\\[\nf(x)=3x^{4}-5x^{2}+7.\n\\]\n\nWe differentiate each term using the **Power Rule** and then combine the results.\n\n1. Derivative of \\(3x^{4}\\):  \n   \\[\n   \\frac{d}{dx}(3x^{4})=3\\cdot4x^{3}=12x^{3}.\n   \\]\n\n2. Derivative of \\(-5x^{2}\\):  \n   \\[\n   \\frac{d}{dx}(-5x^{2})=-5\\cdot2x=-10x.\n   \\]\n\n3. Derivative of the constant \\(7\\):  \n   \\[\n   \\frac{d}{dx}(7)=0\\qquad\\text{(**Constant Rule**)}.\n   \\]\n\nNow apply the **Sum (and Difference) Rule**:\n\n\\[\nf'(x)=12x^{3}-10x+0=12x^{3}-10x.\n\\]\n\nEvery step is explicit: differentiate each piece, then add (or subtract) the results.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nFind the derivative of \\(p(x)=4x^{5}+2x^{3}-9x+1\\).\n\n**Solution**  \n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}(4x^{5}) &= 4\\cdot5x^{4}=20x^{4},\\\\\n\\frac{d}{dx}(2x^{3}) &= 2\\cdot3x^{2}=6x^{2},\\\\\n\\frac{d}{dx}(-9x)   &= -9,\\\\\n\\frac{d}{dx}(1)     &= 0.\n\\end{aligned}\n\\]\n\nUsing the **Sum (and Difference) Rule**:\n\n\\[\np'(x)=20x^{4}+6x^{2}-9.\n\\]\n\n---\n\n### Problem 2  \nDifferentiate \\(q(x)=\\sqrt{x}+ \\frac{1}{x^{2}} - 3\\).\n\n**Solution**  \n\nRewrite with exponents: \\(\\sqrt{x}=x^{1/2}\\) and \\(\\frac{1}{x^{2}}=x^{-2}\\).\n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}(x^{1/2}) &= \\tfrac12 x^{-1/2},\\\\\n\\frac{d}{dx}(x^{-2})  &= -2x^{-3},\\\\\n\\frac{d}{dx}(-3)      &= 0.\n\\end{aligned}\n\\]\n\nApply the rule:\n\n\\[\nq'(x)=\\tfrac12 x^{-1/2}-2x^{-3}= \\frac{1}{2\\sqrt{x}}-\\frac{2}{x^{3}}.\n\\]\n\n---\n\n### Problem 3  \nFind \\(r'(x)\\) for \\(r(x)=7-4x^{6}+3x^{0}\\).\n\n**Solution**  \n\n\\(x^{0}=1\\), so \\(3x^{0}=3\\) is a constant.\n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}(7)      &=0,\\\\\n\\frac{d}{dx}(-4x^{6})&=-4\\cdot6x^{5}=-24x^{5},\\\\\n\\frac{d}{dx}(3)      &=0.\n\\end{aligned}\n\\]\n\nThus  \n\n\\[\nr'(x) = -24x^{5}.\n\\]\n\n---\n\n### Problem 4  \nCompute the derivative of \\(s(x)=\\displaystyle \\frac{2x^{3}}{5} - \\frac{4}{x} + \\pi\\).\n\n**Solution**  \n\nWrite each term with powers:\n\n\\[\n\\frac{2x^{3}}{5}= \\frac{2}{5}x^{3},\\qquad -\\frac{4}{x}= -4x^{-1},\\qquad \\pi\\text{ is constant}.\n\\]\n\nDifferentiate:\n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}\\!\\left(\\frac{2}{5}x^{3}\\right) &= \\frac{2}{5}\\cdot3x^{2}= \\frac{6}{5}x^{2},\\\\[4pt]\n\\frac{d}{dx}(-4x^{-1}) &= -4(-1)x^{-2}=4x^{-2}= \\frac{4}{x^{2}},\\\\[4pt]\n\\frac{d}{dx}(\\pi) &=0.\n\\end{aligned}\n\\]\n\nCombine with the **Sum (and Difference) Rule**:\n\n\\[\ns'(x)=\\frac{6}{5}x^{2}+\\frac{4}{x^{2}}.\n\\]\n\n---  \n\nThese examples show how the **Sum (and Difference) Rule** lets us break a complicated expression into easy pieces, differentiate each piece, and then put the results back together. Practice the rule often; it is a cornerstone for all later differentiation techniques.",
+   "heading": "3. Sum (and Difference) Rule",
+   "body": "When we talk about the **sum (or difference) rule**, we are saying something very simple:  \n\n> **Definition:** *The derivative of a sum of functions is the sum of their derivatives.*  \n\nIn plain words, if you have two functions added together, you can differentiate each one separately and then add the results. The same idea works for a subtraction because subtraction is just adding a negative.\n\nWhy is this useful?  Imagine you have a complicated expression that is built from many smaller pieces. Instead of trying to differentiate the whole thing at once, you can break it into pieces, differentiate each piece, and then put the pieces back together. This saves time and reduces mistakes.\n\n---\n\n### Step‑by‑step example\n\nLet  \n\n$$f(x)=3x^{4}+2x.$$\n\nHere $f(x)$ is the sum of two simpler functions:\n\n- $g(x)=3x^{4}$  \n- $h(x)=2x$\n\nOur goal is to find $f'(x)$, the derivative of $f$.  \n\n1. **Identify the pieces**  \n   Write $f(x)$ as $g(x)+h(x)$.  \n\n2. **Differentiate each piece**  \n\n   - For $g(x)=3x^{4}$ we use the *power rule*: the derivative of $x^{n}$ is $n x^{\\,n-1}$.  \n     So  \n\n     $$g'(x)=3\\cdot 4x^{3}=12x^{3}.$$\n\n   - For $h(x)=2x$ the power rule with $n=1$ gives  \n\n     $$h'(x)=2\\cdot 1x^{0}=2.$$\n\n   > **Note:** $x^{0}=1$, so the term $2x^{0}$ simplifies to just $2$.\n\n3. **Add the derivatives**  \n\n   According to the sum rule,  \n\n   $$f'(x)=g'(x)+h'(x)=12x^{3}+2.$$\n\nThat is the final answer.  \n\nYou can check the work by differentiating $f(x)$ directly using the power rule on each term, which gives the same result. The sum rule simply justifies why we are allowed to do that term‑by‑term.\n\n---\n\n### Why does the rule work?\n\nThe definition of the derivative is a limit:\n\n$$\\frac{d}{dx}[g(x)+h(x)]=\\lim_{h\\to0}\\frac{[g(x+h)+h(x+h)]-[g(x)+h(x)]}{h}.$$\n\nBecause addition inside the numerator can be split, the fraction becomes the sum of two separate fractions. Each fraction is exactly the limit that defines $g'(x)$ and $h'(x)$. Therefore the whole limit equals $g'(x)+h'(x)$.  \n\n> **In daily life:** Think of a recipe that mixes two sauces. If you know how the flavor of each sauce changes when you add a pinch of salt, the overall flavor change is just the sum of the two individual changes. You don’t need a brand‑new formula for the mixture.\n\n---\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to differentiate *every* term. When a function has three or more summed parts, it’s easy to skip one. Always write down each piece, differentiate it, and then add all the results.\n\n---\n\n### Quick checklist\n\n> **Remember:**  \n> 1. Write the function as a sum (or difference) of simpler pieces.  \n> 2. Apply the derivative rule to each piece individually.  \n> 3. Add (or subtract) the resulting derivatives.  \n\nUsing this systematic approach, the sum (and difference) rule becomes a reliable tool for handling any expression that is built from addition or subtraction of functions.",
    "code": ""
   },
   {
-   "heading": "Product Rule",
-   "body": "The **product rule** tells us how to differentiate a product of two functions.  \nIf $f(x)$ and $g(x)$ are differentiable, then  \n\n\\[\n\\bigl(f(x)\\,g(x)\\bigr)' = f'(x)\\,g(x) + f(x)\\,g'(x).\n\\]\n\nIn words: *differentiate the first factor, keep the second unchanged; then add the product of the first unchanged and the derivative of the second.*  \n\n---\n\n### Worked example 1: \\((x^{2})\\sin x\\)\n\nLet  \n\n\\[\nf(x)=x^{2}, \\qquad g(x)=\\sin x.\n\\]\n\n1. **Find the derivatives**  \n   \\[\n   f'(x)=2x, \\qquad g'(x)=\\cos x.\n   \\]\n\n2. **Apply the product rule**  \n   \\[\n   \\bigl(x^{2}\\sin x\\bigr)' = f'(x)g(x)+f(x)g'(x)\n   = (2x)(\\sin x) + (x^{2})(\\cos x).\n   \\]\n\n3. **Simplify (if desired)**  \n   \\[\n   \\boxed{2x\\sin x + x^{2}\\cos x}.\n   \\]\n\nEvery step follows directly from the rule; no extra tricks are needed.\n\n---\n\n### Worked example 2: \\((e^{x})(x^{3})\\)\n\nTake  \n\n\\[\nf(x)=e^{x}, \\qquad g(x)=x^{3}.\n\\]\n\n1. **Derivatives**  \n   \\[\n   f'(x)=e^{x}, \\qquad g'(x)=3x^{2}.\n   \\]\n\n2. **Product rule**  \n   \\[\n   \\bigl(e^{x}x^{3}\\bigr)' = f'(x)g(x)+f(x)g'(x)\n   = e^{x}\\,x^{3} + e^{x}\\,3x^{2}.\n   \\]\n\n3. **Factor common terms**  \n   \\[\n   \\boxed{e^{x}\\bigl(x^{3}+3x^{2}\\bigr)} = e^{x}x^{2}(x+3).\n   \\]\n\nAgain the rule does all the work; factoring is optional but often makes the answer cleaner.\n\n---\n\n## Practice problems\n\n### Problem 1  \nFind the derivative of \\((5x^{4})(\\ln x)\\).\n\n**Solution**  \n\\(f(x)=5x^{4},\\; f'(x)=20x^{3}\\).  \n\\(g(x)=\\ln x,\\; g'(x)=\\dfrac{1}{x}\\).\n\n\\[\n\\begin{aligned}\n\\bigl(5x^{4}\\ln x\\bigr)' &= f'(x)g(x)+f(x)g'(x)\\\\\n&= (20x^{3})(\\ln x) + (5x^{4})\\left(\\frac{1}{x}\\right)\\\\\n&= 20x^{3}\\ln x + 5x^{3}.\n\\end{aligned}\n\\]\n\n---\n\n### Problem 2  \nDifferentiate \\((\\cos x)(x^{2}+1)\\).\n\n**Solution**  \n\\(f(x)=\\cos x,\\; f'(x)=-\\sin x\\).  \n\\(g(x)=x^{2}+1,\\; g'(x)=2x\\).\n\n\\[\n\\begin{aligned}\n\\bigl(\\cos x\\,(x^{2}+1)\\bigr)' &= (-\\sin x)(x^{2}+1) + \\cos x\\,(2x)\\\\\n&= -\\sin x\\,(x^{2}+1) + 2x\\cos x.\n\\end{aligned}\n\\]\n\n---\n\n### Problem 3  \nFind \\(\\dfrac{d}{dx}\\bigl(e^{2x}\\, \\sqrt{x}\\bigr)\\).\n\n**Solution**  \n\\(f(x)=e^{2x},\\; f'(x)=2e^{2x}\\) (chain rule inside the product rule).  \n\\(g(x)=x^{1/2},\\; g'(x)=\\dfrac{1}{2}x^{-1/2}\\).\n\n\\[\n\\begin{aligned}\n\\bigl(e^{2x}\\sqrt{x}\\bigr)' &= (2e^{2x})\\sqrt{x} + e^{2x}\\left(\\frac{1}{2}x^{-1/2}\\right)\\\\\n&= 2e^{2x}x^{1/2} + \\frac{1}{2}e^{2x}x^{-1/2}\\\\\n&= e^{2x}\\left(2x^{1/2} + \\frac{1}{2}x^{-1/2}\\right).\n\\end{aligned}\n\\]\n\n---\n\n### Problem 4  \nCompute the derivative of \\((\\tan x)(\\ln(\\sin x))\\).\n\n**Solution**  \n\\(f(x)=\\tan x,\\; f'(x)=\\sec^{2}x\\).  \n\\(g(x)=\\ln(\\sin x),\\; g'(x)=\\dfrac{1}{\\sin x}\\cos x = \\cot x\\).\n\n\\[\n\\begin{aligned}\n\\bigl(\\tan x\\,\\ln(\\sin x)\\bigr)' &= \\sec^{2}x\\;\\ln(\\sin x) + \\tan x\\;\\cot x\\\\\n&= \\sec^{2}x\\;\\ln(\\sin x) + 1.\n\\end{aligned}\n\\]\n\nEach problem demonstrates the same pattern: differentiate one factor, keep the other, then swap. Practice applying the **product rule** until the steps become automatic.",
+   "heading": "4. Product Rule",
+   "body": "When we have two functions multiplied together, the derivative is **not** just the product of the two derivatives.  \nThink of the product $u(x)v(x)$ as a tiny rectangle whose sides change as $x$ changes.  \nIf one side gets a little longer while the other stays the same, the area grows by the change in that side times the length of the other side.  \nIf both sides change at the same time, the total change is the sum of the two separate effects.  \n\n> **Definition:** The **product rule** states that for differentiable functions $u(x)$ and $v(x)$,\n> $$\\frac{d}{dx}\\bigl[u(x)v(x)\\bigr]=u'(x)v(x)+u(x)v'(x).$$  \n> In short, the derivative of a product is “first‑derivative‑of‑the‑first times the second **plus** the first times the first‑derivative‑of‑the‑second”.\n\nWhy does this work? Write the product as $uv$ and look at a small change $\\Delta x$.  \nThe change in $uv$ is approximately  \n$$\\Delta(uv)\\approx u\\,\\Delta v+v\\,\\Delta u,$$  \nbecause the tiny term $\\Delta u\\,\\Delta v$ is so small it can be ignored when we divide by $\\Delta x$ and let $\\Delta x\\to0$.  \nDividing by $\\Delta x$ and taking the limit gives exactly $u'v+uv'$.\n\n---\n\n### Example: $f(x)=x^{2}\\,\\sin x$\n\nWe will apply the product rule step by step.\n\n1. **Identify the two factors**  \n   Let  \n   $$u(x)=x^{2},\\qquad v(x)=\\sin x.$$\n\n2. **Find the derivatives of each factor**  \n   - The derivative of $u(x)=x^{2}$ uses the power rule:  \n     $$u'(x)=2x.$$\n   - The derivative of $v(x)=\\sin x$ is a basic trigonometric rule:  \n     $$v'(x)=\\cos x.$$\n\n3. **Plug into the product rule**  \n   According to the definition,  \n   $$f'(x)=u'(x)v(x)+u(x)v'(x).$$  \n   Substituting the pieces we just found,\n   $$f'(x)=\\bigl(2x\\bigr)\\sin x + \\bigl(x^{2}\\bigr)\\cos x.$$\n\n4. **Simplify (optional)**  \n   You can factor an $x$ if you like, but the expression is already clear:  \n   $$f'(x)=2x\\sin x + x^{2}\\cos x.$$\n\n> **Note:** You might be tempted to write $f'(x)=2x\\cdot\\sin x\\cdot\\cos x$, but that would be the **common mistake** of multiplying the two derivatives together. The product rule adds two separate terms; it never multiplies the derivatives.\n\n5. **Check the result at a specific point** (helps to see the rule in action)  \n   Suppose $x=\\pi/2$. Then  \n   $$\\sin\\!\\left(\\frac{\\pi}{2}\\right)=1,\\qquad \\cos\\!\\left(\\frac{\\pi}{2}\\right)=0,$$  \n   so  \n   $$f'\\!\\left(\\frac{\\pi}{2}\\right)=2\\!\\left(\\frac{\\pi}{2}\\right)\\cdot1+\\left(\\frac{\\pi}{2}\\right)^{2}\\cdot0=\\pi.$$\n   The derivative tells us the slope of the curve $y=x^{2}\\sin x$ at $x=\\pi/2$ is $\\pi$.\n\n> **In daily life:** Imagine two friends walking side by side, one walking faster (changing speed) while the other stretches their arms outward. The distance between them changes because of both the speed change and the arm stretch. The product rule adds the two contributions, just as we added $u'v$ and $uv'$.\n\n> **Remember:** When you see a product $uv$, always write the derivative as $u'v+uv'$. Never forget the plus sign, and never multiply the two derivatives together.\n\nBy mastering the product rule, you can differentiate any expression that is a product of simpler functions—polynomials, trigonometric functions, exponentials, and more. This tool will appear again and again in calculus, physics, and engineering problems.",
    "code": ""
   },
   {
-   "heading": "Quotient Rule",
-   "body": "The **quotient rule** is the tool we use when we need the derivative of a fraction of two differentiable functions.  \nIf  \n\n\\[\nh(x)=\\frac{f(x)}{g(x)},\n\\]\n\nthen  \n\n\\[\nh'(x)=\\frac{f'(x)\\,g(x)-f(x)\\,g'(x)}{[g(x)]^{2}} .\n\\]\n\nThe rule tells us to **differentiate the top**, multiply by the **bottom**, **subtract** the product of the **bottom’s derivative** and the **original top**, and finally **divide by the square of the bottom**.\n\n---\n\n### Worked example 1 – \\(\\displaystyle \\frac{x^{2}}{1+x}\\)\n\nLet  \n\n\\[\nf(x)=x^{2},\\qquad g(x)=1+x .\n\\]\n\n1. **Derivatives**:  \n   \\(f'(x)=2x\\) (power rule), \\(g'(x)=1\\).\n\n2. **Apply the quotient rule**:  \n\n\\[\n\\begin{aligned}\n\\left(\\frac{x^{2}}{1+x}\\right)' \n&= \\frac{(2x)(1+x)-x^{2}(1)}{(1+x)^{2}} \\\\[4pt]\n&= \\frac{2x+2x^{2}-x^{2}}{(1+x)^{2}} \\\\[4pt]\n&= \\frac{2x+x^{2}}{(1+x)^{2}} .\n\\end{aligned}\n\\]\n\n3. **Simplify (optional)**: factor \\(x\\) in the numerator  \n\n\\[\n\\boxed{\\displaystyle \\frac{x(2+x)}{(1+x)^{2}} } .\n\\]\n\n---\n\n### Worked example 2 – \\(\\displaystyle \\frac{\\ln x}{x^{2}}\\)\n\nTake  \n\n\\[\nf(x)=\\ln x,\\qquad g(x)=x^{2}.\n\\]\n\n1. **Derivatives**:  \n   \\(f'(x)=\\frac{1}{x}\\) (derivative of \\(\\ln x\\)), \\(g'(x)=2x\\).\n\n2. **Quotient rule**:\n\n\\[\n\\begin{aligned}\n\\left(\\frac{\\ln x}{x^{2}}\\right)' \n&= \\frac{\\frac{1}{x}\\,x^{2}-\\ln x\\,(2x)}{(x^{2})^{2}} \\\\[4pt]\n&= \\frac{x-\\;2x\\ln x}{x^{4}} .\n\\end{aligned}\n\\]\n\n3. **Simplify** by factoring \\(x\\) in the numerator:\n\n\\[\n\\boxed{\\displaystyle \\frac{1-2\\ln x}{x^{3}} } .\n\\]\n\n---\n\n## Practice problems\n\n### 1. Differentiate \\(\\displaystyle \\frac{3x^{3}+2}{5x}\\).\n\n**Solution**\n\n\\(f(x)=3x^{3}+2\\), \\(f'(x)=9x^{2}\\).  \n\\(g(x)=5x\\), \\(g'(x)=5\\).\n\n\\[\n\\begin{aligned}\n\\left(\\frac{3x^{3}+2}{5x}\\right)' \n&= \\frac{9x^{2}\\cdot5x-(3x^{3}+2)\\cdot5}{(5x)^{2}} \\\\[4pt]\n&= \\frac{45x^{3}-15x^{3}-10}{25x^{2}} \\\\[4pt]\n&= \\frac{30x^{3}-10}{25x^{2}} \\\\[4pt]\n&= \\frac{10(3x^{3}-1)}{25x^{2}}\n   =\\boxed{\\displaystyle \\frac{2(3x^{3}-1)}{5x^{2}} } .\n\\end{aligned}\n\\]\n\n---\n\n### 2. Differentiate \\(\\displaystyle \\frac{e^{x}}{x^{2}+1}\\).\n\n**Solution**\n\n\\(f(x)=e^{x}\\), \\(f'(x)=e^{x}\\).  \n\\(g(x)=x^{2}+1\\), \\(g'(x)=2x\\).\n\n\\[\n\\begin{aligned}\n\\left(\\frac{e^{x}}{x^{2}+1}\\right)' \n&= \\frac{e^{x}(x^{2}+1)-e^{x}(2x)}{(x^{2}+1)^{2}} \\\\[4pt]\n&= \\frac{e^{x}\\bigl(x^{2}+1-2x\\bigr)}{(x^{2}+1)^{2}} \\\\[4pt]\n&= \\boxed{\\displaystyle \\frac{e^{x}(x^{2}-2x+1)}{(x^{2}+1)^{2}} } .\n\\end{aligned}\n\\]\n\n---\n\n### 3. Differentiate \\(\\displaystyle \\frac{\\sin x}{\\cos x}\\).\n\n**Solution**\n\n\\(f(x)=\\sin x\\), \\(f'(x)=\\cos x\\).  \n\\(g(x)=\\cos x\\), \\(g'(x)=-\\sin x\\).\n\n\\[\n\\begin{aligned}\n\\left(\\frac{\\sin x}{\\cos x}\\right)' \n&= \\frac{\\cos x\\cdot\\cos x-\\sin x(-\\sin x)}{\\cos^{2}x} \\\\[4pt]\n&= \\frac{\\cos^{2}x+\\sin^{2}x}{\\cos^{2}x} \\\\[4pt]\n&= \\frac{1}{\\cos^{2}x}\n   =\\boxed{\\displaystyle \\sec^{2}x } .\n\\end{aligned}\n\\]\n\n---\n\n### 4. Differentiate \\(\\displaystyle \\frac{x\\ln x}{\\sqrt{x}}\\).\n\n**Solution**\n\nRewrite the denominator: \\(\\sqrt{x}=x^{1/2}\\).  \n\\(f(x)=x\\ln x\\), \\(f'(x)=\\ln x+1\\) (product rule).  \n\\(g(x)=x^{1/2}\\), \\(g'(x)=\\frac12 x^{-1/2}\\).\n\n\\[\n\\begin{aligned}\n\\left(\\frac{x\\ln x}{\\sqrt{x}}\\right)' \n&= \\frac{(\\ln x+1)\\,x^{1/2}-x\\ln x\\left(\\frac12 x^{-1/2}\\right)}{(x^{1/2})^{2}} \\\\[4pt]\n&= \\frac{x^{1/2}(\\ln x+1)-\\frac12 x^{1/2}\\ln x}{x} \\\\[4pt]\n&= \\frac{x^{1/2}\\bigl(\\ln x+1-\\tfrac12\\ln x\\bigr)}{x} \\\\[4pt]\n&= \\frac{x^{1/2}\\bigl(\\tfrac12\\ln x+1\\bigr)}{x}\n   =\\boxed{\\displaystyle \\frac{\\tfrac12\\ln x+1}{\\sqrt{x}} } .\n\\end{aligned}\n\\]",
+   "heading": "5. Quotient Rule",
+   "body": "When we have a fraction of two functions, say a numerator $u(x)$ and a denominator $v(x)$, we still want to know how fast the whole fraction changes.  \nThe **quotient rule** tells us exactly how to differentiate such a fraction.\n\n> **Definition:** For differentiable functions $u(x)$ and $v(x)$ with $v(x)\\neq0$,  \n> $$\\left(\\frac{u}{v}\\right)'=\\frac{u'\\,v-u\\,v'}{v^{2}}.$$  \n\nIn words: *the derivative of a quotient is the denominator times the derivative of the numerator, minus the numerator times the derivative of the denominator, all divided by the denominator squared.*  \n\nWhy does this work? Think of the fraction $\\frac{u}{v}$ as “how many $u$'s fit into one $v$”. If $u$ grows faster than $v$, the whole fraction grows; if $v$ grows faster, the fraction shrinks. The rule captures both effects in one tidy formula.\n\n**Everyday comparison:** Imagine you are driving a car that travels a distance $u$ kilometers in a time $v$ hours. Your average speed is $u/v$ km/h. If the distance you travel changes (maybe you take a detour) and the time you spend also changes (maybe you get stuck in traffic), the change in your average speed depends on both how the distance changes *and* how the time changes. The quotient rule is the mathematical version of “how does average speed change when both distance and time change?”\n\n---\n\n### Applying the Quotient Rule step‑by‑step  \n\nLet’s differentiate the concrete function  \n\n\\[\nf(x)=\\frac{x^{3}}{x+1}.\n\\]\n\nHere the numerator is $u(x)=x^{3}$ and the denominator is $v(x)=x+1$.  \n\n1. **Find the derivatives of the pieces.**  \n   - $u'(x)=\\frac{d}{dx}(x^{3})=3x^{2}$.  \n   - $v'(x)=\\frac{d}{dx}(x+1)=1$.\n\n2. **Plug into the quotient rule formula.**  \n\n\\[\nf'(x)=\\frac{u'(x)\\,v(x)-u(x)\\,v'(x)}{[v(x)]^{2}}\n      =\\frac{3x^{2}(x+1)-x^{3}\\cdot 1}{(x+1)^{2}}.\n\\]\n\n3. **Expand the numerator** to see the terms more clearly.  \n\n\\[\n3x^{2}(x+1)=3x^{3}+3x^{2},\n\\]\n\nso  \n\n\\[\nf'(x)=\\frac{(3x^{3}+3x^{2})-x^{3}}{(x+1)^{2}}\n      =\\frac{2x^{3}+3x^{2}}{(x+1)^{2}}.\n\\]\n\n4. **Factor common terms** in the numerator to simplify further. Both terms share $x^{2}$:\n\n\\[\n2x^{3}+3x^{2}=x^{2}(2x+3).\n\\]\n\nThus  \n\n\\[\nf'(x)=\\frac{x^{2}(2x+3)}{(x+1)^{2}}.\n\\]\n\nThat is the simplest form of the derivative.\n\n> **Note:** Always keep the denominator squared; forgetting the square is a common source of error.\n\n> **Common mistake:** Dropping the minus sign between the two products $u'v$ and $uv'$ leads to an incorrect sign in the final answer. Remember the subtraction is essential.\n\n> **Remember:** The quotient rule can be avoided if you rewrite the fraction as a product with a negative exponent, $f(x)=x^{3}(x+1)^{-1}$, and then use the product and power rules. Both methods give the same result, but the quotient rule is often quicker for a single fraction.\n\nNow you have a complete, step‑by‑step example of the quotient rule in action. Whenever you see a function written as a fraction, write down $u$ and $v$, compute $u'$ and $v'$, plug into the formula, and simplify carefully. This systematic approach will keep you from getting lost in algebraic details.",
    "code": ""
   },
   {
-   "heading": "Chain Rule",
-   "body": "**Chain Rule**\n\nWhen a function is built by plugging one function into another, we call it a *composite function*.  \nTo differentiate a composite function we use the **chain rule**:\n\n\\[\n\\frac{d}{dx}\\bigl[\\,f(g(x))\\,\\bigr]=f'\\bigl(g(x)\\bigr)\\cdot g'(x).\n\\]\n\nIn words: **differentiate the outer function** (treat the inner part as a single variable), then **multiply by the derivative of the inner function**.\n\n---\n\n### Example 1 – Polynomial inside a power  \n\nDifferentiate  \n\n\\[\ny=(3x^{2}+2)^{5}.\n\\]\n\n1. Identify the outer and inner functions.  \n   - Outer: \\(f(u)=u^{5}\\) with derivative \\(f'(u)=5u^{4}\\).  \n   - Inner: \\(g(x)=3x^{2}+2\\) with derivative \\(g'(x)=6x\\).\n\n2. Apply the chain rule:  \n\n\\[\n\\frac{dy}{dx}=f'\\bigl(g(x)\\bigr)\\cdot g'(x)\n            =5\\bigl(3x^{2}+2\\bigr)^{4}\\cdot 6x.\n\\]\n\n3. Simplify (optional):  \n\n\\[\n\\boxed{\\frac{dy}{dx}=30x\\,(3x^{2}+2)^{4}}.\n\\]\n\nEvery step is shown: we first wrote the outer derivative, then substituted the inner function, and finally multiplied by the inner derivative.\n\n---\n\n### Example 2 – Trigonometric outer function  \n\nDifferentiate  \n\n\\[\ny=\\sin\\!\\bigl(e^{x}\\bigr).\n\\]\n\n1. Outer function: \\(f(u)=\\sin u\\) with \\(f'(u)=\\cos u\\).  \n2. Inner function: \\(g(x)=e^{x}\\) with \\(g'(x)=e^{x}\\).\n\n\\[\n\\frac{dy}{dx}= \\cos\\!\\bigl(e^{x}\\bigr)\\cdot e^{x}.\n\\]\n\nSo  \n\n\\[\n\\boxed{\\frac{dy}{dx}=e^{x}\\cos\\!\\bigl(e^{x}\\bigr)}.\n\\]\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nFind \\(\\displaystyle \\frac{d}{dx}\\bigl[(2x-1)^{3}\\bigr]\\).\n\n**Solution**  \nOuter: \\(f(u)=u^{3}\\Rightarrow f'(u)=3u^{2}\\).  \nInner: \\(g(x)=2x-1\\Rightarrow g'(x)=2\\).\n\n\\[\n\\frac{d}{dx}=3(2x-1)^{2}\\cdot 2=6(2x-1)^{2}.\n\\]\n\n---\n\n### Problem 2  \nDifferentiate \\(y=\\ln\\!\\bigl(5x^{2}+4\\bigr)\\).\n\n**Solution**  \nOuter: \\(f(u)=\\ln u\\Rightarrow f'(u)=\\frac{1}{u}\\).  \nInner: \\(g(x)=5x^{2}+4\\Rightarrow g'(x)=10x\\).\n\n\\[\n\\frac{dy}{dx}= \\frac{1}{5x^{2}+4}\\cdot 10x\n               =\\frac{10x}{5x^{2}+4}.\n\\]\n\n---\n\n### Problem 3  \nFind \\(\\displaystyle \\frac{d}{dx}\\bigl[\\sqrt{\\,\\cos x\\,}\\bigr]\\).\n\n**Solution**  \nWrite the square root as a power: \\(y=(\\cos x)^{1/2}\\).\n\nOuter: \\(f(u)=u^{1/2}\\Rightarrow f'(u)=\\frac{1}{2}u^{-1/2}\\).  \nInner: \\(g(x)=\\cos x\\Rightarrow g'(x)=-\\sin x\\).\n\n\\[\n\\frac{dy}{dx}= \\frac{1}{2}(\\cos x)^{-1/2}\\cdot(-\\sin x)\n             =-\\frac{\\sin x}{2\\sqrt{\\cos x}}.\n\\]\n\n---\n\n### Problem 4  \nDifferentiate \\(y=\\bigl( e^{3x}+1 \\bigr)^{4}\\).\n\n**Solution**  \nOuter: \\(f(u)=u^{4}\\Rightarrow f'(u)=4u^{3}\\).  \nInner: \\(g(x)=e^{3x}+1\\Rightarrow g'(x)=3e^{3x}\\).\n\n\\[\n\\frac{dy}{dx}=4\\bigl(e^{3x}+1\\bigr)^{3}\\cdot 3e^{3x}\n             =12e^{3x}\\bigl(e^{3x}+1\\bigr)^{3}.\n\\]\n\n---",
+   "heading": "6. Chain Rule",
+   "body": "The chain rule tells us how to differentiate a function that is **made by putting one function inside another**.  \nIf we have a *composite* function $h(x)=f(g(x))$, we first change $x$ into $g(x)$ (the **inner** function) and then apply $f$ (the **outer** function).  \nThe rule says  \n\n$$\n\\frac{d}{dx}\\bigl[f(g(x))\\bigr]=f'\\bigl(g(x)\\bigr)\\,g'(x).\n$$  \n\nIn words: *the derivative of the whole thing equals the derivative of the outer part, evaluated at the inner part, multiplied by the derivative of the inner part.*  \n\n> **Definition:** The **chain rule** is the formula $ (f\\circ g)' = (f'\\circ g)\\cdot g' $.\n\n### Why it works  \n\nThink of a machine that first stretches a rubber band (the inner function $g$) and then paints the stretched band a colour (the outer function $f$).  \nIf you pull the band a little farther, two things happen: the stretch changes (that's $g'$) and the colour changes because the band is now at a new position (that's $f'$ evaluated at the new stretch, $f'(g(x))$). The total change you see on the painted band is the product of those two changes.\n\nMathematically, we can see this by letting $u=g(x)$. Then $h(x)=f(u)$. By the definition of derivative,\n\n$$\nh'(x)=\\lim_{ \\Delta x\\to0}\\frac{f(u+\\Delta u)-f(u)}{\\Delta x},\n$$\n\nwhere $\\Delta u=g(x+\\Delta x)-g(x)$.  \nBecause $\\Delta u\\to0$ as $\\Delta x\\to0$, we can multiply and divide by $\\Delta u$:\n\n$$\nh'(x)=\\lim_{ \\Delta x\\to0}\\frac{f(u+\\Delta u)-f(u)}{\\Delta u}\\cdot\\frac{\\Delta u}{\\Delta x}\n      =f'(u)\\,g'(x)=f'\\bigl(g(x)\\bigr)g'(x).\n$$  \n\nThus the product appears naturally.\n\n### Everyday comparison  \n\nImagine you are driving a car that first **accelerates** (inner function) and then **turns** (outer function).  \nYour speed on the road after the turn depends on how fast you were accelerating *and* how sharply you turn. The overall change in position per second is the product of the two rates.\n\n### Step‑by‑step example  \n\nDifferentiate  \n\n$$\nf(x)=\\bigl(3x^{2}+2\\bigr)^{5}.\n$$  \n\n1. **Identify the inner and outer functions**  \n   - Inner function: $g(x)=3x^{2}+2$  \n   - Outer function: $F(u)=u^{5}$, where $u$ stands for the inner expression.\n\n2. **Find the derivatives of the pieces**  \n   - $g'(x)=\\frac{d}{dx}(3x^{2}+2)=6x$  \n   - $F'(u)=\\frac{d}{du}u^{5}=5u^{4}$.\n\n3. **Apply the chain rule**  \n   Replace $u$ by $g(x)$ in $F'(u)$ and multiply by $g'(x)$:\n\n$$\nf'(x)=F'\\bigl(g(x)\\bigr)\\,g'(x)=5\\bigl(g(x)\\bigr)^{4}\\cdot6x.\n$$\n\n4. **Substitute back $g(x)=3x^{2}+2$**  \n\n$$\nf'(x)=5\\bigl(3x^{2}+2\\bigr)^{4}\\cdot6x\n     =30x\\bigl(3x^{2}+2\\bigr)^{4}.\n$$  \n\n> **Note:** Always replace the inner function *after* you have taken the derivative of the outer function. Skipping this step leads to missing the $g(x)$ inside the power.\n\n> **Common mistake:** Forgetting to multiply by $g'(x)$. The outer derivative alone gives the shape, but the inner derivative tells how fast the inner part is changing. Both are needed.\n\n> **Remember:** Write the answer in a factored form when possible; it shows the structure clearly and makes later calculations easier.\n\n### Quick checklist  \n\n1. Spot the inner function $g(x)$.  \n2. Write the outer function $F(u)$ with $u$ as a placeholder.  \n3. Differentiate $F$ with respect to $u$ → $F'(u)$.  \n4. Differentiate $g$ with respect to $x$ → $g'(x)$.  \n5. Combine: $f'(x)=F'(g(x))\\cdot g'(x)$.  \n\nUsing the chain rule lets us handle any nesting of functions, no matter how deep. Once you master this pattern, differentiating expressions like $\\sin\\!\\bigl(\\sqrt{1+e^{x}}\\bigr)$ becomes a systematic, step‑by‑step process.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Power Rule** – If $f(x)=x^n$ where $n$ is a real number, then  \n\n\\[\n\\frac{d}{dx}x^n = n x^{\\,n-1}.\n\\]\n\n**Constant Rule** – The derivative of a constant $c$ is zero:  \n\n\\[\n\\frac{d}{dx}c = 0.\n\\]\n\n**Sum (and Difference) Rule** – Derivatives distribute over addition and subtraction:  \n\n\\[\n\\frac{d}{dx}\\bigl(g(x)\\pm h(x)\\bigr)=g'(x)\\pm h'(x).\n\\]\n\n**Product Rule** – For two functions $u(x)$ and $v(x)$,  \n\n\\[\n\\frac{d}{dx}\\bigl(u v\\bigr)=u'v+uv'.\n\\]\n\n**Quotient Rule** – For $u(x)$ over $v(x)$ (with $v\\neq0$),  \n\n\\[\n\\frac{d}{dx}\\!\\left(\\frac{u}{v}\\right)=\\frac{u'v-uv'}{v^{2}}.\n\\]\n\n**Chain Rule** – If a function is composed as $f(g(x))$, then  \n\n\\[\n\\frac{d}{dx}f(g(x)) = f'(g(x))\\;g'(x).\n\\]\n\n---\n\n### Worked Example  \n\nFind \\(\\displaystyle \\frac{d}{dx}\\bigl[(2x+5)^3\\big]\\).\n\n1. Identify the outer function \\(f(u)=u^{3}\\) and the inner function \\(u=2x+5\\).  \n2. Differentiate the outer function: \\(f'(u)=3u^{2}\\).  \n3. Differentiate the inner function: \\(\\displaystyle \\frac{du}{dx}=2\\).  \n4. Apply the **Chain Rule**:  \n\n\\[\n\\frac{d}{dx}\\bigl[(2x+5)^3\\bigr]=f'(u)\\cdot\\frac{du}{dx}=3(2x+5)^{2}\\cdot2.\n\\]\n\n5. Simplify:  \n\n\\[\n\\boxed{6(2x+5)^{2}}.\n\\]\n\n---\n\n### Practice Problems  \n\n1. **Problem:** \\(\\displaystyle \\frac{d}{dx}\\bigl(5x^{4}-3x^{2}+7\\bigr)\\)  \n\n   **Solution:** Use the **Power Rule** term‑by‑term.  \n\n   \\[\n   \\frac{d}{dx}(5x^{4})=5\\cdot4x^{3}=20x^{3},\\qquad\n   \\frac{d}{dx}(-3x^{2})=-3\\cdot2x=-6x,\\qquad\n   \\frac{d}{dx}(7)=0.\n   \\]  \n\n   Combine: \\(\\boxed{20x^{3}-6x}\\).\n\n2. **Problem:** \\(\\displaystyle \\frac{d}{dx}\\bigl(x^{2}\\cos x\\bigr)\\)  \n\n   **Solution:** Apply the **Product Rule** with \\(u=x^{2}\\), \\(v=\\cos x\\).  \n\n   \\[\n   u'=2x,\\qquad v'=-\\sin x.\n   \\]  \n\n   \\[\n   \\frac{d}{dx}(x^{2}\\cos x)=u'v+uv' = (2x)\\cos x + x^{2}(-\\sin x)\n   = 2x\\cos x - x^{2}\\sin x.\n   \\]  \n\n   Result: \\(\\boxed{2x\\cos x - x^{2}\\sin x}\\).\n\n3. **Problem:** \\(\\displaystyle \\frac{d}{dx}\\!\\left(\\frac{x^{3}+1}{x-2}\\right)\\)  \n\n   **Solution:** Use the **Quotient Rule** with \\(u=x^{3}+1\\), \\(v=x-2\\).  \n\n   \\[\n   u'=3x^{2},\\qquad v'=1.\n   \\]  \n\n   \\[\n   \\frac{d}{dx}\\!\\left(\\frac{u}{v}\\right)=\\frac{u'v-uv'}{v^{2}}\n   =\\frac{(3x^{2})(x-2)-(x^{3}+1)(1)}{(x-2)^{2}}.\n   \\]  \n\n   Expand numerator:  \n\n   \\[\n   3x^{3}-6x^{2}-x^{3}-1 = 2x^{3}-6x^{2}-1.\n   \\]  \n\n   Final answer: \\(\\boxed{\\dfrac{2x^{3}-6x^{2}-1}{(x-2)^{2}}}\\).\n\n4. **Problem:** \\(\\displaystyle \\frac{d}{dx}\\bigl(e^{\\sin x}\\bigr)\\)  \n\n   **Solution:** This is a composition; let \\(u=\\sin x\\).  \n\n   \\[\n   \\frac{d}{dx}e^{u}=e^{u}\\,u',\\qquad u'=\\cos x.\n   \\]  \n\n   Therefore  \n\n   \\[\n   \\frac{d}{dx}e^{\\sin x}=e^{\\sin x}\\cos x.\n   \\]  \n\n   Result: \\(\\boxed{e^{\\sin x}\\cos x}\\).",
+   "heading": "7. Putting It All Together",
+   "body": "We want to see how the rules we have learned work together in one bigger problem.  \nConsider  \n\n$$\nh(x)=\\frac{(x^{2}+1)^{3}\\,e^{x}}{2x-5}.\n$$  \n\nOur goal is to find $h'(x)$, the derivative of $h$.  This example uses **four** different rules, so it shows why keeping the rules separate in our mind is useful: we can apply each one at the right moment, just like following a recipe step‑by‑step.\n\n---\n\n> **Definition:** *Derivative* – the instantaneous rate of change of a function; it tells how fast the output is moving when the input changes a tiny bit.\n\n### Step 1: Identify the outermost structure  \n\nThe whole fraction has the form  \n\n$$\n\\frac{u(x)}{v(x)},\n$$  \n\nwhere  \n\n* $u(x)=(x^{2}+1)^{3}\\,e^{x}$ (the numerator)  \n* $v(x)=2x-5$ (the denominator)\n\nBecause the function is a quotient, we will use the **quotient rule**:\n\n$$\n\\biggl(\\frac{u}{v}\\biggr)'=\\frac{u'\\,v-u\\,v'}{v^{2}}.\n$$  \n\nSo we need $u'(x)$ and $v'(x)$.\n\n---\n\n> **Note:** The quotient rule is just the product rule applied to $u\\cdot v^{-1}$, but it is faster to remember the compact formula above.\n\n### Step 2: Differentiate the denominator  \n\n$v(x)=2x-5$ is a simple linear function.  \nUsing the **constant rule** (the derivative of a constant is $0$) and the **power rule** ($\\frac{d}{dx}x^{n}=nx^{n-1}$),\n\n$$\nv'(x)=2.\n$$\n\n### Step 3: Differentiate the numerator  \n\n$u(x)$ is a product of two factors:  \n\n* $a(x)=(x^{2}+1)^{3}$  \n* $b(x)=e^{x}$  \n\nWe apply the **product rule**:\n\n$$\nu' = a'\\,b + a\\,b'.\n$$  \n\nNow we must find $a'$ and $b'$.\n\n#### 3a. Derivative of $b(x)=e^{x}$  \n\nThe exponential function $e^{x}$ is its own derivative:\n\n$$\nb'(x)=e^{x}.\n$$\n\n#### 3b. Derivative of $a(x)=(x^{2}+1)^{3}$  \n\nHere we have a composition: an inner function $g(x)=x^{2}+1$ raised to the third power.  \nThe **chain rule** tells us:\n\n$$\n\\frac{d}{dx}[g(x)^{3}] = 3\\,g(x)^{2}\\,g'(x).\n$$  \n\nFirst compute $g'(x)=2x$ (power rule).  \nThen\n\n$$\na'(x)=3\\,(x^{2}+1)^{2}\\,(2x)=6x\\,(x^{2}+1)^{2}.\n$$\n\n#### 3c. Assemble $u'$  \n\nPlug $a'$ and $b'$ into the product rule:\n\n$$\nu'(x)=\\bigl[6x\\,(x^{2}+1)^{2}\\bigr]\\,e^{x} + (x^{2}+1)^{3}\\,e^{x}.\n$$  \n\nFactor $e^{x}$ to keep the expression tidy:\n\n$$\nu'(x)=e^{x}\\Bigl[6x\\,(x^{2}+1)^{2} + (x^{2}+1)^{3}\\Bigr].\n$$\n\n---\n\n> **Common mistake:** Forgetting to factor the inner derivative $g'(x)$ when using the chain rule. Always multiply by the derivative of the inside function.\n\n### Step 4: Apply the quotient rule  \n\nInsert $u$, $u'$, $v$, and $v'$ into the formula:\n\n$$\nh'(x)=\\frac{\\,u'(x)\\,v(x)-u(x)\\,v'(x)\\,}{\\bigl(v(x)\\bigr)^{2}}.\n$$  \n\nReplace each piece:\n\n$$\nh'(x)=\\frac{ \\displaystyle e^{x}\\Bigl[6x\\,(x^{2}+1)^{2} + (x^{2}+1)^{3}\\Bigr]\\,(2x-5)\n          - (x^{2}+1)^{3}\\,e^{x}\\,(2) }\n         {(2x-5)^{2}}.\n$$  \n\nFactor the common $e^{x}$ and $(x^{2}+1)^{2}$ from the numerator:\n\n$$\nh'(x)=\\frac{e^{x}(x^{2}+1)^{2}\\Bigl[ \\bigl(6x + (x^{2}+1)\\bigr)(2x-5) - 2(x^{2}+1) \\Bigr]}\n         {(2x-5)^{2}}.\n$$  \n\nYou could expand the brackets if you need a fully simplified polynomial, but the factored form already shows the structure clearly.\n\n---\n\n> **Remember:** When many rules appear together, work from the outside in (quotient → product → chain). Treat each layer separately, then combine the results.\n\n### Quick check  \n\nA simple way to verify the answer is to plug a convenient number, say $x=3$, into both $h(x)$ and the derivative formula and compare with a numerical derivative (using a calculator). The two values should be close, confirming that we applied each rule correctly.\n\nBy following the same disciplined order—identify the outer operation, break it into smaller pieces, apply the appropriate rule, and simplify—you can tackle even more complicated functions. The rules are tools; using them step by step keeps the work manageable and reduces errors.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Medium",
+   "title": "Product Rule with a Constant",
+   "given": "Find $\\displaystyle \\frac{d}{dx}\\bigl(5x^2\\cdot\\sin x\\bigr)$.",
+   "steps": [
+    {
+     "label": "Identify factors",
+     "text": "Write $u(x)=5x^2$, $v(x)=\\sin x$ to use the product rule $ (uv)'=u'v+uv'$."
+    },
+    {
+     "label": "Differentiate $u$",
+     "text": "$u'(x)=\\frac{d}{dx}(5x^2)=5\\cdot2x=10x$ using the constant and power rules."
+    },
+    {
+     "label": "Differentiate $v$",
+     "text": "$v'(x)=\\frac{d}{dx}(\\sin x)=\\cos x$ using the basic trigonometric derivative."
+    },
+    {
+     "label": "Apply product rule",
+     "text": "$(5x^2\\sin x)' = (10x)\\sin x + (5x^2)(\\cos x)$."
+    }
+   ],
+   "answer": "$\\displaystyle \\frac{d}{dx}\\bigl(5x^2\\sin x\\bigr)=10x\\sin x+5x^{2}\\cos x$."
+  },
+  {
+   "level": "Hard",
+   "title": "Chain Rule with Quotient and Product",
+   "given": "Find $\\displaystyle \\frac{d}{dx}\\left(\\frac{(3x^2+2)^4}{\\sqrt{\\,x^3+1\\,}}\\right)$.",
+   "steps": [
+    {
+     "label": "Write as product",
+     "text": "Express as $(3x^2+2)^4\\,(x^3+1)^{-1/2}$ to use product and chain rules."
+    },
+    {
+     "label": "Differentiate first factor",
+     "text": "$u(x)=(3x^2+2)^4$, $u'(x)=4(3x^2+2)^3\\cdot(6x)$ by the chain rule (outer power $4$, inner derivative $6x$)."
+    },
+    {
+     "label": "Differentiate second factor",
+     "text": "$v(x)=(x^3+1)^{-1/2}$, $v'(x)=-\\tfrac12 (x^3+1)^{-3/2}\\cdot(3x^2)$ by the chain rule."
+    },
+    {
+     "label": "Apply product rule",
+     "text": "Derivative $=u'v+uv'$. Substitute $u',u,v'$: \\[ \\frac{d}{dx}=4(3x^2+2)^3(6x)(x^3+1)^{-1/2} + (3x^2+2)^4\\Bigl[-\\tfrac12 (x^3+1)^{-3/2}(3x^2)\\Bigr]. \\]"
+    },
+    {
+     "label": "Simplify common factor",
+     "text": "Factor $(3x^2+2)^3 (x^3+1)^{-3/2}$: \\[ \\frac{d}{dx}= (3x^2+2)^3 (x^3+1)^{-3/2}\\Bigl[24x(x^3+1)-\\tfrac32 x^2(3x^2+2)\\Bigr]. \\]"
+    }
+   ],
+   "answer": "$\\displaystyle \\frac{d}{dx}\\left(\\frac{(3x^2+2)^4}{\\sqrt{x^3+1}}\\right)= (3x^2+2)^3 (x^3+1)^{-3/2}\\Bigl[24x(x^3+1)-\\tfrac32 x^2(3x^2+2)\\Bigr]$."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $f(x)=5x^3$.",
+   "a": "Using the power rule $ \\frac{d}{dx}x^n = n x^{\\,n-1}$,\n\\[\nf'(x)=5\\cdot\\frac{d}{dx}x^3 =5\\cdot 3x^{2}=15x^{2}.\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $g(x)=7-4x$.",
+   "a": "Write $g(x)=7+(-4)x$. The derivative of a constant is $0$, and the derivative of $-4x$ is $-4$ (constant multiple rule). Thus\n\\[\ng'(x)=0-4=-4.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Differentiate $h(x)= (2x^2+3x)(x^3-1)$.",
+   "a": "Apply the product rule: $(uv)'=u'v+uv'$.\n\\[\nu=2x^2+3x,\\quad u'=4x+3; \\qquad v=x^3-1,\\quad v'=3x^2.\n\\]\nThen\n\\[\nh'(x)=(4x+3)(x^3-1)+(2x^2+3x)(3x^2).\n\\]\nExpand if desired:\n\\[\nh'(x)= (4x+3)x^3-(4x+3)+ (6x^4+9x^3)\n=4x^4+3x^3-4x-3+6x^4+9x^3\n=10x^4+12x^3-4x-3.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Find $\\displaystyle \\frac{d}{dx}\\left(\\frac{5x^2-4}{x}\\right)$.",
+   "a": "Use the quotient rule: $\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-u v'}{v^{2}}$.\n\\[\nu=5x^2-4,\\; u'=10x;\\qquad v=x,\\; v'=1.\n\\]\n\\[\n\\frac{d}{dx}\\left(\\frac{5x^2-4}{x}\\right)=\\frac{(10x)(x)-(5x^2-4)(1)}{x^{2}}\n=\\frac{10x^{2}-5x^{2}+4}{x^{2}}\n=\\frac{5x^{2}+4}{x^{2}}\n=5+\\frac{4}{x^{2}}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Differentiate $p(x)=\\displaystyle\\frac{(3x^2+2)^4}{\\sqrt{2x-1}}$.",
+   "a": "Write $p(x)= (3x^2+2)^4\\,(2x-1)^{-1/2}$. Use the product rule with $u=(3x^2+2)^4$, $v=(2x-1)^{-1/2}$.\nFirst find $u'$ using the chain rule:\n\\[\nu' =4(3x^2+2)^{3}\\cdot (6x)=24x(3x^2+2)^{3}.\n\\]\nNext find $v'$:\n\\[\nv' =-\\tfrac12(2x-1)^{-3/2}\\cdot 2 =-(2x-1)^{-3/2}.\n\\]\nNow apply the product rule:\n\\[\np'(x)=u'v+uv' = 24x(3x^2+2)^{3}(2x-1)^{-1/2}\n+(3x^2+2)^{4}\\big[-(2x-1)^{-3/2}\\big].\n\\]\nFactor common terms $(3x^2+2)^{3}(2x-1)^{-3/2}$:\n\\[\np'(x)=(3x^2+2)^{3}(2x-1)^{-3/2}\\Big[24x(2x-1) - (3x^2+2)\\Big].\n\\]\nSimplify the bracket:\n\\[\n24x(2x-1)=48x^{2}-24x,\n\\]\nso\n\\[\n24x(2x-1)-(3x^2+2)=48x^{2}-24x-3x^{2}-2=45x^{2}-24x-2.\n\\]\nThus\n\\[\n\\boxed{p'(x)=\\frac{(3x^2+2)^{3}\\big(45x^{2}-24x-2\\big)}{(2x-1)^{3/2}} }.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Find the derivative of $q(x)=\\sin\\!\\big((x^2+1)^3\\big)$.",
+   "a": "Use the chain rule: if $y=\\sin(u)$ and $u=(x^2+1)^3$, then $y'= \\cos(u)\\,u'$.\nFirst compute $u'$. Let $v=x^2+1$, so $u=v^{3}$. Then $u'=3v^{2}\\,v'$ and $v'=2x$.\n\\[\nu' =3(x^2+1)^{2}\\cdot 2x =6x(x^2+1)^{2}.\n\\]\nNow apply the outer derivative:\n\\[\nq'(x)=\\cos\\!\\big((x^2+1)^3\\big)\\cdot 6x(x^2+1)^{2}.\n\\]\nSo the final answer is\n\\[\n\\boxed{q'(x)=6x(x^2+1)^{2}\\cos\\!\\big((x^2+1)^3\\big)}.\n\\]"
+  }
+ ],
+ "recap": "This lesson introduced the basic derivative rules used in calculus. It covered the definition of a derivative, constant and power rules, sum/difference, product, quotient, and chain rules, and showed how to combine them in a complex example. Each rule explains how to differentiate a specific type of expression, making calculus calculations systematic and easier.",
  "key_terms": [
   {
-   "term": "Power Rule",
-   "meaning": "Derivative of x^n is n*x^(n-1) for any real n"
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function, found as the limit of the difference quotient."
   },
   {
    "term": "Constant Rule",
-   "meaning": "Derivative of a constant c is 0"
+   "meaning": "The derivative of a constant function c is 0."
   },
   {
-   "term": "Sum Rule",
-   "meaning": "Derivative of a sum or difference is the sum or difference of the derivatives"
+   "term": "Power Rule",
+   "meaning": "For any real number n, the derivative of x^n is n*x^(n-1)."
+  },
+  {
+   "term": "Sum/Difference Rule",
+   "meaning": "The derivative of a sum or difference of functions equals the sum or difference of their derivatives."
   },
   {
    "term": "Product Rule",
-   "meaning": "Derivative of f(x)*g(x) is f'(x)*g(x)+f(x)*g'(x)"
+   "meaning": "For functions u and v, the derivative of u*v is u'*v + u*v'."
   },
   {
    "term": "Quotient Rule",
-   "meaning": "Derivative of f(x)/g(x) is (f'(x)*g(x)-f(x)*g'(x))/g(x)^2"
+   "meaning": "For functions u and v (v not 0), the derivative of u/v is (u'*v - u*v')/v^2."
   },
   {
    "term": "Chain Rule",
-   "meaning": "Derivative of a composite function f(g(x)) is f'(g(x))*g'(x)"
+   "meaning": "For a composite function f(g(x)), the derivative is f'(g(x))*g'(x)."
+  },
+  {
+   "term": "Differentiable",
+   "meaning": "A function is differentiable at a point if its derivative exists there."
   }
  ],
  "quiz": [
   {
-   "q": "What is the derivative of x^5?",
+   "q": "What is the derivative of the constant function 7?",
+   "options": [
+    "0",
+    "7",
+    "1",
+    "undefined"
+   ],
+   "answer": 0,
+   "why": "A constant does not change, so its rate of change is zero."
+  },
+  {
+   "q": "Using the power rule, what is d/dx of x^5?",
    "options": [
     "5*x^4",
     "5*x^5",
-    "4*x^4",
-    "x^5"
+    "x^4",
+    "5"
    ],
    "answer": 0,
-   "why": "Power Rule gives n*x^(n-1) with n=5"
+   "why": "The power rule gives n*x^(n-1) with n=5."
   },
   {
-   "q": "If h(x)=7, what is h'(x)?",
+   "q": "If f(x)=3x^2+4x, what is f'(x) using the sum rule?",
    "options": [
-    "7",
-    "0",
-    "1",
-    "-7"
-   ],
-   "answer": 1,
-   "why": "Constant Rule states the derivative of a constant is zero"
-  },
-  {
-   "q": "Find the derivative of 3x^4-5x^2+7 using the Sum Rule.",
-   "options": [
-    "12x^3-10x",
-    "12x^3+10x",
-    "12x^3-10x+0",
-    "0"
+    "6x+4",
+    "3x^2+4x",
+    "6x",
+    "12x+4"
    ],
    "answer": 0,
-   "why": "Differentiate each term with the Power Rule and add the results"
+   "why": "Differentiate each term separately and add: 6x+4."
   },
   {
-   "q": "Using the Product Rule, what is (x^2 * sin x)'?",
+   "q": "Apply the product rule to u(x)=x^2 and v(x)=sin x. What is (u*v)'?",
    "options": [
     "2x*sin x + x^2*cos x",
-    "2x*cos x + x^2*sin x",
+    "2x*sin x - x^2*cos x",
     "x^2*sin x",
-    "2x*sin x"
+    "2x*cos x + sin x"
    ],
    "answer": 0,
-   "why": "Apply f'=2x, g'=cos x and combine as f'g+fg'"
+   "why": "Product rule gives u'*v + u*v' = 2x*sin x + x^2*cos x."
   },
   {
-   "q": "Apply the Quotient Rule to (x^2)/(1+x). What is the numerator after simplification?",
+   "q": "What is the derivative of (x^3)/(x+1) using the quotient rule?",
    "options": [
-    "2x+x^2",
-    "2x-x^2",
-    "x^2-2x",
-    "2x+2x^2"
+    "(3x^2*(x+1) - x^3*1)/(x+1)^2",
+    "(3x^2*(x+1) + x^3*1)/(x+1)^2",
+    "(3x^2 - x^3)/(x+1)",
+    "(3x^2 + x^3)/(x+1)^2"
    ],
    "answer": 0,
-   "why": "Numerator is (2x)(1+x)-x^2*1 = 2x+2x^2-x^2 = 2x+x^2"
+   "why": "Quotient rule: (u'*v - u*v')/v^2 with u=x^3, v=x+1."
   },
   {
-   "q": "For y=(3x^2+2)^5, what is dy/dx using the Chain Rule?",
+   "q": "For h(x)= (2x)^3, which rule helps find h'(x) and what is the result?",
    "options": [
-    "30x*(3x^2+2)^4",
-    "5*(3x^2+2)^4",
-    "30x^2*(3x^2+2)^4",
-    "15x*(3x^2+2)^3"
+    "Chain rule, 12x^2",
+    "Power rule, 6x^2",
+    "Product rule, 12x^2",
+    "Chain rule, 6x^2"
    ],
    "answer": 0,
-   "why": "Outer derivative 5*u^4 times inner derivative 6x gives 30x*u^4"
+   "why": "Treat inner function 2x, outer ( )^3; derivative is 3*(2x)^2*2 = 12x^2."
   }
  ],
  "flashcards": [
   {
-   "front": "Power Rule formula",
-   "back": "d/dx x^n = n*x^(n-1)"
+   "front": "Definition of derivative",
+   "back": "Limit as h→0 of [f(x+h)-f(x)]/h, the instantaneous rate of change."
   },
   {
-   "front": "Constant Rule result",
-   "back": "d/dx c = 0"
+   "front": "Constant rule",
+   "back": "Derivative of any constant c is 0."
   },
   {
-   "front": "Sum Rule statement",
-   "back": "d/dx [f(x) ± g(x)] = f'(x) ± g'(x)"
+   "front": "Power rule formula",
+   "back": "d/dx[x^n] = n*x^(n-1)."
   },
   {
-   "front": "Product Rule expression",
-   "back": "d/dx [f(x)g(x)] = f'(x)g(x) + f(x)g'(x)"
+   "front": "Sum/Difference rule statement",
+   "back": "(d/dx)[f+g] = f' + g' and (d/dx)[f-g] = f' - g'."
   },
   {
-   "front": "Quotient Rule numerator",
-   "back": "f'(x)g(x) - f(x)g'(x)"
+   "front": "Product rule formula",
+   "back": "(d/dx)[u*v] = u'*v + u*v'."
   },
   {
-   "front": "Quotient Rule denominator",
-   "back": "[g(x)]^2"
+   "front": "Quotient rule formula",
+   "back": "(d/dx)[u/v] = (u'*v - u*v')/v^2, with v≠0."
   },
   {
-   "front": "Chain Rule concept",
-   "back": "Differentiate outer function, then multiply by derivative of inner function"
+   "front": "Chain rule concept",
+   "back": "For f(g(x)), derivative = f'(g(x)) * g'(x)."
   },
   {
-   "front": "Example of Chain Rule: (2x+5)^3 derivative",
-   "back": "30x*(2x+5)^2"
+   "front": "When is a function differentiable?",
+   "back": "When the derivative limit exists at the point in question."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l05-product-rule-gears",
-   "title": "Two interlocking gears show how the derivative of a product combines the changes of each factor.",
-   "alt": "Two interlocking gears show how the derivative of a product combines the changes of each factor.",
+   "file": "calculus-i-l05-product-rule-rectangle",
+   "title": "Shows how the area of a rectangle changes when both sides grow.",
+   "alt": "Shows how the area of a rectangle changes when both sides grow.",
    "priority": 7,
-   "picture_title": "Product Rule Gears",
+   "picture_title": "Product Rule Rectangle",
    "kind": "illustration",
-   "subject": "A large gear labeled f(x) meshes with a smaller gear labeled g(x). Arrows indicate that the rotation speed of the combined system equals the sum of f'(x)·g(x) and f(x)·g'(x).",
-   "layout": "Gear f(x) on the left, gear g(x) on the right, with two overlay arrows pointing to the combined output label \"(f·g)'\" in the centre.",
+   "subject": "A rectangle whose width is u(x) and height is v(x). Small arrows indicate a tiny increase in each side, and the resulting extra area is split into two parts: u·Δv and v·Δu.",
+   "layout": "Rectangle in the centre, width labeled u(x), height labeled v(x); two shaded strips on the right and top showing the separate contributions; arrows pointing to each strip with Δu and Δv labels.",
    "labels": [
-    "f(x)",
-    "g(x)",
-    "f'(x)",
-    "g'(x)",
-    "(f·g)'"
+    "u(x)",
+    "v(x)",
+    "Δu",
+    "Δv",
+    "extra area"
    ],
    "after": 3
   },
   {
    "type": "image",
-   "file": "calculus-i-l05-quotient-rule-water-flow",
-   "title": "A pipe system illustrates the quotient rule by showing flow from top and bottom functions.",
-   "alt": "A pipe system illustrates the quotient rule by showing flow from top and bottom functions.",
+   "file": "calculus-i-l05-quotient-rule-fraction",
+   "title": "Visualizes the change of a fraction when numerator and denominator vary.",
+   "alt": "Visualizes the change of a fraction when numerator and denominator vary.",
    "priority": 7,
-   "picture_title": "Quotient Rule Water Flow",
+   "picture_title": "Quotient Rule Fraction",
    "kind": "illustration",
-   "subject": "A larger pipe representing the numerator f(x) splits into two streams: one multiplied by the bottom pipe g(x) and another where the bottom pipe's derivative g'(x) multiplies the original numerator. The streams recombine and pass through a narrowing representing division by g(x)^2.",
-   "layout": "Top left pipe labeled f(x), top right pipe labeled g(x), arrows showing f'(x)·g(x) and f(x)·g'(x) merging, then a final pipe labeled g(x)^2 before the output.",
+   "subject": "A large rectangle representing the denominator v(x) with a smaller inner rectangle representing the numerator u(x). The picture shows how a tiny change in each part alters the overall fraction, highlighting the term (u'v – uv')/v².",
+   "layout": "Big outer rectangle labelled v(x); inner rectangle labelled u(x); arrows showing Δu and Δv; the resulting change of the whole fraction shown as a separate small diagram with the formula components.",
    "labels": [
-    "f(x)",
-    "g(x)",
-    "f'(x)",
-    "g'(x)",
-    "g(x)^2"
+    "u(x)",
+    "v(x)",
+    "Δu",
+    "Δv",
+    "fraction"
    ],
    "after": 4
   },
   {
    "type": "image",
-   "file": "calculus-i-l05-chain-rule-nested-boxes",
-   "title": "Nested boxes demonstrate how to differentiate a composite function step by step.",
-   "alt": "Nested boxes demonstrate how to differentiate a composite function step by step.",
+   "file": "calculus-i-l05-chain-rule-gears",
+   "title": "Demonstrates how an outer function and an inner function work together.",
+   "alt": "Demonstrates how an outer function and an inner function work together.",
    "priority": 7,
-   "picture_title": "Chain Rule Nested Boxes",
+   "picture_title": "Chain Rule Gears",
    "kind": "illustration",
-   "subject": "An outer box labeled f(  ) contains an inner box labeled g(x). An arrow points from the inner box to the outer box, showing the outer derivative f'(g(x)) multiplied by the inner derivative g'(x).",
-   "layout": "Center: large box with label f(  ), inside it a smaller box labeled g(x); arrows from g(x) to f'(  ) and another arrow from g'(x) to the product symbol.",
+   "subject": "Two interlocking gears: the first gear represents the inner function g(x) turning at speed g'(x), driving the second gear that represents the outer function f, turning at speed f'(g(x)). The combined motion illustrates the product f'(g(x))·g'(x).",
+   "layout": "Gear 1 on the left labelled g(x) with arrow showing rotation speed g'(x); gear 2 on the right labelled f(g(x)) with arrow showing rotation speed f'(g(x)); a connecting line indicating the chain rule multiplication.",
    "labels": [
-    "f(g(x))",
     "g(x)",
-    "f'(g(x))",
-    "g'(x)"
+    "f(g(x))",
+    "g'(x)",
+    "f'(g(x))"
    ],
    "after": 5
   },
   {
-   "type": "steps",
-   "title": "Applying the Product Rule",
-   "steps": [
+   "type": "facts",
+   "title": "Key Derivative Rules",
+   "items": [
     {
-     "label": "1",
-     "text": "Identify the two factors u(x) and v(x)."
+     "value": "0",
+     "label": "Constant rule"
     },
     {
-     "label": "2",
-     "text": "Differentiate each factor: find u'(x) and v'(x)."
+     "value": "n·x^(n-1)",
+     "label": "Power rule"
     },
     {
-     "label": "3",
-     "text": "Combine: u'(x)v(x) + u(x)v'(x)."
+     "value": "f+g → f'+g'",
+     "label": "Sum/Difference rule"
     },
     {
-     "label": "4",
-     "text": "Simplify if possible."
+     "value": "uv → u'v+uv'",
+     "label": "Product rule"
+    },
+    {
+     "value": "(u/v) → (u'v‑uv')/v^2",
+     "label": "Quotient rule"
+    },
+    {
+     "value": "f(g(x)) → f'(g(x))·g'(x)",
+     "label": "Chain rule"
     }
    ],
-   "loop": false,
-   "after": 3
+   "after": 0
   },
   {
    "type": "compare",
-   "title": "Sum Rule vs Difference Rule",
+   "title": "Constant vs. Power Rule",
    "left": {
-    "name": "Sum Rule",
+    "name": "Constant",
     "points": [
-     "f(x)=g(x)+h(x)",
-     "Derivative: f'(x)=g'(x)+h'(x)",
-     "Adds rates of change"
+     "Derivative is 0",
+     "Graph is a horizontal line",
+     "No change regardless of x"
     ]
    },
    "right": {
-    "name": "Difference Rule",
+    "name": "Power (x^n)",
     "points": [
-     "f(x)=g(x)-h(x)",
-     "Derivative: f'(x)=g'(x)-h'(x)",
-     "Subtracts rates of change"
+     "Derivative is n·x^(n‑1)",
+     "Slope depends on x",
+     "Changes with exponent n"
     ]
    },
-   "after": 2
+   "after": 1
   },
   {
-   "type": "facts",
-   "title": "Quick Reference of Derivative Rules",
+   "type": "parts",
+   "title": "Product Rule Components",
    "items": [
     {
-     "value": "n·x^(n-1)",
-     "label": "Power Rule"
+     "name": "u(x)",
+     "role": "first factor"
     },
     {
-     "value": "0",
-     "label": "Constant Rule"
+     "name": "v(x)",
+     "role": "second factor"
     },
     {
-     "value": "u'v+uv'",
-     "label": "Product Rule"
+     "name": "u'(x)",
+     "role": "rate of change of first factor"
     },
     {
-     "value": "(u'v-uv')/v^2",
-     "label": "Quotient Rule"
-    },
-    {
-     "value": "f'(g(x))·g'(x)",
-     "label": "Chain Rule"
+     "name": "v'(x)",
+     "role": "rate of change of second factor"
     }
    ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Using the Chain Rule",
+   "steps": [
+    {
+     "label": "Identify inner function",
+     "text": "Find g(x) inside f(g(x))."
+    },
+    {
+     "label": "Differentiate outer",
+     "text": "Compute f'(g(x))."
+    },
+    {
+     "label": "Differentiate inner",
+     "text": "Compute g'(x)."
+    },
+    {
+     "label": "Multiply",
+     "text": "Multiply f'(g(x)) by g'(x)."
+    }
+   ],
+   "loop": false,
+   "after": 5
+  },
+  {
+   "type": "graph",
+   "title": "Example: y = x^2",
+   "fn": "x^2",
+   "xmin": -3,
+   "xmax": 3,
+   "points": [
+    {
+     "x": -2,
+     "y": 4,
+     "label": "-2",
+     "open": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "label": "0",
+     "open": false
+    },
+    {
+     "x": 2,
+     "y": 4,
+     "label": "2",
+     "open": false
+    }
+   ],
+   "caption": "Parabola y = x^2; slope at each point is 2x.",
    "after": 6
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

@@ -1,292 +1,470 @@
 {
  "title": "Formal Definition of Limits",
- "summary": "This lesson introduces the precise ε‑δ definition of a limit, shows how to prove limits using this definition, and gives students practice applying it to compute limits. Students will gain confidence in rigorous limit reasoning, a foundation for continuity and derivatives.",
+ "summary": "This lesson introduces the precise ε‑δ definition of a limit and shows how to use it to prove simple limits. Students will practice applying the definition to compute limits and understand why the formalism matters.",
+ "objectives": [
+  "State the ε‑δ definition of a limit in words and symbols",
+  "Identify appropriate ε and δ values for basic limit proofs",
+  "Carry out a step‑by‑step ε‑δ proof for a linear function",
+  "Use the definition to verify limits of simple rational functions",
+  "Explain the importance of rigor in calculus"
+ ],
+ "prerequisites": "Students should be comfortable with evaluating limits intuitively and with basic algebraic manipulation.",
+ "why": [
+  "In science and engineering, precise limits are needed to guarantee that models behave predictably near critical points, such as when a bridge approaches its maximum load or a chemical reaction nears equilibrium.",
+  "A rigorous foundation prevents mistakes in later topics like continuity and derivatives, ensuring that conclusions drawn from calculus are trustworthy and reproducible."
+ ],
  "sections": [
   {
-   "heading": "Why a Formal Definition?",
-   "body": "**Why a Formal Definition?**  \n\nWhen we first meet limits we rely on pictures: a curve getting “closer and closer” to a number as $x$ approaches $a$.  This intuition works for many simple graphs, but it can be misleading.  Consider the function  \n\n\\[\nf(x)=\\begin{cases}\n0, & x\\neq 0,\\\\[4pt]\n1, & x=0 .\n\\end{cases}\n\\]\n\nVisually the graph is a flat line at $0$ with a single “dot” at $(0,1)$.  If we look only at points near $0$ we might *feel* the limit is $0$, yet the definition must tell us precisely what “near” means.  Without a rigorous statement we cannot decide whether $\\displaystyle\\lim_{x\\to0}f(x)=0$ or $1$, nor can we prove that a function is **continuous** (i.e. $\\displaystyle\\lim_{x\\to a}f(x)=f(a)$) at a point.  \n\nThe **ε‑δ definition** removes the vague “gets close” language.  It replaces “close” by two numbers:  \n\n* $\\varepsilon>0$ measures how close we want $f(x)$ to be to the proposed limit $L$.  \n* $\\delta>0$ tells us how close $x$ must be to $a$ to guarantee that closeness.  \n\nFormally,  \n\n\\[\n\\lim_{x\\to a}f(x)=L\\quad\\Longleftrightarrow\\quad\n\\forall\\varepsilon>0\\;\\exists\\delta>0\\; \\text{such that}\\;\n0<|x-a|<\\delta\\;\\Longrightarrow\\;|f(x)-L|<\\varepsilon .\n\\]\n\nThis statement is a precise game: for **every** tolerance $\\varepsilon$ we must be able to find a tolerance $\\delta$ that works.  If we can do this, the limit exists and equals $L$; if not, the limit does not exist.  The definition is the foundation of continuity, differentiability, and all later calculus results.\n\n---\n\n### Worked Example: Limit of a Linear Function  \n\nFind $\\displaystyle\\lim_{x\\to3}(2x+5)$ using the ε‑δ definition.\n\n**Step 1: Identify the candidate limit.**  \nPlug $x=3$ into the expression: $2(3)+5=11$.  So we claim $L=11$.\n\n**Step 2: Start with the ε‑condition.**  \nWe need $| (2x+5) - 11 | < \\varepsilon$.  Simplify:\n\n\\[\n|(2x+5)-11| = |2x-6| = 2|x-3|.\n\\]\n\nThus the requirement becomes $2|x-3|<\\varepsilon$, i.e. $|x-3|<\\varepsilon/2$.\n\n**Step 3: Choose δ.**  \nTake $\\displaystyle\\delta = \\frac{\\varepsilon}{2}$.  Then whenever $0<|x-3|<\\delta$ we have  \n\n\\[\n| (2x+5) - 11 | = 2|x-3| < 2\\delta = 2\\left(\\frac{\\varepsilon}{2}\\right)=\\varepsilon .\n\\]\n\n**Step 4: Conclude.**  \nSince for every $\\varepsilon>0$ we produced a $\\delta>0$ (namely $\\varepsilon/2$) that satisfies the definition,  \n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to3}(2x+5)=11}.\n\\]\n\n---\n\n### Practice Problems  \n\n1. **Problem:** Prove $\\displaystyle\\lim_{x\\to-2}(4x-1) = -9$.\n\n   **Solution:**  \n   Candidate limit $L=4(-2)-1=-9$.  \n   $|4x-1+9| = |4x+8| = 4|x+2|$.  \n   Require $4|x+2|<\\varepsilon \\;\\Rightarrow\\; |x+2|<\\varepsilon/4$.  \n   Choose $\\delta=\\varepsilon/4$.  Then $0<|x+2|<\\delta$ implies $|4x-1+9|<\\varepsilon$.  Hence the limit is $-9$.\n\n2. **Problem:** Show $\\displaystyle\\lim_{x\\to0} (5)=5$.\n\n   **Solution:**  \n   The function is constant, so $|5-5|=0<\\varepsilon$ for any $\\varepsilon>0$.  \n   We may pick any $\\delta>0$ (e.g., $\\delta=1$).  The ε‑δ condition holds, so the limit equals $5$.\n\n3. **Problem:** Prove $\\displaystyle\\lim_{x\\to1}(x^{2}) = 1$.\n\n   **Solution:**  \n   $|x^{2}-1| = |x-1||x+1|$.  \n   To control $|x+1|$, restrict $x$ to be within $1$ of $1$: let $\\delta\\le 1$, so $|x-1|<1$ gives $0<x<2$ and thus $|x+1|<3$.  \n   Then $|x^{2}-1| < 3|x-1|$.  \n   Require $3|x-1|<\\varepsilon$, i.e. $|x-1|<\\varepsilon/3$.  \n   Choose $\\displaystyle\\delta = \\min\\{1,\\varepsilon/3\\}$.  The definition is satisfied, so the limit is $1$.\n\n4. **Problem:** Verify $\\displaystyle\\lim_{x\\to2}\\frac{x-2}{x^{2}-4}= \\frac{1}{4}$.\n\n   **Solution:**  \n   Simplify the fraction: $x^{2}-4=(x-2)(x+2)$, so  \n\n   \\[\n   \\frac{x-2}{x^{2}-4}= \\frac{1}{x+2},\\qquad x\\neq2.\n   \\]\n\n   The candidate limit is $L=\\frac{1}{2+2}= \\frac14$.  \n   Need $ \\left|\\frac{1}{x+2}-\\frac14\\right| < \\varepsilon$.  \n   Compute  \n\n   \\[\n   \\left|\\frac{1}{x+2}-\\frac14\\right|\n   =\\left|\\frac{4-(x+2)}{4(x+2)}\\right|\n   =\\frac{|2-x|}{4|x+2|}= \\frac{|x-2|}{4|x+2|}.\n   \\]\n\n   Ensure $|x-2|<1$, then $1<x<3$ and $|x+2|<5$.  Hence  \n\n   \\[\n   \\frac{|x-2|}{4|x+2|} < \\frac{|x-2|}{4\\cdot 1}= \\frac{|x-2|}{4}.\n   \\]\n\n   To make this $<\\varepsilon$, require $|x-2|<4\\varepsilon$.  \n   Choose $\\displaystyle\\delta = \\min\\{1,4\\varepsilon\\}$.  Then $0<|x-2|<\\delta$ guarantees the ε‑condition, proving the limit is $\\frac14$.",
+   "heading": "Intuitive Review of Limits",
+   "body": "Imagine you have a road that bends smoothly toward a hill. As you drive farther along the road, you can see the hill getting taller and taller, even though you never actually reach the top. In mathematics we say the **function** “approaches” a certain value.  \n\n> **Definition:** A limit describes what value a function $f(x)$ gets closer to as the input $x$ gets closer to a particular point $a$.\n\nThe word *approaches* means “gets arbitrarily close, but not necessarily equal.”  It is useful because many real‑world situations involve predicting what will happen near a point where we cannot or do not want to evaluate the function directly (for example, the speed of a car just before it stops).\n\n---\n\n### A simple picture\n\nConsider the function $f(x)=2x$.  Draw a straight line that passes through the origin with slope 2.  Pick the point $a=3$.  As $x$ moves from $2.9$ to $3.1$, the points on the line move from $f(2.9)=5.8$ to $f(3.1)=6.2$.  The $y$‑values are getting closer to $6$, which is exactly $f(3)$.  In a graph you would see the curve sliding toward the point $(3,6)$ from both sides.\n\nIf we write a small table we can see the same idea numerically:\n\n| $x$ | $f(x)=2x$ |\n|-----|----------|\n| 2.9 | 5.8 |\n| 2.99| 5.98 |\n| 3.01| 6.02 |\n| 3.1 | 6.2 |\n\nThe numbers in the second column get nearer to $6$ as $x$ gets nearer to $3$.  This is the **intuitive** notion of a limit:  \n\n$$\\lim_{x\\to 3} 2x = 6.$$\n\n---\n\n### Getting close from one side\n\nSometimes we only look at $x$ values that are **greater** than $a$ (approaching from the right) or **less** than $a$ (approaching from the left).  For $f(x)=\\sqrt{x}$ and $a=4$, the left‑hand approach is impossible because $\\sqrt{x}$ is not defined for $x<0$.  Yet we can still say\n\n$$\\lim_{x\\to 4^+}\\sqrt{x}=2,$$\n\nmeaning “as $x$ approaches $4$ from values larger than $4$, the function values approach $2$.”  The superscript $+$ tells us the direction.\n\n---\n\n### Everyday comparison\n\nThink of a thermostat that displays the temperature as you walk toward a window.  When you stand a few steps away, the reading might be $22.5^\\circ\\text{C}$; a step closer it reads $22.7^\\circ\\text{C}$; even closer it reads $22.9^\\circ\\text{C}$.  You can sense the temperature is heading toward $23^\\circ\\text{C}$ even before you reach the window.  The limit is the temperature you would feel **if** you could stand exactly at the window, without needing the thermostat to give a reading there.\n\n> **In daily life:** Limits are like “the temperature you feel when you get really close to a heat source,” even if the thermometer can’t be placed right at the source.\n\n---\n\n### Why the limit can exist even when the function is not defined at $a$\n\nSometimes a function has a hole at $a$.  Define\n\n$$g(x)=\\frac{x^2-1}{x-1},\\qquad x\\neq 1.$$\n\nAlgebraically $g(x)=x+1$ for all $x\\neq1$, but $g$ is **undefined** at $x=1$ because the denominator is zero.  Looking at a table:\n\n| $x$ | $g(x)$ |\n|-----|--------|\n| 0.9 | 1.9 |\n| 0.99| 1.99 |\n| 1.01| 2.01 |\n| 1.1 | 2.1 |\n\nThe values head toward $2$ as $x$ approaches $1$.  Hence\n\n$$\\lim_{x\\to 1} g(x)=2,$$\n\neven though $g(1)$ does not exist.  This shows the power of limits: they capture the behavior **near** a point, not just at the point.\n\n> **Remember:** A limit cares only about what happens *close* to $a$, not at $a$ itself.\n\n---\n\n### Summing up\n\n- A limit tells us the value a function gets arbitrarily close to as $x$ gets arbitrarily close to a point $a$.\n- Graphs show the curve sliding toward a target point; tables show numbers getting nearer.\n- One‑sided limits ($x\\to a^+$ or $x\\to a^-$) let us consider approach from only one direction.\n- The limit can exist even if the function is not defined at $a$; the “hole” does not stop us from seeing the surrounding behavior.\n\nUnderstanding this intuitive picture prepares you for the precise ε‑δ definition that follows, where we replace “gets close” with a rigorous statement about distances.",
    "code": ""
   },
   {
-   "heading": "The ε‑δ Definition",
-   "body": "The **ε‑δ definition** tells us exactly what it means for a function $f(x)$ to approach a number $L$ as $x$ gets close to a point $a$.  \nIt is written  \n\n\\[\n\\forall \\,\\varepsilon>0\\;\\exists \\,\\delta>0\\; \\text{such that}\\; \n0<|x-a|<\\delta \\;\\Longrightarrow\\; |f(x)-L|<\\varepsilon .\n\\]\n\n---\n\n### What each symbol means  \n\n| Symbol | Meaning | How to picture it |\n|--------|---------|-------------------|\n| $\\varepsilon$ | Any **positive** distance we choose around the target value $L$ | Draw a horizontal band of width $2\\varepsilon$ centred at $L$ on the $y$‑axis. |\n| $\\delta$ | A **positive** distance we must find around the point $a$ | Draw a vertical band of width $2\\delta$ centred at $a$ on the $x$‑axis. |\n| $0<|x-a|<\\delta$ | $x$ is **inside** the vertical band but not exactly at $a$ | Any $x$ inside the band (except the centre) is allowed. |\n| $|f(x)-L|<\\varepsilon$ | The corresponding $f(x)$ lands **inside** the horizontal band | When $x$ is in the vertical band, the point $(x,f(x))$ must also lie inside the horizontal band. |\n\nIf we can always choose a $\\delta$ that makes the second condition true **no matter how small** we pick $\\varepsilon$, then the limit exists and equals $L$.\n\n---\n\n### Fully worked example  \n\nFind $\\displaystyle\\lim_{x\\to 2}(3x-1)$ using the ε‑δ definition.\n\n**Step 1 – Write the limit statement.**  \nWe claim that  \n\n\\[\n\\lim_{x\\to 2}(3x-1)=5 .\n\\]\n\nSo $a=2$, $L=5$, and $f(x)=3x-1$.\n\n**Step 2 – Start from $|f(x)-L|<\\varepsilon$.**  \n\n\\[\n|\\, (3x-1)-5 \\,| = |3x-6| = 3|x-2| .\n\\]\n\nWe need $3|x-2|<\\varepsilon$, i.e.  \n\n\\[\n|x-2|<\\frac{\\varepsilon}{3}.\n\\]\n\n**Step 3 – Choose $\\delta$.**  \nTake  \n\n\\[\n\\boxed{\\;\\delta = \\frac{\\varepsilon}{3}\\;}\n\\]\n\n(which is positive because $\\varepsilon>0$).\n\n**Step 4 – Verify the implication.**  \nAssume $0<|x-2|<\\delta$. Then  \n\n\\[\n|f(x)-5| = 3|x-2| < 3\\delta = 3\\left(\\frac{\\varepsilon}{3}\\right)=\\varepsilon .\n\\]\n\nThus the definition is satisfied, so the limit is indeed $5$.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nProve $\\displaystyle\\lim_{x\\to 1}(4x)=4$.\n\n**Solution**  \nWe need $|4x-4|<\\varepsilon$.  \n$|4x-4| = 4|x-1|$, so require $4|x-1|<\\varepsilon$, i.e. $|x-1|<\\varepsilon/4$.  \nChoose $\\delta=\\varepsilon/4$. Then $0<|x-1|<\\delta$ implies $|4x-4|<\\varepsilon$. ∎\n\n---\n\n### Problem 2  \nShow that $\\displaystyle\\lim_{x\\to 0}(x^{2})=0$.\n\n**Solution**  \nWe need $|x^{2}-0|<\\varepsilon$, i.e. $|x|^{2}<\\varepsilon$.  \nTake square roots: $|x|<\\sqrt{\\varepsilon}$.  \nChoose $\\delta=\\sqrt{\\varepsilon}$.  \nIf $0<|x|<\\delta$, then $|x^{2}|=|x|^{2}<\\delta^{2}=\\varepsilon$. ∎\n\n---\n\n### Problem 3  \nProve $\\displaystyle\\lim_{x\\to -3}(2x+7) = 1$.\n\n**Solution**  \nCompute $| (2x+7)-1| = |2x+6| = 2|x+3|$.  \nWe need $2|x+3|<\\varepsilon$, i.e. $|x+3|<\\varepsilon/2$.  \nSet $\\delta=\\varepsilon/2$.  \nIf $0<|x+3|<\\delta$, then $|2x+7-1|<\\varepsilon$. ∎\n\n---\n\n### Problem 4  \nVerify $\\displaystyle\\lim_{x\\to 2}(x^{2}) = 4$.\n\n**Solution**  \nStart with $|x^{2}-4| = |(x-2)(x+2)|$.  \nWe bound $|x+2|$ by forcing $x$ to stay near $2$.  \nPick $\\delta\\le 1$, so $|x-2|<1$ ⇒ $1< x <3$ ⇒ $3< x+2 <5$ ⇒ $|x+2|<5$.  \nThen  \n\n\\[\n|x^{2}-4| = |x-2||x+2| < 5|x-2|.\n\\]\n\nTo make this $<\\varepsilon$, require $5|x-2|<\\varepsilon$, i.e. $|x-2|<\\varepsilon/5$.  \nChoose  \n\n\\[\n\\boxed{\\;\\delta = \\min\\!\\left\\{1,\\frac{\\varepsilon}{5}\\right\\}\\;}\n\\]\n\nIf $0<|x-2|<\\delta$, then $|x^{2}-4|<\\varepsilon$. ∎",
+   "heading": "Introducing the ε‑δ Language",
+   "body": "When we say that a function $f(x)$ “gets close” to a number $L$ as $x$ gets close to a point $a$, we need a way to describe *how close* we mean.  \nThe ε‑δ language does exactly that: it turns the vague idea of “getting close” into a precise statement that can be checked step by step.\n\n---\n\n**Idea in plain words**  \nImagine you are standing at a target on a dartboard. The target’s centre is the value $L$ you want $f(x)$ to approach. You first decide how small a circle around the centre you are willing to accept – that circle’s radius is called **ε** (the Greek letter epsilon).  \nNext you ask: “If I keep my darts within a certain distance from the point $a$ on the $x$‑axis, will every dart land inside the ε‑circle around $L$?”  \nThat allowed distance from $a$ is called **δ** (the Greek letter delta).  \n\nIf you can find some δ that works for **every** ε you might choose, then we have proved that the limit really is $L$.\n\n---\n\n**Why it is useful**  \nThe ε‑δ definition gives us a universal test that works for any function, no matter how complicated.  \nIt also shows that limits are not about a single “close enough” choice; they must hold for *all* possible tolerances, however tiny. This rigor is the foundation of calculus, allowing us to prove later results such as continuity and differentiability.\n\n---\n\n> **Definition:**  \n> For a function $f$ defined on an interval around $a$ (except possibly at $a$ itself), we write  \n> $$\\lim_{x\\to a} f(x)=L$$  \n> if for every number $\\varepsilon>0$ there exists a number $\\delta>0$ such that  \n> $$0<|x-a|<\\delta \\;\\Longrightarrow\\; |f(x)-L|<\\varepsilon.$$\n\nLet us unpack each symbol:\n\n* **$\\varepsilon>0$** – any positive number you pick; it measures how far $f(x)$ is allowed to be from $L$ (the “vertical” tolerance).  \n* **$\\delta>0$** – a positive number that may depend on the chosen $\\varepsilon$; it measures how far $x$ is allowed to be from $a$ (the “horizontal” tolerance).  \n* **$0<|x-a|<\\delta$** – the condition that $x$ lies inside the open interval $(a-\\delta,\\;a+\\delta)$ but is not exactly $a$.  \n* **$|f(x)-L|<\\varepsilon$** – the conclusion that the value of the function lies inside the open interval $(L-\\varepsilon,\\;L+\\varepsilon)$.\n\nThe arrow “$\\Longrightarrow$” reads “implies”. So the definition says: *whenever* $x$ is within δ of $a$ (but not equal to $a$), *then* $f(x)$ is within ε of $L$.\n\n---\n\n**Everyday comparison**  \nThink of a thermostat controlling room temperature. You set a desired temperature $L$ (say $22^\\circ$C). The thermostat allows a small error ε (maybe $±0.5^\\circ$C). To keep the room within that band, the heating system must respond when the actual temperature $x$ deviates from the set point $a$ (the current reading) by less than some δ. If you can always find a suitable δ for any ε you choose, the system is reliably keeping the temperature close to $L$.\n\n---\n\n> **Note:**  \n> The δ you find may be different for different ε. The definition does **not** require a single δ that works for all ε at once; it only requires a rule that, given any ε, produces a suitable δ.\n\n---\n\n**How the pieces fit together**  \n1. Choose an ε that reflects how accurate you need the function’s value to be.  \n2. Work algebraically with $|f(x)-L|<\\varepsilon$ to discover a condition on $|x-a|$.  \n3. Translate that condition into a concrete δ (often the smallest of several expressions).  \n4. State: “Given this ε, the δ we have chosen guarantees the implication.”  \n\nIf you can repeat this process for an arbitrary ε, the limit statement is proved.\n\n---\n\n> **Remember:**  \n> The symbols $|\\,\\cdot\\,|$ denote absolute value, which measures distance on the number line. Both $|x-a|$ and $|f(x)-L|$ are distances, one horizontal, one vertical. The ε‑δ definition is simply a way of saying “horizontal closeness forces vertical closeness.”",
    "code": ""
   },
   {
-   "heading": "Choosing δ for a Given ε",
-   "body": "When we want to **prove** that a limit exists, we cannot rely on intuition or a sketch of a graph.  \nThe **ε‑δ definition** gives a precise way to translate “$f(x)$ gets arbitrarily close to $L$ when $x$ gets close to $a$’’ into an algebraic statement that we can manipulate.\n\n---\n\n### Choosing δ for a Given ε  \n\nThe usual strategy is:\n\n1. **Start with the inequality we need**  \n   $$|f(x)-L|<\\varepsilon.$$\n\n2. **Replace $|f(x)-L|$ by something easier to control**.  \n   Often we can bound it by a constant multiple of $|x-a|$:  \n   $$|f(x)-L|\\leq M|x-a|,$$  \n   where $M>0$ depends on the function but not on $x$ (near $a$).\n\n3. **Solve for $|x-a|$**:  \n   If $M|x-a|<\\varepsilon$, then it suffices to require  \n   $$|x-a|<\\frac{\\varepsilon}{M}.$$\n\n4. **Define δ** as the minimum of the bound we just found and any other restrictions needed (for example, keeping $x$ inside a region where the bound $M$ is valid).  \n\nThus we set  \n$$\\delta=\\min\\left\\{\\,\\text{region radius},\\;\\frac{\\varepsilon}{M}\\right\\}.$$\n\n---\n\n### Worked Example: $\\displaystyle\\lim_{x\\to 2}(3x-5)=1$\n\nWe prove the limit using the steps above.\n\n1. **Write the ε‑condition**  \n   $$| (3x-5) - 1 | < \\varepsilon.$$\n\n2. **Simplify**  \n   $$|3x-6| = 3|x-2|.$$\n\n   Here the bound is already of the form $M|x-a|$ with $M=3$ and $a=2$.\n\n3. **Relate $|x-2|$ to ε**  \n   To make $3|x-2|<\\varepsilon$ we need  \n   $$|x-2| < \\frac{\\varepsilon}{3}.$$\n\n4. **Choose δ**  \n   No extra restriction is needed, so we can take  \n   $$\\boxed{\\delta=\\frac{\\varepsilon}{3}}.$$\n\n5. **Verification**  \n   If $0<|x-2|<\\delta$, then  \n   $$|3x-5-1| = 3|x-2| < 3\\cdot\\frac{\\varepsilon}{3}= \\varepsilon,$$  \n   which is exactly what the definition requires. Hence  \n   $$\\lim_{x\\to2}(3x-5)=1.$$\n\n---\n\n### Practice Problems  \n\nBelow are four limits to practice the same technique.  \nEach solution follows the same four‑step pattern.\n\n---\n\n#### 1. $\\displaystyle\\lim_{x\\to -1}(4x+7)=3$\n\n**Solution**  \n\n1. Need $|4x+7-3|<\\varepsilon\\;\\Longrightarrow\\;|4x+4|<\\varepsilon$.  \n2. $|4x+4|=4|x+1|$.  \n3. Require $4|x+1|<\\varepsilon\\;\\Longrightarrow\\;|x+1|<\\varepsilon/4$.  \n4. Choose $\\delta=\\varepsilon/4$.  \n\nIf $0<|x+1|<\\delta$, then $|4x+7-3|<\\varepsilon$, proving the limit.\n\n---\n\n#### 2. $\\displaystyle\\lim_{x\\to 0}(5x)=0$\n\n**Solution**  \n\n1. Need $|5x-0|<\\varepsilon\\;\\Longrightarrow\\;5|x|<\\varepsilon$.  \n2. Already in the form $M|x-a|$ with $M=5$, $a=0$.  \n3. Require $|x|<\\varepsilon/5$.  \n4. Take $\\delta=\\varepsilon/5$.  \n\nThus $0<|x|<\\delta$ implies $|5x|<\\varepsilon$.\n\n---\n\n#### 3. $\\displaystyle\\lim_{x\\to 3}(2x^2-18)=0$\n\n**Solution**  \n\n1. Need $|2x^2-18|<\\varepsilon$.  \n2. Factor: $|2(x^2-9)|=2|x-3||x+3|$.  \n   Near $x=3$, say $|x-3|<1$, then $|x+3|<7$.  \n   Hence $|2x^2-18|\\le 2\\cdot7|x-3|=14|x-3|$.  \n3. Require $14|x-3|<\\varepsilon\\;\\Longrightarrow\\;|x-3|<\\varepsilon/14$.  \n4. Choose $\\delta=\\min\\{1,\\varepsilon/14\\}$.  \n\nIf $0<|x-3|<\\delta$, the bound gives $|2x^2-18|<\\varepsilon$.\n\n---\n\n#### 4. $\\displaystyle\\lim_{x\\to 1}\\frac{x^2-1}{x-1}=2$\n\n**Solution**  \n\n1. Simplify the expression: $\\displaystyle\\frac{x^2-1}{x-1}=x+1$ for $x\\neq1$.  \n   So we need $| (x+1) - 2 | < \\varepsilon\\;\\Longrightarrow\\;|x-1|<\\varepsilon$.  \n2. The inequality is already $|x-1|<\\varepsilon$, i.e., $M=1$.  \n3. Hence we can set $\\delta=\\varepsilon$.  \n4. Verification: if $0<|x-1|<\\delta$, then $|x+1-2|=|x-1|<\\varepsilon$.  \n\nThus the limit equals $2$.\n\n---",
+   "heading": "Choosing δ for Simple Linear Functions",
+   "body": "When we work with limits we want a rule that tells us **how close** the input $x$ must be to a point $a$ so that the output $f(x)$ is as close as we wish to the limit $L$.  \nFor a simple linear function the rule is easy to see, and it shows the pattern we will use later for more complicated functions.\n\n---\n\n**Plain‑language idea**  \nSuppose you are walking toward a door. The door is the limit $L$. You can decide how small a gap you are willing to accept between you and the door – that is the “epsilon” $\\varepsilon$. Then you ask: “How close must I stand to the door (how small must my distance $|x-a|$ be) so that the gap is smaller than $\\varepsilon$?” The answer is a number called “delta” $\\delta$. If you stay within $\\delta$ of the point $a$, you are guaranteed to be within $\\varepsilon$ of the limit $L$.\n\n---\n\nLet us do this step by step for the function  \n\n$$f(x)=2x+3$$  \n\nand the point $a=1$.  \n\n1. **Find the limit $L$**  \n   The limit of a linear function at a point is just the value of the function there:  \n\n   $$L = f(1)=2\\cdot1+3=5.$$  \n\n2. **Write the epsilon condition**  \n   We want the output to be within $\\varepsilon$ of $L$:  \n\n   $$|f(x)-L|<\\varepsilon.$$  \n\n   Substituting $f(x)$ and $L$ gives  \n\n   $$|2x+3-5|<\\varepsilon.$$  \n\n3. **Simplify the absolute value**  \n   Inside the absolute value we have $2x-2$, which can be factored:  \n\n   $$|2(x-1)|<\\varepsilon.$$  \n\n   The absolute value of a product is the product of the absolute values, so  \n\n   $$2\\,|x-1|<\\varepsilon.$$  \n\n4. **Solve for $|x-1|$**  \n   Divide both sides by the positive number $2$:  \n\n   $$|x-1|<\\frac{\\varepsilon}{2}.$$  \n\n   This inequality tells us exactly how close $x$ must be to $1$.\n\n5. **Choose $\\delta$**  \n   The definition of limit says we need a single number $\\delta$ that works for *any* $\\varepsilon>0$.  \n   From the inequality we see that any $\\delta$ that is **no larger** than $\\varepsilon/2$ will do.  \n   The simplest choice is  \n\n   $$\\boxed{\\delta=\\frac{\\varepsilon}{2}}.$$  \n\n   With this choice, whenever $|x-1|<\\delta$, the chain of inequalities we just derived guarantees $|f(x)-5|<\\varepsilon$.\n\n> **Definition:** The statement “$\\displaystyle\\lim_{x\\to a}f(x)=L$” means: *For every* $\\varepsilon>0$ there exists a $\\delta>0$ such that if $0<|x-a|<\\delta$ then $|f(x)-L|<\\varepsilon$.\n\n> **Note:** In this linear example the relationship between $\\varepsilon$ and $\\delta$ is a simple proportion. The factor $2$ in front of $|x-1|$ becomes the denominator of $\\delta$.\n\n> **In daily life:** Think of $\\varepsilon$ as the tolerance you set on a kitchen scale (e.g., “within 5 g”). The scale’s sensitivity $\\delta$ tells you how precisely you must place the ingredient (e.g., “within 2.5 g of the target weight”) to stay inside the tolerance.\n\n> **Common mistake:** Forgetting to divide by the coefficient in front of $|x-a|$. If we had stopped at $2|x-1|<\\varepsilon$ and declared $\\delta=\\varepsilon$, the inequality $|f(x)-L|<\\varepsilon$ would not be guaranteed; the extra factor $2$ would make the output error potentially twice as large.\n\n---\n\n**Why this matters**  \nFinding $\\delta$ explicitly shows that the limit really does exist; it is not just a vague idea. The process also teaches us how to control errors: we can translate a desired accuracy in the output (the $\\varepsilon$) into a required accuracy in the input (the $\\delta$). This translation is the core of the $\\varepsilon$–$\\delta$ language and will be used again when we handle non‑linear functions and when we prove that a function is continuous.",
    "code": ""
   },
   {
-   "heading": "Simple Proof: Limit of a Constant Function",
-   "body": "The **formal definition of a limit** tells us exactly what it means for a function $f(x)$ to get arbitrarily close to a number $L$ as $x$ approaches $a$.  \nFor a constant function $f(x)=c$, the limit should be obvious: no matter how $x$ moves, $f(x)$ never changes.  \nBelow we prove this rigorously using the $\\varepsilon$‑$\\delta$ definition.\n\n---\n\n### Simple Proof: Limit of a Constant Function  \n\n**Claim:**  \n\\[\n\\lim_{x\\to a} c = c\\qquad\\text{for any real numbers }a\\text{ and }c .\n\\]\n\n**Proof (using the $\\varepsilon$‑$\\delta$ definition).**  \n\n1. **Start with the definition.**  \n   We must show that for every $\\varepsilon>0$ there exists a $\\delta>0$ such that  \n   \\[\n   0<|x-a|<\\delta \\;\\Longrightarrow\\; |f(x)-c|<\\varepsilon .\n   \\]\n\n2. **Insert the function.**  \n   Here $f(x)=c$, so  \n   \\[\n   |f(x)-c| = |c-c| = 0 .\n   \\]\n\n3. **Choose $\\delta$.**  \n   Because $0$ is *always* less than any positive $\\varepsilon$, we can pick any positive number for $\\delta$.  \n   A convenient choice is  \n   \\[\n   \\boxed{\\delta = 1}.\n   \\]\n\n4. **Verify the implication.**  \n   Assume $0<|x-a|<\\delta$ (i.e., $0<|x-a|<1$). Then  \n   \\[\n   |f(x)-c| = 0 < \\varepsilon \\quad\\text{for every }\\varepsilon>0 .\n   \\]\n   The condition is satisfied, so the definition holds.\n\nSince the argument works for **any** $\\varepsilon>0$, the limit exists and equals $c$. ∎  \n\n---\n\n### Practice Problems  \n\nBelow are four problems that apply the same idea to other simple functions. Each solution follows every logical step.\n\n---\n\n#### Problem 1  \nProve $\\displaystyle\\lim_{x\\to 5} 7 = 7$.\n\n**Solution.**  \nGiven $\\varepsilon>0$, choose $\\delta=1$.  \nIf $0<|x-5|<\\delta$, then $|f(x)-7| = |7-7| = 0 < \\varepsilon$.  \nThus the limit is $7$.\n\n---\n\n#### Problem 2  \nProve $\\displaystyle\\lim_{x\\to -2} (-3) = -3$.\n\n**Solution.**  \nLet $\\varepsilon>0$ be arbitrary. Take $\\delta=1$.  \nFor $0<|x+2|<\\delta$, we have $|f(x)-(-3)| = |-3+3| = 0 < \\varepsilon$.  \nHence the limit equals $-3$.\n\n---\n\n#### Problem 3  \nShow that $\\displaystyle\\lim_{x\\to 0} \\pi = \\pi$.\n\n**Solution.**  \nPick any $\\varepsilon>0$ and set $\\delta=1$.  \nIf $0<|x-0|<\\delta$, then $|f(x)-\\pi| = |\\pi-\\pi| = 0 < \\varepsilon$.  \nTherefore $\\lim_{x\\to0}\\pi = \\pi$.\n\n---\n\n#### Problem 4  \nProve $\\displaystyle\\lim_{x\\to 10} \\frac{1}{2} = \\frac{1}{2}$.\n\n**Solution.**  \nLet $\\varepsilon>0$ be given. Choose $\\delta=1$.  \nWhen $0<|x-10|<\\delta$, we compute  \n\\[\n|f(x)-\\tfrac12| = \\Big|\\tfrac12-\\tfrac12\\Big| = 0 < \\varepsilon .\n\\]\nThus the limit is $\\tfrac12$.\n\n---\n\nThese examples illustrate that for **constant functions** the distance $|f(x)-L|$ is always zero, so any positive $\\delta$—in particular $\\delta=1$—works for every $\\varepsilon$. The same reasoning underlies more complicated limits, where we must choose $\\delta$ carefully to control the expression $|f(x)-L|$.",
+   "heading": "Step‑by‑Step ε‑δ Proofs",
+   "body": "We want to show that  \n\n$$\\lim_{x\\to 2}5x = 10.$$  \n\nIn words: *as* the input $x$ gets closer and closer to $2$, the output $5x$ gets closer and closer to $10$.  \nThe formal way to say “gets closer” is the **ε‑δ definition** of a limit.\n\n> **Definition:**  \n> For a function $f$, we write $\\displaystyle\\lim_{x\\to a}f(x)=L$ if for every positive number $\\varepsilon$ (the “tolerance” we allow for the output) there exists a positive number $\\delta$ (the “tolerance” we allow for the input) such that  \n> $$0<|x-a|<\\delta \\quad\\Longrightarrow\\quad |f(x)-L|<\\varepsilon.$$\n\nThink of $\\varepsilon$ as a tiny “target circle” around the desired output $L$, and $\\delta$ as a “starting circle” around the input $a$. If we can always choose a starting circle that forces the output into the target circle, the limit exists.\n\n### Step 1 – Write the condition we need\n\nFor $f(x)=5x$, $a=2$, and $L=10$, the definition becomes  \n\n$$0<|x-2|<\\delta \\;\\Longrightarrow\\; |5x-10|<\\varepsilon.$$\n\nOur job is to find a formula for $\\delta$ in terms of the given $\\varepsilon$ that makes this implication true.\n\n### Step 2 – Manipulate the output expression\n\nStart with the absolute‑value expression we need to bound:\n\n$$|5x-10| = |5(x-2)| = 5|x-2|.$$\n\nSo the condition $|5x-10|<\\varepsilon$ is equivalent to  \n\n$$5|x-2|<\\varepsilon.$$\n\nNow we can solve for $|x-2|$:\n\n$$|x-2|<\\frac{\\varepsilon}{5}.$$\n\n### Step 3 – Choose $\\delta$\n\nThe inequality we just derived tells us that **any** $\\delta$ that is *no larger* than $\\varepsilon/5$ will work, because if $0<|x-2|<\\delta\\le\\varepsilon/5$, then automatically $|x-2|<\\varepsilon/5$ and hence $5|x-2|<\\varepsilon$.\n\nThus we can **define**  \n\n$$\\boxed{\\;\\delta = \\frac{\\varepsilon}{5}\\;}.$$\n\nThis choice is simple and works for every positive $\\varepsilon$.\n\n> **Note:**  \n> The factor $5$ came from the slope of the line $y=5x$. In general, for a linear function $f(x)=mx+b$, the same steps give $\\delta = \\varepsilon/|m|$.\n\n### Step 4 – Verify the implication\n\nAssume $0<|x-2|<\\delta$ with our chosen $\\delta=\\varepsilon/5$. Then\n\n\\[\n|5x-10| = 5|x-2| \\;<\\; 5\\left(\\frac{\\varepsilon}{5}\\right) = \\varepsilon.\n\\]\n\nThus the definition’s requirement is satisfied.\n\n### Step 5 – Summarise the proof\n\n> **Remember:**  \n> To prove $\\displaystyle\\lim_{x\\to a}f(x)=L$, start from $|f(x)-L|$, rewrite it in terms of $|x-a|$, and then solve for a suitable $\\delta$ as a function of $\\varepsilon$.\n\nPutting everything together, we have shown:\n\n> For every $\\varepsilon>0$, if we let $\\delta=\\varepsilon/5$, then  \n> $$0<|x-2|<\\delta \\;\\Longrightarrow\\; |5x-10|<\\varepsilon.$$  \n> Hence, by the ε‑δ definition, $\\displaystyle\\lim_{x\\to 2}5x = 10$.\n\n### Why this matters\n\nThe ε‑δ proof does more than confirm an intuitive picture; it gives a precise recipe for how close we must get to the input to guarantee a desired closeness of the output. In engineering, for example, if a sensor must stay within $0.01$ units of a target value, the ε‑δ calculation tells us exactly how accurately we need to set the input.\n\n> **In daily life:**  \n> Imagine you are aiming a dart at a bullseye. $\\varepsilon$ is the radius of the bullseye you are willing to accept; $\\delta$ tells you how tightly you must aim your throw. The proof shows that, for a straight‑line relationship, the required aim precision is just the bullseye size divided by the slope of the line.",
    "code": ""
   },
   {
-   "heading": "Proof Example: Linear Function",
-   "body": "**Proof Example: Linear Function**\n\nWe want to prove, using the **ε‑δ definition** of a limit, that  \n\n\\[\n\\lim_{x\\to a}(mx+b)=ma+b ,\n\\]\n\nwhere \\(m\\) and \\(b\\) are real constants.  \n\n---\n\n### Step 1 – Write the definition\n\nThe limit statement means:\n\n> For every \\(\\varepsilon>0\\) there exists a \\(\\delta>0\\) such that  \n> if \\(0<|x-a|<\\delta\\) then \\(|(mx+b)-(ma+b)|<\\varepsilon\\).\n\nNotice that the expression inside the absolute value simplifies:\n\n\\[\n|(mx+b)-(ma+b)|=|m(x-a)|.\n\\]\n\n---\n\n### Step 2 – Isolate \\(|x-a|\\)\n\nBecause \\(|m(x-a)|=|m|\\;|x-a|\\), the inequality we need becomes  \n\n\\[\n|m|\\;|x-a|<\\varepsilon .\n\\]\n\nIf \\(m\\neq 0\\) we can divide both sides by \\(|m|\\):\n\n\\[\n|x-a|<\\frac{\\varepsilon}{|m|}.\n\\]\n\nThus, **choosing**  \n\n\\[\n\\boxed{\\;\\delta=\\frac{\\varepsilon}{|m|}\\;}\n\\]\n\nwill guarantee the required inequality.  \n\nIf \\(m=0\\) the function is constant: \\(mx+b=b\\). Then  \n\n\\[\n|(mx+b)-(ma+b)|=|b-b|=0<\\varepsilon\n\\]\n\nfor any \\(\\varepsilon>0\\). In this case **any** positive \\(\\delta\\) works; we may simply take \\(\\delta=1\\).\n\n---\n\n### Step 3 – Verify the choice\n\nAssume \\(m\\neq 0\\) and let \\(\\varepsilon>0\\) be given. Choose \\(\\delta=\\varepsilon/|m|\\).  \nIf \\(0<|x-a|<\\delta\\), then\n\n\\[\n| (mx+b)-(ma+b)|\n   =|m|\\;|x-a|\n   <|m|\\;\\frac{\\varepsilon}{|m|}\n   =\\varepsilon .\n\\]\n\nHence the definition is satisfied, and the limit is proved.\n\n---\n\n### Summary\n\n- We rewrote the difference of the function and its proposed limit.  \n- The absolute value reduced to \\(|m|\\;|x-a|\\).  \n- Solving \\(|m|\\;|x-a|<\\varepsilon\\) gave \\(\\delta=\\varepsilon/|m|\\) (or any \\(\\delta>0\\) when \\(m=0\\)).  \n- Substituting this \\(\\delta\\) back confirms the ε‑δ condition.\n\n---\n\n## Practice Problems\n\n### Problem 1  \nProve \\(\\displaystyle\\lim_{x\\to 3}(5x-2)=13\\).\n\n**Solution**  \nWe need \\(|5x-2-13|<\\varepsilon\\).  \nSimplify: \\(|5x-15|=5|x-3|\\).  \nChoose \\(\\delta=\\varepsilon/5\\).  \nIf \\(0<|x-3|<\\delta\\) then \\(5|x-3|<5\\delta=\\varepsilon\\). Hence the limit holds.\n\n---\n\n### Problem 2  \nProve \\(\\displaystyle\\lim_{x\\to -1}(-4x+7)=11\\).\n\n**Solution**  \n\\(|-4x+7-11|=|-4x-4|=4|x+1|\\).  \nTake \\(\\delta=\\varepsilon/4\\).  \nIf \\(0<|x+1|<\\delta\\) then \\(4|x+1|<4\\delta=\\varepsilon\\). Limit proved.\n\n---\n\n### Problem 3  \nShow that \\(\\displaystyle\\lim_{x\\to 0}(0\\cdot x+9)=9\\).\n\n**Solution**  \nThe function is constant \\(9\\). For any \\(\\varepsilon>0\\),\n\n\\[\n|(0\\cdot x+9)-9|=0<\\varepsilon .\n\\]\n\nThus any \\(\\delta>0\\) works; pick \\(\\delta=1\\).\n\n---\n\n### Problem 4  \nProve \\(\\displaystyle\\lim_{x\\to 2}( -\\tfrac12 x + 3)=2\\).\n\n**Solution**  \nCompute the difference:\n\n\\[\n\\Big|-\\tfrac12 x +3-2\\Big|\n   =\\Big|-\\tfrac12 x +1\\Big|\n   =\\tfrac12|x-2|.\n\\]\n\nWe need \\(\\tfrac12|x-2|<\\varepsilon\\), i.e. \\(|x-2|<2\\varepsilon\\).  \nChoose \\(\\delta=2\\varepsilon\\).  \nIf \\(0<|x-2|<\\delta\\) then \\(\\tfrac12|x-2|<\\tfrac12\\delta=\\varepsilon\\). Hence the limit is \\(2\\).",
+   "heading": "Practice Problems with Guidance",
+   "body": "When you work with the formal definition of a limit, the goal is to show that **no matter how tightly** you want to trap the function values, you can always find a small enough neighbourhood around the point $x_0$ that makes this happen.  \nIn symbols we want to prove  \n\n$$\\forall\\varepsilon>0\\;\\exists\\delta>0\\; \\text{such that}\\;0<|x-x_0|<\\delta\\implies |f(x)-L|<\\varepsilon.$$  \n\nBelow are three classic limits. For each one we walk through the thinking process that leads to a suitable $\\delta$. Follow the steps, and you will see a pattern that works for many other problems.\n\n---\n\n**Problem 1.**  \n\n$$\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}=4.$$  \n\n*Why this limit?* The expression simplifies to $x+2$ for every $x\\neq2$, so we expect the limit to be $4$ because $2+2=4$.  \n\n**Guided steps**\n\n1. **State the target**: we must make $|\\,\\frac{x^{2}-4}{x-2}-4\\,|$ smaller than a given $\\varepsilon$.  \n2. **Simplify the difference**:  \n\n   $$\\left|\\frac{x^{2}-4}{x-2}-4\\right|\n     =\\left|\\frac{(x-2)(x+2)}{x-2}-4\\right|\n     =|x+2-4|\n     =|x-2|.$$  \n\n   The algebra shows the whole expression collapses to $|x-2|$.  \n3. **Choose $\\delta$**: we need $|x-2|<\\varepsilon$, so we can simply set  \n\n   $$\\delta=\\varepsilon.$$  \n\n   Any $\\delta$ that is **no larger** than $\\varepsilon$ will work.\n\n> **Remember:** After simplifying, the remaining expression often *is* the distance $|x-x_0|$ itself, making the choice $\\delta=\\varepsilon$ possible.\n\n---\n\n**Problem 2.**  \n\n$$\\lim_{x\\to 0}\\frac{1}{x+1}=1.$$  \n\n*Why this limit?* As $x$ gets close to $0$, the denominator $x+1$ gets close to $1$, so the fraction should approach $1$.  \n\n**Guided steps**\n\n1. Write the inequality we need:  \n\n   $$\\left|\\frac{1}{x+1}-1\\right|<\\varepsilon.$$  \n\n2. Combine the terms:  \n\n   $$\\left|\\frac{1-(x+1)}{x+1}\\right|\n     =\\left|\\frac{-x}{x+1}\\right|\n     =\\frac{|x|}{|x+1|}.$$\n\n3. **Control the denominator**. We want a simple lower bound for $|x+1|$.  \n   Choose a provisional restriction, say $|x|<\\tfrac12$. Then  \n\n   $$|x+1|\\ge 1-|x|>1-\\tfrac12=\\tfrac12.$$  \n\n   So whenever $|x|<\\tfrac12$, we have  \n\n   $$\\frac{|x|}{|x+1|}\\le \\frac{|x|}{1/2}=2|x|.$$\n\n4. Now require $2|x|<\\varepsilon$, i.e. $|x|<\\varepsilon/2$.  \n\n5. **Combine the two requirements**:  \n\n   $$\\delta=\\min\\!\\left\\{\\frac12,\\;\\frac{\\varepsilon}{2}\\right\\}.$$\n\n   If $0<|x|<\\delta$, both the denominator bound and the final inequality hold, giving the desired limit.\n\n> **Note:** Picking a small “pre‑restriction’’ (here $|x|<\\tfrac12$) lets us replace a complicated denominator by a harmless constant.\n\n---\n\n**Problem 3.**  \n\n$$\\lim_{x\\to 0}|x|=0.$$  \n\n*Why this limit?* The absolute‑value function measures distance from zero, so as $x$ gets closer to $0$, the distance itself must shrink to $0$.  \n\n**Guided steps**\n\n1. Write the condition:  \n\n   $$\\bigl||x|-0\\bigr|=|x|<\\varepsilon.$$  \n\n2. The inequality is already in the form $|x|<\\varepsilon$, so we can **directly set**  \n\n   $$\\delta=\\varepsilon.$$  \n\n   No extra algebra is needed.\n\n> **In daily life:** This is like saying, “If you want to be within $\\varepsilon$ meters of the door, just stay within $\\varepsilon$ meters of the hallway’s centre.” The same distance works for both the position and the distance to the door.\n\n---\n\n**Putting it all together**\n\n* Start by writing the exact inequality that represents “the function is within $\\varepsilon$ of the limit.”  \n* Simplify the expression as much as possible; often factors cancel or absolute values turn into simple distances.  \n* If a denominator could become tiny, impose a harmless extra restriction (e.g., $|x|<\\frac12$) to bound it away from zero.  \n* Translate the simplified inequality into a condition on $|x-x_0|$, then choose $\\delta$ as the smallest of the numbers that guarantee every requirement.\n\nPractice these three examples until the pattern feels natural. Once you can spot the simplification step quickly, the rest of the $\\varepsilon$–$\\delta$ proof becomes a routine exercise.",
    "code": ""
   },
   {
-   "heading": "Proof Example: Quadratic Function",
-   "body": "**Proof Example: Quadratic Function**  \n\nWe want to prove  \n\n\\[\n\\lim_{x\\to a}x^{2}=a^{2}.\n\\]\n\nAccording to the **ε‑δ definition**, we must show that for every $\\varepsilon>0$ there exists a $\\delta>0$ such that  \n\n\\[\n0<|x-a|<\\delta \\;\\Longrightarrow\\; |x^{2}-a^{2}|<\\varepsilon .\n\\]\n\n---\n\n### Step 1 – Rewrite the difference  \n\n\\[\n|x^{2}-a^{2}|=|(x-a)(x+a)|=|x-a|\\;|x+a|.\n\\]\n\nThe factor $|x-a|$ is already in the form we can control with $\\delta$.  \nWe need a bound for $|x+a|$ when $x$ is close to $a$.\n\n---\n\n### Step 2 – Bound $|x+a|$  \n\nChoose $\\delta\\le 1$. Then, if $|x-a|<\\delta\\le 1$, we have  \n\n\\[\n|x-a|<1 \\;\\Longrightarrow\\; -1 < x-a < 1 \\;\\Longrightarrow\\; a-1 < x < a+1 .\n\\]\n\nAdding $a$ to each part gives  \n\n\\[\n2a-1 < x+a < 2a+1,\n\\]\n\nso  \n\n\\[\n|x+a| < |2a|+1 = 2|a|+1 .\n\\]\n\nThus, whenever $|x-a|<1$, the factor $|x+a|$ is bounded by $2|a|+1$.\n\n---\n\n### Step 3 – Choose $\\delta$ in terms of $\\varepsilon$  \n\nWe want  \n\n\\[\n|x-a|\\;|x+a| < \\varepsilon .\n\\]\n\nUsing the bound from Step 2, it is enough to require  \n\n\\[\n|x-a|\\;(2|a|+1) < \\varepsilon .\n\\]\n\nHence we can guarantee the inequality by taking  \n\n\\[\n|x-a| < \\frac{\\varepsilon}{2|a|+1}.\n\\]\n\nCombine this requirement with the earlier restriction $|x-a|<1$ by defining  \n\n\\[\n\\boxed{\\;\\delta = \\min\\!\\left(1,\\; \\frac{\\varepsilon}{2|a|+1}\\right)\\; } .\n\\]\n\n---\n\n### Step 4 – Verify the choice  \n\nAssume $0<|x-a|<\\delta$. Then $|x-a|<1$, so $|x+a|<2|a|+1$. Also  \n\n\\[\n|x-a| < \\frac{\\varepsilon}{2|a|+1}.\n\\]\n\nMultiplying the two inequalities gives  \n\n\\[\n|x-a|\\;|x+a| < \\frac{\\varepsilon}{2|a|+1}\\;(2|a|+1)=\\varepsilon .\n\\]\n\nTherefore $|x^{2}-a^{2}|<\\varepsilon$, completing the proof that  \n\n\\[\n\\lim_{x\\to a}x^{2}=a^{2}.\n\\]\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nProve $\\displaystyle\\lim_{x\\to 3}(5x-7)=8$.\n\n**Solution**  \n\nWe need $|5x-7-8|<\\varepsilon$, i.e. $|5x-15|<\\varepsilon$.  \nFactor: $|5(x-3)|=5|x-3|$.  \nChoose $\\delta=\\varepsilon/5$. Then $0<|x-3|<\\delta$ implies $5|x-3|<\\varepsilon$, so the limit is $8$.\n\n---\n\n### Problem 2  \nShow $\\displaystyle\\lim_{x\\to -2}(x^{2}+4x+4)=0$.\n\n**Solution**  \n\nRewrite $x^{2}+4x+4=(x+2)^{2}$. We need $|(x+2)^{2}|<\\varepsilon$, i.e. $|x+2|^{2}<\\varepsilon$.  \nTake square roots: $|x+2|<\\sqrt{\\varepsilon}$.  \nSet $\\delta=\\sqrt{\\varepsilon}$. Then $0<|x+2|<\\delta$ gives the desired inequality, proving the limit $0$.\n\n---\n\n### Problem 3  \nProve $\\displaystyle\\lim_{x\\to 1}\\frac{x^{2}-1}{x-1}=2$.\n\n**Solution**  \n\nFor $x\\neq1$, $\\frac{x^{2}-1}{x-1}=x+1$. We must make $|x+1-2|=|x-1|<\\varepsilon$.  \nThus choose $\\delta=\\varepsilon$. Whenever $0<|x-1|<\\delta$, the inequality holds, so the limit equals $2$.\n\n---\n\n### Problem 4  \nProve $\\displaystyle\\lim_{x\\to 0}\\sin x =0$ using the inequality $|\\sin x|\\le|x|$.\n\n**Solution**  \n\nWe need $|\\sin x|<\\varepsilon$. Since $|\\sin x|\\le|x|$, it suffices to have $|x|<\\varepsilon$.  \nChoose $\\delta=\\varepsilon$. Then $0<|x|<\\delta$ guarantees $|\\sin x|<\\varepsilon$, establishing the limit $0$.",
+   "heading": "Common Mistakes and How to Avoid Them",
+   "body": "When you first write an ε‑δ proof, it is easy to slip into habits that look correct at a glance but actually break the logical chain. Below are the most frequent pitfalls and simple ways to keep them from sneaking into your work.\n\n> **Common mistake:** *Choosing δ without looking at ε.*  \nThe definition of a limit says: *for every* positive number ε there must exist a positive number δ that may depend on ε. If you pick a single δ once and then try to use it for all ε, the statement you have proved is much weaker – it only shows the function stays close to the limit for one particular tolerance, not for every possible tolerance.  \n**How to avoid it:** Start each proof by writing “Let ε > 0 be given. We will find a δ that works for this ε.” Then work algebraically to express a condition on |x‑a| that guarantees $|f(x)-L|<\\varepsilon$. The final expression for δ will usually involve ε (e.g., δ = ε/|m| for a linear function $f(x)=mx+b$). By keeping ε visible throughout the calculation you ensure the δ you produce really *depends* on it.\n\n> **Remember:** *Always keep the absolute‑value bars.*  \nThe limit definition uses the distance between numbers, which is measured by absolute value. Forgetting the bars, or writing $|f(x)-L|<\\varepsilon$ as $f(x)-L<\\varepsilon$, changes the inequality dramatically. Without the absolute value you only control one side of the distance (either too big or too small), and the proof fails for points on the other side of the limit.  \n**How to avoid it:** Whenever you see a phrase like “the distance between $f(x)$ and $L$ is less than ε”, translate it directly into $|f(x)-L|<\\varepsilon$. Do the same for the distance between $x$ and the point $a$: always write $|x-a|<\\delta$. If you ever drop a bar, pause and ask yourself whether you are still measuring a distance.\n\n> **Common mistake:** *Mixing up the limit point $a$ with the limit value $L$.*  \nIn the statement $\\displaystyle\\lim_{x\\to a}f(x)=L$, the symbol $a$ tells us **where** $x$ is approaching, while $L$ tells us **what** the function values are approaching. A common error is to replace $|x-a|$ with $|x-L|$ or to solve for δ using the wrong variable. This leads to nonsensical conditions such as “choose δ so that $|x-L|<\\delta$”, which has nothing to do with the definition.  \n**How to avoid it:** Write the two parts of the definition side by side:  \n$$|x-a|<\\delta \\quad\\Longrightarrow\\quad |f(x)-L|<\\varepsilon.$$  \nNotice that the left side involves $a$ and the right side involves $L$. Keep a small note on your paper: *a = where x goes, L = where f(x) goes*. Whenever you manipulate an inequality, check that the variable on the left matches $a$ and the one on the right matches $L$.\n\n> **In daily life:** *Think of ε and δ as a “tightening” game.*  \nImagine you are trying to keep a dog (the function values) within a leash length ε of a post (the limit $L$). The dog can move only when you let the owner (the input $x$) get within a certain distance δ of a gate (the point $a$). If you set the leash length first (choose ε) and then decide how close the owner must be (choose δ) based on that leash, you have a valid strategy. If you set the gate distance once and never change it, the dog might wander too far when you tighten the leash later. This picture reminds you that δ must be chosen *after* you know the desired ε, and it must be tied to the same ε every time.\n\nBy watching for these three errors—using a fixed δ, dropping absolute values, and confusing $a$ with $L$—you can turn a shaky proof into a solid, textbook‑ready argument. Each time you start a new ε‑δ proof, repeat the checklist:  \n\n1. State “let ε > 0 be given”.  \n2. Keep $|x-a|$ and $|f(x)-L|$ with absolute values.  \n3. Solve for δ in terms of ε, making sure the variables match the correct side of the implication.  \n\nFollowing these steps will keep your reasoning clear and your proofs correct.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\n---\n\n### 1. Prove \\(\\displaystyle\\lim_{x\\to 3}(2x+5)=11\\) using the \\(\\varepsilon\\)–\\(\\delta\\) definition  \n\nLet \\(\\varepsilon>0\\) be given.  \nWe need a \\(\\delta>0\\) such that  \n\n\\[\n0<|x-3|<\\delta \\;\\Longrightarrow\\; |(2x+5)-11|<\\varepsilon .\n\\]\n\nSimplify the expression inside the absolute value:\n\n\\[\n|(2x+5)-11|=|2x-6|=2|x-3|.\n\\]\n\nThus the implication we want is  \n\n\\[\n0<|x-3|<\\delta \\;\\Longrightarrow\\; 2|x-3|<\\varepsilon .\n\\]\n\nIf we choose  \n\n\\[\n\\boxed{\\;\\delta=\\frac{\\varepsilon}{2}\\;}\n\\]\n\nthen \\(2|x-3|<2\\delta=\\varepsilon\\). Hence the definition is satisfied, and the limit equals \\(11\\).\n\n---\n\n### 2. Prove \\(\\displaystyle\\lim_{x\\to 0}x^{3}=0\\)  \n\nTake any \\(\\varepsilon>0\\). We must find \\(\\delta>0\\) with  \n\n\\[\n0<|x|<\\delta \\;\\Longrightarrow\\; |x^{3}-0|=|x|^{3}<\\varepsilon .\n\\]\n\nBecause \\(|x|<1\\) implies \\(|x|^{3}<|x|\\), we can first restrict \\(\\delta\\le 1\\).  \nThen, for \\(0<|x|<\\delta\\le 1\\),\n\n\\[\n|x|^{3}\\le |x|<\\delta .\n\\]\n\nSo it is enough to make \\(\\delta\\) smaller than \\(\\varepsilon\\). Choose  \n\n\\[\n\\boxed{\\;\\delta=\\min\\{1,\\varepsilon\\}\\;}\n\\]\n\nand the implication follows, proving the limit is \\(0\\).\n\n---\n\n### 3. Show \\(\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}=4\\) by \\(\\varepsilon\\)–\\(\\delta\\)  \n\nFirst simplify the function (for \\(x\\neq2\\)):\n\n\\[\n\\frac{x^{2}-4}{x-2}= \\frac{(x-2)(x+2)}{x-2}=x+2 .\n\\]\n\nThus we need  \n\n\\[\n0<|x-2|<\\delta \\;\\Longrightarrow\\; |(x+2)-4|=|x-2|<\\varepsilon .\n\\]\n\nThe inequality already has the same form as the hypothesis, so we can simply take  \n\n\\[\n\\boxed{\\;\\delta=\\varepsilon\\;}\n\\]\n\nand the definition is satisfied. Hence the limit equals \\(4\\).\n\n---\n\n### 4. For \\(f(x)=|x|\\), prove \\(\\displaystyle\\lim_{x\\to 0}f(x)=0\\)  \n\nGiven \\(\\varepsilon>0\\), we need \\(\\delta>0\\) such that  \n\n\\[\n0<|x|<\\delta \\;\\Longrightarrow\\; ||x|-0|=|x|<\\varepsilon .\n\\]\n\nThe condition \\(|x|<\\delta\\) already guarantees \\(|x|<\\varepsilon\\) if we set \\(\\delta=\\varepsilon\\).  \nThus choose  \n\n\\[\n\\boxed{\\;\\delta=\\varepsilon\\;}\n\\]\n\nand the limit follows directly.\n\n---\n\n### 5. Counter‑example: a guessed \\(\\delta\\) that fails, and the correction  \n\n**Wrong guess:** For the limit \\(\\displaystyle\\lim_{x\\to 1}(3x-2)=1\\), suppose we pick \\(\\delta=\\varepsilon\\).  \n\nCheck the definition:  \n\n\\[\n|(3x-2)-1|=|3x-3|=3|x-1|.\n\\]\n\nIf we use \\(\\delta=\\varepsilon\\), the implication gives  \n\n\\[\n3|x-1|<\\varepsilon \\quad\\text{whenever}\\quad |x-1|<\\varepsilon .\n\\]\n\nBut \\(3|x-1|<\\varepsilon\\) is **not** guaranteed; we actually need  \n\n\\[\n|x-1|<\\frac{\\varepsilon}{3}.\n\\]\n\n**Correction:** Choose  \n\n\\[\n\\boxed{\\;\\delta=\\frac{\\varepsilon}{3}\\;}\n\\]\n\nThen \\(0<|x-1|<\\delta\\) implies \\(3|x-1|<3\\delta=\\varepsilon\\), satisfying the definition. This example shows why the factor that multiplies \\(|x-a|\\) must be taken into account when selecting \\(\\delta\\).",
+   "heading": "Connecting to Continuity",
+   "body": "When we have already proved a limit with the ε‑δ definition, we can use that result to decide whether the function is **continuous** at the point where we took the limit.  \n\n> **Definition:** A function $f$ is *continuous* at a point $c$ if three things happen:  \n> 1. $f(c)$ is defined (the function has a value at $c$);  \n> 2. the limit $\\displaystyle\\lim_{x\\to c}f(x)$ exists;  \n> 3. the limit equals the function value, that is $\\displaystyle\\lim_{x\\to c}f(x)=f(c)$.  \n\nThe ε‑δ language gives us a precise way to check the second condition.  If we can show that for every tolerance $\\varepsilon>0$ there is a distance $\\delta>0$ such that  \n\n$$\n0<|x-c|<\\delta \\;\\Longrightarrow\\; |f(x)-L|<\\varepsilon ,\n$$  \n\nthen we have proved that $\\displaystyle\\lim_{x\\to c}f(x)=L$.  When, in addition, we already know that $f(c)=L$, the third condition of continuity is automatically satisfied.  Hence the ε‑δ condition together with the equality $f(c)=L$ guarantees continuity at $c$.\n\nWhy is this useful?  In many problems we first find the limit of a function at a point, and then we want to know whether the graph has a “hole” or a “jump” there.  If the limit exists and matches the function’s own value, the graph has no break – it can be drawn without lifting the pencil.  This visual idea matches the formal definition: the pencil never has to jump because the function’s output near $c$ stays arbitrarily close to the value at $c$.\n\nThink of a thermostat that measures room temperature.  Suppose the thermostat reads $22^\\circ\\text{C}$ at the exact moment $t=5$ minutes, and we have shown that for any small tolerance $\\varepsilon$ (say $0.5^\\circ\\text{C}$) we can find a short time interval $\\delta$ (say $0.2$ minutes) such that every reading within that interval differs from $22^\\circ\\text{C}$ by less than $0.5^\\circ\\text{C}$.  This means the temperature does not suddenly jump right at $t=5$; the reading changes smoothly.  In mathematical language, the temperature function is continuous at $t=5$.\n\nLet us write the full argument in steps, using a simple linear function as an example.\n\n1. **Show the limit exists.**  \n   For $f(x)=2x+3$ and $c=1$, we claim $\\displaystyle\\lim_{x\\to1}f(x)=5$.  \n   Given any $\\varepsilon>0$, choose $\\delta=\\varepsilon/2$.  Then  \n\n   $$\n   0<|x-1|<\\delta \\;\\Longrightarrow\\; |f(x)-5|=|2x+3-5|=|2(x-1)|=2|x-1|<2\\delta=\\varepsilon .\n   $$  \n\n   Hence the ε‑δ condition holds, so the limit is $5$.\n\n2. **Check the function value.**  \n   Compute $f(1)=2\\cdot1+3=5$.  The limit value $L=5$ equals $f(1)$.\n\n3. **Conclude continuity.**  \n   Because $f(1)$ exists, the limit exists, and they are equal, $f$ is continuous at $x=1$.\n\n> **Remember:** To prove continuity at $c$, you only need to verify the ε‑δ condition for the limit and then check that $f(c)$ equals the limit you obtained.\n\nA common slip is to forget the first requirement that $f(c)$ must be defined.  A function can have a perfectly good limit at a point but still be discontinuous there if the function is *not* assigned a value at that point (think of a hole in the graph).  \n\n> **Common mistake:** Assuming “the limit exists” automatically means “the function is continuous.”  Always verify that $f(c)$ exists and equals the limit.\n\nIn the next lesson we will explore how continuity behaves under operations such as addition, multiplication, and composition.  Knowing that each piece satisfies the ε‑δ condition lets us combine them confidently, because the combined function will inherit continuity from its parts.  This builds a powerful toolbox for analyzing more complicated functions without re‑doing the ε‑δ proof from scratch each time.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Limit of a linear function",
+   "given": "Find $\\displaystyle\\lim_{x\\to 3}(2x+1)$ using the $\\varepsilon$–$\\delta$ definition.",
+   "steps": [
+    {
+     "label": "Choose $\\varepsilon$",
+     "text": "Let $\\varepsilon>0$ be arbitrary; we must find $\\delta>0$ that works."
+    },
+    {
+     "label": "Express difference",
+     "text": "$| (2x+1) - (2\\cdot3+1) | = |2x-6| = 2|x-3|$."
+    },
+    {
+     "label": "Relate to $\\delta$",
+     "text": "Require $2|x-3|<\\varepsilon$, i.e. $|x-3|<\\varepsilon/2$."
+    },
+    {
+     "label": "Choose $\\delta$",
+     "text": "Take $\\delta=\\varepsilon/2$. Then $0<|x-3|<\\delta$ implies $| (2x+1)-7|<\\varepsilon$."
+    }
+   ],
+   "answer": "$\\displaystyle\\lim_{x\\to3}(2x+1)=7$; any $\\varepsilon>0$ works with $\\delta=\\varepsilon/2$."
+  },
+  {
+   "level": "Medium",
+   "title": "Limit of a rational function",
+   "given": "Prove $\\displaystyle\\lim_{x\\to2}\\frac{x^2-4}{x-2}=4$ with the $\\varepsilon$–$\\delta$ definition.",
+   "steps": [
+    {
+     "label": "Simplify expression",
+     "text": "For $x\\neq2$, $\\frac{x^2-4}{x-2}=x+2$."
+    },
+    {
+     "label": "Write difference",
+     "text": "$| (x+2)-4| = |x-2|$."
+    },
+    {
+     "label": "Relate to $\\varepsilon$",
+     "text": "We need $|x-2|<\\varepsilon$."
+    },
+    {
+     "label": "Choose $\\delta$",
+     "text": "Let $\\delta=\\varepsilon$ (and also $\\delta\\le1$ to stay away from $x=2$ if desired)."
+    },
+    {
+     "label": "Verify",
+     "text": "If $0<|x-2|<\\delta$, then $| \\frac{x^2-4}{x-2}-4| = |x-2|<\\varepsilon$."
+    }
+   ],
+   "answer": "$\\displaystyle\\lim_{x\\to2}\\frac{x^2-4}{x-2}=4$, with any $\\delta\\le\\varepsilon$ satisfying the definition."
+  },
+  {
+   "level": "Hard",
+   "title": "Limit involving a quadratic denominator",
+   "given": "Show $\\displaystyle\\lim_{x\\to1}\\frac{x^2-1}{x-1}=2$ using $\\varepsilon$–$\\delta$.",
+   "steps": [
+    {
+     "label": "Factor numerator",
+     "text": "$x^2-1=(x-1)(x+1)$, so $\\frac{x^2-1}{x-1}=x+1$ for $x\\neq1$."
+    },
+    {
+     "label": "Write difference",
+     "text": "$| (x+1)-2| = |x-1|$."
+    },
+    {
+     "label": "Impose bound on $x$",
+     "text": "Choose $\\delta_1=1$ so that $|x-1|<1\\Rightarrow 0<x<2$, giving $|x+1|\\le3$."
+    },
+    {
+     "label": "Relate to $\\varepsilon$",
+     "text": "Need $|x-1|<\\varepsilon$."
+    },
+    {
+     "label": "Choose $\\delta$",
+     "text": "Take $\\delta=\\min\\{1,\\varepsilon\\}$. Then $0<|x-1|<\\delta$ implies $| \\frac{x^2-1}{x-1}-2| =|x-1|<\\varepsilon$."
+    }
+   ],
+   "answer": "$\\displaystyle\\lim_{x\\to1}\\frac{x^2-1}{x-1}=2$, and the proof works with $\\delta=\\min\\{1,\\varepsilon\\}\\,. $"
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Prove that $\\displaystyle\\lim_{x\\to 2}(3x-5)=1$ using the ε‑δ definition.",
+   "a": "\n1. Let $\\varepsilon>0$ be given.\n2. Compute $|f(x)-L|$:\n$$|3x-5-1|=|3x-6|=3|x-2|.$$\n3. To make this $<\\varepsilon$, require $3|x-2|<\\varepsilon$, i.e. $|x-2|<\\varepsilon/3$.\n4. Choose $\\displaystyle\\delta=\\frac{\\varepsilon}{3}$.\n5. If $0<|x-2|<\\delta$, then $|3x-5-1|=3|x-2|<3\\delta= \\varepsilon$.\n6. Hence $\\displaystyle\\lim_{x\\to2}(3x-5)=1$."
+  },
+  {
+   "level": "Easy",
+   "q": "Show that $\\displaystyle\\lim_{x\\to -1}(4x+2)=-2$ with an ε‑δ proof.",
+   "a": "\n1. Let $\\varepsilon>0$.\n2. $|4x+2+2|=|4x+4|=4|x+1|$.\n3. Require $4|x+1|<\\varepsilon\\;\\Longrightarrow\\;|x+1|<\\varepsilon/4$.\n4. Take $\\displaystyle\\delta=\\frac{\\varepsilon}{4}$.\n5. Then $0<|x+1|<\\delta$ gives $|4x+2+2|<\\varepsilon$.\n6. Therefore the limit equals $-2$."
+  },
+  {
+   "level": "Medium",
+   "q": "Prove $\\displaystyle\\lim_{x\\to 0}(5x)=0$ using ε‑δ.",
+   "a": "\n1. Let $\\varepsilon>0$.\n2. $|5x-0|=5|x|$.\n3. Need $5|x|<\\varepsilon\\;\\Longrightarrow\\;|x|<\\varepsilon/5$.\n4. Choose $\\displaystyle\\delta=\\frac{\\varepsilon}{5}$.\n5. If $0<|x|<\\delta$, then $|5x|<5\\delta=\\varepsilon$.\n6. Hence $\\displaystyle\\lim_{x\\to0}5x=0$."
+  },
+  {
+   "level": "Medium",
+   "q": "Prove that $\\displaystyle\\lim_{x\\to 3}\\frac{x}{2}= \\frac32$ using the ε‑δ definition.",
+   "a": "\n1. Let $\\varepsilon>0$.\n2. $ \\bigg|\\frac{x}{2}-\\frac32\\bigg| = \\bigg|\\frac{x-3}{2}\\bigg| = \\frac12|x-3|$.\n3. Require $\\frac12|x-3|<\\varepsilon\\;\\Longrightarrow\\;|x-3|<2\\varepsilon$.\n4. Choose $\\displaystyle\\delta=2\\varepsilon$.\n5. Then $0<|x-3|<\\delta$ gives $|\\frac{x}{2}-\\frac32|<\\varepsilon$.\n6. Thus the limit is $\\frac32$."
+  },
+  {
+   "level": "Hard",
+   "q": "Prove $\\displaystyle\\lim_{x\\to 1}(2x^2-3x+1)=0$ with an ε‑δ argument.",
+   "a": "\n1. Let $\\varepsilon>0$.\n2. Compute $|f(x)-0|$:\n$$|2x^2-3x+1| = |(2x+1)(x-1)|.$$\n3. We need a bound for $|2x+1|$ when $x$ is near 1.\nChoose $\\delta\\le 1$, so $|x-1|<1$ ⇒ $0<x<2$ ⇒ $|2x+1|\\le 2\\cdot2+1=5$.\n4. Then\n$$|2x^2-3x+1| = |2x+1|\\,|x-1| \\le 5|x-1|.$$\n5. To make this $<\\varepsilon$, require $5|x-1|<\\varepsilon$, i.e. $|x-1|<\\varepsilon/5$.\n6. Define $\\displaystyle\\delta = \\min\\left\\{1,\\frac{\\varepsilon}{5}\\right\\}$.\n7. If $0<|x-1|<\\delta$, then both $|x-1|<1$ and $|x-1|<\\varepsilon/5$ hold, giving\n$$|2x^2-3x+1|\\le5|x-1|<5\\cdot\\frac{\\varepsilon}{5}=\\varepsilon.$$\n8. Hence $\\displaystyle\\lim_{x\\to1}(2x^2-3x+1)=0$."
+  },
+  {
+   "level": "Hard",
+   "q": "Show that $\\displaystyle\\lim_{x\\to 0}\\frac{x}{1+x}=0$ using ε‑δ.",
+   "a": "\n1. Let $\\varepsilon>0$.\n2. $ \\bigg|\\frac{x}{1+x}-0\\bigg| = \\frac{|x|}{|1+x|}$.\n3. We need a lower bound for $|1+x|$ near $0$.\nChoose $\\delta\\le \\tfrac12$, so $|x|<\\tfrac12$ ⇒ $|1+x|\\ge 1-\\tfrac12 = \\tfrac12$.\n4. Then\n$$\\frac{|x|}{|1+x|}\\le \\frac{|x|}{1/2}=2|x|.$$\n5. To make this $<\\varepsilon$, require $2|x|<\\varepsilon$, i.e. $|x|<\\varepsilon/2$.\n6. Define $\\displaystyle\\delta = \\min\\left\\{\\frac12,\\frac{\\varepsilon}{2}\\right\\}$.\n7. If $0<|x|<\\delta$, then $|x|<\\varepsilon/2$ and $|1+x|\\ge 1/2$, so\n$$\\left|\\frac{x}{1+x}\\right|\\le 2|x|<2\\cdot\\frac{\\varepsilon}{2}=\\varepsilon.$$\n8. Therefore $\\displaystyle\\lim_{x\\to0}\\frac{x}{1+x}=0\\,. $"
+  }
+ ],
+ "recap": "This lesson introduced the idea of a limit as the value a function approaches when x gets close to a point. It explained the epsilon‑delta definition, showing how epsilon sets a desired closeness for f(x) and delta sets a required closeness for x. Simple linear examples demonstrated how to choose delta, and the connection to continuity was outlined.",
  "key_terms": [
   {
    "term": "limit",
-   "meaning": "The value that f(x) approaches as x gets arbitrarily close to a certain point."
+   "meaning": "The value a function gets arbitrarily close to as the input approaches a certain point."
   },
   {
    "term": "epsilon (ε)",
-   "meaning": "A positive number that represents how close we want f(x) to be to the limit."
+   "meaning": "A positive number that represents how close we want the function values to be to the limit."
   },
   {
    "term": "delta (δ)",
-   "meaning": "A positive number that represents how close x must be to the point a to achieve the desired epsilon."
+   "meaning": "A positive number that represents how close the input must be to the point to achieve the epsilon closeness."
   },
   {
-   "term": "epsilon-delta definition",
-   "meaning": "For every ε>0 there exists a δ>0 such that 0<|x-a|<δ implies |f(x)-L|<ε."
+   "term": "epsilon‑delta definition",
+   "meaning": "A formal statement: for every ε>0 there exists δ>0 such that 0<|x‑a|<δ implies |f(x)‑L|<ε."
   },
   {
-   "term": "continuous function",
-   "meaning": "A function where the limit as x approaches a equals the function value at a."
+   "term": "continuous at c",
+   "meaning": "A function is continuous at c if f(c) is defined, the limit as x approaches c exists, and the limit equals f(c)."
   },
   {
-   "term": "bounding",
-   "meaning": "Finding an inequality that limits a complicated expression by a simpler one, often used to choose δ."
+   "term": "neighbourhood",
+   "meaning": "An interval around a point, often described by |x‑a|<δ."
   },
   {
-   "term": "constant function",
-   "meaning": "A function that always returns the same number c, regardless of x."
+   "term": "arbitrarily close",
+   "meaning": "Can get as near as desired, without necessarily being equal."
   },
   {
-   "term": "linear function",
-   "meaning": "A function of the form f(x)=mx+b where m and b are constants."
+   "term": "proof by construction",
+   "meaning": "Finding an explicit formula for δ in terms of ε to demonstrate the limit definition."
   }
  ],
  "quiz": [
   {
-   "q": "Why do we need a formal definition of limit instead of just relying on pictures?",
+   "q": "What does the epsilon (ε) represent in the ε‑δ definition?",
    "options": [
-    "Pictures are always accurate",
-    "Formal definition removes ambiguity about 'near'",
-    "Limits only work for constant functions",
-    "Because graphs cannot be drawn"
+    "The distance from x to a",
+    "The desired closeness of f(x) to the limit",
+    "The slope of the function",
+    "The value of the limit"
    ],
    "answer": 1,
-   "why": "The ε‑δ definition precisely defines what 'near' means."
+   "why": "ε sets how close the function values must be to the limit."
   },
   {
-   "q": "In the ε‑δ definition, what does the statement 0<|x-a|<δ represent?",
+   "q": "In the statement 0<|x‑a|<δ ⇒ |f(x)‑L|<ε, what does δ control?",
    "options": [
-    "x equals a",
-    "x is within a vertical band around a but not equal to a",
-    "f(x) is within epsilon of L",
-    "The limit does not exist"
+    "How close f(x) is to L",
+    "How close x is to a",
+    "The value of the limit L",
+    "The derivative of f at a"
    ],
    "answer": 1,
-   "why": "It means x is inside the δ‑neighbourhood of a, excluding the point a itself."
+   "why": "δ determines the required closeness of x to a."
   },
   {
-   "q": "For the constant function f(x)=c, what δ can we choose for any ε>0?",
+   "q": "Which of the following is NOT required for continuity at a point c?",
    "options": [
-    "δ = ε",
-    "δ = 1",
-    "Any positive δ works",
-    "δ = c"
+    "f(c) is defined",
+    "The limit as x→c exists",
+    "The limit equals f(c)",
+    "f is differentiable at c"
    ],
-   "answer": 2,
-   "why": "Since |f(x)-c| is always 0, any positive δ satisfies the condition."
+   "answer": 3,
+   "why": "Differentiability is stronger than continuity and not required."
   },
   {
-   "q": "When proving limit of a linear function mx+b at x→a, what δ should be chosen?",
+   "q": "For the function f(x)=2x+3, what δ works when ε=0.5 at a=1?",
    "options": [
-    "δ = ε / |m|",
-    "δ = ε * |m|",
-    "δ = ε",
-    "δ = |m| / ε"
+    "0.25",
+    "0.5",
+    "0.125",
+    "1"
    ],
    "answer": 0,
-   "why": "We need |m|·|x-a|<ε, so |x-a|<ε/|m|."
+   "why": "|f(x)-L|=2|x‑1|, so δ=ε/2=0.25."
   },
   {
-   "q": "In the quadratic limit proof, why do we first restrict δ ≤ 1?",
+   "q": "If a limit exists, which of the following must be true?",
    "options": [
-    "To make the algebra easier",
-    "To bound |x+a| by a constant",
-    "Because the limit only works for δ=1",
-    "To ensure x is positive"
+    "δ can be chosen independent of ε",
+    "ε can be chosen independent of δ",
+    "For every ε>0 there is a δ>0",
+    "δ must be larger than ε"
    ],
-   "answer": 1,
-   "why": "With δ ≤ 1 we can guarantee |x+a| is bounded by 2|a|+1."
+   "answer": 2,
+   "why": "The definition requires a δ for each ε."
   },
   {
-   "q": "What does it mean for a function to be continuous at a point a?",
+   "q": "Which phrase best describes ‘arbitrarily close’?",
    "options": [
-    "The limit as x→a does not exist",
-    "lim_{x→a} f(x) = f(a)",
-    "f(x) is constant everywhere",
-    "ε can be chosen without δ"
+    "Exactly equal",
+    "Within a fixed distance",
+    "Can be made as small as desired",
+    "Never reaching the point"
    ],
-   "answer": 1,
-   "why": "Continuity requires the limit to equal the function value at that point."
+   "answer": 2,
+   "why": "Arbitrarily close means the distance can be made as small as we wish."
   }
  ],
  "flashcards": [
   {
-   "front": "Define limit in plain words.",
-   "back": "The number L that f(x) gets arbitrarily close to as x approaches a."
+   "front": "Limit",
+   "back": "The value a function approaches as x gets close to a specific point."
   },
   {
-   "front": "What is ε in the ε‑δ definition?",
-   "back": "A chosen positive distance that measures how close f(x) must be to L."
+   "front": "Epsilon (ε)",
+   "back": "A positive number that sets the allowed error for the function value."
   },
   {
-   "front": "What is δ in the ε‑δ definition?",
-   "back": "A positive distance around a that guarantees f(x) stays within ε of L."
+   "front": "Delta (δ)",
+   "back": "A positive number that sets the allowed error for the input value."
   },
   {
-   "front": "State the ε‑δ definition of limit.",
-   "back": "For every ε>0 there exists a δ>0 such that 0<|x-a|<δ implies |f(x)-L|<ε."
+   "front": "ε‑δ definition of limit",
+   "back": "For every ε>0 there exists δ>0 such that 0<|x‑a|<δ implies |f(x)‑L|<ε."
   },
   {
-   "front": "How do you prove the limit of a constant function?",
-   "back": "Show that |f(x)-c|=0 < ε for any ε, so any δ>0 works."
+   "front": "Continuity at a point",
+   "back": "f is continuous at c if f(c) exists, the limit as x→c exists, and the limit equals f(c)."
   },
   {
-   "front": "How to choose δ for a linear function mx+b?",
-   "back": "Set δ = ε / |m| (or any smaller positive number)."
+   "front": "Neighbourhood",
+   "back": "An interval around a point, described by |x‑a|<δ."
   },
   {
-   "front": "Why bound |x+a| when proving limit of x^2?",
-   "back": "Because |x^2-a^2| = |x-a|·|x+a| and we need a constant bound for |x+a| to relate it to δ."
+   "front": "Arbitrarily close",
+   "back": "Can be made as near as desired, without needing to be exactly equal."
   },
   {
-   "front": "What does continuity at a mean in terms of limits?",
-   "back": "The limit of f(x) as x approaches a exists and equals f(a)."
+   "front": "Proof by construction (ε‑δ)",
+   "back": "Finding an explicit formula for δ in terms of ε to satisfy the limit definition."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l02-ball-approaching-wall",
-   "title": "A ball gets closer to a wall, illustrating the idea of a variable approaching a point.",
-   "alt": "A ball gets closer to a wall, illustrating the idea of a variable approaching a point.",
+   "file": "calculus-i-l02-road-toward-hill",
+   "title": "A road smoothly curving toward a distant hill illustrates a function approaching a limit.",
+   "alt": "A road smoothly curving toward a distant hill illustrates a function approaching a limit.",
    "priority": 7,
-   "picture_title": "Ball Approaching Wall",
-   "kind": "photo",
-   "subject": "A small ball rolling on a flat surface toward a vertical wall. The distance between the ball and the wall gets smaller with each frame, showing how a quantity can approach a limit without ever reaching it.",
-   "layout": "The ball is on the left side of the frame, the wall on the right; a series of faint ghost images shows successive positions of the ball getting nearer to the wall.",
-   "labels": [
-    "ball",
-    "wall",
-    "distance ↓"
-   ],
-   "after": 0
-  },
-  {
-   "type": "image",
-   "file": "calculus-i-l02-step-function-sketch",
-   "title": "A step‑function graph with a single isolated point, used to show why intuition can fail.",
-   "alt": "A step‑function graph with a single isolated point, used to show why intuition can fail.",
-   "priority": 6,
-   "picture_title": "Step Function Sketch",
+   "picture_title": "Road Toward Hill",
    "kind": "illustration",
-   "subject": "A piecewise‑constant function that is 0 everywhere except at x = 0, where it jumps to 1. The picture highlights the isolated point and the flat line, helping students see the difference between the graph and the limit.",
-   "layout": "Horizontal axis across the centre; a thick horizontal line at y = 0 for x ≠ 0, and a solid dot at (0,1). Labels point to the flat part and the isolated dot.",
+   "subject": "A side view of a gently curving road that gets closer to a hill in the background, showing the idea of getting nearer without reaching the top.",
+   "layout": "Road runs from left foreground to right background, hill centered behind; arrows indicate direction of approach.",
    "labels": [
-    "flat line (0)",
-    "isolated point (1)",
-    "x = 0"
+    "road",
+    "hill",
+    "approach direction"
    ],
    "after": 0
   },
   {
    "type": "image",
-   "file": "calculus-i-l02-visual-aid",
-   "title": "Two concentric circles around a point showing ε‑neighbourhood and δ‑neighbourhood.",
-   "alt": "Two concentric circles around a point showing ε‑neighbourhood and δ‑neighbourhood.",
-   "priority": 5,
-   "picture_title": "ε‑δ Visual Aid",
-   "kind": "labelled diagram",
-   "subject": "A number line with a point L marked. A larger shaded interval represents the ε‑neighbourhood around L, and a smaller interval around a point a on the x‑axis represents the δ‑neighbourhood. Arrows illustrate the implication: staying inside δ forces the function values inside ε.",
-   "layout": "Number line runs horizontally; L is centred with a wide shaded band labelled ε; directly below, a corresponds to a narrower band labelled δ; vertical arrows connect the bands.",
+   "file": "calculus-i-l02-dartboard-target",
+   "title": "A dartboard with a target circle shows how ε‑δ defines a tolerance around the limit value.",
+   "alt": "A dartboard with a target circle shows how ε‑δ defines a tolerance around the limit value.",
+   "priority": 7,
+   "picture_title": "Dartboard Target",
+   "kind": "illustration",
+   "subject": "A dartboard with concentric circles; the innermost circle is labelled L (the limit) and a larger circle labelled ε‑radius, with a dart representing a function value inside the ε‑circle.",
+   "layout": "Target circles centered, labels placed around each ring, dart shown hitting inside the ε‑circle.",
    "labels": [
-    "L (target)",
-    "ε‑band",
-    "a (approach point)",
-    "δ‑band"
+    "L",
+    "ε‑radius",
+    "dart"
    ],
    "after": 1
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l02-door-gap-illustration",
+   "title": "A person walking toward a door visualizes choosing δ to stay within a desired gap.",
+   "alt": "A person walking toward a door visualizes choosing δ to stay within a desired gap.",
+   "priority": 7,
+   "picture_title": "Door Gap Illustration",
+   "kind": "illustration",
+   "subject": "A side view of a door with a gap marked; a person steps toward the door, and a ruler shows the distance δ that keeps the person within the acceptable gap.",
+   "layout": "Door on right, person on left, arrow indicating movement, gap highlighted with a bracket labeled δ.",
+   "labels": [
+    "door",
+    "δ gap",
+    "person"
+   ],
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "ε‑δ Definition of a Limit",
+   "items": [
+    {
+     "name": "ε (epsilon)",
+     "role": "allowed error in the output |f(x)-L|"
+    },
+    {
+     "name": "δ (delta)",
+     "role": "distance from a that guarantees the ε error"
+    },
+    {
+     "name": "a",
+     "role": "point where x approaches"
+    },
+    {
+     "name": "L",
+     "role": "limit value of f(x) as x→a"
+    }
+   ],
+   "after": 3
   },
   {
    "type": "steps",
-   "title": "Using the ε‑δ Definition",
+   "title": "How to Prove a Limit with ε‑δ",
    "steps": [
     {
-     "label": "1",
-     "text": "Choose ε>0"
+     "label": "State Goal",
+     "text": "Write \"for every ε>0 there exists δ>0 such that…\""
     },
     {
-     "label": "2",
-     "text": "Find a δ>0 so that 0<|x‑a|<δ implies |f(x)‑L|<ε"
+     "label": "Manipulate Inequality",
+     "text": "Turn |f(x)-L|<ε into a condition on |x-a|"
     },
     {
-     "label": "3",
-     "text": "Show the implication holds for all x"
+     "label": "Choose δ",
+     "text": "Pick δ as a function of ε that satisfies the condition"
+    },
+    {
+     "label": "Finish Proof",
+     "text": "Show 0<|x-a|<δ ⇒ |f(x)-L|<ε"
     }
    ],
    "loop": false,
-   "after": 1
+   "after": 3
   },
   {
    "type": "compare",
-   "title": "What “near” Means",
+   "title": "ε vs. δ",
    "left": {
-    "name": "Intuitive view",
+    "name": "ε (output tolerance)",
     "points": [
-     "Looks at points close to a",
-     "May miss isolated points"
+     "Chosen first",
+     "Measures how close f(x) must be to L",
+     "Can be any positive number"
     ]
    },
    "right": {
-    "name": "Formal view",
+    "name": "δ (input tolerance)",
     "points": [
-     "Uses δ‑interval around a",
-     "Works for any ε>0"
+     "Chosen after ε",
+     "Measures how close x must be to a",
+     "Depends on the chosen ε"
     ]
    },
-   "after": 0
+   "after": 1
+  },
+  {
+   "type": "graph",
+   "title": "Linear Example: f(x)=5x",
+   "fn": "5*x",
+   "xmin": 0,
+   "xmax": 4,
+   "points": [
+    {
+     "x": 2,
+     "y": 10,
+     "label": "Limit point (a, L)",
+     "open": false
+    }
+   ],
+   "caption": "As x approaches 2, 5x approaches 10.",
+   "after": 3
   },
   {
    "type": "facts",
-   "title": "Key Limits Proven",
+   "title": "Key Points About Limits",
    "items": [
     {
-     "value": "c",
-     "label": "Limit of constant f(x)=c"
+     "value": "0<|x-a|<δ",
+     "label": "Input condition"
     },
     {
-     "value": "ma+b",
-     "label": "Limit of linear mx+b"
+     "value": "|f(x)-L|<ε",
+     "label": "Output condition"
     },
     {
-     "value": "a^2",
-     "label": "Limit of x^2"
+     "value": "∀ε>0 ∃δ>0",
+     "label": "Quantifier order"
+    },
+    {
+     "value": "Limit exists ⇔ ε‑δ condition holds",
+     "label": "Definition equivalence"
     }
    ],
-   "after": 5
+   "after": 0
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

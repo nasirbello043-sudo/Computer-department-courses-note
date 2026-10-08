@@ -1,263 +1,453 @@
 {
  "title": "Integrals: Antiderivatives",
- "summary": "This lesson introduces indefinite integrals as antiderivatives, explains their relationship to derivatives, and presents basic integration rules. Students will learn how to reverse differentiation and apply simple integration techniques.",
+ "summary": "This lesson introduces indefinite integrals as the reverse process of differentiation and shows how they are connected to antiderivatives. Students learn basic integration rules to compute simple antiderivatives.",
+ "objectives": [
+  "Identify the relationship between derivatives and indefinite integrals",
+  "Write the indefinite integral notation for a given function",
+  "Apply the power rule, constant multiple rule, and sum rule for integration",
+  "Find antiderivatives of basic polynomial and constant functions",
+  "Explain why antiderivatives are useful in solving real‑world problems"
+ ],
+ "prerequisites": "Students should already understand how to compute derivatives and be familiar with basic algebraic manipulation.",
+ "why": [
+  "In physics, knowing the antiderivative lets us recover a quantity like position from its velocity, which is essential for predicting motion. In economics, integrating a marginal cost function gives the total cost, helping businesses plan budgets.",
+  "Biology uses antiderivatives to model growth rates, such as converting a rate of population change into the actual population over time. Mastering these ideas builds confidence that calculus can describe change in many real situations."
+ ],
  "sections": [
   {
    "heading": "What is an Indefinite Integral?",
-   "body": "The **indefinite integral** of a function $f(x)$ is the collection of all functions whose derivative equals $f(x)$.  \nIn symbols we write  \n\n$$\\int f(x)\\,dx = F(x)+C,$$  \n\nwhere $F'(x)=f(x)$ and $C$ is an arbitrary constant.  \nThe symbol $\\int$ (called the integral sign) together with $dx$ tells us to “undo’’ the differentiation with respect to $x$ and to collect every possible antiderivative in one family.\n\n---\n\n**Why a family?**  \nIf $F(x)$ is one antiderivative of $f$, then any other antiderivative must differ from $F$ by a constant, because the derivative of a constant is zero. Hence all antiderivatives can be written as $F(x)+C$, where $C$ can be any real number. This is why the result of an indefinite integral is not a single function but a whole **family of functions**.\n\n---\n\n### Worked example\n\nFind the indefinite integral of $f(x)=3x^{2}$.\n\n1. **Identify the power rule for antiderivatives.**  \n   For $x^{n}$ with $n\\neq -1$, an antiderivative is $\\dfrac{x^{n+1}}{n+1}$.  \n\n   $$\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C.$$\n\n2. **Apply the rule to the term $3x^{2}$.**  \n   Treat the constant $3$ as a factor that can be pulled out of the integral.  \n\n   $$\\int 3x^{2}\\,dx = 3\\int x^{2}\\,dx.$$\n\n3. **Integrate $x^{2}$ using the power rule and add the constant.**  \n\n   $$3\\int x^{2}\\,dx = 3\\left(\\frac{x^{3}}{3}\\right)+C = x^{3}+C.$$\n\nThus the indefinite integral is  \n\n$$\\int 3x^{2}\\,dx = x^{3}+C,$$  \n\nand every function of the form $x^{3}+C$ differentiates to $3x^{2}$.\n\n---\n\n### Key points to remember\n\n- The integral sign $\\int$ together with $dx$ signals “find all antiderivatives’’ of the integrand $f(x)$.  \n- The result always includes a **constant of integration** $C$, because differentiation erases constant terms.  \n- The notation $\\int f(x)\\,dx$ represents a **family of functions**, not a single curve.  \n\nUnderstanding the indefinite integral as a family of antiderivatives prepares you for the next step: using these families to solve differential equations and to compute definite integrals.",
+   "body": "When we talk about an **indefinite integral**, we are really asking a simple question: *“What functions become the given function after we differentiate them?”*  \n\nImagine you have a machine that takes a function and outputs its slope at every point – that machine is the **derivative**. The indefinite integral is the reverse machine: it looks at a slope‑function and asks, “Which original shapes could have produced this slope?”  \n\nThe symbol we use for this reverse process is  \n\n$$\n\\int f(x)\\,dx\n$$  \n\nHere, $f(x)$ is the function whose slopes we know, and the symbol $\\int$ (called the **integral sign**) tells us to “undo” the derivative. The tiny $dx$ at the end reminds us that the variable we are working with is $x$; it is part of the notation and does not change the meaning of the integral.\n\n> **Definition:** The indefinite integral $\\displaystyle \\int f(x)\\,dx$ denotes the *family* of all functions $F(x)$ such that $F'(x)=f(x)$.  \n\nWhy a *family*? Because when we differentiate, any constant disappears: the derivative of $5$ is $0$, and the derivative of $x+7$ is the same as the derivative of $x$. Therefore, when we go backwards, we cannot tell which constant was originally present. All the possible answers differ only by a constant amount.\n\n> **Remember:** Every antiderivative comes with a “+ C” at the end, where $C$ is any real number.  \n\nTo see this in action, consider a very simple slope function $f(x)=3$. We ask: “Which functions have a constant slope of $3$?” A line with slope $3$ looks like $F(x)=3x$, but we could also add any constant and still have the same slope: $F(x)=3x+7$, $F(x)=3x-2$, and so on. All of these share the property that $F'(x)=3$. Writing this compactly, we say  \n\n$$\n\\int 3\\,dx = 3x + C .\n$$  \n\nThe $C$ stands for “any constant you like.”  \n\nAn everyday comparison can help. Think of a **recipe** that tells you how much sugar to add per cup of flour. If the recipe says “add 2 teaspoons of sugar for each cup of flour,” that rule is like a derivative: it tells you the *rate* of sugar addition. The indefinite integral is like asking, “What total amount of sugar have I used after making $n$ cups of flour?” You could have started with some sugar already in the bowl (the constant $C$), and then you keep adding according to the rule. Different starting amounts give different total amounts, but the rule for how fast you add sugar stays the same.\n\n> **In daily life:** The indefinite integral is like a “reverse‑engineered” recipe – you know the rate of change (how fast something grows) and you want the original quantity (how much you have at any time).  \n\nUnderstanding this concept is useful because many problems in physics, economics, and biology give us a rate (speed, growth rate, marginal cost) and ask us to find the original quantity (position, total population, total cost). The indefinite integral provides the systematic way to answer those questions.\n\nFinally, note that the notation $\\int f(x)\\,dx$ does **not** give a single function; it represents *all* possible antiderivatives at once. When you later learn specific rules for integrating, you will see how to write down a convenient representative of this family, always remembering to add the constant $C$ at the end.",
    "code": ""
   },
   {
-   "heading": "Connection Between Derivatives and Integrals",
-   "body": "When a function $F(x)$ is differentiated we obtain its **derivative** $F'(x)$.  \nIf we start with a derivative $f(x)$ and look for a function whose derivative is $f$, we are performing an **indefinite integral**.  \nThe fundamental relationship is  \n\n$$\\int f(x)\\,dx = F(x)+C\\qquad\\text{whenever }F'(x)=f(x).$$  \n\nHere $C$ is the **constant of integration**, representing the fact that many functions share the same derivative.\n\n---\n\n### Worked example  \n\nFind $\\displaystyle\\int 3x^{2}\\,dx$.\n\n1. **Identify the antiderivative form.**  \n   We need a function $F(x)$ whose derivative is $3x^{2}$.  \n   $$F'(x)=3x^{2}$$  \n\n2. **Reverse the power rule.**  \n   The derivative of $x^{n}$ is $n x^{n-1}$, so to undo it we add one to the exponent and divide by the new exponent.  \n   $$F(x)=\\frac{3x^{3}}{3}=x^{3}$$  \n\n3. **Add the constant of integration.**  \n   Any constant disappears when we differentiate, so we must include it.  \n   $$\\int 3x^{2}\\,dx = x^{3}+C$$  \n\nThe steps show that integration “undoes’’ differentiation: we started with $f(x)=3x^{2}$, guessed a form $x^{3}$, checked that its derivative returns $f$, and then added $C$.\n\n---\n\n### Practice problems  \n\n**1.** $\\displaystyle\\int 5x^{4}\\,dx$  \n\n*Solution.*  \n1. Write the antiderivative form: $F'(x)=5x^{4}$.  \n2. Increase the exponent by 1 and divide: $F(x)=\\frac{5x^{5}}{5}=x^{5}$.  \n3. Add $C$: $\\displaystyle\\int 5x^{4}\\,dx = x^{5}+C$.\n\n---\n\n**2.** $\\displaystyle\\int -2x\\,dx$  \n\n*Solution.*  \n1. Set $F'(x)=-2x$.  \n2. Apply the power rule reversal: $F(x)=\\frac{-2x^{2}}{2}=-x^{2}$.  \n3. Include $C$: $\\displaystyle\\int -2x\\,dx = -x^{2}+C$.\n\n---\n\n**3.** $\\displaystyle\\int 7\\,dx$  \n\n*Solution.*  \n1. Here $f(x)=7$ is a constant, so we need $F'(x)=7$.  \n2. A function whose derivative is a constant is a linear function: $F(x)=7x$.  \n3. Add $C$: $\\displaystyle\\int 7\\,dx = 7x+C$.\n\n---\n\n**4.** $\\displaystyle\\int \\left(4x^{3}-3x\\right)dx$  \n\n*Solution.*  \n1. Split the integral using the sum rule:  \n   $$\\int\\left(4x^{3}-3x\\right)dx = \\int4x^{3}\\,dx - \\int3x\\,dx.$$  \n2. Integrate each term separately:  \n   - For $4x^{3}$, $F_{1}(x)=\\frac{4x^{4}}{4}=x^{4}$.  \n   - For $3x$, $F_{2}(x)=\\frac{3x^{2}}{2}=\\frac{3}{2}x^{2}$.  \n3. Combine and add $C$:  \n   $$\\int\\left(4x^{3}-3x\\right)dx = x^{4}-\\frac{3}{2}x^{2}+C.$$  \n\nThese problems illustrate the same idea: **integration reverses differentiation**, and the constant $C$ records the family of all possible antiderivatives.",
+   "heading": "Antiderivatives and the Derivative Connection",
+   "body": "When we talk about an **antiderivative**, we are looking for a function whose derivative gives us back the original function.  \nIn symbols, a function $F(x)$ is an antiderivative of $f(x)$ if  \n\n$$F'(x)=f(x).$$  \n\nThe word *derivative* means the rate of change of a function. So an antiderivative does the opposite: it “undoes” the rate‑of‑change process.\n\n> **Definition:** An **indefinite integral** of $f(x)$, written $\\displaystyle\\int f(x)\\,dx$, is the collection of all antiderivatives of $f$.  \n\nWhy does the symbol $\\int$ appear? It is a stretched “S”, standing for the Latin word *summa* (sum). The idea is that adding up infinitely many tiny changes of $f$ gives back the original function.  \n\n### From derivative to integral\n\nSuppose we already know a function $F(x)$ such that $F'(x)=f(x)$.  \nIf we ask “what is the indefinite integral of $f$?”, the answer must be a function whose derivative is $f$. Since $F$ already has that property, $F$ is one possible answer.  \n\nBut there is a subtlety: adding a constant to $F$ does not change its derivative. Indeed, if $C$ is any real number,  \n\n$$\\frac{d}{dx}\\bigl(F(x)+C\\bigr)=F'(x)+0=f(x).$$  \n\nThe derivative of a constant is zero, so $F(x)+C$ is **also** an antiderivative of $f$. In fact, *every* antiderivative of $f$ looks like $F(x)+C$ for some constant $C$.\n\nTherefore we write  \n\n$$\\int f(x)\\,dx = F(x) + C,$$  \n\nwhere $C$ stands for “any constant”. This $C$ is called the **constant of integration**. It reminds us that there are infinitely many antiderivatives, all differing only by a vertical shift.\n\n> **Note:** The constant $C$ is essential. Forgetting it can give a wrong answer when you later use the antiderivative to solve problems such as initial‑value or area calculations.\n\n### Why is this useful?\n\nImagine you know the speed of a car at every instant, $v(t)$. Speed is the derivative of the car’s position $s(t)$: $s'(t)=v(t)$. If you integrate the speed function, you recover the position up to an unknown starting point:\n\n$$\\int v(t)\\,dt = s(t) + C.$$\n\nThe constant $C$ represents the unknown initial position of the car. If you later learn that the car started at $s(0)=5$ meters, you can determine $C$ by plugging $t=0$:\n\n$$5 = s(0) = \\bigl(\\int v(t)\\,dt\\bigr)_{t=0} + C \\;\\Longrightarrow\\; C = 5 - \\bigl(\\int v(t)\\,dt\\bigr)_{t=0}.$$\n\nThus the connection between derivatives and integrals lets us move back and forth between rates and accumulated quantities.\n\n> **In daily life:** Think of a bathtub. The water flow rate (gallons per minute) is the derivative of the water volume in the tub. If you know the flow rate, integrating it tells you how much water is in the tub, but you also need to know how much water was there at the start—that’s the constant $C$.\n\n### Small step recap\n\n1. **Derivative** tells how a function changes.  \n2. **Antiderivative** is a function whose derivative is the given one.  \n3. Adding any constant $C$ to an antiderivative does not change its derivative.  \n4. The indefinite integral $\\int f(x)\\,dx$ represents *all* antiderivatives, written as $F(x)+C$.\n\n> **Remember:** Whenever you write an indefinite integral, always attach “$+C$”. It is not optional; it records the family of possible answers.\n\nWith this understanding, you can now treat integration as the reverse operation of differentiation, confident that the constant of integration captures any missing starting information.",
    "code": ""
   },
   {
-   "heading": "Constant of Integration",
-   "body": "When we find an **antiderivative** of a function $f(x)$ we are looking for a function $F(x)$ whose derivative is $f(x)$, i.e.  \n\n$$\\frac{d}{dx}F(x)=f(x).$$  \n\nIf one particular $F(x)$ works, then any function that differs from $F(x)$ by a constant also works, because the derivative of a constant is zero. This is why the symbol **$C$** – called the *constant of integration* – always appears in an indefinite integral.\n\n### Why a constant must be added  \n\n1. **Start with a known antiderivative.**  \n   Suppose $F(x)=x^{2}$, so $\\dfrac{d}{dx}F(x)=2x$.  \n\n   $$\\int 2x\\,dx = x^{2}+C.$$\n\n2. **Add a constant and differentiate.**  \n   Take $F(x)+5 = x^{2}+5$. Its derivative is  \n\n   $$\\frac{d}{dx}\\bigl(x^{2}+5\\bigr)=2x+0=2x.$$\n\n   The extra “$+5$’’ disappears after differentiation, leaving the same $f(x)=2x$.\n\n3. **Subtract a constant and differentiate.**  \n   Take $F(x)-3 = x^{2}-3$. Its derivative is  \n\n   $$\\frac{d}{dx}\\bigl(x^{2}-3\\bigr)=2x+0=2x.$$\n\n   Again the constant vanishes, showing that $x^{2}+5$, $x^{2}-3$, and $x^{2}$ are all antiderivatives of $2x$.\n\nBecause we cannot tell from the derivative which constant was originally present, we must include an *arbitrary* constant $C$ to represent **all** possible antiderivatives.\n\n### General rule  \n\n- If $F(x)$ is any antiderivative of $f(x)$, then  \n\n  $$\\int f(x)\\,dx = F(x) + C,$$\n\n  where $C$ can be any real number.\n\n- The constant $C$ does **not** affect the shape or slope of the graph; it only shifts the whole graph up or down.\n\n### Quick check with a simple function  \n\nTake $f(x)=\\cos x$. One antiderivative is $F(x)=\\sin x$ because  \n\n$$\\frac{d}{dx}\\sin x = \\cos x.$$\n\nAdding a constant $C$ gives  \n\n$$\\int \\cos x\\,dx = \\sin x + C.$$\n\nDifferentiating $\\sin x + C$ returns $\\cos x$, confirming that every choice of $C$ works.\n\n### Summary bullet list  \n\n- The derivative of any constant is $0$.  \n- Adding or subtracting a constant to an antiderivative does not change its derivative.  \n- Therefore the most complete answer to an indefinite integral must include “$+C$”.  \n- $C$ represents **all** possible vertical shifts of the antiderivative curve.  \n\nRemember: whenever you write an indefinite integral, always finish with “$+C$” to capture the whole family of antiderivatives.",
+   "heading": "Basic Integration Rules",
+   "body": "When we talk about an **indefinite integral**, we are really looking for a function whose derivative gives us back the original expression.  \nThink of it like a “reverse‑engineered” recipe: if differentiation is the process of taking a cake apart piece by piece, integration is the process of figuring out how the whole cake was originally assembled.\n\n> **Definition:** An indefinite integral of a function $f(x)$ is a family of functions $F(x)$ such that $F'(x)=f(x)$. We write this as  \n> $$\\int f(x)\\,dx = F(x)+C,$$  \n> where $C$ is any constant (the **constant of integration**).\n\nThe three most useful shortcuts for finding $F(x)$ quickly are the **power rule**, the **constant‑multiple rule**, and the **sum rule**. They let us turn many complicated looking integrals into simple algebraic steps, just as a calculator lets us add numbers without doing the longhand addition each time.\n\n---\n\n### 1. Power Rule for Integration  \n\nThe power rule tells us how to integrate any power of $x$ (except $x^{-1}$, which we treat separately).  \n\n> **Note:** If $n\\neq -1$, then  \n> $$\\int x^{\\,n}\\,dx = \\frac{x^{\\,n+1}}{n+1}+C.$$\n\n**Why does this work?**  \nWhen we differentiate $\\frac{x^{\\,n+1}}{n+1}$, the exponent $n+1$ comes down as a multiplier, and the denominator $n+1$ cancels it, leaving $x^{\\,n}$. In symbols:  \n$$\\frac{d}{dx}\\left(\\frac{x^{\\,n+1}}{n+1}\\right)=\\frac{n+1}{n+1}x^{\\,n}=x^{\\,n}.$$\n\n**Example:** Find $\\displaystyle\\int x^{3}\\,dx$.  \nApply the rule with $n=3$:  \n$$\\int x^{3}\\,dx = \\frac{x^{4}}{4}+C.$$\n\nYou can picture this as stacking blocks: each block represents a power of $x$, and the rule tells us how to “undo” the stacking by adding one more layer (the $+1$) and then dividing by the new height.\n\n---\n\n### 2. Constant‑Multiple Rule  \n\nIf a function is multiplied by a constant number, the integral just pulls that constant out front.\n\n> **Remember:** For any constant $k$,  \n> $$\\int k\\,f(x)\\,dx = k\\int f(x)\\,dx.$$\n\n**Why is this useful?**  \nConstants do not change when we differentiate, so they behave like “scaling factors” that can be moved outside the integral without affecting the shape of the antiderivative.\n\n**Example:** Find $\\displaystyle\\int 5x^{2}\\,dx$.  \nFirst pull out the $5$:  \n$$\\int 5x^{2}\\,dx = 5\\int x^{2}\\,dx.$$  \nNow use the power rule on $x^{2}$:  \n$$5\\int x^{2}\\,dx = 5\\left(\\frac{x^{3}}{3}\\right)+C = \\frac{5x^{3}}{3}+C.$$\n\nThink of the constant as a “weight” attached to the whole pile of blocks; moving the weight off the pile makes the counting easier.\n\n---\n\n### 3. Sum (or Difference) Rule  \n\nIntegration works linearly, meaning we can integrate each term of a sum (or difference) separately and then add the results.\n\n> **In daily life:** Adding up the total distance you walk each day is the same as adding the distance for each hour separately and then summing them.  \n> **Mathematically:**  \n> $$\\int\\bigl(f(x)+g(x)\\bigr)\\,dx = \\int f(x)\\,dx + \\int g(x)\\,dx.$$\n\n**Why does it hold?**  \nBecause differentiation is linear, its reverse process (integration) must also be linear. If the derivative of $F$ is $f$ and the derivative of $G$ is $g$, then the derivative of $F+G$ is $f+g$; therefore the antiderivative of $f+g$ is $F+G$.\n\n**Example:** Find $\\displaystyle\\int \\bigl(2x^{3}+4x\\bigr)\\,dx$.  \nBreak the integral into two parts:  \n$$\\int \\bigl(2x^{3}+4x\\bigr)\\,dx = \\int 2x^{3}\\,dx + \\int 4x\\,dx.$$  \nApply the constant‑multiple and power rules:  \n\\[\n\\int 2x^{3}\\,dx = 2\\left(\\frac{x^{4}}{4}\\right)=\\frac{x^{4}}{2},\n\\qquad\n\\int 4x\\,dx = 4\\left(\\frac{x^{2}}{2}\\right)=2x^{2}.\n\\]  \nCombine them:  \n$$\\int \\bigl(2x^{3}+4x\\bigr)\\,dx = \\frac{x^{4}}{2}+2x^{2}+C.$$\n\n---\n\nThese three rules are the backbone of most elementary integration problems. By recognizing powers of $x$, pulling out constants, and separating sums, you can turn a seemingly tough integral into a handful of quick calculations. Practice each rule on its own, then mix them together—just like learning to add, subtract, multiply, and divide before tackling algebraic expressions.",
    "code": ""
   },
   {
-   "heading": "Basic Integration Rules – Power Rule",
-   "body": "The **power rule for antiderivatives** tells us how to integrate any power of $x$ except when the exponent is $-1$.  \nIf $n\\neq -1$, then  \n\n$$\\int x^{\\,n}\\,dx = \\frac{x^{\\,n+1}}{n+1}+C,$$  \n\nwhere $C$ is the **constant of integration**.\n\n---\n\n### Worked examples  \n\n**Example 1:**  Find $\\displaystyle\\int x^{3}\\,dx$.  \n\n1. Identify the exponent $n=3$.  \n   $$\\int x^{3}\\,dx$$  \n\n2. Add $1$ to the exponent: $3+1=4$, and divide by this new exponent.  \n   $$\\frac{x^{4}}{4}+C$$  \n\n3. Write the final antiderivative.  \n   $$\\int x^{3}\\,dx = \\frac{x^{4}}{4}+C$$  \n\n---\n\n**Example 2:**  Find $\\displaystyle\\int 5x^{-2}\\,dx$.  \n\n1. Factor out the constant $5$.  \n   $$5\\int x^{-2}\\,dx$$  \n\n2. Apply the power rule with $n=-2$: add $1$ to get $-1$, then divide.  \n   $$5\\left(\\frac{x^{-1}}{-1}\\right)+C$$  \n\n3. Simplify the sign.  \n   $$\\int 5x^{-2}\\,dx = -5x^{-1}+C$$  \n\n---\n\n**Example 3:**  Find $\\displaystyle\\int \\sqrt{x}\\,dx$.  \n\n1. Rewrite the root as a power: $\\sqrt{x}=x^{1/2}$.  \n   $$\\int x^{1/2}\\,dx$$  \n\n2. Increase the exponent: $1/2+1=3/2$, then divide by $3/2$.  \n   $$\\frac{x^{3/2}}{3/2}+C$$  \n\n3. Multiply by the reciprocal to simplify.  \n   $$\\int \\sqrt{x}\\,dx = \\frac{2}{3}x^{3/2}+C$$  \n\n---\n\n### Practice problems  \n\n**Problem 1:** $\\displaystyle\\int x^{5}\\,dx$  \n\n*Solution:*  \n1. $n=5$, so $n+1=6$.  \n   $$\\int x^{5}\\,dx = \\frac{x^{6}}{6}+C$$  \n\n**Problem 2:** $\\displaystyle\\int 7x^{0}\\,dx$  \n\n*Solution:*  \n1. $x^{0}=1$, treat as constant $7$.  \n   $$7\\int 1\\,dx = 7x+C$$  \n\n**Problem 3:** $\\displaystyle\\int \\frac{1}{x^{3}}\\,dx$  \n\n*Solution:*  \n1. Write as $x^{-3}$.  \n   $$\\int x^{-3}\\,dx$$  \n2. Increase exponent: $-3+1=-2$, divide by $-2$.  \n   $$\\frac{x^{-2}}{-2}+C = -\\frac{1}{2}x^{-2}+C$$  \n\n**Problem 4:** $\\displaystyle\\int 4x^{\\frac{2}{3}}\\,dx$  \n\n*Solution:*  \n1. Factor the constant $4$.  \n   $$4\\int x^{2/3}\\,dx$$  \n2. Add $1$ to the exponent: $2/3+1=5/3$, then divide.  \n   $$4\\left(\\frac{x^{5/3}}{5/3}\\right)+C$$  \n3. Multiply by the reciprocal $3/5$.  \n   $$\\int 4x^{2/3}\\,dx = \\frac{12}{5}x^{5/3}+C$$",
+   "heading": "Finding Antiderivatives of Polynomials",
+   "body": "When we talk about an **antiderivative**, we mean a function whose derivative gives back the original expression.  \nIf you have a simple polynomial like $x^n$, the antiderivative is a new polynomial whose power is one higher and whose coefficient is adjusted so that differentiating it returns $x^n$.\n\n> **Definition:** An antiderivative of a function $f(x)$ is a function $F(x)$ such that $F'(x)=f(x)$.  \n\nThe rule for powers comes directly from the power rule for differentiation, which says  \n$$\\frac{d}{dx}\\bigl(x^{k}\\bigr)=k\\,x^{k-1}.$$  \nTo reverse this process, we need to ask: *what power of $x$ would give $x^{n}$ after we multiply by its exponent and lower the exponent by one?*  \n\n### Step 1: Increase the exponent by one  \nTake $x^{n}$ and add one to the exponent: $x^{n+1}$.\n\n### Step 2: Divide by the new exponent  \nBecause differentiating $x^{n+1}$ would multiply by $n+1$, we must undo that multiplication. So we divide by $n+1$.\n\nPutting the two steps together gives the **power rule for integration**:  \n$$\\int x^{n}\\,dx=\\frac{x^{\\,n+1}}{n+1}+C,$$  \nwhere $C$ is the constant of integration (we will see why later).  \nThis formula works for any real number $n\\neq -1$.  \n\n#### Example 1: Integrate $x^{3}$  \n1. Increase the exponent: $3+1=4$, so we get $x^{4}$.  \n2. Divide by the new exponent: $\\dfrac{x^{4}}{4}$.  \n\nThus  \n$$\\int x^{3}\\,dx=\\frac{x^{4}}{4}+C.$$  \n\n#### Example 2: Integrate $x^{-2}$  \n1. Increase the exponent: $-2+1=-1$, giving $x^{-1}$.  \n2. Divide by $-1$: $\\dfrac{x^{-1}}{-1}= -x^{-1}$.  \n\nSo  \n$$\\int x^{-2}\\,dx=-\\frac{1}{x}+C.$$  \n\n> **Note:** The rule does **not** apply when $n=-1$, because we would be dividing by zero. In that special case the antiderivative is $\\int x^{-1}dx=\\int \\frac{1}{x}dx=\\ln|x|+C$.\n\n### Step 3: Integrating constants  \nA constant $k$ can be thought of as $k\\cdot x^{0}$ because $x^{0}=1$. Using the power rule with $n=0$ gives  \n$$\\int k\\,dx = k\\int x^{0}\\,dx = k\\frac{x^{1}}{1}+C = kx+C.$$  \n\n#### Example 3: Integrate $7$  \n$$\\int 7\\,dx = 7x + C.$$  \n\n### Step 4: Adding terms (linearity)  \nIf a polynomial has several terms, the integral of the whole sum is the sum of the integrals. This follows from the **linearity** property:  \n$$\\int\\bigl(f(x)+g(x)\\bigr)\\,dx = \\int f(x)\\,dx + \\int g(x)\\,dx,$$  \nand constants can be pulled out:  \n$$\\int c\\,f(x)\\,dx = c\\int f(x)\\,dx.$$  \n\n#### Example 4: Integrate $3x^{2}+5x-4$  \n\n1. Treat each term separately.  \n2. Apply the power rule to $3x^{2}$:  \n   $$\\int 3x^{2}\\,dx = 3\\frac{x^{3}}{3}=x^{3}.$$  \n3. Apply the power rule to $5x$:  \n   $$\\int 5x\\,dx = 5\\frac{x^{2}}{2}= \\frac{5}{2}x^{2}.$$  \n4. Integrate the constant $-4$:  \n   $$\\int -4\\,dx = -4x.$$  \n\nCombine the results:  \n$$\\int \\bigl(3x^{2}+5x-4\\bigr)\\,dx = x^{3}+\\frac{5}{2}x^{2}-4x+C.$$  \n\n> **Remember:** Always add the “$+C$” at the end of an indefinite integral. It represents any constant number that could have been lost when we differentiated.\n\n### Why this matters  \nFinding antiderivatives of polynomials is the first step toward solving many real‑world problems, such as computing the area under a curve or the total distance traveled when speed varies as a polynomial function of time.  \n\n> **In daily life:** Imagine you know how fast a car’s speed increases each second (a simple polynomial). Integrating that speed function gives you the total distance the car travels over a period of time.  \n\nBy mastering the power rule, constants, and the add‑and‑scale properties, you can handle any polynomial antiderivative with confidence.",
    "code": ""
   },
   {
-   "heading": "Basic Integration Rules – Constant Multiple",
-   "body": "The **constant‑multiple rule** says that a constant factor can be pulled out of an indefinite integral:\n\n$$\\int k\\,f(x)\\,dx \\;=\\; k\\int f(x)\\,dx$$  \n\nHere $k$ is any real number (positive, negative, or zero) and $f(x)$ is any integrable function. The rule follows directly from the definition of an antiderivative: if $F'(x)=f(x)$, then $(kF(x))' = kF'(x)=k f(x)$, so $kF(x)$ is an antiderivative of $k f(x)$.\n\n**Worked example**\n\nWe integrate $3x^{2}$.\n\n1. **Identify the constant factor.**  \n   The integrand is $3x^{2}=k\\cdot f(x)$ with $k=3$ and $f(x)=x^{2}$.\n\n   $$\\int 3x^{2}\\,dx = 3\\int x^{2}\\,dx$$  \n\n2. **Integrate the simpler function.**  \n   Use the power rule $\\displaystyle\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C$ with $n=2$.\n\n   $$\\int x^{2}\\,dx = \\frac{x^{3}}{3}+C$$  \n\n3. **Multiply by the constant and add the constant of integration.**  \n   Multiply the result by $3$ and keep a single constant $C$.\n\n   $$\\int 3x^{2}\\,dx = 3\\left(\\frac{x^{3}}{3}+C\\right)=x^{3}+C$$  \n\nThe constant $3C$ is renamed $C$ because any constant works.\n\n**Practice problems**\n\n1. **Problem:** $\\displaystyle\\int -5\\cos x \\,dx$  \n\n   **Solution:**  \n   (1) Pull out $-5$: $\\displaystyle\\int -5\\cos x\\,dx = -5\\int\\cos x\\,dx$  \n   (2) Antiderivative of $\\cos x$ is $\\sin x$: $\\displaystyle\\int\\cos x\\,dx = \\sin x + C$  \n   (3) Multiply back: $\\displaystyle\\int -5\\cos x\\,dx = -5\\sin x + C$\n\n2. **Problem:** $\\displaystyle\\int 2e^{3x}\\,dx$  \n\n   **Solution:**  \n   (1) Constant $2$ outside: $2\\int e^{3x}\\,dx$  \n   (2) Use substitution $u=3x$, $du=3dx$, so $\\int e^{3x}\\,dx = \\frac{1}{3}e^{3x}+C$  \n   (3) Multiply: $2\\left(\\frac{1}{3}e^{3x}+C\\right)=\\frac{2}{3}e^{3x}+C$\n\n3. **Problem:** $\\displaystyle\\int 7\\frac{1}{x}\\,dx$  \n\n   **Solution:**  \n   (1) Factor $7$: $7\\int \\frac{1}{x}\\,dx$  \n   (2) Antiderivative of $1/x$ is $\\ln|x|$: $\\int \\frac{1}{x}\\,dx = \\ln|x|+C$  \n   (3) Multiply: $7\\ln|x|+C$\n\n4. **Problem:** $\\displaystyle\\int -\\frac{4}{\\sqrt{x}}\\,dx$  \n\n   **Solution:**  \n   (1) Write as $-4\\int x^{-1/2}\\,dx$  \n   (2) Apply the power rule with $n=-\\tfrac12$: $\\int x^{-1/2}\\,dx = \\frac{x^{1/2}}{1/2}+C = 2\\sqrt{x}+C$  \n   (3) Multiply: $-4\\bigl(2\\sqrt{x}+C\\bigr) = -8\\sqrt{x}+C$\n\nEach problem demonstrates that the constant factor is handled first, then the remaining integral is evaluated using the appropriate rule. The final answer always includes a single constant of integration $C$.",
+   "heading": "The Constant of Integration",
+   "body": "When we write an **indefinite integral** we are really looking for a *family* of functions whose derivative is the given function.  \nIf $F(x)$ is one antiderivative of $f(x)$, then every other antiderivative looks like  \n\n$$\nG(x)=F(x)+C,\n$$  \n\nwhere $C$ is a *constant*—the same number for every $x$.  \n\n> **Definition:** The **constant of integration** $C$ is an arbitrary real number that must be added to an antiderivative because differentiation erases any constant term.\n\n---\n\n### Why does a “+ C” appear?\n\nWhen we differentiate a function, the rule  \n\n$$\n\\frac{d}{dx}\\bigl(k\\bigr)=0\n$$  \n\ntells us that any constant $k$ disappears. For example,  \n\n$$\n\\frac{d}{dx}(x^2+7)=2x,\n$$  \n\nand also  \n\n$$\n\\frac{d}{dx}(x^2-3)=2x.\n$$  \n\nBoth $x^2+7$ and $x^2-3$ have the same derivative $2x$. That means they are both valid antiderivatives of $2x$. The only difference between them is the constant added at the end. Since the derivative cannot tell us which constant was present, we must write the answer as  \n\n$$\n\\int 2x\\,dx = x^{2}+C.\n$$  \n\nIf we omitted $C$, we would be claiming that there is *only one* antiderivative, which is false.\n\n---\n\n### Different choices give different antiderivatives\n\nImagine you are climbing a hill that starts at different base heights. The shape of the hill (its slope) is the same, but the actual elevation you stand on depends on where you began. In calculus, the slope is the derivative, and the starting elevation is the constant $C$.\n\nSuppose we find  \n\n$$\n\\int \\! 3x^{2}\\,dx = x^{3}+C.\n$$  \n\nIf we pick $C=0$, we get $x^{3}$.  \nIf we pick $C=5$, we get $x^{3}+5$, which is the same curve shifted upward by 5 units. Both functions have the same derivative $3x^{2}$, so they are both correct antiderivatives.\n\n---\n\n### How to determine $C$ in a real problem\n\nOften a problem gives an extra piece of information, called an *initial condition* or *boundary condition*. This tells us the value of the original function at a particular point, allowing us to solve for $C$.\n\n**Example:**  \nFind the antiderivative of $f(x)=4x$ that passes through the point $(2,\\,10)$.\n\n1. Integrate:  \n\n   $$\n   \\int 4x\\,dx = 2x^{2}+C.\n   $$\n\n2. Use the given point: plug $x=2$ and the function value $10$ into $2x^{2}+C$.\n\n   $$\n   10 = 2(2)^{2}+C \\;\\Longrightarrow\\; 10 = 8 + C \\;\\Longrightarrow\\; C = 2.\n   $$\n\n3. Write the specific antiderivative:  \n\n   $$\n   F(x)=2x^{2}+2.\n   $$\n\nNow we have a *single* function, not a family, because the extra information fixed the constant.\n\n> **In daily life:** Adding $C$ is like remembering that a recipe can be made with any amount of water; the steps stay the same, but the final taste changes with the amount you add.\n\n---\n\n### Quick ways to check your constant\n\n1. **Plug‑in the condition** – substitute the given $x$‑value and solve for $C$ as shown above.  \n2. **Differentiate back** – take the derivative of your result $F(x)=\\text{(antiderivative)}+C$; the $C$ disappears, confirming you have the right shape.  \n3. **Graphical check** – plot two antiderivatives with different $C$ values; they should be identical in shape, only shifted vertically.\n\n> **Remember:** The constant $C$ is not a mistake; it records the information that the derivative loses. Whenever you write an indefinite integral, always attach “$+C$” unless a later step tells you exactly what $C$ must be.",
    "code": ""
   },
   {
-   "heading": "Basic Integration Rules – Sum/Difference",
-   "body": "When we integrate a sum or a difference, the integral can be split into separate pieces.  \nThe **sum/difference rule** states  \n\n$$\\int \\bigl(f(x) \\pm g(x)\\bigr)\\,dx \\;=\\; \\int f(x)\\,dx \\;\\pm\\; \\int g(x)\\,dx.$$\n\nThis works because differentiation is a linear operation, and the antiderivative reverses that linearity.\n\n---\n\n### Example 1  \n\nFind $\\displaystyle \\int \\bigl(3x^{2}+5\\sin x\\bigr)\\,dx$.\n\n1. **Identify the two parts**: $f(x)=3x^{2}$ and $g(x)=5\\sin x$.  \n   $$\\int \\bigl(3x^{2}+5\\sin x\\bigr)\\,dx = \\int 3x^{2}\\,dx + \\int 5\\sin x\\,dx.$$\n\n2. **Integrate each part separately** using the power rule and the basic sine rule.  \n   $$\\int 3x^{2}\\,dx = 3\\cdot\\frac{x^{3}}{3}=x^{3},$$  \n   $$\\int 5\\sin x\\,dx = 5\\cdot(-\\cos x) = -5\\cos x.$$\n\n3. **Combine the results and add the constant of integration** $C$.  \n   $$\\int \\bigl(3x^{2}+5\\sin x\\bigr)\\,dx = x^{3} - 5\\cos x + C.$$\n\n---\n\n### Example 2  \n\nCompute $\\displaystyle \\int \\bigl(7e^{x}-4\\ln x\\bigr)\\,dx$.\n\n1. **Separate the terms**.  \n   $$\\int \\bigl(7e^{x}-4\\ln x\\bigr)\\,dx = \\int 7e^{x}\\,dx - \\int 4\\ln x\\,dx.$$\n\n2. **Integrate each term**.  \n   $$\\int 7e^{x}\\,dx = 7e^{x},$$  \n   $$\\int 4\\ln x\\,dx = 4\\bigl(x\\ln x - x\\bigr) \\quad\\text{(integration by parts).}$$\n\n3. **Put everything together**.  \n   $$\\int \\bigl(7e^{x}-4\\ln x\\bigr)\\,dx = 7e^{x} - 4x\\ln x + 4x + C.$$\n\n---\n\n## Practice problems  \n\n1. **Problem:** $\\displaystyle \\int (2x^{3} - 9)\\,dx$  \n   **Solution:**  \n   - Split: $\\int 2x^{3}\\,dx - \\int 9\\,dx$  \n   - Integrate: $\\int 2x^{3}\\,dx = 2\\cdot\\frac{x^{4}}{4}= \\frac{x^{4}}{2}$, $\\int 9\\,dx = 9x$  \n   - Result: $\\displaystyle \\int (2x^{3} - 9)\\,dx = \\frac{x^{4}}{2} - 9x + C.$  \n\n2. **Problem:** $\\displaystyle \\int \\bigl( \\cos x + \\frac{1}{x}\\bigr)\\,dx$  \n   **Solution:**  \n   - Split: $\\int \\cos x\\,dx + \\int \\frac{1}{x}\\,dx$  \n   - Integrate: $\\int \\cos x\\,dx = \\sin x$, $\\int \\frac{1}{x}\\,dx = \\ln|x|$  \n   - Result: $\\displaystyle \\int \\bigl( \\cos x + \\frac{1}{x}\\bigr)\\,dx = \\sin x + \\ln|x| + C.$  \n\n3. **Problem:** $\\displaystyle \\int \\bigl(5x^{2} - 3\\sqrt{x}\\bigr)\\,dx$  \n   **Solution:**  \n   - Write $\\sqrt{x}=x^{1/2}$. Split: $\\int 5x^{2}\\,dx - \\int 3x^{1/2}\\,dx$  \n   - Integrate: $\\int 5x^{2}\\,dx = 5\\cdot\\frac{x^{3}}{3}= \\frac{5}{3}x^{3}$,  \n     $\\int 3x^{1/2}\\,dx = 3\\cdot\\frac{x^{3/2}}{3/2}=2x^{3/2}$  \n   - Result: $\\displaystyle \\int \\bigl(5x^{2} - 3\\sqrt{x}\\bigr)\\,dx = \\frac{5}{3}x^{3} - 2x^{3/2} + C.$  \n\n4. **Problem:** $\\displaystyle \\int \\bigl(6e^{2x} + 4\\cos 3x\\bigr)\\,dx$  \n   **Solution:**  \n   - Split: $\\int 6e^{2x}\\,dx + \\int 4\\cos 3x\\,dx$  \n   - Integrate: $\\int 6e^{2x}\\,dx = 6\\cdot\\frac{e^{2x}}{2}=3e^{2x}$,  \n     $\\int 4\\cos 3x\\,dx = 4\\cdot\\frac{\\sin 3x}{3}= \\frac{4}{3}\\sin 3x$  \n   - Result: $\\displaystyle \\int \\bigl(6e^{2x} + 4\\cos 3x\\bigr)\\,dx = 3e^{2x} + \\frac{4}{3}\\sin 3x + C.$",
+   "heading": "Practice Problems and Checks",
+   "body": "When you finish an antiderivative problem, the best way to be sure you are right is to **differentiate** what you found and check that you get back the original function.  \nThink of it like a lock‑and‑key test: you design a key (the antiderivative) and then try it in the lock (the derivative). If the lock turns smoothly, the key fits.\n\nBelow are several short exercises. For each one:\n\n1. **Find** an antiderivative $F(x)$ of the given function $f(x)$.  \n2. **Differentiate** $F(x)$ to obtain $F'(x)$.  \n3. **Compare** $F'(x)$ with the original $f(x)$. If they match, your antiderivative is correct (up to the constant $C$).\n\n---\n\n**Exercise 1**  \nFind an antiderivative of $f(x)=3x^{2}$.\n\n*Step 1:* Write $F(x)=\\int 3x^{2}\\,dx$.  \n*Step 2:* Use the power rule for integration: $$\\int x^{n}\\,dx=\\frac{x^{\\,n+1}}{n+1}+C\\quad (n\\neq -1).$$  \nSo $F(x)=3\\cdot\\frac{x^{3}}{3}+C = x^{3}+C$.\n\n*Step 3:* Differentiate $F(x)$:  \n$$\\frac{d}{dx}(x^{3}+C)=3x^{2}.$$  \nSince $3x^{2}=f(x)$, the answer is correct.\n\n---\n\n**Exercise 2**  \nFind an antiderivative of $f(x)=5\\cos x$.\n\n*Step 1:* $F(x)=\\int 5\\cos x\\,dx$.  \n*Step 2:* The integral of $\\cos x$ is $\\sin x$, so $$F(x)=5\\sin x + C.$$\n\n*Step 3:* Differentiate:  \n$$\\frac{d}{dx}(5\\sin x + C)=5\\cos x,$$  \nwhich equals $f(x)$. Good!\n\n---\n\n**Exercise 3**  \nFind an antiderivative of $f(x)=\\frac{1}{x}$ (for $x>0$).\n\n*Step 1:* $F(x)=\\int \\frac{1}{x}\\,dx$.  \n*Step 2:* The antiderivative of $\\frac{1}{x}$ is the natural logarithm: $$F(x)=\\ln|x|+C.$$  \nBecause we restrict to $x>0$, we can drop the absolute value: $F(x)=\\ln x + C$.\n\n*Step 3:* Differentiate:  \n$$\\frac{d}{dx}(\\ln x + C)=\\frac{1}{x},$$  \nmatching $f(x)$.\n\n---\n\n**Exercise 4**  \nFind an antiderivative of $f(x)=4e^{2x}$.\n\n*Step 1:* $F(x)=\\int 4e^{2x}\\,dx$.  \n*Step 2:* Use the rule $\\int e^{ax}\\,dx=\\frac{1}{a}e^{ax}+C$:  \n$$F(x)=4\\cdot\\frac{1}{2}e^{2x}+C=2e^{2x}+C.$$\n\n*Step 3:* Differentiate:  \n$$\\frac{d}{dx}(2e^{2x}+C)=2\\cdot 2e^{2x}=4e^{2x},$$  \nwhich is exactly $f(x)$.\n\n---\n\n**Exercise 5**  \nFind an antiderivative of $f(x)=7x^{3}-2x+9$.\n\n*Step 1:* $F(x)=\\int (7x^{3}-2x+9)\\,dx$.  \n*Step 2:* Integrate term by term using the power rule:  \n$$F(x)=7\\cdot\\frac{x^{4}}{4}-2\\cdot\\frac{x^{2}}{2}+9x+C\n= \\frac{7}{4}x^{4}-x^{2}+9x+C.$$\n\n*Step 3:* Differentiate:  \n$$\\frac{d}{dx}\\!\\left(\\frac{7}{4}x^{4}-x^{2}+9x+C\\right)\n=7x^{3}-2x+9,$$  \nwhich matches $f(x)$.\n\n---\n\n> **Remember:** The constant $C$ disappears when you differentiate, because the derivative of any constant is $0$. That is why two antiderivatives that differ only by a constant are considered the same “family” of solutions.\n\n> **Common mistake:** Forgetting to add $C$ after integration. Even though $C$ does not affect the derivative check, it is part of the complete answer.\n\n> **In daily life:** Checking your work by reversing the steps is like proofreading a text. You write a sentence (find $F$), then read it backwards (differentiate) to see if it still says what you intended (matches $f$).\n\nTry these problems on your own with different functions, and always perform the derivative check. It builds confidence and helps you spot errors early.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "- **Problem 1** – Find $\\displaystyle \\int 3x^{2}\\,dx$  \n\n  1. Identify the power of $x$: the integrand is $3x^{2}=3\\cdot x^{2}$.  \n  2. Apply the **power rule** for antiderivatives: $\\displaystyle \\int x^{n}\\,dx=\\frac{x^{\\,n+1}}{n+1}+C$ for $n\\neq -1$.  \n  3. Increase the exponent by one and divide by the new exponent, then multiply by the constant $3$:  \n\n     $$\\int 3x^{2}\\,dx = 3\\cdot\\frac{x^{3}}{3}+C = x^{3}+C.$$\n\n- **Problem 2** – Compute $\\displaystyle \\int (5x^{4}-2)\\,dx$  \n\n  1. Split the integral using the **sum/difference rule**:  \n\n     $$\\int (5x^{4}-2)\\,dx = \\int 5x^{4}\\,dx - \\int 2\\,dx.$$  \n  2. Integrate each term separately. For $5x^{4}$ use the power rule, for the constant $2$ use the **constant multiple rule** (the antiderivative of a constant $k$ is $kx$).  \n\n     $$\\int 5x^{4}\\,dx = 5\\cdot\\frac{x^{5}}{5}=x^{5},\\qquad \\int 2\\,dx = 2x.$$  \n  3. Combine the results and add the constant of integration $C$:  \n\n     $$\\int (5x^{4}-2)\\,dx = x^{5}-2x + C.$$\n\n- **Problem 3** – Determine $\\displaystyle \\int 7\\sin x\\,dx$  \n\n  1. Recognize the constant multiple $7$ and the basic antiderivative $\\int \\sin x\\,dx = -\\cos x$.  \n  2. Pull the constant $7$ outside the integral (constant‑multiple rule).  \n\n     $$\\int 7\\sin x\\,dx = 7\\int \\sin x\\,dx.$$  \n  3. Integrate $\\sin x$ and attach the constant $C$:  \n\n     $$\\int 7\\sin x\\,dx = 7(-\\cos x)+C = -7\\cos x + C.$$\n\n- **Problem 4** – Evaluate $\\displaystyle \\int (x^{3}+4x)\\,dx$  \n\n  1. Use the **sum rule** to separate the integral:  \n\n     $$\\int (x^{3}+4x)\\,dx = \\int x^{3}\\,dx + \\int 4x\\,dx.$$  \n  2. Apply the power rule to each term. For $x^{3}$, increase the exponent to $4$ and divide by $4$; for $4x$ treat $4$ as a constant multiplier.  \n\n     $$\\int x^{3}\\,dx = \\frac{x^{4}}{4},\\qquad \\int 4x\\,dx = 4\\cdot\\frac{x^{2}}{2}=2x^{2}.$$  \n  3. Add the two antiderivatives and include $C$:  \n\n     $$\\int (x^{3}+4x)\\,dx = \\frac{x^{4}}{4}+2x^{2}+C.$$\n\n- **Problem 5** – Give the general antiderivative of $f(x)=\\dfrac{1}{x}$  \n\n  1. Recognize that $\\dfrac{1}{x}=x^{-1}$, which is the special case where the power rule does not apply directly.  \n  2. Recall the fundamental antiderivative $\\displaystyle \\int \\frac{1}{x}\\,dx = \\ln|x|$.  \n  3. Write the general antiderivative with the constant of integration:  \n\n     $$\\int \\frac{1}{x}\\,dx = \\ln|x| + C.$$",
+   "heading": "Real‑World Connections",
+   "body": "Imagine you know how fast a car is moving at every instant – that is the **velocity** function $v(t)$.  \nIf you want to know where the car started and where it is after some time, you need the **position** function $s(t)$.  \nMathematically, velocity is the derivative of position:  \n\n$$v(t)=\\frac{ds}{dt}$$  \n\nThe indefinite integral does the opposite job: it takes the velocity function and gives back a family of possible position functions.  \n\n> **Definition:** An *indefinite integral* (or *antiderivative*) of a function $f(x)$ is a new function $F(x)$ such that $F'(x)=f(x)$. We write $F(x)=\\int f(x)\\,dx$ and always add a constant $C$, because many different functions can have the same derivative.\n\nWhy does this help in physics?  \nSuppose a runner’s speed varies with time according to $v(t)=3t^2$ meters per second. To find the distance traveled from the start, we integrate:\n\n$$s(t)=\\int 3t^2\\,dt = t^3 + C.$$\n\nThe constant $C$ represents the starting position. If the runner begins at the origin, we set $C=0$, so $s(t)=t^3$. After $t=2$ seconds, the runner has moved $2^3=8$ meters. The integral has *recovered* the original quantity (position) from its rate of change (velocity).\n\n> **In daily life:** Think of a water faucet. The flow rate (liters per minute) tells you how fast water leaves the tap. Adding up the flow rate over time – the integral – tells you the total amount of water collected in a bucket.\n\nThe same idea appears in economics. Companies often know their **marginal cost** $MC(q)$, the cost of producing one more unit when they already have $q$ units. Marginal cost is the derivative of the **total cost** $C(q)$:\n\n$$MC(q)=\\frac{dC}{dq}.$$\n\nIf the marginal cost is constant, say $MC(q)=5$ dollars per widget, the total cost function is found by integrating:\n\n$$C(q)=\\int 5\\,dq = 5q + C.$$\n\nHere $C$ is the fixed cost that must be paid even before any widget is made (rent, equipment, etc.). If the fixed cost is \\$200, then $C(q)=5q+200$. Producing 10 widgets costs $5\\cdot10+200 = 250$ dollars. The integral has turned a rate (cost per extra unit) into the accumulated amount (total cost).\n\n> **Note:** The constant $C$ (or $C$ in physics, fixed cost in economics) is essential. Without it, the antiderivative would miss the starting point or baseline, leading to wrong predictions.\n\nWhy is this recovery useful?  \n- In physics, knowing the position lets us predict where an object will be, plan routes, or design safety measures.  \n- In economics, total cost is needed for pricing, budgeting, and profit analysis.  \n\nBoth fields share a common pattern: a *rate* (velocity, marginal cost) tells how fast something changes; the indefinite integral *adds up* those tiny changes to reconstruct the original quantity.\n\n> **Remember:** An indefinite integral always includes a “+ C”. That constant records the unknown starting value, whether it is the initial position of a car or the fixed overhead of a business. Ignoring it can give a result that is shifted up or down, which in real‑world problems means a completely different answer.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Antiderivative of a constant",
+   "given": "Find the indefinite integral $\\displaystyle \\int 5\\,dx$.",
+   "steps": [
+    {
+     "label": "Identify constant",
+     "text": "Recognize $5$ is a constant, so its antiderivative is $5x$."
+    },
+    {
+     "label": "Add constant of integration",
+     "text": "Include $+C$ to represent all possible antiderivatives."
+    }
+   ],
+   "answer": "$\\displaystyle \\int 5\\,dx = 5x + C$."
+  },
+  {
+   "level": "Medium",
+   "title": "Polynomial antiderivative",
+   "given": "Find $\\displaystyle \\int (3x^{2} - 4x + 2)\\,dx$.",
+   "steps": [
+    {
+     "label": "Apply power rule",
+     "text": "Integrate each term using $\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C$."
+    },
+    {
+     "label": "Compute each term",
+     "text": "$\\int 3x^{2}dx = 3\\frac{x^{3}}{3}=x^{3}$; $\\int -4x\\,dx = -4\\frac{x^{2}}{2}=-2x^{2}$; $\\int 2dx = 2x$."
+    },
+    {
+     "label": "Combine results",
+     "text": "Add the three antiderivatives and a single constant $C$."
+    }
+   ],
+   "answer": "$\\displaystyle \\int (3x^{2} - 4x + 2)\\,dx = x^{3} - 2x^{2} + 2x + C$."
+  },
+  {
+   "level": "Hard",
+   "title": "Antiderivative with substitution",
+   "given": "Find $\\displaystyle \\int 2x\\cos(x^{2})\\,dx$.",
+   "steps": [
+    {
+     "label": "Choose substitution",
+     "text": "Let $u = x^{2}$, then $du = 2x\\,dx$."
+    },
+    {
+     "label": "Replace differential",
+     "text": "$2x\\,dx$ becomes $du$, so the integral becomes $\\int \\cos(u)\\,du$."
+    },
+    {
+     "label": "Integrate in $u$",
+     "text": "$\\int \\cos(u)\\,du = \\sin(u) + C$."
+    },
+    {
+     "label": "Back‑substitute",
+     "text": "Replace $u$ with $x^{2}$ to obtain $\\sin(x^{2}) + C$."
+    }
+   ],
+   "answer": "$\\displaystyle \\int 2x\\cos(x^{2})\\,dx = \\sin(x^{2}) + C\\,. $"
+  }
+ ],
+ "practice": [
+  {
+   "level": "",
+   "q": "Find $\\displaystyle \\int 7\\,dx$.",
+   "a": "\n1. Recognize that $7$ is a constant.\n2. Use the constant‑multiple rule: $\\int 7\\,dx = 7\\int 1\\,dx$.\n3. $\\int 1\\,dx = x + C$.\n4. Multiply by $7$: $\\displaystyle \\int 7\\,dx = 7x + C$.\n## PRACTICE | Easy"
+  },
+  {
+   "level": "",
+   "q": "Compute $\\displaystyle \\int (2x+3)\\,dx$.",
+   "a": "\n1. Split the integral: $\\int (2x+3)\\,dx = \\int 2x\\,dx + \\int 3\\,dx$.\n2. Pull out constants: $=2\\int x\\,dx + 3\\int 1\\,dx$.\n3. Apply the power rule: $\\int x\\,dx = \\frac{x^{2}}{2}+C$, $\\int 1\\,dx = x + C$.\n4. Combine: $2\\left(\\frac{x^{2}}{2}\\right)+3x + C = x^{2}+3x + C$.\n## PRACTICE | Medium"
+  },
+  {
+   "level": "",
+   "q": "Find $\\displaystyle \\int (4x^{3}-2x^{2}+5)\\,dx$.",
+   "a": "\n1. Separate terms: $\\int 4x^{3}\\,dx - \\int 2x^{2}\\,dx + \\int 5\\,dx$.\n2. Apply the power rule to each:\n- $\\int 4x^{3}\\,dx = 4\\cdot\\frac{x^{4}}{4}=x^{4}$.\n- $\\int 2x^{2}\\,dx = 2\\cdot\\frac{x^{3}}{3}= \\frac{2}{3}x^{3}$.\n- $\\int 5\\,dx = 5x$.\n3. Put together with signs: $x^{4} - \\frac{2}{3}x^{3} + 5x + C$.\n## PRACTICE | Medium"
+  },
+  {
+   "level": "",
+   "q": "Evaluate $\\displaystyle \\int (6x^{-2}+4x^{0})\\,dx$.",
+   "a": "\n1. Write each term clearly: $6x^{-2}+4x^{0}=6x^{-2}+4$.\n2. Integrate term by term:\n- $\\int 6x^{-2}\\,dx = 6\\int x^{-2}\\,dx = 6\\left(\\frac{x^{-1}}{-1}\\right)= -6x^{-1}$.\n- $\\int 4\\,dx = 4x$.\n3. Combine: $-6x^{-1}+4x + C$, or $-\\frac{6}{x}+4x + C$.\n## PRACTICE | Hard"
+  },
+  {
+   "level": "",
+   "q": "Find the antiderivative $\\displaystyle \\int \\left(3x^{4}-\\frac{2}{x^{3}}+7e^{x}\\right)dx$.",
+   "a": "\n1. Split the integral: $\\int 3x^{4}\\,dx - \\int \\frac{2}{x^{3}}\\,dx + \\int 7e^{x}\\,dx$.\n2. Treat each part:\n- $\\int 3x^{4}\\,dx = 3\\cdot\\frac{x^{5}}{5}= \\frac{3}{5}x^{5}$.\n- $\\frac{2}{x^{3}} = 2x^{-3}$, so $\\int 2x^{-3}\\,dx = 2\\cdot\\frac{x^{-2}}{-2}= -x^{-2}$.\n- $\\int 7e^{x}\\,dx = 7e^{x}$.\n3. Remember the minus sign on the second term: $-\\big(-x^{-2}\\big)=+x^{-2}$.\n4. Assemble: $\\displaystyle \\frac{3}{5}x^{5}+x^{-2}+7e^{x}+C$.\n## PRACTICE | Hard"
+  },
+  {
+   "level": "",
+   "q": "Compute $\\displaystyle \\int \\left(\\frac{5}{\\sqrt{x}} - 4\\cos x + 2x^{2}\\right)dx$.",
+   "a": "\n1. Rewrite with exponents: $\\frac{5}{\\sqrt{x}} = 5x^{-1/2}$.\n2. Separate: $\\int 5x^{-1/2}\\,dx - \\int 4\\cos x\\,dx + \\int 2x^{2}\\,dx$.\n3. Integrate each:\n- $\\int 5x^{-1/2}\\,dx = 5\\cdot\\frac{x^{1/2}}{1/2}=5\\cdot 2x^{1/2}=10\\sqrt{x}$.\n- $\\int 4\\cos x\\,dx = 4\\sin x$. (Since $\\int \\cos x\\,dx = \\sin x$.)\n- $\\int 2x^{2}\\,dx = 2\\cdot\\frac{x^{3}}{3}= \\frac{2}{3}x^{3}$.\n4. Combine with signs: $10\\sqrt{x} - 4\\sin x + \\frac{2}{3}x^{3} + C$."
+  }
+ ],
+ "recap": "This lesson explains that an indefinite integral is the set of all functions whose derivative equals a given function, called antiderivatives. The integral sign represents the reverse of differentiation and always includes a constant of integration because derivatives erase constants. Basic rules such as the power, constant‑multiple, and sum rules let us find antiderivatives quickly. Real‑world examples, like finding position from velocity, show why antiderivatives are useful.",
  "key_terms": [
   {
-   "term": "indefinite integral",
-   "meaning": "A family of functions whose derivative equals the given function, written as integral of f(x) dx = F(x) + C"
+   "term": "Indefinite integral",
+   "meaning": "A family of functions whose derivative equals the integrand, written as integral of f(x) dx."
   },
   {
-   "term": "antiderivative",
-   "meaning": "A single function F(x) such that F'(x) = f(x)"
+   "term": "Antiderivative",
+   "meaning": "A single function F(x) such that F'(x)=f(x)."
   },
   {
-   "term": "constant of integration",
-   "meaning": "The symbol C that represents any constant added to an antiderivative because its derivative is zero"
+   "term": "Constant of integration",
+   "meaning": "An arbitrary constant C added to an antiderivative because differentiation removes constants."
   },
   {
-   "term": "power rule for integration",
-   "meaning": "If n is not -1, integral of x^n dx = x^(n+1)/(n+1) + C"
+   "term": "Power rule for integration",
+   "meaning": "Integral of x^n dx equals x^(n+1)/(n+1)+C for n not equal to -1."
   },
   {
-   "term": "constant multiple rule",
-   "meaning": "A constant factor can be taken outside the integral: integral of k*f(x) dx = k * integral of f(x) dx"
+   "term": "Constant‑multiple rule",
+   "meaning": "Integral of k·f(x) dx equals k times the integral of f(x) dx."
   },
   {
-   "term": "sum/difference rule",
-   "meaning": "The integral of a sum or difference equals the sum or difference of the integrals"
+   "term": "Sum rule",
+   "meaning": "Integral of (f(x)+g(x)) dx equals the integral of f(x) dx plus the integral of g(x) dx."
   },
   {
-   "term": "family of functions",
-   "meaning": "All antiderivatives of a function, differing only by a constant"
+   "term": "dx",
+   "meaning": "Indicates the variable of integration; it shows we are integrating with respect to x."
   },
   {
-   "term": "integrand",
-   "meaning": "The function inside the integral sign that is being integrated"
+   "term": "Family of functions",
+   "meaning": "All antiderivatives of a given function, differing only by a constant."
   }
  ],
  "quiz": [
   {
-   "q": "What does the symbol C represent in an indefinite integral?",
+   "q": "What does the symbol ∫ f(x) dx represent?",
    "options": [
-    "The derivative of the function",
-    "A constant that can be any real number",
-    "The limit of integration",
-    "The variable of integration"
-   ],
-   "answer": 1,
-   "why": "C is the constant of integration, added because any constant disappears after differentiation."
-  },
-  {
-   "q": "Using the power rule, what is the integral of 5x^3 dx?",
-   "options": [
-    "5x^4/4 + C",
-    "x^4/4 + C",
-    "5x^4 + C",
-    "x^3 + C"
-   ],
-   "answer": 0,
-   "why": "Increase the exponent to 4 and divide by 4, then multiply by the constant 5."
-  },
-  {
-   "q": "Which rule allows you to write integral of (3x^2 + 5 sin x) dx as two separate integrals?",
-   "options": [
-    "Power rule",
-    "Constant multiple rule",
-    "Sum/difference rule",
-    "Substitution rule"
+    "The derivative of f(x)",
+    "The area under f(x) from 0 to 1",
+    "A family of antiderivatives of f(x)",
+    "A constant value"
    ],
    "answer": 2,
-   "why": "The sum/difference rule splits the integral of a sum into the sum of integrals."
+   "why": "It denotes all functions whose derivative is f(x)."
   },
   {
-   "q": "What is the antiderivative of 2x?",
+   "q": "If F'(x)=3x^2, what is F(x)?",
    "options": [
-    "x^2 + C",
-    "2x^2 + C",
-    "x + C",
-    "2x + C"
+    "x^3+C",
+    "3x^3+C",
+    "x^2+C",
+    "3x+C"
    ],
    "answer": 0,
-   "why": "Integrate using the power rule: increase exponent to 2 and divide by 2."
+   "why": "Integrating 3x^2 gives x^3 plus a constant."
   },
   {
-   "q": "If F(x) is an antiderivative of f(x), which of the following is also an antiderivative of f(x)?",
+   "q": "Which rule allows you to pull a constant k out of an integral?",
    "options": [
-    "F(x) - 7",
-    "F(x) + 7x",
-    "F(x) * 7",
-    "7F(x)"
+    "Power rule",
+    "Constant‑multiple rule",
+    "Sum rule",
+    "Product rule"
    ],
-   "answer": 0,
-   "why": "Adding or subtracting a constant does not change the derivative."
+   "answer": 1,
+   "why": "The constant‑multiple rule states that k·∫f(x)dx = ∫k·f(x)dx."
   },
   {
-   "q": "What is the integral of the constant function 4 dx?",
+   "q": "What is the antiderivative of x^4?",
    "options": [
-    "4x + C",
-    "4 + C",
-    "x/4 + C",
-    "C"
+    "x^5/5+C",
+    "5x^5+C",
+    "x^3/3+C",
+    "x^5+C"
    ],
    "answer": 0,
-   "why": "The antiderivative of a constant k is kx plus the constant of integration."
+   "why": "Increase the exponent to 5 and divide by 5."
+  },
+  {
+   "q": "Why do we always add +C when writing an indefinite integral?",
+   "options": [
+    "Because integration is always approximate",
+    "Because the original function may be unknown",
+    "Because differentiation removes constant terms",
+    "Because C stands for the speed of light"
+   ],
+   "answer": 2,
+   "why": "Constants disappear when differentiating, so they must be included when reversing the process."
+  },
+  {
+   "q": "In the context of motion, if velocity v(t)=2t, what is the position function s(t)?",
+   "options": [
+    "t^2+C",
+    "2t^2+C",
+    "t^2/2+C",
+    "2t+C"
+   ],
+   "answer": 0,
+   "why": "Integrating 2t gives t^2 plus a constant."
   }
  ],
  "flashcards": [
   {
-   "front": "Indefinite integral definition",
-   "back": "A set of all antiderivatives of a function, written as integral f(x) dx = F(x) + C"
+   "front": "Indefinite integral",
+   "back": "The set of all antiderivatives of a function, written as ∫ f(x) dx."
   },
   {
-   "front": "Why do we add + C?",
-   "back": "Because any constant disappears when differentiated, so all antiderivatives differ by a constant."
+   "front": "Antiderivative",
+   "back": "A function F(x) whose derivative is the given function f(x); F'(x)=f(x)."
   },
   {
-   "front": "Power rule for integration (n ≠ -1)",
-   "back": "Integral of x^n dx = x^(n+1)/(n+1) + C"
+   "front": "Constant of integration",
+   "back": "The arbitrary constant C added to an antiderivative because differentiation eliminates constants."
   },
   {
-   "front": "Constant multiple rule",
-   "back": "Integral of k*f(x) dx = k * integral of f(x) dx"
+   "front": "Power rule for integration",
+   "back": "∫ x^n dx = x^(n+1)/(n+1) + C, for n ≠ -1."
   },
   {
-   "front": "Sum/difference rule",
-   "back": "Integral of (f(x) ± g(x)) dx = integral of f(x) dx ± integral of g(x) dx"
+   "front": "Constant‑multiple rule",
+   "back": "∫ k·f(x) dx = k·∫ f(x) dx."
   },
   {
-   "front": "Antiderivative of 3x^2",
-   "back": "x^3 + C"
+   "front": "Sum rule for integration",
+   "back": "∫ (f(x)+g(x)) dx = ∫ f(x) dx + ∫ g(x) dx."
   },
   {
-   "front": "Family of functions",
-   "back": "All antiderivatives of a given function, differing only by a constant"
+   "front": "dx in an integral",
+   "back": "Indicates the variable of integration; tells us we are integrating with respect to x."
   },
   {
-   "front": "Integrand",
-   "back": "The function inside the integral sign that is being integrated"
+   "front": "Why add +C?",
+   "back": "Because many different functions differ only by a constant yet have the same derivative."
   }
  ],
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l07-family-of-antiderivatives",
-   "title": "Several curves that differ only by a vertical shift, illustrating the constant of integration.",
-   "alt": "Several curves that differ only by a vertical shift, illustrating the constant of integration.",
+   "file": "calculus-i-l07-derivative-and-integral-machines",
+   "title": "A simple machine that turns a curve into its slope (derivative) and the reverse machine that rebuilds the original curve (integral).",
+   "alt": "A simple machine that turns a curve into its slope (derivative) and the reverse machine that rebuilds the original curve (integral).",
    "priority": 7,
-   "picture_title": "Family of Antiderivatives",
+   "picture_title": "Derivative and Integral Machines",
    "kind": "illustration",
-   "subject": "A single function f(x) is drawn in black, and three of its antiderivatives F(x)+C are shown in different colors, each shifted up or down by a constant amount. The picture highlights that all these curves have the same slope at every x‑value.",
-   "layout": "The original function f(x) runs across the middle of the image; three antiderivative curves are placed above and below it, each labelled with its constant C value (e.g., C = -2, C = 0, C = 3). Dashed vertical arrows point from a point on f(x) to the corresponding points on each antiderivative.",
+   "subject": "Two side‑by‑side cartoon machines: the left one takes a wavy line and outputs short arrows representing slopes; the right one takes the arrows and reconstructs the wavy line.",
+   "layout": "Left machine on the left, right machine on the right, each with a labeled input and output; arrows connect the two scenes.",
    "labels": [
-    "f(x)",
-    "F(x)+C = -2",
-    "F(x)+C = 0",
-    "F(x)+C = 3"
+    "input curve",
+    "slope arrows",
+    "output curve",
+    "derivative machine",
+    "integral machine"
    ],
    "after": 0
   },
   {
-   "type": "steps",
-   "title": "Finding an Indefinite Integral",
-   "steps": [
+   "type": "image",
+   "file": "calculus-i-l07-car-velocity-to-position",
+   "title": "How integrating a velocity graph gives the possible positions of a moving car.",
+   "alt": "How integrating a velocity graph gives the possible positions of a moving car.",
+   "priority": 8,
+   "picture_title": "Car Velocity to Position",
+   "kind": "illustration",
+   "subject": "A side view of a car on a road with a small timeline; the velocity function is shown as a separate plot, and a family of position curves is drawn showing different starting points.",
+   "layout": "Car illustration at bottom centre, timeline above it, velocity plot on the left, position curves on the right, arrows indicating the integral relationship.",
+   "labels": [
+    "car",
+    "road",
+    "time",
+    "velocity plot",
+    "position curves",
+    "C = constant"
+   ],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l07-cake-analogy-for-integration",
+   "title": "Integration is like figuring out the whole cake from its sliced pieces.",
+   "alt": "Integration is like figuring out the whole cake from its sliced pieces.",
+   "priority": 5,
+   "picture_title": "Cake Analogy for Integration",
+   "kind": "illustration",
+   "subject": "A three‑layer cake being cut into slices; the slices represent terms after differentiation, and the whole assembled cake represents the antiderivative.",
+   "layout": "Cake on the left whole, arrows pointing to sliced pieces on the right; each slice labeled with a derivative term.",
+   "labels": [
+    "whole cake",
+    "slices",
+    "derivative terms"
+   ],
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Parts of an Indefinite Integral",
+   "items": [
     {
-     "label": "1",
-     "text": "Identify the integrand f(x)."
+     "name": "∫",
+     "role": "integral sign (means sum)"
     },
     {
-     "label": "2",
-     "text": "Apply the appropriate antiderivative rule (power, constant‑multiple, etc.)."
+     "name": "f(x)",
+     "role": "function whose slope we know"
     },
     {
-     "label": "3",
-     "text": "Add the constant of integration C."
+     "name": "dx",
+     "role": "tiny change in x"
     }
    ],
-   "loop": false,
    "after": 0
   },
   {
    "type": "compare",
-   "title": "Derivative vs. Indefinite Integral",
+   "title": "Derivative vs Antiderivative",
    "left": {
     "name": "Derivative",
     "points": [
-     "Maps a function to its rate of change",
-     "Denoted by f'(x) or d/dx f(x)",
-     "Linear operation"
+     "takes a function → slope",
+     "writes as f'(x)",
+     "removes constants"
     ]
    },
    "right": {
-    "name": "Indefinite Integral",
+    "name": "Antiderivative",
     "points": [
-     "Finds a family of functions whose derivative is given",
-     "Denoted by ∫ f(x) dx = F(x)+C",
-     "Adds constant C because many antiderivatives exist"
+     "takes a slope → original shape",
+     "writes as ∫ f(x)dx",
+     "adds a constant C"
     ]
    },
    "after": 1
   },
   {
-   "type": "facts",
-   "title": "Power Rule for Antiderivatives",
-   "items": [
+   "type": "steps",
+   "title": "Power Rule for Indefinite Integrals",
+   "steps": [
     {
-     "value": "∫ x^n dx",
-     "label": "General form"
+     "label": "Identify exponent",
+     "text": "Find n in x^n"
     },
     {
-     "value": "x^(n+1)/(n+1) + C",
-     "label": "Result when n ≠ -1"
+     "label": "Add one",
+     "text": "Compute n+1"
     },
     {
-     "value": "n = -1 → ∫ x^(-1) dx = ln|x| + C",
-     "label": "Exception"
+     "label": "Divide",
+     "text": "Place 1/(n+1) in front"
+    },
+    {
+     "label": "Add C",
+     "text": "Write + C at the end"
     }
    ],
-   "after": 3
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "facts",
+   "title": "Constant of Integration",
+   "items": [
+    {
+     "value": "+ C",
+     "label": "Added to every antiderivative"
+    },
+    {
+     "value": "C ∈ ℝ",
+     "label": "Any real number works"
+    },
+    {
+     "value": "Differentiation removes C",
+     "label": "Why it appears"
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "graph",
+   "title": "Velocity and Position Example",
+   "fn": "3*x^2",
+   "xmin": -2,
+   "xmax": 2,
+   "points": [
+    {
+     "x": -1,
+     "y": -3,
+     "label": "v(-1)",
+     "open": false
+    },
+    {
+     "x": 1,
+     "y": 3,
+     "label": "v(1)",
+     "open": false
+    }
+   ],
+   "caption": "Velocity v(t)=3t^2 and its antiderivative s(t)=t^3+C give position.",
+   "after": 6
   }
  ],
- "images_checked": true,
+ "images_version": 5,
  "reviewed": false,
  "models": [
   "openai/gpt-oss-120b"
- ],
- "images_version": 5
+ ]
 }

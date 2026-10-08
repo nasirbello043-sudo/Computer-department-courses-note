@@ -1,232 +1,451 @@
 {
  "title": "Applications of Derivatives",
- "summary": "This lesson shows how derivatives help find tangent lines, describe motion, solve optimization, and handle related‑rate problems. Students will practice each application with clear steps and real‑world examples.",
+ "summary": "In this lesson students learn how to use derivatives to find tangent lines, compute velocity, solve optimization problems, and tackle related rates. Each application is built step‑by‑step with concrete examples.",
+ "objectives": [
+  "Compute the equation of a tangent line using the derivative",
+  "Interpret the derivative as instantaneous velocity and calculate it from a position function",
+  "Set up and solve optimization problems to find maximum or minimum values",
+  "Formulate and solve related‑rates problems involving changing quantities"
+ ],
+ "prerequisites": "Students should already know how to compute basic derivatives using power, product, quotient, and chain rules, and understand the concept of a function’s graph.",
+ "why": [
+  "Derivatives let us predict how things change at an exact moment. Engineers use tangent lines to approximate curves, physicists use velocity to track motion, and biologists use rates of change to model population growth.",
+  "Optimization and related‑rates problems appear in everyday decisions: minimizing material cost, maximizing profit, or determining how quickly a leaking tank empties. Mastering these tools prepares students for real‑world problem solving in science, technology, and economics."
+ ],
  "sections": [
   {
-   "heading": "Tangent Lines and Linear Approximation",
-   "body": "The **derivative** of a function at a point tells us the slope of the curve there.  \nIf the slope is known, we can draw the **tangent line** – the straight line that just touches the graph without crossing it.  \nBecause a line is much simpler than a curved graph, the tangent line can be used to **approximate** the function’s values near the point of tangency. This idea is called **linear approximation**.\n\n---\n\n### Why the tangent line works  \n\nSuppose $f$ is differentiable at $x=a$. By definition  \n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h},\n\\]\n\nso for very small $h$ we have  \n\n\\[\nf(a+h)\\approx f(a)+f'(a)h .\n\\]\n\nIf we let $x=a+h$, the right‑hand side becomes  \n\n\\[\nL(x)=f(a)+f'(a)(x-a),\n\\]\n\nwhich is the equation of the line passing through $(a,f(a))$ with slope $f'(a)$.  \n$L(x)$ is called the **linearization** of $f$ at $a$, and it gives a quick estimate of $f(x)$ when $x$ is close to $a$.\n\n---\n\n### Step‑by‑step recipe  \n\n1. **Find the point** $(a,f(a))$ where you want the approximation.  \n2. **Compute the derivative** $f'(x)$ and evaluate it at $x=a$ to get the slope $m=f'(a)$.  \n3. **Write the line** using point‑slope form: $y-f(a)=m(x-a)$.  \n4. **Plug in the desired $x$‑value** into this line to obtain the approximation $L(x)$.\n\n---\n\n### Fully worked example  \n\nApproximate $\\sqrt{4.1}$ using linear approximation.\n\n1. Let $f(x)=\\sqrt{x}$ and choose $a=4$ because $\\sqrt{4}=2$ is easy to compute.  \n2. Compute the derivative:  \n\n\\[\nf'(x)=\\frac{1}{2\\sqrt{x}}.\n\\]\n\n   Evaluate at $a$: $f'(4)=\\frac{1}{2\\cdot 2}= \\frac14$.\n\n3. Write the tangent line:  \n\n\\[\ny-f(4)=f'(4)(x-4)\\quad\\Longrightarrow\\quad\ny-2=\\frac14(x-4).\n\\]\n\n4. To approximate $\\sqrt{4.1}$, set $x=4.1$:\n\n\\[\ny=2+\\frac14(4.1-4)=2+\\frac14(0.1)=2+0.025=2.025.\n\\]\n\nHence $\\sqrt{4.1}\\approx 2.025$. (The true value is $2.0249\\ldots$, showing the approximation is very close.)\n\n---\n\n### Practice problems  \n\n**1.** Approximate $\\sin(0.52)$ using linearization at $a=0$.  \n\n*Solution.* $f(x)=\\sin x$, $f(0)=0$, $f'(x)=\\cos x$, $f'(0)=1$.  \nTangent line: $y=0+1(x-0)=x$.  \nPlug $x=0.52$: $y\\approx0.52$.  \n\n**2.** Approximate $\\ln(1.1)$ using $a=1$.  \n\n*Solution.* $f(x)=\\ln x$, $f(1)=0$, $f'(x)=1/x$, $f'(1)=1$.  \nLine: $y=0+1(x-1)=x-1$.  \nAt $x=1.1$: $y\\approx0.1$.  \n\n**3.** Approximate $e^{0.03}$ using $a=0$.  \n\n*Solution.* $f(x)=e^{x}$, $f(0)=1$, $f'(x)=e^{x}$, $f'(0)=1$.  \nLine: $y=1+1(x-0)=1+x$.  \nAt $x=0.03$: $y\\approx1.03$.  \n\n**4.** Approximate $\\frac{1}{\\sqrt{9.2}}$ using $a=9$.  \n\n*Solution.* Let $f(x)=x^{-1/2}$. $f(9)=1/3$, $f'(x)=-(1/2)x^{-3/2}$, so $f'(9)=-(1/2)(9)^{-3/2}=-(1/2)\\frac{1}{27}= -\\frac{1}{54}$.  \nLine: $y-\\frac13 = -\\frac{1}{54}(x-9)$.  \nAt $x=9.2$:  \n\n\\[\ny=\\frac13 -\\frac{1}{54}(0.2)=\\frac13 -\\frac{0.2}{54}\n=\\frac13 -\\frac{1}{270}\\approx0.3333-0.0037=0.3296.\n\\]\n\nThus $\\displaystyle\\frac{1}{\\sqrt{9.2}}\\approx0.3296$ (actual value $0.3296\\ldots$).",
+   "heading": "1. Review: Derivative as Slope",
+   "body": "The derivative tells us how steep a curve is at a single point.  \nImagine you are walking along a hill that is drawn by the graph of a function $y=f(x)$.  \nAt any spot $x=a$ you can ask: “If I take a tiny step forward, how much does my height change?”  \nThe answer is the **slope** of the hill right there, and that slope is exactly $f'(a)$, the derivative of $f$ at $a$.\n\n> **Definition:** The derivative of $f$ at $a$ is the limit  \n> $$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$  \n> It measures the instantaneous rate of change of $y$ with respect to $x$ at $x=a$.\n\nWhy does this limit give the slope?  \nThink of a straight line. Its slope is “rise over run’’ – the change in $y$ divided by the change in $x$.  \nIf we draw a tiny secant line that connects two points on the curve, $(a,f(a))$ and $(a+h,f(a+h))$, its slope is  \n\n$$m_{\\text{secant}}=\\frac{f(a+h)-f(a)}{h}.$$\n\nAs the second point moves closer to the first (that is, as $h$ gets smaller), the secant line tilts to match the curve more closely. When $h$ becomes *infinitesimally* small, the secant line becomes the **tangent line** – the line that just touches the curve at $(a,f(a))$ without cutting through it. The slope of that tangent line is the derivative $f'(a)$.\n\n### A concrete example\n\nConsider the simple function $f(x)=x^{2}$.  \nWe want the slope at $x=3$.  \n\n1. Write the difference quotient:  \n   $$\\frac{f(3+h)-f(3)}{h}=\\frac{(3+h)^{2}-3^{2}}{h}.$$\n2. Expand the numerator:  \n   $$(3+h)^{2}=9+6h+h^{2},$$  \n   so the fraction becomes  \n   $$\\frac{9+6h+h^{2}-9}{h}=\\frac{6h+h^{2}}{h}.$$\n3. Simplify by cancelling $h$:  \n   $$\\frac{6h+h^{2}}{h}=6+h.$$\n4. Take the limit as $h\\to0$:  \n   $$\\lim_{h\\to0}(6+h)=6.$$\n\nThus $f'(3)=6$. The tangent line at the point $(3,9)$ has slope $6$, meaning that for a tiny step to the right, the height rises about $6$ units for each unit moved horizontally.\n\n> **In daily life:** If you drive a car and look at a speedometer, the speed you see is the derivative of your position with respect to time. Just as the derivative gives the hill’s steepness, it gives how fast you are moving at an exact instant.\n\n### Visual picture\n\nBelow is a sketch of $y=x^{2}$ with the point $(3,9)$ highlighted.  \nThe red secant line (for a small $h$) approaches the blue tangent line as $h$ shrinks.\n\n```\n          |\n      *   |          *\n    *     |       *\n  *       |    *\n*         | *\n-----------+----------- \n          3\n```\n\n> **Common mistake:** Forgetting to let $h$ approach zero. Using a fixed small $h$ gives an *approximate* slope, not the exact derivative.\n\n### Key take‑away\n\n- The derivative $f'(a)$ is the limit of the secant‑line slopes as the second point slides onto the first.\n- It gives the exact instantaneous slope of the curve at $x=a$.\n- Knowing this slope lets us predict how the function behaves locally, which is the foundation for all later applications such as velocity, optimization, and related rates.\n\n> **Remember:** Always start from the limit definition, simplify algebraically, then let $h$ go to zero. This step‑by‑step process guarantees the correct slope.",
    "code": ""
   },
   {
-   "heading": "Velocity and Acceleration",
-   "body": "The **velocity** of an object is the rate at which its position changes with time.  \nIf the position is given by a function $s(t)$ (measured in meters, for example), the velocity is the first derivative  \n\n\\[\nv(t)=\\frac{ds}{dt}=s'(t).\n\\]\n\nThe **acceleration** is the rate at which velocity changes, i.e. the second derivative of the position function  \n\n\\[\na(t)=\\frac{dv}{dt}=v'(t)=s''(t).\n\\]\n\nBoth $v(t)$ and $a(t)$ inherit the units of the original function.  \nIf $s$ is in meters and $t$ in seconds, then $v$ is in **meters per second** (m/s) and $a$ in **meters per second squared** (m/s\\(^2\\)).  \nThe sign of $v$ tells us the direction of motion along the chosen coordinate axis (positive = forward, negative = backward).  \nThe sign of $a$ indicates whether the speed is increasing (acceleration in the same direction as velocity) or decreasing (acceleration opposite to velocity).\n\n---\n\n### Worked Example  \n\nA particle moves along a straight line with position  \n\n\\[\ns(t)=4t^{3}-3t^{2}+2t\\quad\\text{(meters)},\\qquad 0\\le t\\le 5\\text{ s}.\n\\]\n\n**Step 1: Find the velocity.**  \n\n\\[\nv(t)=s'(t)=\\frac{d}{dt}\\bigl(4t^{3}-3t^{2}+2t\\bigr)\n      =12t^{2}-6t+2\\quad\\text{(m/s)}.\n\\]\n\n**Step 2: Find the acceleration.**  \n\n\\[\na(t)=v'(t)=\\frac{d}{dt}\\bigl(12t^{2}-6t+2\\bigr)\n      =24t-6\\quad\\text{(m/s}^{2}\\text{)}.\n\\]\n\n**Step 3: Interpret at a specific time, say $t=2$ s.**  \n\n\\[\nv(2)=12(2)^{2}-6(2)+2=48-12+2=38\\text{ m/s}.\n\\]  \nThe particle is moving forward (positive velocity) at $38\\,$m/s.\n\n\\[\na(2)=24(2)-6=48-6=42\\text{ m/s}^{2}.\n\\]  \nSince $a(2)>0$, the speed is increasing; the particle is accelerating in the forward direction.\n\n**Step 4: When does the particle momentarily stop?**  \nSet $v(t)=0$:\n\n\\[\n12t^{2}-6t+2=0\\;\\Longrightarrow\\;t=\\frac{6\\pm\\sqrt{36-96}}{24}\n\\]\n\nThe discriminant is negative, so $v(t)$ never equals zero on $[0,5]$. The particle never stops; it always moves forward.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** A car’s position is $s(t)=5t^{2}-t^{3}$ (meters). Find $v(t)$, $a(t)$, and state the units.  \n\n   **Solution:**  \n   \\[\n   v(t)=s'(t)=10t-3t^{2}\\;\\text{(m/s)},\\qquad\n   a(t)=v'(t)=10-6t\\;\\text{(m/s}^{2}\\text{)}.\n   \\]\n\n2. **Problem:** A stone is dropped from a height of $80$ m. Its height above ground is $h(t)=80-4.9t^{2}$ (meters). Compute velocity and acceleration at $t=2$ s, and interpret the signs.  \n\n   **Solution:**  \n   \\[\n   v(t)=h'(t)=-9.8t,\\qquad a(t)=h''(t)=-9.8.\n   \\]  \n   At $t=2$: $v(2)=-19.6\\,$m/s (downward), $a(2)=-9.8\\,$m/s\\(^2\\) (constant downward acceleration due to gravity).\n\n3. **Problem:** A particle moves along a line with velocity $v(t)=6-4t$ (m/s). Find the position function $s(t)$ given $s(0)=3$ m.  \n\n   **Solution:**  \n   Integrate $v(t)$:  \n   \\[\n   s(t)=\\int (6-4t)\\,dt =6t-2t^{2}+C.\n   \\]  \n   Use $s(0)=3$: $C=3$. Hence $s(t)=6t-2t^{2}+3$ (m).  \n   Acceleration $a(t)=v'(t)=-4$ m/s\\(^2\\) (constant, opposite to motion when $v>0$).\n\n4. **Problem:** A balloon rises so that its height is $h(t)=t^{2}+2t$ (meters). At what time is the upward speed greatest on the interval $0\\le t\\le5$?  \n\n   **Solution:**  \n   Velocity $v(t)=h'(t)=2t+2$. This is a linear increasing function, so its maximum on $[0,5]$ occurs at $t=5$:  \n   \\[\n   v_{\\max}=v(5)=2(5)+2=12\\text{ m/s}.\n   \\]  \n   Acceleration $a(t)=h''(t)=2$ m/s\\(^2\\) (constant upward).  \n\nThese examples illustrate how the **first derivative** gives instantaneous speed and direction, while the **second derivative** tells us how that speed is changing. Remember to always check units and the sign of each result—they carry the physical meaning.",
+   "heading": "2. Tangent Line Formula",
+   "body": "When we talk about the **derivative** of a function $f$ at a point $a$, we are really talking about the slope of the curve $y=f(x)$ right at that point.  \nThe slope tells us how steep the curve is, just like the steepness of a hill tells a cyclist how hard it is to pedal.  \n\n> **Definition:** The *tangent line* to the graph of $y=f(x)$ at the point $(a,f(a))$ is the straight line that just “touches’’ the curve there and has the same instantaneous slope as the curve.\n\nWhy do we need a formula for that line?  If we know the slope and a single point on the line, we can write down the whole line.  This is useful for:\n\n* estimating function values near $a$ (linear approximation),  \n* solving problems that involve rates of change, and  \n* visualising how the function behaves locally.\n\n---\n\n### From slope to equation\n\nA straight line in the plane can be described by the **point‑slope form**:\n\n$$\ny - y_0 = m\\,(x - x_0),\n$$\n\nwhere $(x_0,y_0)$ is any point on the line and $m$ is its slope.  \nHere’s why this works:  \n\n1. Start with the definition of slope: $m = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{y-y_0}{\\,x-x_0\\,}$.  \n2. Multiply both sides by $(x-x_0)$ to isolate $y-y_0$: $y-y_0 = m\\,(x-x_0)$.  \n\nNow we just have to plug in the right numbers for our tangent line.\n\n* The point we know is $(a,f(a))$, because the line must pass through the point of tangency.  \n* The slope we know is $f'(a)$, the derivative of $f$ at $a$, because the derivative *is* the instantaneous slope.\n\nPutting these into the point‑slope template gives the **tangent line formula**:\n\n$$\ny - f(a) = f'(a)\\,\\bigl(x - a\\bigr).\n$$\n\n> **Remember:** The derivative $f'(a)$ is the limit of the average rate of change as the interval shrinks to zero; it gives the exact slope at $a$.\n\n---\n\n### Numeric example: $f(x)=x^{2}$ at $x=3$\n\n1. **Find the point** $(a,f(a))$:  \n   $a=3$, so $f(3)=3^{2}=9$.  The point is $(3,9)$.\n\n2. **Compute the derivative** $f'(x)$:  \n   Using the power rule, $f'(x)=2x$.  At $x=3$, $f'(3)=2\\cdot3=6$.  So the slope of the tangent line is $6$.\n\n3. **Insert into the formula**:  \n\n   $$\n   y - f(3) = f'(3)\\,(x-3)\n   $$\n   becomes  \n   $$\n   y - 9 = 6\\,(x-3).\n   $$\n\n4. **Simplify (optional)**: Distribute the $6$ and add $9$ to both sides:  \n\n   $$\n   y = 6x - 18 + 9 = 6x - 9.\n   $$\n\n   This line touches the parabola $y=x^{2}$ exactly at $(3,9)$ and has the same steepness there.\n\n> **In daily life:** Imagine a road that curves like a hill. At a particular spot, the road’s direction is given by the tangent line. If you drive straight along that line instead of following the curve, you’ll stay close to the road for a short distance—just as the linear approximation stays close to the function near $a$.\n\n> **Common mistake:** Forgetting to use the *point* $(a,f(a))$ and instead plugging in $(a,0)$ or another unrelated point. The tangent line must pass through the actual point on the curve; otherwise the line will not be tangent.\n\n---\n\n### What we have learned\n\n* The derivative at a point gives the exact slope of the curve there.  \n* The point‑slope form turns a known point and a known slope into a full equation of a line.  \n* Substituting $a$, $f(a)$, and $f'(a)$ into that form yields the tangent line formula $y-f(a)=f'(a)(x-a)$.  \n* Applying the formula to $f(x)=x^{2}$ at $x=3$ produces the line $y=6x-9$, which we can use for approximations or to understand the local shape of the graph.",
    "code": ""
   },
   {
-   "heading": "Optimization Basics",
-   "body": "**Optimization Basics**  \n\nWhen a problem asks for the “largest” or “smallest” possible value of something, we are looking for an **optimum**.  The usual steps are:\n\n1. **Identify the quantity to be maximized or minimized.**  \n   Write down clearly what you are trying to find – for example, the maximum area of a rectangle, the minimum material for a container, or the fastest speed of a car.\n\n2. **Express that quantity as a function of one variable.**  \n   Use the relationships given in the problem (geometry, physics, etc.) to write the target quantity $Q$ as $Q(x)$.  If more than one variable appears, use any constraints to eliminate all but one variable.\n\n3. **Find the critical points.**  \n   Compute the derivative $Q'(x)$ and solve $Q'(x)=0$ (or look where $Q'$ does not exist).  These $x$‑values are the **critical points** where a maximum or minimum can occur.\n\n4. **Test the critical points.**  \n   - **Second‑derivative test:** compute $Q''(x)$.  If $Q''(x)>0$ at a critical point, the function is concave up there → a **local minimum**.  If $Q''(x)<0$, it is concave down → a **local maximum**.  \n   - **Endpoints:** if the domain is a closed interval $[a,b]$, also evaluate $Q(a)$ and $Q(b)$.  The largest (or smallest) of all these values is the **global optimum**.\n\n---\n\n### Fully worked example  \n\n**Problem:** A farmer has 120 m of fencing and wants to enclose a rectangular field that uses one side of an existing barn as one side of the rectangle (so only three sides need fencing).  What dimensions give the largest possible area?\n\n**Step 1 – Identify the quantity.**  \nWe want to **maximize the area** $A$ of the rectangle.\n\n**Step 2 – Write $A$ as a function of one variable.**  \nLet $x$ be the length of the side parallel to the barn, and $y$ the depth (the two sides perpendicular to the barn).  \nThe fence supplies the two depths and the opposite side, so  \n\\[\n2y + x = 120 \\quad\\Longrightarrow\\quad y = \\frac{120 - x}{2}.\n\\]  \nThe area is $A = x y$, so substituting for $y$ gives  \n\\[\nA(x) = x\\left(\\frac{120 - x}{2}\\right)=\\frac{120x - x^{2}}{2}=60x - \\frac{x^{2}}{2}.\n\\]\n\n**Step 3 – Find critical points.**  \n\\[\nA'(x)=60 - x.\n\\]  \nSet $A'(x)=0$: $60 - x = 0 \\;\\Rightarrow\\; x = 60$ m.\n\n**Step 4 – Test the critical point.**  \nThe domain is $0 < x < 120$ (the length cannot be negative or exceed the total fence).  \nCompute the second derivative: $A''(x) = -1 < 0$, so the graph is concave down and $x=60$ m gives a **local maximum**.  \nCheck the endpoints: $A(0)=0$, $A(120)=0$, both smaller than $A(60)$.  \nThus the **global maximum** occurs at $x=60$ m.  \nThe corresponding depth is  \n\\[\ny = \\frac{120 - 60}{2}=30\\text{ m}.\n\\]  \n**Answer:** 60 m along the barn and 30 m out from the barn, giving a maximum area of $60 \\times 30 = 1800\\ \\text{m}^2$.\n\n---\n\n### Practice problems  \n\n**1.** A rectangular poster is to have an area of $180\\ \\text{cm}^2$.  The margins are 2 cm at the top and bottom and 3 cm on each side.  Find the dimensions of the poster that **minimize** the total printed area (the area inside the margins).\n\n*Solution.*  \nLet the poster’s width be $w$ and height be $h$.  Then $wh = 180$.  \nPrinted width $= w-2\\cdot3 = w-6$, printed height $= h-2\\cdot2 = h-4$.  \nPrinted area $P(w)= (w-6)(h-4) = (w-6)\\!\\left(\\frac{180}{w}-4\\right)$.  \nSimplify: $P(w)= (w-6)\\frac{180-4w}{w}=180 -4w -1080/w +24$.  \nDerivative: $P'(w)= -4 +1080/w^{2}$.  \nSet $P'(w)=0$: $1080/w^{2}=4 \\;\\Rightarrow\\; w^{2}=270 \\;\\Rightarrow\\; w=\\sqrt{270}\\approx 16.43\\text{ cm}$.  \nThen $h=180/w\\approx 10.96\\text{ cm}$.  \nSecond derivative $P''(w)= -2160/w^{3}<0$, so this gives a **maximum** of printed area, not a minimum.  Since $P(w)$ decreases as $w$ approaches the smallest feasible width (just larger than 6 cm), the minimum occurs at the endpoint where $w$ is as small as possible while keeping $h>4$ cm.  Taking $w=6+ \\epsilon$, $h\\approx 180/6=30$ cm, printed area $\\approx (0)(26)=0$.  Thus the printed area is minimized when the poster is just large enough to fit the margins, i.e., $w\\to6^{+}$, $h\\to30^{-}$.\n\n**2.** A cylindrical can must hold $500\\ \\text{cm}^3$ of liquid.  Find the radius $r$ that **minimizes** the surface area (including top and bottom).\n\n*Solution.*  \nVolume constraint: $V=\\pi r^{2}h = 500 \\;\\Rightarrow\\; h = \\frac{500}{\\pi r^{2}}$.  \nSurface area $S = 2\\pi r^{2} + 2\\pi r h = 2\\pi r^{2} + 2\\pi r\\left(\\frac{500}{\\pi r^{2}}\\right)=2\\pi r^{2}+ \\frac{1000}{r}$.  \nDerivative: $S'(r)=4\\pi r - \\frac{1000}{r^{2}}$.  \nSet $S'(r)=0$: $4\\pi r = \\frac{1000}{r^{2}} \\;\\Rightarrow\\; 4\\pi r^{3}=1000 \\;\\Rightarrow\\; r^{3}= \\frac{250}{\\pi}$, so $r = \\left(\\frac{250}{\\pi}\\right)^{1/3}\\approx 4.31\\text{ cm}$.  \nSecond derivative $S''(r)=4\\pi + \\frac{2000}{r^{3}}>0$, confirming a **minimum**.  \n\n**3.** A ladder 10 m long leans against a wall.  The foot of the ladder slides away from the wall at a rate of $1\\ \\text{m/s}$.  At what rate is the top of the ladder descending when the foot is 6 m from the wall?\n\n*Solution.*  \nLet $x$ be the distance from the wall, $y$ the height of the top.  By the Pythagorean theorem $x^{2}+y^{2}=10^{2}=100$.  \nDifferentiate with respect to time $t$: $2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0$.  \nGiven $\\frac{dx}{dt}=1$, $x=6$, solve for $y$: $y=\\sqrt{100-36}=8$.  \nPlug in: $2(6)(1)+2(8)\\frac{dy}{dt}=0 \\;\\Rightarrow\\; 12+16\\frac{dy}{dt}=0 \\;\\Rightarrow\\; \\frac{dy}{dt}= -\\frac{12}{16}= -\\frac{3}{4}\\ \\text{m/s}$.  \nThe top is descending at $0.75\\ \\text{m/s}$.\n\n**4.** A rectangular box with an open top is to have a volume of $32\\ \\text{m}^3$.  Find the dimensions that **minimize** the amount of material used (i.e., the surface area of the sides and bottom).\n\n*Solution.*  \nLet length $= \\ell$, width $= w$, height $= h$.  Volume: $\\ell w h = 32$.  \nSurface area (no top): $A = \\ell w + 2\\ell h + 2 w h$.  \nUse the constraint to eliminate $h$: $h = \\frac{32}{\\ell w}$.  \nThen  \n\\[\nA(\\ell,w)=\\ell w + 2\\ell\\frac{32}{\\ell w}+2w\\frac{32}{\\ell w}\n= \\ell w + \\frac{64}{w}+ \\frac{64}{\\ell}.\n\\]  \nSet partial derivatives to zero:  \n\n$\\displaystyle \\frac{\\partial A}{\\partial \\ell}= w - \\frac{64}{\\ell^{2}} =0 \\;\\Rightarrow\\; w = \\frac{64}{\\ell^{2}}$  \n\n$\\displaystyle \\frac{\\partial A}{\\partial w}= \\ell - \\frac{64}{w^{2}} =0 \\;\\Rightarrow\\; \\ell = \\frac{64}{w^{2}}$  \n\nCombine: substitute $w$ from the first into the second:  \n\n$\\displaystyle \\ell = \\frac{64}{\\left(\\frac{64}{\\ell^{2}}\\right)^{2}} = \\frac{64}{\\frac{4096}{\\ell^{4}}}= \\frac{64\\ell^{4}}{4096}= \\frac{\\ell^{4}}{64}$  \n\nThus $\\ell^{4}=64\\ell \\;\\Rightarrow\\; \\ell^{3}=64 \\;\\Rightarrow\\; \\ell = 4\\text{ m}$.  \nThen $w = \\frac{64}{\\ell^{2}} = \\frac{64}{16}=4\\text{ m}$.  \nHeight $h = \\frac{32}{\\ell w}= \\frac{32}{16}=2\\text{ m}$.  \nSecond‑derivative test (or symmetry) shows this gives a **minimum** surface area.  \n\n---  \n\nThese examples illustrate the systematic process: define the goal, build a single‑variable function, locate critical points, and confirm whether they give the desired optimum.",
+   "heading": "3. Velocity from Position Functions",
+   "body": "When we talk about the **position** of an object moving along a straight line, we usually write it as a function of time, $s(t)$.  \nThe symbol $s$ stands for “distance” (or “displacement”) and the variable $t$ stands for “time”.  \nIf you look at a graph of $s(t)$, the steepness of the curve at any particular instant tells you how fast the object is moving right then.  \n\n> **Definition:** The **instantaneous velocity** $v(t)$ of an object is the derivative of its position function:  \n> $$v(t)=s'(t).$$  \n\nIn words, “take the derivative of the position function”. The derivative measures the rate at which the position changes, which is exactly what velocity means: how much distance is covered per unit of time at that exact moment.\n\nWhy is this useful?  \nSuppose you are driving and you glance at the speedometer. The speedometer is showing you the instantaneous velocity – it is not the average speed over the whole trip, but the speed right now. In calculus, the speedometer is the derivative of the distance‑versus‑time curve.\n\n### Example: $s(t)=4t^{2}-2t$\n\nLet’s work through a concrete example.  \nOur position function is  \n\n$$s(t)=4t^{2}-2t,$$  \n\nwhere $t$ is measured in seconds and $s$ in meters.  \n\n1. **Find the derivative.**  \n   To get velocity we differentiate $s(t)$ with respect to $t$.  \n   The power rule says that the derivative of $t^{n}$ is $n t^{\\,n-1}$.  \n   Applying it:  \n\n   $$s'(t)=\\frac{d}{dt}\\bigl(4t^{2}\\bigr)-\\frac{d}{dt}\\bigl(2t\\bigr)=4\\cdot2t-2=8t-2.$$\n\n   So  \n\n   $$v(t)=8t-2.$$\n\n2. **Interpret the formula.**  \n   The expression $8t-2$ tells us the velocity at any time $t$.  \n   It is a linear function: as time increases, the velocity grows by $8$ meters per second each second, but it starts a little negative because of the “$-2$”.\n\n3. **Evaluate at specific times.**  \n\n   *At $t=0$ seconds:*  \n\n   $$v(0)=8(0)-2=-2\\ \\text{m/s}.$$\n\n   The negative sign means the object is moving in the opposite direction to the positive $s$‑axis at the start.\n\n   *At $t=0.5$ seconds:*  \n\n   $$v(0.5)=8(0.5)-2=4-2=2\\ \\text{m/s}.$$\n\n   After half a second the motion has reversed and the object is now moving forward at $2$ meters per second.\n\n   *At $t=1$ second:*  \n\n   $$v(1)=8(1)-2=6\\ \\text{m/s}.$$\n\n   One second in, the speed has increased to $6$ meters per second.\n\n   *At $t=2$ seconds:*  \n\n   $$v(2)=8(2)-2=14\\ \\text{m/s}.$$\n\n   The object is speeding up quickly; every additional second adds $8$ more meters per second to the velocity.\n\n> **In daily life:** Think of a skateboarder starting from rest and then pushing off. At the very first instant the speed is low (maybe even backward if they wobble), but as they keep pushing, their speed grows steadily. The derivative $v(t)=8t-2$ captures exactly that steady increase.\n\n> **Common mistake:** Some students forget that velocity can be negative. A negative derivative does **not** mean “no motion”; it means motion in the opposite direction. Always keep the sign when you interpret $v(t)$.\n\n> **Remember:** The derivative gives the *instantaneous* rate of change. It is not an average over an interval. If you need the average speed between $t=1$ and $t=3$, you would compute $\\frac{s(3)-s(1)}{3-1}$, which is different from $v(2)$, the instantaneous speed at $t=2$.\n\n### What the numbers tell us\n\n- At $t=0$, the object is moving backward at $2\\ \\text{m/s}$.  \n- By $t=0.5$, it has turned around and is moving forward at $2\\ \\text{m/s}$.  \n- The velocity keeps increasing linearly, so the object accelerates constantly.  \n\nThe constant rate of increase of velocity is called **acceleration**. In this example the acceleration is the derivative of $v(t)$, which is $a(t)=8\\ \\text{m/s}^2$, a constant value. That explains why the velocity line $8t-2$ is a straight line: a constant acceleration produces a linear velocity function.\n\nUnderstanding that $v(t)=s'(t)$ lets us move from a picture of where something is to a picture of how fast it is moving, and later to how its speed is changing. This bridge between position and velocity is the first step toward many real‑world applications, from physics problems to economics and biology.",
    "code": ""
   },
   {
-   "heading": "Common Optimization Examples",
-   "body": "**Common Optimization Examples**\n\nOptimization means finding the largest or smallest value of a quantity that depends on one or more variables. In calculus we use derivatives to locate where a function’s rate of change is zero and then decide whether that point gives a maximum or a minimum.\n\n---\n\n### 1. Minimizing material for an open‑top box  \n\nA rectangular sheet of cardboard $30\\text{ cm}\\times 30\\text{ cm}$ is cut to make an open‑top box by removing equal squares of side $x$ from each corner and folding up the sides.\n\n*Volume* of the box:  \n\\[\nV(x)=(30-2x)(30-2x)x.\n\\]\n\nWe want the **maximum** volume, which also gives the dimensions that use the least material for a given volume.\n\n1. Expand: $V(x)=x(30-2x)^2 = x(900-120x+4x^2)=4x^3-120x^2+900x$.\n2. Derivative: $V'(x)=12x^2-240x+900$.\n3. Critical points: solve $12x^2-240x+900=0\\;\\Rightarrow\\;x^2-20x+75=0$.\n   \\[\n   x=\\frac{20\\pm\\sqrt{400-300}}{2}= \\frac{20\\pm10}{2}\\Rightarrow x=5\\text{ cm or }x=15\\text{ cm}.\n   \\]\n   The value $x=15$ is impossible (it would make a negative side), so $x=5\\text{ cm}$.\n4. Second derivative: $V''(x)=24x-240$. At $x=5$, $V''(5)= -120<0$, confirming a **maximum**.\n\nThus the optimal box is made by cutting $5\\text{ cm}$ squares, giving dimensions $20\\text{ cm}\\times20\\text{ cm}\\times5\\text{ cm}$.\n\n---\n\n### 2. Maximizing fenced area with a river  \n\nA farmer has $200\\text{ m}$ of fencing and wants to enclose a rectangular field against a straight river (no fence needed along the river). Let $x$ be the length parallel to the river and $y$ the depth away from the river.\n\nConstraint: $x+2y=200\\;\\Rightarrow\\;x=200-2y$.\n\nArea: $A(y)=x y=(200-2y)y=200y-2y^{2}$.\n\n1. Derivative: $A'(y)=200-4y$.\n2. Critical point: $200-4y=0\\;\\Rightarrow\\;y=50\\text{ m}$.\n3. Second derivative: $A''(y)=-4<0$, so this gives a **maximum**.\n\nPlug back: $x=200-2(50)=100\\text{ m}$.  \nMaximum area $=100\\times50=5{,}000\\text{ m}^2$.\n\n---\n\n### 3. Optimal speed for fuel efficiency  \n\nA car’s fuel consumption (gallons per hour) is modeled by $C(v)=0.02v^{2}+0.5$, where $v$ is speed in miles per hour. The distance traveled per hour is $v$ miles, so fuel used per mile is  \n\\[\nF(v)=\\frac{C(v)}{v}= \\frac{0.02v^{2}+0.5}{v}=0.02v+ \\frac{0.5}{v}.\n\\]\n\nMinimize $F(v)$:\n\n1. Derivative: $F'(v)=0.02-\\frac{0.5}{v^{2}}$.\n2. Set to zero: $0.02=\\frac{0.5}{v^{2}}\\;\\Rightarrow\\;v^{2}= \\frac{0.5}{0.02}=25\\;\\Rightarrow\\;v=5\\text{ mph}$ (positive speed).\n3. Second derivative: $F''(v)=\\frac{1}{v^{3}}>0$, confirming a **minimum**.\n\nThus the car is most fuel‑efficient at $5\\text{ mph}$.\n\n---\n\n## Practice Problems\n\n### Problem 1  \nA rectangular poster is to have an area of $600\\text{ cm}^2$. The margins are $2\\text{ cm}$ on the sides and bottom, and $3\\text{ cm}$ on the top. Find the dimensions of the poster that **minimize** the total printed area.\n\n**Solution**  \nLet poster width $w$, height $h$. Printed width $w-4$, printed height $h-5$. Printed area $P=(w-4)(h-5)$. Constraint $wh=600$. Write $h=600/w$ and substitute:  \n\\[\nP(w)=(w-4)\\!\\left(\\frac{600}{w}-5\\right)=\\frac{600(w-4)}{w}-5(w-4).\n\\]  \nSimplify and differentiate:  \n\\[\nP'(w)=\\frac{600\\cdot4}{w^{2}}-5= \\frac{2400}{w^{2}}-5.\n\\]  \nSet $P'(w)=0$: $2400/w^{2}=5\\Rightarrow w^{2}=480\\Rightarrow w= \\sqrt{480}\\approx21.9\\text{ cm}$.  \nThen $h=600/w\\approx27.4\\text{ cm}$. These dimensions give the smallest printed area.\n\n---\n\n### Problem 2  \nA farmer has $120\\text{ m}$ of fencing to make a rectangular pen adjacent to a barn (no fence needed along the barn). What dimensions give the **largest** area?\n\n**Solution**  \nLet $x$ be the side parallel to the barn, $y$ the depth. Constraint $x+2y=120\\Rightarrow x=120-2y$.  \nArea $A(y)=x y=(120-2y)y=120y-2y^{2}$.  \n$A'(y)=120-4y=0\\Rightarrow y=30\\text{ m}$, $x=120-60=60\\text{ m}$.  \nMaximum area $=60\\times30=1800\\text{ m}^2$.\n\n---\n\n### Problem 3  \nA cylindrical can must hold $500\\text{ cm}^3$ of liquid. Find the radius $r$ that **minimizes** the material (surface area).  \n\n**Solution**  \nVolume $V=\\pi r^{2}h=500\\Rightarrow h=500/(\\pi r^{2})$.  \nSurface area (no top) $S=\\pi r^{2}+2\\pi r h$. Substitute $h$:  \n\\[\nS(r)=\\pi r^{2}+2\\pi r\\frac{500}{\\pi r^{2}}= \\pi r^{2}+ \\frac{1000}{r}.\n\\]  \nDerivative: $S'(r)=2\\pi r- \\frac{1000}{r^{2}}$.  \nSet to zero: $2\\pi r = 1000/r^{2}\\Rightarrow 2\\pi r^{3}=1000\\Rightarrow r^{3}= \\frac{500}{\\pi}\\Rightarrow r\\approx5.42\\text{ cm}$.  \nThen $h=500/(\\pi r^{2})\\approx5.42\\text{ cm}$, so the optimal can is roughly a **cube** in shape.\n\n---\n\n### Problem 4  \nA car’s fuel consumption per hour is $C(v)=0.03v^{2}+0.4$ gallons, where $v$ is speed in mph. Find the speed that **minimizes** fuel used per mile.\n\n**Solution**  \nFuel per mile $F(v)=C(v)/v = 0.03v + \\frac{0.4}{v}$.  \nDerivative $F'(v)=0.03-\\frac{0.4}{v^{2}}$.  \nSet $F'(v)=0$: $0.03 = 0.4/v^{2}\\Rightarrow v^{2}=0.4/0.03\\approx13.33\\Rightarrow v\\approx3.65\\text{ mph}$.  \nSecond derivative $F''(v)=\\frac{0.8}{v^{3}}>0$, confirming a **minimum**.  \nThus the most fuel‑efficient speed is about $3.7\\text{ mph}$.",
+   "heading": "4. Optimization Basics",
+   "body": "When we talk about **optimizing**, we simply mean “finding the best possible value” of something – the biggest, the smallest, the most efficient, etc.  In calculus we use the derivative to locate those best values because the derivative tells us where a function is increasing or decreasing.\n\n> **Definition:** *Optimization* is the process of finding the maximum or minimum value of a function that models a real‑world quantity.\n\n---\n\n### Step 1 – Define the quantity to optimize  \n\nFirst we must be clear about **what** we want to make as large (or as small) as possible.  This is called the *objective*.  For example, suppose a farmer has 100 m of fencing and wants to enclose a rectangular garden.  The farmer’s goal is to make the garden’s **area** as large as possible.  Here the objective is “area of the rectangle”.\n\n> **In daily life:** Choosing the shape of a garden, a picture frame, or a billboard so that you get the most space for a given amount of material is an optimization problem.\n\n### Step 2 – Write the objective as a function  \n\nNext we translate the objective into a mathematical expression that depends on one variable.  For a rectangle let the length be $L$ and the width be $W$.  The area is  \n\n$$\nA = L\\;W .\n$$\n\nThe fence gives a constraint: the perimeter must equal 100 m.\n\n$$\n2L + 2W = 100 \\quad\\Longrightarrow\\quad W = 50 - L .\n$$\n\nNow substitute this relation into the area formula so that $A$ depends on a single variable $L$:\n\n$$\nA(L) = L\\,(50 - L) = 50L - L^{2}.\n$$\n\n### Step 3 – Find critical points using $f'(x)=0$  \n\nA *critical point* occurs where the derivative of the function is zero or undefined.  For a smooth polynomial like $A(L)$ we only need to set the derivative equal to zero.\n\nFirst compute the derivative:\n\n$$\nA'(L) = \\frac{d}{dL}\\bigl(50L - L^{2}\\bigr) = 50 - 2L .\n$$\n\nSet $A'(L)=0$ and solve for $L$:\n\n$$\n50 - 2L = 0 \\;\\Longrightarrow\\; 2L = 50 \\;\\Longrightarrow\\; L = 25 .\n$$\n\nSo $L=25$ m is the only critical point in the interval $0<L<50$ (the width must stay positive).\n\n### Step 4 – Test the critical point  \n\nWe must decide whether $L=25$ gives a maximum area or a minimum.  Two common tests are:\n\n* **First‑derivative test:** Look at the sign of $A'(L)$ on each side of the critical point.  \n  - For $L<25$, say $L=10$, $A'(10)=50-20=30>0$ (function increasing).  \n  - For $L>25$, say $L=40$, $A'(40)=50-80=-30<0$ (function decreasing).  \n  Since the derivative changes from positive to negative, the function goes up then down, so $L=25$ gives a **maximum**.\n\n* **Second‑derivative test:** Compute $A''(L)$.\n\n$$\nA''(L) = \\frac{d}{dL}(50 - 2L) = -2 .\n$$\n\nBecause $A''(L) = -2 < 0$ everywhere, the graph is concave down, confirming that any critical point is a maximum.\n\nThus the rectangle with the largest possible area under the 100 m fence has length $L=25$ m.  Using the constraint, the width is\n\n$$\nW = 50 - L = 50 - 25 = 25 \\text{ m}.\n$$\n\nThe maximal area is\n\n$$\nA_{\\max}=L\\;W = 25 \\times 25 = 625 \\text{ m}^2 .\n$$\n\n> **Remember:** The steps—define, write as a function, find where $f'(x)=0$, then test—work for any optimization problem, not just rectangles.\n\n> **Common mistake:** Forgetting to use the constraint to eliminate extra variables.  If we kept both $L$ and $W$ in $A(L,W)=LW$, we would have two variables but only one equation, making it impossible to locate a single optimum.\n\nIn summary, optimization turns a practical “best‑possible” question into a clean algebraic process.  By following the four steps, you can solve many everyday problems, from designing a garden to minimizing material cost or maximizing profit.",
    "code": ""
   },
   {
-   "heading": "Related‑Rate Problems",
-   "body": "When a quantity changes over time, we can often relate it to other changing quantities by writing an **equation** that connects them.  \nThe three steps for a related‑rate problem are:\n\n1. **Translate the situation into an equation** that links the variables.  \n2. **Differentiate** that equation with respect to time $t$, using $\\dfrac{d}{dt}$ and the chain rule.  \n3. **Insert the known rates** (the $\\dfrac{dx}{dt}$ values that are given) and solve for the **unknown rate**.\n\nBelow is a complete example that follows these steps.\n\n---\n\n### Worked Example  \n*A ladder 12 m long leans against a vertical wall. The bottom slides away from the wall at a rate of $1.5\\ \\text{m/s}$. How fast is the top sliding down the wall when the bottom is $5\\ \\text{m}$ from the wall?*\n\n1. **Define variables**  \n   - Let $x(t)$ be the distance from the wall to the bottom of the ladder.  \n   - Let $y(t)$ be the height of the top of the ladder on the wall.  \n   - The ladder length $L=12\\ \\text{m}$ is constant.\n\n2. **Write the relationship** (a right‑triangle):  \n   $$x^2 + y^2 = L^2 \\quad\\Longrightarrow\\quad x^2 + y^2 = 144.$$\n\n3. **Differentiate with respect to $t$**:  \n   $$2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0.$$  \n   Simplify:  \n   $$x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0.$$\n\n4. **Insert known values** at the instant $x=5\\ \\text{m}$ and $\\dfrac{dx}{dt}=1.5\\ \\text{m/s}$.  \n   First find $y$ using the original triangle:  \n   $$y = \\sqrt{L^2 - x^2}= \\sqrt{144-25}= \\sqrt{119}\\approx 10.91\\ \\text{m}.$$\n\n   Substitute:  \n   $$5(1.5) + (10.91)\\frac{dy}{dt}=0.$$  \n   $$7.5 + 10.91\\frac{dy}{dt}=0.$$\n\n5. **Solve for the unknown rate** $\\dfrac{dy}{dt}$:  \n   $$\\frac{dy}{dt}= -\\frac{7.5}{10.91}\\approx -0.688\\ \\text{m/s}.$$\n\n   The negative sign tells us the top of the ladder is **descending** at about $0.69\\ \\text{m/s}$.\n\n---\n\n### Practice Problems  \n\n1. **Water tank** – A conical tank points down with radius $2\\ \\text{m}$ and height $4\\ \\text{m}$. Water is leaking so that the water level drops at $0.1\\ \\text{m/min}$. Find the rate at which the water’s volume is decreasing when the depth is $3\\ \\text{m}$.  \n\n   **Solution**  \n   Volume of a cone: $V=\\frac13\\pi r^2 h$. Similar triangles give $r = \\frac{2}{4}h = \\frac{h}{2}$.  \n   Substitute: $V=\\frac13\\pi\\left(\\frac{h}{2}\\right)^2 h = \\frac{\\pi}{12}h^3$.  \n   Differentiate: $\\displaystyle \\frac{dV}{dt}= \\frac{\\pi}{4}h^2\\frac{dh}{dt}$.  \n   Insert $h=3$, $\\frac{dh}{dt}=-0.1$:  \n   $\\displaystyle \\frac{dV}{dt}= \\frac{\\pi}{4}(9)(-0.1)= -\\frac{9\\pi}{40}\\ \\text{m}^3\\!/\\!\\text{min}\\approx -0.71\\ \\text{m}^3\\!/\\!\\text{min}$.\n\n2. **Shadow length** – A 1.8 m tall person walks away from a streetlight 6 m high at $1.2\\ \\text{m/s}$. How fast is the tip of his shadow moving when he is $4\\ \\text{m}$ from the pole?  \n\n   **Solution**  \n   Let $x$ be the distance from the pole to the person, $y$ the length of the shadow. Similar triangles: $\\displaystyle \\frac{6}{x+y}= \\frac{1.8}{y}$ → $6y = 1.8(x+y)$. Simplify: $6y = 1.8x + 1.8y$ → $4.2y = 1.8x$ → $y = \\frac{3}{7}x$.  \n   Differentiate: $\\displaystyle \\frac{dy}{dt}= \\frac{3}{7}\\frac{dx}{dt}= \\frac{3}{7}(1.2)=0.514\\ \\text{m/s}$.  \n   The tip speed is $\\displaystyle \\frac{d}{dt}(x+y)=\\frac{dx}{dt}+\\frac{dy}{dt}=1.2+0.514\\approx1.71\\ \\text{m/s}$.\n\n3. **Inflating balloon** – A spherical balloon is being inflated so that its radius increases at $0.05\\ \\text{m/s}$. Find the rate at which its surface area is increasing when the radius is $0.3\\ \\text{m}$.  \n\n   **Solution**  \n   Surface area $A=4\\pi r^2$. Differentiate: $\\displaystyle \\frac{dA}{dt}=8\\pi r\\frac{dr}{dt}$.  \n   Plug $r=0.3$, $\\frac{dr}{dt}=0.05$: $\\displaystyle \\frac{dA}{dt}=8\\pi(0.3)(0.05)=0.12\\pi\\ \\text{m}^2\\!/\\!\\text{s}\\approx0.377\\ \\text{m}^2\\!/\\!\\text{s}$.\n\n4. **Falling raindrop** – A raindrop falls straight down, its speed increasing at $9.8\\ \\text{m/s}^2$ (gravity). If at a certain instant its speed is $15\\ \\text{m/s}$, how fast is its kinetic energy $K=\\frac12mv^2$ changing? Take the mass $m=2\\times10^{-5}\\ \\text{kg}$.  \n\n   **Solution**  \n   Differentiate $K$: $\\displaystyle \\frac{dK}{dt}= \\frac12 m \\cdot 2v\\frac{dv}{dt}= m v\\frac{dv}{dt}$.  \n   Insert $m=2\\times10^{-5}$ kg, $v=15$ m/s, $\\frac{dv}{dt}=9.8$ m/s²:  \n   $\\displaystyle \\frac{dK}{dt}= (2\\times10^{-5})(15)(9.8)=2.94\\times10^{-3}\\ \\text{J/s}$.  \n\nThese problems illustrate how to **model**, **differentiate**, and **solve** for unknown rates in a variety of physical contexts.",
+   "heading": "5. More Complex Optimization",
+   "body": "Imagine you have a thin sheet of cardboard and you want to turn it into an **open box** (no lid) by cutting out a square from each corner and then folding up the sides.  \nYour goal is to make the box hold as much volume as possible while using as little material as you can. This is a classic *optimization* problem: we have a quantity we want to **maximize** (the volume) or **minimize** (the amount of cardboard) subject to a rule that ties the variables together – the size of the original sheet.\n\n---\n\nFirst, let’s describe the situation with symbols.\n\n* Let the original sheet be a rectangle of length $L$ and width $W$ (both measured in centimeters).  \n* Cut out a square of side $x$ from each corner. After folding, the height of the box will be $x$.  \n* The new length becomes $L-2x$ and the new width becomes $W-2x$.\n\nThe volume $V$ of the open box is therefore  \n\n$$\nV(x)=x\\,(L-2x)\\,(W-2x).\n$$\n\nOur **constraint** is that $x$ must be small enough so the cuts fit: $0<x<\\frac12\\min(L,W)$. This restriction comes from the geometry of the sheet, not from calculus, but we must keep it in mind when we look for the best $x$.\n\n> **Definition:** *Constraint* – a condition that the variables must satisfy. In optimization we often have to work inside the region defined by the constraints.\n\n---\n\n### Step 1: Write the function to be optimized  \n\nBecause we want the *largest* possible volume, we treat $V(x)$ as the function to **maximize**. (If the problem asked for the smallest amount of material for a given volume, we would instead minimize the surface area, but the steps are the same.)\n\n### Step 2: Find the derivative  \n\nThe derivative $V'(x)$ tells us how the volume changes as $x$ changes. Using the product rule or expanding first, we get  \n\n$$\nV'(x)= (L-2x)(W-2x) -2x(W-2x) -2x(L-2x).\n$$\n\nSimplify if you wish:\n\n$$\nV'(x)= (L-2x)(W-2x) -2x\\big[(W-2x)+(L-2x)\\big].\n$$\n\n### Step 3: Locate critical points  \n\nCritical points occur where $V'(x)=0$ or where $V'(x)$ does not exist (the latter never happens here). Set the derivative equal to zero and solve for $x$:\n\n$$\n(L-2x)(W-2x) = 2x\\big[(W-2x)+(L-2x)\\big].\n$$\n\nThis equation is a quadratic in $x$ after expanding; solving gives the candidate values for $x$. For a square sheet where $L=W=a$, the algebra simplifies dramatically:\n\n$$\nV(x)=x\\,(a-2x)^2,\\qquad\nV'(x)= (a-2x)^2 -4x(a-2x).\n$$\n\nSetting $V'(x)=0$ leads to  \n\n$$\n(a-2x)\\big[(a-2x)-4x\\big]=0 \\;\\Longrightarrow\\; a-2x=0 \\text{ or } a-6x=0.\n$$\n\nThe first solution $x=\\frac a2$ violates the constraint (it would cut away the whole sheet), so we discard it. The viable critical point is  \n\n$$\nx=\\frac{a}{6}.\n$$\n\n### Step 4: Test the critical point  \n\nWe check that this $x$ indeed gives a maximum. One quick way is the **second‑derivative test**. Compute $V''(x)$ and evaluate at $x=\\frac a6$; you will find $V''\\big(\\frac a6\\big)<0$, confirming a local maximum. Because the volume is zero at the endpoints $x=0$ and $x=\\frac a2$, this local maximum is also the **global** maximum within the allowed range.\n\n> **Remember:** After finding a critical point, always verify whether it gives a maximum or minimum, and check the endpoints dictated by the constraint.\n\n### Step 5: Interpret the result  \n\nFor a square sheet, the optimal cut‑out size is one‑sixth of the side length. If the sheet is $30\\text{ cm}\\times30\\text{ cm}$, cut out squares of side  \n\n$$\nx=\\frac{30}{6}=5\\text{ cm}.\n$$\n\nThe resulting box dimensions are $20\\text{ cm}\\times20\\text{ cm}\\times5\\text{ cm}$, and its volume is  \n\n$$\nV_{\\max}=5\\cdot20\\cdot20=2000\\text{ cm}^3.\n$$\n\n> **In daily life:** This same reasoning helps engineers design containers, packaging, or even fuel tanks that use the least material while holding a required amount.\n\n### Step 6: Handling more complicated constraints  \n\nIf the sheet is not square, the equation for $x$ becomes a bit messier, but the process is identical: write $V(x)$, differentiate, set $V'(x)=0$, solve within the allowed interval, and test the result. Sometimes the constraint may involve two variables (for example, a fixed surface area). In that case we use *Lagrange multipliers*—a technique introduced later—to keep the constraint while optimizing.\n\n> **Common mistake:** Forgetting to apply the constraint after solving $V'(x)=0$. A solution that lies outside the feasible interval must be rejected, even if the calculus says it is a critical point.\n\nBy following these small, clear steps—write the function, differentiate, solve for critical points, respect the constraints, and test—you can tackle many real‑world optimization problems, from designing boxes to planning the most efficient shape of a garden bed.",
    "code": ""
   },
   {
-   "heading": "Step‑by‑Step Related‑Rate Examples",
-   "body": "**Step‑by‑Step Related‑Rate Examples**\n\nA related‑rate problem asks how two or more quantities that change with time are linked. The usual steps are:\n\n1. **Draw a diagram** and label all variables.  \n2. **Write an equation** that relates the variables (often from geometry).  \n3. **Differentiate** the equation with respect to time $t$, using $\\frac{d}{dt}$.  \n4. **Substitute** the known rates and values, then solve for the unknown rate.  \n\nBelow are three classic scenarios that follow these steps.\n\n---\n\n### 1. Ladder Sliding Down a Wall  \n\nA $10\\,$m ladder leans against a vertical wall. The bottom slides away from the wall at $1.5\\,$m/s. How fast is the top sliding down when the bottom is $6\\,$m from the wall?\n\n1. Diagram: right triangle with base $x$ (bottom), height $y$ (top), hypotenuse $10$.  \n2. Relation: $x^{2}+y^{2}=10^{2}$.  \n3. Differentiate: $2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0\\;\\Rightarrow\\;x\\frac{dx}{dt}+y\\frac{dy}{dt}=0$.  \n4. Plug in $x=6$, $\\frac{dx}{dt}=1.5$, and find $y$ from $6^{2}+y^{2}=100\\;\\Rightarrow\\;y=8$.  \n\n   $$6(1.5)+8\\frac{dy}{dt}=0\\;\\Longrightarrow\\;\\frac{dy}{dt}=-\\frac{9}{8}\\text{ m/s}.$$\n\nThe top is sliding down at $1.125\\,$m/s (negative sign indicates decreasing height).\n\n---\n\n### 2. Balloon Inflating  \n\nA spherical balloon’s radius is increasing at $0.2\\,$m/s. Find the rate at which its volume is increasing when the radius is $3\\,$m.\n\n1. Geometry: volume $V=\\frac{4}{3}\\pi r^{3}$.  \n2. Differentiate: $\\frac{dV}{dt}=4\\pi r^{2}\\frac{dr}{dt}$.  \n3. Substitute $r=3$ and $\\frac{dr}{dt}=0.2$:  \n\n   $$\\frac{dV}{dt}=4\\pi(3)^{2}(0.2)=4\\pi\\cdot9\\cdot0.2=7.2\\pi\\ \\text{m}^{3}\\!/\\text{s}.$$\n\nSo the volume grows at about $22.6\\,$m³/s.\n\n---\n\n### 3. Shadow Lengthening  \n\nA person $1.8\\,$m tall walks away from a streetlight $5\\,$m high at $1\\,$m/s. How fast is the tip of the shadow moving when the person is $4\\,$m from the pole?\n\n1. Let $x$ be the distance from the pole to the person, $s$ the length of the shadow. By similar triangles:  \n\n   $$\\frac{5}{x+s}=\\frac{1.8}{s}\\;\\Longrightarrow\\;5s=1.8(x+s).$$  \n\n2. Simplify: $5s=1.8x+1.8s\\;\\Rightarrow\\;3.2s=1.8x\\;\\Rightarrow\\;s=\\frac{1.8}{3.2}x.$  \n\n3. Differentiate: $\\frac{ds}{dt}=\\frac{1.8}{3.2}\\frac{dx}{dt}=0.5625\\cdot1=0.5625\\,$m/s.  \n\n4. The tip of the shadow moves at $\\frac{dx}{dt}+\\frac{ds}{dt}=1+0.5625=1.5625\\,$m/s.\n\n---\n\n**Practice Problems**\n\n1. **Problem:** A conical tank (height $12\\,$m, radius $6\\,$m) is being filled so that the water height rises at $0.3\\,$m/s. Find the rate at which the water volume is increasing when the water is $4\\,$m deep.  \n\n   **Solution:** For a cone, $V=\\frac13\\pi r^{2}h$. Similar triangles give $\\frac{r}{h}=\\frac{6}{12}= \\frac12$, so $r=\\frac{h}{2}$. Substitute:  \n\n   $$V=\\frac13\\pi\\left(\\frac{h}{2}\\right)^{2}h=\\frac{\\pi}{12}h^{3}.$$  \n\n   Differentiate: $\\frac{dV}{dt}=\\frac{\\pi}{4}h^{2}\\frac{dh}{dt}$.  \n\n   With $h=4$, $\\frac{dh}{dt}=0.3$:  \n\n   $$\\frac{dV}{dt}= \\frac{\\pi}{4}(16)(0.3)=1.2\\pi\\ \\text{m}^{3}/\\text{s}.$$\n\n2. **Problem:** A camera on a 2‑m high tripod tracks a car moving along a straight road at $20\\,$m/s. The camera is aimed at the car, forming angle $\\theta$ with the horizontal. Find $d\\theta/dt$ when the car is $30\\,$m from the point directly beneath the camera.  \n\n   **Solution:** $\\tan\\theta=\\frac{30}{2}=15$. Differentiate: $\\sec^{2}\\theta\\,\\frac{d\\theta}{dt}= \\frac{1}{2}\\frac{dx}{dt}$, where $x$ is horizontal distance. $\\sec^{2}\\theta=1+\\tan^{2}\\theta=1+225=226$.  \n\n   $$\\frac{d\\theta}{dt}= \\frac{1}{2}\\frac{20}{226}= \\frac{10}{226}\\approx0.0442\\ \\text{rad/s}.$$\n\n3. **Problem:** A sand pile remains a right circular cone with a constant apex angle of $30^\\circ$. Sand falls at $5\\,$m³/min. Find how fast the radius of the base is increasing when the radius is $2\\,$m.  \n\n   **Solution:** For a cone with apex angle $2\\alpha$, $\\tan\\alpha = r/h$. Here $\\alpha=15^\\circ$, so $h = r/\\tan15^\\circ$. Volume $V=\\frac13\\pi r^{2}h =\\frac13\\pi r^{2}\\frac{r}{\\tan15^\\circ}= \\frac{\\pi}{3\\tan15^\\circ}r^{3}$.  \n\n   Differentiate: $\\frac{dV}{dt}= \\frac{\\pi}{\\tan15^\\circ}r^{2}\\frac{dr}{dt}$.  \n\n   With $r=2$, $dV/dt=5$:  \n\n   $$\\frac{dr}{dt}= \\frac{5\\tan15^\\circ}{\\pi(2)^{2}} \\approx \\frac{5(0.2679)}{4\\pi}=0.106\\ \\text{m/min}.$$\n\n4. **Problem:** A hot air balloon rises vertically at $3\\,$m/s. A boy on the ground watches the balloon at an angle $\\theta$ from the horizontal. How fast is $\\theta$ changing when the balloon is $40\\,$m high?  \n\n   **Solution:** $\\tan\\theta = \\frac{40}{x}$, where $x$ is the horizontal distance (constant, say $x=60\\,$m). Differentiate: $\\sec^{2}\\theta\\,\\frac{d\\theta}{dt}= \\frac{-40}{x^{2}}\\frac{dx}{dt}+ \\frac{1}{x}\\frac{dh}{dt}$. Since $x$ is constant, the first term is $0$.  \n\n   $$\\frac{d\\theta}{dt}= \\frac{1}{x}\\frac{dh}{dt}\\cos^{2}\\theta.$$  \n\n   Compute $\\theta$: $\\tan\\theta=40/60=2/3$, so $\\cos\\theta = \\frac{1}{\\sqrt{1+\\tan^{2}\\theta}} = \\frac{1}{\\sqrt{1+(4/9)}} = \\frac{3}{\\sqrt{13}}$.  \n\n   $$\\frac{d\\theta}{dt}= \\frac{1}{60}(3)\\left(\\frac{9}{13}\\right)=\\frac{27}{780}\\approx0.0346\\ \\text{rad/s}.$$\n\nThese examples illustrate the systematic approach to **related‑rate** problems: model, differentiate, substitute, and solve.",
+   "heading": "6. Related Rates Introduction",
+   "body": "When we talk about **related rates**, we are looking at how two (or more) quantities change at the same time because they are tied together by some relationship.  \nImagine two gears in a clock: when one gear turns a little, the other turns a little too, because the teeth are linked. In mathematics the “gears” are variables, and the “teeth” are an equation that connects them. By differentiating that equation we can translate a known rate of change of one variable into the unknown rate of change of another.\n\n> **Definition:** *Related rates* are problems where we find the rate at which one quantity changes by using the known rate of change of another quantity that is linked through an equation.\n\nWhy is this useful? Many real‑world situations involve several measurements that move together—water filling a tank, a shadow lengthening as a person walks, or a ladder sliding down a wall. If we can measure one change easily (like the speed at which the foot of the ladder slides), we can compute a harder‑to‑measure change (the speed of the top of the ladder) by using the relationship between the two.\n\n### Everyday comparison\nThink of a bicycle: the pedal rotates, and the rear wheel turns because they are connected by a chain. If you know how fast you are pedaling (revolutions per minute), you can figure out how fast the bike is moving, provided you know the gear ratio. The gear ratio is the equation that links the two rates.\n\n### Step‑by‑step set‑up: the ladder‑against‑wall problem\nA classic related‑rates example is a ladder leaning against a vertical wall.  \n\n- The ladder has a fixed length $L$ (for example, $L = 10\\,$ft).  \n- Let $x(t)$ be the horizontal distance from the wall to the foot of the ladder at time $t$.  \n- Let $y(t)$ be the vertical height of the ladder’s top on the wall at time $t$.  \n\nBecause the ladder does not stretch, the three sides always form a right triangle, so they satisfy the Pythagorean theorem:\n\n$$\nx(t)^2 + y(t)^2 = L^2 .\n$$\n\nThis equation is the “gear” that links $x$ and $y$.\n\nSuppose the foot of the ladder is sliding away from the wall at a constant speed of $dx/dt = 1.5\\,$ft/s. We want to know how fast the top of the ladder is sliding down the wall, i.e., find $dy/dt$, when the foot is $x = 6\\,$ft from the wall.\n\n#### 1. Differentiate the relationship\nDifferentiate both sides of $x^2 + y^2 = L^2$ with respect to time $t$. Remember to apply the chain rule: the derivative of $x^2$ is $2x\\,dx/dt$, and similarly for $y^2$.\n\n$$\n2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 .\n$$\n\nWe can divide the whole equation by $2$ to simplify:\n\n$$\nx\\frac{dx}{dt} + y\\frac{dy}{dt} = 0 .\n$$\n\n#### 2. Plug in known values\nFirst we need the current height $y$ when $x = 6\\,$ft. Use the original triangle equation:\n\n$$\ny = \\sqrt{L^2 - x^2} = \\sqrt{10^2 - 6^2} = \\sqrt{100 - 36} = \\sqrt{64} = 8\\ \\text{ft}.\n$$\n\nNow substitute $x = 6$, $y = 8$, and $dx/dt = 1.5$ into the differentiated equation:\n\n$$\n6(1.5) + 8\\frac{dy}{dt} = 0 .\n$$\n\n#### 3. Solve for the unknown rate\nCalculate the first term: $6(1.5) = 9$. Move it to the other side:\n\n$$\n8\\frac{dy}{dt} = -9 .\n$$\n\nDivide by $8$:\n\n$$\n\\frac{dy}{dt} = -\\frac{9}{8}\\ \\text{ft/s} \\approx -1.125\\ \\text{ft/s}.\n$$\n\nThe negative sign tells us that $y$ is **decreasing**—the top of the ladder is sliding down the wall.\n\n> **Note:** The key step is differentiating the equation that ties the variables together. This turns a static geometric relationship into a dynamic one that involves rates.\n\n> **In daily life:** Whenever you see two quantities that must stay in balance—like the amount of water in a bathtub and the height of the water surface—think of writing an equation linking them and then differentiating to relate their rates.\n\n> **Common mistake:** Forgetting to include the chain rule when differentiating a term like $y^2$. The derivative is $2y\\,dy/dt$, not just $2y$.\n\n> **Remember:** Always check the units. Here $dx/dt$ and $dy/dt$ are both in feet per second, so the final answer makes sense physically.\n\nIn summary, related‑rates problems start with a clear equation that connects the variables, differentiate that equation with respect to time, insert the known numbers, and solve for the unknown rate. The ladder problem illustrates every step: a fixed length gives the relationship, the chain rule creates the link between rates, and algebra yields the speed of the ladder’s top. This method works for countless situations where change in one thing forces change in another.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\n---\n\n### Problem 1 – Tangent line to a curve  \n\nFind the equation of the tangent line to the curve  \n\n\\[\ny = \\frac{x^{3}}{3}-2x^{2}+5\n\\]\n\nat the point where \\(x=2\\).\n\n**Solution**\n\n1. **Derivative** – The slope of the tangent line is \\(y'\\).  \n   \\[\n   y' = \\frac{d}{dx}\\!\\left(\\frac{x^{3}}{3}-2x^{2}+5\\right)=x^{2}-4x .\n   \\]\n\n2. **Slope at \\(x=2\\)** – Substitute \\(x=2\\) into \\(y'\\):  \n   \\[\n   m = y'(2)=2^{2}-4(2)=4-8=-4 .\n   \\]\n\n3. **Point on the curve** – Compute \\(y\\) when \\(x=2\\):  \n   \\[\n   y(2)=\\frac{2^{3}}{3}-2(2)^{2}+5=\\frac{8}{3}-8+5=\\frac{8-24+15}{3}= -\\frac{1}{3}.\n   \\]\n\n4. **Tangent line formula** – Use point‑slope form \\(y-y_{0}=m(x-x_{0})\\):  \n   \\[\n   y+\\frac13 = -4\\bigl(x-2\\bigr).\n   \\]\n\n5. **Simplify** – Distribute and move the constant:  \n   \\[\n   y = -4x+8-\\frac13 = -4x+\\frac{23}{3}.\n   \\]\n\n\\[\n\\boxed{\\,y = -4x+\\dfrac{23}{3}\\,}\n\\]\n\n---\n\n### Problem 2 – Velocity and acceleration  \n\nA particle moves along a line with position function  \n\n\\[\ns(t)=4t^{3}-9t^{2}+6t\\quad\\text{(meters)} .\n\\]\n\nFind its **velocity** and **acceleration** at \\(t=2\\) seconds.\n\n**Solution**\n\n1. **Velocity** is the first derivative:  \n   \\[\n   v(t)=s'(t)=12t^{2}-18t+6 .\n   \\]\n\n2. **Acceleration** is the second derivative:  \n   \\[\n   a(t)=v'(t)=24t-18 .\n   \\]\n\n3. **Evaluate at \\(t=2\\)**  \n\n   \\[\n   v(2)=12(4)-18(2)+6=48-36+6=18\\ \\text{m/s},\n   \\]\n   \\[\n   a(2)=24(2)-18=48-18=30\\ \\text{m/s}^{2}.\n   \\]\n\n\\[\n\\boxed{v(2)=18\\text{ m/s},\\qquad a(2)=30\\text{ m/s}^{2}}\n\\]\n\n---\n\n### Problem 3 – Optimization of area  \n\nA rectangular garden is to be built using 60 m of fencing. One side of the rectangle lies along an existing wall, so fencing is needed for only three sides. Find the dimensions that **maximize the garden’s area**.\n\n**Solution**\n\n1. Let the side parallel to the wall be \\(x\\) (meters) and the two equal sides be \\(y\\).  \n   The amount of fencing gives the constraint  \n   \\[\n   x+2y=60\\quad\\Longrightarrow\\quad y=\\frac{60-x}{2}=30-\\frac{x}{2}.\n   \\]\n\n2. **Area** as a function of \\(x\\):  \n   \\[\n   A(x)=x\\,y=x\\!\\left(30-\\frac{x}{2}\\right)=30x-\\frac{x^{2}}{2}.\n   \\]\n\n3. **Derivative** to locate extrema:  \n   \\[\n   A'(x)=30-x .\n   \\]\n\n4. Set \\(A'(x)=0\\):  \n   \\[\n   30-x=0\\ \\Longrightarrow\\ x=30\\ \\text{m}.\n   \\]\n\n5. Find \\(y\\):  \n   \\[\n   y=30-\\frac{30}{2}=15\\ \\text{m}.\n   \\]\n\n6. **Second‑derivative test**: \\(A''(x)=-1<0\\), so the critical point gives a maximum.\n\n\\[\n\\boxed{\\text{Width }x=30\\text{ m, Length }y=15\\text{ m (area }=450\\text{ m}^{2})}\n\\]\n\n---\n\n### Problem 4 – Related‑rate: Rising balloon  \n\nA spherical balloon is being inflated so that its volume increases at a constant rate of \\(100\\ \\text{cm}^{3}/\\text{s}\\). How fast is the radius increasing when the radius is \\(5\\ \\text{cm}\\)?\n\n**Solution**\n\n1. **Volume–radius relation** for a sphere:  \n   \\[\n   V=\\frac{4}{3}\\pi r^{3}.\n   \\]\n\n2. Differentiate both sides with respect to time \\(t\\):  \n   \\[\n   \\frac{dV}{dt}=4\\pi r^{2}\\frac{dr}{dt}.\n   \\]\n\n3. Plug in the known values \\(\\displaystyle \\frac{dV}{dt}=100\\) and \\(r=5\\):  \n   \\[\n   100 = 4\\pi (5)^{2}\\frac{dr}{dt}=100\\pi\\frac{dr}{dt}.\n   \\]\n\n4. Solve for \\(\\displaystyle \\frac{dr}{dt}\\):  \n   \\[\n   \\frac{dr}{dt}= \\frac{100}{100\\pi}= \\frac{1}{\\pi}\\ \\text{cm/s}.\n   \\]\n\n\\[\n\\boxed{\\displaystyle \\frac{dr}{dt}= \\frac{1}{\\pi}\\text{ cm/s}\\approx0.318\\text{ cm/s}}\n\\]",
+   "heading": "7. Practice Problems and Summary",
+   "body": "We will practice each way a derivative can be used.  \nRead the short story before each problem, then try the question.  \nAfter you finish, look at the brief recap that reminds you of the steps.\n\n> **In daily life:** A derivative tells you how fast something is changing at a single instant – like the speedometer needle that jumps from 30 km/h to 31 km/h in a split second.\n\n---\n\n### 1. Tangent line to a curve  \n\nA tangent line just touches a curve at one point and has the same slope as the curve there.  \nIf you know the function $f(x)$ and the point $x=a$, the slope of the tangent is $f'(a)$.  \nThe line that goes through $(a,f(a))$ with that slope is  \n\n$$\ny = f(a) + f'(a)(x-a).\n$$  \n\n**Problem 1**  \nThe height of a plant (in centimeters) after $t$ days is $h(t)=5t-0.2t^{2}$.  \nFind the equation of the tangent line to the height curve at $t=5$ days.\n\n---\n\n### 2. Velocity from a position function  \n\nWhen $s(t)$ gives the position of a moving object, its instantaneous speed is the derivative $s'(t)$.  \nThink of $s(t)$ as the road map and $s'(t)$ as the speedometer reading at each moment.\n\n**Problem 2**  \nA car travels along a straight road with position $s(t)=3t^{2}+2t$ (meters, $t$ in seconds).  \nWhat is the car’s velocity at $t=4$ s?  \n\n**Problem 3** (conceptual)  \nIf $s'(t)=0$ at some time $t_0$, what does that tell you about the car’s motion at $t_0$?\n\n---\n\n### 3. Simple optimization  \n\nOptimization means “find the biggest or smallest value” of something that depends on a variable.  \nThe usual recipe:  \n\n1. Write the quantity to be optimized as a function $Q(x)$.  \n2. Find $Q'(x)$ and set it equal to zero – these are the **critical points**.  \n3. Test the critical points (and any endpoints) to see which give the maximum or minimum.\n\n**Problem 4**  \nA farmer has 120 m of fencing and wants to make a rectangular pen that uses one side of a barn (so only three sides need fencing).  \nWhat dimensions give the largest possible area?  \n\n**Problem 5**  \nA rectangle is inscribed in a semicircle of radius $r$. Its base lies on the diameter and its top corners touch the arc. Find the dimensions that give the greatest possible area.\n\n---\n\n### 4. Related rates  \n\nRelated rates problems involve two or more quantities that change together.  \nYou differentiate an equation that links them, then plug in the known rates.\n\n**Problem 6**  \nA ladder 10 m long leans against a wall. The bottom slides away from the wall at $0.5\\ \\text{m/s}$. How fast is the top sliding down when the bottom is $6$ m from the wall?\n\n**Problem 7**  \nA spherical balloon is being inflated so that its volume increases at $100\\ \\text{cm}^3/\\text{s}$. How fast is the radius increasing when the radius is $5\\ \\text{cm}$?\n\n---\n\n### 5. Summary of key steps  \n\n> **Remember:**  \n> - **Tangent line:** Find $f'(a)$, then use $y = f(a)+f'(a)(x-a)$.  \n> - **Velocity:** Differentiate the position function; evaluate at the given time.  \n> - **Optimization:** Write the target quantity, set its derivative to zero, test critical points.  \n> - **Related rates:** Write a relationship among the variables, differentiate **with respect to time**, then substitute known values and solve for the unknown rate.\n\nPractice these steps a few times and they will become second nature. When you see a word like “instantaneous” or “rate”, think “derivative”. When you need the “best” or “fastest” value, think “critical point”. Keep the process clear, and the problems will fall into place.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Finding the slope of a line",
+   "given": "A straight road rises 3 m over a horizontal distance of 12 m. Find the slope (derivative) of the road.",
+   "steps": [
+    {
+     "label": "Compute rise over run",
+     "text": "Calculate $\\displaystyle \\frac{\\Delta y}{\\Delta x}= \\frac{3}{12}=0.25$ to get the constant slope."
+    },
+    {
+     "label": "Interpret as derivative",
+     "text": "Since the road is a straight line, its derivative $y'(x)$ is the constant $0.25$."
+    }
+   ],
+   "answer": "The slope (derivative) is $0.25$ (rise per run), i.e., the road rises $0.25\\,$m for each meter forward."
+  },
+  {
+   "level": "Medium",
+   "title": "Velocity from a position function",
+   "given": "A particle moves along a line with position $s(t)=4t^{2}-2t+5$ (meters) at time $t$ seconds. Find its velocity at $t=3\\,$s.",
+   "steps": [
+    {
+     "label": "Differentiate position",
+     "text": "Compute $v(t)=s'(t)=\\frac{d}{dt}(4t^{2}-2t+5)=8t-2$."
+    },
+    {
+     "label": "Evaluate at $t=3$",
+     "text": "Substitute $t=3$ into $v(t)$: $v(3)=8(3)-2=24-2=22$."
+    }
+   ],
+   "answer": "The particle’s velocity at $t=3\\,$s is $22\\,$m/s."
+  },
+  {
+   "level": "Hard",
+   "title": "Optimizing material for a cylindrical can",
+   "given": "A closed cylindrical can must hold $500\\,$cm³ of soup. Find the radius $r$ that minimizes the material (surface area).",
+   "steps": [
+    {
+     "label": "Write volume constraint",
+     "text": "$V=\\pi r^{2}h=500\\;$cm³, so $h=\\dfrac{500}{\\pi r^{2}}$."
+    },
+    {
+     "label": "Write surface‑area function",
+     "text": "$A=2\\pi r^{2}+2\\pi r h$ (top + bottom + side). Substitute $h$: $A(r)=2\\pi r^{2}+2\\pi r\\left(\\dfrac{500}{\\pi r^{2}}\\right)=2\\pi r^{2}+\\dfrac{1000}{r}$."
+    },
+    {
+     "label": "Differentiate $A(r)$",
+     "text": "$A'(r)=4\\pi r-\\dfrac{1000}{r^{2}}$."
+    },
+    {
+     "label": "Set derivative to zero",
+     "text": "$4\\pi r-\\dfrac{1000}{r^{2}}=0\\;\\Rightarrow\\;4\\pi r^{3}=1000\\;\\Rightarrow\\;r^{3}=\\dfrac{250}{\\pi}$."
+    },
+    {
+     "label": "Solve for $r$",
+     "text": "$r=\\left(\\dfrac{250}{\\pi}\\right)^{1/3}\\approx 4.31\\,$cm. Verify $A''(r)>0$ for a minimum."
+    }
+   ],
+   "answer": "The radius that minimizes material is $r\\approx4.31\\,$cm; the corresponding height is $h=\\dfrac{500}{\\pi r^{2}}\\approx 8.55\\,$cm. This gives the least surface area for the can."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "A particle moves along a line with position $s(t)=3t^2-4t+5$ (meters). Find its velocity at $t=2$ seconds.",
+   "a": "The velocity is the derivative of position: $v(t)=s'(t)=\\frac{d}{dt}(3t^2-4t+5)=6t-4$. Plug in $t=2$: $v(2)=6(2)-4=12-4=8$ m/s."
+  },
+  {
+   "level": "Easy",
+   "q": "Find the equation of the tangent line to $y=x^3$ at $x=1$.",
+   "a": "First compute the derivative: $y'=3x^2$. At $x=1$, $y'=3(1)^2=3$. The point on the curve is $(1,1^3)=(1,1)$. Use $y-y_0=m(x-x_0)$:\n$$y-1=3(x-1) \\;\\Longrightarrow\\; y=3x-2.$$"
+  },
+  {
+   "level": "Medium",
+   "q": "A rectangular garden is to be built with 100 m of fencing. One side of the garden will be against a wall, so fencing is needed for only three sides. Find the dimensions that give the maximum area.",
+   "a": "Let the side perpendicular to the wall be $x$ (both sides) and the side parallel to the wall be $y$. The amount of fencing used is $2x+y=100$, so $y=100-2x$.\nArea $A=xy = x(100-2x)=100x-2x^2$.\nFind critical points: $A'(x)=100-4x=0 \\;\\Rightarrow\\; x=25$.\nThen $y=100-2(25)=50$.\nCheck endpoints ($x=0$ or $x=50$) give zero area, so the maximum occurs at $x=25\\,$m, $y=50\\,$m.\nMaximum area $A_{\\max}=25\\cdot50=1250\\,$m²."
+  },
+  {
+   "level": "Medium",
+   "q": "Water is draining from a conical tank at a rate of $3\\text{ ft}^3/\\text{min}$. The tank has height $12\\,$ft and radius $6\\,$ft at the top. Find the rate at which the water level is dropping when the water is $4\\,$ft deep.",
+   "a": "Volume of a cone: $V=\\frac13\\pi r^2 h$. Because the tank’s shape is fixed, $r/h = 6/12 = 1/2$, so $r = \\frac{h}{2}$.\nSubstitute: $V=\\frac13\\pi\\left(\\frac{h}{2}\\right)^2 h = \\frac13\\pi\\frac{h^3}{4}= \\frac{\\pi}{12}h^3$.\nDifferentiate with respect to $t$: $\\displaystyle \\frac{dV}{dt}= \\frac{\\pi}{12}\\cdot3h^2\\frac{dh}{dt}= \\frac{\\pi}{4}h^2\\frac{dh}{dt}$.\nGiven $\\frac{dV}{dt} = -3$ ft³/min (negative because volume is decreasing) and $h=4$ ft:\n$$-3 = \\frac{\\pi}{4}(4)^2\\frac{dh}{dt}= \\frac{\\pi}{4}\\cdot16\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.$$\nSolve: $\\displaystyle \\frac{dh}{dt}= \\frac{-3}{4\\pi}\\approx -0.239\\text{ ft/min}.$\nThe water level is dropping at about $0.24\\,$ft/min."
+  },
+  {
+   "level": "Hard",
+   "q": "Find the dimensions of the right circular cylinder of minimal surface area that can hold a volume of $500\\,$cm³. (Surface area includes the top and bottom.)",
+   "a": "Let radius $r$ and height $h$.\nVolume constraint: $V=\\pi r^2 h = 500 \\;\\Rightarrow\\; h = \\frac{500}{\\pi r^2}$.\nSurface area (including top and bottom): $S = 2\\pi r^2 + 2\\pi r h$. Substitute $h$:\n$$S(r)=2\\pi r^2 + 2\\pi r\\left(\\frac{500}{\\pi r^2}\\right)=2\\pi r^2 + \\frac{1000}{r}.$$\nDifferentiate: $S'(r)=4\\pi r - \\frac{1000}{r^2}$. Set to zero:\n$$4\\pi r = \\frac{1000}{r^2} \\;\\Rightarrow\\; 4\\pi r^3 = 1000 \\;\\Rightarrow\\; r^3 = \\frac{250}{\\pi} \\;\\Rightarrow\\; r = \\left(\\frac{250}{\\pi}\\right)^{1/3} \\approx 4.03\\text{ cm}.$$\nFind $h$: $h = \\frac{500}{\\pi r^2}= \\frac{500}{\\pi (4.03)^2}\\approx 9.86\\text{ cm}.$\nThus the minimal‑area cylinder has radius $\\approx4.03\\,$cm and height $\\approx9.86\\,$cm."
+  },
+  {
+   "level": "Hard",
+   "q": "A ladder 10 ft long rests against a vertical wall. The bottom slides away from the wall at $1\\,$ft/s. How fast is the top sliding down when the bottom is $6\\,$ft from the wall?",
+   "a": "Let $x$ be the distance from the wall to the bottom, $y$ the height of the top. The ladder gives $x^2 + y^2 = 10^2$. Differentiate with respect to time $t$:\n$$2x\\frac{dx}{dt} + 2y\\frac{dy}{dt}=0 \\;\\Longrightarrow\\; x\\frac{dx}{dt} + y\\frac{dy}{dt}=0.$$\nGiven $\\frac{dx}{dt}=1$ ft/s and $x=6$ ft. Find $y$ from the Pythagorean relation: $y = \\sqrt{10^2-6^2}= \\sqrt{100-36}= \\sqrt{64}=8$ ft.\nSolve for $\\frac{dy}{dt}$:\n$$6(1) + 8\\frac{dy}{dt}=0 \\;\\Rightarrow\\; \\frac{dy}{dt}= -\\frac{6}{8}= -\\frac{3}{4}\\text{ ft/s}.$$\nThe top is sliding down at $0.75\\,$ft/s."
+  }
+ ],
+ "recap": "This lesson shows how derivatives give the slope of a curve, let us write tangent lines, compute instantaneous velocity from position, and solve optimization and related‑rates problems. By turning real‑world situations into functions, we use the derivative to find best values or how linked quantities change together. The key steps are: find the derivative, set it to zero for extrema, or differentiate an equation linking variables for related rates.",
  "key_terms": [
   {
-   "term": "derivative",
-   "meaning": "the instantaneous rate of change of a function, giving the slope of its graph at a point"
+   "term": "Derivative",
+   "meaning": "The limit of the difference quotient; gives the instantaneous rate of change or slope at a point."
   },
   {
-   "term": "tangent line",
-   "meaning": "a straight line that touches a curve at one point and has the same slope as the curve there"
+   "term": "Tangent line",
+   "meaning": "A straight line that touches a curve at one point and has the same slope as the curve there."
   },
   {
-   "term": "linear approximation",
-   "meaning": "using the tangent line to estimate function values near the point of tangency"
+   "term": "Instantaneous velocity",
+   "meaning": "The derivative of a position function; tells how fast an object is moving at a specific instant."
   },
   {
-   "term": "velocity",
-   "meaning": "the first derivative of position with respect to time, indicating speed and direction"
+   "term": "Optimization",
+   "meaning": "Using derivatives to find maximum or minimum values of a quantity subject to constraints."
   },
   {
-   "term": "acceleration",
-   "meaning": "the second derivative of position (or first derivative of velocity) with respect to time"
+   "term": "Critical point",
+   "meaning": "A point where the derivative is zero or undefined; a candidate for a maximum or minimum."
   },
   {
-   "term": "critical point",
-   "meaning": "a point where the derivative is zero or undefined, where maxima or minima can occur"
+   "term": "Related rates",
+   "meaning": "Problems where two or more changing quantities are linked by an equation; differentiate to relate their rates."
   },
   {
-   "term": "related rates",
-   "meaning": "problems that connect the rates of change of two or more quantities that vary with time"
+   "term": "Linear approximation",
+   "meaning": "Using the tangent line equation to estimate function values near a point."
   },
   {
-   "term": "optimization",
-   "meaning": "finding the maximum or minimum value of a quantity by using derivatives"
+   "term": "Second derivative test",
+   "meaning": "A method that uses the sign of the second derivative at a critical point to determine if it is a max or min."
   }
  ],
  "quiz": [
   {
-   "q": "What is the equation of the linear approximation L(x) for a function f at x = a?",
+   "q": "What does the derivative f'(a) represent on the graph of y=f(x)?",
    "options": [
-    "L(x) = f(a) + f'(a)(x - a)",
-    "L(x) = f(a) - f'(a)(x - a)",
-    "L(x) = f'(a) + f(a)(x - a)",
-    "L(x) = f(a) * f'(a) * (x - a)"
-   ],
-   "answer": 0,
-   "why": "Linear approximation uses the function value and its slope at a."
-  },
-  {
-   "q": "If s(t) = 5t^2 + 2t, what is the acceleration a(t)?",
-   "options": [
-    "a(t) = 10t + 2",
-    "a(t) = 5t + 2",
-    "a(t) = 10t",
-    "a(t) = 5t^2"
-   ],
-   "answer": 0,
-   "why": "Acceleration is the second derivative of s, giving 10t + 2."
-  },
-  {
-   "q": "Which of the following is a critical point of Q(x) = x^3 - 6x^2 + 9x?",
-   "options": [
-    "x = 1",
-    "x = 2",
-    "x = 3",
-    "x = 4"
+    "The y‑intercept",
+    "The area under the curve",
+    "The slope of the tangent line at x=a",
+    "The x‑coordinate of the vertex"
    ],
    "answer": 2,
-   "why": "Q'(x) = 3x^2 - 12x + 9 = 0 gives x = 3 as a solution."
+   "why": "The derivative gives the instantaneous slope, which is the slope of the tangent line at that point."
   },
   {
-   "q": "In a related‑rates problem, after differentiating the relation, what should you do next?",
+   "q": "If s(t)=4t^2 represents position, what is the instantaneous velocity at t=3?",
    "options": [
-    "Integrate both sides with respect to time",
-    "Plug in the known values of the variables and rates",
-    "Solve for the original function",
-    "Graph the equation"
+    "12",
+    "24",
+    "8",
+    "16"
    ],
    "answer": 1,
-   "why": "Substituting known values lets you solve for the unknown rate."
+   "why": "Velocity is the derivative s'(t)=8t, so at t=3 it is 8*3=24."
   },
   {
-   "q": "A ladder 12 m long slides such that the bottom moves away from the wall at 1.5 m/s. When the bottom is 5 m from the wall, how fast is the top sliding down? (Use dy/dt = -x/(y) * dx/dt)",
+   "q": "For the function V(x)=x(L-2x)(W-2x), which step finds the box dimensions that give maximum volume?",
    "options": [
-    "-0.9 m/s",
-    "-1.2 m/s",
-    "-1.5 m/s",
-    "-2.0 m/s"
+    "Set V(x)=0",
+    "Find V'(x) and solve V'(x)=0",
+    "Integrate V(x)",
+    "Plug x=0 into V(x)"
+   ],
+   "answer": 1,
+   "why": "Critical points are found by setting the derivative equal to zero; the appropriate root gives the max volume."
+  },
+  {
+   "q": "Which of the following is a critical point of f(x)=x^3-3x?",
+   "options": [
+    "x=0",
+    "x=1",
+    "x=2",
+    "x=-1"
    ],
    "answer": 0,
-   "why": "With x=5, y= sqrt(12^2-5^2)= sqrt(119), dy/dt = -5/ sqrt(119) * 1.5 ≈ -0.9."
+   "why": "f'(x)=3x^2-3, which is zero at x=±1; x=0 is not a critical point."
   },
   {
-   "q": "What does a negative acceleration indicate when velocity is positive?",
+   "q": "In a related‑rates problem, you know that the radius r of a circle is increasing at 2 cm/s. If the area A=pi r^2, what is dA/dt when r=5 cm?",
    "options": [
-    "The object is speeding up",
-    "The object is slowing down",
-    "The object is changing direction instantly",
-    "The object is at rest"
+    "20 pi",
+    "10 pi",
+    "40 pi",
+    "5 pi"
+   ],
+   "answer": 0,
+   "why": "Differentiate A to get dA/dt=2 pi r dr/dt =2 pi*5*2=20 pi."
+  },
+  {
+   "q": "Which test tells you that a critical point where f''(c)>0 is a local minimum?",
+   "options": [
+    "First derivative test",
+    "Second derivative test",
+    "Mean value theorem",
+    "Fundamental theorem of calculus"
    ],
    "answer": 1,
-   "why": "Negative acceleration opposite to positive velocity reduces speed."
+   "why": "A positive second derivative indicates the function is concave up, giving a local minimum."
   }
  ],
  "flashcards": [
   {
    "front": "Derivative",
-   "back": "Instantaneous rate of change; slope of the tangent line."
+   "back": "Limit of (f(a+h)-f(a))/h as h→0; gives instantaneous rate of change."
   },
   {
-   "front": "Tangent line",
-   "back": "Line that touches a curve at one point with the same slope as the curve."
+   "front": "Tangent line equation",
+   "back": "y = f(a) + f'(a)(x - a)"
   },
   {
-   "front": "Linear approximation formula",
-   "back": "L(x) = f(a) + f'(a)(x - a)"
-  },
-  {
-   "front": "Velocity",
-   "back": "First derivative of position: v(t) = ds/dt."
-  },
-  {
-   "front": "Acceleration",
-   "back": "Second derivative of position: a(t) = d^2s/dt^2."
-  },
-  {
-   "front": "Critical point",
-   "back": "Point where derivative is zero or undefined; possible max or min."
-  },
-  {
-   "front": "Related rates steps",
-   "back": "1) Write relation, 2) Differentiate w.r.t time, 3) Substitute known rates, solve."
+   "front": "Instantaneous velocity",
+   "back": "Derivative of position: v(t)=s'(t)."
   },
   {
    "front": "Optimization process",
-   "back": "Identify quantity, express as function, find critical points, test for max/min."
+   "back": "1) Define objective, 2) Write function, 3) Find derivative, 4) Set to zero, 5) Test critical points."
+  },
+  {
+   "front": "Critical point",
+   "back": "Where f'(x)=0 or undefined; possible max or min."
+  },
+  {
+   "front": "Related rates method",
+   "back": "1) Write relation, 2) Differentiate w.r.t. time, 3) Plug known rates, 4) Solve for unknown rate."
+  },
+  {
+   "front": "Linear approximation",
+   "back": "Use tangent line: f(x)≈f(a)+f'(a)(x-a) for x near a."
+  },
+  {
+   "front": "Second derivative test",
+   "back": "If f''(c)>0 → local min; if f''(c)<0 → local max; if f''(c)=0 → inconclusive."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l06-open-top-box-construction",
-   "title": "A square sheet of cardboard with corner squares cut out to form an open‑top box.",
-   "alt": "A square sheet of cardboard with corner squares cut out to form an open‑top box.",
-   "priority": 7,
-   "picture_title": "Open‑top box construction",
-   "kind": "photo",
-   "subject": "Shows a 30 cm × 30 cm cardboard sheet with four equal squares removed from each corner, then folded up to illustrate the shape whose material usage is to be minimized.",
-   "layout": "The original sheet is shown flat on a table; the cut‑out squares are highlighted in red; an inset shows the folded box from the side.",
+   "file": "calculus-i-l06-tangent-line-on-curve",
+   "title": "A line touching a curve at one point with the same slope as the curve.",
+   "alt": "A line touching a curve at one point with the same slope as the curve.",
+   "priority": 8,
+   "picture_title": "Tangent Line on Curve",
+   "kind": "labelled diagram",
+   "subject": "A smooth curve y = f(x) with a highlighted point (a, f(a)). A straight line passes through this point and is labeled as the tangent, showing it matches the curve’s slope at that spot.",
+   "layout": "Curve across the background, point highlighted in the centre, tangent line drawn through the point with an arrow indicating slope, labels placed beside the point and line.",
    "labels": [
-    "30 cm side",
-    "cut‑out square x",
-    "folded sides"
+    "point (a,f(a))",
+    "tangent line",
+    "slope"
    ],
-   "after": 3
+   "after": 1
   },
   {
    "type": "image",
-   "file": "calculus-i-l06-falling-ladder-problem",
-   "title": "A ladder leaning against a wall sliding down as the bottom is pulled away.",
-   "alt": "A ladder leaning against a wall sliding down as the bottom is pulled away.",
-   "priority": 6,
-   "picture_title": "Falling ladder problem",
+   "file": "calculus-i-l06-open-box-from-cardboard",
+   "title": "Cutting squares from corners and folding creates an open-top box.",
+   "alt": "Cutting squares from corners and folding creates an open-top box.",
+   "priority": 7,
+   "picture_title": "Open Box from Cardboard",
    "kind": "illustration",
-   "subject": "Depicts a right‑triangle formed by a ladder, the wall, and the ground, with arrows indicating the rates of change of the ladder’s foot and top positions.",
-   "layout": "Ladder as the hypotenuse, wall on the left, ground on the bottom; arrows labeled dx/dt and dy/dt point outward from the foot and top respectively.",
+   "subject": "A rectangular sheet of cardboard with squares marked at each corner. Arrows show the squares being cut out and the sides being folded up to form a box, indicating the dimensions used in the optimization problem.",
+   "layout": "Sheet shown flat on the left, cut‑out squares highlighted in red, folded box shown on the right with dimensions labeled.",
    "labels": [
-    "ladder length",
-    "dx/dt",
-    "dy/dt"
+    "original length",
+    "original width",
+    "cut size",
+    "box height",
+    "box volume"
    ],
    "after": 4
   },
   {
    "type": "image",
-   "file": "calculus-i-l06-speedometer-and-acceleration",
-   "title": "A car dashboard showing speed and a separate gauge for acceleration.",
-   "alt": "A car dashboard showing speed and a separate gauge for acceleration.",
-   "priority": 5,
-   "picture_title": "Speedometer and acceleration",
+   "file": "calculus-i-l06-gears-for-related-rates",
+   "title": "Two interlocking gears illustrate how one changing rate affects another.",
+   "alt": "Two interlocking gears illustrate how one changing rate affects another.",
+   "priority": 6,
+   "picture_title": "Gears for Related Rates",
    "kind": "photo",
-   "subject": "A close‑up of a vehicle’s speedometer needle indicating velocity and an adjacent digital read‑out displaying acceleration, linking the mathematical concepts to everyday devices.",
-   "layout": "Speedometer centered, acceleration read‑out to the right; labels point to each display.",
-   "labels": [
-    "velocity (km/h)",
-    "acceleration (m/s²)"
+   "subject": "A close‑up photograph of two meshed gears of different sizes turning together, with arrows indicating the direction of rotation and speed of each gear.",
+   "layout": "Gears centered in the frame, arrows overlaid on each gear showing rotational direction, a small inset shows a simple equation linking the angular speeds.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "facts",
+   "title": "Derivative Definition",
+   "items": [
+    {
+     "value": "lim_{h→0} (f(a+h)-f(a))/h",
+     "label": "Formula"
+    },
+    {
+     "value": "f'(a)",
+     "label": "Slope at a"
+    },
+    {
+     "value": "instantaneous rate of change",
+     "label": "Meaning"
+    }
    ],
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Position vs. Velocity",
+   "left": {
+    "name": "Position s(t)",
+    "points": [
+     "Distance from start",
+     "Units: meters",
+     "Graph shows where the object is"
+    ]
+   },
+   "right": {
+    "name": "Velocity v(t)",
+    "points": [
+     "Speed with direction",
+     "Units: meters/second",
+     "v(t)=s'(t)"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Basic Optimization Process",
+   "steps": [
+    {
+     "label": "Define objective",
+     "text": "State what to maximize or minimize"
+    },
+    {
+     "label": "Write constraint",
+     "text": "Express the rule linking variables"
+    },
+    {
+     "label": "Form single‑variable function",
+     "text": "Substitute constraint into objective"
+    },
+    {
+     "label": "Differentiate",
+     "text": "Find derivative and set to zero"
+    },
+    {
+     "label": "Test critical points",
+     "text": "Use second derivative or endpoints"
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Components of a Related‑Rates Problem",
+   "items": [
+    {
+     "name": "Variables",
+     "role": "Quantities that change"
+    },
+    {
+     "name": "Relationship",
+     "role": "Equation linking the variables"
+    },
+    {
+     "name": "Differentiate",
+     "role": "Take derivative of the equation"
+    },
+    {
+     "name": "Known rate",
+     "role": "Rate given in the problem"
+    },
+    {
+     "name": "Unknown rate",
+     "role": "What we need to find"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "graph",
+   "title": "Tangent Line to f(x)=x^2 at x=1",
+   "fn": "x^2",
+   "xmin": -1,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 1,
+     "y": 1,
+     "label": "Point (1,1)",
+     "open": false
+    }
+   ],
+   "caption": "Blue curve: f(x)=x^2. Red line: tangent y=2(x-1)+1",
    "after": 1
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }
