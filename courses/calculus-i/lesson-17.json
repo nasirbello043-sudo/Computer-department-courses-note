@@ -1,292 +1,419 @@
 {
  "title": "and economics",
- "summary": "Lesson 17 explores how calculus concepts—limits, derivatives, and integrals—are applied to economic problems such as cost, revenue, and profit analysis. Students will learn to model and solve real‑world economic scenarios using calculus tools.",
+ "summary": "This lesson shows how calculus tools—limits, derivatives, and integrals—are applied to economic concepts such as cost, revenue, and profit. Students will learn to model and analyze real‑world economic problems using calculus.",
+ "objectives": [
+  "Interpret marginal cost and marginal revenue using derivatives",
+  "Set up and solve optimization problems for profit maximization",
+  "Apply definite integrals to compute total cost and consumer/producer surplus",
+  "Use limits to analyze behavior of economic functions at critical points",
+  "Translate a word problem from economics into a calculus model and solve it"
+ ],
+ "prerequisites": "Students should already understand limits, derivatives, basic integration, and how to solve simple optimization problems.",
+ "why": [
+  "Economics relies on understanding how quantities change. Marginal cost and revenue tell businesses how a small change in production affects profit, which is essential for making informed decisions.",
+  "Calculus provides precise tools for measuring total cost, revenue, and surplus over time. These concepts are used by companies, governments, and analysts to plan, price, and evaluate policies."
+ ],
  "sections": [
   {
-   "heading": "Economic Functions and Their Meaning",
-   "body": "A **cost function** $C(q)$ gives the total amount of money a firm spends to produce $q$ units of a good.  \n- The variable $q$ is the **production level** (number of units).  \n- The domain of $C$ is $[0,\\infty)$ because a firm cannot produce a negative quantity.  \n- The unit of $C(q)$ is dollars (or any currency).  \n\nA **revenue function** $R(q)$ tells how much money the firm receives from selling $q$ units.  \n- It also has domain $[0,\\infty)$.  \n- Its unit is dollars.  \n\nThe **profit function** $\\Pi(q)$ is the difference between revenue and cost:  \n\n$$\\Pi(q)=R(q)-C(q).$$  \n\n- Its domain is the intersection of the domains of $R$ and $C$, usually $[0,\\infty)$.  \n- The unit is dollars, and a positive value means the firm earns money, while a negative value means a loss.  \n\n**Worked example:** A factory has a cost function $C(q)=500+20q$ (fixed cost $500$ dollars plus $20$ dollars per unit) and a revenue function $R(q)=30q$ (selling price $30$ dollars per unit). Find the profit function and determine the break‑even production level.\n\n1. **Write the profit as revenue minus cost.**  \n   $$\\Pi(q)=R(q)-C(q).$$  \n\n2. **Substitute the given formulas.**  \n   $$\\Pi(q)=30q-(500+20q).$$  \n\n3. **Simplify the expression.**  \n   $$\\Pi(q)=10q-500.$$  \n\nThe break‑even point occurs when profit is zero:  \n\n$$0=10q-500\\quad\\Longrightarrow\\quad q=50.$$\n\nThus the firm must produce and sell **50 units** to cover all costs.\n\n---\n\n**Practice problems**\n\n1. *Problem:* A bakery’s cost function is $C(q)=200+8q$ and its price per loaf is $12$ dollars. Find the profit function and the production level that yields a profit of $100$ dollars.  \n\n   *Solution:*  \n   - Revenue: $R(q)=12q$.  \n   - Profit: $\\Pi(q)=R(q)-C(q)=12q-(200+8q)=4q-200$.  \n   - Set $\\Pi(q)=100$: $4q-200=100\\;\\Rightarrow\\;4q=300\\;\\Rightarrow\\;q=75$.  \n   The bakery needs to sell **75 loaves** to earn a $100 profit.\n\n2. *Problem:* A tech company’s total cost is $C(q)=1500+15q+0.05q^{2}$ and its revenue is $R(q)=40q$. Find the profit function and the production level that maximizes profit.  \n\n   *Solution:*  \n   - Profit: $\\Pi(q)=40q-(1500+15q+0.05q^{2})=25q-1500-0.05q^{2}$.  \n   - Treat $\\Pi(q)$ as a quadratic $-0.05q^{2}+25q-1500$.  \n   - Vertex at $q=-\\frac{b}{2a}=\\frac{25}{2(0.05)}=250$.  \n   - Profit is maximized at **$q=250$ units**.\n\n3. *Problem:* A farmer’s cost to plant $q$ acres of corn is $C(q)=300+10q$ and the market price per acre is $15$. If the farmer wants a profit of at least $200$, what is the smallest integer $q$ that satisfies this?  \n\n   *Solution:*  \n   - Revenue: $R(q)=15q$.  \n   - Profit: $\\Pi(q)=15q-(300+10q)=5q-300$.  \n   - Require $5q-300\\ge 200\\;\\Rightarrow\\;5q\\ge 500\\;\\Rightarrow\\;q\\ge100$.  \n   - Smallest integer $q$ is **100 acres**.\n\n4. *Problem:* A service firm has $C(q)=400+25q$ and $R(q)=45q-0.1q^{2}$. Find the production level where profit is zero (break‑even).  \n\n   *Solution:*  \n   - Profit: $\\Pi(q)= (45q-0.1q^{2})-(400+25q)=20q-0.1q^{2}-400$.  \n   - Set $\\Pi(q)=0$: $-0.1q^{2}+20q-400=0$.  \n   - Multiply by $-10$: $q^{2}-200q+4000=0$.  \n   - Solve using quadratic formula: $q=\\frac{200\\pm\\sqrt{200^{2}-4\\cdot4000}}{2}= \\frac{200\\pm\\sqrt{40000-16000}}{2}= \\frac{200\\pm\\sqrt{24000}}{2}$.  \n   - $\\sqrt{24000}\\approx154.92$, so $q\\approx\\frac{200\\pm154.92}{2}$.  \n   - Positive solutions: $q\\approx177.46$ or $q\\approx22.54$.  \n   The firm breaks even at about **23 units** (low production) or **177 units** (high production).",
+   "heading": "1. Economic Functions and Their Meaning",
+   "body": "Economic functions describe how a firm’s costs, revenues, and profits change as it produces different quantities of a product.  \nThink of a bakery that decides how many loaves of bread to bake each day. For each possible number of loaves, the bakery can measure (or estimate) three numbers:\n\n* **Cost** – how much money is spent to produce that many loaves.  \n* **Revenue** – how much money is earned from selling those loaves.  \n* **Profit** – the difference between revenue and cost.\n\nThese three numbers are not isolated; they are linked to the **quantity** of output, which we denote by the variable $q$. By treating cost, revenue, and profit as *functions* of $q$, we can write them as\n\n$$\nC(q),\\qquad R(q),\\qquad \\Pi(q)=R(q)-C(q),\n$$\n\nwhere $C$, $R$, and $\\Pi$ are the **cost function**, **revenue function**, and **profit function**, respectively.  \n\n> **Definition:** A *function* is a rule that assigns exactly one output value to each input value. In our case the input is the quantity $q$, and the output is a monetary amount (cost, revenue, or profit).\n\n---\n\n### How the cost function is built\n\nThe bakery first records how much it spends on ingredients, labor, electricity, rent, and other items for different production levels. Suppose the data look like this:\n\n| $q$ (loaves) | Total cost (\\$) |\n|--------------|-----------------|\n| 0            | 50 (fixed rent) |\n| 100          | 150             |\n| 200          | 250             |\n| 300          | 350             |\n\nPlotting these points on a graph, we see a roughly straight line that rises as $q$ increases. The bakery can fit a simple linear model\n\n$$\nC(q)=50+1.0\\,q,\n$$\n\nmeaning each extra loaf adds about \\$1 to the total cost. In reality the relationship may curve slightly because of bulk‑discounts on flour or overtime wages, but the data are usually smooth enough that a **continuous** (no jumps) and **differentiable** (no sharp corners) curve can be drawn through them. Continuity and differentiability are the technical words that tell us calculus tools—like limits and derivatives—can be applied safely.\n\n> **Note:** A function is *smooth* when it can be drawn without lifting the pen and has no sharp turns. Smoothness guarantees that limits exist and derivatives are defined.\n\n---\n\n### How the revenue function is built\n\nRevenue depends on two things: how many units are sold and at what price each unit sells. If the bakery sells each loaf for a price $p(q)$ that may change with quantity (for example, offering discounts for larger orders), then total revenue is\n\n$$\nR(q)=p(q)\\,q.\n$$\n\nIf the price stays constant at \\$2 per loaf, the revenue function is simply\n\n$$\nR(q)=2q.\n$$\n\nIf the bakery lowers the price when it bakes many loaves, the data might look like this:\n\n| $q$ (loaves) | Price per loaf (\\$) |\n|--------------|---------------------|\n| 100          | 2.00                |\n| 200          | 1.90                |\n| 300          | 1.80                |\n\nMultiplying each price by the corresponding quantity gives the revenue values, which can again be fitted by a smooth curve, perhaps a slightly concave one because the price falls as $q$ grows.\n\n> **In daily life:** Think of a grocery store that offers “buy 2 get 1 free.” The total amount you pay changes smoothly as you add more items, not abruptly.\n\n---\n\n### Profit as the difference of two smooth functions\n\nBecause profit is defined as revenue minus cost, its function is\n\n$$\n\\Pi(q)=R(q)-C(q).\n$$\n\nIf both $R(q)$ and $C(q)$ are smooth, their difference is also smooth. This is important: a smooth profit function means we can ask meaningful questions like “At what quantity does profit increase the fastest?” or “Where does profit reach its highest point?” These questions are answered using calculus tools that rely on limits and derivatives.\n\n> **Remember:** The smoothness of $C(q)$ and $R(q)$ lets us treat $\\Pi(q)$ with the same calculus methods; no hidden jumps or breaks will spoil the analysis.\n\n---\n\n### Why smoothness matters\n\nCalculus studies how quantities change *infinitesimally*—that is, over extremely tiny changes in $q$. If a function has a sudden jump (a discontinuity) or a sharp corner (a point where the slope changes abruptly), the limit that defines the derivative may not exist, and the usual calculus formulas break down. Real‑world economic data, when collected carefully, usually vary gradually because costs like labor and materials cannot change instantly, and prices adjust in small steps. Therefore, economists model $C(q)$ and $R(q)$ with smooth curves, making calculus a reliable tool for analysis.\n\n> **Common mistake:** Assuming a cost function is always linear. In many industries, economies of scale or capacity limits cause the cost curve to bend, so a simple straight line may mislead.\n\nBy representing cost, revenue, and profit as smooth functions of quantity, we set the stage for the next topics: using limits to understand behavior near a point, taking derivatives to find marginal (extra) costs or revenues, and optimizing profit by locating the highest point of $\\Pi(q)$. This mathematical language turns everyday business decisions into precise, solvable problems.",
    "code": ""
   },
   {
-   "heading": "Using Limits to Analyze Marginal Changes",
-   "body": "When a firm changes the amount of a product it sells, the **marginal cost** tells us how the total cost changes for a tiny extra unit.  Mathematically this is an *instantaneous rate of change*, found with a limit.\n\n**Example 1 – Marginal cost of producing widgets**  \nThe total cost (in dollars) of producing $x$ widgets is  \n$$C(x)=50+5x+0.2x^{2}.$$  \n\nWe want the cost of producing one more widget when $x=10$.  \n\n1. **Write the difference quotient.**  \n   $$\\frac{C(10+h)-C(10)}{h}$$  \n\n2. **Substitute the function and simplify.**  \n   $$\\frac{\\bigl[50+5(10+h)+0.2(10+h)^{2}\\bigr]-\\bigl[50+5\\cdot10+0.2\\cdot10^{2}\\bigr]}{h}$$  \n\n3. **Take the limit as $h\\to0$.**  \n   $$\\lim_{h\\to0}\\frac{5h+0.4\\cdot10h+0.2h^{2}}{h}\n     =\\lim_{h\\to0}\\bigl(5+4+0.2h\\bigr)=9.$$  \n\nThe marginal cost at $x=10$ is **$9$ dollars per widget**.\n\n---\n\n**Example 2 – Marginal revenue from selling a product**  \nSuppose the revenue (in thousands of dollars) from selling $x$ units is  \n$$R(x)=12x-0.05x^{2}.$$  \n\nFind the marginal revenue when $x=40$.  \n\n1. **Form the difference quotient.**  \n   $$\\frac{R(40+h)-R(40)}{h}$$  \n\n2. **Insert the revenue function and expand.**  \n   $$\\frac{\\bigl[12(40+h)-0.05(40+h)^{2}\\bigr]-\\bigl[12\\cdot40-0.05\\cdot40^{2}\\bigr]}{h}$$  \n\n3. **Evaluate the limit as $h\\to0$.**  \n   $$\\lim_{h\\to0}\\frac{12h-0.1\\cdot40h-0.05h^{2}}{h}\n     =\\lim_{h\\to0}\\bigl(12-4-0.05h\\bigr)=8.$$  \n\nThus the marginal revenue at $x=40$ is **$8$ thousand dollars per unit**.\n\n---\n\n### Practice problems\n\n**Problem 1**  \nTotal cost $C(x)=20+3x+0.1x^{2}$. Find the marginal cost at $x=5$.\n\n*Solution.*  \n1. Write $\\displaystyle \\frac{C(5+h)-C(5)}{h}$.  \n2. Substitute: $\\displaystyle \\frac{[20+3(5+h)+0.1(5+h)^{2}]-[20+3\\cdot5+0.1\\cdot5^{2}]}{h}$.  \n3. Simplify and take $\\displaystyle \\lim_{h\\to0}=3+1=4$.  \n**Answer:** $4$ dollars per unit.\n\n**Problem 2**  \nRevenue $R(x)=15x-0.2x^{2}$. Find marginal revenue at $x=30$.\n\n*Solution.*  \n1. Difference quotient $\\displaystyle \\frac{R(30+h)-R(30)}{h}$.  \n2. Substitute and expand.  \n3. Limit gives $15-0.4\\cdot30=3$.  \n**Answer:** $3$ (thousand dollars) per unit.\n\n**Problem 3**  \nProfit $\\Pi(x)= -10+8x-0.05x^{2}$. Compute marginal profit at $x=20$.\n\n*Solution.*  \n1. Quotient $\\displaystyle \\frac{\\Pi(20+h)-\\Pi(20)}{h}$.  \n2. After substitution, simplify to $8-0.1\\cdot20-0.05h$.  \n3. Limit $=8-2=6$.  \n**Answer:** $6$ dollars per unit.\n\n**Problem 4**  \nA company’s cost function is $C(x)=100+2x+0.01x^{3}$. Find marginal cost when $x=10$.\n\n*Solution.*  \n1. Form $\\displaystyle \\frac{C(10+h)-C(10)}{h}$.  \n2. Substitute: $\\displaystyle \\frac{[100+2(10+h)+0.01(10+h)^{3}]-[100+2\\cdot10+0.01\\cdot10^{3}]}{h}$.  \n3. Expand $(10+h)^{3}=1000+300h+30h^{2}+h^{3}$, simplify, then limit $=2+0.03\\cdot10=2+0.3=2.3$.  \n**Answer:** $2.3$ dollars per unit.",
+   "heading": "2. Limits in Economic Contexts",
+   "body": "When we talk about a **limit** we are asking: *what value does a function get closer to as the input gets very small or very large?*  \nIn economics this question is useful because firms often want to know how costs or revenues behave when they produce almost nothing, or when they produce a huge amount. The answer helps them decide whether it is worth expanding production or shutting down.\n\n> **Definition:** A limit of a function $f(q)$ as $q\\to a$ is the number $L$ that $f(q)$ approaches when the quantity $q$ gets arbitrarily close to $a$. We write $\\displaystyle\\lim_{q\\to a} f(q)=L$.\n\n---\n\n### 1. Limit at zero production  \n\nImagine a small bakery that makes $q$ loaves of bread each day. Its **total cost** $C(q)$ includes a fixed rent $F$ (paid even if $q=0$) and a variable cost $v q$ that grows with each loaf. A simple model is  \n\n$$\nC(q)=F+v q .\n$$  \n\nThe **average cost** per loaf is  \n\n$$\n\\text{AC}(q)=\\frac{C(q)}{q}=\\frac{F}{q}+v .\n$$  \n\nWhat happens when the bakery tries to produce *almost* no loaves? We look at the limit as $q\\to 0^{+}$ (approaching zero from the positive side, because a negative number of loaves makes no sense).  \n\n$$\n\\lim_{q\\to 0^{+}} \\text{AC}(q)=\\lim_{q\\to 0^{+}}\\left(\\frac{F}{q}+v\\right)=\\infty .\n$$  \n\nThe term $\\frac{F}{q}$ blows up because we are dividing a fixed amount of rent by a tiny number of loaves. In plain words: **the average cost becomes extremely large when production is almost zero**. This tells the baker that it is never economical to keep the shop open if only a handful of loaves are sold; the fixed cost must be spread over enough units.\n\n> **In daily life:** Think of buying a single ticket for a yearly museum pass. The price per visit is huge if you go only once, but it drops quickly as you visit many times.\n\n---\n\n### 2. Limit as production becomes very large  \n\nNow consider a factory that manufactures $q$ widgets. Its total cost often has a **fixed part** $F$, a **linear part** $v q$, and a **small inefficiency** that grows slower than $q$, for example $ \\frac{k}{q}$ (perhaps a discount on bulk materials). A realistic model could be  \n\n$$\nC(q)=F+v q+\\frac{k}{q}.\n$$  \n\nThe average cost is  \n\n$$\n\\text{AC}(q)=\\frac{C(q)}{q}= \\frac{F}{q}+v+\\frac{k}{q^{2}} .\n$$  \n\nWe are interested in the behavior when the factory produces a *very large* number of widgets, i.e., $q\\to\\infty$.  \n\n$$\n\\lim_{q\\to\\infty} \\text{AC}(q)=\\lim_{q\\to\\infty}\\left(\\frac{F}{q}+v+\\frac{k}{q^{2}}\\right)=v .\n$$  \n\nAll the terms that contain $q$ in the denominator shrink to zero, leaving only the constant $v$. **The average cost approaches the variable cost per unit**. In other words, when production is huge, the fixed cost $F$ is spread over so many items that its effect on each item becomes negligible.\n\n> **Note:** Limits let us ignore “tiny” terms that do not affect the long‑run behavior, making the math simpler while still giving accurate insight.\n\n---\n\n### 3. Why limits matter for decision‑making  \n\n- **Pricing:** Knowing that average cost approaches $v$ for large $q$ helps a firm set a price slightly above $v$ to earn profit without worrying about the fixed cost per unit.  \n- **Capacity planning:** The infinite limit at $q\\to0$ warns managers that operating below a certain scale is unprofitable.  \n- **Comparisons:** Limits give a quick way to compare different technologies. If one technology has a lower limit of average cost as $q\\to\\infty$, it will be cheaper in the long run.\n\n> **Remember:** A limit describes the *trend* of a function, not the exact value at a single point. It tells us what happens *near* a point (zero or infinity), which is often more useful than the value at that point.\n\n---\n\n### 4. A tiny numerical illustration  \n\nSuppose $F=\\$10{,}000$, $v=\\$5$, $k=2{,}000$.  \n\n- For $q=100$ loaves,  \n\n  $$\\text{AC}(100)=\\frac{10{,}000}{100}+5+\\frac{2{,}000}{100^{2}}=100+5+0.2=105.2\\,$$  \n\n- For $q=10{,}000$ loaves,  \n\n  $$\\text{AC}(10{,}000)=\\frac{10{,}000}{10{,}000}+5+\\frac{2{,}000}{10{,}000^{2}}=1+5+0.00002\\approx6.00\\,$$  \n\nThe numbers show the average cost dropping from over \\$100 per loaf to almost the variable cost \\$5 as production grows, exactly what the limits predicted.  \n\nUnderstanding these limits equips students to read economic graphs, anticipate long‑run behavior, and make informed business choices.",
    "code": ""
   },
   {
-   "heading": "Derivatives as Marginal Concepts",
-   "body": "Consider a firm that produces $q$ units of a product.  \nIts **total cost** $C(q)$ and **total revenue** $R(q)$ are functions of $q$.  \nThe **profit** is $P(q)=R(q)-C(q)$.  To understand how these quantities change when the output is increased by a tiny amount, we differentiate.\n\n**Example 1 – Computing marginal cost**  \n\nSuppose $C(q)=50+10q+0.5q^{2}$ (dollars).  \n\n1. *Write the derivative*: the marginal cost $C'(q)$ is the derivative of $C$ with respect to $q$.  \n   $$C'(q)=\\frac{d}{dq}\\bigl(50+10q+0.5q^{2}\\bigr)$$  \n\n2. *Differentiate term by term*: the constant $50$ disappears, the derivative of $10q$ is $10$, and the derivative of $0.5q^{2}$ is $0.5\\cdot2q= q$.  \n   $$C'(q)=10+q$$  \n\n3. *Interpret*: at $q=20$ units, the marginal cost is $C'(20)=10+20=30$ dollars.  This means producing the 21‑st unit costs about \\$30.\n\n**Example 2 – Marginal revenue and profit**  \n\nLet $R(q)=200q-0.2q^{2}$.\n\n1. *Differentiate*:  \n   $$R'(q)=\\frac{d}{dq}\\bigl(200q-0.2q^{2}\\bigr)$$  \n\n2. *Compute*:  \n   $$R'(q)=200-0.4q$$  \n\n3. *Marginal profit*: $P'(q)=R'(q)-C'(q)$. Using the $C'(q)$ from Example 1,  \n   $$P'(q)=\\bigl(200-0.4q\\bigr)-\\bigl(10+q\\bigr)=190-1.4q$$  \n\n4. *Economic meaning*: $R'(q)$ tells how revenue changes with one more unit sold; $C'(q)$ tells the extra cost; $P'(q)$ shows the net change in profit.  When $P'(q)>0$, producing another unit raises profit; when $P'(q)<0$, it lowers profit.\n\n**Key concepts**\n\n- **Marginal cost** $C'(q)$: approximate cost of the next unit.  \n- **Marginal revenue** $R'(q)$: approximate revenue from the next unit.  \n- **Marginal profit** $P'(q)$: net gain from the next unit, equal to $R'(q)-C'(q)$.\n\nThese marginal quantities are central in decision‑making: a firm will increase output while $R'(q) > C'(q)$ (i.e., $P'(q)>0$) and stop when they are equal.\n\n---\n\n**Practice problems**\n\n1. *Problem*: $C(q)=30+8q+0.3q^{2}$. Find $C'(q)$ and the marginal cost at $q=15$.  \n   *Solution*:  \n   $$C'(q)=8+0.6q$$  \n   $$C'(15)=8+0.6(15)=17\\text{ dollars}$$  \n\n2. *Problem*: $R(q)=150q-0.1q^{2}$. Compute $R'(q)$ and the marginal revenue at $q=40$.  \n   *Solution*:  \n   $$R'(q)=150-0.2q$$  \n   $$R'(40)=150-0.2(40)=142\\text{ dollars}$$  \n\n3. *Problem*: Using $C(q)$ from (1) and $R(q)$ from (2), find the marginal profit $P'(q)$ and determine whether profit increases at $q=20$.  \n   *Solution*:  \n   $$P'(q)=R'(q)-C'(q)=(150-0.2q)-(8+0.6q)=142-0.8q$$  \n   $$P'(20)=142-0.8(20)=126>0$$  \n   Profit is increasing at $q=20$.  \n\n4. *Problem*: A firm wants the output level where marginal profit is zero. Using $P'(q)=142-0.8q$, solve for $q$.  \n   *Solution*:  \n   Set $P'(q)=0$:  \n   $$0=142-0.8q$$  \n   $$0.8q=142$$  \n   $$q=\\frac{142}{0.8}=177.5$$  \n   The firm should produce about 178 units to maximize profit.",
+   "heading": "3. Derivatives as Marginal Quantities",
+   "body": "When we talk about a *marginal* quantity in economics we are asking: **how much does the total change if we produce one more unit?**  \nMathematically this is exactly what a derivative does – it tells us the instantaneous rate of change of a function.  \nSo the derivative of a cost, revenue or profit function gives us the marginal cost, marginal revenue and marginal profit.\n\n> **Definition:** *Marginal cost* $MC(q)$ is the derivative of the total cost function $C(q)$ with respect to the quantity $q$:\n> $$MC(q)=\\frac{dC}{dq}.$$\n\n> **Definition:** *Marginal revenue* $MR(q)$ is the derivative of the total revenue function $R(q)$:\n> $$MR(q)=\\frac{dR}{dq}.$$\n\n> **Definition:** *Marginal profit* $MP(q)$ is the derivative of the profit function $\\Pi(q)=R(q)-C(q)$:\n> $$MP(q)=\\frac{d\\Pi}{dq}=MR(q)-MC(q).$$\n\nWhy is this useful?  \nIf a firm knows that producing the 101st widget will increase total cost by only \\$2 but will increase total revenue by \\$5, then the extra profit from that unit is \\$3. The marginal numbers give exactly this information without having to recompute the whole totals each time.\n\n### Everyday comparison\nThink of a road trip. Your car’s fuel gauge shows the total fuel used $F(d)$ after driving $d$ miles. The *marginal fuel consumption* at a particular speed is the derivative $dF/dd$, i.e., how many extra gallons you need for each additional mile. If you drive a little faster, the marginal consumption rises, just as a firm’s marginal cost may rise when production expands.\n\n### Linear cost example\nSuppose a small bakery has a simple cost structure:\n$$C(q)=50+4q,$$\nwhere $q$ is the number of loaves baked per day.  \nThe fixed cost \\$50 covers rent and equipment; each loaf adds \\$4 of variable cost (ingredients, labor).\n\nThe marginal cost is\n$$MC(q)=\\frac{d}{dq}(50+4q)=4.$$\nThis tells the baker that **every additional loaf costs exactly \\$4**, no matter how many have already been baked. The derivative is constant because the cost function is linear.\n\nIf the bakery sells each loaf for \\$7, the revenue function is\n$$R(q)=7q,$$\nso\n$$MR(q)=\\frac{d}{dq}(7q)=7.$$\nThe marginal profit is then\n$$MP(q)=MR(q)-MC(q)=7-4=3.$$\nThus each extra loaf adds \\$3 to profit. Because both marginal cost and marginal revenue are constant, the decision “produce more?” is simple: as long as $MR>MC$, keep producing.\n\n### Quadratic cost example\nA larger factory faces increasing costs because of overtime and equipment wear. Its total cost might be modeled by a quadratic function:\n$$C(q)=20+3q+0.1q^{2}.$$\nHere \\$20 is fixed cost, \\$3 per unit is the basic variable cost, and the term $0.1q^{2}$ captures the extra cost that grows faster as production rises.\n\nCompute the marginal cost:\n$$MC(q)=\\frac{d}{dq}\\bigl(20+3q+0.1q^{2}\\bigr)=3+0.2q.$$\nNow the marginal cost depends on $q$. For the first 10 units, $MC(10)=3+0.2(10)=5$ dollars per unit. At $q=50$, $MC(50)=3+0.2(50)=13$ dollars per unit. The factory’s extra cost per unit climbs as it pushes output higher.\n\nAssume the product sells for a price that depends on quantity, perhaps because of market saturation:\n$$R(q)=12q-0.05q^{2}.$$\nThe marginal revenue is\n$$MR(q)=\\frac{d}{dq}\\bigl(12q-0.05q^{2}\\bigr)=12-0.1q.$$\nNow marginal revenue falls as $q$ grows: each extra unit brings less additional revenue.\n\nThe marginal profit becomes\n$$MP(q)=MR(q)-MC(q)=\\bigl(12-0.1q\\bigr)-\\bigl(3+0.2q\\bigr)=9-0.3q.$$\nSet $MP(q)=0$ to find the output where profit stops increasing:\n$$9-0.3q=0\\;\\Longrightarrow\\;q=30.$$\nSo producing up to 30 units increases profit; beyond that, each extra unit reduces profit because marginal cost exceeds marginal revenue.\n\n> **In daily life:** Think of a grocery store adding one more item to a shelf. The *marginal* effort is the extra time to stock it, while the *marginal* gain is the extra sales it brings. If the extra sales outweigh the extra effort, it’s worth adding.\n\n> **Common mistake:** Forgetting that marginal values are *instantaneous* rates, not average changes. Using $C(q+1)-C(q)$ gives an average cost over one unit, which approximates $MC$ only when the step is very small.\n\n> **Remember:** Marginal cost, revenue, and profit are simply the first derivatives of their total counterparts. They tell you the “next‑unit” effect, guiding decisions about whether to expand or cut back production.",
    "code": ""
   },
   {
-   "heading": "Optimization in Economics",
-   "body": "To find the **best** economic outcome we look for points where the rate of change stops increasing or decreasing.  \nIn calculus this means setting the derivative of the objective function equal to zero and then checking the sign of the derivative before and after that point.\n\n- **Step 1.** Write the profit (or cost) function in terms of the decision variable, usually quantity $q$.  \n$$\\Pi(q)=R(q)-C(q)$$  \nwhere $R(q)$ is revenue and $C(q)$ is cost.\n\n- **Step 2.** Differentiate the function to obtain the marginal quantity.  \n$$\\Pi'(q)=R'(q)-C'(q)$$  \nThe derivative $\\Pi'(q)$ tells us how profit changes when we produce one more unit.\n\n- **Step 3.** Set the derivative equal to zero and solve for $q$.  \n$$\\Pi'(q)=0$$  \nThe solutions are called **critical points**; they are candidates for maximum profit or minimum cost.\n\n- **Step 4.** Apply the **first‑derivative test**: examine the sign of $\\Pi'(q)$ just left and right of each critical point.  \n  - If $\\Pi'$ changes from positive to negative, the profit function goes up then down → a **local maximum**.  \n  - If $\\Pi'$ changes from negative to positive, the profit function goes down then up → a **local minimum**.\n\n- **Step 5.** If needed, use the **second‑derivative test** for a quicker decision. Compute  \n$$\\Pi''(q)$$  \n  - If $\\Pi''(q)<0$ at the critical point, the curve is concave down → **maximum**.  \n  - If $\\Pi''(q)>0$, the curve is concave up → **minimum**.  \n\n**Worked example**\n\n1. *Write the profit function.*  \n   Suppose $R(q)=120q-2q^{2}$ and $C(q)=20q+5$. Then  \n   $$\\Pi(q)=120q-2q^{2}-20q-5=100q-2q^{2}-5.$$\n\n2. *Find the marginal profit.*  \n   $$\\Pi'(q)=100-4q.$$\n\n3. *Set the derivative to zero and solve.*  \n   $$100-4q=0\\quad\\Longrightarrow\\quad q=25.$$\n\n4. *Second‑derivative test.*  \n   $$\\Pi''(q)=-4<0,$$  \n   so the profit is maximized at $q=25$ units. The maximum profit is  \n   $$\\Pi(25)=100(25)-2(25)^{2}-5=2500-1250-5=1245.$$\n\n---\n\n**Practice problems**\n\n1. **Problem:** $R(q)=50q-0.5q^{2}$, $C(q)=10q+20$. Find the quantity that maximizes profit.  \n\n   **Solution:**  \n   $\\Pi(q)=50q-0.5q^{2}-10q-20=40q-0.5q^{2}-20$.  \n   $\\Pi'(q)=40-q$. Set to zero: $40-q=0\\Rightarrow q=40$.  \n   $\\Pi''(q)=-1<0$, so $q=40$ gives a maximum. Profit: $\\Pi(40)=40(40)-0.5(40)^{2}-20=1600-800-20=780$.\n\n2. **Problem:** Cost function $C(q)=5q^{2}+30q+100$, revenue $R(q)=200q$. Find the output that minimizes cost.  \n\n   **Solution:**  \n   $C'(q)=10q+30$. Set to zero: $10q+30=0\\Rightarrow q=-3$.  \n   Since quantity cannot be negative, the minimum cost on the feasible region occurs at the endpoint $q=0$. $C(0)=100$.\n\n3. **Problem:** $R(q)=80\\sqrt{q}$, $C(q)=20q$. Determine the quantity that gives the greatest profit.  \n\n   **Solution:**  \n   $\\Pi(q)=80\\sqrt{q}-20q$.  \n   $\\Pi'(q)=\\frac{80}{2\\sqrt{q}}-20=\\frac{40}{\\sqrt{q}}-20$.  \n   Set to zero: $\\frac{40}{\\sqrt{q}}=20\\Rightarrow \\sqrt{q}=2\\Rightarrow q=4$.  \n   $\\Pi''(q)=-\\frac{20}{q^{3/2}}<0$ at $q=4$, so a maximum. Profit: $\\Pi(4)=80\\cdot2-20\\cdot4=160-80=80$.\n\n4. **Problem:** A firm’s profit is $\\Pi(q)= -3q^{3}+45q^{2}-150q$. Find all local extrema and classify them.  \n\n   **Solution:**  \n   $\\Pi'(q)=-9q^{2}+90q-150$.  \n   Set to zero: $-9q^{2}+90q-150=0\\Rightarrow 9q^{2}-90q+150=0\\Rightarrow q^{2}-10q+ \\tfrac{50}{3}=0$.  \n   Solving gives $q\\approx3.33$ and $q\\approx6.67$.  \n   $\\Pi''(q)=-18q+90$.  \n   At $q\\approx3.33$, $\\Pi''\\approx-18(3.33)+90\\approx30>0$ → **local minimum**.  \n   At $q\\approx6.67$, $\\Pi''\\approx-18(6.67)+90\\approx-30<0$ → **local maximum**.",
+   "heading": "4. Optimization: Maximizing Profit",
+   "body": "Imagine you own a small bakery that makes chocolate cupcakes.  \nYour **profit** is the money you earn from selling cupcakes **minus** the money you spend to make them.  \nTo earn the most profit, you need to decide how many cupcakes to bake each day.  \nThis is an **optimization** problem: we want the *maximum* value of a function that describes profit.\n\n---\n\n**Step 1 – Write the profit function**\n\nLet  \n\n* $q$ = number of cupcakes produced (quantity)  \n* $R(q)$ = revenue, the money you get from selling $q$ cupcakes  \n* $C(q)$ = cost, the money you spend to produce $q$ cupcakes  \n\nProfit, $P(q)$, is defined as  \n\n$$\nP(q)=R(q)-C(q).\n$$  \n\n> **Definition:** *Profit function* – a formula that gives profit for each possible production level $q$.\n\nSuppose the bakery sells each cupcake for $\\$4$ and the cost to make $q$ cupcakes is  \n\n$$\nC(q)=50+2q+0.01q^{2},\n$$  \n\nwhere \\$50 is a fixed rent, \\$2 per cupcake is the ingredient cost, and the $0.01q^{2}$ term represents extra labor that grows faster when you bake a lot.  \nRevenue is simply price times quantity:  \n\n$$\nR(q)=4q.\n$$  \n\nTherefore  \n\n$$\nP(q)=4q-\\bigl(50+2q+0.01q^{2}\\bigr)\n      =-0.01q^{2}+2q-50.\n$$  \n\n---\n\n**Step 2 – Find the derivative (marginal profit)**  \n\nThe derivative tells how profit changes when you change the production a little bit.  \nWe denote it $P'(q)$ and call it *marginal profit*.\n\n$$\nP'(q)=\\frac{d}{dq}\\bigl(-0.01q^{2}+2q-50\\bigr)\n      =-0.02q+2.\n$$  \n\n> **Note:** The derivative is a new function; you do **not** plug numbers into the original profit formula when taking the derivative.\n\n---\n\n**Step 3 – Locate critical points**\n\nCritical points occur where the derivative is zero (the slope is flat) or where the derivative does not exist.  \nHere the derivative exists everywhere, so set it to zero:\n\n$$\n-0.02q+2=0 \\quad\\Longrightarrow\\quad q=\\frac{2}{0.02}=100.\n$$  \n\nSo $q=100$ cupcakes is a candidate for the profit maximum.\n\n---\n\n**Step 4 – Use the second‑derivative test**\n\nThe second derivative shows whether the profit curve is bending upward (minimum) or downward (maximum).\n\n$$\nP''(q)=\\frac{d}{dq}\\bigl(-0.02q+2\\bigr)=-0.02.\n$$  \n\nBecause $P''(q)=-0.02<0$, the curve is concave down at $q=100$, meaning the profit is at a **maximum** there.\n\n> **Remember:** If $P''(q)<0$ at a critical point, you have a local maximum; if $P''(q)>0$, you have a local minimum.\n\n---\n\n**Step 5 – Compute the maximum profit**\n\nInsert $q=100$ back into the profit function:\n\n$$\nP(100)=-0.01(100)^{2}+2(100)-50\n      =-0.01(10\\,000)+200-50\n      =-100+200-50=50.\n$$  \n\nThe bakery earns a maximum profit of **\\$50** per day when it bakes **100 cupcakes**.\n\n> **In daily life:** This is like finding the best speed to drive a car so you use the least fuel while arriving on time. The “speed” is the variable, and the “fuel cost” is the function you want to minimize or maximize.\n\n---\n\n**Step 6 – Check the result makes sense**\n\n* If you bake fewer than 100 cupcakes, the marginal profit $P'(q)$ is positive, meaning each extra cupcake adds profit.  \n* If you bake more than 100, $P'(q)$ becomes negative, so each extra cupcake reduces profit.  \n\nThus 100 is the sweet spot.\n\n> **Common mistake:** Forgetting to subtract the cost when forming the profit function. Profit is *revenue minus cost*, not just revenue.\n\nBy following these four steps—write $P(q)$, differentiate, find where $P'(q)=0$, and test with $P''(q)$—you can determine the production level that maximizes profit for any business situation.",
    "code": ""
   },
   {
-   "heading": "Integrals for Total Economic Quantities",
-   "body": "When a firm knows its **marginal cost** $MC(q)$ – the cost of producing one more unit at quantity $q$ – the **total cost** $C(q)$ is obtained by adding up all these tiny costs from the start of production up to $q$.  This addition is exactly a **definite integral**:\n\n$$\nC(q)=C(0)+\\int_{0}^{q} MC(x)\\,dx .\n$$\n\nIf the fixed cost $C(0)$ is known, the integral gives the variable part of total cost.\n\n**Worked example 1 – Total cost from marginal cost**\n\n1. *Write the marginal cost function.*  \n   Suppose $MC(x)=5+0.2x$ dollars per unit.\n\n2. *Integrate from $0$ to the desired quantity.*  \n   $$\\int_{0}^{q} (5+0.2x)\\,dx = \\left[5x+0.1x^{2}\\right]_{0}^{q}=5q+0.1q^{2}.$$\n\n3. *Add fixed cost (if any).*  \n   If the fixed cost is $C(0)=100$, then  \n   $$C(q)=100+5q+0.1q^{2}.$$\n\nThe same idea works for **marginal revenue** $MR(q)$, the extra revenue from one more unit.  The **total revenue** $R(q)$ satisfies\n\n$$\nR(q)=R(0)+\\int_{0}^{q} MR(x)\\,dx .\n$$\n\n**Worked example 2 – Total revenue from marginal revenue**\n\n1. *State the marginal revenue.*  \n   Let $MR(x)=20-0.5x$ dollars per unit.\n\n2. *Integrate from $0$ to $q$.*  \n   $$\\int_{0}^{q} (20-0.5x)\\,dx = \\left[20x-0.25x^{2}\\right]_{0}^{q}=20q-0.25q^{2}.$$\n\n3. *Add any initial revenue (often zero).*  \n   Assuming $R(0)=0$, we obtain  \n   $$R(q)=20q-0.25q^{2}.$$\n\nThe **area under the marginal curve** between two quantities $a$ and $b$ represents the change in the total quantity (cost or revenue) over that interval.  Graphically, the integral is the shaded region under $MC$ or $MR$.\n\n---\n\n**Practice problems**\n\n1. *Problem:* $MC(q)=8+0.3q$, fixed cost $C(0)=50$. Find $C(100)$.\n\n   *Solution:*  \n   1. Integrate $MC$: $$\\int_{0}^{100} (8+0.3x)\\,dx = \\left[8x+0.15x^{2}\\right]_{0}^{100}=800+1500=2300.$$  \n   2. Add fixed cost: $$C(100)=50+2300=2350.$$\n\n2. *Problem:* $MR(q)=30-0.4q$, no initial revenue. Compute $R(60)$.\n\n   *Solution:*  \n   1. Integrate $MR$: $$\\int_{0}^{60} (30-0.4x)\\,dx = \\left[30x-0.2x^{2}\\right]_{0}^{60}=1800-720=1080.$$  \n   2. Since $R(0)=0$, $$R(60)=1080.$$\n\n3. *Problem:* A firm’s marginal cost is $MC(q)=12$ for $0\\le q\\le 50$ and $MC(q)=12+0.1(q-50)$ for $q>50$. Find total cost at $q=80$ with $C(0)=200$.\n\n   *Solution:*  \n   1. Split the integral: $$\\int_{0}^{80} MC(x)\\,dx = \\int_{0}^{50}12\\,dx + \\int_{50}^{80}\\bigl[12+0.1(x-50)\\bigr]dx.$$  \n   2. Compute each part: $$\\int_{0}^{50}12\\,dx = 12\\cdot50=600,$$  \n   $$\\int_{50}^{80}\\bigl[12+0.1(x-50)\\bigr]dx = \\left[12x+0.05(x-50)^{2}\\right]_{50}^{80}=960+0.05\\cdot30^{2}=960+45=1005.$$  \n   3. Add fixed cost: $$C(80)=200+600+1005=1805.$$\n\n4. *Problem:* Marginal revenue $MR(q)=25e^{-0.02q}$. Find the total revenue from $q=0$ to $q=100$.\n\n   *Solution:*  \n   1. Integrate $MR$: $$\\int_{0}^{100} 25e^{-0.02x}\\,dx = \\left[-\\frac{25}{0.02}e^{-0.02x}\\right]_{0}^{100}= -1250\\bigl(e^{-2}-1\\bigr).$$  \n   2. Simplify: $$R(100)=1250\\bigl(1-e^{-2}\\bigr)\\approx1250(1-0.1353)=1081.6.$$\n\nThese examples show how **definite integrals** turn marginal information into the total economic quantities that businesses need for planning.",
+   "heading": "5. Definite Integrals for Total Cost and Surplus",
+   "body": "When a firm knows how its **marginal cost** changes with the amount it produces, it can find the **total cost** by adding up (integrating) all those tiny pieces.  \n\n> **Definition:** *Marginal cost* $MC(q)$ is the cost of producing one more unit when the current output level is $q$. It is the derivative of the total‑cost function $C(q)$, so $MC(q)=C'(q)$.  \n\nIf we start at an output level $q_0$ where the total cost is known (often $C(0)=0$), the total cost for any larger output $q$ is the area under the marginal‑cost curve from $q_0$ to $q$. In calculus this area is written as a **definite integral**:\n\n$$\nC(q)=C(q_0)+\\int_{q_0}^{q} MC(x)\\,dx .\n$$\n\nThink of the marginal‑cost graph as a hill. Walking from the left end ($q_0$) to the right end ($q$) and measuring how high the hill is at each step, then adding up all those heights, gives you the total height climbed – exactly what the integral does.\n\n---\n\n### Consumer and Producer Surplus\n\nIn a market, the **demand curve** $D(p)$ shows how many units consumers are willing to buy at each price $p$, while the **supply curve** $S(p)$ shows how many units producers are willing to sell. The point where they intersect, $(p^*, q^*)$, is the market equilibrium price and quantity.\n\n> **In daily life:** Imagine an auction where buyers shout how much they would pay for a painting. The highest price anyone is willing to pay is the demand curve. Sellers have a minimum price they would accept – that’s the supply curve. The actual sale price sits somewhere in between.\n\nThe **consumer surplus** is the extra benefit buyers receive because they pay less than the maximum they were willing to pay. Graphically, it is the area between the demand curve and the horizontal line at the equilibrium price, from $0$ to $q^*$. Using an integral,  \n\n$$\n\\text{Consumer Surplus}= \\int_{0}^{q^*} \\bigl(D^{-1}(x)-p^*\\bigr)\\,dx ,\n$$  \n\nwhere $D^{-1}(x)$ converts a quantity $x$ back to the price a consumer would pay for that unit.\n\nSimilarly, the **producer surplus** is the extra profit producers earn because they receive more than the minimum they would accept. It is the area between the equilibrium price line and the supply curve:\n\n$$\n\\text{Producer Surplus}= \\int_{0}^{q^*} \\bigl(p^*-S^{-1}(x)\\bigr)\\,dx .\n$$\n\n> **Note:** $D^{-1}$ and $S^{-1}$ are the inverse functions of demand and supply, turning a quantity into the corresponding price on each curve.\n\nThese integrals measure “areas under a curve.” In geometry, the area of a shape can be found by slicing it into thin strips, measuring each strip’s height, and adding them up. The definite integral does exactly that, but with infinitely many infinitesimally thin strips, giving an exact result.\n\n---\n\n### Why Integrals Matter in Economics\n\n1. **Total cost from marginal cost** – Instead of listing the cost of every single unit, we only need the marginal‑cost formula and an integral to compute the whole picture.  \n2. **Welfare analysis** – Consumer and producer surplus tell us how much total “well‑being” the market creates. Policymakers use these numbers to judge whether taxes, subsidies, or price controls help or hurt society.  \n\n> **Common mistake:** Forgetting to subtract the equilibrium price $p^*$ inside the integrals. The surplus is the *extra* amount above (for producers) or below (for consumers) the price actually paid, not the whole area under the curve.\n\n---\n\n### Quick Example\n\nSuppose the marginal cost of producing $q$ widgets is $MC(q)=2+0.5q$ dollars. Starting from zero output, the total cost for $q=10$ widgets is\n\n$$\nC(10)=\\int_{0}^{10} (2+0.5x)\\,dx\n      =\\bigl[2x+0.25x^{2}\\bigr]_{0}^{10}\n      =20+25=45\\text{ dollars}.\n$$\n\nIf the demand curve is $p=30-0.5q$ and the supply curve (derived from marginal cost) is $p=2+0.5q$, the equilibrium solves $30-0.5q=2+0.5q$, giving $q^*=28$ and $p^*=16$.  \n\nConsumer surplus:\n\n$$\n\\int_{0}^{28} \\bigl((30-0.5x)-16\\bigr)\\,dx\n= \\int_{0}^{28} (14-0.5x)\\,dx\n= \\bigl[14x-0.25x^{2}\\bigr]_{0}^{28}\n= 392-196 = 196.\n$$\n\nProducer surplus:\n\n$$\n\\int_{0}^{28} \\bigl(16-(2+0.5x)\\bigr)\\,dx\n= \\int_{0}^{28} (14-0.5x)\\,dx\n= 196.\n$$\n\nBoth surpluses are $196$ dollars, showing the market creates $392$ dollars of total welfare beyond the $C(28)$ production cost.\n\n> **Remember:** The integral turns a rate (marginal cost, marginal benefit) into a total amount, and the same idea gives us the areas that represent consumer and producer surplus.",
    "code": ""
   },
   {
-   "heading": "Elasticity and Rate of Change",
-   "body": "**Price elasticity of demand** measures how sensitive the quantity demanded $Q$ is to a change in price $P$.  \nIt is defined as  \n\n$$\nE(P)=\\frac{dQ}{dP}\\,\\frac{P}{Q}.\n$$  \n\nThe sign of $E(P)$ is usually negative because higher prices tend to reduce demand, but economists often report the absolute value $|E(P)|$.\n\n**Computing elasticity with derivatives**  \nSuppose the demand function is $Q(P)=aP^{-b}$ with $a,b>0$.  \n\n1. Differentiate $Q$ with respect to $P$:  \n\n$$\n\\frac{dQ}{dP}= -ab\\,P^{-(b+1)}.\n$$  \n\n2. Form the ratio $\\frac{dQ}{dP}\\frac{P}{Q}$:  \n\n$$\nE(P)=\\left(-ab\\,P^{-(b+1)}\\right)\\frac{P}{aP^{-b}}\n      =-b.\n$$  \n\nThus for a power‑law demand the elasticity is a constant $-b$, independent of price.\n\n**What elasticity tells a firm**  \n\n- If $|E(P)|>1$ (elastic demand), a small price cut leads to a proportionally larger increase in quantity sold, raising total revenue.  \n- If $|E(P)|<1$ (inelastic demand), raising price increases revenue because quantity falls only a little.  \n- When $|E(P)|=1$ (unit‑elastic), revenue is locally unchanged by a small price move.\n\nTherefore, firms use elasticity to decide whether to **lower** or **raise** prices in order to maximise revenue or profit.\n\n---\n\n### Practice problems  \n\n**Problem 1**  \nDemand: $Q(P)=500-4P$. Find the elasticity at $P=50$.\n\n**Solution**  \n1. Compute $dQ/dP$:  \n\n$$\n\\frac{dQ}{dP}=-4.\n$$  \n\n2. Evaluate $Q$ at $P=50$:  \n\n$$\nQ(50)=500-4(50)=300.\n$$  \n\n3. Apply the formula:  \n\n$$\nE(50)=(-4)\\frac{50}{300}=-\\frac{2}{3}\\approx-0.67.\n$$  \n\nDemand is inelastic at $P=50$.\n\n---\n\n**Problem 2**  \nDemand: $Q(P)=1000P^{-2}$. Find elasticity for any $P$.\n\n**Solution**  \n1. Differentiate:  \n\n$$\n\\frac{dQ}{dP}=-2000P^{-3}.\n$$  \n\n2. Form the ratio:  \n\n$$\nE(P)=\\left(-2000P^{-3}\\right)\\frac{P}{1000P^{-2}}=-2.\n$$  \n\nElasticity is constant $-2$ (elastic) for all prices.\n\n---\n\n**Problem 3**  \nA firm sells a product with demand $Q(P)=80e^{-0.05P}$. Compute elasticity at $P=20$.\n\n**Solution**  \n1. Differentiate:  \n\n$$\n\\frac{dQ}{dP}=80(-0.05)e^{-0.05P}=-4e^{-0.05P}.\n$$  \n\n2. Evaluate $Q(20)=80e^{-1}=80/e\\approx29.4$ and $\\frac{dQ}{dP}\\big|_{20}=-4/e\\approx-1.47$.  \n\n3. Elasticity:  \n\n$$\nE(20)=\\left(-\\frac{4}{e}\\right)\\frac{20}{80/e}= -\\frac{4}{e}\\cdot\\frac{20e}{80}= -1.\n$$  \n\nDemand is unit‑elastic at $P=20$.\n\n---\n\n**Problem 4**  \nGiven $Q(P)=1500/(1+0.1P)$. Find the price where demand switches from elastic to inelastic.\n\n**Solution**  \n1. Differentiate:  \n\n$$\n\\frac{dQ}{dP}= -1500\\frac{0.1}{(1+0.1P)^2}= -\\frac{150}{(1+0.1P)^2}.\n$$  \n\n2. Elasticity expression:  \n\n$$\nE(P)=\\left(-\\frac{150}{(1+0.1P)^2}\\right)\\frac{P}{1500/(1+0.1P)}\n     =-\\frac{P}{10+P}.\n$$  \n\n3. Set $|E(P)|=1$:  \n\n$$\n\\frac{P}{10+P}=1\\;\\Longrightarrow\\;P=10+P\\;\\Longrightarrow\\;0=10,\n$$  \n\nwhich is impossible, so $|E(P)|<1$ for all $P>0$. Demand is always inelastic; the firm should consider raising price to increase revenue.",
+   "heading": "6. Real‑World Case Study: Pricing a New Product",
+   "body": "Imagine a company wants to launch a new gadget.  \nThe market research gives a **demand function** that tells how many units $q$ customers will buy at a price $p$:  \n\n$$\nq(p)=1200-20p .\n$$  \n\nThe **cost function** tells how much it costs the company to produce $q$ units:  \n\n$$\nC(q)=2000+30q .\n$$  \n\nOur goal is to choose a price $p$ that makes the **profit** as large as possible.  \nProfit $\\Pi$ is simply **revenue** minus **cost**.  \nRevenue $R$ is price times quantity sold, $R(p)=p\\;q(p)$.  \n\n> **Definition:** *Profit* $\\Pi(p)$ = *Revenue* $R(p)$ – *Cost* $C(q(p))$.\n\n---\n\n### 1. Write profit as a function of price  \n\nFirst compute revenue:\n\n$$\nR(p)=p\\,(1200-20p)=1200p-20p^{2}.\n$$  \n\nNext, substitute the demand into the cost function:\n\n$$\nC(q(p))=2000+30\\,(1200-20p)=2000+36000-600p=38000-600p .\n$$  \n\nNow profit:\n\n$$\n\\Pi(p)=R(p)-C(q(p))\n      =(1200p-20p^{2})-(38000-600p)\n      =-20p^{2}+1800p-38000 .\n$$  \n\nWe have a quadratic (a parabola) opening downward because the coefficient of $p^{2}$ is negative.  \nThat shape guarantees a single highest point – the **maximum profit**.\n\n> **Note:** A downward‑opening parabola $-ap^{2}+bp+c$ reaches its maximum at $p=\\dfrac{b}{2a}$.\n\n---\n\n### 2. Find the price that maximizes profit  \n\nIdentify $a=20$ and $b=1800$ (ignore the minus sign when using the formula).  \n\n$$\np^{*}= \\frac{b}{2a}= \\frac{1800}{2\\cdot 20}= \\frac{1800}{40}=45 .\n$$  \n\nSo the profit‑maximising price is **\\$45** per gadget.\n\n> **In daily life:** This is like adjusting the ticket price for a concert until the money earned from tickets is as high as possible, even though higher prices may scare away some fans.\n\n---\n\n### 3. Compute the maximum profit  \n\nPlug $p^{*}=45$ back into the profit formula:\n\n\\[\n\\Pi(45)= -20(45)^{2}+1800(45)-38000 .\n\\]\n\nCalculate step by step:\n\n* $(45)^{2}=2025$  \n* $-20(2025) = -40500$  \n* $1800(45)=81000$  \n\nNow add:\n\n$$\n\\Pi(45)= -40500 + 81000 - 38000 = 2500 .\n$$  \n\nThe company would earn **\\$2,500** profit at the optimal price.\n\n---\n\n### 4. Determine quantity sold and total revenue at that price  \n\nQuantity demanded at $p=45$:\n\n$$\nq(45)=1200-20(45)=1200-900=300 .\n$$  \n\nRevenue at the optimal price:\n\n$$\nR(45)=45 \\times 300 = 13\\,500 .\n$$  \n\nCost for producing 300 units:\n\n$$\nC(300)=2000+30(300)=2000+9000=11\\,000 .\n$$  \n\nCheck: $13\\,500 - 11\\,000 = 2\\,500$, matching the profit we found.\n\n---\n\n### 5. Evaluate consumer surplus  \n\n**Consumer surplus** measures the extra benefit customers receive because they were willing to pay more than the market price.  \nFor a linear demand curve, the surplus is the area of a triangle between the demand line and the price line.\n\nThe highest price anyone would pay (where $q=0$) is found from $0 = 1200-20p \\Rightarrow p_{\\max}=60$.  \n\nThe triangle’s base is the quantity sold, $300$, and its height is the difference between $p_{\\max}$ and the actual price, $60-45 = 15$.\n\n$$\n\\text{Consumer Surplus}= \\frac{1}{2}\\times \\text{base}\\times \\text{height}\n                       = \\frac{1}{2}\\times 300 \\times 15\n                       = 2250 .\n$$  \n\nSo consumers enjoy a total surplus of **\\$2,250**.\n\n> **Remember:** Profit focuses on the firm, while consumer surplus looks at the buyers’ extra value. Both together give a fuller picture of market welfare.\n\n---\n\n### 6. Summary of the steps  \n\n1. Write demand $q(p)$ and cost $C(q)$.  \n2. Form revenue $R(p)=p\\,q(p)$ and profit $\\Pi(p)=R(p)-C(q(p))$.  \n3. Recognize the profit function as a downward parabola; locate its vertex using $p^{*}=b/(2a)$.  \n4. Substitute $p^{*}$ to find maximum profit, quantity, revenue, and cost.  \n5. Compute consumer surplus as the triangular area under the demand curve above the price.\n\nBy following these concrete algebraic steps, you can price any new product to earn the greatest possible profit while also understanding the benefit to customers.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "- **Problem 1 – Marginal Cost**  \nA factory’s total cost (in dollars) for producing $q$ units of a product is given by  \n$$C(q)=500+20q+0.05q^{2}.$$  \nFind the marginal cost when $q=100$ and interpret its meaning.\n\n**Solution**  \n1. *Differentiate the total‑cost function.*  \n   $$C'(q)=\\frac{d}{dq}\\bigl(500+20q+0.05q^{2}\\bigr)=20+0.10q.$$  \n2. *Evaluate the derivative at $q=100$.*  \n   $$C'(100)=20+0.10(100)=30.$$  \n3. *Interpret the result.*  \n   The marginal cost at $q=100$ is $30$ dollars per unit, meaning that producing one more unit (the 101st) will increase total cost by about $30$ dollars.\n\n---\n\n- **Problem 2 – Profit Maximization**  \nA company’s revenue (in thousands of dollars) from selling $x$ thousand units is $R(x)=12x-0.2x^{2}$, and its total cost (in thousands) is $C(x)=3+4x$. Determine the production level that maximizes profit and compute the maximum profit.\n\n**Solution**  \n1. *Write the profit function $P(x)=R(x)-C(x)$.*  \n   $$P(x)=\\bigl(12x-0.2x^{2}\\bigr)-\\bigl(3+4x\\bigr)=8x-0.2x^{2}-3.$$  \n2. *Find the critical point by setting $P'(x)=0$.*  \n   $$P'(x)=8-0.4x=0\\quad\\Longrightarrow\\quad x=\\frac{8}{0.4}=20.$$  \n3. *Check that this point gives a maximum (second derivative test).*  \n   $$P''(x)=-0.4<0,$$  \n   so $x=20$ (thousand units) yields a maximum.  \n4. *Compute the maximum profit.*  \n   $$P(20)=8(20)-0.2(20)^{2}-3=160-80-3=77.$$  \n   The maximum profit is \\$77 000.\n\n---\n\n- **Problem 3 – Total Revenue from a Demand Curve**  \nThe demand for a product is described by $p(q)=50-0.5q$, where $p$ is the price (dollars) and $q$ is the quantity sold. Find the total revenue when $q$ ranges from $0$ to $80$ units.\n\n**Solution**  \n1. *Express total revenue as the integral of price over quantity.*  \n   $$R=\\int_{0}^{80}p(q)\\,dq=\\int_{0}^{80}\\bigl(50-0.5q\\bigr)\\,dq.$$  \n2. *Integrate term by term.*  \n   $$\\int\\bigl(50-0.5q\\bigr)\\,dq=50q-0.25q^{2}+C.$$  \n3. *Evaluate the antiderivative at the limits.*  \n   $$R=\\Bigl[50q-0.25q^{2}\\Bigr]_{0}^{80}= \\bigl(50\\cdot80-0.25\\cdot80^{2}\\bigr)-0=4000-1600=2400.$$  \n   The total revenue over that range is \\$2 400.\n\n---\n\n- **Problem 4 – Elasticity of Demand**  \nFor the demand function $p(q)=100e^{-0.02q}$, compute the price elasticity of demand at $q=30$ and state whether demand is elastic, inelastic, or unit‑elastic.\n\n**Solution**  \n1. *Recall the elasticity formula $E(q)=\\frac{p'(q)}{p(q)}\\,q$.*  \n2. *Find $p'(q)$.*  \n   $$p'(q)=\\frac{d}{dq}\\bigl(100e^{-0.02q}\\bigr)=100(-0.02)e^{-0.02q}=-2e^{-0.02q}.$$  \n3. *Plug $p'(q)$, $p(q)$, and $q=30$ into the formula.*  \n   $$E(30)=\\frac{-2e^{-0.02\\cdot30}}{100e^{-0.02\\cdot30}}\\cdot30\n          =\\frac{-2}{100}\\cdot30=-0.6.$$  \n4. *Interpret the sign and magnitude.*  \n   The absolute value $|E|=0.6<1$, so demand at $q=30$ is **inelastic**; a 1 % rise in price would reduce quantity demanded by only about 0.6 %.",
+   "heading": "7. Summary and Practice Problems",
+   "body": "Recap  \nWe have seen how calculus helps economists describe and improve real‑world situations.  \n* **Economic functions** turn quantities such as output, price, or labor into numbers we can work with.  \n* **Limits** let us examine what happens when a variable gets very small or very large, for example the price a consumer is willing to pay as quantity approaches zero.  \n* The **derivative** of a revenue or cost function is the **marginal** quantity – the extra gain or expense from producing one more unit.  \n* **Optimization** uses derivatives to find where profit $P(q)=R(q)-C(q)$ is largest. Setting $P'(q)=0$ gives a candidate, and checking the second derivative tells us if it is a maximum.  \n* A **definite integral** adds up tiny pieces. It gives total cost from a marginal‑cost curve, or consumer surplus by integrating the demand curve above the market price.  \n\n> **Note:** The same symbols ($'$ for derivative, $\\int$ for integral) have the same meaning in economics as in pure mathematics; only the interpretation changes.\n\nCommon pitfalls  \n1. **Confusing marginal with average.** The marginal cost $C'(q)$ is the cost of the next unit, not the average cost $C(q)/q$.  \n2. **Ignoring domain restrictions.** A demand function may only be realistic for $q\\ge 0$ and for prices above zero; optimizing outside this range gives meaningless results.  \n3. **Forgetting the second‑derivative test.** Solving $P'(q)=0$ gives a stationary point, but without checking $P''(q)$ you cannot tell if it is a maximum, minimum, or inflection point.  \n\n> **Remember:** Always verify that the solution lies inside the feasible region and that $P''(q)<0$ for a profit maximum.\n\nPractice Problems  \n\n1. **Basic derivative interpretation**  \n   The demand for a product is $p(q)=120-2q$, where $p$ is price (dollars) and $q$ is quantity sold.  \n   *Question:* What is the marginal revenue at $q=30$?  \n   *Hint:* First find total revenue $R(q)=p(q)\\,q$, then differentiate.  \n\n2. **Finding a profit maximum**  \n   Cost: $C(q)=20q+0.5q^{2}$, Revenue: $R(q)=150q- q^{2}$.  \n   *Question:* Determine the output level $q$ that maximizes profit and compute the maximum profit.  \n   *Hint:* Write $P(q)=R(q)-C(q)$, set $P'(q)=0$, solve for $q$, then check $P''(q)$.  \n\n3. **Using a definite integral for consumer surplus**  \n   The same demand curve $p(q)=120-2q$ is faced by a market price of $p_{0}=60$.  \n   *Question:* Calculate the consumer surplus.  \n   *Hint:* Find the quantity $q_{0}$ where $p(q_{0})=p_{0}$, then integrate the demand curve from $0$ to $q_{0}$ and subtract $p_{0}q_{0}$.  \n\n4. **Marginal cost from an integral**  \n   The marginal cost of producing a widget is $MC(q)=5+0.1q$ dollars per unit. Fixed cost is \\$200.  \n   *Question:* Write the total cost function $C(q)$ and find the cost of producing the 50th widget.  \n   *Hint:* Integrate $MC(q)$ from $0$ to $q$ and add the fixed cost; then evaluate $C'(50)$.  \n\n5. **Challenging optimization with constraints**  \n   A firm’s profit function is $P(q)=200q-3q^{2}$, but it cannot produce more than 30 units due to capacity limits.  \n   *Question:* What is the profit‑maximizing output, and what is the profit at that output?  \n   *Hint:* Find the unconstrained optimum by $P'(q)=0$, then compare it with the boundary $q=30$ to see which gives higher profit.  \n\n6. **Interpretation of a limit in economics**  \n   The price elasticity of demand is defined as $\\displaystyle E(q)=\\frac{p'(q)}{p(q)}\\,q$. For $p(q)=\\frac{100}{q+1}$, compute $\\displaystyle\\lim_{q\\to 0^{+}}E(q)$.  \n   *Hint:* First find $p'(q)$, then substitute and take the limit as $q$ approaches zero from the right.  \n\n> **In daily life:** Think of marginal concepts like the extra cost of adding one more topping to a pizza. The derivative tells you that extra price, while the integral would tell you the total cost of all toppings up to a certain number.  \n\nThese problems reinforce the link between calculus tools and economic reasoning. Work through each step carefully, write down what each symbol represents, and check your answers against the economic intuition (e.g., profit should be positive, surplus should be an area above price). Good luck!",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Finding a Marginal Cost",
+   "given": "A factory’s total cost function is $C(q)=50+2q+0.1q^{2}$ dollars, where $q$ is the number of units produced. Find the marginal cost at $q=10$.",
+   "steps": [
+    {
+     "label": "Differentiate",
+     "text": "Compute $C'(q)=\\frac{d}{dq}(50+2q+0.1q^{2})=2+0.2q$ to get the marginal cost function."
+    },
+    {
+     "label": "Evaluate",
+     "text": "Substitute $q=10$ into $C'(q)$: $C'(10)=2+0.2(10)=4$ dollars per unit."
+    }
+   ],
+   "answer": "The marginal cost at $q=10$ is $\\$4$ per additional unit."
+  },
+  {
+   "level": "Medium",
+   "title": "Maximizing Profit with a Demand Curve",
+   "given": "Demand is $p(q)=120-3q$ dollars per unit, and total cost is $C(q)=20q+0.5q^{2}$ dollars. Find the production level $q$ that maximizes profit.",
+   "steps": [
+    {
+     "label": "Revenue",
+     "text": "Revenue is $R(q)=p(q)\\,q=(120-3q)q=120q-3q^{2}$."
+    },
+    {
+     "label": "Profit",
+     "text": "Profit $\\Pi(q)=R(q)-C(q)= (120q-3q^{2})-(20q+0.5q^{2})=100q-3.5q^{2}$."
+    },
+    {
+     "label": "Differentiate",
+     "text": "$\\Pi'(q)=100-7q$. Set $\\Pi'(q)=0$ for a critical point: $100-7q=0\\;\\Rightarrow\\;q=\\frac{100}{7}\\approx14.29$."
+    },
+    {
+     "label": "Second Derivative",
+     "text": "$\\Pi''(q)=-7<0$, confirming a maximum."
+    }
+   ],
+   "answer": "Profit is maximized by producing approximately $14.3$ units (round to the nearest whole unit, $q=14$)."
+  },
+  {
+   "level": "Hard",
+   "title": "Consumer Surplus and Total Cost Using Definite Integrals",
+   "given": "The market demand for a product is $p(q)=200-5q$ dollars, and the marginal cost is $MC(q)=20+2q$ dollars. The firm decides to produce $q=30$ units. Compute (a) total cost, (b) consumer surplus, and (c) profit.",
+   "steps": [
+    {
+     "label": "Total Cost Integral",
+     "text": "$C(q)=\\int_{0}^{30} MC(x)\\,dx=\\int_{0}^{30}(20+2x)\\,dx=[20x+x^{2}]_{0}^{30}=20(30)+30^{2}=600+900=1500$ dollars."
+    },
+    {
+     "label": "Revenue Integral",
+     "text": "Revenue $R(q)=\\int_{0}^{30} p(x)\\,dx=\\int_{0}^{30}(200-5x)\\,dx=[200x-\\frac{5}{2}x^{2}]_{0}^{30}=200(30)-\\frac{5}{2}(30)^{2}=6000-2250=3750$ dollars."
+    },
+    {
+     "label": "Consumer Surplus",
+     "text": "Consumer surplus $CS=R(q)-p(30)\\cdot30$. First $p(30)=200-5(30)=50$ dollars, so $p(30)\\cdot30=1500$. Hence $CS=3750-1500=2250$ dollars."
+    },
+    {
+     "label": "Profit",
+     "text": "Profit $\\Pi=R(q)-C(q)=3750-1500=2250$ dollars."
+    }
+   ],
+   "answer": "(a) Total cost is $\\$1500$, (b) consumer surplus is $\\$2250$, (c) profit is $\\$2250$."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "A linear demand function is $D(p)=120-3p$. Find the price at which exactly 30 units are demanded.",
+   "a": "Set $D(p)=30$:\n\\[\n120-3p=30 \\\\\n-3p = 30-120 = -90 \\\\\np = \\frac{-90}{-3}=30.\n\\]\nSo the price is $\\$30$."
+  },
+  {
+   "level": "Easy",
+   "q": "The total cost of producing $q$ widgets is $C(q)=500+20q$. What is the marginal cost?",
+   "a": "Marginal cost is the derivative $C'(q)$:\n\\[\nC'(q)=\\frac{d}{dq}(500+20q)=20.\n\\]\nThus the marginal cost is constant at \\$20 per widget."
+  },
+  {
+   "level": "Medium",
+   "q": "A firm’s revenue function is $R(q)=50q-0.5q^{2}$. Find the quantity that maximizes revenue and the maximum revenue amount.",
+   "a": "1. Differentiate: $R'(q)=50- q$.\n2. Set $R'(q)=0$: $50-q=0 \\Rightarrow q=50$.\n3. Second derivative $R''(q)=-1<0$, so $q=50$ gives a maximum.\n4. Compute $R(50)=50(50)-0.5(50)^{2}=2500-1250=1250$.\nMaximum revenue is \\$1,250 at $q=50$ units."
+  },
+  {
+   "level": "Medium",
+   "q": "The cost function is $C(q)=1000+8q+0.1q^{2}$. Find the marginal cost at $q=20$ and determine whether marginal cost is increasing or decreasing at that point.",
+   "a": "1. Marginal cost $MC(q)=C'(q)=8+0.2q$.\n2. At $q=20$: $MC(20)=8+0.2(20)=8+4=12$.\n3. Second derivative $C''(q)=0.2>0$, so marginal cost is increasing for all $q$.\nThus $MC= \\$12$ at $q=20$, and marginal cost is increasing."
+  },
+  {
+   "level": "Hard",
+   "q": "A company has demand $D(p)=200-4p$ and cost $C(q)=500+5q+0.02q^{2}$. (a) Express profit $\\Pi$ as a function of price $p$. (b) Find the price $p^{*}$ that maximizes profit. (c) Verify that this price yields a maximum profit.",
+   "a": "(a) Quantity sold at price $p$ is $q=D(p)=200-4p$.\nRevenue $R(p)=p\\,q=p(200-4p)=200p-4p^{2}$.\nProfit $\\Pi(p)=R(p)-C(q)=200p-4p^{2}-\\big[500+5(200-4p)+0.02(200-4p)^{2}\\big]$.\nSimplify:\n\\[\nC(q)=500+1000-20p+0.02(40000-1600p+16p^{2})\\\\\n=1500-20p+800-32p+0.32p^{2}=2300-52p+0.32p^{2}.\n\\]\nThus\n\\[\n\\Pi(p)=200p-4p^{2}-(2300-52p+0.32p^{2})\\\\\n=200p-4p^{2}-2300+52p-0.32p^{2}\\\\\n=252p-4.32p^{2}-2300.\n\\]\n(b) Differentiate: $\\Pi'(p)=252-8.64p$. Set to zero: $252-8.64p=0 \\Rightarrow p^{*}= \\frac{252}{8.64}=29.166\\ldots \\approx 29.17$.\n(c) Second derivative $\\Pi''(p)=-8.64<0$, confirming a maximum.\nTherefore the profit‑maximizing price is about $\\$29.17$."
+  },
+  {
+   "level": "Hard",
+   "q": "The marginal cost of producing $q$ units is $MC(q)=12+0.4q$. The market price is constant at $p=30$. (a) Find the total cost function $C(q)$ assuming fixed cost $F=200$. (b) Determine the profit‑maximizing output level. (c) Compute the maximum profit.",
+   "a": "(a) Integrate marginal cost:\n\\[\nC(q)=\\int MC(q)\\,dq =\\int (12+0.4q)\\,dq =12q+0.2q^{2}+K.\n\\]\nUse $C(0)=F=200$ to find $K=200$.\nSo $C(q)=12q+0.2q^{2}+200$.\n(b) Revenue $R(q)=p\\,q=30q$. Profit $\\Pi(q)=R(q)-C(q)=30q-(12q+0.2q^{2}+200)=18q-0.2q^{2}-200$.\nDifferentiate: $\\Pi'(q)=18-0.4q$. Set to zero: $18-0.4q=0 \\Rightarrow q^{*}= \\frac{18}{0.4}=45$.\n(c) Second derivative $\\Pi''(q)=-0.4<0$, so $q^{*}=45$ is a maximum.\nMaximum profit: $\\Pi(45)=18(45)-0.2(45)^{2}-200=810-0.2(2025)-200=810-405-200=205$.\nThus the firm should produce 45 units and will earn a maximum profit of \\$205."
+  }
+ ],
+ "recap": "This lesson shows how calculus tools like limits, derivatives and integrals describe economic ideas such as cost, revenue and profit. By treating these quantities as functions of output, we can find marginal values and optimise profit. Integrals let us recover total cost or surplus from marginal curves, linking mathematics directly to business decisions.",
  "key_terms": [
   {
-   "term": "Cost function",
-   "meaning": "C(q) gives the total dollars a firm spends to produce q units; domain is q >= 0."
+   "term": "Economic function",
+   "meaning": "A rule that assigns a cost, revenue or profit value to each level of output quantity."
   },
   {
-   "term": "Revenue function",
-   "meaning": "R(q) gives the total dollars received from selling q units; domain is q >= 0."
+   "term": "Limit",
+   "meaning": "The value a function approaches as the input gets arbitrarily close to a specified point."
   },
   {
-   "term": "Profit function",
-   "meaning": "Pi(q) = R(q) - C(q); measures earnings (positive) or loss (negative)."
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function; in economics it gives marginal cost, revenue or profit."
   },
   {
-   "term": "Marginal cost",
-   "meaning": "The derivative C'(q); the extra cost of producing one more unit at quantity q."
+   "term": "Marginal cost (MC)",
+   "meaning": "The derivative of the total cost function; the extra cost of producing one more unit."
   },
   {
-   "term": "Marginal revenue",
-   "meaning": "The derivative R'(q); the extra revenue from selling one more unit at quantity q."
+   "term": "Marginal revenue (MR)",
+   "meaning": "The derivative of the revenue function; the extra revenue from one more unit sold."
   },
   {
-   "term": "Elasticity of demand",
-   "meaning": "E(P) = (dQ/dP)*(P/Q); shows how quantity demanded changes with price."
+   "term": "Optimization",
+   "meaning": "Using calculus to find the output level that maximises or minimises a function, such as profit."
   },
   {
-   "term": "Critical point",
-   "meaning": "A value of q where the derivative of a function equals zero; candidate for max or min."
+   "term": "Definite integral",
+   "meaning": "The accumulated total of a rate function over an interval; used to compute total cost from marginal cost."
   },
   {
-   "term": "First‑derivative test",
-   "meaning": "Examines the sign of the derivative before and after a critical point to decide if it is a maximum or minimum."
+   "term": "Consumer surplus",
+   "meaning": "The area between the demand curve and the market price, representing extra benefit to buyers."
   }
  ],
  "quiz": [
   {
-   "q": "If C(q) = 500 + 20q + 0.05q^2, what is the marginal cost at q = 100?",
+   "q": "What does the derivative of a cost function represent?",
    "options": [
-    "20",
-    "30",
-    "40",
-    "50"
-   ],
-   "answer": 1,
-   "why": "C'(q) = 20 + 0.10q, so C'(100) = 30 dollars per unit."
-  },
-  {
-   "q": "What does a positive profit value indicate?",
-   "options": [
-    "The firm is breaking even",
-    "The firm is earning money",
-    "The firm has a loss",
-    "The firm cannot produce"
-   ],
-   "answer": 1,
-   "why": "Positive profit means revenue exceeds cost."
-  },
-  {
-   "q": "For the cost function C(x) = 50 + 5x + 0.2x^2, what is the marginal cost at x = 10?",
-   "options": [
-    "7",
-    "8",
-    "9",
-    "10"
+    "Total cost",
+    "Average cost",
+    "Marginal cost",
+    "Fixed cost"
    ],
    "answer": 2,
-   "why": "C'(x) = 5 + 0.4x, so C'(10) = 9 dollars per widget."
+   "why": "The derivative gives the marginal cost, the extra cost of one more unit."
   },
   {
-   "q": "If the demand function is Q(P) = a P^-b, what is the price elasticity of demand?",
+   "q": "If C(q)=50+2q+0.01q^2, what is MC(q)?",
    "options": [
-    "-a",
-    "-b",
-    "-ab",
-    "-1/b"
-   ],
-   "answer": 1,
-   "why": "E(P) simplifies to -b, a constant independent of price."
-  },
-  {
-   "q": "A profit function Pi(q) has Pi'(q) = 0 at q = 25 and Pi'(q) changes from positive to negative. What does this tell you?",
-   "options": [
-    "q = 25 is a minimum profit",
-    "q = 25 is a maximum profit",
-    "Profit is constant",
-    "No conclusion can be drawn"
-   ],
-   "answer": 1,
-   "why": "Derivative changes from positive to negative indicates a local maximum."
-  },
-  {
-   "q": "Which integral gives the total cost when marginal cost MC(x) = 5 + 0.2x and fixed cost is 100?",
-   "options": [
-    "integral of (5+0.2x) dx from 0 to q plus 100",
-    "integral of (5+0.2x) dx from q to 0 plus 100",
-    "integral of (5+0.2x) dx from 0 to q",
-    "integral of (5+0.2x) dx from 0 to q minus 100"
+    "2+0.02q",
+    "50+2q",
+    "0.01q^2",
+    "2q+0.01"
    ],
    "answer": 0,
-   "why": "Total cost = fixed cost + integral of marginal cost from 0 to q."
+   "why": "Differentiating gives MC(q)=2+0.02q."
+  },
+  {
+   "q": "Which expression shows profit as a function of price in the case study?",
+   "options": [
+    "-20p^2+18p",
+    "-20p^2+18",
+    "1200p-20p^2",
+    "38000-600p"
+   ],
+   "answer": 1,
+   "why": "Profit simplifies to -20p^2+18 after substituting revenue and cost."
+  },
+  {
+   "q": "What is the purpose of taking a limit as q approaches zero in economics?",
+   "options": [
+    "To find maximum profit",
+    "To determine fixed cost",
+    "To see behavior of cost/revenue at very low output",
+    "To compute marginal revenue"
+   ],
+   "answer": 2,
+   "why": "Limits at zero reveal how cost or revenue behaves when production is almost nothing."
+  },
+  {
+   "q": "Which of the following is NOT a marginal quantity?",
+   "options": [
+    "Marginal cost",
+    "Marginal revenue",
+    "Marginal profit",
+    "Average cost"
+   ],
+   "answer": 3,
+   "why": "Average cost is not a marginal (rate) concept."
+  },
+  {
+   "q": "How is total cost obtained from marginal cost?",
+   "options": [
+    "By differentiating MC",
+    "By integrating MC over the output range",
+    "By dividing MC by output",
+    "By adding fixed cost to MC"
+   ],
+   "answer": 1,
+   "why": "The definite integral of MC from a base output gives total cost."
   }
  ],
  "flashcards": [
   {
-   "front": "Define the cost function C(q).",
-   "back": "C(q) is the total dollars spent to produce q units; domain q ≥ 0."
+   "front": "Define an economic function.",
+   "back": "A rule that assigns a numeric value (cost, revenue, profit) to each possible quantity of output."
   },
   {
-   "front": "What is marginal cost?",
-   "back": "The derivative C'(q); the extra cost of one more unit at quantity q."
+   "front": "What is a limit in simple terms?",
+   "back": "The value a function gets closer to as the input approaches a certain point."
   },
   {
-   "front": "How do you find profit maximization point?",
-   "back": "Set the derivative of profit Pi'(q) = 0, solve for q, then use the first‑derivative test."
+   "front": "How does a derivative relate to economics?",
+   "back": "It gives the marginal change – the extra cost, revenue, or profit from producing one more unit."
   },
   {
-   "front": "Write the formula for price elasticity of demand.",
-   "back": "E(P) = (dQ/dP) * (P/Q)."
+   "front": "Write the formula for marginal cost.",
+   "back": "MC(q)=dC/dq, the derivative of the total cost function with respect to quantity."
   },
   {
-   "front": "If MC(x) = 5 + 0.2x, what is the total variable cost for producing q units?",
-   "back": "Integral from 0 to q of (5 + 0.2x) dx = 5q + 0.1q^2."
+   "front": "What does marginal revenue measure?",
+   "back": "The additional revenue earned by selling one more unit, given by MR(q)=dR/dq."
   },
   {
-   "front": "What does a critical point represent?",
-   "back": "A value where the derivative equals zero; a candidate for a maximum or minimum."
+   "front": "Explain optimization in the profit context.",
+   "back": "Find the output level where the profit function's derivative is zero and the second derivative is negative, giving a maximum profit."
   },
   {
-   "front": "Interpret a negative elasticity value.",
-   "back": "Higher price leads to lower quantity demanded; the magnitude shows sensitivity."
+   "front": "What does a definite integral represent in cost analysis?",
+   "back": "The accumulated total cost obtained by adding up marginal cost over a range of output."
   },
   {
-   "front": "What is the profit function in terms of revenue and cost?",
-   "back": "Pi(q) = R(q) - C(q)."
+   "front": "Define consumer surplus.",
+   "back": "The area between the demand curve and the market price, showing the extra benefit consumers receive beyond what they pay."
   }
  ],
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l17-factory-production-line",
-   "title": "A real factory floor showing machines that add one unit at a time.",
-   "alt": "A real factory floor showing machines that add one unit at a time.",
+   "file": "calculus-i-l17-bakery-production-line",
+   "title": "Shows a small bakery making loaves, illustrating cost, revenue and profit concepts.",
+   "alt": "Shows a small bakery making loaves, illustrating cost, revenue and profit concepts.",
    "priority": 8,
-   "picture_title": "Factory Production Line",
+   "picture_title": "Bakery Production Line",
    "kind": "photo",
-   "subject": "A photograph of an assembly line with workers and equipment adding products sequentially, illustrating how a firm produces additional units.",
-   "layout": "Wide horizontal view of the line with the conveyor belt running left to right; the camera captures the whole setup.",
+   "subject": "A real bakery with ovens, trays of bread, and a worker counting finished loaves, highlighting the physical process behind economic functions.",
+   "layout": "Wide shot of the bakery interior with the oven in the centre; workers and trays are visible on both sides.",
    "labels": [],
-   "after": 1
+   "after": 0
   },
   {
    "type": "image",
-   "file": "calculus-i-l17-cost-vs-quantity-diagram",
-   "title": "Illustration of a cost curve with a tangent line representing marginal cost.",
-   "alt": "Illustration of a cost curve with a tangent line representing marginal cost.",
+   "file": "calculus-i-l17-factory-conveyor-belt",
+   "title": "Depicts a factory line where each additional unit adds a small cost, helping explain marginal cost.",
+   "alt": "Depicts a factory line where each additional unit adds a small cost, helping explain marginal cost.",
    "priority": 7,
-   "picture_title": "Cost vs. Quantity Diagram",
-   "kind": "illustration",
-   "subject": "A labelled sketch of a typical total‑cost curve C(q) with a point at q = 10 and a short tangent line showing the slope, which is the marginal cost at that quantity.",
-   "layout": "Cost curve drawn in the centre, tangent line touching the curve at the point; arrows point to the tangent and label it \"marginal cost\".",
-   "labels": [
-    "C(q)",
-    "q = 10",
-    "tangent",
-    "marginal cost"
-   ],
-   "after": 3
+   "picture_title": "Factory Conveyor Belt",
+   "kind": "photo",
+   "subject": "An assembly line with products moving along a conveyor; a worker adds a component at each station, representing the incremental cost of producing one more unit.",
+   "layout": "The conveyor runs from left to right across the image; the worker and added component are highlighted in the centre.",
+   "labels": [],
+   "after": 2
   },
   {
    "type": "image",
-   "file": "calculus-i-l17-demand-elasticity-illustration",
-   "title": "A visual of a price tag and a demand gauge showing how quantity changes with price.",
-   "alt": "A visual of a price tag and a demand gauge showing how quantity changes with price.",
+   "file": "calculus-i-l17-gadget-market-display",
+   "title": "A store shelf with a new gadget and price tags, useful for the pricing case study.",
+   "alt": "A store shelf with a new gadget and price tags, useful for the pricing case study.",
    "priority": 6,
-   "picture_title": "Demand Elasticity Illustration",
-   "kind": "illustration",
-   "subject": "A simple drawing of a price tag beside a gauge that moves up or down to indicate the quantity demanded, helping students picture the concept of price elasticity.",
-   "layout": "Price tag on the left, gauge on the right; arrows link price changes to gauge movement.",
-   "labels": [
-    "Price (P)",
-    "Quantity (Q)",
-    "elasticity"
-   ],
+   "picture_title": "Gadget Market Display",
+   "kind": "photo",
+   "subject": "A retail display showing a new electronic gadget on a shelf with several price tags, illustrating how price influences quantity sold.",
+   "layout": "Shelf occupies the lower half; price tags are attached to the gadgets and a shopper is reaching for one.",
+   "labels": [],
    "after": 5
   },
   {
-   "type": "steps",
-   "title": "Finding Marginal Cost (Section 1)",
-   "steps": [
+   "type": "parts",
+   "title": "Economic Functions",
+   "items": [
     {
-     "label": "1",
-     "text": "Write the difference quotient (C(10+h)-C(10))/h."
+     "name": "Cost C(q)",
+     "role": "Money spent to produce q units"
     },
     {
-     "label": "2",
-     "text": "Substitute C(x)=50+5x+0.2x^2 and simplify."
+     "name": "Revenue R(q)",
+     "role": "Money earned from selling q units"
     },
     {
-     "label": "3",
-     "text": "Take the limit as h→0 to get the marginal cost."
+     "name": "Profit P(q)",
+     "role": "Revenue minus Cost"
     }
    ],
-   "after": 1
+   "after": 0
   },
   {
    "type": "compare",
-   "title": "Cost vs. Revenue (Section 0)",
+   "title": "Total Cost vs. Marginal Cost",
    "left": {
-    "name": "Cost Function C(q)",
+    "name": "Total Cost C(q)",
     "points": [
-     "Total dollars spent",
-     "Domain [0,∞)",
+     "Accumulated expense up to q units",
      "Units: dollars"
     ]
    },
    "right": {
-    "name": "Revenue Function R(q)",
+    "name": "Marginal Cost MC(q)",
     "points": [
-     "Total dollars earned",
-     "Domain [0,∞)",
-     "Units: dollars"
+     "Derivative of C(q)",
+     "Cost of one extra unit"
     ]
    },
-   "after": 0
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Profit Maximization Process",
+   "steps": [
+    {
+     "label": "Write profit function",
+     "text": "P(q)=R(q)-C(q)"
+    },
+    {
+     "label": "Differentiate",
+     "text": "Find P'(q)"
+    },
+    {
+     "label": "Set to zero",
+     "text": "Solve P'(q)=0 for q*"
+    },
+    {
+     "label": "Second‑derivative test",
+     "text": "Check P''(q*)<0 for maximum"
+    }
+   ],
+   "loop": false,
+   "after": 3
   },
   {
    "type": "facts",
-   "title": "Key Units (Section 0)",
+   "title": "Key Takeaways",
    "items": [
     {
-     "value": "dollars",
-     "label": "Cost & Revenue"
+     "value": "C(q)",
+     "label": "Cost as a function of output"
     },
     {
-     "value": "dollars",
-     "label": "Profit"
+     "value": "lim_{q→0} C(q)",
+     "label": "Limit shows behavior at tiny production"
     },
     {
-     "value": "units",
-     "label": "Quantity q"
+     "value": "MC(q)=C'(q)",
+     "label": "Marginal cost = derivative of cost"
+    },
+    {
+     "value": "P'(q)=0",
+     "label": "Condition for optimal profit"
     }
    ],
-   "after": 0
+   "after": 6
   }
  ],
- "images_checked": true,
+ "images_version": 5,
  "reviewed": false,
  "models": [
   "openai/gpt-oss-120b"
- ],
- "images_version": 5
+ ]
 }

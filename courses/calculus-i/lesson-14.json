@@ -1,194 +1,299 @@
 {
  "title": "derivatives",
- "summary": "This lesson introduces the derivative as a rate of change, explains how to compute it using basic rules, and shows its geometric meaning. It also connects derivatives to real‑world applications in physics, biology, and economics.",
+ "summary": "This lesson introduces the derivative as the instantaneous rate of change and shows how to compute it using basic rules. Students will practice finding derivatives of common functions and interpreting their meaning in real‑world contexts.",
+ "objectives": [
+  "Compute the derivative of polynomial, exponential, and trigonometric functions using basic rules",
+  "Explain the geometric meaning of the derivative as the slope of a tangent line",
+  "Apply the power, product, quotient, and chain rules to composite functions",
+  "Interpret derivative results in simple physics, biology, and economics scenarios",
+  "Check their work by estimating slopes numerically and graphically"
+ ],
+ "prerequisites": "Students should already understand limits, continuity, and the basic definition of a derivative from earlier lessons.",
+ "why": [
+  "Derivatives tell us how quickly something changes, which is essential for predicting motion, growth, and cost. In physics, the derivative of position gives velocity; in biology, it can describe population growth rates; in economics, it shows how profit changes with price.",
+  "Being able to calculate and interpret derivatives builds confidence in using calculus as a tool for solving real‑world problems, preparing students for advanced topics like optimization and differential equations."
+ ],
  "sections": [
   {
-   "heading": "Recap of Derivative Concept and Notation",
-   "body": "The **derivative** measures how a quantity changes *instantly* at a particular point.  \nThink of a car’s speedometer: it tells you the **instantaneous rate of change** of the car’s position with respect to time. In calculus we do the same for any function \\(f(x)\\).\n\n---\n\n### Instantaneous rate of change  \n\nFor a function \\(f\\) and a point \\(x=a\\), the average rate of change on the interval \\([a, a+h]\\) is  \n\n\\[\n\\frac{f(a+h)-f(a)}{h}.\n\\]\n\nIf we let the interval shrink (\\(h\\to 0\\)), the average rate approaches the **instantaneous** rate. This limit, if it exists, is the **derivative** of \\(f\\) at \\(a\\):\n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n\\tag{1}\n\\]\n\nWhen the limit exists for every \\(a\\) in an interval, we write the **derivative function**  \n\n\\[\nf'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.\n\\]\n\n---\n\n### Common notation  \n\n| Symbol | Meaning |\n|--------|---------|\n| \\(f'(x)\\) | Derivative of \\(f\\) with respect to \\(x\\) |\n| \\(\\displaystyle\\frac{dy}{dx}\\) | Same as \\(f'(x)\\) when \\(y=f(x)\\) |\n| \\(\\displaystyle\\frac{d}{dx}\\bigl[g(x)\\bigr]\\) | Operator that “takes the derivative of” \\(g(x)\\) |\n\nAll three notations are interchangeable; choose the one that fits the context.\n\n---\n\n### Worked example  \n\nFind the derivative of \\(f(x)=3x^{2}-5x+2\\) using the limit definition (1).\n\n1. **Write the difference quotient**\n\n   \\[\n   \\frac{f(x+h)-f(x)}{h}\n   =\\frac{\\bigl[3(x+h)^{2}-5(x+h)+2\\bigr]-\\bigl[3x^{2}-5x+2\\bigr]}{h}.\n   \\]\n\n2. **Expand the numerator**\n\n   \\[\n   3(x^{2}+2xh+h^{2})-5x-5h+2-3x^{2}+5x-2\n   =3x^{2}+6xh+3h^{2}-5x-5h+2-3x^{2}+5x-2.\n   \\]\n\n   Simplify:\n\n   \\[\n   =6xh+3h^{2}-5h.\n   \\]\n\n3. **Factor out \\(h\\)**\n\n   \\[\n   \\frac{6xh+3h^{2}-5h}{h}=6x+3h-5.\n   \\]\n\n4. **Take the limit as \\(h\\to 0\\)**\n\n   \\[\n   f'(x)=\\lim_{h\\to 0}(6x+3h-5)=6x-5.\n   \\]\n\nSo the derivative function is  \n\n\\[\n\\boxed{f'(x)=6x-5}.\n\\]\n\n---\n\n### Practice problems  \n\n#### 1.  Find the derivative of \\(g(x)=\\sqrt{x}+4\\) using the limit definition.  \n\n**Solution**  \n\\[\ng'(x)=\\lim_{h\\to0}\\frac{\\sqrt{x+h}+4-(\\sqrt{x}+4)}{h}\n      =\\lim_{h\\to0}\\frac{\\sqrt{x+h}-\\sqrt{x}}{h}.\n\\]  \nMultiply numerator and denominator by the conjugate \\(\\sqrt{x+h}+\\sqrt{x}\\):  \n\n\\[\n\\frac{(\\sqrt{x+h}-\\sqrt{x})(\\sqrt{x+h}+\\sqrt{x})}{h(\\sqrt{x+h}+\\sqrt{x})}\n =\\frac{(x+h)-x}{h(\\sqrt{x+h}+\\sqrt{x})}\n =\\frac{1}{\\sqrt{x+h}+\\sqrt{x}}.\n\\]  \nNow let \\(h\\to0\\):  \n\n\\[\ng'(x)=\\frac{1}{2\\sqrt{x}}.\n\\]\n\n---\n\n#### 2.  Differentiate \\(h(t)=\\dfrac{5t^{3}}{2t-1}\\) using the quotient rule.  \n\n**Solution**  \nQuotient rule: \\(\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^{2}}\\).  \nLet \\(u=5t^{3}\\), \\(v=2t-1\\). Then \\(u'=15t^{2}\\), \\(v'=2\\).  \n\n\\[\nh'(t)=\\frac{15t^{2}(2t-1)-5t^{3}(2)}{(2t-1)^{2}}\n      =\\frac{30t^{3}-15t^{2}-10t^{3}}{(2t-1)^{2}}\n      =\\frac{20t^{3}-15t^{2}}{(2t-1)^{2}}\n      =\\frac{5t^{2}(4t-3)}{(2t-1)^{2}}.\n\\]\n\n---\n\n#### 3.  Compute \\(\\displaystyle\\frac{d}{dx}\\bigl[\\sin(x^{2})\\bigr]\\) using the chain rule.  \n\n**Solution**  \nChain rule: \\(\\displaystyle\\frac{d}{dx}f(g(x))=f'(g(x))\\cdot g'(x)\\).  \nTake \\(f(u)=\\sin u\\) (so \\(f'(u)=\\cos u\\)) and \\(g(x)=x^{2}\\) (so \\(g'(x)=2x\\)).  \n\n\\[\n\\frac{d}{dx}\\sin(x^{2})=\\cos(x^{2})\\cdot 2x=2x\\cos(x^{2}).\n\\]\n\n---\n\n#### 4.  Find \\(\\displaystyle\\frac{dy}{dx}\\) if \\(x^{2}+y^{2}=25\\) (implicit differentiation).  \n\n**Solution**  \nDifferentiate both sides with respect to \\(x\\):  \n\n\\[\n\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(y^{2})=\\frac{d}{dx}(25)\n\\quad\\Longrightarrow\\quad\n2x+2y\\frac{dy}{dx}=0.\n\\]  \nSolve for \\(\\dfrac{dy}{dx}\\):  \n\n\\[\n2y\\frac{dy}{dx}=-2x\\;\\Longrightarrow\\;\n\\frac{dy}{dx}=-\\frac{x}{y}.\n\\]\n\n---",
+   "heading": "1. Review: Derivative as a Limit",
+   "body": "The derivative tells us how a quantity changes **at a single instant**.  \nImagine you are driving a car and looking at the speedometer. The number it shows is not the average speed over the whole trip, but the speed **right now**. In mathematics, the derivative plays the same role for any function $f(x)$: it gives the instantaneous rate of change of $f$ with respect to $x$.\n\nTo capture this idea precisely we start with the average rate of change between two points.  \nIf we pick a point $x$ on the graph of $f$ and another point a little farther away, $x+h$, the average slope of the line joining them is  \n\n$$\n\\frac{f(x+h)-f(x)}{h}.\n$$\n\nHere $h$ is the horizontal distance between the two points. As $h$ gets smaller, the line connecting the points becomes a better approximation of the “instantaneous” slope at $x$. The derivative is defined as the limit of this average slope when $h$ shrinks to zero.\n\n> **Definition:** The derivative of $f$ at the point $x$ is  \n> $$f'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h},$$  \n> provided the limit exists.\n\nThe word **limit** means the value that a expression approaches as the variable gets arbitrarily close to a specified point. In our case, we ask: *What number does the fraction $\\frac{f(x+h)-f(x)}{h}$ approach as $h$ becomes extremely small?* If such a number exists, we call it the derivative $f'(x)$.\n\nWhy does this matter? The derivative tells us the exact slope of the tangent line to the curve at $x$. A **tangent line** is a straight line that just touches the curve without cutting through it, matching the curve’s direction at that point. Knowing the slope of this line lets us predict how the function will behave in a tiny neighborhood around $x$, which is essential for optimization, motion problems, and many other applications.\n\n> **In daily life:** Think of a runner on a track. Their average speed over a lap is easy to compute, but a coach often wants to know the runner’s speed at a particular moment—perhaps when they pass a certain marker. The coach’s measurement is the “instantaneous speed,” the same concept that the derivative gives for any changing quantity.\n\nA few important points about the definition:\n\n- The variable $h$ can be positive or negative. Approaching zero from the right ($h\\to0^+$) and from the left ($h\\to0^-$) must give the same limit; otherwise the derivative does **not** exist at that point.\n- The function must be **continuous** at $x$ for a derivative to exist, but continuity alone is not enough. Some continuous functions have sharp corners (like $|x|$ at $0$) where the limit from the left and right differ, so the derivative fails to exist there.\n\n> **Common mistake:** Forgetting to let $h$ approach zero from **both** sides. If you only check the limit as $h\\to0^+$ you might conclude a derivative exists when, in fact, the left‑hand limit gives a different value.\n\nWhen the limit exists, we can write the derivative in a more compact form using the variable $x$ itself:\n\n$$\nf'(x)=\\lim_{x\\to a}\\frac{f(x)-f(a)}{x-a},\n$$\n\nwhere $a$ is the point of interest. This version emphasizes that the derivative is a function of $x$; for each $x$ where the limit works, we obtain a number $f'(x)$.\n\n> **Remember:** The derivative is the *instantaneous* rate of change, obtained by shrinking the interval between two points to zero and observing the limiting slope.\n\nUnderstanding this limit definition is the foundation for all the rules we will learn later (product rule, chain rule, etc.). It shows how calculus turns the vague idea of “changing at a point” into a precise, calculable quantity.",
    "code": ""
   },
   {
-   "heading": "Derivative as Slope of the Tangent Line",
-   "body": "The **derivative** of a function at a point tells us the **slope of the tangent line** to the graph at that point.  \nThink of the curve $y=f(x)$ as being made up of tiny straight pieces. When we zoom in very close to a point $(a,f(a))$, the curve looks almost like a straight line. The slope of that line is exactly $f'(a)$.\n\n---\n\n### Linear approximation\n\nIf we move a small amount $\\Delta x$ away from $a$, the change in $y$ is approximately  \n\n\\[\n\\Delta y \\approx f'(a)\\,\\Delta x .\n\\]\n\nThe line  \n\n\\[\nL(x)=f(a)+f'(a)(x-a)\n\\]\n\nis called the **linear approximation** or **tangent line** at $x=a$.  \nFor very small $\\Delta x$, $L(a+\\Delta x)$ is almost the same as $f(a+\\Delta x)$.\n\n---\n\n### Why the limit definition works\n\nThe formal definition  \n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}\n\\]\n\nmeasures the **average slope** of the secant line joining $(a,f(a))$ and $(a+h,f(a+h))$ and then squeezes $h$ to zero.  \nAs $h$ shrinks, the secant line becomes the tangent line, and the limit gives its exact slope.\n\n---\n\n## Worked example\n\nFind the derivative of $f(x)=x^{2}+3x$ at the point $x=2$ and write the equation of the tangent line.\n\n1. **Compute the derivative** using basic rules:  \n\n   \\[\n   f'(x)=\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(3x)=2x+3.\n   \\]\n\n2. **Evaluate at $x=2$**:  \n\n   \\[\n   f'(2)=2(2)+3=7.\n   \\]\n\n   So the slope of the tangent at $(2,f(2))$ is $7$.\n\n3. **Find the point** $(2,f(2))$:  \n\n   \\[\n   f(2)=2^{2}+3(2)=4+6=10.\n   \\]\n\n4. **Write the tangent line** using point‑slope form  \n\n   \\[\n   y-10=7(x-2)\\quad\\Longrightarrow\\quad y=7x-4.\n   \\]\n\nThe line $y=7x-4$ just touches the parabola $y=x^{2}+3x$ at $(2,10)$ and has the same instantaneous slope there.\n\n---\n\n## Practice problems\n\n### Problem 1  \nFind $f'(x)$ for $f(x)=\\sqrt{x}$ and give the slope at $x=4$.\n\n**Solution**  \nWrite $f(x)=x^{1/2}$.  \n\\[\nf'(x)=\\frac12 x^{-1/2}=\\frac{1}{2\\sqrt{x}}.\n\\]  \nAt $x=4$, $f'(4)=\\frac{1}{2\\sqrt{4}}=\\frac{1}{4}$.\n\n---\n\n### Problem 2  \nFor $g(x)=\\dfrac{5x}{x^{2}+1}$, compute $g'(x)$ and the equation of the tangent line at $x=1$.\n\n**Solution**  \nUse the quotient rule:  \n\n\\[\ng'(x)=\\frac{(5)(x^{2}+1)-5x(2x)}{(x^{2}+1)^{2}}\n      =\\frac{5x^{2}+5-10x^{2}}{(x^{2}+1)^{2}}\n      =\\frac{5-5x^{2}}{(x^{2}+1)^{2}}.\n\\]  \n\nAt $x=1$,  \n\n\\[\ng'(1)=\\frac{5-5}{(1+1)^{2}}=0.\n\\]  \n\nThe point is $(1,g(1))=(1,\\frac{5}{2})$.  \nSince the slope is $0$, the tangent line is horizontal:  \n\n\\[\ny=\\frac{5}{2}.\n\\]\n\n---\n\n### Problem 3  \nLet $h(x)=\\sin(x^{2})$. Find $h'(x)$ and the slope at $x=\\pi/2$.\n\n**Solution**  \nApply the chain rule:  \n\n\\[\nh'(x)=\\cos(x^{2})\\cdot 2x = 2x\\cos(x^{2}).\n\\]  \n\nAt $x=\\pi/2$,  \n\n\\[\nh'\\!\\left(\\frac{\\pi}{2}\\right)=2\\!\\left(\\frac{\\pi}{2}\\right)\\!\\cos\\!\\left(\\frac{\\pi^{2}}{4}\\right)\n= \\pi\\cos\\!\\left(\\frac{\\pi^{2}}{4}\\right).\n\\]  \n\nThat number is the instantaneous slope there.\n\n---\n\n### Problem 4  \nFind the tangent line to $y= e^{3x}$ at $x=0$.\n\n**Solution**  \nDerivative: $ \\displaystyle \\frac{d}{dx}e^{3x}=3e^{3x}$.  \nAt $x=0$, slope $m=3e^{0}=3$.  \nPoint: $(0,e^{0})=(0,1)$.  \nTangent line using point‑slope:  \n\n\\[\ny-1=3(x-0)\\quad\\Longrightarrow\\quad y=3x+1.\n\\]\n\n---",
+   "heading": "2. Geometric Interpretation: Tangent Line Slope",
+   "body": "Imagine a smooth curve drawn on a piece of paper, like the road you see on a map.  \nIf you pick a single point on that curve, you can ask: *how steep is the road right at that spot?*  \nThe answer is the **slope of the tangent line** – the line that just touches the curve without cutting through it.\n\n> **Definition:** The *tangent line* to a curve $y=f(x)$ at the point $(a,f(a))$ is the straight line that has the same direction as the curve at that point.  \n\nTo find that direction we look at the slope of a secant line. A *secant line* joins two points on the curve, say $(a,f(a))$ and $(a+h,f(a+h))$. Its slope is  \n\n$$\nm_{\\text{secant}}=\\frac{f(a+h)-f(a)}{h}.\n$$  \n\nHere $h$ measures how far we move horizontally from $a$. As $h$ becomes smaller, the second point slides closer to the first one, and the secant line rotates toward the tangent line.  \n\nThe **derivative** of $f$ at $a$, written $f'(a)$, is defined as the limit of those secant slopes as $h$ shrinks to zero:\n\n$$\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n$$  \n\nBecause a limit captures the value that the expression approaches, this limit gives the exact slope of the tangent line. In other words, the derivative **equals** the tangent‑line slope.\n\n> **Note:** The limit must exist (approach a single number) for the derivative to be defined. If the curve has a sharp corner or a vertical jump at $a$, the limit does not exist and there is no tangent line there.\n\n### Why does this matter?\n\nWhen you know the slope of the tangent line, you instantly know how the function is changing at that point. A positive slope means the function is rising, a negative slope means it is falling, and a slope of zero means the curve is flat (a local maximum, minimum, or plateau). This information is essential for graphing, optimization, and understanding motion.\n\n### Everyday comparison\n\nThink of riding a bicycle on a hill. Your speedometer tells you how fast you are going **right now**, not how fast you were going a minute ago. That instantaneous speed is the derivative of your position with respect to time. The hill’s steepness at the exact spot where you are pedaling is the tangent‑line slope of the position‑versus‑time graph.\n\n### Visual walk‑through\n\n1. **Draw the curve** $y=f(x)$ and mark the point $P=(a,f(a))$.  \n2. **Pick a small $h$** (say $h=0.5$) and locate the second point $Q=(a+h,f(a+h))$.  \n3. **Connect $P$ and $Q$** with a straight line. This is the secant line; its slope is the fraction above.  \n4. **Shrink $h$** (try $h=0.1$, then $h=0.01$). Each time the secant line rotates a little, getting closer to a fixed line.  \n5. **When $h$ is almost zero**, the secant line looks indistinguishable from a line that just touches the curve at $P$ – that is the tangent line. Its slope is the limit, i.e., $f'(a)$.\n\nIf you plot several secant lines for decreasing $h$, you will see them converge to a single line. That visual convergence is the geometric meaning of the limit definition.\n\n> **In daily life:** When a car’s speedometer shows $60\\ \\text{km/h}$ at a particular instant, it is reporting the derivative of the car’s distance‑versus‑time graph at that moment. The road’s steepness at that spot is the same idea, but with distance versus horizontal position.\n\n### Common mistake\n\n> **Common mistake:** Some students think the tangent line must *intersect* the curve at two points. In fact, the tangent line usually touches the curve at exactly one point (unless the curve is a straight line, in which case every point is a touch). The word “tangent” comes from the Latin for “touching”.\n\n### Quick check\n\nFor the simple function $f(x)=x^{2}$, compute the derivative at $a=3$ using the limit:\n\n$$\nf'(3)=\\lim_{h\\to0}\\frac{(3+h)^{2}-3^{2}}{h}\n      =\\lim_{h\\to0}\\frac{9+6h+h^{2}-9}{h}\n      =\\lim_{h\\to0}\\frac{6h+h^{2}}{h}\n      =\\lim_{h\\to0}(6+h)=6.\n$$  \n\nSo the tangent line at $(3,9)$ has slope $6$. If you draw the parabola $y=x^{2}$ and the line $y-9=6(x-3)$, you will see the line just grazes the curve at that point.\n\n> **Remember:** The derivative $f'(a)$ is *exactly* the slope of the tangent line to $y=f(x)$ at $x=a$. This geometric picture helps you interpret what a derivative tells you about the shape and behavior of a function.",
    "code": ""
   },
   {
-   "heading": "Basic Differentiation Rules",
-   "body": "**Basic Differentiation Rules**  \n\nWhen we talk about the derivative $f'(x)$ we are asking, “How fast does the function $f(x)$ change at the point $x$?”  The following rules let us find derivatives quickly, without returning to the limit definition each time.\n\n---\n\n### 1. Power Rule  \n\nIf $f(x)=x^n$ where $n$ is any real number, then  \n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,x^n = n x^{\\,n-1}\\,}\n\\]\n\n**Example:**  \nFind the derivative of $f(x)=x^5$.  \n\n\\[\nf'(x)=5x^{5-1}=5x^4 .\n\\]\n\n---\n\n### 2. Constant Multiple Rule  \n\nIf a constant $c$ multiplies a function $g(x)$, the derivative is the constant times the derivative of $g(x)$:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,[c\\,g(x)] = c\\,g'(x)\\,}\n\\]\n\n**Example:**  \nFor $h(x)=3x^2$,  \n\n\\[\nh'(x)=3\\cdot\\frac{d}{dx}x^2 = 3\\cdot 2x = 6x .\n\\]\n\n---\n\n### 3. Sum and Difference Rule  \n\nThe derivative of a sum (or difference) is the sum (or difference) of the derivatives:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,[g(x)\\pm p(x)] = g'(x)\\pm p'(x)\\,}\n\\]\n\n**Example:**  \nLet $k(x)=x^3-4x$.  \n\n\\[\nk'(x)=\\frac{d}{dx}x^3-\\frac{d}{dx}4x = 3x^2-4 .\n\\]\n\n---\n\n### 4. Constant Rule  \n\nThe derivative of a constant number $c$ is zero:\n\n\\[\n\\boxed{\\,\\frac{d}{dx}\\,c = 0\\,}\n\\]\n\n**Example:**  \nIf $m(x)=7$, then $m'(x)=0$.\n\n---\n\n### Fully worked example  \n\nFind the derivative of  \n\n\\[\nF(x)=5x^4-2x^2+7 .\n\\]\n\n**Step 1 – Identify each term.**  \n$5x^4$ is a constant multiple of $x^4$, $-2x^2$ is a constant multiple of $x^2$, and $7$ is a constant.\n\n**Step 2 – Apply the rules term‑by‑term.**  \n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}[5x^4] &= 5\\cdot\\frac{d}{dx}x^4 = 5\\cdot 4x^{3}=20x^{3},\\\\[4pt]\n\\frac{d}{dx}[-2x^2] &= -2\\cdot\\frac{d}{dx}x^2 = -2\\cdot 2x = -4x,\\\\[4pt]\n\\frac{d}{dx}[7] &= 0 .\n\\end{aligned}\n\\]\n\n**Step 3 – Combine the results using the sum rule.**  \n\n\\[\nF'(x)=20x^{3}-4x+0 = 20x^{3}-4x .\n\\]\n\nSo the slope of the tangent line to $y=5x^4-2x^2+7$ at any $x$ is $20x^{3}-4x$.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nFind the derivative of $f(x)=4x^3-5x+2$.\n\n**Solution:**  \n\\[\nf'(x)=4\\cdot3x^{2}-5\\cdot1+0 = 12x^{2}-5 .\n\\]\n\n---\n\n### Problem 2  \nDifferentiate $g(x)=\\displaystyle \\frac{1}{2}x^{\\,\\! -3}+9$.\n\n**Solution:**  \nRewrite $\\frac{1}{2}x^{-3}$ as $\\frac12 x^{-3}$.  \n\\[\ng'(x)=\\frac12\\cdot(-3)x^{-4}+0 = -\\frac{3}{2}x^{-4}.\n\\]\n\n---\n\n### Problem 3  \nCompute the derivative of $h(x)= -7x^{5}+3x^{2}-\\sqrt{2}$.\n\n**Solution:**  \n\\[\nh'(x)= -7\\cdot5x^{4}+3\\cdot2x^{1}+0 = -35x^{4}+6x .\n\\]\n\n---\n\n### Problem 4  \nFind $p'(x)$ for $p(x)=\\displaystyle 6x^{\\frac12}-4$.\n\n**Solution:**  \nRecall $x^{1/2}= \\sqrt{x}$. Apply the power rule:  \n\n\\[\n\\frac{d}{dx}x^{1/2}= \\frac12 x^{-1/2}.\n\\]\n\nThus  \n\n\\[\np'(x)=6\\cdot\\frac12 x^{-1/2}+0 = 3x^{-1/2}= \\frac{3}{\\sqrt{x}} .\n\\]\n\nThese four problems reinforce the **power rule**, **constant multiple rule**, **sum/difference rule**, and **constant rule**. Practice each step until the patterns feel natural.",
+   "heading": "3. Basic Derivative Rules",
+   "body": "The **basic derivative rules** tell us how to find the rate of change for the simplest kinds of functions without having to go back to the limit definition each time.  \nThink of a derivative as a “speedometer” that tells how fast a quantity is changing at a particular instant.  \nIf we already know the speedometer reading for some easy functions, the rules let us combine them to get the speedometer for more complicated expressions.\n\n---\n\n> **Definition:** The **constant rule** says that the derivative of a constant number $c$ is $0$.  \n> In symbols,\n> $$\\frac{d}{dx}\\,c = 0.$$\n\nWhy? A constant never changes, so its “instantaneous speed” is zero.  \n*Example:* $f(x)=7$. No matter what $x$ is, $f(x)$ stays $7$, so $f'(x)=0$.\n\n---\n\n> **Note:** The **power rule** works for any power $n$ (positive, negative, or zero).  \n> It states\n> $$\\frac{d}{dx}\\,x^{\\,n}=n\\,x^{\\,n-1}.$$\n\nImagine $x^{\\,n}$ as a stack of $n$ identical blocks. When $x$ grows a tiny bit, each block contributes proportionally, giving the factor $n$, while one block disappears from the top, reducing the exponent by one.  \n*Example:* $g(x)=x^{3}$. Using the power rule,\n$$g'(x)=3x^{2}.$$\nIf $x$ increases a little, the cube grows roughly three times the square of $x$.\n\n---\n\n> **In daily life:** The **constant‑multiple rule** lets us pull a constant factor out of the derivative.  \n> Formally,\n> $$\\frac{d}{dx}\\,[c\\;f(x)]=c\\,\\frac{d}{dx}f(x).$$\n\nIf you double a distance‑time graph, the speed doubles as well.  \n*Example:* $h(x)=5x^{2}$. First find the derivative of $x^{2}$ (which is $2x$), then multiply by $5$:\n$$h'(x)=5\\cdot 2x=10x.$$\n\n---\n\n> **Remember:** The **sum and difference rules** let us differentiate each part separately and then add or subtract the results.  \n> They are written as\n> $$\\frac{d}{dx}\\,[f(x)\\pm g(x)]=f'(x)\\pm g'(x).$$\n\nThink of two friends walking side by side: the total distance they cover together at any moment is just the sum of their individual distances.  \n*Example:* $p(x)=x^{4}+3x-2$. Differentiate term by term:\n\\[\n\\begin{aligned}\np'(x)&=\\frac{d}{dx}x^{4}+\\frac{d}{dx}3x-\\frac{d}{dx}2\\\\\n&=4x^{3}+3-0\\\\\n&=4x^{3}+3.\n\\end{aligned}\n\\]\n\nThe constant $-2$ disappears because of the constant rule, and the linear term $3x$ becomes $3$ because the derivative of $x$ is $1$.\n\n---\n\nPutting the rules together, we can handle expressions that mix several ideas.  \n*Example:* $q(x)=2x^{5}-\\frac{1}{3}x^{-2}+7$. Apply each rule step by step:\n\n1. **Constant‑multiple rule** on $2x^{5}$ → $2\\cdot5x^{4}=10x^{4}$.  \n2. **Power rule** on $x^{-2}$ gives $-2x^{-3}$; then multiply by $-\\frac13$ → $\\frac{2}{3}x^{-3}$.  \n3. **Constant rule** on $7$ gives $0$.\n\nThus\n$$q'(x)=10x^{4}+\\frac{2}{3}x^{-3}.$$\n\nThese five rules—constant, power, constant‑multiple, sum, and difference—form the foundation for almost every derivative you will compute in Calculus I. Master them, and later rules (product, quotient, chain) become much easier to apply because they always start from these simple building blocks.",
    "code": ""
   },
   {
-   "heading": "Product and Quotient Rules",
-   "body": "**Product and Quotient Rules**\n\nWhen a function is built from *two* simpler functions, we often need a shortcut instead of expanding everything.  \nThe **product rule** tells us how to differentiate a product $u(x)v(x)$, and the **quotient rule** does the same for a quotient $\\dfrac{u(x)}{v(x)}$.\n\n---\n\n### Product Rule  \n\nIf  \n\\[\ny = u(x)\\,v(x),\n\\]  \nthen  \n\\[\n\\boxed{y' = u'(x)v(x) + u(x)v'(x)}.\n\\]  \n\n**Why it works:** Write the product as a limit of a difference quotient and add‑subtract the term $u(x)v(x+h)$. After simplifying, the limit splits into two separate limits, each of which is a derivative of one factor.\n\n---\n\n### Quotient Rule  \n\nIf  \n\\[\ny = \\frac{u(x)}{v(x)}\\qquad\\text{with }v(x)\\neq0,\n\\]  \nthen  \n\\[\n\\boxed{y' = \\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^{2}}}.\n\\]  \n\n**Why it works:** Treat the quotient as $u(x)\\cdot [v(x)]^{-1}$ and apply the product rule together with the chain rule for the power $-1$.\n\n---\n\n## Worked Example (Product Rule)\n\nDifferentiate  \n\\[\ny = (3x^{2}+2)(\\sin x).\n\\]\n\n1. Identify the two factors:  \n   $u(x)=3x^{2}+2$, $u'(x)=6x$;  \n   $v(x)=\\sin x$, $v'(x)=\\cos x$.\n\n2. Apply the product rule:  \n   \\[\n   y' = u'(x)v(x)+u(x)v'(x)\n        = (6x)(\\sin x) + (3x^{2}+2)(\\cos x).\n   \\]\n\n3. If desired, factor a common term:  \n   \\[\n   y' = 6x\\sin x + (3x^{2}+2)\\cos x.\n   \\]\n\nThat is the derivative.\n\n---\n\n## Worked Example (Quotient Rule)\n\nFind the derivative of  \n\\[\ny = \\frac{x^{2}+1}{e^{x}}.\n\\]\n\n1. Set $u(x)=x^{2}+1$, $u'(x)=2x$;  \n   $v(x)=e^{x}$, $v'(x)=e^{x}$.\n\n2. Apply the quotient rule:  \n   \\[\n   y' = \\frac{u'v - uv'}{v^{2}}\n        = \\frac{(2x)(e^{x}) - (x^{2}+1)(e^{x})}{(e^{x})^{2}}.\n   \\]\n\n3. Factor $e^{x}$ from the numerator:  \n   \\[\n   y' = \\frac{e^{x}\\bigl[2x-(x^{2}+1)\\bigr]}{e^{2x}}\n        = \\frac{2x - x^{2} - 1}{e^{x}}.\n   \\]\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nDifferentiate $y = (5x^{3}-4x)(\\ln x)$.\n\n**Solution**  \n$u=5x^{3}-4x,\\; u'=15x^{2}-4$; $v=\\ln x,\\; v'=1/x$.  \n\\[\ny' = (15x^{2}-4)\\ln x + (5x^{3}-4x)\\frac{1}{x}\n    = (15x^{2}-4)\\ln x + 5x^{2}-4.\n\\]\n\n---\n\n### Problem 2  \nFind $y'$ if $y = \\dfrac{\\sqrt{x}}{1+x^{2}}$.\n\n**Solution**  \nWrite $\\sqrt{x}=x^{1/2}$, so $u=x^{1/2},\\; u'=\\tfrac12 x^{-1/2}$.  \n$v=1+x^{2},\\; v'=2x$.  \n\\[\ny' = \\frac{u'v - uv'}{v^{2}}\n    = \\frac{\\tfrac12 x^{-1/2}(1+x^{2}) - x^{1/2}(2x)}{(1+x^{2})^{2}}.\n\\]\nSimplify numerator:  \n\\[\n\\frac{(1+x^{2})}{2\\sqrt{x}} - 2x^{3/2}\n = \\frac{1+x^{2} - 4x^{2}}{2\\sqrt{x}}\n = \\frac{1-3x^{2}}{2\\sqrt{x}}.\n\\]\nThus  \n\\[\ny' = \\frac{1-3x^{2}}{2\\sqrt{x}\\,(1+x^{2})^{2}}.\n\\]\n\n---\n\n### Problem 3  \nDifferentiate $y = (e^{x}\\cos x)$.\n\n**Solution**  \n$u=e^{x},\\; u'=e^{x}$; $v=\\cos x,\\; v'=-\\sin x$.  \n\\[\ny' = e^{x}\\cos x + e^{x}(-\\sin x)\n    = e^{x}(\\cos x - \\sin x).\n\\]\n\n---\n\n### Problem 4  \nFind the derivative of $y = \\dfrac{3x^{2}+5}{\\tan x}$.\n\n**Solution**  \n$u=3x^{2}+5,\\; u'=6x$; $v=\\tan x,\\; v'=\\sec^{2}x$.  \n\\[\ny' = \\frac{6x\\tan x - (3x^{2}+5)\\sec^{2}x}{\\tan^{2}x}.\n\\]\nIf we prefer a single trigonometric function, note $\\sec^{2}x = 1+\\tan^{2}x$ and rewrite, but the expression above already gives the correct derivative.",
+   "heading": "4. Product and Quotient Rules",
+   "body": "When we have two functions that are multiplied or divided, we often need the derivative of the whole expression.  \nThe **product rule** tells us how to differentiate a product $f(x)\\,g(x)$, and the **quotient rule** does the same for a quotient $\\dfrac{f(x)}{g(x)}$.\n\n> **Definition:** The product rule states that the derivative of a product of two differentiable functions $f$ and $g$ is  \n> $$\\frac{d}{dx}\\bigl[f(x)\\,g(x)\\bigr]=f'(x)\\,g(x)+f(x)\\,g'(x).$$  \n\n> **Definition:** The quotient rule states that the derivative of a quotient of two differentiable functions $f$ and $g$ (with $g(x)\\neq0$) is  \n> $$\\frac{d}{dx}\\!\\left(\\frac{f(x)}{g(x)}\\right)=\\frac{f'(x)\\,g(x)-f(x)\\,g'(x)}{[g(x)]^{2}}.$$\n\n### Why the product rule works\n\nThink of $f(x)g(x)$ as the area of a rectangle whose side lengths change with $x$.  \nIf $x$ increases a tiny amount $\\Delta x$, each side grows a little: $f$ becomes $f+\\Delta f$, $g$ becomes $g+\\Delta g$.  \nThe new area is  \n\n\\[\n(f+\\Delta f)(g+\\Delta g)=fg+f\\Delta g+g\\Delta f+\\Delta f\\,\\Delta g.\n\\]\n\nThe change in area is  \n\n\\[\n\\Delta (fg)=f\\Delta g+g\\Delta f+\\Delta f\\,\\Delta g.\n\\]\n\nWhen we divide by $\\Delta x$ and let $\\Delta x\\to0$, the term $\\frac{\\Delta f\\,\\Delta g}{\\Delta x}$ disappears because it is the product of two very small quantities.  \nThus  \n\n\\[\n\\frac{d}{dx}[f(x)g(x)]=f(x)\\,g'(x)+g(x)\\,f'(x).\n\\]\n\n### Why the quotient rule works\n\nA quotient $\\dfrac{f}{g}$ can be written as $f\\cdot\\frac{1}{g}$.  \nFirst we need the derivative of $1/g$. Using the product rule on $g\\cdot\\frac{1}{g}=1$ (a constant) gives  \n\n\\[\n0=g'\\,\\frac{1}{g}+g\\left(\\frac{1}{g}\\right)'.\n\\]\n\nSolving for $\\left(\\frac{1}{g}\\right)'$ yields  \n\n\\[\n\\left(\\frac{1}{g}\\right)'=-\\frac{g'}{g^{2}}.\n\\]\n\nNow apply the product rule to $f\\cdot\\frac{1}{g}$:\n\n\\[\n\\frac{d}{dx}\\!\\left(\\frac{f}{g}\\right)=f'\\,\\frac{1}{g}+f\\left(-\\frac{g'}{g^{2}}\\right)\n=\\frac{f' g-f g'}{g^{2}}.\n\\]\n\n### Step‑by‑step example of the product rule\n\nLet $f(x)=x^{2}$ and $g(x)=\\sin x$.  \n1. Find the individual derivatives: $f'(x)=2x$, $g'(x)=\\cos x$.  \n2. Plug into the product rule:  \n\n\\[\n\\frac{d}{dx}\\bigl[x^{2}\\sin x\\bigr]=2x\\sin x+x^{2}\\cos x.\n\\]\n\nEach term tells us how one factor changes while the other stays fixed, then we add the two effects.\n\n### Step‑by‑step example of the quotient rule\n\nLet $f(x)=e^{x}$ and $g(x)=x^{3}+1$.  \n1. Derivatives: $f'(x)=e^{x}$, $g'(x)=3x^{2}$.  \n2. Apply the quotient rule:  \n\n\\[\n\\frac{d}{dx}\\!\\left(\\frac{e^{x}}{x^{3}+1}\\right)=\\frac{e^{x}(x^{3}+1)-e^{x}\\,3x^{2}}{(x^{3}+1)^{2}}\n=\\frac{e^{x}\\bigl(x^{3}+1-3x^{2}\\bigr)}{(x^{3}+1)^{2}}.\n\\]\n\n### When to use which rule\n\n- Use the product rule whenever the expression is a *multiplication* of two (or more) functions.  \n- Use the quotient rule for a *division* where the denominator is not zero.  \n\n> **In daily life:** Imagine you are cooking a sauce. The total flavor comes from the amount of salt times the intensity of its taste. If you add a little more salt *or* a little more intensity, the overall flavor changes. The product rule adds the two separate contributions, just like you would taste the effect of each ingredient.\n\n> **Common mistake:** Forgetting the minus sign in the numerator of the quotient rule, or swapping the order of $f'$ and $g'$. The correct order is $f' g - f g'$.\n\n> **Remember:** Both rules are built from the basic limit definition of the derivative. They let us handle more complicated expressions without re‑deriving limits each time.",
    "code": ""
   },
   {
-   "heading": "Chain Rule and Implicit Differentiation",
-   "body": "The **chain rule** lets us differentiate a *composite function*—a function inside another function.  \nIf \\(y = f(g(x))\\), the rule states  \n\n\\[\n\\frac{dy}{dx}=f'(g(x))\\cdot g'(x).\n\\]\n\nThink of the outer function \\(f\\) and the inner function \\(g\\) as two steps: first compute \\(u=g(x)\\), then compute \\(y=f(u)\\). The derivative of the whole process is the product of the two separate rates of change.\n\n---\n\n### Worked example: \\(y = \\sin (3x^2+1)\\)\n\n1. **Identify the inner and outer functions**  \n   - Inner: \\(u = 3x^2+1\\)  \n   - Outer: \\(y = \\sin u\\)\n\n2. **Differentiate each part**  \n   - \\( \\dfrac{du}{dx}=6x\\) (derivative of \\(3x^2+1\\))  \n   - \\( \\dfrac{dy}{du}= \\cos u\\) (derivative of \\(\\sin u\\))\n\n3. **Apply the chain rule**  \n   \\[\n   \\frac{dy}{dx}= \\frac{dy}{du}\\cdot\\frac{du}{dx}= \\cos(3x^2+1)\\cdot 6x.\n   \\]\n\n4. **Write the final answer**  \n   \\[\n   \\boxed{\\displaystyle \\frac{d}{dx}\\big[\\sin(3x^2+1)\\big]=6x\\cos(3x^2+1)}.\n   \\]\n\nEvery step is explicit: replace the inner expression, differentiate it, then multiply.\n\n---\n\n### Implicit differentiation\n\nSometimes a function is given **implicitly**, meaning \\(x\\) and \\(y\\) appear together and we cannot easily solve for \\(y\\). We differentiate both sides of the equation with respect to \\(x\\), remembering that \\(y\\) is a function of \\(x\\) (so \\(\\frac{d}{dx}y = y'\\)).\n\n**Example:** Differentiate \\(x^2 + y^2 = 25\\).\n\n1. Differentiate each term:  \n   \\[\n   \\frac{d}{dx}(x^2)=2x,\\qquad \n   \\frac{d}{dx}(y^2)=2y\\,y',\\qquad \n   \\frac{d}{dx}(25)=0.\n   \\]\n\n2. Assemble:  \n   \\[\n   2x + 2y\\,y' = 0.\n   \\]\n\n3. Solve for \\(y'\\):  \n   \\[\n   2y\\,y' = -2x \\;\\Longrightarrow\\; y' = -\\frac{x}{y}.\n   \\]\n\nThus \\(\\displaystyle \\frac{dy}{dx}= -\\frac{x}{y}\\) for any point \\((x,y)\\) on the circle.\n\n---\n\n## Practice problems\n\n### 1. Differentiate \\(h(x)=\\ln\\big((2x+3)^5\\big)\\).\n\n**Solution**  \nLet \\(u = (2x+3)^5\\). Then \\(h=\\ln u\\).  \n\\(u' = 5(2x+3)^4\\cdot 2 =10(2x+3)^4\\).  \n\\(h' = \\frac{1}{u}\\,u' = \\frac{10(2x+3)^4}{(2x+3)^5}= \\frac{10}{2x+3}\\).\n\n---\n\n### 2. Find \\(\\dfrac{dy}{dx}\\) for \\(y^3 = x^2 + 1\\) (implicit).\n\n**Solution**  \nDifferentiate both sides: \\(3y^2 y' = 2x\\).  \nSolve: \\(y' = \\dfrac{2x}{3y^2}\\).\n\n---\n\n### 3. Compute \\(\\displaystyle \\frac{d}{dx}\\big[e^{\\tan x}\\big]\\).\n\n**Solution**  \nOuter: \\(f(u)=e^{u}\\) with \\(f'(u)=e^{u}\\).  \nInner: \\(u=\\tan x\\) with \\(u'=\\sec^2 x\\).  \nChain rule: \\(\\frac{d}{dx}=e^{\\tan x}\\cdot \\sec^2 x\\).\n\n---\n\n### 4. Differentiate implicitly \\(x\\sin y = y\\cos x\\).\n\n**Solution**  \nDifferentiate each side:  \n\nLeft: \\(\\frac{d}{dx}(x\\sin y)=\\sin y + x\\cos y\\,y'\\).  \n\nRight: \\(\\frac{d}{dx}(y\\cos x)=y'\\cos x - y\\sin x\\).  \n\nSet them equal:  \n\\[\n\\sin y + x\\cos y\\,y' = y'\\cos x - y\\sin x.\n\\]\n\nCollect \\(y'\\) terms:  \n\\[\nx\\cos y\\,y' - \\cos x\\,y' = -\\sin y - y\\sin x.\n\\]\n\nFactor \\(y'\\):  \n\\[\ny'(x\\cos y - \\cos x) = -\\sin y - y\\sin x.\n\\]\n\nSolve:  \n\\[\n\\boxed{\\,y' = \\dfrac{-\\sin y - y\\sin x}{\\,x\\cos y - \\cos x\\,}}.\n\\]\n\nThese problems reinforce the **chain rule** and **implicit differentiation** techniques needed for more complex calculus tasks.",
+   "heading": "5. Chain Rule for Composite Functions",
+   "body": "When we have a function inside another function, we call it a **composite function**.  \nFor example, in  \n\n\\[\nh(x)=\\bigl(3x^{2}+2\\bigr)^{5},\n\\]\n\nthe inner part \\(g(x)=3x^{2}+2\\) is fed into the outer part \\(f(u)=u^{5}\\).  \nThe **chain rule** tells us how to differentiate such a composition without expanding it first.\n\n> **Definition:** If \\(h(x)=f\\bigl(g(x)\\bigr)\\), then  \n> \\[\n> h'(x)=f'\\bigl(g(x)\\bigr)\\cdot g'(x).\n> \\]  \n> In words: *differentiate the outer function, keep the inner function unchanged, then multiply by the derivative of the inner function.*\n\n### Why does the rule work?\n\nThink of the graph of \\(g\\) as a road that tells us how \\(x\\) changes the value of \\(u=g(x)\\).  \nThen the graph of \\(f\\) tells us how a change in \\(u\\) changes the final output \\(y=f(u)\\).  \nIf a small step \\(\\Delta x\\) moves us a little along the road, the road itself stretches or shrinks by a factor \\(g'(x)\\).  \nAfter that, the second graph stretches or shrinks the result by a factor \\(f'(u)\\).  \nMultiplying the two factors gives the total stretch from the original \\(\\Delta x\\) to the final \\(\\Delta y\\).  \nThat product is exactly what the chain rule records.\n\n### Everyday comparison\n\nImagine you are sending a letter. First you put the letter in an envelope (inner function), then you put the envelope in a box (outer function).  \nIf the envelope adds 2 cm to the thickness and the box adds 5 cm, the total thickness increase is \\(2 \\times 5 = 10\\) cm.  \nThe chain rule works the same way: each “layer” contributes a factor, and we multiply them.\n\n### Step‑by‑step use on \\(\\bigl(3x^{2}+2\\bigr)^{5}\\)\n\n1. **Identify the layers.**  \n   - Inner function: \\(g(x)=3x^{2}+2\\).  \n   - Outer function: \\(f(u)=u^{5}\\) where \\(u=g(x)\\).\n\n2. **Differentiate the outer function** as if the inner part were just a variable \\(u\\).  \n   \\[\n   f'(u)=5u^{4}.\n   \\]\n\n3. **Replace \\(u\\) by the original inner function** to keep the composition intact.  \n   \\[\n   f'\\bigl(g(x)\\bigr)=5\\bigl(3x^{2}+2\\bigr)^{4}.\n   \\]\n\n4. **Differentiate the inner function** directly.  \n   \\[\n   g'(x)=\\frac{d}{dx}\\bigl(3x^{2}+2\\bigr)=6x.\n   \\]\n\n5. **Multiply the two results** according to the chain rule.  \n   \\[\n   h'(x)=5\\bigl(3x^{2}+2\\bigr)^{4}\\cdot 6x.\n   \\]\n\n6. **Simplify if desired.**  \n   \\[\n   h'(x)=30x\\bigl(3x^{2}+2\\bigr)^{4}.\n   \\]\n\nThat is the derivative of the original nested function, obtained without expanding \\((3x^{2}+2)^{5}\\).\n\n> **Note:** The chain rule works for any number of layers. If you have \\(f(g(h(x)))\\), apply the rule repeatedly: differentiate the outermost, then multiply by the derivative of the next inner layer, and so on.\n\n### Practice problem\n\nFind the derivative of  \n\n\\[\np(x)=\\sqrt{\\,\\sin\\!\\bigl(2x^{3}+1\\bigr)}.\n\\]\n\n*Solution sketch:*  \n- Inner‑most: \\(u(x)=2x^{3}+1\\); \\(u'(x)=6x^{2}\\).  \n- Next layer: \\(v(u)=\\sin u\\); \\(v'(u)=\\cos u\\).  \n- Outer layer: \\(w(v)=\\sqrt{v}=v^{1/2}\\); \\(w'(v)=\\tfrac{1}{2}v^{-1/2}\\).  \nCombine:  \n\n\\[\np'(x)=\\frac{1}{2}\\bigl[\\sin(2x^{3}+1)\\bigr]^{-1/2}\\cdot\\cos(2x^{3}+1)\\cdot6x^{2}.\n\\]\n\n> **Remember:** Always work from the outside in, writing each derivative step clearly before multiplying them together.\n\nThe chain rule is a powerful shortcut. It lets us handle complicated looking functions by peeling them apart layer by layer, just like unwrapping a gift to see what’s inside. Once you practice a few times, the pattern becomes automatic.",
    "code": ""
   },
   {
-   "heading": "Real‑World Applications of Derivatives",
-   "body": "The **derivative** tells us how a quantity changes at an instant.  Below are three everyday contexts where this idea is essential, followed by a worked example and four practice problems with complete solutions.\n\n---\n\n### Real‑World Applications of Derivatives  \n\n1. **Velocity and acceleration** – If the position of a car along a straight road is given by \\(s(t)\\) (metres) at time \\(t\\) (seconds), the **velocity** is the derivative  \n   \\[\n   v(t)=\\frac{ds}{dt}=s'(t)\n   \\]  \n   and the **acceleration** is the derivative of velocity:  \n   \\[\n   a(t)=\\frac{dv}{dt}=v'(t)=s''(t).\n   \\]  \n   A positive acceleration means the car is speeding up; a negative value means it is slowing down.\n\n2. **Population growth rate** – In biology, a simple model for a population \\(P(t)\\) (individuals) is exponential growth: \\(P(t)=P_0e^{kt}\\).  The **instantaneous growth rate** is  \n   \\[\n   \\frac{dP}{dt}=kP_0e^{kt}=kP(t).\n   \\]  \n   The factor \\(k\\) is the *per‑capita* growth rate; if \\(k=0.03\\) per year, the population increases by about \\(3\\%\\) each year.\n\n3. **Marginal cost and revenue** – In economics, if the total cost of producing \\(x\\) units is \\(C(x)\\), the **marginal cost** is the derivative \\(C'(x)\\).  It tells the cost of producing one more unit at the current level of output.  Similarly, the **marginal revenue** is \\(R'(x)\\) when the total revenue is \\(R(x)\\).  When marginal cost equals marginal revenue, profit is maximized.\n\n---\n\n### Worked Example: Finding Velocity and Acceleration  \n\nA ball is thrown upward with height (in metres) described by  \n\\[\ns(t)=20t-5t^{2}.\n\\]\n\n**Step 1 – Velocity:**  \n\\[\nv(t)=\\frac{ds}{dt}= \\frac{d}{dt}\\bigl(20t-5t^{2}\\bigr)=20-10t.\n\\]\n\n**Step 2 – Acceleration:**  \n\\[\na(t)=\\frac{dv}{dt}= \\frac{d}{dt}\\bigl(20-10t\\bigr)=-10\\;\\text{m/s}^{2}.\n\\]\n\n**Interpretation:**  \n- At \\(t=1\\) s, \\(v(1)=20-10(1)=10\\) m/s upward.  \n- The constant acceleration \\(-10\\) m/s² shows gravity pulling the ball down.  \n\n---\n\n### Practice Problems  \n\n#### Problem 1  \nA company’s total cost (in dollars) for producing \\(x\\) gadgets is \\(C(x)=500+20x+0.05x^{2}\\).  \nFind the marginal cost at \\(x=100\\).\n\n**Solution**  \n\\(C'(x)=20+0.10x\\).  \nAt \\(x=100\\): \\(C'(100)=20+0.10(100)=20+10=30\\).  \n**Marginal cost = \\$30 per gadget.**\n\n#### Problem 2  \nThe population of a bacteria culture follows \\(P(t)=200e^{0.4t}\\) (cells), \\(t\\) in hours.  \nWhat is the instantaneous growth rate after 3 hours?\n\n**Solution**  \n\\(P'(t)=0.4\\cdot200e^{0.4t}=80e^{0.4t}\\).  \nAt \\(t=3\\): \\(P'(3)=80e^{1.2}\\approx80(3.320)=265.6\\).  \n**Growth rate ≈ 266 cells per hour.**\n\n#### Problem 3  \nA projectile’s height is \\(h(t)=100t-4.9t^{2}\\) metres.  \nFind the time when the projectile reaches its highest point and the maximum height.\n\n**Solution**  \nVelocity: \\(v(t)=h'(t)=100-9.8t\\).  \nSet \\(v(t)=0\\): \\(100-9.8t=0\\Rightarrow t=\\frac{100}{9.8}\\approx10.20\\) s.  \nMaximum height: \\(h(10.20)=100(10.20)-4.9(10.20)^{2}\\approx1020-510\\approx510\\) m.  \n**Peak at ≈10.2 s, height ≈510 m.**\n\n#### Problem 4  \nTotal revenue from selling \\(x\\) units of a product is \\(R(x)=120x-0.2x^{2}\\).  \nDetermine the production level that maximizes revenue and the maximum revenue amount.\n\n**Solution**  \nMarginal revenue: \\(R'(x)=120-0.4x\\).  \nSet to zero: \\(120-0.4x=0\\Rightarrow x=300\\).  \nSecond derivative: \\(R''(x)=-0.4<0\\) → maximum.  \nMaximum revenue: \\(R(300)=120(300)-0.2(300)^{2}=36\\,000-18\\,000=18\\,000\\).  \n**Produce 300 units for a maximum revenue of \\$18,000.**",
+   "heading": "6. Derivatives of Common Functions",
+   "body": "Derivatives tell us how fast a quantity changes.  \nWhen we know the derivative of a familiar function, we can instantly answer questions like “how quickly does the amount of a drug decay?” or “how steep is the hill at a certain point?” Below are the most common families of functions and their derivatives. Each formula is proved once and then used many times, so memorising them saves a lot of work.\n\n> **Definition:** The *derivative* of a function $f(x)$ at a point $x$ is the limit  \n> $$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}.$$  \n> It measures the instantaneous rate of change, or the slope of the tangent line to the graph at $x$.\n\n---\n\n### 1. Exponential Functions  \n\nThe basic exponential function $e^x$ (where $e\\approx2.718$) grows proportionally to its current value. Because of this special property, its rate of change is the same as the function itself:\n\n$$\\frac{d}{dx}\\,e^{x}=e^{x}.$$\n\nIf the exponent is a linear expression $ax+b$, the chain rule gives\n\n$$\\frac{d}{dx}\\,e^{ax+b}=a\\,e^{ax+b}.$$\n\n*Why it works:*  $e^{ax+b}=e^{b}\\,e^{ax}$ and $e^{b}$ is just a constant factor; the derivative of $e^{ax}$ pulls down the factor $a$ from the exponent.\n\n---\n\n### 2. Logarithmic Functions  \n\nThe natural logarithm $\\ln x$ is the inverse of $e^x$. Its derivative tells us how quickly the logarithm changes with $x$:\n\n$$\\frac{d}{dx}\\,\\ln x=\\frac{1}{x},\\qquad x>0.$$\n\nFor a logarithm with a different base $a>0$, $a\\neq1$, we use the change‑of‑base formula:\n\n$$\\frac{d}{dx}\\,\\log_{a}x=\\frac{1}{x\\ln a}.$$\n\n*Why it works:*  Write $\\log_{a}x=\\frac{\\ln x}{\\ln a}$; the denominator $\\ln a$ is constant, so the derivative is $\\frac{1}{\\ln a}\\cdot\\frac{1}{x}$.\n\n---\n\n### 3. Trigonometric Functions  \n\nThe sine and cosine functions describe periodic motion, like a swinging pendulum. Their derivatives are also periodic, just shifted by a quarter turn.\n\n$$\\frac{d}{dx}\\,\\sin x=\\cos x,$$\n$$\\frac{d}{dx}\\,\\cos x=-\\sin x.$$\n\nFor the tangent function $\\tan x=\\frac{\\sin x}{\\cos x}$, applying the quotient rule gives\n\n$$\\frac{d}{dx}\\,\\tan x=\\sec^{2}x,$$\nwhere $\\sec x=\\frac{1}{\\cos x}$.\n\nOther basic trig derivatives follow from these:\n\n$$\\frac{d}{dx}\\,\\sec x=\\sec x\\tan x,\\qquad\n\\frac{d}{dx}\\,\\csc x=-\\csc x\\cot x,\\qquad\n\\frac{d}{dx}\\,\\cot x=-\\csc^{2}x.$$\n\n*Every new word:*  \n- **Secant** ($\\sec$) is the reciprocal of cosine.  \n- **Cosecant** ($\\csc$) is the reciprocal of sine.  \n- **Cotangent** ($\\cot$) is the reciprocal of tangent.\n\n---\n\n### 4. Quick Practice  \n\n1. **Exponential:** Find the derivative of $f(x)=5e^{3x-2}$.  \n   *Solution:* $f'(x)=5\\cdot3\\,e^{3x-2}=15e^{3x-2}$.\n\n2. **Logarithmic:** Differentiate $g(x)=\\ln(4x^2)$.  \n   *Hint:* Use the property $\\ln(ab)=\\ln a+\\ln b$ and the chain rule.  \n   *Solution:* $g'(x)=\\frac{1}{4x^2}\\cdot8x=\\frac{2}{x}$.\n\n3. **Trigonometric:** Compute $\\displaystyle \\frac{d}{dx}\\bigl(\\sin^2 x\\bigr)$.  \n   *Hint:* Write $\\sin^2 x = (\\sin x)^2$ and apply the chain rule.  \n   *Solution:* $2\\sin x\\cos x = \\sin 2x$.\n\n4. **Mixed:** Find the derivative of $h(x)=x\\ln x$.  \n   *Solution:* Use the product rule: $h'(x)=1\\cdot\\ln x + x\\cdot\\frac{1}{x}= \\ln x +1$.\n\n> **In daily life:** If a bank account earns continuous interest at rate $r$, the balance grows like $A(t)=A_0e^{rt}$. The derivative $A'(t)=rA(t)$ tells you the instantaneous interest earned at any moment.\n\n> **Common mistake:** Forgetting to multiply by the inner derivative when using the chain rule. For $e^{3x}$ the derivative is $3e^{3x}$, not just $e^{3x}$.\n\n> **Remember:** All the formulas above are shortcuts that come from the limit definition. When you see a familiar function, write down its derivative immediately; it will save you time on longer problems.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\nBelow are four problems that let you practise every rule we have studied.  \nRead each question, try the calculations on your own, then compare with the detailed solution that follows.\n\n---\n\n### Problem 1 – Power and Constant‑Multiple Rules  \n\nFind the derivative of  \n\\[\nf(x)=5x^{4}-3x^{2}+7.\n\\]\n\n**Solution**  \n\n1. Apply the **power rule**: \\(\\dfrac{d}{dx}x^{n}=nx^{\\,n-1}\\).  \n2. Apply the **constant‑multiple rule**: \\(\\dfrac{d}{dx}[c\\cdot g(x)]=c\\cdot g'(x)\\).\n\n\\[\n\\begin{aligned}\nf'(x) &=5\\cdot\\frac{d}{dx}\\bigl(x^{4}\\bigr)-3\\cdot\\frac{d}{dx}\\bigl(x^{2}\\bigr)+\\frac{d}{dx}(7)\\\\[4pt]\n      &=5\\cdot 4x^{3}-3\\cdot 2x+0\\\\[4pt]\n      &=20x^{3}-6x.\n\\end{aligned}\n\\]\n\nSo \\(\\boxed{f'(x)=20x^{3}-6x}\\).\n\n---\n\n### Problem 2 – Product Rule  \n\nLet \\(g(x)= (2x^{3}+1)(\\sin x)\\). Compute \\(g'(x)\\).\n\n**Solution**  \n\nThe **product rule** states \\((uv)'=u'v+uv'\\).\n\n- \\(u(x)=2x^{3}+1\\) → \\(u'(x)=6x^{2}\\).  \n- \\(v(x)=\\sin x\\) → \\(v'(x)=\\cos x\\).\n\nNow substitute:\n\n\\[\n\\begin{aligned}\ng'(x) &= u'v + uv'\\\\\n      &= (6x^{2})(\\sin x) + (2x^{3}+1)(\\cos x)\\\\\n      &= 6x^{2}\\sin x + (2x^{3}+1)\\cos x.\n\\end{aligned}\n\\]\n\nThus \\(\\boxed{g'(x)=6x^{2}\\sin x + (2x^{3}+1)\\cos x}\\).\n\n---\n\n### Problem 3 – Quotient Rule and Chain Rule  \n\nFind the derivative of  \n\\[\nh(x)=\\frac{e^{2x}}{x^{2}+1}.\n\\]\n\n**Solution**  \n\nThe **quotient rule**: \\(\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-u v'}{v^{2}}\\).\n\n- \\(u(x)=e^{2x}\\). Using the **chain rule**, \\(u'(x)=e^{2x}\\cdot 2 = 2e^{2x}\\).  \n- \\(v(x)=x^{2}+1\\). Then \\(v'(x)=2x\\).\n\nPlug into the quotient rule:\n\n\\[\n\\begin{aligned}\nh'(x) &=\\frac{(2e^{2x})(x^{2}+1)-e^{2x}(2x)}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}(x^{2}+1)-2xe^{2x}}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}\\bigl(x^{2}+1-x\\bigr)}{(x^{2}+1)^{2}}\\\\[4pt]\n      &=\\frac{2e^{2x}(x^{2}-x+1)}{(x^{2}+1)^{2}}.\n\\end{aligned}\n\\]\n\nHence \\(\\boxed{h'(x)=\\dfrac{2e^{2x}(x^{2}-x+1)}{(x^{2}+1)^{2}}}\\).\n\n---\n\n### Problem 4 – Implicit Differentiation and Real‑World Interpretation  \n\nThe curve defined implicitly by \\(x^{2}+y^{2}=25\\) represents a circle of radius 5.  \n\n1. Find \\(\\dfrac{dy}{dx}\\) at the point \\((3,4)\\).  \n2. Explain what this derivative tells you about the slope of the tangent line at that point.\n\n**Solution**  \n\n1. Differentiate both sides with respect to \\(x\\). Remember that \\(y\\) is a function of \\(x\\), so \\(\\dfrac{d}{dx}(y^{2})=2y\\,\\dfrac{dy}{dx}\\).\n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}(x^{2})+\\frac{d}{dx}(y^{2}) &= \\frac{d}{dx}(25)\\\\\n2x + 2y\\,\\frac{dy}{dx} &= 0.\n\\end{aligned}\n\\]\n\nSolve for \\(\\dfrac{dy}{dx}\\):\n\n\\[\n\\frac{dy}{dx}= -\\frac{x}{y}.\n\\]\n\nAt \\((3,4)\\),\n\n\\[\n\\frac{dy}{dx}\\Big|_{(3,4)} = -\\frac{3}{4}.\n\\]\n\n2. The value \\(-\\frac{3}{4}\\) is the **slope of the tangent line** to the circle at \\((3,4)\\). A negative slope means the tangent line falls as we move to the right. In a real‑world context, if the circle described the path of a particle, the instantaneous direction of motion at that point would be down‑and‑to‑the‑right, making an angle whose tangent is \\(-3/4\\) with the horizontal.\n\n---\n\nThese problems cover **power, constant‑multiple, product, quotient, chain, and implicit differentiation**. Working through them will strengthen your ability to compute derivatives quickly and to interpret the geometric meaning of the results. Keep practicing!",
+   "heading": "7. Real‑World Applications",
+   "body": "When we use a derivative in a real‑world situation, we are asking **how fast something is changing at a particular instant**.  \nThink of a car’s speedometer: it tells you the instantaneous speed, which is the derivative of the car’s position with respect to time.  \nBelow are three short stories that show how the same idea works in physics, biology, and economics.\n\n---\n\n**Problem 1 – Velocity from a Position Function**  \n\nA particle moves along a straight line and its position (in meters) at time $t$ seconds is given by  \n\n$$s(t)=4t^{3}-3t^{2}+2t+5.$$  \n\n*Find the particle’s velocity at $t=2$ seconds.*\n\nThe velocity is the rate of change of position, i.e. the derivative $s'(t)$.  \nFirst differentiate term by term:\n\n$$s'(t)=\\frac{d}{dt}\\bigl(4t^{3}\\bigr)-\\frac{d}{dt}\\bigl(3t^{2}\\bigr)+\\frac{d}{dt}\\bigl(2t\\bigr)+\\frac{d}{dt}(5)$$  \n$$\\qquad =12t^{2}-6t+2+0.$$\n\nNow plug in $t=2$:\n\n$$v(2)=12(2)^{2}-6(2)+2=12\\cdot4-12+2=48-12+2=38\\ \\text{m/s}.$$\n\n> **In daily life:** The derivative turned the whole motion formula into a single number—38 m/s—just like a speedometer tells you the car’s speed at a specific moment.\n\n---\n\n**Problem 2 – Bacterial Growth Rate**  \n\nA laboratory culture of bacteria has size $B(t)=500e^{0.8t}$ after $t$ hours.  \n*What is the growth rate (bacteria per hour) after 3 hours?*\n\nThe growth rate is the derivative $B'(t)$. Use the rule $\\frac{d}{dt}e^{kt}=ke^{kt}$:\n\n$$B'(t)=500\\cdot0.8\\,e^{0.8t}=400e^{0.8t}.$$\n\nEvaluate at $t=3$:\n\n$$B'(3)=400e^{0.8\\cdot3}=400e^{2.4}\\approx400\\cdot11.02\\approx4408\\ \\text{bacteria/hour}.$$\n\n> **Note:** The derivative keeps the same exponential shape, but multiplies it by the constant $0.8$, which tells us how quickly the population is expanding at any moment.\n\nInterpretation: After three hours the culture is adding about 4 400 bacteria each hour—much faster than at the start because exponential growth accelerates.\n\n---\n\n**Problem 3 – Marginal Cost in Economics**  \n\nA factory’s total cost (in dollars) for producing $x$ widgets is  \n\n$$C(x)=200+15x+0.05x^{2}.$$\n\n*What is the marginal cost when 100 widgets are made?*  \n\nThe marginal cost is the derivative $C'(x)$, representing the cost of producing one more widget at a given production level.\n\nDifferentiate:\n\n$$C'(x)=\\frac{d}{dt}(200)+\\frac{d}{dt}(15x)+\\frac{d}{dt}(0.05x^{2})=0+15+0.1x.$$\n\nNow substitute $x=100$:\n\n$$C'(100)=15+0.1(100)=15+10=25\\ \\text{dollars per widget}.$$\n\n> **Definition:** *Marginal cost* is the instantaneous rate of change of total cost with respect to quantity; it tells a manager how much an extra unit will cost right now.\n\nInterpretation: When the factory is already making 100 widgets, the next widget will cost about \\$25. If production rises, the marginal cost will increase because of the $0.1x$ term, reflecting limited resources or overtime labor.\n\n---\n\nPutting these examples together, we see a common pattern:\n\n> **Remember:** To find how fast something changes at a specific point, write the quantity as a function of a variable, differentiate, then plug in the value of interest.\n\nThe derivative translates a complicated relationship (position vs. time, population vs. time, cost vs. quantity) into a simple, actionable number—speed, growth rate, or marginal cost—exactly when we need it. This makes calculus a powerful tool for scientists, biologists, and businesspeople alike.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Slope of a tangent line to $f(x)=x^2$ at $x=3$",
+   "given": "Find the derivative $f'(3)$ using the limit definition and interpret it as the slope of the tangent line.",
+   "steps": [
+    {
+     "label": "Limit definition",
+     "text": "Write $f'(3)=\\displaystyle\\lim_{h\\to0}\\frac{(3+h)^2-3^2}{h}$ to start from the definition."
+    },
+    {
+     "label": "Simplify numerator",
+     "text": "Expand $(3+h)^2=9+6h+h^2$, then compute $(9+6h+h^2)-9=6h+h^2$."
+    },
+    {
+     "label": "Cancel $h$",
+     "text": "Factor $h$: $\\frac{6h+h^2}{h}=6+h$."
+    },
+    {
+     "label": "Take the limit",
+     "text": "$\\displaystyle\\lim_{h\\to0}(6+h)=6$."
+    }
+   ],
+   "answer": "$f'(3)=6$, so the tangent line to $y=x^2$ at $x=3$ has slope $6$. ---"
+  },
+  {
+   "level": "Medium",
+   "title": "Derivative of $g(x)=\\dfrac{x^2}{\\sin x}$ at $x=\\frac{\\pi}{4}$",
+   "given": "Use the quotient rule to find $g'\\!\\left(\\frac{\\pi}{4}\\right)$.",
+   "steps": [
+    {
+     "label": "Identify parts",
+     "text": "Let $u(x)=x^2$, $v(x)=\\sin x$. Then $u'=2x$, $v'=\\cos x$."
+    },
+    {
+     "label": "Apply quotient rule",
+     "text": "$g'(x)=\\frac{u'v-uv'}{v^2}=\\frac{2x\\sin x - x^2\\cos x}{\\sin^2 x}$."
+    },
+    {
+     "label": "Substitute $x=\\frac{\\pi}{4}$",
+     "text": "Compute $2\\!\\left(\\frac{\\pi}{4}\\right)\\sin\\!\\frac{\\pi}{4}= \\frac{\\pi}{2}\\cdot\\frac{\\sqrt2}{2}= \\frac{\\pi\\sqrt2}{4}$; $x^2\\cos x=\\left(\\frac{\\pi}{4}\\right)^2\\!\\cos\\!\\frac{\\pi}{4}= \\frac{\\pi^2}{16}\\cdot\\frac{\\sqrt2}{2}= \\frac{\\pi^2\\sqrt2}{32}$."
+    },
+    {
+     "label": "Simplify",
+     "text": "$g'\\!\\left(\\frac{\\pi}{4}\\right)=\\frac{\\frac{\\pi\\sqrt2}{4}-\\frac{\\pi^2\\sqrt2}{32}}{\\left(\\frac{\\sqrt2}{2}\\right)^2} =\\frac{\\sqrt2\\left(\\frac{8\\pi- \\pi^2}{32}\\right)}{\\frac12} =\\frac{\\sqrt2(8\\pi-\\pi^2)}{16}$."
+    }
+   ],
+   "answer": "$g'\\!\\left(\\frac{\\pi}{4}\\right)=\\displaystyle\\frac{\\sqrt2\\,(8\\pi-\\pi^2)}{16}\\approx0.58\\,$ (units of $g$ per unit $x$). ---"
+  },
+  {
+   "level": "Hard",
+   "title": "Optimize the profit $P(t)=200t\\,e^{-0.05t}$ (dollars) for a product sold $t$ months after launch.",
+   "given": "Find the time $t$ that gives the maximum profit and the maximum profit value.",
+   "steps": [
+    {
+     "label": "Differentiate (product rule)",
+     "text": "$P'(t)=200\\big(e^{-0.05t}+t\\cdot(-0.05)e^{-0.05t}\\big) =200e^{-0.05t}(1-0.05t)$."
+    },
+    {
+     "label": "Set derivative to zero",
+     "text": "$200e^{-0.05t}(1-0.05t)=0$. Since $e^{-0.05t}>0$, solve $1-0.05t=0\\;\\Rightarrow\\;t=20$."
+    },
+    {
+     "label": "Verify maximum (second derivative)",
+     "text": "$P''(t)=200e^{-0.05t}(-0.05)(1-0.05t)-200e^{-0.05t}(0.05) = -10e^{-0.05t}(2-0.05t)$. Evaluate at $t=20$: $P''(20)=-10e^{-1}(2-1)= -10e^{-1}<0$, confirming a maximum."
+    },
+    {
+     "label": "Compute maximum profit",
+     "text": "$P(20)=200\\cdot20\\cdot e^{-0.05\\cdot20}=4000e^{-1}\\approx1472.6\\,$ dollars."
+    }
+   ],
+   "answer": "The profit is maximized at $t=20$ months, with a maximum profit of about $\\$1{,}473$."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $f(x)=3x^2+5x-2$ using the definition of the derivative.",
+   "a": "Using $f'(x)=\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$:\n\\[\n\\begin{aligned}\nf(x+h)&=3(x+h)^2+5(x+h)-2\\\\\n&=3(x^2+2xh+h^2)+5x+5h-2\\\\\n&=3x^2+6xh+3h^2+5x+5h-2.\n\\end{aligned}\n\\]\nThen\n\\[\n\\frac{f(x+h)-f(x)}{h}= \\frac{(3x^2+6xh+3h^2+5x+5h-2)-(3x^2+5x-2)}{h}\n= \\frac{6xh+3h^2+5h}{h}=6x+3h+5.\n\\]\nTake the limit $h\\to0$: $f'(x)=6x+5$.\n---"
+  },
+  {
+   "level": "Easy",
+   "q": "Compute the derivative of $g(t)=\\sqrt{t}$ at $t=4$ using the limit definition.",
+   "a": "Write $g(t)=t^{1/2}$.\n\\[\ng'(4)=\\lim_{h\\to0}\\frac{(4+h)^{1/2}-4^{1/2}}{h}\n=\\lim_{h\\to0}\\frac{\\sqrt{4+h}-2}{h}.\n\\]\nMultiply numerator and denominator by the conjugate $\\sqrt{4+h}+2$:\n\\[\n\\frac{\\sqrt{4+h}-2}{h}\\cdot\\frac{\\sqrt{4+h}+2}{\\sqrt{4+h}+2}\n=\\frac{(4+h)-4}{h(\\sqrt{4+h}+2)}=\\frac{h}{h(\\sqrt{4+h}+2)}\n=\\frac{1}{\\sqrt{4+h}+2}.\n\\]\nNow let $h\\to0$: $g'(4)=\\frac{1}{\\sqrt{4}+2}=\\frac{1}{2+2}=\\frac14$.\n---"
+  },
+  {
+   "level": "Medium",
+   "q": "Find $ \\displaystyle \\frac{d}{dx}\\bigl[x^3\\sin(x)\\bigr] $ using the product rule.",
+   "a": "Let $u=x^3$, $v=\\sin x$. Then $u'=3x^2$, $v'=\\cos x$.\nProduct rule: $(uv)'=u'v+uv'$.\n\\[\n\\frac{d}{dx}[x^3\\sin x]=3x^2\\sin x + x^3\\cos x.\n\\]\n---"
+  },
+  {
+   "level": "Medium",
+   "q": "Differentiate $h(x)=\\dfrac{e^{2x}}{x^2+1}$ using the quotient rule.",
+   "a": "Write $u=e^{2x}$, $v=x^2+1$. Then $u'=2e^{2x}$, $v'=2x$.\nQuotient rule: $\\displaystyle\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}$.\n\\[\nh'(x)=\\frac{(2e^{2x})(x^2+1)-e^{2x}(2x)}{(x^2+1)^2}\n=\\frac{e^{2x}\\bigl[2(x^2+1)-2x\\bigr]}{(x^2+1)^2}\n=\\frac{2e^{2x}(x^2 - x +1)}{(x^2+1)^2}.\n\\]\n---"
+  },
+  {
+   "level": "Hard",
+   "q": "Compute $\\displaystyle \\frac{d}{dx}\\bigl[\\ln(\\sin(x^2))\\bigr]$.",
+   "a": "Let $y=\\ln(\\sin(x^2))$. Use chain rule: $y'=\\frac{1}{\\sin(x^2)}\\cdot\\frac{d}{dx}\\sin(x^2)$.\nNow $\\frac{d}{dx}\\sin(x^2)=\\cos(x^2)\\cdot 2x$ (chain rule again).\nThus\n\\[\ny'=\\frac{1}{\\sin(x^2)}\\cdot 2x\\cos(x^2)=2x\\cot(x^2).\n\\]\n---"
+  },
+  {
+   "level": "Hard",
+   "q": "Find the second derivative $ \\displaystyle \\frac{d^2}{dx^2}\\bigl[e^{3x}\\cos(2x)\\bigr] $.",
+   "a": "First derivative using product rule:\nLet $u=e^{3x}$, $v=\\cos(2x)$.\n$u'=3e^{3x}$, $v'=-2\\sin(2x)$.\n\\[\nf'(x)=u'v+uv'=3e^{3x}\\cos(2x)-2e^{3x}\\sin(2x)=e^{3x}\\bigl[3\\cos(2x)-2\\sin(2x)\\bigr].\n\\]\nNow differentiate $f'(x)$ again. Write $f'(x)=e^{3x}w(x)$ where $w(x)=3\\cos(2x)-2\\sin(2x)$.\n$e^{3x}'=3e^{3x}$, $w'(x) = -6\\sin(2x)-4\\cos(2x)$.\nApply product rule:\n\\[\nf''(x)=3e^{3x}w(x)+e^{3x}w'(x)\n=e^{3x}\\bigl[3w(x)+w'(x)\\bigr].\n\\]\nSubstitute $w$ and $w'$:\n\\[\n\\begin{aligned}\n3w(x)+w'(x)&=3\\bigl[3\\cos(2x)-2\\sin(2x)\\bigr]+ \\bigl[-6\\sin(2x)-4\\cos(2x)\\bigr]\\\\\n&=9\\cos(2x)-6\\sin(2x)-6\\sin(2x)-4\\cos(2x)\\\\\n&=(9-4)\\cos(2x)-12\\sin(2x)\\\\\n&=5\\cos(2x)-12\\sin(2x).\n\\end{aligned}\n\\]\nTherefore\n\\[\n\\boxed{\\,f''(x)=e^{3x}\\bigl[5\\cos(2x)-12\\sin(2x)\\bigr]\\,}.\n\\]"
+  }
+ ],
+ "recap": "The lesson introduced the derivative as the limit of average rates of change, showing it gives the instantaneous slope of a function. It explained the geometric view of a tangent line and presented basic rules like constant, power, product, quotient, and chain rules. Common derivatives and real‑world applications, such as finding velocity, illustrated how derivatives measure change.",
  "key_terms": [
   {
    "term": "Derivative",
-   "meaning": "The instantaneous rate of change of a function at a point, defined as the limit of the average rate of change as the interval approaches zero."
+   "meaning": "The limit of (f(x+h)-f(x))/h as h approaches zero; it gives the instantaneous rate of change of f at x."
   },
   {
-   "term": "Limit definition",
-   "meaning": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h, the formal way to compute a derivative."
+   "term": "Tangent line",
+   "meaning": "A straight line that touches a curve at one point and has the same slope as the curve at that point."
+  },
+  {
+   "term": "Constant rule",
+   "meaning": "The derivative of any constant c is 0 because a constant does not change."
   },
   {
    "term": "Power rule",
-   "meaning": "If f(x)=x^n then f'(x)=n*x^(n-1) for any real exponent n."
+   "meaning": "For any real exponent n, the derivative of x^n is n*x^(n-1)."
   },
   {
    "term": "Product rule",
-   "meaning": "If y = u(x)*v(x) then y' = u'(x)*v(x) + u(x)*v'(x)."
+   "meaning": "If h(x)=f(x)*g(x), then h'(x)=f'(x)*g(x)+f(x)*g'(x)."
   },
   {
    "term": "Quotient rule",
-   "meaning": "If y = u(x)/v(x) then y' = [u'(x)*v(x) - u(x)*v'(x)] / [v(x)]^2."
+   "meaning": "If h(x)=f(x)/g(x), then h'(x)=(f'(x)*g(x)-f(x)*g'(x))/[g(x)]^2."
   },
   {
    "term": "Chain rule",
-   "meaning": "If y = f(g(x)) then dy/dx = f'(g(x)) * g'(x)."
+   "meaning": "For a composite function h(x)=f(g(x)), the derivative is h'(x)=f'(g(x))*g'(x)."
   },
   {
-   "term": "Linear approximation",
-   "meaning": "L(x) = f(a) + f'(a)*(x-a), an estimate of f near a using the tangent line."
-  },
-  {
-   "term": "Implicit differentiation",
-   "meaning": "Differentiating an equation involving x and y by treating y as a function of x and applying the chain rule."
+   "term": "Exponential derivative",
+   "meaning": "The derivative of e^x is e^x; the function grows at a rate proportional to its current value."
   }
  ],
  "quiz": [
   {
-   "q": "What is the derivative of f(x)=3x^4 - 2x + 5 using the power rule?",
+   "q": "What does the derivative of a function represent?",
    "options": [
-    "12x^3 - 2",
-    "3x^3 - 2",
-    "12x^3 + 2",
-    "4x^3 - 2"
+    "The average value of the function over an interval",
+    "The instantaneous rate of change at a point",
+    "The maximum value of the function",
+    "The area under the curve"
    ],
-   "answer": 0,
-   "why": "Apply n*x^(n-1) to each term: 3*4x^3 = 12x^3, derivative of -2x is -2, constant disappears."
+   "answer": 1,
+   "why": "A derivative measures how fast the function changes at a single instant."
   },
   {
-   "q": "If y = (x^2 + 1)(sin x), which expression gives y'?",
+   "q": "Using the power rule, what is the derivative of x^5?",
    "options": [
-    "2x*sin x + (x^2+1)*cos x",
-    "(2x+1)*sin x + (x^2+1)*cos x",
-    "2x*cos x + (x^2+1)*sin x",
-    "2x*sin x + (x^2-1)*cos x"
+    "5*x^4",
+    "x^6",
+    "5*x^5",
+    "4*x^4"
    ],
    "answer": 0,
-   "why": "Product rule: u'=2x, v=sin x, u= x^2+1, v'=cos x."
+   "why": "Power rule gives n*x^(n-1), so 5*x^4."
   },
   {
-   "q": "Using the quotient rule, find the derivative of h(x)= (e^x)/(x^2).",
+   "q": "If f(x)=3x and g(x)=x^2, what is the derivative of f(x)*g(x)?",
    "options": [
-    "(e^x*x^2 - 2x*e^x)/x^4",
-    "(e^x*x^2 - 2x*e^x)/x^2",
-    "(e^x*x^2 + 2x*e^x)/x^4",
-    "(e^x*x^2 - 2x*e^x)/x^3"
+    "3x^2 + 6x",
+    "3x^2",
+    "6x^2",
+    "3x^2 + 2x"
    ],
    "answer": 0,
-   "why": "u'=e^x, v'=2x, so (e^x*x^2 - e^x*2x)/x^4."
+   "why": "Product rule: (3)*(x^2)+(3x)*(2x)=3x^2+6x."
   },
   {
-   "q": "What is the derivative of y = sin(3x^2 + 1)?",
+   "q": "What is the derivative of the quotient (x^2)/(x+1)?",
    "options": [
-    "cos(3x^2+1)*6x",
-    "cos(3x^2+1)*3x",
-    "sin(3x^2+1)*6x",
-    "cos(3x^2+1)*2x"
+    "(2x*(x+1)-x^2)/ (x+1)^2",
+    "(2x*(x+1)+x^2)/ (x+1)^2",
+    "(2x - x^2)/ (x+1)",
+    "2x/(x+1)"
    ],
    "answer": 0,
-   "why": "Chain rule: outer derivative cos(u) times inner derivative 6x."
+   "why": "Quotient rule gives (f' g - f g')/g^2."
   },
   {
-   "q": "If a function satisfies the relation x^2 + y^2 = 25, what is dy/dx by implicit differentiation?",
+   "q": "Apply the chain rule: find the derivative of (2x+3)^4.",
    "options": [
-    "-x/y",
-    "-y/x",
-    "x/y",
-    "y/x"
+    "4*(2x+3)^3 * 2",
+    "4*(2x+3)^3",
+    "8*(2x+3)^3",
+    "2*(2x+3)^4"
    ],
    "answer": 0,
-   "why": "Differentiate both sides: 2x + 2y*y' = 0 => y' = -x/y."
+   "why": "Outer derivative 4*u^3 times inner derivative 2."
   },
   {
-   "q": "Which of the following best describes a linear approximation of f at a point a?",
+   "q": "For the position function s(t)=4t^3-3t^2+2t+5, what is the velocity at t=2?",
    "options": [
-    "f(a) + f'(a)*(x-a)",
-    "f(a) - f'(a)*(x-a)",
-    "f'(a)*(x-a)",
-    "f(a) * f'(a)"
+    "46",
+    "38",
+    "30",
+    "24"
    ],
-   "answer": 0,
-   "why": "The tangent line formula is L(x)=f(a)+f'(a)*(x-a)."
+   "answer": 1,
+   "why": "Derivative s'(t)=12t^2-6t+2; plug t=2 gives 12*4-12+2=48-12+2=38."
   }
  ],
  "flashcards": [
   {
-   "front": "Derivative (limit definition)",
-   "back": "f'(a) = limit as h->0 of [f(a+h)-f(a)]/h"
+   "front": "Definition of derivative",
+   "back": "Limit as h->0 of (f(x+h)-f(x))/h; instantaneous rate of change."
   },
   {
-   "front": "Power rule",
-   "back": "d/dx x^n = n*x^(n-1)"
+   "front": "Tangent line slope",
+   "back": "The derivative at a point; the line that just touches the curve without crossing."
+  },
+  {
+   "front": "Constant rule",
+   "back": "Derivative of any constant c is 0."
+  },
+  {
+   "front": "Power rule formula",
+   "back": "d/dx x^n = n*x^(n-1) for any real n."
   },
   {
    "front": "Product rule",
-   "back": "d/dx [u*v] = u'*v + u*v'"
+   "back": "d/dx [f*g] = f'*g + f*g'."
   },
   {
    "front": "Quotient rule",
-   "back": "d/dx [u/v] = (u'*v - u*v') / v^2"
+   "back": "d/dx [f/g] = (f'*g - f*g') / g^2, g≠0."
   },
   {
-   "front": "Chain rule",
-   "back": "If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x)"
+   "front": "Chain rule idea",
+   "back": "For h(x)=f(g(x)), h' = f'(g(x)) * g'(x)."
   },
   {
-   "front": "Linear approximation",
-   "back": "L(x) = f(a) + f'(a)*(x-a)"
-  },
-  {
-   "front": "Implicit differentiation",
-   "back": "Treat y as a function of x and differentiate both sides, applying the chain rule to terms with y."
-  },
-  {
-   "front": "Constant multiple rule",
-   "back": "d/dx [c*g(x)] = c * g'(x)"
+   "front": "Derivative of e^x",
+   "back": "d/dx e^x = e^x."
   }
  ],
- "reviewed": false,
  "diagrams": [
-  {
-   "type": "image",
-   "file": "calculus-i-l14-speedometer-reading",
-   "title": "A car speedometer showing instantaneous speed, illustrating the concept of instantaneous rate of change.",
-   "alt": "A car speedometer showing instantaneous speed, illustrating the concept of instantaneous rate of change.",
-   "priority": 8,
-   "picture_title": "Speedometer Reading",
-   "kind": "photo",
-   "subject": "A close‑up photograph of an analog speedometer needle pointing to a speed value, with the surrounding dashboard visible.",
-   "layout": "Speedometer centered in the frame, needle highlighted with a thin arrow; dashboard elements blurred in the background.",
-   "labels": [],
-   "after": 0
-  },
   {
    "type": "image",
    "file": "calculus-i-l14-tangent-line-on-curve",
@@ -208,84 +313,154 @@
   },
   {
    "type": "image",
-   "file": "calculus-i-l14-chain-reaction-machine",
-   "title": "A simple Rube‑Goldberg style machine demonstrating a chain of actions, analogous to the chain rule in differentiation.",
-   "alt": "A simple Rube‑Goldberg style machine demonstrating a chain of actions, analogous to the chain rule in differentiation.",
-   "priority": 7,
-   "picture_title": "Chain Reaction Machine",
-   "kind": "photo",
-   "subject": "A tabletop setup where one moving part triggers the next, illustrating how the overall effect is the product of individual effects.",
-   "layout": "Multiple stages arranged left‑to‑right; each stage labeled with its function; arrows show the direction of motion from one stage to the next.",
+   "file": "calculus-i-l14-tangent-line-on-curve-2",
+   "title": "A smooth curve with its tangent line touching at a single point, showing the slope equals the derivative.",
+   "alt": "A smooth curve with its tangent line touching at a single point, showing the slope equals the derivative.",
+   "priority": 9,
+   "picture_title": "Tangent Line on Curve",
+   "kind": "labelled diagram",
+   "subject": "The diagram shows a continuous curve y = f(x) and a straight line that just touches the curve at point (a, f(a)). The line is labelled as the tangent and its slope is highlighted.",
+   "layout": "Curve drawn across the page with the tangent line intersecting at the point; arrows indicate the direction of the slope; labels placed near the curve and line.",
    "labels": [
-    "Stage 1",
-    "Stage 2",
-    "Stage 3",
-    "Overall Output"
+    "curve",
+    "tangent line",
+    "point of contact",
+    "slope"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l14-car-speedometer-analogy",
+   "title": "A car dashboard speedometer illustrating instantaneous speed as a real‑world derivative.",
+   "alt": "A car dashboard speedometer illustrating instantaneous speed as a real‑world derivative.",
+   "priority": 7,
+   "picture_title": "Car Speedometer Analogy",
+   "kind": "photo",
+   "subject": "A close‑up photograph of a vehicle speedometer needle pointing to a speed value, used to relate instantaneous speed to the concept of a derivative.",
+   "layout": "Speedometer centered in the image with a clear needle; optional overlay arrow pointing to the needle.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l14-chain-rule-composition",
+   "title": "Two nested functions shown as boxes to visualize the inner and outer functions in the chain rule.",
+   "alt": "Two nested functions shown as boxes to visualize the inner and outer functions in the chain rule.",
+   "priority": 6,
+   "picture_title": "Chain Rule Composition",
+   "kind": "illustration",
+   "subject": "A diagram with an outer box labeled f(u) and an inner box labeled g(x); arrows indicate the flow from x to g(x) to f(g(x)) and the corresponding derivative factors f'(g(x)) and g'(x).",
+   "layout": "Inner box placed inside the outer box; arrows connecting x → g(x) → f(g(x)) and derivative arrows pointing outward.",
+   "labels": [
+    "x",
+    "g(x)",
+    "f(g(x))",
+    "f'(g(x))",
+    "g'(x)"
    ],
    "after": 4
   },
   {
    "type": "steps",
-   "title": "Finding the derivative using the limit definition",
+   "title": "Finding the Derivative from the Limit Definition",
    "steps": [
     {
-     "label": "1",
-     "text": "Write the difference quotient (f(a+h)-f(a))/h."
+     "label": "Choose points",
+     "text": "Select a point x and a nearby point x+h on the graph."
     },
     {
-     "label": "2",
-     "text": "Simplify the expression algebraically."
+     "label": "Average slope",
+     "text": "Compute (f(x+h)-f(x))/h."
     },
     {
-     "label": "3",
-     "text": "Take the limit as h → 0."
-    },
-    {
-     "label": "4",
-     "text": "Result is f'(a), the instantaneous rate of change."
+     "label": "Take the limit",
+     "text": "Let h → 0 to obtain f'(x)."
     }
    ],
+   "loop": false,
    "after": 0
   },
   {
    "type": "compare",
-   "title": "Average vs Instantaneous Rate",
+   "title": "Secant Line vs. Tangent Line",
    "left": {
-    "name": "Average Rate",
+    "name": "Secant Line",
     "points": [
-     "Uses a finite interval [a, a+h]",
-     "Formula: (f(a+h)-f(a))/h",
-     "Depends on the size of h"
+     "Joins two points (a,f(a)) and (a+h,f(a+h))",
+     "Slope = (f(a+h)-f(a))/h",
+     "Depends on the distance h"
     ]
    },
    "right": {
-    "name": "Instantaneous Rate",
+    "name": "Tangent Line",
     "points": [
-     "Uses the limit as h → 0",
-     "Formula: lim_{h→0}(f(a+h)-f(a))/h",
-     "Gives the derivative f'(a)"
+     "Touches the curve at a single point (a,f(a))",
+     "Slope = limit of the secant slope as h→0",
+     "Gives the instantaneous rate of change"
     ]
    },
-   "after": 0
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Basic Derivative Rules",
+   "items": [
+    {
+     "value": "0",
+     "label": "Constant rule: d/dx c = 0"
+    },
+    {
+     "value": "n·x^(n‑1)",
+     "label": "Power rule for x^n"
+    },
+    {
+     "value": "f'·g + f·g'",
+     "label": "Product rule"
+    },
+    {
+     "value": "(f'·g – f·g')/g^2",
+     "label": "Quotient rule"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Chain Rule Components",
+   "items": [
+    {
+     "name": "Outer function f(u)",
+     "role": "Provides the outer shape of the composition"
+    },
+    {
+     "name": "Inner function g(x)",
+     "role": "Feeds the variable into the outer function"
+    },
+    {
+     "name": "Derivative of outer f'(u)",
+     "role": "Differentiated with u = g(x) left unchanged"
+    },
+    {
+     "name": "Derivative of inner g'(x)",
+     "role": "Multiplied to complete the chain"
+    }
+   ],
+   "after": 4
   },
   {
    "type": "graph",
-   "title": "Tangent line approximation",
-   "fn": "x^2",
-   "xmin": -3,
-   "xmax": 3,
-   "points": [
-    {
-     "x": 1,
-     "y": 1,
-     "label": "point (1,1)",
-     "open": false
-    }
-   ],
-   "caption": "The blue line is the tangent at x=1 with slope f'(1)=2.",
-   "after": 1
+   "title": "Exponential Function Example",
+   "fn": "exp(x)",
+   "xmin": -2,
+   "xmax": 2,
+   "caption": "The graph of e^x and its steepening slope as x increases.",
+   "after": 5
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

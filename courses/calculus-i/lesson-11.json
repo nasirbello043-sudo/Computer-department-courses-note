@@ -1,299 +1,430 @@
 {
  "title": "focus",
- "summary": "Lesson 11 introduces the concept of focus in calculus, explaining how to identify and concentrate on the most important features of a problem. It connects focus with limits, derivatives, and integrals to improve problem‑solving efficiency.",
+ "summary": "Lesson 11 reviews the main ideas of calculus and shows how limits, derivatives, and integrals work together to solve real‑world problems. Students will practice linking these tools across physics, biology, and economics contexts.",
+ "objectives": [
+  "Identify how limits, derivatives, and integrals are connected",
+  "Apply each calculus tool to a simple physics, biology, or economics scenario",
+  "Explain why choosing the right tool matters for a given problem",
+  "Solve a multi‑step problem that uses a limit, a derivative, and an integral",
+  "Reflect on the solution process to build confidence in using calculus"
+ ],
+ "prerequisites": "Students should already know basic limits, derivative rules, and antiderivative techniques from earlier lessons.",
+ "why": [
+  "Calculus is the language of change. Engineers use limits to predict system behavior, biologists model population growth with derivatives, and economists evaluate profit trends with integrals. Understanding how these tools fit together lets you choose the right method for any situation.",
+  "Real‑world problems rarely stay within one calculus topic. By mastering the connections, you can tackle complex tasks—like finding the speed of a car, the rate of drug absorption, or the total cost of production—more efficiently and with greater confidence."
+ ],
  "sections": [
   {
-   "heading": "What is Focus in Calculus?",
-   "body": "**What is Focus in Calculus?**  \n\nIn many calculus problems we are faced with several quantities – functions, variables, constants – that can all be written down at once. **Focus** means deliberately picking the *single* element that actually drives the problem forward. By keeping our attention on that key variable or function, the algebra and the reasoning become much clearer, and we avoid unnecessary detours.\n\nThink of a detective story: the whole plot revolves around the main clue. If the detective spends time on every piece of evidence equally, the case never gets solved. In calculus the “clue’’ is the variable or function that changes the most, or that appears in the limit, derivative, or integral we need to evaluate. Once we have identified it, we rewrite the whole problem in terms of that element and everything else becomes a simple side‑note.\n\nWhy does this help?  \n\n1. **Simplifies algebra** – expressions often collapse when written with a single symbol.  \n2. **Reduces mistakes** – fewer symbols mean fewer chances to mis‑place a sign or exponent.  \n3. **Guides intuition** – we can see how the answer behaves as the focused quantity grows or shrinks.  \n\nBelow is a fully worked example that shows the whole process of focusing, from spotting the key variable to reaching the final answer.\n\n---\n\n### Worked Example: Computing a Limit by Focusing on the Dominant Term  \n\nFind  \n\\[\n\\lim_{x\\to 0}\\frac{\\sin(5x)-5x}{x^{3}} .\n\\]\n\n**Step 1 – Identify the focus.**  \nWhen \\(x\\) is very small, the sine function can be approximated by its Taylor series:  \n\\[\n\\sin(5x)=5x-\\frac{(5x)^{3}}{3!}+O(x^{5}).\n\\]  \nThe dominant terms that will survive after subtraction are the ones up to \\(x^{3}\\). Hence the **focus** is the cubic term \\(-\\frac{(5x)^{3}}{6}\\).\n\n**Step 2 – Rewrite the numerator using the focus.**  \n\\[\n\\sin(5x)-5x = \\Bigl(5x-\\frac{125x^{3}}{6}+O(x^{5})\\Bigr)-5x\n            = -\\frac{125x^{3}}{6}+O(x^{5}).\n\\]\n\n**Step 3 – Form the fraction and cancel the common factor.**  \n\\[\n\\frac{\\sin(5x)-5x}{x^{3}}\n   = \\frac{-\\frac{125x^{3}}{6}+O(x^{5})}{x^{3}}\n   = -\\frac{125}{6}+O(x^{2}).\n\\]\n\n**Step 4 – Take the limit.**  \nAs \\(x\\to0\\), the \\(O(x^{2})\\) term vanishes, leaving  \n\\[\n\\boxed{-\\dfrac{125}{6}}.\n\\]\n\nThe problem becomes trivial once we **focus** on the cubic term of the series; all other higher‑order terms disappear in the limit.\n\n---\n\n### Practice Problems  \n\n1. **Problem:**  \n   \\[\n   \\lim_{t\\to\\infty}\\frac{e^{2t}-e^{t}}{e^{2t}} .\n   \\]  \n\n   **Solution:**  \n   Focus on the highest exponential, \\(e^{2t}\\). Write the numerator as \\(e^{2t}(1-e^{-t})\\). The fraction becomes  \n   \\[\n   \\frac{e^{2t}(1-e^{-t})}{e^{2t}} = 1-e^{-t}.\n   \\]  \n   As \\(t\\to\\infty\\), \\(e^{-t}\\to0\\). Hence the limit is \\(\\boxed{1}\\).\n\n2. **Problem:**  \n   Find the derivative of \\(f(x)=\\ln(3x^{2}+2)\\) at \\(x=1\\).  \n\n   **Solution:**  \n   Focus on the inner function \\(g(x)=3x^{2}+2\\). By the chain rule,  \n   \\[\n   f'(x)=\\frac{1}{g(x)}\\cdot g'(x)=\\frac{1}{3x^{2}+2}\\cdot 6x.\n   \\]  \n   At \\(x=1\\):  \n   \\[\n   f'(1)=\\frac{6\\cdot1}{3\\cdot1^{2}+2}= \\frac{6}{5}= \\boxed{\\tfrac{6}{5}}.\n   \\]\n\n3. **Problem:**  \n   Evaluate \\(\\displaystyle\\int_{0}^{1} (4x^{3}-2x) \\,dx\\).  \n\n   **Solution:**  \n   Focus on integrating term‑by‑term.  \n   \\[\n   \\int_{0}^{1}4x^{3}\\,dx = 4\\left[\\frac{x^{4}}{4}\\right]_{0}^{1}=1,\n   \\qquad\n   \\int_{0}^{1}2x\\,dx = 2\\left[\\frac{x^{2}}{2}\\right]_{0}^{1}=1.\n   \\]  \n   Subtract: \\(1-1= \\boxed{0}\\).\n\n4. **Problem:**  \n   Compute \\(\\displaystyle\\lim_{x\\to0}\\frac{1-\\cos(7x)}{x^{2}}\\).  \n\n   **Solution:**  \n   Focus on the series for cosine: \\(\\cos(7x)=1-\\frac{(7x)^{2}}{2}+O(x^{4})\\).  \n   Then  \n   \\[\n   1-\\cos(7x)=\\frac{49x^{2}}{2}+O(x^{4}).\n   \\]  \n   Divide by \\(x^{2}\\):  \n   \\[\n   \\frac{1-\\cos(7x)}{x^{2}} = \\frac{49}{2}+O(x^{2}).\n   \\]  \n   Taking \\(x\\to0\\) gives the limit \\(\\boxed{\\dfrac{49}{2}}\\).",
+   "heading": "1. Review of Core Concepts",
+   "body": "Recall that a **limit** tells us what value a function $f(x)$ gets arbitrarily close to as the input $x$ approaches a particular point $a$.  \nWe write this as  \n\n$$\\lim_{x\\to a} f(x)=L,$$  \n\nmeaning “as $x$ gets nearer and nearer to $a$, the outputs $f(x)$ get nearer and nearer to $L$.”  \nThink of a car approaching a stop sign: the car’s speed may never actually become zero until it stops, but we can describe the speed it is *approaching* as it gets closer to the sign. The limit captures that “approaching” idea without requiring the function to actually reach the value at $a$.\n\n> **Definition:** A limit $\\displaystyle\\lim_{x\\to a} f(x)=L$ exists if we can make $f(x)$ as close as we wish to $L$ by choosing $x$ sufficiently close (but not equal) to $a$.\n\nThe **derivative** measures how fast a function changes at a single point. Formally, it is the limit of the average rate of change over a shrinking interval:\n\n$$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$\n\nHere $h$ is a tiny step away from $a$, and the fraction $\\frac{f(a+h)-f(a)}{h}$ is the slope of the secant line joining $(a,f(a))$ and $(a+h,f(a+h))$. As $h$ shrinks, the secant line tilts toward the **tangent line**, the straight line that just touches the curve at $(a,f(a))$ without crossing it. The slope of this tangent line is the derivative $f'(a)$.\n\n> **In daily life:** If $f(t)$ gives the distance a runner has traveled after $t$ minutes, then $f'(t)$ is the runner’s instantaneous speed at that exact minute—how fast the distance is changing right then.\n\nAn **antiderivative** (also called an indefinite integral) works in the opposite direction. It is a function $F(x)$ whose derivative returns the original function $f(x)$:\n\n$$F'(x)=f(x).$$\n\nBecause adding a constant $C$ does not change the derivative, every antiderivative comes in a family $F(x)+C$. Geometrically, $F(x)$ can be thought of as the “area under the curve” of $f$ measured from a fixed starting point, though that interpretation becomes precise when we move to definite integrals later.\n\n> **Note:** The antiderivative is not a single function but a whole set of functions that differ only by a constant.\n\nWhy are these ideas useful together? The limit gives us a rigorous way to talk about “instantaneous” behavior, which the derivative captures as a single number—the slope of the tangent. The antiderivative then tells us how to reconstruct the original function from its slopes. This three‑part relationship—limit → derivative → antiderivative—forms the backbone of calculus.\n\nConsider a simple parabola $f(x)=x^{2}$. Its limit as $x$ approaches $3$ is $\\lim_{x\\to3}x^{2}=9$. Using the definition of the derivative,\n\n$$f'(x)=\\lim_{h\\to0}\\frac{(x+h)^{2}-x^{2}}{h}\n       =\\lim_{h\\to0}\\frac{2xh+h^{2}}{h}\n       =\\lim_{h\\to0}(2x+h)=2x,$$\n\nso at $x=3$ the slope of the tangent line is $f'(3)=6$. An antiderivative of $f$ is $F(x)=\\frac{x^{3}}{3}+C$, because differentiating $F$ gives back $x^{2}$.\n\n> **Remember:** A limit describes a value we get *close to*; a derivative is the *instantaneous rate of change* found by a limit; an antiderivative is a function whose *derivative brings us back* to the original.\n\nKeeping these geometric pictures in mind—approaching a point, a tangent line touching a curve, and a curve built up from tiny sloping pieces—will help you see how limits, derivatives, and antiderivatives fit together as tools for describing change.",
    "code": ""
   },
   {
-   "heading": "Choosing the Right Variable",
-   "body": "When we solve a problem in calculus, the first decision is **which quantity will be our independent variable**.  \nChoosing the right variable makes limits, derivatives, and integrals much easier to set up and to interpret.\n\n---\n\n### Why the choice matters  \n\n* The independent variable is the one that **changes freely** while the other quantities depend on it.  \n* A good choice often turns a messy expression into a simple one, or lets us use familiar formulas.  \n* A poor choice can hide the relationship we need and lead to algebraic mistakes.\n\n---\n\n### Common situations  \n\n| Situation | Typical independent variable | Reason |\n|-----------|-----------------------------|--------|\n| Motion of a car | **time** $t$ | Position $s(t)$, speed $v(t)=\\frac{ds}{dt}$, acceleration $a(t)=\\frac{dv}{dt}$ are naturally expressed as functions of time. |\n| Population growth | **time** $t$ | Resources, birth‑rate, etc., evolve over years. |\n| Water draining from a tank | **height** $h$ of the water surface | The rate of outflow depends on the current height, not directly on time. |\n| Cost of producing $x$ items | **quantity** $x$ | Marginal cost is $\\frac{dC}{dx}$, the change in cost per extra unit. |\n\n---\n\n### Worked example: Distance vs. time  \n\nA runner starts from rest and accelerates uniformly at $2\\ \\text{m/s}^2$ for $5$ seconds, then continues at the final speed.  \nWe want the **total distance** after $12$ seconds.\n\n1. **Identify the natural variable.**  \n   The motion is described most directly by **time** $t$, because acceleration and speed are given per second.\n\n2. **Write the speed function.**  \n   During the first $5$ s, acceleration $a=2$ gives  \n   $$v(t)=a t = 2t \\qquad (0\\le t\\le5).$$  \n\n   After $5$ s the speed is constant:  \n   $$v(t)=v(5)=2\\cdot5=10\\ \\text{m/s} \\qquad (5<t\\le12).$$\n\n3. **Integrate to find distance.**  \n   Distance $s(t)=\\int_0^{t} v(\\tau)\\,d\\tau$.\n\n   *First interval* $0\\le t\\le5$:  \n   $$s_1(t)=\\int_0^{t} 2\\tau\\,d\\tau = \\left[\\tau^2\\right]_0^{t}=t^{2}.$$\n\n   At $t=5$, $s_1(5)=25\\ \\text{m}$.\n\n   *Second interval* $5<t\\le12$:  \n   $$s_2(t)=s_1(5)+\\int_5^{t} 10\\,d\\tau = 25 + 10(t-5).$$\n\n4. **Evaluate at $t=12$.**  \n   $$s(12)=25+10(12-5)=25+70=95\\ \\text{m}.$$\n\n**Result:** The runner travels $95$ meters in $12$ seconds.  \nChoosing **time** as the independent variable let us write a single piecewise speed function and integrate it directly.\n\n---\n\n### Practice problems  \n\n1. **Problem:** A bacteria colony doubles every hour. If there are $500$ bacteria at $t=0$, write the population $P(t)$ as a function of time $t$ (hours) and find the limit $\\displaystyle\\lim_{t\\to 3^-}P(t)$.  \n\n   **Solution:** The growth is exponential: $P(t)=500\\cdot2^{t}$.  \n   The limit as $t\\to3^{-}$ is simply $P(3)=500\\cdot2^{3}=500\\cdot8=4000$.\n\n2. **Problem:** Water drains from a cylindrical tank so that the height $h$ (meters) drops at a rate $\\displaystyle\\frac{dh}{dt}=-0.3\\sqrt{h}$. Find the height after $4$ minutes, given $h(0)=9$ m.  \n\n   **Solution:** Treat $h$ as the independent variable’s **function of time**. Separate variables:  \n   $$\\frac{dh}{\\sqrt{h}}=-0.3\\,dt.$$  \n   Integrate: $\\displaystyle 2\\sqrt{h} = -0.3t + C$.  \n   At $t=0$, $2\\sqrt{9}=6=C$.  \n   So $2\\sqrt{h}=6-0.3t$.  \n   At $t=4$, $2\\sqrt{h}=6-1.2=4.8$, thus $\\sqrt{h}=2.4$ and $h=5.76$ m.\n\n3. **Problem:** The cost $C$ (dollars) to produce $x$ widgets is $C(x)=0.05x^{2}+20x+500$. Find the **marginal cost** when $x=100$.  \n\n   **Solution:** Marginal cost is $C'(x)$. Differentiate: $C'(x)=0.10x+20$.  \n   At $x=100$, $C'(100)=0.10(100)+20=10+20=30$ dollars per widget.\n\n4. **Problem:** A car’s fuel efficiency $E$ (km per liter) depends on speed $v$ (km/h) as $E(v)=\\frac{500}{v+10}$. Determine the speed that **maximizes** distance traveled in a 2‑hour trip.  \n\n   **Solution:** Distance $D(v)=E(v)\\cdot v\\cdot2 = 2v\\frac{500}{v+10}= \\frac{1000v}{v+10}$.  \n   Differentiate w.r.t. $v$:  \n   $$D'(v)=\\frac{1000(v+10)-1000v}{(v+10)^{2}}=\\frac{10000}{(v+10)^{2}}.$$  \n   $D'(v)>0$ for all $v>0$, so $D$ increases with $v$.  \n   However, realistic speeds are limited; the maximum feasible speed (e.g., $v=120$ km/h) gives the greatest distance.  \n\nThese problems illustrate how picking **time**, **height**, **quantity**, or **speed** as the independent variable leads to clear, solvable calculus expressions.",
+   "heading": "2. The Relationship Between Limits and Derivatives",
+   "body": "When we talk about a **derivative**, we are really asking one question: *How fast is something changing at this exact instant?*  \nTo answer that, we look at the change over a very short time interval, then let that interval become *as small as possible*. The tool that lets us do this is the **limit**.\n\n> **Definition:** The derivative of a function $f$ at a point $x=a$ is the limit of the difference quotient  \n> $$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.$$\n\nThe expression inside the limit, $\\frac{f(a+h)-f(a)}{h}$, is called the **difference quotient**. It measures the average rate of change of $f$ over the interval from $a$ to $a+h$. Think of $h$ as a tiny step forward on the $x$‑axis. The numerator $f(a+h)-f(a)$ tells us how much the function’s value rises (or falls) during that step, and dividing by $h$ spreads that change out over the length of the step, giving an average slope.\n\nWhy do we let $h$ go to zero? Imagine you are driving and you want to know your speed at a particular instant, not just the average speed over a mile. If you look at your odometer after a long stretch, you get an average speed. To get the instantaneous speed, you would need to look at the distance covered in an *infinitesimally* short time. The limit does exactly that: it shrinks the interval until the average slope becomes the true slope at the single point.\n\n### Step‑by‑step example\n\nLet’s find the derivative of the simple function $f(x)=x^{2}$ at the point $x=3$.\n\n1. **Write the difference quotient.**  \n   $$\\frac{f(3+h)-f(3)}{h} = \\frac{(3+h)^{2}-3^{2}}{h}.$$\n\n2. **Expand the numerator.**  \n   $(3+h)^{2}=9+6h+h^{2}$, so  \n   $$\\frac{9+6h+h^{2}-9}{h}= \\frac{6h+h^{2}}{h}.$$\n\n3. **Factor out $h$ from the numerator.**  \n   $$\\frac{h(6+h)}{h}.$$\n\n4. **Cancel the common factor $h$ (provided $h\\neq0$).**  \n   $$6+h.$$\n\n5. **Take the limit as $h\\to0$.**  \n   $$\\lim_{h\\to0}(6+h)=6.$$\n\nThus $f'(3)=6$. In words, the slope of the parabola $y=x^{2}$ at $x=3$ is $6$; the function is increasing six units in $y$ for each one unit you move to the right in $x$ at that exact spot.\n\n> **In daily life:** If you picture a hill shaped like $y=x^{2}$, the derivative at a point tells you how steep the hill feels right under your feet. Standing at $x=3$, the hill feels as steep as a slope of $6$ (rise $6$ meters for every meter you walk forward).\n\n> **Note:** The limit only exists if the left‑hand and right‑hand approaches give the same number. If they differ, the function has no derivative there (a corner or cusp).\n\n> **Common mistake:** Forgetting to cancel the $h$ before taking the limit. If you try to plug $h=0$ directly into $\\frac{6h+h^{2}}{h}$ you get $\\frac{0}{0}$, an undefined expression. Cancelling first simplifies the fraction so the limit can be evaluated.\n\n### Why this matters\n\nKnowing that a derivative is a limit of a difference quotient connects two core ideas of calculus: **limits** (the language of approaching) and **rates of change** (the language of derivatives). This bridge lets us move from geometric notions of slope to algebraic formulas we can compute, and later to the reverse process—integrals—where we add up infinitely many tiny pieces.\n\n> **Remember:** The derivative $f'(a)$ is *the* limit of the average slope as the interval shrinks to zero. It gives the exact instantaneous rate of change at $x=a$.",
    "code": ""
   },
   {
-   "heading": "Focusing When Computing Limits",
-   "body": "When we talk about **focus** in calculus, we mean looking closely at the part of an expression that actually decides the value of a limit.  \nOften a complicated formula contains many terms, but only one or two of them matter when the variable gets very large or very small. By **isolating** that decisive part, we can compute limits quickly and avoid unnecessary algebra.\n\n---\n\n### Isolating the decisive part  \n\n1. **Identify the variable that is approaching a special value** (usually $0$ or $\\infty$).  \n2. **Rank the terms** according to how fast they grow or shrink as the variable moves toward that value.  \n3. **Keep the dominant term(s)** and discard the rest, because they become negligible in the limit.  \n\nThis process is called **dominant‑term analysis**. It works for rational functions, radicals, exponentials, and trigonometric expressions.\n\n---\n\n### Example 1 – Algebraic simplification  \n\nFind  \n\n\\[\n\\lim_{x\\to\\infty}\\frac{5x^{3}+2x^{2}-7}{3x^{3}-4x+1}.\n\\]\n\n**Step 1 – Identify the dominant power.**  \nBoth numerator and denominator are polynomials. The highest power of $x$ in each is $x^{3}$.\n\n**Step 2 – Factor out $x^{3}$.**  \n\n\\[\n\\frac{5x^{3}+2x^{2}-7}{3x^{3}-4x+1}\n= \\frac{x^{3}\\bigl(5+2/x-7/x^{3}\\bigr)}{x^{3}\\bigl(3-4/x^{2}+1/x^{3}\\bigr)}.\n\\]\n\n**Step 3 – Cancel the common factor $x^{3}$.**  \n\n\\[\n= \\frac{5+2/x-7/x^{3}}{3-4/x^{2}+1/x^{3}}.\n\\]\n\n**Step 4 – Let $x\\to\\infty$.**  \nAll terms containing $1/x$, $1/x^{2}$, $1/x^{3}$ vanish:\n\n\\[\n\\lim_{x\\to\\infty}\\frac{5+2/x-7/x^{3}}{3-4/x^{2}+1/x^{3}}\n= \\frac{5}{3}.\n\\]\n\nThe **focus** was on the $x^{3}$ terms; everything else became irrelevant.\n\n---\n\n### Example 2 – Dominant term in a radical  \n\nCompute  \n\n\\[\n\\lim_{x\\to0^{+}}\\frac{\\sqrt{x+1}-1}{x}.\n\\]\n\n**Step 1 – Recognize the indeterminate form $0/0$.**  \n\n**Step 2 – Use a series‑type focus:** for small $x$, $\\sqrt{1+x}\\approx 1+\\frac{x}{2}$ (the linear term dominates).\n\n**Step 3 – Replace the radical with its dominant approximation.**  \n\n\\[\n\\frac{\\sqrt{x+1}-1}{x}\\;\\approx\\;\\frac{1+\\frac{x}{2}-1}{x}\n= \\frac{x/2}{x}= \\frac12.\n\\]\n\n**Step 4 – Confirm by algebraic manipulation (rationalising).**  \n\n\\[\n\\frac{\\sqrt{x+1}-1}{x}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n= \\frac{x}{x\\bigl(\\sqrt{x+1}+1\\bigr)} = \\frac{1}{\\sqrt{x+1}+1}\n\\to \\frac{1}{2}.\n\\]\n\nThus the limit is $\\boxed{\\tfrac12}$, and the **focus** was the first‑order term of the square‑root expansion.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\lim_{n\\to\\infty}\\frac{4n^{4}+n^{2}}{2n^{4}-5n^{3}+1}.\n\\]\n\n**Solution** – Factor $n^{4}$ from numerator and denominator, cancel, and let $n\\to\\infty$:\n\n\\[\n\\frac{4+1/n^{2}}{2-5/n+1/n^{4}}\\to\\frac{4}{2}=2.\n\\]\n\n---\n\n### Problem 2  \n\\[\n\\lim_{x\\to0}\\frac{e^{3x}-1}{x}.\n\\]\n\n**Solution** – Use the series $e^{3x}=1+3x+\\frac{(3x)^{2}}{2!}+\\dots$; the dominant term after subtraction is $3x$:\n\n\\[\n\\frac{1+3x+\\dots-1}{x}= \\frac{3x+\\dots}{x}\\to3.\n\\]\n\n---\n\n### Problem 3  \n\\[\n\\lim_{x\\to\\infty}\\frac{\\ln(x^{2}+1)}{\\ln x}.\n\\]\n\n**Solution** – For large $x$, $x^{2}+1\\approx x^{2}$, so  \n\n\\[\n\\ln(x^{2}+1)\\approx\\ln x^{2}=2\\ln x.\n\\]\n\nHence the limit is $\\displaystyle\\frac{2\\ln x}{\\ln x}\\to2$.\n\n---\n\n### Problem 4  \n\\[\n\\lim_{x\\to0^{+}}\\frac{x}{\\sqrt{x+1}-1}.\n\\]\n\n**Solution** – Rationalise the denominator:\n\n\\[\n\\frac{x}{\\sqrt{x+1}-1}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n= \\frac{x(\\sqrt{x+1}+1)}{x}= \\sqrt{x+1}+1\\to 2.\n\\]\n\nThe **focus** in each problem was the term that grows (or shrinks) fastest as the variable approaches the limit point. By zeroing in on that term, the limit becomes immediate.",
+   "heading": "3. From Derivatives to Integrals",
+   "body": "When we first met derivatives, we thought of them as “instantaneous rates of change.”  \nIf $f(t)$ tells us the position of a car at time $t$, then $f'(t)$ tells us the car’s speed at that exact moment.  \n\nNow imagine we know the speed function $v(t)=f'(t)$ and we want to recover the original position $f(t)$.  \nThe **Fundamental Theorem of Calculus (FTC)** tells us exactly how to do that: it says that integration, the process of adding up tiny pieces, is the inverse operation of differentiation.\n\n> **Definition:** *Fundamental Theorem of Calculus* –  \n> If $f$ is continuous on $[a,b]$ and $F$ is any function whose derivative is $f$ (that is, $F'(x)=f(x)$), then  \n> $$\\int_{a}^{b} f(x)\\,dx = F(b)-F(a).$$  \n\nIn words, the total accumulated change of $f$ from $a$ to $b$ equals the difference between the values of an antiderivative $F$ at the endpoints.  \n\nWhy does this work? Think of the interval $[a,b]$ as a road. The derivative $f(x)$ tells us the slope of the road at each point – how steep it is. If we slice the road into many tiny pieces of length $\\Delta x$, the change in height over each piece is approximately $f(x_i)\\,\\Delta x$. Adding all those little changes gives an estimate of the total height gain. When we let the pieces become infinitely small, the sum becomes the integral $\\int_a^b f(x)\\,dx$, and the exact total change is captured by $F(b)-F(a)$.  \n\n> **In daily life:** Imagine filling a bathtub. The water flow rate $r(t)$ (liters per minute) is like a derivative. The amount of water that has entered after $t$ minutes is the integral $\\int_0^{t} r(s)\\,ds$. The FTC tells us that if we know a function $R(t)$ whose rate of change is $r(t)$, then the water volume at time $t$ is simply $R(t)-R(0)$.  \n\nThe theorem has two parts. The first part guarantees that the integral of a continuous function produces an antiderivative. The second part, the formula shown above, lets us evaluate a definite integral by finding any antiderivative $F$. This is why we often write  \n\n$$\\int_{a}^{b} f(x)\\,dx = \\bigl[\\,F(x)\\,\\bigr]_{a}^{b} = F(b)-F(a).$$  \n\nHere the brackets $[\\,\\,]_{a}^{b}$ remind us to plug in the upper limit $b$ and subtract the value at the lower limit $a$.\n\n> **Note:** The function $F$ does not have to be the *only* antiderivative; any one works because any two antiderivatives differ by a constant, and that constant cancels when we compute $F(b)-F(a)$.  \n\nUnderstanding the FTC gives us a powerful bridge:  \n\n* From a **rate** (derivative) we can find the **total amount** (integral).  \n* From a **total amount** we can recover the **average rate** by dividing by the interval length:  \n  $$\\text{average rate} = \\frac{1}{b-a}\\int_{a}^{b} f(x)\\,dx.$$  \n\n> **Common mistake:** Forgetting to add the “$+C$” when finding an antiderivative for an *indefinite* integral, and then using that incomplete $F$ in the FTC formula. The constant cancels in a definite integral, but you must still write it when solving for $F$ first.  \n\nBecause the FTC links differentiation and integration, we can choose the tool that best matches the problem. If a problem gives us a rate and asks for total change, we integrate. If it gives us a total change and asks for the rate at a point, we differentiate.  \n\n> **Remember:** The Fundamental Theorem of Calculus tells us that *adding up tiny changes* (integration) exactly reverses *measuring an instant’s change* (differentiation). This symmetry is the heart of calculus and will appear again whenever we move between motion, growth, area, or any situation where rates and totals interact.",
    "code": ""
   },
   {
-   "heading": "Focusing in Differentiation",
-   "body": "When we **differentiate**, the goal is to find the rate at which a *specific* part of the expression changes.  \nOften an expression contains pieces that are constant with respect to the variable we are differentiating.  \nBy **focusing** on the part that actually varies, we can ignore the rest and avoid unnecessary work.\n\n---\n\n### Spot the variable\n\n1. **Identify the independent variable** (usually $x$ or $t$).  \n2. **Mark every factor that contains this variable**. Anything that does not contain it is a constant for the purpose of differentiation.  \n\n*Example:* In $f(x)=5x^2\\sin(3)$, the factor $\\sin(3)$ is a constant because it does not involve $x$. The whole function simplifies to $f(x)=5\\sin(3)\\,x^2$, and we only need to differentiate $x^2$.\n\n---\n\n### Product rule with focus\n\nIf $f(x)=g(x)\\,h(x)$, the product rule says  \n\n$$\\frac{d}{dx}[g(x)h(x)]=g'(x)h(x)+g(x)h'(x).$$  \n\nWhen one factor is constant, its derivative is $0$, and the rule collapses to a single term.\n\n**Worked example**\n\nDifferentiate  \n\n$$F(x)=\\bigl(4x^3+2\\bigr)\\,\\bigl(7\\bigl)\\bigr).$$  \n\n1. **Identify the variable:** $x$ appears only in the first factor $4x^3+2$.  \n2. **Treat the second factor as constant:** $7$ has derivative $0$.  \n3. Apply the product rule:  \n\n\\[\n\\begin{aligned}\nF'(x) &= (4x^3+2)'\\cdot 7 + (4x^3+2)\\cdot 7' \\\\\n      &= (12x^2)\\cdot 7 + (4x^3+2)\\cdot 0 \\\\\n      &= 84x^2.\n\\end{aligned}\n\\]\n\nThe whole differentiation reduces to differentiating the *only* variable‑dependent factor.\n\n---\n\n### Chain rule with focus\n\nFor a composition $f(x)=\\phi\\bigl(g(x)\\bigr)$, the chain rule gives  \n\n$$f'(x)=\\phi'\\bigl(g(x)\\bigr)\\,g'(x).$$  \n\nIf $\\phi$ is a simple constant factor, we can pull it out first.\n\n**Worked example**\n\nDifferentiate  \n\n$$H(x)=3\\bigl(\\cos(5x^2)\\bigr).$$  \n\n1. **Separate constant:** $3$ is constant.  \n2. Apply the chain rule to $\\cos(5x^2)$:  \n\n\\[\n\\begin{aligned}\n\\frac{d}{dx}\\cos(5x^2) &= -\\sin(5x^2)\\cdot (5x^2)' \\\\\n                        &= -\\sin(5x^2)\\cdot 10x.\n\\end{aligned}\n\\]\n\n3. Multiply by the constant $3$:  \n\n\\[\nH'(x)=3\\bigl[-\\sin(5x^2)\\cdot 10x\\bigr]= -30x\\sin(5x^2).\n\\]\n\nAgain, the only part we needed to differentiate was the inner function $5x^2$.\n\n---\n\n### Practice problems\n\n**1.** Differentiate $P(x)=\\bigl(2x^4-5x\\bigr)\\,9$.\n\n*Solution:*  \nThe factor $9$ is constant.  \n$P'(x)=9\\,(2x^4-5x)' = 9\\,(8x^3-5)=72x^3-45$.\n\n---\n\n**2.** Differentiate $Q(t)=\\displaystyle 4\\bigl(e^{3t}+1\\bigr)$.\n\n*Solution:*  \nConstant $4$ pulls out.  \n$\\frac{d}{dt}(e^{3t}+1)=3e^{3t}+0=3e^{3t}$.  \nThus $Q'(t)=4\\cdot 3e^{3t}=12e^{3t}$.\n\n---\n\n**3.** Differentiate $R(x)=\\bigl(\\sin x\\bigr)\\,(5)$.\n\n*Solution:*  \n$5$ is constant.  \n$R'(x)=5\\cos x$.\n\n---\n\n**4.** Differentiate $S(x)=\\bigl(x^2+1\\bigr)^3$.\n\n*Solution:*  \nUse the chain rule. Let $u=x^2+1$, so $S=u^3$.  \n$u' = 2x$, and $\\frac{d}{du}u^3 = 3u^2$.  \nTherefore $S'(x)=3u^2\\cdot u' = 3(x^2+1)^2\\cdot 2x = 6x\\,(x^2+1)^2$.\n\n---\n\nBy **focusing** on the variable‑dependent parts and treating everything else as a constant, differentiation becomes a quick, systematic process. This habit saves time and reduces errors, especially in longer expressions.",
+   "heading": "4. Choosing the Right Tool",
+   "body": "When you face a real‑world problem, the first question is **what you want to find out**.  \nIs it how something changes at a single instant, or is it the total amount that has accumulated over a period?  \nThe answer tells you whether a *derivative* or an *integral* (or sometimes both) is the right tool.\n\n> **Definition:** A **derivative** measures the instantaneous rate of change of a quantity.  \n> It answers “how fast?” at a particular moment.\n\n> **Definition:** An **integral** adds up infinitely many tiny pieces to give a total.  \n> It answers “how much in total?” over an interval.\n\nBelow are three brief scenarios. For each we identify the question, choose the appropriate calculus concept, and see why it fits.\n\n---\n\n### 1. Physics – Speed of a falling ball  \n\nA ball is dropped from a height. A sensor records its position $s(t)$ (in meters) at time $t$ (in seconds).  \n**Question:** What is the ball’s speed exactly 2 seconds after release?\n\nSpeed is the rate at which position changes, so we need the derivative of $s(t)$:\n\n$$v(t)=\\frac{ds}{dt}$$  \n\nEvaluating $v(2)$ gives the instantaneous speed at $t=2\\,$s.  \nIf the position function were $s(t)=5t^{2}$, then\n\n$$v(t)=\\frac{d}{dt}(5t^{2})=10t,$$\n\nand $v(2)=20\\,$m/s.  \n\n> **In daily life:** Think of a car’s speedometer. It shows the derivative of the car’s distance‑travelled curve at that exact moment.\n\n---\n\n### 2. Biology – Total nutrient absorbed  \n\nA plant absorbs nutrients from soil at a rate that depends on time: $r(t)$ grams per hour. The rate varies because sunlight and temperature change throughout the day.  \n**Question:** How many grams of nutrient does the plant absorb between 8 am and 2 pm?\n\nHere we need the total amount, so we integrate the rate over the time interval:\n\n$$\\text{Total}=\\int_{8}^{14} r(t)\\,dt.$$  \n\nIf the rate were $r(t)=3+0.5t$ (with $t$ measured in hours after 8 am), then\n\n$$\\int_{8}^{14} (3+0.5t)\\,dt\n= \\Big[3t+0.25t^{2}\\Big]_{8}^{14}\n= (42+49)-(24+16)=51\\text{ grams}.$$\n\n> **Note:** Integration is like adding up the area under the curve of $r(t)$. Each tiny rectangle represents a small amount of nutrient absorbed in a short time slice.\n\n---\n\n### 3. Economics – Marginal profit and total profit  \n\nA company sells widgets. Its profit function $P(q)$ (in dollars) depends on the number $q$ of widgets produced and sold. The **marginal profit** is the derivative $P'(q)$, the extra profit from selling one more widget.  \n**Question A:** What is the extra profit from the 101st widget?  \n**Question B:** What is the total profit from producing the first 200 widgets if the profit at zero production is zero?\n\nFor Question A we use the derivative:\n\n$$\\text{Marginal profit at }q=100 = P'(100).$$  \n\nIf $P(q)=5q-0.01q^{2}$, then $P'(q)=5-0.02q$, so $P'(100)=5-2=3$ dollars.\n\nFor Question B we need the integral of the marginal profit, which recovers the original profit function (up to a constant). Because $P(0)=0$, the constant is zero:\n\n$$P(200)=\\int_{0}^{200} P'(q)\\,dq.$$\n\nCarrying out the integral gives the same $P(200)$ as plugging directly into $P(q)$.\n\n> **Remember:** In economics, the derivative gives *marginal* quantities (change per extra unit), while the integral gives the *total* accumulated quantity.\n\n---\n\n### Putting it together  \n\n- Use a **derivative** when the problem asks for a rate, slope, or instantaneous change.  \n- Use an **integral** when the problem asks for a total amount, accumulated quantity, or area under a curve.  \n- Some problems require both: first differentiate to find a rate, then integrate that rate to recover the total.\n\nBy matching the question’s wording to these ideas, you can quickly decide which calculus tool will give the answer you need.",
    "code": ""
   },
   {
-   "heading": "Focusing in Integration",
-   "body": "When you **integrate**, the hardest part is often spotting which *technique* will make the problem easy.  \nThink of the integrand as a sentence: some words belong together and hint at a particular rule.  \nThe goal of **focus** is to isolate that “keyword” part, apply the right method, and then bring the rest back in.\n\n---\n\n### 1. Look for a **substitution** pattern  \n\nA substitution works when the integrand contains a function *and* its derivative (up to a constant).  \nTypical clues:\n\n* A factor like $f'(x)$ multiplied by $f(x)$, e.g. $\\int 2x\\cos(x^2)\\,dx$.\n* A composite function where the inner part’s derivative is present, e.g. $\\int \\frac{e^{3x}}{1+e^{6x}}\\,dx$.\n\n**Step‑by‑step**\n\n1. Identify a piece $u = g(x)$ whose derivative $g'(x)$ also appears.\n2. Rewrite $dx = \\frac{du}{g'(x)}$ and replace every $g(x)$ by $u$.\n3. Integrate in $u$, then substitute back $u=g(x)$.\n\n---\n\n### 2. Spot a **integration‑by‑parts** (IBP) situation  \n\nIBP is useful when the integrand is a product of a *polynomial‑type* factor and a *trigonometric, exponential, or logarithmic* factor.  \nThe mnemonic **LIATE** (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) helps choose $u$ (the part to differentiate) and $dv$ (the part to integrate).\n\n**Step‑by‑step**\n\n1. Write the integrand as $u\\,dv$.\n2. Compute $du = u'\\,dx$ and $v = \\int dv$.\n3. Apply $\\displaystyle \\int u\\,dv = uv - \\int v\\,du$.\n4. Simplify; sometimes a second IBP is needed.\n\n---\n\n### 3. Detect a **partial‑fraction** (PF) case  \n\nPF works for rational functions where the denominator factors into linear or irreducible quadratics and the degree of the numerator is lower than the denominator.\n\n**Step‑by‑step**\n\n1. Ensure the fraction is *proper*; if not, perform polynomial long division first.\n2. Factor the denominator completely.\n3. Write the fraction as a sum of unknown constants (or linear terms) over each factor.\n4. Solve for the constants (by equating coefficients or plugging convenient $x$ values).\n5. Integrate each simple term; $\\int \\frac{1}{x-a}\\,dx = \\ln|x-a|$, $\\int \\frac{1}{x^2+b^2}\\,dx = \\frac{1}{b}\\arctan\\frac{x}{b}$, etc.\n\n---\n\n### 4. Worked example – **choose the right technique**\n\n\\[\n\\int \\frac{x\\;e^{x^2}}{1+e^{2x^2}}\\,dx\n\\]\n\n**Step 1 – Look for substitution.**  \nThe denominator contains $e^{2x^2} = (e^{x^2})^2$.  \nLet  \n\n\\[\nu = e^{x^2}\\qquad\\Rightarrow\\qquad du = 2x e^{x^2}\\,dx.\n\\]\n\nOur integrand has $x e^{x^2}\\,dx$, which is $\\frac12 du$.\n\n**Step 2 – Rewrite the integral.**\n\n\\[\n\\int \\frac{x e^{x^2}}{1+e^{2x^2}}\\,dx\n   = \\int \\frac{\\frac12\\,du}{1+u^{2}}\n   = \\frac12\\int \\frac{du}{1+u^{2}}.\n\\]\n\n**Step 3 – Integrate in $u$.**\n\n\\[\n\\frac12\\int \\frac{du}{1+u^{2}} = \\frac12\\arctan u + C.\n\\]\n\n**Step 4 – Substitute back.**\n\n\\[\n\\boxed{\\displaystyle \\int \\frac{x e^{x^2}}{1+e^{2x^2}}\\,dx\n      = \\frac12\\arctan\\!\\big(e^{x^2}\\big)+C }.\n\\]\n\nThe key was **focusing** on the piece $e^{x^2}$ whose derivative $2x e^{x^2}$ appeared.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\int \\frac{3x^2}{(x^3+2)^4}\\,dx\n\\]\n\n**Solution**  \nLet $u = x^3+2$, $du = 3x^2\\,dx$.  \nIntegral becomes $\\displaystyle \\int u^{-4}\\,du = \\frac{u^{-3}}{-3}+C = -\\frac{1}{3(x^3+2)^3}+C$.\n\n---\n\n### Problem 2  \n\\[\n\\int x\\cos(x^2)\\,dx\n\\]\n\n**Solution**  \nSet $u = x^2$, $du = 2x\\,dx \\;\\Rightarrow\\; x\\,dx = \\tfrac12 du$.  \nIntegral $= \\frac12\\int \\cos u\\,du = \\frac12\\sin u + C = \\frac12\\sin(x^2)+C$.\n\n---\n\n### Problem 3  \n\\[\n\\int \\ln x \\,dx\n\\]\n\n**Solution** (IBP)  \nWrite $u = \\ln x$ (so $du = \\frac{1}{x}dx$) and $dv = dx$ (so $v = x$).  \n\\[\n\\int \\ln x\\,dx = x\\ln x - \\int x\\cdot\\frac{1}{x}\\,dx = x\\ln x - \\int 1\\,dx = x\\ln x - x + C.\n\\]\n\n---\n\n### Problem 4  \n\\[\n\\int \\frac{2x+5}{x^2+5x+6}\\,dx\n\\]\n\n**Solution**  \nDenominator factors: $x^2+5x+6=(x+2)(x+3)$.  \nWrite partial fractions:  \n\n\\[\n\\frac{2x+5}{(x+2)(x+3)} = \\frac{A}{x+2}+\\frac{B}{x+3}.\n\\]\n\nMultiply out: $2x+5 = A(x+3)+B(x+2)$.  \nSet $x=-2$: $2(-2)+5 = A(1) \\Rightarrow A = 1$.  \nSet $x=-3$: $2(-3)+5 = B(-1) \\Rightarrow B = 1$.  \n\nThus integral $= \\int\\!\\left(\\frac{1}{x+2}+\\frac{1}{x+3}\\right)dx = \\ln|x+2|+\\ln|x+3|+C$.\n\n---\n\nThese problems illustrate how **focus** helps you pick the right tool—substitution, integration‑by‑parts, or partial fractions—so the integral becomes straightforward.",
+   "heading": "5. Worked Example: Motion Problem",
+   "body": "Imagine a car moving along a straight road. At any moment we might want to know **how fast** it is going (its instantaneous velocity), **how quickly that speed is changing** (its acceleration), and **how far** it has travelled over a time interval.  \nAll three quantities can be obtained from the same piece of information: the position of the car as a function of time, say  \n\n$$s(t)=5t^{2}+2t+1,$$  \n\nwhere $s$ is measured in meters and $t$ in seconds.\n\n> **Definition:** *Instantaneous velocity* is the limit of the average velocity over a shrinking time interval. It tells us the exact speed at a single instant.\n\n### Step 1 – Find the instantaneous velocity using a limit  \n\nThe average velocity between times $t$ and $t+\\Delta t$ is  \n\n$$\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}.$$\n\nTo get the instantaneous velocity at time $t$, we let the interval $\\Delta t$ become *infinitely small* and take a limit:\n\n$$v(t)=\\lim_{\\Delta t\\to 0}\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}.$$\n\nPlug the given $s(t)$ into the fraction:\n\n\\[\n\\frac{(5(t+\\Delta t)^{2}+2(t+\\Delta t)+1)-(5t^{2}+2t+1)}{\\Delta t}\n\\]\n\nExpand the numerator:\n\n\\[\n\\frac{5(t^{2}+2t\\Delta t+(\\Delta t)^{2})+2t+2\\Delta t+1-5t^{2}-2t-1}{\\Delta t}\n= \\frac{10t\\Delta t+5(\\Delta t)^{2}+2\\Delta t}{\\Delta t}.\n\\]\n\nCancel $\\Delta t$:\n\n\\[\n10t+5\\Delta t+2.\n\\]\n\nNow let $\\Delta t\\to 0$:\n\n$$v(t)=10t+2.$$\n\nSo at any moment $t$, the car’s velocity is $10t+2$ meters per second.\n\n> **In daily life:** This is like checking a speedometer that updates continuously; the limit process is the math behind that smooth reading.\n\n### Step 2 – Differentiate to obtain acceleration  \n\nAcceleration tells us how fast the velocity itself is changing. It is the derivative of $v(t)$ with respect to $t$:\n\n$$a(t)=\\frac{dv}{dt}.$$\n\nSince $v(t)=10t+2$, differentiate term by term:\n\n$$a(t)=10.$$\n\nThe acceleration is constant: the car speeds up by $10\\ \\text{m/s}^2$ at every instant.\n\n> **Note:** Differentiation is the formal name for the limit process we used earlier. Once we have a formula for velocity, taking its derivative gives acceleration directly.\n\n### Step 3 – Integrate to find the distance travelled  \n\nSuppose we want the total distance the car travels from $t=0$ to $t=3$ seconds. Integration is the reverse of differentiation: it adds up infinitely many tiny pieces of motion. The distance $D$ is\n\n$$D=\\int_{0}^{3} v(t)\\,dt.$$\n\nInsert $v(t)=10t+2$:\n\n$$D=\\int_{0}^{3} (10t+2)\\,dt.$$\n\nIntegrate term by term:\n\n\\[\n\\int (10t)\\,dt =5t^{2},\\qquad \\int 2\\,dt =2t.\n\\]\n\nThus  \n\n$$D=\\Bigl[5t^{2}+2t\\Bigr]_{0}^{3}= \\bigl(5\\cdot 3^{2}+2\\cdot 3\\bigr)-\\bigl(5\\cdot0^{2}+2\\cdot0\\bigr)=45+6=51\\ \\text{meters}.$$\n\n> **Common mistake:** Forgetting to evaluate the antiderivative at both limits. Always subtract the value at the lower limit from the value at the upper limit.\n\n### Putting it all together  \n\n1. **Limit** → instantaneous velocity $v(t)=10t+2$.  \n2. **Derivative** (differentiating $v$) → constant acceleration $a(t)=10$.  \n3. **Integral** (adding up $v$ over time) → total distance $51\\,$m from $0$ to $3\\,$s.\n\n> **Remember:** Limits, derivatives, and integrals are three faces of the same idea—how quantities change and accumulate. Mastering each step lets you move smoothly from position → velocity → acceleration, and back from velocity → distance.",
    "code": ""
   },
   {
-   "heading": "Applying Focus to Real‑World Problems",
-   "body": "**Applying Focus to Real‑World Problems**\n\nIn many applications we are not interested in the whole function, but in a *specific* quantity that tells us what we need.  By **focusing** on the right variable we can turn a complicated problem into a simple one.\n\n---\n\n### Physics – Velocity from Position  \n\nSuppose a particle moves along a line with position (in metres) given by  \n\n\\[\ns(t)=4t^{3}-3t^{2}+2t .\n\\]\n\nWe want its **instantaneous velocity** at \\(t=2\\) s.  \nThe velocity is the derivative of position, so we *focus* on the limit that defines the derivative:\n\n\\[\nv(2)=\\lim_{h\\to 0}\\frac{s(2+h)-s(2)}{h}.\n\\]\n\n**Step‑by‑step**\n\n1. Compute \\(s(2)=4(2)^{3}-3(2)^{2}+2(2)=32-12+4=24\\).  \n2. Expand \\(s(2+h)=4(2+h)^{3}-3(2+h)^{2}+2(2+h)\\).  \n   \\[\n   \\begin{aligned}\n   (2+h)^{3}&=8+12h+6h^{2}+h^{3},\\\\\n   (2+h)^{2}&=4+4h+h^{2}.\n   \\end{aligned}\n   \\]\n   Hence  \n   \\[\n   s(2+h)=4(8+12h+6h^{2}+h^{3})-3(4+4h+h^{2})+2(2+h).\n   \\]\n3. Simplify:  \n   \\[\n   s(2+h)=32+48h+24h^{2}+4h^{3}-12-12h-3h^{2}+4+2h\n   =24+38h+21h^{2}+4h^{3}.\n   \\]\n4. Form the difference quotient:  \n   \\[\n   \\frac{s(2+h)-s(2)}{h}= \\frac{(24+38h+21h^{2}+4h^{3})-24}{h}\n   =\\frac{38h+21h^{2}+4h^{3}}{h}=38+21h+4h^{2}.\n   \\]\n5. Take the limit as \\(h\\to0\\):  \n   \\[\n   v(2)=\\lim_{h\\to0}(38+21h+4h^{2})=38\\ \\text{m/s}.\n   \\]\n\nBy **focusing** on the derivative limit we avoided differentiating the whole polynomial first; the algebraic cancellation became immediate.\n\n---\n\n### Biology – Growth Rate of a Species  \n\nA bacterial colony follows the logistic model  \n\n\\[\nP(t)=\\frac{500}{1+9e^{-0.6t}},\n\\]\n\nwhere \\(P\\) is the population after \\(t\\) days.  The **instantaneous growth rate** is \\(P'(t)\\).  Rather than differentiate the whole fraction, we focus on the *exponential part*.\n\nLet \\(u(t)=1+9e^{-0.6t}\\).  Then \\(P(t)=500\\,u^{-1}\\) and  \n\n\\[\nP'(t)=500\\cdot(-1)u^{-2}\\,u'(t).\n\\]\n\nCompute \\(u'(t)=9(-0.6)e^{-0.6t}=-5.4e^{-0.6t}\\).  Thus  \n\n\\[\nP'(t)= -500\\,\\frac{-5.4e^{-0.6t}}{(1+9e^{-0.6t})^{2}}\n      =\\frac{2700e^{-0.6t}}{(1+9e^{-0.6t})^{2}}.\n\\]\n\nAt \\(t=3\\) days, \\(e^{-0.6\\cdot3}=e^{-1.8}\\approx0.165\\).  \n\n\\[\nP'(3)=\\frac{2700(0.165)}{(1+9\\cdot0.165)^{2}}\n      =\\frac{445.5}{(1+1.485)^{2}}\n      =\\frac{445.5}{2.485^{2}}\n      \\approx\\frac{445.5}{6.18}\\approx72.1\\ \\text{cells/day}.\n\\]\n\nFocusing on the inner exponential reduced the differentiation to a single product‑rule step.\n\n---\n\n### Economics – Marginal Cost  \n\nA factory’s total cost (in dollars) for producing \\(q\\) units is  \n\n\\[\nC(q)=0.02q^{3}-0.9q^{2}+150q+500.\n\\]\n\nThe **marginal cost** is \\(C'(q)\\).  Instead of expanding the whole cubic, we focus on the power rule:\n\n\\[\nC'(q)=0.02\\cdot3q^{2}-0.9\\cdot2q+150=0.06q^{2}-1.8q+150.\n\\]\n\nFor \\(q=20\\) units,  \n\n\\[\nC'(20)=0.06(400)-1.8(20)+150=24-36+150=138\\ \\text{dollars per unit}.\n\\]\n\nHere the focus on the derivative turned a costly algebraic expansion into a few straightforward multiplications.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** A car’s position is \\(s(t)=5t^{2}+3t\\) metres. Find its velocity at \\(t=4\\) s.  \n\n   **Solution:**  \n   \\[\n   v(t)=\\frac{d}{dt}s(t)=10t+3\\;\\Rightarrow\\;v(4)=10(4)+3=43\\ \\text{m/s}.\n   \\]\n\n2. **Problem:** A population follows \\(P(t)=\\frac{200}{1+4e^{-0.5t}}\\). Compute the growth rate at \\(t=2\\).  \n\n   **Solution:**  \n   Set \\(u=1+4e^{-0.5t}\\). Then \\(P=200u^{-1}\\) and \\(u'=-2e^{-0.5t}\\).  \n   \\[\n   P' =200(-1)u^{-2}u' =\\frac{400e^{-0.5t}}{(1+4e^{-0.5t})^{2}}.\n   \\]  \n   At \\(t=2\\), \\(e^{-1}=0.3679\\).  \n   \\[\n   P'(2)=\\frac{400(0.3679)}{(1+4\\cdot0.3679)^{2}}\n        =\\frac{147.2}{(1+1.4716)^{2}}\n        =\\frac{147.2}{2.4716^{2}}\n        \\approx\\frac{147.2}{6.11}\\approx24.1\\ \\text{units/time}.\n   \\]\n\n3. **Problem:** Total cost \\(C(q)=0.01q^{3}+0.5q^{2}+30q+200\\). Find marginal cost when \\(q=15\\).  \n\n   **Solution:**  \n   \\[\n   C'(q)=0.03q^{2}+1.0q+30\\;\\Rightarrow\\;C'(15)=0.03(225)+15+30=6.75+15+30=51.75.\n   \\]\n\n4. **Problem:** A projectile’s height is \\(h(t)= -4.9t^{2}+20t+5\\) metres. Determine the instant when the height is increasing fastest.  \n\n   **Solution:**  \n   Velocity \\(v(t)=h'(t)=-9.8t+20\\). Acceleration \\(a(t)=v'(t)=-9.8\\) (constant negative).  \n   Since acceleration is negative, the velocity is decreasing; the maximum height increase occurs at the start, \\(t=0\\).  \n   At \\(t=0\\), \\(v(0)=20\\ \\text{m/s}\\) – the greatest upward speed.  \n\nThese examples show how **focusing** on the relevant derivative or limit streamlines calculations across physics, biology, and economics.",
+   "heading": "6. Worked Example: Population Growth",
+   "body": "Imagine a town where the number of people does not grow forever. At first, when there are few residents, each family can have many children, so the population rises quickly. As the town becomes crowded, there is less space, food, and jobs, so the growth slows down and eventually levels off.  \nThis idea is captured by the **logistic model**, a simple formula that describes how a population changes over time while respecting a maximum size, called the *carrying capacity*.\n\n> **Definition:** The *carrying capacity* $K$ is the largest population that the environment can sustain indefinitely.\n\n---\n\n### 1. From a limit to the growth rate  \n\nThe *instantaneous growth rate* tells us how fast the population is changing at a particular moment. Mathematically, it is the limit of the average change over a very short time interval.\n\nIf $P(t)$ is the population at time $t$, the average change from $t$ to $t+\\Delta t$ is  \n\n$$\\frac{P(t+\\Delta t)-P(t)}{\\Delta t}.$$\n\nTaking the limit as $\\Delta t\\to 0$ gives the **derivative**:\n\n$$\\frac{dP}{dt}=\\lim_{\\Delta t\\to 0}\\frac{P(t+\\Delta t)-P(t)}{\\Delta t}.$$\n\nThis derivative is the instantaneous growth rate, measured in people per unit time.\n\n> **Note:** A derivative is just a precise way of saying “how fast something is changing right now”.\n\n---\n\n### 2. Writing the logistic differential equation  \n\nThe logistic model assumes two things:\n\n1. When the population is small, it grows proportionally to its current size. This gives a term $rP$, where $r$ is the *intrinsic growth rate* (how fast the population would grow without limits).\n2. As the population approaches $K$, the growth slows down. The slowdown is proportional to both the current size $P$ and the fraction of unused capacity $\\left(1-\\frac{P}{K}\\right)$.\n\nCombining these ideas, the *logistic differential equation* is  \n\n$$\\frac{dP}{dt}=rP\\left(1-\\frac{P}{K}\\right).$$\n\nHere $r>0$ and $K>0$ are constants that depend on the species and environment.\n\n> **In daily life:** Think of a bathtub filling with water. The faucet supplies water at a constant rate, but as the tub fills, the water level rises more slowly because the space left is smaller. The logistic equation works the same way for populations.\n\n---\n\n### 3. Solving the differential equation (finding $P(t)$)\n\nTo predict the future population, we need to *integrate* the equation. First, separate the variables $P$ and $t$:\n\n$$\\frac{1}{P\\left(1-\\frac{P}{K}\\right)}\\,dP = r\\,dt.$$\n\nThe left side can be split using partial fractions:\n\n$$\\frac{1}{P\\left(1-\\frac{P}{K}\\right)}=\\frac{1}{P}+\\frac{1}{K-P}.$$\n\nNow integrate both sides:\n\n$$\\int\\left(\\frac{1}{P}+\\frac{1}{K-P}\\right)dP = \\int r\\,dt.$$\n\nCarrying out the integrals gives\n\n$$\\ln|P| - \\ln|K-P| = rt + C,$$\n\nwhere $C$ is the constant of integration, determined by the initial population $P(0)=P_0$.\n\nCombine the logarithms:\n\n$$\\ln\\left(\\frac{P}{K-P}\\right)=rt + C.$$\n\nExponentiate to remove the log:\n\n$$\\frac{P}{K-P}=Ae^{rt},\\qquad A=e^{C}.$$\n\nSolve for $P$:\n\n$$P(t)=\\frac{K\\,Ae^{rt}}{1+Ae^{rt}}.$$\n\nUse the initial condition $P(0)=P_0$ to find $A$:\n\n$$\\frac{P_0}{K-P_0}=A,$$\n\nso $A=\\frac{P_0}{K-P_0}$. Substituting back,\n\n$$\\boxed{\\,P(t)=\\frac{K}{1+\\left(\\frac{K-P_0}{P_0}\\right)e^{-rt}}\\,}.$$\n\nThis formula predicts the population at any future time $t$.\n\n> **Remember:** The logistic curve starts near exponential growth, then bends and approaches the horizontal line $P=K$ as $t\\to\\infty$.\n\n---\n\n### 4. Using the model: a concrete example  \n\nSuppose a wildlife reserve can support at most $K=10{,}000$ deer. The intrinsic growth rate is $r=0.4$ per year, and the current population is $P_0=1{,}000$ deer.\n\nFirst compute the factor $\\frac{K-P_0}{P_0}= \\frac{9{,}000}{1{,}000}=9$.\n\nThe population after $t$ years is\n\n$$P(t)=\\frac{10{,}000}{1+9e^{-0.4t}}.$$\n\nIf we want the population after 5 years, plug in $t=5$:\n\n$$P(5)=\\frac{10{,}000}{1+9e^{-2}} \\approx \\frac{10{,}000}{1+9(0.135)} \\approx \\frac{10{,}000}{2.215} \\approx 4{,}514\\text{ deer}.$$\n\nThe model shows rapid growth at first, then a slowdown as the reserve fills.\n\n> **Common mistake:** Forgetting to include the factor $\\left(1-\\frac{P}{K}\\right)$ leads to the simple exponential model, which predicts unlimited growth—unrealistic for most real‑world populations.\n\n---\n\nBy defining the growth rate with a limit, turning the logistic idea into a differential equation, and then integrating, we obtain a powerful tool for forecasting how populations evolve over time. This step‑by‑step process mirrors many problems in calculus: start with a real‑world description, translate it into mathematics, and use limits, derivatives, and integrals to find answers.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "What is **Focus** in Calculus?  \nIn many problems we are asked to find a limit, a derivative, or an integral, but the expression often contains several parts that are not needed for the final answer. **Focus** means identifying the part of the expression that actually determines the result and ignoring the rest. By “zooming in’’ on the relevant piece we simplify the algebra and avoid unnecessary work.\n\n### Choosing the Right Variable  \nWhen a function involves several variables, pick the one that changes while the others stay constant. For a limit like  \n\n$$\\lim_{x\\to 2}\\frac{x^2-4}{x-2},$$  \n\nthe **focus** is the factor that becomes zero in the denominator, i.e., the term $(x-2)$.  \n\n### Focusing When Computing Limits  \n**Example (fully worked):**  \n\nFind  \n\n$$\\lim_{x\\to 3}\\frac{x^3-27}{x-3}.$$  \n\n1. **Identify the focus.** The denominator $x-3$ goes to $0$, so we look for the same factor in the numerator.  \n2. **Factor the numerator:**  \n\n   $$x^3-27 = (x-3)(x^2+3x+9)$$  \n\n   (difference of cubes).  \n3. **Cancel the common factor:**  \n\n   $$\\frac{(x-3)(x^2+3x+9)}{x-3}=x^2+3x+9,$$  \n\n   for $x\\neq 3$.  \n4. **Evaluate the remaining expression at $x=3$:**  \n\n   $$3^2+3\\cdot3+9 = 9+9+9 = 27.$$  \n\nHence  \n\n$$\\boxed{ \\displaystyle \\lim_{x\\to 3}\\frac{x^3-27}{x-3}=27 }.$$  \n\nThe focus was the factor $(x-3)$; once it was removed the limit became trivial.\n\n### Focusing in Differentiation  \nWhen differentiating a product, the **focus** is often the factor that contains the variable we are differentiating with respect to. For  \n\n$$f(x)= (x^2+1)\\sin x,$$  \n\nthe derivative is  \n\n$$f'(x)=2x\\sin x+(x^2+1)\\cos x,$$  \n\nwhere each term comes from focusing on one factor at a time (product rule).\n\n### Focusing in Integration  \nIn an integral like  \n\n$$\\int \\frac{2x}{x^2+1}\\,dx,$$  \n\nthe substitution $u=x^2+1$ makes the **focus** the denominator. With $du=2x\\,dx$ the integral becomes  \n\n$$\\int \\frac{1}{u}\\,du = \\ln|u|+C = \\ln(x^2+1)+C.$$\n\n### Applying Focus to Real‑World Problems  \nSuppose a tank drains at a rate $R(t)=\\frac{5}{t+2}$ liters per minute. To find the total volume lost from $t=0$ to $t=4$, we integrate  \n\n$$\\int_0^4 \\frac{5}{t+2}\\,dt.$$  \n\nThe **focus** is the denominator $t+2$; a simple substitution $u=t+2$ gives  \n\n$$5\\ln|t+2|\\Big|_0^4 =5\\big(\\ln6-\\ln2\\big)=5\\ln3.$$\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nFind  \n\n$$\\lim_{x\\to 1}\\frac{x^4-1}{x-1}.$$  \n\n**Solution:**  \nFactor $x^4-1=(x-1)(x^3+x^2+x+1)$. Cancel $(x-1)$ and evaluate the remaining polynomial at $x=1$:  \n\n$$1+1+1+1=4.$$  \n\nSo the limit is **4**.\n\n### Problem 2  \nDifferentiate  \n\n$$g(x)=\\frac{x^2}{\\sqrt{x+1}}.$$  \n\n**Solution:**  \nWrite $g(x)=x^2 (x+1)^{-1/2}$. Use the product rule, focusing on each factor:  \n\n$$g'(x)=2x (x+1)^{-1/2}+x^2\\left(-\\frac12\\right)(x+1)^{-3/2}.$$  \n\nCombine:  \n\n$$g'(x)=\\frac{2x}{\\sqrt{x+1}}-\\frac{x^2}{2(x+1)^{3/2}}.$$\n\n### Problem 3  \nEvaluate  \n\n$$\\int \\frac{3x}{x^2+4}\\,dx.$$  \n\n**Solution:**  \nLet $u=x^2+4$, then $du=2x\\,dx$. Rewrite $3x\\,dx=\\frac32\\,du$. The integral becomes  \n\n$$\\frac32\\int \\frac{1}{u}\\,du =\\frac32\\ln|u|+C =\\frac32\\ln(x^2+4)+C.$$\n\n### Problem 4  \nA car’s speed is $v(t)=\\frac{60}{t+2}$ km/h for $0\\le t\\le 3$ hours. Find the distance traveled.  \n\n**Solution:**  \nDistance $= \\displaystyle\\int_0^3 \\frac{60}{t+2}\\,dt$.  \nFocus on the denominator: set $u=t+2$, $du=dt$. Limits change: $u(0)=2$, $u(3)=5$.  \n\n$$\\int_2^5 \\frac{60}{u}\\,du =60\\ln u\\Big|_2^5 =60(\\ln5-\\ln2)=60\\ln\\frac{5}{2}\\ \\text{km}.$$  \n\nEach problem first isolates the **focus** (the part that drives the computation) and then proceeds with the standard technique.",
+   "heading": "7. Reflection and Practice",
+   "body": "Reflection and practice are the best ways to turn new ideas into lasting skills.  \nIn this part you will see how a problem can be broken into three clear stages:\n\n1. **Limit** – find the instantaneous rate or the behaviour at a point.  \n2. **Derivative** – turn that limit into a formula that works for any $x$.  \n3. **Integral** – use the derivative (or its inverse) to accumulate change over an interval.\n\nWhen you can recognise which stage you are in, you can choose the right tool – just like picking the right screwdriver for a screw.\n\n> **Remember:** The three steps are a *sequence*: limit → derivative → integral.  \n> If you skip a step, you may end up with an answer that looks right but is actually based on a hidden assumption.\n\nBelow is a mixed problem set. For each question, follow the guide:\n\n* **Step 1 – Identify the limit.** Write down the limit expression that describes the situation.  \n* **Step 2 – Compute the derivative.** Turn the limit into a derivative function $f'(x)$.  \n* **Step 3 – Set up the integral.** Decide what quantity you need to add up (area, total change, etc.) and write the appropriate integral.  \n* **Step 4 – Check.** Plug the result back into the original story to see if it makes sense.\n\n---\n\n### Problem 1: Speed of a car\n\nA car’s position along a straight road is given by $s(t)=3t^{2}+2t$ meters, where $t$ is time in seconds.\n\n1. **Limit:** Write the limit that defines the car’s instantaneous speed at time $t=4$ seconds.  \n2. **Derivative:** Compute $s'(t)$, the speed function.  \n3. **Integral:** Find the total distance traveled from $t=2$ s to $t=5$ s by integrating the speed.  \n\n*Hint:* The distance is $\\displaystyle\\int_{2}^{5} s'(t)\\,dt$.\n\n---\n\n### Problem 2: Water flowing into a tank\n\nWater flows into a cylindrical tank at a rate that changes with time: the flow rate (in liters per minute) is $r(t)=5\\sin(t)+10$, where $t$ is minutes after the tap is opened.\n\n1. **Limit:** Express the instantaneous flow rate at $t=\\pi$ minutes as a limit.  \n2. **Derivative:** The flow rate itself is already a function of $t$, so $r'(t)$ would represent how the flow rate is changing. Compute $r'(t)$.  \n3. **Integral:** How many liters are in the tank after 4 minutes? Use an integral of $r(t)$ from $0$ to $4$.  \n\n*Check:* The answer should be a positive number; if you obtain a negative, you have likely reversed the limits.\n\n---\n\n### Problem 3: Bacterial population\n\nA bacterial culture grows according to $P(t)=P_{0}e^{0.3t}$, where $P_{0}=200$ cells and $t$ is measured in hours.\n\n1. **Limit:** Write the limit that gives the instantaneous growth rate at $t=3$ h.  \n2. **Derivative:** Find $P'(t)$, the rate at which the number of cells changes.  \n3. **Integral:** Suppose you want the total increase in cell count from $t=0$ to $t=5$ h. Set up and evaluate the integral of $P'(t)$.  \n\n$$\\int_{0}^{5} P'(t)\\,dt = P(5)-P(0)$$  \n\n*Why this works:* Integrating the derivative over an interval gives the net change of the original function.\n\n---\n\n### Problem 4: Temperature change\n\nThe temperature in a room (in °C) varies with time according to $T(t)=20+4\\cos\\!\\left(\\frac{\\pi t}{12}\\right)$, where $t$ is hours after midnight.\n\n1. **Limit:** Write the limit that would give the instantaneous rate of temperature change at $t=6$ h.  \n2. **Derivative:** Compute $T'(t)$.  \n3. **Integral:** How much does the temperature increase or decrease between $t=0$ and $t=12$? Use the integral of $T'(t)$.  \n\n*Interpretation:* A positive integral means overall warming; a negative integral means overall cooling.\n\n---\n\n### How to check your work\n\n- **Units:** Make sure the units match at each step (e.g., meters per second for speed, liters for volume).  \n- **Reasonableness:** Ask yourself if the number seems plausible. A car traveling at $1000\\,$m/s is unrealistic, so you probably made an algebra slip.  \n- **Reverse step:** After integrating, differentiate your answer. You should get back the original derivative function (up to a constant).  \n\n> **In daily life:** Think of the three steps like a recipe. The limit is tasting a single bite to know the flavor, the derivative is writing down the full recipe, and the integral is cooking the whole meal and measuring how much you end up with.\n\nWork through each problem slowly, writing out every limit, derivative, and integral. When you finish, compare your answers with a classmate or the answer key. The more you practice spotting the sequence, the quicker you’ll know which tool to reach for next time.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Linear Motion – Finding Velocity",
+   "given": "A car travels along a straight road with position $s(t)=5t^{2}+2t$ (meters) at time $t$ seconds. Find the instantaneous velocity at $t=3\\ \\text{s}$.",
+   "steps": [
+    {
+     "label": "Differentiate Position",
+     "text": "Compute $v(t)=\\dfrac{ds}{dt}=10t+2$ using the power rule, because velocity is the derivative of position."
+    },
+    {
+     "label": "Evaluate at $t=3$",
+     "text": "Substitute $t=3$ into $v(t)$: $v(3)=10(3)+2=32$."
+    }
+   ],
+   "answer": "The car’s instantaneous velocity at $3\\ \\text{s}$ is $32\\ \\text{m/s}$. ---"
+  },
+  {
+   "level": "Medium",
+   "title": "Population Growth – Choosing a Model",
+   "given": "A town’s population $P(t)$ (in thousands) follows $P(t)=P_{0}e^{kt}$, where $t$ is years after 2020. In 2020, $P_{0}=50$. After 5 years, the population is $65$ thousand. Determine the growth rate $k$ and predict the population in 2030.",
+   "steps": [
+    {
+     "label": "Set up equation",
+     "text": "Use $P(5)=50e^{5k}=65$ to relate known values."
+    },
+    {
+     "label": "Solve for $k$",
+     "text": "Divide by 50: $e^{5k}=1.3$. Take natural log: $5k=\\ln 1.3$, so $k=\\dfrac{\\ln 1.3}{5}$."
+    },
+    {
+     "label": "Compute $k$",
+     "text": "$k\\approx\\dfrac{0.262364}{5}=0.0525\\ \\text{yr}^{-1}$."
+    },
+    {
+     "label": "Predict 2030 population",
+     "text": "$t=10$ years: $P(10)=50e^{10k}=50e^{10(0.0525)}\\approx50e^{0.525}\\approx50(1.690)=84.5$."
+    }
+   ],
+   "answer": "The growth rate is $k\\approx0.0525\\ \\text{yr}^{-1}$ and the predicted 2030 population is about $84.5$ thousand people. ---"
+  },
+  {
+   "level": "Hard",
+   "title": "Optimizing Cost – Choosing the Right Tool",
+   "given": "A company can produce a widget either by manual labor (cost $C_m(x)=20x+500$ dollars for $x$ units) or by an automated machine (cost $C_a(x)=15x+1200$ dollars). Determine for which production levels $x$ the manual method is cheaper, and find the break‑even point where both costs are equal.",
+   "steps": [
+    {
+     "label": "Set costs equal",
+     "text": "Solve $20x+500=15x+1200$ to find the break‑even quantity."
+    },
+    {
+     "label": "Isolate $x$",
+     "text": "Subtract $15x$ from both sides: $5x+500=1200$. Then subtract 500: $5x=700$."
+    },
+    {
+     "label": "Compute break‑even $x$",
+     "text": "$x=\\dfrac{700}{5}=140$ units."
+    },
+    {
+     "label": "Compare costs for $x<140$",
+     "text": "Choose a test value, e.g., $x=100$: $C_m(100)=20(100)+500=2500$, $C_a(100)=15(100)+1200=2700$. Since $C_m<C_a$, manual is cheaper for $x<140$."
+    },
+    {
+     "label": "Compare costs for $x>140$",
+     "text": "Test $x=200$: $C_m(200)=20(200)+500=4500$, $C_a(200)=15(200)+1200=4200$. Automated is cheaper for $x>140$."
+    }
+   ],
+   "answer": "The manual method is cheaper when producing fewer than $140$ widgets; the automated machine is cheaper when producing more than $140$ widgets. The break‑even point is at $x=140$ units."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $f(x)=3x^2+5x-2$.",
+   "a": "The derivative of a polynomial is found by applying the power rule $ \\frac{d}{dx}[x^n]=nx^{n-1} $.\n- For $3x^2$: $ \\frac{d}{dx}[3x^2]=3\\cdot2x^{2-1}=6x$.\n- For $5x$: $ \\frac{d}{dx}[5x]=5\\cdot1x^{1-1}=5$.\n- For the constant $-2$: $ \\frac{d}{dx}[-2]=0$.\nCombine the terms: $f'(x)=6x+5$."
+  },
+  {
+   "level": "Easy",
+   "q": "Compute $\\displaystyle \\lim_{x\\to 3}\\frac{x^2-9}{x-3}$.",
+   "a": "Factor the numerator: $x^2-9=(x-3)(x+3)$.\nThen $\\displaystyle \\frac{x^2-9}{x-3}=\\frac{(x-3)(x+3)}{x-3}=x+3$, for $x\\neq3$.\nNow take the limit: $\\displaystyle \\lim_{x\\to3}(x+3)=3+3=6$."
+  },
+  {
+   "level": "Medium",
+   "q": "A particle moves along a line with position $s(t)=t^3-6t^2+9t$ (meters) for $t\\ge0$. Find its velocity at $t=2$ seconds and the total distance traveled from $t=0$ to $t=3$ seconds.",
+   "a": "Velocity is the derivative of position: $v(t)=s'(t)=3t^2-12t+9$.\n- At $t=2$: $v(2)=3(2)^2-12(2)+9=12-24+9=-3\\,$m/s.\nTo find total distance, locate where velocity changes sign: solve $v(t)=0$.\n$3t^2-12t+9=0 \\;\\Rightarrow\\; t^2-4t+3=0 \\;\\Rightarrow\\; (t-1)(t-3)=0$, so $t=1$ and $t=3$.\nCheck intervals:\n- $0\\le t<1$: pick $t=0.5$, $v(0.5)=3(0.25)-12(0.5)+9=0.75-6+9=3.75>0$.\n- $1<t<3$: pick $t=2$, $v(2)=-3<0$.\n- $t>3$: $v$ becomes positive again.\nDistance = $\\displaystyle \\int_{0}^{1}v(t)\\,dt -\\int_{1}^{3}v(t)\\,dt$ (subtract because velocity is negative on $[1,3]$).\nCompute antiderivative $S(t)=\\int v(t)dt = t^3-6t^2+9t$ (which is just $s(t)$).\n- $\\int_{0}^{1}v(t)dt = s(1)-s(0)= (1-6+9)-(0)=4$.\n- $\\int_{1}^{3}v(t)dt = s(3)-s(1)= (27-54+27)-4=0-4=-4$.\nTake absolute value: distance $=4-(-4)=8$ meters."
+  },
+  {
+   "level": "Medium",
+   "q": "Evaluate the definite integral $\\displaystyle \\int_{0}^{2} (4x-5)\\,dx$ and interpret its meaning as the net change of the function $F(x)=2x^2-5x$ over $[0,2]$.",
+   "a": "Antiderivative of $4x-5$ is $F(x)=2x^2-5x$.\nApply the Fundamental Theorem of Calculus:\n$\\displaystyle \\int_{0}^{2} (4x-5)\\,dx = F(2)-F(0)$.\nCompute: $F(2)=2(2)^2-5(2)=8-10=-2$, $F(0)=0$.\nThus the integral equals $-2-0=-2$.\nInterpretation: The net change of $F$ from $x=0$ to $x=2$ is $-2$; $F$ decreased by 2 units over that interval."
+  },
+  {
+   "level": "Hard",
+   "q": "The population $P(t)$ of a bacteria culture satisfies the differential equation $\\displaystyle \\frac{dP}{dt}=0.4P\\left(1-\\frac{P}{5000}\\right)$ with $P(0)=1000$. Find an explicit formula for $P(t)$ and determine the population after 10 hours.",
+   "a": "This is a logistic differential equation: $\\displaystyle \\frac{dP}{dt}=kP\\left(1-\\frac{P}{M}\\right)$ with $k=0.4$, $M=5000$.\nSeparate variables:\n$\\displaystyle \\frac{dP}{P(1-P/5000)} = 0.4\\,dt$.\nPartial fractions: $\\displaystyle \\frac{1}{P(1-P/5000)} = \\frac{1}{P}+\\frac{1}{5000-P}\\,\\frac{1}{5000}$.\nCarrying out the decomposition gives:\n$\\displaystyle \\frac{1}{P}+\\frac{1}{5000-P}\\frac{1}{5000} = \\frac{1}{P}+\\frac{1}{5000-P}\\frac{1}{5000}$ (standard result).\nIntegrate:\n$\\displaystyle \\int\\left(\\frac{1}{P}+\\frac{1}{5000-P}\\frac{1}{5000}\\right)dP = 0.4\\int dt$.\nSimplify: $\\displaystyle \\ln|P| - \\ln|5000-P| = 0.4t + C$.\nCombine logs: $\\displaystyle \\ln\\left|\\frac{P}{5000-P}\\right| = 0.4t + C$.\nExponentiate: $\\displaystyle \\frac{P}{5000-P}=Ce^{0.4t}$.\nSolve for $P$: $P = 5000\\frac{Ce^{0.4t}}{1+Ce^{0.4t}}$.\nUse initial condition $P(0)=1000$:\n$\\displaystyle \\frac{1000}{5000-1000}= \\frac{1000}{4000}= \\frac14 = C e^{0}=C$.\nThus $C= \\frac14$.\nPlug back:\n$P(t)=5000\\frac{(1/4)e^{0.4t}}{1+(1/4)e^{0.4t}} = \\frac{5000 e^{0.4t}}{4+ e^{0.4t}}$.\nNow compute $P(10)$:\n$e^{0.4\\cdot10}=e^{4}\\approx 54.598$.\n$P(10)=\\frac{5000\\cdot54.598}{4+54.598}= \\frac{272990}{58.598}\\approx 4662\\text{ (rounded)}$.\nSo after 10 hours the population is about $4.66\\times10^{3}$ bacteria."
+  },
+  {
+   "level": "Hard",
+   "q": "Find the limit $\\displaystyle \\lim_{x\\to 0}\\frac{\\sin(5x)-5x}{x^3}$.",
+   "a": "Use the Taylor series for $\\sin(5x)$ around $0$:\n$\\sin(5x)=5x-\\frac{(5x)^3}{3!}+ \\frac{(5x)^5}{5!}-\\dots =5x-\\frac{125x^3}{6}+O(x^5)$.\nSubtract $5x$: $\\sin(5x)-5x = -\\frac{125x^3}{6}+O(x^5)$.\nDivide by $x^3$: $\\displaystyle \\frac{\\sin(5x)-5x}{x^3}= -\\frac{125}{6}+O(x^2)$.\nTaking the limit as $x\\to0$, the $O(x^2)$ term vanishes, leaving\n$\\displaystyle \\lim_{x\\to0}\\frac{\\sin(5x)-5x}{x^3}= -\\frac{125}{6}$."
+  }
+ ],
+ "recap": "The lesson explained limits as the value a function approaches, showed how derivatives are limits of difference quotients that give instantaneous rates of change, introduced integrals as the inverse of derivatives via the Fundamental Theorem of Calculus, and gave guidance on choosing between derivatives and integrals for real‑world problems.",
  "key_terms": [
   {
-   "term": "focus",
-   "meaning": "Identifying the single variable, function, or term that determines the outcome of a limit, derivative, or integral."
+   "term": "limit",
+   "meaning": "The value a function gets arbitrarily close to as the input approaches a certain point."
   },
   {
-   "term": "independent variable",
-   "meaning": "The quantity that is allowed to change freely while other quantities are expressed in terms of it."
+   "term": "derivative",
+   "meaning": "The instantaneous rate of change of a function, defined as the limit of the difference quotient."
   },
   {
-   "term": "dominant term",
-   "meaning": "The part of an expression that grows fastest (or shrinks slowest) and therefore controls the value of a limit."
+   "term": "difference quotient",
+   "meaning": "The average rate of change (f(a+h)-f(a))/h used to define the derivative."
   },
   {
-   "term": "substitution",
-   "meaning": "A technique where you set u equal to a function whose derivative also appears, simplifying the integral."
+   "term": "integral",
+   "meaning": "The accumulation of infinitely many tiny pieces, giving the total change of a function over an interval."
   },
   {
-   "term": "product rule",
-   "meaning": "A differentiation rule: d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)."
+   "term": "Fundamental Theorem of Calculus",
+   "meaning": "States that the integral of a continuous function from a to b equals an antiderivative evaluated at the endpoints, linking derivatives and integrals."
   },
   {
-   "term": "constant with respect to x",
-   "meaning": "Any factor that does not contain the variable x, and therefore has derivative zero."
+   "term": "instantaneous velocity",
+   "meaning": "The limit of average velocity as the time interval shrinks to zero."
   },
   {
-   "term": "limit definition of derivative",
-   "meaning": "v(a) = limit as h->0 of [f(a+h) - f(a)] / h."
+   "term": "carrying capacity",
+   "meaning": "The maximum population size that an environment can sustain indefinitely."
   },
   {
-   "term": "side note",
-   "meaning": "Elements of a problem that are not the focus and can be treated as constants or ignored during the main computation."
+   "term": "antiderivative",
+   "meaning": "A function whose derivative is the given function."
   }
  ],
  "quiz": [
   {
-   "q": "What does the term 'focus' refer to in calculus problem solving?",
+   "q": "What does the limit lim x->a f(x)=L mean?",
    "options": [
-    "Choosing the hardest part of the problem",
-    "Identifying the single element that determines the result",
-    "Writing all variables in the same equation",
-    "Using the most advanced theorem"
+    "f(x) equals L for all x",
+    "f(x) gets arbitrarily close to L as x approaches a",
+    "f(x) is undefined at x=a",
+    "L is the maximum value of f(x)"
    ],
    "answer": 1,
-   "why": "Focus means picking the key variable or term that drives the solution."
+   "why": "A limit describes the behavior of the function near a point, not necessarily at the point."
   },
   {
-   "q": "When solving a limit, which term is usually the focus?",
+   "q": "Which expression defines the derivative of f at x=a?",
    "options": [
-    "The term that becomes infinite",
-    "The term that cancels the denominator",
-    "The term that approaches zero in the denominator",
-    "The term with the highest power of x"
-   ],
-   "answer": 2,
-   "why": "The denominator term that goes to zero determines the need for simplification."
-  },
-  {
-   "q": "In the integral int 2x cos(x^2) dx, what is the appropriate substitution?",
-   "options": [
-    "u = x",
-    "u = cos(x^2)",
-    "u = x^2",
-    "u = 2x"
-   ],
-   "answer": 2,
-   "why": "u = x^2 makes du = 2x dx, matching the integrand."
-  },
-  {
-   "q": "Which of the following is a constant with respect to x?",
-   "options": [
-    "5x^2",
-    "sin(3)",
-    "x+7",
-    "log(x)"
-   ],
-   "answer": 1,
-   "why": "sin(3) does not contain x, so its derivative is zero."
-  },
-  {
-   "q": "What is the product rule for differentiation?",
-   "options": [
-    "d/dx[g(x)h(x)] = g'(x)h'(x)",
-    "d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)",
-    "d/dx[g(x)h(x)] = g(x)h(x)",
-    "d/dx[g(x)h(x)] = g'(x) + h'(x)"
-   ],
-   "answer": 1,
-   "why": "The product rule adds the derivative of each factor multiplied by the other factor."
-  },
-  {
-   "q": "In the limit lim x->infinity (3x^2 + 5x) / (2x^2 - x), which term is dominant?",
-   "options": [
-    "3x^2 in the numerator and 2x^2 in the denominator",
-    "5x in the numerator and -x in the denominator",
-    "The constant terms 5 and -1",
-    "All terms are equally important"
+    "lim h->0 (f(a+h)-f(a))/h",
+    "lim x->a f(x)",
+    "integral from a to a+ h of f(x) dx",
+    "f(a) * h"
    ],
    "answer": 0,
-   "why": "The highest‑power terms control the behavior as x grows large."
+   "why": "The derivative is the limit of the difference quotient as the step h approaches zero."
+  },
+  {
+   "q": "The Fundamental Theorem of Calculus connects which two concepts?",
+   "options": [
+    "Limits and series",
+    "Derivatives and integrals",
+    "Probability and statistics",
+    "Vectors and matrices"
+   ],
+   "answer": 1,
+   "why": "It shows that integration and differentiation are inverse operations."
+  },
+  {
+   "q": "If s(t)=5t^2+2t+1, what is the instantaneous velocity at time t?",
+   "options": [
+    "10t+2",
+    "5t^2+2t+1",
+    "integral of s(t) dt",
+    "lim t->0 s(t)"
+   ],
+   "answer": 0,
+   "why": "Differentiating s(t) gives v(t)=ds/dt=10t+2, the instantaneous velocity."
+  },
+  {
+   "q": "In a logistic growth model, what does the symbol K represent?",
+   "options": [
+    "Growth rate",
+    "Initial population",
+    "Carrying capacity",
+    "Time variable"
+   ],
+   "answer": 2,
+   "why": "K denotes the maximum sustainable population size."
+  },
+  {
+   "q": "Which tool would you use to find the total distance traveled from t=0 to t=3 given a velocity function v(t)?",
+   "options": [
+    "Derivative of v(t)",
+    "Limit of v(t) as t->0",
+    "Integral of v(t) from 0 to 3",
+    "Average of v(t) at t=0 and t=3"
+   ],
+   "answer": 2,
+   "why": "Integrating velocity over an interval gives total distance traveled."
   }
  ],
  "flashcards": [
   {
-   "front": "Define 'focus' in the context of calculus.",
-   "back": "It is the process of picking the single variable, function, or term that actually determines the result of a limit, derivative, or integral."
+   "front": "Limit",
+   "back": "The value a function approaches as the input gets arbitrarily close to a point."
   },
   {
-   "front": "Why choose the right independent variable?",
-   "back": "A good choice simplifies limits, derivatives, and integrals, while a poor choice can hide relationships and cause errors."
+   "front": "Derivative",
+   "back": "Instantaneous rate of change; limit of the difference quotient."
   },
   {
-   "front": "What is a dominant term?",
-   "back": "The part of an expression that grows fastest (or shrinks slowest) and therefore decides the value of a limit."
+   "front": "Difference Quotient",
+   "back": "(f(a+h)-f(a))/h, the average rate of change over a small interval."
   },
   {
-   "front": "When is substitution useful in integration?",
-   "back": "When the integrand contains a function and its derivative (up to a constant), allowing you to set u = that function."
+   "front": "Integral",
+   "back": "Sum of infinitely many tiny pieces; gives total accumulation over an interval."
   },
   {
-   "front": "State the product rule.",
-   "back": "d/dx[g(x)h(x)] = g'(x)h(x) + g(x)h'(x)."
+   "front": "Fundamental Theorem of Calculus",
+   "back": "Integral of f from a to b equals antiderivative F evaluated at b minus F at a."
   },
   {
-   "front": "What does 'constant with respect to x' mean?",
-   "back": "Any term that does not contain x; its derivative with respect to x is zero."
+   "front": "Instantaneous Velocity",
+   "back": "Limit of average velocity as the time interval shrinks to zero."
   },
   {
-   "front": "Write the limit definition of the derivative.",
-   "back": "f'(a) = limit as h->0 of [f(a+h) - f(a)] / h."
+   "front": "Carrying Capacity (K)",
+   "back": "Maximum population size an environment can sustain."
   },
   {
-   "front": "How does focusing help when computing limits?",
-   "back": "It lets you isolate the decisive part of the expression, discard negligible terms, and compute the limit quickly."
+   "front": "Antiderivative",
+   "back": "A function whose derivative is the given function."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l11-detective-clue-analogy",
-   "title": "A magnifying glass highlights the key variable that drives the problem.",
-   "alt": "A magnifying glass highlights the key variable that drives the problem.",
-   "priority": 8,
-   "picture_title": "Detective Clue Analogy",
-   "kind": "illustration",
-   "subject": "A simple cartoon showing a detective examining several objects (functions, constants, variables) and pointing to one highlighted object labeled as the \"focus\".",
-   "layout": "Detective in the centre with speech bubble pointing to the highlighted object; other objects are dimmed in the background.",
-   "labels": [
-    "focus variable",
-    "other terms"
-   ],
-   "after": 0
-  },
-  {
-   "type": "image",
-   "file": "calculus-i-l11-particle-motion-sketch",
-   "title": "Position curve of a particle with a tangent indicating instantaneous velocity at t = 2 s.",
-   "alt": "Position curve of a particle with a tangent indicating instantaneous velocity at t = 2 s.",
-   "priority": 7,
-   "picture_title": "Particle Motion Sketch",
-   "kind": "labelled diagram",
-   "subject": "A hand‑drawn style graph of s(t)=4t³‑3t²+2t showing the point (2, s(2)) and a tangent line representing the derivative (velocity).",
-   "layout": "Axes in the background, curve in the centre, tangent line in a contrasting colour, labels for position, time, and velocity.",
-   "labels": [
-    "s(t)",
-    "t = 2 s",
-    "velocity (s')"
-   ],
+   "file": "calculus-i-l11-car-motion-scene",
+   "title": "A car traveling along a straight road with distance markers and a speedometer display.",
+   "alt": "A car traveling along a straight road with distance markers and a speedometer display.",
+   "priority": 9,
+   "picture_title": "Car Motion Scene",
+   "kind": "photo",
+   "subject": "The photo shows a car on a flat road with numbered distance signs in the background and a visible speedometer reading, helping students link position, velocity, and acceleration to real objects.",
+   "layout": "Car centered in the foreground, road stretching into the distance; distance markers placed at regular intervals on the side; speedometer inset in the corner.",
+   "labels": [],
    "after": 5
   },
   {
    "type": "image",
-   "file": "calculus-i-l11-substitution-cue",
-   "title": "A typical integrand with a function and its derivative highlighted for u‑substitution.",
-   "alt": "A typical integrand with a function and its derivative highlighted for u‑substitution.",
-   "priority": 6,
-   "picture_title": "Substitution Cue",
+   "file": "calculus-i-l11-town-growth-illustration",
+   "title": "A small village expanding into a larger town, showing limited space and resources.",
+   "alt": "A small village expanding into a larger town, showing limited space and resources.",
+   "priority": 7,
+   "picture_title": "Town Growth Illustration",
    "kind": "illustration",
-   "subject": "An algebraic expression such as (2x)·cos(x²) where the part \"x²\" and its derivative \"2x\" are boxed in different colours to show the substitution pattern.",
-   "layout": "Expression written horizontally, two coloured boxes around the matching parts, arrows pointing to a small note \"let u = x²\".",
+   "subject": "An artist’s drawing depicts a sparse settlement growing into a dense town surrounded by fields, illustrating the concept of limited resources and carrying capacity in population growth.",
+   "layout": "Three panels side‑by‑side: left panel shows few houses, middle panel shows moderate development, right panel shows a crowded town with a boundary line indicating maximum size.",
    "labels": [
-    "u = x²",
-    "du = 2x dx"
+    "few houses",
+    "moderate",
+    "crowded",
+    "capacity limit"
    ],
-   "after": 4
+   "after": 6
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l11-limit-analogy-diagram",
+   "title": "A car approaching a stop sign, illustrating how a limit describes approaching behavior.",
+   "alt": "A car approaching a stop sign, illustrating how a limit describes approaching behavior.",
+   "priority": 5,
+   "picture_title": "Limit Analogy Diagram",
+   "kind": "illustration",
+   "subject": "A simple drawing of a car moving toward a stop sign with a series of decreasing distance arrows, helping students visualize the idea of getting arbitrarily close to a point.",
+   "layout": "Car on the left moving rightward toward a red stop sign; arrows decreasing in length between car and sign; a small text box showing “distance → 0”.",
+   "labels": [
+    "car",
+    "stop sign",
+    "distance"
+   ],
+   "after": 0
   },
   {
    "type": "steps",
-   "title": "Choosing the Right Variable",
+   "title": "Three Calculus Steps",
    "steps": [
     {
-     "label": "1",
-     "text": "Identify all quantities in the problem."
+     "label": "Limit",
+     "text": "Find the instantaneous rate at a point"
     },
     {
-     "label": "2",
-     "text": "Pick the one that changes freely (independent variable)."
+     "label": "Derivative",
+     "text": "Turn the limit into a formula for any x"
     },
     {
-     "label": "3",
-     "text": "Rewrite other quantities as functions of that variable."
-    },
-    {
-     "label": "4",
-     "text": "Proceed with limits, derivatives or integrals."
+     "label": "Integral",
+     "text": "Add up tiny changes to get total change"
     }
    ],
-   "after": 1,
-   "loop": false
+   "loop": false,
+   "after": 7
   },
   {
    "type": "compare",
-   "title": "Focus in Limits vs. Derivatives",
+   "title": "Derivative vs Integral",
    "left": {
-    "name": "Limits",
+    "name": "Derivative",
     "points": [
-     "Look for the variable approaching a value",
-     "Keep dominant term(s)",
-     "Discard negligible terms"
+     "Instantaneous rate of change",
+     "Answers “how fast?”",
+     "Uses limit of difference quotient"
     ]
    },
    "right": {
-    "name": "Derivatives",
+    "name": "Integral",
     "points": [
-     "Identify the independent variable",
-     "Mark factors containing that variable",
-     "Treat everything else as constant"
+     "Total accumulation",
+     "Answers “how much in total?”",
+     "Adds up infinitely many tiny pieces"
     ]
    },
-   "after": 2
+   "after": 4
   },
   {
    "type": "parts",
-   "title": "Integration Focus Techniques",
+   "title": "Motion Quantities",
    "items": [
     {
-     "name": "Substitution clue",
-     "role": "Function and its derivative appear together"
+     "name": "Position s(t)",
+     "role": "Where the car is at time t"
     },
     {
-     "name": "u‑substitution",
-     "role": "Replace inner function with u"
+     "name": "Velocity v(t)",
+     "role": "Instantaneous speed, derivative of s(t)"
     },
     {
-     "name": "Integration by parts clue",
-     "role": "Product of two functions, one easy to differentiate"
-    },
-    {
-     "name": "Partial fractions clue",
-     "role": "Rational function with factorable denominator"
+     "name": "Acceleration a(t)",
+     "role": "Rate of change of velocity, second derivative of s(t)"
     }
    ],
-   "after": 4
+   "after": 5
+  },
+  {
+   "type": "facts",
+   "title": "Logistic Growth Basics",
+   "items": [
+    {
+     "value": "K",
+     "label": "Carrying capacity – max sustainable population"
+    },
+    {
+     "value": "Fast growth",
+     "label": "When population is far below K"
+    },
+    {
+     "value": "Slowing growth",
+     "label": "As population approaches K"
+    },
+    {
+     "value": "Level off",
+     "label": "Population stabilises at K"
+    }
+   ],
+   "after": 6
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

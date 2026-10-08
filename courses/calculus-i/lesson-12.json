@@ -1,209 +1,303 @@
 {
  "title": ":",
- "summary": "This lesson teaches how to build and solve real‑world models using limits, derivatives, and integrals, and how to interpret the results. Students will practice applying calculus tools to problems in physics, biology, and economics.",
+ "summary": "Lesson 12 applies limits, derivatives, and integrals to real‑world problems in physics, biology, and economics. Students practice setting up and solving calculus models to build confidence in using these tools.",
+ "objectives": [
+  "Translate a word problem into a limit, derivative, or integral expression",
+  "Compute the required calculus quantity using appropriate rules",
+  "Interpret the mathematical result in the context of the original problem",
+  "Explain how changing assumptions affects the model outcome",
+  "Present a clear, step‑by‑step solution to a real‑world scenario"
+ ],
+ "prerequisites": "Students should already know limits, continuity, derivative rules, basic integration techniques, and how to evaluate definite integrals.",
+ "why": [
+  "Calculus is the language of change and accumulation. In physics it predicts motion, in biology it describes population growth, and in economics it measures cost, revenue, and profit over time. Understanding how to build and solve these models lets students analyze real phenomena rather than just manipulate symbols.",
+  "Being able to apply calculus to authentic problems prepares students for college STEM courses and many careers. It also develops logical thinking, problem‑solving confidence, and the ability to communicate quantitative ideas clearly."
+ ],
  "sections": [
   {
-   "heading": "Review of Key Calculus Concepts",
-   "body": "**Review of Key Calculus Concepts**\n\nCalculus is the mathematics of change.  The two central ideas are the **limit** and the **derivative**.  \n\nA limit describes the value a function $f(x)$ approaches as $x$ gets close to a point $a$.  We write  \n$$\\lim_{x\\to a} f(x)=L.$$  \nIf the limit exists and equals $f(a)$, the function is **continuous** at $a$.  Continuity lets us replace a complicated expression by its limit when $x$ is very near $a$.\n\nThe **derivative** $f'(x)$ measures the instantaneous rate of change of $f$.  It is defined by a limit:  \n$$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}.$$  \nCommon derivative rules are:\n\n| Rule | Formula |\n|------|---------|\n| Power | $\\displaystyle \\frac{d}{dx}x^n = nx^{\\,n-1}$ |\n| Constant multiple | $\\displaystyle \\frac{d}{dx}[c\\,f(x)] = c\\,f'(x)$ |\n| Sum | $\\displaystyle \\frac{d}{dx}[f(x)+g(x)] = f'(x)+g'(x)$ |\n| Product | $\\displaystyle \\frac{d}{dx}[f(x)g(x)] = f'(x)g(x)+f(x)g'(x)$ |\n| Quotient | $\\displaystyle \\frac{d}{dx}\\!\\left[\\frac{f(x)}{g(x)}\\right]=\\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}$ |\n| Chain | $\\displaystyle \\frac{d}{dx}f(g(x)) = f'(g(x))\\,g'(x)$ |\n\nIntegration is the reverse process.  The **indefinite integral** (antiderivative) of $f$ is a function $F$ with $F'=f$.  Basic rules mirror the derivative rules:\n\n* $\\displaystyle \\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C\\quad (n\\neq -1)$  \n* $\\displaystyle \\int c\\,f(x)\\,dx = c\\int f(x)\\,dx$  \n* $\\displaystyle \\int [f(x)\\pm g(x)]\\,dx = \\int f(x)\\,dx \\pm \\int g(x)\\,dx$\n\nThe **definite integral** $\\displaystyle \\int_a^b f(x)\\,dx$ gives the net area under $f$ from $x=a$ to $x=b$.  The Fundamental Theorem of Calculus links the two concepts:\n$$\\int_a^b f(x)\\,dx = F(b)-F(a),\\qquad\\text{where }F'=f.$$\n\n---\n\n### Worked Example: Finding the velocity of a falling object\n\nA ball is dropped from a height of $100\\,$m.  Its height after $t$ seconds is modeled by  \n$$h(t)=100-4.9t^{2}.$$\n\n1. **Find the velocity** $v(t)$ by differentiating $h(t)$.  \n   $$v(t)=\\frac{dh}{dt}= \\frac{d}{dt}\\bigl(100-4.9t^{2}\\bigr) = 0-4.9\\cdot2t = -9.8t.$$\n\n2. **Evaluate the velocity at $t=3$ s.**  \n   $$v(3) = -9.8(3) = -29.4\\ \\text{m/s}.$$\n   The negative sign indicates the ball is moving downward.\n\n3. **Find the distance fallen in the first 3 seconds** using a definite integral of speed $|v(t)|=9.8t$:  \n   $$\\text{Distance}= \\int_{0}^{3}9.8t\\,dt = 9.8\\left[\\frac{t^{2}}{2}\\right]_{0}^{3}=9.8\\cdot\\frac{9}{2}=44.1\\ \\text{m}.$$\n\nThus the ball’s velocity grows linearly with time, and after 3 s it has fallen $44.1\\,$m.\n\n---\n\n**Practice Problems**\n\n1. **Problem:** A company’s revenue (in thousands of dollars) is $R(q)=5q-0.02q^{2}$, where $q$ is the number of units sold.  \n   *Find the marginal revenue* $R'(q)$ and the production level that maximizes revenue.\n\n   **Solution:**  \n   $R'(q)=5-0.04q$.  Set $R'(q)=0$: $5-0.04q=0\\;\\Rightarrow\\;q=125$.  Since $R''(q)=-0.04<0$, this gives a maximum.  Marginal revenue is $5-0.04q$.\n\n2. **Problem:** The temperature $T(t)$ (°C) of a cooling metal follows $T(t)=20+80e^{-0.3t}$, $t$ in minutes.  \n   *Find the rate of cooling at $t=5$ minutes.*\n\n   **Solution:**  \n   $T'(t)=80(-0.3)e^{-0.3t}=-24e^{-0.3t}$.  \n   $T'(5)=-24e^{-1.5}\\approx -24(0.223)= -5.35\\ ^\\circ\\text{C/min}.$\n\n3. **Problem:** Evaluate the definite integral $\\displaystyle \\int_{0}^{\\pi} \\sin^{2}x\\,dx$.\n\n   **Solution:**  \n   Use $\\sin^{2}x=\\frac{1-\\cos2x}{2}$.  \n   $$\\int_{0}^{\\pi}\\sin^{2}x\\,dx =\\frac12\\int_{0}^{\\pi}(1-\\cos2x)\\,dx\n   =\\frac12\\Bigl[x-\\frac{\\sin2x}{2}\\Bigr]_{0}^{\\pi}\n   =\\frac12\\bigl[\\pi-0\\bigr]=\\frac{\\pi}{2}.$$\n\n4. **Problem:** A population follows the logistic model $P(t)=\\frac{500}{1+9e^{-0.4t}}$.  \n   *Find $P'(t)$ and the instantaneous growth rate when $t=5$.*\n\n   **Solution:**  \n   Write $P(t)=500\\,(1+9e^{-0.4t})^{-1}$.  \n   Using the chain rule:  \n   $$P'(t)=500\\cdot(-1)(1+9e^{-0.4t})^{-2}\\cdot 9e^{-0.4t}(-0.4)$$  \n   $$=500\\cdot\\frac{9\\cdot0.4\\,e^{-0.4t}}{(1+9e^{-0.4t})^{2}}\n   =\\frac{1800\\,e^{-0.4t}}{(1+9e^{-0.4t})^{2}}.$$\n\n   At $t=5$: $e^{-0.4\\cdot5}=e^{-2}\\approx0.1353$.  \n   $$P'(5)=\\frac{1800(0.1353)}{(1+9\\cdot0.1353)^{2}}\n   =\\frac{243.5}{(1+1.217)^{2}}\n   =\\frac{243.5}{(2.217)^{2}}\n   \\approx\\frac{243.5}{4.91}\\approx49.6\\ \\text{individuals per unit time}.$$\n\nThese examples illustrate how limits, derivatives, and integrals turn real‑world descriptions into precise quantitative predictions.",
+   "heading": "1. From Word Problem to Mathematical Model",
+   "body": "When we first see a word problem, the goal is to turn the story into a clean mathematical picture.  \nThink of it like translating a foreign language: we need to pick the right “words” (variables) and the right “grammar” (operations) so the problem can be solved with calculus.\n\n> **Definition:** *Variable* – a symbol that stands for a quantity that can change.  \n> **Note:** Choose a variable that captures the most important changing quantity in the problem.\n\n**Step 1 – Identify the variable**  \nRead the problem carefully and ask: *What is changing, and what do we want to know about that change?*  \nFor example, in a story about a tank being filled with water, the amount of water in the tank grows over time. We would let  \n\n$$\nV(t) = \\text{volume of water in the tank at time } t\n$$  \n\nHere the variable is \\(V\\) and the independent variable (the thing we measure against) is time \\(t\\).\n\n**Step 2 – Decide the type of relationship**  \nAsk yourself whether the problem talks about a *rate of change* (how fast something is changing) or an *accumulation* (how much has built up).  \n\n- **Rate of change** means we are interested in the instantaneous speed of the variable. In calculus this is expressed by a *derivative*.  \n- **Accumulation** means we want the total amount gathered over an interval. In calculus this is expressed by an *integral*.\n\n> **In daily life:** When you watch a car’s speedometer, you see the rate of change of distance with respect to time. When you look at the odometer, you see the accumulated distance.\n\n**Step 3 – Write the appropriate limit expression**  \nBoth derivatives and integrals are defined using limits, which capture the idea of “getting arbitrarily close” to a value.\n\n- If the problem involves a rate, write the derivative as a limit:\n\n$$\n\\frac{dV}{dt} = \\lim_{\\Delta t \\to 0} \\frac{V(t+\\Delta t)-V(t)}{\\Delta t}\n$$\n\nThis says: “the instantaneous change of \\(V\\) at time \\(t\\) is the limit of the average change over a tiny time interval \\(\\Delta t\\) as that interval shrinks to zero.”\n\n- If the problem involves accumulation, write the integral as a limit of sums (a *Riemann sum*):\n\n$$\n\\int_{a}^{b} f(t)\\,dt = \\lim_{n\\to\\infty}\\sum_{i=1}^{n} f(t_i^*)\\Delta t_i\n$$\n\nHere \\(f(t)\\) is the rate at which something is added, \\(\\Delta t_i\\) are small time pieces, and the sum adds up all those tiny contributions. The limit makes the pieces infinitesimally small, giving the exact total.\n\n**Step 4 – Connect the expression to the story**  \nReplace the generic symbols with the ones from the problem.  \nIf the story says “water flows in at 3 L/min,” then the rate function is \\(f(t)=3\\) (constant). The accumulated volume from time \\(a\\) to \\(b\\) becomes\n\n$$\nV(b)-V(a)=\\int_{a}^{b} 3\\,dt = 3(b-a).\n$$\n\nIf the story instead says “the water level rises faster as the tank gets fuller,” we might have a rate like \\(f(t)=kV(t)\\). Then the derivative form\n\n$$\n\\frac{dV}{dt}=kV(t)\n$$\n\ncaptures the exponential growth described in the word problem.\n\n> **Remember:** The choice between derivative and integral is guided by the question: *Are we looking for how fast something changes (derivative) or how much has been added over time (integral)?*\n\n**Step 5 – Check the units**  \nMake sure the units on both sides of your equation match. In the derivative example, \\(\\frac{dV}{dt}\\) has units of volume per time (e.g., liters per minute). In the integral example, the result has units of volume, because we multiply a rate (volume per time) by a time interval.\n\n> **Common mistake:** Forgetting to include the differential \\(dt\\) in an integral. Writing \\(\\int_{a}^{b} f(t)\\) without “\\(dt\\)” loses the connection to the variable of integration and makes the expression dimensionally incorrect.\n\nBy following these small, clear steps—pick a variable, decide if you need a rate or an accumulation, write the limit‑based derivative or integral, and then translate back to the story—you turn any word problem into a mathematical model ready for calculus tools. This systematic translation is the foundation for solving the later examples in physics, biology, and economics.",
    "code": ""
   },
   {
-   "heading": "Formulating Real‑World Problems",
-   "body": "Understanding how to turn a real‑world situation into a **mathematical model** is the first step in using calculus.  \nWe start by identifying the quantities that change, deciding how they are related, and then writing those relationships as **functions** of a convenient variable (often time $t$).  \n\n### Steps to formulate a problem  \n\n1. **Define the variables** – Give each changing quantity a symbol and state its units.  \n2. **Choose the independent variable** – Usually time $t$, but it could be distance $x$, population size $P$, etc.  \n3. **Write the relationship** – Express the dependent variable as a function of the independent one, using known physical laws, empirical data, or reasonable assumptions.  \n4. **State the goal** – What do we want to find? A maximum, a time when a value is reached, the total accumulated amount, etc.  \n\n### Worked example: Cooling a cup of coffee  \n\nA cup of coffee at $90^\\circ\\text{C}$ is left in a room that stays at $20^\\circ\\text{C}$. Newton’s law of cooling says the rate of temperature change is proportional to the difference between the coffee temperature $T(t)$ and the room temperature $T_r$:\n\n$$\\frac{dT}{dt} = -k\\bigl(T(t)-T_r\\bigr).$$  \n\n**Step 1 – Define variables**  \n- $T(t)$ = temperature of the coffee (°C) at time $t$ (minutes).  \n- $T_r = 20^\\circ\\text{C}$ (constant).  \n- $k>0$ = cooling constant (unknown).  \n\n**Step 2 – Choose independent variable**  \nTime $t$ measured in minutes.  \n\n**Step 3 – Write the relationship**  \nThe differential equation above is already the relationship.  \n\n**Step 4 – Solve the equation**  \n\nSeparate variables:  \n\n$$\\frac{dT}{T-T_r}= -k\\,dt.$$\n\nIntegrate both sides:  \n\n$$\\int \\frac{dT}{T-20}= -k\\int dt \\quad\\Longrightarrow\\quad \\ln|T-20| = -kt + C.$$\n\nExponentiate:  \n\n$$T-20 = Ce^{-kt}.$$\n\nUse the initial condition $T(0)=90^\\circ\\text{C}$ to find $C$:  \n\n$$90-20 = C e^{0} \\;\\Rightarrow\\; C = 70.$$\n\nThus the model is  \n\n$$\\boxed{T(t)=20 + 70e^{-kt}}.$$\n\nIf after 5 minutes the coffee is $65^\\circ\\text{C}$, we can find $k$:  \n\n$$65 = 20 + 70e^{-5k} \\;\\Rightarrow\\; 45 = 70e^{-5k} \\;\\Rightarrow\\; e^{-5k}= \\frac{45}{70}=0.6429.$$\n\nTake natural logs:  \n\n$$-5k = \\ln(0.6429) \\;\\Rightarrow\\; k = -\\frac{\\ln(0.6429)}{5}\\approx 0.089\\ \\text{min}^{-1}.$$\n\nNow the model can predict the temperature at any later time.  \n\n---\n\n## Practice problems  \n\n### Problem 1  \nA tank contains 100 L of water with 5 kg of dissolved salt. Fresh water flows in at 3 L/min, and the well‑mixed solution flows out at the same rate. Find the amount of salt $S(t)$ after $t$ minutes.\n\n**Solution**  \nLet $S(t)$ be the mass of salt (kg). The concentration in the tank is $S(t)/V$, with $V=100$ L constant. Inflow has zero salt, outflow removes salt at rate $(3\\ \\text{L/min})\\cdot S(t)/100$.  \n\n$$\\frac{dS}{dt}= -\\frac{3}{100}S.$$\n\nSeparate: $\\displaystyle \\frac{dS}{S}= -\\frac{3}{100}dt$.  \n\nIntegrate: $\\ln|S| = -\\frac{3}{100}t + C$.  \n\nExponentiate: $S = C e^{-0.03t}$. Use $S(0)=5$: $C=5$.  \n\n$\\boxed{S(t)=5e^{-0.03t}\\text{ kg}}$.\n\n---\n\n### Problem 2  \nA population of bacteria grows according to $P'(t)=0.4P(t)$. If $P(0)=200$, find $P(t)$ and the population after 6 hours.\n\n**Solution**  \nSolve $P' =0.4P$: $\\displaystyle \\frac{dP}{P}=0.4\\,dt$.  \n\nIntegrate: $\\ln P =0.4t + C$.  \n\n$P = Ce^{0.4t}$, $C=P(0)=200$.  \n\n$P(t)=200e^{0.4t}$.  \n\nAt $t=6$: $P(6)=200e^{2.4}\\approx 200\\cdot11.02\\approx 2204$ bacteria.\n\n---\n\n### Problem 3  \nA car accelerates from rest with velocity $v(t)=5t-0.2t^{2}$ (m/s) for $0\\le t\\le 10$. Find the distance traveled in the first 8 seconds.\n\n**Solution**  \nDistance $s(t)=\\int_{0}^{t} v(\\tau)\\,d\\tau$.  \n\n$$s(8)=\\int_{0}^{8} (5\\tau-0.2\\tau^{2})\\,d\\tau\n= \\Big[2.5\\tau^{2}-\\frac{0.2}{3}\\tau^{3}\\Big]_{0}^{8}\n=2.5(64)-\\frac{0.2}{3}(512)$$  \n\n$$=160-\\frac{102.4}{3}=160-34.13\\approx125.9\\text{ m}.$$\n\n---\n\n### Problem 4  \nA company’s profit $P(x)$ (in thousands of dollars) from selling $x$ thousand units is modeled by $P(x)= -2x^{2}+12x-5$. Find the production level that maximizes profit and the maximum profit.\n\n**Solution**  \n$P(x)$ is a downward‑opening parabola. Vertex at $x=-\\frac{b}{2a}$ with $a=-2$, $b=12$:  \n\n$$x^{*}= -\\frac{12}{2(-2)} = \\frac{12}{4}=3\\ (\\text{thousand units}).$$  \n\nMaximum profit: $P(3)= -2(3)^{2}+12(3)-5 = -18+36-5 =13$ (thousand dollars).  \n\nSo produce $3{,}000$ units for a maximum profit of $\\boxed{\\$13{,}000}$.",
+   "heading": "2. Physics Example: Falling Object",
+   "body": "Imagine you drop a ball from the top of a building. You can watch it fall, but how do we describe its motion with numbers?  In physics we use **position** $s(t)$ (how far the ball is from the ground at time $t$), **velocity** $v(t)$ (how fast the position is changing), and **acceleration** $a(t)$ (how fast the velocity is changing).  These three ideas are linked by calculus:  \n\n> **Definition:** The *derivative* of a function gives its instantaneous rate of change.  \n> **Definition:** The *integral* of a function adds up tiny pieces to give a total amount.\n\n---\n\n### Step 1 – Write down the acceleration\n\nNear the Earth’s surface the only important force on a falling object is gravity.  Gravity gives a constant downward acceleration  \n\n\\[\na(t)= -g,\n\\]\n\nwhere $g\\approx 9.8\\ \\text{m/s}^2$ and the minus sign shows the direction is toward the ground.  The unit “meters per second squared” (m/s²) tells us how many meters per second the velocity changes each second.\n\n---\n\n### Step 2 – Find the velocity by integrating acceleration\n\nIntegration is the reverse of differentiation.  To get velocity we add up all the tiny changes in speed that occur over time:\n\n\\[\nv(t)=\\int a(t)\\,dt = \\int (-g)\\,dt = -g t + C_1 .\n\\]\n\nThe symbol $C_1$ is a **constant of integration**.  It represents the velocity the ball had at the moment we started counting time.  If we release the ball from rest, then at $t=0$ the velocity is $0$, so\n\n\\[\n0 = -g\\cdot 0 + C_1 \\quad\\Longrightarrow\\quad C_1 = 0 .\n\\]\n\nThus the velocity formula simplifies to  \n\n\\[\nv(t)= -g t .\n\\]\n\nThe unit of $v(t)$ is meters per second (m/s).  The negative sign again tells us the ball is moving downward.\n\n> **In daily life:** When you throw a ball straight up, its velocity is positive while it rises and becomes negative after it starts falling—exactly what the sign in $v(t)$ indicates.\n\n---\n\n### Step 3 – Find the position by integrating velocity\n\nNow we add up all the tiny distances the ball travels as its speed changes:\n\n\\[\ns(t)=\\int v(t)\\,dt = \\int (-g t)\\,dt = -\\frac{1}{2}g t^{2}+ C_2 .\n\\]\n\n$C_2$ is another constant of integration.  It tells us where the ball started.  Suppose the ball is dropped from a height $h$ above the ground.  At $t=0$, the position is $s(0)=h$, so\n\n\\[\nh = -\\frac{1}{2}g\\cdot 0^{2}+ C_2 \\quad\\Longrightarrow\\quad C_2 = h .\n\\]\n\nTherefore the position as a function of time is  \n\n\\[\ns(t)= h - \\frac{1}{2}g t^{2}.\n\\]\n\nThe unit of $s(t)$ is meters (m).  As time grows, the term $\\frac{1}{2}g t^{2}$ becomes larger, so $s(t)$ gets smaller—meaning the ball gets closer to the ground.\n\n> **Note:** The formula $s(t)=h-\\frac12gt^{2}$ works only while the ball is falling freely.  If it hits the ground, the model must change.\n\n---\n\n### Step 4 – Check the result with a simple question\n\nHow long does it take the ball to hit the ground?  Set $s(t)=0$ (ground level) and solve for $t$:\n\n\\[\n0 = h - \\frac{1}{2}g t^{2}\n\\;\\Longrightarrow\\;\n\\frac{1}{2}g t^{2}=h\n\\;\\Longrightarrow\\;\nt = \\sqrt{\\frac{2h}{g}} .\n\\]\n\nIf $h=20\\ \\text{m}$, then  \n\n\\[\nt = \\sqrt{\\frac{2\\cdot20}{9.8}} \\approx 2.02\\ \\text{s}.\n\\]\n\nPlugging $t=2.02\\ \\text{s}$ back into $v(t) = -g t$ gives  \n\n\\[\nv(2.02) \\approx -9.8 \\times 2.02 \\approx -19.8\\ \\text{m/s},\n\\]\n\na speed that makes sense for a falling object after about two seconds.\n\n> **Remember:** Always keep track of units.  If you accidentally mix seconds with minutes, the numbers will be wrong even though the algebra looks correct.\n\n---\n\n### Step 5 – Summarize the chain of ideas\n\n1. **Acceleration** is given (constant $-g$).  \n2. **Integrate** acceleration → velocity, adding a constant that matches the initial speed.  \n3. **Integrate** velocity → position, adding a constant that matches the starting height.  \n4. **Use** the position formula to answer practical questions (time to hit ground, speed at impact).\n\nBy moving from the physical description (a ball falling) to the mathematical model (derivatives and integrals), we can predict exactly how fast and how far the ball moves at any moment. This same process—turning a word problem into equations, then solving step by step—will appear throughout calculus and many other sciences.",
    "code": ""
   },
   {
-   "heading": "Using Limits to Describe Behavior",
-   "body": "When we look at a real‑world situation, the **limit** tells us what the system is trying to approach.  \nIt can give a *steady‑state value* (what the quantity settles to), an *asymptote* (a line the graph gets closer to but never reaches), or an *instantaneous rate* (the slope at a single moment).  \n\n---\n\n### Worked Example – Cooling of a Hot Cup of Coffee  \n\nA cup of coffee at $90^\\circ\\text{C}$ is placed in a room that stays at $20^\\circ\\text{C}$.  Newton’s law of cooling says  \n\n\\[\n\\frac{dT}{dt}=k\\,(T-20),\n\\]\n\nwhere $T(t)$ is the temperature of the coffee after $t$ minutes and $k<0$ is a constant.  \nSuppose after 5 minutes the coffee is $70^\\circ\\text{C}$.  Find the temperature the coffee will approach as $t\\to\\infty$ and the instantaneous cooling rate at $t=5$ min.\n\n1. **Solve the differential equation.**  \n   Separate variables:  \n\n   \\[\n   \\frac{dT}{T-20}=k\\,dt.\n   \\]  \n\n   Integrate:  \n\n   \\[\n   \\ln|T-20| = kt + C.\n   \\]  \n\n   Exponentiate:  \n\n   \\[\n   T-20 = Ce^{kt}.\n   \\]  \n\n   Use the initial condition $T(0)=90$ to find $C$:  \n\n   \\[\n   90-20 = C e^{k\\cdot0}\\;\\Longrightarrow\\; C=70.\n   \\]  \n\n   Thus  \n\n   \\[\n   T(t)=20+70e^{kt}.\n   \\]\n\n2. **Find $k$ using $T(5)=70$.**  \n\n   \\[\n   70 = 20+70e^{5k}\\;\\Longrightarrow\\;50 = 70e^{5k}\\;\\Longrightarrow\\;e^{5k}= \\frac{5}{7}.\n   \\]  \n\n   Take logs:  \n\n   \\[\n   5k = \\ln\\!\\left(\\frac{5}{7}\\right)\\;\\Longrightarrow\\;k = \\frac{1}{5}\\ln\\!\\left(\\frac{5}{7}\\right)\\approx -0.067.\n   \\]\n\n3. **Steady‑state value (limit as $t\\to\\infty$).**  \n\n   \\[\n   \\lim_{t\\to\\infty}T(t)=\\lim_{t\\to\\infty}\\bigl(20+70e^{kt}\\bigr)=20,\n   \\]  \n\n   because $e^{kt}\\to0$ when $k<0$.  The coffee will eventually reach the room temperature $20^\\circ\\text{C}$.\n\n4. **Instantaneous cooling rate at $t=5$.**  \n\n   Use the original formula $\\frac{dT}{dt}=k\\,(T-20)$.  \n   At $t=5$, $T=70$, so  \n\n   \\[\n   \\left.\\frac{dT}{dt}\\right|_{t=5}=k\\,(70-20)=k\\cdot50\\approx -0.067\\cdot50\\approx -3.35^\\circ\\text{C/min}.\n   \\]  \n\n   The coffee is cooling at about $3.35^\\circ\\text{C}$ per minute at that moment.\n\n---\n\n### Practice Problems  \n\n1. **Population model:** A bacteria culture grows according to $P(t)=\\frac{500}{1+9e^{-0.8t}}$.  \n   *Find the limiting population as $t\\to\\infty$ and the instantaneous growth rate at $t=2$.*  \n\n   **Solution:**  \n   \\[\n   \\lim_{t\\to\\infty}P(t)=\\frac{500}{1+9\\cdot0}=50.\n   \\]  \n   Differentiate: $P'(t)=\\frac{500\\cdot9\\cdot0.8e^{-0.8t}}{(1+9e^{-0.8t})^{2}}$.  \n   At $t=2$, $e^{-0.8\\cdot2}=e^{-1.6}\\approx0.202$, so  \n\n   \\[\n   P'(2)=\\frac{500\\cdot9\\cdot0.8\\cdot0.202}{(1+9\\cdot0.202)^{2}}\\approx\\frac{726}{(2.818)^{2}}\\approx91.5\\text{ cells/min}.\n   \\]\n\n2. **Charging capacitor:** Voltage $V(t)=V_{\\max}(1-e^{-t/RC})$ with $V_{\\max}=12\\,$V, $RC=5\\,$s.  \n   *What voltage does the capacitor approach? Compute $\\displaystyle\\lim_{t\\to0^{+}}\\frac{V(t)}{t}$ (initial rate of voltage rise).*  \n\n   **Solution:**  \n   \\[\n   \\lim_{t\\to\\infty}V(t)=12\\text{ V}.\n   \\]  \n   Near $t=0$, use series $e^{-t/5}\\approx1-\\frac{t}{5}$, so  \n\n   \\[\n   V(t)\\approx12\\bigl(1-(1-\\tfrac{t}{5})\\bigr)=12\\cdot\\frac{t}{5}= \\frac{12}{5}t.\n   \\]  \n\n   Hence $\\displaystyle\\lim_{t\\to0^{+}}\\frac{V(t)}{t}= \\frac{12}{5}=2.4\\,$V/s.\n\n3. **Projectile height:** $h(t)=20t-4.9t^{2}$ (meters, $t$ in seconds).  \n   *Find the horizontal asymptote as $t\\to\\infty$ and the instantaneous vertical speed when $t=2$ s.*  \n\n   **Solution:**  \n   As $t\\to\\infty$, the dominant term $-4.9t^{2}$ drives $h(t)\\to -\\infty$, so there is **no finite horizontal asymptote**.  \n   Derivative $h'(t)=20-9.8t$. At $t=2$, $h'(2)=20-19.6=0.4\\,$m/s upward.\n\n4. **Economic profit:** Profit $ \\Pi(q)= -0.02q^{2}+30q-200$, where $q$ is units produced.  \n   *Determine the production level that gives the maximum profit by using the limit definition of the derivative (i.e., find where the instantaneous rate of change is zero).*  \n\n   **Solution:**  \n   Compute the derivative via limit:  \n\n   \\[\n   \\Pi'(q)=\\lim_{h\\to0}\\frac{\\Pi(q+h)-\\Pi(q)}{h}= -0.04q+30.\n   \\]  \n\n   Set $\\Pi'(q)=0$: $-0.04q+30=0\\Rightarrow q=750$ units.  \n   The maximum profit is $\\Pi(750)= -0.02(750)^{2}+30(750)-200=8{,}250$ dollars.  \n\nThese examples illustrate how limits turn everyday descriptions—cooling, growth, charging, motion, profit—into precise numerical information.",
+   "heading": "3. Biology Example: Logistic Population Growth",
+   "body": "Imagine a small island where a certain type of rabbit lives. At first there are only a few rabbits, so they have plenty of food and space. As the population grows, food becomes scarcer and the island can only hold so many rabbits before crowding stops further growth. This idea – that a population grows quickly when it is small but slows down as it approaches a limit – is captured by the **logistic model**.\n\n> **Definition:** *Carrying capacity* ($K$) is the maximum number of individuals that an environment can sustain indefinitely.\n\n### 1. From a word problem to a differential equation  \n\nWe want a formula that tells us how the rabbit population $P(t)$ changes over time $t$. Two forces act on the population:\n\n1. **Natural growth** – when there is plenty of food, the population tends to increase proportionally to its current size. This gives the term $rP$, where $r>0$ is the *intrinsic growth rate* (how fast the rabbits would grow without limits).\n\n2. **Limiting effect** – as the population approaches the carrying capacity $K$, the growth slows down. A simple way to model this slowdown is to multiply the natural growth term by a factor that becomes smaller as $P$ gets close to $K$. The factor $\\displaystyle 1-\\frac{P}{K}$ does exactly that: it is near $1$ when $P\\ll K$ and goes to $0$ when $P=K$.\n\nPutting these ideas together gives the **logistic differential equation**  \n\n$$\n\\frac{dP}{dt}=rP\\left(1-\\frac{P}{K}\\right).\n$$\n\n> **Note:** A *differential equation* relates a function (here $P(t)$) to its derivative (its rate of change). Solving it means finding the function itself.\n\n### 2. Solving by separation of variables  \n\n“Separation of variables’’ means we rearrange the equation so that all terms involving $P$ are on one side and all terms involving $t$ are on the other.\n\nStart with  \n\n$$\n\\frac{dP}{dt}=rP\\left(1-\\frac{P}{K}\\right).\n$$\n\nDivide both sides by $P\\left(1-\\frac{P}{K}\\right)$ and multiply by $dt$:\n\n$$\n\\frac{dP}{P\\left(1-\\frac{P}{K}\\right)} = r\\,dt.\n$$\n\nNow we need to integrate both sides. The left side looks messy, but we can split it using *partial fractions*:\n\n\\[\n\\frac{1}{P\\left(1-\\frac{P}{K}\\right)}=\n\\frac{1}{P}+\\frac{1}{K-P}\\;\\frac{1}{K}.\n\\]\n\nMore explicitly,\n\n\\[\n\\frac{1}{P\\left(1-\\frac{P}{K}\\right)}=\n\\frac{1}{P}+\\frac{1}{K-P}\\;\\frac{1}{K}.\n\\]\n\nIntegrating gives  \n\n$$\n\\int\\!\\left(\\frac{1}{P}+\\frac{1}{K-P}\\right)dP = \\int r\\,dt .\n$$\n\nThe integrals are straightforward:\n\n\\[\n\\ln|P| - \\ln|K-P| = rt + C,\n\\]\n\nwhere $C$ is the constant of integration. Combine the logarithms:\n\n\\[\n\\ln\\!\\left(\\frac{P}{K-P}\\right)=rt + C.\n\\]\n\nExponentiate both sides to remove the log:\n\n\\[\n\\frac{P}{K-P}=Ce^{rt},\n\\]\n\nwith $C=e^{C}$ (still a constant). Solve for $P$:\n\n\\[\nP = \\frac{KCe^{rt}}{1+Ce^{rt}}.\n\\]\n\nTo determine $C$, use the initial population $P(0)=P_0$:\n\n\\[\n\\frac{P_0}{K-P_0}=C.\n\\]\n\nSubstituting back, the final **logistic solution** is  \n\n$$\nP(t)=\\frac{K}{1+\\left(\\frac{K-P_0}{P_0}\\right)e^{-rt}}.\n$$\n\n> **In daily life:** This formula tells you how a virus spreads in a closed community, how a fishery recovers after over‑fishing, or how a startup’s user base grows before hitting market saturation.\n\n### 3. Interpreting the result  \n\n- When $t\\to\\infty$, the exponential term $e^{-rt}\\to0$, so  \n\n\\[\nP(t)\\to\\frac{K}{1+0}=K.\n\\]\n\n  The population settles at the **carrying capacity** $K$. No matter how many rabbits you start with (as long as $P_0>0$), the island cannot support more than $K$ rabbits in the long run.\n\n- If $P_0$ is very small, the denominator is initially close to $1$, and $P(t)$ grows almost like $P(t)\\approx P_0e^{rt}$, the familiar exponential growth. This matches our intuition: when there is plenty of room, the rabbits multiply quickly.\n\n- If $P_0$ is already near $K$, the fraction $\\frac{K-P_0}{P_0}$ is small, so the denominator is already larger than $1$, and growth is slow from the start.\n\n> **Common mistake:** Forgetting to include the factor $\\displaystyle 1-\\frac{P}{K}$ leads to the simple exponential model $\\frac{dP}{dt}=rP$, which predicts unlimited growth – unrealistic for most real‑world populations.\n\n### 4. Why this matters  \n\nUnderstanding the logistic model helps biologists predict how species will respond to changes in habitat, how conservation efforts might raise $K$, or how disease control measures affect the effective carrying capacity of a pathogen. The math shows that **limits matter**: growth cannot continue forever, and the shape of the curve tells us *when* the limit will start to dominate.\n\n> **Remember:** The logistic equation balances *growth* ($rP$) with *restriction* ($1-P/K$). Solving it gives a smooth S‑shaped curve that starts fast, slows down, and finally levels off at the carrying capacity $K$.",
    "code": ""
   },
   {
-   "heading": "Derivatives in Modeling",
-   "body": "Derivatives give us a precise way to talk about **rates of change**.  \nIf a quantity \\(y\\) depends on time \\(t\\), the derivative \\(\\dfrac{dy}{dt}\\) tells us how fast \\(y\\) is changing at any instant.  \nThe **first derivative** measures the instantaneous rate (e.g., velocity, growth rate, marginal cost).  \nThe **second derivative** \\(\\dfrac{d^{2}y}{dt^{2}}\\) measures how that rate itself is changing (e.g., acceleration, concavity, how quickly marginal cost is increasing).\n\n---\n\n### Worked Example: Marginal Cost of a Toy Factory  \n\nA toy factory finds that the total cost (in dollars) to produce \\(x\\) toys is  \n\n\\[\nC(x)=0.02x^{3}-0.9x^{2}+150x+500 .\n\\]\n\n**Step 1 – Find the marginal cost.**  \nThe marginal cost is the first derivative of the cost function:\n\n\\[\nC'(x)=\\frac{d}{dx}\\bigl(0.02x^{3}-0.9x^{2}+150x+500\\bigr)\n      =0.06x^{2}-1.8x+150 .\n\\]\n\n**Step 2 – Evaluate at a specific production level.**  \nSuppose the factory plans to make \\(x=20\\) toys.\n\n\\[\nC'(20)=0.06(20)^{2}-1.8(20)+150\n      =0.06(400)-36+150\n      =24-36+150=138 .\n\\]\n\nSo the **marginal cost** when producing the 20‑th toy is \\(\\$138\\). This means producing one more toy (the 21st) will increase total cost by about \\(\\$138\\).\n\n**Step 3 – Interpret the second derivative.**  \nThe second derivative tells us how the marginal cost is changing:\n\n\\[\nC''(x)=\\frac{d}{dx}\\bigl(0.06x^{2}-1.8x+150\\bigr)=0.12x-1.8 .\n\\]\n\nAt \\(x=20\\),\n\n\\[\nC''(20)=0.12(20)-1.8=2.4-1.8=0.6 .\n\\]\n\nSince \\(C''(20)>0\\), the marginal cost is **increasing** at a rate of \\(\\$0.60\\) per additional toy. The cost curve is concave up, indicating diminishing economies of scale beyond this point.\n\n---\n\n### Practice Problems  \n\n1. **Velocity from a position function**  \n   A particle moves along a line with position \\(s(t)=5t^{3}-45t^{2}+120t\\) (meters).  \n   *Find the velocity at \\(t=4\\) s and determine whether the particle is speeding up or slowing down at that instant.*\n\n   **Solution**  \n   Velocity \\(v(t)=s'(t)=15t^{2}-90t+120\\).  \n   \\(v(4)=15(16)-90(4)+120=240-360+120=0\\) m/s.  \n   Acceleration \\(a(t)=v'(t)=30t-90\\).  \n   \\(a(4)=30(4)-90=120-90=30\\) m/s\\(^2\\) (positive).  \n   Since velocity is zero and acceleration is positive, the particle is **starting to move forward**, i.e., it is accelerating from rest.\n\n2. **Population growth rate**  \n   A bacteria colony follows \\(P(t)=200e^{0.3t}\\) (cells).  \n   *Compute the instantaneous growth rate at \\(t=5\\) h and interpret it.*\n\n   **Solution**  \n   \\(P'(t)=200\\cdot0.3e^{0.3t}=60e^{0.3t}\\).  \n   \\(P'(5)=60e^{1.5}\\approx60(4.4817)=268.9\\) cells/h.  \n   The colony is gaining about **269 cells per hour** at \\(t=5\\) h.\n\n3. **Marginal profit**  \n   Profit (in thousands of dollars) from selling \\(x\\) thousand units is \\( \\Pi(x)= -2x^{2}+12x-5\\).  \n   *Find the production level that maximizes profit and the maximum profit.*\n\n   **Solution**  \n   Marginal profit \\(\\Pi'(x)=-4x+12\\). Set to zero: \\(-4x+12=0\\Rightarrow x=3\\).  \n   Second derivative \\(\\Pi''(x)=-4<0\\) → maximum.  \n   Profit at \\(x=3\\): \\(\\Pi(3)=-2(9)+12(3)-5=-18+36-5=13\\).  \n   Maximum profit = \\(\\$13{,}000\\) when 3 000 units are produced.\n\n4. **Acceleration from a velocity function**  \n   A car’s velocity is given by \\(v(t)=4t^{2}-12t+9\\) (m/s).  \n   *Find the acceleration at the moment when the car’s speed is zero.*\n\n   **Solution**  \n   Set \\(v(t)=0\\): \\(4t^{2}-12t+9=0\\). Solve: \\(t=\\frac{12\\pm\\sqrt{144-144}}{8}= \\frac{12}{8}=1.5\\) s (double root).  \n   Acceleration \\(a(t)=v'(t)=8t-12\\).  \n   \\(a(1.5)=8(1.5)-12=12-12=0\\) m/s\\(^2\\).  \n   The car momentarily stops with **zero acceleration**, indicating a brief pause before changing direction.",
+   "heading": "4. Economics Example: Consumer Surplus",
+   "body": "Imagine you go to a market and see a table of prices for a product—say, a concert ticket. The price you actually pay is the **market price**. But each buyer might have been willing to pay a different amount, depending on how much they value the experience. The **consumer surplus** is the total amount of “extra happiness” that all buyers get because they pay less than what they were prepared to pay.\n\n> **Definition:** *Consumer surplus* is the difference between what consumers are willing to pay for a good and what they actually pay.\n\n---\n\n### 1.  Modelling demand as a function  \n\nEconomists often describe how much of a product people want at each price with a **demand function**.  \nLet $p$ denote the price (in dollars) and $q(p)$ the quantity demanded at that price.  \nA simple linear demand curve looks like  \n\n$$\nq(p)=a-bp,\n$$  \n\nwhere $a$ and $b$ are positive constants.  \n- $a$ is the quantity demanded if the price were $0$ (the “maximum possible demand”).  \n- $b$ tells us how quickly demand falls as price rises.\n\n**Example:** Suppose a small bakery sells cupcakes. If the price were free, 200 people would take one ($a=200$). For each extra dollar, 10 fewer people buy a cupcake, so $b=10$. The demand function is  \n\n$$\nq(p)=200-10p.\n$$\n\n---\n\n### 2.  From demand to willingness to pay  \n\nThe **willingness to pay** for each individual unit is represented by the area under the demand curve from the price you actually pay, $p_0$, up to the highest price anyone would pay (where $q=0$).  \nFirst find that highest price $p_{\\max}$ by setting $q(p)=0$:\n\n$$\n0 = a - b p_{\\max} \\quad\\Longrightarrow\\quad p_{\\max}= \\frac{a}{b}.\n$$\n\nIn the cupcake example, $p_{\\max}=200/10 = 20$ dollars. No one would buy a cupcake if it cost more than \\$20.\n\nThe total willingness to pay for all cupcakes sold at price $p_0$ is the **definite integral** of the demand function from $p_0$ to $p_{\\max}$:\n\n$$\n\\text{WTP}= \\int_{p_0}^{p_{\\max}} q(p)\\,dp.\n$$\n\nPlugging the linear form gives  \n\n$$\n\\text{WTP}= \\int_{p_0}^{p_{\\max}} (a-bp)\\,dp\n          = \\Big[ap-\\tfrac{b}{2}p^{2}\\Big]_{p_0}^{p_{\\max}}.\n$$\n\n---\n\n### 3.  Subtract actual expenditure  \n\nThe **actual expenditure** is simply the market price times the quantity actually bought:\n\n$$\n\\text{Expenditure}= p_0 \\, q(p_0).\n$$\n\nFinally, the consumer surplus $CS$ is  \n\n$$\nCS = \\text{WTP} - \\text{Expenditure}.\n$$\n\n---\n\n### 4.  Worked example  \n\nTake the cupcake shop again. Suppose the market price is $p_0 = 5$ dollars.\n\n1. **Quantity sold**: $q(5)=200-10\\cdot5 = 150$ cupcakes.  \n2. **WTP**:  \n\n\\[\n\\text{WTP}= \\Big[200p-\\tfrac{10}{2}p^{2}\\Big]_{5}^{20}\n          = \\Big[200p-5p^{2}\\Big]_{5}^{20}\n          = (200\\cdot20-5\\cdot20^{2})-(200\\cdot5-5\\cdot5^{2})\n          = (4000-2000)-(1000-125)=2000-875=1125.\n\\]\n\n3. **Expenditure**: $5 \\times 150 = 750$ dollars.  \n\n4. **Consumer surplus**:  \n\n$$\nCS = 1125 - 750 = 375 \\text{ dollars}.\n$$\n\nSo the 150 customers together enjoy \\$375 of extra benefit because they each paid only \\$5 instead of their individual higher willingness to pay.\n\n> **In daily life:** Think of a sale where you buy a shirt for \\$30, but you would have been happy to pay up to \\$50. Your personal surplus is \\$20. Adding up all customers’ surpluses gives the market’s consumer surplus.\n\n---\n\n### 5.  Why this matters  \n\nConsumer surplus tells businesses and policymakers how much value consumers receive beyond the price tag. A large surplus suggests the product is priced well below what people value it at, which can indicate strong demand or a competitive market. Conversely, a tiny surplus may signal that prices are too high or that consumers are indifferent.\n\n> **Remember:** The integral captures *all* the tiny willingness‑to‑pay amounts for each infinitesimal slice of quantity; adding them up gives the total benefit.\n\n---\n\n### 6.  Common mistake to avoid  \n\n> **Common mistake:** Forgetting to integrate from the market price $p_0$ up to $p_{\\max}$, and instead integrating from $0$ to $p_{\\max}$. That would count willingness to pay for units that were never bought, inflating the surplus.\n\nBy carefully modelling demand, computing the integral, and subtracting the actual spending, you obtain a clear, quantitative picture of consumer surplus—an essential tool in economics.",
    "code": ""
   },
   {
-   "heading": "Integrals in Modeling",
-   "body": "Integrals let us turn a rate or density into a total amount.  In many real‑world situations we know **how fast** something changes (a speed, a growth rate, a marginal cost) and we want the **accumulated quantity** (distance, total biomass, surplus).  The tool for this is the **definite integral**  \n\n\\[\n\\int_{a}^{b} f(x)\\,dx .\n\\]\n\nBelow we see three common modeling contexts, then a fully worked example, and finally four practice problems with complete solutions.\n\n---\n\n### 1. Distance from a speed function  \n\nIf a car travels with speed $v(t)$ (miles per hour) for time $t$ measured in hours, the distance covered between $t=a$ and $t=b$ is  \n\n\\[\n\\text{Distance}= \\int_{a}^{b} v(t)\\,dt .\n\\]\n\nThe integral adds up infinitely many tiny pieces of distance $v(t)\\,dt$.\n\n### 2. Total biomass from a density function  \n\nSuppose a lake has fish density $\\rho(x)$ (kilograms per square meter) that varies with depth $x$ (meters).  The total fish mass in the layer from depth $x=a$ to $x=b$ is  \n\n\\[\nM = \\int_{a}^{b} \\rho(x)\\,dx .\n\\]\n\nHere the integrand is a **density**, and the integral converts density into a total mass.\n\n### 3. Consumer and producer surplus  \n\nA demand curve $p = D(q)$ gives the price consumers are willing to pay for quantity $q$.  The market price is $p = p_0$.  Consumer surplus is the area between the demand curve and the price line:\n\n\\[\n\\text{CS}= \\int_{0}^{Q^*}\\bigl(D(q)-p_0\\bigr)\\,dq ,\n\\]\n\nwhere $Q^*$ is the quantity actually sold.  Producer surplus is defined analogously with the supply curve.\n\n---\n\n## Worked Example: Distance Traveled with Variable Speed  \n\nA cyclist’s speed (in km/h) varies with time according to  \n\n\\[\nv(t)=12-0.5t,\\qquad 0\\le t\\le 8 .\n\\]\n\nFind the total distance ridden from $t=0$ to $t=8$ hours.\n\n**Step 1 – Write the integral**  \n\n\\[\n\\text{Distance}= \\int_{0}^{8} (12-0.5t)\\,dt .\n\\]\n\n**Step 2 – Find an antiderivative**  \n\n\\[\n\\int (12-0.5t)\\,dt = 12t-\\frac{0.5}{2}t^{2}=12t-0.25t^{2}.\n\\]\n\n**Step 3 – Evaluate at the limits**  \n\n\\[\n\\begin{aligned}\n\\text{Distance}&=\\Bigl[12t-0.25t^{2}\\Bigr]_{0}^{8} \\\\\n&=\\bigl(12\\cdot8-0.25\\cdot8^{2}\\bigr)-\\bigl(12\\cdot0-0.25\\cdot0^{2}\\bigr)\\\\\n&=96-0.25\\cdot64\\\\\n&=96-16\\\\\n&=80\\;\\text{km}.\n\\end{aligned}\n\\]\n\nSo the cyclist travels **80 km** in the 8‑hour interval.\n\n---\n\n## Practice Problems  \n\n### Problem 1 – Accumulated biomass  \nA forest has tree biomass density $\\rho(x)=5e^{-0.2x}$ kg/m² at depth $x$ (m) from the surface down to $x=10$ m. Compute the total biomass per square meter.\n\n**Solution**  \n\n\\[\nM=\\int_{0}^{10}5e^{-0.2x}\\,dx\n=5\\left[-\\frac{1}{0.2}e^{-0.2x}\\right]_{0}^{10}\n=5\\left[-5e^{-0.2x}\\right]_{0}^{10}\n= -25\\bigl(e^{-2}-1\\bigr)=25\\bigl(1-e^{-2}\\bigr)\\approx 21.6\\text{ kg/m}^2.\n\\]\n\n---\n\n### Problem 2 – Consumer surplus  \nDemand: $p=100-2q$, supply: $p=20+q$.  The market price is the equilibrium price. Find consumer surplus.\n\n**Solution**  \n\nSet demand = supply: $100-2q = 20+q \\Rightarrow 3q=80 \\Rightarrow q^*= \\frac{80}{3}\\approx26.67$, $p^*=100-2q^*\\approx46.67$.\n\nConsumer surplus:\n\n\\[\n\\text{CS}= \\int_{0}^{q^*}\\bigl(100-2q- p^*\\bigr)\\,dq\n= \\int_{0}^{q^*}(53.33-2q)\\,dq\n= \\Bigl[53.33q-q^{2}\\Bigr]_{0}^{q^*}\n=53.33\\cdot\\frac{80}{3}-\\left(\\frac{80}{3}\\right)^{2}\n\\approx 1422.2-711.1=711.1.\n\\]\n\n---\n\n### Problem 3 – Total distance from a velocity function  \nA runner’s speed is $v(t)=6+3\\sin(\\pi t/5)$ m/s for $0\\le t\\le10$ s. Find the distance covered.\n\n**Solution**  \n\n\\[\n\\int_{0}^{10}\\bigl(6+3\\sin(\\tfrac{\\pi t}{5})\\bigr)dt\n=6t-\\frac{15}{\\pi}\\cos(\\tfrac{\\pi t}{5})\\Big|_{0}^{10}\n=60-\\frac{15}{\\pi}\\bigl(\\cos 2\\pi-\\cos0\\bigr)=60.\n\\]\n\n(The cosine terms cancel because $\\cos 2\\pi=\\cos0=1$.)  Distance = **60 m**.\n\n---\n\n### Problem 4 – Producer surplus  \nSupply curve: $p=10+0.5q$.  Market price is $p=30$.  Find producer surplus.\n\n**Solution**  \n\nQuantity supplied at $p=30$: $30=10+0.5q \\Rightarrow q=40$.\n\nProducer surplus:\n\n\\[\n\\text{PS}= \\int_{0}^{40}\\bigl(30-(10+0.5q)\\bigr)\\,dq\n= \\int_{0}^{40}(20-0.5q)\\,dq\n= \\Bigl[20q-0.25q^{2}\\Bigr]_{0}^{40}\n=800-0.25\\cdot1600=800-400=400.\n\\]\n\nThus the producer surplus is **\\$400** (in the same monetary units as the price).",
+   "heading": "5. Checking and Interpreting Results",
+   "body": "When we finish a calculation, the work is not done until we **check** that the answer makes sense.  \nChecking means three things:\n\n1. **Units** – do the numbers have the right physical units (seconds, meters, dollars …)?  \n2. **Interpretation** – what does the number actually tell us about the situation?  \n3. **Sensitivity** – how would the answer change if we tweaked a key parameter such as gravity, a growth rate, or a price?\n\nDoing these steps prevents us from accepting a mathematically correct but practically useless result.\n\n---\n\n> **Definition:** *Units* are the labels that tell us what a number measures (e.g., meters for distance, seconds for time). Keeping track of units is a simple way to catch algebraic mistakes.\n\n### 1. Verify the units\n\nSuppose we modeled a falling object and found the time to hit the ground to be  \n\n$$t = \\sqrt{\\frac{2h}{g}}$$  \n\nwhere $h$ is the height (in meters) and $g$ is the acceleration due to gravity (in meters per second squared).  \n\nInsert the units:\n\n\\[\n\\sqrt{\\frac{2\\;\\text{m}}{\\text{m/s}^2}} = \\sqrt{\\frac{\\text{m}}{\\text{m}\\,\\text{s}^{-2}}}= \\sqrt{\\text{s}^2}= \\text{s}.\n\\]\n\nThe result is in seconds, exactly what we expect for a time. If we had mistakenly written $g$ as $9.8$ without units, the square‑root would have given a number with no unit, signalling an error.\n\n### 2. Interpret the numerical answer\n\nImagine $h = 20\\,$m and $g = 9.8\\,$m/s\\(^2\\). Plugging in:\n\n$$t = \\sqrt{\\frac{2\\cdot20}{9.8}} \\approx 2.02\\;\\text{s}.$$\n\nWhat does “2.02 s” mean? It tells us that, ignoring air resistance, an object dropped from a 20‑meter balcony will reach the ground just after two seconds. This is a concrete statement we can compare with a real‑world stopwatch. If the answer had been $0.02\\,$s, we would suspect a slip in the algebra because a human cannot fall that fast from that height.\n\n> **In daily life:** When a recipe says “bake for 15 minutes”, the number is only useful if we also know the unit (minutes). Forgetting the unit would make the instruction meaningless.\n\n### 3. Explore how changing parameters affects the outcome\n\n#### Changing gravity\n\nIf the same drop occurred on the Moon, where $g_{\\text{moon}}\\approx1.6\\,$m/s\\(^2\\), the time becomes\n\n$$t_{\\text{moon}} = \\sqrt{\\frac{2\\cdot20}{1.6}} \\approx 5.0\\;\\text{s}.$$\n\nThe lower gravity makes the fall slower, roughly 2.5 times longer. This shows the formula’s sensitivity: $t$ grows like $1/\\sqrt{g}$.\n\n#### Changing the growth rate in the logistic model\n\nFor the logistic population model $P(t)=\\frac{K}{1+Ae^{-rt}}$, the parameter $r$ is the intrinsic growth rate. If $r$ doubles, the exponent $-rt$ halves in magnitude for a given $t$, making $e^{-rt}$ smaller and $P(t)$ larger. In plain words, the population reaches its carrying capacity faster.\n\n#### Changing price in consumer surplus\n\nConsumer surplus is the area between the demand curve and the market price. If the market price rises from $p_1$ to $p_2$, the surplus shrinks by the rectangle of width $(p_2-p_1)$ and height equal to the quantity demanded at $p_1$. Numerically, a $5\\,$dollar increase might cut the surplus from $200$ dollars to $150$ dollars, indicating that buyers are now less “happy” with the purchase.\n\n> **Remember:** After any calculation, ask yourself: *What are the units?* *What does the number describe?* *If I change a key input, how does the answer move?* Answering these three questions turns a raw number into useful knowledge.\n\n### Quick checklist for verification\n\n1. Write down the units of every variable before substituting numbers.  \n2. Perform the algebra, then simplify the units; they should match the quantity you are solving for.  \n3. State the result in a full sentence that explains its meaning.  \n4. Change one parameter slightly (e.g., increase $g$ by 10 %) and recompute to see the direction of change.  \n\nBy habitually applying this checklist, you develop confidence that your models not only solve equations but also describe the real world accurately.",
    "code": ""
   },
   {
-   "heading": "Case Study: Projectile Motion",
-   "body": "The motion of a projectile launched straight up from ground level is a classic example that brings together **limits**, **derivatives**, and **integrals**.  \nAssume the only force acting after launch is gravity (ignore air resistance).  \nLet  \n\n\\[\nh(t)=v_0t-\\frac12gt^{2}\n\\]\n\nbe the height (in meters) at time \\(t\\) seconds, where  \n\n* \\(v_0\\) – initial velocity (m s\\(^{-1}\\)),  \n* \\(g\\approx9.8\\text{ m s}^{-2}\\) – acceleration due to gravity.\n\n---\n\n### 1. Finding the maximum height  \n\nThe height is a **continuous** function of \\(t\\); its maximum occurs where the derivative \\(h'(t)\\) changes sign from positive to negative.\n\n\\[\nh'(t)=\\frac{d}{dt}\\Big(v_0t-\\frac12gt^{2}\\Big)=v_0-gt .\n\\]\n\nSet the derivative to zero:\n\n\\[\nv_0-gt=0\\quad\\Longrightarrow\\quad t_{\\max}= \\frac{v_0}{g}.\n\\]\n\nPlug \\(t_{\\max}\\) back into \\(h(t)\\):\n\n\\[\n\\begin{aligned}\nh_{\\max}&=h\\!\\left(\\frac{v_0}{g}\\right)\n =v_0\\!\\left(\\frac{v_0}{g}\\right)-\\frac12g\\!\\left(\\frac{v_0}{g}\\right)^{2}  \\\\\n &=\\frac{v_0^{2}}{g}-\\frac12\\frac{v_0^{2}}{g}\n =\\frac{v_0^{2}}{2g}.\n\\end{aligned}\n\\]\n\nThus the **maximum height** is \\(\\displaystyle h_{\\max}= \\frac{v_0^{2}}{2g}\\) and occurs at time \\(\\displaystyle t_{\\max}= \\frac{v_0}{g}\\).\n\n---\n\n### 2. Time of flight (when the projectile returns to ground)\n\nThe projectile hits the ground when \\(h(t)=0\\):\n\n\\[\nv_0t-\\frac12gt^{2}=0\n\\quad\\Longrightarrow\\quad\nt\\bigl(v_0-\\tfrac12gt\\bigr)=0.\n\\]\n\nThe solutions are \\(t=0\\) (launch) and  \n\n\\[\nv_0-\\tfrac12gt=0\\;\\Longrightarrow\\;t_{\\text{flight}}=\\frac{2v_0}{g}.\n\\]\n\nSo the **total time of flight** is \\(\\displaystyle \\frac{2v_0}{g}\\).\n\n---\n\n### 3. Distance travelled (integral of speed)\n\nThe speed is the absolute value of the velocity \\(v(t)=h'(t)=v_0-gt\\).  \nFrom launch to the top (\\(0\\le t\\le t_{\\max}\\)) the speed equals \\(v(t)\\); from the top to landing (\\(t_{\\max}\\le t\\le t_{\\text{flight}}\\)) the speed is \\(-v(t)\\).  \nBecause the upward and downward paths are symmetric, the total distance equals twice the maximum height:\n\n\\[\n\\text{distance}=2h_{\\max}=2\\left(\\frac{v_0^{2}}{2g}\\right)=\\frac{v_0^{2}}{g}.\n\\]\n\nAlternatively, integrate the absolute velocity:\n\n\\[\n\\int_{0}^{t_{\\text{flight}}}|v_0-gt|\\,dt\n=2\\int_{0}^{t_{\\max}}(v_0-gt)\\,dt\n=2\\Bigl[v_0t-\\tfrac12gt^{2}\\Bigr]_{0}^{v_0/g}\n=\\frac{v_0^{2}}{g}.\n\\]\n\n---\n\n### Worked Example  \n\nA ball is thrown upward with \\(v_0=20\\text{ m s}^{-1}\\).\n\n1. **Maximum height**  \n\n   \\[\n   h_{\\max}= \\frac{20^{2}}{2\\cdot9.8}\n   =\\frac{400}{19.6}\\approx20.41\\text{ m}.\n   \\]\n\n2. **Time to reach the top**  \n\n   \\[\n   t_{\\max}= \\frac{20}{9.8}\\approx2.04\\text{ s}.\n   \\]\n\n3. **Total time of flight**  \n\n   \\[\n   t_{\\text{flight}}= \\frac{2\\cdot20}{9.8}\\approx4.08\\text{ s}.\n   \\]\n\n4. **Total distance travelled**  \n\n   \\[\n   \\text{distance}= \\frac{20^{2}}{9.8}\\approx40.82\\text{ m}.\n   \\]\n\nAll results follow directly from the derivative (to locate the peak) and the integral (to sum the travelled length).\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nA rock is launched upward with \\(v_0=15\\text{ m s}^{-1}\\). Find its maximum height and the time when it occurs.\n\n**Solution**  \n\n\\[\nt_{\\max}= \\frac{15}{9.8}\\approx1.53\\text{ s},\\qquad\nh_{\\max}= \\frac{15^{2}}{2\\cdot9.8}= \\frac{225}{19.6}\\approx11.48\\text{ m}.\n\\]\n\n---\n\n### Problem 2  \nA soccer ball is kicked straight up with \\(v_0=12\\text{ m s}^{-1}\\). Determine the total time the ball is in the air.\n\n**Solution**  \n\n\\[\nt_{\\text{flight}}= \\frac{2\\cdot12}{9.8}= \\frac{24}{9.8}\\approx2.45\\text{ s}.\n\\]\n\n---\n\n### Problem 3  \nA projectile is launched with \\(v_0=25\\text{ m s}^{-1}\\). Compute the total vertical distance it travels before returning to the ground.\n\n**Solution**  \n\n\\[\n\\text{distance}= \\frac{25^{2}}{9.8}= \\frac{625}{9.8}\\approx63.78\\text{ m}.\n\\]\n\n---\n\n### Problem 4  \nA basketball is thrown upward with an initial speed of \\(8\\text{ m s}^{-1}\\). Find the height of the ball after \\(0.5\\) seconds and the velocity at that instant.\n\n**Solution**  \n\nHeight:  \n\n\\[\nh(0.5)=8(0.5)-\\frac12(9.8)(0.5)^{2}\n=4-1.225=2.775\\text{ m}.\n\\]\n\nVelocity:  \n\n\\[\nv(0.5)=8-9.8(0.5)=8-4.9=3.1\\text{ m s}^{-1}.\n\\]\n\n---",
+   "heading": "6. Common Pitfalls and How to Avoid Them",
+   "body": "When you turn a word problem into a mathematical model, the smallest slip can change the whole answer. Below are the most frequent mistakes students make and simple ways to catch them before they spoil your work.\n\n> **Common mistake:** *Mixing up dependent and independent variables*  \nThe **dependent variable** is the quantity that changes **because of** something else; the **independent variable** is the thing you control or that progresses naturally (often time).  \nIf you write the height of a falling ball as $h(t)=\\frac12gt^2$ you have swapped the roles: height depends on time, not the other way around. The correct model is  \n$$h(t)=h_0-\\frac12gt^2,$$  \nwhere $h_0$ is the initial height (a constant). Always ask: *What am I solving for?* If the answer is “height,” then height must be the dependent variable, written as a function of the independent variable $t$.\n\n> **Remember:** *Write the variable you are solving for as a function of the independent variable.*  \nA quick check: replace the independent variable with a number (e.g., $t=2$ seconds). The expression should give you a single, sensible value for the dependent variable (e.g., a height in meters). If it gives a time instead, you have the variables reversed.\n\n> **Common mistake:** *Forgetting constants of integration*  \nWhen you integrate a rate, you are essentially “undoing” a derivative. The antiderivative is never unique; it always includes a **constant of integration** (usually written $C$).  \nFor example, if the velocity of a car is $v(t)=3t$, the distance traveled is  \n$$s(t)=\\int 3t\\,dt = \\frac32 t^2 + C.$$  \nIf you drop the $+C$, you assume the car started at the origin, which may be false. The constant is determined by an **initial condition**, such as “the car was 5 m from the start line at $t=0$.” Plugging $t=0$ gives $5 = C$, so the full model becomes $s(t)=\\frac32 t^2 + 5$.\n\n> **Note:** *Always write “+ C” after an indefinite integral, then use given data to find $C$.*  \nA handy mental shortcut: after each integration step, pause and ask, “Did the problem tell me where the object started or how much was present at the beginning?” If yes, that information will fix the constant.\n\n> **Common mistake:** *Misreading the problem statement*  \nWord problems often hide crucial details in plain language. Phrases like “after 5 seconds,” “per unit time,” or “when the population reaches 1000” are not decorative; they tell you **when** to evaluate your model or **what** value to set as a condition.  \nConsider the logistic growth model for a bacteria culture:  \n$$P(t)=\\frac{K}{1+Ae^{-rt}},$$  \nwhere $P(t)$ is the population at time $t$, $K$ is the carrying capacity, $r$ is the growth rate, and $A$ is a constant determined by the initial population $P(0)$. If the problem says “the culture starts with 200 cells and the carrying capacity is 5000,” you must use $P(0)=200$ to find $A$:\n$$200=\\frac{5000}{1+A}\\;\\Longrightarrow\\;A=24.$$  \nSkipping this step and using $A=1$ would give a completely wrong curve.\n\n> **In daily life:** *Think of a recipe.* The instructions (problem statement) tell you how much flour, sugar, and butter to add **before** you start mixing. If you ignore “add 2 cups of flour” and just mix whatever you have, the cake will not turn out as expected. Similarly, every number or condition in a word problem is an ingredient for the correct mathematical “recipe.”\n\n**How to avoid these pitfalls**\n\n1. **Identify variables first.** Write a short list:  \n   - Independent variable (usually $t$ for time).  \n   - Dependent variable (the quantity you need to find).  \n   - Parameters (constants like $g$, $K$, or $r$).  \n\n2. **Translate each sentence.** After reading a clause, write the corresponding mathematical piece next to it. For example, “the object falls 5 m in the first second” becomes $h(1)=h_0-\\frac12g(1)^2=5$.\n\n3. **Mark every integration.** Immediately write “$+C$” and note where you will later substitute an initial condition.\n\n4. **Check units and logic.** Plug in simple numbers (e.g., $t=0$) to see if the model gives a realistic value (height should be the initial height, not zero unless the object starts at ground level).\n\nBy following these small, systematic steps, you turn a confusing word problem into a clear, reliable mathematical model, and you keep the common errors from sneaking in unnoticed.",
    "code": ""
   },
   {
-   "heading": "Case Study: Logistic Population Growth",
-   "body": "**Case Study: Logistic Population Growth**\n\nA population that grows without limits would follow the simple model  \n\n\\[\n\\frac{dP}{dt}=rP ,\n\\]\n\nwhere \\(P(t)\\) is the population at time \\(t\\) and \\(r>0\\) is the intrinsic growth rate.  \nIn reality, resources are limited, so the growth slows as the population approaches a **carrying capacity** \\(K\\). The **logistic model** captures this by reducing the growth rate proportionally to the fraction of unused resources:\n\n\\[\n\\frac{dP}{dt}=rP\\left(1-\\frac{P}{K}\\right).\n\\]\n\n---\n\n### Solving the logistic differential equation  \n\n1. **Separate variables**\n\n\\[\n\\frac{dP}{P\\left(1-\\frac{P}{K}\\right)} = r\\,dt .\n\\]\n\nRewrite the left‑hand side using partial fractions:\n\n\\[\n\\frac{1}{P\\left(1-\\frac{P}{K}\\right)}\n   =\\frac{1}{P}+\\frac{1}{K-P}\\;\\;\\Longrightarrow\\;\\;\n\\frac{dP}{P}+\\frac{dP}{K-P}=r\\,dt .\n\\]\n\n2. **Integrate**\n\n\\[\n\\int\\!\\left(\\frac{1}{P}+\\frac{1}{K-P}\\right)\\!dP\n   =\\int r\\,dt .\n\\]\n\n\\[\n\\ln|P|-\\ln|K-P| = rt + C .\n\\]\n\n3. **Combine logarithms**\n\n\\[\n\\ln\\!\\left|\\frac{P}{K-P}\\right| = rt + C .\n\\]\n\nExponentiate:\n\n\\[\n\\frac{P}{K-P}=Ce^{rt},\n\\qquad C=e^{C}.\n\\]\n\n4. **Solve for \\(P(t)\\)**\n\n\\[\nP = (K-P)Ce^{rt}\n\\;\\Longrightarrow\\;\nP\\bigl(1+Ce^{rt}\\bigr)=KCe^{rt}\n\\;\\Longrightarrow\\;\nP(t)=\\frac{KCe^{rt}}{1+Ce^{rt}} .\n\\]\n\nLet the initial population be \\(P(0)=P_0\\). Substituting \\(t=0\\):\n\n\\[\n\\frac{P_0}{K-P_0}=C .\n\\]\n\nThus  \n\n\\[\n\\boxed{\\,P(t)=\\frac{K}{1+\\displaystyle\\left(\\frac{K-P_0}{P_0}\\right)e^{-rt}}\\,}.\n\\]\n\n---\n\n### Long‑term behavior  \n\n- As \\(t\\to\\infty\\), \\(e^{-rt}\\to0\\). Hence  \n\n  \\[\n  P(t)\\to\\frac{K}{1+0}=K .\n  \\]\n\n  The population approaches the **carrying capacity** \\(K\\) and stays there.\n\n- If \\(P_0<K\\) the fraction \\(\\frac{K-P_0}{P_0}>0\\); the denominator grows, so \\(P(t)\\) rises monotonically toward \\(K\\).\n\n- If \\(P_0>K\\) the same fraction is negative, making the denominator decrease toward 1, and \\(P(t)\\) falls toward \\(K\\) from above.\n\nThus the logistic model predicts a stable equilibrium at \\(P=K\\) and an unstable equilibrium at \\(P=0\\).\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nA fish lake has carrying capacity \\(K=10{,}000\\) fish. The intrinsic growth rate is \\(r=0.4\\ \\text{yr}^{-1}\\). If initially there are \\(P_0=2{,}000\\) fish, find \\(P(t)\\) and the population after 5 years.\n\n**Solution**  \n\n\\[\nP(t)=\\frac{10{,}000}{1+\\left(\\frac{10{,}000-2{,}000}{2{,}000}\\right)e^{-0.4t}}\n     =\\frac{10{,}000}{1+4e^{-0.4t}} .\n\\]\n\nAt \\(t=5\\):\n\n\\[\ne^{-0.4\\cdot5}=e^{-2}=0.1353,\\qquad\n1+4(0.1353)=1+0.5412=1.5412,\n\\]\n\n\\[\nP(5)=\\frac{10{,}000}{1.5412}\\approx 6{,}487\\text{ fish}.\n\\]\n\n---\n\n### Problem 2  \nA bacterial culture follows the logistic law with \\(K=5\\times10^8\\) cells and \\(r=1.2\\ \\text{hr}^{-1}\\). After 3 hours the population is \\(1.5\\times10^8\\). Determine \\(P_0\\).\n\n**Solution**  \n\nUse the solved form  \n\n\\[\nP(t)=\\frac{K}{1+\\left(\\frac{K-P_0}{P_0}\\right)e^{-rt}} .\n\\]\n\nSet \\(t=3\\), \\(P(3)=1.5\\times10^8\\):\n\n\\[\n1.5\\times10^8 = \\frac{5\\times10^8}{1+\\left(\\frac{5\\times10^8-P_0}{P_0}\\right)e^{-3.6}} .\n\\]\n\nInvert:\n\n\\[\n\\frac{5\\times10^8}{1.5\\times10^8}= \\frac{10}{3}=1+\\left(\\frac{5\\times10^8-P_0}{P_0}\\right)e^{-3.6}.\n\\]\n\nThus  \n\n\\[\n\\left(\\frac{5\\times10^8-P_0}{P_0}\\right)=\\frac{10}{3}-1 =\\frac{7}{3},\n\\qquad\n\\frac{5\\times10^8-P_0}{P_0}= \\frac{7}{3}e^{3.6}.\n\\]\n\nCompute \\(e^{3.6}\\approx36.6\\):\n\n\\[\n\\frac{5\\times10^8-P_0}{P_0}= \\frac{7}{3}\\times36.6\\approx85.4.\n\\]\n\nHence  \n\n\\[\n5\\times10^8-P_0 \\approx 85.4P_0 \\;\\Longrightarrow\\; 5\\times10^8 \\approx 86.4P_0,\n\\]\n\n\\[\nP_0\\approx \\frac{5\\times10^8}{86.4}\\approx5.79\\times10^6\\text{ cells}.\n\\]\n\n---\n\n### Problem 3  \nShow that \\(P=0\\) and \\(P=K\\) are equilibrium solutions of the logistic equation.\n\n**Solution**  \n\nSet \\(\\frac{dP}{dt}=rP\\left(1-\\frac{P}{K}\\right)=0\\).\n\nThe product is zero when either factor is zero:\n\n- \\(P=0\\) gives \\(\\frac{dP}{dt}=0\\).\n- \\(1-\\frac{P}{K}=0\\) ⇒ \\(P=K\\).\n\nThus both are constant solutions (equilibria).\n\n---\n\n### Problem 4  \nA wildlife reserve wants the deer population to stay within 80 %–90 % of the carrying capacity \\(K=2000\\). With \\(r=0.25\\ \\text{yr}^{-1}\\), find the range of initial populations \\(P_0\\) that will keep the herd inside this band for all future time.\n\n**Solution**  \n\nThe logistic solution is monotonic toward \\(K\\). If \\(P_0\\) is below the lower bound, the population will increase and eventually cross 80 % \\(K\\); if above the upper bound, it will decrease and cross 90 % \\(K\\). To stay inside forever, we need  \n\n\\[\n0.8K \\le P_0 \\le 0.9K .\n\\]\n\nThus  \n\n\\[\n0.8(2000)=1600 \\le P_0 \\le 1800=0.9(2000).\n\\]\n\nAny initial population in \\([1600,1800]\\) will remain within the desired band as the logistic curve approaches \\(K\\) from inside the interval.",
-   "code": ""
-  },
-  {
-   "heading": "Case Study: Economic Profit Maximization",
-   "body": "**Case Study: Economic Profit Maximization**\n\nA small factory produces wooden toys. The **revenue** from selling \\(x\\) toys per month (in thousands of dollars) is modeled by  \n\n\\[\nR(x)=12x-0.1x^{2}.\n\\]\n\nThe **cost** of producing \\(x\\) toys per month (in thousands of dollars) is  \n\n\\[\nC(x)=3x+0.05x^{2}.\n\\]\n\nThe **profit** function is the difference between revenue and cost:\n\n\\[\n\\boxed{P(x)=R(x)-C(x)=\\bigl(12x-0.1x^{2}\\bigr)-\\bigl(3x+0.05x^{2}\\bigr)\n      =9x-0.15x^{2}}.\n\\]\n\n---\n\n### Finding the optimal production level  \n\nTo maximise profit we set the derivative \\(P'(x)\\) equal to zero.\n\n\\[\nP'(x)=\\frac{d}{dx}\\bigl(9x-0.15x^{2}\\bigr)=9-0.30x.\n\\]\n\nSolve \\(P'(x)=0\\):\n\n\\[\n9-0.30x=0\\quad\\Longrightarrow\\quad 0.30x=9\\quad\\Longrightarrow\\quad\nx^{*}= \\frac{9}{0.30}=30.\n\\]\n\nThus the profit is maximised when the factory produces **\\(x^{*}=30\\)** thousand toys per month (i.e., 30 000 toys).\n\nCheck that this is a maximum using the second derivative:\n\n\\[\nP''(x)=\\frac{d}{dx}(9-0.30x)=-0.30<0,\n\\]\n\nso the critical point is indeed a local (and here global) maximum.\n\n---\n\n### Computing the maximum profit  \n\nInsert \\(x^{*}=30\\) into the profit function:\n\n\\[\nP_{\\max}=P(30)=9(30)-0.15(30)^{2}\n          =270-0.15(900)\n          =270-135=135.\n\\]\n\nThe maximum profit is **\\$135 000** per month.\n\n---\n\n### Total profit over a production interval  \n\nSuppose the factory runs at the optimal level for a whole year (12 months). The **total profit** is the integral of the monthly profit over 12 months:\n\n\\[\n\\text{Total profit}= \\int_{0}^{12} P(30)\\,dt\n                    =\\int_{0}^{12} 135\\,dt\n                    =135t\\Big|_{0}^{12}=135\\times12=1620.\n\\]\n\nThus the factory earns **\\$1 620 000** in profit over the year.\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nA bakery’s revenue (in \\$) from selling \\(x\\) loaves of bread per day is \\(R(x)=20x-0.05x^{2}\\). The cost (in \\$) is \\(C(x)=5x+0.02x^{2}\\).  \n\n**(a)** Write the profit function \\(P(x)\\).  \n**(b)** Find the number of loaves that maximises profit.  \n**(c)** Compute the maximum daily profit.\n\n**Solution**  \n(a) \\(P(x)=R(x)-C(x)= (20x-0.05x^{2})-(5x+0.02x^{2})=15x-0.07x^{2}\\).\n\n(b) \\(P'(x)=15-0.14x=0\\Rightarrow x^{*}= \\frac{15}{0.14}\\approx107.14\\) loaves.\n\n(c) \\(P_{\\max}=15(107.14)-0.07(107.14)^{2}\\approx1607.14-801.43\\approx805.71\\) dollars.\n\n---\n\n### Problem 2  \nA tech company’s profit (in thousands of dollars) from producing \\(x\\) gadgets is \\(P(x)=8x-0.2x^{2}\\).  \n\nFind the production level that yields zero profit (break‑even points).\n\n**Solution**  \nSet \\(P(x)=0\\): \\(8x-0.2x^{2}=0\\Rightarrow x(8-0.2x)=0\\).  \nThus \\(x=0\\) or \\(8-0.2x=0\\Rightarrow x=40\\).  \nBreak‑even occurs at **0** and **40** thousand gadgets.\n\n---\n\n### Problem 3  \nA farmer’s profit from selling \\(x\\) tons of wheat is \\(P(x)=12x-0.3x^{2}\\).  \n\nCompute the total profit if the farmer produces at the optimal level for 6 months.\n\n**Solution**  \nFirst find optimum: \\(P'(x)=12-0.6x=0\\Rightarrow x^{*}=20\\) tons.  \nMaximum profit per month: \\(P(20)=12(20)-0.3(400)=240-120=120\\) (thousand dollars).  \nTotal profit for 6 months: \\(\\int_{0}^{6}120\\,dt=120t\\big|_{0}^{6}=720\\) thousand dollars.\n\n---\n\n### Problem 4  \nA software firm’s monthly profit is \\(P(x)=5x-0.1x^{2}\\), where \\(x\\) is the number of licenses sold (in hundreds).  \n\n**(a)** Determine the profit‑maximising number of licenses.  \n**(b)** If the firm sells that many licenses each month for a year, what is the total profit?\n\n**Solution**  \n(a) \\(P'(x)=5-0.2x=0\\Rightarrow x^{*}=25\\) (hundreds of licenses = 2 500 licenses).  \n\n(b) Monthly maximum profit: \\(P(25)=5(25)-0.1(25)^{2}=125-62.5=62.5\\) thousand dollars.  \nYearly profit: \\(\\int_{0}^{12}62.5\\,dt=62.5t\\big|_{0}^{12}=750\\) thousand dollars.",
-   "code": ""
-  },
-  {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\nBelow are four modelling problems. Each problem is followed by a complete, step‑by‑step solution that uses **limits**, **derivatives**, and **integrals**. Work through the algebra carefully and check each limit or derivative against the definitions you have learned.\n\n---\n\n### Problem 1 – Falling Object  \n\nA ball is dropped from a height of 80 m. Air resistance is negligible. The height \\(h(t)\\) (in metres) after \\(t\\) seconds satisfies  \n\n\\[\nh(t)=80-4.9t^{2}.\n\\]\n\n1. Use a **limit** to find the instantaneous velocity at \\(t=2\\) s.  \n2. Compute the **derivative** \\(h'(t)\\) and verify the result from part 1.  \n3. Find the total distance the ball travels until it hits the ground using an **integral**.\n\n#### Solution  \n\n1. Instantaneous velocity is the limit of the average velocity over a short interval:  \n\n\\[\nv(2)=\\lim_{\\Delta t\\to0}\\frac{h(2+\\Delta t)-h(2)}{\\Delta t}.\n\\]\n\nInsert \\(h(t)=80-4.9t^{2}\\):\n\n\\[\n\\frac{[80-4.9(2+\\Delta t)^{2}]-(80-4.9\\cdot2^{2})}{\\Delta t}\n =\\frac{-4.9[(2+\\Delta t)^{2}-4]}{\\Delta t}.\n\\]\n\nExpand \\((2+\\Delta t)^{2}=4+4\\Delta t+(\\Delta t)^{2}\\). The numerator becomes  \n\n\\[\n-4.9[4+4\\Delta t+(\\Delta t)^{2}-4]=-4.9[4\\Delta t+(\\Delta t)^{2}]\n =-4.9\\Delta t(4+\\Delta t).\n\\]\n\nDivide by \\(\\Delta t\\) and take the limit:\n\n\\[\nv(2)=\\lim_{\\Delta t\\to0}-4.9(4+\\Delta t)=-4.9\\cdot4=-19.6\\ \\text{m/s}.\n\\]\n\n2. Differentiate directly:\n\n\\[\nh'(t)=\\frac{d}{dt}\\bigl(80-4.9t^{2}\\bigr)=-9.8t.\n\\]\n\nAt \\(t=2\\),\n\n\\[\nh'(2)=-9.8(2)=-19.6\\ \\text{m/s},\n\\]\n\nmatching the limit result.\n\n3. The ball hits the ground when \\(h(t)=0\\):\n\n\\[\n80-4.9t^{2}=0\\;\\Longrightarrow\\;t=\\sqrt{\\frac{80}{4.9}}\\approx4.04\\ \\text{s}.\n\\]\n\nThe distance travelled is the integral of speed \\(|h'(t)|\\) from \\(0\\) to \\(t_{\\text{hit}}\\):\n\n\\[\nD=\\int_{0}^{4.04} | -9.8t |\\,dt=\\int_{0}^{4.04} 9.8t\\,dt\n   =9.8\\left[\\frac{t^{2}}{2}\\right]_{0}^{4.04}\n   =4.9(4.04)^{2}\\approx80\\ \\text{m}.\n\\]\n\n---\n\n### Problem 2 – Bacterial Growth  \n\nA culture of bacteria grows according to the logistic model  \n\n\\[\nP(t)=\\frac{500}{1+9e^{-0.6t}},\n\\]\n\nwhere \\(P\\) is the population (in millions) after \\(t\\) hours.\n\n1. Find \\(\\displaystyle\\lim_{t\\to\\infty}P(t)\\).  \n2. Compute the **derivative** \\(P'(t)\\) and evaluate the growth rate at \\(t=5\\) h.  \n3. Determine the total increase in population from \\(t=0\\) to \\(t=10\\) h using an **integral** of \\(P'(t)\\).\n\n#### Solution  \n\n1. As \\(t\\to\\infty\\), \\(e^{-0.6t}\\to0\\), so  \n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\frac{500}{1+0}=500\\ \\text{million}.\n\\]\n\n2. Differentiate using the quotient rule or rewrite \\(P(t)=500(1+9e^{-0.6t})^{-1}\\):\n\n\\[\nP'(t)=500\\cdot(-1)(1+9e^{-0.6t})^{-2}\\cdot 9(-0.6)e^{-0.6t}\n      =\\frac{500\\cdot5.4\\;9e^{-0.6t}}{(1+9e^{-0.6t})^{2}}.\n\\]\n\nSimplify:\n\n\\[\nP'(t)=\\frac{2430\\,e^{-0.6t}}{(1+9e^{-0.6t})^{2}}.\n\\]\n\nAt \\(t=5\\),\n\n\\[\ne^{-0.6\\cdot5}=e^{-3}\\approx0.0498,\n\\]\n\\[\nP'(5)=\\frac{2430(0.0498)}{(1+9\\cdot0.0498)^{2}}\n      \\approx\\frac{121.0}{(1+0.448)^{2}}\n      \\approx\\frac{121.0}{2.10}\\approx57.6\\ \\text{million per hour}.\n\\]\n\n3. The total increase is  \n\n\\[\n\\Delta P=\\int_{0}^{10}P'(t)\\,dt = P(10)-P(0).\n\\]\n\nCompute the endpoints:\n\n\\[\nP(0)=\\frac{500}{1+9}=50\\ \\text{million},\n\\qquad\ne^{-0.6\\cdot10}=e^{-6}\\approx0.00248,\n\\]\n\\[\nP(10)=\\frac{500}{1+9(0.00248)}\\approx\\frac{500}{1+0.0223}\n      \\approx\\frac{500}{1.0223}\\approx489.1\\ \\text{million}.\n\\]\n\nThus  \n\n\\[\n\\Delta P\\approx489.1-50=439.1\\ \\text{million}.\n\\]\n\n---\n\n### Problem 3 – Cost‑Revenue Maximisation  \n\nA company’s cost (in thousands of dollars) to produce \\(x\\) units is  \n\n\\[\nC(x)=0.02x^{2}+5x+200,\n\\]\n\nand its revenue is  \n\n\\[\nR(x)=12x-0.001x^{2}.\n\\]\n\n1. Write the profit function \\(\\Pi(x)=R(x)-C(x)\\).  \n2. Use a **derivative** to find the production level that maximizes profit.  \n3. Verify that the profit at this level is indeed a maximum by checking the **second derivative**.  \n4. Compute the **limit** of the profit per unit, \\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\Pi(x)}{x}\\).\n\n#### Solution  \n\n1.  \n\n\\[\n\\Pi(x)=\\bigl(12x-0.001x^{2}\\bigr)-\\bigl(0.02x^{2}+5x+200\\bigr)\n      =-0.021x^{2}+7x-200.\n\\]\n\n2. Differentiate:\n\n\\[\n\\Pi'(x)=-0.042x+7.\n\\]\n\nSet \\(\\Pi'(x)=0\\):\n\n\\[\n-0.042x+7=0\\;\\Longrightarrow\\;x=\\frac{7}{0.042}\\approx166.67\\ \\text{units}.\n\\]\n\n3. Second derivative:\n\n\\[\n\\Pi''(x)=-0.042<0,\n\\]\n\nso the critical point is a **maximum**.\n\nProfit at this production level:\n\n\\[\n\\Pi(166.67)=-0.021(166.67)^{2}+7(166.67)-200\\approx -0.021(27778)+1166.7-200\n\\approx -583.3+966.7\\approx383.4\\ (\\text{thousand dollars}).\n\\]\n\n4.  \n\n\\[\n\\lim_{x\\to\\infty}\\frac{\\Pi(x)}{x}\n =\\lim_{x\\to\\infty}\\frac{-0.021x^{2}+7x-200}{x}\n =\\lim_{x\\to\\infty}\\bigl(-0.021x+7-\\frac{200}{x}\\bigr)=-\\infty.\n\\]\n\nThus profit per unit eventually becomes negative, confirming that producing far beyond the optimal level reduces profitability.\n\n---\n\n### Problem 4 – Heat Loss Model (Bonus)  \n\nThe temperature \\(T(t)\\) of a hot metal piece (in °C) cooling in air follows Newton’s law  \n\n\\[\n\\frac{dT}{dt}=-k\\bigl(T-20\\bigr),\\qquad T(0)=120,\n\\]\n\nwhere the ambient temperature is \\(20^{\\circ}\\)C and \\(k>0\\).\n\n1. Solve the differential equation to obtain \\(T(t)\\).  \n2. Using a **limit**, find the temperature as \\(t\\to\\infty\\).  \n3. Compute the total heat lost from \\(t=0\\) to \\(t=10\\) min by integrating the rate of loss \\(-\\frac{dT}{dt}\\).\n\n#### Solution  \n\n1. Separate variables:\n\n\\[\n\\frac{dT}{T-20}=-k\\,dt\\;\\Longrightarrow\\;\n\\int\\frac{dT}{T-20}=-k\\int dt\n\\]\n\n\\[\n\\ln|T-20|=-kt+C.\n\\]\n\nExponentiate and solve for \\(C\\) using \\(T(0)=120\\):\n\n\\[\nT-20 = Ae^{-kt},\\qquad A=e^{C}=120-20=100.\n\\]\n\nHence  \n\n\\[\n\\boxed{T(t)=20+100e^{-kt}}.\n\\]\n\n2.  \n\n\\[\n\\lim_{t\\to\\infty}T(t)=20+100\\lim_{t\\to\\infty}e^{-kt}=20.\n\\]\n\nThe piece asymptotically approaches ambient temperature.\n\n3. The instantaneous heat loss rate is \\(-\\frac{dT}{dt}=k\\bigl(T-20\\bigr)=k\\cdot100e^{-kt}=100k e^{-kt}\\).\n\nIntegrate from \\(0\\) to \\(10\\) min:\n\n\\[\nQ=\\int_{0}^{10}100k e^{-kt}\\,dt\n   =100\\bigl[-e^{-kt}\\bigr]_{0}^{10}\n   =100\\bigl(1-e^{-10k}\\bigr).\n\\]\n\nIf, for example, \\(k=0.3\\ \\text{min}^{-1}\\),\n\n\\[\nQ=100\\bigl(1-e^{-3}\\bigr)\\approx100(1-0.0498)=95.0\\ \\text{units of heat}.\n\\]",
+   "heading": "7. Practice Problems and Reflection",
+   "body": "Think of each problem as a short story.  \nFirst read the story, then decide what the unknown quantity is, write an equation that describes the situation, and finally solve it.  \nAfter you finish, answer the reflection questions to see how well you turned the word problem into a mathematical model.\n\n---\n\n**Problem 1 – Physics (Free‑fall)**  \n\nA ball is dropped from a height of $120\\ \\text{m}$ above the ground.  \nAir resistance is negligible and the acceleration due to gravity is $g=9.8\\ \\text{m/s}^2$.  \n\n*Task:*  \n1. Write a function $s(t)$ that gives the height of the ball $t$ seconds after it is released.  \n2. Find the time $t$ when the ball hits the ground.  \n\n*Steps you might follow*  \n- Let $s(t)$ be the height (in meters) at time $t$ (seconds).  \n- Because the ball starts from rest, its initial velocity $v_0=0$.  \n- The position of an object under constant acceleration $a$ is  \n$$ s(t)=s_0+v_0 t+\\tfrac12 a t^2 $$  \nwhere $s_0$ is the initial height.  \n- Set $s(t)=0$ (ground level) and solve for $t$.\n\n---\n\n**Problem 2 – Biology (Logistic growth)**  \n\nA small lake contains a fish population that follows the logistic model  \n$$ P(t)=\\frac{K}{1+Ae^{-rt}} $$  \nwhere $P(t)$ is the number of fish $t$ years after today, $K=10\\,000$ is the carrying capacity (maximum sustainable population), $r=0.6\\ \\text{yr}^{-1}$ is the intrinsic growth rate, and $A$ is a constant determined by the initial population.  \nToday the lake has $P(0)=2\\,000$ fish.\n\n*Task:*  \n1. Find the value of $A$.  \n2. Predict the population after $5$ years.  \n\n*Steps you might follow*  \n- Plug $t=0$ into the formula to get $P(0)=\\frac{K}{1+A}$.  \n- Solve this equation for $A$.  \n- Then substitute $A$ and $t=5$ into the logistic formula to compute $P(5)$.\n\n---\n\n**Problem 3 – Economics (Consumer surplus)**  \n\nThe demand for a product is described by the price function $p(q)=120-0.5q$, where $p$ is the price in dollars and $q$ is the quantity demanded.  \nThe market price is fixed at $p=70$ dollars.\n\n*Task:*  \n1. Determine the quantity $q$ that consumers will buy at this price.  \n2. Compute the consumer surplus, the area between the demand curve and the price line, from $q=0$ to the quantity found in part 1.  \n\n*Steps you might follow*  \n- Set $p(q)=70$ and solve for $q$.  \n- Consumer surplus is the integral of the difference between the demand price and the market price:  \n$$ \\text{CS}= \\int_{0}^{q^*}\\bigl(p(q)-70\\bigr)\\,dq $$  \nwhere $q^*$ is the quantity from part 1.  \n- Evaluate the integral to obtain the surplus in dollars.\n\n---\n\n> **Note:** When you turn a word problem into a model, always identify the *variables* (what changes) and the *constants* (what stays fixed). This prevents mixing up units and makes the algebra easier.\n\n> **Remember:** After solving, check that your answer makes sense in the original story. Does a time of $3$ seconds for a $120\\,$m drop seem reasonable? Does a fish population of $9\\,800$ after $5$ years look plausible given the carrying capacity?\n\n> **In daily life:** Modeling is like making a recipe. The ingredients (numbers from the story) are measured, the cooking steps (equations) are followed, and the final dish (solution) is tasted to see if it matches what you expected.\n\n### Reflection prompts  \n\n1. **Identify the model:** For each problem, write a one‑sentence description of the real‑world situation you are modeling (e.g., “the height of a falling ball as a function of time”).  \n\n2. **List assumptions:** Note any simplifications you made (e.g., “air resistance ignored”, “growth rate constant”). Why were they necessary?  \n\n3. **Interpret the result:** Explain in plain language what the numerical answer tells you about the original situation.  \n\n4. **Evaluate the model:** Could a different model give a more accurate picture? Suggest one possible improvement for each problem (e.g., adding a drag term for the falling ball).  \n\nAnswer these questions in a notebook or on a sheet of paper. Revisiting them later will help you see how mathematical modeling connects the abstract symbols to the concrete world.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Falling stone height after 2 s",
+   "given": "A stone is dropped from rest. Find its height above the ground after $t=2\\,$s.",
+   "steps": [
+    {
+     "label": "Define variables",
+     "text": "Let $h(t)$ be the height (m) and $g=9.8\\ \\text{m/s}^2$ the acceleration due to gravity."
+    },
+    {
+     "label": "Write model",
+     "text": "Since the stone starts from rest, $h(t)=h_0-\\frac12gt^2$, where $h_0$ is the initial height."
+    },
+    {
+     "label": "Insert data",
+     "text": "Take $h_0=20\\,$m (example building). Then $h(2)=20-\\frac12(9.8)(2)^2$."
+    },
+    {
+     "label": "Compute",
+     "text": "$h(2)=20-19.6=0.4\\,$m."
+    }
+   ],
+   "answer": "After 2 s the stone is $0.4\\,$m above the ground."
+  },
+  {
+   "level": "Medium",
+   "title": "Logistic growth of a bacteria culture",
+   "given": "A bacteria population follows $P(t)=\\frac{K}{1+Ae^{-rt}}$ with carrying capacity $K=10^6$, growth rate $r=0.8\\ \\text{day}^{-1}$, and $P(0)=10^4$. Find $P(5)$ (population after 5 days).",
+   "steps": [
+    {
+     "label": "Find $A$",
+     "text": "At $t=0$, $10^4=\\frac{10^6}{1+A}$ ⇒ $1+A=100$ ⇒ $A=99$."
+    },
+    {
+     "label": "Write full model",
+     "text": "$P(t)=\\frac{10^6}{1+99e^{-0.8t}}$."
+    },
+    {
+     "label": "Evaluate at $t=5$",
+     "text": "Compute $e^{-0.8\\cdot5}=e^{-4}\\approx0.0183$."
+    },
+    {
+     "label": "Plug in",
+     "text": "$P(5)=\\frac{10^6}{1+99(0.0183)}=\\frac{10^6}{1+1.8117}\\approx\\frac{10^6}{2.8117}\\approx3.56\\times10^5$."
+    }
+   ],
+   "answer": "After 5 days the population is about $3.6\\times10^5$ bacteria."
+  },
+  {
+   "level": "Hard",
+   "title": "Consumer surplus for a linear demand curve",
+   "given": "Demand: $p=120-2q$ (price $p$ in dollars, quantity $q$ in units). Supply: $p=20+q$. Find the consumer surplus at equilibrium.",
+   "steps": [
+    {
+     "label": "Find equilibrium",
+     "text": "Set demand = supply: $120-2q=20+q$ ⇒ $3q=100$ ⇒ $q^*=33.\\overline{3}$ units."
+    },
+    {
+     "label": "Equilibrium price",
+     "text": "$p^*=120-2(33.\\overline{3})=120-66.\\overline{6}=53.\\overline{3}$ dollars."
+    },
+    {
+     "label": "Sketch area",
+     "text": "Consumer surplus = area between demand curve and price line from $q=0$ to $q^*$."
+    },
+    {
+     "label": "Compute area (triangle)",
+     "text": "Height = $p_{\\text{max}}-p^*$ where $p_{\\text{max}}$ is price when $q=0$: $p_{\\text{max}}=120$. Height $=120-53.\\overline{3}=66.\\overline{6}$. Base $=q^*=33.\\overline{3}$."
+    },
+    {
+     "label": "Formula",
+     "text": "Consumer surplus $= \\frac12 \\times \\text{base} \\times \\text{height}= \\frac12(33.\\overline{3})(66.\\overline{6})\\approx1111.1\\,$ dollars."
+    }
+   ],
+   "answer": "The consumer surplus at equilibrium is approximately $\\$1{,}111$."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "A ball is dropped from a height of $20\\,$m. Using $g=10\\,$m/s², find the time it takes to hit the ground.",
+   "a": "The height as a function of time is $s(t)=20-\\frac12gt^2$. Set $s(t)=0$:\n$$0=20-\\frac12(10)t^2 \\;\\Longrightarrow\\; 5t^2=20 \\;\\Longrightarrow\\; t^2=4 \\;\\Longrightarrow\\; t=2\\ \\text{s}.$$"
+  },
+  {
+   "level": "Easy",
+   "q": "A small fish population follows the logistic model with $r=0.6\\,$day⁻¹ and carrying capacity $K=500$. If $P(0)=50$, find $P(5)$.",
+   "a": "Logistic solution: $P(t)=\\dfrac{K}{1+Ce^{-rt}}$.\nFirst find $C$ using $P(0)=50$:\n$$50=\\frac{500}{1+C}\\;\\Longrightarrow\\;1+C=10\\;\\Longrightarrow\\;C=9.$$\nNow compute $P(5)$:\n$$P(5)=\\frac{500}{1+9e^{-0.6\\cdot5}}=\\frac{500}{1+9e^{-3}}.$$\n$e^{-3}\\approx0.0498$, so denominator $=1+9(0.0498)\\approx1+0.448=1.448$.\nThus $P(5)\\approx\\frac{500}{1.448}\\approx345\\,$ fish."
+  },
+  {
+   "level": "Medium",
+   "q": "A demand curve is $p=100-2q$. The market price is $p_0=40$. Compute the consumer surplus for the quantity sold.",
+   "a": "First find $Q$ where $p=40$:\n$$40=100-2Q \\;\\Longrightarrow\\;2Q=60 \\;\\Longrightarrow\\;Q=30.$$\nTotal willingness to pay:\n$$\\int_{0}^{30}(100-2q)\\,dq = \\Big[100q - q^2\\Big]_{0}^{30}=100(30)-30^2=3000-900=2100.$$\nActual expenditure: $p_0 Q = 40 \\times 30 = 1200$.\nConsumer surplus $CS = 2100 - 1200 = 900$ (dollars)."
+  },
+  {
+   "level": "Medium",
+   "q": "A tank drains water such that the rate of change of volume $V(t)$ satisfies $\\displaystyle \\frac{dV}{dt} = -k\\sqrt{V}$, with $k=2\\,$L$^{1/2}$/min. If the tank starts with $V(0)=16\\,$L, find $V(5)$.",
+   "a": "Separate variables:\n$$\\frac{dV}{\\sqrt{V}} = -k\\,dt.$$\nIntegrate:\n$$\\int V^{-1/2}\\,dV = -k\\int dt \\;\\Longrightarrow\\; 2\\sqrt{V} = -kt + C.$$\nUse $V(0)=16$: $2\\sqrt{16}=2\\cdot4=8 = C$.\nThus $2\\sqrt{V}= -2t + 8 \\;\\Longrightarrow\\; \\sqrt{V}=4 - t.$\nSquare both sides: $V=(4-t)^2$.\nAt $t=5$: $V=(4-5)^2 = (-1)^2 = 1\\,$L."
+  },
+  {
+   "level": "Hard",
+   "q": "A particle moves along a line with acceleration $a(t)=6t-4$. Its initial velocity is $v(0)=3$ m/s and initial position $s(0)=2$ m. Find the position $s(t)$ and the time when the particle returns to $s=2$ m.",
+   "a": "Integrate acceleration to get velocity:\n$$v(t)=\\int a(t)\\,dt = \\int (6t-4)\\,dt = 3t^2-4t + C_1.$$\nUse $v(0)=3$: $C_1=3$. So $v(t)=3t^2-4t+3$.\nIntegrate velocity to get position:\n$$s(t)=\\int v(t)\\,dt = \\int (3t^2-4t+3)\\,dt = t^3-2t^2+3t + C_2.$$\nUse $s(0)=2$: $C_2=2$. Hence $s(t)=t^3-2t^2+3t+2$.\nSet $s(t)=2$ to find return time:\n$$t^3-2t^2+3t+2 = 2 \\;\\Longrightarrow\\; t^3-2t^2+3t =0.$$\nFactor $t$: $t(t^2-2t+3)=0$.\nSolutions: $t=0$ (the start) or $t^2-2t+3=0$.\nDiscriminant $(-2)^2-4\\cdot1\\cdot3 =4-12=-8<0$, no real roots.\nThus the particle never returns to $s=2$ after $t>0$."
+  },
+  {
+   "level": "Hard",
+   "q": "A company’s cost function is $C(q)=0.05q^3-0.6q^2+12q+100$, where $q$ is the number of units produced. Find the production level that minimizes average cost, and compute that minimum average cost.",
+   "a": "Average cost $AC(q)=\\dfrac{C(q)}{q}=0.05q^2-0.6q+12+\\dfrac{100}{q}$.\nTo minimize, differentiate and set to zero:\n$$\\frac{d}{dq}AC(q)=0.10q-0.6-\\frac{100}{q^2}=0.$$\nMultiply by $q^2$: $0.10q^3-0.6q^2-100=0$.\nSimplify: $q^3-6q^2-1000=0$ (multiply by 10).\nWe look for an integer root; test $q=10$: $1000-600-1000=-600\\neq0$.\nTest $q=20$: $8000-2400-1000=4600$.\nTest $q=25$: $15625-3750-1000=10875$.\nUse trial $q=...$ Use rational root theorem: possible roots $\\pm1,\\pm2,\\pm4,\\pm5,\\pm8,\\pm10,\\pm20,\\pm25,\\pm40,\\pm50,\\pm100$. Test $q=...$\nTry $q=...$ Actually we can solve numerically. Let $f(q)=0.10q-0.6-100/q^2$. Use iteration:\nStart $q=5$: $0.5-0.6-4= -4.1$ (negative).\n$q=10$: $1-0.6-1= -0.6$ (negative).\n$q=12$: $1.2-0.6-0.694≈ -0.094$ (negative).\n$q=13$: $1.3-0.6-0.593≈0.107$ (positive).\nSo root between 12 and 13. Linear interpolation:\nAt 12, $f=-0.094$; at 13, $f=0.107$. Approx root $q≈12+ \\frac{0.094}{0.094+0.107}\\approx12+0.467≈12.47$.\nThus minimizing production level $q\\approx12.5$ units (round to nearest whole unit, $q=12$ or $13$).\nCompute minimum average cost using $q=12.5$:\nFirst compute $C(12.5)=0.05(12.5)^3-0.6(12.5)^2+12(12.5)+100$\n$(12.5)^3=1953.125$, times $0.05$ = $97.6563$\n$(12.5)^2=156.25$, times $0.6$ = $93.75$\n$12(12.5)=150$\nSo $C=97.6563-93.75+150+100=253.9063$.\nAverage cost $AC= C/q = 253.9063/12.5 ≈20.31$ dollars per unit.\nTherefore, the production level that minimizes average cost is about $12$–$13$ units, and the minimum average cost is roughly $\\$20.3$ per unit."
+  }
+ ],
+ "recap": "This lesson shows how to turn real‑world stories into mathematical models by picking the right variables and writing equations. It walks through examples from physics (free fall), biology (logistic growth), and economics (consumer surplus) and stresses checking units and interpretation. Finally, it lists common mistakes and gives practice problems to reinforce the modelling steps.",
  "key_terms": [
   {
-   "term": "limit",
-   "meaning": "The value a function approaches as the input gets arbitrarily close to a certain point."
+   "term": "Variable",
+   "meaning": "A symbol that represents a quantity that can change."
   },
   {
-   "term": "continuous",
-   "meaning": "A function is continuous at a point if its limit there equals the function’s value."
+   "term": "Independent variable",
+   "meaning": "The quantity that is controlled or progresses naturally, often time."
   },
   {
-   "term": "derivative",
-   "meaning": "The instantaneous rate of change of a function, defined as a limit of difference quotients."
+   "term": "Dependent variable",
+   "meaning": "The quantity that changes because of the independent variable."
   },
   {
-   "term": "product rule",
-   "meaning": "A rule for differentiating a product: (fg)' = f'g + fg'."
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function."
   },
   {
-   "term": "definite integral",
-   "meaning": "The total accumulation of a quantity over an interval, written as integral from a to b of f(x) dx."
+   "term": "Integral",
+   "meaning": "The sum of many tiny pieces to find a total amount."
   },
   {
-   "term": "marginal cost",
-   "meaning": "The derivative of a total cost function, representing the cost of producing one more unit."
+   "term": "Carrying capacity",
+   "meaning": "The maximum population an environment can sustain indefinitely."
   },
   {
-   "term": "logistic growth",
-   "meaning": "A population model where growth slows as the population approaches a carrying capacity, given by dP/dt = rP(1-P/K)."
+   "term": "Consumer surplus",
+   "meaning": "The difference between what consumers are willing to pay and what they actually pay."
   },
   {
-   "term": "Newton's law of cooling",
-   "meaning": "A differential equation describing how temperature changes proportionally to the difference from ambient temperature."
+   "term": "Units",
+   "meaning": "Labels that tell what a number measures, such as meters or seconds."
   }
  ],
  "quiz": [
   {
-   "q": "What does the limit of f(x) as x approaches a represent?",
+   "q": "What is the first step when modelling a word problem?",
    "options": [
-    "The exact value of f at a",
-    "The value f(x) gets arbitrarily close to near a",
-    "The derivative of f at a",
-    "The integral of f from 0 to a"
+    "Write the final answer",
+    "Identify the variable",
+    "Plug numbers into a formula",
+    "Draw a picture"
    ],
    "answer": 1,
-   "why": "A limit describes the value the function approaches, not necessarily its actual value at that point."
+   "why": "Identifying the variable captures the changing quantity you need to solve for."
   },
   {
-   "q": "If a function is continuous at a, which of the following is true?",
+   "q": "In a free‑fall problem, which variable is typically independent?",
    "options": [
-    "The limit does not exist",
-    "The limit equals f(a)",
-    "The derivative is zero",
-    "The function is constant"
-   ],
-   "answer": 1,
-   "why": "Continuity means the limit at a equals the function’s value there."
-  },
-  {
-   "q": "Which rule is used to differentiate the product of two functions?",
-   "options": [
-    "Power rule",
-    "Sum rule",
-    "Product rule",
-    "Quotient rule"
+    "Height s(t)",
+    "Acceleration g",
+    "Time t",
+    "Velocity v(t)"
    ],
    "answer": 2,
-   "why": "The product rule states (fg)' = f'g + fg'."
+   "why": "Time progresses naturally and is used as the independent variable."
   },
   {
-   "q": "The marginal cost of producing x toys is given by C'(x). What does C'(100)=12 mean?",
+   "q": "What does the derivative of a position function represent?",
    "options": [
-    "It costs $12 to make the 100th toy",
-    "The total cost is $12 when 100 toys are made",
-    "The cost per toy is $12",
-    "The profit is $12 at 100 toys"
-   ],
-   "answer": 0,
-   "why": "Marginal cost is the cost of producing one additional unit, here the 100th toy."
-  },
-  {
-   "q": "In Newton's law of cooling, what does the constant k represent?",
-   "options": [
-    "Ambient temperature",
-    "Initial temperature of the object",
-    "Rate constant (negative) describing how fast temperature changes",
-    "Time when the object reaches room temperature"
-   ],
-   "answer": 2,
-   "why": "k is a negative constant that scales the rate of temperature change toward ambient."
-  },
-  {
-   "q": "For logistic growth, what happens to dP/dt when P is close to the carrying capacity K?",
-   "options": [
-    "It becomes large positive",
-    "It becomes zero",
-    "It becomes large negative",
-    "It oscillates"
+    "Total distance traveled",
+    "Instantaneous velocity",
+    "Average speed",
+    "Acceleration"
    ],
    "answer": 1,
-   "why": "When P ≈ K, the factor (1-P/K) is near zero, so growth rate approaches zero."
+   "why": "The derivative of position with respect to time gives instantaneous velocity."
+  },
+  {
+   "q": "In the logistic population model, what does the symbol K stand for?",
+   "options": [
+    "Growth rate",
+    "Initial population",
+    "Carrying capacity",
+    "Time constant"
+   ],
+   "answer": 2,
+   "why": "K is defined as the carrying capacity, the maximum sustainable population."
+  },
+  {
+   "q": "Which expression gives the consumer surplus for a linear demand q(p)=a-bp and market price p0?",
+   "options": [
+    "a p0 - b p0^2",
+    "integral from 0 to p0 of (a-bp) dp",
+    "integral from p0 to a/b of (a-bp) dp",
+    "a - b p0"
+   ],
+   "answer": 2,
+   "why": "Consumer surplus is the area under the demand curve above the market price, from p0 up to the intercept a/b."
+  },
+  {
+   "q": "When checking a result, which of the following is NOT a recommended step?",
+   "options": [
+    "Verify units",
+    "Interpret the number",
+    "Ignore the sign of the answer",
+    "Consider sensitivity to parameters"
+   ],
+   "answer": 2,
+   "why": "Ignoring the sign can hide errors; checking units, interpretation, and sensitivity are all recommended."
   }
  ],
  "flashcards": [
   {
-   "front": "Limit",
-   "back": "The value a function approaches as the input gets arbitrarily close to a point."
+   "front": "What is a variable?",
+   "back": "A symbol that stands for a quantity that can change."
   },
   {
-   "front": "Derivative",
-   "back": "The instantaneous rate of change; limit of (f(x+h)-f(x))/h as h→0."
+   "front": "Define independent variable.",
+   "back": "The quantity you control or that naturally progresses, often time."
   },
   {
-   "front": "Continuous function",
-   "back": "A function whose limit at a point equals its value at that point."
+   "front": "Define dependent variable.",
+   "back": "The quantity that depends on the independent variable."
   },
   {
-   "front": "Product rule",
-   "back": "(f·g)' = f'·g + f·g'."
+   "front": "What does a derivative measure?",
+   "back": "The instantaneous rate of change of a function."
   },
   {
-   "front": "Definite integral",
-   "back": "The accumulated total of a rate or density over an interval, written integral from a to b of f(x) dx."
+   "front": "What does an integral measure?",
+   "back": "The total amount obtained by adding up many tiny pieces."
   },
   {
-   "front": "Marginal cost",
-   "back": "The derivative of the total cost function; cost of producing one more unit."
+   "front": "What is carrying capacity (K) in population models?",
+   "back": "The maximum number of individuals an environment can sustain indefinitely."
   },
   {
-   "front": "Newton's law of cooling equation",
-   "back": "dT/dt = k (T - ambient temperature), where k<0."
+   "front": "What is consumer surplus?",
+   "back": "The difference between what consumers are willing to pay and what they actually pay."
   },
   {
-   "front": "Logistic growth equation",
-   "back": "dP/dt = rP(1 - P/K), describing growth with limited resources."
+   "front": "Why check units in a calculation?",
+   "back": "Units reveal mismatches and help catch algebraic mistakes."
   }
  ],
- "reviewed": false,
  "diagrams": [
-  {
-   "type": "image",
-   "file": "calculus-i-l12-coffee-cooling-curve",
-   "title": "Temperature of a coffee cup falling toward room temperature over time.",
-   "alt": "Temperature of a coffee cup falling toward room temperature over time.",
-   "priority": 8,
-   "picture_title": "Coffee Cooling Curve",
-   "kind": "illustration",
-   "subject": "A simple line graph showing the coffee temperature starting at 90 °C and approaching the ambient 20 °C, with the exponential decay shape predicted by Newton's law of cooling.",
-   "layout": "Time axis horizontal, temperature vertical, curve drawn in the centre with a dashed horizontal line at 20 °C indicating the ambient temperature.",
-   "labels": [
-    "90 °C start",
-    "20 °C ambient",
-    "time (s)",
-    "temperature (°C)"
-   ],
-   "after": 2
-  },
   {
    "type": "image",
    "file": "calculus-i-l12-projectile-motion-sketch",
@@ -225,66 +319,143 @@
   },
   {
    "type": "image",
-   "file": "calculus-i-l12-logistic-growth-curve",
-   "title": "Population growth slowing as it approaches the carrying capacity.",
-   "alt": "Population growth slowing as it approaches the carrying capacity.",
-   "priority": 7,
-   "picture_title": "Logistic Growth Curve",
+   "file": "calculus-i-l12-free-fall-motion",
+   "title": "A ball dropping with its position, velocity, and acceleration shown at several times.",
+   "alt": "A ball dropping with its position, velocity, and acceleration shown at several times.",
+   "priority": 10,
+   "picture_title": "Free‑fall motion",
    "kind": "illustration",
-   "subject": "A sigmoidal S‑shaped curve starting near the origin, rising steeply, then flattening out near a horizontal line that marks the carrying capacity K.",
-   "layout": "Curve drawn across the centre, horizontal dashed line at K, arrows indicating early exponential growth, mid‑range slowdown, and final steady state.",
+   "subject": "Shows a ball released from a height, arrows indicating downward velocity increasing linearly and constant downward acceleration due to gravity.",
+   "layout": "Ball on the left, three vertical arrows beside it labeled position, velocity, acceleration; a timeline below with time marks.",
    "labels": [
-    "population P(t)",
-    "carrying capacity K",
-    "growth rate r",
-    "inflection point"
+    "ball",
+    "position",
+    "velocity",
+    "acceleration",
+    "gravity"
    ],
-   "after": 6
-  },
-  {
-   "type": "steps",
-   "title": "Formulating a Real‑World Problem",
-   "steps": [
-    {
-     "label": "1",
-     "text": "Define each changing quantity and its units."
-    },
-    {
-     "label": "2",
-     "text": "Choose the independent variable (often time)."
-    },
-    {
-     "label": "3",
-     "text": "Write relationships as functions of that variable."
-    },
-    {
-     "label": "4",
-     "text": "Use calculus tools (limits, derivatives, integrals) to analyze."
-    }
-   ],
-   "loop": false,
    "after": 1
   },
   {
-   "type": "facts",
-   "title": "Key Calculus Formulas",
-   "items": [
+   "type": "image",
+   "file": "calculus-i-l12-logistic-growth-curve",
+   "title": "Population versus time for the logistic model, highlighting carrying capacity.",
+   "alt": "Population versus time for the logistic model, highlighting carrying capacity.",
+   "priority": 7,
+   "picture_title": "Logistic growth curve",
+   "kind": "labelled diagram",
+   "subject": "A smooth S‑shaped curve that starts near zero, rises steeply, then levels off at the carrying capacity K.",
+   "layout": "Axes in the centre, curve drawn, horizontal line at K labeled, point of inflection marked.",
+   "labels": [
+    "population",
+    "time",
+    "carrying capacity",
+    "inflection point"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l12-consumer-surplus-area",
+   "title": "Demand curve with market price line, shading the area of consumer surplus.",
+   "alt": "Demand curve with market price line, shading the area of consumer surplus.",
+   "priority": 7,
+   "picture_title": "Consumer surplus area",
+   "kind": "labelled diagram",
+   "subject": "A downward‑sloping demand curve, a horizontal line at market price, and the region between them up to the demand curve representing total consumer surplus.",
+   "layout": "Axes with price vertical, quantity horizontal; demand curve drawn, price line across, shaded region under demand above price.",
+   "labels": [
+    "demand",
+    "price",
+    "quantity",
+    "consumer surplus"
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Turning a Word Problem into a Model",
+   "steps": [
     {
-     "value": "lim_{x→a} f(x)=L",
-     "label": "Limit definition"
+     "label": "Identify variable",
+     "text": "Pick the quantity that changes"
     },
     {
-     "value": "f'(x)=lim_{h→0} (f(x+h)-f(x))/h",
-     "label": "Derivative definition"
+     "label": "Write relationship",
+     "text": "Express how the variable depends on others"
     },
     {
-     "value": "∫_a^b f(x)dx",
-     "label": "Definite integral"
+     "label": "Form equation",
+     "text": "Create a formula or differential equation"
+    },
+    {
+     "label": "Check units",
+     "text": "Make sure units match"
     }
    ],
    "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Dependent vs Independent Variable",
+   "left": {
+    "name": "Dependent",
+    "points": [
+     "Changes because of something else",
+     "Usually written as a function of the independent variable"
+    ]
+   },
+   "right": {
+    "name": "Independent",
+    "points": [
+     "Controlled or natural progression",
+     "Often time"
+    ]
+   },
+   "after": 6
+  },
+  {
+   "type": "facts",
+   "title": "Key Constants",
+   "items": [
+    {
+     "value": "9.8 m/s^2",
+     "label": "Gravity"
+    },
+    {
+     "value": "120 m",
+     "label": "Drop height"
+    },
+    {
+     "value": "0 s",
+     "label": "Start time"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Falling Object Model",
+   "items": [
+    {
+     "name": "s(t)",
+     "role": "Height above ground"
+    },
+    {
+     "name": "v(t)",
+     "role": "Velocity (rate of change of height)"
+    },
+    {
+     "name": "a(t)",
+     "role": "Acceleration (rate of change of velocity)"
+    }
+   ],
+   "after": 2
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

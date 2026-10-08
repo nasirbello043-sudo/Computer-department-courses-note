@@ -1,290 +1,441 @@
 {
  "title": "Apply limits",
- "summary": "In this lesson students learn how to apply limit concepts to solve real‑world problems and to prepare for using derivatives and integrals in physics, biology, and economics. The focus is on interpreting limits, handling indeterminate forms, and connecting limits to rates of change and accumulation.",
+ "summary": "Students learn how to evaluate limits in a variety of contexts and how to use limits as a tool for solving real‑world problems. The lesson connects limits to continuity, derivatives, and integrals, showing their practical importance.",
+ "objectives": [
+  "Compute limits using algebraic manipulation, substitution, and special techniques",
+  "Identify when a limit does not exist and explain why",
+  "Apply limit concepts to determine continuity at a point",
+  "Use limits to derive instantaneous rates of change in physics, biology, and economics",
+  "Interpret the meaning of a limit in a real‑world scenario"
+ ],
+ "prerequisites": "Students should already understand basic limit notation, the idea of approaching a value, and have practiced simple limit calculations from earlier lessons.",
+ "why": [
+  "Limits are the foundation of calculus. They let us describe how quantities behave when they get very small or very large, which is essential for modeling change in natural and social sciences.",
+  "In physics we use limits to define velocity and acceleration, in biology to model population growth near carrying capacity, and in economics to find marginal cost or revenue. Mastering limits builds confidence for these applications."
+ ],
  "sections": [
   {
-   "heading": "Review of Limit Basics",
-   "body": "**Review of Limit Basics**\n\nA limit describes the value that a function $f(x)$ approaches as the input $x$ gets arbitrarily close to a certain point $a$. Formally, we write  \n\n\\[\n\\lim_{x\\to a} f(x)=L\n\\]\n\nand mean: *for every* $\\varepsilon>0$ *there exists* $\\delta>0$ *such that*  \n\n\\[\n0<|x-a|<\\delta \\;\\Longrightarrow\\; |f(x)-L|<\\varepsilon .\n\\]\n\nThe symbols $\\varepsilon$ and $\\delta$ are just tiny positive numbers that let us control how close $x$ must be to $a$ and how close $f(x)$ must be to $L$.\n\n---\n\n### One‑sided limits  \n\nSometimes we only care about $x$ approaching $a$ from the left or from the right.  \n\n*Left‑hand limit*:  \n\n\\[\n\\lim_{x\\to a^-} f(x)=L\n\\]\n\nmeans the condition above holds for $x$ with $a-\\delta < x < a$.  \n\n*Right‑hand limit*:  \n\n\\[\n\\lim_{x\\to a^+} f(x)=L\n\\]\n\nmeans it holds for $a < x < a+\\delta$.  \n\nIf the left‑hand and right‑hand limits exist and are equal, the (two‑sided) limit exists and equals that common value.\n\n---\n\n### Common limit laws  \n\nThese laws let us combine simpler limits to find more complicated ones without returning to the $\\varepsilon$–$\\delta$ definition each time.\n\n| Law | Statement |\n|-----|-----------|\n| **Sum** | $\\displaystyle \\lim_{x\\to a}[f(x)+g(x)]=\\lim_{x\\to a}f(x)+\\lim_{x\\to a}g(x)$ |\n| **Product** | $\\displaystyle \\lim_{x\\to a}[f(x)g(x)]=\\big(\\lim_{x\\to a}f(x)\\big)\\big(\\lim_{x\\to a}g(x)\\big)$ |\n| **Quotient** | If $\\displaystyle \\lim_{x\\to a}g(x)\\neq0$, then $\\displaystyle \\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\frac{\\lim_{x\\to a}f(x)}{\\lim_{x\\to a}g(x)}$ |\n| **Power** | $\\displaystyle \\lim_{x\\to a}[f(x)]^n=\\big(\\lim_{x\\to a}f(x)\\big)^n$ for any integer $n\\ge0$ |\n| **Squeeze** | If $h(x)\\le f(x)\\le k(x)$ near $a$ and $\\displaystyle \\lim_{x\\to a}h(x)=\\lim_{x\\to a}k(x)=L$, then $\\displaystyle \\lim_{x\\to a}f(x)=L$ |\n\n---\n\n### When limits do **not** exist  \n\nA limit fails to exist if:\n\n1. The left‑hand and right‑hand limits are different.  \n2. The function oscillates without settling to a single number (e.g., $\\sin(1/x)$ as $x\\to0$).  \n3. The values grow without bound (we say the limit is $+\\infty$ or $-\\infty$, not a finite number).\n\n---\n\n## Fully worked example  \n\nFind  \n\n\\[\n\\lim_{x\\to 3}\\frac{x^2-9}{x-3}.\n\\]\n\n**Step 1 – Direct substitution.**  \nPlugging $x=3$ gives $\\frac{3^2-9}{3-3}= \\frac{0}{0}$, an indeterminate form. We must simplify.\n\n**Step 2 – Factor the numerator.**  \n\n\\[\nx^2-9=(x-3)(x+3).\n\\]\n\nSo  \n\n\\[\n\\frac{x^2-9}{x-3}= \\frac{(x-3)(x+3)}{x-3}.\n\\]\n\n**Step 3 – Cancel the common factor** (valid for $x\\neq3$).  \n\n\\[\n\\frac{(x-3)(x+3)}{x-3}=x+3\\qquad (x\\neq3).\n\\]\n\n**Step 4 – Take the limit of the simplified expression.**  \n\n\\[\n\\lim_{x\\to3}(x+3)=3+3=6.\n\\]\n\nHence  \n\n\\[\n\\boxed{\\displaystyle \\lim_{x\\to3}\\frac{x^2-9}{x-3}=6 }.\n\\]\n\nThe limit exists even though the original fraction was undefined at $x=3$; the function behaves like the line $y=x+3$ near that point.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\n\\lim_{x\\to -2}\\frac{x^2+4x+4}{x+2}.\n\\]\n\n**Solution**  \nFactor numerator: $x^2+4x+4=(x+2)^2$.  \n\n\\[\n\\frac{(x+2)^2}{x+2}=x+2\\;(x\\neq-2).\n\\]  \n\nTake the limit: $\\displaystyle \\lim_{x\\to-2}(x+2)=0$.  \n\n\\[\n\\boxed{0}\n\\]\n\n---\n\n### Problem 2  \n\\[\n\\lim_{x\\to0^+}\\frac{1}{x}.\n\\]\n\n**Solution**  \nAs $x$ approaches $0$ from the right, $1/x$ grows without bound.  \n\n\\[\n\\boxed{+\\infty}\n\\]\n\n---\n\n### Problem 3  \n\\[\n\\lim_{x\\to\\pi}\\sin x.\n\\]\n\n**Solution**  \nSine is continuous everywhere, so we may substitute directly:  \n\n\\[\n\\sin(\\pi)=0.\n\\]  \n\n\\[\n\\boxed{0}\n\\]\n\n---\n\n### Problem 4  \n\\[\n\\lim_{x\\to0}\\frac{\\sin(5x)}{x}.\n\\]\n\n**Solution**  \nUse the standard limit $\\displaystyle \\lim_{u\\to0}\\frac{\\sin u}{u}=1$.  \nLet $u=5x$, then $u\\to0$ as $x\\to0$.\n\n\\[\n\\frac{\\sin(5x)}{x}=5\\frac{\\sin(5x)}{5x}=5\\cdot\\frac{\\sin u}{u}.\n\\]\n\nTaking limits:\n\n\\[\n\\lim_{x\\to0}\\frac{\\sin(5x)}{x}=5\\cdot 1=5.\n\\]  \n\n\\[\n\\boxed{5}\n\\]",
+   "heading": "Review of Basic Limit Ideas",
+   "body": "When we talk about a **limit**, we are asking: *what number does the function get closer and closer to as the input gets close to a certain value?*  \nThink of walking toward a door. Each step you take brings you nearer to the door, but you never have to actually touch it to know where you are heading. The limit tells us the “door” that the function is aiming for.\n\n> **Definition:**  \n> For a function $f(x)$, we write  \n> $$\\lim_{x\\to a} f(x)=L$$  \n> and read it as “the limit of $f(x)$ as $x$ approaches $a$ equals $L$.”  \n> This means that for every tiny tolerance we choose around $L$, we can find a region around $a$ (but not necessarily at $a$ itself) where the values of $f(x)$ stay inside that tolerance.\n\nThe simplest way to find a limit is **direct substitution**: plug the approaching value $a$ straight into the formula. If the function is a polynomial or a rational function that does not cause division by zero, the substitution works without any extra tricks.\n\n> **Note:**  \n> Polynomials (expressions like $x^2+3x-5$) are continuous everywhere, so $\\displaystyle\\lim_{x\\to a} p(x)=p(a)$. Rational functions $\\displaystyle\\frac{p(x)}{q(x)}$ behave the same way as long as $q(a)\\neq0$.\n\n### Example 1: A polynomial\n\nFind $\\displaystyle\\lim_{x\\to 2} (3x^2-4x+1)$.  \nBecause this is a polynomial, we simply replace $x$ by $2$:\n\n$$\\lim_{x\\to 2} (3x^2-4x+1)=3(2)^2-4(2)+1=12-8+1=5.$$\n\nThe function’s graph shows a smooth curve; as $x$ moves toward $2$, the $y$‑values slide toward $5$.\n\n### Example 2: A rational function without a zero denominator\n\nCompute $\\displaystyle\\lim_{x\\to -1}\\frac{x^2+2x+1}{x+3}$.  \nFirst check the denominator at $x=-1$: $(-1)+3=2\\neq0$, so direct substitution is safe.\n\n$$\\lim_{x\\to -1}\\frac{x^2+2x+1}{x+3}= \\frac{(-1)^2+2(-1)+1}{-1+3}= \\frac{1-2+1}{2}= \\frac{0}{2}=0.$$\n\nEven though the numerator becomes $0$, the denominator stays non‑zero, so the fraction settles at $0$.\n\n### Example 3: A rational function where substitution still works\n\nFind $\\displaystyle\\lim_{x\\to 4}\\frac{2x^2-8x}{x-4}$.  \nAt first glance the denominator $x-4$ becomes $0$ when $x=4$, which would seem to block direct substitution. However, we can simplify first:\n\n$$\\frac{2x^2-8x}{x-4}= \\frac{2x(x-4)}{x-4}=2x\\quad\\text{for }x\\neq4.$$\n\nNow take the limit of the simplified expression:\n\n$$\\lim_{x\\to 4}2x = 2\\cdot4 = 8.$$\n\nThe key step was canceling the common factor $(x-4)$, which is allowed because we are only interested in values *near* $4$, not exactly at $4$.\n\n> **Common mistake:**  \n> Trying to substitute $x=4$ into the original fraction without simplifying leads to “division by zero,” which is undefined. Remember that limits care about *nearby* values, so algebraic simplification is permitted before taking the limit.\n\n### Why direct substitution matters\n\nIn many real‑world problems, we need to know the behavior of a quantity as conditions approach a certain point—temperature as time approaches noon, speed as a car nears a traffic light, etc. If the underlying formula is a polynomial or a well‑behaved rational expression, we can answer these questions instantly by plugging in the target value.\n\n> **In daily life:**  \n> Imagine a recipe that calls for “add sugar until the mixture is sweet enough.” If the sweetness increases smoothly with the amount of sugar, you can predict the exact sweetness by simply measuring the amount you plan to add—no need for trial and error.\n\n> **Remember:**  \n> For polynomials and for rational functions where the denominator does not become zero at the point of interest, **the limit equals the function’s value at that point**. This shortcut saves time and builds confidence before we move on to more complicated cases where substitution fails.",
    "code": ""
   },
   {
-   "heading": "Limits in Physical Motion",
-   "body": "In physics a **limit** tells us what a quantity is doing as time gets very close to a particular instant.  \nWhen we write  \n\n\\[\n\\lim_{t\\to t_0} s(t)=L,\n\\]\n\nwe are saying that the position \\(s(t)\\) approaches the value \\(L\\) as the clock ticks toward \\(t_0\\).  \nIf the limit exists, we can use it to define **instantaneous velocity** and **instantaneous acceleration**.\n\n---\n\n### Instantaneous velocity  \n\nThe average velocity of an object on the interval \\([t,\\,t+h]\\) is  \n\n\\[\nv_{\\text{avg}}(t,h)=\\frac{s(t+h)-s(t)}{h}.\n\\]\n\nIf we let the interval shrink (\\(h\\to0\\)), the average velocity approaches the **instantaneous velocity**:\n\n\\[\nv(t)=\\lim_{h\\to0}\\frac{s(t+h)-s(t)}{h}=s'(t).\n\\]\n\nThus the derivative of the position function gives the velocity at the exact moment \\(t\\).\n\n---\n\n### Instantaneous acceleration  \n\nAcceleration is the rate of change of velocity.  Starting from the definition of average acceleration,\n\n\\[\na_{\\text{avg}}(t,h)=\\frac{v(t+h)-v(t)}{h},\n\\]\n\nthe limit as \\(h\\to0\\) gives the **instantaneous acceleration**:\n\n\\[\na(t)=\\lim_{h\\to0}\\frac{v(t+h)-v(t)}{h}=v'(t)=s''(t).\n\\]\n\nSo the second derivative of the position function tells us how quickly the velocity is changing at a specific instant.\n\n---\n\n## Worked example  \n\nA particle moves along a line with position (in meters) given by  \n\n\\[\ns(t)=4t^{3}-3t^{2}+2,\n\\]\n\nwhere \\(t\\) is measured in seconds.\n\n**Step 1 – Find the velocity function.**  \nUse the limit definition of the derivative:\n\n\\[\nv(t)=\\lim_{h\\to0}\\frac{s(t+h)-s(t)}{h}.\n\\]\n\nInstead of expanding the limit each time, we differentiate directly (the limit *is* the derivative):\n\n\\[\n\\begin{aligned}\ns'(t) &= \\frac{d}{dt}\\bigl(4t^{3}-3t^{2}+2\\bigr)\\\\\n      &= 12t^{2}-6t.\n\\end{aligned}\n\\]\n\nThus  \n\n\\[\nv(t)=12t^{2}-6t.\n\\]\n\n**Step 2 – Find the acceleration function.**  \n\n\\[\na(t)=v'(t)=\\frac{d}{dt}\\bigl(12t^{2}-6t\\bigr)=24t-6.\n\\]\n\n**Step 3 – Evaluate at a specific instant, say \\(t=1\\) s.**  \n\n\\[\n\\begin{aligned}\nv(1) &= 12(1)^{2}-6(1)=12-6=6\\ \\text{m/s},\\\\[4pt]\na(1) &= 24(1)-6=18\\ \\text{m/s}^{2}.\n\\end{aligned}\n\\]\n\n**Interpretation.**  \nAt the exact moment \\(t=1\\) s the particle is moving forward at \\(6\\) m/s, and its speed is increasing by \\(18\\) m/s each second. The limits we took guarantee that these numbers describe the motion *exactly* at that instant, not an average over a time interval.\n\n---\n\n## Practice problems  \n\n### Problem 1  \nA car’s position is \\(s(t)=5t^{2}+3t\\) (meters, \\(t\\) in seconds).  \nFind the instantaneous velocity at \\(t=2\\) s.\n\n**Solution**  \n\\(v(t)=s'(t)=10t+3\\).  \n\\(v(2)=10(2)+3=23\\) m/s.\n\n---\n\n### Problem 2  \nThe height of a ball thrown upward is \\(h(t)=20t-4.9t^{2}\\) (meters).  \nCompute the acceleration at any time \\(t\\).\n\n**Solution**  \nFirst derivative (velocity): \\(h'(t)=20-9.8t\\).  \nSecond derivative (acceleration): \\(a(t)=h''(t)=-9.8\\) m/s\\(^2\\).  \nThe acceleration is constant, equal to the gravitational acceleration (downward).\n\n---\n\n### Problem 3  \nA particle moves according to \\(x(t)=\\sqrt{t+4}\\).  \nFind the instantaneous velocity at \\(t=5\\) s using the limit definition.\n\n**Solution**  \n\\[\nv(5)=\\lim_{h\\to0}\\frac{\\sqrt{5+h+4}-\\sqrt{5+4}}{h}\n     =\\lim_{h\\to0}\\frac{\\sqrt{9+h}-3}{h}.\n\\]\n\nMultiply numerator and denominator by the conjugate:\n\n\\[\n\\frac{\\sqrt{9+h}-3}{h}\\cdot\\frac{\\sqrt{9+h}+3}{\\sqrt{9+h}+3}\n =\\frac{(9+h)-9}{h\\bigl(\\sqrt{9+h}+3\\bigr)}\n =\\frac{1}{\\sqrt{9+h}+3}.\n\\]\n\nNow let \\(h\\to0\\):  \n\n\\[\nv(5)=\\frac{1}{\\sqrt{9}+3}=\\frac{1}{3+3}=\\frac{1}{6}\\ \\text{m/s}.\n\\]\n\n---\n\n### Problem 4  \nA satellite’s radial distance from Earth’s center is \\(r(t)=7t^{2}+2\\) (kilometres).  \nFind both the instantaneous velocity and acceleration at \\(t=3\\) s.\n\n**Solution**  \nVelocity: \\(v(t)=r'(t)=14t\\).  \n\\(v(3)=14(3)=42\\) km/s.\n\nAcceleration: \\(a(t)=v'(t)=14\\) km/s\\(^2\\) (constant).  \n\nSo at \\(t=3\\) s the satellite is moving outward at \\(42\\) km/s and its outward speed is increasing by \\(14\\) km/s each second.",
+   "heading": "Techniques for Indeterminate Forms",
+   "body": "When we try to evaluate a limit, sometimes we first get an expression like  \n\n$$\\frac{0}{0}\\qquad\\text{or}\\qquad\\frac{\\infty}{\\infty}$$  \n\nThese are called **indeterminate forms** because the fraction does not tell us the answer directly – the numerator and denominator are both “going to nothing” or “going to something huge,” and many different results are possible. To find the true limit we must **re‑arrange** the expression so that the troublesome $0$ or $\\infty$ disappears. The most common rearrangements are **factoring**, **rationalizing**, and a few simple algebraic tricks.\n\n> **Definition:** An *indeterminate form* is a limit expression that initially looks like $0/0$ or $\\infty/\\infty$, meaning we cannot decide the limit without further work.\n\n---\n\n### 1. Factoring to cancel a common factor  \n\nSuppose we need  \n\n$$\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}.$$  \n\nIf we plug $x=2$ straight in, the numerator becomes $2^{2}-4=0$ and the denominator $2-2=0$, giving $0/0$. The trick is to **factor** the numerator:\n\n$$x^{2}-4=(x-2)(x+2).$$  \n\nNow the limit looks like  \n\n$$\\lim_{x\\to 2}\\frac{(x-2)(x+2)}{x-2}.$$\n\nBecause $x$ is approaching 2 but never actually equal to 2, we may cancel the common factor $(x-2)$:\n\n$$\\lim_{x\\to 2}(x+2).$$  \n\nNow we can substitute $x=2$ safely:\n\n$$2+2=4.$$\n\nSo the original limit equals $4$.\n\n> **Note:** Cancelling works only after we have *factored* and confirmed the factor is not zero for the values *near* the limit point.\n\n---\n\n### 2. Rationalizing a numerator or denominator  \n\nConsider  \n\n$$\\lim_{x\\to 0}\\frac{\\sqrt{x+1}-1}{x}.$$  \n\nDirect substitution gives $\\frac{0}{0}$. The square‑root makes it hard to cancel, so we **rationalize**: multiply numerator and denominator by the conjugate $\\sqrt{x+1}+1$.\n\n\\[\n\\frac{\\sqrt{x+1}-1}{x}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n   =\\frac{(\\sqrt{x+1})^{2}-1^{2}}{x(\\sqrt{x+1}+1)}\n   =\\frac{x}{x(\\sqrt{x+1}+1)}.\n\\]\n\nNow the $x$ in numerator and denominator cancel:\n\n\\[\n\\frac{1}{\\sqrt{x+1}+1}.\n\\]\n\nWe can now let $x\\to0$:\n\n\\[\n\\frac{1}{\\sqrt{0+1}+1}=\\frac{1}{1+1}= \\frac12 .\n\\]\n\nThus the limit is $\\frac12$.\n\n> **In daily life:** Rationalizing is like clearing fog from a window – we multiply by a special “cleaning” factor (the conjugate) so we can see the simple picture underneath.\n\n---\n\n### 3. Common algebraic tricks  \n\n#### a) Dividing by the highest power  \n\nFor a limit at infinity, such as  \n\n$$\\lim_{x\\to\\infty}\\frac{3x^{2}+5x}{2x^{2}-x+7},$$  \n\nboth numerator and denominator grow without bound, giving $\\infty/\\infty$. Divide every term by the highest power of $x$ that appears, here $x^{2}$:\n\n\\[\n\\frac{3+\\frac{5}{x}}{2-\\frac{1}{x}+\\frac{7}{x^{2}}}.\n\\]\n\nAs $x\\to\\infty$, the fractions $\\frac{5}{x},\\frac{1}{x},\\frac{7}{x^{2}}$ all approach $0$. The limit becomes  \n\n\\[\n\\frac{3+0}{2-0+0}= \\frac{3}{2}.\n\\]\n\n#### b) Using a known limit  \n\nA classic limit is  \n\n$$\\lim_{x\\to0}\\frac{\\sin x}{x}=1.$$\n\nIf we encounter  \n\n$$\\lim_{x\\to0}\\frac{2\\sin(3x)}{5x},$$  \n\nrewrite it as  \n\n\\[\n\\frac{2\\cdot3}{5}\\cdot\\frac{\\sin(3x)}{3x}\n   =\\frac{6}{5}\\cdot\\frac{\\sin(3x)}{3x}.\n\\]\n\nNow let $u=3x$. As $x\\to0$, $u\\to0$, and $\\frac{\\sin u}{u}\\to1$. Hence the limit equals $\\frac{6}{5}\\cdot1=\\frac{6}{5}$.\n\n> **Remember:** When you see a familiar pattern (like $\\sin x/x$), replace it with its known limit and simplify the surrounding constants.\n\n---\n\n### Putting it together  \n\n1. **Check the form** – is it $0/0$ or $\\infty/\\infty$?  \n2. **Choose a tool** – factor, rationalize, divide by the highest power, or use a known limit.  \n3. **Rewrite step by step**, cancelling only after you have justified the cancellation.  \n4. **Substitute** the approaching value once the expression is free of the indeterminate form.\n\n> **Common mistake:** Cancelling a factor before confirming it truly appears in both numerator and denominator (or before factoring) leads to wrong answers. Always perform the algebraic manipulation first.",
    "code": ""
   },
   {
-   "heading": "Biological Growth Models",
-   "body": "Biological growth often follows simple mathematical patterns that can be described with **exponential** or **logistic** functions.  \nBy applying limits we can predict what happens to a population **as time $t$ becomes very large** (i.e., $t\\to\\infty$).  \n\n---\n\n### Exponential growth  \n\nA population that reproduces without any constraints can be modeled by  \n\n\\[\nP(t)=P_0\\,e^{rt},\n\\]\n\nwhere  \n\n* $P_0$ is the initial size,  \n* $r>0$ is the constant growth rate,  \n* $e$ is the base of natural logarithms.  \n\nTo find the **long‑term behavior**, evaluate  \n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\lim_{t\\to\\infty}P_0e^{rt}.\n\\]\n\nBecause $e^{rt}\\to\\infty$ when $r>0$, the limit is  \n\n\\[\n\\boxed{\\infty}.\n\\]\n\nThus an unrestricted exponential model predicts unbounded growth.\n\n---\n\n### Logistic growth  \n\nReal populations face limited resources. A common model is  \n\n\\[\nP(t)=\\frac{K}{1+Ae^{-rt}},\n\\]\n\nwhere  \n\n* $K$ is the **carrying capacity** (maximum sustainable size),  \n* $A=\\frac{K-P_0}{P_0}$ depends on the initial condition,  \n* $r>0$ is the intrinsic growth rate.  \n\n**Goal:** Determine $\\displaystyle\\lim_{t\\to\\infty}P(t)$ and interpret it.\n\n\\[\n\\begin{aligned}\n\\lim_{t\\to\\infty}P(t)\n&=\\lim_{t\\to\\infty}\\frac{K}{1+Ae^{-rt}}\\\\[4pt]\n&=\\frac{K}{1+ A\\cdot\\underbrace{\\lim_{t\\to\\infty}e^{-rt}}_{0}}\\\\[4pt]\n&=\\frac{K}{1+0}=K.\n\\end{aligned}\n\\]\n\nThe limit equals the **carrying capacity** $K$, showing that the population settles at a stable size.\n\n---\n\n### Fully worked example  \n\nA bacterial culture starts with $P_0=200$ cells. Its growth follows the logistic law  \n\n\\[\nP(t)=\\frac{5000}{1+24e^{-0.8t}}.\n\\]\n\n1. **Identify the carrying capacity.**  \n   The numerator $K=5000$ cells, so $K=5000$.\n\n2. **Compute the long‑term limit.**  \n\n\\[\n\\begin{aligned}\n\\lim_{t\\to\\infty}P(t)\n&=\\lim_{t\\to\\infty}\\frac{5000}{1+24e^{-0.8t}}\\\\\n&=\\frac{5000}{1+24\\cdot0}\\\\\n&=5000.\n\\end{aligned}\n\\]\n\n3. **Interpretation.**  \n   As $t$ grows, the population approaches **5 000 cells**, the environment’s carrying capacity.  \n\n4. **Check the early‑time behavior (optional).**  \n   At $t=0$,  \n\n\\[\nP(0)=\\frac{5000}{1+24}= \\frac{5000}{25}=200,\n\\]\n\nwhich matches the given $P_0$, confirming the model’s consistency.\n\n---\n\n### Practice problems  \n\n**Problem 1**  \nA fish population follows $P(t)=\\dfrac{800}{1+3e^{-0.5t}}$. Find $\\displaystyle\\lim_{t\\to\\infty}P(t)$ and state its ecological meaning.  \n\n*Solution.*  \n\\[\n\\lim_{t\\to\\infty}P(t)=\\frac{800}{1+3\\cdot0}=800.\n\\]  \nThe population will settle at **800 fish**, the lake’s carrying capacity.\n\n---\n\n**Problem 2**  \nAn uncontrolled tumor grows exponentially: $V(t)=V_0e^{0.03t}$ with $V_0=1\\text{ cm}^3$. What is $\\displaystyle\\lim_{t\\to\\infty}V(t)$?  \n\n*Solution.*  \nSince $e^{0.03t}\\to\\infty$,  \n\n\\[\n\\lim_{t\\to\\infty}V(t)=\\infty.\n\\]  \nThe model predicts unbounded tumor volume, highlighting the need for treatment.\n\n---\n\n**Problem 3**  \nA plant species spreads with $N(t)=\\dfrac{1500}{1+9e^{-t}}$. Determine the time $t$ when the population reaches half the carrying capacity.  \n\n*Solution.*  \nHalf of $K=1500$ is $750$. Set $N(t)=750$:\n\n\\[\n750=\\frac{1500}{1+9e^{-t}}\\;\\Longrightarrow\\;1+9e^{-t}=2\\;\\Longrightarrow\\;9e^{-t}=1\\;\\Longrightarrow\\;e^{-t}= \\frac19.\n\\]\n\nTake natural logs:\n\n\\[\n-t=\\ln\\!\\left(\\frac19\\right)=-\\ln 9\\;\\Longrightarrow\\;t=\\ln 9\\approx2.20.\n\\]\n\nSo after **≈2.2 time units** the population is half of $K$.\n\n---\n\n**Problem 4**  \nA virus count follows $V(t)=\\dfrac{10^6}{1+e^{-0.4(t-5)}}$. Compute the limit as $t\\to -\\infty$ and as $t\\to\\infty$, and explain the two limits.  \n\n*Solution.*  \n\n- As $t\\to -\\infty$, $e^{-0.4(t-5)}=e^{0.4(5-t)}\\to\\infty$, so  \n\n\\[\n\\lim_{t\\to -\\infty}V(t)=\\frac{10^6}{1+\\infty}=0.\n\\]\n\n  The virus count starts essentially at **zero**.\n\n- As $t\\to\\infty$, $e^{-0.4(t-5)}\\to0$, thus  \n\n\\[\n\\lim_{t\\to\\infty}V(t)=\\frac{10^6}{1+0}=10^6.\n\\]\n\n  The population approaches the **carrying capacity** of one million virions.  \n\nThese limits describe the infection’s onset and its eventual plateau.",
+   "heading": "One‑Sided Limits and Limits at Infinity",
+   "body": "When we talk about a limit we usually imagine the variable $x$ getting *closer* to a particular number from **both** sides – from the left (smaller values) and from the right (larger values).  \nSometimes the behavior is different on the two sides, and we need to look at them separately. This is what we call a **one‑sided limit**.\n\n> **Definition:** A *right‑hand limit* (or limit from the right) of a function $f(x)$ as $x$ approaches $a$ is written  \n> $$\\lim_{x\\to a^{+}} f(x)$$  \n> and means we only consider values of $x$ that are a little larger than $a$ (the “+’’ indicates “plus’’).  \n> A *left‑hand limit* (or limit from the left) is written  \n> $$\\lim_{x\\to a^{-}} f(x)$$  \n> and uses only $x$ that are a little smaller than $a$ (the “–’’ indicates “minus’’).\n\nWhy separate them? Imagine a road that ends at a cliff. If you walk toward the edge from the left side, you might see a smooth path that gently slopes down. From the right side, there could be a steep staircase. The overall “limit at the edge’’ does not exist because the two approaches give different results, but each side still has a clear description. In mathematics we say the two one‑sided limits exist, but the two‑sided limit $\\lim_{x\\to a} f(x)$ does **not** exist unless the left‑hand and right‑hand limits are equal.\n\n> **Note:** If $\\displaystyle\\lim_{x\\to a^{-}} f(x)=\\displaystyle\\lim_{x\\to a^{+}} f(x)=L$, then the ordinary limit $\\displaystyle\\lim_{x\\to a} f(x)$ exists and equals $L$.\n\n### Simple example\nConsider the piecewise function  \n\n$$\nf(x)=\\begin{cases}\n2x+1, & x<3,\\\\[4pt]\n5, & x\\ge 3.\n\\end{cases}\n$$\n\n- For $x\\to3^{-}$ we use the first rule: $\\displaystyle\\lim_{x\\to3^{-}}(2x+1)=2\\cdot3+1=7$.\n- For $x\\to3^{+}$ we use the second rule: $\\displaystyle\\lim_{x\\to3^{+}}5=5$.\n\nBecause $7\\neq5$, the two‑sided limit at $x=3$ does not exist, even though each one‑sided limit does.\n\n### Limits at infinity\nSometimes we are interested in what happens when $x$ grows without bound, either positively ($x\\to+\\infty$) or negatively ($x\\to-\\infty$). This tells us the **end behavior** of the graph – how the curve behaves far to the right or far to the left.\n\nWe write  \n\n$$\\lim_{x\\to+\\infty} f(x)$$  \n\nto mean “the value that $f(x)$ approaches as $x$ gets larger and larger.”  \nSimilarly  \n\n$$\\lim_{x\\to-\\infty} f(x)$$  \n\nmeans “the value approached as $x$ becomes very negative.”\n\nThese limits are useful for predicting whether a graph will settle near a horizontal line (a *horizontal asymptote*) or keep climbing forever.\n\n### Example with a rational function\nTake  \n\n$$f(x)=\\frac{3x^{2}+2}{x^{2}-4}.$$\n\nBoth numerator and denominator are degree 2 polynomials. When $x$ is huge, the lower‑order terms ($+2$ and $-4$) become negligible, so the fraction behaves like  \n\n$$\\frac{3x^{2}}{x^{2}}=3.$$\n\nFormally,\n\n$$\\lim_{x\\to\\pm\\infty}\\frac{3x^{2}+2}{x^{2}-4}=3.$$\n\nThus the graph has a horizontal asymptote $y=3$ on both ends.\n\n### When the degrees differ\nIf the degree of the numerator is larger than that of the denominator, the limit at infinity is infinite, meaning the graph shoots upward or downward without bound.\n\nFor  \n\n$$g(x)=\\frac{5x^{3}}{2x^{2}+1},$$  \n\nthe numerator grows like $x^{3}$ while the denominator grows like $x^{2}$. Their ratio behaves like $\\frac{5x^{3}}{2x^{2}}=\\frac{5}{2}x$, which goes to $+\\infty$ as $x\\to+\\infty$ and to $-\\infty$ as $x\\to-\\infty$.\n\n> **In daily life:** Think of a car’s speedometer. As time passes ($t\\to\\infty$), the speed may settle to a cruising speed (a horizontal asymptote) or keep accelerating without limit (the limit is $\\infty$). One‑sided limits are like checking the speed just before a stop sign (approaching from the left) versus just after the stop sign (approaching from the right).\n\n### Using one‑sided limits to describe graph edges\nWhen a function has a jump, a hole, or a vertical asymptote at $x=a$, we often need the one‑sided limits to describe the picture:\n\n- A **vertical asymptote** occurs when $\\displaystyle\\lim_{x\\to a^{\\pm}} f(x)=\\pm\\infty$. The graph shoots up or down near $x=a$.\n- A **removable discontinuity** (a hole) happens when both one‑sided limits exist and are equal, but the function’s actual value at $a$ is different or undefined.\n\n> **Remember:** To decide the overall limit at a point, first check the left‑hand and right‑hand limits. If they match, you have the two‑sided limit; if not, the limit does not exist, even though each side may be perfectly well‑defined. For end behavior, compute limits as $x\\to\\pm\\infty$ to locate horizontal asymptotes or determine unbounded growth.",
    "code": ""
   },
   {
-   "heading": "Economic Cost and Revenue Analysis",
-   "body": "In economics a **cost** or **revenue** function tells us how total expense or total income changes as a firm produces more units.  The *average* cost $C_{\\text{avg}}(q)=\\dfrac{C(q)}{q}$ gives the cost per unit when $q$ items are made.  The **marginal cost** $C'(q)$ is the *instantaneous* increase in total cost when production is increased by one more unit.  Mathematically we obtain it as a limit of the average‑cost slope:\n\n\\[\nC'(q)=\\lim_{\\Delta q\\to 0}\\frac{C(q+\\Delta q)-C(q)}{\\Delta q}\n      =\\lim_{\\Delta q\\to 0}\\frac{C_{\\text{avg}}(q+\\Delta q)-C_{\\text{avg}}(q)}{\\Delta q}\\,q .\n\\]\n\nA similar story holds for **revenue**.  If $R(q)$ is total revenue, the average revenue is $R_{\\text{avg}}(q)=\\dfrac{R(q)}{q}$ and the **marginal revenue** $R'(q)$ is\n\n\\[\nR'(q)=\\lim_{\\Delta q\\to 0}\\frac{R(q+\\Delta q)-R(q)}{\\Delta q}.\n\\]\n\nBoth marginal quantities are limits that give the *instantaneous* rate of change, just as the derivative does in physics or biology.\n\n---\n\n### Worked Example  \n\nA company’s total cost (in thousands of dollars) for producing $q$ thousand widgets is  \n\n\\[\nC(q)=5q^{2}+20q+100 .\n\\]\n\n1. **Average cost**  \n\n\\[\nC_{\\text{avg}}(q)=\\frac{C(q)}{q}=5q+20+\\frac{100}{q}.\n\\]\n\n2. **Marginal cost** – take the derivative of $C(q)$ (the limit definition of the derivative).  \n\n\\[\nC'(q)=\\lim_{\\Delta q\\to 0}\\frac{C(q+\\Delta q)-C(q)}{\\Delta q}\n     =\\frac{d}{dq}\\bigl(5q^{2}+20q+100\\bigr)=10q+20 .\n\\]\n\n3. **Interpretation**  \n   At $q=4$ (i.e., 4 000 widgets) the marginal cost is  \n\n\\[\nC'(4)=10(4)+20=60\\text{ thousand dollars per thousand widgets}\n      =\\$60\\text{ per widget}.\n\\]\n\nThus producing one more thousand widgets around $q=4$ will increase total cost by about \\$60 000.\n\n4. **Check with the limit of average cost**  \n\n\\[\n\\begin{aligned}\n\\lim_{\\Delta q\\to 0}\\frac{C_{\\text{avg}}(4+\\Delta q)-C_{\\text{avg}}(4)}{\\Delta q}\n&=\\frac{d}{dq}\\bigl(5q+20+\\frac{100}{q}\\bigr)_{q=4} \\\\\n&=5-\\frac{100}{q^{2}}\\Big|_{q=4}=5-\\frac{100}{16}=5-6.25=-1.25 .\n\\end{aligned}\n\\]\n\nMultiplying by $q=4$ gives $-1.25\\cdot4=-5$, which is the *change* in average cost per unit, not the total marginal cost.  The correct marginal cost comes directly from $C'(q)$, confirming that limits of **average** quantities must be handled carefully.\n\n---\n\n### Practice Problems  \n\n**1.** Total cost: $C(q)=3q^{2}+15q+50$.  \n*Find the marginal cost at $q=5$.*\n\n**Solution:**  \n$C'(q)=6q+15$, so $C'(5)=6(5)+15=45$ (thousand dollars per thousand units).\n\n---\n\n**2.** Total revenue: $R(q)=200q-0.5q^{2}$.  \n*Compute marginal revenue when $q=80$.*\n\n**Solution:**  \n$R'(q)=200- q$, thus $R'(80)=200-80=120$ (dollars per unit).\n\n---\n\n**3.** Average cost $C_{\\text{avg}}(q)=4+\\frac{200}{q}$.  \n*Find the marginal cost function $C'(q)$ using the limit definition.*\n\n**Solution:**  \nFirst write $C(q)=q\\,C_{\\text{avg}}(q)=4q+200$.  \nDifferentiate: $C'(q)=4$.  Hence marginal cost is constant $4$ (dollars per unit).\n\n---\n\n**4.** A firm’s total revenue is $R(q)=500\\ln(q+1)$.  \n*Determine the marginal revenue at $q=9$.*\n\n**Solution:**  \n$R'(q)=\\frac{500}{q+1}$ (by the derivative of $\\ln$).  \nEvaluate: $R'(9)=\\frac{500}{10}=50$ dollars per unit.\n\nThese problems illustrate how **limits** turn average economic quantities into **instantaneous** rates, giving the marginal cost and marginal revenue that businesses use for decision‑making.",
+   "heading": "Limits and Continuity",
+   "body": "When we talk about a function “behaving nicely’’ at a certain point, we are really asking whether we can draw its graph there without lifting our pencil.  \nMathematically, that niceness is called **continuity**.  \n\n> **Definition:** A function $f$ is *continuous at a point* $a$ if the limit of $f(x)$ as $x$ approaches $a$ exists **and** equals the actual value $f(a)$. In symbols,\n> $$\\lim_{x\\to a} f(x)=f(a).$$  \n\nThe idea is simple: the numbers that $f(x)$ gets closer to when $x$ gets closer to $a$ must be exactly the number the function already gives at $a$. If either of these two pieces fails, the function has a “break’’ or “jump’’ at $a$.\n\n### Why the two conditions matter  \n\n1. **The limit exists.**  \n   This means that as we approach $a$ from the left (values smaller than $a$) *and* from the right (values larger than $a$), the function heads toward the same single number. If the left‑hand approach heads to $2$ while the right‑hand approach heads to $5$, there is no single number to call “the limit”, so continuity cannot hold.\n\n2. **The limit equals $f(a)$.**  \n   Even if the two sides agree on a number, the function might still be defined differently at $a$. Imagine a road that detours around a small island: the road’s path is smooth everywhere except at the island where a bridge is missing. The limit tells us where the road would be, but the actual value $f(a)$ tells us whether the bridge is there. If the bridge is missing ($f(a)$ is something else), the road is not continuous.\n\n> **Note:** The two‑step test for continuity at $a$ is  \n> 1. Compute $\\displaystyle\\lim_{x\\to a^-} f(x)$ and $\\displaystyle\\lim_{x\\to a^+} f(x)$.  \n> 2. Check that both one‑sided limits exist, are equal, and equal $f(a)$.  \n\n### Piecewise functions – a common source of “breaks’’  \n\nA piecewise function is defined by different formulas on different intervals. For example,\n$$\nf(x)=\\begin{cases}\nx^2 & \\text{if } x<1,\\\\[4pt]\n3x-2 & \\text{if } x\\ge 1.\n\\end{cases}\n$$\nTo see whether $f$ is continuous at the point where the definition changes ($x=1$), we follow the continuity test:\n\n1. **Left‑hand limit** (using the first piece):\n   $$\\lim_{x\\to 1^-} f(x)=\\lim_{x\\to 1^-} x^2 = 1.$$\n2. **Right‑hand limit** (using the second piece):\n   $$\\lim_{x\\to 1^+} f(x)=\\lim_{x\\to 1^+} (3x-2)=1.$$\n   Both one‑sided limits exist and are equal, so the overall limit exists and equals $1$.\n3. **Function value** at $x=1$:\n   $$f(1)=3(1)-2=1.$$\n   Since the limit $1$ matches $f(1)$, the function is continuous at $x=1$.\n\nIf we changed the second piece to $3x-1$, then $f(1)=2$, while the limit would still be $1$. The function would have a jump at $x=1$ and would **not** be continuous there.\n\n> **In daily life:** Think of a sidewalk that runs straight and smooth. If the sidewalk suddenly ends and you have to step onto a curb, that abrupt change is like a discontinuity. A continuous sidewalk lets you walk without interruption.\n\n### Quick checklist for continuity of a piecewise function  \n\n- Identify the points where the formula changes.  \n- Compute the left‑hand and right‑hand limits at each such point.  \n- Compare those limits to each other and to the defined value at the point.  \n- If all three match, the function is continuous there; otherwise, it is not.\n\n> **Common mistake:** Forgetting to check the actual function value $f(a)$. Students often compute the two one‑sided limits, see they are equal, and conclude continuity without confirming that $f(a)$ matches the limit.\n\n> **Remember:** Continuity at $a$ is exactly the statement “the limit as $x$ approaches $a$ exists **and** equals $f(a)$.” This two‑part condition is the foundation for many later results, such as the Intermediate Value Theorem and the ability to replace a function by its limit in calculus operations.",
    "code": ""
   },
   {
-   "heading": "Handling Indeterminate Forms",
-   "body": "**Handling Indeterminate Forms**\n\nWhen a limit produces the symbols $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, the expression is called an **indeterminate form**. The value cannot be read directly; we must transform the limit into a form that can be evaluated. The most systematic tool is **L’Hôpital’s Rule**.\n\n---\n\n### L’Hôpital’s Rule  \n\nIf  \n\n\\[\n\\lim_{x\\to a} f(x)=0\\quad\\text{and}\\quad \\lim_{x\\to a} g(x)=0,\n\\]\n\nor  \n\n\\[\n\\lim_{x\\to a} f(x)=\\pm\\infty\\quad\\text{and}\\quad \\lim_{x\\to a} g(x)=\\pm\\infty,\n\\]\n\nand the derivatives $f'(x)$ and $g'(x)$ exist near $a$, then  \n\n\\[\n\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\n\\lim_{x\\to a}\\frac{f'(x)}{g'(x)},\n\\]\n\nprovided the right‑hand limit exists (or is $\\pm\\infty$).  \nThe rule may be applied repeatedly until the limit is no longer indeterminate.\n\n**Important:** Before using L’Hôpital, always try algebraic simplifications—factoring, rationalising, or using trigonometric identities—because they often remove the indeterminate form without differentiation.\n\n---\n\n### Fully worked example  \n\nFind  \n\n\\[\n\\lim_{x\\to 2}\\frac{x^{2}-4}{\\sin (x-2)} .\n\\]\n\n1. **Check the form.**  \n   \\[\n   \\lim_{x\\to 2}(x^{2}-4)=2^{2}-4=0,\\qquad\n   \\lim_{x\\to 2}\\sin (x-2)=\\sin 0=0.\n   \\]  \n   The limit is $\\frac{0}{0}$, an indeterminate form.\n\n2. **Simplify first.**  \n   Factor the numerator: $x^{2}-4=(x-2)(x+2)$.  \n   The expression becomes  \n\n   \\[\n   \\frac{(x-2)(x+2)}{\\sin (x-2)}.\n   \\]\n\n   Notice the common factor $(x-2)$. Write  \n\n   \\[\n   \\frac{(x-2)(x+2)}{\\sin (x-2)}=\n   (x+2)\\,\\frac{x-2}{\\sin (x-2)}.\n   \\]\n\n3. **Use a known limit.**  \n   The standard limit $\\displaystyle\\lim_{u\\to 0}\\frac{u}{\\sin u}=1$.  \n   Here $u=x-2\\to 0$, so  \n\n   \\[\n   \\lim_{x\\to 2}\\frac{x-2}{\\sin (x-2)}=1.\n   \\]\n\n4. **Combine the results.**  \n\n   \\[\n   \\lim_{x\\to 2}(x+2)\\cdot 1 = 2+2 = 4.\n   \\]\n\nThus  \n\n\\[\n\\boxed{\\,\\displaystyle\\lim_{x\\to 2}\\frac{x^{2}-4}{\\sin (x-2)} = 4\\,}.\n\\]\n\nNo differentiation was needed because the algebraic simplification removed the indeterminate form.\n\n---\n\n### Practice problems  \n\n#### 1.  \n\\[\n\\lim_{x\\to 0}\\frac{e^{x}-1}{x}.\n\\]\n\n**Solution:**  \nBoth numerator and denominator go to $0$. Apply L’Hôpital:  \n\n\\[\n\\lim_{x\\to 0}\\frac{(e^{x})'}{(x)'}=\\lim_{x\\to 0}e^{x}=e^{0}=1.\n\\]\n\n---\n\n#### 2.  \n\\[\n\\lim_{x\\to \\infty}\\frac{\\ln x}{\\sqrt{x}}.\n\\]\n\n**Solution:**  \nAs $x\\to\\infty$, $\\ln x\\to\\infty$ and $\\sqrt{x}\\to\\infty$ → $\\frac{\\infty}{\\infty}$.  \nDifferentiate numerator and denominator:\n\n\\[\n\\lim_{x\\to\\infty}\\frac{(\\ln x)'}{(\\sqrt{x})'}=\n\\lim_{x\\to\\infty}\\frac{1/x}{\\frac{1}{2}x^{-1/2}}=\n\\lim_{x\\to\\infty}\\frac{2}{\\sqrt{x}}=0.\n\\]\n\n---\n\n#### 3.  \n\\[\n\\lim_{x\\to 0}\\frac{1-\\cos x}{x^{2}}.\n\\]\n\n**Solution:**  \nBoth go to $0$ → $\\frac{0}{0}$. First simplify using the identity $1-\\cos x = 2\\sin^{2}\\!\\frac{x}{2}$:\n\n\\[\n\\frac{1-\\cos x}{x^{2}}=\\frac{2\\sin^{2}\\!\\frac{x}{2}}{x^{2}}\n=2\\left(\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\right)^{2}\\frac{1}{4}\n= \\frac{1}{2}\\left(\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\right)^{2}.\n\\]\n\nAs $x\\to0$, $\\displaystyle\\frac{\\sin\\frac{x}{2}}{\\frac{x}{2}}\\to1$, so the limit is $\\frac12$.\n\n---\n\n#### 4.  \n\\[\n\\lim_{x\\to 1}\\frac{x^{3}-1}{x^{2}-1}.\n\\]\n\n**Solution:**  \nFactor both numerator and denominator:\n\n\\[\nx^{3}-1=(x-1)(x^{2}+x+1),\\qquad\nx^{2}-1=(x-1)(x+1).\n\\]\n\nCancel the common factor $(x-1)$:\n\n\\[\n\\frac{x^{2}+x+1}{x+1}.\n\\]\n\nNow substitute $x=1$:\n\n\\[\n\\frac{1^{2}+1+1}{1+1}= \\frac{3}{2}.\n\\]\n\nThus the limit equals $\\displaystyle\\frac{3}{2}$.",
+   "heading": "Using Limits to Find Instantaneous Rate of Change",
+   "body": "When we talk about “instantaneous rate of change’’ we mean how fast something is changing at a single instant, not over a whole interval.  \nImagine watching a car on a road. If you look at the odometer you see the total distance travelled, but the speedometer tells you how fast the car is moving **right now**. In mathematics that “right‑now’’ speed is the derivative, and we obtain it by letting the time interval become *infinitely small*.\n\n> **Definition:** The instantaneous rate of change of a function $f(t)$ at the point $t=a$ is  \n> $$f'(a)=\\lim_{\\Delta t\\to 0}\\frac{f(a+\\Delta t)-f(a)}{\\Delta t}.$$  \n> The fraction inside the limit is called the *difference quotient*. It measures the average change of $f$ over a short time $\\Delta t$; the limit makes that interval shrink to zero.\n\nWhy does this work?  \nIf $\\Delta t$ is a tiny piece of time, the average change $\\dfrac{f(a+\\Delta t)-f(a)}{\\Delta t}$ is a good approximation of the true change at the exact moment $a$. As we make $\\Delta t$ smaller and smaller, the approximation improves, and the limit gives the exact value.\n\n### Example 1: Velocity of a falling ball  \n\nSuppose the height (in meters) of a ball dropped from a tower is described by  \n$$s(t)=100-4.9t^{2},$$  \nwhere $t$ is the time in seconds after release. To find the velocity at $t=2\\,$s we compute  \n\n$$v(2)=\\lim_{\\Delta t\\to 0}\\frac{s(2+\\Delta t)-s(2)}{\\Delta t}.$$\n\nFirst write the numerator:  \n\n$$s(2+\\Delta t)=100-4.9(2+\\Delta t)^{2}=100-4.9(4+4\\Delta t+\\Delta t^{2})$$  \n$$=100-19.6-19.6\\Delta t-4.9\\Delta t^{2}=80.4-19.6\\Delta t-4.9\\Delta t^{2}.$$\n\nNow subtract $s(2)=100-4.9(4)=80.4$:  \n\n$$s(2+\\Delta t)-s(2)= -19.6\\Delta t-4.9\\Delta t^{2}.$$\n\nDivide by $\\Delta t$:  \n\n$$\\frac{s(2+\\Delta t)-s(2)}{\\Delta t}= -19.6-4.9\\Delta t.$$\n\nTake the limit as $\\Delta t\\to0$:  \n\n$$v(2)=\\lim_{\\Delta t\\to0}(-19.6-4.9\\Delta t)=-19.6\\ \\text{m/s}.$$\n\nThe negative sign tells us the ball is moving downward.  \n\n> **In daily life:** The same idea lets engineers compute the exact speed of a rocket at any moment, even though a sensor can only record positions at discrete times.\n\n### Example 2: Population growth rate  \n\nA small town’s population after $t$ years is modeled by $P(t)=500e^{0.03t}$. The *instantaneous* growth rate at $t=5$ years is  \n\n$$P'(5)=\\lim_{\\Delta t\\to0}\\frac{P(5+\\Delta t)-P(5)}{\\Delta t}.$$\n\nBecause $e^{kt}$ differentiates nicely, we can use the known rule $ \\frac{d}{dt}e^{kt}=ke^{kt}$, giving  \n\n$$P'(t)=0.03\\cdot500e^{0.03t}=15e^{0.03t}.$$\n\nThus  \n\n$$P'(5)=15e^{0.15}\\approx 15(1.162)=17.4\\ \\text{people per year}.$$\n\nThe town is gaining about 17 people each year at that moment, even though the overall growth is exponential.\n\n> **Note:** When a function is smooth (no sharp corners), the limit exists and the derivative is a single number. If the graph has a corner, the limit from the left and right differ, so the instantaneous rate is *undefined* there.\n\n### Example 3: Marginal profit in economics  \n\nA company’s profit (in thousands of dollars) from producing $x$ thousand units is $ \\Pi(x)= -2x^{2}+12x-5$. The *marginal profit*—the extra profit from selling one more thousand units—is the derivative  \n\n$$\\Pi'(x)=\\lim_{\\Delta x\\to0}\\frac{\\Pi(x+\\Delta x)-\\Pi(x)}{\\Delta x}.$$\n\nComputing directly,  \n\n$$\\Pi'(x)= -4x+12.$$\n\nIf the firm currently makes $x=3$ (i.e., 3 000 units), the marginal profit is  \n\n$$\\Pi'(3)= -4(3)+12=0\\ \\text{(thousand dollars per thousand units)}.$$\n\nAt this production level, selling a few more units does not increase profit; the company is at a *maximum* profit point.\n\n> **Common mistake:** Forgetting to simplify the difference quotient before taking the limit. Leaving terms like $\\frac{0}{\\Delta t}$ or $\\frac{\\Delta t^{2}}{\\Delta t}$ un‑reduced leads to an undefined limit.\n\n### Why the limit definition matters  \n\nThe limit definition works for any function, even those that are not simple polynomials. It gives a systematic way to translate a real‑world question—“how fast is this changing right now?”—into a precise mathematical answer. Once the derivative is known, we can predict future behavior, optimize quantities, and understand the underlying dynamics of physical, biological, or economic systems.\n\n> **Remember:** The instantaneous rate of change is a *limit* of average rates over smaller and smaller intervals. It turns a vague “speed at an instant” into a concrete number we can calculate and use.",
    "code": ""
   },
   {
-   "heading": "Connecting Limits to Derivatives and Integrals",
-   "body": "The **derivative** and the **definite integral** are not new ideas – they are built directly from limits.  \nUnderstanding this connection helps you see why calculus works and how to use it safely.\n\n---\n\n### Derivative as a limit of a difference quotient  \n\nFor a function $f(x)$ the derivative at a point $a$ is defined by  \n\n\\[\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n\\]\n\nThe fraction $\\dfrac{f(a+h)-f(a)}{h}$ is called the **difference quotient**.  \nAs $h$ gets smaller, the secant line through $(a,f(a))$ and $(a+h,f(a+h))$ tilts closer to the tangent line at $a$. The limit tells us the exact slope of that tangent.\n\n#### Worked example  \n\nFind the derivative of $f(x)=3x^{2}+2x$ at $x=1$ using the limit definition.\n\n1. Write the difference quotient:  \n\n   \\[\n   \\frac{f(1+h)-f(1)}{h}\n   =\\frac{[3(1+h)^{2}+2(1+h)]-[3(1)^{2}+2(1)]}{h}.\n   \\]\n\n2. Expand the numerator:  \n\n   \\[\n   3(1+2h+h^{2})+2+2h-3-2\n   =3+6h+3h^{2}+2+2h-5\n   =8h+3h^{2}.\n   \\]\n\n3. Divide by $h$:  \n\n   \\[\n   \\frac{8h+3h^{2}}{h}=8+3h.\n   \\]\n\n4. Take the limit as $h\\to0$:  \n\n   \\[\n   \\lim_{h\\to0}(8+3h)=8.\n   \\]\n\nHence $f'(1)=8$. (In fact $f'(x)=6x+2$, and plugging $x=1$ also gives $8$.)\n\n---\n\n### Integral as a limit of Riemann sums  \n\nThe **definite integral** of $f$ from $a$ to $b$ is the limit of the sum of areas of thin rectangles:\n\n\\[\n\\int_{a}^{b} f(x)\\,dx\n=\\lim_{n\\to\\infty}\\sum_{i=1}^{n} f(x_i^{*})\\Delta x,\n\\]\n\nwhere $\\Delta x=\\dfrac{b-a}{n}$ and $x_i^{*}$ is any point in the $i$‑th subinterval.  \nWhen $n$ grows, the rectangles become thinner and the sum approaches the exact area under the curve.\n\n#### Worked example  \n\nCompute $\\displaystyle\\int_{0}^{2} (4x)\\,dx$ using a Riemann sum with right endpoints.\n\n1. Partition $[0,2]$ into $n$ equal parts: $\\Delta x=\\frac{2}{n}$.\n\n2. Right endpoint of the $i$‑th subinterval: $x_i=i\\Delta x=\\frac{2i}{n}$.\n\n3. Form the sum:  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}4x_i\\,\\Delta x\n   =\\sum_{i=1}^{n}4\\left(\\frac{2i}{n}\\right)\\frac{2}{n}\n   =\\frac{16}{n^{2}}\\sum_{i=1}^{n} i.\n   \\]\n\n4. Use $\\displaystyle\\sum_{i=1}^{n}i=\\frac{n(n+1)}{2}$:  \n\n   \\[\n   S_n=\\frac{16}{n^{2}}\\cdot\\frac{n(n+1)}{2}\n   =8\\frac{n+1}{n}.\n   \\]\n\n5. Take the limit as $n\\to\\infty$:  \n\n   \\[\n   \\lim_{n\\to\\infty}8\\frac{n+1}{n}=8.\n   \\]\n\nThus $\\displaystyle\\int_{0}^{2}4x\\,dx=8$, which matches the antiderivative method ($\\frac{4x^{2}}{2}\\big|_{0}^{2}=8$).\n\n---\n\n### Practice problems  \n\n1. **Problem:** Use the limit definition to find $f'(2)$ for $f(x)=x^{3}-5x$.  \n\n   **Solution:**  \n\n   \\[\n   \\frac{f(2+h)-f(2)}{h}\n   =\\frac{(2+h)^{3}-5(2+h)-\\big(2^{3}-5\\cdot2\\big)}{h}\n   =\\frac{8+12h+6h^{2}+h^{3}-10-5h-8+10}{h}\n   =\\frac{7h+6h^{2}+h^{3}}{h}=7+6h+h^{2}.\n   \\]  \n   $\\displaystyle\\lim_{h\\to0}(7+6h+h^{2})=7$, so $f'(2)=7$.\n\n2. **Problem:** Evaluate $\\displaystyle\\int_{1}^{3}(2x+1)\\,dx$ via a Riemann sum (left endpoints).  \n\n   **Solution:** $\\Delta x=\\frac{2}{n}$, $x_i=1+\\frac{2(i-1)}{n}$.  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}\\bigl[2x_i+1\\bigr]\\Delta x\n   =\\frac{2}{n}\\sum_{i=1}^{n}\\Bigl[2\\Bigl(1+\\frac{2(i-1)}{n}\\Bigr)+1\\Bigr]\n   =\\frac{2}{n}\\sum_{i=1}^{n}\\Bigl(3+\\frac{4(i-1)}{n}\\Bigr).\n   \\]  \n   Split the sum:  \n\n   \\[\n   =\\frac{2}{n}\\Bigl[3n+\\frac{4}{n}\\sum_{i=1}^{n}(i-1)\\Bigr]\n   =\\frac{2}{n}\\Bigl[3n+\\frac{4}{n}\\frac{(n-1)n}{2}\\Bigr]\n   =6+4\\frac{n-1}{n}.\n   \\]  \n   Limit $n\\to\\infty$: $6+4=10$. Hence the integral equals $10$.\n\n3. **Problem:** Show that the derivative of $g(x)=\\sqrt{x}$ at $x=4$ equals $\\dfrac{1}{4}$ using limits.  \n\n   **Solution:**  \n\n   \\[\n   g'(4)=\\lim_{h\\to0}\\frac{\\sqrt{4+h}-\\sqrt{4}}{h}\n   =\\lim_{h\\to0}\\frac{\\sqrt{4+h}-2}{h}\\cdot\\frac{\\sqrt{4+h}+2}{\\sqrt{4+h}+2}\n   =\\lim_{h\\to0}\\frac{(4+h)-4}{h\\bigl(\\sqrt{4+h}+2\\bigr)}\n   =\\lim_{h\\to0}\\frac{1}{\\sqrt{4+h}+2}\n   =\\frac{1}{4}.\n   \\]\n\n4. **Problem:** Compute $\\displaystyle\\int_{0}^{\\pi}\\sin x\\,dx$ as a limit of right‑endpoint Riemann sums.  \n\n   **Solution:** $\\Delta x=\\frac{\\pi}{n}$, $x_i=\\frac{i\\pi}{n}$.  \n\n   \\[\n   S_n=\\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right)\\frac{\\pi}{n}\n   =\\frac{\\pi}{n}\\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right).\n   \\]  \n   The sum is a known telescoping form:  \n\n   \\[\n   \\sum_{i=1}^{n}\\sin\\!\\left(\\frac{i\\pi}{n}\\right)\n   =\\cot\\!\\left(\\frac{\\pi}{2n}\\right).\n   \\]  \n   (Derivation uses the identity $\\sin a = \\frac{\\cos(a-\\frac{\\pi}{2})-\\cos(a+\\frac{\\pi}{2})}{2}$.)  \n\n   Thus $S_n=\\frac{\\pi}{n}\\cot\\!\\left(\\frac{\\pi}{2n}\\right)$.  \n\n   As $n\\to\\infty$, $\\frac{\\pi}{2n}\\to0$ and $\\cot\\theta\\sim\\frac{1}{\\theta}$, so  \n\n   \\[\n   \\lim_{n\\to\\infty}S_n=\\lim_{n\\to\\infty}\\frac{\\pi}{n}\\cdot\\frac{2n}{\\pi}=2.\n   \\]  \n\n   Therefore $\\displaystyle\\int_{0}^{\\pi}\\sin x\\,dx=2$, matching the antiderivative $[-\\cos x]_{0}^{\\pi}=2$.",
+   "heading": "Limits in Integral Context",
+   "body": "Imagine you have a thin, irregularly shaped strip of land that runs from $x=a$ to $x=b$ along the $x$‑axis, and the height of the land at each point $x$ is given by a function $f(x)$.  \nThe **definite integral** $\\displaystyle\\int_{a}^{b} f(x)\\,dx$ tells us the total area of that strip.  \n\n> **Definition:** A definite integral is the limit of the sums of the areas of many thin rectangles that approximate the region under a curve.\n\n---\n\n### 1. From rectangles to a sum  \n\nPick a number $n$ and cut the interval $[a,b]$ into $n$ equal pieces.  \nEach piece has width  \n\n$$\\Delta x=\\frac{b-a}{n}.$$\n\nChoose a point $x_i^{*}$ inside the $i$‑th piece (the left end, right end, or any point inside works).  \nThe height of the rectangle that sits on that piece is $f\\!\\left(x_i^{*}\\right)$.  \nSo the area of the $i$‑th rectangle is  \n\n$$f\\!\\left(x_i^{*}\\right)\\,\\Delta x.$$\n\nAdding all $n$ rectangles gives a **Riemann sum**  \n\n$$S_n=\\sum_{i=1}^{n} f\\!\\left(x_i^{*}\\right)\\,\\Delta x.$$\n\nIf $n$ is small, the rectangles are wide and $S_n$ is only a rough estimate of the true area.\n\n---\n\n### 2. Let the rectangles get thinner  \n\nNow imagine making $n$ larger and larger.  \nEach rectangle becomes thinner because $\\Delta x=\\frac{b-a}{n}$ gets smaller.  \nThe tops of the rectangles follow the curve $y=f(x)$ more closely, so the sum $S_n$ becomes a better approximation.\n\nMathematically we say that the **limit** of these sums, as the number of rectangles goes to infinity, is the exact area:\n\n$$\\int_{a}^{b} f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^{n} f\\!\\left(x_i^{*}\\right)\\,\\Delta x.$$\n\n> **Note:** The limit exists when the function $f$ is “nice’’ (for example, continuous) on $[a,b]$. In that case the choice of the points $x_i^{*}$ does not affect the final value.\n\n---\n\n### 3. A concrete example  \n\nTake $f(x)=x^{2}$ on the interval $[0,2]$.  \nWe divide the interval into $n$ equal parts, so $\\Delta x = \\dfrac{2-0}{n}= \\dfrac{2}{n}$.  \nChoose the right‑hand endpoint of each subinterval: $x_i^{*}=i\\Delta x = \\dfrac{2i}{n}$.\n\nThe Riemann sum becomes  \n\n$$S_n=\\sum_{i=1}^{n}\\left(\\frac{2i}{n}\\right)^{2}\\frac{2}{n}\n      =\\frac{8}{n^{3}}\\sum_{i=1}^{n} i^{2}.$$\n\nWe know the formula $\\displaystyle\\sum_{i=1}^{n} i^{2}= \\frac{n(n+1)(2n+1)}{6}$, so  \n\n$$S_n=\\frac{8}{n^{3}}\\cdot\\frac{n(n+1)(2n+1)}{6}\n     =\\frac{4}{3}\\,\\frac{(n+1)(2n+1)}{n^{2}}.$$\n\nNow take the limit as $n\\to\\infty$:\n\n$$\\int_{0}^{2} x^{2}\\,dx=\\lim_{n\\to\\infty}S_n\n   =\\frac{4}{3}\\,\\lim_{n\\to\\infty}\\frac{(n+1)(2n+1)}{n^{2}}\n   =\\frac{4}{3}\\cdot 2 = \\frac{8}{3}.$$\n\nYou can check this result with the antiderivative method:  \n\n$$\\int_{0}^{2} x^{2}\\,dx = \\left[\\frac{x^{3}}{3}\\right]_{0}^{2}= \\frac{8}{3}.$$\n\nBoth ways give the same number, confirming that the limit of the Riemann sums really does equal the area under the curve.\n\n> **In daily life:** Think of measuring the amount of water that flows out of a tap in one minute. If you count the water in very short time slices (seconds, milliseconds, …) and add them up, the sum approaches the true volume as the slices become tinier. The integral works the same way for area.\n\n---\n\n### 4. Why this matters  \n\nUnderstanding the integral as a limit of sums connects the geometric idea of area with the algebraic process of adding many small pieces.  \nIt also explains why the Fundamental Theorem of Calculus works: the antiderivative gives a shortcut for evaluating that limit without having to add up every rectangle.\n\n> **Remember:** A definite integral is not a mysterious new object; it is simply the limit of Riemann sums, the precise way to add up infinitely many infinitesimally thin rectangles.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\n---\n\n### 1. Instantaneous velocity of \\(s(t)=5t^{2}-3t+2\\) at \\(t=4\\)\n\nThe instantaneous velocity is the derivative \\(v(t)=s'(t)\\).\n\n\\[\n\\begin{aligned}\ns'(t) &= \\frac{d}{dt}\\bigl(5t^{2}-3t+2\\bigr) \\\\\n      &= 10t-3 .\n\\end{aligned}\n\\]\n\nNow evaluate at \\(t=4\\):\n\n\\[\nv(4)=10(4)-3=40-3=37 .\n\\]\n\n\\[\n\\boxed{v(4)=37\\text{ units per time}}\n\\]\n\n---\n\n### 2. Limit of a population model  \n\n\\[\nP(t)=\\frac{1000}{1+9e^{-0.3t}},\\qquad t\\to\\infty .\n\\]\n\nAs \\(t\\to\\infty\\), the exponential term \\(e^{-0.3t}\\to0\\).  \nThus the denominator approaches \\(1+9\\cdot0=1\\).\n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\frac{1000}{1}=1000 .\n\\]\n\nThe model predicts the population will level off at **1000 individuals**.\n\n---\n\n### 3. Marginal cost from the total‑cost function  \n\nTotal cost: \\(C(q)=0.02q^{3}-0.5q^{2}+30q+200\\).\n\nThe **marginal cost** is the derivative \\(C'(q)\\):\n\n\\[\n\\begin{aligned}\nC'(q) &= \\frac{d}{dq}\\bigl(0.02q^{3}-0.5q^{2}+30q+200\\bigr)\\\\\n      &= 0.06q^{2}-1.0q+30 .\n\\end{aligned}\n\\]\n\nSo the marginal cost when producing \\(q\\) units is  \n\n\\[\n\\boxed{C'(q)=0.06q^{2}-q+30\\text{ (dollars per unit)}} .\n\\]\n\nIf a specific quantity is required, just substitute the value of \\(q\\).\n\n---\n\n### 4. Evaluate \\(\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}\\) using L'Hôpital's Rule  \n\nBoth numerator and denominator go to \\(0\\) as \\(x\\to0\\); we have a \\(0/0\\) indeterminate form, so L'Hôpital's Rule applies:\n\n\\[\n\\lim_{x\\to0}\\frac{\\sin x}{x}\n   =\\lim_{x\\to0}\\frac{\\frac{d}{dx}\\sin x}{\\frac{d}{dx}x}\n   =\\lim_{x\\to0}\\frac{\\cos x}{1}\n   =\\cos 0 = 1 .\n\\]\n\nHence  \n\n\\[\n\\boxed{\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1}.\n\\]\n\n---\n\n### 5. Approximate the area under \\(f(x)=x^{2}\\) from \\(0\\) to \\(2\\) with a Riemann sum (4 equal subintervals) and relate to the definite integral  \n\n**Step 1: Determine subinterval width**  \n\\[\n\\Delta x=\\frac{2-0}{4}=0.5 .\n\\]\n\n**Step 2: Choose sample points** (use right‑endpoints for simplicity)  \n\n\\[\nx_{1}=0.5,\\; x_{2}=1.0,\\; x_{3}=1.5,\\; x_{4}=2.0 .\n\\]\n\n**Step 3: Evaluate the function at each sample point**  \n\n\\[\nf(0.5)=0.25,\\; f(1.0)=1,\\; f(1.5)=2.25,\\; f(2.0)=4 .\n\\]\n\n**Step 4: Form the Riemann sum**  \n\n\\[\n\\begin{aligned}\nS &=\\sum_{i=1}^{4} f(x_i)\\,\\Delta x \\\\\n  &= (0.25+1+2.25+4)\\times0.5 \\\\\n  &= 7.5 \\times 0.5 = 3.75 .\n\\end{aligned}\n\\]\n\nSo the **approximate area** is \\(3.75\\).\n\n**Step 5: Compare with the exact definite integral**  \n\n\\[\n\\int_{0}^{2} x^{2}\\,dx = \\left[\\frac{x^{3}}{3}\\right]_{0}^{2}\n= \\frac{8}{3}\\approx 2.6667 .\n\\]\n\nThe Riemann sum with only four subintervals overestimates the true area because we used right‑endpoints on an increasing function. Refining the partition (more subintervals or using left‑endpoints) would bring the sum closer to the exact value \\( \\frac{8}{3}\\).",
+   "heading": "Practice Problems and Real‑World Applications",
+   "body": "> **Definition:** A *limit* describes the value that a function approaches as the input gets arbitrarily close to a certain point.  \n\n> **Note:** When we talk about a *one‑sided limit* we only look at values from one side (left or right) of the point.  \n\n> **In daily life:** Think of a car that slows down as it nears a stop sign. The speed “approaches” zero, even though the car never actually reaches the sign until it stops.  \n\n> **Remember:** If a limit exists, the left‑hand and right‑hand limits must be the same.\n\nBelow are five practice problems that use the ideas you have learned. Each problem is followed by a hint and a complete step‑by‑step solution.\n\n---\n\n### Problem 1 – Algebraic limit with a removable discontinuity  \n\nFind  \n\n$$\\lim_{x\\to 3}\\frac{x^{2}-9}{x-3}.$$\n\n**Hint:** Factor the numerator and cancel a common factor.\n\n**Solution:**  \n\n1. Recognise that $x^{2}-9$ is a difference of squares: $x^{2}-9=(x-3)(x+3)$.  \n2. Rewrite the fraction:  \n\n   $$\\frac{x^{2}-9}{x-3}= \\frac{(x-3)(x+3)}{x-3}.$$\n\n3. For $x\\neq 3$ we can cancel the factor $x-3$:  \n\n   $$\\frac{(x-3)(x+3)}{x-3}=x+3.$$\n\n4. Now take the limit of the simplified expression:  \n\n   $$\\lim_{x\\to 3}(x+3)=3+3=6.$$\n\nSo the limit is **6**. The original function is not defined at $x=3$, but the limit still exists because the “hole’’ can be filled by the value $6$.\n\n---\n\n### Problem 2 – Continuity check for a piecewise function  \n\nLet  \n\n\\[\nf(x)=\\begin{cases}\n2x+1, & x<1,\\\\[4pt]\nk, & x=1,\\\\[4pt]\nx^{2}-1, & x>1.\n\\end{cases}\n\\]\n\nFind the value of $k$ that makes $f$ continuous at $x=1$.\n\n**Hint:** Continuity means the left‑hand limit, right‑hand limit, and the function value are all equal.\n\n**Solution:**  \n\n1. Compute the left‑hand limit:  \n\n   $$\\lim_{x\\to 1^-}(2x+1)=2(1)+1=3.$$\n\n2. Compute the right‑hand limit:  \n\n   $$\\lim_{x\\to 1^+}(x^{2}-1)=1^{2}-1=0.$$\n\n3. For continuity we need both limits equal, so we must have  \n\n   $$3=0,$$\n\n   which is impossible. Therefore **no value of $k$ can make $f$ continuous at $x=1$**. The function has a jump discontinuity there.\n\n---\n\n### Problem 3 – Instantaneous rate of change (physics)  \n\nA ball is dropped from a height of $h(t)=100-4.9t^{2}$ meters, where $t$ is seconds. Find the instantaneous velocity at $t=2\\,$s.\n\n**Hint:** Velocity is the limit of the average velocity over a short time interval:  \n\n$$v(t)=\\lim_{\\Delta t\\to 0}\\frac{h(t+\\Delta t)-h(t)}{\\Delta t}.$$\n\n**Solution:**  \n\n1. Write the difference quotient:  \n\n   $$\\frac{h(2+\\Delta t)-h(2)}{\\Delta t}\n   =\\frac{[100-4.9(2+\\Delta t)^{2}]-[100-4.9(2)^{2}]}{\\Delta t}.$$\n\n2. Expand $(2+\\Delta t)^{2}=4+4\\Delta t+(\\Delta t)^{2}$ and simplify:  \n\n   \\[\n   h(2+\\Delta t)-h(2)= -4.9\\bigl[4+4\\Delta t+(\\Delta t)^{2}\\bigr]+4.9(4)\n   =-4.9\\bigl[4\\Delta t+(\\Delta t)^{2}\\bigr].\n   \\]\n\n3. Divide by $\\Delta t$:  \n\n   $$\\frac{-4.9\\bigl[4\\Delta t+(\\Delta t)^{2}\\bigr]}{\\Delta t}\n   =-4.9\\bigl[4+ \\Delta t\\bigr].$$\n\n4. Take the limit as $\\Delta t\\to 0$:  \n\n   $$v(2)=\\lim_{\\Delta t\\to 0}-4.9(4+\\Delta t)=-4.9\\cdot4=-19.6\\ \\text{m/s}.$$\n\nThe ball is moving downward at $19.6\\,$m/s after two seconds.\n\n---\n\n### Problem 4 – Rate of change in biology (population)  \n\nA bacterial culture grows according to $P(t)=500e^{0.3t}$ cells, where $t$ is measured in hours. Approximate the instantaneous growth rate at $t=5$ hours using the limit definition.\n\n**Hint:** Use the same steps as in Problem 3, but you can differentiate the exponential directly if you know the rule $ \\frac{d}{dt}e^{kt}=ke^{kt}$.\n\n**Solution:**  \n\n1. The derivative (instantaneous rate) is  \n\n   $$\\frac{dP}{dt}=0.3\\cdot 500e^{0.3t}=150e^{0.3t}.$$\n\n2. Evaluate at $t=5$:  \n\n   $$\\frac{dP}{dt}\\Big|_{t=5}=150e^{0.3\\cdot5}=150e^{1.5}\\approx150(4.4817)=672.3\\ \\text{cells/hour}.$$\n\nThus the culture is adding about **672 cells each hour** at the five‑hour mark.\n\n---\n\n### Problem 5 – Riemann‑sum estimation of an area (integral context)  \n\nEstimate the area under $f(x)=\\sqrt{x}$ from $x=0$ to $x=4$ using a right‑endpoint Riemann sum with $n=4$ equal subintervals.\n\n**Hint:** Divide the interval, compute the width $\\Delta x$, evaluate $f$ at the right endpoints, then sum the rectangles.\n\n**Solution:**  \n\n1. The interval length is $4-0=4$, so  \n\n   $$\\Delta x=\\frac{4}{4}=1.$$\n\n2. Right endpoints are $x_{1}=1,\\;x_{2}=2,\\;x_{3}=3,\\;x_{4}=4$.  \n\n3. Evaluate $f$ at each endpoint:  \n\n   \\[\n   f(1)=\\sqrt{1}=1,\\quad\n   f(2)=\\sqrt{2}\\approx1.414,\\quad\n   f(3)=\\sqrt{3}\\approx1.732,\\quad\n   f(4)=\\sqrt{4}=2.\n   \\]\n\n4. Form the sum  \n\n   $$\\text{Area}\\approx\\sum_{i=1}^{4} f(x_i)\\,\\Delta x\n   =1(1)+1.414(1)+1.732(1)+2(1)=6.146.$$\n\nThe exact integral $\\int_{0}^{4}\\sqrt{x}\\,dx=\\frac{2}{3}x^{3/2}\\Big|_{0}^{4}= \\frac{2}{3}\\cdot8= \\frac{16}{3}\\approx5.333$, so our Riemann sum overestimates the true area, as expected when using right endpoints on an increasing function.\n\n---\n\nThese problems illustrate how limits let us handle “instantaneous’’ quantities, check continuity, and approximate areas—tools that appear in physics, biology, economics, and everyday measurement. Practice each step until the process feels natural; the algebra may look long, but the logical flow is always the same: simplify, cancel, and then let the variable approach the target value.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Finding a Simple Limit",
+   "given": "Evaluate $\\displaystyle \\lim_{x\\to 3}\\frac{x^2-9}{x-3}$ and state the limit.",
+   "steps": [
+    {
+     "label": "Factor",
+     "text": "Factor the numerator: $x^2-9=(x-3)(x+3)$ to cancel the $x-3$ term."
+    },
+    {
+     "label": "Cancel",
+     "text": "Cancel $(x-3)$ from numerator and denominator, leaving $x+3$."
+    },
+    {
+     "label": "Substitute",
+     "text": "Substitute $x=3$ into $x+3$ to get $3+3=6$."
+    }
+   ],
+   "answer": "$\\displaystyle \\lim_{x\\to 3}\\frac{x^2-9}{x-3}=6\\,$."
+  },
+  {
+   "level": "Medium",
+   "title": "One‑Sided Limit at a Jump Discontinuity",
+   "given": "For the piecewise function \\[ f(x)=\\begin{cases} 2x+1, & x<1,\\\\[2mm] 5, & x\\ge 1, \\end{cases} \\] find the left‑hand limit $\\displaystyle\\lim_{x\\to 1^-}f(x)$, the right‑hand limit $\\displaystyle\\lim_{x\\to 1^+}f(x)$, and decide whether $\\displaystyle\\lim_{x\\to 1}f(x)$ exists.",
+   "steps": [
+    {
+     "label": "Left limit",
+     "text": "Use the definition for $x<1$: $f(x)=2x+1$. Substitute $x\\to1^-$: $2(1)+1=3$."
+    },
+    {
+     "label": "Right limit",
+     "text": "For $x\\ge1$, $f(x)=5$ for all $x$ near 1 from the right. So $\\lim_{x\\to1^+}f(x)=5$."
+    },
+    {
+     "label": "Compare",
+     "text": "Since $3\\neq5$, the two one‑sided limits are different."
+    },
+    {
+     "label": "Conclude",
+     "text": "The two‑sided limit $\\displaystyle\\lim_{x\\to1}f(x)$ does **not** exist."
+    }
+   ],
+   "answer": "$\\displaystyle\\lim_{x\\to1^-}f(x)=3$, $\\displaystyle\\lim_{x\\to1^+}f(x)=5$, and $\\displaystyle\\lim_{x\\to1}f(x)$ does not exist."
+  },
+  {
+   "level": "Hard",
+   "title": "Instantaneous Rate of Change Using a Limit at Infinity",
+   "given": "A particle moves along a line with position $s(t)=\\frac{4t}{t+2}$ meters, where $t$ is time in seconds. Find the particle’s instantaneous velocity as $t\\to\\infty$ and interpret the result.",
+   "steps": [
+    {
+     "label": "Difference quotient",
+     "text": "Write the average velocity over $[t,\\,t+h]$: $\\displaystyle \\frac{s(t+h)-s(t)}{h}$."
+    },
+    {
+     "label": "Substitute $s(t)$",
+     "text": "Compute $s(t+h)=\\frac{4(t+h)}{t+h+2}$ and $s(t)=\\frac{4t}{t+2}$."
+    },
+    {
+     "label": "Form expression",
+     "text": "$\\displaystyle \\frac{\\frac{4(t+h)}{t+h+2}-\\frac{4t}{t+2}}{h}$."
+    },
+    {
+     "label": "Simplify",
+     "text": "Combine fractions and factor $h$; after algebra the expression reduces to \\[ \\frac{8}{(t+2)(t+h+2)}. \\]"
+    },
+    {
+     "label": "Limit as $h\\to0$",
+     "text": "Let $h\\to0$ to get the instantaneous velocity $v(t)=\\frac{8}{(t+2)^2}$."
+    },
+    {
+     "label": "Limit as $t\\to\\infty$",
+     "text": "Evaluate $\\displaystyle\\lim_{t\\to\\infty}\\frac{8}{(t+2)^2}=0$."
+    }
+   ],
+   "answer": "The particle’s instantaneous velocity approaches $0\\,$m/s as $t\\to\\infty$; the particle eventually moves with negligible speed."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Evaluate $\\displaystyle \\lim_{x\\to 3}\\frac{x^2-9}{x-3}$.",
+   "a": "Factor the numerator: $x^2-9=(x-3)(x+3)$.\nThen $\\displaystyle \\frac{x^2-9}{x-3}=\\frac{(x-3)(x+3)}{x-3}=x+3$ for $x\\neq3$.\nNow take the limit: $\\displaystyle \\lim_{x\\to3}(x+3)=3+3=6$."
+  },
+  {
+   "level": "Easy",
+   "q": "Find $\\displaystyle \\lim_{x\\to 0^+}\\frac{1}{\\sqrt{x}}$.",
+   "a": "As $x$ approaches $0$ from the right, $\\sqrt{x}$ becomes a very small positive number, so $\\frac{1}{\\sqrt{x}}$ grows without bound.\nTherefore $\\displaystyle \\lim_{x\\to0^+}\\frac{1}{\\sqrt{x}}=+\\infty$."
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle \\lim_{x\\to\\infty}\\frac{5x^2-2x+1}{3x^2+4}$.",
+   "a": "Divide numerator and denominator by $x^2$:\n$\\displaystyle \\frac{5-\\frac{2}{x}+\\frac{1}{x^2}}{3+\\frac{4}{x^2}}$.\nAs $x\\to\\infty$, the terms $\\frac{2}{x},\\frac{1}{x^2},\\frac{4}{x^2}$ go to $0$.\nThus the limit is $\\displaystyle \\frac{5}{3}$."
+  },
+  {
+   "level": "Medium",
+   "q": "Determine $\\displaystyle \\lim_{x\\to 0}\\frac{\\sin(4x)}{x}$.",
+   "a": "Use the standard limit $\\displaystyle \\lim_{u\\to0}\\frac{\\sin u}{u}=1$.\nLet $u=4x$, so $x=\\frac{u}{4}$ and as $x\\to0$, $u\\to0$.\nThen $\\displaystyle \\frac{\\sin(4x)}{x}= \\frac{\\sin u}{u/4}=4\\frac{\\sin u}{u}$.\nTaking the limit gives $4\\cdot1=4$."
+  },
+  {
+   "level": "Hard",
+   "q": "Evaluate $\\displaystyle \\lim_{x\\to0}\\frac{e^{2x}-1-2x}{x^2}$.",
+   "a": "This is a $0/0$ indeterminate form. Apply L'Hôpital's Rule twice.\nFirst derivative of numerator: $2e^{2x}-2$, derivative of denominator: $2x$.\nLimit becomes $\\displaystyle \\lim_{x\\to0}\\frac{2e^{2x}-2}{2x}=\\lim_{x\\to0}\\frac{e^{2x}-1}{x}$.\nApply L'Hôpital again: derivative numerator $2e^{2x}$, denominator $1$.\nNow $\\displaystyle \\lim_{x\\to0}2e^{2x}=2e^{0}=2$.\nSo the original limit equals $2$."
+  },
+  {
+   "level": "Hard",
+   "q": "Find $\\displaystyle \\lim_{x\\to\\infty}\\left( \\sqrt{x^2+3x}-x\\right)$.",
+   "a": "Multiply by the conjugate to simplify:\n$\\displaystyle \\sqrt{x^2+3x}-x=\\frac{(\\sqrt{x^2+3x}-x)(\\sqrt{x^2+3x}+x)}{\\sqrt{x^2+3x}+x}\n=\\frac{x^2+3x-x^2}{\\sqrt{x^2+3x}+x}\n=\\frac{3x}{\\sqrt{x^2+3x}+x}$.\nFactor $x$ from the square root: $\\sqrt{x^2+3x}=x\\sqrt{1+\\frac{3}{x}}$.\nThus the expression becomes $\\displaystyle \\frac{3x}{x\\sqrt{1+\\frac{3}{x}}+x}\n=\\frac{3}{\\sqrt{1+\\frac{3}{x}}+1}$.\nAs $x\\to\\infty$, $\\frac{3}{x}\\to0$, so $\\sqrt{1+\\frac{3}{x}}\\to1$.\nTherefore the limit is $\\displaystyle \\frac{3}{1+1}= \\frac{3}{2}$."
+  }
+ ],
+ "recap": "This lesson introduced limits as the value a function approaches when the input gets close to a point. It covered basic definitions, how to handle indeterminate forms by factoring or simplifying, one‑sided limits, the link between limits and continuity, and using limits to define instantaneous rate of change and definite integrals. Simple examples illustrate each idea.",
  "key_terms": [
   {
    "term": "limit",
-   "meaning": "The value a function approaches as the input gets arbitrarily close to a point"
+   "meaning": "The number a function gets arbitrarily close to as the input approaches a specified value."
   },
   {
-   "term": "epsilon-delta definition",
-   "meaning": "A formal way to describe limits using two small positive numbers epsilon and delta"
+   "term": "indeterminate form",
+   "meaning": "An expression like 0/0 or infinity/infinity that does not give a limit directly and needs further algebraic work."
   },
   {
-   "term": "one-sided limit",
-   "meaning": "A limit taken only from the left (x→a-) or right (x→a+) of a point"
+   "term": "one‑sided limit",
+   "meaning": "A limit taken only from the left (x→a−) or only from the right (x→a+)."
   },
   {
-   "term": "instantaneous velocity",
-   "meaning": "The derivative of the position function, giving speed at an exact moment"
+   "term": "continuity",
+   "meaning": "A function is continuous at a point if the limit exists there and equals the function’s actual value."
   },
   {
-   "term": "L'Hopital's rule",
-   "meaning": "A method for evaluating indeterminate forms 0/0 or ∞/∞ by differentiating numerator and denominator"
+   "term": "instantaneous rate of change",
+   "meaning": "The derivative at a point, found as the limit of the average rate of change as the interval shrinks to zero."
   },
   {
-   "term": "marginal cost",
-   "meaning": "The derivative of the total cost function, representing the cost of producing one more unit"
+   "term": "definite integral",
+   "meaning": "The limit of a sum of areas of rectangles that approximates the total area under a curve between two points."
   },
   {
-   "term": "logistic growth model",
-   "meaning": "A population model that levels off at a carrying capacity K as time goes to infinity"
+   "term": "factoring",
+   "meaning": "An algebraic technique used to cancel common factors and resolve 0/0 indeterminate forms."
   },
   {
-   "term": "derivative as limit",
-   "meaning": "The slope of the tangent line defined by the limit of the difference quotient as h approaches 0"
+   "term": "rationalizing",
+   "meaning": "Multiplying by a conjugate to eliminate radicals in the numerator or denominator when evaluating limits."
   }
  ],
  "quiz": [
   {
-   "q": "What does the epsilon-delta definition of a limit guarantee?",
+   "q": "What does lim_{x->a} f(x)=L mean in plain words?",
    "options": [
-    "The function equals the limit at the point",
-    "The function stays within epsilon of the limit whenever x is within delta of the point",
-    "The derivative exists",
-    "The function is continuous"
+    "f(x) equals L for all x",
+    "f(x) gets arbitrarily close to L as x approaches a",
+    "f(x) is undefined at a",
+    "The graph of f crosses the line y=L"
    ],
    "answer": 1,
-   "why": "It states that if 0<|x-a|<delta then |f(x)-L|<epsilon."
+   "why": "The definition of a limit states the function values approach L near a."
   },
   {
-   "q": "Which of the following is a right-hand limit notation?",
+   "q": "Which technique would you use for lim_{x->2} (x^2-4)/(x-2)?",
    "options": [
-    "lim x->a- f(x)",
-    "lim x->a+ f(x)",
-    "lim x->a f(x)",
-    "lim x->a^* f(x)"
+    "Rationalizing",
+    "Factoring",
+    "Direct substitution",
+    "L'Hopital's rule"
    ],
    "answer": 1,
-   "why": "The plus sign indicates approaching from the right."
+   "why": "Factoring cancels the common factor (x-2) and removes the 0/0 form."
   },
   {
-   "q": "If s(t)=5t^2-3t+2, what is the instantaneous velocity at t=4?",
+   "q": "If the right‑hand limit at a is 5 and the left‑hand limit at a is 5, what can we say?",
    "options": [
-    "37",
-    "40",
-    "33",
-    "45"
+    "The two‑sided limit does not exist",
+    "The two‑sided limit exists and equals 5",
+    "The function is discontinuous at a",
+    "Only the right‑hand limit matters"
+   ],
+   "answer": 1,
+   "why": "When both one‑sided limits agree, the overall limit exists and equals that common value."
+  },
+  {
+   "q": "A function f is continuous at x=3. Which must be true?",
+   "options": [
+    "lim_{x->3} f(x) does not exist",
+    "f(3) is undefined",
+    "lim_{x->3} f(x)=f(3)",
+    "lim_{x->3^-} f(x) ≠ lim_{x->3^+} f(x)"
+   ],
+   "answer": 2,
+   "why": "Continuity requires the limit to exist and equal the function value at that point."
+  },
+  {
+   "q": "The derivative f'(a) is defined as which limit?",
+   "options": [
+    "lim_{h->0} (f(a+h)-f(a))/h",
+    "lim_{x->a} f(x)",
+    "lim_{x->infinity} f(x)/x",
+    "lim_{x->a} (f(x)-f(a))"
    ],
    "answer": 0,
-   "why": "Derivative is 10t-3, evaluate at 4 gives 37."
+   "why": "That expression is the difference quotient whose limit gives the instantaneous rate of change."
   },
   {
-   "q": "Using L'Hopital's rule, what is the limit of (sin x)/x as x approaches 0?",
+   "q": "Which statement best describes a definite integral?",
    "options": [
-    "0",
-    "1",
-    "undefined",
-    "infinity"
+    "The sum of function values at integer points",
+    "The limit of Riemann sums approximating area under a curve",
+    "The product of a function and its derivative",
+    "The average value of a function over an interval"
    ],
    "answer": 1,
-   "why": "Both numerator and denominator go to 0, differentiate to get cos x / 1, limit is 1."
-  },
-  {
-   "q": "In the logistic model P(t)=K/(1+Ae^{-rt}), what does P(t) approach as t→∞?",
-   "options": [
-    "0",
-    "K",
-    "A",
-    "∞"
-   ],
-   "answer": 1,
-   "why": "The exponential term vanishes, leaving denominator 1, so P(t)→K."
-  },
-  {
-   "q": "The marginal cost function C'(q) is the limit of which expression?",
-   "options": [
-    "(C(q+Δq)-C(q))/Δq as Δq→0",
-    "C(q)/q",
-    "C(q+Δq)-C(q)",
-    "∫C(q) dq"
-   ],
-   "answer": 0,
-   "why": "Marginal cost is defined as the limit of the average cost change as the change in quantity goes to zero."
+   "why": "A definite integral is defined as the limit of Riemann sums, giving the total area."
   }
  ],
  "flashcards": [
   {
-   "front": "Limit",
-   "back": "The value a function approaches as x gets arbitrarily close to a point."
+   "front": "Limit definition",
+   "back": "The value L that f(x) approaches as x gets arbitrarily close to a specified point a."
   },
   {
-   "front": "One-sided limit",
-   "back": "A limit taken only from the left (x→a-) or right (x→a+) side of a point."
+   "front": "Indeterminate form example",
+   "back": "Expressions like 0/0 or infinity/infinity that require algebraic manipulation before evaluating the limit."
   },
   {
-   "front": "Epsilon-delta definition",
-   "back": "For every epsilon>0 there exists delta>0 such that 0<|x-a|<delta implies |f(x)-L|<epsilon."
+   "front": "Right‑hand limit notation",
+   "back": "lim_{x->a+} f(x) – considers x values slightly larger than a."
   },
   {
-   "front": "Instantaneous velocity",
-   "back": "The derivative of position with respect to time; v(t)=lim h→0 (s(t+h)-s(t))/h."
+   "front": "Continuity condition",
+   "back": "A function is continuous at a if lim_{x->a} f(x) exists and equals f(a)."
   },
   {
-   "front": "L'Hopital's rule",
-   "back": "If a limit gives 0/0 or ∞/∞, differentiate numerator and denominator and take the limit of the new fraction."
+   "front": "Instantaneous rate of change formula",
+   "back": "f'(a)=lim_{h->0} (f(a+h)-f(a))/h."
   },
   {
-   "front": "Derivative as a limit",
-   "back": "f'(a)=lim h→0 (f(a+h)-f(a))/h, the slope of the tangent line at a."
+   "front": "Definite integral as a limit",
+   "back": "Integral from a to b of f(x)dx = limit of sum f(x_i*)*Δx as number of subintervals → infinity."
   },
   {
-   "front": "Logistic growth model",
-   "back": "P(t)=K/(1+Ae^{-rt}); predicts a population that approaches the carrying capacity K as time grows."
+   "front": "Factoring to remove 0/0",
+   "back": "Factor numerator and denominator to cancel common factors, then substitute the limit point."
   },
   {
-   "front": "Marginal cost",
-   "back": "C'(q)=lim Δq→0 (C(q+Δq)-C(q))/Δq, the cost of producing one additional unit."
+   "front": "Rationalizing technique",
+   "back": "Multiply by the conjugate to eliminate radicals and simplify the limit expression."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l13-runner-with-position-marks",
-   "title": "Shows a runner at several close time points to illustrate instantaneous velocity.",
-   "alt": "Shows a runner at several close time points to illustrate instantaneous velocity.",
-   "priority": 8,
-   "picture_title": "Runner with Position Marks",
-   "kind": "photo",
-   "subject": "A track athlete is photographed at equally spaced short intervals; small flags on the track mark the positions at each time, highlighting how the distance changes over a tiny time span.",
-   "layout": "Runner in the centre with a series of small flags behind and ahead, each flag labelled with its time stamp.",
+   "file": "calculus-i-l13-door-approach-analogy",
+   "title": "A person walking toward a closed door, illustrating a limit as the target value.",
+   "alt": "A person walking toward a closed door, illustrating a limit as the target value.",
+   "priority": 7,
+   "picture_title": "Door Approach Analogy",
+   "kind": "illustration",
+   "subject": "Shows a person taking successive steps that get closer to a door without touching it, representing how a function approaches a limit.",
+   "layout": "Door on the right side of the image, person on the left moving toward it; arrows indicate each step.",
    "labels": [
-    "t‑0.2 s",
-    "t‑0.1 s",
-    "t = 0 s",
-    "t + 0.1 s",
-    "t + 0.2 s"
+    "person",
+    "door",
+    "steps"
    ],
-   "after": 1
+   "after": 0
   },
   {
    "type": "image",
-   "file": "calculus-i-l13-petri-dish-bacterial-growth",
-   "title": "Illustrates exponential bacterial growth that approaches a limit as time goes to infinity.",
-   "alt": "Illustrates exponential bacterial growth that approaches a limit as time goes to infinity.",
-   "priority": 7,
-   "picture_title": "Petri Dish Bacterial Growth",
-   "kind": "photo",
-   "subject": "A series of three petri dishes taken at increasing times showing colonies multiplying, demonstrating how the population rises rapidly and then levels off when resources run out.",
-   "layout": "Three dishes placed left to right, each labelled with the time of observation.",
+   "file": "calculus-i-l13-one-sided-limit-on-a-road",
+   "title": "Cars approaching a stop sign from the left and right, demonstrating right‑hand and left‑hand limits.",
+   "alt": "Cars approaching a stop sign from the left and right, demonstrating right‑hand and left‑hand limits.",
+   "priority": 8,
+   "picture_title": "One‑Sided Limit on a Road",
+   "kind": "illustration",
+   "subject": "Two lanes of traffic converge on a stop sign; one lane approaches from the left, the other from the right, showing that the behavior can differ on each side.",
+   "layout": "Stop sign in the centre, arrows from left and right lanes pointing toward it, each lane labelled with its side.",
    "labels": [
-    "t = 2 h",
-    "t = 6 h",
-    "t = 12 h"
+    "right‑hand",
+    "left‑hand",
+    "stop sign"
    ],
    "after": 2
   },
   {
    "type": "image",
-   "file": "calculus-i-l13-factory-production-line",
-   "title": "Depicts a conveyor belt where adding one more item shows the marginal cost concept.",
-   "alt": "Depicts a conveyor belt where adding one more item shows the marginal cost concept.",
-   "priority": 6,
-   "picture_title": "Factory Production Line",
+   "file": "calculus-i-l13-rectangles-approximating-area",
+   "title": "Thin rectangles under a curve approximating the area of a region, leading to a definite integral.",
+   "alt": "Thin rectangles under a curve approximating the area of a region, leading to a definite integral.",
+   "priority": 7,
+   "picture_title": "Rectangles Approximating Area",
    "kind": "illustration",
-   "subject": "A simple factory floor with a conveyor belt moving boxes; a worker adds an extra box, and a cost tag appears next to it to represent the instantaneous increase in total cost.",
-   "layout": "Conveyor belt runs horizontally across the image; boxes are evenly spaced; an arrow points to the newly added box with a cost label.",
+   "subject": "A curved line representing a function with many narrow rectangles beneath it, showing how summing their areas approaches the true area under the curve.",
+   "layout": "Curve across the centre, rectangles stacked beneath it from left to right, a large arrow indicating the limit process.",
    "labels": [
-    "Additional Box",
-    "Δ Cost"
+    "function curve",
+    "rectangles",
+    "area sum"
+   ],
+   "after": 5
+  },
+  {
+   "type": "compare",
+   "title": "Indeterminate Forms",
+   "left": {
+    "name": "0/0",
+    "points": [
+     "Both numerator and denominator go to 0",
+     "Result can be any finite number",
+     "Needs algebraic manipulation"
+    ]
+   },
+   "right": {
+    "name": "∞/∞",
+    "points": [
+     "Both grow without bound",
+     "Result can be any finite number or ∞",
+     "Needs algebraic manipulation"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "One‑Sided Limit Process",
+   "steps": [
+    {
+     "label": "Choose side",
+     "text": "Decide if you approach from left (‑) or right (+)."
+    },
+    {
+     "label": "Write notation",
+     "text": "Use lim_{x→a⁻} or lim_{x→a⁺}."
+    },
+    {
+     "label": "Evaluate",
+     "text": "Simplify the expression keeping only values on that side."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "facts",
+   "title": "Continuity Checklist",
+   "items": [
+    {
+     "value": "lim_{x→a} f(x) exists",
+     "label": "Limit exists"
+    },
+    {
+     "value": "f(a) defined",
+     "label": "Function value"
+    },
+    {
+     "value": "lim_{x→a} f(x) = f(a)",
+     "label": "Equality"
+    }
    ],
    "after": 3
   },
   {
-   "type": "compare",
-   "title": "One‑sided vs Two‑sided Limits",
-   "left": {
-    "name": "Two‑sided",
-    "points": [
-     "x approaches a from both sides",
-     "Limit exists only if left and right limits equal"
-    ]
-   },
-   "right": {
-    "name": "One‑sided",
-    "points": [
-     "Left‑hand limit x→a⁻",
-     "Right‑hand limit x→a⁺"
-    ]
-   },
-   "after": 0
-  },
-  {
-   "type": "steps",
-   "title": "Using L’Hôpital’s Rule",
-   "steps": [
+   "type": "parts",
+   "title": "Derivative as Instantaneous Rate",
+   "items": [
     {
-     "label": "1",
-     "text": "Check that limit gives 0/0 or ∞/∞"
+     "name": "Δt",
+     "role": "small time interval"
     },
     {
-     "label": "2",
-     "text": "Differentiate numerator and denominator"
+     "name": "f(a+Δt)-f(a)",
+     "role": "change in quantity"
     },
     {
-     "label": "3",
-     "text": "Take the new limit"
+     "name": "Δt in denominator",
+     "role": "average rate over Δt"
+    },
+    {
+     "name": "limit Δt→0",
+     "role": "turns average into instantaneous rate"
     }
    ],
-   "loop": false,
    "after": 4
-  },
-  {
-   "type": "graph",
-   "title": "Typical Removable Discontinuity",
-   "fn": "(x^2-4)/(x-2)",
-   "xmin": 0,
-   "xmax": 4,
-   "points": [
-    {
-     "x": 2,
-     "y": 4,
-     "label": "hole",
-     "open": true
-    }
-   ],
-   "caption": "The function equals x+2 except at x=2 where there is a hole.",
-   "after": 5
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

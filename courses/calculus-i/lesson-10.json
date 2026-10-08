@@ -1,299 +1,458 @@
 {
  "title": "Modeling with Calculus",
- "summary": "This lesson shows how limits, derivatives, and integrals can model real‑world situations in physics, biology, and economics. Students will learn to set up and solve calculus models, interpret results, and practice with authentic problems.",
+ "summary": "In this lesson students learn how to translate real‑world situations into calculus models and solve them using limits, derivatives, and integrals. They practice building and interpreting models from physics, biology, and economics contexts.",
+ "objectives": [
+  "Identify the key variables and relationships in a real‑world problem",
+  "Formulate a limit, derivative, or integral expression that represents the situation",
+  "Solve the calculus model and interpret the numerical result",
+  "Explain how changing assumptions affects the model outcome"
+ ],
+ "prerequisites": "Students should already understand limits, continuity, basic derivative rules, and the fundamental theorem of calculus.",
+ "why": [
+  "Calculus models let us predict how quantities change, which is essential for designing safe bridges, dosing medicines, or forecasting market trends. By turning words into equations, we can test ideas before spending time or resources on real experiments.",
+  "Being able to model with calculus builds confidence to tackle complex problems in science, health, and finance. It shows how mathematics connects directly to everyday decisions and technological advances."
+ ],
  "sections": [
   {
-   "heading": "1. Why Modeling Matters",
-   "body": "Mathematical **models** are simple equations that stand in for real‑world situations.  \nInstead of measuring every tiny detail of a growing plant, a falling ball, or a city’s traffic flow, we write a formula that captures the essential behavior.  A good model lets us **predict**, **compare alternatives**, and **understand** why something happens.\n\nCalculus is the language of change.  When a quantity varies—height of water in a tank, speed of a car, or the number of bacteria—its **rate of change** tells us a lot.  The derivative $\\displaystyle \\frac{dy}{dx}$ measures how fast $y$ changes as $x$ changes, while the integral $\\displaystyle \\int y\\,dx$ adds up tiny pieces to give a total amount.  By inserting these ideas into a model, we can describe not only a snapshot but also how the system evolves over time.\n\n**Why does this matter?**  \n- **Prediction:** A model of population growth can tell us roughly how many people will live in a city in ten years.  \n- **Optimization:** A company can use a cost‑revenue model to decide the production level that maximizes profit.  \n- **Explanation:** A physics model using $F=ma$ explains why a skydiver reaches a constant speed (terminal velocity).  \n\n### Worked Example: Cooling of a Hot Cup of Coffee  \n\nSuppose a cup of coffee at $90^\\circ\\text{C}$ is left in a room that stays at $20^\\circ\\text{C}$.  Experiments show the coffee cools roughly according to **Newton’s Law of Cooling**:\n\n\\[\n\\frac{dT}{dt}= -k\\,(T-20),\n\\]\n\nwhere $T(t)$ is the coffee temperature (in $^\\circ\\text{C}$) after $t$ minutes, and $k>0$ is a constant that depends on the cup and the air flow.\n\n**Step 1 – Separate variables**\n\n\\[\n\\frac{dT}{T-20}= -k\\,dt.\n\\]\n\n**Step 2 – Integrate both sides**\n\n\\[\n\\int \\frac{dT}{T-20}= -k\\int dt\n\\quad\\Longrightarrow\\quad\n\\ln|T-20| = -kt + C.\n\\]\n\n**Step 3 – Solve for $T$**\n\nExponentiate:\n\n\\[\n|T-20| = e^{-kt+C}=Ce^{-kt},\n\\]\n\nwhere $C=e^{C}$ is a new positive constant.  Since $T>20$, we drop the absolute value:\n\n\\[\nT-20 = Ce^{-kt}.\n\\]\n\n**Step 4 – Use the initial condition** $T(0)=90$:\n\n\\[\n90-20 = C e^{0}\\;\\Longrightarrow\\; C = 70.\n\\]\n\n**Step 5 – Write the final model**\n\n\\[\n\\boxed{T(t)=20+70e^{-kt}}.\n\\]\n\nIf a later measurement shows the coffee is $65^\\circ\\text{C}$ after 5 minutes, we can find $k$:\n\n\\[\n65 = 20+70e^{-5k}\\;\\Longrightarrow\\;45 = 70e^{-5k}\n\\;\\Longrightarrow\\; e^{-5k}= \\frac{45}{70}=0.6429\n\\;\\Longrightarrow\\; -5k = \\ln 0.6429\n\\;\\Longrightarrow\\; k = -\\frac{\\ln 0.6429}{5}\\approx 0.089.\n\\]\n\nNow the model predicts the temperature at any future time, e.g. after 10 minutes:\n\n\\[\nT(10)=20+70e^{-0.089\\cdot10}\\approx20+70e^{-0.89}\\approx20+70(0.410)\\approx48.7^\\circ\\text{C}.\n\\]\n\nThis simple equation, built from a **limit** (the derivative) and an **integral** (the solution of the differential equation), lets us answer practical questions about when the coffee will be drinkable.\n\n---\n\n### Practice Problems  \n\n1. **Population growth**  \n   A bacteria culture starts with 200 cells and doubles every 3 hours. Write a model $P(t)$ for the number of cells after $t$ hours, then find $P(9)$.  \n\n   **Solution:** Doubling means $P(t)=200\\cdot2^{t/3}$.  For $t=9$, $P(9)=200\\cdot2^{3}=200\\cdot8=1600$ cells.\n\n2. **Falling object**  \n   An object is dropped from rest. Its height $h(t)$ (meters) satisfies $\\displaystyle \\frac{dh}{dt}=-9.8t$ with $h(0)=100$. Find $h(t)$.  \n\n   **Solution:** Integrate: $h(t)=100-\\int_0^t9.8s\\,ds=100-4.9t^{2}$.\n\n3. **Tank filling**  \n   Water flows into a cylindrical tank at $5\\ \\text{L/min}$, and leaks out at a rate proportional to the current volume $V$, with leakage constant $0.02\\ \\text{min}^{-1}$. Write the differential equation and solve for $V(t)$ given $V(0)=0$.  \n\n   **Solution:** $\\displaystyle \\frac{dV}{dt}=5-0.02V$.  Solve: $V(t)=\\frac{5}{0.02}\\bigl(1-e^{-0.02t}\\bigr)=250\\bigl(1-e^{-0.02t}\\bigr)$ liters.\n\n4. **Cost minimization**  \n   A company’s cost $C(x)$ (in dollars) to produce $x$ units is $C(x)=0.05x^{2}+30x+2000$. Find the production level that gives the lowest average cost $\\displaystyle \\frac{C(x)}{x}$.  \n\n   **Solution:** Average cost $A(x)=\\frac{C(x)}{x}=0.05x+30+\\frac{2000}{x}$.  \n   Differentiate: $A'(x)=0.05-\\frac{2000}{x^{2}}$. Set $A'(x)=0$: $0.05=\\frac{2000}{x^{2}} \\Rightarrow x^{2}= \\frac{2000}{0.05}=40000 \\Rightarrow x=200$ units.  \n   At $x=200$, $A(200)=0.05(200)+30+10=10+30+10=50$ dollars per unit, the minimum.",
+   "heading": "1. From Word Problem to Mathematical Question",
+   "body": "When you first read a word problem, treat it like a short story.  \nThe characters are the quantities that can change – for example the height of a plant, the amount of water in a tank, or the speed of a car.  \nYour first job is to **identify** these changing quantities and decide what the problem really asks you to find.\n\n> **Definition:** *Variable* – a symbol (like $t$, $x$, or $v$) that represents a quantity that can take different values as the situation evolves.\n\nOnce the variables are clear, ask yourself three simple questions:\n\n1. **Do we need a single value at a particular instant?**  \n   This is an *instantaneous* question. It asks for the value of a variable at a specific moment, such as “What is the speed of the bike exactly 3 seconds after it starts?” To answer it we usually need a **limit** that captures how the quantity behaves as we get closer and closer to that instant.\n\n2. **Do we need how fast something is changing?**  \n   If the problem talks about “rate of change”, “how quickly the temperature rises”, or “the slope of a graph”, it is asking for a *derivative*. The derivative tells us the instantaneous rate at which one variable changes with respect to another (most often time).\n\n3. **Do we need the total amount accumulated over a period?**  \n   Questions like “How much water has flowed into the reservoir after 5 minutes?” or “What is the total distance traveled in 10 seconds?” require an *integral*. The integral adds up infinitely many tiny pieces of the quantity over the interval.\n\n### From Words to a Limit\n\nSuppose a story says: *“A ball is dropped from a height of 20 m. After 1.2 s it is 12 m above the ground.”*  \nWe want the **instantaneous velocity** at $t=1.2\\,$s. First we write the height as a function $h(t)$. The velocity is the limit of the average speed over a short time interval $\\Delta t$:\n\n$$\nv(1.2)=\\lim_{\\Delta t\\to 0}\\frac{h(1.2+\\Delta t)-h(1.2)}{\\Delta t}.\n$$\n\nThe limit tells us what the average speed becomes when the time interval shrinks to zero, giving the exact speed at that moment.\n\n### From Words to a Derivative\n\nConsider a garden where the water level $w(t)$ (in litres) rises as a faucet runs. The problem might ask: *“How fast is the water level rising when the tank contains 30 L?”*  \nHere we need the derivative $dw/dt$, the rate of change of water with respect to time. If we know a formula for $w(t)$, we differentiate it:\n\n$$\n\\frac{dw}{dt}=w'(t).\n$$\n\nThe derivative directly answers the “how fast” question.\n\n### From Words to an Integral\n\nImagine a car traveling along a road with speed $s(t)$ (km/h). The question: *“How far does the car travel between $t=2$ h and $t=5$ h?”*  \nWe add up all the tiny distances $s(t)\\,dt$ covered in each instant:\n\n$$\n\\text{distance}= \\int_{2}^{5} s(t)\\,dt .\n$$\n\nThe integral accumulates the speed over the time interval, giving the total distance.\n\n> **In daily life:** Think of a bathtub filling. The water height at any moment is a variable. The flow rate of the tap is the derivative (how fast the height changes). The total water after 10 minutes is the integral of that flow rate.\n\n### Choosing the Right Tool\n\nWhen you translate a story into mathematics, match the question type to the appropriate calculus concept:\n\n- **Instantaneous value** → set up a *limit*.\n- **Rate of change** → write a *derivative*.\n- **Accumulated total** → form an *integral*.\n\n> **Remember:** Always write down what each symbol stands for before you start manipulating equations. Clear definitions prevent confusion later.\n\n> **Common mistake:** Jumping straight to a formula without first deciding whether the problem asks for a limit, a rate, or an accumulation. This often leads to using the wrong calculus tool and getting an answer that doesn’t match the question.\n\nBy carefully reading the scenario, picking out the varying quantities, and asking these three guiding questions, you turn any word problem into a precise mathematical question ready for calculus to solve.",
    "code": ""
   },
   {
-   "heading": "2. Building a Model with Limits",
-   "body": "**2. Building a Model with Limits**\n\nLimits let us describe how a quantity behaves **as it gets very close** to a certain point. In calculus‑based modeling we often need three kinds of information that limits provide:\n\n* **Instantaneous rate of change** – the limit of an average rate as the time interval shrinks to zero.  \n* **Approach behavior** – the value a function gets nearer to as the input grows without bound (or approaches a special point).  \n* **Defining natural limits** – quantities such as terminal velocity or population saturation that cannot be exceeded.\n\n---\n\n### Instantaneous rate of change  \n\nSuppose a car travels a distance $s(t)$ (in meters) after $t$ seconds. The average speed between $t$ and $t+\\Delta t$ is  \n\n\\[\n\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}.\n\\]\n\nThe **instantaneous speed** at time $t$ is the limit of this average as $\\Delta t\\to0$:\n\n\\[\nv(t)=\\lim_{\\Delta t\\to0}\\frac{s(t+\\Delta t)-s(t)}{\\Delta t}=s'(t).\n\\]\n\n---\n\n### Approach behavior (horizontal asymptotes)\n\nIf a population $P(t)$ follows the rule  \n\n\\[\nP(t)=\\frac{5000}{1+e^{-0.3(t-10)}},\n\\]\n\nwe ask what happens as $t\\to\\infty$.  \n\n\\[\n\\lim_{t\\to\\infty}P(t)=\\lim_{t\\to\\infty}\\frac{5000}{1+e^{-0.3(t-10)}}=\n\\frac{5000}{1+0}=5000.\n\\]\n\nThus the population **saturates** at 5000 individuals; this is a natural upper bound.\n\n---\n\n### Defining terminal velocity  \n\nA skydiver falling through air experiences a drag force proportional to the square of the speed. A simple model for the speed $v(t)$ (in m/s) is  \n\n\\[\n\\frac{dv}{dt}=g - kv^{2},\n\\]\n\nwhere $g=9.8\\ \\text{m/s}^2$ and $k>0$ is a constant. Solving the differential equation gives  \n\n\\[\nv(t)=\\sqrt{\\frac{g}{k}}\\tanh\\!\\bigl(\\sqrt{gk}\\,t\\bigr).\n\\]\n\nThe **terminal velocity** $v_T$ is the limit as $t\\to\\infty$:\n\n\\[\nv_T=\\lim_{t\\to\\infty}v(t)=\\sqrt{\\frac{g}{k}}.\n\\]\n\nNo matter how long the fall lasts, the speed cannot exceed $v_T$.\n\n---\n\n## Worked Example  \n\n**Problem:** A bacteria culture grows according to  \n\n\\[\nB(t)=\\frac{2000}{1+4e^{-0.5t}},\n\\]\n\nwhere $t$ is measured in hours. Find the **instantaneous growth rate** at $t=4$ hours and the **maximum possible population**.\n\n**Solution:**\n\n1. **Instantaneous growth rate** is $B'(t)$. Differentiate using the quotient rule or rewrite first:\n\n\\[\nB(t)=2000\\bigl(1+4e^{-0.5t}\\bigr)^{-1}.\n\\]\n\nLet $u(t)=1+4e^{-0.5t}$. Then $B(t)=2000u^{-1}$ and  \n\n\\[\nB'(t)=2000(-1)u^{-2}u'(t).\n\\]\n\nCompute $u'(t)=4(-0.5)e^{-0.5t}=-2e^{-0.5t}$.\n\nThus  \n\n\\[\nB'(t)=-2000\\,\\frac{-2e^{-0.5t}}{(1+4e^{-0.5t})^{2}}\n= \\frac{4000e^{-0.5t}}{(1+4e^{-0.5t})^{2}}.\n\\]\n\nEvaluate at $t=4$:\n\n\\[\ne^{-0.5\\cdot4}=e^{-2}\\approx0.1353,\n\\]\n\n\\[\nB'(4)=\\frac{4000(0.1353)}{(1+4(0.1353))^{2}}\n=\\frac{541.2}{(1+0.5412)^{2}}\n=\\frac{541.2}{(1.5412)^{2}}\n\\approx\\frac{541.2}{2.376}=227.8\\ \\text{cells/hour}.\n\\]\n\n2. **Maximum possible population** is the horizontal asymptote as $t\\to\\infty$:\n\n\\[\n\\lim_{t\\to\\infty}B(t)=\\frac{2000}{1+4\\cdot0}=2000.\n\\]\n\nSo the culture cannot exceed 2000 cells.\n\n---\n\n## Practice Problems  \n\n### Problem 1  \nA projectile’s height (in meters) after $t$ seconds is $h(t)=100t-5t^{2}$.  \n**(a)** Find the instantaneous vertical velocity at $t=8$ s.  \n**(b)** Determine the maximum height the projectile can reach.\n\n**Solution:**  \n(a) $v(t)=h'(t)=100-10t$. At $t=8$, $v(8)=100-80=20\\ \\text{m/s}$.  \n(b) The height is a parabola opening downward; its vertex occurs at $t=-\\frac{b}{2a}= -\\frac{100}{2(-5)}=10$ s.  \nMaximum height $h(10)=100(10)-5(10)^{2}=1000-500=500\\ \\text{m}$.\n\n---\n\n### Problem 2  \nA cooling coffee follows Newton’s law $T(t)=20+80e^{-0.3t}$ (°C).  \nFind the limit of $T(t)$ as $t\\to\\infty$ and interpret it.\n\n**Solution:**  \n\\[\n\\lim_{t\\to\\infty}T(t)=20+80\\cdot0=20^\\circ\\text{C}.\n\\]  \nThe coffee approaches room temperature (20 °C) and will never get colder than that.\n\n---\n\n### Problem 3  \nThe concentration $C(t)$ of a drug in the bloodstream decays as $C(t)=\\frac{50}{1+3t}$.  \nCompute the instantaneous rate of change at $t=2$ hours.\n\n**Solution:**  \nRewrite $C(t)=50(1+3t)^{-1}$.  \n$C'(t)=50(-1)(1+3t)^{-2}\\cdot3=-\\frac{150}{(1+3t)^{2}}$.  \nAt $t=2$, $C'(2)=-\\frac{150}{(1+6)^{2}}=-\\frac{150}{49}\\approx-3.06\\ \\text{units/h}$.\n\n---\n\n### Problem 4  \nA rabbit population $R(t)$ (in hundreds) satisfies $R(t)=\\frac{8}{1+e^{-0.4(t-5)}}$.  \nFind the **terminal population** and the **instantaneous growth rate** at $t=5$.\n\n**Solution:**  \nTerminal population: $\\displaystyle\\lim_{t\\to\\infty}R(t)=\\frac{8}{1+0}=8$ (i.e., 800 rabbits).  \n\nFor the growth rate, differentiate:  \n\n\\[\nR'(t)=8\\cdot\\frac{e^{-0.4(t-5)}\\cdot0.4}{\\bigl(1+e^{-0.4(t-5)}\\bigr)^{2}}\n=\\frac{3.2\\,e^{-0.4(t-5)}}{\\bigl(1+e^{-0.4(t-5)}\\bigr)^{2}}.\n\\]\n\nAt $t=5$, $e^{0}=1$, so  \n\n\\[\nR'(5)=\\frac{3.2\\cdot1}{(1+1)^{2}}=\\frac{3.2}{4}=0.8\\ \\text{hundreds per unit time}=80\\ \\text{rabbits per time unit}.\n\\]",
+   "heading": "2. Setting Up Limits for Instantaneous Values",
+   "body": "When we want to know how fast something is changing *right now*, we use a **limit**.  \nThe idea is to look at the average change over a very short time interval, then let that interval shrink to zero.  \n\n> **Definition:** The *instantaneous rate* of a quantity $Q(t)$ at time $t=a$ is  \n> $$\\displaystyle \\lim_{\\Delta t\\to 0}\\frac{Q(a+\\Delta t)-Q(a)}{\\Delta t}.$$  \n\nThink of a car traveling on a highway. If you measure the distance it covers in the first 10 seconds, you get an average speed of, say, $20\\ \\text{m/s}$. If you instead measure the distance in the first 1 second, the average speed might be $22\\ \\text{m/s}$. As you make the time window smaller and smaller, the average speed approaches the *speedometer reading* at that exact instant. The limit captures that idea mathematically.\n\n### Step‑by‑step construction of a limit\n\n1. **Write the quantity of interest as a function of time.**  \n   Example: a population $P(t)$ (people) that grows according to $P(t)=500\\,e^{0.03t}$, where $t$ is measured in years.\n\n2. **Form the difference quotient.**  \n   This is the average change over a short interval $\\Delta t$:  \n   $$\\frac{P(t+\\Delta t)-P(t)}{\\Delta t}.$$\n\n3. **Insert the specific function.**  \n   For the population example:  \n   $$\\frac{500e^{0.03(t+\\Delta t)}-500e^{0.03t}}{\\Delta t}\n     =\\frac{500e^{0.03t}\\big(e^{0.03\\Delta t}-1\\big)}{\\Delta t}.$$\n\n4. **Take the limit as $\\Delta t\\to 0$.**  \n   We use the well‑known limit $\\displaystyle \\lim_{h\\to 0}\\frac{e^{kh}-1}{h}=k$.  \n   Applying it with $k=0.03$ gives  \n   $$\\lim_{\\Delta t\\to 0}\\frac{500e^{0.03t}\\big(e^{0.03\\Delta t}-1\\big)}{\\Delta t}\n     =500e^{0.03t}\\cdot 0.03\n     =15e^{0.03t}.$$\n\n   This result, $15e^{0.03t}$, is the **instantaneous growth rate** of the population at time $t$ (people per year).\n\n### More examples\n\n**Instantaneous speed**  \nA runner’s position is $s(t)=5t^2$ meters, with $t$ in seconds.  \nThe limit for speed at time $t=a$ is  \n$$\\displaystyle \\lim_{\\Delta t\\to 0}\\frac{5(a+\\Delta t)^2-5a^2}{\\Delta t}.$$\nExpand the numerator: $5\\big(a^2+2a\\Delta t+(\\Delta t)^2-a^2\\big)=5\\big(2a\\Delta t+(\\Delta t)^2\\big)$.  \nFactor $\\Delta t$: $5\\Delta t\\big(2a+\\Delta t\\big)$.  \nDivide by $\\Delta t$ and let $\\Delta t\\to0$:  \n$$\\displaystyle \\lim_{\\Delta t\\to 0}5\\big(2a+\\Delta t\\big)=10a.$$\nSo the runner’s speed at $t=a$ seconds is $10a$ m/s.\n\n**Population growth at a specific year**  \nSuppose we want the growth rate in year $5$ for the earlier population model.  \nPlug $t=5$ into $15e^{0.03t}$:  \n$$15e^{0.03\\cdot5}=15e^{0.15}\\approx 15(1.162)=17.4\\ \\text{people per year}.$$\n\n> **In daily life:** When a thermometer shows a temperature change of $0.5^\\circ\\text{C}$ over one minute, the limit process tells us the *rate* of temperature change at that moment, useful for predicting how quickly a room will warm up.\n\n### Using limit rules\n\nYou do not always have to expand everything by hand. Several standard limits are memorized:\n\n- $\\displaystyle \\lim_{h\\to0}\\frac{\\sin h}{h}=1$  \n- $\\displaystyle \\lim_{h\\to0}\\frac{e^{kh}-1}{h}=k$  \n- $\\displaystyle \\lim_{h\\to0}\\frac{(1+h)^n-1}{h}=n$  \n\nThese rules let you evaluate limits quickly, especially when the function involves trigonometric or exponential terms.\n\n> **Note:** The limit only gives a meaningful instantaneous value if the function is *continuous* at the point of interest. A jump or break would make the limit undefined.\n\n### Why the limit matters in modeling\n\nWhen a model predicts how a quantity changes, the derivative (the limit we just computed) tells us the *exact* rate at the moment we care about. This is crucial for:\n\n- Designing safety systems (e.g., braking distance depends on instantaneous speed).  \n- Planning resources (e.g., hospital beds needed based on current patient admission rate).  \n\n> **Remember:** Always write the limit expression first, then simplify step by step. Skipping the algebraic manipulation is a common source of errors.\n\nBy mastering these small steps, you can turn any word problem about “how fast” or “how quickly” into a precise mathematical answer.",
    "code": ""
   },
   {
-   "heading": "3. Derivative‑Based Models",
-   "body": "**Derivative‑Based Models**\n\nA *derivative‑based model* uses the rate of change of a quantity to describe a real‑world situation.  \nThe first step is to identify what the **variable** represents (e.g., distance, population, cost) and what its **rate of change** means in the context (e.g., speed, growth rate, marginal cost).  \nThen we write an equation that relates the derivative to known information, solve for the unknown function, and finally interpret the result.\n\n---\n\n### Worked Example: From Position to Velocity  \n\nA car travels along a straight road. Its position (in meters) after $t$ seconds is given by  \n\n\\[\ns(t)=5t^{2}+2t+10 .\n\\]\n\n**Step 1 – Identify the derivative.**  \nThe *velocity* $v(t)$ is the derivative of position:  \n\n\\[\nv(t)=\\frac{ds}{dt}.\n\\]\n\n**Step 2 – Differentiate.**  \n\n\\[\nv(t)=\\frac{d}{dt}\\bigl(5t^{2}+2t+10\\bigr)=10t+2 .\n\\]\n\n**Step 3 – Interpret.**  \nAt $t=3\\,$s, the car’s speed is  \n\n\\[\nv(3)=10(3)+2=32\\ \\text{m/s}.\n\\]\n\nThus the model tells us that the car accelerates linearly: every second its speed increases by $10\\,$m/s.\n\n---\n\n### More Situations\n\n| Situation | Quantity $y(t)$ | Meaning of $y'(t)$ |\n|-----------|----------------|--------------------|\n| Population $P(t)$ | Number of individuals | **Growth rate** (individuals per year) |\n| Profit $R(q)$ | Revenue as a function of quantity $q$ | **Marginal revenue** $R'(q)$ (extra revenue per extra unit) |\n| Cost $C(q)$ | Total cost to produce $q$ items | **Marginal cost** $C'(q)$ (cost of one more item) |\n\nIn each case we write a differential equation that matches the description, solve (or integrate) if needed, and then use the model to answer questions such as “How fast is the population growing now?” or “What is the cost of producing the 101st widget?”\n\n---\n\n## Practice Problems\n\n### Problem 1  \nA bacteria culture grows according to $P'(t)=0.04P(t)$. If $P(0)=500$, find $P(t)$ and the population after 5 hours.\n\n**Solution**  \nSeparate variables: $\\displaystyle \\frac{dP}{P}=0.04\\,dt$.  \nIntegrate: $\\ln|P|=0.04t+C$.  \nExponentiate: $P=Ke^{0.04t}$. Use $P(0)=500$ → $K=500$.  \nThus $P(t)=500e^{0.04t}$.  \nAt $t=5$: $P(5)=500e^{0.2}\\approx500(1.2214)=610.7\\,$ bacteria.\n\n---\n\n### Problem 2  \nA company’s total cost to produce $q$ gadgets is $C(q)=150+20q+0.5q^{2}$. Find the **marginal cost** and evaluate it at $q=30$.\n\n**Solution**  \nMarginal cost $C'(q)=\\frac{d}{dq}(150+20q+0.5q^{2})=20+q$.  \nAt $q=30$: $C'(30)=20+30=50$ dollars per gadget.\n\n---\n\n### Problem 3  \nThe position of a particle moving along a line is $s(t)=3\\sin t+4t$. Find the **velocity** and the speed at $t=\\pi/2$.\n\n**Solution**  \nVelocity $v(t)=s'(t)=3\\cos t+4$.  \nAt $t=\\pi/2$: $v(\\pi/2)=3\\cos(\\pi/2)+4=0+4=4\\,$ m/s.  \nSince velocity is positive, speed = 4 m/s.\n\n---\n\n### Problem 4  \nRevenue from selling $q$ units of a product is $R(q)=120q-0.2q^{2}$. Determine the **marginal revenue** and the quantity that maximizes revenue.\n\n**Solution**  \nMarginal revenue $R'(q)=120-0.4q$.  \nSet $R'(q)=0$ for a maximum: $120-0.4q=0\\Rightarrow q=300$.  \nThus revenue is maximized when 300 units are sold, and the marginal revenue there is $0$ (no additional revenue from one more unit).",
+   "heading": "3. Translating Rates into Derivative Formulas",
+   "body": "When we have turned a word problem into a question about a rate, the next step is to write that rate as a **derivative**.  \nA derivative is a symbol that tells us how fast one quantity changes with respect to another.  \nIn symbols we write it as $\\dfrac{dy}{dx}$, read “the change in $y$ per change in $x$”.\n\n> **Definition:** The derivative $\\dfrac{dy}{dx}$ of a function $y=f(x)$ is the limit of the average rate of change as the interval shrinks to zero.\n\n---\n\n### 1. Identify the dependent and independent variables  \n\nFirst decide which quantity is changing (the **dependent variable**) and which one we are measuring the change against (the **independent variable**).  \nFor example, if a tank is being filled with water, the **volume** $V$ depends on **time** $t$.  \nSo we will look for $\\dfrac{dV}{dt}$.\n\n### 2. Write the rate in words, then replace words by symbols  \n\nSuppose the problem says: “Water flows into the tank at a rate that is proportional to the square of the water height $h$.”  \nIn words the rate is “flow = constant × (height)²”.  \nWe turn this into symbols:\n\n$$\\frac{dV}{dt}=k\\,h^{2}$$\n\nwhere $k$ is the constant of proportionality (a number that makes the units match).\n\n> **Note:** Always introduce a new constant (like $k$) when the problem tells you the rate is “proportional”. It captures any fixed factor that the story does not give explicitly.\n\n### 3. Relate the dependent variables if needed  \n\nOften the rate involves a second quantity that is itself a function of the independent variable.  \nIn the tank example, the volume $V$ and the height $h$ are linked by the geometry of the tank.  \nIf the tank has a circular cross‑section of radius $r$, then $V=\\pi r^{2}h$.  \nWe can differentiate this relationship to connect $\\dfrac{dV}{dt}$ and $\\dfrac{dh}{dt}$.\n\nApply the **product rule** (or treat $\\pi r^{2}$ as a constant):\n\n$$\\frac{dV}{dt}= \\pi r^{2}\\,\\frac{dh}{dt}$$\n\nNow we have two expressions for $\\dfrac{dV}{dt}$:\n\n1. From the rate description: $\\displaystyle \\frac{dV}{dt}=k\\,h^{2}$\n2. From geometry: $\\displaystyle \\frac{dV}{dt}= \\pi r^{2}\\,\\frac{dh}{dt}$\n\nSet them equal and solve for the unknown derivative $\\dfrac{dh}{dt}$:\n\n$$\\pi r^{2}\\,\\frac{dh}{dt}=k\\,h^{2}$$\n$$\\frac{dh}{dt}= \\frac{k}{\\pi r^{2}}\\,h^{2}$$\n\n### 4. Choose the right differentiation rule  \n\nWhen the expression to differentiate is a simple power of the variable, use the **power rule**:  \n\n$$\\frac{d}{dx}\\bigl(x^{n}\\bigr)=n\\,x^{\\,n-1}$$  \n\nIf the expression is a product of two functions, use the **product rule**:  \n\n$$\\frac{d}{dx}\\bigl(u(x)v(x)\\bigr)=u'(x)v(x)+u(x)v'(x)$$  \n\nWhen a function is composed inside another (for example $\\sin(h(t)^{2})$), apply the **chain rule**:  \n\n$$\\frac{d}{dx} f(g(x)) = f'(g(x))\\;g'(x)$$  \n\nIn our tank problem we needed the product rule because $V$ is the product of a constant area $\\pi r^{2}$ and the height $h(t)$.\n\n### 5. Simplify the derivative expression  \n\nAfter applying the rule, combine like terms and cancel any common factors.  \nIn the example, $\\pi r^{2}$ is a constant, so it stays in the denominator.  \nThe final simplified rate of change of height is\n\n$$\\boxed{\\displaystyle \\frac{dh}{dt}= \\frac{k}{\\pi r^{2}}\\,h^{2}}$$\n\nThis compact formula tells us exactly how fast the water level rises at any moment, given the current height $h$.\n\n> **In daily life:** Think of a car’s speedometer. The speed reading is the derivative of distance with respect to time. If the driver presses the gas pedal harder, the car’s acceleration (the derivative of speed) changes, just as a larger constant $k$ makes the water level rise faster.\n\n> **Common mistake:** Forgetting to attach the correct variable to the derivative. Writing $\\dfrac{dh}{dt}=k\\,h^{2}$ would ignore the geometric factor and give the wrong units.\n\n> **Remember:** Always check that the units on both sides of your derivative equation match. This is a quick way to spot algebraic slips before you move on to solving the model.",
    "code": ""
   },
   {
-   "heading": "4. Integral‑Based Models",
-   "body": "Integral‑Based Models let us **accumulate** a quantity that changes continuously.  \nWhen the rate of change is known as a function of time (or another variable), the **definite integral** gives the total amount over an interval.\n\n---\n\n### Why integrals are useful  \n\n* **Distance** – If $v(t)$ is velocity in meters per second, the distance traveled from $t=a$ to $t=b$ is  \n  $$\\int_{a}^{b} v(t)\\,dt.$$  \n* **Biomass** – If a population grows at a rate $r(t)$ (kg per day), the total biomass added between days $a$ and $b$ is  \n  $$\\int_{a}^{b} r(t)\\,dt.$$  \n* **Consumer surplus** – For a demand curve $p(q)$ (price as a function of quantity), the area between the price axis and the curve from $q=0$ to $q=Q$ is  \n  $$\\int_{0}^{Q} p(q)\\,dq,$$  \n  which measures the extra value consumers receive.\n\n---\n\n### Fully worked example: distance from a variable velocity  \n\nA car’s velocity is given by $v(t)=12-0.5t$ meters per second, where $t$ is measured in seconds after the car starts moving. Find the distance the car travels from $t=0$ to $t=20$ seconds.\n\n**Step 1 – Write the integral**  \nThe distance $D$ is  \n$$D=\\int_{0}^{20} (12-0.5t)\\,dt.$$\n\n**Step 2 – Find an antiderivative**  \nAn antiderivative of $12-0.5t$ is  \n$$F(t)=12t-\\frac{0.5}{2}t^{2}=12t-0.25t^{2}.$$\n\n**Step 3 – Evaluate at the limits**  \n\\[\n\\begin{aligned}\nD &= F(20)-F(0)\\\\\n  &= \\bigl(12\\cdot20-0.25\\cdot20^{2}\\bigr)-\\bigl(12\\cdot0-0.25\\cdot0^{2}\\bigr)\\\\\n  &= (240-0.25\\cdot400)-0\\\\\n  &= 240-100\\\\\n  &= 140\\text{ meters}.\n\\end{aligned}\n\\]\n\n**Step 4 – Interpret**  \nThe car travels **140 m** in the first 20 seconds. The negative term $-0.5t$ shows the car is slowing down, so the distance is less than it would be at a constant $12\\,$m/s.\n\n---\n\n### Practice problems  \n\n1. **Problem:** A river’s flow rate (in cubic meters per hour) is $Q(t)=500+20t$, where $t$ is hours after sunrise. Find the total volume that passes a fixed point between sunrise ($t=0$) and $t=6$ h.  \n\n   **Solution:**  \n   \\[\n   V=\\int_{0}^{6}(500+20t)\\,dt = \\bigl[500t+10t^{2}\\bigr]_{0}^{6}=500\\cdot6+10\\cdot36=3000+360=3360\\text{ m}^{3}.\n   \\]\n\n2. **Problem:** A plant’s growth rate (grams per day) is $g(t)=3t^{2}$ for $0\\le t\\le5$ days. How much total biomass is added in the first five days?  \n\n   **Solution:**  \n   \\[\n   B=\\int_{0}^{5}3t^{2}\\,dt = \\bigl[t^{3}\\bigr]_{0}^{5}=5^{3}=125\\text{ g}.\n   \\]\n\n3. **Problem:** The demand curve for a product is $p(q)=20-0.1q$, where $p$ is price (\\$) and $q$ is quantity sold. If the market sells $Q=80$ units, compute the **consumer surplus**.  \n\n   **Solution:**  \n   \\[\n   CS=\\int_{0}^{80}(20-0.1q)\\,dq = \\bigl[20q-0.05q^{2}\\bigr]_{0}^{80}=20\\cdot80-0.05\\cdot6400=1600-320=1280\\text{ dollars}.\n   \\]\n\n4. **Problem:** A runner’s speed varies as $v(t)=6+2\\sin\\!\\left(\\frac{\\pi t}{5}\\right)$ m/s for $0\\le t\\le10$ s. Find the total distance run.  \n\n   **Solution:**  \n   \\[\n   D=\\int_{0}^{10}\\!\\!\\Bigl(6+2\\sin\\!\\frac{\\pi t}{5}\\Bigr)dt\n     =\\Bigl[6t-\\frac{10}{\\pi}\\cos\\!\\frac{\\pi t}{5}\\Bigr]_{0}^{10}\n     =60-\\frac{10}{\\pi}\\bigl(\\cos2\\pi-\\cos0\\bigr)=60.\n   \\]\n   (Since $\\cos2\\pi=\\cos0=1$, the cosine terms cancel.)  \n   The runner covers **60 m** in 10 seconds.",
+   "heading": "4. Using Integrals for Accumulated Quantities",
+   "body": "When we talk about “accumulated quantity’’ we mean something that builds up over time, like the total miles you drive, the total amount of medicine that enters your bloodstream, or the total profit a shop makes during a month.  The word **integral** is the mathematical tool that lets us add up an infinite number of tiny pieces to find the whole.\n\n> **Definition:** An **integral** is the limit of a sum of many small contributions.  In calculus we write a *definite integral* as  \n> $$\\int_{a}^{b} f(t)\\,dt$$  \n> where $f(t)$ is the rate at which the quantity is changing, $t$ is the time (or another variable), and $a$ and $b$ are the start and end points of the interval.\n\n### Why does this work?\n\nImagine you are filling a bathtub.  The faucet lets water flow in at a rate of $r(t)$ gallons per minute, which might change as you turn the knob.  If you look at a very short time interval $\\Delta t$, the amount of water added is approximately $r(t)\\,\\Delta t$.  Adding up all those tiny amounts from the moment you turn the faucet on ($t=a$) until you turn it off ($t=b$) gives the total water in the tub.  In the limit as the intervals become infinitely small, the sum becomes the integral $\\int_{a}^{b} r(t)\\,dt$.\n\n### Step‑by‑step construction\n\n1. **Identify the rate function** $f(t)$.  \n   - For distance, $f(t)$ is the speed $v(t)$ (miles per hour).  \n   - For drug dosage, $f(t)$ is the infusion rate $R(t)$ (milligrams per hour).  \n   - For profit, $f(t)$ is the instantaneous profit rate $p(t)$ (dollars per day).\n\n2. **Choose the interval** $[a,b]$ that matches the period you care about.  \n   - Driving from 2 pm to 5 pm → $a=2$, $b=5$ (hours).  \n   - Medication given over 8 hours → $a=0$, $b=8$ (hours).  \n   - A month of sales → $a=1$, $b=30$ (days).\n\n3. **Write the definite integral** that represents the total amount.  \n\n   For distance:  \n   $$\\text{Total distance}= \\int_{a}^{b} v(t)\\,dt$$  \n\n   For drug dosage:  \n   $$\\text{Total dose}= \\int_{a}^{b} R(t)\\,dt$$  \n\n   For profit:  \n   $$\\text{Total profit}= \\int_{a}^{b} p(t)\\,dt$$  \n\n4. **Find an antiderivative** $F(t)$ of the rate function.  An antiderivative is a function whose derivative is the original rate: $F'(t)=f(t)$.  This step uses the **Fundamental Theorem of Calculus**, which tells us that the definite integral can be evaluated by subtracting the antiderivative at the endpoints:\n\n   $$\\int_{a}^{b} f(t)\\,dt = F(b)-F(a)$$\n\n### Example: Total distance traveled\n\nSuppose a car’s speed varies with time as $v(t)=60-10t$ (miles per hour) for $0\\le t\\le 3$ hours.  The total distance from $t=0$ to $t=3$ is\n\n$$\\int_{0}^{3} (60-10t)\\,dt.$$\n\nAn antiderivative of $60-10t$ is $F(t)=60t-5t^{2}$, because $F'(t)=60-10t$.  Apply the formula:\n\n$$\\text{Distance}=F(3)-F(0)=\\bigl(60\\cdot3-5\\cdot3^{2}\\bigr)-0=180-45=135\\text{ miles}.$$\n\n> **In daily life:** This same idea tells you how many calories you burn while jogging if you know your calorie‑burn rate at each minute.\n\n### Example: Total drug dosage\n\nA patient receives an IV drip that delivers medicine at a rate $R(t)=5e^{-0.2t}$ mg/h for the first 6 hours.  The total amount received is\n\n$$\\int_{0}^{6} 5e^{-0.2t}\\,dt.$$\n\nAn antiderivative is $F(t)=\\frac{5}{-0.2}e^{-0.2t}=-25e^{-0.2t}$.  Evaluate:\n\n$$\\text{Dose}=F(6)-F(0)=\\bigl(-25e^{-1.2}\\bigr)-\\bigl(-25\\bigr)=25\\bigl(1-e^{-1.2}\\bigr)\\approx 25(1-0.301)=17.5\\text{ mg}.$$\n\n### Example: Total profit\n\nA shop’s profit rate per day is $p(t)=200+30\\sin\\!\\left(\\frac{\\pi t}{15}\\right)$ dollars, where $t$ is the day of a 30‑day month.  Total profit is\n\n$$\\int_{1}^{30} \\bigl(200+30\\sin(\\tfrac{\\pi t}{15})\\bigr)\\,dt.$$\n\nAn antiderivative is $F(t)=200t-\\frac{450}{\\pi}\\cos(\\tfrac{\\pi t}{15})$.  Compute:\n\n$$\\text{Profit}=F(30)-F(1)=\\bigl(200\\cdot30-\\tfrac{450}{\\pi}\\cos 2\\pi\\bigr)-\\bigl(200\\cdot1-\\tfrac{450}{\\pi}\\cos \\tfrac{\\pi}{15}\\bigr).$$  \nSince $\\cos 2\\pi=1$, this simplifies to a numeric value after plugging in the cosine of $\\pi/15$.\n\n> **Remember:** Always check the units.  If $f(t)$ is “miles per hour’’ and $t$ is in hours, the integral gives miles.  Mismatched units lead to nonsensical answers.",
    "code": ""
   },
   {
-   "heading": "5. Interpreting Results",
-   "body": "When you finish a calculus model, the last step is to **interpret the results**.  \nA number by itself tells you little; you must translate it back into the language of the original problem.\n\n---\n\n### What does a derivative value mean?\n\nThe derivative $f'(x)$ gives the **instantaneous rate of change** of the quantity $f$ with respect to $x$ at the point $x$.  \n* **Units** – If $f$ is measured in meters and $x$ in seconds, then $f'(x)$ has units of meters per second.  \n* **Sign** – A positive derivative means the quantity is increasing, a negative derivative means it is decreasing.  \n* **Magnitude** – Larger absolute values indicate faster change.\n\n---\n\n### What does an integral value mean?\n\nThe definite integral $\\displaystyle\\int_{a}^{b} f(x)\\,dx$ represents the **total accumulation** of $f$ from $x=a$ to $x=b$.  \n* **Units** – Multiply the units of $f$ by the units of $x$. For example, if $f$ is a speed (m s\\(^{-1}\\)) and $x$ is time (s), the integral has units of meters, i.e., a distance.  \n* **Positive vs. negative** – A positive integral means net accumulation in the positive direction; a negative integral means net loss.  \n* **Geometric picture** – The integral equals the signed area under the curve $y=f(x)$ between $a$ and $b$.\n\n---\n\n### Example: Cooling coffee\n\nA cup of coffee cools according to Newton’s law  \n\\[\n\\frac{dT}{dt}= -k\\bigl(T-20\\bigr),\n\\]  \nwhere $T(t)$ is the temperature in $^\\circ\\text{C}$, $t$ is minutes, and the room temperature is $20^\\circ\\text{C}$.  \nSuppose $k=0.07\\ \\text{min}^{-1}$ and the coffee starts at $90^\\circ\\text{C}$.\n\n**Step 1 – Solve the model**  \nSeparate variables and integrate:\n\\[\n\\int\\frac{dT}{T-20}= -k\\int dt\n\\quad\\Longrightarrow\\quad\n\\ln|T-20| = -kt + C.\n\\]\nExponentiate and solve for $C$ using $T(0)=90$:\n\\[\nT-20 = Ce^{-kt},\\qquad\nC = 90-20 = 70.\n\\]\nThus  \n\\[\n\\boxed{T(t)=20+70e^{-0.07t}}.\n\\]\n\n**Step 2 – Interpret a derivative**  \nThe derivative at $t=5$ minutes is  \n\\[\nT'(5)= -0.07\\bigl(T(5)-20\\bigr)\n      = -0.07\\bigl(20+70e^{-0.35}-20\\bigr)\n      = -0.07\\cdot70e^{-0.35}\\approx -3.0.\n\\]  \nUnits: $^\\circ\\text{C}\\,\\text{min}^{-1}$.  \nInterpretation: After five minutes the coffee is cooling at about $3^\\circ\\text{C}$ per minute.\n\n**Step 3 – Interpret an integral**  \nThe total temperature loss from $t=0$ to $t=10$ minutes is  \n\\[\n\\int_{0}^{10} -T'(t)\\,dt = \\int_{0}^{10} 0.07\\bigl(T(t)-20\\bigr)dt.\n\\]  \nUsing the explicit formula,\n\\[\n\\int_{0}^{10} 0.07\\cdot70e^{-0.07t}\\,dt\n= 4.9\\bigl[1-e^{-0.7}\\bigr]\\approx 2.9^\\circ\\text{C}.\n\\]  \nInterpretation: In the first ten minutes the coffee’s temperature drops by about $2.9^\\circ\\text{C}$.\n\n---\n\n### Practice problems\n\n1. **Population growth**  \n   A bacteria culture follows $P'(t)=0.4P$, $P(0)=500$.  \n   *Find $P(t)$ and interpret $P'(3)$ (units, sign, magnitude).*\n\n   **Solution**  \n   Separate: $\\displaystyle\\frac{dP}{P}=0.4\\,dt\\;\\Rightarrow\\;\\ln P=0.4t+C$.  \n   $C=\\ln500$, so $P(t)=500e^{0.4t}$.  \n   $P'(3)=0.4P(3)=0.4\\cdot500e^{1.2}\\approx 0.4\\cdot1650\\approx660$ bacteria/min.  \n   Positive sign → population increasing; magnitude tells the instantaneous growth rate at $t=3$ min.\n\n2. **Water tank**  \n   Water flows in at $3\\ \\text{L/min}$ and out at a rate $0.1h(t)$ where $h$ is the water height (m). The tank cross‑section is $2\\ \\text{m}^2$.  \n   *Write a differential equation for $h(t)$, solve for $h(t)$ given $h(0)=0$, and interpret $\\displaystyle\\int_{0}^{5}h(t)\\,dt$.*\n\n   **Solution**  \n   Volume $V=2h$. Rate of change: $V' = 3 -0.1h$. Thus $2h' = 3-0.1h$ → $h' = 1.5-0.05h$.  \n   Solve: $h' +0.05h =1.5$. Integrating factor $e^{0.05t}$ gives  \n   $h(t)=30\\bigl(1-e^{-0.05t}\\bigr)$.  \n   The integral $\\int_{0}^{5}h(t)dt$ equals the total “height‑time” area, whose units are m·min; multiplying by the cross‑section (2 m²) gives the total volume that has passed the height sensor in the first five minutes.\n\n3. **Car braking**  \n   A car’s speed satisfies $v'(t) = -5$ m s\\(^{-2}\\) (constant deceleration). At $t=0$, $v=30$ m s\\(^{-1}\\).  \n   *Find $v(t)$, the stopping time, and interpret the integral $\\displaystyle\\int_{0}^{t_{\\text{stop}}} v(t)\\,dt$.*\n\n   **Solution**  \n   $v(t)=30-5t$. Set $v=0$ → $t_{\\text{stop}}=6$ s.  \n   $\\int_{0}^{6}(30-5t)dt = [30t-2.5t^{2}]_{0}^{6}=180-90=90$ m.  \n   The integral gives the total distance traveled before stopping.\n\n4. **Heat loss**  \n   A metal rod loses heat at a rate $Q'(t) = -k\\bigl(Q(t)-Q_{\\text{env}}\\bigr)$ with $k=0.02\\ \\text{min}^{-1}$, $Q_{\\text{env}}=25^\\circ\\text{C}$, $Q(0)=100^\\circ\\text{C}$.  \n   *Find $Q(t)$ and explain what $Q'(10)$ tells you about the rod at $t=10$ min.*\n\n   **Solution**  \n   Same form as the coffee example: $Q(t)=25+75e^{-0.02t}$.  \n   $Q'(10) = -0.02\\bigl(Q(10)-25\\bigr) = -0.02\\cdot75e^{-0.2}\\approx -1.23^\\circ\\text{C/min}$.  \n   The negative sign shows the rod is cooling; the magnitude tells the instantaneous cooling speed at 10 min.",
+   "heading": "5. Solving the Model and Checking Units",
+   "body": "When we have built a mathematical model, the next step is to **solve it** – that means finding the number or function the model predicts – and then **check the units** to be sure the answer really fits the original story.\n\n---\n\nFirst, write down the equation that came from the previous steps.  \nSuppose our word problem described a tank being filled with water at a rate that changes with time, and we derived  \n\n$$\\frac{dV}{dt}=3t^{2}+2\\; \\text{L/min},$$  \n\nwhere $V(t)$ is the volume of water (in litres) after $t$ minutes.  \n\n> **Definition:** *Differential equation* – an equation that relates a function to its derivative (its rate of change).\n\nOur goal is to find $V(t)$. To do that we **integrate** the rate function. Integration is the reverse of differentiation; it adds up all the tiny changes over time.\n\n$$V(t)=\\int (3t^{2}+2)\\,dt = t^{3}+2t + C,$$\n\nwhere $C$ is a constant that we determine from an **initial condition** – a piece of information given in the problem, such as “the tank is empty at $t=0$”.\n\nIf $V(0)=0$, then  \n\n$$0 = 0^{3}+2\\cdot0 + C \\quad\\Longrightarrow\\quad C=0.$$\n\nSo the model predicts  \n\n$$V(t)=t^{3}+2t\\; \\text{L}.$$\n\n---\n\n### Keeping track of units\n\nEach term in the equation must have the same unit (litres). Check them one by one.\n\n- The first term $t^{3}$: $t$ is in minutes, so $t^{3}$ has units $\\text{min}^{3}$.  \n- The second term $2t$ has units $\\text{min}$.  \n\nAt first glance this looks wrong because we need litres, not minutes. The mistake is that we omitted the unit factor that comes from integrating the rate.\n\nRecall the original rate: $3t^{2}+2$ has units **L/min**. When we integrate with respect to $t$ (minutes), we multiply by a minute:\n\n$$\\int 3t^{2}\\,\\text{L/min}\\,dt = 3\\int t^{2}\\,\\text{L/min}\\,dt\n   = 3\\left(\\frac{t^{3}}{3}\\right)\\text{L}= t^{3}\\text{L}.$$\n\nSimilarly  \n\n$$\\int 2\\,\\text{L/min}\\,dt = 2t\\text{L}.$$\n\nSo the correct expression, with units attached, is  \n\n$$V(t)=t^{3}\\,\\text{L}+2t\\,\\text{L}= (t^{3}+2t)\\,\\text{L}.$$\n\nNow every term is in litres, matching the left‑hand side $V(t)$.\n\n> **Note:** Always multiply the unit of the integrand by the unit of the variable you integrate over. This automatically gives the correct unit for the result.\n\n---\n\n### Verifying the answer makes sense\n\n1. **Plug in a simple time.**  \n   At $t=0$, $V(0)=0$ L, which matches the initial condition (the tank starts empty).\n\n2. **Check a later time.**  \n   After $t=2$ min,  \n\n   $$V(2)=2^{3}+2\\cdot2 = 8+4 = 12\\;\\text{L}.$$\n\n   The rate at $t=2$ is $3(2)^{2}+2 = 12+2 = 14\\;\\text{L/min}$.  \n   Over the next minute the volume should increase by roughly $14$ L, so reaching about $26$ L at $t=3$ min is reasonable. Compute:\n\n   $$V(3)=3^{3}+2\\cdot3 = 27+6 = 33\\;\\text{L}.$$\n\n   The increase from $t=2$ to $t=3$ is $33-12 = 21$ L, a bit larger than $14$ L because the rate itself grew during that minute. This consistency shows the model behaves plausibly.\n\n> **In daily life:** Think of a car’s speedometer. If you know the speed (km/h) at each instant, integrating it over time tells you how far you have traveled (km). Checking units is like confirming the speedometer reads km/h and the clock reads hours, so the product gives kilometres.\n\n---\n\n### What to do if the units don’t match\n\nIf after solving you find a term with the wrong unit, go back to the integration step and look for a missing factor of the variable’s unit. Often the error is forgetting that “$dt$” carries the unit of time, or that a constant like $3$ may have hidden units (e.g., $3\\;\\text{L/min}^3$).\n\n> **Common mistake:** Dropping the unit on the constant of integration $C$. Remember that $C$ must have the same unit as the quantity you are solving for (here, litres).\n\n---\n\nFinally, write the solution in a clear sentence that includes the units:\n\n*“The volume of water in the tank after $t$ minutes is $V(t) = (t^{3}+2t)$ litres.”*  \n\nBy solving the equation, keeping track of units at every step, and confirming that the numbers behave as the story predicts, we ensure the model is both mathematically correct and physically meaningful.",
    "code": ""
   },
   {
-   "heading": "6. Refining and Validating Models",
-   "body": "When we first write a mathematical model we are **making assumptions** about how the real world works.  \nThese assumptions turn the messy situation into symbols we can manipulate, but they also create limits on what the model can tell us.  \n\n---\n\n### 1. Identify and state the assumptions  \n\n1. **Simplifying the geometry** – e.g., treating a river as a straight line of constant width.  \n2. **Constant parameters** – assuming the growth rate of a bacteria culture stays the same over the time interval studied.  \n3. **Neglecting small effects** – ignoring air resistance for a short‑range projectile.  \n\nWrite each assumption clearly; later you will see whether they are reasonable.\n\n---\n\n### 2. Estimate the parameters  \n\nA model often contains unknown numbers (parameters) such as a decay constant $k$ or a maximum capacity $M$.  \nUse **experimental data** to find them:\n\n* **Direct measurement** – measure the length of a pendulum to get its period constant.  \n* **Linearisation** – if the model predicts $y = Ae^{kx}$, take logs: $\\ln y = \\ln A + kx$ and fit a straight line to $(x,\\ln y)$ data; the slope gives $k$.  \n\n---\n\n### 3. Compare model predictions with data  \n\n1. **Compute the predicted values** from the model for the same $x$‑values used in the experiment.  \n2. **Calculate the error** $E_i = |y_{\\text{data},i} - y_{\\text{model},i}|$ or the relative error $\\frac{E_i}{y_{\\text{data},i}}$.  \n3. **Summarise** the errors with a statistic such as the **mean absolute error (MAE)** or **root‑mean‑square error (RMSE)**:  \n\n$$\n\\text{RMSE}= \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}\\bigl(y_{\\text{data},i}-y_{\\text{model},i}\\bigr)^2 } .\n$$  \n\nA small error indicates the model fits well; a large error suggests a missing factor or a bad assumption.\n\n---\n\n### 4. Refine the model  \n\nIf the error is too large, revisit the assumptions:\n\n* Add a term for air resistance if the projectile falls faster than predicted.  \n* Allow the growth rate $k$ to vary with temperature if the data show a systematic drift.  \n\nRe‑estimate the new parameters and repeat the comparison. This iterative loop continues until the model is **acceptable** for the intended purpose.\n\n---\n\n## Fully worked example: Cooling of a cup of coffee  \n\n**Problem:** A cup of coffee at $90^\\circ\\text{C}$ is left in a room that stays at $20^\\circ\\text{C}$. After 5 minutes the coffee measures $70^\\circ\\text{C}$. Use Newton’s Law of Cooling to predict the temperature after 10 minutes, and check the model against a later measurement of $55^\\circ\\text{C}$ at 10 minutes.\n\n### Step 1 – Write the model and assumptions  \n\nNewton’s Law:  \n\n$$\n\\frac{dT}{dt}= -k\\,(T- T_{\\text{room}}),\n$$  \n\nwhere $T(t)$ is the coffee temperature and $T_{\\text{room}}=20^\\circ\\text{C}$ is constant.  \nAssume **constant $k$** and **no heat sources**.\n\n### Step 2 – Solve the differential equation  \n\nSeparate variables:  \n\n$$\n\\frac{dT}{T-20}= -k\\,dt.\n$$  \n\nIntegrate:  \n\n$$\n\\ln|T-20| = -kt + C.\n$$  \n\nExponentiate and solve for $T$:  \n\n$$\nT(t)=20 + Ce^{-kt}.\n$$  \n\nUse the initial condition $T(0)=90$:\n\n$$\n90 = 20 + C \\;\\Rightarrow\\; C = 70.\n$$  \n\nSo  \n\n$$\nT(t)=20 + 70e^{-kt}.\n$$  \n\n### Step 3 – Estimate $k$ from the 5‑minute data  \n\nAt $t=5$, $T=70$:\n\n$$\n70 = 20 + 70e^{-5k}\n\\;\\Rightarrow\\; 50 = 70e^{-5k}\n\\;\\Rightarrow\\; e^{-5k}= \\frac{5}{7}\n\\;\\Rightarrow\\; -5k = \\ln\\!\\left(\\frac{5}{7}\\right)\n\\;\\Rightarrow\\; k = -\\frac{1}{5}\\ln\\!\\left(\\frac{5}{7}\\right)\\approx 0.067.\n$$  \n\n### Step 4 – Predict $T$ at 10 minutes  \n\n$$\nT(10)=20 + 70e^{-0.067\\cdot10}\n      =20 + 70e^{-0.67}\n      \\approx 20 + 70(0.512) \n      \\approx 20 + 35.8 = 55.8^\\circ\\text{C}.\n$$  \n\n### Step 5 – Compare with the measured $55^\\circ\\text{C}$  \n\nError:  \n\n$$\nE = |55.8 - 55| = 0.8^\\circ\\text{C},\n$$  \n\nwhich is less than $2\\%$ relative error. The model is **validated** for this time range.\n\nIf a later measurement at 15 minutes gave $45^\\circ\\text{C}$ while the model predicted $48^\\circ\\text{C}$, we might reconsider the assumption of constant $k$ (perhaps the cup loses heat faster as it cools).\n\n---\n\n## Practice problems  \n\n### Problem 1  \nA population of bacteria grows according to $P'(t)=rP(t)$ with $P(0)=200$. After 3 hours $P=800$. Find $r$ and predict $P$ after 5 hours.  \n\n**Solution:**  \nSolve $P(t)=200e^{rt}$. Use $800=200e^{3r}\\Rightarrow e^{3r}=4\\Rightarrow 3r=\\ln4\\Rightarrow r=\\frac{\\ln4}{3}\\approx0.462$.  \nThen $P(5)=200e^{0.462\\cdot5}=200e^{2.31}\\approx200\\cdot10.07=2014$ cells.\n\n### Problem 2  \nA falling object experiences air resistance proportional to its speed: $v'(t)=g - kv(t)$, $v(0)=0$. With $g=9.8\\,$m/s² and measured $v(2)=15\\,$m/s, find $k$ and the terminal speed.  \n\n**Solution:**  \nSolve $v(t)=\\frac{g}{k}\\bigl(1-e^{-kt}\\bigr)$.  \n$15=\\frac{9.8}{k}(1-e^{-2k})$. Solve numerically → $k\\approx0.30\\,$s⁻¹.  \nTerminal speed $v_{\\infty}=g/k\\approx9.8/0.30\\approx32.7\\,$m/s.\n\n### Problem 3  \nA tank initially contains 100 L of pure water. Saltwater with concentration $0.05\\,$kg/L flows in at $2\\,$L/min, and the well‑mixed solution flows out at the same rate. Find the amount of salt after 30 min.  \n\n**Solution:**  \nLet $S(t)$ be kg of salt. $S'(t)=0.05\\cdot2 - \\frac{2}{100}S(t)=0.1-\\frac{2}{100}S$.  \nSolve: $S(t)=5\\bigl(1-e^{-0.02t}\\bigr)$.  \n$S(30)=5(1-e^{-0.6})\\approx5(1-0.549)=5(0.451)=2.26\\,$kg.\n\n### Problem 4  \nA drug concentration in blood follows $C'(t)=-kC(t)$ after an injection gives $C(0)=50\\,$mg/L. A blood test 4 h later reads $30\\,$mg/L. Determine $k$ and the concentration after 8 h.  \n\n**Solution:**  \n$C(t)=50e^{-kt}$. $30=50e^{-4k}\\Rightarrow e^{-4k}=0.6\\Rightarrow k=-\\frac{1}{4}\\ln0.6\\approx0.127$.  \n$C(8)=50e^{-0.127\\cdot8}=50e^{-1.016}\\approx50\\cdot0.362=18.1\\,$mg/L.",
+   "heading": "6. Sensitivity and What‑If Analysis",
+   "body": "When we finish building a model, we still have to ask **what happens if something in the model changes?**  \nThis is called *sensitivity analysis* – checking how sensitive the answer is to the numbers we put in.  \nA *what‑if analysis* is the same idea, but we usually phrase it as “What if we change this parameter?”  \n\n> **Definition:** *Sensitivity analysis* is the systematic study of how the output of a model varies when its input parameters are varied.\n\nWhy do we do this?  In real life the numbers we use (growth rates, costs, distances, etc.) are never known exactly.  By seeing how the result moves when we tweak a value, we learn whether the model is reliable or whether a small mistake could give a completely wrong answer.\n\n---\n\n### Step 1: Identify the key parameters\n\nLook at the formula you derived in the previous sections.  \nFor a simple population model we might have\n\n$$\nP(t)=P_0\\,e^{rt},\n$$\n\nwhere  \n\n* $P_0$ = initial population,  \n* $r$ = growth rate (per year),  \n* $t$ = time in years.\n\nThe two parameters we can change are $P_0$ and $r$.\n\n---\n\n### Step 2: Change one parameter at a time\n\nSuppose $P_0=1{,}000$ and $r=0.04$ (4 % per year).  \nAfter $t=5$ years the model predicts\n\n$$\nP(5)=1{,}000\\,e^{0.04\\cdot5}\\approx1{,}221.\n$$\n\nNow ask: *What if the growth rate is actually 5 % instead of 4 %?*  \nReplace $r$ with $0.05$:\n\n$$\nP(5)=1{,}000\\,e^{0.05\\cdot5}\\approx1{,}284.\n$$\n\nThe population rises by about $63$ people – a noticeable difference.  \n\n> **Note:** Changing a parameter by a small amount can produce a larger change in the output if the model contains an exponential term, because exponentials grow quickly.\n\n---\n\n### Step 3: Plot the effect\n\nIf you draw a short table, the pattern becomes clear:\n\n| $r$ (per year) | $P(5)$ |\n|----------------|--------|\n| 0.03           | 1 159 |\n| 0.04           | 1 221 |\n| 0.05           | 1 284 |\n| 0.06           | 1 350 |\n\nYou see a roughly linear increase in $P(5)$ for this short range, but if we extend to $t=20$ years the differences explode:\n\n$$\nP(20)=1{,}000\\,e^{20r}.\n$$\n\nWith $r=0.04$, $P(20)\\approx2{,}208$; with $r=0.05$, $P(20)\\approx2{,}718$.  \nA 1 % change in $r$ more than doubles the population after two decades.\n\n---\n\n### Step 4: Check units and realism\n\nWhen we change a parameter, we must keep the units consistent.  \nIf $r$ is given in “per month” but we plug it into a formula that expects “per year,” the answer will be off by a factor of 12.  \n\n> **Remember:** Always write down the units of every quantity before you substitute numbers.\n\nAlso ask whether the new result makes sense.  A 5 % annual growth for a small town might be unrealistic; perhaps the model should include a *carrying capacity* that limits growth.  Adding that term changes the whole equation, showing the limits of the original model.\n\n---\n\n### Step 5: Summarize what the sensitivity tells us\n\n* If the output changes a lot when a parameter changes a little, the model is **highly sensitive** to that parameter.  \n* If the output barely moves, the model is **robust** with respect to that parameter.  \n\nUnderstanding this helps us decide where to spend effort measuring values accurately.  In the population example, measuring the growth rate $r$ precisely is far more important than measuring the initial count $P_0$ to the nearest person.\n\n> **In daily life:** When you bake a cake, a small change in the amount of baking powder can make the cake rise too much or not enough.  That ingredient is a sensitive parameter, just like $r$ in our population model.\n\nBy repeatedly asking “What if …?” and recomputing, we keep the model honest and learn its practical limits.  This habit will serve you whenever you turn a word problem into a mathematical description.",
    "code": ""
   },
   {
-   "heading": "Practice Problems",
-   "body": "**Practice Problems**\n\nBelow are four real‑world scenarios. For each problem you will **set up** the appropriate limit, derivative, or integral, **solve** it, and then **interpret** what the answer means in context.  \n\n---\n\n### 1. Falling object with air resistance (derivative model)\n\nA small steel ball is dropped from a height of $100\\ \\text{m}$. Its velocity $v(t)$ (in m s\\(^{-1}\\)) satisfies  \n\n\\[\n\\frac{dv}{dt}=g - kv,\n\\]\n\nwhere $g=9.8\\ \\text{m s}^{-2}$ and $k=0.25\\ \\text{s}^{-1}$ (air resistance proportional to velocity). The ball starts from rest, $v(0)=0$.\n\n**Solution**\n\n1. **Separate variables**  \n\n   \\[\n   \\frac{dv}{g-kv}=dt.\n   \\]\n\n2. **Integrate**  \n\n   \\[\n   \\int_0^{v(t)}\\frac{dv}{g-kv}= \\int_0^{t} dt\n   \\quad\\Longrightarrow\\quad\n   -\\frac{1}{k}\\ln\\!\\bigl(g-kv\\bigr)\\Big|_{0}^{v(t)} = t.\n   \\]\n\n3. **Apply limits**  \n\n   \\[\n   -\\frac{1}{k}\\bigl[\\ln(g-kv(t))-\\ln(g)\\bigr]=t\n   \\;\\Longrightarrow\\;\n   \\ln\\!\\frac{g}{g-kv(t)} = kt.\n   \\]\n\n4. **Solve for \\(v(t)\\)**  \n\n   \\[\n   \\frac{g}{g-kv(t)} = e^{kt}\n   \\;\\Longrightarrow\\;\n   g = (g-kv(t))e^{kt}\n   \\]\n   \\[\n   g = ge^{kt} - kv(t)e^{kt}\n   \\;\\Longrightarrow\\;\n   kv(t)e^{kt}=g(e^{kt}-1)\n   \\]\n   \\[\n   v(t)=\\frac{g}{k}\\bigl(1-e^{-kt}\\bigr).\n   \\]\n\n5. **Interpretation**  \n\n   As $t\\to\\infty$, $e^{-kt}\\to0$ and $v(t)\\to g/k = 9.8/0.25 = 39.2\\ \\text{m s}^{-1}$.  \n   This is the **terminal velocity**: the speed at which gravity and air resistance balance.\n\n---\n\n### 2. Bacterial culture (limit and derivative)\n\nA bacterial population $P(t)$ (in millions) grows according to the logistic law  \n\n\\[\n\\frac{dP}{dt}=rP\\Bigl(1-\\frac{P}{K}\\Bigr),\n\\]\n\nwith growth rate $r=0.6\\ \\text{day}^{-1}$ and carrying capacity $K=10$ million. Initially $P(0)=1$ million.  \n\n**(a) Find $\\displaystyle\\lim_{t\\to\\infty}P(t)$.**  \n\n**(b) Compute $dP/dt$ at $t=2$ days.**\n\n**Solution**\n\nThe logistic solution is  \n\n\\[\nP(t)=\\frac{K}{1+Ae^{-rt}},\\qquad A=\\frac{K-P(0)}{P(0)}=\\frac{10-1}{1}=9.\n\\]\n\nThus  \n\n\\[\nP(t)=\\frac{10}{1+9e^{-0.6t}}.\n\\]\n\n(a) \\[\n\\lim_{t\\to\\infty}P(t)=\\frac{10}{1+9\\cdot 0}=10\\ \\text{million}.\n\\]\n\nThe population approaches the **carrying capacity** $K$.\n\n(b) First find $P(2)$:  \n\n\\[\nP(2)=\\frac{10}{1+9e^{-1.2}}\\approx\\frac{10}{1+9(0.301)}\\approx\\frac{10}{3.709}\\approx2.69.\n\\]\n\nNow  \n\n\\[\n\\frac{dP}{dt}=0.6\\,P\\Bigl(1-\\frac{P}{10}\\Bigr)\n          =0.6(2.69)\\Bigl(1-\\frac{2.69}{10}\\Bigr)\n          \\approx0.6(2.69)(0.731)\\approx1.18\\ \\text{million/day}.\n\\]\n\nInterpretation: after two days the culture is still far from $K$, and it is increasing by about $1.2$ million cells each day.\n\n---\n\n### 3. Profit maximization (derivative)\n\nA company sells $x$ units of a product. The revenue (in dollars) is $R(x)=120x-0.5x^{2}$ and the cost is $C(x)=30x+2000$. Profit is $P(x)=R(x)-C(x)$.\n\n**Find the production level $x$ that maximizes profit and compute that maximum profit.**\n\n**Solution**\n\n1. **Profit function**  \n\n   \\[\n   P(x)= (120x-0.5x^{2})-(30x+2000)=90x-0.5x^{2}-2000.\n   \\]\n\n2. **Derivative**  \n\n   \\[\n   P'(x)=90 - x.\n   \\]\n\n3. **Critical point**  \n\n   Set $P'(x)=0$: $90-x=0\\;\\Rightarrow\\;x=90$ units.\n\n4. **Second derivative**  \n\n   \\[\n   P''(x)=-1<0,\n   \\]\n   confirming a **maximum**.\n\n5. **Maximum profit**  \n\n   \\[\n   P(90)=90(90)-0.5(90)^{2}-2000=8100-4050-2000=2050\\ \\text{dollars}.\n   \\]\n\nInterpretation: producing **90 units** yields the greatest profit of **\\$2,050**; producing more would increase cost faster than revenue.\n\n---\n\n### 4. Water tank draining (integral model)\n\nA cylindrical tank of radius $r=2\\ \\text{m}$ drains through a hole at the bottom. The outflow rate follows Torricelli’s law:  \n\n\\[\n\\frac{dV}{dt} = -A\\sqrt{2gh},\n\\]\n\nwhere $A=\\pi(0.05)^{2}$ m\\(^2\\) is the hole area, $g=9.8\\ \\text{m s}^{-2}$, and $h(t)$ is the water depth. Since $V=\\pi r^{2}h$, we have  \n\n\\[\n\\pi r^{2}\\frac{dh}{dt}= -A\\sqrt{2gh}.\n\\]\n\nInitially $h(0)=3\\ \\text{m}$. Find the time $T$ when the tank empties ($h(T)=0$).\n\n**Solution**\n\n1. **Separate variables**  \n\n   \\[\n   \\frac{dh}{\\sqrt{h}} = -\\frac{A}{\\pi r^{2}}\\sqrt{2g}\\,dt.\n   \\]\n\n2. **Integrate** from $h=3$ to $0$ and $t=0$ to $T$  \n\n   \\[\n   \\int_{3}^{0} h^{-1/2}\\,dh = -\\frac{A\\sqrt{2g}}{\\pi r^{2}}\\int_{0}^{T} dt.\n   \\]\n\n   Left side: $\\displaystyle \\bigl[2\\sqrt{h}\\bigr]_{3}^{0}=2(0-\\sqrt{3})=-2\\sqrt{3}$.\n\n3. **Solve for $T$**  \n\n   \\[\n   -2\\sqrt{3}= -\\frac{A\\sqrt{2g}}{\\pi r^{2}}\\,T\n   \\;\\Longrightarrow\\;\n   T = \\frac{2\\sqrt{3}\\,\\pi r^{2}}{A\\sqrt{2g}}.\n   \\]\n\n   Insert numbers: $r=2$, $A=\\pi(0.05)^{2}= \\pi\\cdot0.0025$, $g=9.8$.\n\n   \\[\n   T = \\frac{2\\sqrt{3}\\,\\pi (2)^{2}}{\\pi\\cdot0.0025\\sqrt{2\\cdot9.8}}\n       = \\frac{8\\sqrt{3}}{0.0025\\sqrt{19.6}}\n       \\approx \\frac{13.856}{0.0025\\cdot4.427}\n       \\approx \\frac{13.856}{0.01107}\n       \\approx 1.25\\times10^{3}\\ \\text{s}.\n   \\]\n\n   About **21 minutes**.\n\nInterpretation: The tank will be empty after roughly twenty‑one minutes; the model assumes the hole size stays constant and neglects viscosity effects.",
+   "heading": "7. Real‑World Example Walkthrough",
+   "body": "We start by turning a story‑problem into a clear mathematical question.  \nFirst we write down what we know, what we want to find, and which quantities change with time.  \nThen we decide whether we need an **instantaneous rate** (use a derivative) or an **accumulated amount** (use an integral).  \nFinally we solve the equations, check the units, and see how the answer would change if the numbers were a little different.\n\n---\n\n**Physics: Projectile motion**\n\nA ball is thrown upward from ground level with an initial speed of $20\\ \\text{m/s}$.  \nWe want to know **when** the ball reaches its highest point and **how high** that point is.\n\n1. **Identify the variable.**  \n   Height $h(t)$ depends on time $t$ (seconds).  \n\n2. **Write the rate of change.**  \n   Gravity pulls downward with acceleration $g = 9.8\\ \\text{m/s}^2$.  \n   Acceleration is the derivative of velocity, and velocity is the derivative of height:  \n\n   $$\n   \\frac{d^2 h}{dt^2} = -g .\n   $$\n\n3. **Integrate twice** to get $h(t)$.  \n   First integration gives velocity:  \n\n   $$\n   \\frac{dh}{dt}=v(t)= -gt + C_1 .\n   $$  \n\n   The constant $C_1$ is the initial velocity, $20\\ \\text{m/s}$, so $C_1=20$.  \n\n   Second integration gives height:  \n\n   $$\n   h(t)= -\\frac{1}{2}gt^2 + 20t + C_2 .\n   $$  \n\n   At $t=0$ the ball is on the ground, so $h(0)=0$ and $C_2=0$.\n\n4. **Find the instant when the ball stops rising.**  \n   The highest point occurs when velocity $v(t)=0$:  \n\n   $$\n   0 = -gt + 20 \\quad\\Longrightarrow\\quad t_{\\text{max}} = \\frac{20}{g}\\approx2.04\\ \\text{s}.\n   $$\n\n5. **Find the maximum height.** Plug $t_{\\text{max}}$ into $h(t)$:  \n\n   $$\n   h_{\\text{max}} = -\\frac{1}{2}g\\left(\\frac{20}{g}\\right)^2 + 20\\left(\\frac{20}{g}\\right)\n                = \\frac{20^2}{2g}\\approx20.4\\ \\text{m}.\n   $$\n\n> **Remember:** The derivative tells you the *instantaneous* rate (here, velocity). Setting the derivative to zero finds a maximum or minimum.\n\n---\n\n**Biology: Bacterial growth**\n\nA culture starts with $N_0 = 500$ bacteria and doubles every 3 hours.  \nWe want the number of bacteria after $t$ hours.\n\n1. **Assume continuous exponential growth.**  \n   The rate of change of the population $N(t)$ is proportional to the current size:  \n\n   $$\n   \\frac{dN}{dt}=kN .\n   $$\n\n   The constant $k$ is the *growth constant*.\n\n2. **Solve the differential equation.**  \n   Separate variables:  \n\n   $$\n   \\frac{dN}{N}=k\\,dt .\n   $$  \n\n   Integrate both sides:  \n\n   $$\n   \\ln N = kt + C .\n   $$  \n\n   Exponentiate: $N(t)=C' e^{kt}$, where $C'=e^{C}$.\n\n3. **Find $C'$ using the initial condition.**  \n   $N(0)=500$ gives $C'=500$, so $N(t)=500e^{kt}$.\n\n4. **Determine $k$ from the doubling time.**  \n   After 3 h, $N(3)=2\\cdot500=1000$:  \n\n   $$\n   1000 = 500e^{3k}\\;\\Longrightarrow\\; e^{3k}=2\\;\\Longrightarrow\\; k=\\frac{\\ln 2}{3}\\approx0.231\\ \\text{h}^{-1}.\n   $$\n\n5. **Predict after 10 h:**  \n\n   $$\n   N(10)=500e^{0.231\\times10}\\approx500e^{2.31}\\approx500\\times10.08\\approx5040\\ \\text{bacteria}.\n   $$\n\n> **In daily life:** Exponential growth is like money earning compound interest – the amount grows faster the more you already have.\n\n---\n\n**Economics: Cost‑revenue analysis**\n\nA factory produces $x$ units of a gadget.  \nThe **cost** to produce $x$ units is $C(x)=50x+2000$ dollars (fixed cost $2000$ plus $50$ per unit).  \nThe **revenue** from selling $x$ units is $R(x)=80x$ dollars.  \nWe want the production level that **maximizes profit** $P(x)=R(x)-C(x)$.\n\n1. **Write the profit function.**  \n\n   $$\n   P(x)=80x-(50x+2000)=30x-2000 .\n   $$\n\n2. **Find where profit stops increasing.**  \n   Profit is a linear function, so its derivative is constant:  \n\n   $$\n   \\frac{dP}{dx}=30 .\n   $$  \n\n   Because the derivative is positive, profit keeps growing as $x$ grows.  \n   However, we cannot produce a negative number of units, and there may be a market limit.  \n   Suppose the market can absorb at most $100$ units. Then the **optimal** production is the maximum feasible $x=100$.\n\n3. **Check the profit at that point.**  \n\n   $$\n   P(100)=30\\times100-2000=3000-2000=1000\\ \\text{dollars}.\n   $$\n\n4. **What if the selling price drops to $70$ dollars?**  \n   New revenue $R(x)=70x$, profit $P(x)=20x-2000$.  \n   The derivative $\\frac{dP}{dx}=20$ is still positive, but the break‑even point changes: set $P(x)=0$:  \n\n   $$\n   20x-2000=0\\;\\Longrightarrow\\;x=100 .\n   $$  \n\n   So the factory must sell at least $100$ units just to cover costs.\n\n> **Common mistake:** Forgetting the fixed cost $2000$ leads to thinking profit is simply $(\\text{price}-\\text{variable cost})\\times x$, which overestimates profit for small $x$.\n\n---\n\nThese three walk‑throughs show the full modeling cycle: translate words into variables, write a rate or accumulation equation, solve using derivatives or integrals, and finally interpret the result with correct units and realistic constraints.",
    "code": ""
   }
  ],
+ "examples": [
+  {
+   "level": "Easy",
+   "title": "Filling a bathtub",
+   "given": "A bathtub is empty. Water flows in at a constant rate of $10\\ \\text{L/min}$. The tub holds $200\\ \\text{L}$. Find how long it takes to fill the tub.",
+   "steps": [
+    {
+     "label": "Rate → derivative",
+     "text": "Write the inflow rate as $ \\frac{dV}{dt}=10\\ \\text{L/min}$, where $V(t)$ is the volume of water at time $t$."
+    },
+    {
+     "label": "Integrate",
+     "text": "Integrate both sides: $\\displaystyle \\int_{0}^{V(t)} dV = \\int_{0}^{t} 10\\;dt$, giving $V(t)=10t$."
+    },
+    {
+     "label": "Solve for time",
+     "text": "Set $V(t)=200\\ \\text{L}$: $200=10t \\;\\Rightarrow\\; t=20\\ \\text{min}$."
+    }
+   ],
+   "answer": "The bathtub will be full after $\\displaystyle 20\\ \\text{minutes}$."
+  },
+  {
+   "level": "Medium",
+   "title": "Car braking distance",
+   "given": "A car traveling at $20\\ \\text{m/s}$ applies brakes that produce a constant deceleration of $4\\ \\text{m/s}^2$. Find the distance the car travels before stopping.",
+   "steps": [
+    {
+     "label": "Velocity → derivative",
+     "text": "Let $v(t)$ be speed. The deceleration gives $\\frac{dv}{dt}=-4\\ \\text{m/s}^2$."
+    },
+    {
+     "label": "Integrate velocity",
+     "text": "Integrate: $\\displaystyle \\int_{20}^{v(t)} dv = \\int_{0}^{t} -4\\;dt$, yielding $v(t)=20-4t$."
+    },
+    {
+     "label": "Find stopping time",
+     "text": "Set $v(t)=0$: $0=20-4t \\;\\Rightarrow\\; t=5\\ \\text{s}$."
+    },
+    {
+     "label": "Position → derivative",
+     "text": "Distance $s(t)$ satisfies $\\frac{ds}{dt}=v(t)=20-4t$."
+    },
+    {
+     "label": "Integrate position",
+     "text": "$\\displaystyle s(t)=\\int_{0}^{t}(20-4t)\\,dt = 20t-2t^{2}$."
+    },
+    {
+     "label": "Compute distance",
+     "text": "Plug $t=5\\ \\text{s}$: $s(5)=20(5)-2(5)^{2}=100-50=50\\ \\text{m}$."
+    }
+   ],
+   "answer": "The car travels $50\\ \\text{meters}$ before it stops."
+  },
+  {
+   "level": "Hard",
+   "title": "Harvesting a rectangular field with a variable rate",
+   "given": "A farmer harvests a rectangular field $100\\ \\text{m}$ long and $50\\ \\text{m}$ wide. The harvester moves along the length; its harvesting width is $2\\ \\text{m}$, but the speed $v(x)$ (in m/min) decreases linearly from $5\\ \\text{m/min}$ at the field edge $x=0$ to $3\\ \\text{m/min}$ at $x=100\\ \\text{m}$. Find the total time to harvest the whole field.",
+   "steps": [
+    {
+     "label": "Express speed function",
+     "text": "Because speed decreases linearly: $v(x)=5-\\frac{2}{100}x = 5-0.02x\\ \\text{m/min}$."
+    },
+    {
+     "label": "Instantaneous time element",
+     "text": "For a small strip $dx$, the time $dt$ to cover it is $dt=\\frac{dx}{v(x)}$."
+    },
+    {
+     "label": "Set up integral for total time",
+     "text": "Total time $T=\\displaystyle\\int_{0}^{100}\\frac{dx}{5-0.02x}$."
+    },
+    {
+     "label": "Evaluate integral",
+     "text": "$\\displaystyle T=\\int_{0}^{100}\\frac{dx}{5-0.02x}= \\left[-\\frac{1}{0.02}\\ln|5-0.02x|\\right]_{0}^{100}= -50\\bigl(\\ln|5-2|- \\ln|5|\\bigr)$."
+    },
+    {
+     "label": "Simplify",
+     "text": "$5-2=3$, so $T=-50(\\ln 3-\\ln 5)= -50\\ln\\!\\left(\\frac{3}{5}\\right)=50\\ln\\!\\left(\\frac{5}{3}\\right)$."
+    },
+    {
+     "label": "Numerical value",
+     "text": "$T\\approx 50\\cdot\\ln(1.6667)\\approx 50\\cdot0.5108\\approx 25.5\\ \\text{min}$."
+    }
+   ],
+   "answer": "The whole field is harvested in approximately $\\displaystyle 25.5\\ \\text{minutes}$."
+  }
+ ],
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "A ball is thrown straight up with an initial velocity of $20\\ \\text{m/s}$. Its height after $t$ seconds is given by $h(t)=20t-5t^{2}$. What is the instantaneous velocity of the ball at $t=2\\ \\text{s}$?",
+   "a": "The instantaneous velocity is the derivative $h'(t)$.\nFirst compute $h'(t)=\\frac{d}{dt}(20t-5t^{2})=20-10t$.\nEvaluate at $t=2$: $v(2)=20-10(2)=20-20=0\\ \\text{m/s}$.\nSo the ball’s velocity at $2$ seconds is $0\\ \\text{m/s}$ (the top of its flight)."
+  },
+  {
+   "level": "Easy",
+   "q": "Water flows into a tank at a rate of $R(t)=3+2t$ liters per minute, where $t$ is minutes after the start. How many liters are in the tank after $5$ minutes if it started empty?",
+   "a": "The amount of water is the integral of the rate:\n$V(5)=\\int_{0}^{5}(3+2t)\\,dt$.\nIntegrate: $\\int(3+2t)dt=3t+t^{2}+C$.\nEvaluate from $0$ to $5$: $V(5)=[3(5)+(5)^{2}] - [0]=15+25=40\\ \\text{L}$.\nThus $40$ liters are in the tank after $5$ minutes."
+  },
+  {
+   "level": "Medium",
+   "q": "A company’s profit $P$ (in thousands of dollars) depends on the price $p$ (in dollars) of its product by $P(p)= -0.02p^{2}+1.2p-10$. Find the price that maximizes profit and compute the maximum profit.",
+   "a": "To maximize profit, set derivative $P'(p)=0$.\n$P'(p)= -0.04p+1.2$.\nSolve $-0.04p+1.2=0 \\Rightarrow p=\\frac{1.2}{0.04}=30$.\nCheck second derivative $P''(p)=-0.04<0$, confirming a maximum.\nMaximum profit: $P(30)= -0.02(30)^{2}+1.2(30)-10 = -0.02(900)+36-10 = -18+36-10=8$.\nSo the optimal price is $\\$30$ and the maximum profit is $\\$8{,}000$."
+  },
+  {
+   "level": "Medium",
+   "q": "A car’s fuel consumption rate (liters per hour) is $c(v)=0.05v^{2}+0.2$, where $v$ is the speed in km/h. If the car travels at a constant speed of $80\\ \\text{km/h}$ for $3$ hours, how much fuel is used?",
+   "a": "Fuel used = consumption rate $\\times$ time (since speed is constant).\nFirst compute $c(80)=0.05(80)^{2}+0.2=0.05(6400)+0.2=320+0.2=320.2\\ \\text{L/h}$.\nFuel used $=320.2\\ \\text{L/h}\\times 3\\ \\text{h}=960.6\\ \\text{L}$."
+  },
+  {
+   "level": "Hard",
+   "q": "A population of bacteria grows according to the differential equation $\\displaystyle \\frac{dP}{dt}=kP\\left(1-\\frac{P}{M}\\right)$, where $k=0.6\\ \\text{day}^{-1}$ and the carrying capacity $M=5000$. Initially $P(0)=500$. Find $P(t)$ and determine the population after $10$ days.",
+   "a": "This is the logistic equation. Its solution is\n$$P(t)=\\frac{M}{1+Ae^{-k t}},\\qquad A=\\frac{M-P_0}{P_0}.$$\nCompute $A$: $A=\\frac{5000-500}{500}= \\frac{4500}{500}=9$.\nThus $P(t)=\\frac{5000}{1+9e^{-0.6t}}$.\nFor $t=10$: $e^{-0.6(10)}=e^{-6}\\approx0.00248$.\nDenominator $=1+9(0.00248)=1+0.0223=1.0223$.\nSo $P(10)\\approx\\frac{5000}{1.0223}\\approx 4890\\ \\text{bacteria}$."
+  },
+  {
+   "level": "Hard",
+   "q": "A projectile is launched from ground level with speed $v_0$ at angle $\\theta$ above the horizontal. Its horizontal position is $x(t)=v_0\\cos\\theta\\,t$ and vertical position $y(t)=v_0\\sin\\theta\\,t-\\frac12gt^{2}$, with $g=9.8\\ \\text{m/s}^{2}$. Derive a formula for the trajectory $y$ as a function of $x$, then find the maximum height when $v_0=50\\ \\text{m/s}$ and $\\theta=30^{\\circ}$.",
+   "a": "Eliminate $t$: from $x=v_0\\cos\\theta\\,t$ we get $t=\\frac{x}{v_0\\cos\\theta}$.\nSubstitute into $y$:\n\\[\ny(x)=v_0\\sin\\theta\\left(\\frac{x}{v_0\\cos\\theta}\\right)-\\frac12 g\\left(\\frac{x}{v_0\\cos\\theta}\\right)^{2}\n= x\\tan\\theta-\\frac{g x^{2}}{2v_0^{2}\\cos^{2}\\theta}.\n\\]\nMaximum height occurs at the apex where vertical velocity $v_y=0$.\nVertical velocity $v_y(t)=v_0\\sin\\theta-gt$. Set $0=v_0\\sin\\theta-gt\\Rightarrow t_{\\text{apex}}=\\frac{v_0\\sin\\theta}{g}$.\nHeight at apex: $y_{\\max}=v_0\\sin\\theta\\,t_{\\text{apex}}-\\frac12 g t_{\\text{apex}}^{2}\n= \\frac{(v_0\\sin\\theta)^{2}}{2g}$.\nInsert numbers: $\\sin30^{\\circ}=0.5$, so $v_0\\sin\\theta=50(0.5)=25\\ \\text{m/s}$.\nThus $y_{\\max}= \\frac{25^{2}}{2(9.8)}=\\frac{625}{19.6}\\approx31.9\\ \\text{m}$.\nHence the trajectory is $y=x\\tan30^{\\circ}-\\dfrac{9.8\\,x^{2}}{2(50)^{2}\\cos^{2}30^{\\circ}}$, and the maximum height is about $31.9\\ \\text{m}$."
+  }
+ ],
+ "recap": "The lesson shows how to turn a word problem into a mathematical model by first spotting the changing quantities (variables). It explains using limits to find instantaneous rates, then writing those rates as derivatives, and using integrals to accumulate quantities. Finally it covers solving the model, checking units, and testing how results change with different parameters.",
  "key_terms": [
   {
-   "term": "model",
-   "meaning": "A simplified mathematical equation that represents a real‑world situation."
+   "term": "Variable",
+   "meaning": "A symbol such as t, x, or v that represents a quantity that can change."
   },
   {
-   "term": "derivative",
-   "meaning": "The instantaneous rate of change of a quantity, written as dy/dx."
+   "term": "Limit",
+   "meaning": "The value that an expression approaches as the input gets arbitrarily close to a certain point."
   },
   {
-   "term": "integral",
-   "meaning": "The accumulation of tiny pieces of a quantity, written as integral of f(x) dx."
+   "term": "Instantaneous rate",
+   "meaning": "The rate of change at a single moment, found as the limit of average rates as the time interval shrinks to zero."
   },
   {
-   "term": "limit",
-   "meaning": "The value a function approaches as the input gets arbitrarily close to a point."
+   "term": "Derivative",
+   "meaning": "The limit of the average rate of change; it measures how fast one quantity changes with respect to another, written dy/dx."
   },
   {
-   "term": "instantaneous speed",
-   "meaning": "The limit of average speed as the time interval shrinks to zero; v(t) = limit as Δt→0 of [s(t+Δt)-s(t)]/Δt."
+   "term": "Integral",
+   "meaning": "The limit of a sum of many small contributions; it gives the total accumulated quantity over an interval."
   },
   {
-   "term": "parameter",
-   "meaning": "A constant in a model that must be estimated from data, such as k or M."
+   "term": "Differential equation",
+   "meaning": "An equation that relates a function to its derivative, describing how the function changes."
   },
   {
-   "term": "assumption",
-   "meaning": "A simplification made to turn a messy real situation into a workable mathematical form."
+   "term": "Sensitivity analysis",
+   "meaning": "A study of how the output of a model varies when its input parameters are varied."
   },
   {
-   "term": "definite integral",
-   "meaning": "The total accumulation of a rate over an interval, written as integral from a to b of f(x) dx."
+   "term": "What‑if analysis",
+   "meaning": "A scenario test that asks what happens to the result if a particular parameter is changed."
   }
  ],
  "quiz": [
   {
-   "q": "What does the derivative dy/dx represent in a modeling context?",
+   "q": "What is the first step when you read a word problem?",
    "options": [
-    "The total amount of y over an interval",
-    "The average value of y",
-    "The instantaneous rate of change of y with respect to x",
-    "The limit of y as x approaches infinity"
-   ],
-   "answer": 2,
-   "why": "A derivative gives the instantaneous rate of change at a point."
-  },
-  {
-   "q": "Which of the following is a correct description of a limit?",
-   "options": [
-    "The exact value of a function at a point",
-    "The value a function approaches as the input gets very close to a specific point",
-    "The area under a curve",
-    "The slope of a line"
+    "Write down all numbers",
+    "Identify the variables",
+    "Compute the derivative",
+    "Draw a graph"
    ],
    "answer": 1,
-   "why": "A limit describes the behavior of a function near a point, not necessarily its exact value."
+   "why": "Identifying the variables tells you what quantities can change and what the problem asks for."
   },
   {
-   "q": "In the falling ball example, the differential equation dv/dt = g - k v models:",
+   "q": "Which expression represents the instantaneous rate of Q at time a?",
    "options": [
-    "Constant acceleration",
-    "Air resistance proportional to velocity",
-    "Quadratic drag",
-    "No forces acting on the ball"
+    "(Q(a+Δt)-Q(a))/Δt",
+    "limit as Δt→0 of (Q(a+Δt)-Q(a))/Δt",
+    "Q'(a) plus Δt",
+    "integral of Q dt"
    ],
    "answer": 1,
-   "why": "The term -k v represents air resistance that is proportional to the current velocity."
+   "why": "The instantaneous rate is defined as the limit of the average change as Δt approaches zero."
   },
   {
-   "q": "What does the definite integral integral from a to b of v(t) dt give for a moving object?",
+   "q": "If V(t) satisfies dV/dt = 3t^2 + 2, what is V(t) after integrating?",
    "options": [
-    "The object's average speed",
-    "The object's instantaneous speed at time a",
-    "The total distance traveled between times a and b",
-    "The object's acceleration"
+    "t^3 + 2t + C",
+    "3t^3 + 2t + C",
+    "t^2 + 2t + C",
+    "t^3 + 2 + C"
    ],
-   "answer": 2,
-   "why": "Integrating velocity over time yields the total distance covered."
+   "answer": 0,
+   "why": "Integrating 3t^2 gives t^3 and integrating 2 gives 2t, plus a constant C."
   },
   {
-   "q": "Which assumption is most likely made when modeling a river as a straight line of constant width?",
+   "q": "What does the definite integral integral from a to b of f(t) dt represent?",
    "options": [
-    "The river flow changes direction rapidly",
-    "The river depth is zero",
-    "The geometry is simplified to make calculations easier",
-    "The water temperature varies widely"
-   ],
-   "answer": 2,
-   "why": "Simplifying geometry is a common assumption to reduce model complexity."
-  },
-  {
-   "q": "If a population model has a parameter M representing maximum capacity, what is M called?",
-   "options": [
-    "Growth rate",
-    "Carrying capacity",
-    "Initial population",
-    "Decay constant"
+    "The average value of f between a and b",
+    "The total accumulation of the quantity whose rate is f over [a,b]",
+    "The derivative of f at a",
+    "The limit of f as t approaches infinity"
    ],
    "answer": 1,
-   "why": "M denotes the carrying capacity, the largest population the environment can sustain."
+   "why": "A definite integral adds up all tiny contributions of the rate f over the interval, giving the total accumulated amount."
+  },
+  {
+   "q": "In a model, why is it important to check units after solving?",
+   "options": [
+    "Units determine the shape of the graph",
+    "Units verify that the answer matches the original story context",
+    "Units are needed to compute limits",
+    "Units change the derivative formula"
+   ],
+   "answer": 1,
+   "why": "Correct units confirm that the numerical result makes sense for the physical situation described."
+  },
+  {
+   "q": "What is the purpose of sensitivity analysis?",
+   "options": [
+    "To find the exact solution of a differential equation",
+    "To see how small changes in inputs affect the output",
+    "To convert derivatives to integrals",
+    "To eliminate variables"
+   ],
+   "answer": 1,
+   "why": "Sensitivity analysis tests how variations in parameters influence the model’s predictions."
   }
  ],
  "flashcards": [
   {
-   "front": "What is a mathematical model?",
-   "back": "A simple equation that captures the essential behavior of a real‑world situation."
+   "front": "What is a variable?",
+   "back": "A symbol like t, x, or v that can take different values as the situation changes."
   },
   {
-   "front": "How do you find instantaneous speed from position s(t)?",
-   "back": "Differentiate s(t) to get v(t) = ds/dt."
+   "front": "Define limit in calculus.",
+   "back": "The value that a function approaches as the input gets arbitrarily close to a certain point."
   },
   {
-   "front": "What does the integral of a rate function represent?",
-   "back": "The total accumulation of the quantity over the interval."
+   "front": "What does the derivative dy/dx represent?",
+   "back": "The instantaneous rate of change of y with respect to x, found as a limit of average rates."
   },
   {
-   "front": "Name one use of limits in modeling.",
-   "back": "To define instantaneous rates of change, such as velocity."
+   "front": "How do you obtain an instantaneous rate from data?",
+   "back": "Take the average rate over a short interval and let the interval shrink to zero (use a limit)."
   },
   {
-   "front": "What is a parameter in a model?",
-   "back": "A constant that must be measured or estimated from data."
+   "front": "What is an integral used for?",
+   "back": "To calculate the total accumulated quantity by summing infinitely many tiny pieces."
   },
   {
-   "front": "Why are assumptions necessary in modeling?",
-   "back": "They simplify complex reality so the problem becomes solvable."
+   "front": "Write the integral that gives total distance traveled from time 0 to t if speed is v(t).",
+   "back": "integral from 0 to t of v(t) dt"
   },
   {
-   "front": "What units does a derivative have?",
-   "back": "Units of the original quantity divided by units of the variable (e.g., meters per second)."
+   "front": "What is a differential equation?",
+   "back": "An equation that relates a function to its derivative, describing how the function changes."
   },
   {
-   "front": "What does a positive derivative indicate?",
-   "back": "The modeled quantity is increasing at that point."
+   "front": "Why perform a what‑if analysis?",
+   "back": "To explore how the model’s result changes when a specific parameter is altered."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
-   "file": "calculus-i-l10-falling-ball-with-air-resistance",
-   "title": "A ball falling through air showing velocity direction and drag force.",
-   "alt": "A ball falling through air showing velocity direction and drag force.",
-   "priority": 9,
-   "picture_title": "Falling Ball with Air Resistance",
-   "kind": "illustration",
-   "subject": "The picture shows a small steel ball released from a height, an arrow indicating downward velocity, and a curved arrow representing the opposing air‑resistance force proportional to the velocity.",
-   "layout": "Ball in centre, velocity arrow below it, drag arrow pointing upward, labels on each arrow.",
-   "labels": [
-    "Ball",
-    "Velocity v(t)",
-    "Air resistance kv"
-   ],
-   "after": 5
-  },
-  {
-   "type": "image",
    "file": "calculus-i-l10-water-tank-filling",
-   "title": "Cross‑section of a tank illustrating how the water level rises over time.",
-   "alt": "Cross‑section of a tank illustrating how the water level rises over time.",
+   "title": "A tank being filled with water while a flow meter shows the changing rate.",
+   "alt": "A tank being filled with water while a flow meter shows the changing rate.",
    "priority": 8,
    "picture_title": "Water Tank Filling",
-   "kind": "labelled diagram",
-   "subject": "A side view of a cylindrical tank with a pipe feeding water in; the water height h(t) is marked, and a small block shows the rate of change dh/dt as a function of time.",
-   "layout": "Tank on left, pipe entering from top right, water level line labelled h(t), small graph inset of dh/dt vs. t.",
-   "labels": [
-    "Tank",
-    "Inlet pipe",
-    "Water height h(t)",
-    "Rate dh/dt"
-   ],
-   "after": 3
+   "kind": "photo",
+   "subject": "The photo shows a cylindrical tank with a pipe delivering water, a visible flow meter, and a stopwatch to illustrate the time‑dependent filling rate described by dV/dt.",
+   "layout": "Tank centered, pipe on the left, flow meter and stopwatch in the foreground.",
+   "labels": [],
+   "after": 4
   },
   {
    "type": "image",
-   "file": "calculus-i-l10-city-traffic-flow-model",
-   "title": "A simple road network used to illustrate a traffic‑flow model with cars per minute.",
-   "alt": "A simple road network used to illustrate a traffic‑flow model with cars per minute.",
+   "file": "calculus-i-l10-car-speed-measurement",
+   "title": "A car passing two markers 10 seconds apart to illustrate instantaneous speed.",
+   "alt": "A car passing two markers 10 seconds apart to illustrate instantaneous speed.",
    "priority": 7,
-   "picture_title": "City Traffic Flow Model",
+   "picture_title": "Car Speed Measurement",
    "kind": "illustration",
-   "subject": "A map‑like sketch of two intersecting streets with arrows indicating vehicle direction; each road segment has a label for traffic density and a small box showing the derivative representing change in density.",
-   "layout": "Intersection at centre, four road segments radiating outward, arrows on each road, labels placed beside arrows.",
+   "subject": "A side view of a road with two distance markers and a car moving between them, highlighting the short time interval used to approximate instantaneous velocity.",
+   "layout": "Road runs horizontally, markers labeled 0 m and 50 m, car positioned between them with an arrow showing direction.",
    "labels": [
-    "Road A",
-    "Road B",
-    "Traffic density ρ(t)",
-    "dρ/dt"
+    "Car",
+    "Marker 1",
+    "Marker 2",
+    "Time Δt"
    ],
-   "after": 0
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l10-projectile-motion-sketch",
+   "title": "A ball thrown upward, showing height versus time and the point of maximum height.",
+   "alt": "A ball thrown upward, showing height versus time and the point of maximum height.",
+   "priority": 6,
+   "picture_title": "Projectile Motion Sketch",
+   "kind": "labelled diagram",
+   "subject": "A simple sketch of a ball launched from ground level, the trajectory curve, and a small inset graph indicating the height‑time relationship used in the physics example.",
+   "layout": "Ball trajectory in the centre, inset graph at the top right, arrows indicating upward velocity and downward acceleration.",
+   "labels": [
+    "Launch point",
+    "Peak height",
+    "Ground",
+    "Velocity vector"
+   ],
+   "after": 6
   },
   {
    "type": "steps",
-   "title": "Creating a Derivative‑Based Model",
+   "title": "From Word Problem to Model",
    "steps": [
     {
-     "label": "1",
-     "text": "Identify the variable and what its rate means"
+     "label": "Read story",
+     "text": "Identify quantities that change"
     },
     {
-     "label": "2",
-     "text": "Write an equation linking the derivative to known data"
+     "label": "Choose variables",
+     "text": "Assign symbols like t, x, V"
     },
     {
-     "label": "3",
-     "text": "Solve the differential equation for the original function"
+     "label": "Ask question",
+     "text": "Is it an instant value or accumulated amount?"
     },
     {
-     "label": "4",
-     "text": "Interpret the solution in the real‑world context"
+     "label": "Write equation",
+     "text": "Use a derivative for rates or an integral for totals"
+    },
+    {
+     "label": "Solve & check",
+     "text": "Find the function and verify units"
     }
    ],
    "loop": false,
-   "after": 2
+   "after": 0
   },
   {
    "type": "compare",
-   "title": "Derivative vs. Integral Models",
+   "title": "Instantaneous vs. Accumulated Quantities",
    "left": {
-    "name": "Derivative Model",
+    "name": "Instantaneous",
     "points": [
-     "Uses rates of change",
-     "Gives instantaneous information",
-     "Often solves for the original function"
+     "Answer at a single moment",
+     "Use limits → derivative",
+     "Example: speed at t = 5 s"
     ]
    },
    "right": {
-    "name": "Integral Model",
+    "name": "Accumulated",
     "points": [
-     "Accumulates quantities",
-     "Gives total over an interval",
-     "Uses definite integrals"
+     "Total over an interval",
+     "Use integrals",
+     "Example: distance from t = 0 to 5 s"
     ]
    },
-   "after": 3
+   "after": 2
   },
   {
    "type": "facts",
-   "title": "Units in Modeling",
+   "title": "Key Definitions",
    "items": [
     {
-     "value": "m/s",
-     "label": "Velocity"
+     "value": "Variable",
+     "label": "Symbol for a changing quantity"
     },
     {
-     "value": "m",
-     "label": "Distance"
+     "value": "Derivative",
+     "label": "Limit of average rate as interval → 0"
     },
     {
-     "value": "kg/day",
-     "label": "Biomass growth rate"
+     "value": "Integral",
+     "label": "Limit of a sum of tiny contributions"
+    },
+    {
+     "value": "Differential equation",
+     "label": "Relates a function to its derivative"
     }
    ],
    "after": 4
+  },
+  {
+   "type": "parts",
+   "title": "Components of a Simple Model",
+   "items": [
+    {
+     "name": "Independent variable",
+     "role": "What we control (e.g., time t)"
+    },
+    {
+     "name": "Dependent variable",
+     "role": "Quantity we want (e.g., volume V)"
+    },
+    {
+     "name": "Rate expression",
+     "role": "Derivative dV/dt describing change"
+    },
+    {
+     "name": "Initial condition",
+     "role": "Starting value to solve the equation"
+    }
+   ],
+   "after": 5
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }
