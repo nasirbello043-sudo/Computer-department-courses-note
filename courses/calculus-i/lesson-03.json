@@ -1,180 +1,225 @@
 {
  "title": "Continuity",
- "summary": "This lesson explains what it means for a function to be continuous at a point and on an interval, shows how limits and continuity are linked, and teaches how to spot different types of discontinuities. Students will practice identifying continuity and classifying breaks in graphs.",
+ "summary": "Continuity describes when a function has no jumps or holes at a point or over an interval. This lesson links limits to continuity and shows how to spot different types of discontinuities.",
+ "objectives": [
+  "Define continuity at a point and on an interval",
+  "Explain how limits determine continuity",
+  "Classify removable, jump, and infinite discontinuities",
+  "Use a graph to identify where a function is continuous"
+ ],
+ "prerequisites": "Students should already understand the concept of a limit and be able to compute simple limits of functions.",
+ "why": [
+  "In physics, continuous functions model smooth motion, such as the position of a car over time, allowing us to predict future states without sudden jumps. In economics, continuity ensures that small changes in price lead to small changes in demand, making models reliable.",
+  "Biology uses continuous growth curves to describe population changes, and engineering relies on continuity to guarantee that structures respond predictably to forces. Recognizing continuity helps avoid errors when applying calculus tools to real‑world problems."
+ ],
  "sections": [
   {
-   "heading": "What is Continuity at a Point?",
-   "body": "**Continuity at a Point**  \n\nA function $f$ is said to be **continuous at a point** $c$ when three simple conditions are all satisfied:\n\n1. **The function is defined at $c$** – $f(c)$ exists.  \n2. **The limit as $x$ approaches $c$ exists** – the left‑hand and right‑hand limits are equal:  \n   $$\\lim_{x\\to c^-}f(x)=\\lim_{x\\to c^+}f(x)=L.$$  \n3. **The limit equals the function value** – the number $L$ from the previous step is exactly $f(c)$:  \n   $$\\lim_{x\\to c}f(x)=f(c).$$  \n\nIf any one of these fails, the function is **discontinuous** at $c$.\n\n---\n\n### Fully worked example  \n\nConsider the piece‑wise function  \n\n\\[\nf(x)=\\begin{cases}\n2x+1, & x<3,\\\\[4pt]\n7, & x=3,\\\\[4pt]\nx^2-2x+4, & x>3.\n\\end{cases}\n\\]\n\nWe test continuity at $c=3$.\n\n**Step 1 – Is $f(3)$ defined?**  \nYes, the second piece tells us $f(3)=7$.\n\n**Step 2 – Does $\\displaystyle\\lim_{x\\to3}f(x)$ exist?**  \nCompute the left‑hand limit:  \n\n\\[\n\\lim_{x\\to3^-}f(x)=\\lim_{x\\to3^-}(2x+1)=2(3)+1=7.\n\\]\n\nCompute the right‑hand limit:  \n\n\\[\n\\lim_{x\\to3^+}f(x)=\\lim_{x\\to3^+}(x^2-2x+4)=3^2-2\\cdot3+4=9-6+4=7.\n\\]\n\nBoth one‑sided limits exist and are equal, so the two‑sided limit exists and equals $7$.\n\n**Step 3 – Does the limit equal $f(3)$?**  \nWe have $\\displaystyle\\lim_{x\\to3}f(x)=7$ and $f(3)=7$, so they are equal.\n\nSince all three conditions hold, **$f$ is continuous at $x=3$**.\n\n---\n\n### Practice problems  \n\n1. **Problem:**  \n   \\[\n   g(x)=\\begin{cases}\n   \\dfrac{x^2-4}{x-2}, & x\\neq2,\\\\[6pt]\n   5, & x=2.\n   \\end{cases}\n   \\]  \n   Determine whether $g$ is continuous at $x=2$.\n\n   **Solution:**  \n   - $g(2)=5$ (defined).  \n   - For $x\\neq2$, simplify $\\dfrac{x^2-4}{x-2}=\\dfrac{(x-2)(x+2)}{x-2}=x+2$.  \n     Hence $\\displaystyle\\lim_{x\\to2}g(x)=\\lim_{x\\to2}(x+2)=4$.  \n   - The limit $4$ does **not** equal $g(2)=5$.  \n   Therefore $g$ is **discontinuous** at $x=2$ (a removable discontinuity).\n\n2. **Problem:**  \n   \\[\n   h(x)=\\sqrt{x-1}.\n   \\]  \n   Is $h$ continuous at $x=1$?\n\n   **Solution:**  \n   - $h(1)=\\sqrt{0}=0$, so $h(1)$ exists.  \n   - $\\displaystyle\\lim_{x\\to1}h(x)=\\lim_{x\\to1}\\sqrt{x-1}=0$ (the square‑root function is continuous on its domain).  \n   - Limit $0$ equals $h(1)=0$.  \n   Hence $h$ is **continuous** at $x=1$.\n\n3. **Problem:**  \n   \\[\n   p(x)=\\frac{1}{x-3}.\n   \\]  \n   Test continuity at $x=3$.\n\n   **Solution:**  \n   - $p(3)$ is undefined (division by zero).  \n   - Because the function value does not exist, the first condition fails.  \n   Thus $p$ is **discontinuous** at $x=3$ (an infinite discontinuity).\n\n4. **Problem:**  \n   \\[\n   q(x)=\\begin{cases}\n   \\sin x, & x\\le\\pi,\\\\[4pt]\n   0, & x>\\pi.\n   \\end{cases}\n   \\]  \n   Check continuity at $x=\\pi$.\n\n   **Solution:**  \n   - $q(\\pi)=\\sin\\pi=0$, so the function is defined.  \n   - Left‑hand limit: $\\displaystyle\\lim_{x\\to\\pi^-}q(x)=\\lim_{x\\to\\pi^-}\\sin x=0$.  \n   - Right‑hand limit: $\\displaystyle\\lim_{x\\to\\pi^+}q(x)=\\lim_{x\\to\\pi^+}0=0$.  \n   - Both limits exist and equal $0$, which matches $q(\\pi)$.  \n   Therefore $q$ is **continuous** at $x=\\pi$.",
+   "heading": "What Does Continuity Mean?",
+   "body": "Imagine you have a piece of paper and a pencil. If you can draw the graph of a function from left to right **without ever lifting the pencil off the paper**, that picture is what mathematicians call a *continuous* function. The word “continuous’’ simply means “no jumps, no holes, no sudden breaks’’ in the picture.\n\nWhy do we care about this?  When a function is continuous, its graph behaves predictably: small changes in the input $x$ produce only small changes in the output $f(x)$.  This makes it possible to estimate values, to solve equations, and later, to take derivatives and integrals.  In everyday life, continuity is the reason you can turn a dimmer switch smoothly from dark to bright, rather than the light jumping from off to full brightness.\n\nLet us look at two very simple examples.\n\n1. **A straight line:** $f(x)=x$.  \n   For every $x$ you pick, the output is exactly the same number.  If you plot the points $( -2,-2), (0,0), (3,3)$ and connect them, you get a straight line that goes on forever.  There is no place where you have to pick up the pencil; the line is smooth everywhere.\n\n2. **A reciprocal function:** $f(x)=\\dfrac{1}{x}$.  \n   Here the output is the number that, when multiplied by $x$, gives $1$.  If you draw its graph, you will see two curves, one in the first quadrant and one in the third quadrant, that get closer and closer to the vertical line $x=0$ but never touch it.  On each side of $x=0$ the curve can be drawn without lifting the pencil, so the function is continuous **everywhere except at $x=0$**.  At $x=0$ there is a *hole* – the graph jumps from a very large positive value to a very large negative value, and you cannot draw a line through that point.\n\n> **Note:** A function can be continuous on some parts of its domain and not on others.  In the example $f(x)=1/x$, the function is continuous for all $x\\neq0$, but it is *discontinuous* at $x=0$ because the graph has a break there.\n\nWhen we say “the graph can be drawn without lifting the pencil,” we are really talking about the behavior of the function **at each individual point**.  At a point $a$, we look at what happens to $f(x)$ when $x$ gets very close to $a$ from both the left and the right.  If the values of $f(x)$ settle down to a single number, and that number is exactly $f(a)$, then the function is continuous at $a$.  Later we will write this idea using limits, but for now just remember the picture: no jumps, no holes, no sudden spikes.\n\n> **In daily life:** Think of a road that never has a gap or a sudden cliff.  A car can drive smoothly along it, just as a continuous function lets you move smoothly from one $x$‑value to another without “falling off’’ the graph.\n\nA common misunderstanding is to think that any function you can write down is automatically continuous.  That is **not** true.  Functions like $f(x)=\\begin{cases}1 & x\\ge 0\\\\ -1 & x<0\\end{cases}$ jump from $-1$ to $1$ at $x=0$, so you would have to lift the pencil to draw the graph.  Recognizing such jumps is an important skill.\n\n> **Remember:** Continuity means *no breaks* in the graph.  If you can trace the whole curve with a single, unbroken line, the function is continuous at every point you trace.\n\nWith this intuitive picture in mind, we are ready to turn the idea into a precise mathematical statement in the next section.",
+   "code": ""
+  },
+  {
+   "heading": "Formal Definition at a Point",
+   "body": "Imagine you are looking at a smooth road. If you stand at a point on the road and can walk a tiny step forward or backward without feeling a sudden jump or a hole, the road is **continuous** at that spot. In mathematics we describe the same idea for a function $f(x)$ at a single number $a$.\n\n> **Definition:** A function $f$ is *continuous at* $a$ if three things happen:  \n> 1. $f(a)$ is defined (the road exists at $a$).  \n> 2. The limit $\\displaystyle\\lim_{x\\to a} f(x)$ exists (the road approaches a single height from both sides).  \n> 3. The limit equals the actual value: $\\displaystyle\\lim_{x\\to a} f(x)=f(a)$.\n\nAll three must hold together; missing any one means the function is not continuous at $a$.\n\n---\n\n### Why each part matters  \n\n1. **Function defined at $a$** – If $f(a)$ does not exist, there is literally no point on the graph at $x=a$. You cannot talk about “the height of the road” there.  \n2. **Limit exists** – The limit looks at what $f(x)$ does when $x$ gets *very close* to $a$ from the left and from the right. If the left‑hand approach gives a different number than the right‑hand approach, the limit does not exist, just like a road that ends in a cliff on one side and a wall on the other.  \n3. **Limit equals the function value** – Even if the limit exists, the function could still have a “hole” at $a$ where the road is missing but the surrounding road is smooth. Filling the hole makes the limit and the function value match.\n\n> **Note:** The three conditions are not independent; they are checked in the order shown because you cannot compute $\\lim_{x\\to a} f(x)$ if $f$ is not defined near $a$.\n\n---\n\n### Step‑by‑step example  \n\nConsider the piecewise function  \n\n$$\nf(x)=\\begin{cases}\n\\displaystyle \\frac{x^{2}-4}{x-2}, & x\\neq 2,\\\\[6pt]\n5, & x=2.\n\\end{cases}\n$$\n\nWe will test continuity at $a=2$.\n\n**Step 1: Is $f(2)$ defined?**  \nYes, the definition tells us $f(2)=5$. So the first condition is satisfied.\n\n**Step 2: Does $\\displaystyle\\lim_{x\\to 2} f(x)$ exist?**  \nFor $x\\neq2$, simplify the expression:  \n\n$$\n\\frac{x^{2}-4}{x-2}= \\frac{(x-2)(x+2)}{x-2}=x+2\\quad (x\\neq2).\n$$  \n\nThus, when $x$ is close to 2 (but not equal), $f(x)=x+2$. The limit of $x+2$ as $x\\to2$ is simply  \n\n$$\n\\lim_{x\\to2}(x+2)=2+2=4.\n$$  \n\nBoth the left‑hand and right‑hand approaches give the same number 4, so the limit exists.\n\n**Step 3: Compare the limit to the function value.**  \nWe have  \n\n$$\n\\lim_{x\\to2} f(x)=4,\\qquad f(2)=5.\n$$  \n\nSince $4\\neq5$, the third condition fails. Therefore $f$ is **not continuous at $x=2$**. The graph would look like a smooth line $y=x+2$ that has a small “hole” at $(2,4)$, and a separate isolated point at $(2,5)$.\n\n> **Common mistake:** Assuming that because the algebraic expression simplifies to $x+2$, the function must be continuous everywhere. The simplification is only valid for $x\\neq2$; the original definition still leaves a gap at $x=2$.\n\n---\n\n### What we have learned  \n\n- Continuity at a point is a precise checklist: defined, limit exists, limit equals value.  \n- Checking each step prevents hidden gaps or jumps.  \n- The example shows how a removable discontinuity (the hole at $(2,4)$) can be fixed by redefining $f(2)$ to be $4$; then all three conditions would hold and the function would become continuous at $2$.\n\n> **Remember:** When you see a piecewise or rational function, always test the point where the formula changes or where a denominator could be zero. Those are the places continuity most often fails.",
    "code": ""
   },
   {
    "heading": "Continuity on an Interval",
-   "body": "Continuity on an Interval\n-------------------------\n\nWhen a function is **continuous at a single point** $c$, we require three things:\n\n1. $f(c)$ is defined.  \n2. $\\displaystyle\\lim_{x\\to c}f(x)$ exists.  \n3. The limit equals the function value: $\\displaystyle\\lim_{x\\to c}f(x)=f(c)$.\n\nTo say that a function is **continuous on an interval** means that the above three conditions hold for **every** point in that interval.\n\n### Open intervals  \n\nIf the interval is open, for example $(a,b)$, every point $x$ inside the interval satisfies $a<x<b$.  \nSince there are no endpoints, we only need to check the three conditions at each interior point.  \nThus a function $f$ is continuous on $(a,b)$ iff it is continuous at every $x\\in(a,b)$.\n\n### Closed intervals  \n\nA closed interval $[a,b]$ contains its endpoints.  \nAt interior points $x\\in(a,b)$ we use the same three‑point test as above.  \nAt the **left endpoint** $a$ we can only approach from the right, so we require the **right‑hand limit**:\n\n\\[\n\\lim_{x\\to a^{+}}f(x)=f(a).\n\\]\n\nSimilarly, at the **right endpoint** $b$ we need the **left‑hand limit**:\n\n\\[\n\\lim_{x\\to b^{-}}f(x)=f(b).\n\\]\n\nIf these two one‑sided conditions hold together with continuity at every interior point, then $f$ is continuous on the whole closed interval $[a,b]$.\n\n### Example: Checking continuity on $[0,2]$\n\nConsider  \n\n\\[\nf(x)=\\begin{cases}\nx^{2}, & 0\\le x<1,\\\\[4pt]\n2-x,   & 1\\le x\\le 2.\n\\end{cases}\n\\]\n\nWe test three regions.\n\n1. **Interior of $[0,1)$**: $f(x)=x^{2}$, a polynomial, which is continuous everywhere.  \n2. **Interior of $(1,2]$**: $f(x)=2-x$, also a polynomial, continuous everywhere.  \n3. **At the point $x=1$ (the junction)**  \n\n   *Function value*: $f(1)=2-1=1$ (using the second piece).  \n\n   *Left‑hand limit*: $\\displaystyle\\lim_{x\\to1^{-}}x^{2}=1^{2}=1$.  \n\n   *Right‑hand limit*: $\\displaystyle\\lim_{x\\to1^{+}}(2-x)=2-1=1$.  \n\n   Since both one‑sided limits exist and equal $f(1)$, $f$ is continuous at $x=1$.\n\n4. **Endpoints**  \n\n   *At $x=0$*: $\\displaystyle\\lim_{x\\to0^{+}}x^{2}=0$ and $f(0)=0^{2}=0$.  \n\n   *At $x=2$*: $\\displaystyle\\lim_{x\\to2^{-}}(2-x)=0$ and $f(2)=2-2=0$.\n\nAll conditions are satisfied, so $f$ is **continuous on the closed interval $[0,2]$**.\n\n---\n\n### Practice Problems\n\n**1.** Determine whether $g(x)=\\frac{x^{2}-4}{x-2}$ is continuous on $[1,3]$.\n\n*Solution.*  \nFactor the numerator: $x^{2}-4=(x-2)(x+2)$. For $x\\neq2$,  \n\n\\[\ng(x)=\\frac{(x-2)(x+2)}{x-2}=x+2.\n\\]\n\nThus $g(x)=x+2$ for $x\\neq2$, but $g(2)$ is **undefined** because the original formula has a zero denominator.  \n\n- Interior points $x\\in[1,3]$, $x\\neq2$: $g$ equals $x+2$, a polynomial → continuous.  \n- At $x=2$: $g(2)$ does not exist, so the first condition fails.  \n\nTherefore $g$ is **not continuous** on $[1,3]$.\n\n---\n\n**2.** Is $h(x)=\\sqrt{x}$ continuous on $[0,4]$?\n\n*Solution.*  \nThe domain of $\\sqrt{x}$ is $x\\ge0$.  \n\n- For any $c\\in(0,4]$, $\\displaystyle\\lim_{x\\to c} \\sqrt{x}= \\sqrt{c}=h(c)$.  \n- At the left endpoint $0$, we need the right‑hand limit:  \n\n  \\[\n  \\lim_{x\\to0^{+}}\\sqrt{x}=0=h(0).\n  \\]\n\nAll conditions hold, so $h$ is **continuous on $[0,4]$**.\n\n---\n\n**3.** Let  \n\n\\[\np(x)=\\begin{cases}\n\\sin x, & x\\le \\pi,\\\\[4pt]\n1,      & x>\\pi.\n\\end{cases}\n\\]\n\nIs $p$ continuous on $(-\\infty,\\infty)$?\n\n*Solution.*  \n- For $x<\\pi$, $p(x)=\\sin x$, continuous everywhere.  \n- For $x>\\pi$, $p(x)=1$, a constant, continuous everywhere.  \n- At $x=\\pi$:  \n\n  *Value*: $p(\\pi)=\\sin\\pi=0$.  \n\n  *Right‑hand limit*: $\\displaystyle\\lim_{x\\to\\pi^{+}}1=1$.  \n\n  Since $0\\neq1$, the limit does not equal the function value.  \n\nThus $p$ has a **jump discontinuity** at $x=\\pi$ and is **not continuous** on the whole real line.\n\n---\n\n**4.** Check continuity of  \n\n\\[\nq(x)=\\frac{1}{x^{2}+1}\n\\]\n\non the interval $(-\\infty,\\infty)$.\n\n*Solution.*  \nThe denominator $x^{2}+1$ is never zero for any real $x$, so $q(x)$ is defined everywhere.  \nBoth numerator and denominator are polynomials, and the quotient of continuous functions with non‑zero denominator is continuous.  \nTherefore $q$ is **continuous for all real numbers**, i.e., on $(-\\infty,\\infty)$.",
+   "body": "When we say a function is *continuous at a single point* $c$, we mean that the graph has no jump, hole, or vertical break right at $c$.  \nTo talk about an entire stretch of the graph—say from $a$ to $b$—we simply require that the same “no‑break” condition holds at **every** point inside that stretch. This is what we call **continuity on an interval**.\n\n> **Definition:** A function $f$ is *continuous on an interval* $I$ if for every point $c$ in $I$ the limit $\\displaystyle\\lim_{x\\to c}f(x)$ exists and equals $f(c)$.  \n\nIn symbols,\n$$\n\\forall c\\in I,\\qquad \\lim_{x\\to c}f(x)=f(c).\n$$\nThe phrase “for every point $c$ in $I$” is the key: we check the point‑definition at each $c$ that belongs to the interval.\n\n---\n\n### Why we care about intervals\n\nMany theorems in calculus—such as the Intermediate Value Theorem or the Extreme Value Theorem—require a function to be continuous **throughout** an interval, not just at isolated points. If a function is continuous on $[a,b]$, we can guarantee that it takes every value between $f(a)$ and $f(b)$, and that it reaches a highest and lowest point somewhere in that range. These facts are essential when we solve real problems, like finding the maximum profit of a business over a month or ensuring a bridge’s load never exceeds a safe limit.\n\n---\n\n### Open, closed, and half‑open intervals\n\nIntervals come in three basic shapes, each describing which endpoints are included.\n\n| Interval type | Notation | Endpoints included? |\n|---------------|----------|---------------------|\n| Open          | $(a,b)$  | Neither $a$ nor $b$ |\n| Closed        | $[a,b]$  | Both $a$ and $b$    |\n| Half‑open     | $[a,b)$  | $a$ included, $b$ excluded |\n| Half‑open     | $(a,b]$  | $a$ excluded, $b$ included |\n\nWhen we say “continuous on $(a,b)$”, we only need to check points **strictly between** $a$ and $b$. The endpoints $a$ and $b$ are not part of the interval, so we do not require $f(a)$ or $f(b)$ to exist or to match a limit.\n\nFor a **closed interval** $[a,b]$, the requirement is stronger: we must verify continuity at every interior point **and** at the two endpoints. At an endpoint we cannot approach from both sides, so the definition is slightly adjusted:\n\n- At the left endpoint $a$, we only look at limits as $x\\to a^{+}$ (from the right).  \n- At the right endpoint $b$, we only look at limits as $x\\to b^{-}$ (from the left).\n\nThus $f$ is continuous on $[a,b]$ if  \n\n$$\n\\lim_{x\\to a^{+}}f(x)=f(a)\\quad\\text{and}\\quad\\lim_{x\\to b^{-}}f(x)=f(b),\n$$  \n\nand the usual two‑sided condition holds for every $c$ with $a<c<b$.\n\nA **half‑open interval** mixes the two ideas. For $[a,b)$ we check the right‑hand limit at $a$ and the two‑sided limits for all interior points, but we do **not** need to check anything at $b$ because $b$ is not in the set.\n\n> **Note:** The endpoint conditions are sometimes called *one‑sided continuity* because we only approach from the side that lies inside the interval.\n\n---\n\n### Concrete example\n\nConsider the piecewise function  \n\n$$\nf(x)=\\begin{cases}\nx^{2}, & x\\le 1,\\\\[4pt]\n2x-1, & x>1.\n\\end{cases}\n$$\n\n- On the open interval $(0,2)$, we must test every point. The only place where the formula changes is at $x=1$.  \n  $\\displaystyle\\lim_{x\\to1^{-}}f(x)=1^{2}=1$ and $\\displaystyle\\lim_{x\\to1^{+}}f(x)=2(1)-1=1$, so the two limits agree and equal $f(1)=1$. Hence $f$ is continuous on $(0,2)$.\n\n- On the closed interval $[0,2]$, we also need to check the endpoints.  \n  At $x=0$, $\\displaystyle\\lim_{x\\to0^{+}}f(x)=0^{2}=0=f(0)$.  \n  At $x=2$, $\\displaystyle\\lim_{x\\to2^{-}}f(x)=2(2)-1=3=f(2)$.  \n  All conditions hold, so $f$ is continuous on $[0,2]$.\n\nIf we changed the right‑hand piece to $2x-2$, then at $x=2$ we would have $\\displaystyle\\lim_{x\\to2^{-}}f(x)=2$, while $f(2)=2(2)-2=2$; the endpoint would still be fine, but the function would jump at $x=1$, breaking continuity on any interval that contains $1$.\n\n> **In daily life:** Think of a road that never has a sudden cliff or a missing bridge segment. If you can drive smoothly from any point $a$ to any point $b$ on that road, the road is “continuous on $[a,b]$”. An open interval is like a stretch of road that starts and ends in the middle of a highway—there’s no need to check what happens before the start or after the finish.\n\n> **Common mistake:** Assuming that continuity on an open interval automatically gives continuity at the endpoints. Remember, endpoints are not part of the interval, so you must check them separately when the interval is closed or half‑open.",
    "code": ""
   },
   {
    "heading": "Limits and Continuity Relationship",
-   "body": "When we say a function \\(f\\) is **continuous at a point** \\(c\\), we are really saying three things happen together:\n\n1. \\(f(c)\\) is defined.  \n2. The limit \\(\\displaystyle\\lim_{x\\to c}f(x)\\) exists.  \n3. The limit equals the function value:  \n\n\\[\n\\lim_{x\\to c}f(x)=f(c).\n\\]\n\nThus **continuity** is just a way of saying “the limit matches the actual value.”  \nThe converse is also true: if the limit exists and equals the function’s value, then the function is continuous at that point.\n\n---\n\n### Worked Example  \n\nConsider the piece‑wise function  \n\n\\[\nf(x)=\\begin{cases}\n2x+1, & x<3,\\\\[4pt]\n7,    & x=3,\\\\[4pt]\nx^2-2x+4, & x>3.\n\\end{cases}\n\\]\n\nWe will test continuity at \\(c=3\\).\n\n**Step 1 – Is \\(f(3)\\) defined?**  \nYes, the middle piece tells us \\(f(3)=7\\).\n\n**Step 2 – Compute the left‑hand limit**  \n\n\\[\n\\lim_{x\\to 3^-}f(x)=\\lim_{x\\to 3^-}(2x+1)=2\\cdot3+1=7.\n\\]\n\n**Step 3 – Compute the right‑hand limit**  \n\n\\[\n\\lim_{x\\to 3^+}f(x)=\\lim_{x\\to 3^+}(x^2-2x+4)=3^2-2\\cdot3+4=9-6+4=7.\n\\]\n\nSince the left‑hand and right‑hand limits are equal, the two‑sided limit exists and equals \\(7\\).\n\n**Step 4 – Compare limit with function value**  \n\n\\[\n\\lim_{x\\to 3}f(x)=7 = f(3).\n\\]\n\nAll three conditions are satisfied, so **\\(f\\) is continuous at \\(x=3\\).**\n\n---\n\n### Practice Problems  \n\nBelow are four functions. For each, decide whether the function is continuous at the indicated point. Show every step.\n\n---\n\n#### Problem 1  \n\\[\ng(x)=\\frac{x^2-4}{x-2},\\qquad c=2.\n\\]\n\n**Solution**  \n1. \\(g(2)\\) is **not defined** because the denominator is zero.  \n2. Simplify: \\(\\displaystyle g(x)=\\frac{(x-2)(x+2)}{x-2}=x+2\\) for \\(x\\neq2\\).  \n3. \\(\\displaystyle\\lim_{x\\to2}g(x)=\\lim_{x\\to2}(x+2)=4\\).  \nSince \\(g(2)\\) does not exist, the function is **discontinuous** at \\(x=2\\) (a removable discontinuity).\n\n---\n\n#### Problem 2  \n\\[\nh(x)=\\begin{cases}\n\\sin x, & x\\le \\pi,\\\\[4pt]\n\\displaystyle\\frac{1}{x-\\pi}, & x>\\pi,\n\\end{cases}\\qquad c=\\pi.\n\\]\n\n**Solution**  \n1. \\(h(\\pi)=\\sin\\pi=0\\).  \n2. Left‑hand limit: \\(\\displaystyle\\lim_{x\\to\\pi^-}h(x)=\\lim_{x\\to\\pi^-}\\sin x=0\\).  \n3. Right‑hand limit: \\(\\displaystyle\\lim_{x\\to\\pi^+}\\frac{1}{x-\\pi}=+\\infty\\).  \nThe two one‑sided limits differ, so the two‑sided limit does **not** exist. Hence **\\(h\\) is discontinuous at \\(\\pi\\)** (an infinite discontinuity).\n\n---\n\n#### Problem 3  \n\\[\np(x)=\\sqrt{x},\\qquad c=0.\n\\]\n\n**Solution**  \n1. \\(p(0)=\\sqrt{0}=0\\) (defined).  \n2. For \\(x\\ge0\\), \\(\\displaystyle\\lim_{x\\to0^+}\\sqrt{x}=0\\).  \n   The left‑hand limit does not exist because the function is not defined for \\(x<0\\).  \n3. Since the domain does not include points left of \\(0\\), we only require the right‑hand limit. It equals the function value, so **\\(p\\) is continuous at \\(0\\)** (continuity on the endpoint of its domain).\n\n---\n\n#### Problem 4  \n\\[\nq(x)=\\begin{cases}\n\\displaystyle\\frac{x^2-9}{x-3}, & x\\neq3,\\\\[6pt]\n6, & x=3.\n\\end{cases}\n\\qquad c=3.\n\\]\n\n**Solution**  \n1. \\(q(3)=6\\).  \n2. Simplify the fraction for \\(x\\neq3\\):  \n\n\\[\n\\frac{x^2-9}{x-3}=\\frac{(x-3)(x+3)}{x-3}=x+3.\n\\]\n\n3. Limit: \\(\\displaystyle\\lim_{x\\to3}q(x)=\\lim_{x\\to3}(x+3)=6\\).  \n4. The limit equals the defined value \\(q(3)=6\\).  \n\nAll conditions hold, so **\\(q\\) is continuous at \\(x=3\\)** (the removable discontinuity has been “filled in”).",
+   "body": "When we say a function $f$ is **continuous** at a point $a$, we really mean that the function’s value at $a$ matches the value the function is “trying to reach” as we approach $a$ from either side.  \nIn symbols this is written as  \n\n$$\\lim_{x\\to a} f(x)=f(a).$$  \n\nThe phrase “approach from either side” refers to the **left‑hand limit** (values of $x$ a little smaller than $a$) and the **right‑hand limit** (values of $x$ a little larger than $a$). Both must exist and be the same number for the overall limit $\\displaystyle\\lim_{x\\to a} f(x)$ to exist.\n\n> **Note:** *Limit* – the number that $f(x)$ gets arbitrarily close to as $x$ gets arbitrarily close to a given point.\n\n### Why checking both sides matters  \n\nImagine you are walking toward a doorway from the left and from the right. If the floor height is the same on both sides, you can step through without stumbling – the floor is “continuous.” If the floor height jumps on one side, you will trip; the function is not continuous there.  \n\nMathematically, we first compute  \n\n$$\\lim_{x\\to a^-} f(x) \\quad\\text{(left‑hand limit)}$$  \n\nand  \n\n$$\\lim_{x\\to a^+} f(x) \\quad\\text{(right‑hand limit)}.$$  \n\nIf these two numbers are equal, we say the **two‑sided limit** exists and equals that common value. Only then can we compare it to $f(a)$. If the two‑sided limit exists **and** equals $f(a)$, the function passes the continuity test at $a$.\n\n### Table: Limit existence vs. continuity at a point  \n\n| Situation | Left‑hand limit | Right‑hand limit | Two‑sided limit | $f(a)$ defined? | Continuity at $a$? |\n|-----------|----------------|------------------|----------------|-----------------|-------------------|\n| 1. Both sides give the same number $L$, and $f(a)=L$ | $L$ | $L$ | $L$ | Yes | **Yes** |\n| 2. Both sides give the same number $L$, but $f(a)$ is different or missing | $L$ | $L$ | $L$ | No or $f(a)\\neq L$ | **No** |\n| 3. Left‑hand limit exists, right‑hand limit does not (or they differ) | $L_1$ | does not exist / $L_2\\neq L_1$ | does not exist | May or may not be defined | **No** |\n| 4. Neither side limit exists | – | – | does not exist | May or may not be defined | **No** |\n\n> **Definition:** A function is *continuous at* $a$ iff the left‑hand limit, right‑hand limit, and the function value $f(a)$ all exist **and are equal**.\n\n### Step‑by‑step checklist  \n\n1. **Find $f(a)$.** Write down the exact value of the function at the point.  \n2. **Compute the left‑hand limit** $\\displaystyle\\lim_{x\\to a^-} f(x)$. Use algebraic simplification or substitution, remembering $x$ approaches $a$ from smaller values.  \n3. **Compute the right‑hand limit** $\\displaystyle\\lim_{x\\to a^+} f(x)$. Do the same, but now $x$ approaches $a$ from larger values.  \n4. **Compare the two limits.** If they are different, the two‑sided limit does not exist, and the function is discontinuous at $a$.  \n5. **Compare the common limit (if it exists) to $f(a)$.** If they match, continuity is confirmed; otherwise, the function has a *removable* or *jump* discontinuity.\n\n> **In daily life:** Think of a road that is smooth (continuous) versus one that has a sudden pothole (discontinuity). Drivers can travel smoothly only when the road height does not jump unexpectedly – just as a graph can be drawn without lifting the pencil only when the function is continuous.\n\n### Quick example  \n\nConsider  \n\n$$f(x)=\\begin{cases}\n2x+1, & x<3,\\\\[4pt]\n7, & x=3,\\\\[4pt]\nx^2-2, & x>3.\n\\end{cases}$$  \n\n- Left‑hand limit at $3$: $\\displaystyle\\lim_{x\\to3^-}(2x+1)=2\\cdot3+1=7$.  \n- Right‑hand limit at $3$: $\\displaystyle\\lim_{x\\to3^+}(x^2-2)=3^2-2=7$.  \n- Two‑sided limit exists and equals $7$.  \n- $f(3)=7$.  \n\nAll three numbers match, so $f$ is continuous at $x=3$.\n\n> **Remember:** To prove continuity at a point, **both** one‑sided limits must exist **and** equal the function’s actual value there. Skipping either side is a common mistake that leads to wrong conclusions.",
    "code": ""
   },
   {
    "heading": "Types of Discontinuities",
-   "body": "A function may fail to be continuous in several characteristic ways.  Below we describe the four main types of discontinuities, give a simple sketch idea for each, and show how to recognise them algebraically.\n\n---\n\n### Removable discontinuity  \n\nA **removable discontinuity** occurs when the limit $\\displaystyle\\lim_{x\\to a}f(x)$ exists but $f(a)$ is either undefined or has a different value.  \n*Sketch*: imagine a curve that approaches a point $(a,L)$ from both sides, but there is a small “hole’’ at $x=a$ (or a dot at a different height).  \n\n**How to spot it**:  \n1. Compute $\\displaystyle\\lim_{x\\to a^-}f(x)$ and $\\displaystyle\\lim_{x\\to a^+}f(x)$.  \n2. If the two one‑sided limits are equal (call the common value $L$) but $f(a)\\neq L$ or $f(a)$ is not defined, the discontinuity is removable.  \n\n---\n\n### Jump discontinuity  \n\nA **jump discontinuity** happens when the left‑hand and right‑hand limits exist but are not equal.  \n*Sketch*: the graph jumps from one height to another at $x=a$, like a step.  \n\n**How to spot it**:  \n- $\\displaystyle\\lim_{x\\to a^-}f(x)=L_1$, $\\displaystyle\\lim_{x\\to a^+}f(x)=L_2$ with $L_1\\neq L_2$.  \n- The function may be defined at $a$, but the “jump’’ remains.  \n\n---\n\n### Infinite (essential) discontinuity  \n\nAn **infinite discontinuity** occurs when at least one of the one‑sided limits blows up to $\\pm\\infty$.  \n*Sketch*: the curve shoots upward or downward without bound as it approaches $x=a$.  \n\n**How to spot it**:  \n- $\\displaystyle\\lim_{x\\to a^-}f(x)=\\pm\\infty$ or $\\displaystyle\\lim_{x\\to a^+}f(x)=\\pm\\infty$.  \n- The function may also be undefined at $a$.  \n\n---\n\n### Oscillatory discontinuity  \n\nAn **oscillatory discontinuity** (also called a *essential* discontinuity) appears when the function oscillates infinitely fast near $a$, so no limit exists.  \n*Sketch*: a wavy line that gets tighter and tighter as it approaches $x=a$, never settling to a single height.  \n\n**How to spot it**:  \n- The left‑hand or right‑hand limit does not exist because the values keep jumping between different numbers.  \n- Typical example: $f(x)=\\sin\\!\\left(\\frac{1}{x-a}\\right)$ as $x\\to a$.  \n\n---\n\n## Fully worked example  \n\n**Problem**: Determine the type of discontinuity of  \n\n\\[\nf(x)=\\begin{cases}\n\\displaystyle\\frac{x^2-4}{x-2}, & x\\neq 2,\\\\[4pt]\n5, & x=2 .\n\\end{cases}\n\\]\n\n**Solution**  \n\n1. **Simplify the expression for $x\\neq2$**:  \n\n   \\[\n   \\frac{x^2-4}{x-2}= \\frac{(x-2)(x+2)}{x-2}=x+2\\qquad (x\\neq2).\n   \\]\n\n2. **Compute the limit as $x\\to2$**:  \n\n   \\[\n   \\lim_{x\\to2}f(x)=\\lim_{x\\to2}(x+2)=4.\n   \\]\n\n3. **Compare with the defined value**: $f(2)=5\\neq4$.\n\n4. Since the two‑sided limit exists (it equals $4$) but $f(2)$ is a different number, the discontinuity at $x=2$ is **removable**.  \n   If we re‑define $f(2)=4$, the function becomes continuous everywhere.\n\n---\n\n## Practice problems  \n\n### Problem 1  \n\\[\ng(x)=\\begin{cases}\n\\displaystyle\\frac{\\sin x}{x}, & x\\neq0,\\\\\n2, & x=0 .\n\\end{cases}\n\\]  \n**Solution**:  \n$\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1$. Since $g(0)=2\\neq1$, the discontinuity at $0$ is **removable**.\n\n### Problem 2  \n\\[\nh(x)=\\begin{cases}\n3x+1, & x<1,\\\\\n7, & x\\ge 1 .\n\\end{cases}\n\\]  \n**Solution**:  \nLeft limit: $\\displaystyle\\lim_{x\\to1^-}(3x+1)=4$.  \nRight limit: $\\displaystyle\\lim_{x\\to1^+}7=7$.  \nBecause $4\\neq7$, there is a **jump discontinuity** at $x=1$.\n\n### Problem 3  \n\\[\np(x)=\\frac{1}{(x-3)^2}.\n\\]  \n**Solution**:  \nAs $x\\to3$, $(x-3)^2\\to0^+$, so $p(x)\\to+\\infty$ from both sides.  \nThus $x=3$ is an **infinite discontinuity**.\n\n### Problem 4  \n\\[\nq(x)=\\sin\\!\\left(\\frac{1}{x}\\right),\\qquad x\\neq0.\n\\]  \n**Solution**:  \nWhen $x\\to0$, the argument $\\frac{1}{x}$ grows without bound, causing $\\sin$ to oscillate between $-1$ and $1$ infinitely often.  \nNo one‑sided limit exists, so $x=0$ is an **oscillatory discontinuity**.  \n\n---  \n\nThese examples illustrate how to identify each discontinuity type by examining limits and the function’s actual value.",
+   "body": "When a function is not continuous at a point, something “breaks” in its graph.  \nThe way it breaks tells us which kind of discontinuity we have.  \nWe will look at three common types: **removable**, **jump**, and **infinite (essential)**.  \nEach type has a clear picture and a simple algebraic example.\n\n---\n\n**Removable discontinuity** – plain words  \nImagine a road that has a small pothole. The road is otherwise smooth, and if we fill the pothole the road becomes perfectly continuous. For a function, a removable discontinuity occurs when the limit from the left and the right exist and are equal, but the function’s actual value at that point is either missing or different.\n\nWhy it matters  \nIf we can “repair” the function by redefining it at that single point, the function becomes continuous. This is useful when we want to apply theorems that require continuity, such as the Intermediate Value Theorem.\n\nAlgebraic example  \n$$\nf(x)=\\frac{x^{2}-1}{x-1},\\qquad x\\neq 1\n$$\nFor $x\\neq1$ we can simplify $f(x)=x+1$.  \nThe limit as $x\\to1$ is\n$$\n\\lim_{x\\to1}f(x)=\\lim_{x\\to1}(x+1)=2 .\n$$\nBut $f(1)$ is **not defined** (the original formula has $0$ in the denominator).  \nIf we define a new function $g$ by $g(1)=2$ and $g(x)=f(x)$ otherwise, $g$ is continuous at $x=1$.\n\nGraphically, the graph of $f$ looks like the line $y=x+1$ with a single hole at the point $(1,2)$.  \n\n> **Definition:** A removable discontinuity occurs when $\\displaystyle\\lim_{x\\to a}f(x)$ exists, but $f(a)$ is either undefined or $\\neq\\displaystyle\\lim_{x\\to a}f(x)$.\n\n---\n\n**Jump discontinuity** – plain words  \nThink of a staircase: you walk up, then suddenly you have to step up to a higher level. The function jumps from one height to another at a specific $x$‑value.\n\nWhy it matters  \nJump discontinuities indicate that the left‑hand limit and the right‑hand limit exist but are **different**. Many calculus tools (like the Mean Value Theorem) cannot be used across a jump.\n\nAlgebraic example  \n$$\nh(x)=\\begin{cases}\n2x+1, & x<0,\\\\[4pt]\nx-3, & x\\ge 0 .\n\\end{cases}\n$$\nCompute the one‑sided limits at $x=0$:\n\\[\n\\lim_{x\\to0^-}h(x)=2(0)+1=1,\\qquad\n\\lim_{x\\to0^+}h(x)=0-3=-3 .\n\\]\nSince $1\\neq-3$, the function jumps at $0$. The graph shows two straight lines meeting at $x=0$ with a vertical gap.\n\n> **Note:** A jump discontinuity happens when $\\displaystyle\\lim_{x\\to a^-}f(x)$ and $\\displaystyle\\lim_{x\\to a^+}f(x)$ both exist but are not equal.\n\n---\n\n**Infinite (essential) discontinuity** – plain words  \nPicture a bridge that suddenly disappears into a deep canyon; the height goes off to infinity. The function’s values grow without bound as we approach the point from at least one side.\n\nWhy it matters  \nWhen a limit blows up to $+\\infty$ or $-\\infty$, the function cannot be made continuous by redefining a single point. Such points often signal vertical asymptotes, important in curve sketching and integration.\n\nAlgebraic example  \n$$\nk(x)=\\frac{1}{x},\\qquad x\\neq0 .\n$$\nAs $x\\to0^+$, $k(x)\\to+\\infty$; as $x\\to0^-$, $k(x)\\to-\\infty$. The graph has a vertical line $x=0$ that the curve approaches but never touches.\n\n> **In daily life:** An infinite discontinuity is like a road that ends at a cliff—no matter how close you get, you never reach the other side.\n\n---\n\n> **Remember:**  \n> - Removable: limits match, function value wrong → fill the hole.  \n> - Jump: left and right limits exist but differ → a sudden step.  \n> - Infinite: at least one one‑sided limit is unbounded → a vertical break.\n\nUnderstanding these three shapes helps you quickly identify where a function fails to be continuous and decide which calculus tools are still applicable.",
    "code": ""
   },
   {
-   "heading": "How to Test Continuity Algebraically",
-   "body": "**How to Test Continuity Algebraically**\n\nWhen you are asked whether a function $f(x)$ is continuous at a point $c$, follow this simple checklist.  \n\n1. **Identify the function at $c$** – Write down $f(c)$, making sure the formula is defined at $c$. If the expression involves a denominator, a square‑root, a logarithm, etc., check that the operation is legal when $x=c$.  \n\n2. **Compute the left‑hand limit** – Evaluate  \n   $$\\lim_{x\\to c^-} f(x).$$  \n   Use algebraic simplification, factoring, rationalising, or known limit rules.  \n\n3. **Compute the right‑hand limit** – Evaluate  \n   $$\\lim_{x\\to c^+} f(x).$$  \n\n4. **Compare the three numbers** –  \n   * If $f(c)$ exists **and** the left‑hand and right‑hand limits exist **and are equal** to each other **and** equal to $f(c)$, then $f$ is **continuous at $c$**.  \n   * If any of these three values differ, or if one of the limits does not exist, $f$ is **discontinuous at $c$**.\n\n---\n\n### Fully worked example  \n\nDetermine whether  \n$$f(x)=\\frac{x^2-4}{x-2}$$  \nis continuous at $x=2$.\n\n**Step 1: Evaluate $f(2)$.**  \nDirect substitution gives $\\frac{2^2-4}{2-2}= \\frac{0}{0}$, an indeterminate form. The function is **not defined** at $x=2$, so $f(2)$ does not exist.\n\n**Step 2: Left‑hand limit.**  \nFactor the numerator: $x^2-4=(x-2)(x+2)$.  \nThen  \n$$\\frac{x^2-4}{x-2}=x+2\\quad\\text{for }x\\neq2.$$  \nHence  \n$$\\lim_{x\\to2^-} f(x)=\\lim_{x\\to2^-}(x+2)=4.$$\n\n**Step 3: Right‑hand limit.**  \nThe same simplification holds for $x>2$, so  \n$$\\lim_{x\\to2^+} f(x)=\\lim_{x\\to2^+}(x+2)=4.$$\n\n**Step 4: Compare.**  \nThe two one‑sided limits are equal ($4$), but $f(2)$ does not exist. Because the value of the function is missing, **$f$ is discontinuous at $x=2$** (a removable discontinuity).\n\n---\n\n**Practice problems**\n\n1. **Problem:**  \n   $$g(x)=\\frac{\\sin x}{x},\\qquad x=0.$$  \n   **Solution:**  \n   * $g(0)$ is undefined (division by $0$).  \n   * Use the standard limit $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1$. Both one‑sided limits equal $1$.  \n   * Since $g(0)$ does not exist, $g$ is **discontinuous at $0$** (removable).\n\n2. **Problem:**  \n   $$h(x)=\\begin{cases}\n   x^2 & x\\le 1,\\\\[2mm]\n   2x-1 & x>1,\n   \\end{cases}\\qquad x=1.$$  \n   **Solution:**  \n   * $h(1)=1^2=1$.  \n   * Left limit: $\\displaystyle\\lim_{x\\to1^-}x^2=1$.  \n   * Right limit: $\\displaystyle\\lim_{x\\to1^+}(2x-1)=2(1)-1=1$.  \n   * All three values equal $1$, so **$h$ is continuous at $1$**.\n\n3. **Problem:**  \n   $$p(x)=\\sqrt{x-3},\\qquad x=3.$$  \n   **Solution:**  \n   * $p(3)=\\sqrt{0}=0$ (defined).  \n   * Left limit does not exist because the expression under the root is negative for $x<3$; thus $\\displaystyle\\lim_{x\\to3^-}p(x)$ is undefined.  \n   * Since a one‑sided limit fails, **$p$ is discontinuous at $3$** (jump from “no real value” to $0$).\n\n4. **Problem:**  \n   $$q(x)=\\frac{x^2-9}{x-3},\\qquad x=3.$$  \n   **Solution:**  \n   * Direct substitution gives $0/0$, so $q(3)$ is undefined.  \n   * Factor: $x^2-9=(x-3)(x+3)$, so for $x\\neq3$, $q(x)=x+3$.  \n   * Left limit: $\\displaystyle\\lim_{x\\to3^-}(x+3)=6$.  \n   * Right limit: $\\displaystyle\\lim_{x\\to3^+}(x+3)=6$.  \n   * Limits agree but $q(3)$ does not exist, therefore **$q$ is discontinuous at $3$** (removable).  \n\nThese examples illustrate the checklist in action and show how different kinds of discontinuities appear.",
+   "heading": "Spotting Continuity on a Graph",
+   "body": "When you look at a picture of a function, the first question is: *does the graph have any breaks?*  \nA **continuous** graph is one you can draw without lifting your pencil.  \nIf you have to jump, skip a point, or go off to infinity, the function is not continuous at that spot.\n\n> **Definition:** A function $f$ is continuous at a point $a$ if the limit as $x$ approaches $a$ exists **and** equals $f(a)$. On a graph this means the curve meets the point $(a,f(a))$ smoothly.\n\n### 1. Holes – “missing points”\n\nA hole appears when the curve approaches a certain $x$‑value but the point itself is not drawn.  \nMathematically this is a *removable discontinuity*: the limit exists, but $f(a)$ is either undefined or has a different value.\n\n**Everyday comparison:** Imagine a road that is paved everywhere except for a small pothole. Cars can drive right up to the edge, but there is no surface at the exact spot of the pothole.\n\n**How to spot it:**  \n- Look for a small open circle on the graph.  \n- Check the $x$‑coordinate of the circle; that is the candidate $a$.  \n- Ask: “If I ignore the open circle, does the line on each side head to the same height?” If yes, the limit exists.\n\n**Practice sketch 1:** Draw the curve $y=\\frac{x^2-1}{x-1}$ for $x\\neq1$ and place an open circle at $(1,2)$.  \n*Guided question:* What is $\\displaystyle\\lim_{x\\to1}\\frac{x^2-1}{x-1}$? Does the graph give you that limit? Is the function continuous at $x=1$?\n\n### 2. Jumps – “sudden changes”\n\nA jump occurs when the left‑hand limit and the right‑hand limit at $a$ are different. The graph shows two separate pieces that do not meet.\n\n**Everyday comparison:** Think of a staircase. When you step from one step to the next, you instantly rise a fixed height – there is no smooth slope connecting them.\n\n**How to spot it:**  \n- Find a vertical line $x=a$ that cuts the graph into two pieces.  \n- Look at the heights where the left piece ends and where the right piece begins.  \n- If those heights differ, you have a jump discontinuity.\n\n**Practice sketch 2:** Draw a line with slope $2$ for $x<0$, ending at the point $(0, -1)$ with an open circle, and another line with slope $-1$ for $x>0$, starting at $(0,3)$ with an open circle.  \n*Guided question:* What are $\\displaystyle\\lim_{x\\to0^-}f(x)$ and $\\displaystyle\\lim_{x\\to0^+}f(x)$? Why can’t we assign a single value to make $f$ continuous at $0$?\n\n### 3. Vertical asymptotes – “blowing up”\n\nA vertical asymptote is a line $x=a$ that the graph approaches but never touches, while the $y$‑values grow without bound (either $+\\infty$ or $-\\infty$). This is an *essential* discontinuity.\n\n**Everyday comparison:** Picture a bridge that gets steeper and steeper as it approaches a cliff; you can get arbitrarily close to the edge, but you never actually reach it.\n\n**How to spot it:**  \n- Look for a line where the graph shoots up or down infinitely on one or both sides.  \n- The limit $\\displaystyle\\lim_{x\\to a}f(x)$ does not exist as a finite number; it is $\\pm\\infty$.\n\n**Practice sketch 3:** Plot $y=\\frac{1}{x}$ for $x<0$ and $x>0$, leaving a clear gap at $x=0$.  \n*Guided question:* What happens to $f(x)$ as $x$ gets very close to $0$ from the left? From the right? Can any single value at $x=0$ make the function continuous?\n\n> **Note:** A function can have more than one type of discontinuity on the same graph. Always check each candidate point separately.\n\n### 4. Quick visual checklist\n\n1. **Open circles?** → possible hole (removable).  \n2. **Two different heights on the same vertical line?** → jump.  \n3. **Graph shoots up/down near a vertical line?** → vertical asymptote.  \n\nIf none of these appear on the interval you are studying, the function is continuous there.\n\n> **Remember:** Continuity is a local property. A function may be continuous on some parts of its domain and not on others. Always examine each region of the graph individually.",
    "code": ""
   },
   {
-   "heading": "Common Continuous Functions",
-   "body": "**Common Continuous Functions**\n\nA function is **continuous** at a point $c$ if  \n\n\\[\n\\lim_{x\\to c}f(x)=f(c).\n\\]\n\nIf this holds for every $c$ in an interval, the function is continuous on that interval.  \nMany familiar families of functions satisfy this condition everywhere on $\\mathbb{R}$.\n\n---\n\n### 1. Polynomials  \n\nA polynomial has the form  \n\n\\[\np(x)=a_nx^n+a_{n-1}x^{n-1}+\\dots +a_1x+a_0,\n\\]\n\nwhere the coefficients $a_i$ are real numbers.  \nPolynomials are built from the operations **addition**, **subtraction**, and **multiplication** of the basic function $x\\mapsto x$, which is continuous everywhere.  \n\n*Why continuous everywhere?*  \n\n- The identity function $f(x)=x$ is continuous because $\\lim_{x\\to c}x=c$.  \n- Sums and products of continuous functions are continuous (proved using limit laws).  \n- Repeatedly applying these laws shows any finite combination of $x$ and constants—i.e., any polynomial—is continuous for every real $c$.\n\n---\n\n### 2. Exponential Functions  \n\nThe exponential function $e^x$ (and more generally $a^x$ for $a>0$) is defined as the limit of its power‑series  \n\n\\[\ne^x=\\sum_{k=0}^{\\infty}\\frac{x^{k}}{k!}.\n\\]\n\nA power series converges for all real $x$, and the sum of a convergent series of continuous terms is continuous. Hence $e^x$ is continuous everywhere.  \n\nMultiplying $e^x$ by a constant or adding another continuous function (e.g., a polynomial) preserves continuity, so any function of the form $c\\,e^{kx}+p(x)$ is also continuous for all $x$.\n\n---\n\n### 3. Trigonometric Functions  \n\nThe basic trigonometric functions $\\sin x$ and $\\cos x$ are defined geometrically on the unit circle. Their limits satisfy  \n\n\\[\n\\lim_{x\\to c}\\sin x=\\sin c,\\qquad \n\\lim_{x\\to c}\\cos x=\\cos c,\n\\]\n\nso they are continuous at every real number.  \n\nOther trig functions are obtained by algebraic operations:\n\n- $\\tan x = \\dfrac{\\sin x}{\\cos x}$ is continuous wherever $\\cos x\\neq0$ (i.e., at all $x\\neq \\frac{\\pi}{2}+k\\pi$).  \n- $\\sec x = \\dfrac{1}{\\cos x}$, $\\csc x = \\dfrac{1}{\\sin x}$, and $\\cot x = \\dfrac{\\cos x}{\\sin x}$ have similar domain restrictions, but on any interval that avoids their vertical asymptotes they are continuous.\n\nThus, **sine** and **cosine** are continuous everywhere, and the other trig functions are continuous on any interval that does not contain points where their denominators are zero.\n\n---\n\n### Worked Example  \n\n**Show that the function**  \n\n\\[\nf(x)=3x^4-2x^2+5\n\\]\n\n**is continuous for every real number.**\n\n1. **Identify the building blocks.**  \n   The function is a polynomial: it consists of powers of $x$ (namely $x^4$ and $x^2$) multiplied by constants and added together.\n\n2. **Recall the continuity of the identity function.**  \n   $g(x)=x$ is continuous because $\\lim_{x\\to c}x=c$ for any $c$.\n\n3. **Use limit laws.**  \n   - If $g(x)$ is continuous, then $g(x)^n$ is continuous for any positive integer $n$ (by repeated multiplication).  \n   - Multiplying a continuous function by a constant preserves continuity.  \n   - Adding continuous functions preserves continuity.\n\n4. **Apply the steps to $f(x)$.**  \n   - $x$ is continuous ⇒ $x^2$ and $x^4$ are continuous.  \n   - $3x^4$ and $-2x^2$ are continuous (constant multiples).  \n   - Adding $3x^4$, $-2x^2$, and $5$ (a constant function) yields a continuous function.\n\n5. **Conclusion.**  \n   Since each component is continuous everywhere and the operations used (addition, multiplication by constants) preserve continuity, $f(x)$ is continuous for all $x\\in\\mathbb{R}$.\n\n---\n\n### Practice Problems  \n\n1. **Problem:** Determine whether $g(x)=\\sqrt{x^2+1}$ is continuous on $\\mathbb{R}$.  \n\n   **Solution:**  \n   - The inside function $h(x)=x^2+1$ is a polynomial → continuous everywhere.  \n   - The square‑root function $\\sqrt{y}$ is continuous for $y\\ge0$. Since $h(x)\\ge1>0$, its output is always in the domain of $\\sqrt{\\;}$, so $\\sqrt{h(x)}$ is continuous wherever $h$ is.  \n   - Therefore $g(x)$ is continuous for all real $x$.\n\n2. **Problem:** Is $p(x)=\\dfrac{1}{x-3}$ continuous at $x=3$?  \n\n   **Solution:**  \n   - The denominator $x-3$ is zero at $x=3$, so $p(3)$ is undefined.  \n   - Continuity requires the function to be defined at the point, so $p$ is **not** continuous at $x=3$.  \n   - It is continuous on any interval that does not contain $3$.\n\n3. **Problem:** Show that $h(x)=\\sin(x^2)$ is continuous for all $x$.  \n\n   **Solution:**  \n   - $k(x)=x^2$ is a polynomial → continuous everywhere.  \n   - $\\sin y$ is continuous for every real $y$.  \n   - The composition $\\sin(k(x))$ is continuous wherever $k$ is continuous.  \n   - Hence $h(x)$ is continuous for all real $x$.\n\n4. **Problem:** Determine the continuity of $f(x)=\\ln(x)$ on the interval $(0,\\infty)$.  \n\n   **Solution:**  \n   - The natural logarithm $\\ln y$ is defined and continuous for $y>0$.  \n   - On the interval $(0,\\infty)$ the argument $x$ is always positive, so $\\ln(x)$ is defined everywhere there.  \n   - Therefore $f$ is continuous on $(0,\\infty)$. (It is not defined at $x\\le0$, so continuity there is meaningless.)",
-   "code": ""
-  },
-  {
-   "heading": "Practice Problems",
-   "body": "Continuity tells us whether a graph can be drawn **without lifting the pencil**.  \nFor a function $f$, we say it is **continuous at a point** $c$ when three conditions hold:\n\n1. $f(c)$ is defined.  \n2. $\\displaystyle\\lim_{x\\to c}f(x)$ exists.  \n3. $\\displaystyle\\lim_{x\\to c}f(x)=f(c)$.\n\nIf any of these fails, the function is **discontinuous** at $c$.\n\n---\n\n### Continuity on an Interval  \n\nA function is continuous on an interval $I$ if it is continuous at **every** point of $I$.  \nTypical intervals are closed $[a,b]$, open $(a,b)$, or half‑open $[a,b)$.  \nAt the endpoints of a closed interval we only need the **one‑sided limit**:  \n\n* At $a$, require $\\displaystyle\\lim_{x\\to a^{+}}f(x)=f(a)$.  \n* At $b$, require $\\displaystyle\\lim_{x\\to b^{-}}f(x)=f(b)$.\n\n---\n\n### Limits and Continuity Relationship  \n\nThe limit definition is the backbone of continuity.  \nIf $\\displaystyle\\lim_{x\\to c}f(x)=L$ and $L=f(c)$, then the limit “matches” the function value, giving continuity.  \nConversely, if $f$ is continuous at $c$, the limit must equal $f(c)$.\n\n---\n\n### Types of Discontinuities  \n\n| Type | Description | Example |\n|------|-------------|---------|\n| **Removable** | Limit exists but $f(c)$ is missing or different. | $f(x)=\\frac{x^2-4}{x-2}$ at $x=2$. |\n| **Jump** | Left‑hand and right‑hand limits exist but are unequal. | $g(x)=\\begin{cases}0,&x<0\\\\1,&x\\ge0\\end{cases}$ at $0$. |\n| **Infinite** | One or both one‑sided limits are $\\pm\\infty$. | $h(x)=\\frac1x$ at $0$. |\n| **Oscillatory** | Limits do not settle to a single number. | $k(x)=\\sin\\frac1x$ at $0$. |\n\n---\n\n### How to Test Continuity Algebraically  \n\n1. **Check the domain** – make sure $c$ is in it.  \n2. **Compute the limit** $\\displaystyle\\lim_{x\\to c}f(x)$. Use algebraic simplification, L’Hôpital’s rule, or known limit laws.  \n3. **Compare** the limit with $f(c)$. If they match, continuity holds.\n\n---\n\n### Common Continuous Functions  \n\n* Polynomials $p(x)=a_nx^n+\\dots +a_0$ – continuous everywhere.  \n* Rational functions $\\frac{p(x)}{q(x)}$ – continuous wherever $q(x)\\neq0$.  \n* Exponential $e^x$, logarithm $\\ln x$ (on $x>0$), trigonometric $\\sin x$, $\\cos x$ – continuous on their natural domains.  \n\n---\n\n## Practice Problems  \n\n### Problem 1  \n**Determine if** $f(x)=\\dfrac{x^{2}-4}{x-2}$ **is continuous at** $x=2$.\n\n**Solution**  \n1. $f(2)$ is undefined because the denominator $x-2=0$.  \n2. Factor the numerator: $x^{2}-4=(x-2)(x+2)$.  \n   $$f(x)=\\frac{(x-2)(x+2)}{x-2}=x+2\\quad (x\\neq2).$$  \n3. Compute the limit:  \n   $$\\lim_{x\\to2}f(x)=\\lim_{x\\to2}(x+2)=4.$$  \nSince $f(2)$ does not exist, the third continuity condition fails.  \n**Conclusion:** $f$ is **not continuous** at $x=2$ (removable discontinuity).\n\n---\n\n### Problem 2  \n**Classify the discontinuity of**  \n$$g(x)=\\begin{cases}\nx^{2}, & x<1\\\\[2mm]\n3, & x=1\\\\[2mm]\n2x-1, & x>1\n\\end{cases}$$\n\n**Solution**  \n* Left‑hand limit at $1$: $\\displaystyle\\lim_{x\\to1^{-}}g(x)=1^{2}=1$.  \n* Right‑hand limit at $1$: $\\displaystyle\\lim_{x\\to1^{+}}g(x)=2(1)-1=1$.  \nBoth one‑sided limits exist and are equal to $1$.  \n\nBut $g(1)=3\\neq1$. The limit exists, yet the function value is different.  \n**Classification:** **Removable discontinuity** at $x=1$ (can be “fixed” by redefining $g(1)=1$).\n\n---\n\n### Problem 3  \n**State whether** $h(x)=\\dfrac{1}{x}$ **is continuous on** $[-2,2]$.\n\n**Solution**  \nThe domain of $h$ is $\\mathbb{R}\\setminus\\{0\\}$.  \nThe interval $[-2,2]$ contains $0$, where $h$ is undefined and the limit $\\displaystyle\\lim_{x\\to0} \\frac1x$ does not exist (it blows up to $\\pm\\infty$).  \n\nTherefore $h$ fails the first continuity condition at $x=0$.  \n**Answer:** $h$ is **not continuous** on $[-2,2]$; it is continuous on $[-2,0)$ and $(0,2]$ separately.\n\n---\n\n### Problem 4  \n**Check continuity of** $p(x)=\\sqrt{x-1}$ **at** $x=1$ **and on** $[1,5]$.\n\n**Solution**  \n*Domain*: $x-1\\ge0\\;\\Rightarrow\\;x\\ge1$, so $1\\in\\text{Dom}(p)$.  \n\n1. Evaluate $p(1)=\\sqrt{0}=0$.  \n2. Compute the limit from the right (left limit is irrelevant because $x<1$ is outside the domain):  \n   $$\\lim_{x\\to1^{+}}p(x)=\\lim_{x\\to1^{+}}\\sqrt{x-1}=0.$$  \nSince the right‑hand limit equals $p(1)$, $p$ is continuous at $x=1$.  \n\nFor any $c\\in(1,5]$, $p$ is a composition of continuous functions (the identity $x\\mapsto x-1$ and the square‑root, which is continuous on $[0,\\infty)$). Hence $p$ is continuous at every point of $[1,5]$.  \n\n**Conclusion:** $p(x)$ is continuous on the whole interval $[1,5]$.",
+   "heading": "Quick Check and Real‑World Example",
+   "body": "Imagine a car moving along a straight road. Its position at time $t$ (seconds) is given by a function $s(t)$.  \nWe want to know whether $s(t)$ is **continuous** – that is, whether the car’s path has any sudden jumps or breaks.\n\n> **Definition:** A function $f$ is continuous at a point $a$ if $\\displaystyle\\lim_{x\\to a}f(x)=f(a)$. In words, the limit as we approach $a$ from both sides equals the actual value at $a$.\n\n### The scenario\n\nA physics teacher writes the following piece‑wise position function for the car:\n\n$$\ns(t)=\n\\begin{cases}\n3t+2, & 0\\le t<4,\\\\[4pt]\n-5t+30, & 4\\le t\\le 7,\\\\[4pt]\n10, & t>7.\n\\end{cases}\n$$\n\nThe three parts describe three different motion phases:\n\n1. **First phase (0 ≤ $t$ < 4):** The car moves forward at a constant speed of $3\\ \\text{m/s}$, starting from $s(0)=2\\ \\text{m}$.\n2. **Second phase (4 ≤ $t$ ≤ 7):** The car suddenly slows down and moves backward at $5\\ \\text{m/s}$.\n3. **Third phase ($t>7$):** The car stops at the point $s=10\\ \\text{m}$ and stays there forever.\n\n### What we need to decide\n\n*Is the position function $s(t)$ continuous for all $t\\ge0$?*  \nIf it is not, point out exactly where the break occurs and explain why the definition of continuity fails there.\n\n### Step‑by‑step reasoning\n\n1. **Check each interval separately.**  \n   Inside each piece the formula is a simple linear expression (like $3t+2$). Linear functions are polynomials, and every polynomial is continuous everywhere. So $s(t)$ is continuous on the open intervals $(0,4)$, $(4,7)$, and $(7,\\infty)$.\n\n2. **Look at the “border” points** $t=4$ and $t=7$. These are the only places where the rule changes, so a jump could happen there.\n\n3. **At $t=4$**  \n   - Left‑hand limit: $\\displaystyle\\lim_{t\\to4^-}s(t)=3(4)+2=14$.  \n   - Right‑hand limit: $\\displaystyle\\lim_{t\\to4^+}s(t)=-5(4)+30=10$.  \n   - Function value: $s(4)=-5(4)+30=10$ (because the second piece includes $t=4$).\n\n   The two one‑sided limits are different ($14\\neq10$), so the overall limit $\\displaystyle\\lim_{t\\to4}s(t)$ does **not** exist. By the definition, $s(t)$ is **not continuous at $t=4$**.\n\n4. **At $t=7$**  \n   - Left‑hand limit: $\\displaystyle\\lim_{t\\to7^-}s(t)=-5(7)+30=-5$.  \n   - Right‑hand limit: $\\displaystyle\\lim_{t\\to7^+}s(t)=10$ (the constant piece).  \n   - Function value: $s(7)=-5(7)+30=-5$.\n\n   Again the left‑hand and right‑hand limits differ, so the overall limit does not exist. Hence $s(t)$ is **not continuous at $t=7$**.\n\n5. **Conclusion:** The position function is continuous everywhere **except** at the moments $t=4\\,$s and $t=7\\,$s, where the car would have to “teleport” from one location to another. In a real physical world, such instantaneous jumps are impossible; a real car must travel through every intermediate point.\n\n> **In daily life:** Think of a runner on a track. If the runner stops suddenly at one spot and then appears a few meters ahead without running, the runner’s path is not continuous. Continuity guarantees there are no “magical jumps”.\n\n> **Common mistake:** Assuming that because each piece of a piece‑wise function is continuous, the whole function must be continuous. The glue points (where the pieces meet) must also satisfy the limit‑equals‑value condition.\n\n> **Remember:** To test continuity, always (1) compute the left‑hand limit, (2) compute the right‑hand limit, (3) compare them to the actual function value at that point. If any step fails, the function breaks there.\n\n### Quick check for you\n\nWrite down, in your own words, why the car’s position cannot be continuous at $t=4$ and $t=7$. Which part of the definition does each failure violate? Use the limits you calculated above as evidence.",
    "code": ""
   }
  ],
+ "examples": [],
+ "examples_version": 2,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Explain in your own words why a function with a “hole” at $x=2$ is not continuous there.",
+   "a": "A function is not continuous at $x=2$ because condition 1 of the definition fails: $f(2)$ is not defined. Even if the limit $\\lim_{x\\to2}f(x)$ exists, without a value at $x=2$ the function cannot equal its limit, so there is a break (a hole) in the graph."
+  },
+  {
+   "level": "Easy",
+   "q": "State the three conditions that must be true for $f$ to be continuous at $c$.",
+   "a": "(1) $f(c)$ exists. (2) $\\displaystyle\\lim_{x\\to c} f(x)$ exists. (3) $\\displaystyle\\lim_{x\\to c} f(x)=f(c)$. All three must hold simultaneously."
+  },
+  {
+   "level": "Medium",
+   "q": "Determine whether $f(x)=\\frac{x^2-4}{x-2}$ is continuous at $x=2$. Show your work.",
+   "a": "First simplify: $\\frac{x^2-4}{x-2}=\\frac{(x-2)(x+2)}{x-2}=x+2$ for $x\\neq2$.\n1. $f(2)$ is undefined (division by zero).\n2. $\\displaystyle\\lim_{x\\to2}f(x)=\\lim_{x\\to2}(x+2)=4$.\nSince $f(2)$ does not exist, condition 1 fails, so $f$ is **not** continuous at $x=2$. The discontinuity is removable; defining $f(2)=4$ would make it continuous."
+  },
+  {
+   "level": "Medium",
+   "q": "A piecewise function is defined by \\[ g(x)=\\begin{cases} x^2,& x<1\\\\[4pt] 3x-2,& x\\ge 1 \\end{cases} \\] Is $g$ continuous at $x=1$? Explain each step.",
+   "a": "Check the three conditions:\n1. $g(1)=3(1)-2=1$ (defined).\n2. Left‑hand limit: $\\displaystyle\\lim_{x\\to1^-}g(x)=\\lim_{x\\to1^-}x^2=1$.\nRight‑hand limit: $\\displaystyle\\lim_{x\\to1^+}g(x)=\\lim_{x\\to1^+}(3x-2)=1$.\nSince both one‑sided limits equal, the two‑sided limit exists and equals $1$.\n3. The limit $1$ equals $g(1)=1$.\nAll three conditions hold, so $g$ is continuous at $x=1$."
+  },
+  {
+   "level": "Hard",
+   "q": "Let $h(x)=\\begin{cases} \\displaystyle\\frac{\\sin x}{x}, & x\\neq0\\\\[6pt] k, & x=0 \\end{cases}$. Find the value of $k$ that makes $h$ continuous at $0$, and justify your answer.",
+   "a": "We need $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=h(0)=k$.\nUsing the standard limit $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}=1$, we set $k=1$.\nThus, choosing $k=1$ makes the limit equal to the function value, satisfying condition 3, and $h$ becomes continuous at $0$."
+  },
+  {
+   "level": "Hard",
+   "q": "Consider $p(x)=\\begin{cases} \\displaystyle\\frac{1}{x}, & x<0\\\\[6pt] 0, & x=0\\\\[6pt] \\displaystyle\\frac{1}{x}, & x>0 \\end{cases}$. Is $p$ continuous on the interval $[-1,1]$? Provide a detailed analysis using limits.",
+   "a": "Examine each point in $[-1,1]$:\n- For any $x\\neq0$, $p(x)=1/x$ is defined and its limit as $x\\to c$ equals $1/c$, so $p$ is continuous at those points.\n- At $x=0$:\n1. $p(0)=0$ (defined).\n2. $\\displaystyle\\lim_{x\\to0}p(x)=\\lim_{x\\to0}\\frac{1}{x}$ does **not** exist; the left‑hand limit is $-\\infty$, the right‑hand limit is $+\\infty$.\nSince the limit does not exist, condition 2 fails, so $p$ is **not** continuous at $0$.\nTherefore, $p$ is continuous on $[-1,1]$ **except** at $x=0$, where it has an infinite discontinuity."
+  }
+ ],
+ "recap": "Continuity means a function’s graph can be drawn without lifting the pencil, so there are no jumps, holes, or breaks. A function is continuous at a point if it is defined there, the limit exists, and the limit equals the function’s value. Continuity on an interval requires this condition at every point in the interval, and different types of breaks lead to removable, jump, or infinite discontinuities.",
  "key_terms": [
   {
+   "term": "continuous function",
+   "meaning": "A function whose graph has no jumps, holes, or breaks."
+  },
+  {
+   "term": "limit",
+   "meaning": "The value that f(x) approaches as x gets arbitrarily close to a given point."
+  },
+  {
    "term": "continuous at a point",
-   "meaning": "A function f is continuous at c if f(c) is defined, the limit as x approaches c exists, and the limit equals f(c)."
-  },
-  {
-   "term": "limit from the left",
-   "meaning": "The value that f(x) approaches as x approaches c from values smaller than c, written as limit x->c- f(x)."
-  },
-  {
-   "term": "limit from the right",
-   "meaning": "The value that f(x) approaches as x approaches c from values larger than c, written as limit x->c+ f(x)."
-  },
-  {
-   "term": "removable discontinuity",
-   "meaning": "A break in the graph where the two one‑sided limits are equal but either f(c) is missing or f(c) differs from that common limit."
-  },
-  {
-   "term": "jump discontinuity",
-   "meaning": "A break where the left‑hand and right‑hand limits exist but are different values."
+   "meaning": "f(a) is defined, the limit as x approaches a exists, and the limit equals f(a)."
   },
   {
    "term": "continuous on an interval",
-   "meaning": "The function satisfies the three continuity conditions at every point inside the interval; at closed endpoints only the appropriate one‑sided limit is required."
+   "meaning": "The function is continuous at every point inside the interval."
   },
   {
-   "term": "polynomial function",
-   "meaning": "A function of the form a_n x^n + ... + a_1 x + a_0, which is continuous for all real numbers."
+   "term": "removable discontinuity",
+   "meaning": "A hole in the graph where the limit exists but f(a) is missing or different."
   },
   {
-   "term": "one‑sided limit",
-   "meaning": "A limit taken from only one side of a point, either limit x->c+ or limit x->c-."
+   "term": "jump discontinuity",
+   "meaning": "The left‑hand and right‑hand limits exist but are different, causing a sudden jump."
+  },
+  {
+   "term": "infinite discontinuity",
+   "meaning": "At least one one‑sided limit is infinite, causing the graph to blow up."
+  },
+  {
+   "term": "piecewise function",
+   "meaning": "A function defined by different formulas on different parts of its domain."
   }
  ],
  "quiz": [
   {
-   "q": "Which of the following must be true for f to be continuous at x = 2?",
+   "q": "What three conditions must hold for a function to be continuous at a point a?",
    "options": [
-    "f(2) is undefined",
-    "The left‑hand limit at 2 does not exist",
-    "The limit as x approaches 2 equals f(2)",
-    "The right‑hand limit at 2 is different from the left‑hand limit"
+    "f(a) is defined, limit exists, limit equals f(a)",
+    "f(a) is defined, derivative exists, limit equals f(a)",
+    "limit exists, derivative exists, function is bounded",
+    "f(a) is defined, function is differentiable, limit exists"
    ],
-   "answer": 2,
-   "why": "Continuity requires the limit to exist and equal the function value."
+   "answer": 0,
+   "why": "All three are required by the definition of continuity at a point."
   },
   {
-   "q": "For the piecewise function f(x)= { x^2 for x<1, 3 for x=1, 2x+1 for x>1 }, is f continuous at x=1?",
+   "q": "If a function has a hole at x=2 but the limit as x approaches 2 is 5, what type of discontinuity is it?",
    "options": [
-    "Yes, because the left and right limits are both 1",
-    "No, because f(1) does not equal the common limit",
-    "Yes, because the function is defined at 1",
-    "No, because the left‑hand limit does not exist"
+    "jump discontinuity",
+    "removable discontinuity",
+    "infinite discontinuity",
+    "no discontinuity"
    ],
    "answer": 1,
-   "why": "Both one‑sided limits equal 1, but f(1)=3, so the limit does not equal the function value."
+   "why": "A hole with an existing limit is a removable discontinuity."
   },
   {
-   "q": "What type of discontinuity occurs when lim x->a- f(x)=4, lim x->a+ f(x)=4, but f(a)=5?",
+   "q": "Which statement is true about continuity on an interval [a,b]?",
    "options": [
-    "Jump discontinuity",
-    "Infinite discontinuity",
-    "Removable discontinuity",
-    "Oscillatory discontinuity"
-   ],
-   "answer": 2,
-   "why": "The limit exists and equals 4, but the function value differs, which is a removable discontinuity."
-  },
-  {
-   "q": "A function is continuous on the open interval (0,5). Which statement is always true?",
-   "options": [
-    "It is also continuous at x=0 and x=5",
-    "It may have a jump at x=3",
-    "It has no breaks for any x between 0 and 5",
-    "It must be a polynomial"
-   ],
-   "answer": 2,
-   "why": "Continuity on an open interval means there are no breaks at any interior point."
-  },
-  {
-   "q": "Which of these functions is continuous everywhere on the real line?",
-   "options": [
-    "f(x)=1/(x-2)",
-    "g(x)=sqrt(x)",
-    "h(x)=x^3 - 4x + 7",
-    "k(x)=ln(x-1)"
-   ],
-   "answer": 2,
-   "why": "Polynomials have no restrictions and are continuous for all real numbers."
-  },
-  {
-   "q": "At the left endpoint a of a closed interval [a,b], which condition is required for continuity?",
-   "options": [
-    "limit x->a- f(x)=f(a)",
-    "limit x->a+ f(x)=f(a)",
-    "Both one‑sided limits must equal f(a)",
-    "No condition is needed at endpoints"
+    "It only needs to be continuous at the endpoints",
+    "It must be continuous at every point between a and b",
+    "It can have a jump at one interior point",
+    "It requires the function to be differentiable"
    ],
    "answer": 1,
-   "why": "Only the right‑hand (one‑sided) limit is needed at the left endpoint of a closed interval."
+   "why": "Continuity on an interval means the point‑definition holds for every point in the interval."
+  },
+  {
+   "q": "For the piecewise function s(t) given, is s(t) continuous at t=4?",
+   "options": [
+    "Yes, because the left and right formulas give the same value",
+    "No, because the left formula is not defined at t=4",
+    "Yes, because both pieces meet at the same point",
+    "No, because the derivative is different"
+   ],
+   "answer": 2,
+   "why": "Both pieces give s(4)=14, so the limit equals the function value."
+  },
+  {
+   "q": "What characterizes an infinite discontinuity?",
+   "options": [
+    "Both one‑sided limits are finite but unequal",
+    "At least one one‑sided limit is infinite",
+    "The function is undefined at the point but limits exist",
+    "The function has a removable hole"
+   ],
+   "answer": 1,
+   "why": "An infinite discontinuity occurs when a limit blows up to infinity."
+  },
+  {
+   "q": "Which of the following is NOT a requirement for continuity at a point?",
+   "options": [
+    "The function must be defined there",
+    "The limit must exist",
+    "The derivative must exist",
+    "The limit must equal the function value"
+   ],
+   "answer": 2,
+   "why": "Differentiability is stronger than continuity and not required."
   }
  ],
  "flashcards": [
   {
-   "front": "Define continuity at a point.",
-   "back": "f is continuous at c if f(c) exists, limit x->c f(x) exists, and limit x->c f(x)=f(c)."
+   "front": "What does it mean to draw a graph without lifting the pencil?",
+   "back": "The function is continuous; there are no jumps, holes, or breaks."
+  },
+  {
+   "front": "Define limit in plain words.",
+   "back": "The number that f(x) gets arbitrarily close to as x gets arbitrarily close to a given point."
+  },
+  {
+   "front": "State the three parts of the definition of continuity at a point a.",
+   "back": "f(a) is defined, the limit as x approaches a exists, and the limit equals f(a)."
   },
   {
    "front": "What is a removable discontinuity?",
-   "back": "The limit exists but f(c) is missing or different; the hole can be 'filled' to make the function continuous."
+   "back": "A hole where the limit exists but the function’s value is missing or different."
   },
   {
-   "front": "State the three conditions for continuity on a closed interval [a,b].",
-   "back": "Continuity at every interior point and right‑hand limit equals f(a) at a, left‑hand limit equals f(b) at b."
+   "front": "Give an example of a jump discontinuity.",
+   "back": "A function that equals 1 for x<0 and 2 for x>=0; the left and right limits differ."
   },
   {
-   "front": "Give an example of a function that has a jump discontinuity.",
-   "back": "f(x)= {0 for x<0, 1 for x>=0} has a jump at x=0 because the left and right limits are different."
+   "front": "What is an infinite (essential) discontinuity?",
+   "back": "A point where at least one one‑sided limit goes to infinity, causing the graph to shoot up or down."
   },
   {
-   "front": "Why are all polynomial functions continuous everywhere?",
-   "back": "Polynomials are built from the identity function using addition, subtraction, and multiplication, each of which preserves continuity."
+   "front": "How do you check continuity on an interval?",
+   "back": "Verify the three conditions at every point inside the interval."
   },
   {
-   "front": "How do you test continuity algebraically?",
-   "back": "Check that f(c) is defined, compute left‑hand and right‑hand limits, and verify they exist, are equal, and equal f(c)."
-  },
-  {
-   "front": "What is a one‑sided limit?",
-   "back": "A limit taken from only one direction: limit x->c+ (right) or limit x->c- (left)."
-  },
-  {
-   "front": "Describe an infinite discontinuity.",
-   "back": "The function grows without bound as x approaches a point, so the limit is infinite (e.g., f(x)=1/(x-2) at x=2)."
+   "front": "Why is continuity important for calculus theorems?",
+   "back": "Many theorems, like the Intermediate Value Theorem, require the function to have no breaks on the interval."
   }
  ],
- "reviewed": false,
  "diagrams": [
   {
    "type": "image",
@@ -196,40 +241,100 @@
   },
   {
    "type": "image",
-   "file": "calculus-i-l03-continuous-real-world-example",
-   "title": "A water pipe with no leaks represents a continuous process.",
-   "alt": "A water pipe with no leaks represents a continuous process.",
-   "priority": 7,
-   "picture_title": "Continuous Real‑World Example",
+   "file": "calculus-i-l03-road-with-pothole",
+   "title": "A smooth road that has a small pothole that can be filled in.",
+   "alt": "A smooth road that has a small pothole that can be filled in.",
+   "priority": 9,
+   "picture_title": "Road with Pothole",
    "kind": "photo",
-   "subject": "A clear photograph of a straight section of pipe with water flowing smoothly, emphasizing that the flow is uninterrupted from start to end.",
-   "layout": "The pipe runs from left to right across the image; a small arrow indicates the direction of flow.",
+   "subject": "A real road surface showing a single shallow hole. The surrounding pavement is continuous, illustrating a removable discontinuity that disappears when the hole is repaired.",
+   "layout": "The pothole is centered in the frame with the surrounding road extending to the left and right, no labels needed.",
    "labels": [],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l03-broken-bridge-gap",
+   "title": "A bridge with a missing segment that forces a jump across a gap.",
+   "alt": "A bridge with a missing segment that forces a jump across a gap.",
+   "priority": 8,
+   "picture_title": "Broken Bridge Gap",
+   "kind": "photo",
+   "subject": "A pedestrian bridge where a section is missing, creating a clear jump. The two ends of the bridge are aligned but not connected, representing a jump discontinuity.",
+   "layout": "The gap is in the middle of the image, the bridge sections on each side are visible, no labels needed.",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-i-l03-waterfall-cliff-edge",
+   "title": "A river flowing over a cliff, dropping infinitely downwards.",
+   "alt": "A river flowing over a cliff, dropping infinitely downwards.",
+   "priority": 7,
+   "picture_title": "Waterfall Cliff Edge",
+   "kind": "photo",
+   "subject": "A river that reaches a cliff and falls vertically, showing an abrupt, unbounded rise in height—an infinite (essential) discontinuity.",
+   "layout": "The river is shown approaching the cliff from the left, then disappearing over the edge; the cliff edge is centered, no labels needed.",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Why Continuity Matters",
+   "items": [
+    {
+     "value": "Predictable",
+     "label": "small changes in x give small changes in f(x)"
+    },
+    {
+     "value": "Estimations",
+     "label": "allows value approximation"
+    },
+    {
+     "value": "Calculus",
+     "label": "enables derivatives and integrals"
+    }
+   ],
    "after": 0
   },
   {
-   "type": "steps",
-   "title": "How to Test Continuity at a Point",
-   "steps": [
+   "type": "parts",
+   "title": "Continuity at a Point",
+   "items": [
     {
-     "label": "1",
-     "text": "Check that f(c) is defined."
+     "name": "Defined",
+     "role": "f(a) exists"
     },
     {
-     "label": "2",
-     "text": "Find the left‑hand limit as x→c⁻."
+     "name": "Limit Exists",
+     "role": "lim_{x→a} f(x) exists"
     },
     {
-     "label": "3",
-     "text": "Find the right‑hand limit as x→c⁺."
-    },
-    {
-     "label": "4",
-     "text": "If both limits exist and equal f(c), the function is continuous."
+     "name": "Match",
+     "role": "lim_{x→a} f(x) = f(a)"
     }
    ],
-   "after": 0,
-   "loop": false
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "How to Check Continuity at a Point",
+   "steps": [
+    {
+     "label": "Value",
+     "text": "Confirm f(a) is given"
+    },
+    {
+     "label": "Limit",
+     "text": "Compute lim_{x→a} f(x)"
+    },
+    {
+     "label": "Compare",
+     "text": "See if limit equals f(a)"
+    }
+   ],
+   "loop": false,
+   "after": 1
   },
   {
    "type": "compare",
@@ -237,39 +342,40 @@
    "left": {
     "name": "Removable",
     "points": [
-     "Limit exists",
-     "f(a) missing or wrong value"
+     "Left and right limits exist and are equal",
+     "f(a) missing or different"
     ]
    },
    "right": {
-    "name": "Jump",
+    "name": "Jump / Infinite",
     "points": [
-     "Left‑hand limit ≠ right‑hand limit",
-     "No single limit"
+     "Left and right limits differ (jump)",
+     "One side goes to ±∞ (infinite)"
     ]
    },
-   "after": 2
+   "after": 4
   },
   {
-   "type": "facts",
-   "title": "Common Continuous Functions",
-   "items": [
+   "type": "graph",
+   "title": "Removable Discontinuity Example",
+   "fn": "(x^2-1)/(x-1)",
+   "xmin": -2,
+   "xmax": 3,
+   "points": [
     {
-     "value": "All real numbers",
-     "label": "Domain of polynomials"
-    },
-    {
-     "value": "All real numbers",
-     "label": "Domain of exponential functions"
-    },
-    {
-     "value": "All real numbers",
-     "label": "Domain of sine and cosine"
+     "x": 1,
+     "y": 2,
+     "label": "hole",
+     "open": true
     }
    ],
-   "after": 5
+   "caption": "The function equals x+1 except for a missing point at x=1.",
+   "after": 4
   }
  ],
- "images_checked": true,
- "images_version": 5
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
 }

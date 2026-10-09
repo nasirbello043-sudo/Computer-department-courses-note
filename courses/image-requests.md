@@ -1,10 +1,10 @@
 # Pictures to add
 
-Waiting: **15** | Uploaded: **34** | Covers waiting: **5**
+Waiting: **8** | Uploaded: **34** | Covers waiting: **5**
 
 ## Course covers
 
-Upload each cover into `courses/images` with the exact name. It shows on the course card and behind every lesson banner.
+Upload each cover into `courses/images` with the exact name. It shows as a book on the course card, the course page and the lesson banner on wide screens.
 
 ### Introduction to Programming
 
@@ -14,7 +14,12 @@ cover-introduction-to-programming.jpg
 ```
 Prompt:
 ```
-A beautiful simple flat vector illustration for a school course called "Introduction to Programming". One clear central subject that represents the subject, a deep orange colour palette with cream highlights, soft shapes, clean modern educational style, landscape orientation (16:9). No text, no letters, no numbers, no words, no watermark.
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a orange colour palette, showing a lively scene built around: Laptop with code editor, Binary digits (0 and 1) flowing, Simple flowchart diagram, Robot arm executing commands, Puzzle pieces forming a program, Keyboard with highlighted keys, Debugging magnifying glass, Game character moving on screen, Variable containers with labels, Looping arrows around code blocks.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO PROGRAMMING"
+- Subtitle under it, smaller: "Coding Adventures: From Bits to Brilliant Apps"
+The spine shows "INTRODUCTION TO PROGRAMMING" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ### Introduction to Agriculture
@@ -25,7 +30,12 @@ cover-introduction-to-agriculture.jpg
 ```
 Prompt:
 ```
-A beautiful simple flat vector illustration for a school course called "Introduction to Agriculture". One clear central subject that represents the subject, a deep green colour palette with cream highlights, soft shapes, clean modern educational style, landscape orientation (16:9). No text, no letters, no numbers, no words, no watermark.
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a green colour palette, showing a lively scene built around: seedling sprout, farm tractor, irrigation sprinkler, soil microscope, crop rotation diagram, beehive pollination, farmers market stall, greenhouse structure, farm animal silhouette, solar-powered farm sensor.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO AGRICULTURE"
+- Subtitle under it, smaller: "Growing Futures: From Soil to Harvest"
+The spine shows "INTRODUCTION TO AGRICULTURE" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ### Calculus I
@@ -36,7 +46,12 @@ cover-calculus-i.jpg
 ```
 Prompt:
 ```
-A beautiful simple flat vector illustration for a school course called "Calculus I". One clear central subject that represents the subject, a deep pink colour palette with cream highlights, soft shapes, clean modern educational style, landscape orientation (16:9). No text, no letters, no numbers, no words, no watermark.
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: Graph of a function with a curve, Derivative symbol (dy/dx) on a chalkboard, Integral sign with area under a curve, Limit notation approaching a point, Tangent line touching a curve, Slope triangle illustrating rate of change, Particle moving along a path with velocity arrows, Optimization problem with a maximum/minimum diagram, Area between two curves shaded, Series of stacked rectangles representing Riemann sums.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "CALCULUS I"
+- Subtitle under it, smaller: "Understanding Change and Motion in Everyday Life"
+The spine shows "CALCULUS I" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ### Introduction to Biology
@@ -47,7 +62,12 @@ cover-introduction-to-biology.jpg
 ```
 Prompt:
 ```
-A beautiful simple flat vector illustration for a school course called "Introduction to Biology". One clear central subject that represents the subject, a deep green colour palette with cream highlights, soft shapes, clean modern educational style, landscape orientation (16:9). No text, no letters, no numbers, no words, no watermark.
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a green colour palette, showing a lively scene built around: DNA double helix, Microscope, Frog, Tree with roots and leaves, Human heart model, Petri dish with bacterial colonies, Butterfly on a flower, Ocean wave with plankton, Neuron with synapse, Mushroom spore release.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO BIOLOGY"
+- Subtitle under it, smaller: "Discover Life: From Cells to Ecosystems"
+The spine shows "INTRODUCTION TO BIOLOGY" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ### Organic Chemistry
@@ -58,158 +78,12 @@ cover-organic-chemistry.jpg
 ```
 Prompt:
 ```
-A beautiful simple flat vector illustration for a school course called "Organic Chemistry". One clear central subject that represents the subject, a deep blue colour palette with cream highlights, soft shapes, clean modern educational style, landscape orientation (16:9). No text, no letters, no numbers, no words, no watermark.
-```
-
-## Introduction to Agriculture
-
-### Lesson 7: Pest and Disease Control
-
-Save as:
-```
-introduction-to-agriculture-l07-pest-damage-on-leaves.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: A close‑up photograph showing real leaf damage caused by common pests such as aphids and by fungal diseases, helping students recognise symptoms in the field.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-### Lesson 8: Farm Machinery and Tools
-
-Save as:
-```
-introduction-to-agriculture-l08-tractor-and-implements.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: Shows a typical farm tractor with a front-mounted plow and a rear-mounted combine harvester, illustrating the size, power source, and how different implements are attached for various tasks.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-## Introduction to Biology
-
-### Lesson 6: Evolution and Natural Selection
-
-Save as:
-```
-introduction-to-biology-l06-comparative-limb-bones.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: A side‑by‑side labelled diagram showing the homologous bones (humerus, radius, ulna, carpals, metacarpals, phalanges) in a human hand, a bat wing, and a whale flipper, illustrating common ancestry.
-
-Layout: Three silhouettes placed vertically; each silhouette has the same set of bone labels aligned horizontally across the three rows.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Humerus"
-- "Radius"
-- "Ulna"
-- "Carpals"
-- "Metacarpals"
-- "Phalanges"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 7: Ecology Basics
-
-Save as:
-```
-introduction-to-biology-l07-pond-ecosystem.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A cross‑section of a pond with fish, algae, insects, water, sunlight and temperature gradients, labelled to show biotic and abiotic components.
-
-Layout: Pond view in the centre with organisms around the edges; arrows indicate energy and material flow between components.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Fish"
-- "Algae"
-- "Insects"
-- "Water"
-- "Sunlight"
-- "Temperature"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 8: Human Body Systems Overview
-
-Save as:
-```
-introduction-to-biology-l08-skeletal-and-muscular-system.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: A full‑body illustration showing the major bones (skull, spine, rib cage, limbs) and the overlay of skeletal muscles, with joints highlighted.
-
-Layout: The skeleton is drawn in light gray; major muscle groups are coloured and placed over the bones; lines with arrows point from each label to the corresponding bone or muscle.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Skull"
-- "Spine"
-- "Rib cage"
-- "Femur"
-- "Humerus"
-- "Quadriceps"
-- "Biceps"
-- "Deltoid"
-- "Gluteus Maximus"
-- "Trapezius"
-- "Patella"
-- "Cartilage"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 9: Laboratory Skills and Safety
-
-Save as:
-```
-introduction-to-biology-l09-proper-pipetting-technique.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: The image shows a laboratory technician holding a micropipette, pressing the first stop, immersing the tip in liquid, and releasing slowly to avoid bubbles.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-### Lesson 10: Applying Biology: Real‑World Issues
-
-Save as:
-```
-introduction-to-biology-l10-covid-19-case-map.png
-```
-Prompt:
-```
-Create a clear, accurate educational map for secondary-school students.
-
-Show: A colour‑coded world map that highlights regions with high, medium, and low infection rates, illustrating how epidemiologists visualise data to guide public‑health actions.
-
-Layout: World map centred, with a legend on the right side indicating case density colours.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "High cases"
-- "Medium cases"
-- "Low cases"
-- "Legend"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a blue colour palette, showing a lively scene built around: hydrocarbon chain, benzene ring, functional groups, reaction arrows, laboratory flask, spectrometer, polymer chain, enzyme active site, carbon skeleton diagram, organic synthesis pathway.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "ORGANIC CHEMISTRY"
+- Subtitle under it, smaller: "Molecules in Motion: The Chemistry of Life"
+The spine shows "ORGANIC CHEMISTRY" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Organic Chemistry
@@ -218,15 +92,15 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 Save as:
 ```
-organic-chemistry-l01-carbon-atom-bonds.png
+organic-chemistry-l01-carbon-tetravalency-diagram.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: Shows a central carbon atom with four bonds extending outward, each ending in a hydrogen atom, highlighting carbon's tetravalency.
+Show: A central carbon atom represented by a black sphere with four white spheres (hydrogen) around it, each connected by a single line to show the four covalent bonds.
 
-Layout: Carbon atom in the centre, four hydrogen atoms placed at the cardinal points, lines for bonds, labels on each atom.
+Layout: Carbon sphere in the centre, four hydrogen spheres placed at the cardinal points, lines radiating outward to each hydrogen.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "C"
@@ -247,15 +121,14 @@ Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: Shows two atoms with their outer electron shells and a shared electron pair between them, highlighting how each atom counts the shared electrons toward a full valence shell.
+Show: Shows two atoms with their outer electron shells and a shared electron pair between them, highlighting the concept of electron sharing.
 
-Layout: Two atoms side‑by‑side with overlapping electron clouds; arrows point to the shared electrons and labels indicate "shared pair" and "valence shell".
+Layout: Two atoms side‑by‑side in the centre, shared electron pair drawn as a double‑dotted line between them, labels pointing to each atom and the shared electrons.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "Atom A"
 - "Atom B"
-- "Shared electron pair"
-- "Valence shell"
+- "Shared electrons"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -269,16 +142,18 @@ organic-chemistry-l03-alkane-chain.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational labelled diagram for secondary-school students.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A simple molecule such as hexane drawn with carbon atoms as circles linked by single lines and hydrogen atoms attached to fill the remaining bonds.
+Show: A labelled diagram of a four‑carbon alkane (butane) with each carbon atom connected by single lines and hydrogen atoms filling the remaining valences.
 
-Layout: Carbon backbone in the centre with hydrogen atoms radiating outward; each atom labelled C or H.
+Layout: Carbon backbone drawn horizontally in the centre, hydrogen atoms shown as small circles above and below each carbon, labels for each carbon (C1, C2, C3, C4) placed below the chain.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
+- "C1"
+- "C2"
+- "C3"
+- "C4"
 - "H"
-- "single bond"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -288,41 +163,19 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 Save as:
 ```
-organic-chemistry-l04-nucleophilic-substitution-sn2.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A step‑by‑step depiction of an SN2 reaction where a nucleophile approaches the carbon bearing the leaving group from the opposite side, the bond to the halogen breaks, and the new bond to the nucleophile forms.
-
-Layout: Three panels: (1) reactants with nucleophile and alkyl halide, (2) transition state showing partial bonds, (3) products with nucleophile attached and halide ion released; arrows indicate motion.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Nucleophile"
-- "Leaving group (X)"
-- "Backside attack"
-- "Transition state"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-Save as:
-```
 organic-chemistry-l04-alkyl-halide-structure.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: A simple carbon chain representing the alkyl group with a single halogen (Cl, Br, I, or F) attached at the end or on the side, illustrating the R–X formula.
+Show: The diagram displays a carbon chain (R) with a single halogen atom (Cl, Br, I, or F) attached at the end or on a side carbon, illustrating the general formula R–X.
 
-Layout: Carbon chain drawn horizontally with a halogen atom at one end; labels point to the R group and the X atom.
+Layout: A straight‑chain carbon skeleton in the centre with the halogen attached; labels point to the R‑group and the X atom.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "R (alkyl group)"
-- "X (halogen)"
+- "R‑group"
+- "Halogen (X)"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -332,23 +185,44 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 Save as:
 ```
-organic-chemistry-l05-carbonyl-group-variants.png
+organic-chemistry-l05-carbonyl-group.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: A central carbon atom double‑bonded to oxygen with different attached groups: H for aldehydes, R for ketones, –OH for carboxylic acids, –OR for esters, and –NR₂ for amides.
+Show: A simple diagram of a carbonyl functional group, displaying the carbon double‑bonded to oxygen and two generic R groups (R and R′) attached to the carbon.
 
-Layout: Four small structures arranged in a row, each labelled with its name below the drawing.
+Layout: Carbon atom in the centre double‑bonded to oxygen on the right; two lines from carbon point to R and R′ on the left and top; labels placed next to each atom and substituent.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C"
+- "O"
+- "R"
+- "R′"
 - "C=O"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+organic-chemistry-l05-aldehyde-vs-ketone.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: Two structures: an aldehyde (R‑CHO) with a hydrogen attached to the carbonyl carbon, and a ketone (R‑CO‑R′) with two carbon groups attached. The diagram emphasizes the presence or absence of the hydrogen.
+
+Layout: Two panels placed horizontally; left panel shows aldehyde with H label, right panel shows ketone with two R labels; arrows point to the carbonyl carbon in each panel.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "H"
 - "R"
-- "OH"
-- "OR"
-- "NR₂"
+- "R′"
+- "C=O"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -358,45 +232,46 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 Save as:
 ```
-organic-chemistry-l06-structural-isomers.png
+organic-chemistry-l06-chiral-molecule-hands.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: Shows a straight‑chain butane molecule and a branched isobutane molecule, both labelled with carbon and hydrogen atoms.
+Show: A tetrahedral carbon attached to four different groups, drawn alongside its mirror image; below, a pair of human hands to emphasize handedness.
 
-Layout: Two separate structures placed side‑by‑side, each with atom labels and bond lines; arrows point from the formula C4H10 to each structure.
+Layout: Left side shows the molecule, right side shows the mirror image; beneath both, a photo of left and right hands with arrows indicating non‑superimposability.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
-- "H"
-- "C‑C bond"
-- "branch"
+- "chiral centre"
+- "mirror image"
+- "left hand"
+- "right hand"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
-### Lesson 7: Reaction Mechanisms Basics
+### Lesson 8: Key Organic Reactions I: Substitution
 
 Save as:
 ```
-organic-chemistry-l07-curved-arrow-example.png
+organic-chemistry-l08-sn1-mechanism.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational labelled diagram for secondary-school students.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A simple SN2 reaction where a nucleophile attacks a carbon atom and the leaving group departs in a single concerted step.
+Show: A carbon attached to a leaving group (e.g., Cl) that departs, forming a planar carbocation, followed by a nucleophile approaching from either side to form the product.
 
-Layout: Reactants on the left, curved arrows in the centre, products on the right; each arrow labelled with its electron flow.
+Layout: Three panels left‑to‑right: (1) substrate with leaving group, (2) carbocation intermediate, (3) product with nucleophile attached; arrows indicate each step.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "OH⁻"
-- "C–Br"
-- "Br⁻"
-- "product"
+- "R‑Cl"
+- "R⁺"
+- "Cl⁻"
+- "Nu:"
+- "Product"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
