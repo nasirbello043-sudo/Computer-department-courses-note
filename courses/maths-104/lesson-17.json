@@ -1,70 +1,19 @@
 {
- "plan": {
-  "summary": "This lesson introduces separable differential equations, shows how to separate variables and integrate, and applies the method to real‑world problems. Students learn to solve initial‑value problems and interpret the solutions.",
-  "objectives": [
-   "Identify a differential equation that is separable",
-   "Separate variables and set up the appropriate integrals",
-   "Integrate both sides and solve for the unknown function",
-   "Apply the method to initial‑value problems",
-   "Interpret the solution in a physical context"
-  ],
-  "prerequisites": "Students should already know basic algebra, exponent and logarithm rules, and how to compute indefinite integrals.",
-  "why": [
-   "Many natural processes – such as population growth, cooling, mixing, and radioactive decay – are modelled by separable differential equations. Being able to solve them lets you predict how a system changes over time.",
-   "Engineers and scientists use these solutions to design safe structures, control chemical reactions, and optimise financial investments, making the skill directly useful in many careers."
-  ],
-  "calculation": true,
-  "sections": [
-   {
-    "heading": "What is a Separable Differential Equation?",
-    "points": "Define separable form dy/dx = g(x)·h(y) and explain why the variables can be moved to opposite sides.",
-    "examples": []
-   },
-   {
-    "heading": "Separating the Variables",
-    "points": "Show the algebraic step: dy/h(y) = g(x)dx and discuss the importance of non‑zero denominators.",
-    "examples": [
-     "Easy: Solve dy/dx = 3x²·y → separate to dy/y = 3x²dx."
-    ]
-   },
-   {
-    "heading": "Integrating Both Sides",
-    "points": "Integrate the separated equation, add constant of integration, and combine constants when convenient.",
-    "examples": [
-     "Medium: ∫(1/y) dy = ∫3x² dx → ln|y| = x³ + C."
-    ]
-   },
-   {
-    "heading": "Solving for y and Using Initial Conditions",
-    "points": "Exponentiate to isolate y, then apply a given initial condition to find the particular constant.",
-    "examples": [
-     "Medium‑Hard: Given dy/dx = (2x)/(y), y(0)=4, find y(x).",
-     "Hard: Solve dy/dx = (y²)/(x) with y(1)=2."
-    ]
-   },
-   {
-    "heading": "Applications: Growth and Decay",
-    "points": "Model exponential growth/decay with dy/dt = ky, separate, integrate, and interpret the constant k.",
-    "examples": [
-     "Applied: A bacteria culture doubles every 3 hours. Set up dy/dt = ky, find k, and write the population formula.",
-     "Applied‑Hard: A radioactive substance loses 15% of its mass each day. Find the half‑life using the separable model."
-    ]
-   },
-   {
-    "heading": "More Complex Real‑World Example",
-    "points": "Combine separable DE with a physical law, such as Newton’s law of cooling, to solve for temperature over time.",
-    "examples": [
-     "Challenge: A hot object cools in a room at 20°C. Its temperature satisfies dT/dt = -k(T‑20). If T(0)=80°C and T(10)=50°C, find T(t)."
-    ]
-   },
-   {
-    "heading": "Summary and Checklist",
-    "points": "Review the steps: identify, separate, integrate, solve for constant, interpret. Provide a quick checklist for future problems.",
-    "examples": []
-   }
-  ]
- },
- "secs": [
+ "title": "Separable Differential Equations",
+ "summary": "This lesson introduces separable differential equations, shows how to separate variables and integrate, and applies the method to real‑world problems. Students learn to solve initial‑value problems and interpret the solutions.",
+ "objectives": [
+  "Identify a differential equation that is separable",
+  "Separate variables and set up the appropriate integrals",
+  "Integrate both sides and solve for the unknown function",
+  "Apply the method to initial‑value problems",
+  "Interpret the solution in a physical context"
+ ],
+ "prerequisites": "Students should already know basic algebra, exponent and logarithm rules, and how to compute indefinite integrals.",
+ "why": [
+  "Many natural processes – such as population growth, cooling, mixing, and radioactive decay – are modelled by separable differential equations. Being able to solve them lets you predict how a system changes over time.",
+  "Engineers and scientists use these solutions to design safe structures, control chemical reactions, and optimise financial investments, making the skill directly useful in many careers."
+ ],
+ "sections": [
   {
    "heading": "What is a Separable Differential Equation?",
    "body": "A separable differential equation is a special kind of first‑order equation that can be “split” so that every factor involving the unknown function $y$ sits on one side of the equation, while every factor involving the independent variable $x$ sits on the other side.  \n\nImagine you have a recipe that tells you how fast a quantity changes:  \n\n\\[\n\\frac{dy}{dx}=g(x)\\,h(y)\n\\]\n\nHere the derivative $\\frac{dy}{dx}$ tells us the rate of change of $y$ with respect to $x$. The right‑hand side is a product of two separate pieces:\n\n* $g(x)$ depends **only** on $x$ – think of it as a “temperature” that changes with the day.\n* $h(y)$ depends **only** on $y$ – think of it as a “reaction speed” that depends on how much of a chemical is already present.\n\nBecause the two pieces are multiplied, we can move all the $y$‑related factors to the left and all the $x$‑related factors to the right. This step is called **separating the variables**.  \n\nTo see why this works, start with the equation written out:\n\n\\[\n\\frac{dy}{dx}=g(x)\\,h(y).\n\\]\n\nIf $h(y)\\neq0$, we can divide both sides by $h(y)$ and multiply both sides by $dx$ (treating $dx$ as a small increment). This gives\n\n\\[\n\\frac{1}{h(y)}\\,dy = g(x)\\,dx .\n\\]\n\nNow each side contains only one variable: the left side involves only $y$, the right side only $x$. This manipulation is legitimate because we are applying the same algebraic operations to both sides of an equality – just as you would move terms across an ordinary equation like $3a = 2b$ to get $a = \\frac{2}{3}b$.\n\n> **Definition:** A differential equation of the form $\\displaystyle \\frac{dy}{dx}=g(x)\\,h(y)$ is called *separable* because the variables $x$ and $y$ can be separated onto opposite sides of the equation.\n\nWhy is this useful? Once the variables are separated, we can integrate each side independently:\n\n\\[\n\\int \\frac{1}{h(y)}\\,dy = \\int g(x)\\,dx .\n\\]\n\nThe integrals produce functions of $y$ and $x$ that can later be combined to give an explicit or implicit solution for $y$ in terms of $x$. In many physical problems—population growth, radioactive decay, cooling of an object—the rate of change depends on the current amount (the $h(y)$ part) and possibly on time (the $g(x)$ part). Recognising the separable form lets us solve these problems quickly without more advanced techniques.\n\n> **In daily life:** Think of a bathtub filling with water. The speed at which the water level rises ($dy/dx$) is the product of the faucet’s flow rate (a constant, part of $g(x)$) and the current water height (which might affect pressure, part of $h(y)$). By separating the variables we can predict how long it takes to reach a certain level.\n\nA word of caution: the step of dividing by $h(y)$ assumes $h(y)\\neq0$. If $h(y)=0$ for some $y$, that value could be a **constant solution** of the original equation. Always check whether setting $h(y)=0$ gives a valid solution before discarding it.\n\n> **Common mistake:** Forgetting to consider the constant solution $h(y)=0$. For example, if $h(y)=y$, the equation $\\frac{dy}{dx}=g(x)\\,y$ also has the solution $y=0$, which is lost if we simply divide by $y$.\n\nOnce the variables are separated and integrated, we usually obtain an equation that relates $y$ and $x$ implicitly. If possible, we solve for $y$ explicitly, and then we can apply any given initial condition (a point $(x_0,y_0)$ that the solution must pass through) to determine the constant of integration.\n\n> **Remember:** After separating, always integrate both sides, then use any initial condition to find the constant, and finally check whether any constant solutions were missed. This systematic approach turns a seemingly complex rate problem into a straightforward calculation.",
@@ -101,6 +50,8 @@
    "code": ""
   }
  ],
+ "examples": [],
+ "examples_version": 3,
  "practice": [
   {
    "level": "Easy",
@@ -132,5 +83,288 @@
    "q": "A tank contains 100 L of water with 5 kg of dissolved salt. Fresh water flows in at 3 L/min, and the well‑mixed solution flows out at the same rate. Let \\(S(t)\\) be the amount of salt (kg) after \\(t\\) minutes. Set up and solve the differential equation for \\(S(t)\\).",
    "a": "Volume stays constant at 100 L. Rate of salt in = \\(0\\) (fresh water). Rate of salt out = \\(\\frac{S(t)}{100}\\times 3\\) kg/min.\nDifferential equation:\n\\[\n\\frac{dS}{dt}= -\\frac{3}{100}S .\n\\]\nSeparate: \\(\\frac{1}{S}dS = -\\frac{3}{100}dt\\).\nIntegrate: \\(\\ln|S| = -\\frac{3}{100}t + C\\).\nExponentiate: \\(S = Ce^{-0.03t}\\).\nInitial condition \\(S(0)=5\\) gives \\(C=5\\).\nThus\n\\[\n\\boxed{S(t)=5\\,e^{-0.03t}\\ \\text{kg}}.\n\\]"
   }
+ ],
+ "recap": "A separable differential equation can be written as dy/dx = g(x)*h(y), allowing all y‑terms to be moved to one side and all x‑terms to the other. After separating, we integrate each side to find an implicit relation, then solve for y and apply any initial conditions. This method is useful for modelling growth, decay, and cooling problems. A quick checklist helps ensure each step is completed correctly.",
+ "key_terms": [
+  {
+   "term": "separable differential equation",
+   "meaning": "An equation that can be rearranged so that all factors of y and dy are on one side and all factors of x and dx are on the other."
+  },
+  {
+   "term": "dy/dx",
+   "meaning": "The derivative of y with respect to x, representing the rate of change of y."
+  },
+  {
+   "term": "separate variables",
+   "meaning": "The algebraic step of moving all y‑related expressions to one side and all x‑related expressions to the other."
+  },
+  {
+   "term": "integration",
+   "meaning": "The process of finding an antiderivative, used to undo differentiation after variables are separated."
+  },
+  {
+   "term": "initial condition",
+   "meaning": "A given value of the unknown function at a specific point, used to determine the constant of integration."
+  },
+  {
+   "term": "implicit solution",
+   "meaning": "An equation relating x and y that may not have y solved explicitly, often obtained after integration."
+  },
+  {
+   "term": "explicit solution",
+   "meaning": "An equation where y is expressed directly as a function of x."
+  },
+  {
+   "term": "exponential growth/decay",
+   "meaning": "Solutions of the form y = C*e^{k*x} that model quantities increasing or decreasing proportionally to their current size."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What form must a first‑order equation have to be separable?",
+   "options": [
+    "dy/dx = g(x)+h(y)",
+    "dy/dx = g(x)*h(y)",
+    "dy/dx = g(x)-h(y)",
+    "dy/dx = g(y)/h(x)"
+   ],
+   "answer": 1,
+   "why": "Separable equations are products of a function of x and a function of y."
+  },
+  {
+   "q": "After separating variables, which operation is performed next?",
+   "options": [
+    "Differentiate both sides",
+    "Integrate both sides",
+    "Multiply by x",
+    "Take the limit as x approaches zero"
+   ],
+   "answer": 1,
+   "why": "Integration undoes the differentiation and yields an equation relating x and y."
+  },
+  {
+   "q": "What is the purpose of an initial condition?",
+   "options": [
+    "To eliminate the need for integration",
+    "To determine the constant of integration",
+    "To change a separable equation into a linear one",
+    "To find the derivative of y"
+   ],
+   "answer": 1,
+   "why": "The initial condition lets us solve for the constant that appears after integration."
+  },
+  {
+   "q": "Which of the following is an example of exponential decay?",
+   "options": [
+    "y = 5e^{2t}",
+    "y = 3e^{-0.4t}",
+    "y = ln(t)",
+    "y = t^2"
+   ],
+   "answer": 1,
+   "why": "A negative exponent coefficient indicates decay."
+  },
+  {
+   "q": "In Newton's law of cooling, the differential equation dT/dt = -k(T - Troom) is separable because:",
+   "options": [
+    "It can be written as a product of a function of t and a function of T",
+    "It contains a logarithm",
+    "It is already integrated",
+    "It has constant coefficients"
+   ],
+   "answer": 0,
+   "why": "The right‑hand side is a product of a function of t (constant) and a function of T."
+  },
+  {
+   "q": "If after integration you obtain ln|y| = 3x + C, what is the explicit form of y?",
+   "options": [
+    "y = 3x + C",
+    "y = e^{3x}+C",
+    "y = ±e^{C}*e^{3x}",
+    "y = ln(3x + C)"
+   ],
+   "answer": 2,
+   "why": "Exponentiating both sides gives |y| = e^{C}*e^{3x}, so y = ±e^{C}*e^{3x}."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a separable differential equation.",
+   "back": "An equation that can be rewritten so that all y‑terms (including dy) are on one side and all x‑terms (including dx) are on the other."
+  },
+  {
+   "front": "What does dy/dx represent?",
+   "back": "The rate of change of the unknown function y with respect to the independent variable x."
+  },
+  {
+   "front": "State the step called 'separating variables'.",
+   "back": "Move every expression containing y to one side and every expression containing x to the opposite side, usually giving dy/h(y) = g(x) dx."
+  },
+  {
+   "front": "Why do we integrate after separating variables?",
+   "back": "Integration finds antiderivatives, turning the differential equation into an algebraic relation between x and y."
+  },
+  {
+   "front": "What is an implicit solution?",
+   "back": "A relation between x and y that still contains y inside another function (like a log) and is not solved for y alone."
+  },
+  {
+   "front": "How do you obtain an explicit solution from ln|y| = x^2 + C?",
+   "back": "Exponentiate both sides to get |y| = e^{C}*e^{x^2}, then write y = ±e^{C}*e^{x^2}."
+  },
+  {
+   "front": "Give the general solution for dy/dt = k y.",
+   "back": "y(t) = C * e^{k t}, where C is determined by an initial condition."
+  },
+  {
+   "front": "What is the purpose of an initial condition in solving differential equations?",
+   "back": "It provides a specific point (x0, y0) that allows us to solve for the constant of integration, giving a unique solution."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l17-coffee-cooling",
+   "title": "A cup of coffee cooling in a room, showing temperature difference.",
+   "alt": "A cup of coffee cooling in a room, showing temperature difference.",
+   "priority": 9,
+   "picture_title": "Coffee Cooling",
+   "kind": "photo",
+   "subject": "A steaming coffee mug placed on a table beside a wall thermometer that reads the cooler room temperature, illustrating Newton's law of cooling.",
+   "layout": "The coffee mug is centered; a thermometer is to the right with a temperature reading; arrows indicate heat flow from mug to air.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l17-population-growth",
+   "title": "Bacterial colonies expanding in a petri dish over time.",
+   "alt": "Bacterial colonies expanding in a petri dish over time.",
+   "priority": 8,
+   "picture_title": "Population Growth",
+   "kind": "photo",
+   "subject": "A series of three petri dishes showing increasing numbers of bacterial colonies, representing exponential growth governed by dy/dt = k·y.",
+   "layout": "Three dishes placed side‑by‑side from left (few colonies) to right (many colonies); each dish labeled with time points.",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l17-mixing-tank",
+   "title": "A tank with inflow and outflow pipes used to model a separable rate equation.",
+   "alt": "A tank with inflow and outflow pipes used to model a separable rate equation.",
+   "priority": 7,
+   "picture_title": "Mixing Tank",
+   "kind": "illustration",
+   "subject": "A cylindrical tank with an inlet pipe delivering liquid at a known concentration and an outlet pipe removing mixed liquid, visualising the differential equation dy/dt = (inflow‑outflow)·y.",
+   "layout": "Tank in centre; inlet pipe on left, outlet pipe on right; arrows show direction of flow; concentration symbols near inlet and outlet.",
+   "labels": [
+    "Inlet",
+    "Outlet",
+    "Tank",
+    "Concentration"
+   ],
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Components of a separable differential equation",
+   "items": [
+    {
+     "name": "dy/dx",
+     "role": "derivative of y with respect to x"
+    },
+    {
+     "name": "g(x)",
+     "role": "function that depends only on x"
+    },
+    {
+     "name": "h(y)",
+     "role": "function that depends only on y"
+    },
+    {
+     "name": "dx, dy",
+     "role": "infinitesimal changes used for separation"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "How to solve a separable differential equation",
+   "steps": [
+    {
+     "label": "Identify separable form",
+     "text": "Rewrite the equation as dy/dx = g(x)·h(y)."
+    },
+    {
+     "label": "Separate variables",
+     "text": "Move all y‑terms to one side and x‑terms to the other: dy/h(y) = g(x)dx."
+    },
+    {
+     "label": "Integrate both sides",
+     "text": "Take ∫ dy/h(y) = ∫ g(x)dx and add a constant C."
+    },
+    {
+     "label": "Solve for y",
+     "text": "If possible, isolate y (explicit solution) or keep implicit form."
+    },
+    {
+     "label": "Apply initial condition",
+     "text": "Use given y(x0)=y0 to find the constant C."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Growth vs. Decay",
+   "left": {
+    "name": "Growth (k > 0)",
+    "points": [
+     "Solution y = C e^{kx} increases with x",
+     "Curve slopes upward",
+     "Population or money increases"
+    ]
+   },
+   "right": {
+    "name": "Decay (k < 0)",
+    "points": [
+     "Solution y = C e^{kx} decreases with x",
+     "Curve slopes downward",
+     "Radioactive material or cooling"
+    ]
+   },
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Key facts about separable DEs",
+   "items": [
+    {
+     "value": "dy/dx = g(x)·h(y)",
+     "label": "Standard form"
+    },
+    {
+     "value": "∫ dy/h(y) = ∫ g(x)dx + C",
+     "label": "Integration step"
+    },
+    {
+     "value": "y = Ce^{kx}",
+     "label": "Typical solution for dy/dx = k y"
+    },
+    {
+     "value": "Check by differentiating",
+     "label": "Verify the solution"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
  ]
 }

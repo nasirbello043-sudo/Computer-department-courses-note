@@ -1,0 +1,328 @@
+{
+ "title": "First-Order Linear Equations and the Integrating Factor",
+ "summary": "This lesson introduces first‑order linear differential equations and shows how to solve them using an integrating factor. Students learn the step‑by‑step method and apply it to several concrete problems.",
+ "objectives": [
+  "Identify a first‑order linear differential equation",
+  "Derive the integrating factor for a given equation",
+  "Apply the integrating factor to find the general solution",
+  "Solve initial‑value problems using the method",
+  "Interpret the solution in a real‑world context"
+ ],
+ "prerequisites": "Students should already know basic algebra, how to differentiate and integrate simple functions, and the concept of a differential equation.",
+ "why": [
+  "First‑order linear equations model many everyday processes such as cooling, population growth with harvesting, and charging of a capacitor. Being able to solve them lets us predict future behaviour of these systems.",
+  "The integrating‑factor technique is a systematic tool that works for any linear equation, giving a reliable shortcut compared with trial‑and‑error methods. Mastery of this tool builds confidence for more advanced differential‑equation topics."
+ ],
+ "sections": [
+  {
+   "heading": "What is a First‑Order Linear Equation?",
+   "body": "A first‑order linear differential equation is a rule that tells us how a quantity $y$ changes with another variable $x$, and the rule is “linear’’ in $y$.  \nIn plain words, “linear’’ means that $y$ appears only by itself or multiplied by a function of $x$, never squared, cubed, or inside a sine. The equation also involves the derivative $\\dfrac{dy}{dx}$, which measures the instantaneous rate of change of $y$ with respect to $x$.\n\nThe **standard form** of a first‑order linear equation is  \n\n$$\n\\frac{dy}{dx}+P(x)\\,y = Q(x)\n$$  \n\nHere each symbol has a specific meaning:\n\n* $\\displaystyle \\frac{dy}{dx}$ – the derivative of $y$ with respect to $x$. Think of it as the speed at which $y$ is moving when $x$ changes a little bit.\n* $P(x)$ – a known function of $x$ (it could be a constant, like $2$, or something more complicated, like $\\sin x$). It tells us how strongly $y$ is “dragged’’ or “amplified’’ at each point $x$.\n* $y$ – the unknown function we are trying to find. It is the quantity whose behaviour we want to understand.\n* $Q(x)$ – another known function of $x$. It acts like an external source or forcing term that adds or removes amount from $y$ as $x$ varies.\n\n> **Definition:** A first‑order linear differential equation is any equation that can be written as $\\displaystyle \\frac{dy}{dx}+P(x)\\,y = Q(x)$, where $P(x)$ and $Q(x)$ are given functions of $x$.\n\nWhy do we care about this particular shape? Because it is the simplest type of differential equation that still captures many real‑world processes, yet it can be solved systematically using the integrating factor method. The linearity guarantees that the superposition principle works: if $y_1$ and $y_2$ are solutions of the *homogeneous* part (when $Q(x)=0$), then any linear combination $c_1y_1+c_2y_2$ is also a solution. This property makes the mathematics tidy and the solutions predictable.\n\nTo see the idea in everyday terms, imagine water flowing through a pipe whose width changes with distance $x$. The rate at which the water level $y$ rises or falls depends on two things: (1) the natural tendency of the water to keep moving, represented by the derivative $\\frac{dy}{dx}$, and (2) the pipe’s shape, represented by $P(x)$. If the pipe widens, $P(x)$ might be negative, slowing the rise of $y$; if it narrows, $P(x)$ could be positive, speeding up the change. Meanwhile, $Q(x)$ could be a faucet adding water at a rate that varies with $x$. The equation $\\frac{dy}{dx}+P(x)y = Q(x)$ simply balances these effects.\n\n> **Note:** The term “first‑order’’ refers only to the highest derivative present (here $\\frac{dy}{dx}$). Higher‑order equations would involve $\\frac{d^2y}{dx^2}$, $\\frac{d^3y}{dx^3}$, etc., and require different techniques.\n\n> **In daily life:** The cooling of a hot cup of coffee can be modelled by a first‑order linear equation, where $y$ is the coffee temperature, $P(x)$ is a constant related to the heat‑transfer coefficient, and $Q(x)$ is the ambient room temperature (a constant). The same form also describes mixing problems, population growth with a constant immigration rate, and electrical circuits with a resistor and a voltage source.\n\n> **Common mistake:** Forgetting to keep $y$ multiplied only by a function of $x$. If you see a term like $y^2$ or $\\sin(y)$, the equation is no longer linear and the integrating‑factor method does not apply.\n\n> **Remember:** To recognise a first‑order linear equation, rewrite it so that the derivative term $\\frac{dy}{dx}$ stands alone on the left, and everything else is a sum of a function of $x$ times $y$ plus another function of $x$. Once in this form, the powerful integrating factor technique can be used to find $y(x)$.",
+   "code": ""
+  },
+  {
+   "heading": "Deriving the Integrating Factor",
+   "body": "When we meet a first‑order linear differential equation  \n\n\\[\n\\frac{dy}{dx}+P(x)\\,y = Q(x),\n\\]\n\nthe unknown function $y(x)$ appears both by itself and multiplied by its derivative.  \nOur goal is to rewrite the left‑hand side so that it looks like the derivative of a *single* product.  \nIf we can do that, we can integrate once and immediately obtain $y$.  \n\n> **Definition:** An *integrating factor* is a function $\\mu(x)$ that, when multiplied by the whole equation, turns the left side into the derivative of the product $\\mu(x)\\,y(x)$.\n\n---\n\n### Why multiply by something at all?\n\nThink of a recipe: you have two ingredients, flour and water, that you must mix in a precise way to get dough.  \nIf you add a little oil (the integrating factor) to the bowl before mixing, the flour and water combine more easily into a smooth dough.  \nSimilarly, $\\mu(x)$ is chosen so that the terms $P(x)y$ and $dy/dx$ “blend” into a single derivative.\n\n---\n\n### Finding the right $\\mu(x)$\n\nSuppose we multiply the whole equation by an unknown function $\\mu(x)$:\n\n\\[\n\\mu(x)\\frac{dy}{dx}+\\mu(x)P(x)\\,y = \\mu(x)Q(x).\n\\]\n\nWe would like the left side to be exactly the derivative of the product $\\mu(x)y(x)$, that is\n\n\\[\n\\frac{d}{dx}\\bigl[\\mu(x)y(x)\\bigr].\n\\]\n\nUsing the product rule for differentiation,  \n\n\\[\n\\frac{d}{dx}\\bigl[\\mu y\\bigr]=\\mu\\frac{dy}{dx}+y\\frac{d\\mu}{dx}.\n\\]\n\nCompare this with the left side after multiplication.  \nWe already have the term $\\mu\\,dy/dx$.  \nTherefore we need  \n\n\\[\ny\\frac{d\\mu}{dx}= \\mu P(x)\\,y .\n\\]\n\nBecause $y$ is common, we can cancel it (provided $y\\neq0$, which is fine for the derivation).  \nWe obtain a simple differential equation for $\\mu$ alone:\n\n\\[\n\\frac{d\\mu}{dx}=P(x)\\,\\mu .\n\\]\n\nThis is a *separable* equation: we can move all $\\mu$ terms to one side and $x$ terms to the other:\n\n\\[\n\\frac{1}{\\mu}\\,d\\mu = P(x)\\,dx .\n\\]\n\nIntegrating both sides gives\n\n\\[\n\\int \\frac{1}{\\mu}\\,d\\mu = \\int P(x)\\,dx\n\\quad\\Longrightarrow\\quad\n\\ln|\\mu| = \\int P(x)\\,dx + C .\n\\]\n\nExponentiating removes the logarithm:\n\n\\[\n\\mu = e^{\\int P(x)\\,dx + C}=e^{C}\\,e^{\\int P(x)\\,dx}.\n\\]\n\nThe constant factor $e^{C}$ can be dropped because any non‑zero constant multiplying an integrating factor still works.  \nThus we choose the *standard* integrating factor\n\n\\[\n\\boxed{\\mu(x)=e^{\\int P(x)\\,dx}} .\n\\]\n\n> **Remember:** The integrating factor is always an exponential of the integral of the coefficient $P(x)$ that sits in front of $y$.\n\nNow the left side truly becomes a single derivative:\n\n\\[\n\\mu\\frac{dy}{dx}+\\mu P y = \\frac{d}{dx}\\bigl[\\mu y\\bigr].\n\\]\n\nHence the original equation is equivalent to  \n\n\\[\n\\frac{d}{dx}\\bigl[\\mu(x)y(x)\\bigr]=\\mu(x)Q(x).\n\\]\n\nIntegrating once more yields  \n\n\\[\n\\mu(x)y(x)=\\int \\mu(x)Q(x)\\,dx + C,\n\\]\n\nand finally  \n\n\\[\ny(x)=\\frac{1}{\\mu(x)}\\Bigl(\\int \\mu(x)Q(x)\\,dx + C\\Bigr).\n\\]\n\nThat is the general solution method for any first‑order linear equation.\n\n---\n\n### Worked example: finding the integrating factor\n\n**Example 1 (Easy): Find the integrating factor for**  \n\n\\[\n\\frac{dy}{dx}+2y = 0 .\n\\]\n\n1. **Identify $P(x)$.**  \n   The equation is already in the form $dy/dx+P(x)y=Q(x)$ with $P(x)=2$ (a constant).\n\n2. **Integrate $P(x)$.**  \n   Compute $\\displaystyle\\int P(x)\\,dx = \\int 2\\,dx = 2x$.\n\n3. **Exponentiate the result.**  \n   The integrating factor is  \n\n   $$\n   \\mu(x)=e^{\\int P(x)\\,dx}=e^{2x}.\n   $$\n\n**Answer:** $\\displaystyle \\mu(x)=e^{2x}$.\n\n> **In daily life:** Just as adding a little oil lets flour and water mix smoothly, multiplying by $e^{2x}$ lets the terms $dy/dx$ and $2y$ combine into a single derivative, simplifying the equation.\n\nWith the integrating factor known, the next step (covered in the following section) is to multiply the whole differential equation by $e^{2x}$, rewrite the left side as $\\frac{d}{dx}(e^{2x}y)$, and integrate to obtain the solution $y=C\\,e^{-2x}$.  \n\n> **Common mistake:** Forgetting to drop the absolute value when exponentiating $\\ln|\\mu|$. Since $\\mu$ is defined as an exponential, it is always positive, so we can safely write $\\mu=e^{\\int P(x)dx}$ without the bars.",
+   "code": ""
+  },
+  {
+   "heading": "Solving the General Equation",
+   "body": "When we have a first‑order linear differential equation  \n\n\\[\n\\frac{dy}{dx}+P(x)\\,y = Q(x),\n\\]\n\nthe trick is to turn the left‑hand side into the derivative of a single product.  \nWe do this by **multiplying the whole equation by a special function** called the *integrating factor*.  \nAfter this multiplication the left side becomes the derivative of “integrating factor × y”, so we can integrate both sides easily and then solve for \\(y(x)\\).\n\n> **Note:** The integrating factor is chosen precisely so that the product rule reverses the left‑hand side into a single derivative.\n\n---\n\n### Step‑by‑step derivation\n\n1. **Write the equation in standard form.**  \n   The coefficient of \\(dy/dx\\) must be 1, so the equation already looks like  \n\n   \\[\n   \\frac{dy}{dx}+P(x)\\,y = Q(x).\n   \\]\n\n2. **Define the integrating factor \\(\\mu(x)\\).**  \n   We set  \n\n   \\[\n   \\mu(x)=e^{\\int P(x)\\,dx}.\n   \\]\n\n   The exponential ensures \\(\\mu(x)>0\\) and its derivative is \\(\\mu'(x)=P(x)\\mu(x)\\).  \n\n3. **Multiply the whole equation by \\(\\mu(x)\\).**  \n\n   \\[\n   \\mu(x)\\frac{dy}{dx}+\\mu(x)P(x)y = \\mu(x)Q(x).\n   \\]\n\n4. **Recognise the left‑hand side as a derivative.**  \n   Because \\(\\mu'(x)=P(x)\\mu(x)\\), the left side is exactly  \n\n   \\[\n   \\frac{d}{dx}\\bigl[\\mu(x)\\,y\\bigr].\n   \\]\n\n   So we have  \n\n   \\[\n   \\frac{d}{dx}\\bigl[\\mu(x)\\,y\\bigr]=\\mu(x)Q(x).\n   \\]\n\n5. **Integrate both sides with respect to \\(x\\).**  \n\n   \\[\n   \\int \\frac{d}{dx}\\bigl[\\mu(x)\\,y\\bigr]\\,dx = \\int \\mu(x)Q(x)\\,dx.\n   \\]\n\n   The integral of a derivative simply returns the original function, giving  \n\n   \\[\n   \\mu(x)\\,y = \\int \\mu(x)Q(x)\\,dx + C,\n   \\]\n\n   where \\(C\\) is the constant of integration.\n\n6. **Solve for \\(y(x)\\).**  \n\n   \\[\n   y(x)=\\frac{1}{\\mu(x)}\\left(\\int \\mu(x)Q(x)\\,dx + C\\right).\n   \\]\n\n   This formula gives the *general solution* of any first‑order linear equation.\n\n> **Remember:** After finding \\(\\mu(x)\\) you never differentiate again; you only integrate once, then divide by \\(\\mu(x)\\).\n\n---\n\n### Worked example (Medium)\n\n**Example 2 (Medium): Solve \\(\\displaystyle \\frac{dy}{dx}+3x^{2}y = x^{2}\\).**\n\nWe follow the steps above without skipping any detail.\n\n1. **Identify \\(P(x)\\) and \\(Q(x)\\).**  \n   Here \\(P(x)=3x^{2}\\) and \\(Q(x)=x^{2}\\).\n\n2. **Compute the integrating factor.**  \n\n   \\[\n   \\mu(x)=e^{\\int 3x^{2}\\,dx}=e^{x^{3}}.\n   \\]\n\n3. **Multiply the equation by \\(\\mu(x)=e^{x^{3}}\\).**  \n\n   \\[\n   e^{x^{3}}\\frac{dy}{dx}+3x^{2}e^{x^{3}}y = x^{2}e^{x^{3}}.\n   \\]\n\n4. **Recognise the left side as a derivative.**  \n\n   Since \\(\\frac{d}{dx}\\bigl(e^{x^{3}}\\bigr)=3x^{2}e^{x^{3}}\\), the left side equals  \n\n   \\[\n   \\frac{d}{dx}\\bigl[e^{x^{3}}y\\bigr].\n   \\]\n\n   Thus  \n\n   \\[\n   \\frac{d}{dx}\\bigl[e^{x^{3}}y\\bigr]=x^{2}e^{x^{3}}.\n   \\]\n\n5. **Integrate both sides.**  \n\n   \\[\n   \\int \\frac{d}{dx}\\bigl[e^{x^{3}}y\\bigr]\\,dx = \\int x^{2}e^{x^{3}}\\,dx.\n   \\]\n\n   The left integral gives \\(e^{x^{3}}y\\).  \n   For the right integral, let \\(u = x^{3}\\); then \\(du = 3x^{2}dx\\) or \\(\\frac{1}{3}du = x^{2}dx\\).  \n\n   \\[\n   \\int x^{2}e^{x^{3}}dx = \\int e^{u}\\frac{1}{3}du = \\frac{1}{3}e^{u}+C = \\frac{1}{3}e^{x^{3}}+C.\n   \\]\n\n   Hence  \n\n   \\[\n   e^{x^{3}}y = \\frac{1}{3}e^{x^{3}} + C.\n   \\]\n\n6. **Solve for \\(y(x)\\).**  \n\n   Divide by \\(e^{x^{3}}\\):\n\n   \\[\n   y(x)=\\frac{1}{3}+Ce^{-x^{3}}.\n   \\]\n\n**Answer:** The general solution is  \n\n\\[\n\\boxed{\\,y(x)=\\dfrac{1}{3}+Ce^{-x^{3}}\\,}.\n\\]\n\nNo units appear because the equation is dimensionless, but the form shows a constant term \\(\\frac13\\) plus a term that decays rapidly as \\(x\\) grows.\n\n---\n\n### Why this method works\n\nThink of the integrating factor as a “glue” that sticks the \\(y\\) term to the derivative term, just like adding a small amount of oil lets two metal parts slide together smoothly. Once the glue is in place, the whole left side moves as one piece, which we can then “un‑wrap” by integration. This avoids the need to guess a solution; the mathematics tells us exactly how to combine the pieces.\n\n> **In daily life:** Solving a linear differential equation with an integrating factor is similar to adjusting a recipe: you add a specific amount of a secret ingredient (the factor) so that all flavors blend into a smooth, predictable taste (the solution).\n\nBy following the six clear steps—standard form, integrating factor, multiply, recognise derivative, integrate, solve—you can handle any first‑order linear equation confidently.",
+   "code": ""
+  },
+  {
+   "heading": "Initial‑Value Problems",
+   "body": "When we solve a first‑order linear differential equation we usually obtain a family of curves that differ only by a constant.  \nThat constant is called the **constant of integration**.  An *initial‑value problem* tells us one point on the curve, for example  \n\n\\[\ny(x_0)=y_0 .\n\\]\n\nUsing this single piece of information we can pick the exact member of the family that passes through \\((x_0 ,y_0)\\).  In other words, the initial condition lets us *determine* the constant of integration.\n\n> **Remember:**  The constant of integration is not a random number; it is fixed by the condition \\(y(x_0)=y_0\\).\n\n---\n\n### General steps for an initial‑value problem\n\n1. **Solve the differential equation** as we did for the general case, obtaining  \n\n   $$\n   y(x)=\\mu(x)^{-1}\\Bigl(\\int \\mu(x)\\,g(x)\\,dx + C\\Bigr),\n   $$  \n\n   where \\(\\mu(x)=e^{\\int p(x)\\,dx}\\) is the integrating factor and \\(g(x)\\) is the non‑homogeneous term.\n\n2. **Insert the initial condition** \\(y(x_0)=y_0\\) into the solution.  \n   Replace \\(x\\) by \\(x_0\\) and \\(y\\) by \\(y_0\\). This gives an equation that contains only the unknown constant \\(C\\).\n\n3. **Solve for \\(C\\).**  The algebra is usually straightforward: isolate \\(C\\) on one side.\n\n4. **Write the final particular solution** by substituting the found value of \\(C\\) back into the general formula.\n\nThese steps guarantee that the solution not only satisfies the differential equation but also passes through the prescribed point.\n\n> **Definition:**  An *initial‑value problem* is a differential equation together with a condition that specifies the value of the unknown function at a particular point.\n\n---\n\n### Worked example (Medium‑Hard)\n\n**Example 3 (Medium‑Hard):** Solve the initial‑value problem  \n\n\\[\n\\frac{dy}{dx}+\\frac{1}{x}\\,y=\\sin x ,\\qquad y(\\pi)=2 .\n\\]\n\nWe will follow the four steps above.\n\n1. **Find the integrating factor.**  \n   The equation is already in the standard form \\(y'+p(x)y=g(x)\\) with \\(p(x)=\\frac1x\\).  \n   $$\\mu(x)=e^{\\int p(x)\\,dx}=e^{\\int \\frac{1}{x}\\,dx}=e^{\\ln|x|}=|x|.$$\n   Since we will work on the interval \\(x>0\\) (because \\(\\pi>0\\)), we can drop the absolute value and write \\(\\mu(x)=x\\).\n\n2. **Multiply the whole equation by \\(\\mu(x)\\).**  \n   $$x\\frac{dy}{dx}+y = x\\sin x.$$\n   The left‑hand side is now the derivative of \\(\\mu(x)y\\):\n   $$\\frac{d}{dx}\\bigl(xy\\bigr)=x\\sin x.$$\n\n3. **Integrate both sides.**  \n   $$\\int \\frac{d}{dx}(xy)\\,dx = \\int x\\sin x\\,dx.$$\n   The left integral simply gives \\(xy\\).  For the right integral we use integration by parts:\n   \\[\n   \\int x\\sin x\\,dx = -x\\cos x + \\int \\cos x\\,dx = -x\\cos x + \\sin x + C .\n   \\]\n   Hence\n   $$xy = -x\\cos x + \\sin x + C.$$\n\n4. **Solve for \\(y\\).**  \n   Divide by \\(x\\) (again \\(x>0\\)):\n   $$y(x)= -\\cos x + \\frac{\\sin x}{x} + \\frac{C}{x}.$$\n\n5. **Apply the initial condition \\(y(\\pi)=2\\).**  \n   Substitute \\(x=\\pi\\) and \\(y=2\\):\n   $$2 = -\\cos \\pi + \\frac{\\sin \\pi}{\\pi} + \\frac{C}{\\pi}.$$\n   Because \\(\\cos\\pi = -1\\) and \\(\\sin\\pi = 0\\), this simplifies to\n   $$2 = -(-1) + 0 + \\frac{C}{\\pi} \\;\\Longrightarrow\\; 2 = 1 + \\frac{C}{\\pi}.$$\n   Solving for \\(C\\):\n   $$\\frac{C}{\\pi}=1 \\quad\\Rightarrow\\quad C=\\pi.$$\n\n6. **Write the particular solution.**  \n   Insert \\(C=\\pi\\) back into the expression for \\(y(x)\\):\n   $$\\boxed{\\,y(x)= -\\cos x + \\frac{\\sin x}{x} + \\frac{\\pi}{x}\\,}.$$\n\n**Answer:** The function \\(y(x)= -\\cos x + \\dfrac{\\sin x}{x} + \\dfrac{\\pi}{x}\\) satisfies both the differential equation and the condition \\(y(\\pi)=2\\). No units are involved because the equation is dimensionless.\n\n---\n\n### Why the method works\n\nMultiplying by the integrating factor turns the left side of the equation into the exact derivative of a product.  This is similar to *undoing* a product rule in calculus: we create a situation where integration directly recovers the original unknown function multiplied by a known factor.  The constant \\(C\\) appears because indefinite integration can only determine an antiderivative up to an additive constant.  The initial condition tells us exactly which antiderivative we need.\n\n> **In daily life:**  Think of the constant of integration like the starting amount of water in a tank.  The differential equation tells you how the water level changes over time, but you still need to know how much water was there at the beginning to predict the exact level later.\n\n> **Common mistake:**  Forgetting to substitute the initial condition *after* solving for \\(y\\).  Doing it too early (before isolating \\(y\\)) often leads to algebraic errors because the constant \\(C\\) is still hidden inside the expression.\n\nBy always following the four‑step routine—solve, multiply, integrate, apply the condition—you will reliably obtain the correct particular solution for any first‑order linear initial‑value problem.",
+   "code": ""
+  },
+  {
+   "heading": "Applications: Mixing and Cooling",
+   "body": "When a liquid or a temperature changes because something is added or removed, the rate of change often depends on two things:  \n\n* how much of the substance is already present, and  \n* how fast the outside source is pushing new material in (or pulling heat out).  \n\nIf this dependence is **linear** – that is, the rate is a constant times the amount already there plus a constant term – the situation can be described by a *first‑order linear ordinary differential equation* (ODE). Solving such an ODE tells us exactly how the quantity evolves over time.\n\n> **In daily life:** The temperature of a cup of coffee cooling in a room, or the concentration of salt in a mixing tank, both follow this pattern.\n\n---\n\n### 1.  Modelling a mixing tank\n\n**Idea in plain words** – Imagine a tank that already holds some water. Fresh water flows in, and the mixed water flows out at the same speed, so the total volume stays the same. The temperature of the water inside changes because the incoming water has a different temperature. We want a formula for the temperature after a certain time.\n\n#### Step‑by‑step set‑up\n\n1. **Define the unknown.**  \n   Let $T(t)$ be the temperature (in °C) of the water in the tank at time $t$ minutes.\n\n2. **Write the rate of change.**  \n   The amount of heat entering per minute equals the flow rate times the temperature difference between the incoming water and the tank water:  \n   $$\\frac{dT}{dt}= \\frac{\\text{inflow rate}}{\\text{volume}} \\bigl(T_{\\text{in}}-T(t)\\bigr).$$  \n   Here the inflow rate is $2\\,$L/min, the volume is constant $100\\,$L, and $T_{\\text{in}}=5^\\circ\\text{C}$.\n\n3. **Insert numbers.**  \n   $$\\frac{dT}{dt}= \\frac{2}{100}\\bigl(5 - T(t)\\bigr)=0.02\\,(5-T).$$  \n\n   This is a first‑order linear ODE of the form $\\displaystyle \\frac{dT}{dt}+0.02\\,T=0.1$.\n\n4. **Identify the integrating factor.**  \n   For an equation $y'+p(t)y=q(t)$, the integrating factor is $e^{\\int p(t)\\,dt}$.  \n   Here $p(t)=0.02$, a constant, so  \n   $$\\mu(t)=e^{0.02t}.$$\n\n5. **Multiply the whole equation by $\\mu(t)$.**  \n   $$e^{0.02t}\\frac{dT}{dt}+0.02e^{0.02t}T =0.1e^{0.02t}.$$\n\n6. **Recognise the left side as a derivative.**  \n   $$\\frac{d}{dt}\\!\\bigl(e^{0.02t}T\\bigr)=0.1e^{0.02t}.$$\n\n7. **Integrate both sides.**  \n   $$e^{0.02t}T = \\int 0.1e^{0.02t}\\,dt = \\frac{0.1}{0.02}e^{0.02t}+C =5e^{0.02t}+C.$$\n\n8. **Solve for $T(t)$.**  \n   $$T(t)=5 + Ce^{-0.02t}.$$\n\n9. **Use the initial condition.**  \n   At $t=0$, the tank temperature is $20^\\circ$C, so  \n   $$20 = 5 + C \\;\\Longrightarrow\\; C =15.$$\n\n   Hence  \n   $$\\boxed{T(t)=5+15e^{-0.02t}}.$$\n\n10. **Find the temperature after 15 min.**  \n    $$T(15)=5+15e^{-0.02\\cdot15}=5+15e^{-0.3}\\approx5+15(0.7408)\\approx16.1^\\circ\\text{C}.$$\n\n**Answer:** After 15 minutes the water temperature is about $16.1^\\circ\\text{C}$.\n\n> **Remember:** The integrating factor turns a linear ODE into an exact derivative, making integration straightforward.\n\n---\n\n### 2.  Modelling an RC‑circuit (capacitor charging)\n\n**Idea in plain words** – In an electrical circuit with a resistor $R$ and a capacitor $C$, the charge $Q(t)$ on the capacitor changes because the voltage source pushes charge through the resistor. Ohm’s law ($V=IR$) and the definition $I=\\frac{dQ}{dt}$ give a linear ODE for $Q(t)$.\n\n#### Worked example\n\n**Example 5 (Harder): Capacitor with a time‑varying source**  \nA capacitor with capacitance $C=5\\,$F is charged by a voltage source $V(t)=10e^{-t}$ V. The circuit has resistance $R=2\\,$Ω. Find the charge $Q(t)$ given $Q(0)=0$.\n\n1. **Write the governing equation.**  \n   Kirchhoff’s loop rule says the source voltage equals the sum of the voltage across the resistor and the capacitor:  \n   $$V(t)=R\\,I(t)+\\frac{Q(t)}{C}.$$  \n   Since $I(t)=\\frac{dQ}{dt}$, we have  \n   $$10e^{-t}=2\\frac{dQ}{dt}+\\frac{Q}{5}.$$\n\n2. **Put the equation in standard linear form.**  \n   Divide by $2$:  \n   $$\\frac{dQ}{dt}+\\frac{1}{10}Q =5e^{-t}.$$\n\n3. **Identify $p(t)$ and $q(t)$.**  \n   Here $p(t)=\\frac{1}{10}$ (constant) and $q(t)=5e^{-t}$.\n\n4. **Compute the integrating factor.**  \n   $$\\mu(t)=e^{\\int p(t)\\,dt}=e^{t/10}.$$\n\n5. **Multiply the ODE by $\\mu(t)$.**  \n   $$e^{t/10}\\frac{dQ}{dt}+\\frac{1}{10}e^{t/10}Q =5e^{t/10}e^{-t}=5e^{-9t/10}.$$\n\n6. **Recognise the left side as a derivative.**  \n   $$\\frac{d}{dt}\\!\\bigl(e^{t/10}Q\\bigr)=5e^{-9t/10}.$$\n\n7. **Integrate both sides.**  \n   $$e^{t/10}Q = \\int 5e^{-9t/10}\\,dt =5\\left(-\\frac{10}{9}\\right)e^{-9t/10}+C =-\\frac{50}{9}e^{-9t/10}+C.$$\n\n8. **Solve for $Q(t)$.**  \n   $$Q(t)= -\\frac{50}{9}e^{-t}+Ce^{-t/10}.$$\n\n9. **Apply the initial condition $Q(0)=0$.**  \n   $$0 = -\\frac{50}{9}+C \\;\\Longrightarrow\\; C=\\frac{50}{9}.$$\n\n   Therefore  \n   $$\\boxed{Q(t)=\\frac{50}{9}\\bigl(e^{-t/10}-e^{-t}\\bigr)}\\ \\text{coulombs}.$$\n\n**Answer:** The charge on the capacitor at time $t$ seconds is $Q(t)=\\dfrac{50}{9}\\bigl(e^{-t/10}-e^{-t}\\bigr)\\,$ C.\n\n> **Common mistake:** Forgetting to multiply the *entire* differential equation by the integrating factor. The factor must be applied to both the derivative term and the non‑derivative term; otherwise the left side will not become an exact derivative.\n\n---\n\nThese two examples show how the same mathematical tool – the integrating factor – handles very different real‑world problems: the cooling of water in a tank and the charging of an electrical capacitor. Once the ODE is written correctly, the steps are mechanical, and the solution gives a clear prediction that can be checked against measurements.",
+   "code": ""
+  },
+  {
+   "heading": "Checking and Interpreting Solutions",
+   "body": "When we have solved a first‑order linear differential equation, the work is not finished until we **check** that the answer really satisfies the original equation and we **interpret** what the solution tells us about the situation we are modelling.  \nDoing these two things helps us avoid algebra slips and connects the mathematics back to the real world.\n\n> **Remember:** A solution is only correct if, after substituting it into the original differential equation, the equation holds true for every $x$ in the interval of interest.\n\n### 1. Verify by differentiation  \n\nThe most direct way to check a solution $y(x)$ is to differentiate it (find $y'(x)$) and then plug both $y$ and $y'$ into the original equation.  \nIf the left‑hand side (LHS) equals the right‑hand side (RHS) after simplification, the solution passes the test.\n\n**Why it works:** The differential equation tells us a relationship between $y$ and its derivative $y'$. By computing $y'$ from our candidate $y$ we can see whether that relationship is indeed satisfied.\n\n#### Worked example  \n\n**Example 6 (Level): Verifying a cooling solution**  \n\nA coffee mug cools according to Newton’s law  \n$$\\frac{dT}{dt}=k\\,(T_{\\text{room}}-T),$$  \nwith $k=0.07\\ \\text{min}^{-1}$ and $T_{\\text{room}}=20^\\circ\\text{C}$.  \nWe solved earlier and obtained  \n$$T(t)=20+80e^{-0.07t}.$$  \nCheck that this $T(t)$ satisfies the differential equation.\n\n1. **Differentiate $T(t)$**  \n   $$\\frac{dT}{dt}= \\frac{d}{dt}\\bigl(20+80e^{-0.07t}\\bigr)=80(-0.07)e^{-0.07t}=-5.6e^{-0.07t}.$$\n\n2. **Form the RHS of the original equation**  \n   $$k\\,(T_{\\text{room}}-T)=0.07\\bigl(20-(20+80e^{-0.07t})\\bigr)=0.07(-80e^{-0.07t})=-5.6e^{-0.07t}.$$\n\n3. **Compare LHS and RHS**  \n   Both are $-5.6e^{-0.07t}$, so the equality holds for every $t$.\n\n**Answer:** The function $T(t)=20+80e^{-0.07t}$ is indeed a correct solution of the cooling equation.  \n\n### 2. Behaviour as $x\\to\\infty$ (or $t\\to\\infty$)  \n\nMany physical problems ask what happens after a long time. Mathematically we look at the limit of the solution as the independent variable grows without bound.\n\n**Key idea:** In a first‑order linear equation with constant coefficients, the term that contains the exponential $e^{-\\lambda x}$ (with $\\lambda>0$) will shrink to zero as $x\\to\\infty$. The remaining constant part is the *steady‑state* or *equilibrium* value.\n\n> **Note:** The steady‑state value often represents the temperature of the surrounding medium, the concentration of a well‑mixed tank, or any quantity that the system approaches but never exceeds.\n\n#### Worked example  \n\n**Example 7 (Level): Long‑term temperature of the cooling coffee**  \n\nUsing the same solution $T(t)=20+80e^{-0.07t}$, find $\\displaystyle\\lim_{t\\to\\infty}T(t)$ and explain why this makes sense.\n\n1. **Identify the exponential term**  \n   The term $80e^{-0.07t}$ contains $e^{-0.07t}$, which decays because $-0.07<0$.\n\n2. **Take the limit**  \n   $$\\lim_{t\\to\\infty}80e^{-0.07t}=80\\cdot0=0,$$  \n   because $e^{-0.07t}\\to0$ as $t\\to\\infty$.\n\n3. **Add the constant part**  \n   $$\\lim_{t\\to\\infty}T(t)=20+0=20^\\circ\\text{C}.$$\n\n**Answer:** The coffee’s temperature approaches $20^\\circ\\text{C}$, the room temperature. Physically, the coffee cannot become cooler than the surrounding air; it will eventually reach thermal equilibrium with the room.\n\n### 3. Relating the limit to the physical meaning  \n\nWhen the limit equals a constant that appears in the differential equation (here $T_{\\text{room}}$), it tells us that the system settles into a state where the driving force of change disappears. In the cooling law, the driving force is the temperature difference $T_{\\text{room}}-T$. When $T$ equals $T_{\\text{room}}$, the difference is zero, so the rate of cooling $dT/dt$ becomes zero – the coffee stops changing temperature.\n\n> **In daily life:** Think of a hot cup of tea left on a kitchen counter. At first it cools quickly, then more slowly, and after many hours it feels just like the air around it. The mathematics captures exactly this intuitive picture.\n\n### 4. Checking a mixing problem  \n\nA similar check works for a mixing tank. Suppose a tank of $100\\,$L contains salt concentration $C(t)$ (grams per litre) and obeys  \n$$\\frac{dC}{dt}= \\frac{r_{\\text{in}}}{V}\\bigl(C_{\\text{in}}-C\\bigr),$$  \nwith $r_{\\text{in}}=5\\,$L/min, $V=100\\,$L, and $C_{\\text{in}}=0.2\\,$g/L. Solving gives  \n$$C(t)=0.2+\\bigl(C_0-0.2\\bigr)e^{-0.05t}.$$\n\n#### Worked example  \n\n**Example 8 (Level): Verify and interpret the mixing solution**  \n\n1. **Differentiate $C(t)$**  \n   $$\\frac{dC}{dt}= (C_0-0.2)(-0.05)e^{-0.05t}=-0.05\\bigl(C_0-0.2\\bigr)e^{-0.05t}.$$\n\n2. **Compute RHS of the model**  \n   $$\\frac{r_{\\text{in}}}{V}\\bigl(C_{\\text{in}}-C\\bigr)=\\frac{5}{100}\\bigl(0.2-\\bigl[0.2+(C_0-0.2)e^{-0.05t}\\bigr]\\bigr)$$  \n   $$=\\;0.05\\bigl(- (C_0-0.2)e^{-0.05t}\\bigr)=-0.05\\bigl(C_0-0.2\\bigr)e^{-0.05t}.$$\n\n3. **Compare** – the two expressions are identical, so the solution is correct.\n\n4. **Long‑term behaviour**  \n   $$\\lim_{t\\to\\infty}C(t)=0.2\\ \\text{g/L}.$$  \n   The concentration approaches the incoming water’s concentration, which is what we expect: after a long time the tank’s water is essentially the same as the fresh inflow.\n\n**Answer:** The solution passes the verification and shows that the tank’s salt level settles at $0.2\\,$g/L, the concentration of the incoming stream.\n\n> **Common mistake:** Forgetting to include the constant (steady‑state) term when taking the limit. The exponential part goes to zero, but the constant remains and often carries the physical meaning.\n\n### 5. Summary of the checking process  \n\n1. **Differentiate** the proposed solution.  \n2. **Substitute** $y$ and $y'$ back into the original equation.  \n3. **Simplify**; if both sides match, the solution is correct.  \n4. **Take the limit** as $x\\to\\infty$ (or $t\\to\\infty$) to find the steady‑state value.  \n5. **Interpret** that value in the context of the problem – it should represent an equilibrium that the real system can reach.\n\nBy following these steps we turn a symbolic answer into a trustworthy description of the physical world.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Solve \\(\\displaystyle \\frac{dy}{dx}+2y=6\\).",
+   "a": "The equation is already in the form \\(y'+P y = Q\\) with \\(P=2,\\;Q=6\\).\nIntegrating factor: \\(\\mu=e^{\\int2dx}=e^{2x}\\).\nMultiply: \\(e^{2x}y'+2e^{2x}y = \\frac{d}{dx}(e^{2x}y)=6e^{2x}\\).\nIntegrate: \\(e^{2x}y = \\int 6e^{2x}dx = 3e^{2x}+C\\).\nDivide by \\(e^{2x}\\): \\(y = 3 + Ce^{-2x}\\)."
+  },
+  {
+   "level": "Easy",
+   "q": "Verify that \\(y(x)=4e^{-3x}+5\\) solves \\(\\displaystyle \\frac{dy}{dx}+3y=15\\).",
+   "a": "Compute \\(y' = -12e^{-3x}\\).\nThen \\(y'+3y = -12e^{-3x}+3(4e^{-3x}+5)= -12e^{-3x}+12e^{-3x}+15 =15\\).\nSince the left‑hand side equals the right‑hand side, the solution is correct."
+  },
+  {
+   "level": "Medium",
+   "q": "Solve the initial‑value problem \\(\\displaystyle \\frac{dy}{dx}-\\frac{1}{x}y = x^2,\\; y(1)=2\\).",
+   "a": "Here \\(P(x)=-\\frac{1}{x}\\).\nIntegrating factor: \\(\\mu=e^{\\int -\\frac{1}{x}dx}=e^{-\\ln|x|}=x^{-1}\\).\nMultiply: \\(x^{-1}y' - x^{-2}y = \\frac{d}{dx}(x^{-1}y)=x^{-1}\\cdot x^{2}=x\\).\nIntegrate: \\(x^{-1}y = \\int x\\,dx = \\frac{x^{2}}{2}+C\\).\nThus \\(y = x\\left(\\frac{x^{2}}{2}+C\\right)=\\frac{x^{3}}{2}+Cx\\).\nApply \\(y(1)=2\\): \\(\\frac{1}{2}+C =2 \\Rightarrow C = \\frac{3}{2}\\).\nFinal solution: \\(y(x)=\\frac{x^{3}}{2}+\\frac{3}{2}x\\)."
+  },
+  {
+   "level": "Medium",
+   "q": "A tank initially contains 100 L of fresh water. Saltwater with concentration \\(0.5\\;\\text{kg/L}\\) flows in at \\(2\\;\\text{L/min}\\); the mixture flows out at the same rate. Find the amount of salt \\(A(t)\\) after \\(t\\) minutes.",
+   "a": "Volume stays constant at 100 L. Rate in: \\(2 \\times 0.5 =1\\;\\text{kg/min}\\).\nRate out: \\(\\displaystyle 2\\frac{A(t)}{100}=0.02A(t)\\).\nDifferential equation: \\(\\displaystyle \\frac{dA}{dt}=1-0.02A\\).\nWrite as \\(A'+0.02A=1\\).\nIntegrating factor: \\(\\mu=e^{0.02t}\\).\nMultiply: \\(\\frac{d}{dt}(e^{0.02t}A)=e^{0.02t}\\).\nIntegrate: \\(e^{0.02t}A = \\frac{1}{0.02}e^{0.02t}+C =50e^{0.02t}+C\\).\nThus \\(A = 50 + Ce^{-0.02t}\\).\nInitially \\(A(0)=0\\) (fresh water), so \\(0 = 50 + C \\Rightarrow C=-50\\).\nTherefore \\(A(t)=50\\bigl(1-e^{-0.02t}\\bigr)\\) kg."
+  },
+  {
+   "level": "Hard",
+   "q": "Solve \\(\\displaystyle \\frac{dy}{dx}+y\\tan x = \\sin x,\\; 0<x<\\frac{\\pi}{2}\\).",
+   "a": "Identify \\(P(x)=\\tan x,\\; Q(x)=\\sin x\\).\nIntegrating factor: \\(\\mu=e^{\\int \\tan x\\,dx}=e^{-\\ln|\\cos x|}= \\frac{1}{\\cos x}\\).\nMultiply the equation: \\(\\frac{1}{\\cos x}y' + \\frac{\\sin x}{\\cos^{2}x}y = \\frac{\\sin x}{\\cos x}\\).\nLeft side is \\(\\frac{d}{dx}\\!\\left(\\frac{y}{\\cos x}\\right)\\).\nThus \\(\\frac{d}{dx}\\!\\left(\\frac{y}{\\cos x}\\right)=\\tan x\\).\nIntegrate: \\(\\frac{y}{\\cos x}= \\int \\tan x\\,dx = -\\ln|\\cos x| + C\\).\nHence \\(y = \\cos x\\bigl(-\\ln|\\cos x| + C\\bigr)= -\\cos x\\ln(\\cos x)+C\\cos x\\)."
+  },
+  {
+   "level": "Hard",
+   "q": "A coffee mug cools according to Newton’s law: \\(\\displaystyle \\frac{dT}{dt}= -k\\bigl(T-20\\bigr)\\). The coffee is initially \\(90^{\\circ}\\)C and after 5 min it is \\(70^{\\circ}\\)C. Find \\(T(t)\\) and the temperature after 10 min.",
+   "a": "Equation is linear with \\(P=k,\\; Q=k\\cdot20\\).\nIntegrating factor: \\(\\mu=e^{kt}\\).\nMultiply: \\(\\frac{d}{dt}(e^{kt}T)=20k e^{kt}\\).\nIntegrate: \\(e^{kt}T =20 e^{kt}+C\\).\nThus \\(T =20 + Ce^{-kt}\\).\nUse \\(T(0)=90\\): \\(90 =20 + C \\Rightarrow C=70\\).\nSo \\(T(t)=20+70e^{-kt}\\).\nUse \\(T(5)=70\\): \\(70 =20+70e^{-5k}\\) → \\(50 =70e^{-5k}\\) → \\(e^{-5k}=5/7\\).\nTake logs: \\(-5k = \\ln(5/7)\\) → \\(k = -\\frac{1}{5}\\ln\\frac{5}{7}= \\frac{1}{5}\\ln\\frac{7}{5}\\).\nNow \\(T(10)=20+70e^{-10k}=20+70\\left(e^{-5k}\\right)^{2}=20+70\\left(\\frac{5}{7}\\right)^{2}=20+70\\cdot\\frac{25}{49}=20+\\frac{1750}{49}\\approx20+35.71=55.71^{\\circ}\\text{C}.\\)"
+  }
+ ],
+ "recap": "A first‑order linear differential equation has the form dy/dx+P(x)*y=Q(x). By multiplying the equation by an integrating factor mu(x)=exp(integral P(x)dx) the left side becomes the derivative of mu(x)*y, allowing easy integration. Solving gives a family of solutions, and an initial condition selects the specific curve. The method applies to real‑world problems like mixing and cooling, and solutions should always be checked by substitution.",
+ "key_terms": [
+  {
+   "term": "first‑order linear equation",
+   "meaning": "An equation of the form dy/dx+P(x)*y=Q(x) where the unknown function y appears only to the first power."
+  },
+  {
+   "term": "standard form",
+   "meaning": "The arrangement dy/dx+P(x)*y=Q(x) with the coefficient of dy/dx equal to 1."
+  },
+  {
+   "term": "integrating factor",
+   "meaning": "A function mu(x)=exp(integral P(x)dx) that turns the left side into the derivative of mu(x)*y."
+  },
+  {
+   "term": "product rule",
+   "meaning": "The derivative of a product: d(uv)/dx = u'*v+u*v'."
+  },
+  {
+   "term": "constant of integration",
+   "meaning": "The arbitrary constant C that appears after integrating, fixed by an initial condition."
+  },
+  {
+   "term": "initial‑value problem",
+   "meaning": "A differential equation together with a condition y(x0)=y0 used to determine C."
+  },
+  {
+   "term": "checking solution",
+   "meaning": "Substituting the found y(x) back into the original equation to verify it satisfies the equation."
+  },
+  {
+   "term": "application (mixing/cooling)",
+   "meaning": "Real‑world situations modeled by first‑order linear ODEs, such as salt concentration in a tank or temperature change of an object."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the standard form of a first‑order linear differential equation?",
+   "options": [
+    "dy/dx+P(x)*y=Q(x)",
+    "dy/dx-P(x)*y=Q(x)",
+    "P(x)*dy/dx+y=Q(x)",
+    "dy/dx+Q(x)*y=P(x)"
+   ],
+   "answer": 0,
+   "why": "The standard form isolates dy/dx with coefficient 1 and adds P(x)*y on the left."
+  },
+  {
+   "q": "How is the integrating factor mu(x) defined?",
+   "options": [
+    "mu(x)=exp(integral Q(x)dx)",
+    "mu(x)=exp(integral P(x)dx)",
+    "mu(x)=integral P(x)dx",
+    "mu(x)=P(x)*Q(x)"
+   ],
+   "answer": 1,
+   "why": "mu(x) is exp of the integral of P(x), not Q(x)."
+  },
+  {
+   "q": "After multiplying by mu(x), what does the left side become?",
+   "options": [
+    "mu(x)*dy/dx",
+    "d(mu(x)*y)/dx",
+    "mu(x)*y",
+    "dy/dx"
+   ],
+   "answer": 1,
+   "why": "By design mu(x) makes the left side the derivative of mu(x)*y."
+  },
+  {
+   "q": "What role does the constant of integration play?",
+   "options": [
+    "It determines the shape of the integrating factor",
+    "It is fixed by an initial condition",
+    "It cancels out during integration",
+    "It is always zero"
+   ],
+   "answer": 1,
+   "why": "The constant C is chosen so the solution passes through the given initial point."
+  },
+  {
+   "q": "Which of the following is an example of an application of first‑order linear ODEs?",
+   "options": [
+    "Projectile motion",
+    "Mixing tank concentration",
+    "Quadratic equation solving",
+    "Circle area calculation"
+   ],
+   "answer": 1,
+   "why": "Mixing tank problems lead to linear ODEs of the form dy/dx+P*y=Q."
+  },
+  {
+   "q": "How do you verify a solution to a differential equation?",
+   "options": [
+    "Plug it into the original equation and simplify",
+    "Check that the constant of integration is zero",
+    "Differentiate twice and compare",
+    "Graph the solution only"
+   ],
+   "answer": 0,
+   "why": "Substituting y and y' into the original equation confirms correctness."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a first‑order linear differential equation.",
+   "back": "An equation of the form dy/dx+P(x)*y=Q(x) where y appears only to the first power."
+  },
+  {
+   "front": "What is the integrating factor and why is it used?",
+   "back": "mu(x)=exp(integral P(x)dx); it converts the left side into d(mu*y)/dx for easy integration."
+  },
+  {
+   "front": "State the product rule for differentiation.",
+   "back": "d(uv)/dx = u'*v + u*v'."
+  },
+  {
+   "front": "How do you solve for y after integrating?",
+   "back": "y = (1/mu(x))*(integral mu(x)*Q(x)dx + C)."
+  },
+  {
+   "front": "What is an initial‑value problem?",
+   "back": "A differential equation together with a condition y(x0)=y0 that determines the constant C."
+  },
+  {
+   "front": "Why must the coefficient of dy/dx be 1 in standard form?",
+   "back": "So the integrating factor can be applied directly; otherwise you first divide the whole equation by that coefficient."
+  },
+  {
+   "front": "Give a real‑world example modeled by a first‑order linear ODE.",
+   "back": "Cooling of a cup of coffee (Newton's law of cooling) or salt concentration in a mixing tank."
+  },
+  {
+   "front": "How do you check a solved differential equation?",
+   "back": "Differentiate the solution, substitute y and y' into the original equation, and verify both sides are equal."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l18-mixing-tank",
+   "title": "A tank where a liquid is mixed with an incoming stream, illustrating the variables in a mixing ODE.",
+   "alt": "A tank where a liquid is mixed with an incoming stream, illustrating the variables in a mixing ODE.",
+   "priority": 9,
+   "picture_title": "Mixing Tank",
+   "kind": "photo",
+   "subject": "A clear cylindrical tank with inlet and outlet pipes; the inlet shows a colored stream entering and the outlet shows mixed liquid leaving. A ruler or scale is visible to convey volume.",
+   "layout": "Tank centred, inlet pipe on left, outlet pipe on right, labels placed around the tank pointing to inlet, outlet, and liquid level.",
+   "labels": [
+    "Tank",
+    "Inlet",
+    "Outlet",
+    "Liquid level"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l18-cooling-coffee-cup",
+   "title": "A cup of coffee cooling in a room, used to model Newton's law of cooling as a first‑order linear ODE.",
+   "alt": "A cup of coffee cooling in a room, used to model Newton's law of cooling as a first‑order linear ODE.",
+   "priority": 8,
+   "picture_title": "Cooling Coffee Cup",
+   "kind": "photo",
+   "subject": "A steaming coffee cup on a table beside a thermometer; the surrounding air temperature is shown on a wall-mounted gauge.",
+   "layout": "Cup in foreground, thermometer on the wall behind, arrows indicating heat flow from cup to air.",
+   "labels": [
+    "Coffee",
+    "Thermometer",
+    "Room temperature"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l18-integrating-factor-illustration",
+   "title": "A step‑by‑step illustration of multiplying an ODE by the integrating factor to create a product derivative.",
+   "alt": "A step‑by‑step illustration of multiplying an ODE by the integrating factor to create a product derivative.",
+   "priority": 6,
+   "picture_title": "Integrating Factor Illustration",
+   "kind": "illustration",
+   "subject": "Three panels: (1) original equation dy/dx + P(x)y = Q(x); (2) multiplying by μ(x)=e^{∫P(x)dx}; (3) resulting derivative d/dx[μ(x)y] = μ(x)Q(x).",
+   "layout": "Horizontal sequence of three boxes, each with the equation centered and arrows showing the transformation.",
+   "labels": [],
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Deriving the Integrating Factor",
+   "steps": [
+    {
+     "label": "Standard Form",
+     "text": "Write the ODE as dy/dx + P(x) y = Q(x)."
+    },
+    {
+     "label": "Choose μ(x)",
+     "text": "Set μ(x) = exp(∫ P(x) dx)."
+    },
+    {
+     "label": "Multiply",
+     "text": "Multiply the whole equation by μ(x)."
+    },
+    {
+     "label": "Recognise Derivative",
+     "text": "Left side becomes d/dx[ μ(x) y(x) ]."
+    },
+    {
+     "label": "Integrate",
+     "text": "Integrate both sides to obtain μ y = ∫ μ Q dx + C."
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Solving a First‑Order Linear ODE",
+   "steps": [
+    {
+     "label": "Find μ",
+     "text": "Compute μ(x)=exp(∫P(x)dx)."
+    },
+    {
+     "label": "Multiply Equation",
+     "text": "μ dy/dx + μ P y = μ Q."
+    },
+    {
+     "label": "Write as Single Derivative",
+     "text": "Recognise left side as d/dx[μ y]."
+    },
+    {
+     "label": "Integrate",
+     "text": "∫ d/dx[μ y] dx = ∫ μ Q dx."
+    },
+    {
+     "label": "Solve for y",
+     "text": "y(x) = (1/μ)(∫ μ Q dx + C)."
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
