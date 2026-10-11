@@ -1,0 +1,390 @@
+{
+ "title": "Exponential and Logarithmic Functions",
+ "summary": "Students explore how exponential functions model growth and decay, learn exponent rules, and discover basic logarithms as the inverse of exponentials. They apply these ideas to real‑world situations and simple calculations.",
+ "objectives": [
+  "Explain the difference between exponential growth and decay",
+  "Apply the laws of exponents to simplify expressions",
+  "Convert between exponential and logarithmic forms",
+  "Solve basic exponential and logarithmic equations",
+  "Interpret real‑world problems using exponential or logarithmic models"
+ ],
+ "prerequisites": "Students should already know how to solve linear equations and be comfortable with basic arithmetic and algebraic notation.",
+ "why": [
+  "Exponential growth describes many natural and social processes, such as population increase, bacterial growth, and compound interest. Understanding decay helps explain radioactive half‑life, cooling, and depreciation.",
+  "Logarithms let us work backwards from a result to find the original input, which is essential in fields like acoustics (decibels), pH chemistry, and information theory."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Exponents",
+   "body": "When we write $a^b$, we are saying “multiply the number $a$ by itself $b$ times”.  \nHere $a$ is called the **base** – the number that is being repeated – and $b$ is the **exponent** (or power).  \nIf $b$ is a positive integer, the meaning is straightforward:\n\n$$a^b = \\underbrace{a \\times a \\times \\dots \\times a}_{\\text{$b$ factors}}$$  \n\n> **Definition:** For a positive integer exponent $b$, $a^b$ means the product of $b$ copies of $a$.\n\n**Why this matters:**  Multiplication is itself a shortcut for repeated addition.  Exponents are a second shortcut: they let us write a long product of the same factor in a compact way.  This saves time and reduces mistakes when numbers get large.\n\n---\n\n### Simple examples\n\n- $3^4 = 3 \\times 3 \\times 3 \\times 3 = 81$.  \n- $5^1 = 5$ because there is only one factor.  \n- $7^0 = 1$ – we will see why zero works later, but for now just remember that any non‑zero number raised to the power $0$ equals $1$.\n\n> **In daily life:** Think of a stack of identical books.  If each book is $a$ centimeters thick and you have $b$ books, the total thickness is $a^b$ only when you *multiply* the thickness repeatedly (as in building a tower where each level is $a$ times taller than the one below).  The exponent tells you how many levels you have.\n\n---\n\n### Basic exponent rules\n\nOnce we understand the meaning of a single exponent, we can combine them.  The rules below let us simplify expressions without expanding everything.\n\n1. **Product of same base:**  \n   $$a^m \\times a^n = a^{m+n}$$  \n   *Reason:* $a^m$ gives $m$ copies of $a$, $a^n$ gives $n$ copies, together they give $m+n$ copies.\n\n2. **Quotient of same base:**  \n   $$\\frac{a^m}{a^n} = a^{m-n} \\qquad (a\\neq 0)$$  \n   *Reason:* Cancel $n$ copies from the numerator’s $m$ copies, leaving $m-n$ copies.\n\n3. **Power of a power:**  \n   $$(a^m)^n = a^{m\\;n}$$  \n   *Reason:* Raising $a^m$ to the $n$‑th power means multiplying $a^m$ by itself $n$ times, giving $m \\times n$ copies of $a$.\n\n4. **Power of a product:**  \n   $$(ab)^n = a^n b^n$$  \n   *Reason:* Distribute the $n$ copies over each factor in the product.\n\n5. **Power of a quotient:**  \n   $$\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n} \\qquad (b\\neq 0)$$  \n\n> **Note:** These rules work only when the bases are the same (for the first two) or when we are dealing with a single base raised to several exponents (for the others).  Mixing different bases without converting them first can lead to errors.\n\n---\n\n### A quick check\n\nSuppose we want to simplify $\\displaystyle \\frac{2^5 \\times 2^3}{2^4}$.  \nApply the product rule first: $2^5 \\times 2^3 = 2^{5+3}=2^8$.  \nThen use the quotient rule: $\\frac{2^8}{2^4}=2^{8-4}=2^4=16$.\n\n> **Common mistake:** Forgetting to keep the base the same when using the product rule.  For example, writing $2^5 \\times 3^5 = (2\\cdot3)^5$ is **incorrect**; the correct result is $2^5 \\times 3^5 = (2\\cdot3)^5$ **only** when the exponents are equal and the bases are multiplied **after** the exponentiation, i.e., $(2\\cdot3)^5 = 6^5$, which is a different number.\n\n---\n\n### Remember the zero and one exponents\n\n- Any non‑zero number to the power $1$ is itself: $a^1 = a$.  \n- Any non‑zero number to the power $0$ equals $1$: $a^0 = 1$.  \nThese follow from the quotient rule: $\\displaystyle a^m / a^m = a^{m-m}=a^0$, but the left side is $1$, so $a^0=1$.\n\n> **Remember:** The exponent rules are tools that let us rewrite complicated products and quotients as a single power.  Mastering them now will make later work with exponential growth, decay, and logarithms much smoother.",
+   "code": ""
+  },
+  {
+   "heading": "2. Exponential Growth and Decay Concepts",
+   "body": "Exponential growth and decay describe how a quantity changes when it is multiplied by the same factor over equal time intervals.  \nThink of a **factor** as a number that tells you “how many times bigger (or smaller) the amount becomes each step.”  \n\n> **Definition:** *Exponential growth* occurs when the factor (called the **base**) is larger than 1, written $a>1$. Each step makes the quantity larger.  \n> **Definition:** *Exponential decay* occurs when the factor is between 0 and 1, written $0<a<1$. Each step makes the quantity smaller.  \n\nWhy does this matter? Many natural and human‑made processes follow this pattern: populations, radioactive substances, bank interest, and even the spread of a rumor. Recognising the pattern lets us predict future values without measuring every single step.\n\n---\n\n### General formula\n\nIf a quantity starts at a value $P_0$ (the **initial amount**) at time $t=0$, and it is multiplied by the same base $a$ each unit of time, the amount after $t$ time units is\n\n$$\nP(t)=P_0\\cdot a^{\\,t}.\n$$\n\n* $P(t)$ – amount after $t$ units of time  \n* $P_0$ – amount at the beginning (when $t=0$)  \n* $a$ – base (growth factor if $a>1$, decay factor if $0<a<1$)  \n* $t$ – number of equal time intervals that have passed  \n\nThe exponent $t$ tells us **how many times** we apply the factor $a$.  \n\n> **Note:** The base $a$ is *constant*; it does not change from one interval to the next. If the factor changed, the process would no longer be exponential.\n\n---\n\n### Worked example: exponential growth\n\n**Example 1 (Easy): Bacteria doubling**  \nA bacteria culture doubles every hour. If you start with 100 cells, how many are there after 3 hours?\n\n1. **Identify the initial amount** $P_0$.  \n   $$P_0 = 100\\text{ cells}$$  \n\n2. **Determine the base** $a$. “Doubling” means the amount becomes twice as large each hour, so $a = 2$.  \n\n3. **Count the number of intervals** $t$. From the start to 3 hours later, $t = 3$.  \n\n4. **Plug into the general formula** $P(t)=P_0 a^{t}$.  \n   $$P(3)=100\\cdot 2^{3}$$  \n\n5. **Calculate the power** $2^{3}=8$ and then multiply.  \n   $$P(3)=100\\cdot 8 = 800$$  \n\n**Answer:** After 3 hours there are **800 bacteria cells**.\n\nThis example shows the steps clearly: start value, growth factor, time steps, then apply the formula.\n\n---\n\n### Understanding decay with a simple picture\n\nImagine a cup of hot coffee cooling down. Each minute the temperature drops to 90 % of what it was a minute earlier. Here the base $a$ is $0.90$, which is less than 1, so the temperature **decays**.\n\nIf the coffee starts at $80^\\circ\\text{C}$, after $t$ minutes its temperature is  \n\n$$\nT(t)=80\\cdot 0.9^{\\,t}.\n$$\n\nAfter 5 minutes,  \n\n$$\nT(5)=80\\cdot 0.9^{5}\\approx 80\\cdot 0.5905\\approx 47.2^\\circ\\text{C}.\n$$\n\nThe same formula works; only the base tells us whether the quantity grows or shrinks.\n\n> **In daily life:** Radioactive decay follows the same rule with a base $a$ that is a little less than 1. Knowing the half‑life (the time for the amount to become $1/2$ of what it was) lets us write $a = \\frac12$ for each half‑life period.\n\n---\n\n### Key ideas to remember\n\n> **Remember:** The exponent $t$ must be a count of *equal* time intervals. If the intervals are not equal, you must first convert them so that each step uses the same length of time.\n\n> **Common mistake:** Using the wrong base. For growth you must use a number greater than 1; using a number between 0 and 1 will give a decreasing result, which is the opposite of what you expect.\n\n---\n\n### Worked example: exponential decay\n\n**Example 2 (Easy): Radioactive sample**  \nA sample of a radioactive isotope loses half of its mass every 4 days. If the initial mass is $200\\text{ mg}$, what is the mass after 12 days?\n\n1. **Initial amount** $P_0 = 200\\text{ mg}$.  \n\n2. **Base** $a$ for each 4‑day period is $0.5$ (half remains).  \n\n3. **Number of periods** $t$: 12 days ÷ 4 days per period = $3$ periods.  \n\n4. **Apply the formula**  \n   $$P(3)=200\\cdot 0.5^{\\,3}$$  \n\n5. **Compute the power** $0.5^{3}=0.125$ and multiply.  \n   $$P(3)=200\\cdot 0.125 = 25\\text{ mg}$$  \n\n**Answer:** After 12 days the sample weighs **25 mg**.\n\n---\n\n### Why the formula works\n\nEach time interval multiplies the current amount by $a$. After the first interval we have $P_0 a$. After the second we multiply again: $(P_0 a) a = P_0 a^{2}$. Continuing $t$ times gives $P_0 a^{t}$. This repeated multiplication is exactly what the exponent represents.\n\nUnderstanding this simple pattern lets you model many real‑world situations quickly and accurately. Once you can write the correct $P_0$, $a$, and $t$, the rest is just arithmetic.",
+   "code": ""
+  },
+  {
+   "heading": "3. Using the Laws of Exponents",
+   "body": "When we work with powers, the **laws of exponents** let us turn a messy product of many similar factors into a single, tidy expression.  \nThink of each factor as a stack of identical blocks. Adding another block on top makes the stack taller – that is what the exponent tells us. The laws tell us how to combine stacks when we put them side‑by‑side, take one stack away, or build a stack of stacks.\n\n> **Definition:** An *exponent* $a^b$ means “multiply the base $a$ by itself $b$ times”.  \n> **Note:** The laws only work when the bases are the same (both $2$, both $5$, etc.).  \n\n### 1. Product Rule  \n\nIf two powers have the same base, we can add their exponents:\n\n$$a^{m}\\cdot a^{n}=a^{m+n}$$  \n\nWhy? Each factor contributes its own copies of $a$. Putting them together just counts all the copies.\n\n**Example 2 (Easy): Simplify a product‑quotient**  \nSimplify $\\displaystyle\\frac{2^{3}\\cdot 2^{4}}{2^{2}}$.\n\n1. **Combine the numerator using the product rule.**  \n   $$2^{3}\\cdot 2^{4}=2^{3+4}=2^{7}$$  \n\n2. **Now divide by $2^{2}$ using the quotient rule (next rule).**  \n   $$\\frac{2^{7}}{2^{2}}=2^{7-2}=2^{5}$$  \n\n3. **Write the final power.**  \n   $$2^{5}=32$$  \n\n**Answer:** $\\displaystyle\\frac{2^{3}\\cdot 2^{4}}{2^{2}}=2^{5}=32$.\n\n### 2. Quotient Rule  \n\nWhen we divide two powers with the same base, we subtract the exponent of the denominator from the exponent of the numerator:\n\n$$\\frac{a^{m}}{a^{n}}=a^{m-n}$$  \n\nThe idea is that the denominator “cancels” that many copies of the base from the numerator.\n\n### 3. Power‑to‑a‑Power Rule  \n\nIf a power itself is raised to another exponent, we multiply the exponents:\n\n$$\\left(a^{m}\\right)^{n}=a^{m\\cdot n}$$  \n\nImagine building a tower of $m$ blocks, then stacking $n$ identical towers on top of each other – the total height is $m\\cdot n$ blocks.\n\n### 4. Zero‑Exponent Rule  \n\nAny non‑zero number raised to the power $0$ equals $1$:\n\n$$a^{0}=1\\qquad (a\\neq0)$$  \n\nWhy? From the quotient rule, $\\displaystyle\\frac{a^{m}}{a^{m}}=a^{m-m}=a^{0}$, but the left side is simply $1$ because any number divided by itself is $1$.\n\n> **In daily life:** Think of a discount code that says “buy 0 extra items”. No matter what the original price is, the extra cost is $0$, just as any base to the zero power becomes $1$.\n\n### 5. Putting the rules together  \n\nOften a problem requires more than one rule. We apply them step by step, always keeping the base the same.\n\n**Example 3 (Medium): Write a nested product as a single power**  \nRewrite $(5^{x}\\cdot 5^{2})^{3}$ as a single power of $5$.\n\n1. **Inside the parentheses, combine the two factors using the product rule.**  \n   $$5^{x}\\cdot 5^{2}=5^{x+2}$$  \n\n2. **Now apply the power‑to‑a‑power rule to the whole parentheses.**  \n   $$\\left(5^{x+2}\\right)^{3}=5^{(x+2)\\cdot 3}$$  \n\n3. **Distribute the multiplication in the exponent.**  \n   $$5^{3(x+2)}=5^{3x+6}$$  \n\n**Answer:** $(5^{x}\\cdot 5^{2})^{3}=5^{3x+6}$.\n\n### 6. Quick checklist for simplifying  \n\n| Situation | Rule to use | What you do |\n|-----------|------------|-------------|\n| Same base multiplied | Product rule | Add exponents |\n| Same base divided | Quotient rule | Subtract exponents |\n| Power raised to a power | Power‑to‑a‑power | Multiply exponents |\n| Exponent is $0$ | Zero‑exponent rule | Replace by $1$ |\n\n> **Remember:** Always look first for a common base. If the bases differ, the exponent laws cannot be applied directly; you may need to rewrite one base using a different identity (e.g., $2=4^{1/2}$) before proceeding.\n\n### 7. Why these rules matter  \n\nSimplifying expressions makes calculations faster and reduces the chance of arithmetic errors. In physics, chemistry, and finance, quantities often appear as powers (e.g., $e^{kt}$ for continuous growth). Using the exponent laws lets us combine terms, solve for unknowns, and interpret results clearly.\n\n> **Common mistake:** Forgetting to keep the base the same when adding exponents. Adding $2^{3}+2^{4}$ does **not** give $2^{7}$; addition of powers requires a common factor, not the product rule.\n\nBy mastering these four basic laws, you gain a toolbox that works in every later topic involving exponentials and logarithms. Practice each rule on its own, then try problems that need several rules together, just as we did in the examples above.",
+   "code": ""
+  },
+  {
+   "heading": "4. Introducing Logarithms",
+   "body": "When we first met exponentials, we saw expressions such as $a^x$ where a **base** $a$ is multiplied by itself $x$ times.  \nA **logarithm** asks the opposite question: *“How many times must we multiply the base $a$ to obtain a given number $b$?”*  \n\n> **Definition:** The logarithm of $b$ with base $a$, written $\\log_a(b)$, is the exponent that gives $b$ when $a$ is the base. In symbols,  \n\n$$\\log_a(b)=x \\quad\\Longleftrightarrow\\quad a^{\\,x}=b.$$\n\nSo $\\log_a(b)$ tells us the power $x$ we need to raise $a$ to in order to reach $b$.  \n\nWhy is this useful?  Many real‑world situations grow or shrink by repeatedly multiplying by the same factor (interest, population, radioactive decay).  Sometimes we know the final amount and want to know *how long* it took to get there.  The logarithm converts that “final amount” back into a time or number of steps.\n\n### The inverse relationship\n\nAn **inverse** operation undoes another operation.  Adding and subtracting are inverses; multiplying and dividing are inverses.  Similarly, exponentiation and logarithms are inverses:\n\n- Starting with $a^{\\,x}=b$ and applying $\\log_a$ to both sides gives $\\log_a(a^{\\,x})= \\log_a(b)$.\n- Because $\\log_a(a^{\\,x})$ asks “to what power must we raise $a$ to get $a^{\\,x}$?”, the answer is simply $x$.  \n\nThus  \n\n$$\\log_a(a^{\\,x}) = x \\qquad\\text{and}\\qquad a^{\\,\\log_a(b)} = b.$$\n\nThese two equations are the cornerstone of working with logarithms.\n\n> **Note:** The base $a$ must be positive and not equal to $1$; otherwise the function would not be one‑to‑one and would not have an inverse.\n\n### Everyday comparison\n\nThink of a ladder with equally spaced rungs.  Climbing up $x$ rungs from the ground (the base) lands you at height $a^{\\,x}$.  If you are told the height $b$, the logarithm tells you exactly which rung $x$ you must stand on to reach that height.  It’s like a “reverse‑climb” calculator.\n\n### Worked example – solving a simple exponential equation\n\n**Example 4 (Easy): Finding the exponent with a logarithm**  \nIf $2^{x}=8$, find $x$ using logarithms.\n\n1. **Write the equation in logarithmic form.**  \n   Apply the logarithm with base $2$ to both sides:  \n\n   $$\\log_{2}\\!\\left(2^{x}\\right)=\\log_{2}(8).$$\n\n2. **Use the inverse property.**  \n   The left side simplifies because the logarithm and the exponential cancel:  \n\n   $$x = \\log_{2}(8).$$\n\n3. **Evaluate the logarithm.**  \n   Ask: “To what power must we raise $2$ to get $8$?”  \n   Since $2^{3}=8$, we have  \n\n   $$\\log_{2}(8)=3.$$\n\n**Answer:** $x=3$. The exponent that makes $2^{x}=8$ is $3$.\n\nThe example shows how the definition of logarithm directly converts an exponential equation into a simple arithmetic question.\n\n### Changing the base\n\nSometimes the base we need is not the one we have in a calculator.  The **change‑of‑base formula** lets us rewrite any logarithm in terms of a more convenient base, such as $10$ or $e$ (the natural base).\n\n$$\\log_{a}(b)=\\frac{\\log_{c}(b)}{\\log_{c}(a)}$$  \n\nwhere $c$ is any positive base (commonly $10$ or $e$).  This formula follows from the definition and the inverse property, and it is essential when using tables or calculators that only provide $\\log_{10}$ or $\\ln$ (which means $\\log_{e}$).\n\n> **Remember:** $\\ln(b)$ is just a shortcut for $\\log_{e}(b)$, where $e\\approx2.71828$.\n\n### Another quick example – using change of base\n\n**Example 5 (Medium): Compute $\\log_{5}(20)$ with a calculator that only has $\\log_{10}$.**\n\n1. **Write the change‑of‑base expression.**  \n\n   $$\\log_{5}(20)=\\frac{\\log_{10}(20)}{\\log_{10}(5)}.$$\n\n2. **Enter the numbers into the calculator.**  \n   Suppose $\\log_{10}(20)\\approx1.3010$ and $\\log_{10}(5)\\approx0.6990$.\n\n3. **Divide the results.**  \n\n   $$\\log_{5}(20)=\\frac{1.3010}{0.6990}\\approx1.861.$$\n\n**Answer:** $\\log_{5}(20)\\approx1.86$. This means $5^{1.86}\\approx20$.\n\n### Summary of key ideas\n\n- A logarithm $\\log_a(b)$ tells the exponent needed to reach $b$ from base $a$.\n- Exponentials and logarithms are inverse functions: each undoes the other.\n- The definition $\\log_a(b)=x\\iff a^{x}=b$ lets us switch between the two forms.\n- The change‑of‑base formula lets us compute any logarithm with a calculator that only knows one base.\n\n> **In daily life:** When you hear “the half‑life of a substance is 5 years,” you are using a logarithmic idea.  To find how long it takes for the amount to drop to a certain fraction, you solve $ (1/2)^{t/5}= \\text{fraction}$ and then take a logarithm to isolate $t$.\n\nUnderstanding logarithms as the “reverse” of exponentials gives you a powerful tool for untangling many problems where growth, decay, or repeated multiplication appear.",
+   "code": ""
+  },
+  {
+   "heading": "5. Logarithm Rules",
+   "body": "When we work with logarithms we often want to turn a complicated expression into something simpler.  \nThe **logarithm rules** tell us how to break a log of a product, a quotient, or a power into separate, easier pieces.  \nThey are the mirror image of the exponent rules we already know, because a logarithm is the inverse operation of exponentiation.\n\n> **Definition:** A logarithm $\\log_b a$ answers the question “to what exponent must we raise the base $b$ to obtain the number $a$?” In symbols, $b^{\\log_b a}=a$.\n\n---\n\n### 1. Product rule  \n\nIf we have $\\log_b (xy)$, the log of a product, we can split it into the sum of two logs:\n\n$$\\log_b (xy)=\\log_b x+\\log_b y.$$\n\n**Why it works:**  \nWrite $x=b^{\\log_b x}$ and $y=b^{\\log_b y}$ using the definition above. Then  \n\n$$xy = b^{\\log_b x}\\,b^{\\log_b y}=b^{\\log_b x+\\log_b y}.$$\n\nTaking $\\log_b$ of both sides gives the product rule.  \n\n**Everyday comparison:**  \nThink of adding money from two separate bank accounts. The total amount (product) is just the sum of the amounts in each account (logs).  \n\n---\n\n### 2. Quotient rule  \n\nFor a division inside a log we have\n\n$$\\log_b \\left(\\frac{x}{y}\\right)=\\log_b x-\\log_b y.$$\n\n**Why it works:**  \nWrite $x=b^{\\log_b x}$ and $y=b^{\\log_b y}$ again. Then  \n\n$$\\frac{x}{y}=b^{\\log_b x}\\,b^{-\\log_b y}=b^{\\log_b x-\\log_b y}.$$\n\nTaking $\\log_b$ of both sides yields the quotient rule.  \n\n**Everyday comparison:**  \nIf you share a pizza equally among friends, the amount each friend gets (quotient) is the original amount minus the part taken away (subtraction of logs).\n\n> **Note:** The base $b$ must be the same for all logs in a rule; otherwise the rule does not apply directly.\n\n---\n\n### 3. Power rule  \n\nWhen a number is raised to a power inside a log, the exponent can be moved in front:\n\n$$\\log_b (x^k)=k\\;\\log_b x.$$\n\n**Why it works:**  \n$x^k = \\bigl(b^{\\log_b x}\\bigr)^k = b^{k\\log_b x}.$  \nTaking $\\log_b$ of both sides gives the power rule.  \n\n**Everyday comparison:**  \nIf you repeat the same task $k$ times, the total effort is $k$ times the effort of one task – the same idea as moving the exponent outside.\n\n> **Remember:** The exponent $k$ can be any real number, not just an integer.\n\n---\n\n### 4. Change‑of‑base formula  \n\nSometimes the base we need is not the one given. The change‑of‑base formula lets us rewrite any log in terms of a more convenient base (often $10$ or $e$):\n\n$$\\log_b a=\\frac{\\log_c a}{\\log_c b},$$\n\nwhere $c$ is any positive number different from $1$ (commonly $c=10$ or $c=e$).\n\n**Why it works:**  \nLet $x=\\log_b a$, so $b^x=a$. Take $\\log_c$ of both sides:\n\n$$\\log_c a = \\log_c (b^x)=x\\;\\log_c b.$$\n\nSolving for $x$ gives $x=\\dfrac{\\log_c a}{\\log_c b}$, which is exactly the formula.\n\n**Everyday comparison:**  \nChanging the base is like converting currencies: you multiply by the exchange rate (the denominator) and then divide to get the amount in the new currency.\n\n> **In daily life:** Scientific calculators usually have only $\\log_{10}$ and $\\ln$ (log base $e$). The change‑of‑base formula lets you compute any other base using those keys.\n\n---\n\n### Worked examples\n\n**Example 5 (Medium): Evaluate $\\log_3(27)+\\log_3(9)$ using log rules.**  \n\nWe want to add two logarithms with the same base.\n\n1. **Identify the product rule.**  \n   The sum of logs with the same base equals the log of the product:  \n   $$\\log_3(27)+\\log_3(9)=\\log_3(27\\cdot 9).$$\n\n2. **Multiply the inside numbers.**  \n   $$27\\cdot 9 = 243,$$ so the expression becomes $$\\log_3(243).$$\n\n3. **Recognize $243$ as a power of $3$.**  \n   $3^5 = 243$, therefore $$\\log_3(243)=5.$$\n\n**Answer:** $\\displaystyle \\log_3(27)+\\log_3(9)=5.$  \n\n---\n\n**Example 6 (Medium): Compute $\\log_5(125)$ using the power rule.**  \n\nHere the argument $125$ is a power of the base $5$.\n\n1. **Write $125$ as a power of $5$.**  \n   $5^3 = 125$, so $125 = 5^3$.\n\n2. **Apply the power rule $\\log_b(x^k)=k\\log_b x$.**  \n   $$\\log_5(125)=\\log_5(5^3)=3\\;\\log_5 5.$$\n\n3. **Use the definition $\\log_b b = 1$.**  \n   Since $\\log_5 5 = 1$, we have $$3\\;\\log_5 5 = 3\\cdot 1 = 3.$$\n\n**Answer:** $\\displaystyle \\log_5(125)=3.$  \n\n---\n\nThese rules give us a toolbox for turning messy logarithmic expressions into simple numbers or into forms that a calculator can handle. Practice applying each rule separately, then combine them in more complex problems. With each step you will see how the rules mirror the familiar exponent laws, making logarithms feel just as natural as working with powers.",
+   "code": ""
+  },
+  {
+   "heading": "6. Solving Exponential Equations",
+   "body": "When an equation has the unknown variable sitting **inside** an exponent, the usual algebraic tricks (adding, subtracting, factoring) do not work directly.  \nThe key idea is to **undo** the exponent by applying a logarithm to both sides of the equation.  \n\nA **logarithm** is the inverse operation of exponentiation, just as subtraction undoes addition.  \nIf $a^x = b$, then taking the logarithm base $a$ of both sides gives $x = \\log_a b$.  \nBecause the logarithm “brings down’’ the exponent, we can isolate the variable that was hidden in the power.\n\n> **Note:** The base of the logarithm you use must match the base of the exponential term you are trying to solve. If the bases are different, you can use the natural logarithm $\\ln$ (base $e$) or the common logarithm $\\log$ (base $10$) together with the change‑of‑base formula.\n\n---\n\n### General steps for solving $a^{f(x)} = b$\n\n1. **Check that the bases are positive and not equal to 1.**  \n   Exponential functions are only defined for bases $a>0$, $a\\neq1$; otherwise the equation has no real solution.\n\n2. **Take the logarithm of both sides.**  \n   Choose a convenient base (often the same as $a$, or $\\ln$).  \n   $$\\log_a\\!\\bigl(a^{f(x)}\\bigr)=\\log_a b$$\n\n3. **Use the logarithm rule $\\log_a(a^{y}) = y$.**  \n   This “brings down’’ the exponent:  \n   $$f(x)=\\log_a b$$\n\n4. **Solve the resulting ordinary equation for $x$.**  \n   At this point the problem is reduced to the usual algebraic techniques.\n\n> **Remember:** Always keep the domain restrictions in mind – the argument of a logarithm must be positive.\n\n---\n\n### Example 7 (Hard): Solving $4^{2t}=64$ for $t$\n\nWe want the value of $t$ that makes the equation true.\n\n1. **Identify the base and take the logarithm.**  \n   The base is $4$, so we use $\\log_4$:  \n   $$\\log_4\\!\\bigl(4^{2t}\\bigr)=\\log_4 64$$\n\n2. **Apply the power rule of logarithms** ($\\log_a(a^{y}) = y$).  \n   $$2t = \\log_4 64$$\n\n3. **Evaluate the logarithm.**  \n   Write $64$ as a power of $4$: $64 = 4^{3/2}$ because $4^{3/2}= (4^{1})^{3/2}=4^{1.5}=8\\,$?  Wait, correct: $4^{3}=64$? Actually $4^{3}=64$, so $\\log_4 64 = 3$.  \n   $$2t = 3$$\n\n4. **Solve for $t$.**  \n   Divide both sides by $2$:  \n   $$t = \\frac{3}{2}=1.5$$\n\n**Answer:** $t = 1.5$ (the exponent that makes $4^{2t}=64$).\n\n> **In daily life:** This technique is like figuring out how many times you need to double a recipe to reach a certain amount. The logarithm tells you “how many doublings’’ are required.\n\n---\n\n### Example 8 (Hard): When does $P(t)=200\\,(1.05)^t$ reach $500$?\n\nWe are given a population model $P(t)=200\\,(1.05)^t$ and need the time $t$ when $P(t)=500$.\n\n1. **Set the equation and take a logarithm.**  \n   $$200\\,(1.05)^t = 500$$  \n   First isolate the exponential term: divide by $200$.  \n   $$ (1.05)^t = \\frac{500}{200}=2.5 $$  \n   Now take the natural logarithm $\\ln$ of both sides (any base works).  \n   $$\\ln\\!\\bigl((1.05)^t\\bigr)=\\ln 2.5$$\n\n2. **Use the power rule $\\ln(a^y)=y\\ln a$.**  \n   $$ t\\,\\ln 1.05 = \\ln 2.5 $$\n\n3. **Solve for $t$ by dividing.**  \n   $$ t = \\frac{\\ln 2.5}{\\ln 1.05} $$\n\n4. **Compute the numerical value.**  \n   Using a calculator: $\\ln 2.5 \\approx 0.9163$, $\\ln 1.05 \\approx 0.04879$.  \n   $$ t \\approx \\frac{0.9163}{0.04879} \\approx 18.8 $$\n\n**Answer:** The population reaches $500$ after about $t \\approx 19$ time units (e.g., years if $t$ is measured in years).\n\n> **Common mistake:** Forgetting to isolate the exponential term before taking the logarithm. If you apply $\\ln$ directly to $200\\,(1.05)^t$, the extra factor $200$ stays inside the log and makes the algebra harder.\n\n---\n\n### Why this works\n\nExponentiation and logarithms are *inverse* functions.  \nJust as adding $5$ and then subtracting $5$ returns you to the original number, raising a number to a power and then taking the logarithm (with the same base) returns you to the exponent. This symmetry guarantees that the steps above are mathematically sound.\n\n> **Definition:** The **logarithm rule** $\\log_a(b^c)=c\\log_a b$ allows us to move a coefficient from the exponent to a multiplication outside the log, and the special case $\\log_a(a^c)=c$ “cancels’’ the base.\n\nBy mastering this method, you can solve any equation where the unknown appears only in the exponent, whether the numbers are small integers or come from real‑world growth models.",
+   "code": ""
+  },
+  {
+   "heading": "7. Real‑World Applications",
+   "body": "When we use exponential formulas in the real world, we are describing how something changes **by a fixed percentage** over equal time periods.  \nIf the amount gets **smaller** each period, we call it *decay*; if it gets **larger**, we call it *growth*.  \nBoth situations are modeled by the same basic equation  \n\n$$\nA = A_0 \\, b^{t}\n$$  \n\nwhere  \n\n* $A$ = amount after time $t$ (the result we want),  \n* $A_0$ = initial amount (what we start with),  \n* $b$ = *base* – the factor that multiplies the amount each period,  \n* $t$ = number of periods (years, months, etc.).  \n\nFor decay the base $b$ is a number between $0$ and $1$ (e.g., $b = \\tfrac12$ for a half‑life).  \nFor growth the base $b$ is larger than $1$ (e.g., $b = 1.06$ for a 6 % increase each year).\n\n> **Note:** The exponent $t$ can be any real number, not just an integer. This lets us calculate amounts after fractional periods, such as 2.5 years.\n\n---\n\n**Example 9 (Hard): Radioactive half‑life**  \nA radioactive isotope has a half‑life of 10 years. Starting with 80 g, how much remains after 25 years?\n\n1. **Identify the decay base.**  \n   A half‑life means the amount halves every 10 years, so the base per year is the 10‑year half‑life factor raised to the power $\\frac{1}{10}$:  \n\n   $$b = \\left(\\frac12\\right)^{\\frac{1}{10}}$$  \n\n2. **Write the general decay formula.**  \n   Using $A = A_0 b^{t}$ with $A_0 = 80\\text{ g}$ and $t = 25$ years:  \n\n   $$A = 80 \\left[\\left(\\frac12\\right)^{\\frac{1}{10}}\\right]^{25}$$  \n\n3. **Simplify the exponent.**  \n   Multiply the exponents:  \n\n   $$\\left(\\frac12\\right)^{\\frac{25}{10}} = \\left(\\frac12\\right)^{2.5}$$  \n\n   So  \n\n   $$A = 80 \\left(\\frac12\\right)^{2.5}$$  \n\n   Compute $\\left(\\frac12\\right)^{2.5}= \\frac{1}{2^{2.5}} = \\frac{1}{2^{2}\\sqrt{2}} = \\frac{1}{4\\sqrt{2}}\\approx 0.1768.$  \n\n   Then  \n\n   $$A \\approx 80 \\times 0.1768 \\approx 14.14\\text{ g}$$  \n\n**Answer:** After 25 years about **14 g** of the original 80 g remains.\n\n> **In daily life:** Half‑life calculations are used in medicine to know how long a radioactive tracer stays active in the body, and in archaeology for carbon‑14 dating.\n\n---\n\n**Example 10 (Hard): Compound interest growth**  \nAn investment of \\$1,000 earns 6 % interest compounded annually. How long until it grows to \\$2,000?\n\n1. **Translate the situation into the growth formula.**  \n   Annual compounding means the amount multiplies by $1 + r$ each year, where $r = 0.06$.  \n   So the base $b = 1.06$. The formula is  \n\n   $$A = A_0 \\, (1.06)^{t}$$  \n\n   with $A_0 = 1000$ and $A = 2000$.\n\n2. **Set up the equation and isolate the exponent.**  \n\n   $$2000 = 1000 (1.06)^{t}$$  \n\n   Divide both sides by 1000:  \n\n   $$2 = (1.06)^{t}$$  \n\n   To solve for $t$, take the logarithm of both sides (any base works; we use natural log $\\ln$ for convenience):  \n\n   $$\\ln 2 = \\ln\\big((1.06)^{t}\\big)$$  \n\n3. **Apply the logarithm rule $\\ln (b^{t}) = t\\ln b$.**  \n\n   $$\\ln 2 = t \\,\\ln 1.06$$  \n\n   Solve for $t$:  \n\n   $$t = \\frac{\\ln 2}{\\ln 1.06}$$  \n\n   Compute the numbers: $\\ln 2 \\approx 0.6931$, $\\ln 1.06 \\approx 0.05827$.  \n\n   $$t \\approx \\frac{0.6931}{0.05827} \\approx 11.89$$  \n\n   Since we count whole years for annual compounding, we need **12 years** to exceed \\$2,000.\n\n**Answer:** It takes about **12 years** for the \\$1,000 investment to double to \\$2,000 at 6 % compounded annually.\n\n> **Remember:** When solving for time in exponential growth or decay, use logarithms to bring the exponent down. The rule $\\log_b (b^{t}) = t$ is the key step.\n\nThese two examples show how the same exponential model can describe very different real‑world processes: a natural decay that shrinks a quantity, and a financial growth that expands it. By recognizing the base $b$ (whether less than 1 or greater than 1) and applying the appropriate logarithm rule, we can answer practical questions about “how much” and “how long.”",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Simplify $5^{3}\\cdot5^{2}$.",
+   "a": "Use the rule $a^{m}\\cdot a^{n}=a^{m+n}$.\n\\[\n5^{3}\\cdot5^{2}=5^{3+2}=5^{5}=3125.\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Write $\\log_{10}(1000)$ as a single number.",
+   "a": "$10^{3}=1000$, so $\\log_{10}(1000)=3$ because the exponent that gives 1000 is 3."
+  },
+  {
+   "level": "Medium",
+   "q": "Solve for $x$: $2^{x}=32$.",
+   "a": "Recognize $32=2^{5}$.\n\\[\n2^{x}=2^{5}\\implies x=5.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "If a population grows according to $P(t)=200\\cdot1.08^{t}$, what is the population after 5 years?",
+   "a": "Substitute $t=5$:\n\\[\nP(5)=200\\cdot1.08^{5}=200\\cdot(1.08^{5})\\approx200\\cdot1.4693\\approx293.86.\n\\]\nRounded to the nearest whole person, $294$ people."
+  },
+  {
+   "level": "Hard",
+   "q": "Solve for $x$: $3^{2x-1}=7^{x+2}$.",
+   "a": "Take natural logs of both sides:\n\\[\n\\ln(3^{2x-1})=\\ln(7^{x+2})\\Rightarrow(2x-1)\\ln3=(x+2)\\ln7.\n\\]\nDistribute:\n\\[\n2x\\ln3-\\ln3 = x\\ln7+2\\ln7.\n\\]\nGather $x$ terms on one side:\n\\[\n2x\\ln3 - x\\ln7 = \\ln3 + 2\\ln7.\n\\]\nFactor $x$:\n\\[\nx(2\\ln3-\\ln7)=\\ln3+2\\ln7.\n\\]\nSolve for $x$:\n\\[\nx=\\frac{\\ln3+2\\ln7}{2\\ln3-\\ln7}\\approx\\frac{1.0986+2(1.9459)}{2(1.0986)-1.9459}\n=\\frac{1.0986+3.8918}{2.1972-1.9459}\n=\\frac{4.9904}{0.2513}\\approx19.86.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A radioactive substance decays according to $A(t)=A_0 e^{-0.03t}$, where $t$ is in years. Find the time required for the amount to decrease to 25 % of the original amount.",
+   "a": "Set $A(t)=0.25A_0$:\n\\[\n0.25A_0 = A_0 e^{-0.03t}\\;\\Rightarrow\\;0.25 = e^{-0.03t}.\n\\]\nTake natural log:\n\\[\n\\ln 0.25 = -0.03t \\;\\Rightarrow\\; t = \\frac{\\ln 0.25}{-0.03}.\n\\]\nCompute: $\\ln 0.25 = \\ln\\frac{1}{4}= -\\ln4 \\approx -1.3863$.\n\\[\nt = \\frac{-1.3863}{-0.03}= \\frac{1.3863}{0.03}\\approx46.21\\text{ years}.\n\\]\nSo about **46 years** are needed for the substance to drop to 25 % of its initial amount."
+  }
+ ],
+ "recap": "The lesson introduces exponents as repeated multiplication, explains exponential growth and decay, covers the laws of exponents, defines logarithms as the inverse of exponentiation, presents logarithm rules, and shows how to solve exponential equations and apply them to real‑world problems.",
+ "key_terms": [
+  {
+   "term": "base",
+   "meaning": "The number that is multiplied by itself in an exponent expression."
+  },
+  {
+   "term": "exponent",
+   "meaning": "The number of times the base is used as a factor."
+  },
+  {
+   "term": "exponential growth",
+   "meaning": "A process where the quantity is multiplied by a factor greater than 1 each equal time step."
+  },
+  {
+   "term": "exponential decay",
+   "meaning": "A process where the quantity is multiplied by a factor between 0 and 1 each equal time step."
+  },
+  {
+   "term": "logarithm",
+   "meaning": "The exponent needed to raise a given base to obtain a specified number."
+  },
+  {
+   "term": "product rule for exponents",
+   "meaning": "When multiplying same‑base powers, add the exponents: a^m * a^n = a^(m+n)."
+  },
+  {
+   "term": "product rule for logarithms",
+   "meaning": "log_b(xy) = log_b x + log_b y."
+  },
+  {
+   "term": "change‑of‑base formula",
+   "meaning": "log_b a = log_c a / log_c b, allowing any convenient base c."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is 4^3?",
+   "options": [
+    "12",
+    "64",
+    "81",
+    "7"
+   ],
+   "answer": 1,
+   "why": "4 multiplied by itself three times equals 64."
+  },
+  {
+   "q": "If a population grows by a factor of 1.05 each year, what type of change is this?",
+   "options": [
+    "Linear growth",
+    "Exponential growth",
+    "Exponential decay",
+    "Constant"
+   ],
+   "answer": 1,
+   "why": "The factor is greater than 1, indicating exponential growth."
+  },
+  {
+   "q": "Which law lets you simplify a^5 * a^2?",
+   "options": [
+    "Quotient rule",
+    "Power rule",
+    "Product rule",
+    "Zero rule"
+   ],
+   "answer": 2,
+   "why": "The product rule adds exponents: a^(5+2) = a^7."
+  },
+  {
+   "q": "What does log_2 8 equal?",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "8"
+   ],
+   "answer": 1,
+   "why": "2 raised to the power 3 gives 8."
+  },
+  {
+   "q": "Using the change‑of‑base formula, log_5 25 equals:",
+   "options": [
+    "2",
+    "5",
+    "log 25 / log 5",
+    "log 5 / log 25"
+   ],
+   "answer": 2,
+   "why": "log_5 25 = log 25 / log 5, which evaluates to 2."
+  },
+  {
+   "q": "Solve for x: 3^(2x) = 81.",
+   "options": [
+    "x = 2",
+    "x = 3",
+    "x = 4",
+    "x = 1"
+   ],
+   "answer": 0,
+   "why": "81 = 3^4, so 2x = 4 and x = 2."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define exponent.",
+   "back": "The number of times a base is multiplied by itself."
+  },
+  {
+   "front": "What is exponential decay?",
+   "back": "Multiplying by a factor between 0 and 1 each equal time step."
+  },
+  {
+   "front": "State the product rule for exponents.",
+   "back": "a^m * a^n = a^(m+n)."
+  },
+  {
+   "front": "What does log_a(b) represent?",
+   "back": "The exponent x such that a^x = b."
+  },
+  {
+   "front": "Write the logarithm product rule.",
+   "back": "log_b(xy) = log_b x + log_b y."
+  },
+  {
+   "front": "How do you solve a^x = b for x?",
+   "back": "Take log base a of both sides: x = log_a b."
+  },
+  {
+   "front": "Give an example of exponential growth in real life.",
+   "back": "Bank interest that compounds annually."
+  },
+  {
+   "front": "What is the change‑of‑base formula?",
+   "back": "log_b a = log_c a / log_c b."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l08-bacterial-colony-growth",
+   "title": "A petri dish showing exponential increase of bacterial colonies over time.",
+   "alt": "A petri dish showing exponential increase of bacterial colonies over time.",
+   "priority": 9,
+   "picture_title": "Bacterial Colony Growth",
+   "kind": "photo",
+   "subject": "A series of three petri dishes taken at equal time intervals, each with many more bacterial colonies than the previous one, illustrating rapid exponential growth.",
+   "layout": "Three dishes placed side‑by‑side from left (earliest) to right (latest) with a small time label under each.",
+   "labels": [],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l08-radioactive-decay-sample",
+   "title": "A piece of radioactive material with a Geiger counter reading decreasing over time.",
+   "alt": "A piece of radioactive material with a Geiger counter reading decreasing over time.",
+   "priority": 8,
+   "picture_title": "Radioactive Decay Sample",
+   "kind": "photo",
+   "subject": "A laboratory setup showing a small radioactive source, a Geiger‑Müller tube, and a digital display that records counts per minute, with a plotted list of decreasing values beside it.",
+   "layout": "Source on the left, detector in the centre, display on the right; arrows indicate the flow of radiation to the detector.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l08-tree-ring-age-chart",
+   "title": "Cross‑section of a tree trunk showing rings that get thinner, demonstrating exponential decay of growth rate.",
+   "alt": "Cross‑section of a tree trunk showing rings that get thinner, demonstrating exponential decay of growth rate.",
+   "priority": 7,
+   "picture_title": "Tree Ring Age Chart",
+   "kind": "illustration",
+   "subject": "A close‑up illustration of a tree trunk cut, with concentric rings labelled by year; the width of rings decreases outward, showing slower growth each year.",
+   "layout": "Ring diagram centred, with radial arrows pointing to each ring and a small legend indicating year and ring width.",
+   "labels": [
+    "Year 1",
+    "Year 2",
+    "Year 3",
+    "Year 4",
+    "Year 5"
+   ],
+   "after": 6
+  },
+  {
+   "type": "compare",
+   "title": "Growth vs. Decay",
+   "left": {
+    "name": "Exponential Growth",
+    "points": [
+     "Base a > 1",
+     "Quantity gets larger each step",
+     "Example: 2^t doubles each period"
+    ]
+   },
+   "right": {
+    "name": "Exponential Decay",
+    "points": [
+     "Base 0 < a < 1",
+     "Quantity gets smaller each step",
+     "Example: (1/2)^t halves each period"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Exponent vs. Logarithm",
+   "items": [
+    {
+     "name": "Exponent",
+     "role": "Repeats multiplication of the base"
+    },
+    {
+     "name": "Logarithm",
+     "role": "Answers how many times the base must be multiplied"
+    },
+    {
+     "name": "Base",
+     "role": "The number that is repeated"
+    },
+    {
+     "name": "Exponent / Log value",
+     "role": "Number of repetitions (power or answer)"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Solving an Exponential Equation",
+   "steps": [
+    {
+     "label": "Isolate exponential term",
+     "text": "Move all other terms to the other side"
+    },
+    {
+     "label": "Take logarithm",
+     "text": "Apply log with the same base to both sides"
+    },
+    {
+     "label": "Use log rule",
+     "text": "Bring the exponent down as a coefficient"
+    },
+    {
+     "label": "Solve for variable",
+     "text": "Finish with ordinary algebra"
+    }
+   ],
+   "loop": false,
+   "after": 5
+  },
+  {
+   "type": "graph",
+   "title": "Typical Exponential Function",
+   "fn": "2^x",
+   "xmin": -2,
+   "xmax": 4,
+   "points": [
+    {
+     "x": 0,
+     "y": 1,
+     "label": "1",
+     "open": false
+    },
+    {
+     "x": 2,
+     "y": 4,
+     "label": "4",
+     "open": false
+    }
+   ],
+   "caption": "y = 2^x shows rapid growth for x > 0 and approaches 0 for negative x.",
+   "after": 2
+  },
+  {
+   "type": "facts",
+   "title": "Key Numbers in Exponential & Logarithmic Work",
+   "items": [
+    {
+     "value": "a > 1",
+     "label": "Growth base"
+    },
+    {
+     "value": "0 < a < 1",
+     "label": "Decay base"
+    },
+    {
+     "value": "log_a(b) = x ⇔ a^x = b",
+     "label": "Log definition"
+    },
+    {
+     "value": "a^{m+n} = a^m·a^n",
+     "label": "Product rule"
+    }
+   ],
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

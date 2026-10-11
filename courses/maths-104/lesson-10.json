@@ -1,0 +1,399 @@
+{
+ "title": "Introduction to Proofs and Logic",
+ "summary": "This lesson introduces basic logical statements, set notation, and the structure of simple mathematical proofs. Students learn to read and write logical expressions, work with sets, and construct clear, step‑by‑step arguments.",
+ "objectives": [
+  "Identify and translate basic logical statements (and, or, not, if‑then, iff).",
+  "Use set notation to describe collections of objects and perform simple operations.",
+  "Create a simple two‑step proof using definitions and direct reasoning.",
+  "Evaluate truth values of logical expressions with truth tables.",
+  "Apply logical and set concepts to solve short word problems."
+ ],
+ "prerequisites": "Students should be comfortable with basic arithmetic and have experience solving linear equations from earlier lessons.",
+ "why": [
+  "Logical reasoning is the foundation of all mathematics and computer science; it helps us decide whether statements are true and to communicate ideas precisely.",
+  "Understanding sets and proofs enables students to analyze real‑world situations, such as determining eligibility criteria, verifying data sets, or proving why a design works."
+ ],
+ "sections": [
+  {
+   "heading": "1. Basic Logical Connectives",
+   "body": "Logical connectives are the tiny building blocks that let us join simple statements into more complicated ones.  \nA **statement** (also called a *proposition*) is any sentence that is either true or false, but not both.  \nFor example,  \n\n* $P$: “It is raining.”  \n* $Q$: “The ground is wet.”  \n\nBoth $P$ and $Q$ are statements because each has a definite truth value (true or false) at any given moment.\n\n> **Definition:** The five basic logical connectives are **AND** ($\\land$), **OR** ($\\lor$), **NOT** ($\\neg$), **IF‑THEN** ($\\rightarrow$), and **IF‑AND‑ONLY‑IF** ($\\leftrightarrow$). They combine statements to form new statements.\n\n---\n\n### 1.1 AND – “both … and …”\n\nThe connective **AND**, written $\\land$, joins two statements and says that *both* must be true.  \nThe combined statement $P \\land Q$ is true **only** when *both* $P$ is true **and** $Q$ is true; otherwise it is false.\n\n> **In daily life:** “I will eat pizza **and** drink soda.” This is true only if you do *both* actions.\n\n**Example 1 (Easy): Evaluate the truth of $(P \\land Q)$ when $P$ is true and $Q$ is false.**  \n\n1. Identify the truth values: $P = \\text{true}$, $Q = \\text{false}$.  \n2. Apply the definition of $\\land$: the conjunction is true only if *both* parts are true.  \n3. Write the evaluation:  \n   $$P \\land Q = \\text{true} \\land \\text{false} = \\text{false}$$  \n\n**Answer:** $(P \\land Q)$ is **false**.\n\n---\n\n### 1.2 OR – “either … or … (or both)”\n\nThe connective **OR**, written $\\lor$, says that at least one of the statements is true.  \nThe combined statement $P \\lor Q$ is false **only** when *both* $P$ and $Q$ are false; in every other case it is true.\n\n> **Note:** In logic, “or” is inclusive – it includes the possibility that both statements are true. In everyday speech we sometimes mean an exclusive “either … or … but not both,” but the logical symbol $\\lor$ does **not** exclude the “both” case.\n\n---\n\n### 1.3 NOT – “negation”\n\nThe connective **NOT**, written $\\neg$, flips the truth value of a statement.  \nIf $P$ is true, then $\\neg P$ is false; if $P$ is false, then $\\neg P$ is true.\n\n> **Common mistake:** Forgetting that $\\neg$ changes *every* truth value, not just “makes it opposite in meaning.”  \n\n---\n\n### 1.4 IF‑THEN – “implication”\n\nThe connective **IF‑THEN**, written $\\rightarrow$, links a *hypothesis* (the **antecedent**) to a *conclusion* (the **consequent**).  \nThe statement $P \\rightarrow Q$ reads “If $P$ then $Q$.” It is considered **false only** when $P$ is true **and** $Q$ is false; in all other combinations it is true. This may feel counter‑intuitive, but it matches the idea that a promise is broken only when the condition happens and the promised result does not.\n\n> **Remember:** When the antecedent $P$ is false, the whole implication $P \\rightarrow Q$ is automatically true, regardless of $Q$.\n\n**Example 2 (Easy): Determine the truth of $(P \\rightarrow Q)$ when $P$ is false and $Q$ is true.**  \n\n1. Record the given truth values: $P = \\text{false}$, $Q = \\text{true}$.  \n2. Use the definition of implication: an implication is false only if $P$ is true and $Q$ is false.  \n3. Compute:  \n   $$P \\rightarrow Q = \\text{false} \\rightarrow \\text{true} = \\text{true}$$  \n\n**Answer:** $(P \\rightarrow Q)$ is **true**.\n\n---\n\n### 1.5 IF‑AND‑ONLY‑IF – “biconditional”\n\nThe connective **IF‑AND‑ONLY‑IF**, written $\\leftrightarrow$, states that the two statements have the *same* truth value.  \n$P \\leftrightarrow Q$ is true when both $P$ and $Q$ are true **or** both are false; it is false when their truth values differ.\n\n> **In daily life:** “You will get a discount **if and only if** you have a student card.” This means the discount is given exactly when you have the card—no more, no less.\n\n---\n\n### 1.6 Putting the symbols together\n\nNow we can write short logical sentences using the symbols we have learned.  \nFor example, the English sentence  \n\n> “If it is raining **and** it is cold, then the ground will be wet.”\n\ntranslates to  \n\n$$ (P \\land R) \\rightarrow Q $$  \n\nwhere $P$ = “It is raining”, $R$ = “It is cold”, and $Q$ = “The ground is wet”.\n\nThese symbols let us manipulate statements precisely, which is essential for constructing rigorous proofs later in the course.\n\n> **Definition:** A *logical expression* is any combination of statements and logical connectives, written using the symbols $\\land, \\lor, \\neg, \\rightarrow, \\leftrightarrow$.\n\nUnderstanding each connective and its truth conditions gives us a reliable toolbox. Whenever you see a complicated English claim, try to break it down into these basic pieces; then you can check its truth, compare statements, or build a proof step by step.",
+   "code": ""
+  },
+  {
+   "heading": "2. Truth Tables",
+   "body": "When we want to know whether a whole statement is true or false, we look at the truth values of its parts.  \nA **truth table** is a systematic way of listing every possible combination of truth values for the basic statements and then recording the resulting truth value of the whole expression.  \n\n> **Definition:** A truth table shows, for each possible assignment of *true* (T) or *false* (F) to the atomic propositions, the truth value of a compound logical statement.\n\nWhy is this useful?  \nIf we can see every case, we can be certain whether a statement is always true (a tautology), sometimes true (contingent), or never true (a contradiction). In everyday life this is like checking every possible route on a map before deciding which road will definitely get you to the destination.\n\n### 1. Truth tables for a single connective  \n\nThe four basic connectives are  \n\n* **Negation** $¬P$ – “not $P$”.  \n* **Conjunction** $P ∧ Q$ – “$P$ and $Q$”.  \n* **Disjunction** $P ∨ Q$ – “$P$ or $Q$ (or both)”.  \n* **Implication** $P → Q$ – “if $P$ then $Q$”.\n\nFor each we write a small table with a column for each atomic proposition and a column for the compound statement.\n\n**Negation**  \n\n| $P$ | $¬P$ |\n|-----|------|\n| T   | F    |\n| F   | T    |\n\n**Conjunction**  \n\n| $P$ | $Q$ | $P ∧ Q$ |\n|-----|-----|----------|\n| T   | T   | T        |\n| T   | F   | F        |\n| F   | T   | F        |\n| F   | F   | F        |\n\n**Disjunction**  \n\n| $P$ | $Q$ | $P ∨ Q$ |\n|-----|-----|----------|\n| T   | T   | T        |\n| T   | F   | T        |\n| F   | T   | T        |\n| F   | F   | F        |\n\n**Implication**  \n\n| $P$ | $Q$ | $P → Q$ |\n|-----|-----|----------|\n| T   | T   | T        |\n| T   | F   | F        |\n| F   | T   | T        |\n| F   | F   | T        |\n\nNotice the only time $P → Q$ is false is when $P$ is true but $Q$ is false. This matches the everyday meaning: “If it rains, the ground gets wet.” The statement is only broken when it rains and the ground stays dry.\n\n> **In daily life:** Think of $P$ as “I have an umbrella” and $Q$ as “I stay dry”. The implication $P → Q$ is false only when you have an umbrella (true) and still get wet (false).\n\n### 2. Combining connectives  \n\nWhen several connectives appear together, we evaluate them step‑by‑step, usually from the innermost parentheses outward. Let us practice with two medium‑difficulty examples.\n\n---\n\n**Example 3 (Medium): Build a truth table for $(P ∨ ¬Q) ∧ R$.**  \n\nWe must consider three atomic propositions $P$, $Q$, and $R$, so there are $2^3 = 8$ possible rows.\n\n1. **List all combinations of $P$, $Q$, $R$.**  \n   $$\\text{Rows: } (T,T,T), (T,T,F), (T,F,T), (T,F,F), (F,T,T), (F,T,F), (F,F,T), (F,F,F)$$  \n\n2. **Compute $¬Q$ for each row.**  \n   Add a column “$¬Q$” that flips the truth value of $Q$.\n\n3. **Compute $P ∨ ¬Q$.**  \n   Use the disjunction rule: the result is true if either $P$ or $¬Q$ (or both) is true.\n\n4. **Finally compute $(P ∨ ¬Q) ∧ R$.**  \n   Apply conjunction: the whole statement is true only when both the previous result and $R$ are true.\n\nPutting the columns together we obtain  \n\n| $P$ | $Q$ | $R$ | $¬Q$ | $P ∨ ¬Q$ | $(P ∨ ¬Q) ∧ R$ |\n|-----|-----|-----|------|----------|----------------|\n| T   | T   | T   | F    | T        | **T**          |\n| T   | T   | F   | F    | T        | **F**          |\n| T   | F   | T   | T    | T        | **T**          |\n| T   | F   | F   | T    | T        | **F**          |\n| F   | T   | T   | F    | **F**    | **F**          |\n| F   | T   | F   | F    | **F**    | **F**          |\n| F   | F   | T   | T    | **T**    | **T**          |\n| F   | F   | F   | T    | **T**    | **F**          |\n\n**Answer:** The compound statement $(P ∨ ¬Q) ∧ R$ is true in exactly three of the eight possible cases (rows 1, 3, 7).  \n\n---\n\n**Example 4 (Medium): Use a truth table to check if $(P → Q) ↔ (¬Q → ¬P)$ is always true.**  \n\nThe symbol $↔$ means “if and only if”; the whole expression is true when both sides have the same truth value.\n\n1. **List all $2^2 = 4$ combinations of $P$ and $Q$.**  \n   $$\\text{Rows: } (T,T), (T,F), (F,T), (F,F)$$  \n\n2. **Compute $P → Q$ for each row** using the implication rule.\n\n3. **Compute $¬Q$ and $¬P$**, then evaluate $¬Q → ¬P$.\n\n4. **Compare the two results with $↔$**: the biconditional is true when the two columns are equal.\n\nThe completed table looks like this  \n\n| $P$ | $Q$ | $P → Q$ | $¬Q$ | $¬P$ | $¬Q → ¬P$ | $(P → Q) ↔ (¬Q → ¬P)$ |\n|-----|-----|----------|------|------|-----------|------------------------|\n| T   | T   | T        | F    | F    | T         | **T**                  |\n| T   | F   | F        | T    | F    | **F**     | **T**                  |\n| F   | T   | T        | F    | T    | T         | **T**                  |\n| F   | F   | T        | T    | T    | T         | **T**                  |\n\n**Answer:** The biconditional $(P → Q) ↔ (¬Q → ¬P)$ is true in every possible row, so it is a **tautology**—always true regardless of the truth values of $P$ and $Q$.\n\n> **Remember:** When building a truth table, always write down every possible combination of truth values first; this guarantees that no case is missed.\n\n### 3. Quick checklist for constructing any truth table  \n\n1. Count the distinct atomic propositions; write down $2^{n}$ rows.  \n2. Create a column for each sub‑expression, starting with the innermost parentheses.  \n3. Apply the definition of each connective (use the small tables above).  \n4. If the final column is all T, you have proved a tautology; if all F, a contradiction; otherwise, the statement is contingent.\n\nBy mastering truth tables you gain a reliable tool for testing logical arguments, simplifying expressions, and later, for proving statements about numbers or sets. The method is mechanical, but the insight it gives—seeing exactly when a statement holds—is invaluable in all of mathematics.",
+   "code": ""
+  },
+  {
+   "heading": "3. Introduction to Sets",
+   "body": "When we talk about a **set** we mean a collection of objects, called *elements*, that are gathered together because they share some property.  \nThink of a set like a basket: you can put apples, oranges, or any items you like into it, and later you can look inside and see exactly what is there.  \nThe idea is useful because many mathematical statements are about “all the objects that satisfy a certain condition”, and a set gives us a tidy way to write that group down.\n\n> **Definition:** A *set* is a well‑defined collection of distinct objects, written with curly braces $\\{\\,\\}$.\n\nThe objects inside a set are written either **in roster form** (listing each element) or **in set‑builder notation** (describing a rule that picks the elements).\n\n### Roster form\nIn roster form we simply list the elements, separated by commas.  \nExample: $\\{2,4,6,8\\}$ is the set of the first four even numbers.\n\n### Set‑builder notation\nIn set‑builder notation we describe the property that characterises the elements.  \nWe write a variable, a vertical bar “$|$” (read “such that”), and then the condition.\n\n$$\n\\{x \\mid x \\text{ is an even number between 1 and 10}\\}\n$$\n\nThis reads: “the set of all $x$ such that $x$ is an even number between 1 and 10”.\n\n> **Note:** The vertical bar $|$ can also be written as a colon “:”. Both mean “such that”.\n\n### Basic set operations\nJust as we can combine numbers with addition or multiplication, we can combine sets with **union**, **intersection**, and **complement**.\n\n* **Union** ($A\\cup B$) – all elements that are in $A$ *or* in $B$ (or in both).  \n  Imagine two circles of friends; the union is the whole group of friends from both circles.\n\n* **Intersection** ($A\\cap B$) – all elements that are in *both* $A$ *and* $B$.  \n  This is the overlap of the two circles of friends – the people who belong to both groups.\n\n* **Complement** ($A^{c}$) – all elements in the universal set $U$ that are *not* in $A$.  \n  If $U$ is the set of all students in a school, $A^{c}$ is the set of students who are **not** in club $A$.\n\n> **In daily life:** If $A$ is the set of people who like pizza and $B$ is the set of people who like ice‑cream, $A\\cup B$ is everyone who likes at least one of those foods, while $A\\cap B$ is the people who like both.\n\nNow let us see how these ideas work in practice.\n\n---\n\n**Example 5 (Easy): List the set $A = \\{x \\mid x \\text{ is an even number between 1 and 10}\\}$.**  \n\n1. Identify the condition: “$x$ is even and $1 < x < 10$”.  \n2. Write down the numbers that satisfy it: the even numbers greater than 1 and less than 10 are $2,4,6,8$.  \n3. Express the set in roster form.\n\n$$\nA = \\{2,4,6,8\\}\n$$\n\n**Answer:** $A = \\{2,4,6,8\\}$.\n\n---\n\n**Example 6 (Medium): Find $A \\cup B$ and $A \\cap B$ for $A = \\{1,2,3,4\\}$ and $B = \\{3,4,5,6\\}$.**  \n\n1. **Union** – combine every element that appears in either set, writing each only once.  \n   List the elements of $A$ and then add the new elements from $B$ that are not already listed.  \n\n   $$\n   A \\cup B = \\{1,2,3,4,5,6\\}\n   $$  \n\n2. **Intersection** – keep only the elements that appear in **both** sets.  \n   Compare the two lists and write down the common numbers.  \n\n   $$\n   A \\cap B = \\{3,4\\}\n   $$  \n\n**Answer:** $A \\cup B = \\{1,2,3,4,5,6\\}$ and $A \\cap B = \\{3,4\\}$.\n\n---\n\n### Using complements\nWhen a **universal set** $U$ is understood, the complement of a set $A$ is written $A^{c}=U\\setminus A$.  \nIf $U=\\{1,2,3,4,5,6,7,8,9,10\\}$ and $A=\\{2,4,6,8\\}$, then\n\n$$\nA^{c}= \\{1,3,5,7,9,10\\}.\n$$\n\n> **Common mistake:** Forgetting to specify the universal set. Without $U$, the complement is ambiguous because “everything not in $A$” depends on what we consider “everything”.\n\n### Summary of symbols\n| Symbol | Meaning |\n|--------|---------|\n| $\\{\\,\\}$ | Set written in roster form |\n| $\\{x \\mid \\text{condition}\\}$ | Set‑builder notation |\n| $\\cup$ | Union |\n| $\\cap$ | Intersection |\n| $^{c}$ or $\\setminus$ | Complement (relative to a universal set) |\n\nUnderstanding these notations lets us move smoothly from everyday language (“the students who play soccer”) to precise mathematical statements that we can manipulate with logic and proof techniques later in the course.",
+   "code": ""
+  },
+  {
+   "heading": "4. Translating English Statements",
+   "body": "When we read a sentence in everyday language, it often hides a precise logical pattern.  \nTo use mathematics, we must first **translate** that pattern into symbols that a computer or a proof can understand.  \nDoing this lets us check arguments for hidden mistakes, combine statements, and apply the rules of logic we learned earlier.\n\n> **Definition:** *Translation* means rewriting an English statement as a formula that uses logical connectives ( $\\land$, $\\lor$, $\\neg$, $\\rightarrow$, $\\leftrightarrow$ ) and, when sets are involved, the symbols $\\in$, $\\subseteq$, $\\cup$, $\\cap$, etc.\n\nThe first step is to identify the **atomic parts** – the simplest facts that cannot be broken down further.  \nFor example, in the sentence  \n\n*“It is raining and the ground is wet.”*  \n\nthe atomic parts are “It is raining’’ and “the ground is wet”.  \nWe give each a short name, say $R$ for “it is raining’’ and $W$ for “the ground is wet”.  \nThen the whole sentence becomes $R \\land W$.\n\nWhy is this useful?  Once the sentence is in symbols, we can apply truth‑tables, combine it with other statements, or negate it without guessing how the English words interact.\n\n### 1. Identify the basic propositions  \n\n1. Look for words like **if**, **only if**, **and**, **or**, **not**, **all**, **some**.  \n2. Replace each simple claim with a single capital letter (or a short phrase in parentheses if you prefer).  \n\n> **Note:**  Do not try to translate the whole sentence at once; break it into pieces first.  \n\n### 2. Choose the right connective  \n\n| English phrase | Logical symbol |\n|----------------|----------------|\n| and            | $\\land$ |\n| or (inclusive) | $\\lor$ |\n| not            | $\\neg$ |\n| if … then …   | $\\rightarrow$ |\n| if and only if| $\\leftrightarrow$ |\n| all … are …   | $\\forall$ (with a set) |\n| some … are …  | $\\exists$ (with a set) |\n\n### 3. Write the formula  \n\nPlace the symbols in the same order as the English logical flow.  \nParentheses are important: they show which parts belong together, just as commas do in a sentence.\n\n### 4. When sets appear, use set notation  \n\nA statement such as “All even numbers are multiples of 2’’ involves a set of even numbers, usually written  \n\n$$E = \\{\\,n \\in \\mathbb{Z} \\mid n \\text{ is even}\\,\\}.$$\n\nThe phrase “all … are …’’ becomes a universal quantifier $\\forall$, and “some … are …’’ becomes an existential quantifier $\\exists$.\n\n> **In daily life:**  Translating is like turning a recipe written in words into a list of exact measurements – the result is clearer and easier to follow.\n\n---\n\n#### Worked example (Medium):  “A student passes the test if and only if they answer at least 8 out of 10 questions correctly.”\n\n**Step 1.**  Choose symbols for the two simple statements.  \n\n- Let $P$ = “the student passes the test”.  \n- Let $A$ = “the student answers at least 8 out of 10 questions correctly”.\n\n**Step 2.**  Recognize the connective “if and only if”, which is the biconditional $\\leftrightarrow$.\n\n**Step 3.**  Write the translation using the symbols.  \n\n$$P \\leftrightarrow A$$\n\n**Answer:**  \nThe English sentence is expressed as $P \\leftrightarrow A$, meaning the student passes exactly when the answer count is $\\ge 8$.\n\n---\n\n#### Worked example (Hard):  “All prime numbers greater than 2 are odd.”\n\n**Step 1.**  Define the relevant set and a predicate.  \n\n- Let $\\mathbb{P}$ be the set of all prime numbers.  \n- Define the predicate $O(n)$ : “$n$ is odd”, i.e. $n = 2k+1$ for some integer $k$.  \n\n**Step 2.**  Write the condition “greater than 2” as a restriction on the variable.  \n\nWe consider numbers $n$ such that $n \\in \\mathbb{P}$ and $n > 2$.\n\n**Step 3.**  Use the universal quantifier $\\forall$ to say “all such numbers have property $O$”.  \n\n$$\\forall n \\bigl( (n \\in \\mathbb{P} \\land n > 2) \\rightarrow O(n) \\bigr)$$\n\n**Step 4.**  Expand the definition of $O(n)$ if we want a fully explicit formula.  \n\n$$\\forall n \\bigl( (n \\in \\mathbb{P} \\land n > 2) \\rightarrow \\exists k \\in \\mathbb{Z}\\, (n = 2k + 1) \\bigr)$$\n\n**Answer:**  \nThe statement “All prime numbers greater than 2 are odd’’ is captured by  \n\n$$\\forall n \\bigl( (n \\in \\mathbb{P} \\land n > 2) \\rightarrow \\exists k \\in \\mathbb{Z}\\, (n = 2k + 1) \\bigr).$$  \n\nIt says that for every integer $n$, if $n$ is a prime and larger than 2, then there exists an integer $k$ with $n = 2k+1$, i.e., $n$ is odd.\n\n---\n\nBy practicing these steps, you will become comfortable turning any everyday claim into a clean logical or set‑theoretic expression. Once in that form, the powerful tools of proof and deduction can be applied without ambiguity.  \n\n> **Remember:**  Always start by naming the simple statements, then pick the correct connective, and finally place parentheses to reflect the English logical structure. This systematic approach prevents the common mistake of mis‑ordering “if… then…” and “only if”.",
+   "code": ""
+  },
+  {
+   "heading": "5. Structure of a Simple Proof",
+   "body": "A **direct proof** is a way of showing that a mathematical statement is always true by starting from what we already know and moving step‑by‑step to the statement we want to prove. Think of it like a recipe: you begin with the ingredients (the given information), follow a clear sequence of actions (the logical steps), and finish with the finished dish (the conclusion).  \n\n> **Definition:** A direct proof consists of four parts:  \n> 1. **Statement** – the claim we want to prove.  \n> 2. **Given information** – all facts, definitions, or assumptions that are known to be true.  \n> 3. **Logical steps** – a chain of deductions that connect the given information to the statement, using rules of logic and previously proved results.  \n> 4. **Conclusion** – a clear sentence that restates the original claim and confirms that it has been established.\n\n### 1. The Statement  \nWrite the claim exactly as it appears, using symbols if that makes it clearer. For example, “If $n$ is an even integer, then $n^2$ is even.” The statement tells us what we must end up showing.\n\n### 2. The Given Information  \nList every piece of information that the problem supplies, plus any definitions that are relevant. In the example above the given information is “$n$ is an even integer.” By definition of evenness, this means there exists an integer $k$ such that  \n\n$$ n = 2k. $$  \n\nWriting the definition explicitly prevents hidden assumptions later on.\n\n### 3. Logical Steps  \nEach step should be a single, justified deduction. Use words like “by definition,” “since,” “therefore,” or “because” to explain why the step follows. The goal is to create a chain where the end of one step becomes the start of the next.  \n\nA common structure is:\n\n*Replace the given quantity with an equivalent expression.*  \n*Apply algebraic manipulation.*  \n*Use a known theorem or property.*  \n\nIf at any point you need a fact that you have proved earlier in the course, you may cite it, e.g., “by the distributive law” or “by the theorem on the product of even numbers.”\n\n### 4. The Conclusion  \nAfter the last logical step, write a sentence that ties everything back to the original statement. For the example, we would say: “Since $n^2 = 2(2k^2)$ is of the form $2m$ with $m = 2k^2$, $n^2$ is even. Hence, the statement is proved.”\n\n> **Remember:** A proof is finished only when the conclusion is explicitly stated in words that match the original claim.\n\n---\n\n## Worked Example  \n\n**Example 9 (Level: Introductory): Proving a divisibility statement**  \n\n*Show that for any integer $a$, if $a$ is divisible by $6$ then $a^2$ is divisible by $12$.*\n\n1. **State the claim.**  \n   We must prove: *If $6 \\mid a$, then $12 \\mid a^2$.*\n\n2. **Write the given information using a definition.**  \n   “$6 \\mid a$” means there exists an integer $k$ such that  \n\n   $$ a = 6k. $$  \n\n3. **Substitute the expression for $a$ into $a^2$ and simplify.**  \n   $$ a^2 = (6k)^2 = 36k^2. $$  \n\n4. **Factor $36k^2$ to reveal a factor of $12$.**  \n   $$ 36k^2 = 12 \\cdot 3k^2. $$  \n\n   Here we used the fact that $36 = 12 \\times 3$.\n\n5. **Conclude using the definition of divisibility.**  \n   Since $a^2 = 12 \\cdot (3k^2)$ and $3k^2$ is an integer, $12$ divides $a^2$.\n\n**Answer:** For every integer $a$, if $6$ divides $a$ then $12$ divides $a^2$. The proof is complete.\n\n---\n\n### Putting the Pieces Together  \n\nWhen you write a proof, follow the same order every time:\n\n1. **Restate the statement** in a single sentence.  \n2. **List the givens** and translate any English phrases into precise mathematical language.  \n3. **Proceed with logical steps**, one at a time, always indicating the rule or definition that justifies the move.  \n4. **End with a conclusion** that mirrors the original claim.\n\n> **In daily life:** This is similar to solving a puzzle. You start with the picture on the box (the statement), look at the pieces you already have (the givens), fit the pieces together according to the rules (logical steps), and finally see the completed picture (the conclusion).\n\n> **Common mistake:** Skipping a justification. Every algebraic manipulation or logical inference must be explained; otherwise the reader cannot follow the reasoning, and the proof is incomplete.\n\nBy keeping the structure clear and explicit, you make your argument easy to read and hard to dispute. Practice by writing out each part on a separate line, and soon the process will become automatic.",
+   "code": ""
+  },
+  {
+   "heading": "6. Proof Example – Divisibility",
+   "body": "When we talk about **divisibility** we are asking a simple question: *Can one whole number be multiplied by another whole number to give a third one?*  \nIf the answer is “yes”, we say the first number **divides** the third.  \nFor example, $6$ divides $24$ because $24 = 6\\cdot4$.  \nUnderstanding how divisibility works lets us see patterns in numbers and is the first step toward more advanced proofs.\n\n---\n\n**Example 10 (Hard): Prove that if $n$ is an even integer, then $n^{2}$ is also even.**  \n\nWe must start from the definition of “even” and use only logical steps that follow directly from that definition.\n\n1. **State the definition of an even integer.**  \n   > **Definition:** An integer $n$ is *even* if there exists an integer $k$ such that $n = 2k$.\n\n2. **Introduce a new symbol for the integer that makes $n$ even.**  \n   Since $n$ is even, we can write  \n   $$ n = 2k $$  \n   for some integer $k$.\n\n3. **Square both sides of the equation.**  \n   $$ n^{2} = (2k)^{2} $$  \n\n4. **Simplify the right‑hand side using the rule $(ab)^{2}=a^{2}b^{2}$.**  \n   $$ n^{2} = 4k^{2} $$  \n\n5. **Factor the constant $4$ as $2\\cdot2$ to expose a factor of $2$.**  \n   $$ n^{2} = 2\\,(2k^{2}) $$  \n\n6. **Recognise the expression $2k^{2}$ as an integer.**  \n   Because $k$ is an integer, $k^{2}$ is also an integer, and multiplying an integer by $2$ still gives an integer.  \n   Let $m = 2k^{2}$; then $m$ is an integer.\n\n7. **Rewrite $n^{2}$ using the new integer $m$.**  \n   $$ n^{2} = 2m $$  \n\n8. **Apply the definition of “even” in reverse.**  \n   Since $n^{2}$ can be written as $2$ times an integer $m$, $n^{2}$ is even.\n\n**Answer:** If $n$ is even, then $n^{2}$ is also even. ∎  \n\n---\n\n> **Note:** The key move was substituting the definition $n = 2k$ and then keeping the factor $2$ visible after algebraic manipulation.  \n\nNow that we have seen a full proof, let us look at the logical structure behind it.\n\n### Logical steps used in the proof\n\n1. **Assumption** – We begin by *assuming* the hypothesis “$n$ is even”. In proof language this is called the *premise*.\n2. **Definition substitution** – We replace $n$ with the expression given by the definition of evenness.\n3. **Algebraic manipulation** – We perform legitimate algebraic operations (squaring, expanding, factoring). Each operation is justified by a basic arithmetic rule.\n4. **Existence of a new integer** – We introduce a new symbol ($m$) to capture the product $2k^{2}$, and we argue that it is an integer because the integers are closed under multiplication.\n5. **Conclusion** – We rewrite the final expression in the form required by the definition of evenness, thereby *proving* the statement.\n\n> **Remember:** A proof is a chain of statements where each link follows logically from the previous one or from a definition. If any link is missing, the chain breaks and the proof is invalid.\n\n### Why this matters\n\nDivisibility arguments appear everywhere in number theory, cryptography, and computer science. Knowing how to turn a vague claim (“$n^{2}$ should be even”) into a rigorous argument teaches you to think carefully about the *why* behind patterns you observe.  \n\n> **In daily life:** Think of a recipe that calls for “twice as much sugar as flour”. If you know the amount of flour, you can immediately compute the sugar by multiplying by $2$. The proof above does the same thing with numbers: it shows that squaring an even number automatically gives you “twice something”.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to show that the new symbol you introduce (here $m$) is indeed an integer. Without this step the final expression $n^{2}=2m$ would not satisfy the definition of evenness.\n\n### Summarising the method\n\n1. **Write down the definition** of the property you are given (even, odd, divisible, etc.).  \n2. **Express the given number** using that definition.  \n3. **Manipulate** the expression using algebraic rules, keeping track of each step.  \n4. **Identify** a new integer (or other object) that appears, and state why it is valid.  \n5. **Rewrite** the result in the form required by the definition of the property you need to prove.  \n\nBy following these five tiny steps, you can tackle many basic divisibility proofs, such as “if $3$ divides $n$, then $3$ divides $n^{3}$”, or “if $5$ divides $ab$, then $5$ divides $a$ or $5$ divides $b$”. The same logical skeleton applies; only the definitions and algebraic details change.  \n\n> **Definition:** A number $a$ **divides** $b$ (written $a\\mid b$) if there exists an integer $c$ with $b = ac$.  \n\nWith this toolbox you are ready to move on to more complex proofs, confident that each step rests on a clear, justified foundation.",
+   "code": ""
+  },
+  {
+   "heading": "7. Putting It All Together",
+   "body": "We start by looking at a problem that brings together three ideas we have learned:  \n\n* logical statements (using “if … then …”, “and”, “or”),  \n* set notation (writing things like \\(S\\subseteq B\\)), and  \n* the basic structure of a proof (assume the hypothesis, deduce something, reach the conclusion).\n\nImagine a school where some students play soccer, some play basketball, and some may play both.  \nWe want to show, using a formal proof, that **if every student who plays soccer also plays basketball, then the set of soccer players is a subset of the set of basketball players**.  \nIn symbols this is  \n\n$$\n\\bigl(\\forall x\\,(x\\in S \\rightarrow x\\in B)\\bigr)\\;\\Longrightarrow\\; S\\subseteq B .\n$$  \n\nThe statement looks simple, but writing each step clearly helps us see why it is always true.\n\n> **Note:** A *subset* \\(S\\subseteq B\\) means “every element of \\(S\\) is also an element of \\(B\\)”. This is exactly the same idea as the logical phrase “if \\(x\\) is in \\(S\\) then \\(x\\) is in \\(B\\)”.\n\n### Logical translation\n\nFirst translate the English hypothesis into a logical formula:\n\n* “Every student who plays soccer also plays basketball” becomes  \n  \\(\\forall x\\,(x\\in S \\rightarrow x\\in B)\\).\n\nThe conclusion we need to prove is the definition of a subset:\n\n* \\(S\\subseteq B\\) is defined as \\(\\forall x\\,(x\\in S \\rightarrow x\\in B)\\).\n\nNotice that the hypothesis and the definition of the conclusion are **identical**. That tells us the proof will be very short: we only have to show that the hypothesis indeed matches the definition of a subset.\n\n### Proof structure\n\nA simple proof in this context follows three steps:\n\n1. **Assume** the hypothesis is true.  \n2. **Show** that under this assumption the condition required for a subset holds.  \n3. **Conclude** that \\(S\\subseteq B\\).\n\nWe will write each step in words and then in symbols.\n\n### Worked example\n\n**Example 11 (Hard): Subset proof with soccer and basketball**  \n\n*Question:* In a school, let \\(S\\) be the set of students who play soccer and \\(B\\) be the set of students who play basketball. Prove that if every student who plays soccer also plays basketball, then \\(S\\subseteq B\\).\n\n1. **Assume the hypothesis.**  \n   We suppose that for every student \\(x\\),\n\n   $$\n   x\\in S \\;\\rightarrow\\; x\\in B .\n   $$\n\n2. **Recall the definition of a subset.**  \n   By definition, \\(S\\subseteq B\\) means  \n\n   $$\n   \\forall x\\,(x\\in S \\rightarrow x\\in B).\n   $$\n\n3. **Match the assumed statement to the definition.**  \n   The statement we assumed in step 1 is exactly the same as the statement required in step 2. Therefore the condition for a subset is satisfied.\n\n**Answer:** Since the hypothesis and the definition of \\(S\\subseteq B\\) are identical, we have proved that \\(S\\subseteq B\\). No further calculation is needed.\n\n> **Remember:** When a hypothesis is phrased exactly like the definition of what you need to prove, the proof often reduces to “by definition”.\n\n### Putting the pieces together in a real‑world context\n\nSuppose the school wants to schedule a joint practice for all students who play either sport. Knowing that every soccer player also plays basketball tells the coach that the soccer group adds no new names to the basketball roster. Therefore the coach can simply use the basketball list for the joint practice, saving time and avoiding duplicate entries.\n\nIn logical terms, the coach uses the implication  \n\n$$\n\\forall x\\,(x\\in S \\rightarrow x\\in B)\n$$  \n\nto replace the union \\(S\\cup B\\) with just \\(B\\). The set‑theoretic simplification is  \n\n$$\nS\\cup B = B .\n$$  \n\n> **In daily life:** If every member of Club A is also a member of Club B, then the membership list of Club A is completely contained in Club B’s list. You never need to check Club A separately when planning an event for Club B.\n\n### Common mistake to avoid\n\n> **Common mistake:** Forgetting to write the universal quantifier \\(\\forall x\\).  \n> Without \\(\\forall x\\) the statement “\\(x\\in S \\rightarrow x\\in B\\)” only talks about a single, unspecified student, not about **all** students. The subset relation requires the condition to hold for every element, so the quantifier is essential.\n\n### Summary of the method\n\n1. **Translate** the English condition into a logical formula with quantifiers.  \n2. **Identify** the definition of the set relation you need to prove.  \n3. **Compare** the hypothesis with the definition; if they match, the proof is finished.  \n4. **State** the conclusion clearly, using the proper set notation.\n\nBy practicing this pattern, you will be able to handle many problems where logical statements, set notation, and simple proof steps interact. The key is always to keep the definitions in front of you and to write each logical step explicitly. This habit prevents errors and makes your arguments easy for others to follow.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Write the negation of the statement “All primes are odd.”",
+   "a": "The original statement is $\\forall p\\,(P(p)\\rightarrow O(p))$, where $P(p)$ means “$p$ is prime” and $O(p)$ means “$p$ is odd”. Its negation is $\\exists p\\,(P(p)\\land \\neg O(p))$, i.e., “There exists a prime that is not odd.” (The prime $2$ is an example.)"
+  },
+  {
+   "level": "Easy",
+   "q": "Using a truth table, determine whether $(P\\lor Q)\\rightarrow P$ is a tautology, contradiction, or contingent.",
+   "a": "Construct the table:\n| $P$ | $Q$ | $P\\lor Q$ | $(P\\lor Q)\\rightarrow P$ |\n|---|---|---|---|\n| T | T | T | T |\n| T | F | T | T |\n| F | T | T | F |\n| F | F | F | T |\nThe column for $(P\\lor Q)\\rightarrow P$ contains both T and F, so the statement is **contingent** (neither always true nor always false)."
+  },
+  {
+   "level": "Medium",
+   "q": "Prove that for any sets $A$ and $B$, $A\\subseteq B$ if and only if $A\\cup B = B$.",
+   "a": "\n1. **($\\Rightarrow$)** Assume $A\\subseteq B$.\n- Every element of $A$ is already in $B$, so $A\\cup B$ adds no new elements beyond those in $B$.\n- Hence $A\\cup B = B$.\n2. **($\\Leftarrow$)** Assume $A\\cup B = B$.\n- Take any $x\\in A$. Then $x\\in A\\cup B$, so $x\\in B$ (because the union equals $B$).\n- Therefore every $x\\in A$ is also in $B$, i.e., $A\\subseteq B$.\nThus $A\\subseteq B \\iff A\\cup B = B$. ∎"
+  },
+  {
+   "level": "Medium",
+   "q": "Translate the English statement “A number $n$ is divisible by 6 **iff** it is divisible by both 2 and 3” into logical symbols and prove it.",
+   "a": "\n- Let $D_2(n)$ be “$2\\mid n$” and $D_3(n)$ be “$3\\mid n$”.\n- The statement is $D_6(n) \\leftrightarrow (D_2(n)\\land D_3(n))$.\n*Proof:*\n1. (**$\\Rightarrow$**) If $6\\mid n$, then $n=6k$ for some integer $k$.\n- $6k = 2(3k)$, so $2\\mid n$.\n- $6k = 3(2k)$, so $3\\mid n$.\n- Hence $D_2(n)\\land D_3(n)$.\n2. (**$\\Leftarrow$**) If $2\\mid n$ and $3\\mid n$, then $n=2a=3b$ for some integers $a,b$.\n- Since $2a = 3b$, $a$ must be a multiple of $3$: $a=3c$.\n- Then $n = 2(3c)=6c$, so $6\\mid n$.\nThus $D_6(n) \\leftrightarrow (D_2(n)\\land D_3(n))$ is proved. ∎"
+  },
+  {
+   "level": "Hard",
+   "q": "Prove that the statement “If $n$ is an integer and $n^2$ is even, then $n$ is even” using a proof by contrapositive.",
+   "a": "\n1. The contrapositive of the statement is: “If $n$ is **odd**, then $n^2$ is **odd**.”\n2. Assume $n$ is odd. Then $n = 2k+1$ for some integer $k$.\n3. Compute $n^2$:\n$$n^2 = (2k+1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1.$$\nThis has the form $2m+1$, where $m = 2k^2+2k$ is an integer, so $n^2$ is odd.\n4. Since the contrapositive is true, the original implication is true: if $n^2$ is even, then $n$ must be even. ∎"
+  },
+  {
+   "level": "Hard",
+   "q": "Let $A$, $B$, and $C$ be sets. Prove the distributive law $A\\cap (B\\cup C) = (A\\cap B)\\cup (A\\cap C)$ by showing each side is a subset of the other.",
+   "a": "\n1. **Show $A\\cap (B\\cup C) \\subseteq (A\\cap B)\\cup (A\\cap C)$.**\n- Take $x\\in A\\cap (B\\cup C)$. Then $x\\in A$ and $x\\in B\\cup C$.\n- From $x\\in B\\cup C$, we have $x\\in B$ **or** $x\\in C$.\n- If $x\\in B$, then $x\\in A\\cap B$, so $x\\in (A\\cap B)\\cup (A\\cap C)$.\n- If $x\\in C$, then $x\\in A\\cap C$, so again $x\\in (A\\cap B)\\cup (A\\cap C)$.\n- Hence every $x$ in the left side is in the right side.\n2. **Show $(A\\cap B)\\cup (A\\cap C) \\subseteq A\\cap (B\\cup C)$.**\n- Take $x\\in (A\\cap B)\\cup (A\\cap C)$. Then $x\\in A\\cap B$ **or** $x\\in A\\cap C$.\n- If $x\\in A\\cap B$, then $x\\in A$ and $x\\in B$, so $x\\in B\\cup C$, giving $x\\in A\\cap (B\\cup C)$.\n- If $x\\in A\\cap C$, similarly $x\\in A$ and $x\\in C\\subseteq B\\cup C$, so $x\\in A\\cap (B\\cup C)$.\n- Thus every $x$ on the right side belongs to the left side.\nSince each side is a subset of the other, the two sets are equal. ∎"
+  }
+ ],
+ "recap": "The lesson introduced logical statements and the five basic connectives, showed how truth tables evaluate compound statements, defined sets and ways to write them, explained translating English sentences into symbolic form, outlined the structure of a direct proof, and gave a simple proof example involving even numbers and set inclusion.",
+ "key_terms": [
+  {
+   "term": "statement",
+   "meaning": "A sentence that is either true or false, but not both."
+  },
+  {
+   "term": "logical connective",
+   "meaning": "A symbol such as AND, OR, NOT, IF-THEN, IF-AND-ONLY-IF that joins statements to form new statements."
+  },
+  {
+   "term": "truth table",
+   "meaning": "A table that lists all possible truth values of component statements and the resulting truth value of a compound statement."
+  },
+  {
+   "term": "set",
+   "meaning": "A well-defined collection of distinct objects, written with curly braces."
+  },
+  {
+   "term": "roster form",
+   "meaning": "A way to write a set by listing its elements, e.g., {2,4,6,8}."
+  },
+  {
+   "term": "set-builder notation",
+   "meaning": "A way to describe a set by a rule, e.g., {x | x is an even integer}."
+  },
+  {
+   "term": "translation",
+   "meaning": "Rewriting an English statement as a formula using logical symbols and set symbols."
+  },
+  {
+   "term": "direct proof",
+   "meaning": "A proof method that starts from known facts and proceeds step‑by‑step to the desired conclusion."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which connective means both component statements must be true?",
+   "options": [
+    "OR",
+    "AND",
+    "NOT",
+    "IF-THEN"
+   ],
+   "answer": 1,
+   "why": "AND is true only when both statements are true."
+  },
+  {
+   "q": "What does a truth table help us determine about a statement?",
+   "options": [
+    "Its length",
+    "Its truth value in every case",
+    "Its font",
+    "Its pronunciation"
+   ],
+   "answer": 1,
+   "why": "A truth table shows the truth value for every possible assignment of truth values."
+  },
+  {
+   "q": "Which of the following is a correct roster form for the set of first three odd numbers?",
+   "options": [
+    "{1,2,3}",
+    "{2,4,6}",
+    "{1,3,5}",
+    "{0,1,2}"
+   ],
+   "answer": 2,
+   "why": "The first three odd numbers are 1, 3, and 5."
+  },
+  {
+   "q": "In set-builder notation, how would you describe the set of all even integers?",
+   "options": [
+    "{x | x is an integer}",
+    "{x | x is even}",
+    "{x | x = 2k for some integer k}",
+    "{x | x > 0}"
+   ],
+   "answer": 2,
+   "why": "Even integers are those that can be written as 2k for some integer k."
+  },
+  {
+   "q": "What is the first step in translating the English sentence 'It is raining and the ground is wet' into symbols?",
+   "options": [
+    "Identify the connective",
+    "Identify the atomic parts",
+    "Write the conclusion",
+    "Draw a diagram"
+   ],
+   "answer": 1,
+   "why": "We first break the sentence into its simplest statements."
+  },
+  {
+   "q": "Which part of a direct proof states the claim to be proved?",
+   "options": [
+    "Given information",
+    "Logical steps",
+    "Statement",
+    "Conclusion"
+   ],
+   "answer": 2,
+   "why": "The statement is the claim that the proof aims to establish."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a logical statement (proposition)?",
+   "back": "A sentence that is either true or false, but not both."
+  },
+  {
+   "front": "Symbol for logical AND",
+   "back": "land"
+  },
+  {
+   "front": "When is P AND Q true?",
+   "back": "Only when both P and Q are true."
+  },
+  {
+   "front": "Define a truth table",
+   "back": "A table listing all possible truth values of components and the resulting truth value of the compound statement."
+  },
+  {
+   "front": "What is a set?",
+   "back": "A well-defined collection of distinct objects, written with curly braces."
+  },
+  {
+   "front": "Roster form example for even numbers",
+   "back": "{2,4,6,8}"
+  },
+  {
+   "front": "Set-builder notation for even integers",
+   "back": "{x | x = 2k for some integer k}"
+  },
+  {
+   "front": "Four parts of a direct proof",
+   "back": "Statement, given information, logical steps, conclusion."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l10-truth-table-grid",
+   "title": "Shows all possible true/false combinations for P and Q and the result of P ∧ Q, P ∨ Q, etc.",
+   "alt": "Shows all possible true/false combinations for P and Q and the result of P ∧ Q, P ∨ Q, etc.",
+   "priority": 8,
+   "picture_title": "Truth Table Grid",
+   "kind": "illustration",
+   "subject": "A rectangular grid with columns for P, Q, ¬P, P ∧ Q, P ∨ Q, P → Q and rows for the four truth assignments (TT, TF, FT, FF). Each cell contains T or F.",
+   "layout": "Columns labelled at the top, rows listed vertically; each cell filled with a single letter (T/F).",
+   "labels": [
+    "P",
+    "Q",
+    "¬P",
+    "∧",
+    "∨",
+    "→",
+    "T",
+    "F"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-set-as-basket",
+   "title": "A basket representing a set with several items inside.",
+   "alt": "A basket representing a set with several items inside.",
+   "priority": 7,
+   "picture_title": "Set as Basket",
+   "kind": "photo",
+   "subject": "A simple photograph of a woven basket containing a few apples, oranges, and a toy car, illustrating that a set can hold any kind of objects.",
+   "layout": "Basket centered, items visible inside; no extra labeling needed.",
+   "labels": [],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-proof-flowchart",
+   "title": "Step‑by‑step flow of a direct proof from hypothesis to conclusion.",
+   "alt": "Step‑by‑step flow of a direct proof from hypothesis to conclusion.",
+   "priority": 6,
+   "picture_title": "Proof Flowchart",
+   "kind": "labelled diagram",
+   "subject": "A vertical flowchart with four boxes: 1) Given (hypothesis), 2) Reason/Step, 3) Reason/Step, 4) Conclusion. Arrows connect the boxes in order.",
+   "layout": "Boxes stacked vertically, arrows pointing downwards, each box contains brief text.",
+   "labels": [
+    "Given",
+    "Step 1",
+    "Step 2",
+    "Conclusion"
+   ],
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "AND vs OR",
+   "left": {
+    "name": "AND (∧)",
+    "points": [
+     "True only when both parts are true",
+     "Used for “both … and …” statements",
+     "Truth table row: T ∧ T = T"
+    ]
+   },
+   "right": {
+    "name": "OR (∨)",
+    "points": [
+     "True when at least one part is true",
+     "Used for “either … or …” statements",
+     "Truth table row: T ∨ F = T"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Constructing a Truth Table",
+   "steps": [
+    {
+     "label": "Identify atomic statements",
+     "text": "Write down P and Q"
+    },
+    {
+     "label": "List all combinations",
+     "text": "Create rows for (T,T), (T,F), (F,T), (F,F)"
+    },
+    {
+     "label": "Apply the connective",
+     "text": "Compute P ∧ Q (or other) for each row"
+    },
+    {
+     "label": "Interpret results",
+     "text": "See when the compound statement is true"
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Parts of a Direct Proof",
+   "items": [
+    {
+     "name": "Statement",
+     "role": "What we want to prove"
+    },
+    {
+     "name": "Given information",
+     "role": "Assumptions, definitions, known facts"
+    },
+    {
+     "name": "Logical steps",
+     "role": "Chain of deductions linking given to statement"
+    },
+    {
+     "name": "Conclusion",
+     "role": "Restate the proved statement"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "facts",
+   "title": "Definition of an Even Integer",
+   "items": [
+    {
+     "value": "n = 2k",
+     "label": "Form of an even integer"
+    },
+    {
+     "value": "k ∈ ℤ",
+     "label": "k is an integer"
+    },
+    {
+     "value": "n² = 4k²",
+     "label": "Square of an even integer"
+    },
+    {
+     "value": "n² = 2(2k²)",
+     "label": "Result is also even"
+    }
+   ],
+   "after": 6
+  },
+  {
+   "type": "steps",
+   "title": "Proving a Subset Relation",
+   "steps": [
+    {
+     "label": "Assume implication",
+     "text": "Suppose ∀x (x∈S → x∈B)"
+    },
+    {
+     "label": "Pick arbitrary element",
+     "text": "Let x be any element of S"
+    },
+    {
+     "label": "Apply the assumption",
+     "text": "From the assumption, x∈B"
+    },
+    {
+     "label": "Conclude subset",
+     "text": "Since every x∈S is in B, S⊆B"
+    }
+   ],
+   "loop": false,
+   "after": 7
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
