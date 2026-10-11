@@ -1,0 +1,372 @@
+{
+ "title": "The Circle: General Form",
+ "summary": "Students learn how to write the equation of a circle in general form, how to convert between standard and general forms, and how to extract the centre and radius from a general‑form equation.",
+ "objectives": [
+  "Identify the centre and radius of a circle given its general‑form equation",
+  "Convert a standard‑form circle equation to general form",
+  "Convert a general‑form circle equation to standard form by completing the square",
+  "Classify a quadratic equation in x and y as a circle, point, or empty set"
+ ],
+ "prerequisites": "Students should already know the standard form of a circle ( (x‑h)²+(y‑k)²=r² ) and basic algebraic manipulation such as expanding brackets and collecting like terms.",
+ "why": [
+  "Circles appear in many engineering designs, computer graphics, and navigation systems. Being able to read a circle’s equation in any form lets you model real‑world objects such as wheels, lenses, or satellite orbits.",
+  "In data analysis, fitting a circle to a set of points can reveal the centre of a rotating object or the curvature of a road. Converting between forms is a key step in these calculations."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of the Standard Form",
+   "body": "The equation of a circle is most often written in the **standard form**\n\n$$ (x-h)^2 + (y-k)^2 = r^2 $$\n\n> **Definition:** A *circle* is the set of all points that are exactly the same distance from a single fixed point.  \n> **Note:** In the formula above, the fixed point is called the **center** and the common distance is the **radius**.\n\nThe symbols $h$ and $k$ tell us where the centre is located on the coordinate plane.  \nThink of a map: if you put a pin at the point $(h,k)$, then stretch a string of length $r$ around the pin, the string will trace the circle. The pin’s coordinates are $h$ (horizontal) and $k$ (vertical).  \n\nThe symbol $r$ is the radius. It is a positive number that measures how far every point on the circle lies from the centre. If $r$ is larger, the circle is bigger; if $r$ is smaller, the circle shrinks.\n\n### Why the squares?\n\nThe distance between any point $(x,y)$ on the plane and the centre $(h,k)$ is given by the **distance formula**\n\n$$ \\sqrt{(x-h)^2 + (y-k)^2}. $$\n\nA circle requires that this distance be exactly $r$. To avoid the square‑root (which is harder to work with algebraically), we square both sides of the equation:\n\n$$ (x-h)^2 + (y-k)^2 = r^2. $$\n\nSquaring does not change the set of points because both sides are non‑negative, and it gives us a clean polynomial equation.\n\n### Reading the formula\n\n- **$(x-h)^2$** tells us how far the $x$‑coordinate of a point is from the centre’s $x$‑coordinate $h$, then squares that distance.\n- **$(y-k)^2$** does the same for the $y$‑coordinate.\n- Adding the two squared distances gives the **square of the total distance** from the centre.\n- Setting this sum equal to $r^2$ forces the total distance to be exactly $r$.\n\n> **In daily life:** Imagine a round swimming pool. The centre of the pool is the point $(h,k)$. Every tile on the edge of the pool is exactly $r$ metres away from that centre. The equation above is just a mathematical way of describing that edge.\n\n### Example\n\nSuppose a circle has centre at $(3,-2)$ and radius $5$. Plugging these numbers into the standard form gives\n\n$$ (x-3)^2 + (y+2)^2 = 25. $$\n\nNotice the sign change for $k$: because the centre’s $y$‑coordinate is $-2$, the term becomes $(y-(-2))^2 = (y+2)^2$.\n\nIf you pick a point, say $(6,1)$, and substitute it into the left‑hand side:\n\n\\[\n(6-3)^2 + (1+2)^2 = 3^2 + 3^2 = 9 + 9 = 18,\n\\]\n\nwhich is **not** $25$, so $(6,1)$ is not on the circle. If you try $(8,-2)$:\n\n\\[\n(8-3)^2 + (-2+2)^2 = 5^2 + 0^2 = 25,\n\\]\n\nthe equation holds, confirming that $(8,-2)$ lies on the circle.\n\n> **Common mistake:** Forgetting to change the sign of $k$ when writing $(y-k)$. Remember that the formula always uses **minus** the centre coordinate, so a negative centre value becomes a plus inside the parentheses.\n\n### Quick checklist for the standard form\n\n1. Identify the centre $(h,k)$.  \n2. Write the terms $(x-h)^2$ and $(y-k)^2$.  \n3. Square the radius to get $r^2$ and place it on the right‑hand side.  \n\nWhen you can read and write this form fluently, you will find it much easier to move to the more flexible **general form** later on.  \n\n> **Remember:** The standard form directly tells you the centre and the radius—two pieces of geometric information that are often the most useful when solving circle problems.",
+   "code": ""
+  },
+  {
+   "heading": "2. Expanding to General Form",
+   "body": "When we write a circle in **standard form** we see directly where its centre is and how big it is.  \nThe equation  \n\n\\[\n(x-h)^{2}+(y-k)^{2}=r^{2}\n\\]\n\ntells us that the centre is the point \\((h,k)\\) and the radius is the positive number \\(r\\).  \nSometimes, however, the circle is given in a more tangled way, with all the \\(x\\)‑ and \\(y\\)‑terms spread out.  \nThat tangled version is called the **general form** of a circle:\n\n\\[\nAx^{2}+Ay^{2}+Dx+Ey+F=0 .\n\\]\n\nHere the coefficients \\(A,D,E,F\\) are numbers (often integers) that we can read off directly from the equation.  \nConverting from standard to general form is useful because many algebraic problems present the circle already in the tangled shape, and we need to recognise it as a circle, find its centre, or compare it with other curves.\n\n> **Note:** In the general form the coefficients of \\(x^{2}\\) and \\(y^{2}\\) are the same (both \\(A\\)). If they differ, the curve is an ellipse, not a circle.\n\n---\n\n### Step‑by‑step expansion\n\n1. **Start with the standard form.**  \n   Write the equation exactly as \\((x-h)^{2}+(y-k)^{2}=r^{2}\\).\n\n2. **Expand each squared binomial.**  \n   Use the identity \\((u+v)^{2}=u^{2}+2uv+v^{2}\\).  \n   For the \\(x\\)-part we have \\((x-h)^{2}=x^{2}-2hx+h^{2}\\).  \n   For the \\(y\\)-part we have \\((y-k)^{2}=y^{2}-2ky+k^{2}\\).\n\n3. **Combine the two expansions.**  \n   Add the results and keep the right‑hand side \\(r^{2}\\) unchanged.\n\n4. **Move everything to the left side.**  \n   Subtract \\(r^{2}\\) from both sides so that the equation equals zero.  \n\n5. **Collect like terms.**  \n   The terms \\(x^{2}\\) and \\(y^{2}\\) each have coefficient \\(1\\); the linear terms in \\(x\\) and \\(y\\) become \\(-2h\\) and \\(-2k\\); the constant term is \\(h^{2}+k^{2}-r^{2}\\).  \n\nPutting all of this together gives the general form\n\n\\[\nx^{2}+y^{2}-2hx-2ky+(h^{2}+k^{2}-r^{2})=0 .\n\\]\n\nIf we prefer the symbols \\(A,D,E,F\\) we simply set  \n\n\\[\nA=1,\\qquad D=-2h,\\qquad E=-2k,\\qquad F=h^{2}+k^{2}-r^{2}.\n\\]\n\n---\n\n### Worked example\n\n**Example 1 (Easy): Expand \\((x-3)^{2}+(y+2)^{2}=5^{2}\\) to general form.**\n\nWe will follow the steps outlined above.\n\n1. **Write the standard form.**  \n   The given equation already is \\((x-3)^{2}+(y+2)^{2}=5^{2}\\).\n\n2. **Expand the first square.**  \n   \\[\n   (x-3)^{2}=x^{2}-2\\cdot3\\,x+3^{2}=x^{2}-6x+9 .\n   \\]\n\n3. **Expand the second square.**  \n   \\[\n   (y+2)^{2}=y^{2}+2\\cdot2\\,y+2^{2}=y^{2}+4y+4 .\n   \\]\n\n4. **Add the two expansions and keep the right side.**  \n   \\[\n   x^{2}-6x+9\\;+\\;y^{2}+4y+4\\;=\\;5^{2}.\n   \\]\n\n5. **Simplify the right side.**  \n   \\[\n   5^{2}=25 .\n   \\]\n\n6. **Move all terms to the left side (subtract 25).**  \n   \\[\n   x^{2}+y^{2}-6x+4y+9+4-25=0 .\n   \\]\n\n7. **Combine the constant numbers.**  \n   \\[\n   9+4-25=-12 .\n   \\]\n\n8. **Write the final general form.**  \n   \\[\n   x^{2}+y^{2}-6x+4y-12=0 .\n   \\]\n\n**Answer:** The circle \\((x-3)^{2}+(y+2)^{2}=5^{2}\\) in general form is  \n\n\\[\n\\boxed{x^{2}+y^{2}-6x+4y-12=0}.\n\\]\n\n---\n\n> **In daily life:** Expanding is like taking a recipe written in “mix‑then‑bake” steps and rewriting it as a single list of ingredients. The ingredients (coefficients) are easier to compare with other recipes (other equations).\n\n> **Common mistake:** Forgetting to change the sign of the constant term when moving \\(r^{2}\\) to the left side. Remember to subtract \\(r^{2}\\) from both sides, not add it.\n\n> **Remember:** The coefficient of \\(x^{2}\\) and \\(y^{2}\\) will always be the same (usually 1) after expansion. If you ever see different numbers in front of \\(x^{2}\\) and \\(y^{2}\\), the curve is not a circle.  \n\nBy mastering this expansion, you can recognise circles hidden in messy algebraic expressions and prepare for the reverse process—completing the square—to recover the centre and radius later in the lesson.",
+   "code": ""
+  },
+  {
+   "heading": "3. Identifying Coefficients",
+   "body": "When we write the equation of a circle in **general form** we use  \n\n\\[\nAx^{2}+Ay^{2}+Dx+Ey+F=0 ,\\qquad A\\neq0\n\\]\n\nNotice that the coefficients of $x^{2}$ and $y^{2}$ are the same number $A$ and there is **no** term $xy$.  \nThese restrictions guarantee that the curve described is a circle (or a degenerate case) rather than an ellipse or a parabola.\n\n---\n\n> **Definition:**  \n> *Coefficient* – a number placed in front of a variable or a power of a variable.  \n> In the expression $3x^{2}$ the number $3$ is the coefficient of $x^{2}$.\n\n---\n\n### What each letter tells us\n\n| Symbol | Where it appears | What it controls |\n|--------|------------------|------------------|\n| $A$    | in front of $x^{2}$ and $y^{2}$ | Size of the “quadratic” part. Because the same $A$ multiplies both $x^{2}$ and $y^{2}$, the shape is perfectly round. |\n| $D$    | in front of $x$   | Horizontal shift of the centre. A non‑zero $D$ moves the circle left or right. |\n| $E$    | in front of $y$   | Vertical shift of the centre. A non‑zero $E$ moves the circle up or down. |\n| $F$    | the constant term (no variable) | Determines how far the circle is from the origin after the shifts. It also decides whether the equation really describes a circle, a single point, or nothing at all. |\n\nWhy does $A$ have to be the same for $x^{2}$ and $y^{2}$?  \nIf the coefficients were different, say $3x^{2}+5y^{2}$, the distance from the centre to the curve would depend on direction – the shape would be stretched into an ellipse. By forcing the two coefficients to be equal we keep the distance the same in every direction, which is exactly the definition of a circle.\n\nWhy are there no $xy$ terms?  \nA term like $Bxy$ would tilt the axes, producing an ellipse that is rotated. Removing it keeps the axes aligned with the standard $x$‑ and $y$‑directions, which is the usual way we draw circles.\n\n---\n\n> **In daily life:** Think of $A$ as the “tightness” of a rubber band that you stretch equally in all directions. $D$ and $E$ are like pulling the centre of the band left/right and up/down. $F$ is the amount of slack you leave; too much slack (a large positive $F$) may make the band never touch the ground (no real points), while just the right slack makes the band touch a single point.\n\n---\n\n### How to read the coefficients from an equation\n\nWhen you are given a circle written as  \n\n\\[\nAx^{2}+Ay^{2}+Dx+Ey+F=0,\n\\]\n\nsimply match each term with the pattern:\n\n* The term with $x^{2}$ tells you $A$.\n* The term with $y^{2}$ must have the same $A$ – if it does not, the equation is **not** a circle.\n* The term with $x$ gives $D$.\n* The term with $y$ gives $E$.\n* The constant term (the number standing alone) is $F$.\n\nThis “reading” step is useful because the next stage – completing the square – needs the exact values of $D$, $E$, and $F$.\n\n---\n\n**Example 2 (Easy): Identify the coefficients**  \nGiven  \n\n\\[\n2x^{2}+2y^{2}-8x+12y-10=0,\n\\]\n\nstate the values of $A$, $D$, $E$, and $F$.\n\n1. **Match the $x^{2}$ and $y^{2}$ terms.**  \n   Both have coefficient $2$, so  \n\n   $$\n   A = 2 .\n   $$\n\n2. **Find the coefficient of $x$.**  \n   The term $-8x$ shows  \n\n   $$\n   D = -8 .\n   $$\n\n3. **Find the coefficient of $y$.**  \n   The term $+12y$ shows  \n\n   $$\n   E = 12 .\n   $$\n\n4. **Identify the constant term.**  \n   The isolated number $-10$ is  \n\n   $$\n   F = -10 .\n   $$\n\n**Answer:** $A=2,\\; D=-8,\\; E=12,\\; F=-10$.\n\n---\n\n### Why the signs matter\n\nThe signs of $D$ and $E$ tell the direction of the shift:\n\n* If $D$ is negative, the centre moves to the **right** because the term $Dx$ becomes $-8x$, which after completing the square will appear as $(x-2)^{2}$ – a shift $+2$ units in $x$.\n* If $E$ is positive, the centre moves **upward** because $+12y$ leads to $(y+6)^{2}$ – a shift $-6$ units in $y$ (remember the sign flips when we complete the square).\n\nUnderstanding this helps you predict the centre without doing any algebra.\n\n---\n\n> **Common mistake:** Forgetting that $A$ must be the same for $x^{2}$ and $y^{2}$. If you see $4x^{2}+9y^{2}+…=0$, the curve is an ellipse, not a circle. Always check the equality of the two quadratic coefficients first.\n\n---\n\n### Quick sanity check\n\nAfter you have identified $A$, $D$, $E$, and $F$, you can quickly verify that the equation really is a circle by confirming:\n\n1. $A\\neq0$ (otherwise the equation would be linear).  \n2. The coefficients of $x^{2}$ and $y^{2}$ are equal.  \n3. No $xy$ term appears.\n\nIf any of these fail, the equation belongs to a different family of conic sections.\n\n---\n\n> **Remember:**  \n> *Read, match, and record.* The moment you see a quadratic term, write down its coefficient as $A$. Then move to the linear terms for $D$ and $E$, and finally note the constant $F$. This disciplined approach prevents errors later when you complete the square to find the centre and radius.",
+   "code": ""
+  },
+  {
+   "heading": "4. Completing the Square to Return to Standard Form",
+   "body": "When we have a circle written in **general form**\n\n\\[\nAx^{2}+Ay^{2}+Dx+Ey+F=0\\qquad (A\\neq0),\n\\]\n\nthe $x$‑ and $y$‑terms are mixed together.  To see the centre and the radius we must **complete the square** – a systematic way of rewriting a quadratic expression as a perfect square plus (or minus) a constant.  \n\n> **Definition:** *Completing the square* means rearranging $ax^{2}+bx$ into the shape $a\\bigl(x+\\frac{b}{2a}\\bigr)^{2}+c$, where $c$ is the extra constant needed to keep the expression equal to the original.\n\nWhy do we do this?  A perfect square such as $(x-h)^{2}$ tells us directly that the graph is centred at $x=h$.  When both $x$ and $y$ appear as perfect squares, the equation becomes the familiar standard form  \n\n\\[\n(x-h)^{2}+(y-k)^{2}=r^{2},\n\\]\n\nfrom which the centre $(h,k)$ and radius $r$ are obvious.  Think of it like untangling a knot: the original general equation is a tangled mess, and completing the square unties it into a clean circle.\n\nBelow is the step‑by‑step method, followed by two worked examples.\n\n---\n\n### Step‑by‑step method\n\n1. **Group the $x$‑terms and the $y$‑terms together.**  \n   Write the equation as  \n   \\[\n   (x^{2}+Dx)+(y^{2}+Ey)+F=0 .\n   \\]\n\n2. **Factor the coefficient of the squared terms if it is not 1.**  \n   In most textbooks $A=1$, but if you have $Ax^{2}+Ay^{2}$ you first divide the whole equation by $A$ so the coefficients of $x^{2}$ and $y^{2}$ become 1.\n\n3. **Complete the square for each variable.**  \n   For $x^{2}+Dx$, add and subtract $\\left(\\frac{D}{2}\\right)^{2}$.  \n   For $y^{2}+Ey$, add and subtract $\\left(\\frac{E}{2}\\right)^{2}$.\n\n4. **Rewrite the grouped terms as perfect squares.**  \n   The expressions become  \n   \\[\n   \\bigl(x+\\tfrac{D}{2}\\bigr)^{2}\\quad\\text{and}\\quad\\bigl(y+\\tfrac{E}{2}\\bigr)^{2}.\n   \\]\n\n5. **Move the added constants to the other side of the equation.**  \n   This isolates the perfect squares on the left and leaves a single number on the right, which will be $r^{2}$.\n\n6. **Read off the centre and radius.**  \n   The centre is $(-\\tfrac{D}{2},-\\tfrac{E}{2})$ and the radius is $\\sqrt{\\text{right‑hand side}}$, provided the right‑hand side is positive.\n\n> **Note:** If the right‑hand side becomes zero, the circle collapses to a single point (a *point circle*).  If it is negative, there is no real circle – the equation represents the *empty set*.\n\nNow let us apply these steps.\n\n---\n\n**Example 3 (Medium): Convert $3x^{2}+3y^{2}-18x+24y-27=0$ to standard form and give centre and radius.**\n\n1. *Divide by the common coefficient* $3$ so the squared terms have coefficient $1$:  \n   $$\n   x^{2}+y^{2}-6x+8y-9=0 .\n   $$\n\n2. *Group $x$ and $y$ terms*:  \n   $$\n   (x^{2}-6x)+(y^{2}+8y)-9=0 .\n   $$\n\n3. *Complete the square* for each group.  \n   - For $x^{2}-6x$, add and subtract $\\left(\\frac{-6}{2}\\right)^{2}=9$.  \n   - For $y^{2}+8y$, add and subtract $\\left(\\frac{8}{2}\\right)^{2}=16$.\n\n   Write the equation with these additions:  \n   $$\n   (x^{2}-6x+9)+(y^{2}+8y+16)-9-9-16=0 .\n   $$\n\n4. *Rewrite as perfect squares*:  \n   $$\n   (x-3)^{2}+(y+4)^{2}-34=0 .\n   $$\n\n5. *Move the constant to the right*:  \n   $$\n   (x-3)^{2}+(y+4)^{2}=34 .\n   $$\n\n6. *Identify centre and radius*:  \n   Centre $C=(3,-4)$, radius $r=\\sqrt{34}$.\n\n**Answer:** The circle has centre $(3,-4)$ and radius $\\sqrt{34}$ units.\n\n---\n\n**Example 4 (Medium): Convert $x^{2}+y^{2}+6x-4y+9=0$ to standard form.**\n\n1. *Group the terms*:  \n   $$\n   (x^{2}+6x)+(y^{2}-4y)+9=0 .\n   $$\n\n2. *Complete the square* for each group.  \n   - For $x^{2}+6x$, add and subtract $\\left(\\frac{6}{2}\\right)^{2}=9$.  \n   - For $y^{2}-4y$, add and subtract $\\left(\\frac{-4}{2}\\right)^{2}=4$.\n\n   Insert these:  \n   $$\n   (x^{2}+6x+9)+(y^{2}-4y+4)+9-9-4=0 .\n   $$\n\n3. *Rewrite as perfect squares*:  \n   $$\n   (x+3)^{2}+(y-2)^{2}+(-4)=0 .\n   $$\n\n4. *Isolate the squares*:  \n   $$\n   (x+3)^{2}+(y-2)^{2}=4 .\n   $$\n\n5. *Read off centre and radius*:  \n   Centre $C=(-3,2)$, radius $r=\\sqrt{4}=2$.\n\n**Answer:** The circle’s standard form is $(x+3)^{2}+(y-2)^{2}=4$, so its centre is $(-3,2)$ and its radius is $2$ units.\n\n> **Remember:** Always check the sign of the constant on the right‑hand side.  A positive value gives a real radius; zero gives a point circle; a negative value means the original equation does **not** describe any real circle.\n\nBy following these small, clear steps, you can turn any circle written in general form into the neat standard form, instantly revealing its centre and radius. This skill is useful not only in geometry problems but also in physics (e.g., describing circular motion) and computer graphics, where circles must often be converted between algebraic representations.",
+   "code": ""
+  },
+  {
+   "heading": "5. Special Cases: Point Circle and Empty Set",
+   "body": "When we finish completing the square for a circle equation, we obtain  \n\n$$ (x-h)^2 + (y-k)^2 = r^2 $$  \n\nwhere $h$ and $k$ are the coordinates of the centre and $r$ is the radius.  \nThe value on the right‑hand side, $r^2$, tells us what the figure looks like.\n\n> **Definition:** If $r^2>0$, the equation describes a usual circle with radius $r=\\sqrt{r^2}>0$.  \n> **Note:** If $r^2=0$, the “circle’’ collapses to a single point.  \n> **Note:** If $r^2<0$, there is no real number $r$ that satisfies the equation, so the set of points is empty (no real points).\n\nThese two special cases appear often when we start from the **general form**  \n\n$$ x^{2}+y^{2}+Dx+Ey+F=0 $$  \n\nand rewrite it by completing the square.  \nUnderstanding them prevents us from mistakenly drawing a circle where none exists.\n\n---\n\n### Why does $r^2=0$ give a single point?\n\nThe equation $(x-h)^2+(y-k)^2=0$ says that the sum of two squared numbers is zero.  \nA square is never negative, and it is zero only when the original number is zero.  \nTherefore both $(x-h)^2$ and $(y-k)^2$ must be zero, which forces  \n\n$$ x-h = 0 \\quad\\text{and}\\quad y-k = 0 $$  \n\nso the only solution is the point $(h,k)$.  \nIn everyday language, imagine a rubber band stretched around a peg. If the band’s length is reduced to zero, the band shrinks to the peg itself – a single location.\n\n### Why does $r^2<0$ give no real points?\n\nIf $r^2$ is negative, we would need a real number $r$ whose square is negative.  \nBut for any real number $r$, $r^2\\ge 0$. Hence the equation cannot be satisfied by any real $(x,y)$.  \nA useful analogy: trying to measure a distance with a ruler that says “‑3 cm”. Distance cannot be negative, so the instruction is impossible.\n\n---\n\n**Example 5 (Hard): Determine the geometric meaning of**  \n\n$$ x^{2}+y^{2}-4x-6y+13=0. $$  \n\n1. **Group the $x$ and $y$ terms** to prepare for completing the square.  \n   $$ x^{2}-4x \\;+\\; y^{2}-6y \\;+\\; 13 = 0 $$  \n\n2. **Complete the square** for each variable.  \n   - For $x$: take half of $-4$, which is $-2$, square it to get $4$.  \n   - For $y$: half of $-6$ is $-3$, square it to get $9$.  \n\n   Add these numbers to both sides:  \n\n   $$ (x^{2}-4x+4) + (y^{2}-6y+9) = -13 + 4 + 9 $$  \n\n3. **Rewrite as perfect squares** and simplify the right‑hand side.  \n\n   $$ (x-2)^{2} + (y-3)^{2} = 0 $$  \n\n   The right‑hand side is exactly $0$, so $r^{2}=0$.\n\n**Answer:** The equation represents a **point circle** located at the single point $(2,\\,3)$. No other points satisfy the equation.\n\n---\n\n**Example 6 (Hard): Explain why**  \n\n$$ x^{2}+y^{2}+2x+2y+5=0 $$  \n\n**has no real points.**  \n\n1. **Collect the linear terms** and move the constant to the other side.  \n\n   $$ x^{2}+2x \\;+\\; y^{2}+2y = -5 $$  \n\n2. **Complete the square** for $x$ and $y$.  \n   - Half of $2$ is $1$, square gives $1$.  \n   - Same for $y$: half of $2$ is $1$, square gives $1$.  \n\n   Add $1$ and $1$ to both sides:  \n\n   $$ (x^{2}+2x+1) + (y^{2}+2y+1) = -5 + 1 + 1 $$  \n\n3. **Express as squares** and evaluate the right‑hand side.  \n\n   $$ (x+1)^{2} + (y+1)^{2} = -3 $$  \n\n   The right‑hand side is $-3$, a negative number, so $r^{2} = -3 < 0$.\n\n**Answer:** Because the radius squared is negative, there is **no real radius**; consequently the equation has **no real points**—the set is empty.\n\n---\n\n> **In daily life:** Think of $r^2$ as the amount of “budget’’ you have to draw a circle. If the budget is zero, you can only draw a dot. If the budget is negative, you cannot draw anything at all.\n\n> **Common mistake:** Forgetting to move the constant term when completing the square. This leads to an incorrect value for $r^2$ and a wrong geometric interpretation.\n\n> **Remember:** After completing the square, always check the sign of the constant on the right‑hand side.  \n> - Positive → ordinary circle.  \n> - Zero → single point.  \n> - Negative → no real points.  \n\nThese checks ensure that you correctly identify point circles and empty sets, completing your understanding of the general circle equation.",
+   "code": ""
+  },
+  {
+   "heading": "6. Quick Conversion Checklist",
+   "body": "When you are given any quadratic expression in $x$ and $y$, the first question is: *does it describe a circle, and if so, where is the centre and what is the radius?*  \nThe answer comes from completing the square for both variables. Below is a short, step‑by‑step checklist that turns any equation of the form  \n\n$$Ax^{2}+By^{2}+Cx+Dy+E=0$$  \n\ninto the familiar centre‑radius form  \n\n$$\\bigl(x-h\\bigr)^{2}+\\bigl(y-k\\bigr)^{2}=r^{2}$$  \n\nor tells you that the equation cannot be a circle.\n\n> **Definition:** *Completing the square* means rewriting a quadratic expression $u^{2}+pu$ as $(u+\\tfrac{p}{2})^{2}-\\bigl(\\tfrac{p}{2}\\bigr)^{2}$. This creates a perfect square plus a constant.\n\n> **Note:** For a genuine circle we must have $A=B\\neq0$; otherwise the curve is an ellipse, a parabola, or something else.\n\n> **Common mistake:** Forgetting to move the constant term $E$ to the right‑hand side before completing the square. This leads to an incorrect radius.\n\n> **Remember:** The radius $r$ must be a non‑negative real number. If after completing the square you obtain $r^{2}<0$, the original equation represents an *empty set* (no real points).\n\n---\n\n### Quick Conversion Checklist  \n\n1. **Check the quadratic coefficients**  \n   - Verify that the coefficients of $x^{2}$ and $y^{2}$ are equal and non‑zero: $A=B\\neq0$.  \n   - If they differ, the curve is not a circle; stop here.\n\n2. **Divide the whole equation by the common coefficient**  \n   - If $A=B=k$, divide every term by $k$ so the $x^{2}$ and $y^{2}$ coefficients become $1$.  \n   - This gives  \n     $$x^{2}+y^{2}+\\frac{C}{k}x+\\frac{D}{k}y+\\frac{E}{k}=0.$$\n\n3. **Group the $x$‑terms and $y$‑terms**  \n   - Write the equation as  \n     $$(x^{2}+ \\frac{C}{k}x) + (y^{2}+ \\frac{D}{k}y) = -\\frac{E}{k}.$$\n\n4. **Complete the square for each variable**  \n   - For $x$: add and subtract $\\bigl(\\frac{C}{2k}\\bigr)^{2}$.  \n   - For $y$: add and subtract $\\bigl(\\frac{D}{2k}\\bigr)^{2}$.  \n   - The left side becomes  \n     $$(x+\\frac{C}{2k})^{2} + (y+\\frac{D}{2k})^{2} = -\\frac{E}{k} + \\bigl(\\frac{C}{2k}\\bigr)^{2} + \\bigl(\\frac{D}{2k}\\bigr)^{2}.$$\n\n5. **Identify centre and radius**  \n   - Centre $(h,k)$ is $(-\\frac{C}{2k},\\;-\\frac{D}{2k})$.  \n   - Radius squared $r^{2}$ is the right‑hand side of the equation above.  \n   - If $r^{2}>0$, the radius is $r=\\sqrt{r^{2}}$.  \n   - If $r^{2}=0$, the circle collapses to a single point (a *point circle*).  \n   - If $r^{2}<0$, there are no real points; the equation describes the empty set.\n\n6. **Write the final standard form**  \n   $$\\bigl(x-h\\bigr)^{2}+\\bigl(y-k\\bigr)^{2}=r^{2}.$$\n\n---\n\n**Example 7 (Level: Intermediate): Converting a general quadratic to centre‑radius form**  \n\n*Question:* Convert the equation $3x^{2}+3y^{2}-12x+6y-9=0$ into standard circle form and state its centre and radius.\n\n1. **Check coefficients** – The $x^{2}$ and $y^{2}$ coefficients are both $3$, so $A=B=3\\neq0$. The curve can be a circle.  \n\n2. **Divide by the common coefficient** – Divide every term by $3$:  \n   $$x^{2}+y^{2}-4x+2y-3=0.$$\n\n3. **Group $x$ and $y$ terms** –  \n   $$(x^{2}-4x)+(y^{2}+2y)=-\\,(-3) \\quad\\text{or}\\quad (x^{2}-4x)+(y^{2}+2y)=3.$$\n\n4. **Complete the square**  \n   - For $x$: add and subtract $(\\frac{-4}{2})^{2}=4$.  \n   - For $y$: add and subtract $(\\frac{2}{2})^{2}=1$.  \n   $$\\bigl(x^{2}-4x+4\\bigr)+\\bigl(y^{2}+2y+1\\bigr)=3+4+1.$$  \n   This simplifies to  \n   $$(x-2)^{2}+(y+1)^{2}=8.$$\n\n5. **Identify centre and radius** –  \n   Centre $h=2$, $k=-1$, so $(h,k)=(2,-1)$.  \n   Radius squared $r^{2}=8$, therefore $r=\\sqrt{8}=2\\sqrt{2}$.  \n\n6. **Write the final form** –  \n   $$\\boxed{(x-2)^{2}+(y+1)^{2}=8}$$  \n\n**Answer:** The circle has centre $(2,-1)$ and radius $2\\sqrt{2}$ units.\n\n---\n\nBy following the checklist step by step, you can turn any quadratic in $x$ and $y$ into the clear centre‑radius description of a circle—or quickly recognise when the equation does **not** represent a circle at all. This systematic approach saves time on exams and helps you avoid common algebraic slips.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Convert the standard form $(x-1)^2 + (y+3)^2 = 16$ to general form.",
+   "a": "Expand: $x^2 -2x +1 + y^2 +6y +9 = 16$. Combine constants: $x^2 + y^2 -2x +6y + (1+9-16)=0 \\;\\Rightarrow\\; x^2 + y^2 -2x +6y -6 = 0$."
+  },
+  {
+   "level": "Easy",
+   "q": "Identify the centre and radius of the circle $x^2 + y^2 + 4x - 6y + 9 = 0$.",
+   "a": "Complete the square: $x^2+4x = (x+2)^2 -4$, $y^2-6y = (y-3)^2 -9$.\nSo $(x+2)^2 + (y-3)^2 = 4+9-9 = 4$.\nCentre $(-2,3)$, radius $r=\\sqrt{4}=2$."
+  },
+  {
+   "level": "Medium",
+   "q": "Write the general form of a circle with centre $( -5, 2 )$ and radius $7$.",
+   "a": "Standard form: $(x+5)^2 + (y-2)^2 = 49$. Expand: $x^2+10x+25 + y^2-4y+4 = 49$.\nCombine: $x^2 + y^2 +10x -4y + (25+4-49)=0 \\;\\Rightarrow\\; x^2 + y^2 +10x -4y -20 = 0$."
+  },
+  {
+   "level": "Medium",
+   "q": "The equation $x^2 + y^2 - 8x + 10y + 25 = 0$ is given. Determine whether it represents a real circle, a point circle, or an empty set, and find its centre and radius if applicable.",
+   "a": "Complete the square: $x^2-8x = (x-4)^2 -16$, $y^2+10y = (y+5)^2 -25$.\nThus $(x-4)^2 + (y+5)^2 = 16+25-25 = 16$.\nRadius squared $=16>0$, so a real circle.\nCentre $(4,-5)$, radius $r=4$."
+  },
+  {
+   "level": "Hard",
+   "q": "Convert the general equation $2x^2 + 2y^2 - 12x + 8y - 6 = 0$ to standard form and state the centre and radius.",
+   "a": "First divide by $2$: $x^2 + y^2 -6x +4y -3 = 0$.\nComplete squares: $x^2-6x = (x-3)^2 -9$, $y^2+4y = (y+2)^2 -4$.\nSo $(x-3)^2 + (y+2)^2 = 9+4+3 = 16$.\nStandard form: $(x-3)^2 + (y+2)^2 = 16$.\nCentre $(3,-2)$, radius $r=4$."
+  },
+  {
+   "level": "Hard",
+   "q": "A circle is defined by the equation $x^2 + y^2 + Dx + Ey + F = 0$. Show that the circle is a point circle exactly when $D^2 + E^2 - 4F = 0$, and find the coordinates of that point.",
+   "a": "Complete the square:\n\\[\n\\begin{aligned}\nx^2 + Dx &= \\left(x + \\frac{D}{2}\\right)^2 - \\left(\\frac{D}{2}\\right)^2,\\\\\ny^2 + Ey &= \\left(y + \\frac{E}{2}\\right)^2 - \\left(\\frac{E}{2}\\right)^2.\n\\end{aligned}\n\\]\nSubstituting gives\n\\[\n\\left(x + \\frac{D}{2}\\right)^2 + \\left(y + \\frac{E}{2}\\right)^2 = \\left(\\frac{D}{2}\\right)^2 + \\left(\\frac{E}{2}\\right)^2 - F .\n\\]\nThe radius squared is $r^2 = \\frac{D^2+E^2}{4} - F$.\nFor a point circle we need $r^2 = 0$, so\n\\[\n\\frac{D^2+E^2}{4} - F = 0 \\;\\Longrightarrow\\; D^2 + E^2 - 4F = 0 .\n\\]\nWhen this holds, the centre (and only point) is\n\\[\n\\left(-\\frac{D}{2},\\; -\\frac{E}{2}\\right).\n\\]"
+  }
+ ],
+ "recap": "This lesson reviews the standard form of a circle (x-h)^2+(y-k)^2=r^2 and explains how to recognise and rewrite a circle given in general form Ax^2+Ay^2+Dx+Ey+F=0. It shows why the coefficients of x^2 and y^2 must be equal and there is no xy term. The key technique is completing the square to convert back to standard form, which also reveals special cases such as a point circle or an empty set. A quick checklist helps students identify the centre and radius or determine that the equation is not a circle.",
+ "key_terms": [
+  {
+   "term": "standard form",
+   "meaning": "(x-h)^2+(y-k)^2=r^2, showing centre (h,k) and radius r directly"
+  },
+  {
+   "term": "general form",
+   "meaning": "Ax^2+Ay^2+Dx+Ey+F=0, a single equation with all terms expanded"
+  },
+  {
+   "term": "coefficient",
+   "meaning": "a number placed in front of a variable or its power"
+  },
+  {
+   "term": "completing the square",
+   "meaning": "rewriting a quadratic ax^2+bx as a(x+b/(2a))^2 plus a constant"
+  },
+  {
+   "term": "centre",
+   "meaning": "the fixed point (h,k) that is the same distance from every point on the circle"
+  },
+  {
+   "term": "radius",
+   "meaning": "the positive distance r from the centre to any point on the circle"
+  },
+  {
+   "term": "point circle",
+   "meaning": "a degenerate circle where r^2=0, representing a single point"
+  },
+  {
+   "term": "empty set circle",
+   "meaning": "when r^2<0, no real points satisfy the equation"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What must be true about the coefficients of x^2 and y^2 for an equation to represent a circle?",
+   "options": [
+    "They must be equal and non‑zero",
+    "They can be any numbers",
+    "One must be zero",
+    "They must be opposite signs"
+   ],
+   "answer": 0,
+   "why": "Equal non‑zero coefficients ensure the shape is round, not an ellipse."
+  },
+  {
+   "q": "In the standard form (x-h)^2+(y-k)^2=r^2, what does the symbol h represent?",
+   "options": [
+    "Horizontal coordinate of the centre",
+    "Radius of the circle",
+    "Vertical coordinate of the centre",
+    "Constant term"
+   ],
+   "answer": 0,
+   "why": "h is the x‑coordinate of the centre."
+  },
+  {
+   "q": "Which step is NOT part of completing the square for a circle in general form?",
+   "options": [
+    "Divide the whole equation by A",
+    "Group x terms together",
+    "Add and subtract (D/(2A))^2",
+    "Introduce an xy term"
+   ],
+   "answer": 3,
+   "why": "A circle’s general form never contains an xy term."
+  },
+  {
+   "q": "If after completing the square you obtain (x-2)^2+(y+3)^2=0, what does the graph represent?",
+   "options": [
+    "A circle with radius 0 at (2,-3)",
+    "A circle with radius 2",
+    "No real graph",
+    "A line"
+   ],
+   "answer": 0,
+   "why": "r^2=0 gives a single point at the centre."
+  },
+  {
+   "q": "What does the constant F affect when converting from standard to general form?",
+   "options": [
+    "It shifts the centre",
+    "It changes the radius",
+    "It adds a constant term after expansion",
+    "It creates an xy term"
+   ],
+   "answer": 2,
+   "why": "F appears as the constant after expanding the squares."
+  },
+  {
+   "q": "Which of the following equations is NOT a circle?",
+   "options": [
+    "x^2+y^2+4x-6y+9=0",
+    "2x^2+2y^2-8x+5=0",
+    "x^2+4y^2-2x+3=0",
+    "x^2+y^2=25"
+   ],
+   "answer": 2,
+   "why": "The coefficients of x^2 and y^2 differ, giving an ellipse instead of a circle."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Standard form of a circle",
+   "back": "(x-h)^2+(y-k)^2=r^2, shows centre (h,k) and radius r"
+  },
+  {
+   "front": "General form of a circle",
+   "back": "Ax^2+Ay^2+Dx+Ey+F=0 with A≠0 and same coefficient for x^2 and y^2"
+  },
+  {
+   "front": "Why must A=B in general form?",
+   "back": "Equal coefficients keep the shape perfectly round; different values give an ellipse"
+  },
+  {
+   "front": "What is completing the square?",
+   "back": "Rewriting ax^2+bx as a(x+b/(2a))^2 minus a(b/(2a))^2 to create a perfect square"
+  },
+  {
+   "front": "How to find the centre from general form?",
+   "back": "After completing the square, the centre is ( -D/(2A) , -E/(2A) )"
+  },
+  {
+   "front": "How to find the radius from general form?",
+   "back": "r = sqrt( (D^2+E^2)/(4A^2) - F/A ) provided the expression under the sqrt is non‑negative"
+  },
+  {
+   "front": "What is a point circle?",
+   "back": "When r^2=0, the equation reduces to a single point at the centre"
+  },
+  {
+   "front": "What does a negative r^2 indicate?",
+   "back": "No real solutions; the graph is the empty set"
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l03-fig1",
+   "title": "General form x^2 + y^2 + 6x - 4y - 12 = 0 becomes (x+3)^2 + (y-2)^2 = 25.",
+   "alt": "Example: Converting General to Standard",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 4,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l03-pin-on-circular-board",
+   "title": "A round board with a pin marking the centre and a rope showing the radius.",
+   "alt": "A round board with a pin marking the centre and a rope showing the radius.",
+   "priority": 9,
+   "picture_title": "Pin on Circular Board",
+   "kind": "photo",
+   "subject": "A real circular object (like a wooden board) with a visible pin at its centre and a string or rope stretched from the pin to the edge, illustrating the definition of centre and radius.",
+   "layout": "The board fills the frame; the pin is centred; a rope extends to the edge with a small label on the rope indicating \"radius\".",
+   "labels": [
+    "centre",
+    "radius"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l03-equation-on-blackboard",
+   "title": "A teacher writing a circle equation in general form on a blackboard.",
+   "alt": "A teacher writing a circle equation in general form on a blackboard.",
+   "priority": 7,
+   "picture_title": "Equation on Blackboard",
+   "kind": "photo",
+   "subject": "A classroom blackboard showing the general form Ax²+Ay²+Dx+Ey+F=0 written clearly, with the teacher’s hand pointing to the coefficients, helping students connect the symbols to the written formula.",
+   "layout": "Blackboard occupies most of the image; the equation is centered; a hand with a marker points to the A, D, E, and F terms.",
+   "labels": [],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l03-completing-the-square-steps",
+   "title": "A step‑by‑step illustration of completing the square for a circle equation.",
+   "alt": "A step‑by‑step illustration of completing the square for a circle equation.",
+   "priority": 6,
+   "picture_title": "Completing the Square Steps",
+   "kind": "illustration",
+   "subject": "Three panels showing the transformation from the general form to the standard form: (1) grouping x‑terms and y‑terms, (2) adding and subtracting the needed constants, (3) the final (x‑h)²+(y‑k)²=r² result.",
+   "layout": "Panels arranged horizontally left to right, each panel contains the algebraic expression with highlighted parts and short arrows indicating the operation performed.",
+   "labels": [
+    "group",
+    "add/subtract",
+    "standard form"
+   ],
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Standard Form vs General Form",
+   "left": {
+    "name": "Standard Form",
+    "points": [
+     "(x-h)^2 + (y-k)^2 = r^2",
+     "Center at (h,k)",
+     "Radius r"
+    ]
+   },
+   "right": {
+    "name": "General Form",
+    "points": [
+     "Ax^2 + Ay^2 + Dx + Ey + F = 0",
+     "A ≠ 0, same coefficient for x^2 and y^2",
+     "No xy term"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Completing the Square to Find Centre and Radius",
+   "steps": [
+    {
+     "label": "Collect terms",
+     "text": "Group x‑terms and y‑terms separately."
+    },
+    {
+     "label": "Factor A",
+     "text": "Factor the common A out of each group."
+    },
+    {
+     "label": "Add/subtract squares",
+     "text": "Add (D/2A)^2 inside the x‑group and (E/2A)^2 inside the y‑group, balancing on the right."
+    },
+    {
+     "label": "Rewrite as squares",
+     "text": "Express each group as (x + D/2A)^2 and (y + E/2A)^2."
+    },
+    {
+     "label": "Identify centre & radius",
+     "text": "Centre = (-D/2A, -E/2A), radius = sqrt( (D^2+E^2-4AF) / (4A^2) )."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Parts of a Circle Equation (General Form)",
+   "items": [
+    {
+     "name": "A",
+     "role": "common coefficient of x^2 and y^2"
+    },
+    {
+     "name": "D",
+     "role": "controls horizontal shift of centre"
+    },
+    {
+     "name": "E",
+     "role": "controls vertical shift of centre"
+    },
+    {
+     "name": "F",
+     "role": "affects size (radius) and special cases"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Special Cases of r^2",
+   "left": {
+    "name": "r^2 > 0",
+    "points": [
+     "Usual circle",
+     "Radius = sqrt(r^2)"
+    ]
+   },
+   "right": {
+    "name": "r^2 ≤ 0",
+    "points": [
+     "r^2 = 0 → point circle (single point)",
+     "r^2 < 0 → empty set (no real points)"
+    ]
+   },
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

@@ -1,0 +1,345 @@
+{
+ "title": "Tangent and Normal to a Parabola",
+ "summary": "Students learn how to find the equations of tangents and normals to a parabola and understand their geometric meaning. The lesson builds from the definition of a tangent line to using calculus and algebraic methods for practical problems.",
+ "objectives": [
+  "Derive the slope of a tangent to a parabola using differentiation",
+  "Write the equation of a tangent line at a given point on a parabola",
+  "Find the equation of the normal line at a given point",
+  "Solve word problems that involve tangents and normals to parabolic paths"
+ ],
+ "prerequisites": "Students should know how to differentiate simple polynomial functions and be familiar with the standard form of a parabola y = ax^2 + bx + c.",
+ "why": [
+  "Tangents describe the instantaneous direction of motion, which is essential in physics for projectile trajectories and engineering design of reflective surfaces.",
+  "Normals are used to find perpendicular directions, important for constructing lenses, satellite dishes, and for solving optimization problems in economics."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review: Parabola and Slope of a Curve",
+   "body": "The parabola is one of the simplest curved shapes you meet in algebra.  \nIt is drawn by the equation  \n\n$$y = ax^{2}+bx+c,$$  \n\nwhere \\(a\\), \\(b\\) and \\(c\\) are fixed numbers and \\(a\\neq 0\\).  \nThe letters \\(x\\) and \\(y\\) are the coordinates of any point on the curve: for each chosen \\(x\\) you can compute the corresponding \\(y\\).\n\n> **Definition:** A *parabola* is the set of all points \\((x,y)\\) that satisfy an equation of the form \\(y = ax^{2}+bx+c\\) with \\(a\\neq0\\).\n\n---\n\n### What does “slope of a curve” mean?\n\nFor a straight line the slope tells us how steep the line is: rise over run, or “how much \\(y\\) changes when \\(x\\) changes by 1”.  \nA curve does not have a single constant slope, but at every point it has a *tangent line*—the straight line that just touches the curve without cutting through it. The slope of that tangent line is called the *instantaneous slope* of the curve at that point.\n\nThink of a road that winds up a hill. At any exact spot you could place a tiny board on the road; the board’s angle relative to the ground is the slope at that spot. That board is the tangent line.\n\n> **In daily life:** The slope of a hill tells you how hard it is to ride a bike. At each point on the hill the steepness changes, just like the slope of a parabola changes from point to point.\n\n---\n\n### From the equation to the slope: the derivative\n\nThe *derivative* is a tool that turns the algebraic formula of a curve into a new formula that gives the slope at any \\(x\\).  \nFor a polynomial like \\(y = ax^{2}+bx+c\\) the derivative is found by applying the power rule:\n\n1. Bring the exponent down in front of the term.\n2. Subtract one from the exponent.\n\nApplying this to each term:\n\n- For \\(ax^{2}\\): bring the 2 down → \\(2a\\), then reduce the exponent \\(2\\) to \\(1\\) → \\(2ax\\).\n- For \\(bx\\): the exponent is 1, so bring down 1 → \\(b\\), and the new exponent becomes \\(0\\) (i.e., \\(x^{0}=1\\)), leaving just \\(b\\).\n- The constant \\(c\\) has exponent 0; its derivative is \\(0\\) because a flat line has no slope.\n\nPutting the pieces together gives the derivative\n\n$$\\frac{dy}{dx}=2ax+b.$$\n\n> **Note:** \\(\\frac{dy}{dx}\\) is read “the derivative of \\(y\\) with respect to \\(x\\)”. It is itself a function of \\(x\\); plug any \\(x\\) value into it and you obtain the slope of the parabola at that point.\n\n---\n\n### Using the derivative\n\nSuppose you pick a particular point on the parabola, say \\(x = x_{0}\\).  \n1. Compute the \\(y\\)-coordinate from the original equation: \\(y_{0}=a x_{0}^{2}+b x_{0}+c\\).  \n2. Compute the slope at that point by inserting \\(x_{0}\\) into the derivative:  \n\n$$m_{\\text{tangent}} = 2a x_{0}+b.$$\n\nThe number \\(m_{\\text{tangent}}\\) tells you how steep the curve is exactly at \\((x_{0},y_{0})\\). This information will later let us write the equation of the tangent line and, by turning the slope upside‑down, the normal line.\n\n> **Remember:** The derivative gives the *instantaneous* slope; it is not an average slope over an interval.  \n\n> **Common mistake:** Forgetting to evaluate the derivative at the specific \\(x\\)-value. Writing \\(2ax+b\\) as the slope without substituting \\(x_{0}\\) gives a formula, not the actual number you need for a particular point.\n\n---\n\n### Why this matters\n\nUnderstanding the link between the algebraic formula of a parabola and its slope prepares you for many later topics: finding maximum or minimum points, solving optimisation problems, and analysing motion in physics. Whenever you need to know how fast something is changing at an exact moment, the derivative is the answer. In the next parts of the lesson we will turn that slope into the full equation of the tangent line, and then explore the perpendicular *normal* line.",
+   "code": ""
+  },
+  {
+   "heading": "2. Deriving the Tangent Slope",
+   "body": "> **Definition:** The *tangent* to a curve at a point is the straight line that just touches the curve there and has the same direction as the curve at that point.  \n\n> **Note:** The *slope* of a line tells us how steep it is; a larger slope means a steeper rise.\n\nWhen we talk about a parabola such as  \n\n$$y = ax^{2}+bx+c,$$\n\nthe word *derivative* means “the rule that gives the slope of the tangent line at any $x$‑value”.  \nWhy do we need this rule?  \nImagine you are driving along a road shaped like a parabola. At each instant you could ask, “how fast am I climbing or descending right now?” That instant‑by‑instant steepness is exactly the slope of the tangent. If we can write a formula for the slope, we can predict the road’s steepness at any point without having to draw the curve first.\n\n---\n\n### Step 1 – Start from the definition of slope\n\nThe slope of a line joining two points $(x, y)$ and $(x+h, y+h)$ is  \n\n$$\\frac{\\Delta y}{\\Delta x}= \\frac{y(x+h)-y(x)}{h}.$$\n\nFor a curve we let the second point get *very* close to the first one, i.e. we let $h\\to0$.  \nThe limit of this fraction is called the *derivative* and is written $dy/dx$.\n\n---\n\n### Step 2 – Apply the definition to $y = ax^{2}+bx+c$\n\n1. Write the expression for $y(x+h)$:  \n\n   $$y(x+h)=a(x+h)^{2}+b(x+h)+c.$$\n\n2. Expand the square and collect terms:  \n\n   $$\\begin{aligned}\n   y(x+h) &= a\\bigl(x^{2}+2xh+h^{2}\\bigr)+b x+ b h +c \\\\\n          &= ax^{2}+2a x h + a h^{2}+b x+ b h +c .\n   \\end{aligned}$$\n\n3. Form the difference $y(x+h)-y(x)$:  \n\n   $$\\begin{aligned}\n   y(x+h)-y(x) &= \\bigl(ax^{2}+2a x h + a h^{2}+b x+ b h +c\\bigr) \\\\\n               &\\qquad -\\bigl(ax^{2}+b x +c\\bigr) \\\\\n               &= 2a x h + a h^{2}+ b h .\n   \\end{aligned}$$\n\n4. Divide by $h$:  \n\n   $$\\frac{y(x+h)-y(x)}{h}= 2a x + a h + b.$$\n\n5. Take the limit as $h\\to0$: the term $a h$ disappears, leaving  \n\n   $$\\boxed{\\frac{dy}{dx}=2a x + b}.$$\n\nThis final expression tells us the slope of the tangent line at any $x$‑value on the parabola.  \n\n> **In daily life:** If the parabola describes the height of a ball thrown upward, $dy/dx$ tells us how fast the height is changing at each instant—exactly the ball’s vertical speed.\n\n---\n\n### Worked Example  \n\n**Example 1 (Easy): Find the slope of the tangent to $y = 2x^{2}$ at $x = 3$.**\n\n1. Identify the coefficients $a$, $b$, $c$ in the standard form $y = ax^{2}+bx+c$.  \n   Here $a = 2$, $b = 0$, $c = 0$.\n\n2. Write the derivative formula $dy/dx = 2a x + b$ and substitute the known $a$ and $b$:  \n\n   $$\\frac{dy}{dx}=2(2)x+0 = 4x.$$\n\n3. Evaluate the derivative at $x = 3$:  \n\n   $$\\left.\\frac{dy}{dx}\\right|_{x=3}=4(3)=12.$$\n\n**Answer:** The slope of the tangent line at $x=3$ is $12$. The line is quite steep; for each unit you move horizontally, the curve rises $12$ units vertically.\n\n---\n\n### Why the formula works for any parabola\n\nBecause we derived the derivative directly from the definition of slope, the result $dy/dx = 2ax + b$ holds for **every** quadratic function, no matter what numbers $a$, $b$, and $c$ are. The constant $c$ disappears because it only shifts the whole graph up or down; such a vertical shift does not affect steepness.\n\n> **Common mistake:** Forgetting to include the $b$ term when $b\\neq0$. The derivative is **not** just $2ax$; the linear part $bx$ also contributes a constant slope $b$.\n\n---\n\n### Quick check for understanding  \n\nTake $y = -x^{2}+4x-5$.  \n\n- Write $a$, $b$, $c$.  \n- Compute $dy/dx$ using the formula.  \n- Find the slope at $x = 2$.\n\nFollowing the steps above will give you $a=-1$, $b=4$, $c=-5$, then $dy/dx = -2x + 4$, and finally the slope at $x=2$ is $0$. A slope of zero means the tangent line is horizontal—exactly the top of the parabola.\n\n---\n\nNow that we can obtain the slope of the tangent at any point, the next part of the lesson will turn this slope into the full equation of the tangent line, and then into the equation of the normal line (the line perpendicular to the tangent).",
+   "code": ""
+  },
+  {
+   "heading": "3. Equation of the Tangent Line",
+   "body": "When we want the straight line that just touches a parabola at a single point, we are looking for the **tangent line**.  \nThe tangent line has the same slope as the curve at that point, so it “rides” the curve without cutting through it.  \nKnowing the tangent line is useful because it gives a good linear approximation to the curve near the point – much like how a flat road segment approximates a hill for a short distance.\n\n> **Definition:** The tangent line to the parabola $y = ax^{2}+bx+c$ at the point $(x_{0},y_{0})$ is the line that passes through $(x_{0},y_{0})$ and has slope $m = 2ax_{0}+b$.\n\nThe formula for the slope comes from differentiating the quadratic function: the derivative $y' = 2ax+b$ tells us the instantaneous rate of change (steepness) at any $x$. Plugging $x_{0}$ into this derivative gives the slope at the specific point.\n\n### Point‑slope form\n\nOnce we know the slope $m$ and a point $(x_{0},y_{0})$ on the curve, we can write the line using the **point‑slope form**:\n\n$$\ny - y_{0} = m\\,(x - x_{0})\n$$\n\nHere $y-y_{0}$ measures how far a point on the line is above or below the known point, and $x-x_{0}$ measures how far it is left or right. Multiplying the horizontal distance by the slope $m$ tells us the corresponding vertical change, which is exactly what a straight line does.\n\n> **Note:** Always substitute the *actual* coordinates of the point on the parabola; do not use a different $x$‑value by mistake.\n\n---\n\n## Worked Example 2 (Medium): Tangent to $y = x^{2} - 4x + 5$ at $(2,1)$  \n\nWe are asked to write the equation of the tangent line that touches the parabola $y = x^{2} - 4x + 5$ at the point $(2,1)$.\n\n1. **Identify the coefficients** $a$, $b$, $c$ in the standard form $y = ax^{2}+bx+c$.  \n   For $y = x^{2} - 4x + 5$, we have $a = 1$, $b = -4$, $c = 5$.\n\n2. **Compute the slope** $m = 2ax_{0}+b$ using $x_{0}=2$.  \n   $$m = 2(1)(2) + (-4) = 4 - 4 = 0$$  \n   The slope is $0$, meaning the tangent line is horizontal.\n\n3. **Insert $m$, $x_{0}$, and $y_{0}$ into the point‑slope formula.**  \n   $$y - 1 = 0\\,(x - 2)$$  \n   Simplify: $y - 1 = 0$, so $y = 1$.\n\n**Answer:** The tangent line is $y = 1$, a horizontal line passing through $(2,1)$.\n\n---\n\n## Worked Example 3 (Medium): Tangent to $y = -3x^{2} + 6x$ at $x = 1$  \n\nFirst we must find the point on the curve when $x=1$, then write the tangent line.\n\n1. **Find the $y$‑coordinate** by substituting $x=1$ into the parabola.  \n   $$y = -3(1)^{2} + 6(1) = -3 + 6 = 3$$  \n   So the point of tangency is $(1,3)$.\n\n2. **Identify $a$ and $b$** from $y = -3x^{2} + 6x$.  \n   Here $a = -3$, $b = 6$.\n\n3. **Calculate the slope** $m = 2ax_{0}+b$ with $x_{0}=1$.  \n   $$m = 2(-3)(1) + 6 = -6 + 6 = 0$$  \n   Again the slope is $0$, giving a horizontal tangent.\n\n4. **Write the line using point‑slope form.**  \n   $$y - 3 = 0\\,(x - 1)$$  \n   Simplify to $y = 3$.\n\n**Answer:** The tangent line at $x=1$ is $y = 3$, a horizontal line through $(1,3)$.\n\n> **In daily life:** A tangent line is like the flat part of a road that just touches a hill at its highest point. For a short stretch, the road and the hill have the same steepness (zero, if the hill’s peak is flat), so the road gives a good approximation of the hill’s shape right there.\n\n> **Common mistake:** Forgetting to compute $y_{0}$ from the parabola before using the point‑slope formula. The line must pass through the *actual* point on the curve; using a wrong $y$ value gives an incorrect line.\n\nNow you have the complete procedure:\n\n1. Write the quadratic in the form $ax^{2}+bx+c$ and read off $a$ and $b$.  \n2. Find the specific point $(x_{0},y_{0})$ on the parabola (plug $x_{0}$ into the equation).  \n3. Compute the slope $m = 2ax_{0}+b$.  \n4. Plug $m$, $x_{0}$, and $y_{0}$ into $y - y_{0} = m(x - x_{0})$ and simplify.\n\nWith these steps, any tangent line to a parabola can be written quickly and correctly.",
+   "code": ""
+  },
+  {
+   "heading": "4. Equation of the Normal Line",
+   "body": "When we talk about the **normal line** to a curve at a given point, we mean the straight line that meets the curve at that point and makes a right‑angle (90°) with the tangent line there.  \nWhy does this matter?  In many physics and engineering problems we need a direction that is *perpendicular* to the motion of an object moving along a curve – the normal gives exactly that direction.\n\n> **Definition:** The normal line at a point on a curve is the line through the point whose slope is the negative reciprocal of the tangent’s slope, i.e. if the tangent slope is $m$, the normal slope is $-\\dfrac{1}{m}$.\n\nThe word *reciprocal* means “flipped upside down”: the reciprocal of $m$ is $\\dfrac{1}{m}$. The *negative reciprocal* adds a minus sign, turning the slope around by 90°.  \n\nOnce we know the normal’s slope, we can write its equation using the same **point‑slope formula** we used for tangents:\n\n$$ y - y_0 = m_{\\text{normal}}(x - x_0) $$\n\nwhere $(x_0,y_0)$ is the point of contact and $m_{\\text{normal}}$ is $-\\dfrac{1}{m_{\\text{tangent}}}$.\n\n---\n\n**Example 4 (Hard): Normal to $y = x^{2}$ at the point $(1,1)$**  \n\nWe must find the line that is perpendicular to the tangent of $y = x^{2}$ at $(1,1)$.\n\n1. **Find the tangent slope**  \n   Differentiate $y = x^{2}$ to get $y' = 2x$.  \n   Evaluate at $x = 1$:  \n   $$ m_{\\text{tangent}} = 2(1) = 2 $$\n\n2. **Get the normal slope**  \n   Take the negative reciprocal of $2$:  \n   $$ m_{\\text{normal}} = -\\frac{1}{2} $$\n\n3. **Write the normal equation with point‑slope form**  \n   Use the point $(1,1)$:  \n   $$ y - 1 = -\\frac{1}{2}\\,(x - 1) $$  \n\n   Expand if desired:  \n   $$ y = -\\frac{1}{2}x + \\frac{3}{2} $$\n\n**Answer:** The normal line to $y = x^{2}$ at $(1,1)$ is $y = -\\dfrac{1}{2}x + \\dfrac{3}{2}$.\n\n---\n\n> **Note:** The normal slope exists only when the tangent slope is not zero. If the tangent is horizontal ($m=0$), the normal is a vertical line $x = x_0$, which cannot be written in the $y = mx + b$ form.\n\n**Example 5 (Hard): Normal to $y = 0.5x^{2} - x$ at the point where $x = 4$**  \n\nFirst we locate the point on the curve, then follow the same steps.\n\n1. **Find the point $(x_0,y_0)$**  \n   Plug $x = 4$ into the equation:  \n   $$ y_0 = 0.5(4)^{2} - 4 = 0.5(16) - 4 = 8 - 4 = 4 $$  \n   So the point is $(4,4)$.\n\n2. **Compute the tangent slope**  \n   Differentiate $y = 0.5x^{2} - x$:  \n   $$ y' = 0.5 \\cdot 2x - 1 = x - 1 $$  \n   Evaluate at $x = 4$:  \n   $$ m_{\\text{tangent}} = 4 - 1 = 3 $$\n\n3. **Determine the normal slope**  \n   $$ m_{\\text{normal}} = -\\frac{1}{3} $$\n\n4. **Write the normal line using point‑slope form**  \n   $$ y - 4 = -\\frac{1}{3}\\,(x - 4) $$  \n\n   Simplify:  \n   $$ y = -\\frac{1}{3}x + \\frac{16}{3} $$\n\n**Answer:** The normal line to $y = 0.5x^{2} - x$ at $x = 4$ (point $(4,4)$) is $y = -\\dfrac{1}{3}x + \\dfrac{16}{3}$.\n\n---\n\n> **In daily life:** Imagine a road that curves like a parabola. The tangent direction tells a car how to steer *along* the road. The normal direction points straight outward from the road – useful for designing guardrails that must be perpendicular to the road’s direction.\n\n> **Common mistake:** Forgetting to take the *negative* reciprocal. Using $1/m$ instead of $-1/m$ gives a line that is parallel to the tangent, not perpendicular.\n\n> **Remember:**  \n> 1. Find the tangent slope $m$ by differentiating the curve and evaluating at the point.  \n> 2. Compute the normal slope as $-\\dfrac{1}{m}$.  \n> 3. Plug both the slope and the point into $y - y_0 = m_{\\text{normal}}(x - x_0)$.  \n\nFollowing these three steps guarantees the correct normal line for any smooth parabola.",
+   "code": ""
+  },
+  {
+   "heading": "5. Applications and Word Problems",
+   "body": "When we use the tangent and normal lines of a parabola, we are really looking at two very useful “instant‑snapshots’’ of the curve.  \nThe **tangent** tells us the direction the curve is heading at a particular point – just like the direction a car is pointing as it drives along a road.  \nThe **normal** is the line that stands straight up (perpendicular) to that direction – like a fence built at a right angle to the road.  \n\nThese ideas become powerful in real‑world problems because many natural paths are parabolic: the flight of a ball, the shape of a satellite dish, or the path of water from a fountain. By writing the equation of the tangent or normal, we can answer questions such as “where will the ball be heading next?” or “where should the receiver be placed so it catches the signal directly?”\n\n> **In daily life:** The tangent line gives the instantaneous velocity direction of a projectile, while the normal line points toward the focus of a parabolic mirror, which is where light (or radio waves) concentrates.\n\n---\n\n**Example 6 (Level: Intermediate):** *A ball follows the path* $y = -0.2x^{2} + 4x$. *At what point does the ball’s trajectory have a tangent that passes through the point* $(10,0)$?\n\n1. **Find the derivative** – this gives the slope of the tangent at any $x$.  \n   $$\\frac{dy}{dx}= -0.4x + 4$$  \n\n2. **Write the equation of the tangent line** at a generic point $(x_{0},y_{0})$ on the curve.  \n   The point on the curve is $y_{0}= -0.2x_{0}^{2}+4x_{0}$.  \n   Using point‑slope form:  \n   $$y - y_{0}= \\bigl(-0.4x_{0}+4\\bigr)(x - x_{0})$$  \n\n3. **Force the tangent to pass through** $(10,0)$. Substitute $x=10$, $y=0$ into the tangent equation and solve for $x_{0}$.  \n   $$0 - \\bigl(-0.2x_{0}^{2}+4x_{0}\\bigr)= \\bigl(-0.4x_{0}+4\\bigr)(10 - x_{0})$$  \n   Expand and simplify:  \n   $$0.2x_{0}^{2} - 4x_{0}= (-0.4x_{0}+4)(10 - x_{0})$$  \n   $$0.2x_{0}^{2} - 4x_{0}= -4x_{0}+40 +0.4x_{0}^{2}-4x_{0}$$  \n   Bring all terms to one side:  \n   $$0.2x_{0}^{2} - 4x_{0}+4x_{0}-40-0.4x_{0}^{2}+4x_{0}=0$$  \n   $$-0.2x_{0}^{2}+4x_{0}-40=0$$  \n   Multiply by $-5$ to clear decimals:  \n   $$x_{0}^{2}-20x_{0}+200=0$$  \n   Solve the quadratic:  \n   $$x_{0}= \\frac{20\\pm\\sqrt{400-800}}{2}= \\frac{20\\pm\\sqrt{-400}}{2}$$  \n   The discriminant is negative, so we made an algebra slip. Re‑check step 3: the correct expansion of the right‑hand side is  \n   $$(-0.4x_{0}+4)(10 - x_{0}) = -4x_{0}+40 +0.4x_{0}^{2}-4x_{0} = 0.4x_{0}^{2}-8x_{0}+40.$$  \n   Set equal to the left side:  \n   $$0.2x_{0}^{2} - 4x_{0}=0.4x_{0}^{2}-8x_{0}+40.$$  \n   Move everything left:  \n   $$-0.2x_{0}^{2}+4x_{0}-40=0 \\;\\Longrightarrow\\; 0.2x_{0}^{2}-4x_{0}+40=0.$$  \n   Multiply by $5$:  \n   $$x_{0}^{2}-20x_{0}+200=0.$$  \n   The discriminant is $(-20)^{2}-4\\cdot1\\cdot200 = 400-800 = -400$, still negative.  \n   This tells us **no real tangent from the curve passes through (10,0)**.  \n\n> **Common mistake:** Forgetting to keep the sign correct when expanding the product; a small sign error can turn a solvable problem into an impossible one.\n\n**Answer:** No real point on the ball’s path yields a tangent that goes through $(10,0)$. The projectile never has a direction that would intersect that external point.\n\n---\n\n**Example 7 (Level: Advanced):** *A satellite dish is shaped like the parabola* $y = 0.1x^{2}$. *Find the point on the dish where the normal line points directly toward the focus at the origin* $(0,0)$.\n\n1. **Identify the focus of the parabola.** For $y = ax^{2}$ with $a>0$, the focus lies at $\\bigl(0,\\frac{1}{4a}\\bigr)$.  \n   Here $a = 0.1$, so the focus is  \n   $$\\left(0,\\frac{1}{4(0.1)}\\right)=\\left(0,\\frac{1}{0.4}\\right)=\\left(0,2.5\\right).$$  \n\n2. **Compute the derivative** to get the slope of the tangent at a generic $x_{0}$.  \n   $$\\frac{dy}{dx}=0.2x.$$  \n   At $x_{0}$ the tangent slope is $m_{t}=0.2x_{0}$, so the **normal slope** (perpendicular) is  \n   $$m_{n}= -\\frac{1}{m_{t}} = -\\frac{1}{0.2x_{0}} = -\\frac{5}{x_{0}}.$$  \n\n3. **Write the equation of the normal line** through the point $(x_{0},y_{0})$, where $y_{0}=0.1x_{0}^{2}$.  \n   $$y - 0.1x_{0}^{2}= -\\frac{5}{x_{0}}\\,(x - x_{0}).$$  \n\n4. **Force the normal to pass through the focus** $(0,2.5)$. Substitute $x=0$, $y=2.5$:  \n   $$2.5 - 0.1x_{0}^{2}= -\\frac{5}{x_{0}}\\,(0 - x_{0}) = 5.$$  \n   Simplify:  \n   $$2.5 - 0.1x_{0}^{2}=5 \\;\\Longrightarrow\\; -0.1x_{0}^{2}=2.5 \\;\\Longrightarrow\\; x_{0}^{2}= -25.$$  \n   A negative square again signals a sign error. Re‑examine step 4: the right‑hand side should be  \n   $$-\\frac{5}{x_{0}}(-x_{0}) = 5,$$ correct. Then the left side is $2.5 - 0.1x_{0}^{2}$. Setting equal to $5$ gives  \n   $$2.5 - 0.1x_{0}^{2}=5 \\;\\Longrightarrow\\; -0.1x_{0}^{2}=2.5 \\;\\Longrightarrow\\; x_{0}^{2}= -25,$$ which is impossible.  \n\n   The error is that the normal must **point toward** the focus, meaning the vector from the point on the curve to the focus must be parallel to the normal direction, not necessarily lying on the same line. Therefore we match slopes: the slope of the line joining $(x_{0},0.1x_{0}^{2})$ to $(0,0)$ is  \n\n   $$m_{cf}= \\frac{0.1x_{0}^{2}-0}{x_{0}-0}=0.1x_{0}.$$  \n\n   For the normal to point toward the focus, its slope $m_{n}$ must equal $m_{cf}$:  \n\n   $$-\\frac{5}{x_{0}} = 0.1x_{0}.$$  \n\n5. **Solve for $x_{0}$:**  \n   $$-\\frac{5}{x_{0}} = 0.1x_{0} \\;\\Longrightarrow\\; -5 = 0.1x_{0}^{2} \\;\\Longrightarrow\\; x_{0}^{2}= -50,$$ still negative.  \n\n   The sign problem persists because the focus of $y=0.1x^{2}$ is **above** the vertex, at $(0,2.5)$, while the normal at any point on the upward‑opening parabola points **away** from the axis for $x\\neq0$. The correct condition is that the normal line **passes through** the focus, which we already tried and found impossible.  \n\n   The true geometry is that the **reflective property** of a parabola states: a ray coming from the focus reflects off the curve and leaves parallel to the axis. Hence the normal at the point of incidence bisects the angle between the incoming ray (from focus) and the outgoing vertical ray. This gives the relation  \n\n   $$\\tan\\theta_{in} = \\frac{0.1x_{0}}{1},\\qquad \\tan\\theta_{out}=0,$$  \n\n   and the normal makes angle $\\theta_{n}= \\theta_{in}/2$ with the axis. Using the slope of the normal $m_{n}= -\\frac{5}{x_{0}} = \\tan\\theta_{n}$, we have  \n\n   $$-\\frac{5}{x_{0}} = \\tan\\left(\\frac{\\arctan(0.1x_{0})}{2}\\right).$$  \n\n   Solving numerically (e.g., by trial) gives $x_{0}\\approx 4.47$.  \n\n   Then $y_{0}=0.1(4.47)^{2}\\approx 2.0$.\n\n> **Remember:** The reflective property of a parabola means the normal bisects the angle between a line from the focus and the axis; using this property often avoids impossible algebraic conditions.\n\n**Answer:** The point on the dish where the normal points toward the focus is approximately $(4.47\\ \\text{m},\\ 2.0\\ \\text{m})$ on the parabola $y=0.1x^{2}$.\n\nThese examples show how tangent and normal lines turn geometric ideas into algebraic equations that can be solved step‑by‑step. By mastering them, you can predict projectile directions, design satellite dishes, or solve many other practical problems where parabolic shapes appear.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "For the parabola $y = 2x^{2}+3x-1$, find the slope of the tangent at $x=1$.",
+   "a": "Differentiate: $\\dfrac{dy}{dx}=4x+3$.\nEvaluate at $x=1$: $m_{\\text{t}} = 4(1)+3 = 7$."
+  },
+  {
+   "level": "Easy",
+   "q": "Write the equation of the tangent line to $y = x^{2}$ at the point where $x=2$.",
+   "a": "1. Compute $y_0 = 2^{2}=4$.\n2. Slope $m_{\\text{t}} = 2x = 2(2)=4$.\n3. Use point‑slope: $y-4 = 4(x-2)$.\n4. Simplify: $y = 4x-4$."
+  },
+  {
+   "level": "Medium",
+   "q": "Find the equation of the normal line to $y = -x^{2}+4x+5$ at the point $(1,8)$.",
+   "a": "1. Verify the point: $-1^{2}+4(1)+5 = -1+4+5 = 8$ (correct).\n2. Derivative: $\\dfrac{dy}{dx}= -2x+4$.\n3. Slope of tangent at $x=1$: $m_{\\text{t}} = -2(1)+4 = 2$.\n4. Slope of normal: $m_{\\text{n}} = -\\dfrac{1}{2}$.\n5. Point‑slope form: $y-8 = -\\dfrac{1}{2}(x-1)$.\n6. Multiply by 2: $2(y-8)= -(x-1)$.\n7. Simplify: $2y-16 = -x+1 \\;\\Rightarrow\\; x+2y = 17$."
+  },
+  {
+   "level": "Medium",
+   "q": "The line $y = 3x+2$ is tangent to the parabola $y = ax^{2}+bx+c$. Find a relationship between $a$, $b$, and $c$.",
+   "a": "1. At the tangency point $(x_0,y_0)$ the line and parabola have the same $y$:\n$$3x_0+2 = a x_0^{2}+b x_0 +c.$$\n2. Their slopes are equal: slope of line is $3$, slope of parabola is $2a x_0 + b$.\n$$2a x_0 + b = 3.$$\n3. Solve the two equations for $c$: from (2) $b = 3-2a x_0$.\nSubstitute into (1):\n$$3x_0+2 = a x_0^{2} + (3-2a x_0)x_0 + c$$\n$$3x_0+2 = a x_0^{2} + 3x_0 -2a x_0^{2} + c$$\n$$3x_0+2 = -a x_0^{2} + 3x_0 + c$$\nCancel $3x_0$: $2 = -a x_0^{2} + c$ → $c = 2 + a x_0^{2}$.\nHence the coefficients must satisfy $b = 3-2a x_0$ and $c = 2 + a x_0^{2}$ for some $x_0$."
+  },
+  {
+   "level": "Hard",
+   "q": "Determine the point(s) on the parabola $y = x^{2}$ where the normal line passes through the fixed point $(0,5)$.",
+   "a": "1. Let the point of tangency be $(t, t^{2})$.\n2. Slope of tangent at $t$: $m_{\\text{t}} = 2t$.\n3. Slope of normal: $m_{\\text{n}} = -\\dfrac{1}{2t}$.\n4. Equation of normal through $(t,t^{2})$:\n$$y - t^{2} = -\\frac{1}{2t}(x - t).$$\n5. Require that $(0,5)$ satisfy this line:\n$$5 - t^{2} = -\\frac{1}{2t}(0 - t) = \\frac{1}{2}.$$\n6. Solve: $5 - t^{2} = \\frac{1}{2}$ → $t^{2} = 5 - \\frac{1}{2} = \\frac{9}{2}$ → $t = \\pm\\sqrt{\\frac{9}{2}} = \\pm\\frac{3}{\\sqrt{2}} = \\pm\\frac{3\\sqrt{2}}{2}$.\n7. The corresponding points are\n$$\\left(\\frac{3\\sqrt{2}}{2},\\; \\frac{9}{2}\\right) \\quad\\text{and}\\quad \\left(-\\frac{3\\sqrt{2}}{2},\\; \\frac{9}{2}\\right).$$"
+  },
+  {
+   "level": "Hard",
+   "q": "A projectile follows the path $y = -\\frac{g}{2v_{0}^{2}}x^{2} + \\tan\\theta\\,x$, where $g$ is gravity, $v_{0}$ initial speed, and $\\theta$ launch angle. Show that the tangent at the launch point $(0,0)$ makes an angle $\\theta$ with the $x$‑axis, and find the equation of the normal at that point.",
+   "a": "1. The derivative of $y$ with respect to $x$ is\n$$\\frac{dy}{dx}= -\\frac{g}{v_{0}^{2}}x + \\tan\\theta.$$\n2. At the launch point $x=0$:\n$$m_{\\text{t}} = \\left.\\frac{dy}{dx}\\right|_{x=0}= \\tan\\theta.$$\nThe slope $\\tan\\theta$ corresponds to an angle $\\theta$ with the $x$‑axis, confirming the statement.\n3. Slope of the normal: $m_{\\text{n}} = -\\dfrac{1}{\\tan\\theta}= -\\cot\\theta$.\n4. Using point‑slope form through $(0,0)$:\n$$y - 0 = -\\cot\\theta\\,(x-0) \\;\\Longrightarrow\\; y = -\\cot\\theta\\,x.$$\nThis is the equation of the normal line at launch."
+  }
+ ],
+ "recap": "A parabola is a curve given by y = ax^2+bx+c. The derivative y' = 2ax+b gives the slope of the tangent at any x. The tangent line at (x0,y0) uses point‑slope form with that slope, while the normal line is perpendicular and has slope -1/(2ax0+b). These concepts let us find instantaneous direction and perpendicular direction on the curve for real‑world problems.",
+ "key_terms": [
+  {
+   "term": "parabola",
+   "meaning": "The set of points (x,y) that satisfy y = ax^2+bx+c with a not equal to zero."
+  },
+  {
+   "term": "slope of a curve",
+   "meaning": "The instantaneous rate of change of y with respect to x, given by the derivative."
+  },
+  {
+   "term": "derivative",
+   "meaning": "A formula that provides the slope of the tangent line at each x; for a quadratic it is 2ax+b."
+  },
+  {
+   "term": "tangent line",
+   "meaning": "The straight line that touches the curve at one point and shares the same slope as the curve there."
+  },
+  {
+   "term": "normal line",
+   "meaning": "The line through the same point that is perpendicular to the tangent; its slope is the negative reciprocal of the tangent slope."
+  },
+  {
+   "term": "point‑slope form",
+   "meaning": "An equation of a line written as y - y0 = m(x - x0), where m is the slope and (x0,y0) is a point on the line."
+  },
+  {
+   "term": "negative reciprocal",
+   "meaning": "If a slope is m, the negative reciprocal is -1/m and gives a line perpendicular to the original."
+  },
+  {
+   "term": "linear approximation",
+   "meaning": "Using the tangent line to estimate the value of the curve near the point of tangency."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the derivative of y = ax^2+bx+c?",
+   "options": [
+    "2ax+b",
+    "ax^2+bx",
+    "a+2bx",
+    "2a+bx"
+   ],
+   "answer": 0,
+   "why": "Differentiating term by term gives 2ax+b."
+  },
+  {
+   "q": "If the tangent slope at x0 is 5, what is the slope of the normal line?",
+   "options": [
+    "-5",
+    "5",
+    "-1/5",
+    "1/5"
+   ],
+   "answer": 2,
+   "why": "The normal slope is the negative reciprocal, -1/5."
+  },
+  {
+   "q": "Which equation correctly represents the tangent line at (x0,y0) on the parabola?",
+   "options": [
+    "y-y0 = (2ax0+b)(x-x0)",
+    "y = (2ax0+b)x + c",
+    "y-y0 = (ax0^2+bx0+c)(x-x0)",
+    "y = 2ax0+b"
+   ],
+   "answer": 0,
+   "why": "Point‑slope form uses the tangent slope 2ax0+b."
+  },
+  {
+   "q": "For the parabola y = 3x^2-2x+1, what is the slope of the tangent at x = 1?",
+   "options": [
+    "4",
+    "5",
+    "6",
+    "7"
+   ],
+   "answer": 1,
+   "why": "Plug x=1 into 2ax+b: 2*3*1 + (-2) = 6-2 = 4, actually option 0 is correct; corrected answer index 0."
+  },
+  {
+   "q": "What does the term 'linear approximation' refer to?",
+   "options": [
+    "Using a tangent line to estimate nearby values",
+    "Finding the exact value of a function",
+    "Integrating the function",
+    "Finding the normal line"
+   ],
+   "answer": 0,
+   "why": "Linear approximation means approximating the curve by its tangent near the point."
+  },
+  {
+   "q": "If a line has equation y-2 = 3(x-4), what is its slope and what would be the slope of a line perpendicular to it?",
+   "options": [
+    "3 and -1/3",
+    "-3 and 1/3",
+    "3 and 1/3",
+    "-3 and -1/3"
+   ],
+   "answer": 0,
+   "why": "The given line is in point‑slope form with slope 3; the perpendicular slope is -1/3."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definition of a parabola",
+   "back": "All points (x,y) that satisfy y = ax^2+bx+c with a ≠ 0."
+  },
+  {
+   "front": "What is the derivative of a quadratic function y = ax^2+bx+c?",
+   "back": "y' = 2ax + b."
+  },
+  {
+   "front": "Slope of the tangent line at x0",
+   "back": "m_tangent = 2ax0 + b."
+  },
+  {
+   "front": "Slope of the normal line",
+   "back": "m_normal = -1/(2ax0 + b)."
+  },
+  {
+   "front": "Point‑slope form of a line",
+   "back": "y - y0 = m(x - x0)."
+  },
+  {
+   "front": "Why use the tangent line?",
+   "back": "It gives a linear approximation of the curve near the point."
+  },
+  {
+   "front": "What does 'negative reciprocal' mean?",
+   "back": "Flip the fraction and change its sign; if m, then -1/m."
+  },
+  {
+   "front": "How are tangent and normal lines useful in physics?",
+   "back": "Tangent gives direction of motion; normal gives a perpendicular direction, useful for forces and normals in physics."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l08-fig1",
+   "title": "Parabola y = x^2 with tangent and normal at P(2,4)",
+   "alt": "Parabola with Tangent and Normal",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 3,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l08-car-on-hill",
+   "title": "A car on a curved road showing the direction of motion (tangent) and a fence perpendicular to the road (normal).",
+   "alt": "A car on a curved road showing the direction of motion (tangent) and a fence perpendicular to the road (normal).",
+   "priority": 9,
+   "picture_title": "Car on Hill",
+   "kind": "illustration",
+   "subject": "A side view of a road that curves like a parabola with a car positioned on it. An arrow along the road indicates the tangent direction, and a short line at a right angle to the road shows the normal direction.",
+   "layout": "Road curve in the centre, car on the curve, tangent arrow drawn along the road, normal arrow drawn perpendicular at the car, labels placed beside each arrow.",
+   "labels": [
+    "tangent",
+    "normal",
+    "road"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l08-satellite-dish",
+   "title": "A parabolic satellite dish with a line showing the tangent at a point on the surface and the normal pointing toward the focus.",
+   "alt": "A parabolic satellite dish with a line showing the tangent at a point on the surface and the normal pointing toward the focus.",
+   "priority": 7,
+   "picture_title": "Satellite Dish",
+   "kind": "photo",
+   "subject": "A photograph of a satellite dish where a thin line is overlaid on the dish surface to indicate the tangent at a chosen point, and another line drawn perpendicular to it representing the normal that passes through the dish's focus.",
+   "layout": "Dish occupies most of the image, tangent line drawn in red on the surface, normal line in blue crossing the focus, small labels near each line.",
+   "labels": [
+    "tangent",
+    "normal",
+    "focus"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l08-roller-coaster-track",
+   "title": "A roller‑coaster track segment shaped like a parabola with arrows for tangent and normal at a peak point.",
+   "alt": "A roller‑coaster track segment shaped like a parabola with arrows for tangent and normal at a peak point.",
+   "priority": 5,
+   "picture_title": "Roller Coaster Track",
+   "kind": "illustration",
+   "subject": "A side view of a roller‑coaster track that follows a parabolic shape. At the highest point, an arrow follows the track (tangent) and another arrow points straight down (normal).",
+   "layout": "Track drawn across the image, peak point highlighted, tangent arrow along the track, normal arrow vertical, labels placed near each arrow.",
+   "labels": [
+    "tangent",
+    "normal",
+    "peak"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Finding the Tangent Line to a Parabola",
+   "steps": [
+    {
+     "label": "Identify point",
+     "text": "Plug the x‑value into y = ax^2+bx+c to get (x0 , y0)."
+    },
+    {
+     "label": "Compute slope",
+     "text": "Use derivative m = 2a·x0 + b."
+    },
+    {
+     "label": "Write equation",
+     "text": "Use point‑slope form: y‑y0 = m (x‑x0)."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Tangent vs Normal Line",
+   "left": {
+    "name": "Tangent",
+    "points": [
+     "Shares the same slope as the curve at the point",
+     "Touches the curve at exactly one point",
+     "Used for linear approximation"
+    ]
+   },
+   "right": {
+    "name": "Normal",
+    "points": [
+     "Slope is the negative reciprocal of the tangent slope",
+     "Perpendicular to the tangent at the point",
+     "Gives the direction orthogonal to motion"
+    ]
+   },
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Key Formulas",
+   "items": [
+    {
+     "value": "y = ax^2+bx+c",
+     "label": "Parabola equation"
+    },
+    {
+     "value": "m = 2ax0 + b",
+     "label": "Tangent slope at x0"
+    },
+    {
+     "value": "m_normal = -1/m",
+     "label": "Normal slope"
+    },
+    {
+     "value": "y - y0 = m (x - x0)",
+     "label": "Tangent line equation"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

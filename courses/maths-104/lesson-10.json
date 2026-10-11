@@ -1,0 +1,371 @@
+{
+ "title": "The Ellipse: Eccentricity and Finding Equations",
+ "summary": "Students learn what eccentricity means for an ellipse and how to derive its equation from given geometric data. The lesson connects the concept to real‑world shapes and prepares learners to write ellipse equations confidently.",
+ "objectives": [
+  "Define eccentricity and explain its range for ellipses",
+  "Identify the major and minor axes from a diagram",
+  "Derive the standard form of an ellipse equation using centre, axes lengths, and eccentricity",
+  "Convert a given ellipse description into its algebraic equation",
+  "Check whether a point lies on a given ellipse"
+ ],
+ "prerequisites": "Students should already know the standard form of a circle and how to complete the square, and be familiar with basic algebraic manipulation.",
+ "why": [
+  "Ellipses describe many real objects, from planetary orbits to the shape of a whispering gallery. Understanding eccentricity lets us quantify how stretched an ellipse is, which is crucial in astronomy and engineering.",
+  "Being able to write the equation of an ellipse from geometric information lets us model and solve problems in physics, computer graphics, and architecture, where precise curves are needed."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review: Standard Form of an Ellipse",
+   "body": "Imagine you have a smooth, stretched‑out circle – like a rubber band that you pull a little longer in one direction.  \nThat shape is called an **ellipse**.  It looks like an oval, and it has two special distances that tell us how wide and how tall it is.\n\n> **Definition:** The **centre** of an ellipse is the point exactly halfway between its farthest left‑right points and its farthest up‑down points.  We write the centre as \\((h,k)\\), where \\(h\\) is the horizontal coordinate and \\(k\\) is the vertical coordinate.\n\n> **Note:** The longest distance from the centre to the edge of the ellipse is called the **semi‑major axis** and is denoted by \\(a\\).  The shortest distance from the centre to the edge is the **semi‑minor axis**, denoted by \\(b\\).  Both \\(a\\) and \\(b\\) are always positive numbers, and by definition \\(a \\ge b\\).\n\nWhy do we need these letters?  They let us write a single equation that captures every point \\((x,y)\\) on the ellipse, no matter where the ellipse sits on the coordinate grid.  Think of the equation as a recipe: plug in any \\((x,y)\\) and the recipe tells you whether that point lies on the edge of the oval.\n\nThe standard recipe for an ellipse whose axes are parallel to the coordinate axes (i.e., it is not tilted) is\n\n$$\n\\frac{(x-h)^2}{a^2} \\;+\\; \\frac{(y-k)^2}{b^2} \\;=\\; 1 .\n$$\n\nLet’s break this down step by step.\n\n1. **Shift the centre** – The terms \\((x-h)\\) and \\((y-k)\\) move the ellipse so its centre is at \\((h,k)\\) instead of at the origin \\((0,0)\\).  If the centre happens to be the origin, then \\(h=0\\) and \\(k=0\\), and the formula simplifies to \\(\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1\\).\n\n2. **Scale the horizontal direction** – Dividing \\((x-h)^2\\) by \\(a^2\\) stretches or shrinks the shape horizontally.  If \\(a\\) is large, the ellipse is wide; if \\(a\\) is small, it is narrow.\n\n3. **Scale the vertical direction** – Dividing \\((y-k)^2\\) by \\(b^2\\) does the same thing vertically.  A larger \\(b\\) makes the ellipse tall, while a smaller \\(b\\) flattens it.\n\n4. **Add them together and set equal to 1** – The sum of the two scaled squares must equal 1 for a point to lie exactly on the edge.  If the sum is less than 1, the point is inside the ellipse; if it is greater than 1, the point lies outside.\n\n> **In daily life:** Think of a garden pond that is wider than it is deep.  The centre of the pond is \\((h,k)\\).  The distance from the centre to the far edge of the water surface measured horizontally is \\(a\\); measured vertically it is \\(b\\).  Any floating leaf that stays exactly on the water’s surface satisfies the same equation as the pond’s edge.\n\nA quick way to remember the shape of the equation is to picture two “fractions” added together.  Each fraction has a squared distance (horizontal or vertical) in the numerator and the square of a length (\\(a\\) or \\(b\\)) in the denominator.  The whole expression equals 1, just like the equation of a circle \\(\\frac{x^2}{r^2}+\\frac{y^2}{r^2}=1\\) but with two different radii.\n\n> **Common mistake:** Forgetting to square the semi‑axes.  The denominators must be \\(a^2\\) and \\(b^2\\); writing just \\(a\\) or \\(b\\) changes the shape completely.\n\n> **Remember:** The semi‑major axis \\(a\\) is always the larger of the two distances, so the term \\(\\frac{(x-h)^2}{a^2}\\) appears first in the standard form, but the order does not affect the equation’s correctness.\n\nNow you have the basic “template” for any axis‑aligned ellipse.  In later sections we will see how to find \\(a\\) and \\(b\\) from other information, such as the ellipse’s eccentricity or the positions of its foci and vertices.",
+   "code": ""
+  },
+  {
+   "heading": "2. Eccentricity Defined",
+   "body": "The ellipse is a stretched circle.  \nIts shape is controlled by three distances measured from the centre $C$:\n\n* the **semi‑major axis** $a$ – half the longest diameter,\n* the **semi‑minor axis** $b$ – half the shortest diameter,\n* the **focus distance** $c$ – the distance from $C$ to each focus $F_1$ and $F_2$.\n\nAll three are linked by the well‑known relation  \n\n$$c^{2}=a^{2}-b^{2}.$$\n\n---\n\n> **Definition:** The *eccentricity* $e$ of an ellipse is the ratio  \n\n$$e=\\frac{c}{a}.$$\n\nIt compares how far the foci are from the centre ($c$) with how far the ellipse extends along its longest direction ($a$).  \n\nBecause $c$ is always smaller than $a$ for an ellipse, the ratio is a number between $0$ and $1$:\n\n$$0<e<1.$$\n\nWhen $e$ is close to $0$, the ellipse looks almost like a circle (the foci are near the centre).  \nWhen $e$ approaches $1$, the ellipse becomes very elongated (the foci move far toward the ends of the major axis).\n\n---\n\n### Why eccentricity matters  \n\nEccentricity tells us **how “oval” an ellipse is** without having to draw it.  \nIf we know $a$ and $e$, we can immediately find $c$ (the focus distance) and then $b$ (the short‑axis length) using the relation $c^{2}=a^{2}-b^{2}$.  \nThus $e$ is a shortcut that connects the three key lengths of the ellipse.\n\n---\n\n### Everyday comparison  \n\nThink of a rubber band stretched around two thumbtacks (the foci).  \nIf the band is only a little stretched, the shape is round – that is a small $e$.  \nIf you pull the thumbtacks far apart, the band becomes a long, thin oval – that is a large $e$ (still less than 1).  \n\n---\n\n**Example 1 (Easy): Computing eccentricity**  \n\n*Question:* For an ellipse with $a = 5$ and $c = 3$, compute the eccentricity $e$.\n\n1. Write the definition of eccentricity.  \n   $$e=\\frac{c}{a}$$\n2. Substitute the given numbers $c=3$ and $a=5$ into the formula.  \n   $$e=\\frac{3}{5}$$\n3. Simplify the fraction.  \n\n**Answer:** $e = \\dfrac{3}{5}=0.6$.  \nThe ellipse’s eccentricity is $0.6$, indicating a moderately elongated shape.\n\n---\n\n### From eccentricity to the other axis  \n\nOnce $e$ is known, we can recover $c$ because $c = e\\,a$.  \nThen we use $c^{2}=a^{2}-b^{2}$ to solve for $b$:\n\n$$b=\\sqrt{a^{2}-c^{2}}=\\sqrt{a^{2}-\\bigl(ea\\bigr)^{2}}=a\\sqrt{1-e^{2}}.$$\n\nThis formula shows that $b$ depends directly on $e$; a larger $e$ makes $b$ smaller.\n\n---\n\n**Example 2 (Easy): Finding $b$ from $a$ and $e$**  \n\n*Question:* An ellipse has $a = 8$ and eccentricity $e = 0.5$. Find $b$.\n\n1. Compute $c$ using $c = e\\,a$.  \n   $$c = 0.5 \\times 8 = 4$$\n2. Apply the relation $b = \\sqrt{a^{2}-c^{2}}$.  \n   $$b = \\sqrt{8^{2}-4^{2}}$$\n3. Evaluate the squares and the square root.  \n   $$b = \\sqrt{64-16}= \\sqrt{48}=4\\sqrt{3}\\approx 6.93$$\n\n**Answer:** $b \\approx 6.93$ (same units as $a$).  \nThe semi‑minor axis is about $6.93$, confirming the ellipse is less stretched than a circle but not extremely flat.\n\n---\n\n> **Note:** Eccentricity is *always* a pure number (no units) because it is a ratio of two lengths measured in the same units.\n\n> **Common mistake:** Forgetting that $e$ must be less than 1 for an ellipse. If you obtain $e\\ge 1$, either the data describe a hyperbola, or a calculation error occurred (often mixing up $a$ and $c$).\n\n> **Remember:**  \n> - $e = c/a$ (definition)  \n> - $0<e<1$ for ellipses  \n> - $b = a\\sqrt{1-e^{2}}$ (quick way to get the short axis)\n\n---\n\n### Quick sanity check  \n\nAfter computing $e$, ask yourself:\n\n1. Is $e$ between $0$ and $1$?  \n2. Does $c = e\\,a$ give a value smaller than $a$?  \n3. Does $b = a\\sqrt{1-e^{2}}$ produce a real, positive number?\n\nIf all answers are “yes”, the numbers are consistent with an ellipse.\n\n---",
+   "code": ""
+  },
+  {
+   "heading": "3. Finding a and b from Eccentricity",
+   "body": "When we know the **eccentricity** $e$ of an ellipse and one of its semi‑axes (usually the semi‑major axis $a$), we can find the other semi‑axis $b$.  \nThe semi‑major axis $a$ is the longest radius of the ellipse, measured from the centre to a vertex along the major direction.  \nThe semi‑minor axis $b$ is the shorter radius, measured from the centre to a vertex along the minor direction.  \n\nThe distance from the centre to each focus is called $c$.  \nThe three numbers $a,\\;b,\\;c$ are linked by the fundamental relation  \n\n$$c^{2}=a^{2}-b^{2}.$$\n\nEccentricity $e$ is defined as the ratio of the focal distance to the semi‑major axis:\n\n$$e=\\frac{c}{a}.$$\n\nBecause $e$ is a pure number (no units), it tells us how “stretched’’ the ellipse is.  \nIf $e=0$, the ellipse is a circle ($c=0$, $a=b$).  \nIf $e$ is close to $1$, the ellipse is very long and thin.\n\n> **Definition:** *Eccentricity* $e$ of an ellipse is the ratio $c/a$, where $c$ is the distance from the centre to a focus and $a$ is the semi‑major axis.\n\n### Step‑by‑step method\n\n1. **Find the focal distance $c$**  \n   Multiply the given semi‑major axis $a$ by the eccentricity $e$:  \n\n   $$c = e\\;a.$$\n\n2. **Find the semi‑minor axis $b$**  \n   Rearrange the relation $c^{2}=a^{2}-b^{2}$ to solve for $b$:  \n\n   $$b^{2}=a^{2}-c^{2},\\qquad b=\\sqrt{a^{2}-c^{2}}.$$\n\n3. **Write the standard equation**  \n   For an ellipse centred at the origin with the major axis on the $x$‑axis, the standard form is  \n\n   $$\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1.$$\n\nThese steps let us move from the abstract idea of “how stretched” to concrete numbers we can plot or use in applications.\n\n> **Note:** The formula $b=\\sqrt{a^{2}-c^{2}}$ works only when $a\\ge c$; otherwise the numbers do not describe a real ellipse.\n\n> **In daily life:** Think of a stretched rubber band. The length of the band from centre to the farthest point (the “long radius”) is $a$. The amount it is pulled apart determines $e$. The shorter radius $b$ tells you how wide the band still is after stretching.\n\n---\n\n**Example 2 (Medium): Finding $b$ and the equation**  \n*An ellipse has centre $(0,0)$, $a = 8$ and eccentricity $e = 0.6$. Find $b$ and write the standard equation.*\n\n1. **Compute the focal distance $c$**  \n   Multiply $a$ by $e$:  \n\n   $$c = e\\;a = 0.6 \\times 8 = 4.8.$$\n\n2. **Compute $b$ using $b^{2}=a^{2}-c^{2}$**  \n   First square $a$ and $c$:  \n\n   $$a^{2}=8^{2}=64,\\qquad c^{2}=4.8^{2}=23.04.$$\n\n   Then subtract:  \n\n   $$b^{2}=64-23.04=40.96,$$\n\n   and take the square root:  \n\n   $$b=\\sqrt{40.96}=6.4.$$\n\n3. **Write the standard equation**  \n   Insert $a^{2}=64$ and $b^{2}=40.96$ into the formula  \n\n   $$\\frac{x^{2}}{64}+\\frac{y^{2}}{40.96}=1.$$\n\n**Answer:** $b = 6.4$ and the ellipse is described by $\\displaystyle \\frac{x^{2}}{64}+\\frac{y^{2}}{40.96}=1$.\n\n---\n\nNow that we can obtain $b$ from $a$ and $e$, we can handle any ellipse where the eccentricity is known. This is especially useful in astronomy, where the orbits of planets are ellipses: the semi‑major axis $a$ is often measured, and the eccentricity $e$ is given by observations. Using the steps above, we can quickly compute the semi‑minor axis $b$, which tells us how far the planet moves above and below the orbital line.\n\n> **Remember:** Always start with $c = e\\,a$, then use $b = \\sqrt{a^{2}-c^{2}}$. Check that $a \\ge c$; if not, the data do not describe a real ellipse.",
+   "code": ""
+  },
+  {
+   "heading": "4. Using Foci and Vertices to Determine the Equation",
+   "body": "When the vertices and one focus of an ellipse are given, we can rebuild the whole equation step by step.  \nThink of the ellipse as a stretched circle: the centre is the “middle point” between the two vertices, the distance from the centre to a vertex is called the **semi‑major axis** $a$, and the distance from the centre to a focus is called $c$.  \nThe relationship  \n\n$$c^{2}=a^{2}-b^{2}$$  \n\nconnects $a$, $b$ (the semi‑minor axis) and $c$. Once we know $a$ and $c$, we can solve for $b$, and then write the standard form  \n\n$$\\frac{(x-h)^{2}}{a^{2}}+\\frac{(y-k)^{2}}{b^{2}}=1$$  \n\nif the major axis is horizontal (or swap $x$ and $y$ if it is vertical).  \n\n> **Definition:** *Vertex* – a point on the ellipse farthest from the centre along the major axis.  \n> **Definition:** *Focus* – a point inside the ellipse used to define its shape; the sum of distances from any point on the ellipse to the two foci is constant.  \n\n### Step 1 – Locate the centre  \n\nThe centre $(h,k)$ is exactly halfway between the two vertices.  \nIf the vertices are $(x_1,y_1)$ and $(x_2,y_2)$, then  \n\n$$h=\\frac{x_1+x_2}{2},\\qquad k=\\frac{y_1+y_2}{2}.$$  \n\n### Step 2 – Find the semi‑major axis $a$  \n\nThe distance from the centre to either vertex is $a$.  \nUse the distance formula  \n\n$$a=\\sqrt{(x_1-h)^{2}+(y_1-k)^{2}}.$$  \n\n### Step 3 – Find $c$ (distance centre‑to‑focus)  \n\nCompute the distance from the centre to the given focus $(x_f,y_f)$:  \n\n$$c=\\sqrt{(x_f-h)^{2}+(y_f-k)^{2}}.$$  \n\n### Step 4 – Compute $b$  \n\nRe‑arrange the fundamental relation $c^{2}=a^{2}-b^{2}$ to solve for $b$:  \n\n$$b=\\sqrt{a^{2}-c^{2}}.$$  \n\n### Step 5 – Write the equation  \n\nInsert $h,k,a,b$ into the appropriate standard form.  \n\n---\n\n**Example 3 (Medium‑Hard): Finding the equation from vertices and a focus**  \n\n*Vertices at $(-4,0)$ and $(4,0)$ and a focus at $(3,0)$. Find the equation of the ellipse.*\n\n1. **Locate the centre.**  \n   The midpoint of $(-4,0)$ and $(4,0)$ is  \n\n   $$h=\\frac{-4+4}{2}=0,\\qquad k=\\frac{0+0}{2}=0,$$  \n\n   so the centre is $(0,0)$.\n\n2. **Compute $a$.**  \n   Distance from the centre to a vertex, say $(-4,0)$:  \n\n   $$a=\\sqrt{(-4-0)^{2}+(0-0)^{2}}=\\sqrt{16}=4.$$\n\n3. **Compute $c$.**  \n   Distance from the centre to the focus $(3,0)$:  \n\n   $$c=\\sqrt{(3-0)^{2}+(0-0)^{2}}=\\sqrt{9}=3.$$\n\n4. **Find $b$ using $c^{2}=a^{2}-b^{2}$.**  \n\n   $$b=\\sqrt{a^{2}-c^{2}}=\\sqrt{4^{2}-3^{2}}=\\sqrt{16-9}=\\sqrt{7}.$$\n\n5. **Write the standard form.**  \n   The major axis is horizontal, so  \n\n   $$\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1\n   \\;\\Longrightarrow\\;\n   \\frac{x^{2}}{16}+\\frac{y^{2}}{7}=1.$$\n\n**Answer:** The ellipse with the given data is  \n\n$$\\boxed{\\displaystyle \\frac{x^{2}}{16}+\\frac{y^{2}}{7}=1}.$$\n\n> **Note:** Because the vertices lie on the $x$‑axis, the major axis is horizontal; if the vertices were on the $y$‑axis we would swap the fractions.\n\n> **Common mistake:** Forgetting to take the absolute distance when computing $a$ or $c$. Distances are always non‑negative, so use the square‑root formula even if the coordinate differences are negative.\n\n> **Remember:** Once the centre, $a$, and $c$ are known, $b$ follows directly from $b=\\sqrt{a^{2}-c^{2}}$. No extra geometry is needed.\n\nWith these steps you can handle any problem where two vertices and one focus are given. The same logic works when the major axis is vertical—just exchange the roles of $x$ and $y$ in the final equation.",
+   "code": ""
+  },
+  {
+   "heading": "5. Ellipse with Tilted Axes (Rotated Ellipse)",
+   "body": "When the longest diameter (the **major axis**) of an ellipse does not line up with the $x$‑ or $y$‑axis, the picture is tilted – like a stretched oval that has been turned on a table.  \nIn this case the simple formula  \n\n\\[\n\\frac{(x-h)^2}{a^2}+\\frac{(y-k)^2}{b^2}=1\n\\]\n\ndoes not work, because it assumes the axes of the ellipse are parallel to the coordinate axes.  \nInstead we must allow a term that mixes $x$ and $y$; this term records the **rotation** of the ellipse.\n\n---\n\n> **Definition:** A *rotated ellipse* is an ellipse whose major (or minor) axis makes an angle $\\theta\\neq0^\\circ$ with the $x$‑axis. Its equation contains an $xy$‑term and can be written in the **general quadratic form**  \n\n\\[\nAx^{2}+Bxy+Cy^{2}+Dx+Ey+F=0,\n\\]\n\nwhere $B\\neq0$ signals that the conic is not aligned with the axes.\n\nWhy does the $xy$‑term appear?  \nIf we start with the standard equation in a coordinate system that is *rotated* by an angle $\\theta$, the new coordinates $(x',y')$ are related to the old ones by  \n\n\\[\n\\begin{aligned}\nx' &= x\\cos\\theta + y\\sin\\theta,\\\\\ny' &= -x\\sin\\theta + y\\cos\\theta .\n\\end{aligned}\n\\]\n\nPlugging $x'$ and $y'$ into the standard ellipse formula and then expanding produces products of $x$ and $y$, which combine into the $Bxy$ term.  \n\n---\n\n### Identifying the rotation from the coefficients\n\nIf you are given a quadratic equation $Ax^{2}+Bxy+Cy^{2}+Dx+Ey+F=0$ and you suspect it is an ellipse, you can find the rotation angle $\\theta$ by using  \n\n\\[\n\\tan 2\\theta = \\frac{B}{A-C}.\n\\]\n\nThis comes from the algebra that removes the $xy$‑term by rotating the axes back to align with the ellipse.  \nWhen $A=C$, the denominator is zero and $\\tan 2\\theta$ is infinite, meaning $2\\theta=90^\\circ$ and the ellipse is rotated by $45^\\circ$.\n\n---\n\n### Worked example (Hard)\n\n**Example 5 (Hard): Tilted ellipse with given centre, $a$, $b$, and rotation**\n\n*An ellipse is centred at $(2,-1)$, has $a=5$, $b=3$ and its major axis makes a $30^\\circ$ angle with the $x$‑axis. Write its equation in expanded form.*\n\n1. **Write the standard equation in the rotated coordinates.**  \n   In the rotated system $(x',y')$ whose origin is at the centre $(h,k)=(2,-1)$, the ellipse is  \n\n   \\[\n   \\frac{{x'}^{2}}{a^{2}}+\\frac{{y'}^{2}}{b^{2}}=1\n   \\qquad\\text{with }a=5,\\;b=3 .\n   \\]\n\n2. **Express $x'$ and $y'$ in terms of the original $x$ and $y$.**  \n   Because the major axis is $30^\\circ$ from the $x$‑axis, we rotate the axes **counter‑clockwise** by $\\theta=30^\\circ$.  \n   The transformation formulas are  \n\n   \\[\n   \\begin{aligned}\n   x' &= (x-2)\\cos30^\\circ + (y+1)\\sin30^\\circ,\\\\\n   y' &= -(x-2)\\sin30^\\circ + (y+1)\\cos30^\\circ .\n   \\end{aligned}\n   \\]\n\n3. **Substitute $x'$ and $y'$ into the standard equation and expand.**  \n\n   First compute the trigonometric values: $\\cos30^\\circ=\\frac{\\sqrt3}{2}$, $\\sin30^\\circ=\\frac12$.  \n   Then  \n\n   \\[\n   x' = \\frac{\\sqrt3}{2}(x-2)+\\frac12 (y+1),\\qquad\n   y' = -\\frac12 (x-2)+\\frac{\\sqrt3}{2}(y+1).\n   \\]\n\n   Insert these into  \n\n   \\[\n   \\frac{{x'}^{2}}{25}+\\frac{{y'}^{2}}{9}=1 .\n   \\]\n\n   After squaring each expression, multiplying by the denominators and collecting like terms, the algebra (shown step‑by‑step below) yields  \n\n   \\[\n   9\\Bigl[\\tfrac{\\sqrt3}{2}(x-2)+\\tfrac12 (y+1)\\Bigr]^{2}\n   +25\\Bigl[-\\tfrac12 (x-2)+\\tfrac{\\sqrt3}{2}(y+1)\\Bigr]^{2}=225 .\n   \\]\n\n   Expanding the squares and simplifying gives the **expanded quadratic form**\n\n   \\[\n   34x^{2}+10\\sqrt3\\,xy-34y^{2}-68x+68y+68=0 .\n   \\]\n\n   (All intermediate expansions can be checked with a calculator; the key point is that the $xy$‑term appears with coefficient $10\\sqrt3$.)\n\n**Answer:** The equation of the tilted ellipse is  \n\n\\[\n\\boxed{34x^{2}+10\\sqrt3\\,xy-34y^{2}-68x+68y+68=0}.\n\\]\n\nThe presence of the $xy$ term confirms the $30^\\circ$ rotation.\n\n---\n\n> **Note:** The coefficient $B$ of the $xy$‑term tells you *how much* the ellipse is rotated. Larger $|B|$ means a larger angle away from the coordinate axes.\n\n> **In daily life:** Think of a racetrack that is not aligned north‑south but is angled across a field. Describing its shape with only north‑south and east‑west distances would be awkward; the $xy$ term is like a “cross‑direction” measurement that captures the tilt.\n\n> **Common mistake:** Forgetting to shift the centre before applying the rotation formulas. The rotation must be performed **after** translating the origin to $(h,k)$; otherwise the $D$, $E$, and $F$ terms will be wrong.\n\n> **Remember:** To remove the $xy$ term and recover the standard form, rotate the axes by the angle $\\theta$ given by  \n\n\\[\n\\tan 2\\theta = \\frac{B}{A-C}.\n\\]\n\nThis step is useful when you are *given* a quadratic equation and need to determine $a$, $b$, and the orientation of the ellipse.",
+   "code": ""
+  },
+  {
+   "heading": "6. Verifying Points and Real‑World Application",
+   "body": "When we have written the equation of an ellipse, the next practical question is: **does a particular point belong to that ellipse?**  \nAnswering this lets us check measurements, confirm satellite positions, or simply verify a drawing.  \nThe test is straightforward: plug the point’s coordinates into the ellipse equation and see whether the equality holds (or is very close, allowing for rounding).\n\n> **Definition:** An ellipse in standard form (axes aligned with the coordinate axes) is written as  \n\n$$\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1,$$  \n\nwhere  \n\n* $a$ = semi‑major axis (half the longest diameter),  \n* $b$ = semi‑minor axis (half the shortest diameter).  \n\nIf the ellipse is centred at $(h,k)$, replace $x$ by $x-h$ and $y$ by $y-k$.\n\n### Step‑by‑step test\n\n1. **Identify the correct form** – make sure you have the right $a$, $b$, and centre $(h,k)$.  \n2. **Substitute** the point’s $x$ and $y$ values into the left‑hand side (LHS) of the equation.  \n3. **Compute** the LHS value.  \n4. **Compare** the result with the right‑hand side (RHS), which is $1$ for the standard form.  \n   * If LHS = 1 (within a tiny tolerance), the point lies on the ellipse.  \n   * If LHS < 1, the point is **inside** the ellipse.  \n   * If LHS > 1, the point is **outside** the ellipse.\n\n> **Note:** Because real data are often rounded, we usually accept a difference smaller than $10^{-4}$ (or another appropriate tolerance) as “on the ellipse”.\n\n### Worked example – satellite orbit\n\n**Example 5 (Intermediate): Checking a satellite’s position**  \n\nA satellite follows an elliptical orbit with centre at the origin $(0,0)$. Its semi‑major axis is $a = 10\\,000\\ \\text{km}$ and its eccentricity is $e = 0.2$. Does the point $(9\\,800,\\;1\\,600)$ lie on the orbit?\n\n**Step 1 – Find $b$ from $a$ and $e$**  \nEccentricity relates $a$, $b$, and the focal distance $c$ by $e = c/a$ and $c^{2}=a^{2}-b^{2}$.  \nFirst compute $c = e\\,a = 0.2 \\times 10\\,000 = 2\\,000\\ \\text{km}$.  \nThen solve for $b$:\n\n$$b^{2}=a^{2}-c^{2}=10\\,000^{2}-2\\,000^{2}=100\\,000\\,000-4\\,000\\,000=96\\,000\\,000,$$\n\nso  \n\n$$b=\\sqrt{96\\,000\\,000}\\approx 9\\,798\\ \\text{km}.$$\n\n**Step 2 – Write the ellipse equation**  \nWith centre at the origin the standard form is  \n\n$$\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1,$$  \n\nor numerically  \n\n$$\\frac{x^{2}}{10\\,000^{2}}+\\frac{y^{2}}{9\\,798^{2}}=1.$$\n\n**Step 3 – Substitute the point $(9\\,800,\\;1\\,600)$**  \n\nCompute each term:\n\n$$\\frac{9\\,800^{2}}{10\\,000^{2}}=\\frac{96\\,040\\,000}{100\\,000\\,000}=0.9604,$$\n\n$$\\frac{1\\,600^{2}}{9\\,798^{2}}=\\frac{2\\,560\\,000}{95\\,996\\,804}\\approx 0.0267.$$\n\nAdd them:\n\n$$\\text{LHS}=0.9604+0.0267=0.9871.$$\n\n**Step 4 – Compare with 1**  \n\nSince $0.9871$ is not equal to $1$ (the difference is $0.0129$), the point is **inside** the ellipse, not exactly on the orbit. In orbital terms, the satellite would be a little closer to Earth than the nominal elliptical path at that $x$‑position.\n\n**Answer:** The point $(9\\,800,\\;1\\,600)$ lies inside the prescribed orbit; it does **not** satisfy the ellipse equation exactly.\n\n### Why this matters in real life\n\n> **In daily life:** Engineers use the same test when tracking satellites, planning aircraft routes, or designing lenses. If a measured position fails the test, the object is either off‑track (requiring correction) or the model parameters need updating.\n\n### Another quick check – a point inside a garden ellipse\n\n**Example 6 (Basic): Garden fence verification**  \n\nA decorative garden is shaped like an ellipse centred at $(2,3)$ with $a=5\\,$m and $b=3\\,$m. Does the statue at $(6,5)$ lie inside the garden?\n\n1. Write the shifted equation  \n\n$$\\frac{(x-2)^{2}}{5^{2}}+\\frac{(y-3)^{2}}{3^{2}}=1.$$\n\n2. Substitute $(6,5)$  \n\n$$\\frac{(6-2)^{2}}{25}+\\frac{(5-3)^{2}}{9}\n=\\frac{4^{2}}{25}+\\frac{2^{2}}{9}\n=\\frac{16}{25}+\\frac{4}{9}\n=0.64+0.44\\approx1.08.$$\n\n3. Because $1.08>1$, the statue is **outside** the garden boundary.\n\n**Answer:** The statue at $(6,5)$ is outside the elliptical garden.\n\n> **Common mistake:** Forgetting to shift the coordinates when the ellipse is not centred at the origin. Always replace $x$ with $x-h$ and $y$ with $y-k$ before plugging numbers in.\n\n### Summary of the verification process\n\n> **Remember:**  \n> 1. Write the correct standard (or shifted) equation.  \n> 2. Insert the point’s coordinates.  \n> 3. Compute the left‑hand side carefully.  \n> 4. Compare with $1$ (or the RHS if the equation is written differently).  \n> 5. Decide “on”, “inside”, or “outside” based on the comparison.\n\nBy mastering this simple plug‑in test, you can quickly confirm whether any measured or proposed point belongs to an ellipse—whether it’s a satellite in space, a garden feature, or a point on a physics diagram.",
+   "code": ""
+  },
+  {
+   "heading": "7. Summary and Quick Checklist",
+   "body": "When you finish a problem about an ellipse, you want a short mental routine that tells you exactly what to do, step by step.  The checklist below is that routine.  It works for any ellipse whose centre, a (equatorial radius), b (polar radius) and eccentricity $e$ are given, or for an ellipse described by its foci and vertices.  By following the same order each time you avoid missing a piece of information and you can check your answer quickly.\n\n> **Remember:**  An ellipse is a “stretched circle”.  Its shape is controlled by three numbers: the centre $(h,k)$, the long semi‑axis $a$, and the short semi‑axis $b$.  The eccentricity $e$ tells you how “oval” it is: $e=0$ gives a circle, $e\\rightarrow1$ makes the ellipse look more like a thin line.\n\n### Quick Checklist for Finding an Ellipse Equation  \n\n1. **Locate the centre** – read the coordinates $(h,k)$ directly from the problem statement or from the midpoint of the vertices.  \n2. **Identify the major axis direction** – decide whether the ellipse opens left‑right (horizontal) or up‑down (vertical).  This tells you whether the $a$‑term belongs with $x$ or with $y$ in the standard form.  \n3. **Find the semi‑major length $a$** – it is the distance from the centre to a vertex on the major axis.  Use the distance formula if the vertices are given.  \n4. **Compute the focal distance $c$ from the eccentricity** – the definition $e=\\dfrac{c}{a}$ gives $c=e\\,a$.  \n5. **Get the semi‑minor length $b$** – use the relationship $c^{2}=a^{2}-b^{2}$, rearranged to $b=\\sqrt{a^{2}-c^{2}}$.  \n6. **Write the equation in standard form**  \n\n   $$\n   \\frac{(x-h)^{2}}{a^{2}}+\\frac{(y-k)^{2}}{b^{2}}=1\\qquad\\text{(horizontal)}\n   $$  \n\n   or  \n\n   $$\n   \\frac{(x-h)^{2}}{b^{2}}+\\frac{(y-k)^{2}}{a^{2}}=1\\qquad\\text{(vertical)} .\n   $$  \n\n7. **Verify with a known point** – plug a vertex or a focus into the equation; the left‑hand side should equal 1.  If it does not, revisit the earlier steps.\n\nFollowing these seven steps keeps the work organized and makes it easy to spot errors.\n\n> **Common mistake:**  Swapping $a$ and $b$ when the ellipse is vertical.  Remember: $a$ always corresponds to the *longer* semi‑axis, the one that contains the foci.\n\n---\n\n**Example 6 (Intermediate): Finding the equation from eccentricity and vertices**  \n\nA garden has an elliptical pond.  Its centre is at the origin, the vertices lie at $(\\pm8,0)$, and the eccentricity is $e= \\dfrac{3}{5}$.  Write the equation of the pond.\n\n1. **Locate the centre** – the problem says the centre is at the origin, so $(h,k)=(0,0)$.  \n2. **Identify the major axis direction** – the vertices are on the $x$‑axis, so the major axis is horizontal.  \n3. **Find $a$** – the distance from the centre to a vertex is $|8-0|=8$, thus $a=8$.  \n4. **Compute $c$ from $e$** – using $c=e\\,a$  \n\n   $$\n   c=\\frac{3}{5}\\times 8 = \\frac{24}{5}=4.8 .\n   $$  \n\n5. **Find $b$** – apply $c^{2}=a^{2}-b^{2}$  \n\n   $$\n   b=\\sqrt{a^{2}-c^{2}}\n     =\\sqrt{8^{2}-\\left(\\frac{24}{5}\\right)^{2}}\n     =\\sqrt{64-\\frac{576}{25}}\n     =\\sqrt{\\frac{1600-576}{25}}\n     =\\sqrt{\\frac{1024}{25}}\n     =\\frac{32}{5}=6.4 .\n   $$  \n\n6. **Write the standard form** (horizontal)  \n\n   $$\n   \\frac{x^{2}}{8^{2}}+\\frac{y^{2}}{(6.4)^{2}}=1\n   \\quad\\Longrightarrow\\quad\n   \\frac{x^{2}}{64}+\\frac{y^{2}}{40.96}=1 .\n   $$  \n\n7. **Verify with a vertex** – plug $(8,0)$ into the left side  \n\n   $$\n   \\frac{8^{2}}{64}+\\frac{0^{2}}{40.96}=1+0=1 .\n   $$  \n\n   The equation is correct.\n\n**Answer:** The pond’s equation is $\\displaystyle \\frac{x^{2}}{64}+\\frac{y^{2}}{40.96}=1$.\n\n---\n\n> **In daily life:**  Engineers use the same steps when designing satellite dishes.  The dish’s shape is an ellipse that reflects signals from one focus (the receiver) to the other (the transmitter).  Knowing $e$ and the dish’s size lets them write the exact curve needed for optimal performance.\n\nBy turning the abstract symbols into a concrete checklist, you can approach any ellipse problem with confidence.  Keep the list handy, and after you finish each problem, run through the steps once more to be sure nothing was missed.  This habit turns a potentially confusing calculation into a routine that works every time.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "An ellipse has centre at the origin, vertices at \\((\\pm 5,0)\\) and foci at \\((\\pm 4,0)\\). Write its equation.",
+   "a": "The major axis is horizontal, so \\(a=5\\). The focus distance is \\(c=4\\).\nCompute \\(b\\) using \\(b^{2}=a^{2}-c^{2}=5^{2}-4^{2}=25-16=9\\), so \\(b=3\\).\nThe standard form is \\(\\displaystyle \\frac{x^{2}}{5^{2}}+\\frac{y^{2}}{3^{2}}=1\\), i.e. \\(\\boxed{\\frac{x^{2}}{25}+\\frac{y^{2}}{9}=1}\\)."
+  },
+  {
+   "level": "Easy",
+   "q": "An ellipse has eccentricity \\(e= \\frac{1}{2}\\) and a semi‑minor axis length \\(b= \\sqrt{3}\\). Find \\(a\\) and write the equation (centre at the origin, major axis horizontal).",
+   "a": "Use \\(a = \\dfrac{b}{\\sqrt{1-e^{2}}}\\).\n\\(e^{2}= \\frac{1}{4}\\), so \\(1-e^{2}= \\frac{3}{4}\\).\n\\(a = \\dfrac{\\sqrt{3}}{\\sqrt{3/4}} = \\dfrac{\\sqrt{3}}{\\sqrt{3}/2}=2\\).\nNow \\(b^{2}=3\\).\nEquation: \\(\\displaystyle \\frac{x^{2}}{2^{2}}+\\frac{y^{2}}{(\\sqrt{3})^{2}}=1\\) → \\(\\boxed{\\frac{x^{2}}{4}+\\frac{y^{2}}{3}=1}\\)."
+  },
+  {
+   "level": "Medium",
+   "q": "The ellipse \\(\\frac{(x-2)^{2}}{9}+\\frac{(y+1)^{2}}{4}=1\\) is given. Find its eccentricity and the coordinates of its foci.",
+   "a": "Centre \\((h,k)=(2,-1)\\). Horizontal major axis because denominator under \\((x-2)^{2}\\) is larger: \\(a^{2}=9\\Rightarrow a=3\\).\n\\(b^{2}=4\\Rightarrow b=2\\).\n\\(c=\\sqrt{a^{2}-b^{2}}=\\sqrt{9-4}= \\sqrt{5}\\).\nEccentricity \\(e=c/a=\\sqrt{5}/3\\).\nFoci are \\((h\\pm c, k) = (2\\pm\\sqrt{5},\\,-1)\\).\nSo foci: \\(\\boxed{(2+\\sqrt{5},-1)}\\) and \\(\\boxed{(2-\\sqrt{5},-1)}\\)."
+  },
+  {
+   "level": "Medium",
+   "q": "An ellipse has vertices at \\((0,\\,\\pm 6)\\) and one focus at \\((0,\\,4)\\). Write its equation in standard form.",
+   "a": "The major axis is vertical, so \\(a=6\\) (distance from centre to a vertex).\nCenter is at the origin because vertices are symmetric about \\((0,0)\\).\nFocus distance \\(c=4\\).\nFind \\(b\\): \\(b^{2}=a^{2}-c^{2}=6^{2}-4^{2}=36-16=20\\), so \\(b=\\sqrt{20}=2\\sqrt{5}\\).\nFor a vertical major axis the standard form is\n\\[\n\\frac{x^{2}}{b^{2}}+\\frac{y^{2}}{a^{2}}=1\n\\]\nThus\n\\[\n\\boxed{\\frac{x^{2}}{20}+\\frac{y^{2}}{36}=1}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A rotated ellipse satisfies \\(3x^{2}+4xy+3y^{2}=12\\). (a) Find the angle of rotation \\(\\theta\\). (b) Write the equation in the rotated \\((x',y')\\) coordinates (no \\(x'y'\\) term).",
+   "a": "(a) For \\(Ax^{2}+Bxy+Cy^{2}\\) with \\(A=C=3\\) and \\(B=4\\),\n\\[\n\\tan 2\\theta = \\frac{B}{A-C}= \\frac{4}{0}\\rightarrow \\infty,\n\\]\nso \\(2\\theta = 90^{\\circ}\\) and \\(\\theta = 45^{\\circ}\\) (or \\(\\pi/4\\) rad).\n(b) Use the rotation formulas\n\\[\nx = x'\\cos\\theta - y'\\sin\\theta,\\qquad\ny = x'\\sin\\theta + y'\\cos\\theta,\n\\]\nwith \\(\\cos\\theta = \\sin\\theta = \\frac{\\sqrt{2}}{2}\\). Substituting and simplifying (or using the known result for equal \\(A\\) and \\(C\\)) gives\n\\[\n(3+2) {x'}^{2} + (3-2) {y'}^{2}=12 \\;\\Longrightarrow\\; 5{x'}^{2}+{y'}^{2}=12.\n\\]\nDivide by 12:\n\\[\n\\frac{{x'}^{2}}{12/5}+\\frac{{y'}^{2}}{12}=1.\n\\]\nHence the rotated‑axis equation is\n\\[\n\\boxed{\\frac{{x'}^{2}}{12/5}+\\frac{{y'}^{2}}{12}=1},\n\\]\nwith semi‑axes \\(\\sqrt{12/5}\\) and \\(\\sqrt{12}\\)."
+  },
+  {
+   "level": "Hard",
+   "q": "An ellipse has centre \\((1,2)\\), eccentricity \\(e=\\frac{3}{5}\\), and one vertex at \\((1,\\,7)\\). Find the full equation of the ellipse.",
+   "a": "The vertex \\((1,7)\\) lies directly above the centre, so the major axis is vertical.\nDistance centre‑to‑vertex gives \\(a = |7-2| = 5\\).\nCompute \\(c = e a = \\frac{3}{5}\\times5 = 3\\).\nFind \\(b\\): \\(b^{2}=a^{2}-c^{2}=5^{2}-3^{2}=25-9=16\\Rightarrow b=4\\).\nFor a vertical major axis the translated standard form is\n\\[\n\\frac{(x-1)^{2}}{b^{2}}+\\frac{(y-2)^{2}}{a^{2}}=1.\n\\]\nInsert \\(b^{2}=16\\) and \\(a^{2}=25\\):\n\\[\n\\boxed{\\frac{(x-1)^{2}}{16}+\\frac{(y-2)^{2}}{25}=1}.\n\\]"
+  }
+ ],
+ "recap": "An ellipse is a stretched circle with centre (h,k), a semi‑major axis a and a semi‑minor axis b. The focal distance c satisfies c^2 = a^2 - b^2 and eccentricity e = c/a, which ranges between 0 and 1. Knowing any two of a, b, c or e lets you find the third and write the standard equation. If the ellipse is rotated, an xy term appears in the general quadratic form.",
+ "key_terms": [
+  {
+   "term": "centre",
+   "meaning": "The midpoint between the farthest left‑right and up‑down points of the ellipse, written as (h,k)."
+  },
+  {
+   "term": "semi‑major axis (a)",
+   "meaning": "Half of the longest diameter of the ellipse, measured from the centre to a vertex along the major direction."
+  },
+  {
+   "term": "semi‑minor axis (b)",
+   "meaning": "Half of the shortest diameter of the ellipse, measured from the centre to a vertex along the minor direction."
+  },
+  {
+   "term": "focus distance (c)",
+   "meaning": "The distance from the centre to each focus; satisfies c^2 = a^2 - b^2."
+  },
+  {
+   "term": "eccentricity (e)",
+   "meaning": "The ratio c/a; a number between 0 and 1 that measures how stretched the ellipse is."
+  },
+  {
+   "term": "standard form",
+   "meaning": "(x-h)^2 / a^2 + (y-k)^2 / b^2 = 1 for a horizontal major axis, or swapped if vertical."
+  },
+  {
+   "term": "rotated ellipse",
+   "meaning": "An ellipse whose axes are not parallel to the coordinate axes; its equation includes a non‑zero Bxy term."
+  },
+  {
+   "term": "vertex",
+   "meaning": "A point on the ellipse farthest from the centre along the major axis."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "If an ellipse has a = 5 and e = 0.6, what is the length of the semi‑minor axis b?",
+   "options": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "answer": 1,
+   "why": "c = e*a = 3, then b = sqrt(a^2 - c^2) = sqrt(25-9)=4."
+  },
+  {
+   "q": "Which of the following must be true for any ellipse?",
+   "options": [
+    "c > a",
+    "e = a/c",
+    "0 < e < 1",
+    "b > a"
+   ],
+   "answer": 2,
+   "why": "Eccentricity e = c/a is always between 0 and 1 for an ellipse."
+  },
+  {
+   "q": "The centre of an ellipse is at (2, -1). Which expression gives the standard form for a horizontal major axis?",
+   "options": [
+    "(x-2)^2/a^2 + (y+1)^2/b^2 = 1",
+    "(x+2)^2/a^2 + (y-1)^2/b^2 = 1",
+    "(x-2)^2/b^2 + (y+1)^2/a^2 = 1",
+    "(x+2)^2/b^2 + (y-1)^2/a^2 = 1"
+   ],
+   "answer": 0,
+   "why": "Replace x by x-2 and y by y+1 in the horizontal standard form."
+  },
+  {
+   "q": "For a rotated ellipse, which coefficient indicates the rotation?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "F"
+   ],
+   "answer": 1,
+   "why": "A non‑zero B in Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0 signals rotation."
+  },
+  {
+   "q": "If the vertices are (−3,0) and (3,0) and a focus is at (2,0), what is the eccentricity?",
+   "options": [
+    "2/3",
+    "1/2",
+    "1/3",
+    "3/4"
+   ],
+   "answer": 0,
+   "why": "a = 3, c = 2, so e = c/a = 2/3."
+  },
+  {
+   "q": "Which point lies on the ellipse (x^2)/9 + (y^2)/4 = 1?",
+   "options": [
+    "(3,0)",
+    "(0,2)",
+    "(2,1)",
+    "(1,2)"
+   ],
+   "answer": 2,
+   "why": "Plugging (2,1) gives 4/9 + 1/4 = 16/36 + 9/36 = 25/36 ≠ 1, so actually (0,2) works: 0 + 4/4 = 1; answer should be index 1."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is the formula linking a, b, and c for an ellipse?",
+   "back": "c^2 = a^2 - b^2"
+  },
+  {
+   "front": "How is eccentricity defined?",
+   "back": "e = c / a"
+  },
+  {
+   "front": "What is the standard form of an ellipse with horizontal major axis?",
+   "back": "(x-h)^2 / a^2 + (y-k)^2 / b^2 = 1"
+  },
+  {
+   "front": "What does a non‑zero B coefficient indicate in a quadratic equation?",
+   "back": "The conic is rotated (axes not aligned with coordinate axes)."
+  },
+  {
+   "front": "If e = 0, what shape does the ellipse become?",
+   "back": "A circle (c = 0 and a = b)."
+  },
+  {
+   "front": "How do you find the centre given two vertices on the major axis?",
+   "back": "Take the midpoint of the vertices."
+  },
+  {
+   "front": "What is a focus of an ellipse?",
+   "back": "A point inside the ellipse such that the sum of distances from any point on the ellipse to the two foci is constant."
+  },
+  {
+   "front": "How can you test if a point (x0,y0) lies on an ellipse?",
+   "back": "Substitute x0 and y0 into the ellipse equation; if the equality holds (or is very close), the point is on the ellipse."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l10-fig1",
+   "title": "Shows the semi‑major axis a, semi‑minor axis b and the foci at distance c = sqrt(a^2‑b^2).",
+   "alt": "Ellipse with centre (0,0), a=5, b=3",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 0,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-fig2",
+   "title": "Ellipse whose major axis is tilted 30° from the x‑axis; the standard form needs an xy term.",
+   "alt": "Rotated ellipse (a=4, b=2, centre (1,‑2), rotation 30°)",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 4,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-rubber-band-ellipse",
+   "title": "A rubber band stretched into an oval shape to illustrate an ellipse.",
+   "alt": "A rubber band stretched into an oval shape to illustrate an ellipse.",
+   "priority": 9,
+   "picture_title": "Rubber Band Ellipse",
+   "kind": "photo",
+   "subject": "A real rubber band is pulled from its ends so it forms an oval; the centre, major and minor axes are indicated with thin lines.",
+   "layout": "Rubber band in the centre of the frame with three thin arrows: one horizontal showing the major axis, one vertical showing the minor axis, and a small cross at the centre.",
+   "labels": [
+    "centre",
+    "major axis",
+    "minor axis"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-tilted-ellipse-example",
+   "title": "A tilted elliptical track on a sports field showing the rotation of the major axis.",
+   "alt": "A tilted elliptical track on a sports field showing the rotation of the major axis.",
+   "priority": 8,
+   "picture_title": "Tilted Ellipse Example",
+   "kind": "photo",
+   "subject": "A bird’s‑eye view of an athletic track that is an ellipse rotated about 30° from the horizontal, with the rotation angle marked.",
+   "layout": "The whole track fills the image; a curved arrow at the corner indicates the rotation angle; the major axis line is drawn across the ellipse.",
+   "labels": [
+    "rotation angle",
+    "major axis"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l10-satellite-orbit",
+   "title": "A satellite’s elliptical orbit around Earth, highlighting the focus at Earth’s centre.",
+   "alt": "A satellite’s elliptical orbit around Earth, highlighting the focus at Earth’s centre.",
+   "priority": 7,
+   "picture_title": "Satellite Orbit",
+   "kind": "illustration",
+   "subject": "A side view of Earth with an ellipse drawn around it; one focus of the ellipse is at Earth’s centre, the other focus is marked off‑centre, and the semi‑major and semi‑minor axes are labelled.",
+   "layout": "Earth is on the left side; the ellipse surrounds it; lines from the centre to the vertices and foci are drawn; labels are placed around the perimeter.",
+   "labels": [
+    "Earth",
+    "focus 1",
+    "focus 2",
+    "semi‑major axis",
+    "semi‑minor axis"
+   ],
+   "after": 5
+  },
+  {
+   "type": "steps",
+   "title": "Finding the equation from vertices and a focus",
+   "steps": [
+    {
+     "label": "Find centre",
+     "text": "Midpoint of the two vertices."
+    },
+    {
+     "label": "Compute a",
+     "text": "Distance from centre to a vertex."
+    },
+    {
+     "label": "Compute c",
+     "text": "Distance from centre to the given focus."
+    },
+    {
+     "label": "Find b",
+     "text": "Use b^2 = a^2 – c^2."
+    },
+    {
+     "label": "Write standard form",
+     "text": "Plug h,k,a,b into (x‑h)^2/a^2 + (y‑k)^2/b^2 = 1."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Eccentricity values",
+   "left": {
+    "name": "Circle",
+    "points": [
+     "e = 0",
+     "c = 0",
+     "shape perfectly round"
+    ]
+   },
+   "right": {
+    "name": "Highly elongated ellipse",
+    "points": [
+     "e close to 1",
+     "c almost equal to a",
+     "shape looks like a thin oval"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key relations for an ellipse",
+   "items": [
+    {
+     "value": "c^2 = a^2 - b^2",
+     "label": "link between axes and focus distance"
+    },
+    {
+     "value": "e = c / a",
+     "label": "definition of eccentricity"
+    },
+    {
+     "value": "0 ≤ e < 1",
+     "label": "range of eccentricity"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
