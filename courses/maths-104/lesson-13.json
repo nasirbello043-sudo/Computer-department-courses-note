@@ -1,0 +1,355 @@
+{
+ "title": "Parametric Equations: Meaning and Graphs",
+ "summary": "This lesson introduces parametric equations, shows how to plot them, and explains how to eliminate the parameter to obtain a Cartesian equation. Students will practice converting between forms and interpreting the resulting curves.",
+ "objectives": [
+  "Define a parametric equation and identify its components",
+  "Plot points from a parametric pair and sketch the resulting curve",
+  "Eliminate the parameter to find the Cartesian equation",
+  "Interpret the shape of the curve from both parametric and Cartesian forms",
+  "Apply parametric equations to simple motion problems"
+ ],
+ "prerequisites": "Students should be comfortable with algebraic manipulation, solving equations, and basic graphing of functions.",
+ "why": [
+  "Parametric equations let us describe curves that are difficult or impossible to write as a single y = f(x) function, such as circles or loops. This flexibility is essential in physics, engineering, and computer graphics.",
+  "In real life, parametric forms model the motion of objects (position as a function of time), the design of gears, and the animation of paths in video games, making them a practical tool beyond pure mathematics."
+ ],
+ "sections": [
+  {
+   "heading": "1. What is a Parametric Equation?",
+   "body": "A parametric equation is a way of describing a curve by using a third variable, usually called the **parameter** and denoted by $t$.  \nInstead of writing a single equation that directly links $x$ and $y$, we write two separate equations  \n\n$$\nx = f(t),\\qquad y = g(t)\n$$  \n\nwhere the same parameter $t$ appears in both.  \nFor each value of $t$ we obtain a pair $(x,y)$, so as $t$ varies we trace out a whole set of points – the curve.\n\n> **Definition:** A *parametric representation* of a curve consists of two functions $x=f(t)$ and $y=g(t)$ that assign an $x$‑coordinate and a $y$‑coordinate to each value of the parameter $t$.\n\nWhy do we use a parameter?  \nThink of a road map. The road itself is a line on the map, but a driver follows it by moving forward step by step. The driver’s *position* at any moment can be described by the distance travelled so far, say $t$ kilometres. The map tells us that after $t$ kilometres the driver will be at a certain east‑west coordinate $x$ and a north‑south coordinate $y$. In the same way, the parameter $t$ records the “progress” along the curve, while $f(t)$ and $g(t)$ tell us where we are in the $x$‑ and $y$‑directions at that progress.\n\nEvery new word is introduced carefully:\n\n* **Parameter** – a variable that we let run through a range of numbers; it is not one of the coordinates of the plane but a helper that generates them.  \n* **Function** – a rule that assigns exactly one output to each input. Here $f$ and $g$ are functions of $t$.  \n* **Coordinate** – a number that tells us a position along an axis; $x$ is the horizontal coordinate, $y$ the vertical one.\n\nBy separating $x$ and $y$ into two functions we gain flexibility. Some curves are difficult or impossible to write as a single equation $y = h(x)$. For example, a circle of radius $r$ centred at the origin satisfies $x^{2}+y^{2}=r^{2}$, but solving for $y$ gives $y = \\pm\\sqrt{r^{2}-x^{2}}$, which splits the circle into two separate pieces (the upper and lower halves). Using a parameter we can describe the whole circle in one simple pair:\n\n$$\nx = r\\cos t,\\qquad y = r\\sin t,\\qquad 0\\le t<2\\pi .\n$$\n\nHere $t$ measures the angle swept from the positive $x$‑axis; as $t$ runs from $0$ to $2\\pi$, the point $(x,y)$ moves once around the circle.\n\n> **In daily life:** Imagine a clock hand. The angle $\\theta$ (our parameter) tells us where the tip of the hand is. The horizontal distance from the centre is $r\\cos\\theta$, the vertical distance is $r\\sin\\theta$. The hand’s tip follows a circular path, described exactly by the parametric equations above.\n\nA parameter can also represent time. If a particle moves in the plane, its position at time $t$ might be given by $x(t)=3t$ and $y(t)=2t^{2}$. At $t=1$ second the particle is at $(3,2)$; at $t=2$ seconds it is at $(6,8)$, and so on. This makes parametric equations especially useful in physics and engineering, where we often know how each coordinate changes with time.\n\n> **Note:** The same curve can have many different parametrisations. Changing the way $t$ runs (for example, using $t^{2}$ instead of $t$) will trace the same set of points but at a different speed or starting point.\n\nWhen we first meet parametric equations, a common mistake is to think that $t$ must be a time variable. It can be any quantity that helps us generate the points – an angle, a distance, or even an abstract index. The key idea is that $t$ provides a systematic way to list all the points on the curve.\n\n> **Remember:** A parametric description gives two functions, $x=f(t)$ and $y=g(t)$. By plugging in values of $t$ we obtain the coordinates of points, and letting $t$ vary over its domain draws the entire curve. This approach turns the problem of “drawing a shape” into the simpler problem of “evaluating two easy formulas”.",
+   "code": ""
+  },
+  {
+   "heading": "2. Plotting Parametric Points",
+   "body": "When we write a curve with a **parameter** $t$, each value of $t$ gives us one ordered pair $(x,y)$.  \nThink of $t$ as a “time knob’’ that we turn: every turn produces a new point on the picture.  \nTo **plot parametric points** we simply evaluate the formulas for $x$ and $y$ at several convenient $t$‑values, then mark the resulting $(x,y)$ on the usual $xy$‑plane.\n\n> **Definition:** A *parametric equation* is a pair of equations $x = f(t)$ and $y = g(t)$ that describe the coordinates of a point as functions of a third variable $t$ (the parameter).\n\nWhy do we do this?  \nIf a curve is difficult to describe directly as $y = h(x)$, using a parameter often makes the algebra much simpler. It also lets us follow the motion of a point over time, which is useful in physics and computer graphics.\n\n### Step‑by‑step procedure\n\n1. **Choose a list of $t$‑values** that are easy to compute and that cover the part of the curve you want to see.  \n   Common choices are integers or simple fractions.\n\n2. **Plug each $t$ into the $x$‑formula** to get the $x$‑coordinate.  \n   Write the result clearly.\n\n3. **Plug the same $t$ into the $y$‑formula** to get the $y$‑coordinate.\n\n4. **Write the ordered pair** $(x,y)$ for each $t$.\n\n5. **Mark the points** on graph paper (or a digital grid).  \n   If you like, label each point with its $t$ value; this helps you see the direction in which the curve is traced as $t$ increases.\n\n> **Note:** The order of the points matters. As $t$ grows, the curve is traced in the direction of increasing $t$.\n\n> **In daily life:** Imagine a car driving along a road. The car’s position at any moment can be described by its east‑west coordinate $x$ and north‑south coordinate $y$. If we let $t$ be the time in seconds, the formulas $x(t)$ and $y(t)$ tell us exactly where the car is at each second. Plotting a few seconds gives a sketch of the car’s path.\n\n> **Common mistake:** Forgetting to compute *both* coordinates for the same $t$. Using $x$ from $t=1$ together with $y$ from $t=2$ creates a point that never actually lies on the curve.\n\nBelow we work through a complete example.\n\n---\n\n**Example 1 (Easy): Plot the points for $x = t$, $y = t^{2}$ with $t = -2,\\,-1,\\,0,\\,1,\\,2$.**  \n\nWe want the five points that the parameter $t$ produces.\n\n1. **List the $t$‑values.**  \n   $$t \\in \\{-2,\\,-1,\\,0,\\,1,\\,2\\}$$  \n\n2. **Compute $x = t$ for each $t$.**  \n   - For $t=-2$: $x = -2$  \n   - For $t=-1$: $x = -1$  \n   - For $t=0$:  $x = 0$  \n   - For $t=1$:  $x = 1$  \n   - For $t=2$:  $x = 2$\n\n3. **Compute $y = t^{2}$ for each $t$.**  \n   $$y = t^{2}$$  \n   - For $t=-2$: $y = (-2)^{2}=4$  \n   - For $t=-1$: $y = (-1)^{2}=1$  \n   - For $t=0$:  $y = 0^{2}=0$  \n   - For $t=1$:  $y = 1^{2}=1$  \n   - For $t=2$:  $y = 2^{2}=4$\n\n4. **Write the ordered pairs.**  \n   $$(-2,4),\\; (-1,1),\\; (0,0),\\; (1,1),\\; (2,4)$$  \n\n5. **Place the points on the $xy$‑plane.**  \n   - Mark $(-2,4)$ in the second quadrant.  \n   - Mark $(-1,1)$ near the origin.  \n   - Mark $(0,0)$ at the origin.  \n   - Mark $(1,1)$ symmetric to $(-1,1)$.  \n   - Mark $(2,4)$ symmetric to $(-2,4)$.  \n\n   If you label each point with its $t$ value, you will see the curve starts at $t=-2$, moves down to the origin at $t=0$, then rises again to $t=2$.\n\n**Answer:** The five plotted points are $(-2,4)$, $(-1,1)$, $(0,0)$, $(1,1)$, and $(2,4)$. Connecting them smoothly gives the right‑hand half of a parabola opening upward, traced from left to right as $t$ increases.\n\n---\n\nNow try the same steps with a slightly different pair of formulas, for example $x = \\cos t$, $y = \\sin t$ with $t = 0,\\ \\frac{\\pi}{2},\\ \\pi,\\ \\frac{3\\pi}{2},\\ 2\\pi$. The procedure does not change; only the arithmetic does.\n\n> **Remember:** Always keep the same $t$ for both $x$ and $y$ when you form a point. This guarantees the point truly belongs to the parametric curve.",
+   "code": ""
+  },
+  {
+   "heading": "3. Sketching the Curve",
+   "body": "When we have already plotted a few points from the parametric formulas, the next step is to **connect those points** so that we can see the whole curve.  \nThink of the points as a string of beads that we pull tight; the string shows the shape the beads trace as the parameter $t$ runs through its interval.  \n\n> **Note:** *Connecting the points* means drawing a smooth line that passes through each plotted point in the order that the parameter $t$ increases. The order is important because it tells us the **direction of motion** – the way a particle would travel along the curve.\n\n---\n\n### How to sketch the curve\n\n1. **Arrange the points in increasing $t$**  \n   Write down the coordinates you have found, together with the corresponding $t$‑value. For example, if $t=0,\\; \\frac{\\pi}{2},\\; \\pi,\\; \\frac{3\\pi}{2},\\;2\\pi$, list the points in that order.  \n\n2. **Draw a smooth line through them**  \n   Use a pencil or a computer plotter to join the points. Do not make sharp corners unless the mathematics forces a corner (for instance, when the derivative changes sign abruptly).  \n\n3. **Mark the direction**  \n   Put an arrow on the line pointing from the smallest $t$ to the largest $t$. This arrow tells a viewer how a particle would move if $t$ represented time.  \n\n4. **Look for a familiar shape**  \n   Many parametric pairs produce circles, ellipses, parabolas, or more exotic loops. Compare the sketch with known shapes to name the curve.\n\n---\n\n### Worked example – a unit circle  \n\n**Example 2 (Easy): Sketch the curve for $x=\\cos t,\\;y=\\sin t,\\;t\\in[0,2\\pi]$ (a unit circle).**  \n\nWe will follow the steps above, choosing a few convenient values of $t$.\n\n1. **Choose values of $t$ and compute $(x,y)$.**  \n   - For $t=0$:  \n     $$x=\\cos 0=1,\\qquad y=\\sin 0=0$$  \n   - For $t=\\frac{\\pi}{2}$:  \n     $$x=\\cos\\frac{\\pi}{2}=0,\\qquad y=\\sin\\frac{\\pi}{2}=1$$  \n   - For $t=\\pi$:  \n     $$x=\\cos\\pi=-1,\\qquad y=\\sin\\pi=0$$  \n   - For $t=\\frac{3\\pi}{2}$:  \n     $$x=\\cos\\frac{3\\pi}{2}=0,\\qquad y=\\sin\\frac{3\\pi}{2}=-1$$  \n   - For $t=2\\pi$:  \n     $$x=\\cos 2\\pi=1,\\qquad y=\\sin 2\\pi=0$$  \n\n2. **Plot the five points on the $xy$‑plane.**  \n   Place the points $(1,0)$, $(0,1)$, $(-1,0)$, $(0,-1)$ and return to $(1,0)$.  \n\n3. **Connect the points smoothly and add arrows.**  \n   Draw a smooth closed curve that passes through the points in the order listed. Place an arrow that starts at $(1,0)$, moves upward to $(0,1)$, continues left to $(-1,0)$, down to $(0,-1)$, and finally back to $(1,0)$.  \n\n**Answer:** The sketch is a circle of radius 1 centred at the origin, traced once counter‑clockwise as $t$ increases from $0$ to $2\\pi$. The direction arrow shows the motion is **counter‑clockwise**.\n\n---\n\n### What the direction tells us  \n\nIf $t$ represents time, the arrow indicates the **velocity direction** of a moving point. In the example, the velocity vector is  \n\n$$\\mathbf{v}(t)=\\bigl(-\\sin t,\\;\\cos t\\bigr),$$  \n\nwhich is always tangent to the circle and points in the same counter‑clockwise sense.  \n\n> **In daily life:** Imagine a child running around a circular track. The child’s position at each second is given by $(\\cos t,\\sin t)$. Plotting the positions and joining them shows the track, while the arrows show the child’s running direction.\n\n---\n\n### Recognising basic shapes  \n\nAfter you have drawn the curve, ask yourself:\n\n* Does the curve close on itself? (Possible circle, ellipse, or closed loop)  \n* Does it open outward like a parabola or a hyperbola?  \n* Are there any sharp turns or cusps?  \n\nOften you can identify the shape without algebraic elimination. For instance, the pair  \n\n$$x = 2\\cos t,\\qquad y = 3\\sin t$$  \n\nproduces an **ellipse** because the $x$‑coordinate is scaled by 2 and the $y$‑coordinate by 3, stretching the unit circle horizontally and vertically.\n\n---\n\n### Quick checklist while sketching  \n\n> **Remember:**  \n> 1. List points in order of increasing $t$.  \n> 2. Draw a smooth curve through them.  \n> 3. Add arrows to show motion.  \n> 4. Compare the picture with known geometric figures.\n\nBy following these small, explicit steps you turn a set of algebraic formulas into a visual picture that is easy to interpret and useful for later analysis, such as finding the speed or determining where the curve intersects axes.",
+   "code": ""
+  },
+  {
+   "heading": "4. Eliminating the Parameter",
+   "body": "When we have a pair of parametric equations, each variable is written in terms of a third variable, usually called the **parameter** $t$.  To understand the shape of the curve in the ordinary $xy$‑plane we often want a single equation that relates $x$ and $y$ directly.  This process is called **eliminating the parameter**.  \n\n> **Definition:** *Eliminating the parameter* means using algebraic manipulation to remove $t$ from the two equations, leaving a Cartesian equation that involves only $x$ and $y$.\n\nWhy do we do this?  A Cartesian equation lets us recognise familiar curves (lines, circles, ellipses, parabolas, …) and compare them with textbook forms.  It also makes it easier to compute things like slopes or areas without having to keep track of $t$.\n\nThink of $t$ as a secret code that tells you how to move from point to point.  If you can decode the message and write the rule directly in terms of $x$ and $y$, anyone can read the shape without knowing the code.  This is similar to translating a recipe written in a foreign language into your own language so you can follow it without a dictionary.\n\nBelow we present two common algebraic tricks:\n\n1. **Solve one equation for $t$** and substitute into the other.  \n2. **Use trigonometric identities** when $x$ and $y$ involve sine and cosine of the same $t$.\n\nBoth methods are systematic; just follow the steps carefully.\n\n---\n\n**Example 3 (Medium): From $x = 2t + 1$, $y = t^{2}$, eliminate $t$ to find the Cartesian relation between $x$ and $y$.**\n\nWe want a single equation linking $x$ and $y$.\n\n1. **Solve the first equation for $t$.**  \n   $$t = \\frac{x-1}{2}$$  \n\n2. **Substitute this expression for $t$ into the second equation.**  \n   $$y = \\left(\\frac{x-1}{2}\\right)^{2}$$  \n\n3. **Simplify the resulting expression.**  \n   $$y = \\frac{(x-1)^{2}}{4}$$  \n\n**Answer:** The curve satisfies the Cartesian equation  \n$$y = \\frac{(x-1)^{2}}{4}.$$  \nThis is a parabola opening upward, shifted one unit to the right from the origin and stretched vertically by a factor of $\\tfrac14$.\n\n---\n\n> **Note:** When you solve for $t$, be careful to keep the algebra exact; a small sign error will give a completely different curve.\n\nNow consider a situation where both $x$ and $y$ are expressed with trigonometric functions of the same parameter.  The Pythagorean identity $\\sin^{2}t+\\cos^{2}t=1$ is the key tool.\n\n**Example 4 (Medium): From $x = 3\\cos t$, $y = 4\\sin t$, eliminate $t$ and identify the resulting ellipse.**\n\n1. **Square each equation** so that $\\cos^{2}t$ and $\\sin^{2}t$ appear.  \n   $$x^{2} = 9\\cos^{2}t,\\qquad y^{2} = 16\\sin^{2}t$$  \n\n2. **Divide each squared equation by the square of its coefficient** to isolate the trigonometric squares.  \n   $$\\frac{x^{2}}{9} = \\cos^{2}t,\\qquad \\frac{y^{2}}{16} = \\sin^{2}t$$  \n\n3. **Add the two resulting equations** and use the identity $\\sin^{2}t+\\cos^{2}t=1$.  \n   $$\\frac{x^{2}}{9} + \\frac{y^{2}}{16} = \\cos^{2}t + \\sin^{2}t = 1$$  \n\n**Answer:** The Cartesian equation is  \n$$\\frac{x^{2}}{9} + \\frac{y^{2}}{16} = 1,$$  \nwhich is an ellipse centered at the origin, with semi‑major axis $4$ along the $y$‑direction and semi‑minor axis $3$ along the $x$‑direction.\n\n---\n\n> **In daily life:**  Eliminating a parameter is like removing a middleman.  If a delivery driver tells you “I will be at the warehouse at time $t$, then travel $2t+1$ miles east and $t^{2}$ miles north,” you can compute directly where the driver will be without tracking the time.\n\n> **Common mistake:** Forgetting to square both sides correctly when using trigonometric identities.  Always keep the coefficients (like $3$ and $4$) attached to the trigonometric functions until after you have squared them.\n\n> **Remember:** The goal is a clean relationship between $x$ and $y$.  Check your final equation by picking a convenient value of $t$, computing $(x,y)$, and verifying that the pair satisfies the Cartesian form.\n\nBy mastering these algebraic steps, you can turn any simple parametric pair into a familiar Cartesian curve, making further analysis much easier.",
+   "code": ""
+  },
+  {
+   "heading": "5. Interpreting the Resulting Curve",
+   "body": "When we have turned a pair of parametric equations into a single Cartesian ( $x$‑$y$ ) equation, we can compare the two descriptions of the same curve.  \nDoing this tells us **what shape the curve really is**, whether it has any symmetry, and whether the original parameter $t$ forces us to keep only part of the Cartesian curve.\n\n---\n\n> **Note:** *Cartesian form* means an equation that involves only $x$ and $y$, with no $t$.  \n> *Parametric form* keeps $t$ as a separate “time‑like’’ variable that tells us how the point moves along the curve.\n\n### 1. From parametric to Cartesian – what changes?\n\nThe parametric equations give a rule for each coordinate:\n\n$$x = f(t),\\qquad y = g(t).$$  \n\nWhen we eliminate $t$, we combine these two rules into one relationship $F(x,y)=0$.  \nThe new equation may look simpler (for example a circle $x^{2}+y^{2}=r^{2}$) or more complicated (a hyperbola, a parabola, etc.).  \n\nBecause $t$ can be any real number **except where the formulas are undefined**, the Cartesian curve may be *restricted* to a part of the full shape.  For instance, $x = \\sqrt{t}$ only produces $x\\ge 0$, so the Cartesian equation $x^{2}=t$ would describe the whole parabola $y^{2}=x$, but the original parametric form gives only the right‑hand branch.\n\n### 2. Checking the shape\n\nOnce we have $F(x,y)=0$, we can recognise the shape by comparing it with the standard forms we know:\n\n| Standard Cartesian form | Shape |\n|--------------------------|-------|\n| $x^{2}+y^{2}=r^{2}$      | Circle of radius $r$ |\n| $\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1$ | Ellipse |\n| $\\frac{x^{2}}{a^{2}}-\\frac{y^{2}}{b^{2}}=1$ | Hyperbola |\n| $y = ax^{2}+bx+c$        | Parabola |\n| $y^{2}=4px$              | Parabola opening right |\n\nIf the resulting equation matches one of these, we instantly know the overall shape.\n\n### 3. Looking for symmetry\n\nSymmetry means the curve looks the same after a simple transformation:\n\n* **Even symmetry** about the $y$‑axis: replace $x$ by $-x$ and the equation stays unchanged.  \n* **Odd symmetry** about the $x$‑axis: replace $y$ by $-y$ and the equation stays unchanged.  \n* **Rotational symmetry** about the origin: replace both $x$ and $y$ by $-x$ and $-y$.\n\nWhen the Cartesian equation has such properties, the original parametric description will usually produce the whole symmetric picture, unless the domain of $t$ blocks one side.\n\n### 4. Domain restrictions from the parameter\n\nEven after we recognise the shape, we must ask: *Does the original $t$ allow every point on that shape?*  \n\nTypical restrictions come from:\n\n* Division by $t$ (cannot be $0$).  \n* Square‑roots (require non‑negative arguments).  \n* Trigonometric functions (periodic, limited range).\n\nIf a restriction exists, we write it as a condition on $x$ or $y$ after elimination.\n\n---\n\n> **In daily life:** Imagine a train track that is a perfect circle.  \n> The parametric description $x=R\\cos t$, $y=R\\sin t$ tells us the train’s position at each “time’’ $t$.  \n> If the train can only travel forward, $t$ might be limited to $0\\le t\\le\\pi$, so only the upper half of the circle is actually traced, even though the Cartesian equation $x^{2}+y^{2}=R^{2}$ describes the whole circle.\n\n### Worked example\n\n**Example 5 (Hard): Eliminating the parameter and describing the curve**  \n\nGiven  \n\n\\[\nx = t - \\frac{1}{t},\\qquad y = t + \\frac{1}{t}\\qquad (t\\neq 0),\n\\]\n\neliminate $t$ and describe the resulting curve.\n\n1. **Add the two equations** to isolate $t$ and $1/t$ together.  \n\n   $$\n   x + y = \\bigl(t - \\frac{1}{t}\\bigr) + \\bigl(t + \\frac{1}{t}\\bigr) = 2t.\n   $$  \n\n   Hence  \n\n   $$\n   t = \\frac{x+y}{2}.\n   $$\n\n2. **Subtract the equations** to obtain an expression for $1/t$.  \n\n   $$\n   y - x = \\bigl(t + \\frac{1}{t}\\bigr) - \\bigl(t - \\frac{1}{t}\\bigr) = \\frac{2}{t}.\n   $$  \n\n   Therefore  \n\n   $$\n   \\frac{1}{t} = \\frac{y - x}{2}.\n   $$\n\n3. **Multiply the expressions for $t$ and $1/t$** (they must be reciprocals).  \n\n   $$\n   t\\cdot\\frac{1}{t}=1 \\;\\Longrightarrow\\; \\left(\\frac{x+y}{2}\\right)\\!\\left(\\frac{y-x}{2}\\right)=1.\n   $$  \n\n   Simplify:  \n\n   $$\n   \\frac{(x+y)(y-x)}{4}=1 \\;\\Longrightarrow\\; (x+y)(y-x)=4.\n   $$  \n\n   Expand the left side:  \n\n   $$\n   y^{2}-x^{2}=4.\n   $$  \n\n   This is the Cartesian equation of the curve.\n\n**Answer:** The curve satisfies $y^{2}-x^{2}=4$, which is a **hyperbola** opening upward and downward.  \nBecause $t\\neq 0$, there is no additional restriction on $x$ or $y$ beyond the hyperbola itself; every point on the hyperbola can be reached by some non‑zero $t$ (positive $t$ gives the right branch, negative $t$ the left branch).\n\n### 5. Summarising the comparison\n\n* The parametric pair $(x(t),y(t))$ gave us a hyperbola after elimination.  \n* The Cartesian form $y^{2}-x^{2}=4$ tells us the shape immediately (standard hyperbola).  \n* Checking symmetry: replacing $x$ by $-x$ leaves the equation unchanged, so the hyperbola is symmetric about the $y$‑axis.  \n* No extra domain restriction appears because the only forbidden value, $t=0$, does not correspond to any point on the hyperbola (it would require $x$ and $y$ both infinite).\n\n> **Remember:** After eliminating the parameter, always verify whether the original domain of $t$ removes any part of the Cartesian curve.  \n\n> **Common mistake:** Assuming the Cartesian equation automatically includes the whole curve.  Forgetting a restriction (like $t\\neq0$) can lead to drawing extra branches that never occur in the parametric picture.\n\nBy following these steps—eliminate $t$, recognise the standard shape, test for symmetry, and check domain restrictions—you can move confidently between parametric and Cartesian descriptions and understand exactly what the curve looks like and how it is traced.",
+   "code": ""
+  },
+  {
+   "heading": "6. Simple Motion Applications",
+   "body": "When we talk about **simple motion**, we are usually interested in how an object’s position changes over time.  \nA *parameter* is just a variable that we let run freely; in motion problems the natural choice for the parameter is **time**, usually denoted by $t$.  \nIf we write the $x$‑coordinate and the $y$‑coordinate of a moving point as separate functions of $t$, we obtain a *parametric description* of the path:\n\n$$\nx = f(t), \\qquad y = g(t).\n$$\n\n> **Definition:** A *parametric equation* expresses each coordinate of a point as a function of a common parameter (here, time $t$).  \n\nWhy is this useful?  \nImagine a car that drives east at a steady speed of $5\\ \\text{m/s}$ while simultaneously accelerating northward. Its east‑west position grows linearly with time, but its north‑south position grows quadratically. A single equation $y = h(x)$ cannot capture both behaviours at once, but the pair $x(t), y(t)$ can.\n\n### Position versus time\n\nThe functions $f(t)$ and $g(t)$ give the *position vector* of the particle at any instant:\n\n$$\n\\mathbf{r}(t)=\\langle f(t),\\,g(t)\\rangle .\n$$\n\nIf we differentiate each component with respect to $t$, we obtain the *velocity components*:\n\n$$\nv_x = \\frac{dx}{dt}, \\qquad v_y = \\frac{dy}{dt}.\n$$\n\nThe full velocity vector is  \n\n$$\n\\mathbf{v}(t)=\\langle v_x,\\,v_y\\rangle .\n$$\n\nThe *speed* (a scalar) is the length of the velocity vector:\n\n$$\n\\text{speed}=|\\mathbf{v}(t)|=\\sqrt{v_x^{2}+v_y^{2}}.\n$$\n\n> **Note:** Speed is always non‑negative; it tells how fast the particle moves, while velocity also tells the direction.\n\n### Worked example – linear and quadratic motion  \n\n**Example 6 (Hard):** A particle moves with  \n\n$$\nx = 5t,\\qquad y = 3t^{2}.\n$$  \n\nFind its speed at $t = 2\\ \\text{s}$.\n\n1. **Differentiate each coordinate** to obtain the velocity components.  \n   $$v_x = \\frac{dx}{dt}=5,$$  \n   $$v_y = \\frac{dy}{dt}=6t.$$\n\n2. **Evaluate the components at the given time** $t=2\\ \\text{s}$.  \n   $$v_x(2)=5\\ \\text{m/s},$$  \n   $$v_y(2)=6(2)=12\\ \\text{m/s}.$$\n\n3. **Combine the components** using the speed formula.  \n   $$\\text{speed}= \\sqrt{v_x^{2}+v_y^{2}} = \\sqrt{5^{2}+12^{2}} = \\sqrt{25+144}= \\sqrt{169}=13\\ \\text{m/s}.$$\n\n**Answer:** The particle’s speed at $t=2\\ \\text{s}$ is $13\\ \\text{m/s}$.\n\n### Interpreting the result\n\nThe velocity components tell us the direction of motion at any instant.  \nAt $t=2\\ \\text{s}$ the particle is moving eastward at $5\\ \\text{m/s}$ (constant) and northward at $12\\ \\text{m/s}$ (increasing).  \nThe speed $13\\ \\text{m/s}$ is the hypotenuse of the right‑triangle formed by these components, just as the Pythagorean theorem relates the sides of a right triangle.\n\n> **In daily life:** Think of a skateboarder who rides straight ahead while also being pulled upward by a ramp. The forward speed stays the same, but the upward speed grows as the ramp gets steeper. The skateboarder’s overall speed is the combination of the two.\n\n### More motion examples\n\n#### Example 7 (Easy): Uniform circular motion  \n\nA point travels around a circle of radius $r=4\\ \\text{m}$ with angular speed $\\omega = 2\\ \\text{rad/s}$. Its parametric equations are  \n\n$$\nx = r\\cos(\\omega t),\\qquad y = r\\sin(\\omega t).\n$$  \n\nFind the speed.\n\n1. Differentiate:  \n   $$v_x = -r\\omega\\sin(\\omega t),\\qquad v_y = r\\omega\\cos(\\omega t).$$\n\n2. Compute the speed:  \n   $$|\\mathbf{v}| = \\sqrt{(-r\\omega\\sin)^2+(r\\omega\\cos)^2}=r\\omega\\sqrt{\\sin^{2}+\\cos^{2}}=r\\omega.$$\n\n3. Insert numbers:  \n   $$|\\mathbf{v}| = 4\\ \\text{m}\\times 2\\ \\text{rad/s}=8\\ \\text{m/s}.$$\n\n**Answer:** The particle moves at a constant speed of $8\\ \\text{m/s}$ around the circle.\n\n#### Example 8 (Medium): Projectile motion  \n\nA ball is launched from the origin with initial speed $v_0=20\\ \\text{m/s}$ at an angle $\\theta=30^\\circ$ above the horizontal. Ignoring air resistance, the parametric equations are  \n\n$$\nx = v_0\\cos\\theta\\, t,\\qquad y = v_0\\sin\\theta\\, t-\\frac{1}{2}gt^{2},\n$$  \n\nwhere $g\\approx9.8\\ \\text{m/s}^2$.\n\nFind the velocity components at $t=1\\ \\text{s}$.\n\n1. Differentiate:  \n   $$v_x = v_0\\cos\\theta,\\qquad v_y = v_0\\sin\\theta - gt.$$\n\n2. Insert the numbers ($\\cos30^\\circ=\\sqrt3/2$, $\\sin30^\\circ=1/2$):  \n   $$v_x = 20\\left(\\frac{\\sqrt3}{2}\\right)=10\\sqrt3\\ \\text{m/s},$$  \n   $$v_y = 20\\left(\\frac12\\right)-9.8(1)=10-9.8=0.2\\ \\text{m/s}.$$\n\n3. Speed at $t=1\\ \\text{s}$:  \n   $$\\text{speed}= \\sqrt{(10\\sqrt3)^2+(0.2)^2}\\approx \\sqrt{300+0.04}\\approx 17.3\\ \\text{m/s}.$$\n\n**Answer:** At $t=1\\ \\text{s}$ the horizontal velocity is $10\\sqrt3\\ \\text{m/s}$, the vertical velocity is $0.2\\ \\text{m/s}$, and the speed is about $17.3\\ \\text{m/s}$.\n\n### Summary of the motion section\n\n- Write the position as two functions of time: $x(t)$ and $y(t)$.  \n- Differentiate each to get the velocity components $v_x$ and $v_y$.  \n- Combine them with the Pythagorean formula to obtain the speed.  \n- The same steps work for any path—straight lines, circles, or projectile arcs.\n\n> **Remember:** Always differentiate *each* coordinate separately, then use the speed formula. Skipping the differentiation step is a common mistake that leads to wrong answers.",
+   "code": ""
+  },
+  {
+   "heading": "7. Review and Practice Problems",
+   "body": "> **Remember:**  A parametric equation describes a curve by giving both $x$ and $y$ as functions of a third variable, usually called the *parameter* $t$.  \n\nWhen you finish a lesson on parametric equations, you should be able to  \n\n1. recognise a parametric description,  \n2. plot a few points by substituting values of $t$,  \n3. eliminate $t$ to obtain a single Cartesian equation,  \n4. identify the type of curve (line, circle, ellipse, parabola, etc.),  \n5. interpret the curve in a real‑world context such as motion.  \n\nBelow is a short recap of the steps, followed by a set of practice problems.  Work through each problem before checking the answers; the more you practice, the more automatic the process becomes.\n\n---\n\n### Quick recap of the main ideas  \n\n1. **Write down the given parametric formulas.**  \n   Example: $x = f(t),\\; y = g(t)$.  \n\n2. **Choose convenient $t$‑values** (often $0$, $\\frac{\\pi}{2}$, $\\pi$, etc.) and compute the corresponding $(x,y)$ points.  Plot them on the $xy$‑plane; the points give you a feel for the shape.  \n\n3. **Eliminate the parameter.**  \n   - Solve one of the equations for $t$ (or for a trig function of $t$).  \n   - Substitute this expression into the other equation.  \n   - Simplify to obtain a relation involving only $x$ and $y$.  \n\n4. **Identify the curve.**  \n   Compare the resulting equation with the standard forms:  \n\n   - $x^2 + y^2 = r^2$  (circle)  \n   - $\\frac{x^2}{a^2} + \\frac{y^2}{b^2}=1$  (ellipse)  \n   - $y = mx + c$  (line)  \n   - $y = ax^2 + bx + c$  (parabola)  \n\n5. **Read off geometric information.**  \n   For an ellipse, $a$ and $b$ are the semi‑major and semi‑minor axes; the full lengths are $2a$ and $2b$.  \n\n6. **Interpret the result** in the context of the original problem (e.g., the path of a particle, the shape of a garden fence, etc.).  \n\n---\n\n### Worked example (hard)\n\n**Example 7 (Hard): Eliminating the parameter and classifying the conic**  \n\nThe curve is given by  \n\n$$x = 4\\cos(2t),\\qquad y = 3\\sin(2t).$$  \n\nWe must eliminate $t$, state the type of conic, and find its major and minor axes lengths.\n\n1. **Express $\\cos(2t)$ and $\\sin(2t)$ in terms of $x$ and $y$.**  \n   Solve each parametric equation for the trigonometric function:  \n\n   $$\\cos(2t)=\\frac{x}{4},\\qquad \\sin(2t)=\\frac{y}{3}.$$\n\n2. **Use the Pythagorean identity** $\\sin^2\\theta+\\cos^2\\theta=1$ with $\\theta=2t$.  \n   Substitute the expressions from step 1:  \n\n   $$\\left(\\frac{x}{4}\\right)^{2}+\\left(\\frac{y}{3}\\right)^{2}=1.$$\n\n3. **Rewrite the equation in standard form** of an ellipse.  \n   Multiply out the denominators:  \n\n   $$\\frac{x^{2}}{4^{2}}+\\frac{y^{2}}{3^{2}}=1\\quad\\Longrightarrow\\quad\n   \\frac{x^{2}}{16}+\\frac{y^{2}}{9}=1.$$\n\n   This matches the standard ellipse $\\displaystyle\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}=1$ with $a^{2}=16$, $b^{2}=9$.\n\n**Answer:**  \nThe curve is an **ellipse** centred at the origin.  \n- Semi‑major axis $a = \\sqrt{16}=4$, so the full major axis length is $2a = 8$.  \n- Semi‑minor axis $b = \\sqrt{9}=3$, so the full minor axis length is $2b = 6$.  \n\n---\n\n### Practice problems  \n\nSolve each problem using the steps above.  Write down the intermediate equations; this will help you avoid the **Common mistake** of jumping straight to the final answer without checking algebra.\n\n1. **Simple circle**  \n   $x = 5\\cos t,\\; y = 5\\sin t$  \n   *Eliminate $t$ and state the radius.*\n\n2. **Line from a parametric pair**  \n   $x = 2t + 1,\\; y = -3t + 4$  \n   *Find the Cartesian equation and give its slope and $y$‑intercept.*\n\n3. **Parabola from a quadratic parameter**  \n   $x = t,\\; y = t^{2} - 4t + 3$  \n   *Eliminate $t$ and write the equation in the form $y = ax^{2}+bx+c$.*\n\n4. **Ellipse with different frequencies**  \n   $x = 6\\cos(3t),\\; y = 2\\sin(3t)$  \n   *Eliminate $t$, identify the conic, and give the lengths of the major and minor axes.*\n\n5. **Motion interpretation**  \n   A particle moves according to $x = 3\\cos(\\omega t)$, $y = 4\\sin(\\omega t)$ where $\\omega$ is a constant angular speed.  \n   *Describe the path of the particle and explain what changing $\\omega$ would do to the motion.*\n\n6. **Mixed practice – identify the curve**  \n   $x = t - \\frac{1}{t},\\; y = t + \\frac{1}{t}$ for $t>0$  \n   *Eliminate $t$ and show that the resulting curve is a hyperbola. State its asymptotes.*\n\n7. **Hard (similar to the example but with a twist)**  \n   $x = 7\\cos(5t),\\; y = 7\\sin(5t) + 2$  \n   *Eliminate $t$, identify the conic, and find the centre and radius (or axes) of the curve.*\n\n---\n\n> **In daily life:**  Think of $t$ as “time”.  When you watch a point move around a track, its $x$‑position and $y$‑position change with time.  The parametric formulas are exactly the same as the GPS coordinates of a runner at each second.  Eliminating $t$ tells you the shape of the track itself, independent of how fast the runner goes.\n\n> **Common mistake:**  Forgetting to square both sides when using the identity $\\sin^{2}\\theta+\\cos^{2}\\theta=1$.  Always write the squares explicitly; otherwise the algebra will be wrong.\n\nWhen you have finished the practice set, compare your answers with the solution key (provided separately).  If any step feels unclear, go back to the recap and repeat the process on a simpler example.  Mastery comes from repeating the full cycle: *write → substitute → eliminate → identify → interpret*.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "For the parametric equations $x = 2t$, $y = 3t+1$, find the Cartesian equation relating $x$ and $y$.",
+   "a": "Solve the first equation for $t$: $t = \\frac{x}{2}$. Substitute into the second: $y = 3\\left(\\frac{x}{2}\\right)+1 = \\frac{3x}{2}+1$. Hence the Cartesian equation is $y = \\frac{3}{2}x + 1$."
+  },
+  {
+   "level": "Easy",
+   "q": "Plot the point corresponding to $t = \\frac{\\pi}{4}$ for $x = \\cos t$, $y = \\sin t$.",
+   "a": "Compute $x = \\cos\\frac{\\pi}{4}= \\frac{\\sqrt2}{2}$, $y = \\sin\\frac{\\pi}{4}= \\frac{\\sqrt2}{2}$. The point is $\\left(\\frac{\\sqrt2}{2},\\frac{\\sqrt2}{2}\\right)$, which lies on the unit circle in the first quadrant."
+  },
+  {
+   "level": "Medium",
+   "q": "Given $x = 1 - t^2$, $y = t$, eliminate the parameter to obtain the Cartesian equation, and identify the curve.",
+   "a": "From $y = t$ we have $t = y$. Substitute into $x$: $x = 1 - y^2$. Rearranged: $x + y^2 = 1$. This is the equation of a **parabola** opening leftwards with vertex at $(1,0)$."
+  },
+  {
+   "level": "Medium",
+   "q": "The parametric equations $x = 4\\cos t$, $y = 3\\sin t$ describe a curve. Eliminate $t$ and state the type of curve, including its major and minor axes.",
+   "a": "Use $\\cos^2 t + \\sin^2 t = 1$. Write $\\frac{x}{4} = \\cos t$, $\\frac{y}{3} = \\sin t$. Then\n\\[\n\\left(\\frac{x}{4}\\right)^2 + \\left(\\frac{y}{3}\\right)^2 = 1.\n\\]\nThis is an **ellipse** centered at the origin. The semi‑major axis is $4$ (horizontal) and the semi‑minor axis is $3$ (vertical)."
+  },
+  {
+   "level": "Hard",
+   "q": "A particle moves with $x(t)=t^2$, $y(t)=t^3-3t$. a) Eliminate $t$ to find a relation between $x$ and $y$. b) Determine the points where the particle changes direction along the curve.",
+   "a": "\na) From $x = t^2$ we get $t = \\pm\\sqrt{x}$. Substitute into $y$:\n\\[\ny = (\\pm\\sqrt{x})^3 - 3(\\pm\\sqrt{x}) = \\pm x\\sqrt{x} \\mp 3\\sqrt{x}.\n\\]\nThus the curve satisfies $y^2 = (x\\sqrt{x} - 3\\sqrt{x})^2 = x(x-3)^2$. A simpler implicit form is $y^2 = x(x-3)^2$.\nb) Direction changes when the velocity vector $(\\dot x,\\dot y)$ is zero or when its direction reverses.\n\\[\n\\dot x = 2t,\\qquad \\dot y = 3t^2-3.\n\\]\nSet $\\dot x = 0 \\Rightarrow t = 0$. At $t=0$, $\\dot y = -3 \\neq 0$, so the particle moves vertically.\nSet $\\dot y = 0 \\Rightarrow 3t^2-3=0 \\Rightarrow t = \\pm1$.\nAt $t=1$, $\\dot x = 2$, $\\dot y = 0$ → horizontal motion to the right.\nAt $t=-1$, $\\dot x = -2$, $\\dot y = 0$ → horizontal motion to the left.\nThus the particle changes direction at $t = -1, 0, 1$, corresponding to points $(1, -2)$, $(0,0)$, and $(1, -2)$ again (note the curve passes through $(1,-2)$ twice)."
+  },
+  {
+   "level": "Hard",
+   "q": "Consider the parametric curve $x = \\frac{1-t^2}{1+t^2}$, $y = \\frac{2t}{1+t^2}$. a) Eliminate $t$ to show the curve is a circle. b) Find the point on the curve where $t = 2$ and state its direction of motion (increasing $t$).",
+   "a": "\na) Observe that $x^2 + y^2 = \\left(\\frac{1-t^2}{1+t^2}\\right)^2 + \\left(\\frac{2t}{1+t^2}\\right)^2$.\nCombine over common denominator $(1+t^2)^2$:\n\\[\nx^2 + y^2 = \\frac{(1-t^2)^2 + (2t)^2}{(1+t^2)^2}\n= \\frac{1 - 2t^2 + t^4 + 4t^2}{(1+t^2)^2}\n= \\frac{1 + 2t^2 + t^4}{(1+t^2)^2}\n= \\frac{(1+t^2)^2}{(1+t^2)^2}=1.\n\\]\nHence $x^2 + y^2 = 1$, the unit circle centered at the origin.\nb) For $t=2$:\n\\[\nx = \\frac{1-4}{1+4}= \\frac{-3}{5}= -\\frac{3}{5},\\qquad\ny = \\frac{4}{5}= \\frac{4}{5}.\n\\]\nThe velocity vector is\n\\[\n\\dot x = \\frac{d}{dt}\\!\\left(\\frac{1-t^2}{1+t^2}\\right)=\\frac{-2t(1+t^2)-(1-t^2)2t}{(1+t^2)^2}\n= \\frac{-4t}{(1+t^2)^2},\n\\]\n\\[\n\\dot y = \\frac{d}{dt}\\!\\left(\\frac{2t}{1+t^2}\\right)=\\frac{2(1+t^2)-2t(2t)}{(1+t^2)^2}\n= \\frac{2-2t^2}{(1+t^2)^2}.\n\\]\nAt $t=2$:\n\\[\n\\dot x = \\frac{-8}{(1+4)^2}= \\frac{-8}{25}<0,\\qquad\n\\dot y = \\frac{2-8}{25}= \\frac{-6}{25}<0.\n\\]\nBoth components are negative, so as $t$ increases through $2$, the point moves downwards and to the left along the circle."
+  }
+ ],
+ "recap": "Parametric equations describe a curve by giving x and y as functions of a third variable, usually called the parameter t. By evaluating these functions at several t values you can plot points and then connect them to see the shape and direction of motion. Eliminating t produces a single Cartesian equation that reveals the familiar form of the curve, while keeping t shows how a point moves along it.",
+ "key_terms": [
+  {
+   "term": "parameter",
+   "meaning": "A variable, often denoted t, that both x and y depend on in a parametric description."
+  },
+  {
+   "term": "parametric representation",
+   "meaning": "A pair of functions x=f(t) and y=g(t) that assign coordinates to each value of t."
+  },
+  {
+   "term": "Cartesian equation",
+   "meaning": "An equation involving only x and y, obtained by eliminating the parameter."
+  },
+  {
+   "term": "direction of motion",
+   "meaning": "The order in which points are traced as t increases, shown by arrows on the curve."
+  },
+  {
+   "term": "eliminating the parameter",
+   "meaning": "Algebraic steps that remove t to produce a single equation in x and y."
+  },
+  {
+   "term": "plotting parametric points",
+   "meaning": "Choosing t values, computing x and y, and marking the resulting points on the xy‑plane."
+  },
+  {
+   "term": "simple motion",
+   "meaning": "A situation where the position of an object is given by parametric equations, with t representing time."
+  },
+  {
+   "term": "curve sketching",
+   "meaning": "Connecting plotted points smoothly, using knowledge of symmetry and direction, to draw the whole curve."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does a parameter t represent in a parametric equation?",
+   "options": [
+    "The slope of the curve",
+    "A third variable that both x and y depend on",
+    "The y‑intercept of the curve",
+    "The area under the curve"
+   ],
+   "answer": 1,
+   "why": "t is the extra variable that determines the coordinates of each point."
+  },
+  {
+   "q": "Which step comes first when plotting a parametric curve?",
+   "options": [
+    "Eliminate the parameter",
+    "Choose convenient t values",
+    "Draw arrows for direction",
+    "Compute the derivative"
+   ],
+   "answer": 1,
+   "why": "You need specific t values to calculate corresponding (x,y) points."
+  },
+  {
+   "q": "When you eliminate t, what type of equation do you obtain?",
+   "options": [
+    "Parametric equation",
+    "Differential equation",
+    "Cartesian equation",
+    "Polar equation"
+   ],
+   "answer": 2,
+   "why": "Removing t leaves an equation involving only x and y, i.e., a Cartesian form."
+  },
+  {
+   "q": "Why is the order of points important when sketching a parametric curve?",
+   "options": [
+    "It determines the color of the curve",
+    "It shows the direction a particle travels",
+    "It changes the length of the curve",
+    "It affects the scale of the axes"
+   ],
+   "answer": 1,
+   "why": "Increasing t tells you how the point moves, indicating direction."
+  },
+  {
+   "q": "In a motion problem, if x=5t and y=2t^2, what does the term 2t^2 represent?",
+   "options": [
+    "Constant speed eastward",
+    "Quadratic northward displacement",
+    "Time interval",
+    "Horizontal acceleration"
+   ],
+   "answer": 1,
+   "why": "y depends on t squared, showing a quadratic change in the northward direction."
+  },
+  {
+   "q": "Which of the following is NOT a reason to eliminate the parameter?",
+   "options": [
+    "To recognise familiar curve shapes",
+    "To simplify slope calculations",
+    "To keep track of time",
+    "To compare with textbook forms"
+   ],
+   "answer": 2,
+   "why": "Eliminating t removes the time variable, so keeping track of time is not a reason."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a parametric representation of a curve.",
+   "back": "Two functions x=f(t) and y=g(t) that give the coordinates of a point for each value of the parameter t."
+  },
+  {
+   "front": "What is the purpose of plotting parametric points?",
+   "back": "To obtain concrete (x,y) locations that can be connected to visualize the curve and its direction."
+  },
+  {
+   "front": "How do you eliminate the parameter?",
+   "back": "Solve one equation for t (or t^2, etc.) and substitute into the other equation to get a relation only in x and y."
+  },
+  {
+   "front": "What does the direction of motion tell you on a parametric curve?",
+   "back": "It indicates the order in which the curve is traced as t increases, often shown with arrows."
+  },
+  {
+   "front": "Give an example of a simple motion described parametrically.",
+   "back": "x=5t (eastward constant speed) and y=2t^2 (northward acceleration)."
+  },
+  {
+   "front": "Why might a curve be easier to describe parametrically than with y=h(x)?",
+   "back": "Because some shapes (like circles) cannot be written as a single function y of x without splitting into parts."
+  },
+  {
+   "front": "What is a Cartesian equation?",
+   "back": "An equation that involves only x and y, obtained after removing the parameter t."
+  },
+  {
+   "front": "What is meant by 'plotting parametric points'?",
+   "back": "Choosing t values, computing the corresponding x and y, and marking those points on the xy‑plane."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l13-fig1",
+   "title": "A circle traced as t runs from 0 to 2π; arrows show counter‑clockwise motion.",
+   "alt": "Unit circle from x = cos t, y = sin t",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 4,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l13-fig2",
+   "title": "The Cartesian form x^2 + y^2 = 1 matches the parametric unit circle.",
+   "alt": "Circle obtained after eliminating the parameter",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 4,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l13-fig3",
+   "title": "A line through the origin with slope 2; direction follows increasing t.",
+   "alt": "Straight line from x = t, y = 2t",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 5,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l13-rolling-ball-on-track",
+   "title": "A ball rolling along a curved track illustrates how position changes with time.",
+   "alt": "A ball rolling along a curved track illustrates how position changes with time.",
+   "priority": 9,
+   "picture_title": "Rolling Ball on Track",
+   "kind": "photo",
+   "subject": "A real ball moving on a wooden track shaped like a segment of a circle, showing the direction of motion with arrows.",
+   "layout": "The track curves from left to right; the ball is positioned at several points along the track with faint motion‑blur trails indicating successive positions.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l13-planetary-orbit",
+   "title": "A planet orbiting a star demonstrates a natural parametric path in space.",
+   "alt": "A planet orbiting a star demonstrates a natural parametric path in space.",
+   "priority": 8,
+   "picture_title": "Planetary Orbit",
+   "kind": "illustration",
+   "subject": "A simple diagram of a planet moving around a sun, with the orbital path drawn and a small clock icon indicating the parameter t as time.",
+   "layout": "Sun at centre, circular orbit around it; the planet is shown at three positions with arrows pointing in the direction of motion.",
+   "labels": [
+    "Sun",
+    "Planet",
+    "Orbit",
+    "Time t"
+   ],
+   "after": 6
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l13-animated-pendulum",
+   "title": "A swinging pendulum provides a clear example of periodic motion described by parametric equations.",
+   "alt": "A swinging pendulum provides a clear example of periodic motion described by parametric equations.",
+   "priority": 7,
+   "picture_title": "Animated Pendulum",
+   "kind": "photo",
+   "subject": "A pendulum suspended from a ceiling, captured at several angles during its swing, with a faint trace of its path.",
+   "layout": "The pendulum rod is centred; three ghost images of the bob are shown at different swing positions, each labelled with the corresponding time value.",
+   "labels": [
+    "Bob",
+    "Rod",
+    "Center",
+    "t = 0",
+    "t = π/2"
+   ],
+   "after": 6
+  },
+  {
+   "type": "steps",
+   "title": "How to plot points from a parametric equation",
+   "steps": [
+    {
+     "label": "Choose t-values",
+     "text": "Select a few convenient values of the parameter t."
+    },
+    {
+     "label": "Compute coordinates",
+     "text": "Plug each t into x = f(t) and y = g(t) to get (x, y)."
+    },
+    {
+     "label": "Mark points",
+     "text": "Place each (x, y) on the xy‑plane."
+    },
+    {
+     "label": "Connect in order",
+     "text": "Draw a smooth curve following the increasing t‑order."
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Parametric vs Cartesian description",
+   "left": {
+    "name": "Parametric",
+    "points": [
+     "Two separate equations x = f(t), y = g(t)",
+     "Shows direction of motion",
+     "Works well for curves not functions of x"
+    ]
+   },
+   "right": {
+    "name": "Cartesian",
+    "points": [
+     "Single equation relating x and y",
+     "No explicit direction",
+     "Easier to recognise standard shapes"
+    ]
+   },
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

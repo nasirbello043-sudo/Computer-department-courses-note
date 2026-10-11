@@ -1,0 +1,332 @@
+{
+ "title": "Eliminating the Parameter",
+ "summary": "Students learn how to remove a parameter from a pair of parametric equations to obtain a Cartesian equation of a curve. The lesson shows step‑by‑step algebraic techniques and several worked examples.",
+ "objectives": [
+  "Identify the parameter in a set of parametric equations",
+  "Solve one equation for the parameter",
+  "Substitute the expression into the other equation",
+  "Simplify to obtain the Cartesian form",
+  "Check the result by plotting or testing points"
+ ],
+ "prerequisites": "Students should already know how to work with algebraic equations, solve for a variable, and understand basic functions and graphs.",
+ "why": [
+  "In physics and engineering, many motions are described with a time variable (the parameter). Converting to a single equation lets us see the overall path without constantly referring to time.",
+  "Eliminating the parameter also helps in calculus when we need to differentiate or integrate a curve directly, and it appears in computer graphics for converting parametric models to implicit surfaces."
+ ],
+ "sections": [
+  {
+   "heading": "What Does ‘Eliminate the Parameter’ Mean?",
+   "body": "When we write a curve with a *parameter* we are giving two separate formulas, one for $x$ and one for $y$, that both involve the same extra symbol – the parameter.  \nFor example we might have  \n\n$$x = f(t), \\qquad y = g(t)$$  \n\nwhere $t$ is the parameter. Each point on the curve is produced by picking a value of $t$, plugging it into the two formulas, and getting a pair $(x,y)$.  \n\n> **Definition:** *Eliminating the parameter* means removing the extra symbol $t$ so that we end up with a single equation that relates $x$ and $y$ directly, without any $t$ left.\n\nWhy would we want to do this?  \nFirst, a single equation $F(x,y)=0$ is often easier to recognise. It tells us at a glance what shape we are dealing with – a line, a circle, a parabola, etc. Second, many later calculations (for example finding where two curves intersect) are simpler when each curve is expressed only in $x$ and $y$.  \n\nThink of the parameter as a *secret ingredient* in a recipe. The two formulas $x=f(t)$ and $y=g(t)$ are like two separate dishes that both need the same spice $t$. If we can rewrite the menu so that the spice never appears, diners can understand the overall flavour without knowing the hidden ingredient. In mathematics, the “flavour” is the geometric relationship between $x$ and $y$.\n\nHow do we actually get rid of $t$? The basic idea is to solve one of the two equations for $t$, and then replace $t$ in the other equation. Suppose we can solve $x = f(t)$ for $t$; we write  \n\n$$t = f^{-1}(x)$$  \n\n(the inverse function $f^{-1}$ gives the value of $t$ that produces a given $x$). Then we substitute this expression for $t$ into the second equation:  \n\n$$y = g\\!\\bigl(f^{-1}(x)\\bigr).$$  \n\nNow $y$ is written directly in terms of $x$, and the parameter $t$ has disappeared.  \n\n> **Note:** The step “solve for $t$” is only possible when the function $f$ can be inverted on the part of the curve we are studying. If $f$ is not one‑to‑one, we may have to split the curve into pieces or use a different algebraic trick.\n\nSometimes solving directly for $t$ is messy, but we can still eliminate it by *combining* the two equations. For instance, if $x = t^2$ and $y = t^3$, we can write $t = \\sqrt{x}$ (choosing the non‑negative root) and substitute into $y$:  \n\n$$y = (\\sqrt{x})^{\\,3} = x^{3/2}.$$  \n\nAlternatively, we can eliminate $t$ without solving by using algebraic identities. From $x = t^2$ we have $t^2 = x$, and from $y = t^3$ we have $t^3 = y$. Dividing the second by the first gives  \n\n$$\\frac{y}{x} = t,$$  \n\nso $t = y/x$, and substituting back into $x = t^2$ yields  \n\n$$x = \\left(\\frac{y}{x}\\right)^{2},$$  \n\nwhich can be rearranged to a single equation $x^{3}=y^{2}$. Both routes give the same curve, just expressed differently.\n\n> **In daily life:** Imagine you have a map that tells you “travel $t$ kilometres north, then $t$ kilometres east”. The pair $(x,y)$ tells where you end up. Eliminating $t$ is like drawing a straight line on the map that shows all possible end points without mentioning how many kilometres you walked each time.\n\nThe ultimate goal is a clean relationship $F(x,y)=0$ that captures every point the original parametric pair describes, and nothing else (unless the algebra introduced extra solutions, which we check later). Once the parameter is gone, we can compare curves, compute areas, or apply other tools that require a single equation.\n\n> **Remember:** After eliminating the parameter, always verify that the new equation really represents the original curve – sometimes algebraic manipulation can add points that were not produced by any $t$, or lose points that were. A quick check with a few sample $t$‑values helps catch such mistakes.",
+   "code": ""
+  },
+  {
+   "heading": "Solving One Equation for the Parameter",
+   "body": "When we have a parametric curve we usually write the coordinates as  \n\n\\[\nx = f(t),\\qquad y = g(t)\n\\]\n\nwhere the same symbol $t$ (the **parameter**) appears in both equations.  \nTo “eliminate the parameter’’ means to rewrite the relationship between $x$ and $y$ without any $t$ left.  \nThe first step is often to **solve one of the equations for $t$** – that is, to isolate $t$ on one side of the equation.  \nOnce we have $t$ expressed in terms of $x$ (or $y$) we can substitute that expression into the other equation, and the $t$ disappears.\n\n> **Definition:** *Solving for the parameter* means rearranging an equation so that the parameter $t$ is alone on one side, written as $t = \\text{(something in }x\\text{ or }y\\text{)}$.\n\nWhy does this help? Think of $t$ as a secret code that tells you how far along a path you have travelled. If you can write the code directly in terms of the horizontal position $x$, then you no longer need the secret – you can describe the whole path just with $x$ and $y$.  \n\n> **In daily life:** Imagine a recipe that tells you “add $t$ teaspoons of sugar and $2t$ cups of flour”. If you solve the first instruction for $t$ (say $t = \\frac{\\text{sugar}}{1\\text{ tsp}}$) and plug it into the second, you get “flour = $2 \\times$ (sugar amount)”, removing the hidden variable $t$.\n\nThe algebraic steps are simple but must be done carefully:\n\n1. **Identify the equation** that looks easiest to isolate $t$. Linear equations (those where $t$ appears only to the first power and is not inside a function) are the simplest.\n2. **Undo any operations** that are applied to $t$ – add, subtract, multiply, divide – in the reverse order.\n3. **Check** that the expression you obtain really gives the same $t$ when you substitute it back.\n\nBelow we walk through two very easy examples that illustrate every step.\n\n---\n\n**Example 1 (Easy): Solving $x = 3t + 2$ for $t$**  \n\nWe are given the $x$‑equation of a parametric line and want $t$ in terms of $x$.\n\n1. **Subtract the constant term** $2$ from both sides to remove it from the right‑hand side.  \n   $$x - 2 = 3t$$\n2. **Divide by the coefficient** $3$ that multiplies $t$ to isolate $t$.  \n   $$\\frac{x-2}{3} = t$$\n3. **Rewrite** the equation so $t$ is on the left, which is the standard form.  \n   $$t = \\frac{x-2}{3}$$\n\n**Answer:** $t = \\dfrac{x-2}{3}$.\n\n---\n\n**Example 2 (Easy): Solving $y = 5 - 2t$ for $t$**  \n\nNow the $y$‑equation is given; we again isolate $t$.\n\n1. **Move the constant** $5$ to the left by subtracting $5$ from both sides.  \n   $$y - 5 = -2t$$\n2. **Divide by the coefficient** $-2$ (remember the minus sign) to get $t$ alone.  \n   $$\\frac{y-5}{-2} = t$$\n3. **Simplify the fraction** by pulling the minus sign to the numerator for a cleaner look.  \n   $$t = \\frac{5 - y}{2}$$\n\n**Answer:** $t = \\dfrac{5 - y}{2}$.\n\n---\n\nNow that we have practiced the mechanics, let’s see why the result is useful. Suppose the same curve also has the second equation $y = 5 - 2t$. Using the expression for $t$ we just found from the $x$‑equation, we can replace $t$ in the $y$‑equation:\n\n\\[\ny = 5 - 2\\left(\\frac{x-2}{3}\\right)\n\\]\n\nSimplifying gives a direct relationship between $x$ and $y$ with no $t$ left. This is exactly what “eliminating the parameter’’ means.\n\n> **Remember:** Always solve the *simpler* equation first. Linear equations are easiest; if $t$ appears inside a trigonometric or exponential function, you may need to use inverse functions later, but the same idea—undo the operations—still applies.\n\n> **Common mistake:** Forgetting to apply the same operation to *both* sides of the equation. When you subtract $2$ from the right‑hand side, you must also subtract $2$ from the left; otherwise the equality is broken.\n\nBy mastering the skill of isolating the parameter, you build the foundation for turning any pair of parametric equations into a single Cartesian equation. The next sections will show how to substitute the solved expression into the other equation and how to handle more complicated cases such as trigonometric parameters.",
+   "code": ""
+  },
+  {
+   "heading": "Substituting and Simplifying",
+   "body": "When we have already solved one of the parametric equations for the parameter $t$, the next step is to **replace** $t$ in the other equation and then tidy the result.  \nThis process is called *substituting and simplifying*. By doing it we turn the pair of parametric equations into a single equation that relates $x$ and $y$ directly – the Cartesian form.  \n\n> **Definition:** *Substituting* means putting the expression we found for $t$ into the second equation. *Simplifying* means using ordinary algebra (expanding, collecting like terms, factoring) until the equation contains only $x$ and $y$.\n\nWhy is this useful?  \nImagine you have a recipe that tells you how much flour ($x$) and sugar ($y$) you need, but both are expressed in terms of the number of servings $t$. If you want to know the relationship between flour and sugar **without** referring to the number of servings, you solve one recipe line for $t$, plug it into the other, and simplify. The result tells you directly how much flour and sugar go together, no matter how many servings you make.\n\n---\n\n**Example 3 (Medium): Eliminating $t$ from linear equations**  \nGiven  \n\\[\nx = 3t + 2,\\qquad y = 4t - 1,\n\\]  \neliminate $t$.\n\n1. **Solve the first equation for $t$.**  \n   Isolate $t$ by moving the constant term and dividing by the coefficient of $t$:  \n   $$\n   t = \\frac{x-2}{3}.\n   $$\n\n2. **Substitute this expression for $t$ into the second equation.**  \n   Replace $t$ in $y = 4t - 1$ with $\\dfrac{x-2}{3}$:  \n   $$\n   y = 4\\left(\\frac{x-2}{3}\\right) - 1.\n   $$\n\n3. **Simplify the resulting equation.**  \n   Multiply out the fraction and combine the constants:  \n   $$\n   y = \\frac{4x-8}{3} - 1\n   = \\frac{4x-8-3}{3}\n   = \\frac{4x-11}{3}.\n   $$  \n   Finally, clear the denominator to obtain a clean Cartesian form:  \n   $$\n   3y = 4x - 11.\n   $$\n\n**Answer:** The relationship between $x$ and $y$ after eliminating $t$ is $3y = 4x - 11$.\n\n---\n\n**Example 4 (Medium): Eliminating $t$ when one equation is quadratic**  \nGiven  \n\\[\nx = t^{2},\\qquad y = 2t + 3,\n\\]  \nsolve for $t$ from the first equation and substitute into the second.\n\n1. **Solve the first equation for $t$.**  \n   Since $x = t^{2}$, take the square root (remembering both positive and negative roots):  \n   $$\n   t = \\pm\\sqrt{x}.\n   $$  \n   *Note:* We keep both signs because the original parametric description may allow $t$ to be negative as well as positive.\n\n2. **Substitute $t = \\pm\\sqrt{x}$ into the second equation.**  \n   Replace $t$ in $y = 2t + 3$:  \n   $$\n   y = 2(\\pm\\sqrt{x}) + 3.\n   $$\n\n3. **Simplify and write the Cartesian relation.**  \n   The expression can be written as two separate branches:  \n   $$\n   y = 2\\sqrt{x} + 3 \\quad\\text{or}\\quad y = -2\\sqrt{x} + 3.\n   $$  \n   If we prefer a single equation without the ± sign, we can square both sides after moving the constant:  \n   $$\n   (y-3)^{2} = (2\\sqrt{x})^{2} = 4x.\n   $$  \n   Hence the Cartesian form is  \n   $$\n   (y-3)^{2} = 4x.\n   $$\n\n**Answer:** Eliminating $t$ gives the parabola $(y-3)^{2}=4x$, which includes both branches $y = 2\\sqrt{x}+3$ and $y = -2\\sqrt{x}+3$.\n\n> **Note:** When the solved expression for $t$ involves a square root, remember to consider both the positive and negative possibilities unless the context restricts $t$ to one sign.\n\n> **In daily life:** Think of $t$ as a hidden knob on a machine. Solving for $t$ tells you exactly how far to turn the knob. Substituting that turn into the other setting shows you the final output without ever mentioning the knob again.\n\n> **Common mistake:** Forgetting to simplify fully. After substitution you might leave a fraction or a square root inside the equation. Always finish by clearing denominators or combining like terms so the final Cartesian equation is as simple as possible.\n\nBy following these steps—solve for $t$, substitute, then simplify—you can turn any pair of parametric equations into a single, easy‑to‑interpret relationship between $x$ and $y$. This technique is the backbone of “eliminating the parameter” and will be used repeatedly in the rest of the course.",
+   "code": ""
+  },
+  {
+   "heading": "Using Trigonometric Parameters",
+   "body": "When a parameter such as $t$ appears inside a sine or cosine, “eliminate the parameter’’ means we want an equation that relates the other variables (for example $x$ and $y$) **without** any $t$.  \nThe trick is to use the basic trigonometric identities that connect $\\sin$, $\\cos$, $\\tan$, $\\sec$, etc. These identities are always true, so replacing a combination of functions by an equivalent expression removes the hidden variable.\n\n> **Definition:** A *trigonometric identity* is an equation that holds for every angle $t$.  \n> For example, $$\\sin^2 t + \\cos^2 t = 1$$ is true for all $t$.\n\nWhy is this useful? Imagine you have a parametric curve drawn on a piece of paper. The curve is described by $x$ and $y$ in terms of a hidden angle $t$. If you can rewrite the description as a single equation $F(x,y)=0$, you can recognise the shape instantly – a circle, an ellipse, a hyperbola, etc. It is like knowing the recipe (the parametric form) and then being able to name the dish (the Cartesian equation) without having to taste every ingredient.\n\nThink of $t$ as a secret code that tells you how far around a circle you have moved. The identities are the decoding rules that let you translate the secret code back into ordinary numbers.\n\n---\n\n**Example 5 (Hard):** *Eliminate $t$ from $x = 5\\cos t,\\; y = 5\\sin t$ to obtain the equation of the curve.*\n\n1. **Write each variable in terms of the trigonometric function.**  \n   We already have $x = 5\\cos t$ and $y = 5\\sin t$.\n\n2. **Solve each equation for the trigonometric function.**  \n   $$\\cos t = \\frac{x}{5},\\qquad \\sin t = \\frac{y}{5}$$\n\n3. **Use the Pythagorean identity $\\sin^2 t + \\cos^2 t = 1$.**  \n   Substitute the expressions from step 2:  \n   $$\\left(\\frac{y}{5}\\right)^{2} + \\left(\\frac{x}{5}\\right)^{2} = 1$$\n\n4. **Simplify the equation.**  \n   Multiply both sides by $25$ (which is $5^{2}$):  \n   $$x^{2} + y^{2} = 25$$\n\n**Answer:** The curve is the circle centred at the origin with radius $5$, described by $x^{2}+y^{2}=25$.\n\n---\n\nNow consider a case where the parameter appears inside a secant and a tangent. Secant is the reciprocal of cosine, and tangent is sine divided by cosine. The identity that connects them is derived from the Pythagorean identity:\n\n$$\\sec^{2} t = 1 + \\tan^{2} t.$$\n\nThis tells us that any time we see $\\sec^{2} t$ and $\\tan^{2} t$ together, we can replace the left‑hand side by $1+\\tan^{2} t$ and then cancel terms.\n\n> **Note:** $\\sec t = \\dfrac{1}{\\cos t}$ and $\\tan t = \\dfrac{\\sin t}{\\cos t}$. Remember these definitions; they are the building blocks for the identities we use.\n\n---\n\n**Example 6 (Hard):** *Eliminate $t$ from $x = 2\\sec t,\\; y = 2\\tan t$ using the identity $\\sec^{2} t = 1 + \\tan^{2} t$.*\n\n1. **Express the trigonometric functions in terms of $x$ and $y$.**  \n   From $x = 2\\sec t$ we get $$\\sec t = \\frac{x}{2}.$$  \n   From $y = 2\\tan t$ we get $$\\tan t = \\frac{y}{2}.$$\n\n2. **Square both expressions** so that they match the identity (which involves squares).  \n   $$\\sec^{2} t = \\left(\\frac{x}{2}\\right)^{2},\\qquad \\tan^{2} t = \\left(\\frac{y}{2}\\right)^{2}.$$\n\n3. **Substitute into the identity $\\sec^{2} t = 1 + \\tan^{2} t$.**  \n   $$\\left(\\frac{x}{2}\\right)^{2} = 1 + \\left(\\frac{y}{2}\\right)^{2}$$\n\n4. **Clear the denominators by multiplying by $4$** (the square of $2$).  \n   $$x^{2} = 4 + y^{2}$$\n\n5. **Re‑arrange to a standard form.**  \n   $$x^{2} - y^{2} = 4$$\n\n**Answer:** The eliminated‑parameter equation is the hyperbola $x^{2} - y^{2} = 4$, opening left and right with centre at the origin.\n\n> **Remember:** After substituting, always simplify by clearing fractions and collecting like terms. This step prevents algebraic mistakes and reveals the familiar shape of the curve.\n\nBy following these steps—solve for the trig function, square if needed, apply a known identity, and simplify—you can eliminate a parameter that lives inside sine, cosine, tangent, or secant. The resulting Cartesian equation lets you recognise the geometric figure instantly, just as a chef can name a dish from its final presentation without seeing the individual ingredients.",
+   "code": ""
+  },
+  {
+   "heading": "Checking Your Result",
+   "body": "When we finish eliminating a parameter we usually get a Cartesian equation that should describe exactly the same set of points as the original parametric form.  \n**Checking your result** means testing that the two descriptions really match.  \nWe do this by picking a few convenient values of the parameter $t$, computing the corresponding $(x,y)$ from the original formulas, and then seeing whether those points satisfy the equation we derived.  \nIf they do, we have good evidence that the elimination was correct; if not, we have found a mistake and can go back and look for algebraic slips.\n\n> **Note:** A “Cartesian equation” is an equation that relates $x$ and $y$ directly, without any other symbols such as $t$.  \n\n> **Remember:** Substituting a few sample $t$‑values is not a formal proof, but it is a quick sanity check that catches most algebraic errors.\n\n---\n\n**Example 7 (Intermediate): Verifying the relation for $x=t^{3},\\;y=t^{2}$**  \n\nWe have already eliminated $t$ from the pair  \n\n\\[\nx = t^{3},\\qquad y = t^{2}\n\\]\n\nby solving the second equation for $t$ and substituting into the first.  \nThe steps gave the Cartesian equation  \n\n\\[\nx^{2}=y^{3}.\n\\]\n\nNow we test this result with three easy values of $t$.\n\n1. **Choose a value of $t$ and compute $(x,y)$.**  \n   Take $t=-1$. Then  \n\n   $$\n   x = (-1)^{3} = -1,\\qquad y = (-1)^{2}=1.\n   $$\n\n2. **Insert the computed $x$ and $y$ into the Cartesian equation.**  \n\n   $$\n   x^{2}=(-1)^{2}=1,\\qquad y^{3}=1^{3}=1.\n   $$\n\n   Since $1=1$, the point $(-1,1)$ satisfies $x^{2}=y^{3}$.\n\n3. **Repeat with another $t$ value.**  \n   Take $t=0$. Then  \n\n   $$\n   x = 0^{3}=0,\\qquad y = 0^{2}=0.\n   $$  \n\n   Substituting gives  \n\n   $$\n   x^{2}=0^{2}=0,\\qquad y^{3}=0^{3}=0,\n   $$  \n\n   which again matches.\n\n4. **One more test for confidence.**  \n   Take $t=2$. Then  \n\n   $$\n   x = 2^{3}=8,\\qquad y = 2^{2}=4.\n   $$  \n\n   Check the relation:  \n\n   $$\n   x^{2}=8^{2}=64,\\qquad y^{3}=4^{3}=64.\n   $$  \n\n   The equality holds, so the point $(8,4)$ also lies on the curve $x^{2}=y^{3}$.\n\n**Answer:** All three sampled points satisfy the derived Cartesian equation, confirming that the elimination $x^{2}=y^{3}$ is correct for the parametric pair $x=t^{3},\\;y=t^{2}$.\n\n---\n\nIf a point fails the test, the most common source of error is a sign mistake when solving for $t$ or when squaring/cubing both sides.  \n\n> **Common mistake:** Forgetting that squaring a negative number makes it positive, which can hide a sign error if you do not keep track of the original $t$‑value.\n\n---\n\nAnother way to check is to **sketch** the curve from both descriptions and see whether they look the same.\n\n1. **Sketch from the parametric form.**  \n   For $x=t^{3},\\;y=t^{2}$, as $t$ runs from $-\\infty$ to $\\infty$, $y$ is always non‑negative (because a square is never negative) while $x$ takes both negative and positive values, growing faster in magnitude than $y$. The points trace a “half‑cubic” shape that lies entirely above the $x$‑axis.\n\n2. **Sketch from the Cartesian equation $x^{2}=y^{3}$.**  \n   Solving for $y$ gives $y = \\sqrt[3]{x^{2}}$, which is also always non‑negative and symmetric about the $y$‑axis because $x$ appears only as $x^{2}$. The graph is the same “half‑cubic” curve we saw before.\n\nBecause the two pictures match, the algebraic elimination is further supported.\n\n> **In daily life:** This is like checking a recipe. After you follow the steps to bake a cake, you taste a small piece. If it tastes as expected, the recipe likely worked; if not, you review the steps.\n\n---\n\n**Example 8 (Advanced): Using a trigonometric parameter**  \n\nSuppose the parametric equations are  \n\n\\[\nx = 2\\cos t,\\qquad y = 3\\sin t.\n\\]\n\nEliminating $t$ gives the familiar ellipse  \n\n\\[\n\\frac{x^{2}}{4}+\\frac{y^{2}}{9}=1.\n\\]\n\nWe verify with three $t$‑values.\n\n1. **$t=0$** gives $x=2$, $y=0$. Substituting:  \n\n   $$\n   \\frac{2^{2}}{4}+\\frac{0^{2}}{9}=1+0=1.\n   $$\n\n2. **$t=\\frac{\\pi}{2}$** gives $x=0$, $y=3$. Substituting:  \n\n   $$\n   \\frac{0^{2}}{4}+\\frac{3^{2}}{9}=0+1=1.\n   $$\n\n3. **$t=\\pi$** gives $x=-2$, $y=0$. Substituting:  \n\n   $$\n   \\frac{(-2)^{2}}{4}+\\frac{0^{2}}{9}=1+0=1.\n   $$\n\nAll three points satisfy the ellipse equation, confirming the elimination.\n\n**Answer:** The Cartesian equation $\\displaystyle \\frac{x^{2}}{4}+\\frac{y^{2}}{9}=1$ correctly represents the parametric curve $x=2\\cos t,\\;y=3\\sin t$.\n\n---\n\nBy consistently **plugging in** a few easy $t$‑values and, when possible, **drawing** the two versions of the curve, we gain confidence that the parameter has truly been eliminated without error. This habit saves time later, especially when the algebra becomes more involved.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Given $x = 2t+1$ and $y = 3t-4$, eliminate $t$ to find a relation between $x$ and $y$.",
+   "a": "Solve the first equation for $t$: $t = \\frac{x-1}{2}$. Substitute into $y$:\n\\[\ny = 3\\left(\\frac{x-1}{2}\\right)-4 = \\frac{3x-3}{2}-4 = \\frac{3x-3-8}{2}= \\frac{3x-11}{2}.\n\\]\nMultiply by $2$: $2y = 3x-11$, or $3x-2y-11=0$."
+  },
+  {
+   "level": "Easy",
+   "q": "For the parametric equations $x = \\cos t$, $y = \\sin t$, eliminate $t$.",
+   "a": "Use the Pythagorean identity: $\\cos^2 t + \\sin^2 t = 1$. Replace $\\cos t$ with $x$ and $\\sin t$ with $y$:\n\\[\nx^2 + y^2 = 1.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Eliminate the parameter $t$ from $x = \\frac{1}{t}$ and $y = \\frac{t^2+1}{t}$.",
+   "a": "From $x = \\frac{1}{t}$ we get $t = \\frac{1}{x}$. Substitute into $y$:\n\\[\ny = \\frac{\\left(\\frac{1}{x}\\right)^2 + 1}{\\frac{1}{x}} = \\frac{\\frac{1}{x^2}+1}{\\frac{1}{x}} = \\frac{1+x^2}{x}.\n\\]\nMultiply both sides by $x$: $xy = 1 + x^2$, or $x^2 - xy + 1 = 0$."
+  },
+  {
+   "level": "Medium",
+   "q": "The curve is given by $x = 5\\sec\\theta$, $y = 5\\tan\\theta$. Eliminate $\\theta$ and write the Cartesian equation.",
+   "a": "Recall the identity $\\sec^2\\theta - \\tan^2\\theta = 1$. Solve for $\\sec\\theta$ and $\\tan\\theta$: $\\sec\\theta = \\frac{x}{5}$, $\\tan\\theta = \\frac{y}{5}$. Substitute into the identity:\n\\[\n\\left(\\frac{x}{5}\\right)^2 - \\left(\\frac{y}{5}\\right)^2 = 1 \\;\\Longrightarrow\\; \\frac{x^2 - y^2}{25}=1.\n\\]\nMultiply by $25$: $x^2 - y^2 = 25$."
+  },
+  {
+   "level": "Hard",
+   "q": "Given $x = e^{2t}$ and $y = e^{3t} + e^{t}$, eliminate $t$ to obtain a relation between $x$ and $y$.",
+   "a": "From $x = e^{2t}$, take natural logs: $\\ln x = 2t$, so $t = \\frac{1}{2}\\ln x$. Then $e^{t}=e^{\\frac{1}{2}\\ln x}=x^{1/2}$ and $e^{3t}=e^{\\frac{3}{2}\\ln x}=x^{3/2}$. Substitute into $y$:\n\\[\ny = x^{3/2} + x^{1/2} = x^{1/2}(x+1).\n\\]\nThus the Cartesian equation is $y = \\sqrt{x}\\,(x+1)$, or $y^2 = x(x+1)^2$ after squaring both sides."
+  },
+  {
+   "level": "Hard",
+   "q": "A curve is described by $x = \\frac{1-\\cos\\theta}{\\sin\\theta}$ and $y = \\frac{1+\\cos\\theta}{\\sin\\theta}$. Eliminate $\\theta$ and simplify the resulting equation.",
+   "a": "Write both fractions with a common denominator:\n\\[\nx = \\frac{1-\\cos\\theta}{\\sin\\theta},\\qquad y = \\frac{1+\\cos\\theta}{\\sin\\theta}.\n\\]\nAdd the two equations: $x + y = \\frac{(1-\\cos\\theta)+(1+\\cos\\theta)}{\\sin\\theta}= \\frac{2}{\\sin\\theta}$, so $\\sin\\theta = \\frac{2}{x+y}$.\nSubtract: $y - x = \\frac{(1+\\cos\\theta)-(1-\\cos\\theta)}{\\sin\\theta}= \\frac{2\\cos\\theta}{\\sin\\theta}$, thus $\\cos\\theta = \\frac{(y-x)}{2}\\sin\\theta = \\frac{y-x}{2}\\cdot\\frac{2}{x+y}= \\frac{y-x}{x+y}$.\nNow use $\\sin^2\\theta + \\cos^2\\theta = 1$:\n\\[\n\\left(\\frac{2}{x+y}\\right)^2 + \\left(\\frac{y-x}{x+y}\\right)^2 = 1.\n\\]\nCompute:\n\\[\n\\frac{4 + (y-x)^2}{(x+y)^2}=1 \\;\\Longrightarrow\\; 4 + (y-x)^2 = (x+y)^2.\n\\]\nExpand both sides: $4 + y^2 -2xy + x^2 = x^2 + 2xy + y^2$. Cancel $x^2$ and $y^2$: $4 -2xy = 2xy$, so $4 = 4xy$, giving $xy = 1$.\nHence the Cartesian equation after eliminating $\\theta$ is $xy = 1$."
+  }
+ ],
+ "recap": "Eliminating the parameter means removing the extra variable t from a pair of equations x=f(t), y=g(t) to get a single relation between x and y. Usually we solve one equation for t, substitute into the other, and simplify, sometimes using trig identities. The resulting Cartesian equation is easier to recognise and work with, and we check it by testing a few t values.",
+ "key_terms": [
+  {
+   "term": "parameter",
+   "meaning": "An extra variable, often t, that both x and y depend on in a parametric description."
+  },
+  {
+   "term": "eliminate the parameter",
+   "meaning": "Rewrite the relationship between x and y so that the parameter no longer appears."
+  },
+  {
+   "term": "solve for t",
+   "meaning": "Rearrange one of the parametric equations so that t is expressed in terms of x or y alone."
+  },
+  {
+   "term": "substitute",
+   "meaning": "Replace t in the other equation with the expression found from solving for t."
+  },
+  {
+   "term": "simplify",
+   "meaning": "Use algebraic steps like expanding, factoring, or combining like terms to obtain an equation only in x and y."
+  },
+  {
+   "term": "trigonometric identity",
+   "meaning": "An equation true for all angles, such as sin^2 t + cos^2 t = 1, used to remove trig parameters."
+  },
+  {
+   "term": "Cartesian equation",
+   "meaning": "An equation that relates x and y directly, without any other symbols."
+  },
+  {
+   "term": "sanity check",
+   "meaning": "Testing a few values of t to see if the derived Cartesian equation gives the same points as the original parametric form."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does it mean to eliminate the parameter?",
+   "options": [
+    "Find the value of t that makes x and y equal",
+    "Write a single equation in x and y with no t",
+    "Replace x and y with new variables",
+    "Differentiate both parametric equations"
+   ],
+   "answer": 1,
+   "why": "Eliminating the parameter produces a relation between x and y only."
+  },
+  {
+   "q": "Which step comes first when eliminating a parameter?",
+   "options": [
+    "Substitute the expression for t",
+    "Simplify the equations",
+    "Solve one equation for t",
+    "Graph the curve"
+   ],
+   "answer": 2,
+   "why": "You must first isolate t before you can substitute it into the other equation."
+  },
+  {
+   "q": "If x = 2t+1 and y = t^2, what is the Cartesian equation after eliminating t?",
+   "options": [
+    "y = (x-1)^2/4",
+    "y = (x+1)^2/4",
+    "y = (x-1)/2",
+    "y = (x+1)/2"
+   ],
+   "answer": 0,
+   "why": "Solve t = (x-1)/2 and substitute into y = t^2 gives y = ((x-1)/2)^2."
+  },
+  {
+   "q": "Which trigonometric identity is most useful for eliminating a parameter when x = cos t and y = sin t?",
+   "options": [
+    "tan^2 t + 1 = sec^2 t",
+    "sin^2 t + cos^2 t = 1",
+    "1 + cot^2 t = csc^2 t",
+    "sin 2t = 2 sin t cos t"
+   ],
+   "answer": 1,
+   "why": "sin^2 t + cos^2 t = 1 directly relates x and y."
+  },
+  {
+   "q": "After eliminating the parameter, how can you check your result?",
+   "options": [
+    "Integrate the Cartesian equation",
+    "Plug in several t values and see if the points satisfy the equation",
+    "Differentiate both sides with respect to t",
+    "Graph both forms and compare colors"
+   ],
+   "answer": 1,
+   "why": "Testing sample t values is a quick sanity check."
+  },
+  {
+   "q": "What is a Cartesian equation?",
+   "options": [
+    "An equation involving only x and y",
+    "An equation that includes a parameter t",
+    "An equation in polar coordinates",
+    "An equation with three variables"
+   ],
+   "answer": 0,
+   "why": "A Cartesian equation relates x and y directly, without extra symbols."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Parameter",
+   "back": "An extra variable (often t) that both x and y depend on in a parametric description."
+  },
+  {
+   "front": "Eliminate the parameter",
+   "back": "Rewrite the relationship between x and y so that the parameter no longer appears."
+  },
+  {
+   "front": "Solve for t",
+   "back": "Rearrange one parametric equation to express t in terms of x or y alone."
+  },
+  {
+   "front": "Substitute",
+   "back": "Insert the expression for t into the other equation to remove t."
+  },
+  {
+   "front": "Simplify",
+   "back": "Use algebraic manipulation to obtain an equation containing only x and y."
+  },
+  {
+   "front": "Trigonometric identity example",
+   "back": "sin^2 t + cos^2 t = 1, true for all angles t."
+  },
+  {
+   "front": "Cartesian equation",
+   "back": "An equation that relates x and y directly, without any other symbols such as t."
+  },
+  {
+   "front": "Sanity check",
+   "back": "Test a few values of t to verify that the derived Cartesian equation matches the original parametric points."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l14-fig1",
+   "title": "Parametric form x = t, y = t^2 produces a parabola.",
+   "alt": "Example: Parabolic Curve",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 1,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l14-fig2",
+   "title": "x = cos t, y = sin t traces a circle of radius 1.",
+   "alt": "Trigonometric Example: Unit Circle",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 3,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l14-fig3",
+   "title": "Eliminating t gives x^2 + y^2 = 1.",
+   "alt": "Cartesian Equation of the Unit Circle",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 3,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l14-clock-hands",
+   "title": "A clock showing hour and minute hands at different times, illustrating how the angle (parameter) determines the hand positions.",
+   "alt": "A clock showing hour and minute hands at different times, illustrating how the angle (parameter) determines the hand positions.",
+   "priority": 9,
+   "picture_title": "Clock Hands",
+   "kind": "photo",
+   "subject": "A close‑up photograph of an analog clock with the hour and minute hands highlighted. The hands move as the time (the parameter) changes, showing a real‑world example of a parametric description.",
+   "layout": "Clock centered in the frame; hour hand in red, minute hand in blue; a small inset shows the current time as a numeric label.",
+   "labels": [
+    "hour hand",
+    "minute hand",
+    "time"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l14-rotating-fan-blade",
+   "title": "A fan blade rotating, where the rotation angle is the parameter that determines the blade’s tip coordinates.",
+   "alt": "A fan blade rotating, where the rotation angle is the parameter that determines the blade’s tip coordinates.",
+   "priority": 7,
+   "picture_title": "Rotating Fan Blade",
+   "kind": "illustration",
+   "subject": "An illustration of a single fan blade attached to a hub, with the blade shown at several positions corresponding to different rotation angles (the parameter).",
+   "layout": "Hub at centre, blade drawn in three translucent positions around it; arrows indicate the angle parameter; each position labelled with its angle value.",
+   "labels": [
+    "hub",
+    "blade",
+    "angle"
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "How to Eliminate a Parameter",
+   "steps": [
+    {
+     "label": "Solve for t",
+     "text": "Isolate the parameter t in one of the equations."
+    },
+    {
+     "label": "Substitute",
+     "text": "Replace t in the other equation with the expression found."
+    },
+    {
+     "label": "Simplify",
+     "text": "Algebraically simplify to get an equation in x and y only."
+    },
+    {
+     "label": "Check",
+     "text": "Test a few t‑values to verify the new equation."
+    }
+   ],
+   "loop": false,
+   "after": 0
+  },
+  {
+   "type": "graph",
+   "title": "Cartesian Form of the Parabola",
+   "fn": "x^2",
+   "xmin": -3,
+   "xmax": 3,
+   "points": [
+    {
+     "x": -2,
+     "y": 4,
+     "label": "(-2,4)",
+     "open": false
+    },
+    {
+     "x": 2,
+     "y": 4,
+     "label": "(2,4)",
+     "open": false
+    }
+   ],
+   "caption": "After eliminating t we get y = x^2.",
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

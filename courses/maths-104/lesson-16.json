@@ -1,0 +1,367 @@
+{
+ "title": "Introduction to Differential Equations",
+ "summary": "This lesson introduces differential equations, explains what they represent, and shows how to solve simple first‑order equations. Students learn to recognise and solve separable and linear equations using basic techniques.",
+ "objectives": [
+  "Identify a differential equation and classify its order",
+  "Solve separable first‑order differential equations",
+  "Apply the integrating factor method to first‑order linear equations",
+  "Interpret the solution of a differential equation in a real‑world context"
+ ],
+ "prerequisites": "Students should be comfortable with algebra, functions, and basic calculus (derivatives and antiderivatives).",
+ "why": [
+  "Differential equations model how quantities change over time, such as population growth, cooling of objects, or the motion of a falling body. Understanding them lets us predict future behaviour from current conditions.",
+  "Engineers, scientists, and economists use differential equations every day to design systems, analyse data, and make decisions. Even simple models give valuable insight into real‑world problems."
+ ],
+ "sections": [
+  {
+   "heading": "What is a Differential Equation?",
+   "body": "A differential equation is simply an equation that involves a function and one or more of its derivatives.  \nA **derivative** measures how fast something changes; for a function $y(x)$ the symbol $\\dfrac{dy}{dx}$ means “the rate of change of $y$ with respect to $x$”.  \n\n> **Definition:** A differential equation is an equation that relates a function to its derivatives.\n\nThink of a car’s speedometer. The speed shown at any instant is the derivative of the car’s position with respect to time. If we know a rule that connects the speed to the position, we have a differential equation that tells us how the car moves.\n\n---\n\n### Order and degree\n\nThe **order** of a differential equation is the highest derivative that appears.  \n- In $\\dfrac{dy}{dx}=3x$ the highest derivative is the first derivative $\\dfrac{dy}{dx}$, so the equation is **first‑order**.  \n- If an equation contains $\\dfrac{d^2y}{dx^2}$ (the second derivative), its order is **second**.\n\nThe **degree** is the power to which the highest‑order derivative is raised, *provided the equation can be written as a polynomial in that derivative*.  \n- In $\\left(\\dfrac{dy}{dx}\\right)^2 + y = 0$ the highest derivative $\\dfrac{dy}{dx}$ is squared, so the degree is **2**.  \n- In $\\sin\\!\\left(\\dfrac{dy}{dx}\\right) = x$ the equation is not a polynomial in the derivative, so the degree is **not defined**.\n\nKnowing the order helps us decide which solution techniques to use, while the degree is mostly a classification tool.\n\n---\n\n### Simple examples\n\n1. **Linear first‑order example**  \n   $$\\frac{dy}{dx}=3x$$  \n   This says “the rate at which $y$ changes equals three times $x$”. If you increase $x$ by a little amount, $y$ grows by three times that amount.\n\n2. **Separable example**  \n   $$\\frac{dy}{dx}=y$$  \n   Here the derivative of $y$ equals the function itself. The equation can be “separated” into $\\dfrac{1}{y}\\,dy = dx$, which we will solve later.\n\n3. **Second‑order example**  \n   $$\\frac{d^2y}{dx^2}+4y=0$$  \n   The highest derivative is the second derivative $\\dfrac{d^2y}{dx^2}$, so the order is 2. The degree is 1 because the second derivative appears to the first power.\n\nThese tiny equations already illustrate the main ideas: a relationship between a function and its rates of change.\n\n> **In daily life:** Imagine a bathtub filling with water. The amount of water $V(t)$ depends on time $t$, and the flow rate $dV/dt$ tells you how fast the water level rises. If the faucet supplies water at a constant rate of $5$ L/min, the situation is described by the differential equation $\\dfrac{dV}{dt}=5$.\n\n---\n\n### Why study differential equations?\n\nMany physical, biological, and economic systems are governed by rules that involve rates of change. By writing those rules as differential equations, we can predict future behaviour, design control strategies, or understand underlying mechanisms. For instance, Newton’s second law $F = m\\,\\dfrac{d^2x}{dt^2}$ is a second‑order differential equation that predicts the motion of an object when the forces are known.\n\n> **Remember:** A differential equation tells you how a quantity changes; solving it gives the actual quantity as a function of the independent variable (often time or space).\n\n---\n\n### A quick check\n\nBefore moving on, make sure you can identify the order and degree of a few simple equations:\n\n- $\\dfrac{dy}{dx}+2y=0$ → order 1, degree 1.  \n- $\\left(\\dfrac{d^3y}{dx^3}\\right)^4 - y = 7$ → order 3, degree 4.  \n- $e^{\\frac{dy}{dx}} = x$ → order 1, degree not defined.\n\n> **Common mistake:** Confusing “order” with “degree”. The order looks at *which* derivative is highest; the degree looks at *how many times* that highest derivative is multiplied by itself (its exponent). They are independent concepts.\n\nUnderstanding these basics will make the later topics—separable equations, linear equations, and applications—much easier to follow.",
+   "code": ""
+  },
+  {
+   "heading": "Separable Differential Equations",
+   "body": "A separable differential equation is a first‑order equation that can be rewritten so that every term containing the unknown function $y$ (and $dy$) is on one side, and every term containing the independent variable $x$ (and $dx$) is on the other side.  \nWhen this is possible we can **separate the variables** and then integrate each side. The integration step gives us a relationship between $x$ and $y$ that describes all possible solutions.\n\n> **Definition:** A differential equation of the form  \n> $$\\frac{dy}{dx}=g(x)\\,h(y)$$  \n> is called *separable* because it can be rearranged to $$\\frac{1}{h(y)}\\,dy = g(x)\\,dx.$$\n\nThe idea is simple: treat $dy$ and $dx$ like ordinary algebraic factors that can be moved across the equality sign. This is not a rigorous algebraic rule, but it works because the derivative $\\frac{dy}{dx}$ is defined as the limit of a ratio of small changes. By moving the factors we are really preparing the equation for integration, which is the inverse operation of differentiation.\n\nWhy is this useful? Once the variables are separated, each side depends on only one variable. We can then apply the fundamental theorem of calculus: integrating the left side with respect to $y$ and the right side with respect to $x$ gives an equation that no longer involves a derivative. This new equation can often be solved explicitly for $y$.\n\n> **In daily life:** Think of a recipe that tells you how much flour to add per cup of water. If the rule is “add $2$ grams of flour for each cup of water,” you can write it as $ \\frac{d(\\text{flour})}{d(\\text{water})}=2$. To find the total flour after $5$ cups of water, you separate the variables (multiply both sides by $d(\\text{water})$) and integrate: $\\int d(\\text{flour}) = \\int 2\\,d(\\text{water})$. The same mathematical step appears in separable differential equations.\n\n### General steps for solving a separable equation  \n\n1. **Write the equation in the form $\\frac{dy}{dx}=g(x)h(y)$.**  \n2. **Move all $y$‑terms (including $dy$) to the left and all $x$‑terms (including $dx$) to the right.**  \n   $$\\frac{1}{h(y)}\\,dy = g(x)\\,dx$$  \n3. **Integrate both sides.**  \n   $$\\int \\frac{1}{h(y)}\\,dy = \\int g(x)\\,dx + C$$  \n   where $C$ is the constant of integration.  \n4. **Solve the resulting equation for $y$ if possible.**  \n5. **If an initial condition is given, use it to find the specific value of $C$ and obtain the *particular* solution.**\n\nBelow we apply these steps to two concrete examples.\n\n---\n\n**Example 1 (Easy): Solve $\\displaystyle \\frac{dy}{dx}=2x$.**  \n\nWe want a function $y(x)$ whose derivative equals $2x$.\n\n1. **Identify the form.** The right‑hand side depends only on $x$, so $h(y)=1$ and $g(x)=2x$.  \n2. **Separate the variables.** Multiply both sides by $dx$:  \n   $$dy = 2x\\,dx$$  \n3. **Integrate both sides.**  \n   $$\\int dy = \\int 2x\\,dx$$  \n   $$y = x^{2}+C$$  \n4. **Write the general solution.**  \n   $$y(x)=x^{2}+C$$  \n\n**Answer:** The family of solutions is $y=x^{2}+C$, where $C$ is any constant.  \n\n---\n\n**Example 2 (Medium): Solve $\\displaystyle \\frac{dy}{dx}=y\\sin x$.**  \n\nNow the derivative is the product of a function of $y$ and a function of $x$.\n\n1. **Write in separable form.** Here $g(x)=\\sin x$ and $h(y)=y$, so  \n   $$\\frac{dy}{dx}=y\\sin x$$  \n2. **Separate the variables.** Divide both sides by $y$ and multiply by $dx$:  \n   $$\\frac{1}{y}\\,dy = \\sin x\\,dx$$  \n3. **Integrate each side.**  \n   $$\\int \\frac{1}{y}\\,dy = \\int \\sin x\\,dx$$  \n   $$\\ln|y| = -\\cos x + C$$  \n4. **Solve for $y$.** Exponentiate both sides to remove the logarithm:  \n   $$|y| = e^{-\\cos x + C}=e^{C}\\,e^{-\\cos x}$$  \n   Let $K=e^{C}>0$ (a new constant). Then  \n   $$y = \\pm K\\,e^{-\\cos x}$$  \n   Since $K$ can absorb the sign, we write the general solution as  \n   $$y = C\\,e^{-\\cos x}$$  \n   where $C$ is any non‑zero real constant (including zero gives the trivial solution $y=0$).  \n\n**Answer:** The solution set is $y(x)=C\\,e^{-\\cos x}$, with $C$ determined by any given initial condition.\n\n> **Common mistake:** Forgetting to include the constant of integration after each integral. Both sides must have the same constant, but we usually combine them into a single $C$ after integration.\n\n### Why the method works\n\nThe separation step relies on the fact that differentiation obeys the chain rule. If $y$ is a function of $x$, then $dy = y'(x)\\,dx$. Rearranging $\\frac{dy}{dx}=g(x)h(y)$ gives $dy = h(y)g(x)\\,dx$. Dividing by $h(y)$ isolates $dy$ on one side, and the integral of $1/h(y)$ with respect to $y$ precisely undoes the differentiation that produced $h(y)$. The same reasoning applies to the $x$‑side. Thus integration restores the original relationship between $x$ and $y$ without any loss of information, except for the constant $C$ that records the family of possible curves.\n\n> **Remember:** After integrating, always check whether you can solve explicitly for $y$. If not, the implicit relation $$\\int \\frac{1}{h(y)}\\,dy = \\int g(x)\\,dx + C$$ itself describes the solution set.\n\nSeparable equations appear frequently in physics, biology, and economics because many growth or decay processes depend on the current state (the $y$ term) and an external factor (the $x$ term). Mastering the separation technique gives you a powerful tool for turning a rate description into a usable formula.",
+   "code": ""
+  },
+  {
+   "heading": "Initial Conditions and Particular Solutions",
+   "body": "When we solve a differential equation we usually obtain a whole family of curves, not just one single curve.  \nEach curve in the family differs by a constant that appears after we integrate.  \nAn **initial condition** tells us the value of the unknown function at a particular point, for example “when $x=0$ the temperature is $5^\\circ$”.  \nBy fixing that value we can determine the constant, and the differential equation then has **one unique solution** that satisfies both the equation and the given condition.  \n\n> **Definition:** An *initial condition* is a statement of the form $y(x_0)=y_0$, where $x_0$ and $y_0$ are numbers. It specifies the value of the unknown function $y$ at the point $x=x_0$.\n\nWhy is this useful? Imagine you are tracking the amount of water in a tank that leaks at a rate proportional to the current amount. The differential equation tells you how the amount changes, but without knowing how much water was in the tank at the start you cannot predict the exact amount at later times. The initial condition supplies that missing piece of information.\n\n> **In daily life:** Think of a road trip. The speed‑time graph (a differential equation) tells you how fast you are going at each moment, but you also need to know where you started (the initial position) to know where you will be after a certain time.\n\n---\n\n### How an initial condition selects a particular solution  \n\nSuppose we have solved a first‑order differential equation and obtained  \n\n$$\ny(x)=F(x)+C,\n$$  \n\nwhere $C$ is an arbitrary constant.  \nIf we are told that $y(x_0)=y_0$, we substitute $x_0$ and $y_0$ into the formula:\n\n$$\ny_0 = F(x_0)+C \\quad\\Longrightarrow\\quad C = y_0 - F(x_0).\n$$  \n\nNow we replace $C$ in the general expression, obtaining a **particular solution** that passes through the point $(x_0,y_0)$.  \n\n> **Remember:** The initial condition eliminates the “+ C” freedom, leaving a single curve that satisfies both the differential equation and the given point.\n\n---\n\n## Worked examples  \n\n### **Example 3 (Easy): Find the particular solution of $\\displaystyle \\frac{dy}{dx}=2x$ with $y(0)=5$.**  \n\n1. **Integrate the differential equation.**  \n   We treat $dy/dx = 2x$ as $dy = 2x\\,dx$ and integrate both sides:  \n   $$ \n   \\int dy = \\int 2x\\,dx \\;\\Longrightarrow\\; y = x^{2}+C .\n   $$  \n\n2. **Apply the initial condition $y(0)=5$.**  \n   Substitute $x=0$ and $y=5$ into the formula:  \n   $$ \n   5 = 0^{2}+C \\;\\Longrightarrow\\; C = 5 .\n   $$  \n\n3. **Write the particular solution.**  \n   Replace $C$ with $5$ in the general expression:  \n   $$ \n   y = x^{2}+5 .\n   $$  \n\n**Answer:** The unique solution that satisfies the condition is $y(x)=x^{2}+5$.  \n\n---\n\n### **Example 4 (Medium): Solve $\\displaystyle \\frac{dy}{dx}=y\\sin x$, with $y(\\pi)=2$.**  \n\n1. **Separate the variables.**  \n   Write the equation as $\\displaystyle \\frac{1}{y}\\,dy = \\sin x\\,dx$ so that each variable appears on its own side.  \n\n2. **Integrate both sides.**  \n   $$ \n   \\int \\frac{1}{y}\\,dy = \\int \\sin x\\,dx \\;\\Longrightarrow\\; \\ln|y| = -\\cos x + C .\n   $$  \n\n3. **Exponentiate to solve for $y$.**  \n   Remove the logarithm by raising $e$ to both sides:  \n   $$ \n   |y| = e^{-\\cos x + C}=e^{C}\\,e^{-\\cos x}.\n   $$  \n   Let $K = \\pm e^{C}$ (a new constant that can be positive or negative). Then  \n   $$ \n   y = K\\,e^{-\\cos x}.\n   $$  \n\n4. **Use the initial condition $y(\\pi)=2$.**  \n   Compute $\\cos\\pi = -1$, so $e^{-\\cos\\pi}=e^{1}=e$. Substitute:  \n   $$ \n   2 = K\\,e \\;\\Longrightarrow\\; K = \\frac{2}{e}.\n   $$  \n\n5. **Write the particular solution.**  \n   Insert $K$ back:  \n   $$ \n   y = \\frac{2}{e}\\,e^{-\\cos x}=2\\,e^{-\\cos x-1}.\n   $$  \n\n**Answer:** The solution that satisfies $y(\\pi)=2$ is $y(x)=2\\,e^{-\\cos x-1}$.  \n\n---\n\n> **Common mistake:** Forgetting to apply the absolute value when solving $\\ln|y| = \\dots$. The constant $C$ can absorb the sign, but you must keep the absolute value during integration to avoid losing negative solutions.\n\nBy mastering the use of initial conditions, you can turn a vague family of curves into a precise prediction that matches the real‑world situation you are modelling. This skill is the foundation for solving more complicated differential equations later in the course.",
+   "code": ""
+  },
+  {
+   "heading": "First‑Order Linear Differential Equations",
+   "body": "When we meet a first‑order linear differential equation we are looking at an equation that can be written in the form  \n\n$$\\frac{dy}{dx}+P(x)\\,y = Q(x)$$  \n\nHere  \n\n* $y$ is the unknown function of the variable $x$ that we want to find.  \n* $\\dfrac{dy}{dx}$ is the **derivative** of $y$, meaning the rate at which $y$ changes as $x$ changes.  \n* $P(x)$ and $Q(x)$ are given functions of $x$ (they may be constants, powers of $x$, trigonometric functions, etc.).  \n\n> **Definition:** A *first‑order linear differential equation* is any equation that can be rearranged so that the unknown function $y$ and its first derivative appear only in the combination $\\dfrac{dy}{dx}+P(x)y$, with everything else on the right‑hand side.\n\nThe word *linear* does **not** mean that the solution itself is a straight line; it means that $y$ and its derivative appear to the first power and are not multiplied together. This property lets us solve the equation with a systematic trick called the **integrating factor method**.\n\n### Why the integrating factor works  \n\nImagine you have a simple algebraic equation $a\\,y = b$. To isolate $y$ you divide by $a$. With differential equations we cannot simply “divide” by the operator $\\dfrac{d}{dx}+P(x)$, but we can *multiply* the whole equation by a carefully chosen function $\\mu(x)$ so that the left‑hand side becomes the derivative of a product.  \n\nIf we can find $\\mu(x)$ such that  \n\n$$\\mu(x)\\Bigl(\\frac{dy}{dx}+P(x)y\\Bigr)=\\frac{d}{dx}\\bigl(\\mu(x)y\\bigr),$$  \n\nthen the equation collapses to  \n\n$$\\frac{d}{dx}\\bigl(\\mu(x)y\\bigr)=\\mu(x)Q(x),$$  \n\nand we can integrate both sides once to obtain $\\mu(x)y$, and finally solve for $y$.\n\nThe condition for $\\mu(x)$ is obtained by expanding the derivative on the right:\n\n$$\\frac{d}{dx}\\bigl(\\mu y\\bigr)=\\mu\\frac{dy}{dx}+ \\mu' y.$$\n\nComparing this with $\\mu\\bigl(\\frac{dy}{dx}+P y\\bigr)$ we see we need  \n\n$$\\mu' = \\mu P(x).$$  \n\nThis is a separable equation for $\\mu$ itself, whose solution is  \n\n$$\\mu(x)=e^{\\int P(x)\\,dx}.$$\n\nWe call $\\mu(x)$ the **integrating factor** because multiplying the original equation by it makes the left side integrable.\n\n> **Note:** The integrating factor is never zero, because an exponential function is always positive. This guarantees we can divide by $\\mu$ later without trouble.\n\n### Step‑by‑step recipe  \n\n1. **Write the equation in standard form** $\\displaystyle \\frac{dy}{dx}+P(x)y = Q(x)$.  \n2. **Compute the integrating factor** $\\displaystyle \\mu(x)=e^{\\int P(x)\\,dx}$.  \n3. **Multiply the whole equation** by $\\mu(x)$.  \n4. **Recognise the left side** as $\\displaystyle \\frac{d}{dx}\\bigl(\\mu(x)y\\bigr)$.  \n5. **Integrate** both sides with respect to $x$.  \n6. **Solve for $y$** by dividing by $\\mu(x)$ and, if an initial condition is given, determine the constant of integration.\n\nBelow we apply every step to two concrete problems.\n\n---\n\n**Example 5 (Hard):** Solve $\\displaystyle \\frac{dy}{dx}+3y = 6x.$  \n\n1. The equation is already in standard form with $P(x)=3$ and $Q(x)=6x$.  \n2. Compute the integrating factor  \n\n   $$\\mu(x)=e^{\\int 3\\,dx}=e^{3x}.$$  \n\n3. Multiply the equation by $e^{3x}$  \n\n   $$e^{3x}\\frac{dy}{dx}+3e^{3x}y = 6x\\,e^{3x}.$$  \n\n4. The left‑hand side is the derivative of $e^{3x}y$:  \n\n   $$\\frac{d}{dx}\\bigl(e^{3x}y\\bigr)=6x\\,e^{3x}.$$  \n\n5. Integrate both sides  \n\n   $$\\int \\frac{d}{dx}\\bigl(e^{3x}y\\bigr)\\,dx = \\int 6x\\,e^{3x}\\,dx.$$  \n\n   The left integral gives $e^{3x}y$. For the right integral we use integration by parts:  \n\n   $$\\int 6x\\,e^{3x}\\,dx = 2x\\,e^{3x}-\\frac{2}{3}e^{3x}+C.$$  \n\n   Hence  \n\n   $$e^{3x}y = 2x\\,e^{3x}-\\frac{2}{3}e^{3x}+C.$$  \n\n6. Divide by $e^{3x}$ to isolate $y$  \n\n   $$y = 2x-\\frac{2}{3}+C\\,e^{-3x}.$$\n\n**Answer:** The general solution is $y(x)=2x-\\dfrac{2}{3}+C e^{-3x}$, where $C$ is an arbitrary constant.\n\n---\n\n**Example 6 (Hard):** Solve $\\displaystyle \\frac{dy}{dx}+\\frac{2}{x}y = x^{2}$, with the initial condition $y(1)=0.$  \n\n1. Write in standard form: $P(x)=\\dfrac{2}{x}$, $Q(x)=x^{2}$.  \n2. Integrating factor  \n\n   $$\\mu(x)=e^{\\int \\frac{2}{x}\\,dx}=e^{2\\ln|x|}=x^{2} \\quad (x>0\\text{ for the initial condition}).$$  \n\n3. Multiply the whole equation by $x^{2}$  \n\n   $$x^{2}\\frac{dy}{dx}+2x\\,y = x^{4}.$$  \n\n4. Recognise the left side as a derivative:  \n\n   $$\\frac{d}{dx}\\bigl(x^{2}y\\bigr)=x^{4}.$$  \n\n5. Integrate  \n\n   $$\\int \\frac{d}{dx}\\bigl(x^{2}y\\bigr)\\,dx = \\int x^{4}\\,dx,$$  \n\n   giving  \n\n   $$x^{2}y = \\frac{x^{5}}{5}+C.$$  \n\n6. Solve for $y$  \n\n   $$y = \\frac{x^{3}}{5}+C\\,x^{-2}.$$\n\n   Apply the initial condition $y(1)=0$:  \n\n   $$0 = \\frac{1}{5}+C\\,(1)^{-2}\\;\\Longrightarrow\\; C = -\\frac{1}{5}.$$\n\n   Substitute back  \n\n   $$y = \\frac{x^{3}}{5}-\\frac{1}{5}x^{-2} = \\frac{x^{3}}{5}-\\frac{1}{5x^{2}}.$$\n\n**Answer:** The particular solution satisfying $y(1)=0$ is $y(x)=\\dfrac{x^{3}}{5}-\\dfrac{1}{5x^{2}}$ for $x>0$.\n\n> **Remember:** The integrating factor $e^{\\int P(x)dx}$ is the key step; once you have it, the rest of the work follows the same pattern every time.",
+   "code": ""
+  },
+  {
+   "heading": "Applications of First‑Order Equations",
+   "body": "When we model a real‑world situation with a first‑order differential equation, the unknown function usually represents something that changes **continuously** – a population size, a temperature, the amount of a drug in the bloodstream, and so on.  \nThe equation tells us how fast that quantity is changing at any instant, often in proportion to the quantity itself or to the difference between the quantity and some constant background value.  \n\n> **In daily life:**  Think of a bathtub filling with water. The rate at which the water level rises depends on how fast the tap is running, not on the current height of the water. That is a simple first‑order situation: the derivative (rate of change) is a constant.  \n\nIn many natural processes the rate of change is *proportional* to the quantity we are watching. This leads to the very common form  \n\n$$\\frac{dy}{dt}=k\\,y,$$\n\nwhere  \n\n* $y(t)$ is the quantity of interest,  \n* $t$ is time,  \n* $k$ is a constant that tells us how strong the proportionality is (positive for growth, negative for decay).  \n\nBecause the derivative $\\dfrac{dy}{dt}$ appears alone (no higher‑order terms), the equation is first‑order and can be solved by separating the variables or by recognizing it as a linear equation with constant coefficients.\n\n---\n\n### Exponential growth and decay  \n\nIf $k>0$, the solution grows without bound – this is **exponential growth**.  \nIf $k<0$, the solution shrinks toward zero – this is **exponential decay**.  \n\nSolving $\\dfrac{dy}{dt}=k\\,y$ by separation:\n\n1. Move all $y$ terms to one side and $t$ terms to the other:  \n\n   $$\\frac{1}{y}\\,dy = k\\,dt.$$\n\n2. Integrate both sides:  \n\n   $$\\int \\frac{1}{y}\\,dy = \\int k\\,dt \\quad\\Longrightarrow\\quad \\ln|y| = kt + C.$$\n\n3. Exponentiate to isolate $y$:  \n\n   $$y(t)=C_1 e^{kt},\\qquad C_1=e^{C}.$$\n\nIf an **initial condition** $y(0)=y_0$ is given, we can find $C_1$:\n\n$$y_0 = C_1 e^{k\\cdot0}=C_1 \\;\\Longrightarrow\\; C_1 = y_0,$$\n\nso the final formula is  \n\n$$y(t)=y_0 e^{kt}.$$\n\n> **Remember:**  The constant $k$ decides whether the process grows ($k>0$) or decays ($k<0$).  \n\n---\n\n### Example 7 (Hard): Bacterial culture doubling  \n\nA bacteria culture doubles every 3 hours. Write and solve the differential equation for the population $P(t)$ given $P(0)=100$.\n\n1. **Translate the statement** “doubling every 3 hours’’ into a proportional growth law:  \n\n   $$\\frac{dP}{dt}=kP,$$  \n   with $k>0$ unknown.\n\n2. **Use the doubling condition**. After 3 hours the population is $2P(0)$, so  \n\n   $$P(3)=P_0 e^{k\\cdot3}=2P_0.$$  \n   Divide by $P_0$ and take natural logs:  \n\n   $$e^{3k}=2 \\;\\Longrightarrow\\; 3k=\\ln 2 \\;\\Longrightarrow\\; k=\\frac{\\ln 2}{3}.$$\n\n3. **Insert $k$ and the initial condition** $P(0)=100$ into the general solution $P(t)=P_0 e^{kt}$:  \n\n   $$P(t)=100\\,e^{\\frac{\\ln 2}{3}t}.$$\n\n**Answer:** The bacterial population after $t$ hours is  \n\n$$P(t)=100\\;2^{\\,t/3}\\ \\text{cells}.$$  \n\n(The factor $2^{t/3}$ shows the population doubles every three hours.)\n\n---\n\n### Newton’s law of cooling  \n\nWhen a hot object is placed in a surrounding medium of constant temperature $T_0$, the rate at which its temperature $T(t)$ changes is proportional to the **difference** between the object’s temperature and the surrounding temperature. This is expressed as  \n\n$$\\frac{dT}{dt} = -k\\,(T - T_0),\\qquad k>0.$$\n\nThe minus sign tells us the temperature moves toward $T_0$ (it cools down if $T>T_0$, warms up if $T<T_0$).\n\n> **Definition:**  *Newton’s law of cooling* – a first‑order linear differential equation that models heat exchange with a constant‑temperature environment.\n\nThe equation is linear, but it can also be solved by separation:\n\n1. Write $\\displaystyle \\frac{dT}{dt}= -k(T-T_0)$.  \n2. Separate variables:  \n\n   $$\\frac{1}{T-T_0}\\,dT = -k\\,dt.$$\n\n3. Integrate:  \n\n   $$\\ln|T-T_0| = -kt + C.$$\n\n4. Exponentiate and solve for $T$:  \n\n   $$T(t)=T_0 + C_1 e^{-kt},\\qquad C_1=e^{C}.$$\n\nIf an initial temperature $T(0)=T_{\\text{init}}$ is known, then $C_1 = T_{\\text{init}}-T_0$ and  \n\n$$T(t)=T_0 + (T_{\\text{init}}-T_0)e^{-kt}.$$\n\n> **Note:**  The constant $k$ measures how quickly the object exchanges heat with its surroundings; larger $k$ means faster cooling.\n\n---\n\n### Example 8 (Hard): Cooling of a metal rod  \n\nA hot object cools according to Newton’s law $\\displaystyle \\frac{dT}{dt} = -k(T‑T_0)$.  \nGiven $T(0)=90^\\circ\\text{C}$, $T_0=20^\\circ\\text{C}$, and $T(10)=70^\\circ\\text{C}$, find $T(t)$.\n\n1. **Write the general solution** with the known ambient temperature $T_0=20$:  \n\n   $$T(t)=20 + (T(0)-20)e^{-kt}=20+70e^{-kt}.$$\n\n2. **Use the data at $t=10$** to determine $k$:  \n\n   $$70 = 20 + 70e^{-k\\cdot10}\\;\\Longrightarrow\\; 50 = 70e^{-10k}.$$\n\n   Solve for $e^{-10k}$:  \n\n   $$e^{-10k}= \\frac{5}{7}.$$\n\n   Take natural logs:  \n\n   $$-10k = \\ln\\!\\left(\\frac{5}{7}\\right)\\;\\Longrightarrow\\; k = -\\frac{1}{10}\\ln\\!\\left(\\frac{5}{7}\\right).$$\n\n   Since $\\frac{5}{7}<1$, the log is negative, making $k$ positive as required.\n\n3. **Insert $k$ back into the formula** (or keep it in logarithmic form):  \n\n   $$T(t)=20+70\\exp\\!\\left[-\\left(-\\frac{1}{10}\\ln\\!\\frac{5}{7}\\right)t\\right]\n        =20+70\\left(\\frac{5}{7}\\right)^{t/10}.$$\n\n**Answer:** The temperature after $t$ minutes is  \n\n$$T(t)=20+70\\left(\\frac{5}{7}\\right)^{t/10}\\;^\\circ\\text{C}.$$\n\nIn particular, the object approaches the ambient $20^\\circ\\text{C}$ as $t\\to\\infty$.\n\n---\n\nThese two examples illustrate the power of first‑order differential equations: a simple statement about “doubling” or “cooling proportionally to the temperature difference” translates directly into a compact formula that predicts the future behaviour of the system.  \n\n> **Common mistake:**  Forgetting to apply the initial condition after solving the differential equation. The constant $C_1$ (or $k$) is determined **only** by the given data; without it the solution remains a family of curves rather than the specific one that matches the real situation.  \n\nBy recognizing the pattern “rate ∝ quantity (or difference)”, writing the corresponding equation, separating variables, and using the initial condition, you can handle many everyday phenomena—population growth, radioactive decay, cooling, charging a capacitor, and more.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Solve the separable DE $\\displaystyle \\frac{dy}{dx}=2x\\,y$.",
+   "a": "Separate variables: $\\displaystyle \\frac{1}{y}\\,dy = 2x\\,dx$.\nIntegrate: $\\displaystyle \\int \\frac{1}{y}\\,dy = \\int 2x\\,dx \\;\\Rightarrow\\; \\ln|y| = x^{2}+C$.\nExponentiate: $|y| = e^{x^{2}+C}=e^{C}e^{x^{2}}$.\nLet $A=e^{C}>0$, then $y = \\pm A e^{x^{2}}$.  Absorbing the sign into $A$, the general solution is $y = C e^{x^{2}}$, where $C$ is any non‑zero constant."
+  },
+  {
+   "level": "Easy",
+   "q": "Find the particular solution of $\\displaystyle \\frac{dy}{dx}=3x^{2}$ that satisfies $y(1)=5$.",
+   "a": "Integrate: $\\displaystyle y = \\int 3x^{2}\\,dx = x^{3}+C$.\nApply the initial condition: $5 = 1^{3}+C \\;\\Rightarrow\\; C=4$.\nThus the particular solution is $y = x^{3}+4$."
+  },
+  {
+   "level": "Medium",
+   "q": "Solve the linear DE $\\displaystyle \\frac{dy}{dx}+2y = e^{-x}$ and give the general solution.",
+   "a": "Identify $P(x)=2$, $Q(x)=e^{-x}$.\nIntegrating factor: $\\displaystyle \\mu(x)=e^{\\int 2\\,dx}=e^{2x}$.\nMultiply: $e^{2x}\\frac{dy}{dx}+2e^{2x}y = e^{2x}e^{-x}=e^{x}$.\nLeft side is $\\displaystyle \\frac{d}{dx}\\bigl(e^{2x}y\\bigr)$.\nIntegrate: $\\displaystyle e^{2x}y = \\int e^{x}\\,dx = e^{x}+C$.\nSolve for $y$: $y = e^{-2x}(e^{x}+C)=e^{-x}+Ce^{-2x}$."
+  },
+  {
+   "level": "Medium",
+   "q": "A tank contains 100 L of water with 10 g of salt dissolved. Fresh water flows in at 3 L/min and the well‑mixed solution flows out at the same rate. Write and solve the differential equation for the amount of salt $S(t)$ (in grams) after $t$ minutes.",
+   "a": "Rate in = $0$ (fresh water has no salt).\nRate out = concentration $\\times$ outflow $= \\frac{S(t)}{100}\\times 3$.\nDE: $\\displaystyle \\frac{dS}{dt}= -\\frac{3}{100}S$.\nSeparate: $\\displaystyle \\frac{1}{S}\\,dS = -\\frac{3}{100}\\,dt$.\nIntegrate: $\\ln|S| = -\\frac{3}{100}t + C$.\nExponentiate: $S = Ce^{-0.03t}$.\nUse $S(0)=10$: $10 = C$, so $S(t)=10e^{-0.03t}$ g."
+  },
+  {
+   "level": "Hard",
+   "q": "Solve the Bernoulli equation $\\displaystyle \\frac{dy}{dx}+y = y^{2}x$, and find the solution that satisfies $y(1)=\\frac12$.",
+   "a": "Write in Bernoulli form: $\\displaystyle \\frac{dy}{dx}+y = x y^{2}$.\nDivide by $y^{2}$ (since $y\\neq0$): $\\displaystyle y^{-2}\\frac{dy}{dx}+y^{-1}=x$.\nLet $v = y^{-1}$, so $v = 1/y$. Then $\\displaystyle \\frac{dv}{dx}= -y^{-2}\\frac{dy}{dx}$.\nThus $-\\,\\frac{dv}{dx}+v = x$, or $\\displaystyle \\frac{dv}{dx}-v = -x$.\nThis is linear: $P(x)=-1$, $Q(x)=-x$.\nIntegrating factor: $\\mu(x)=e^{\\int -1\\,dx}=e^{-x}$.\nMultiply: $e^{-x}\\frac{dv}{dx}-e^{-x}v = -x e^{-x}$ → $\\displaystyle \\frac{d}{dx}(e^{-x}v) = -x e^{-x}$.\nIntegrate RHS: $\\int -x e^{-x}\\,dx$. Use integration by parts: let $u=-x$, $dv=e^{-x}dx$ → $du=-dx$, $v=-e^{-x}$.\nResult: $\\int -x e^{-x}dx = -x(-e^{-x}) - \\int -e^{-x}dx = x e^{-x} - e^{-x}+C = e^{-x}(x-1)+C$.\nSo $e^{-x}v = e^{-x}(x-1)+C$. Multiply by $e^{x}$: $v = x-1 + C e^{x}$.\nRecall $v=1/y$, so $1/y = x-1 + C e^{x}$.\nThus $y = \\dfrac{1}{x-1 + C e^{x}}$.\nApply $y(1)=\\frac12$: $ \\frac12 = \\frac{1}{1-1 + C e^{1}} = \\frac{1}{C e}$.\nHence $C e = 2 \\;\\Rightarrow\\; C = \\frac{2}{e}$.\nFinal solution: $$y(x)=\\frac{1}{\\,x-1 + \\frac{2}{e}\\,e^{x}\\,}= \\frac{1}{\\,x-1 + 2e^{x-1}\\,}.$$"
+  },
+  {
+   "level": "Hard",
+   "q": "Consider the linear DE $\\displaystyle \\frac{dy}{dx}= \\frac{y}{x} + x^{2}$ for $x>0$. Use the method of integrating factor to find the general solution, then determine the particular solution with $y(1)=3$.",
+   "a": "Rewrite in standard linear form: $\\displaystyle \\frac{dy}{dx} -\\frac{1}{x}y = x^{2}$.\nHere $P(x) = -\\frac{1}{x}$, $Q(x)=x^{2}$.\nIntegrating factor: $\\displaystyle \\mu(x)=e^{\\int -\\frac{1}{x}\\,dx}=e^{-\\ln x}=x^{-1}$.\nMultiply the equation by $\\mu$: $x^{-1}\\frac{dy}{dx} - x^{-2}y = x^{2}\\cdot x^{-1}=x$.\nLeft side becomes $\\displaystyle \\frac{d}{dx}\\bigl(x^{-1}y\\bigr)$.\nIntegrate: $\\displaystyle x^{-1}y = \\int x\\,dx = \\frac{x^{2}}{2}+C$.\nSolve for $y$: $y = x\\left(\\frac{x^{2}}{2}+C\\right)=\\frac{x^{3}}{2}+Cx$.\nApply $y(1)=3$: $3 = \\frac{1}{2}+C\\cdot1 \\;\\Rightarrow\\; C = \\frac{5}{2}$.\nHence the particular solution is $$y(x)=\\frac{x^{3}}{2}+\\frac{5}{2}x.$$"
+  }
+ ],
+ "recap": "This lesson introduces differential equations as equations linking a function with its derivatives, explains order and degree, and covers special types like separable, first‑order linear equations, and how initial conditions pick a unique solution. Real‑world examples such as speed, population growth, and tank filling illustrate the concepts.",
+ "key_terms": [
+  {
+   "term": "Differential equation",
+   "meaning": "An equation that relates a function to one or more of its derivatives."
+  },
+  {
+   "term": "Derivative",
+   "meaning": "A measure of how fast a quantity changes; dy/dx is the rate of change of y with respect to x."
+  },
+  {
+   "term": "Order",
+   "meaning": "The highest derivative that appears in a differential equation."
+  },
+  {
+   "term": "Separable equation",
+   "meaning": "A first‑order equation that can be rewritten so that all y‑terms are on one side and all x‑terms on the other, allowing integration."
+  },
+  {
+   "term": "Initial condition",
+   "meaning": "A statement of the form y(x0)=y0 that fixes the constant of integration and yields a unique solution."
+  },
+  {
+   "term": "First‑order linear equation",
+   "meaning": "An equation that can be written as dy/dx + P(x)*y = Q(x), where P and Q are known functions of x."
+  },
+  {
+   "term": "Integration constant",
+   "meaning": "The arbitrary constant that appears after integrating, determined by an initial condition."
+  },
+  {
+   "term": "Proportional growth",
+   "meaning": "A situation where dy/dt = k*y, meaning the rate of change is proportional to the current amount."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the order of a differential equation refer to?",
+   "options": [
+    "The number of variables",
+    "The highest power of y",
+    "The highest derivative present",
+    "The number of terms"
+   ],
+   "answer": 2,
+   "why": "Order is defined by the highest derivative that appears."
+  },
+  {
+   "q": "Which form characterises a separable differential equation?",
+   "options": [
+    "dy/dx = g(x)+h(y)",
+    "dy/dx = g(x)*h(y)",
+    "dy/dx + P(x)*y = Q(x)",
+    "dy/dx = k*y"
+   ],
+   "answer": 1,
+   "why": "A separable equation can be written as dy/dx = g(x)*h(y)."
+  },
+  {
+   "q": "In the equation dy/dx + 2y = 5, what are P(x) and Q(x)?",
+   "options": [
+    "P=2, Q=5",
+    "P=5, Q=2",
+    "P=dy/dx, Q=y",
+    "P=0, Q=5"
+   ],
+   "answer": 0,
+   "why": "It matches the form dy/dx + P(x)*y = Q(x) with P=2 and Q=5."
+  },
+  {
+   "q": "What does an initial condition do?",
+   "options": [
+    "Changes the order of the equation",
+    "Determines the integration constant",
+    "Eliminates the derivative",
+    "Adds a new variable"
+   ],
+   "answer": 1,
+   "why": "It fixes the constant that appears after integration, giving a unique solution."
+  },
+  {
+   "q": "If dy/dt = 3y, what type of growth does this represent?",
+   "options": [
+    "Linear growth",
+    "Exponential (proportional) growth",
+    "Constant growth",
+    "Quadratic growth"
+   ],
+   "answer": 1,
+   "why": "The rate is proportional to y, leading to exponential growth."
+  },
+  {
+   "q": "Which of the following is NOT a key term for first‑order linear equations?",
+   "options": [
+    "Integrating factor",
+    "Separable",
+    "Derivative",
+    "Integration constant"
+   ],
+   "answer": 1,
+   "why": "Separable refers to a different class; the others are directly related to first‑order linear equations."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a differential equation.",
+   "back": "An equation that relates a function to its derivatives."
+  },
+  {
+   "front": "What is a derivative?",
+   "back": "The rate at which a function changes; dy/dx is the change of y with respect to x."
+  },
+  {
+   "front": "How do you determine the order of a differential equation?",
+   "back": "Look for the highest derivative appearing in the equation."
+  },
+  {
+   "front": "Give the general form of a separable differential equation.",
+   "back": "dy/dx = g(x)*h(y), which can be rewritten as (1/h(y)) dy = g(x) dx."
+  },
+  {
+   "front": "What is an initial condition?",
+   "back": "A statement y(x0)=y0 that specifies the value of the solution at a particular point."
+  },
+  {
+   "front": "Write the standard form of a first‑order linear differential equation.",
+   "back": "dy/dx + P(x)*y = Q(x)."
+  },
+  {
+   "front": "What does the integration constant represent?",
+   "back": "The arbitrary constant that appears after integrating, fixed by an initial condition."
+  },
+  {
+   "front": "Explain proportional growth in differential equations.",
+   "back": "When dy/dt = k*y, the rate of change is proportional to the current amount, leading to exponential growth."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l16-car-speedometer",
+   "title": "Shows how speed (derivative) relates to position over time.",
+   "alt": "Shows how speed (derivative) relates to position over time.",
+   "priority": 9,
+   "picture_title": "Car Speedometer",
+   "kind": "photo",
+   "subject": "A close‑up photograph of a car's speedometer needle pointing to a speed value, illustrating the concept of a derivative as an instantaneous rate of change.",
+   "layout": "Speedometer centered in the frame with the needle highlighted; no additional labels.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l16-bathtub-filling",
+   "title": "Visualizes a first‑order rate equation for water level rise.",
+   "alt": "Visualizes a first‑order rate equation for water level rise.",
+   "priority": 8,
+   "picture_title": "Bathtub Filling",
+   "kind": "illustration",
+   "subject": "A side view of a bathtub with water flowing from a tap, showing the water level increasing over time, representing a real‑world first‑order differential equation.",
+   "layout": "Bathtub on the left, tap on the right, arrows indicating water flow and rising level; simple labels for 'tap' and 'water level'.",
+   "labels": [
+    "tap",
+    "water level"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l16-separating-variables",
+   "title": "Diagram of moving terms to opposite sides of an equation.",
+   "alt": "Diagram of moving terms to opposite sides of an equation.",
+   "priority": 6,
+   "picture_title": "Separating Variables",
+   "kind": "illustration",
+   "subject": "A step‑by‑step visual of a separable differential equation where terms with y are moved left and terms with x are moved right, preparing for integration.",
+   "layout": "Two columns: left column shows terms with y and dy, right column shows terms with x and dx; arrows point from original equation to separated form.",
+   "labels": [
+    "y terms",
+    "x terms"
+   ],
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Solving a Separable Differential Equation",
+   "steps": [
+    {
+     "label": "Identify form",
+     "text": "Write the equation as dy/dx = g(x)·h(y)."
+    },
+    {
+     "label": "Separate variables",
+     "text": "Rearrange to (1/h(y)) dy = g(x) dx."
+    },
+    {
+     "label": "Integrate both sides",
+     "text": "∫ 1/h(y) dy = ∫ g(x) dx + C."
+    },
+    {
+     "label": "Solve for y",
+     "text": "Express y as a function of x (if possible)."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Order vs. Degree",
+   "left": {
+    "name": "Order",
+    "points": [
+     "Highest derivative appearing in the equation",
+     "e.g., dy/dx is first order"
+    ]
+   },
+   "right": {
+    "name": "Degree",
+    "points": [
+     "Power of the highest derivative after clearing fractions",
+     "e.g., (d²y/dx²)^3 has degree 3"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Components of a First‑Order Linear DE",
+   "items": [
+    {
+     "name": "y",
+     "role": "unknown function of x"
+    },
+    {
+     "name": "dy/dx",
+     "role": "first derivative of y"
+    },
+    {
+     "name": "P(x)",
+     "role": "coefficient multiplying y"
+    },
+    {
+     "name": "Q(x)",
+     "role": "non‑homogeneous term"
+    }
+   ],
+   "after": 3
+  },
+  {
+   "type": "graph",
+   "title": "Example: dy/dx = x·y",
+   "fn": "exp(x^2/2)",
+   "xmin": -2,
+   "xmax": 2,
+   "points": [
+    {
+     "x": 0,
+     "y": 1,
+     "label": "y(0)=1",
+     "open": false
+    }
+   ],
+   "caption": "Solution curve y = C·e^{x^2/2} with C=1",
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Initial Condition Facts",
+   "items": [
+    {
+     "value": "y(x0)=y0",
+     "label": "Form of an initial condition"
+    },
+    {
+     "value": "One constant fixed",
+     "label": "Reduces family to a single solution"
+    },
+    {
+     "value": "Ensures uniqueness",
+     "label": "One solution satisfies both DE and condition"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

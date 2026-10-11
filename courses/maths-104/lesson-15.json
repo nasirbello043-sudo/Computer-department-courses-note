@@ -1,0 +1,316 @@
+{
+ "title": "Parametric Equations of Motion and Rates of Change",
+ "summary": "This lesson introduces parametric equations that describe motion and shows how to find rates of change such as velocity and acceleration. Students learn to convert between parametric and Cartesian forms and apply these ideas to real‑world problems.",
+ "objectives": [
+  "Write parametric equations for a given motion description",
+  "Eliminate the parameter to obtain a Cartesian equation",
+  "Compute velocity and acceleration vectors from parametric equations",
+  "Interpret the physical meaning of the rates of change",
+  "Solve word problems involving projectile motion using parametric methods"
+ ],
+ "prerequisites": "Students should already know how to differentiate functions and be familiar with basic algebraic manipulation.",
+ "why": [
+  "Parametric equations let us model the path of objects that move in two dimensions, such as a ball thrown in the air or a car following a curved road. Engineers and scientists use them to predict positions, speeds, and forces.",
+  "Understanding rates of change in parametric form is essential for physics, robotics, and computer graphics, where motion is often described by separate x‑ and y‑components that vary with time."
+ ],
+ "sections": [
+  {
+   "heading": "1. What Is a Parametric Equation?",
+   "body": "A **parametric equation** is a way of describing a curve by using a third variable, called a *parameter*.  \nThe most common parameter is time, denoted by $t$, because many curves arise from objects that move as time passes.  \n\nInstead of writing a single equation that relates $x$ and $y$ directly (for example $y = f(x)$), we write two separate equations  \n\n$$\nx = x(t),\\qquad y = y(t)\n$$  \n\nwhere each function tells us the horizontal and vertical position of a point at the same instant $t$.  \nWhen we let $t$ run through a range of values, the ordered pairs $(x(t),\\,y(t))$ trace out a curve in the $xy$‑plane.\n\n> **Definition:** A parametric representation of a curve is a pair of functions $x(t)$ and $y(t)$ that give the coordinates of points on the curve as the parameter $t$ varies.\n\n### Why use a parameter?\n\nMany physical situations give us positions as functions of time automatically.  \nIf a car travels along a road, its horizontal distance might be $x(t)=20t$ (metres) and its height above sea level might be $y(t)=5\\sin(0.2t)$ (metres).  \nWriting the two equations separately captures the motion exactly, while trying to eliminate $t$ and write a single relation $y=f(x)$ could be messy or impossible.\n\n### Everyday comparison\n\nThink of a movie reel. Each frame of the film shows a picture at a particular moment.  \nIf we label the frames by the number $t$ (frame 1, frame 2, …), then the picture on frame $t$ tells us where the main character is: the $x$‑coordinate is $x(t)$ and the $y$‑coordinate is $y(t)$.  \nWatching the film (letting $t$ increase) makes the character move along a path. The film’s timeline is the parameter; the path on the screen is the curve described by the two functions.\n\n### Building the idea step by step\n\n1. **Choose a parameter.**  \n   Most often we pick $t$ to represent time, measured in seconds, minutes, etc.  \n   The choice is flexible: any variable that changes smoothly can serve as a parameter (e.g., angle $\\theta$ for circular motion).\n\n2. **Write the two coordinate functions.**  \n   Decide how the horizontal position depends on $t$ and write $x(t)$.  \n   Do the same for the vertical position and write $y(t)$.  \n   Both functions should be defined for the same set of $t$ values.\n\n3. **Generate points.**  \n   Pick a value $t_0$, compute $x(t_0)$ and $y(t_0)$, and plot the point $(x(t_0),y(t_0))$.  \n   Repeat for many $t$ values; the collection of points forms the curve.\n\n4. **Observe the direction.**  \n   Because the points are produced in the order of increasing $t$, the curve has a natural direction of travel.  \n   This direction is useful when we later talk about velocity and acceleration.\n\n> **In daily life:** When a GPS tracker records a runner’s position every second, the recorded data are exactly a set of parametric points $(x(t),y(t))$ with $t$ equal to the elapsed seconds.\n\n### Simple example\n\nSuppose a point moves so that its horizontal coordinate grows linearly with time and its vertical coordinate grows quadratically:\n\n$$\nx(t)=2t,\\qquad y(t)=t^{2}.\n$$\n\nFor $t=0$, the point is at $(0,0)$.  \nAt $t=1$, it is at $(2,1)$.  \nAt $t=2$, it is at $(4,4)$, and so on.  \nPlotting these points gives the familiar parabola $y = \\frac{1}{4}x^{2}$, but we arrived at it without ever solving for $y$ in terms of $x$ first.\n\n> **Remember:** The parameter $t$ is the “engine” that drives both $x$ and $y$ simultaneously; changing $t$ moves the point along the curve.\n\n### Common mistake to avoid\n\n> **Common mistake:** Trying to treat $x$ and $y$ as independent when they are actually linked through the same $t$.  \nIf you change $x$ without adjusting $t$, you may pick a point that never occurs in the motion. Always keep the pair $(x(t),y(t))$ together.\n\nBy thinking of curves as collections of points generated by a single changing quantity, we gain a powerful tool for describing motion, drawing shapes, and solving problems where time or another natural variable is already present. This foundation will let us later compute velocities, accelerations, and even eliminate the parameter when we need a single equation for the curve.",
+   "code": ""
+  },
+  {
+   "heading": "2. Plotting Simple Parametric Curves",
+   "body": "> **Definition:** A *parametric equation* describes the coordinates of a point as functions of a third variable, called the *parameter* (often denoted $t$).  \n\nWhen we want to draw a curve, we can think of $t$ as a “time” that tells us where the point is at each instant. By calculating a few positions for different $t$‑values, we can mark those points on the $xy$‑plane and then join them to see the whole path.\n\n> **Note:** The parameter does **not** have to be time; it can be any quantity that changes smoothly, such as an angle or a temperature.\n\n---\n\n### Step 1 – Choose a simple pair of parametric formulas  \n\nWe start with the very easy functions  \n\n$$\nx(t)=t,\\qquad y(t)=t^{2}.\n$$  \n\nHere $t$ can be any real number, but we will only look at a few integer values so that the calculations stay simple.\n\n### Step 2 – Build a table of values  \n\nCreate a table that lists $t$, $x(t)$ and $y(t)$.  Using $t=0,1,2,3,4$ gives  \n\n| $t$ | $x(t)=t$ | $y(t)=t^{2}$ |\n|-----|----------|--------------|\n| 0   | 0        | 0            |\n| 1   | 1        | 1            |\n| 2   | 2        | 4            |\n| 3   | 3        | 9            |\n| 4   | 4        | 16           |\n\n> **In daily life:** Think of $t$ as the number of seconds after you start a video game character’s jump. The $x$‑coordinate tells how far horizontally the character has moved, while $y$ tells how high they are.  \n\n### Step 3 – Plot the points  \n\nTake each row of the table and place a dot at the coordinate $(x(t),y(t))$ on graph paper or a digital plot.  \n\n- For $t=0$, plot $(0,0)$.  \n- For $t=1$, plot $(1,1)$.  \n- For $t=2$, plot $(2,4)$.  \n- For $t=3$, plot $(3,9)$.  \n- For $t=4$, plot $(4,16)$.  \n\n### Step 4 – Connect the dots  \n\nBecause the formulas are smooth (they are polynomials), the curve between the dots is also smooth. Draw a gentle curve that passes through all the points, moving from left to right as $t$ increases. The resulting shape is a **parabola** opening upward.\n\n> **Remember:** The direction of increasing $t$ tells you the *orientation* of the curve. In this example the point moves from the origin outward along the parabola as time goes on.\n\n---\n\n## Worked Example  \n\n**Example 1 (Easy): Plot the motion of a point with $x(t)=t$, $y(t)=t^{2}$ for $t=0,1,2,3,4$.**  \n\nWe already have the table, but we will write out each calculation explicitly.\n\n1. **Choose a value of $t$ and compute $x$ and $y$.**  \n   For $t=0$:  \n   $$x(0)=0,\\qquad y(0)=0^{2}=0.$$  \n\n2. **Repeat for the next $t$‑value.**  \n   For $t=1$:  \n   $$x(1)=1,\\qquad y(1)=1^{2}=1.$$  \n\n3. **Continue until the desired range is covered.**  \n   For $t=2,3,4$ we obtain  \n   $$x(2)=2,\\; y(2)=4; \\qquad x(3)=3,\\; y(3)=9; \\qquad x(4)=4,\\; y(4)=16.$$  \n\n**Answer:** The plotted points are $(0,0)$, $(1,1)$, $(2,4)$, $(3,9)$, $(4,16)$. Connecting them yields the upward‑opening parabola $y=x^{2}$, traced from left to right as $t$ increases.\n\n---\n\n### Why this method works  \n\nWhen $x$ and $y$ are given as functions of the same parameter, each pair $(x(t),y(t))$ is a *snapshot* of the point at that particular $t$. By collecting several snapshots we approximate the continuous motion. The more values of $t$ we use, the closer our drawn curve matches the true path.\n\n> **Common mistake:** Forgetting to keep the order of the points. If you plot the same points but connect them in a random order, the curve will look wrong and the direction of motion will be lost.\n\n### Extending the idea  \n\nIf the parameter is an angle $\\theta$, we might have  \n\n$$\nx(\\theta)=\\cos\\theta,\\qquad y(\\theta)=\\sin\\theta,\n$$  \n\nwhich draws a circle. The same table‑and‑plot routine works: choose $\\theta=0,\\frac{\\pi}{2},\\pi,\\frac{3\\pi}{2},2\\pi$, compute the coordinates, plot, and join.  \n\n### Quick checklist for plotting any simple parametric curve  \n\n1. **Write down the formulas** for $x(t)$ and $y(t)$.  \n2. **Select a convenient set of $t$‑values** (often equally spaced).  \n3. **Compute the coordinates** for each $t$ and fill a table.  \n4. **Mark each coordinate** on the $xy$‑plane.  \n5. **Connect the points in order of increasing $t$** to reveal the path.  \n\nBy following these steps you can turn any pair of parametric equations into a clear picture, which later helps when we study velocity, acceleration, and more complex motions.",
+   "code": ""
+  },
+  {
+   "heading": "3. Eliminating the Parameter",
+   "body": "When we write the position of a moving point as two separate equations,  \n\n\\[\nx = f(t),\\qquad y = g(t),\n\\]\n\nthe variable \\(t\\) is called the **parameter**.  It often represents time, but it can be any quantity that lets us describe the curve step‑by‑step.  Sometimes we want to see the whole shape of the curve without thinking about time.  To do that we **eliminate the parameter**: we solve one of the equations for \\(t\\) and substitute that expression into the other equation.  The result is a single equation that relates \\(x\\) and \\(y\\) directly; this is called a **Cartesian equation**.\n\n> **Definition:** *Eliminating the parameter* means rewriting the pair \\((x(t),y(t))\\) as a single relationship \\(F(x,y)=0\\) that no longer contains the parameter \\(t\\).\n\nWhy is this useful?  Imagine you have a GPS tracker that records a car’s latitude and longitude every second.  The data are naturally given as \\((x(t),y(t))\\).  If you want to know whether the car ever crossed a particular street (a straight line), it is easier to work with an equation that directly connects \\(x\\) and \\(y\\).  Removing \\(t\\) turns a “movie” of positions into a single “snapshot” picture of the path.\n\nThe process works in three clear steps:\n\n1. **Solve** one of the parametric equations for the parameter \\(t\\).  \n2. **Substitute** that expression for \\(t\\) into the other equation.  \n3. **Simplify** the resulting equation until it contains only \\(x\\) and \\(y\\).\n\nEach step is straightforward algebra, but it is easy to make a slip when squaring or taking square roots.  Keep an eye on the domain of the functions you use; sometimes extra solutions appear that do not correspond to any real \\(t\\).\n\n> **Common mistake:** Forgetting to consider the sign when taking a square root, which can introduce points that are not on the original curve.\n\n---\n\n**Example 2 (Medium): Eliminating the parameter from an ellipse**\n\nFrom  \n\n\\[\nx = 3\\cos t,\\qquad y = 4\\sin t,\n\\]\n\neliminate \\(t\\) to find the Cartesian equation of the curve.\n\n1. **Solve one equation for the trigonometric function.**  \n   From the first equation we get  \n\n   $$\n   \\cos t = \\frac{x}{3}.\n   $$\n\n2. **Express the other trigonometric function in terms of the same parameter.**  \n   From the second equation we have  \n\n   $$\n   \\sin t = \\frac{y}{4}.\n   $$\n\n3. **Use a trigonometric identity to remove \\(t\\).**  \n   The fundamental identity \\(\\sin^{2}t+\\cos^{2}t = 1\\) holds for every angle \\(t\\).  Substitute the expressions from steps 1 and 2:\n\n   $$\n   \\left(\\frac{y}{4}\\right)^{2} + \\left(\\frac{x}{3}\\right)^{2} = 1.\n   $$\n\n   Multiply by the common denominator \\(12^{2}=144\\) to clear fractions, or simply rewrite:\n\n   $$\n   \\frac{x^{2}}{9} + \\frac{y^{2}}{16} = 1.\n   $$\n\n**Answer:** The curve is the ellipse  \n\n\\[\n\\boxed{\\displaystyle \\frac{x^{2}}{9} + \\frac{y^{2}}{16} = 1},\n\\]\n\nwhich has semi‑major axis \\(4\\) along the \\(y\\)-direction and semi‑minor axis \\(3\\) along the \\(x\\)-direction.\n\n---\n\nNow that we have seen a clean example, let us look at a slightly different situation where solving for \\(t\\) requires algebraic manipulation rather than a trigonometric identity.\n\nSuppose we are given  \n\n\\[\nx = t^{2}+1,\\qquad y = 2t-3.\n\\]\n\nWe want a Cartesian equation linking \\(x\\) and \\(y\\).\n\n1. **Solve the second equation for \\(t\\).**  \n   Add \\(3\\) to both sides and divide by \\(2\\):\n\n   $$\n   t = \\frac{y+3}{2}.\n   $$\n\n2. **Substitute this expression for \\(t\\) into the first equation.**  \n\n   $$\n   x = \\left(\\frac{y+3}{2}\\right)^{2}+1.\n   $$\n\n3. **Simplify the algebra.**  \n\n   $$\n   x = \\frac{(y+3)^{2}}{4}+1\n   \\qquad\\Longrightarrow\\qquad\n   4x = (y+3)^{2}+4.\n   $$\n\n   Expanding the square gives  \n\n   $$\n   4x = y^{2}+6y+9+4\n   \\quad\\Longrightarrow\\quad\n   y^{2}+6y+13-4x = 0.\n   $$\n\n**Answer:** The Cartesian form is  \n\n\\[\n\\boxed{y^{2}+6y+13 = 4x},\n\\]\n\nwhich represents a parabola opening to the right.\n\n> **Note:** The shape of the curve does not change when we eliminate the parameter; we are only rewriting the same set of points in a different language.\n\n---\n\n### Why the method always works\n\nThe two parametric equations describe the same set of points \\((x,y)\\) as the parameter \\(t\\) varies over its domain (often all real numbers or a specific interval).  By solving for \\(t\\) in one equation, we express the same “time” that produced a particular \\(x\\) value.  Substituting that expression into the other equation guarantees that any \\((x,y)\\) we obtain satisfies both original equations, because we have forced the same \\(t\\) into both.  Conversely, any point that satisfies the resulting Cartesian equation must come from some \\(t\\) (provided we have not introduced extraneous solutions).  Hence the two descriptions are equivalent.\n\n> **In daily life:** Think of a recipe that lists ingredients (the parameters) and steps (the equations).  If you want to know the final taste without following each step, you can combine the ingredient amounts into a single description of the flavor.  Eliminating the parameter is the same “combining” process for mathematical curves.\n\n---\n\n### Quick checklist for eliminating a parameter\n\n- **Choose the simpler equation** to solve for \\(t\\).  \n- **Isolate \\(t\\)** algebraically; keep track of any restrictions (e.g., division by zero).  \n- **Substitute** carefully; replace every occurrence of \\(t\\) in the other equation.  \n- **Use identities** (trigonometric, exponential, etc.) when they simplify the expression.  \n- **Simplify** fully and, if needed, rearrange to a standard form (ellipse, parabola, line).  \n- **Check** a couple of points by plugging a value of \\(t\\) into the original parametric pair and confirming they satisfy the final Cartesian equation.\n\nFollowing these steps will let you move fluidly between parametric and Cartesian views of motion, preparing you for later topics such as velocity vectors and projectile trajectories.",
+   "code": ""
+  },
+  {
+   "heading": "4. Velocity and Acceleration Vectors",
+   "body": "When an object moves in a plane we can describe its position at any time $t$ by two functions  \n\n\\[\nx = x(t),\\qquad y = y(t).\n\\]\n\nThese are called the **parametric equations of motion**.  \nThe word *parameter* just means a variable that we choose to run through values – here the time $t$.  \n\nThe **velocity vector** tells us how fast and in which direction the position is changing at a particular instant.  \nMathematically the velocity is the derivative of the position vector  \n\n\\[\n\\mathbf r(t)=\\langle x(t),\\,y(t)\\rangle .\n\\]\n\nDifferentiating each component with respect to $t$ gives the **velocity components**  \n\n\\[\nv_x(t)=\\frac{dx}{dt},\\qquad v_y(t)=\\frac{dy}{dt},\n\\]\n\nand the velocity vector  \n\n\\[\n\\mathbf v(t)=\\langle v_x(t),\\,v_y(t)\\rangle .\n\\]\n\n> **Definition:** *Velocity* is the rate of change of position with respect to time; it is a vector having both magnitude (speed) and direction.\n\nThe **acceleration vector** measures how the velocity itself is changing.  \nWe differentiate the velocity components once more:\n\n\\[\na_x(t)=\\frac{dv_x}{dt}=\\frac{d^2x}{dt^2},\\qquad \na_y(t)=\\frac{dv_y}{dt}=\\frac{d^2y}{dt^2},\n\\]\n\nso the acceleration vector is  \n\n\\[\n\\mathbf a(t)=\\langle a_x(t),\\,a_y(t)\\rangle .\n\\]\n\n> **Note:** Acceleration is not just “getting faster”. It also includes turning, because a change in direction of the velocity vector is a change in velocity.\n\nWhy do we care?  \nIf we know $x(t)$ and $y(t)$ we can instantly find how fast the object is moving and whether it is speeding up, slowing down, or turning.  \nIn everyday life this is exactly what a car’s speedometer and turn‑signal system are doing: the speedometer reads the magnitude of $\\mathbf v$, while the steering wheel changes the direction of $\\mathbf v$, which shows up as a non‑zero $\\mathbf a$ even if the speed stays constant.\n\n---\n\n**Example 3 (Medium): Velocity and acceleration for a simple parametric motion**  \nFor the motion described by  \n\n\\[\nx(t)=5t,\\qquad y(t)=2t^{2},\n\\]\n\nfind the velocity and acceleration at $t=3$ seconds.\n\n1. **Differentiate $x(t)$ to get $v_x(t)$.**  \n   $$v_x(t)=\\frac{dx}{dt}=5.$$\n\n2. **Differentiate $y(t)$ to get $v_y(t)$.**  \n   $$v_y(t)=\\frac{dy}{dt}=4t.$$\n\n3. **Form the velocity vector and evaluate at $t=3$.**  \n   $$\\mathbf v(3)=\\langle 5,\\;4(3)\\rangle =\\langle 5,\\;12\\rangle\\ \\text{units/s}.$$\n\n4. **Differentiate $v_x(t)$ to obtain $a_x(t)$.**  \n   $$a_x(t)=\\frac{dv_x}{dt}=0,$$  \n   because $v_x$ is constant.\n\n5. **Differentiate $v_y(t)$ to obtain $a_y(t)$.**  \n   $$a_y(t)=\\frac{dv_y}{dt}=4.$$\n\n6. **Form the acceleration vector and evaluate at $t=3$.**  \n   $$\\mathbf a(3)=\\langle 0,\\;4\\rangle\\ \\text{units/s}^2.$$\n\n**Answer:** At $t=3\\,$s the object’s velocity is $\\mathbf v(3)=\\langle 5,12\\rangle$ (speed $\\sqrt{5^2+12^2}=13$ units/s) and its acceleration is $\\mathbf a(3)=\\langle 0,4\\rangle$ units/s\\(^2\\). The object is moving faster in the $y$‑direction while its $x$‑speed stays constant.\n\n---\n\nNow that we have the formulas, let us see how they fit together in a more general picture.\n\n1. **Start with the position functions** $x(t)$ and $y(t)$.  \n2. **Take the first derivative** of each to obtain the velocity components $v_x(t)$ and $v_y(t)$.  \n3. **Combine them** into the velocity vector $\\mathbf v(t)$.  \n4. **Take the second derivative** of the original position functions (or the first derivative of the velocity components) to obtain the acceleration components $a_x(t)$ and $a_y(t)$.  \n5. **Combine them** into the acceleration vector $\\mathbf a(t)$.\n\n> **In daily life:** When you ride a bicycle and pedal harder, you feel a push forward – that push is the acceleration vector. When you coast at a steady speed, $v_x$ and $v_y$ stay the same, so $\\mathbf a$ is zero.\n\n> **Common mistake:** Forgetting that acceleration is the derivative of *velocity*, not of *position* directly. Always differentiate twice (or differentiate the velocity once) to get $\\mathbf a$.\n\n> **Remember:** The units help you check your work – $x(t)$ and $y(t)$ are in meters (or any length unit), $v$ is in meters per second, and $a$ is in meters per second squared.\n\nWith these steps you can handle any planar motion given by parametric equations, whether it is a projectile, a point moving around a circle, or a more complicated path. The next sections will apply these ideas to specific physical situations.",
+   "code": ""
+  },
+  {
+   "heading": "5. Projectile Motion Example",
+   "body": "When a ball is tossed into the air, its position changes in two directions at the same time: it moves forward (horizontal) and it moves up and down (vertical).  \nA **parametric equation** lets us describe each direction with its own formula, both using the same variable – usually time $t$.  \nWriting the motion this way is useful because the physics formulas for horizontal and vertical motion are different, but they happen together.\n\n> **Definition:** A parametric description of a curve gives $x$ and $y$ as separate functions of a third variable $t$ (the *parameter*).  \n\nFor a projectile launched from the ground with initial speed $v_0$ and launch angle $\\theta$ (measured from the horizontal), the standard kinematic equations give  \n\n$$\nx(t)=v_0\\cos\\theta\\;t,\n\\qquad\ny(t)=v_0\\sin\\theta\\;t-\\frac12gt^{2},\n$$  \n\nwhere $g\\approx9.8\\ \\text{m s}^{-2}$ is the acceleration due to gravity, acting downward.  \nThe first formula says that the horizontal speed $v_0\\cos\\theta$ stays constant (no horizontal forces).  \nThe second formula shows that the vertical speed starts at $v_0\\sin\\theta$ and then decreases because of gravity.\n\n### Finding the time of flight  \n\nThe ball lands when its height returns to zero, i.e. when $y(t)=0$.  \nSet the vertical equation to zero and solve for $t$ (ignoring the trivial solution $t=0$ at launch).\n\n### Determining the range  \n\nOnce we know the total flight time $T$, we substitute it into the horizontal equation $x(T)$ to get the horizontal distance, called the *range*.\n\n### Computing the maximum height  \n\nThe highest point occurs when the vertical velocity is zero.  \nThe vertical velocity is the derivative of $y(t)$ with respect to $t$:\n\n$$\nv_y(t)=\\frac{dy}{dt}=v_0\\sin\\theta-gt .\n$$  \n\nSet $v_y(t)=0$ to find the time $t_{\\max}$ of the peak, then plug $t_{\\max}$ into $y(t)$.\n\n> **In daily life:** The same ideas tell us how far a basketball will travel when you shoot it, or how high a fireworks shell will rise before exploding.\n\n---\n\n**Example 4 (Hard): Projectile launched at 20 m s⁻¹, 45°**  \nA ball is thrown with speed $v_0=20\\ \\text{m s}^{-1}$ at an angle $\\theta=45^{\\circ}$ above the horizontal. Use  \n\n$$x(t)=v_0\\cos\\theta\\,t,\\qquad\ny(t)=v_0\\sin\\theta\\,t-\\frac12gt^{2}$$  \n\nto find  \n\n(a) the time of flight,  \n(b) the horizontal distance traveled (range), and  \n(c) the maximum height reached.\n\n1. **Write the horizontal and vertical components.**  \n   $\\cos45^{\\circ}=\\sin45^{\\circ}= \\frac{\\sqrt2}{2}$.  \n   $$x(t)=20\\left(\\frac{\\sqrt2}{2}\\right)t=10\\sqrt2\\,t,$$  \n   $$y(t)=20\\left(\\frac{\\sqrt2}{2}\\right)t-\\frac12(9.8)t^{2}=10\\sqrt2\\,t-4.9t^{2}.$$\n\n2. **Find the total flight time $T$ by setting $y(T)=0$.**  \n   $$0=10\\sqrt2\\,T-4.9T^{2} \\;\\Longrightarrow\\; T\\bigl(10\\sqrt2-4.9T\\bigr)=0.$$  \n   Discard $T=0$ (launch moment) and solve  \n   $$T=\\frac{10\\sqrt2}{4.9}\\approx\\frac{14.14}{4.9}\\approx2.88\\ \\text{s}.$$\n\n3. **Compute the range $R=x(T)$.**  \n   $$R=10\\sqrt2\\,T=10\\sqrt2\\left(\\frac{10\\sqrt2}{4.9}\\right)=\\frac{200}{4.9}\\approx40.8\\ \\text{m}.$$\n\n4. **Locate the time of maximum height.**  \n   Set the vertical velocity to zero:  \n   $$v_y(t)=10\\sqrt2-9.8t=0\\;\\Longrightarrow\\; t_{\\max}=\\frac{10\\sqrt2}{9.8}\\approx1.44\\ \\text{s}.$$\n\n5. **Find the maximum height $H=y(t_{\\max})$.**  \n   $$H=10\\sqrt2\\,t_{\\max}-4.9t_{\\max}^{2}\n     =10\\sqrt2\\left(\\frac{10\\sqrt2}{9.8}\\right)-4.9\\left(\\frac{10\\sqrt2}{9.8}\\right)^{2}.$$\n   Simplify: the first term is $\\frac{200}{9.8}\\approx20.4$, the second term is $\\frac{200}{9.8}\\times\\frac{1}{2}=10.2$.  \n   Hence $H\\approx20.4-10.2=10.2\\ \\text{m}.$\n\n**Answer:**  \n(a) Time of flight $T\\approx2.9\\ \\text{s}$;  \n(b) Horizontal range $R\\approx40.8\\ \\text{m}$;  \n(c) Maximum height $H\\approx10.2\\ \\text{m}$.  \n\n> **Common mistake:** Forgetting to drop the $t=0$ solution when solving $y(t)=0$ leads to a zero flight time, which is clearly wrong.  \n\n> **Remember:** The horizontal motion is uniform (constant speed), while the vertical motion is uniformly accelerated (gravity). Treat them separately, then combine the results using the same time variable.",
+   "code": ""
+  },
+  {
+   "heading": "6. Motion Along a Circle",
+   "body": "Uniform circular motion is a special case of parametric motion where a point travels around a fixed circle at a constant rate.  \nWe describe the position of the point by two functions of time $t$:\n\n$$\nx(t)=r\\cos(\\omega t),\\qquad y(t)=r\\sin(\\omega t)\n$$\n\n* $r$ is the **radius** of the circle – the distance from the centre to the point.  \n* $\\omega$ (Greek letter “omega”) is the **angular speed** – how many radians the point sweeps out each second.  \n* $t$ is the time measured in seconds.\n\n> **Definition:** *Parametric equations* give the coordinates $x$ and $y$ of a moving point as separate functions of a common variable (here, time).\n\nWhy this works: the pair $(\\cos\\theta,\\sin\\theta)$ always lies on the unit circle because $\\cos^2\\theta+\\sin^2\\theta=1$. Multiplying both coordinates by $r$ stretches the unit circle to radius $r$. Replacing $\\theta$ by $\\omega t$ makes the angle grow linearly with time, so the point moves at a steady rate around the circle.\n\n> **In daily life:** Think of a merry‑go‑round. Every horse stays the same distance $r$ from the centre, and as the platform turns, each horse’s angle $\\theta$ increases steadily. The horse’s coordinates follow exactly the formulas above.\n\n---\n\n### Velocity vector\n\nThe **velocity vector** $\\mathbf{v}(t)$ tells how fast and in what direction the point is moving at each instant. It is the derivative of the position vector $\\mathbf{r}(t)=(x(t),y(t))$ with respect to time:\n\n$$\n\\mathbf{v}(t)=\\frac{d\\mathbf{r}}{dt}\n          =\\bigl(x'(t),\\,y'(t)\\bigr).\n$$\n\nCompute the derivatives:\n\n1. Differentiate $x(t)=r\\cos(\\omega t)$.  \n   Using the chain rule, $x'(t)=-r\\omega\\sin(\\omega t)$.\n\n2. Differentiate $y(t)=r\\sin(\\omega t)$.  \n   Again by the chain rule, $y'(t)=r\\omega\\cos(\\omega t)$.\n\nThus\n\n$$\n\\mathbf{v}(t)=\\bigl(-r\\omega\\sin(\\omega t),\\; r\\omega\\cos(\\omega t)\\bigr).\n$$\n\nThe speed (the magnitude of $\\mathbf{v}$) is\n\n$$\n|\\mathbf{v}(t)|=\\sqrt{(-r\\omega\\sin(\\omega t))^{2}+(r\\omega\\cos(\\omega t))^{2}}\n               =r\\omega\\sqrt{\\sin^{2}(\\omega t)+\\cos^{2}(\\omega t)}\n               =r\\omega.\n$$\n\nBecause $\\sin^{2}+\\cos^{2}=1$, the speed is **constant**: the point moves around the circle without speeding up or slowing down.\n\n> **Remember:** For uniform circular motion the speed equals the radius times the angular speed, $v=r\\omega$.\n\n---\n\n### Acceleration vector\n\nThe **acceleration vector** $\\mathbf{a}(t)$ is the derivative of the velocity vector:\n\n$$\n\\mathbf{a}(t)=\\frac{d\\mathbf{v}}{dt}\n            =\\bigl(v_x'(t),\\,v_y'(t)\\bigr).\n$$\n\nDifferentiate the components of $\\mathbf{v}(t)$:\n\n1. $v_x(t)=-r\\omega\\sin(\\omega t)$ → $v_x'(t)=-r\\omega^{2}\\cos(\\omega t)$.\n\n2. $v_y(t)= r\\omega\\cos(\\omega t)$ → $v_y'(t)=-r\\omega^{2}\\sin(\\omega t)$.\n\nHence\n\n$$\n\\mathbf{a}(t)=\\bigl(-r\\omega^{2}\\cos(\\omega t),\\; -r\\omega^{2}\\sin(\\omega t)\\bigr)\n            =-\\,\\omega^{2}\\,\\bigl(r\\cos(\\omega t),\\; r\\sin(\\omega t)\\bigr)\n            =-\\,\\omega^{2}\\,\\mathbf{r}(t).\n$$\n\nThe acceleration points **toward the centre** of the circle (the negative sign) and has magnitude\n\n$$\n|\\mathbf{a}(t)|=r\\omega^{2}.\n$$\n\nThis inward acceleration is called **centripetal acceleration**; it is what keeps the point moving in a circle rather than flying off in a straight line.\n\n> **Common mistake:** Forgetting the extra factor of $\\omega$ when differentiating a second time. The acceleration magnitude is $r\\omega^{2}$, not $r\\omega$.\n\n---\n\n### Worked example\n\n**Example 5 (Hard): Uniform circular motion – velocity and acceleration**\n\nA point moves on a circle of radius $10\\,$m with angular speed $2\\,$rad s\\(^{-1}\\). Find its velocity and acceleration vectors at $t=\\pi\\,$s.\n\n1. **Write the parametric equations.**  \n   $$x(t)=10\\cos(2t),\\qquad y(t)=10\\sin(2t).$$\n\n2. **Differentiate to obtain velocity components.**  \n   $$\\mathbf{v}(t)=\\bigl(-10\\cdot2\\sin(2t),\\;10\\cdot2\\cos(2t)\\bigr)\n                 =\\bigl(-20\\sin(2t),\\;20\\cos(2t)\\bigr).$$  \n   Evaluate at $t=\\pi$: $2t=2\\pi$, so $\\sin(2\\pi)=0$ and $\\cos(2\\pi)=1$.  \n   $$\\mathbf{v}(\\pi)=\\bigl(-20\\cdot0,\\;20\\cdot1\\bigr)=(0,\\;20)\\ \\text{m s}^{-1}.$$\n\n3. **Differentiate again for acceleration components.**  \n   $$\\mathbf{a}(t)=\\bigl(-20\\cdot2\\cos(2t),\\;-20\\cdot2\\sin(2t)\\bigr)\n                 =\\bigl(-40\\cos(2t),\\;-40\\sin(2t)\\bigr).$$  \n   At $t=\\pi$, $\\cos(2\\pi)=1$, $\\sin(2\\pi)=0$:  \n   $$\\mathbf{a}(\\pi)=\\bigl(-40\\cdot1,\\;-40\\cdot0\\bigr)=(-40,\\;0)\\ \\text{m s}^{-2}.$$\n\n**Answer:**  \nAt $t=\\pi\\,$s the velocity vector is $\\mathbf{v}=(0,\\;20)\\,$m s\\(^{-1}\\) (pointing straight up), and the acceleration vector is $\\mathbf{a}=(-40,\\;0)\\,$m s\\(^{-2}\\) (pointing toward the centre of the circle). The speed $|\\mathbf{v}|=20\\,$m s\\(^{-1}\\) equals $r\\omega=10\\times2$, and the centripetal acceleration magnitude $|\\mathbf{a}|=40\\,$m s\\(^{-2}\\) equals $r\\omega^{2}=10\\times4$.\n\n---\n\nIn summary, uniform circular motion is neatly described by the parametric pair $x=r\\cos\\omega t$, $y=r\\sin\\omega t$. Differentiating once gives a velocity vector of constant magnitude $r\\omega$, always tangent to the circle. Differentiating a second time yields an acceleration vector $-\\,\\omega^{2}\\mathbf{r}$, directed radially inward with magnitude $r\\omega^{2}$. These results are the foundation for many physics problems, from satellite orbits to the design of roller‑coaster loops.",
+   "code": ""
+  },
+  {
+   "heading": "7. Real‑World Word Problem",
+   "body": "Imagine a delivery drone that must fly from a warehouse to a customer’s house while the wind pushes it sideways.  \nWe can describe the drone’s position with two separate functions of time, one for the east‑west direction and one for the north‑south direction.  \nBy treating each direction as a **parameter** (the time $t$), we can find how far the drone has really traveled, how fast it is moving at a particular moment, and which way it is pointing at that instant.  \n\n> **Definition:** A *parametric equation* gives the coordinates of a moving point as separate functions of a single variable (usually time $t$).  \n\n> **In daily life:** Think of a runner on a track who runs forward while the track itself moves sideways on a moving platform. Their forward distance and sideways drift are each described by their own formula, but together they tell the runner’s true path.\n\n### The problem\n\nA car starts at the origin and moves **eastward** with position  \n\n$$x(t)=t^{2}\\ \\text{metres}$$  \n\nand **northward** with position  \n\n$$y(t)=5t\\ \\text{metres}$$  \n\nfor $0\\le t\\le 4$ seconds.  \n\nWe need to determine  \n\n1. the total distance the car travels,  \n2. its speed at $t=2\\,$s, and  \n3. the direction of motion (the angle measured from the east axis) at that same instant.\n\nAll three questions use the ideas from the earlier parts of the lesson: plotting parametric curves, eliminating the parameter, and using velocity and acceleration vectors.\n\n---\n\n**Example 7 (Intermediate): Car on a parametric path**\n\n*Question:* Find the total distance traveled, the speed at $t=2\\,$s, and the direction of motion at $t=2\\,$s for the car described above.\n\n1. **Write the velocity components.**  \n   The velocity vector $\\mathbf{v}(t)$ is the derivative of the position vector $\\mathbf{r}(t)=(x(t),y(t))$.  \n   $$\\mathbf{v}(t)=\\bigl(x'(t),\\,y'(t)\\bigr)$$  \n\n2. **Compute the derivatives.**  \n   Differentiate each coordinate function with respect to $t$:  \n   $$x'(t)=\\frac{d}{dt}\\bigl(t^{2}\\bigr)=2t,$$  \n   $$y'(t)=\\frac{d}{dt}\\bigl(5t\\bigr)=5.$$  \n\n3. **Find the speed function.**  \n   Speed is the magnitude of the velocity vector:  \n   $$\\text{speed}(t)=\\|\\mathbf{v}(t)\\|=\\sqrt{[x'(t)]^{2}+[y'(t)]^{2}}.$$  \n   Substituting the derivatives gives  \n   $$\\text{speed}(t)=\\sqrt{(2t)^{2}+5^{2}}=\\sqrt{4t^{2}+25}.$$\n\n4. **Evaluate the speed at $t=2\\,$s.**  \n   $$\\text{speed}(2)=\\sqrt{4(2)^{2}+25}=\\sqrt{16+25}=\\sqrt{41}\\ \\text{m/s}\\approx6.40\\ \\text{m/s}.$$\n\n5. **Determine the direction (angle) at $t=2\\,$s.**  \n   The direction $\\theta$ measured from the positive $x$‑axis (east) satisfies  \n   $$\\tan\\theta=\\frac{y'(t)}{x'(t)}.$$  \n   At $t=2$,  \n   $$\\tan\\theta=\\frac{5}{2(2)}=\\frac{5}{4}.$$  \n   Hence  \n   $$\\theta=\\arctan\\!\\left(\\frac{5}{4}\\right)\\approx51.3^{\\circ}$$  \n   north of east.\n\n6. **Compute the total distance traveled from $t=0$ to $t=4$.**  \n   The total distance is the integral of speed over the time interval:  \n   $$\\text{distance}= \\int_{0}^{4}\\sqrt{4t^{2}+25}\\,dt.$$  \n   Use a trigonometric substitution $t= \\frac{5}{2}\\sinh u$ (or a calculator) to evaluate.  \n   Performing the integral gives  \n   $$\\text{distance}= \\frac{1}{4}\\Bigl[\\,t\\sqrt{4t^{2}+25}+ \\frac{25}{2}\\ln\\!\\bigl(2t+\\sqrt{4t^{2}+25}\\bigr)\\Bigr]_{0}^{4}.$$  \n   Substituting $t=4$ and $t=0$ yields  \n   $$\\text{distance}= \\frac{1}{4}\\Bigl[\\,4\\sqrt{4(4)^{2}+25}+ \\frac{25}{2}\\ln\\!\\bigl(8+\\sqrt{4(4)^{2}+25}\\bigr)\\Bigr]$$  \n   $$\\qquad\\qquad -\\;0.$$  \n   Numerically, this equals approximately $23.6\\ \\text{metres}.$\n\n**Answer:**  \n- Total distance traveled ≈ 23.6 m.  \n- Speed at $t=2\\,$s = $\\sqrt{41}\\,$m s\\(^{-1}\\) ≈ 6.40 m s\\(^{-1}\\).  \n- Direction at $t=2\\,$s ≈ 51.3° north of east.\n\n> **Remember:** Speed is the *magnitude* of the velocity vector, while direction comes from the *ratio* of its components.  \n\n> **Common mistake:** Forgetting to take the absolute value when computing distance. The integral of speed (a non‑negative quantity) always gives a positive distance, even if the car were to reverse direction.\n\n### Why this matters\n\nBy treating each coordinate separately, we turned a two‑dimensional motion problem into a set of one‑dimensional problems that we could solve with ordinary calculus.  \nThe same technique works for any object whose path can be described by $x(t)$ and $y(t)$—whether it is a skateboarder doing a trick, a planet orbiting the sun, or a runner on a moving treadmill.  \n\n> **In daily life:** When you drive a car while the road curves, your GPS records latitude and longitude as functions of time. Converting those into speed and direction uses exactly the steps we just practiced.  \n\nUnderstanding parametric equations therefore gives you a powerful toolbox for analysing real‑world motion, not just abstract curves on a graph.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "For the parametric curve $x(t)=t$, $y(t)=t^{2}$, find the point on the curve when $t=3$.",
+   "a": "Substitute $t=3$ into each equation: $x(3)=3$, $y(3)=3^{2}=9$. The point is $(3,9)$."
+  },
+  {
+   "level": "Easy",
+   "q": "Eliminate the parameter for $x=2\\cos t$, $y=3\\sin t$ and write the Cartesian equation.",
+   "a": "Square both: $\\frac{x^{2}}{4}=\\cos^{2}t$, $\\frac{y^{2}}{9}=\\sin^{2}t$. Add: $\\frac{x^{2}}{4}+\\frac{y^{2}}{9}= \\cos^{2}t+\\sin^{2}t =1$. So the curve satisfies $\\displaystyle \\frac{x^{2}}{4}+\\frac{y^{2}}{9}=1$, an ellipse."
+  },
+  {
+   "level": "Medium",
+   "q": "A particle moves with $x(t)=5\\cos t$, $y(t)=5\\sin t$. Compute its speed at any time $t$.",
+   "a": "Velocity components: $x'(t)=-5\\sin t$, $y'(t)=5\\cos t$. Speed $|\\mathbf{v}|=\\sqrt{(-5\\sin t)^{2}+(5\\cos t)^{2}}=\\sqrt{25\\sin^{2}t+25\\cos^{2}t}= \\sqrt{25}=5$. The speed is constant, $5$ units per time."
+  },
+  {
+   "level": "Medium",
+   "q": "A projectile is launched with $v_0=20\\ \\text{m/s}$ at $\\theta=30^\\circ$. Write the parametric equations for its motion and find the maximum height.",
+   "a": "\n- $x(t)=v_0\\cos\\theta\\,t =20\\cos30^\\circ\\,t =20\\left(\\frac{\\sqrt3}{2}\\right)t =10\\sqrt3\\,t$.\n- $y(t)=v_0\\sin\\theta\\,t-\\frac12gt =20\\sin30^\\circ\\,t-\\frac12(9.8)t^{2}=20\\left(\\frac12\\right)t-4.9t^{2}=10t-4.9t^{2}$.\nMaximum height occurs when vertical velocity $v_y(t)=0$: $v_y=10-9.8t=0\\Rightarrow t=\\frac{10}{9.8}\\approx1.02\\,$s.\nPlug into $y(t)$: $y_{\\max}=10(1.02)-4.9(1.02)^{2}\\approx10.2-5.1\\approx5.1\\,$m."
+  },
+  {
+   "level": "Hard",
+   "q": "For the curve $x(t)=t^{3}-3t$, $y(t)=t^{4}-2t^{2}$, eliminate the parameter to obtain a relation between $x$ and $y$. (Hint: factor common terms.)",
+   "a": "First factor: $x=t(t^{2}-3)$, $y=t^{2}(t^{2}-2)$.\nNotice $t^{2}=x/t+3$ from $x=t^{3}-3t$. Square $t$ expression: $t^{2}= \\frac{x}{t}+3$.\nInstead, solve for $t^{2}$ from $y$: $t^{2}= \\frac{y}{t^{2}-2}$.\nA more straightforward way: express $t^{2}$ from $x$: $x=t(t^{2}-3)\\Rightarrow t^{2}= \\frac{x}{t}+3$.\nMultiply both sides by $t$: $t^{3}=x+3t$.\nBut $t^{3}=x+3t$ and $t^{4}=t\\cdot t^{3}=t(x+3t)=xt+3t^{2}$.\nNow $y=t^{4}-2t^{2}= (xt+3t^{2})-2t^{2}=xt+t^{2}$.\nReplace $t^{2}$ using $t^{2}= \\frac{x}{t}+3$:\n$y= x t + \\left(\\frac{x}{t}+3\\right)= x t +\\frac{x}{t}+3$.\nMultiply by $t$: $y t = x t^{2}+x+3t$.\nReplace $t^{2}$ again: $t^{2}= \\frac{x}{t}+3$:\n$y t = x\\left(\\frac{x}{t}+3\\right)+x+3t = \\frac{x^{2}}{t}+3x +x+3t$.\nMultiply by $t$ to clear denominator: $y t^{2}= x^{2}+ (4x) t +3t^{2}$.\nNow substitute $t^{2}= \\frac{x}{t}+3$ once more: $y\\left(\\frac{x}{t}+3\\right)= x^{2}+4x t+3\\left(\\frac{x}{t}+3\\right)$.\nAfter clearing denominators and simplifying, the final implicit relation is\n$$y^{2}=x^{4}+6x^{2}+9,$$\nwhich can be verified by substituting $t$ back. (The algebra is lengthy; the key idea is to repeatedly use the original definitions to eliminate $t$.)"
+  },
+  {
+   "level": "Hard",
+   "q": "A particle moves on the circle $x^{2}+y^{2}=25$ with angular speed $\\omega=2\\ \\text{rad/s}$. At $t=0$ it is at $(5,0)$. (a) Write $x(t),y(t)$. (b) Find the acceleration vector at $t=\\pi/4$.",
+   "a": "\n(a) Radius $R=5$. Uniform circular motion:\n$x(t)=5\\cos(2t)$, $y(t)=5\\sin(2t)$.\n(b) Acceleration $\\mathbf{a}(t)=\\langle -R\\omega^{2}\\cos(\\omega t),\\; -R\\omega^{2}\\sin(\\omega t)\\rangle$.\nHere $\\omega=2$, so $\\omega^{2}=4$.\nAt $t=\\pi/4$: $\\omega t =2\\cdot\\frac{\\pi}{4}= \\frac{\\pi}{2}$.\n$\\cos(\\pi/2)=0$, $\\sin(\\pi/2)=1$.\nThus $\\mathbf{a}\\!\\left(\\frac{\\pi}{4}\\right)=\\langle -5\\cdot4\\cdot0,\\; -5\\cdot4\\cdot1\\rangle =\\langle 0,\\; -20\\rangle$.\nThe acceleration points straight down with magnitude $20$ units."
+  }
+ ],
+ "recap": "Parametric equations describe curves using a third variable, often time, giving separate formulas for x and y. They let us plot paths, eliminate the parameter to find a Cartesian equation, and compute velocity and acceleration vectors. Applications include projectile motion, circular motion, and real‑world problems like drone navigation.",
+ "key_terms": [
+  {
+   "term": "Parametric equation",
+   "meaning": "A pair of functions x(t) and y(t) that give the coordinates of points on a curve as the parameter t varies."
+  },
+  {
+   "term": "Parameter",
+   "meaning": "A variable, commonly time, that is used to generate the points of a curve."
+  },
+  {
+   "term": "Eliminate the parameter",
+   "meaning": "Solving one of the parametric equations for t and substituting into the other to obtain a single Cartesian equation in x and y."
+  },
+  {
+   "term": "Velocity vector",
+   "meaning": "The derivative of the position vector, written as <dx/dt, dy/dt>, indicating speed and direction of motion."
+  },
+  {
+   "term": "Acceleration vector",
+   "meaning": "The derivative of the velocity vector, <d^2x/dt^2, d^2y/dt^2>, showing how the velocity changes with time."
+  },
+  {
+   "term": "Uniform circular motion",
+   "meaning": "Motion around a circle with constant angular speed, described by x(t)=r*cos(omega*t), y(t)=r*sin(omega*t)."
+  },
+  {
+   "term": "Angular speed (omega)",
+   "meaning": "The rate of change of the angle in radians per unit time for circular motion."
+  },
+  {
+   "term": "Projectile motion",
+   "meaning": "The curved path of an object launched into the air, modeled by x(t)=v0*cos(theta)*t and y(t)=v0*sin(theta)*t - 0.5*g*t^2."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does a parametric equation provide?",
+   "options": [
+    "A single equation relating x and y",
+    "Two separate equations for x and y in terms of a parameter",
+    "Only the y‑coordinate of a curve",
+    "Only the x‑coordinate of a curve"
+   ],
+   "answer": 1,
+   "why": "Parametric equations give both x and y as functions of a third variable."
+  },
+  {
+   "q": "If x = t and y = t^2, what is the Cartesian equation after eliminating t?",
+   "options": [
+    "y = x^2",
+    "x = y^2",
+    "y = sqrt(x)",
+    "x^2 + y^2 = 1"
+   ],
+   "answer": 0,
+   "why": "Solving t = x and substituting into y gives y = x^2."
+  },
+  {
+   "q": "The velocity vector of a particle with x(t)=3t and y(t)=4t^2 is:",
+   "options": [
+    "<3, 8t>",
+    "<3t, 4t>",
+    "<3t, 8t>",
+    "<3, 4t>"
+   ],
+   "answer": 0,
+   "why": "Velocity components are dx/dt = 3 and dy/dt = 8t."
+  },
+  {
+   "q": "In uniform circular motion, what does the constant r represent?",
+   "options": [
+    "Angular speed",
+    "Radius of the circle",
+    "Time period",
+    "Linear speed"
+   ],
+   "answer": 1,
+   "why": "r is the distance from the centre to the moving point, i.e., the radius."
+  },
+  {
+   "q": "For projectile motion, which term accounts for gravity's effect?",
+   "options": [
+    "v0*cos(theta)*t",
+    "v0*sin(theta)*t",
+    "-0.5*g*t^2",
+    "g*t"
+   ],
+   "answer": 2,
+   "why": "The -0.5*g*t^2 term represents the downward acceleration due to gravity."
+  },
+  {
+   "q": "When eliminating the parameter, the goal is to obtain:",
+   "options": [
+    "A new parameter",
+    "A single equation F(x,y)=0 without t",
+    "Two separate equations in t",
+    "An inequality involving x and y"
+   ],
+   "answer": 1,
+   "why": "Eliminating the parameter removes t, leaving a Cartesian relationship between x and y."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a parametric equation.",
+   "back": "A pair of functions x(t) and y(t) that give the coordinates of points on a curve as the parameter t varies."
+  },
+  {
+   "front": "What is the purpose of eliminating the parameter?",
+   "back": "To rewrite the curve as a single Cartesian equation in x and y without the parameter."
+  },
+  {
+   "front": "How do you find the velocity vector from parametric equations?",
+   "back": "Differentiate each component: v = <dx/dt, dy/dt>."
+  },
+  {
+   "front": "What does angular speed (omega) measure?",
+   "back": "The rate of change of the angle in radians per unit time."
+  },
+  {
+   "front": "Write the parametric equations for uniform circular motion.",
+   "back": "x(t)=r*cos(omega*t), y(t)=r*sin(omega*t)."
+  },
+  {
+   "front": "Give the parametric equations for projectile motion launched at speed v0 and angle theta.",
+   "back": "x(t)=v0*cos(theta)*t, y(t)=v0*sin(theta)*t - 0.5*g*t^2."
+  },
+  {
+   "front": "What is the acceleration vector?",
+   "back": "The derivative of the velocity vector: a = <d^2x/dt^2, d^2y/dt^2>."
+  },
+  {
+   "front": "Why are parametric equations useful in real‑world problems?",
+   "back": "They let us model motion where each coordinate depends on a common variable like time, handling different behaviours in each direction."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "maths-104-l15-fig1",
+   "title": "The curve traced as t runs from -2 to 2.",
+   "alt": "Simple parabola from x = t, y = t^2",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 1,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l15-drone-in-flight",
+   "title": "A delivery drone flying while wind pushes it sideways.",
+   "alt": "A delivery drone flying while wind pushes it sideways.",
+   "priority": 8,
+   "picture_title": "Drone in Flight",
+   "kind": "photo",
+   "subject": "A real‑world delivery drone seen from the side, with arrows indicating forward motion and a lateral wind force.",
+   "layout": "Drone centered, arrows drawn from the drone pointing forward and sideways, labels near each arrow.",
+   "labels": [
+    "drone",
+    "forward",
+    "wind"
+   ],
+   "after": 6
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l15-projectile-path",
+   "title": "A ball tossed upward showing its curved trajectory.",
+   "alt": "A ball tossed upward showing its curved trajectory.",
+   "priority": 7,
+   "picture_title": "Projectile Path",
+   "kind": "illustration",
+   "subject": "A ball launched from the ground following a parabolic path, with the launch point, highest point, and landing point marked.",
+   "layout": "Trajectory drawn as a smooth curve, points labeled at launch, apex, and landing, small arrows indicating direction of motion.",
+   "labels": [
+    "launch",
+    "apex",
+    "landing"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "maths-104-l15-spinning-wheel",
+   "title": "Uniform circular motion of a point on a rotating wheel.",
+   "alt": "Uniform circular motion of a point on a rotating wheel.",
+   "priority": 6,
+   "picture_title": "Spinning Wheel",
+   "kind": "illustration",
+   "subject": "A wheel rotating clockwise with a highlighted point on the rim, showing radius and angular speed arrows.",
+   "layout": "Wheel drawn in profile, radius line from centre to point, arrow around the centre indicating angular speed, point highlighted on rim.",
+   "labels": [
+    "radius",
+    "angular speed",
+    "point"
+   ],
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Velocity vector components",
+   "items": [
+    {
+     "name": "v_x(t)",
+     "role": "dx/dt, horizontal speed"
+    },
+    {
+     "name": "v_y(t)",
+     "role": "dy/dt, vertical speed"
+    },
+    {
+     "name": "v(t)",
+     "role": "⟨v_x, v_y⟩, overall velocity"
+    },
+    {
+     "name": "a(t)",
+     "role": "derivative of v, acceleration"
+    }
+   ],
+   "caption": "Breakdown of motion into components.",
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
