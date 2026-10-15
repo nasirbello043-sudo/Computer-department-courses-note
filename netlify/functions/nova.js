@@ -65,6 +65,13 @@ async function ask(key, messages) {
       if (text && String(text).trim()) return { text: String(text) };
       last = { status: 502, detail: 'empty answer' };
       continue;
+    }
+    last = { status: r.status, detail: 'model ' + model };
+    if (r.status === 401 || r.status === 403) break; // wrong key: other models will not help
+  }
+  return { error: last };
+}
+
 exports.handler = async (event) => {
   const origin = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
   const h = headersFor(origin);
@@ -97,4 +104,3 @@ exports.handler = async (event) => {
   const sse = 'data: ' + JSON.stringify({ choices: [{ delta: { content: out.text } }] }) + '\n\ndata: [DONE]\n\n';
   return { statusCode: 200, headers: Object.assign({ 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-store' }, h), body: sse };
 };
-    
