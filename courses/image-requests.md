@@ -274,14 +274,14 @@ Prompt:
 ```
 Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: Shows a simple diatomic molecule (e.g., H₂) with the shared electron pair drawn between the nuclei, each atom labelled and the shared electrons highlighted.
+Show: Shows two atoms, each contributing one electron, with the shared electron pair drawn between them and labels for the atoms and the shared electrons.
 
-Layout: Two atoms side‑by‑side in the centre, a double‑headed arrow indicating shared electrons, labels for each nucleus and the shared electron pair.
+Layout: Two atoms side‑by‑side in the centre, a double‑dot line between them representing the shared pair, arrows pointing to each atom labeled "atom A" and "atom B", and a label on the electron pair "shared electrons".
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Atom A"
-- "Atom B"
-- "Shared electrons"
+- "atom A"
+- "atom B"
+- "shared electrons"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
