@@ -1,9 +1,9 @@
-// Nova for Learning Hub: a small server that holds the NVIDIA key (for Render).
-// Setup: Render service > Environment > NVIDIA_API_KEY (secret).
+// Nova for Learning Hub: a small server that holds the Groq key (for Render).
+// Setup: Render service > Environment > GROQ_API_KEY (secret).
 // Start command on Render: node render/nova-server.js
 
-const API = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODELS = ['mistralai/mistral-large-2-instruct', 'google/gemma-4-31b-it', 'moonshotai/kimi-k2.6'];
+const API = 'https://api.groq.com/openai/v1/chat/completions';
+const MODELS = ['llama-3.3-70b-versatile', 'openai/gpt-oss-120b', 'llama-3.1-8b-instant'];
 const ALLOWED = ['https://nasirbello043-sudo.github.io'];
 const MAX_BODY = 60000, MAX_MESSAGES = 12, MAX_MSG_CHARS = 2000, MAX_CONTEXT = 16000, MAX_TOKENS = 1200;
 
@@ -81,7 +81,7 @@ const handler = async (event) => {
   if (!(ALLOWED.includes(origin) || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))) {
     return reply(403, { error: 'This address is not allowed to use Nova.' }, h);
   }
-  const key = process.env.NVIDIA_API_KEY;
+  const key = process.env.GROQ_API_KEY;
   if (!key) return reply(500, { error: 'Nova is not set up yet (key missing).' }, h);
   if ((event.body || '').length > MAX_BODY) return reply(413, { error: 'Message too large.' }, h);
 
