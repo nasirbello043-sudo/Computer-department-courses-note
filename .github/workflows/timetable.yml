@@ -1,0 +1,33 @@
+name: Read timetables
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "timetable-uploads/**"
+permissions:
+  contents: write
+concurrency:
+  group: timetables
+  cancel-in-progress: false
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pypdf pillow
+      - run: python timetable.py
+        env:
+          GROQ_TIMETABLE_KEY: ${{ secrets.GROQ_TIMETABLE_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "timetable-bot"
+          git config user.email "timetable-bot@users.noreply.github.com"
+          git add timetables
+          git diff --staged --quiet || git commit -m "Update timetables"
+          git pull --rebase --autostash
+          git push
