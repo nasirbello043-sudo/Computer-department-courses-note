@@ -47,7 +47,8 @@ function reply(status, obj, h) {
 
 // Asks each model in turn (no streaming). Returns the answer text or an error.
 async function ask(key, messages) {
-  let last = { status: 502, detail: '' };
+  let last = { status: 502 };
+  const tried = [];
   for (const model of MODELS) {
     let r;
     try {
@@ -57,20 +58,25 @@ async function ask(key, messages) {
         body: JSON.stringify({ model, messages, stream: false, max_tokens: MAX_TOKENS, temperature: 0.4 }),
       });
     } catch (e) {
-      last = { status: 502, detail: 'network' };
+      tried.push(model + ': network error');
+      last = { status: 502 };
       continue;
     }
     if (r.ok) {
       const data = await r.json();
       const text = data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
       if (text && String(text).trim()) return { text: String(text) };
-      last = { status: 502, detail: 'empty answer' };
+      tried.push(model + ': empty answer');
+      last = { status: 502 };
       continue;
     }
-    last = { status: r.status, detail: 'model ' + model };
+    let detail = '';
+    try { detail = (await r.text()).slice(0, 120).replace(/\\s+/g, ' '); } catch (e) {}
+    tried.push(model + ': ' + r.status + (detail ? ' ' + detail : ''));
+    last = { status: r.status };
     if (r.status === 401 || r.status === 403) break; // wrong key: other models will not help
   }
-  return { error: last };
+  return { error: last, tried: tried };
 }
 
 const handler = async (event) => {
@@ -99,7 +105,8 @@ const handler = async (event) => {
   const out = await ask(key, messages);
   if (out.error) {
     const busy = out.error.status === 429 || out.error.status === 503;
-    return reply(busy ? 429 : 502, { error: busy ? 'Nova is busy right now. Please try again in a minute.' : 'Nova could not answer. Please try again.' }, h);
+    const why = (out.tried || []).join(' | ');
+    return reply(busy ? 429 : 502, { error: (busy ? 'Nova is busy right now. Please try again in a minute.' : 'Nova could not answer.') + ' Reason from AI service: ' + why }, h);
   }
   // The Study page reads answers in streaming format; send the whole answer as one piece.
   const sse = 'data: ' + JSON.stringify({ choices: [{ delta: { content: out.text } }] }) + '\n\ndata: [DONE]\n\n';
