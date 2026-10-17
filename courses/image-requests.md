@@ -264,26 +264,25 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 ## Organic Chemistry
 
-### Lesson 3: Functional Groups I: Hydrocarbons
+### Lesson 5: Functional Groups III: Carbonyl Compounds
 
 Save as:
 ```
-organic-chemistry-l03-straight-chain-alkane.png
+organic-chemistry-l05-carbonyl-group-polarity.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: A linear chain of four carbon atoms (butane) with each carbon bonded to enough hydrogen atoms to satisfy four bonds total.
+Show: A carbon atom double‑bonded to an oxygen atom, with δ+ on carbon and δ‑ on oxygen, illustrating the electrophilic nature of the carbonyl carbon.
 
-Layout: Carbon backbone in the centre with hydrogen atoms drawn around each carbon; single lines for bonds; labels on each carbon atom.
+Layout: Carbonyl group centered, arrows pointing from carbon to oxygen, charge symbols placed near each atom, labels on both atoms.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C1"
-- "C2"
-- "C3"
-- "C4"
-- "H"
+- "C"
+- "O"
+- "δ+"
+- "δ‑"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
