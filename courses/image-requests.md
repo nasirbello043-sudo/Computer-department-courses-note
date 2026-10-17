@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **7** | Uploaded: **41** | Covers waiting: **6**
+Waiting: **8** | Uploaded: **41** | Covers waiting: **6**
 
 ## Course covers
 
@@ -257,6 +257,33 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 3: Functional Groups I: Hydrocarbons
+
+Save as:
+```
+organic-chemistry-l03-straight-chain-alkane.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A linear chain of four carbon atoms (butane) with each carbon bonded to enough hydrogen atoms to satisfy four bonds total.
+
+Layout: Carbon backbone in the centre with hydrogen atoms drawn around each carbon; single lines for bonds; labels on each carbon atom.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C1"
+- "C2"
+- "C3"
+- "C4"
+- "H"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
