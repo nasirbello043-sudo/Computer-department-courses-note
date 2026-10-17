@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Updates – Learning Hub</title>
+<style>
+:root{--green:#1b4332;--gold:#c9a84c;--canvas:#f4f2ed}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--canvas);font-family:Inter,system-ui,Arial,sans-serif;color:#1a1a1a}
+.top{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--green);border-bottom:3px solid var(--gold);color:#fff;position:sticky;top:0;z-index:5}
+.top a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border-radius:10px;padding:8px 12px;font:600 14px Inter,sans-serif}
+.top .t{flex:1;font:700 18px Georgia,serif}
+main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:#fff;border:1px solid #e2ddd4;border-radius:14px;overflow:hidden;margin:0 0 16px}
+.card img{display:block;width:100%;height:auto}
+.meta{padding:10px 14px;font:500 13px Inter,sans-serif;color:#555}
+.empty{text-align:center;color:#666;padding:40px 10px;font-size:15px}
+</style></head><body>
+<div class="top"><a href="../index.html">&lsaquo; Home</a><div class="t">Updates</div></div>
+<main id="list"><p class="empty">Loading&hellip;</p></main>
+<script>
+(function(){
+  var box = document.getElementById('list');
+  function showMessage(msg){ box.innerHTML=''; var p=document.createElement('p'); p.className='empty'; p.textContent=msg; box.appendChild(p); }
+  fetch('../courses/updates/index.json', {cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(items){
+      if(!items.length){ showMessage('No updates yet. New lessons, courses and news will appear here.'); return; }
+      box.innerHTML='';
+      items.forEach(function(it){
+        var card=document.createElement('div'); card.className='card';
+        var img=document.createElement('img');
+        img.src='../courses/updates/'+encodeURIComponent(it.file);
+        img.alt=(it.title||'Update')+'. '+(it.text||'');
+        img.loading='lazy';
+        var meta=document.createElement('div'); meta.className='meta'; meta.textContent=it.date;
+        card.appendChild(img); card.appendChild(meta); box.appendChild(card);
+      });
+    })
+    .catch(function(){ showMessage('Could not load the updates. Please refresh the page.'); });
+})();
+</script></body></html>
