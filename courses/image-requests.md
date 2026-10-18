@@ -264,27 +264,24 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 ## Organic Chemistry
 
-### Lesson 6: Isomerism
+### Lesson 3: Functional Groups I: Hydrocarbons
 
 Save as:
 ```
-organic-chemistry-l06-chiral-carbon-center.png
+organic-chemistry-l03-straight-chain-alkane.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational illustration for secondary-school students.
+Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how the two cannot be rotated to match each other.
+Show: Shows a linear chain of carbon atoms (e.g., hexane) where each carbon is bonded to hydrogen atoms, illustrating the concept of a hydrocarbon made solely of C and H.
 
-Layout: Two tetrahedral models side by side, arrows indicating mirror relationship, with labels on each substituent.
+Layout: Carbon atoms in a horizontal line with single bonds; hydrogen atoms drawn around each carbon; labels on each carbon and hydrogen.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C*"
+- "C"
 - "H"
-- "Cl"
-- "CH3"
-- "Br"
-- "mirror image"
+- "single bond"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
