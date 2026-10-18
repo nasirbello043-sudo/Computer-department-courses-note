@@ -1,11 +1,12 @@
 # Timetable reader report
 
-2026-10-16 07:17 UTC
+2026-10-18 07:22 UTC
 
-- Key found: yes | text model: openai/gpt-oss-120b | vision model: meta-llama/llama-4-scout-17b-16e-instruct
+- NVIDIA key found: yes | Groq key found: yes
+- Word and text PDFs: meta/llama-3.1-70b-instruct (NVIDIA) | pictures and scanned PDFs: meta/llama-3.2-11b-vision-instruct (NVIDIA)
 - Timetables on the site: none
 
 ## What happened
 
-- Groq error 404 with meta-llama/llama-4-scout-17b-16e-instruct: {"error":{"message":"The model `meta-llama/llama-4-scout-17b-16e-instruct` does not exist or you do not have access to it.","type":"invalid_request_error","code
+- NVIDIA error 401 with meta/llama-3.2-11b-vision-instruct: {"status":401,"title":"Unauthorized","detail":"Invalid JWT serialization: Missing dot delimiter(s)"}
 - exams.jpg: no courses could be read. It will be tried again on the next run.
