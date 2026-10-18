@@ -264,25 +264,27 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 ## Organic Chemistry
 
-### Lesson 5: Functional Groups III: Carbonyl Compounds
+### Lesson 6: Isomerism
 
 Save as:
 ```
-organic-chemistry-l05-carbonyl-group-polarity.png
+organic-chemistry-l06-chiral-carbon-center.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational labelled diagram for secondary-school students.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A carbon atom double‑bonded to an oxygen atom, with δ+ on carbon and δ‑ on oxygen, illustrating the electrophilic nature of the carbonyl carbon.
+Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how the two cannot be rotated to match each other.
 
-Layout: Carbonyl group centered, arrows pointing from carbon to oxygen, charge symbols placed near each atom, labels on both atoms.
+Layout: Two tetrahedral models side by side, arrows indicating mirror relationship, with labels on each substituent.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
-- "O"
-- "δ+"
-- "δ‑"
+- "C*"
+- "H"
+- "Cl"
+- "CH3"
+- "Br"
+- "mirror image"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
