@@ -17,7 +17,10 @@
     '#sb .lh-panel a{display:block;color:#fff;padding:9px 0;border-bottom:1px solid #ffffff14;text-decoration:none;font-size:.9rem}' +
     '#sb .lh-panel a:last-child{border-bottom:0}' +
     '#sb .lh-panel small{display:block;color:#c9d9cf;font-size:.72rem;margin-top:2px}' +
-    '#sb .lh-note{color:#e8c96a;font-size:.82rem;margin:4px 2px 10px}';
+    '#sb .lh-note{color:#e8c96a;font-size:.82rem;margin:4px 2px 10px}' +
+    '#sb .lh-dept{background:#e8c96a;color:#1b4332;border-radius:10px;padding:14px 16px;margin:6px 0 10px;' +
+    'font:700 .95rem Inter,system-ui,Arial,sans-serif;letter-spacing:.08em;border:0}' +
+    '#sb .lh-dept span{color:#1b4332;font-size:1rem}';
   document.head.appendChild(css);
 
   function setOpen(open) {
@@ -36,7 +39,7 @@
   list.style.display = 'none';
   var deptBtn = document.createElement('button');
   deptBtn.type = 'button';
-  deptBtn.className = 'lh-acc';
+  deptBtn.className = 'lh-acc lh-dept';
   deptBtn.innerHTML = 'Departments <span>&#9662;</span>';
   if (label) label.replaceWith(deptBtn); else sb.insertBefore(deptBtn, list);
   deptBtn.onclick = function () {
