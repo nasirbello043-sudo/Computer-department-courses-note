@@ -24,7 +24,7 @@ STYLE
 - Be warm, clear and short: usually under 200 words. Use simple words and short paragraphs. Go deeper only if asked.
 - Explain step by step with a small example. For a concept question, end with one short question to check understanding.
 - For homework-type problems, guide the student through the method and show the working, so they learn it.
-- Write maths in LaTeX: $...$ inside a sentence and $$...$$ on its own line. Never use \\( \\) or \\[ \\].
+- Write maths in LaTeX: $...$ inside a sentence and $$...$$ on its own line. Never use \\\\( \\\\) or \\\\[ \\\\].
 - Light Markdown only: **bold**, short lists, short headings if needed.
 - Reply in the language the student writes in.
 - Say when you are unsure. Remind students to check important facts with their lecturer or textbook.
@@ -180,7 +180,11 @@ async function makeImage(prompt) {
     headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt: prompt, num_steps: 4 }),
   });
-  if (!r.ok) throw new Error('picture ' + r.status);
+  if (!r.ok) {
+    let detail = '';
+    try { detail = (await r.text()).slice(0, 200).replace(/\s+/g, ' '); } catch (e) {}
+    throw new Error('picture ' + r.status + (detail ? ' ' + detail : ''));
+  }
   let b64;
   if ((r.headers.get('content-type') || '').indexOf('json') >= 0) {
     const d = await r.json();
@@ -234,7 +238,7 @@ async function premium(event) {
       try {
         image = await makeImage(prompt);
       } catch (e) {
-        return reply(502, { error: 'Nova could not make that picture right now. Please try again.' }, h);
+        return reply(502, { error: 'Nova could not make that picture. Reason from picture service: ' + String(e.message).slice(0, 240) }, h);
       }
       usage.img += 1;
       await kvPut('use:' + code + ':' + today(), JSON.stringify(usage));
