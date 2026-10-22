@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **8** | Uploaded: **41** | Covers waiting: **6**
+Waiting: **7** | Uploaded: **41** | Covers waiting: **6**
 
 ## Course covers
 
@@ -257,35 +257,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-## Organic Chemistry
-
-### Lesson 6: Isomerism
-
-Save as:
-```
-organic-chemistry-l06-chiral-carbon-center.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: The diagram shows a tetrahedral carbon atom with four distinct substituents (e.g., H, Cl, CH₃, OH). Two versions are displayed: the original molecule and its mirror image, highlighting that they cannot be rotated to match each other.
-
-Layout: Two tetrahedral models side‑by‑side, each with bonds drawn as wedges and dashes; arrows point from each model to a label indicating 'R' or 'S' configuration.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
-- "H"
-- "Cl"
-- "CH₃"
-- "OH"
-- "R"
-- "S"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
