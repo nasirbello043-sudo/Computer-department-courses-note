@@ -208,7 +208,7 @@ async function makeImage(prompt) {
   const r = await fetch(url, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt, num_steps: 4 }),
+    body: JSON.stringify({ prompt: prompt }),
   });
   if (!r.ok) {
     let detail = '';
