@@ -173,12 +173,42 @@ async function usageToday(code) {
   const raw = await kvGet('use:' + code + ':' + today());
   return raw ? JSON.parse(raw) : { img: 0 };
 }
+const VISION_MODEL = '@cf/meta/llama-3.2-11b-vision-instruct';
+const VISION_MAX_BODY = 4000000; // a picture in the chat, as text, can be a few MB
+async function visionUsage(code) {
+  const raw = await kvGet('vis:' + code + ':' + today());
+  return raw ? JSON.parse(raw) : { vis: 0 };
+}
+async function askVision(image, question) {
+  const url = 'https://api.cloudflare.com/client/v4/accounts/' + process.env.CF_ACCOUNT_ID + '/ai/run/' + VISION_MODEL;
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      messages: [{ role: 'user', content: [
+        { type: 'text', text: question },
+        { type: 'image_url', image_url: { url: image } },
+      ] }],
+      max_tokens: 500,
+    }),
+  });
+  if (!r.ok) {
+    let detail = '';
+    try { detail = (await r.text()).slice(0, 200).replace(/\s+/g, ' '); } catch (e) {}
+    throw new Error('vision ' + r.status + (detail ? ' ' + detail : ''));
+  }
+  const d = await r.json();
+  const text = d && d.result && (d.result.response || d.result.description);
+  if (!text) throw new Error('no answer');
+  return String(text);
+}
+
 async function makeImage(prompt) {
   const url = 'https://api.cloudflare.com/client/v4/accounts/' + process.env.CF_ACCOUNT_ID + '/ai/run/' + IMG_MODEL;
   const r = await fetch(url, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt }),
+    body: JSON.stringify({ prompt: prompt, num_steps: 4 }),
   });
   if (!r.ok) {
     let detail = '';
@@ -244,6 +274,35 @@ async function premium(event) {
       await kvPut('use:' + code + ':' + today(), JSON.stringify(usage));
       return reply(200, { image: image, remaining: IMG_PER_DAY - usage.img }, h);
     }
+    if (event.path === '/vision') {
+      const code = checkToken(body.token);
+      if (!code) return reply(401, { error: 'Enter your access code first.' }, h);
+      const v = await kvGet('code:' + code);
+      if (!v || v === 'free') return reply(401, { error: 'Enter your access code first.' }, h);
+      const image = String(body.image || '');
+      if (!/^data:image\/(jpeg|png|webp);base64,/.test(image)) {
+        return reply(400, { error: 'Please choose a JPG, PNG or WEBP picture.' }, h);
+      }
+      if (image.length > VISION_MAX_BODY) return reply(413, { error: 'That picture is too large. Please use a smaller one.' }, h);
+      const question = String(body.question || '').trim().slice(0, 500) ||
+        'Describe this picture and explain what it shows, for a student.';
+      if (blockedPrompt(question)) {
+        return reply(400, { error: 'Sorry, Nova cannot answer that question about this picture.' }, h);
+      }
+      const usage = await visionUsage(code);
+      if (usage.vis >= VIS_PER_DAY) {
+        return reply(429, { error: 'You have used all ' + VIS_PER_DAY + ' picture questions for today. Come back tomorrow.' }, h);
+      }
+      let answer;
+      try {
+        answer = await askVision(image, question);
+      } catch (e) {
+        return reply(502, { error: 'Nova could not look at that picture. Reason from picture service: ' + String(e.message).slice(0, 240) }, h);
+      }
+      usage.vis += 1;
+      await kvPut('vis:' + code + ':' + today(), JSON.stringify(usage));
+      return reply(200, { answer: answer, remaining: VIS_PER_DAY - usage.vis }, h);
+    }
     return reply(404, { error: 'Not found.' }, h);
   } catch (e) {
     return reply(502, { error: 'Nova could not complete that. Please try again.' }, h);
@@ -258,17 +317,24 @@ const PORT = process.env.PORT || 10000;
 http.createServer((req, res) => {
   let data = '';
   let tooBig = false;
+  const limit = (req.url || '').split('?')[0] === '/vision' ? VISION_MAX_BODY + 1000 : MAX_BODY + 1000;
   req.on('data', (chunk) => {
+    if (tooBig) return;
     data += chunk;
-    if (data.length > MAX_BODY + 1000) { tooBig = true; req.destroy(); }
+    if (data.length > limit) { tooBig = true; data = ''; }
   });
   req.on('error', () => {});
   req.on('end', async () => {
-    if (tooBig) return;
+    if (tooBig) {
+      const o = reply(413, { error: 'That is too large. Please use a smaller file or a shorter message.' }, headersFor(req.headers.origin || ''));
+      res.writeHead(o.statusCode, o.headers);
+      res.end(o.body);
+      return;
+    }
     try {
       const path = (req.url || '/').split('?')[0];
       const event = { httpMethod: req.method, headers: req.headers, body: data, path: path };
-      const out = (path === '/code' || path === '/image') ? await premium(event) : await handler(event);
+      const out = (path === '/code' || path === '/image' || path === '/vision') ? await premium(event) : await handler(event);
       res.writeHead(out.statusCode, out.headers || {});
       res.end(out.body || '');
     } catch (e) {
