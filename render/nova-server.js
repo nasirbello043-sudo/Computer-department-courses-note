@@ -116,7 +116,7 @@ const handler = async (event) => {
 
 // ---- Premium: early-user codes and image creation (chat route above is unchanged) ----
 const crypto = require('crypto');
-const IMG_MODEL = '@cf/black-forest-labs/flux-1-schnell';
+const IMG_MODELS = ['@cf/black-forest-labs/flux-1-schnell', '@cf/stabilityai/stable-diffusion-xl-base-1.0'];
 const IMG_PER_DAY = 10;
 const VIS_PER_DAY = 15; // used when the vision step is added
 const BLOCKED = ['nude', 'nudity', 'naked', 'porn', 'sex', 'sexual', 'nsfw', 'erotic', 'gore', 'murder', 'kill',
@@ -203,27 +203,39 @@ async function askVision(image, question) {
   return String(text);
 }
 
+// Tries each picture model in turn. If one refuses, the next one is tried.
 async function makeImage(prompt) {
-  const url = 'https://api.cloudflare.com/client/v4/accounts/' + process.env.CF_ACCOUNT_ID + '/ai/run/' + IMG_MODEL;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt }),
-  });
-  if (!r.ok) {
-    let detail = '';
-    try { detail = (await r.text()).slice(0, 200).replace(/\s+/g, ' '); } catch (e) {}
-    throw new Error('picture ' + r.status + (detail ? ' ' + detail : ''));
+  const problems = [];
+  for (const model of IMG_MODELS) {
+    const url = 'https://api.cloudflare.com/client/v4/accounts/' + process.env.CF_ACCOUNT_ID + '/ai/run/' + model;
+    let r;
+    try {
+      r = await fetch(url, {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + process.env.CF_API_TOKEN, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: prompt }),
+      });
+    } catch (e) {
+      problems.push(model.split('/').pop() + ': network error');
+      continue;
+    }
+    if (!r.ok) {
+      let detail = '';
+      try { detail = (await r.text()).slice(0, 160).replace(/\s+/g, ' '); } catch (e) {}
+      problems.push(model.split('/').pop() + ': ' + r.status + (detail ? ' ' + detail : ''));
+      continue;
+    }
+    let b64;
+    if ((r.headers.get('content-type') || '').indexOf('json') >= 0) {
+      const d = await r.json();
+      b64 = d && d.result && d.result.image;
+    } else {
+      b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
+    }
+    if (b64) return 'data:image/jpeg;base64,' + b64;
+    problems.push(model.split('/').pop() + ': no picture');
   }
-  let b64;
-  if ((r.headers.get('content-type') || '').indexOf('json') >= 0) {
-    const d = await r.json();
-    b64 = d && d.result && d.result.image;
-  } else {
-    b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
-  }
-  if (!b64) throw new Error('no picture');
-  return 'data:image/jpeg;base64,' + b64;
+  throw new Error(problems.join(' | '));
 }
 
 async function premium(event) {
