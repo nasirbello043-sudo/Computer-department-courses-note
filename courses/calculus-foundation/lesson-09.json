@@ -1,0 +1,335 @@
+{
+ "title": "Trigonometric Identities",
+ "summary": "In this lesson students learn the main trigonometric identities, how to solve basic trigonometric equations, and how to work with compound‑angle formulas. The concepts are built step‑by‑step so every learner can follow the algebraic manipulations.",
+ "objectives": [
+  "State and prove the Pythagorean identity",
+  "Solve simple sine, cosine, and tangent equations",
+  "Apply sum‑and‑difference formulas for sine and cosine",
+  "Combine identities to simplify and solve more complex problems"
+ ],
+ "prerequisites": "Students should already know the definitions of sine, cosine, and tangent on the unit circle and basic algebraic manipulation.",
+ "why": [
+  "Trigonometric identities let engineers simplify waveforms, design bridges, and analyze alternating‑current circuits. Without these tools, calculations would be far more cumbersome and error‑prone.",
+  "Solving trig equations appears in real‑world contexts such as navigation (finding bearings), physics (determining angles of projectile motion), and computer graphics (rotating objects). Mastery of these techniques prepares students for many STEM careers."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Sine, Cosine, and the Unit Circle",
+   "body": "The sine and cosine functions tell us how far a point on a circle has moved horizontally and vertically.  \nImagine a circle drawn on a piece of paper with its centre at the origin $(0,0)$ of a coordinate grid.  \nIf the radius of the circle is **one unit**, we call it the *unit circle*.  \n\n> **Definition:** The *unit circle* is the set of all points $(x,y)$ that satisfy $x^{2}+y^{2}=1$.\n\nPick any angle $\\\\theta$ measured from the positive $x$‑axis, turning counter‑clockwise.  \nDraw a line from the origin that makes this angle with the $x$‑axis; where the line meets the unit circle is a point $P$.  \nThe coordinates of $P$ are written as $(x,y)$. By definition  \n\n$$\\cos\\\\theta = x,\\qquad \\sin\\\\theta = y.$$\n\nIn words, **cosine** gives the horizontal coordinate (how far left or right), and **sine** gives the vertical coordinate (how far up or down) of the point that corresponds to the angle $\\\\theta$.\n\nWhy does this work? The distance from the origin to any point on the unit circle is always one unit.  \nThe distance formula tells us that for a point $(x,y)$ the squared distance is $x^{2}+y^{2}$.  \nBecause the distance is $1$, we have  \n\n$$x^{2}+y^{2}=1.$$\n\nSubstituting the definitions $x=\\\\cos\\\\theta$ and $y=\\\\sin\\\\theta$ gives the fundamental relationship\n\n$$\\sin^{2}\\\\theta + \\cos^{2}\\\\theta = 1.$$\n\n> **Note:** The superscript “2” means “squared”, i.e., multiplied by itself. So $\\sin^{2}\\\\theta$ is $(\\sin\\\\theta)^{2}$.\n\nThis equation is called the *Pythagorean identity* because it mirrors the Pythagorean theorem for a right‑angled triangle: the sum of the squares of the two legs equals the square of the hypotenuse. In the unit circle, the legs are the horizontal and vertical distances from the origin to $P$, and the hypotenuse is the radius, which is $1$.\n\n**Everyday comparison:** Think of a clock face. At 12 o’clock the hand points straight up; the point on the unit circle is $(0,1)$. Here $\\cos 90^{\\circ}=0$ and $\\sin 90^{\\circ}=1$, and indeed $0^{2}+1^{2}=1$. At 3 o’clock the hand points right; the point is $(1,0)$, giving $\\cos 0^{\\circ}=1$, $\\sin 0^{\\circ}=0$, and $1^{2}+0^{2}=1$ again. No matter where the hand points, the sum of the squares stays $1$.\n\nUnderstanding this relationship is useful because it lets us find one function if we know the other. For example, if we know $\\sin\\\\theta = \\\\frac{3}{5}$, we can compute $\\cos\\\\theta$ by rearranging the identity:\n\n$$\\cos^{2}\\\\theta = 1 - \\sin^{2}\\\\theta = 1 - \\left(\\\\frac{3}{5}\\\\right)^{2} = 1 - \\\\frac{9}{25} = \\\\frac{16}{25},$$  \n\nso $\\cos\\\\theta = \\\\pm\\\\frac{4}{5}$, with the sign chosen according to the quadrant where $\\\\theta$ lies.\n\n> **Common mistake:** Forgetting the “plus‑or‑minus” when taking a square root. The identity gives $\\cos^{2}\\\\theta$, not $\\cos\\\\theta$ directly; you must consider both signs unless you know the angle’s quadrant.\n\nRemember that the unit circle picture works for any angle, even angles larger than $360^{\\circ}$ or negative angles. We simply keep rotating around the circle; the coordinates repeat every full turn. This periodic behavior is the heart of trigonometry and will appear again when we study identities later in the lesson.\n\n> **Remember:** $\\sin^{2}\\\\theta + \\cos^{2}\\\\theta = 1$ is always true for any angle $\\\\theta$; it comes straight from the definition of sine and cosine on the unit circle.",
+   "code": ""
+  },
+  {
+   "heading": "2. The Pythagorean Identity",
+   "body": "The Pythagorean identity comes from the very definition of the sine and cosine functions on the unit circle.\n\n> **Definition:** The *unit circle* is a circle with radius 1 centred at the origin $(0,0)$ in the coordinate plane.  \n> For any angle $\\theta$ measured from the positive $x$‑axis, the point where the terminal side of the angle meets the circle has coordinates $(\\cos\\theta,\\;\\sin\\theta)$.\n\nBecause every point on a circle of radius $r$ satisfies the equation $x^{2}+y^{2}=r^{2}$, the coordinates of the point on the unit circle must satisfy  \n\n$$\\cos^{2}\\theta+\\sin^{2}\\theta=1^{2}.$$\n\nThus we obtain the **Pythagorean identity**\n\n$$\\sin^{2}\\theta+\\cos^{2}\\theta=1.$$\n\nWhy is this useful?  It lets us replace a squared sine with a squared cosine (or vice‑versa) whenever we need to simplify an expression, solve an equation, or change a tangent or secant into sine and cosine.\n\n---\n\n### Rearranging the identity\n\n1. **Express $\\cos^{2}\\theta$ in terms of $\\sin^{2}\\theta$**  \n   Subtract $\\sin^{2}\\theta$ from both sides:\n\n   $$\n   \\cos^{2}\\theta = 1-\\sin^{2}\\theta .\n   $$\n\n2. **Express $\\sin^{2}\\theta$ in terms of $\\cos^{2}\\theta$**  \n   Subtract $\\cos^{2}\\theta$ from both sides:\n\n   $$\n   \\sin^{2}\\theta = 1-\\cos^{2}\\theta .\n   $$\n\n3. **Create a formula for $\\tan^{2}\\theta$**  \n   By definition $\\tan\\theta = \\dfrac{\\sin\\theta}{\\cos\\theta}$, so\n\n   $$\n   \\tan^{2}\\theta = \\frac{\\sin^{2}\\theta}{\\cos^{2}\\theta}.\n   $$\n\n   Replace $\\sin^{2}\\theta$ using the identity $\\sin^{2}\\theta = 1-\\cos^{2}\\theta$:\n\n   $$\n   \\tan^{2}\\theta = \\frac{1-\\cos^{2}\\theta}{\\cos^{2}\\theta}\n                 = \\frac{1}{\\cos^{2}\\theta}-1 .\n   $$\n\n   Recognising $\\dfrac{1}{\\cos^{2}\\theta}$ as $\\sec^{2}\\theta$ (the square of the secant function), we obtain\n\n   $$\n   \\boxed{\\tan^{2}\\theta + 1 = \\sec^{2}\\theta } .\n   $$\n\n4. **Create a formula for $\\sec^{2}\\theta$ directly**  \n   Starting from the previous line and adding $1$ to both sides gives the same result:\n\n   $$\n   \\sec^{2}\\theta = 1 + \\tan^{2}\\theta .\n   $$\n\nThese rearranged forms are called **derived Pythagorean identities**. They are handy when a problem involves tangent or secant but we only know sine or cosine values.\n\n> **Note:** The symbols $\\tan$ and $\\sec$ are just shortcuts: $\\tan\\theta = \\dfrac{\\sin\\theta}{\\cos\\theta}$ and $\\sec\\theta = \\dfrac{1}{\\cos\\theta}$.\n\n---\n\n## Worked examples\n\n**Example 1 (Easy): Verify the identity for $\\theta = 30^\\circ$**  \nWe know $\\sin30^\\circ = \\dfrac12$ and $\\cos30^\\circ = \\dfrac{\\sqrt3}{2}$.\n\n1. Square each value:  \n   $$\n   \\sin^{2}30^\\circ = \\left(\\frac12\\right)^{2}= \\frac14,\n   \\qquad\n   \\cos^{2}30^\\circ = \\left(\\frac{\\sqrt3}{2}\\right)^{2}= \\frac34 .\n   $$\n2. Add the squares:  \n   $$\n   \\sin^{2}30^\\circ + \\cos^{2}30^\\circ = \\frac14 + \\frac34 = 1 .\n   $$\n3. Compare with the right‑hand side of the identity, which is $1$.\n\n**Answer:** The left‑hand side equals $1$, so the identity holds for $30^\\circ$.\n\n---\n\n**Example 2 (Medium): If $\\sin\\theta = \\dfrac35$ and $\\theta$ is in the first quadrant, find $\\cos\\theta$ using the Pythagorean identity.**  \n\n1. Write the identity with the known sine value:  \n   $$\n   \\sin^{2}\\theta + \\cos^{2}\\theta = 1\n   \\quad\\Longrightarrow\\quad\n   \\left(\\frac35\\right)^{2} + \\cos^{2}\\theta = 1 .\n   $$\n2. Compute $\\sin^{2}\\theta$:  \n   $$\n   \\left(\\frac35\\right)^{2}= \\frac{9}{25}.\n   $$\n3. Isolate $\\cos^{2}\\theta$:  \n   $$\n   \\cos^{2}\\theta = 1 - \\frac{9}{25}\n                 = \\frac{25}{25} - \\frac{9}{25}\n                 = \\frac{16}{25}.\n   $$\n4. Take the square root. Because $\\theta$ is in the first quadrant, cosine is positive:  \n   $$\n   \\cos\\theta = \\sqrt{\\frac{16}{25}} = \\frac{4}{5}.\n   $$\n\n**Answer:** $\\displaystyle \\cos\\theta = \\frac45$.\n\n> **Common mistake:** Forgetting to consider the sign of the square root. In quadrants II, III, or IV the cosine could be negative, so you must check the angle’s location.\n\n---\n\n### Why the identity matters in everyday reasoning\n\nThink of a right‑angled triangle drawn on a piece of paper. The two legs are like the “horizontal” and “vertical” components of a step you take. No matter how you tilt the triangle, the length of the hypotenuse (the direct distance from start to finish) stays the same. The Pythagorean identity tells us that the squared “horizontal” part ($\\cos^{2}\\theta$) plus the squared “vertical” part ($\\sin^{2}\\theta$) always equals the squared total distance (which is $1$ on the unit circle). This is the same idea as the familiar Pythagorean theorem $a^{2}+b^{2}=c^{2}$, only expressed with trigonometric functions.\n\n> **Remember:** Whenever you see $\\sin^{2}\\theta+\\cos^{2}\\theta$, you can replace it by $1$, and you can freely move terms to create $\\tan^{2}\\theta+1=\\sec^{2}\\theta$ or $\\cot^{2}\\theta+1=\\csc^{2}\\theta$ (the latter is similar but not needed here).\n\nWith the Pythagorean identity firmly understood, later sections—such as sum‑and‑difference formulas and double‑angle identities—will become much easier to handle, because many of those formulas are just clever ways of rearranging the same basic relationship.",
+   "code": ""
+  },
+  {
+   "heading": "3. Solving Basic Trigonometric Equations",
+   "body": "When we are asked to **solve a trigonometric equation**, the goal is to find every angle θ in the interval we are given that makes the equation true.  \nThe usual trick is to rewrite the equation so that only one trig function (like $\\sin\\theta$ or $\\cos\\theta$) appears, then use the **Pythagorean identity** or the **reciprocal identities** to isolate that function. Once the function is isolated we can read off the angles from the unit circle.\n\n> **Definition:** The *Pythagorean identity* is $\\,\\sin^{2}\\theta+\\cos^{2}\\theta=1\\,$. It comes directly from the right‑triangle relationship $x^{2}+y^{2}=r^{2}$ on the unit circle, where the radius $r$ equals 1.\n\n> **Note:** The *reciprocal identities* are $\\csc\\theta=\\frac{1}{\\sin\\theta}$, $\\sec\\theta=\\frac{1}{\\cos\\theta}$, and $\\cot\\theta=\\frac{1}{\\tan\\theta}$. They let us turn a fraction involving a trig function into a simpler single function.\n\n> **Remember:** Always check the interval you are working in (for example $0^{\\circ}\\le\\theta<360^{\\circ}$) and list **all** angles that satisfy the equation, not just one.\n\n---\n\n### Step‑by‑step strategy  \n\n1. **Simplify** the equation algebraically until only one trig function remains.  \n2. **Use** the Pythagorean identity to replace a squared sine with $1-\\cos^{2}\\theta$ (or vice‑versa) if needed.  \n3. **Isolate** the remaining trig function (e.g., get $\\sin\\theta = k$).  \n4. **Find** the reference angle whose trig value equals $|k|$ using the unit circle.  \n5. **Place** that reference angle in the correct quadrants, because the sign of the function tells us where the solutions lie.  \n6. **Write** all solutions in the required interval, adding $360^{\\circ}$ (or $2\\pi$) multiples if the interval were larger.\n\n---\n\n### Example 3 (Easy): Solving $\\sin\\theta = \\dfrac12$ for $0^{\\circ}\\le\\theta<360^{\\circ}$  \n\nWe want every angle whose sine is one‑half.\n\n1. **Identify the function.** The equation already has a single trig function: $\\sin\\theta = \\frac12$. No algebraic rearrangement is needed.  \n\n2. **Find the reference angle.** On the unit circle, $\\sin\\alpha = \\frac12$ occurs at $\\alpha = 30^{\\circ}$ because the opposite side is half the hypotenuse in a $30^{\\circ}\\!-\\!60^{\\circ}\\!-\\!90^{\\circ}$ triangle.  \n\n   $$\\alpha = 30^{\\circ}$$  \n\n3. **Determine the quadrants.** Sine is positive in Quadrant I and Quadrant II. Therefore the solutions are  \n\n   $$\\theta_1 = 30^{\\circ}$$  \n   $$\\theta_2 = 180^{\\circ} - 30^{\\circ} = 150^{\\circ}$$  \n\n**Answer:** $\\displaystyle \\theta = 30^{\\circ},\\;150^{\\circ}$ (both lie in $0^{\\circ}\\le\\theta<360^{\\circ}$).\n\n---\n\n### Example 4 (Hard): Solving $2\\cos^{2}\\theta - 1 = 0$ for $0^{\\circ}\\le\\theta<360^{\\circ}$  \n\nThis equation contains $\\cos^{2}\\theta$, so we first isolate the squared cosine.\n\n1. **Add 1 to both sides** and then divide by 2 to get $\\cos^{2}\\theta$ alone.  \n\n   $$2\\cos^{2}\\theta - 1 = 0 \\;\\Longrightarrow\\; 2\\cos^{2}\\theta = 1 \\;\\Longrightarrow\\; \\cos^{2}\\theta = \\frac12$$  \n\n2. **Take the square root** of both sides, remembering both the positive and negative roots because a square eliminates sign.  \n\n   $$\\cos\\theta = \\pm\\sqrt{\\frac12} = \\pm\\frac{\\sqrt2}{2}$$  \n\n3. **Find the reference angle.** $\\cos\\alpha = \\frac{\\sqrt2}{2}$ corresponds to $\\alpha = 45^{\\circ}$ (the $45^{\\circ}\\!-\\!45^{\\circ}\\!-\\!90^{\\circ}$ triangle).  \n\n   $$\\alpha = 45^{\\circ}$$  \n\n4. **Place the angles in the correct quadrants.** Cosine is positive in Quadrant I and Quadrant IV, and negative in Quadrant II and Quadrant III. Hence  \n\n   - For $+\\frac{\\sqrt2}{2}$: $\\theta = 45^{\\circ}$ (Q I) and $\\theta = 360^{\\circ} - 45^{\\circ} = 315^{\\circ}$ (Q IV).  \n   - For $-\\frac{\\sqrt2}{2}$: $\\theta = 180^{\\circ} - 45^{\\circ} = 135^{\\circ}$ (Q II) and $\\theta = 180^{\\circ} + 45^{\\circ} = 225^{\\circ}$ (Q III).  \n\n   $$\\theta = 45^{\\circ},\\;135^{\\circ},\\;225^{\\circ},\\;315^{\\circ}$$  \n\n**Answer:** $\\displaystyle \\theta = 45^{\\circ},\\;135^{\\circ},\\;225^{\\circ},\\;315^{\\circ}$ satisfy $2\\cos^{2}\\theta-1=0$ in the interval $0^{\\circ}\\le\\theta<360^{\\circ}$.\n\n---\n\nBy following the same pattern—simplify, use the Pythagorean or reciprocal identities, isolate the function, and then locate the angles on the unit circle—you can solve any basic trigonometric equation in a given interval. Practice with different forms (e.g., $\\tan\\theta = -1$, $1+\\cot^{2}\\theta = \\csc^{2}\\theta$) and the process will become second nature.",
+   "code": ""
+  },
+  {
+   "heading": "4. Sum‑and‑Difference Formulas",
+   "body": "The sum‑and‑difference formulas tell us how to find the sine or cosine of a sum or a difference of two angles, such as $\\sin(\\alpha+\\beta)$ or $\\cos(\\alpha-\\beta)$.  \nThink of the unit circle: every angle $\\theta$ corresponds to a point $(\\cos\\theta,\\sin\\theta)$ on the circle of radius 1.  \nIf we rotate first by $\\alpha$ and then by $\\beta$, the total rotation is $\\alpha+\\beta$. The coordinates after the two rotations can be expressed in two ways, and by comparing them we obtain the formulas.\n\n> **Definition:**  \n> For any angles $\\alpha$ and $\\beta$ (measured in degrees or radians)  \n> $$\\sin(\\alpha\\pm\\beta)=\\sin\\alpha\\cos\\beta\\pm\\cos\\alpha\\sin\\beta,$$  \n> $$\\cos(\\alpha\\pm\\beta)=\\cos\\alpha\\cos\\beta\\mp\\sin\\alpha\\sin\\beta.$$\n\n### Why the formulas are true\n\n1. **Start with two points on the unit circle.**  \n   The point after rotating by $\\alpha$ is $P_\\alpha=(\\cos\\alpha,\\sin\\alpha)$.  \n   After an additional rotation by $\\beta$, the new point $P_{\\alpha+\\beta}$ has coordinates $(\\cos(\\alpha+\\beta),\\sin(\\alpha+\\beta))$.\n\n2. **Use the rotation matrix.**  \n   Rotating a vector $(x,y)$ by an angle $\\beta$ multiplies it by the matrix  \n   $$\\begin{pmatrix}\\cos\\beta & -\\sin\\beta\\\\[2pt]\\sin\\beta & \\cos\\beta\\end{pmatrix}.$$  \n   Apply this matrix to $P_\\alpha$:\n   \\[\n   \\begin{pmatrix}\\cos\\beta & -\\sin\\beta\\\\ \\sin\\beta & \\cos\\beta\\end{pmatrix}\n   \\begin{pmatrix}\\cos\\alpha\\\\ \\sin\\alpha\\end{pmatrix}\n   =\n   \\begin{pmatrix}\\cos\\beta\\cos\\alpha-\\sin\\beta\\sin\\alpha\\\\[2pt]\n   \\sin\\beta\\cos\\alpha+\\cos\\beta\\sin\\alpha\\end{pmatrix}.\n   \\]\n\n3. **Identify the components.**  \n   The first component must equal $\\cos(\\alpha+\\beta)$ and the second must equal $\\sin(\\alpha+\\beta)$.  \n   Hence we read off the two formulas above.\n\n> **Note:** The signs “$+$” and “$-$” in the formulas are opposite for sine and cosine. This comes directly from the rotation matrix: the off‑diagonal entry is $-\\sin\\beta$ for the $x$‑coordinate but $+\\sin\\beta$ for the $y$‑coordinate.\n\nThese identities are useful because they let us break a complicated angle into simpler pieces whose sine and cosine we already know (for example, $30^\\circ$, $45^\\circ$, $60^\\circ$).  \n\n> **In daily life:** Imagine you are walking north for $\\alpha$ meters, then turning east by $\\beta$ degrees and walking the same distance. The overall displacement can be found by adding the two moves as vectors; the sum‑and‑difference formulas do the same thing for angles on the unit circle.\n\n---\n\n**Example 5 (Medium): Find $\\sin(75^\\circ)$ using $\\sin(45^\\circ+30^\\circ)$.**  \n\nWe know the exact values $\\sin45^\\circ=\\frac{\\sqrt2}{2}$, $\\cos45^\\circ=\\frac{\\sqrt2}{2}$, $\\sin30^\\circ=\\frac12$, $\\cos30^\\circ=\\frac{\\sqrt3}{2}$.\n\n1. Write the angle as a sum: $\\;75^\\circ = 45^\\circ + 30^\\circ$.  \n2. Apply the sine sum formula:  \n   $$\\sin(45^\\circ+30^\\circ)=\\sin45^\\circ\\cos30^\\circ+\\cos45^\\circ\\sin30^\\circ.$$  \n3. Substitute the known values:  \n   $$\\sin75^\\circ = \\frac{\\sqrt2}{2}\\cdot\\frac{\\sqrt3}{2}+\\frac{\\sqrt2}{2}\\cdot\\frac12\n   =\\frac{\\sqrt6}{4}+\\frac{\\sqrt2}{4}\n   =\\frac{\\sqrt6+\\sqrt2}{4}.$$\n\n**Answer:** $\\displaystyle \\sin75^\\circ = \\frac{\\sqrt6+\\sqrt2}{4}\\,$.\n\n---\n\n**Example 6 (Hard): Compute $\\cos(15^\\circ)$ using the cosine difference formula with known angles $45^\\circ$ and $30^\\circ$.**  \n\nWe use $\\cos(45^\\circ-30^\\circ)$ because $45^\\circ-30^\\circ = 15^\\circ$.\n\n1. Write the angle as a difference: $\\;15^\\circ = 45^\\circ - 30^\\circ$.  \n2. Apply the cosine difference formula (note the “minus” sign):  \n   $$\\cos(45^\\circ-30^\\circ)=\\cos45^\\circ\\cos30^\\circ+\\sin45^\\circ\\sin30^\\circ.$$  \n   (The sign before the sine product is “$+$” because the formula for $\\cos(\\alpha-\\beta)$ has a minus in front of the sine‑sine term, which becomes a plus when $\\beta$ is subtracted.)  \n3. Insert the exact values:  \n   $$\\cos15^\\circ = \\frac{\\sqrt2}{2}\\cdot\\frac{\\sqrt3}{2}+\\frac{\\sqrt2}{2}\\cdot\\frac12\n   =\\frac{\\sqrt6}{4}+\\frac{\\sqrt2}{4}\n   =\\frac{\\sqrt6+\\sqrt2}{4}.$$\n\n**Answer:** $\\displaystyle \\cos15^\\circ = \\frac{\\sqrt6+\\sqrt2}{4}\\,$.\n\n> **Remember:** When you see a sum or difference of angles, first check whether each part matches a “special angle” (multiples of $30^\\circ$ or $45^\\circ$). Then apply the appropriate sum‑or‑difference formula; the algebra is straightforward once the known values are substituted.",
+   "code": ""
+  },
+  {
+   "heading": "5. Double‑Angle and Half‑Angle Identities",
+   "body": "We start from the idea that a **double‑angle** is simply an angle that is twice another angle.  \nIf we know the sine or cosine of an angle θ, the double‑angle formulas let us find the sine, cosine, or tangent of $2\\theta$ without having to measure the larger angle directly.  \nThese formulas come straight from the **sum‑and‑difference** identities, which say how to add or subtract angles inside the trigonometric functions.\n\n> **Definition:** The double‑angle identities are  \n> $$\\sin 2\\theta = 2\\sin\\theta\\cos\\theta,$$  \n> $$\\cos 2\\theta = \\cos^{2}\\theta-\\sin^{2}\\theta,$$  \n> $$\\tan 2\\theta = \\frac{2\\tan\\theta}{1-\\tan^{2}\\theta}.$$\n\n---\n\n### Deriving $\\sin 2\\theta$\n\nThe sum formula for sine is  \n\n$$\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta.$$\n\nSet $\\alpha=\\beta=\\theta$:\n\n$$\\sin(\\theta+\\theta)=\\sin\\theta\\cos\\theta+\\cos\\theta\\sin\\theta.$$\n\nThe left side is $\\sin 2\\theta$, and the right side has two identical terms, so we combine them:\n\n$$\\sin 2\\theta = 2\\sin\\theta\\cos\\theta.$$\n\n---\n\n### Deriving $\\cos 2\\theta$\n\nThe sum formula for cosine is  \n\n$$\\cos(\\alpha+\\beta)=\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta.$$\n\nAgain let $\\alpha=\\beta=\\theta$:\n\n$$\\cos(\\theta+\\theta)=\\cos\\theta\\cos\\theta-\\sin\\theta\\sin\\theta,$$\n\nwhich simplifies to\n\n$$\\cos 2\\theta = \\cos^{2}\\theta-\\sin^{2}\\theta.$$\n\nBecause $\\sin^{2}\\theta+\\cos^{2}\\theta=1$ (the Pythagorean identity), we can rewrite $\\cos 2\\theta$ in two useful alternative forms:\n\n$$\\cos 2\\theta = 1-2\\sin^{2}\\theta \\qquad\\text{or}\\qquad \\cos 2\\theta = 2\\cos^{2}\\theta-1.$$\n\nThese versions are handy when only $\\sin\\theta$ **or** only $\\cos\\theta$ is known.\n\n> **Note:** The three forms of $\\cos 2\\theta$ are equivalent; choose the one that matches the information you have.\n\n---\n\n### Deriving $\\tan 2\\theta$\n\nTangent is the ratio of sine to cosine: $\\tan\\theta=\\dfrac{\\sin\\theta}{\\cos\\theta}$.  \nUsing the double‑angle formulas for sine and cosine:\n\n\\[\n\\tan 2\\theta=\\frac{\\sin 2\\theta}{\\cos 2\\theta}\n           =\\frac{2\\sin\\theta\\cos\\theta}{\\cos^{2}\\theta-\\sin^{2}\\theta}.\n\\]\n\nDivide numerator and denominator by $\\cos^{2}\\theta$ (assuming $\\cos\\theta\\neq0$):\n\n\\[\n\\tan 2\\theta=\\frac{2\\frac{\\sin\\theta}{\\cos\\theta}}{1-\\left(\\frac{\\sin\\theta}{\\cos\\theta}\\right)^{2}}\n           =\\frac{2\\tan\\theta}{1-\\tan^{2}\\theta}.\n\\]\n\nNow we have a formula that uses only $\\tan\\theta$.\n\n---\n\n### From Double‑Angle to Half‑Angle\n\nSometimes we know $\\cos 2\\theta$ or $\\sin 2\\theta$ and need $\\cos\\theta$ or $\\sin\\theta$.  \nWe simply solve the double‑angle equations for the single‑angle functions.\n\n#### Solving for $\\cos\\theta$\n\nStart with the form $\\cos 2\\theta = 2\\cos^{2}\\theta-1$.  \nAdd $1$ to both sides and divide by $2$:\n\n\\[\n\\cos^{2}\\theta = \\frac{1+\\cos 2\\theta}{2}.\n\\]\n\nTake the square root, remembering that $\\cos\\theta$ can be positive or negative depending on the quadrant:\n\n\\[\n\\cos\\theta = \\pm\\sqrt{\\frac{1+\\cos 2\\theta}{2}}.\n\\]\n\n#### Solving for $\\sin\\theta$\n\nUse $\\cos 2\\theta = 1-2\\sin^{2}\\theta$:\n\n\\[\n\\sin^{2}\\theta = \\frac{1-\\cos 2\\theta}{2},\n\\qquad\n\\sin\\theta = \\pm\\sqrt{\\frac{1-\\cos 2\\theta}{2}}.\n\\]\n\nIf we start from $\\sin 2\\theta = 2\\sin\\theta\\cos\\theta$, we can also write\n\n\\[\n\\sin\\theta = \\pm\\sqrt{\\frac{1-\\cos 2\\theta}{2}},\\qquad\n\\cos\\theta = \\pm\\sqrt{\\frac{1+\\cos 2\\theta}{2}},\n\\]\n\nwhich are the classic **half‑angle identities**.\n\n> **In daily life:** When engineers double a rotation angle in a gear system, they often need the sine of the new angle. Using $\\sin 2\\theta = 2\\sin\\theta\\cos\\theta$ avoids measuring the larger angle directly, saving time and reducing error.\n\n---\n\n### Worked Examples\n\n**Example 7 (Medium): Evaluate $\\sin 2\\theta$ when $\\sin\\theta = \\dfrac{4}{5}$ and $\\theta$ is acute.**\n\n1. **Find $\\cos\\theta$** using the Pythagorean identity $\\sin^{2}\\theta+\\cos^{2}\\theta=1$.  \n   $$\\cos\\theta = \\sqrt{1-\\sin^{2}\\theta}\n               = \\sqrt{1-\\left(\\frac{4}{5}\\right)^{2}}\n               = \\sqrt{1-\\frac{16}{25}}\n               = \\sqrt{\\frac{9}{25}}\n               = \\frac{3}{5}.$$\n   (We take the positive root because an acute angle has positive cosine.)\n\n2. **Apply the double‑angle formula for sine.**  \n   $$\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\n                 = 2\\left(\\frac{4}{5}\\right)\\left(\\frac{3}{5}\\right)\n                 = \\frac{24}{25}.$$\n\n3. **State the result.**  \n\n**Answer:** $\\displaystyle \\sin 2\\theta = \\frac{24}{25}$.\n\n---\n\n**Example 8 (Hard): Find all solutions of $\\cos 2\\theta = \\dfrac12$ in the interval $0^{\\circ}\\le \\theta <360^{\\circ}$.**\n\n1. **Solve for the double angle.**  \n   $$2\\theta = \\cos^{-1}\\!\\left(\\frac12\\right).$$  \n   The cosine equals $\\frac12$ at $60^{\\circ}$ and $300^{\\circ}$ (or $-60^{\\circ}$).  \n   Hence  \n   $$2\\theta = 60^{\\circ}+360^{\\circ}k \\quad\\text{or}\\quad 2\\theta = 300^{\\circ}+360^{\\circ}k,$$\n   where $k$ is any integer.\n\n2. **Divide by 2 to obtain $\\theta$.**  \n   $$\\theta = 30^{\\circ}+180^{\\circ}k \\quad\\text{or}\\quad \\theta = 150^{\\circ}+180^{\\circ}k.$$\n\n3. **Select the values that lie in $[0^{\\circ},360^{\\circ})$.**  \n   For $k=0$: $\\theta = 30^{\\circ},\\;150^{\\circ}$.  \n   For $k=1$: $\\theta = 210^{\\circ},\\;330^{\\circ}$.  \n   $k=2$ would give $ \\theta = 390^{\\circ}$, which is outside the interval.\n\n**Answer:** $\\displaystyle \\theta = 30^{\\circ},\\;150^{\\circ},\\;210^{\\circ},\\;330^{\\circ}$.\n\n---\n\nThese derivations and examples show how the double‑angle identities turn a problem about a “big” angle into a simpler problem about the original angle θ, and how the same algebraic steps give us the half‑angle forms when we need to go the other way. Mastering these tools makes later trigonometric simplifications and equation solving much faster.",
+   "code": ""
+  },
+  {
+   "heading": "6. Combining Identities to Simplify Expressions",
+   "body": "When we have a trigonometric expression that looks messy, the goal is to **rewrite it using the identities we already know** until it becomes a single, easy‑to‑read function such as $\\sin\\theta$, $\\cos\\theta$, or $\\tan\\theta$.  \nThink of it like untangling a knot: each identity is a small move that loosens the knot a bit more, and after a few moves the whole thing becomes a smooth line again.\n\n> **Note:** *Combining identities* means applying two or more of the formulas from earlier sections (Pythagorean, double‑angle, sum‑and‑difference, etc.) in succession.  \n> The result should be simpler—usually a single trigonometric function or a constant.\n\n---\n\n### 1. Look for a double‑angle or half‑angle pattern  \n\nExpressions that contain $2\\theta$ or $\\frac{\\theta}{2}$ often hide a double‑angle or half‑angle identity.  \nRecall the double‑angle formulas:\n\n$$\n\\sin 2\\theta = 2\\sin\\theta\\cos\\theta,\\qquad\n\\cos 2\\theta = \\cos^2\\theta-\\sin^2\\theta = 1-2\\sin^2\\theta = 2\\cos^2\\theta-1.\n$$\n\nIf you see $1+\\cos 2\\theta$ or $1-\\cos 2\\theta$, replace them with the equivalent forms above. This usually creates factors that cancel.\n\n---\n\n### 2. Use the Pythagorean identity to eliminate squares  \n\nThe Pythagorean identity $ \\sin^2\\theta+\\cos^2\\theta=1 $ lets us change a square of one function into $1$ minus the square of the other.  \nWhen a term like $\\sin^2\\theta$ appears together with $\\cos^2\\theta$, you can often replace one of them and simplify.\n\n---\n\n### 3. Convert products to sums or vice‑versa  \n\nThe product‑to‑sum formulas are handy when a product such as $\\sin\\theta\\cos\\theta$ shows up:\n\n$$\n\\sin\\theta\\cos\\theta = \\tfrac12\\sin 2\\theta.\n$$\n\nTurning a product into a single sine or cosine of a double angle reduces the number of different functions in the expression.\n\n---\n\n### 4. Keep an eye on common denominators  \n\nIf the expression is a fraction, try to make the numerator and denominator share a factor.  \nFactorising, using the identities above, and then cancelling common factors is the usual route.\n\n---\n\n**Example 9 (Hard): Simplify \\(\\displaystyle\\frac{\\sin\\theta\\cdot\\cos\\theta}{1+\\cos 2\\theta}\\).**  \n\nWe want a single trigonometric function of $\\theta$.\n\n1. **Replace the product in the numerator** using the product‑to‑sum identity.  \n   $$\\sin\\theta\\cos\\theta = \\tfrac12\\sin 2\\theta.$$\n\n2. **Rewrite the denominator** $1+\\cos 2\\theta$ with a double‑angle form that contains only $\\cos^2\\theta$ or $\\sin^2\\theta$.  \n   $$1+\\cos 2\\theta = 1 + (2\\cos^2\\theta-1) = 2\\cos^2\\theta.$$\n\n3. **Substitute the two results** back into the fraction and cancel the common factor.  \n   $$\\frac{\\sin\\theta\\cos\\theta}{1+\\cos 2\\theta}\n     = \\frac{\\tfrac12\\sin 2\\theta}{2\\cos^2\\theta}\n     = \\frac{\\sin 2\\theta}{4\\cos^2\\theta}.$$\n\n   Now use $\\sin 2\\theta = 2\\sin\\theta\\cos\\theta$ again:  \n   $$\\frac{2\\sin\\theta\\cos\\theta}{4\\cos^2\\theta}\n     = \\frac{\\sin\\theta}{2\\cos\\theta}\n     = \\tfrac12\\tan\\theta.$$\n\n**Answer:** $\\displaystyle\\frac{\\sin\\theta\\cdot\\cos\\theta}{1+\\cos 2\\theta}= \\frac12\\,\\tan\\theta.$  \n\n---\n\n**Example 10 (Hard): Show that \\(\\displaystyle\\frac{1-\\cos 2\\theta}{\\sin 2\\theta}= \\tan\\theta\\).**  \n\nThis identity is a good test of using both double‑angle and Pythagorean formulas.\n\n1. **Replace the numerator** $1-\\cos 2\\theta$ with a form that contains $\\sin^2\\theta$.  \n   $$1-\\cos 2\\theta = 1-(1-2\\sin^2\\theta)=2\\sin^2\\theta.$$\n\n2. **Replace the denominator** $\\sin 2\\theta$ with its double‑angle expression.  \n   $$\\sin 2\\theta = 2\\sin\\theta\\cos\\theta.$$\n\n3. **Form the fraction** and cancel the common factor $2\\sin\\theta$.  \n   $$\\frac{2\\sin^2\\theta}{2\\sin\\theta\\cos\\theta}\n     = \\frac{\\sin\\theta}{\\cos\\theta}\n     = \\tan\\theta.$$\n\n**Answer:** $\\displaystyle\\frac{1-\\cos 2\\theta}{\\sin 2\\theta}= \\tan\\theta,$ confirming the identity.\n\n---\n\n> **Remember:** Always look for a double‑angle or half‑angle pattern first; it often turns a complicated expression into something that cancels nicely.\n\nBy practicing these steps—spotting patterns, substituting identities, and cancelling—you will be able to turn any tangled trigonometric expression into a clean, single function. This skill is especially useful in calculus when simplifying derivatives or integrals of trigonometric functions. Keep the toolbox of identities close, and the simplifications will become almost automatic.",
+   "code": ""
+  },
+  {
+   "heading": "7. Applied Problem: Solving a Real‑World Angle",
+   "body": "When we meet a real‑world problem that involves angles, we can often turn the story into a simple trigonometric equation.  \nThe trick is to picture the situation, write down what the angles and lengths mean, and then replace the unknown angle with a trigonometric function (usually $\\sin$ or $\\cos$).  \nAfter that we use the identities we have already learned – the Pythagorean identity, the sum‑and‑difference formulas, or the double‑angle formulas – to solve for the angle.  \n\n> **In daily life:**  A ladder leaning against a wall, a rotating fan blade, or the shadow of a tree are all situations where angles change while distances stay the same.  By translating the picture into a trig equation, we can find the hidden angle without measuring it directly.\n\n---\n\n**Example 11 (Intermediate): Ladder sliding**  \nA ladder $10\\,$m long leans against a vertical wall and makes a $60^\\circ$ angle with the ground.  The foot of the ladder is then pulled out so that it is $2\\,$m farther from the wall.  Find the new angle $\\theta$ that the ladder makes with the ground.\n\n1. **Draw the right‑triangle before and after the slide.**  \n   The ladder is the hypotenuse of length $10\\,$m.  \n   Initially the angle with the ground is $60^\\circ$, so the distance from the wall (the opposite side) is  \n   $$\\text{initial height}=10\\sin 60^\\circ.$$  \n\n2. **Express the new horizontal distance.**  \n   Let $x$ be the original horizontal distance from the wall.  \n   $$x = 10\\cos 60^\\circ.$$  \n   After sliding $2\\,$m outward, the new horizontal distance is $x+2$.\n\n3. **Write the trig equation for the new angle.**  \n   The same ladder length $10\\,$m is now the hypotenuse, so  \n   $$\\cos\\theta = \\frac{x+2}{10}.$$  \n   Substitute $x = 10\\cos 60^\\circ = 10\\cdot\\frac12 =5$:  \n   $$\\cos\\theta = \\frac{5+2}{10}= \\frac{7}{10}.$$\n\n4. **Solve for $\\theta$ using the inverse cosine.**  \n   $$\\theta = \\arccos\\!\\left(\\frac{7}{10}\\right).$$  \n   This is a standard angle that can be left in inverse‑cosine form or approximated if a calculator is allowed.  \n\n**Answer:** The ladder now makes an angle $\\displaystyle \\theta = \\arccos\\!\\left(\\frac{7}{10}\\right)\\approx 45.6^\\circ$ with the ground.\n\n> **Remember:**  When the hypotenuse stays the same, changing one leg changes the cosine (or sine) value directly: $\\cos\\theta =\\frac{\\text{adjacent}}{\\text{hypotenuse}}$.\n\n---\n\n**Example 12 (Intermediate): Fan blade rotation**  \nA fan blade rotates at a constant speed of $45^\\circ$ per second.  At time $t = 3\\,$s we want the value of $\\sin(\\text{blade angle})$ without using a calculator.  \n\n1. **Find the total angle turned after 3 seconds.**  \n   $$\\text{total angle}=45^\\circ \\times 3 = 135^\\circ.$$\n\n2. **Write the angle as a sum of known angles.**  \n   $135^\\circ$ can be expressed as $90^\\circ + 45^\\circ$.  The sine of a sum uses the sum formula:  \n   $$\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B.$$\n\n3. **Apply the sum formula with $A=90^\\circ$, $B=45^\\circ$.**  \n   $$\\sin 135^\\circ = \\sin 90^\\circ\\cos 45^\\circ + \\cos 90^\\circ\\sin 45^\\circ.$$  \n   We know the exact values: $\\sin 90^\\circ = 1$, $\\cos 90^\\circ = 0$, $\\sin 45^\\circ = \\cos 45^\\circ = \\frac{\\sqrt2}{2}$.  \n   Substituting,  \n   $$\\sin 135^\\circ = 1\\cdot\\frac{\\sqrt2}{2}+0\\cdot\\frac{\\sqrt2}{2}= \\frac{\\sqrt2}{2}.$$\n\n**Answer:** After $3$ s the sine of the blade’s angle is $\\displaystyle \\frac{\\sqrt2}{2}\\approx0.707$.\n\n> **Common mistake:**  Forgetting that $\\cos 90^\\circ = 0$ leads to an extra term that should disappear.  Always write down the exact values of the basic angles first.\n\n---\n\nNow we combine the ideas from both examples.  Suppose a construction worker needs to know how far a ladder will reach up a wall after the foot has been moved, and at the same time a ceiling fan is turning.  The ladder problem gives us a new angle $\\theta$; the fan problem shows how to break a complicated angle into a sum of simpler angles whose sine and cosine we already know.  By using the **sum‑and‑difference formulas** together with the **Pythagorean identity** $\\,\\sin^2\\theta+\\cos^2\\theta=1$, we can compute any missing side length or angle.\n\n> **Definition:**  The sum‑and‑difference formulas are  \n> $$\\sin(\\alpha\\pm\\beta)=\\sin\\alpha\\cos\\beta\\pm\\cos\\alpha\\sin\\beta,$$  \n> $$\\cos(\\alpha\\pm\\beta)=\\cos\\alpha\\cos\\beta\\mp\\sin\\alpha\\sin\\beta.$$  \n> They let us rewrite the sine or cosine of a complicated angle as a combination of sines and cosines of simpler angles.\n\n**Putting it all together – a mini‑project**  \nA ladder $12\\,$m long leans against a wall at an unknown angle $\\phi$.  At the same moment a ceiling fan rotates $30^\\circ$ per second.  After $4$ s the fan blade points exactly in the same direction as the ladder.  Find $\\phi$.\n\n1. **Find the fan’s angle after $4$ s.**  \n   $$\\text{fan angle}=30^\\circ \\times 4 = 120^\\circ.$$\n\n2. **Set the ladder’s angle equal to the fan’s angle.**  \n   So $\\phi = 120^\\circ$.\n\n3. **Check consistency with the ladder length using the Pythagorean identity.**  \n   The height the ladder reaches is $12\\sin\\phi$, the base distance is $12\\cos\\phi$.  \n   Compute $\\sin 120^\\circ$ using the sum formula: $120^\\circ = 90^\\circ+30^\\circ$.  \n   $$\\sin120^\\circ = \\sin90^\\circ\\cos30^\\circ+\\cos90^\\circ\\sin30^\\circ = 1\\cdot\\frac{\\sqrt3}{2}+0\\cdot\\frac12 = \\frac{\\sqrt3}{2}.$$  \n   Likewise, $\\cos120^\\circ = \\cos(90^\\circ+30^\\circ)=\\cos90^\\circ\\cos30^\\circ-\\sin90^\\circ\\sin30^\\circ = 0\\cdot\\frac{\\sqrt3}{2}-1\\cdot\\frac12 = -\\frac12.$  \n   The negative cosine simply tells us the ladder leans to the left of the vertical, which is fine for magnitude.\n\n4. **Find the actual distances (optional).**  \n   Height $=12\\cdot\\frac{\\sqrt3}{2}=6\\sqrt3\\,$m,  \n   Base distance $=12\\cdot\\frac12=6\\,$m.\n\n**Answer:** The ladder makes an angle $\\displaystyle \\phi = 120^\\circ$ with the ground, reaching $6\\sqrt3\\,$m up the wall and standing $6\\,$m away from the wall.\n\n> **Note:**  Even when an angle is larger than $90^\\circ$, the identities still work; the sign of $\\cos$ tells you on which side of the vertical the line lies.\n\nBy turning a word problem into a picture, writing down the right‑triangle relationships, and then applying the identities we have proved, we can solve many practical angle problems without ever measuring the angle directly.  Practice these steps, and the ladder‑and‑fan situations will become as easy as reading a clock.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Verify the Pythagorean identity for \\(\\theta = 45^\\circ\\).",
+   "a": "Compute \\(\\sin45^\\circ = \\frac{\\sqrt2}{2}\\) and \\(\\cos45^\\circ = \\frac{\\sqrt2}{2}\\).\nThen \\(\\sin^2 45^\\circ + \\cos^2 45^\\circ = \\left(\\frac{\\sqrt2}{2}\\right)^2 + \\left(\\frac{\\sqrt2}{2}\\right)^2 = \\frac12 + \\frac12 = 1.\\) The identity holds."
+  },
+  {
+   "level": "Easy",
+   "q": "Solve \\(\\cos\\theta = 0\\) for \\(0\\le\\theta<2\\pi\\).",
+   "a": "Cosine is zero at \\(\\theta = \\frac{\\pi}{2}\\) and \\(\\theta = \\frac{3\\pi}{2}\\). These are the only solutions in the given interval."
+  },
+  {
+   "level": "Medium",
+   "q": "Simplify \\(\\displaystyle \\frac{1-\\cos 2\\theta}{\\sin 2\\theta}\\).",
+   "a": "Use double‑angle identities: \\(1-\\cos 2\\theta = 2\\sin^2\\theta\\) and \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).\nThus \\(\\frac{2\\sin^2\\theta}{2\\sin\\theta\\cos\\theta}= \\frac{\\sin\\theta}{\\cos\\theta}= \\tan\\theta.\\)"
+  },
+  {
+   "level": "Medium",
+   "q": "Find all solutions of \\(\\sin\\theta = \\sin\\left(\\frac{\\pi}{3}\\right)\\) on \\([0,2\\pi)\\).",
+   "a": "\\(\\sin\\theta = \\frac{\\sqrt3}{2}\\). The reference angle is \\(\\frac{\\pi}{3}\\). Sine is positive in Quadrants I and II, so\n\\(\\theta = \\frac{\\pi}{3}\\) or \\(\\theta = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}.\\)"
+  },
+  {
+   "level": "Hard",
+   "q": "Solve \\(\\displaystyle 2\\cos^2\\theta - 3\\cos\\theta + 1 = 0\\) for \\(0\\le\\theta<2\\pi\\).",
+   "a": "Treat as a quadratic in \\(x=\\cos\\theta\\): \\(2x^2-3x+1=0\\).\nFactor: \\((2x-1)(x-1)=0\\) → \\(x=\\frac12\\) or \\(x=1\\).\n* For \\(\\cos\\theta = 1\\): \\(\\theta = 0\\).\n* For \\(\\cos\\theta = \\frac12\\): \\(\\theta = \\frac{\\pi}{3}\\) or \\(\\theta = 5\\pi/3\\).\nThus solutions: \\(\\theta = 0,\\; \\frac{\\pi}{3},\\; \\frac{5\\pi}{3}\\)."
+  },
+  {
+   "level": "Hard",
+   "q": "Simplify \\(\\displaystyle \\frac{\\sin(\\alpha+\\beta)+\\sin(\\alpha-\\beta)}{\\cos(\\alpha-\\beta)-\\cos(\\alpha+\\beta)}\\).",
+   "a": "Use sum‑to‑product formulas:\n\\[\n\\sin(\\alpha+\\beta)+\\sin(\\alpha-\\beta)=2\\sin\\alpha\\cos\\beta,\n\\]\n\\[\n\\cos(\\alpha-\\beta)-\\cos(\\alpha+\\beta)=2\\sin\\alpha\\sin\\beta.\n\\]\nTherefore the fraction becomes\n\\[\n\\frac{2\\sin\\alpha\\cos\\beta}{2\\sin\\alpha\\sin\\beta}= \\frac{\\cos\\beta}{\\sin\\beta}= \\cot\\beta.\n\\]\nSo the expression simplifies to \\(\\boxed{\\cot\\beta}\\)."
+  }
+ ],
+ "recap": "This lesson reviews how sine and cosine are defined on the unit circle, derives the fundamental Pythagorean identity, and shows how to use sum‑and‑difference, double‑angle, and half‑angle formulas to solve equations and simplify expressions. It also demonstrates applying these identities to real‑world problems such as a ladder leaning against a wall.",
+ "key_terms": [
+  {
+   "term": "unit circle",
+   "meaning": "A circle with radius 1 centered at the origin; points on it have coordinates (cosθ, sinθ)."
+  },
+  {
+   "term": "Pythagorean identity",
+   "meaning": "The equation sin^2θ + cos^2θ = 1 that holds for any angle θ."
+  },
+  {
+   "term": "reciprocal identities",
+   "meaning": "Relations like cscθ = 1/sinθ, secθ = 1/cosθ, and cotθ = 1/tanθ."
+  },
+  {
+   "term": "sum‑and‑difference formulas",
+   "meaning": "Formulas for sin(α±β) and cos(α±β) that express these functions in terms of sin and cos of α and β."
+  },
+  {
+   "term": "double‑angle identity",
+   "meaning": "Formulas such as sin2θ = 2 sinθ cosθ and cos2θ = cos^2θ – sin^2θ."
+  },
+  {
+   "term": "half‑angle identity",
+   "meaning": "Formulas that express sin(θ/2) or cos(θ/2) using the Pythagorean identity, e.g., sin^2(θ/2) = (1 – cosθ)/2."
+  },
+  {
+   "term": "trigonometric equation",
+   "meaning": "An equation that involves trigonometric functions and is solved by finding angles that satisfy it."
+  },
+  {
+   "term": "simplify expression",
+   "meaning": "Rewrite a trigonometric expression using identities to a shorter or more useful form."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What are the coordinates of a point on the unit circle at angle θ?",
+   "options": [
+    "(sinθ, cosθ)",
+    "(cosθ, sinθ)",
+    "(tanθ, cotθ)",
+    "(secθ, cscθ)"
+   ],
+   "answer": 1,
+   "why": "By definition, x = cosθ and y = sinθ on the unit circle."
+  },
+  {
+   "q": "Which identity follows directly from the equation x^2 + y^2 = 1 for the unit circle?",
+   "options": [
+    "sinθ + cosθ = 1",
+    "sin^2θ + cos^2θ = 1",
+    "tanθ = sinθ/cosθ",
+    "sec^2θ - tan^2θ = 1"
+   ],
+   "answer": 1,
+   "why": "Substituting x = cosθ and y = sinθ gives sin^2θ + cos^2θ = 1."
+  },
+  {
+   "q": "Using the sum formula, what is sin(α+β)?",
+   "options": [
+    "sinα sinβ + cosα cosβ",
+    "sinα cosβ + cosα sinβ",
+    "cosα cosβ – sinα sinβ",
+    "sinα cosβ – cosα sinβ"
+   ],
+   "answer": 1,
+   "why": "The correct sum formula is sinα cosβ + cosα sinβ."
+  },
+  {
+   "q": "What is the double‑angle formula for cos2θ?",
+   "options": [
+    "2 cos^2θ – 1",
+    "cos^2θ – sin^2θ",
+    "1 – 2 sin^2θ",
+    "All of the above are equivalent"
+   ],
+   "answer": 3,
+   "why": "All three forms are algebraically equivalent expressions for cos2θ."
+  },
+  {
+   "q": "If sinθ = 3/5 and θ is in the first quadrant, what is cosθ?",
+   "options": [
+    "4/5",
+    "-4/5",
+    "5/3",
+    "-5/3"
+   ],
+   "answer": 0,
+   "why": "Using sin^2θ + cos^2θ = 1 gives cosθ = sqrt(1 – (3/5)^2) = 4/5."
+  },
+  {
+   "q": "A ladder 10 m long makes a 60 degree angle with the ground. How high up the wall does it reach?",
+   "options": [
+    "5 m",
+    "8.66 m",
+    "10 m",
+    "6.5 m"
+   ],
+   "answer": 1,
+   "why": "Height = 10 * sin60 = 10 * (sqrt3/2) ≈ 8.66 m."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define the unit circle.",
+   "back": "A circle of radius 1 centered at (0,0); any point on it is (cosθ, sinθ)."
+  },
+  {
+   "front": "State the Pythagorean identity.",
+   "back": "sin^2θ + cos^2θ = 1."
+  },
+  {
+   "front": "What is the reciprocal identity for secθ?",
+   "back": "secθ = 1 / cosθ."
+  },
+  {
+   "front": "Write the sum formula for cos(α‑β).",
+   "back": "cosα cosβ + sinα sinβ."
+  },
+  {
+   "front": "Give one form of the double‑angle identity for sin2θ.",
+   "back": "sin2θ = 2 sinθ cosθ."
+  },
+  {
+   "front": "How can you express cos^2θ using a half‑angle identity?",
+   "back": "cos^2θ = (1 + cos2θ)/2."
+  },
+  {
+   "front": "What step helps solve a trigonometric equation?",
+   "back": "Rewrite the equation so only one trig function appears, then use identities to isolate it."
+  },
+  {
+   "front": "Why are trigonometric identities useful in real‑world problems?",
+   "back": "They let you convert geometric relationships into solvable equations without measuring angles directly."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l09-fig1",
+   "title": "Point P on the unit circle gives cosθ = x and sinθ = y",
+   "alt": "Unit Circle",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 0,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l09-adding-angles-vectors",
+   "title": "Two vectors rotated by α and β combine to a single vector at angle α + β.",
+   "alt": "Two vectors rotated by α and β combine to a single vector at angle α + β.",
+   "priority": 8,
+   "picture_title": "Adding Angles Vectors",
+   "kind": "illustration",
+   "subject": "Shows two arrows starting from the origin, one at angle α and another at angle β, and the resulting arrow that represents the sum of the rotations.",
+   "layout": "Origin at centre, three arrows radiating outward; α arrow in red, β arrow in blue, resultant arrow in green with a curved arrow indicating the addition.",
+   "labels": [
+    "origin",
+    "α",
+    "β",
+    "α+β"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l09-double-angle-rotation",
+   "title": "Rotating a vector by 2θ is the same as rotating it twice by θ.",
+   "alt": "Rotating a vector by 2θ is the same as rotating it twice by θ.",
+   "priority": 7,
+   "picture_title": "Double‑Angle Rotation",
+   "kind": "illustration",
+   "subject": "A single arrow is rotated first by θ and then again by θ, ending at the same position as a direct rotation by 2θ.",
+   "layout": "One arrow at angle θ in orange, a second arrow from that tip rotated another θ in orange, and a single arrow at angle 2θ in purple overlapping the tip of the second arrow.",
+   "labels": [
+    "θ",
+    "2θ"
+   ],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l09-ladder-angle-problem",
+   "title": "A ladder leaning against a wall illustrates a real‑world trigonometry problem.",
+   "alt": "A ladder leaning against a wall illustrates a real‑world trigonometry problem.",
+   "priority": 9,
+   "picture_title": "Ladder Angle Problem",
+   "kind": "photo",
+   "subject": "A wooden ladder rests against a vertical wall, forming an angle θ with the ground; the lengths of the ladder, wall, and ground are labeled.",
+   "layout": "Ladder as the hypotenuse, ground horizontal line, wall vertical line; labels placed near each side indicating ladder length, height, and base distance.",
+   "labels": [
+    "ladder",
+    "ground",
+    "wall",
+    "θ"
+   ],
+   "after": 6
+  },
+  {
+   "type": "facts",
+   "title": "Pythagorean Identity Values",
+   "items": [
+    {
+     "value": "0",
+     "label": "sin0"
+    },
+    {
+     "value": "1",
+     "label": "cos0"
+    },
+    {
+     "value": "1",
+     "label": "sin²θ + cos²θ"
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Solving a Basic Trig Equation",
+   "steps": [
+    {
+     "label": "Isolate",
+     "text": "Rewrite the equation so only one trig function appears."
+    },
+    {
+     "label": "Use Identity",
+     "text": "Apply sin²θ+cos²θ=1 or a reciprocal identity to replace the other function."
+    },
+    {
+     "label": "Find Angles",
+     "text": "Read off the angles from the unit circle that satisfy the isolated function."
+    },
+    {
+     "label": "Check",
+     "text": "Verify each solution lies in the required interval."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

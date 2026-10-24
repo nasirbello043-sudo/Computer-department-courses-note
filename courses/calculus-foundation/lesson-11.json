@@ -1,0 +1,369 @@
+{
+ "title": "Limits with Algebra",
+ "summary": "Students learn how to evaluate limits using algebraic techniques such as direct substitution, factoring, and limits at infinity. The lesson builds step‑by‑step from simple substitution to more complex rational expressions.",
+ "objectives": [
+  "Apply direct substitution to find limits of continuous functions",
+  "Factor polynomials to cancel zero denominators and evaluate limits",
+  "Determine limits as x approaches infinity or negative infinity",
+  "Explain why each algebraic step is valid"
+ ],
+ "prerequisites": "Students should already know how to evaluate basic arithmetic expressions and understand the concept of a function’s value at a point.",
+ "why": [
+  "Limits describe how a quantity behaves near a point, which is essential for predicting physical phenomena such as speed as a car approaches a stop sign.",
+  "Algebraic limit techniques are the foundation for calculus concepts like derivatives and integrals, enabling engineers and scientists to model real‑world systems."
+ ],
+ "sections": [
+  {
+   "heading": "1. Direct Substitution",
+   "body": "When we talk about a **limit**, we are asking what value a function gets closer to as the input gets closer to a certain point.  \nIf the function does not “jump” or “break” at that point, we can simply **plug in** the number and read off the answer.  \nThis is called **direct substitution**.\n\n> **Definition:** A function \\(f\\) is *continuous* at a point \\(a\\) if  \n> $$\\lim_{x\\to a} f(x)=f(a).$$  \n> In words, the limit as \\(x\\) approaches \\(a\\) is exactly the same as the value of the function at \\(a\\).\n\nWhy does this work?  \nThink of a smooth road. If you drive along it and reach the spot \\(x=a\\), you do not have to jump over a gap; the road continues without interruption. The height of the road at that spot is both the road’s value and the height you would approach if you came from either side. In mathematics, a continuous function behaves the same way: there is no sudden change, so the limit equals the function’s actual value.\n\n> **In daily life:** Imagine a temperature gauge that reads the exact temperature at every moment. If you want to know the temperature at 3 pm, you just read the gauge; you don’t need to estimate from earlier or later times. The gauge is “continuous” in time, just as a continuous function lets us read the limit directly.\n\nBecause many elementary functions (polynomials, exponentials, trigonometric functions on their natural domains) are continuous everywhere, direct substitution is often the quickest way to evaluate a limit.\n\n---\n\n**Example 1 (Easy): Direct substitution for a linear function**  \n\nFind \\(\\displaystyle\\lim_{x\\to 3} (2x+5)\\).\n\n1. **Identify the function** \\(f(x)=2x+5\\) and the point \\(a=3\\).  \n2. **Check continuity.** A linear function is a polynomial, and all polynomials are continuous everywhere, so we may substitute directly.  \n3. **Substitute** the number \\(3\\) for \\(x\\):  \n   $$f(3)=2\\cdot 3+5.$$  \n   $$f(3)=6+5=11.$$\n\n**Answer:** \\(\\displaystyle\\lim_{x\\to 3} (2x+5)=11.\\)\n\n---\n\n**Example 2 (Easy): Direct substitution for a quadratic expression**  \n\nFind \\(\\displaystyle\\lim_{x\\to -2} (x^{2}-4)\\).\n\n1. **Identify the function** \\(g(x)=x^{2}-4\\) and the point \\(a=-2\\).  \n2. **Check continuity.** Quadratic functions are polynomials, hence continuous everywhere; direct substitution is allowed.  \n3. **Substitute** \\(-2\\) for \\(x\\):  \n   $$g(-2)=(-2)^{2}-4.$$  \n   $$g(-2)=4-4=0.$$\n\n**Answer:** \\(\\displaystyle\\lim_{x\\to -2} (x^{2}-4)=0.\\)\n\n---\n\nThese two examples show the whole process: recognize the function, note that it is continuous, then replace the variable by the approaching value. No algebraic manipulation is needed.\n\n> **Note:** Direct substitution works only when the function is continuous at the point of interest. If plugging in the number produces an expression like \\(\\frac{0}{0}\\) or \\(\\frac{\\infty}{\\infty}\\), the function is not continuous there, and we must use other techniques (factoring, rationalizing, etc.) in later sections.\n\n> **Common mistake:** Forgetting to verify continuity and trying to substitute into a piece‑wise defined function at a breakpoint. Always ask, “Is the function smooth at this point?” before you plug in.\n\n> **Remember:** For any polynomial \\(p(x)\\), rational function whose denominator does not become zero, exponential \\(e^{x}\\), sine \\(\\sin x\\), cosine \\(\\cos x\\), and many other elementary functions, the limit as \\(x\\) approaches a number \\(a\\) is simply \\(p(a)\\) (or the corresponding value). This saves time and lets you focus on the harder limits that appear later.",
+   "code": ""
+  },
+  {
+   "heading": "2. When Substitution Gives 0/0",
+   "body": "When we plug the number we are approaching directly into the formula, the first thing we try is **direct substitution**.  \nIf the substitution gives a normal number, such as $5$ or $-3.2$, the limit is that number and we are done.  \n\nSometimes, however, the substitution produces the indeterminate form  \n\n$$\\frac{0}{0}$$  \n\nThis does **not** mean the limit is zero. The fraction $\\frac{0}{0}$ is undefined because both the numerator and the denominator become zero at the same time. It tells us that the expression is “too tangled” at that point and we need to **simplify** it before we can see what the limit really is.\n\n> **Definition:** An *indeterminate form* like $\\frac{0}{0}$ means the limit cannot be decided just by looking at the numbers we get after substitution; further algebraic work is required.\n\nThink of it like a jammed door. When you try to open it and the handle turns but the door does not move, you know something is blocking it. You must remove the obstacle (the jam) before the door can open smoothly. In the same way, the “obstacle” is the common factor that makes both numerator and denominator zero. By factoring, canceling, or otherwise rewriting the expression, we remove that obstacle and can then evaluate the limit.\n\n### Why does $\\frac{0}{0}$ signal more work?\n\n- The numerator being zero means the function’s value is trying to be *nothing*.\n- The denominator being zero means we are trying to *divide by nothing*, which is impossible.\n- When both happen together, the fraction could approach any number, depending on how the two zeros relate to each other.  \n  For example, $\\displaystyle\\lim_{x\\to2}\\frac{x-2}{x-2}=1$, while $\\displaystyle\\lim_{x\\to2}\\frac{x-2}{(x-2)^2}=0$. Both start as $\\frac{0}{0}$, but the limits are different.\n\nTherefore we must **simplify** the expression to reveal the hidden relationship between the numerator and denominator.\n\n> **Note:** Simplifying does not change the value of the function for any $x$ where it is defined; it only removes the factor that makes the expression undefined at the point of interest.\n\n### A simple tool: factoring\n\nIf the numerator and denominator share a common factor, we can factor it out and cancel. This is often the quickest way to get rid of the $\\frac{0}{0}$ problem.\n\n> **In daily life:** Imagine two friends holding a rope together. If they both let go of the same knot, the knot disappears and the rope becomes a single, smooth line. Factoring and canceling works the same way with algebraic “knots.”\n\n---\n\n**Example 3 (Level: Introductory):**  \nFind $\\displaystyle\\lim_{x\\to3}\\frac{x^{2}-9}{x-3}$.\n\n1. **Identify the indeterminate form.**  \n   Substitute $x=3$: numerator $3^{2}-9=0$, denominator $3-3=0$. We have $\\frac{0}{0}$, so we must simplify.\n\n2. **Factor the numerator.**  \n   Recognize $x^{2}-9$ as a difference of squares: $x^{2}-9=(x-3)(x+3)$.  \n   $$x^{2}-9=(x-3)(x+3)$$\n\n3. **Cancel the common factor.**  \n   The factor $(x-3)$ appears in both numerator and denominator, so we divide it out (allowed for $x\\neq3$).  \n   $$\\frac{(x-3)(x+3)}{x-3}=x+3\\qquad (x\\neq3)$$  \n\n4. **Take the limit of the simplified expression.**  \n   Now substitute $x=3$ into $x+3$:  \n   $$\\lim_{x\\to3}(x+3)=3+3=6$$\n\n**Answer:** $\\displaystyle\\lim_{x\\to3}\\frac{x^{2}-9}{x-3}=6$.\n\nThe limit exists and equals $6$ because the factor that caused the $\\frac{0}{0}$ cancelled, leaving a simple linear function.\n\n---\n\n### What if factoring is not obvious?\n\nSometimes the expression does not factor nicely, or the zero comes from a square root or other operation. In those cases we may need other techniques (rationalizing, using algebraic identities, or applying L’Hôpital’s Rule later). The key idea remains the same: **remove the common zero** so the limit can be read directly.\n\n> **Common mistake:** Cancelling terms that are not actually common factors, or cancelling after substituting the limit value. Always factor **before** substituting the limit point.\n\n### Summary of this step\n\n1. Substitute the approaching value.  \n2. If you obtain $\\frac{0}{0}$, stop – the limit is indeterminate.  \n3. Look for a common factor in numerator and denominator (often by factoring).  \n4. Cancel the common factor, obtaining a simpler expression that is equivalent for all $x$ except the point itself.  \n5. Substitute the limit value into the simplified expression to find the limit.\n\nBy mastering this process, you turn a confusing “0‑over‑0” situation into a clear, calculable answer. The next sections will show other ways to simplify when factoring alone does not work.",
+   "code": ""
+  },
+  {
+   "heading": "3. Factoring to Cancel Common Factors",
+   "body": "When a limit gives the indeterminate form \\(\\frac{0}{0}\\), it means both the top (numerator) and the bottom (denominator) become zero at the point we are approaching.  \nOne useful way to get rid of that “zero‑over‑zero” problem is to **factor** the numerator and the denominator, look for a common factor that contains the troublesome zero, and cancel it. After the cancellation the expression is no longer undefined at the point, so we can simply plug the value in.\n\n> **Definition:** *Factoring* means writing a polynomial as a product of simpler polynomials (its *factors*). A *common factor* is a factor that appears in both the numerator and the denominator.\n\nThink of it like a pair of shoes that are too tight because both shoes have an extra thick sole. If you shave off the same piece of sole from each shoe, the pair fits again. In algebra we “shave off” the same factor from the top and bottom, and the fraction becomes easier to evaluate.\n\n### Why factoring works\nIf a polynomial \\(p(x)\\) has a factor \\((x-a)\\), then \\(p(a)=0\\).  \nIf both numerator and denominator contain \\((x-a)\\), we can write\n\n$$\\frac{p(x)}{q(x)}=\\frac{(x-a)\\,p_1(x)}{(x-a)\\,q_1(x)}.$$\n\nFor every \\(x\\neq a\\) the factor \\((x-a)\\) cancels, leaving\n\n$$\\frac{p_1(x)}{q_1(x)}.$$\n\nNow the limit as \\(x\\to a\\) can be found by direct substitution because the new fraction is defined at \\(x=a\\).\n\n> **Note:** Cancelling is only allowed when we are sure the factor is not zero for the values we are *actually* using (the limit looks at values *near* \\(a\\), not exactly at \\(a\\)).\n\n### Worked Example 4 (Medium): Removing a common factor\n\nFind  \n\n\\[\n\\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}.\n\\]\n\n**Step 1. Identify the indeterminate form.**  \nPlugging \\(x=2\\) gives \\(\\frac{0}{0}\\), so we need to simplify.\n\n**Step 2. Factor the numerator.**  \nThe numerator \\(x^{2}-4\\) is a difference of squares:\n\n$$x^{2}-4=(x-2)(x+2).$$\n\n**Step 3. Cancel the common factor \\((x-2)\\).**  \nWrite the fraction with the factored form and remove \\((x-2)\\):\n\n$$\\frac{x^{2}-4}{x-2}\n=\\frac{(x-2)(x+2)}{x-2}\n= x+2\\qquad (x\\neq 2).$$\n\n**Step 4. Substitute the limit value.**  \nNow the expression is simply \\(x+2\\), which is defined at \\(x=2\\):\n\n$$\\lim_{x\\to 2}(x+2)=2+2=4.$$\n\n**Answer:** \\(\\displaystyle \\lim_{x\\to 2}\\frac{x^{2}-4}{x-2}=4.\\)\n\n### Worked Example 5 (Medium): Factoring a cubic\n\nFind  \n\n\\[\n\\lim_{x\\to -1}\\frac{x^{3}+1}{x+1}.\n\\]\n\n**Step 1. Check the direct substitution.**  \nPutting \\(x=-1\\) gives \\(\\frac{0}{0}\\); we must simplify.\n\n**Step 2. Factor the numerator using the sum‑of‑cubes formula.**  \nRecall \\(a^{3}+b^{3}=(a+b)(a^{2}-ab+b^{2})\\).  \nWith \\(a=x\\) and \\(b=1\\),\n\n$$x^{3}+1=(x+1)(x^{2}-x+1).$$\n\n**Step 3. Cancel the common factor \\((x+1)\\).**  \n\n$$\\frac{x^{3}+1}{x+1}\n=\\frac{(x+1)(x^{2}-x+1)}{x+1}\n= x^{2}-x+1\\qquad (x\\neq -1).$$\n\n**Step 4. Substitute \\(x=-1\\).**  \n\n$$\\lim_{x\\to -1}(x^{2}-x+1)=(-1)^{2}-(-1)+1=1+1+1=3.$$\n\n**Answer:** \\(\\displaystyle \\lim_{x\\to -1}\\frac{x^{3}+1}{x+1}=3.\\)\n\n### General steps to remember\n\n1. **Plug in** the limit point. If you get \\(\\frac{0}{0}\\), continue.  \n2. **Factor** the numerator and denominator completely.  \n3. **Identify** any identical factor \\((x-a)\\) that appears in both places.  \n4. **Cancel** that factor, remembering the cancellation is valid for all \\(x\\neq a\\).  \n5. **Substitute** the limit value into the simplified expression.\n\n> **Remember:** Factoring works best for polynomials that can be broken into products like \\((x-a)\\), \\((x^{2}+bx+c)\\), or special forms such as difference of squares and sum/difference of cubes.\n\nBy mastering this technique, you turn many seemingly impossible limits into simple plug‑in problems. The next sections will show other tricks (rationalizing, limits at infinity) for cases where factoring alone does not help.",
+   "code": ""
+  },
+  {
+   "heading": "4. Rationalizing Numerators or Denominators",
+   "body": "When a limit gives the indeterminate form $\\frac{0}{0}$ and the expression cannot be factored easily, we can *rationalize* the numerator or the denominator.  \nRationalizing means multiplying by a **conjugate** – an expression that looks the same except the sign between two terms is changed.  \nThe product of a binomial and its conjugate removes the square‑root (or other radical) because  \n\n$$ (a-b)(a+b)=a^{2}-b^{2}. $$  \n\nThis identity turns a messy radical into a simple polynomial, allowing us to cancel the common factor that caused the $0/0$ problem.\n\n> **Definition:** *Conjugate* – for an expression $a\\pm b$, the conjugate is $a\\mp b$ (the same two terms with the opposite sign).\n\nWhy is this useful? Imagine trying to simplify a fraction that contains $\\sqrt{x}$ in the top. Direct substitution may give $0/0$, and factoring does not help because the radical is not a factor of a polynomial. By multiplying numerator and denominator by the conjugate, the radical disappears after using the difference‑of‑squares formula, and a factor of $(x-4)$ (or similar) can be cancelled.\n\n> **In daily life:** Think of a pair of scissors. One blade cuts forward, the other backward. When you close them together (multiply the two blades), the sharp edges meet and disappear, leaving only the handle – the part you can hold. The conjugate works the same way: the opposite signs meet and cancel the radical, leaving a clean “handle” that we can work with.\n\n### Step‑by‑step process\n\n1. **Identify** the radical that is causing the $0/0$ form.  \n2. **Write** its conjugate (change the sign between the two terms).  \n3. **Multiply** both the numerator *and* the denominator by this conjugate.  \n4. **Simplify** using the difference‑of‑squares identity; a factor of $(x-a)$ will usually appear.  \n5. **Cancel** the common factor and then substitute the limit value.\n\nNow let us see the method in action.\n\n**Example 6 (Hard): Rationalizing a numerator**  \nFind $\\displaystyle\\lim_{x\\to 4}\\frac{\\sqrt{x}-2}{x-4}$.\n\n1. *Notice* the numerator $\\sqrt{x}-2$ becomes $0$ when $x=4$, and the denominator $x-4$ also becomes $0$. Direct substitution gives $\\frac{0}{0}$, so we rationalize the numerator.  \n2. *Write* the conjugate of the numerator: $\\sqrt{x}+2$. Multiply the fraction by $\\frac{\\sqrt{x}+2}{\\sqrt{x}+2}$ (which equals $1$).  \n   $$\\frac{\\sqrt{x}-2}{x-4}\\cdot\\frac{\\sqrt{x}+2}{\\sqrt{x}+2}\n     =\\frac{(\\sqrt{x}-2)(\\sqrt{x}+2)}{(x-4)(\\sqrt{x}+2)}.$$\n3. *Apply* the difference‑of‑squares formula: $(\\sqrt{x})^{2}-(2)^{2}=x-4$.  \n   $$\\frac{x-4}{(x-4)(\\sqrt{x}+2)}.$$\n4. *Cancel* the common factor $x-4$ (it is non‑zero for $x\\neq4$, which is allowed in a limit).  \n   $$\\frac{1}{\\sqrt{x}+2}.$$\n5. *Substitute* $x=4$ into the simplified expression.  \n   $$\\frac{1}{\\sqrt{4}+2}=\\frac{1}{2+2}=\\frac{1}{4}.$$\n\n**Answer:** $\\displaystyle\\lim_{x\\to 4}\\frac{\\sqrt{x}-2}{x-4}= \\frac14.$  \n\nThe rationalization turned an impossible‑looking fraction into a simple one that we could evaluate directly.\n\n> **Note:** You must multiply *both* numerator and denominator by the same conjugate; otherwise you would change the value of the fraction.\n\n### Another illustration\n\nConsider $\\displaystyle\\lim_{x\\to 9}\\frac{3-\\sqrt{x}}{x-9}$.  \nThe numerator $3-\\sqrt{x}$ approaches $0$ as $x\\to9$, and the denominator also approaches $0$. We rationalize the numerator again, this time using the conjugate $3+\\sqrt{x}$.\n\n1. Multiply by $\\frac{3+\\sqrt{x}}{3+\\sqrt{x}}$:  \n\n   $$\\frac{3-\\sqrt{x}}{x-9}\\cdot\\frac{3+\\sqrt{x}}{3+\\sqrt{x}}\n     =\\frac{(3-\\sqrt{x})(3+\\sqrt{x})}{(x-9)(3+\\sqrt{x})}.$$\n\n2. Use the identity: $(3)^{2}-(\\sqrt{x})^{2}=9-x$.  \n\n   $$\\frac{9-x}{(x-9)(3+\\sqrt{x})}.$$\n\n3. Notice $9-x=-(x-9)$, so  \n\n   $$\\frac{- (x-9)}{(x-9)(3+\\sqrt{x})}= -\\frac{1}{3+\\sqrt{x}}.$$\n\n4. Substitute $x=9$:  \n\n   $$-\\frac{1}{3+\\sqrt{9}}=-\\frac{1}{3+3}=-\\frac{1}{6}.$$\n\n**Answer:** $\\displaystyle\\lim_{x\\to 9}\\frac{3-\\sqrt{x}}{x-9}= -\\frac16.$  \n\n> **Common mistake:** Forgetting to change the sign when forming the conjugate. Using $\\sqrt{x}-2$ instead of $\\sqrt{x}+2$ would give $(\\sqrt{x}-2)^2$, which still contains a radical and does not cancel the problematic factor.\n\n### When to rationalize the denominator\n\nSometimes the radical sits in the denominator, e.g. $\\displaystyle\\lim_{x\\to 0}\\frac{x}{\\sqrt{x+1}-1}$. The same steps apply, but we multiply by the conjugate of the denominator:\n\n1. Conjugate of $\\sqrt{x+1}-1$ is $\\sqrt{x+1}+1$.  \n2. Multiply numerator and denominator by this conjugate.  \n3. The denominator becomes $(\\sqrt{x+1})^{2}-1^{2}=x+1-1=x$.  \n4. The $x$ cancels, leaving a simple expression that can be evaluated at $x=0$.\n\nCarrying out the algebra:\n\n$$\\frac{x}{\\sqrt{x+1}-1}\\cdot\\frac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}\n   =\\frac{x(\\sqrt{x+1}+1)}{x}\n   =\\sqrt{x+1}+1.$$\n\nNow substitute $x=0$: $\\sqrt{0+1}+1=1+1=2$.\n\n**Answer:** $\\displaystyle\\lim_{x\\to 0}\\frac{x}{\\sqrt{x+1}-1}=2.$  \n\n> **Remember:** Rationalizing works for any radical expression where the conjugate removes the root, not just square roots. For cube roots, you would use the sum‑of‑cubes identity, but the idea remains the same.\n\n---\n\nIn summary, rationalizing is a reliable tool when factoring fails. By multiplying by a conjugate, we turn a troublesome radical into a polynomial, cancel the offending $0$ factor, and evaluate the limit cleanly. Practice with both numerator and denominator cases until the pattern feels natural.",
+   "code": ""
+  },
+  {
+   "heading": "5. Limits at Infinity for Polynomials",
+   "body": "When \\(x\\) becomes very large (either \\(+\\infty\\) or \\(-\\infty\\)), the terms with the highest power of \\(x\\) in a polynomial dominate everything else.  \nThe lower‑degree terms (like constants or \\(x\\)‑terms when a \\(x^3\\) term is present) grow much more slowly, so their contribution to the value of the fraction becomes negligible.  \nBecause of this, the limit of a rational expression (a fraction of two polynomials) at infinity is determined only by the **leading term** of each polynomial – the term with the greatest exponent.\n\n> **Definition:** The *leading term* of a polynomial is the term that contains the highest power of the variable, together with its coefficient.  \n> Example: in \\(3x^3-2x+5\\) the leading term is \\(3x^3\\).\n\nWhy does this help?  Suppose we have  \n\n$$\\frac{a_n x^n + a_{n-1}x^{n-1}+ \\dots + a_0}{b_m x^m + b_{m-1}x^{m-1}+ \\dots + b_0}.$$\n\nIf we divide every term by the highest power that appears in the denominator, \\(x^m\\), we obtain  \n\n$$\\frac{a_n x^{\\,n-m}+a_{n-1}x^{\\,n-m-1}+ \\dots + a_0/x^{\\,m}}{b_m + b_{m-1}/x + \\dots + b_0/x^{\\,m}}.$$\n\nNow let \\(x\\) go to \\(\\infty\\).  Every fraction that has a power of \\(x\\) in the denominator (like \\(1/x\\), \\(1/x^2\\), …) shrinks to zero.  What remains are the constant pieces that came from the leading terms.  Therefore\n\n* if \\(n=m\\) (the degrees are the same) the limit is the ratio of the leading coefficients \\(\\displaystyle \\frac{a_n}{b_m}\\);\n* if \\(n<m\\) the limit is \\(0\\) because the numerator grows slower than the denominator;\n* if \\(n>m\\) the limit is \\(\\pm\\infty\\) depending on the signs of the leading coefficients and on whether \\(x\\) goes to \\(+\\infty\\) or \\(-\\infty\\).\n\n> **In daily life:** Think of a race between two runners.  One runs at a speed that grows with the square of time, the other with the cube of time.  After a long enough race, the runner whose speed grows faster (the higher‑degree term) will be far ahead, while the slower runner’s progress becomes almost irrelevant.\n\n---\n\n**Example 7 (Hard):** *Find \\(\\displaystyle \\lim_{x\\to \\infty} \\frac{3x^3-2x+5}{6x^3+4}\\).*\n\n1. **Identify the highest power** in both numerator and denominator.  \n   The numerator’s leading term is \\(3x^3\\); the denominator’s leading term is \\(6x^3\\).\n\n2. **Divide every term by \\(x^3\\)** (the highest power that appears).  \n   $$\\frac{3x^3-2x+5}{6x^3+4}\n     =\\frac{3-\\dfrac{2}{x^{2}}+\\dfrac{5}{x^{3}}}{6+\\dfrac{4}{x^{3}}}.$$\n\n3. **Let \\(x\\to\\infty\\).**  All fractions with \\(x\\) in the denominator go to zero.  \n   $$\\lim_{x\\to\\infty}\\frac{3-\\dfrac{2}{x^{2}}+\\dfrac{5}{x^{3}}}{6+\\dfrac{4}{x^{3}}}\n     =\\frac{3-0+0}{6+0}= \\frac{3}{6}.$$\n\n**Answer:** \\(\\displaystyle \\frac{1}{2}\\).  The limit equals the ratio of the leading coefficients \\(3\\) and \\(6\\).\n\n---\n\n**Example 8 (Hard):** *Determine \\(\\displaystyle \\lim_{x\\to -\\infty} \\frac{-2x^2+7}{5x^2-3x}\\).*\n\n1. **Find the leading terms.**  \n   Numerator: \\(-2x^2\\); denominator: \\(5x^2\\).  Both have degree \\(2\\).\n\n2. **Divide by the highest power \\(x^2\\).**  \n   $$\\frac{-2x^2+7}{5x^2-3x}\n     =\\frac{-2+\\dfrac{7}{x^{2}}}{5-\\dfrac{3}{x}}.$$\n\n3. **Take the limit as \\(x\\to -\\infty\\).**  The fractions \\(\\frac{7}{x^{2}}\\) and \\(\\frac{3}{x}\\) both approach \\(0\\).  \n   $$\\lim_{x\\to -\\infty}\\frac{-2+\\dfrac{7}{x^{2}}}{5-\\dfrac{3}{x}}\n     =\\frac{-2+0}{5-0}= -\\frac{2}{5}.$$\n\n**Answer:** \\(\\displaystyle -\\frac{2}{5}\\).  Again the limit is simply the ratio of the leading coefficients.\n\n> **Remember:** When the degrees of the top and bottom polynomials are the same, the limit at \\(\\pm\\infty\\) is just the ratio of their leading coefficients.  No complicated algebra is needed beyond spotting those leading terms.",
+   "code": ""
+  },
+  {
+   "heading": "6. Limits at Infinity for Rational Functions with Different Degrees",
+   "body": "When \\(x\\) grows without bound (that is, \\(x\\to\\infty\\) or \\(x\\to-\\infty\\)), a rational function  \n\n\\[\nR(x)=\\frac{p(x)}{q(x)}\n\\]\n\nbehaves like the highest‑power terms of the numerator \\(p(x)\\) and the denominator \\(q(x)\\).  \nThe “degree’’ of a polynomial is the largest exponent that appears.  \nWe compare the degree of the numerator with the degree of the denominator and three different outcomes appear.\n\n> **Definition:** *Degree* – the largest exponent of \\(x\\) in a polynomial.  \n> **Note:** Only the leading (highest‑power) terms matter for limits at infinity.\n\n---\n\n### 1. Numerator degree **smaller** than denominator degree  \\(\\;(\\deg p < \\deg q)\\)\n\nImagine a tiny child (the numerator) trying to keep up with a marathon runner (the denominator). No matter how far the runner goes, the child’s contribution becomes negligible.  \nMathematically, the denominator grows much faster, so the whole fraction shrinks toward **zero**.\n\n\\[\n\\lim_{x\\to\\pm\\infty}\\frac{p(x)}{q(x)}=0\\qquad\\text{if }\\deg p<\\deg q .\n\\]\n\n---\n\n### 2. Numerator degree **equal** to denominator degree  \\(\\;(\\deg p = \\deg q)\\)\n\nNow the child and the runner have the same speed. Their ratio stays constant, determined by how big each leading term is.  \nIf  \n\n\\[\np(x)=a_nx^{n}+(\\text{lower terms}),\\qquad \nq(x)=b_nx^{n}+(\\text{lower terms}),\n\\]\n\nthen the \\(x^{n}\\) cancel and the limit is the ratio of the leading coefficients \\(a_n/b_n\\).\n\n\\[\n\\lim_{x\\to\\pm\\infty}\\frac{p(x)}{q(x)}=\\frac{a_n}{b_n}\\qquad\\text{if }\\deg p=\\deg q .\n\\]\n\n---\n\n### 3. Numerator degree **greater** than denominator degree  \\(\\;(\\deg p > \\deg q)\\)\n\nHere the child runs faster than the runner; the fraction grows without bound.  \nThe sign (positive or negative infinity) depends on the sign of the leading coefficients and on whether we approach \\(+\\infty\\) or \\(-\\infty\\).\n\n\\[\n\\lim_{x\\to\\pm\\infty}\\frac{p(x)}{q(x)}=\n\\begin{cases}\n+\\infty &\\text{if the leading term is positive for the direction considered},\\\\[4pt]\n-\\infty &\\text{if it is negative.}\n\\end{cases}\n\\qquad\\text{if }\\deg p>\\deg q .\n\\]\n\n> **In daily life:** Think of a car’s speedometer. If the engine (numerator) produces more power than the drag (denominator), the speed (the fraction) keeps increasing; if drag dominates, the speed settles to zero; if they match, the speed stays at a constant cruising value.\n\n---\n\n## Worked examples\n\n**Example 9 (Hard):** *Limit of a fraction whose numerator degree is smaller*  \n\nEvaluate  \n\n\\[\n\\lim_{x\\to \\infty} \\frac{2x+1}{x^{2}+5}.\n\\]\n\n1. **Identify the degrees.**  \n   The numerator \\(2x+1\\) has degree 1; the denominator \\(x^{2}+5\\) has degree 2.  \n   Since \\(1<2\\), we are in case 1.\n\n   $$\n   \\deg(2x+1)=1,\\qquad \\deg(x^{2}+5)=2\n   $$\n\n2. **Apply the rule for smaller numerator degree.**  \n   The limit is \\(0\\).\n\n   $$\n   \\lim_{x\\to\\infty}\\frac{2x+1}{x^{2}+5}=0\n   $$\n\n3. **Explain why the fraction shrinks.**  \n   As \\(x\\) becomes huge, the term \\(x^{2}\\) dominates the denominator, making the whole denominator much larger than the linear numerator, so the fraction gets closer to zero.\n\n**Answer:** \\(\\displaystyle 0\\).\n\n---\n\n**Example 10 (Hard):** *Limit of a fraction whose numerator and denominator have the same degree*  \n\nEvaluate  \n\n\\[\n\\lim_{x\\to -\\infty} \\frac{4x^{3}-2}{2x^{3}+3x}.\n\\]\n\n1. **Identify the leading terms and degrees.**  \n   Both numerator and denominator are degree 3 (the highest exponent is 3).  \n   The leading term of the numerator is \\(4x^{3}\\); of the denominator it is \\(2x^{3}\\).\n\n   $$\n   p(x)=4x^{3}-2,\\qquad q(x)=2x^{3}+3x\n   $$\n\n2. **Form the ratio of leading coefficients.**  \n   According to case 2, the limit equals \\(\\dfrac{4}{2}=2\\).\n\n   $$\n   \\lim_{x\\to -\\infty}\\frac{4x^{3}-2}{2x^{3}+3x}\n   =\\frac{4}{2}=2\n   $$\n\n3. **Check the sign for \\(-\\infty\\).**  \n   Both leading terms contain \\(x^{3}\\). When \\(x\\) is negative, \\(x^{3}\\) is also negative, so the signs of the leading terms are the same (both negative), and their ratio remains positive \\(2\\).\n\n**Answer:** \\(\\displaystyle 2\\).\n\n---\n\n> **Remember:**  \n> - Compare degrees first.  \n> - If the degrees differ, the limit is either \\(0\\) (numerator smaller) or \\(\\pm\\infty\\) (numerator larger).  \n> - If the degrees are equal, drop all lower‑order terms and keep only the leading coefficients; their ratio is the limit.\n\nUnderstanding these three cases lets you evaluate limits at infinity quickly, without lengthy algebra. It is a powerful shortcut that appears again in calculus when studying end behavior of functions, asymptotes, and growth rates.",
+   "code": ""
+  },
+  {
+   "heading": "7. Summary and Mixed Practice",
+   "body": "**Example 11 (Challenge):** Find \\(\\displaystyle\\lim_{x\\to 3}\\frac{x^{3}-27}{x^{2}-9}\\).\n\n1. **Factor each polynomial** so that a common factor can be cancelled.  \n   $$x^{3}-27=(x-3)(x^{2}+3x+9)$$  \n   $$x^{2}-9=(x-3)(x+3)$$  \n\n2. **Cancel the common factor** \\((x-3)\\) from numerator and denominator.  \n   $$\\frac{(x-3)(x^{2}+3x+9)}{(x-3)(x+3)}=\\frac{x^{2}+3x+9}{x+3}$$  \n\n3. **Substitute the approaching value** \\(x=3\\) into the simplified fraction.  \n   $$\\frac{3^{2}+3\\cdot3+9}{3+3}=\\frac{9+9+9}{6}=\\frac{27}{6}=\\frac{9}{2}$$  \n\n**Answer:** \\(\\displaystyle\\lim_{x\\to 3}\\frac{x^{3}-27}{x^{2}-9}= \\frac{9}{2}\\).  \n\n> **Definition:** A *limit* describes the value that a function approaches as the input gets arbitrarily close to a certain point.  \n\n> **Note:** When direct substitution gives the indeterminate form \\(\\frac{0}{0}\\), we must simplify the expression first—usually by factoring, rationalizing, or using algebraic identities.  \n\n> **In daily life:** Think of a road that narrows at a construction zone. The traffic flow (the function) seems to stop at the exact point of the narrowing (the “0/0” spot), but by looking at the lanes before and after the zone (simplifying), we can still predict how many cars will pass per minute.  \n\n> **Remember:** Always check whether a factor \\((x-a)\\) appears in both numerator and denominator before cancelling; forgetting this step leads to the common mistake of dividing by zero.  \n\n**Example 12 (Mixed Techniques):** Evaluate \\(\\displaystyle\\lim_{x\\to\\infty}\\frac{2x^{3}-5x+1}{x^{3}+4x^{2}-7}\\).\n\n1. **Identify the highest power of \\(x\\)** in the numerator and denominator (both are \\(x^{3}\\)).  \n2. **Divide every term** by \\(x^{3}\\) to see the dominant behavior as \\(x\\) grows without bound.  \n   $$\\frac{2x^{3}-5x+1}{x^{3}+4x^{2}-7}\n     =\\frac{2-\\frac{5}{x^{2}}+\\frac{1}{x^{3}}}{1+\\frac{4}{x}-\\frac{7}{x^{3}}}$$  \n\n3. **Take the limit** as \\(x\\to\\infty\\). All fractions with \\(x\\) in the denominator go to zero.  \n   $$\\lim_{x\\to\\infty}\\frac{2-\\frac{5}{x^{2}}+\\frac{1}{x^{3}}}{1+\\frac{4}{x}-\\frac{7}{x^{3}}}\n     =\\frac{2-0+0}{1+0-0}=2$$  \n\n**Answer:** \\(\\displaystyle\\lim_{x\\to\\infty}\\frac{2x^{3}-5x+1}{x^{3}+4x^{2}-7}=2\\).  \n\n**Example 13 (Rationalizing):** Compute \\(\\displaystyle\\lim_{x\\to 4}\\frac{\\sqrt{x+5}-3}{x-4}\\).\n\n1. **Recognize the 0/0 form** after direct substitution (\\(\\sqrt{9}=3\\) and denominator \\(0\\)).  \n2. **Rationalize the numerator** by multiplying numerator and denominator by the conjugate \\(\\sqrt{x+5}+3\\).  \n   $$\\frac{\\sqrt{x+5}-3}{x-4}\\cdot\\frac{\\sqrt{x+5}+3}{\\sqrt{x+5}+3}\n     =\\frac{(x+5)-9}{(x-4)(\\sqrt{x+5}+3)}$$  \n\n3. **Simplify the numerator**: \\((x+5)-9 = x-4\\). Cancel the common factor \\((x-4)\\).  \n   $$\\frac{x-4}{(x-4)(\\sqrt{x+5}+3)}=\\frac{1}{\\sqrt{x+5}+3}$$  \n\n4. **Substitute \\(x=4\\)** into the simplified expression.  \n   $$\\frac{1}{\\sqrt{4+5}+3}=\\frac{1}{\\sqrt{9}+3}=\\frac{1}{3+3}=\\frac{1}{6}$$  \n\n**Answer:** \\(\\displaystyle\\lim_{x\\to 4}\\frac{\\sqrt{x+5}-3}{x-4}= \\frac{1}{6}\\).  \n\n**Example 14 (Combining Factoring and Infinity):** Find \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{x^{2}+2x}{x^{2}-x+5}\\).\n\n1. **Factor out the highest power** \\(x^{2}\\) from both numerator and denominator.  \n   $$\\frac{x^{2}+2x}{x^{2}-x+5}\n     =\\frac{x^{2}\\left(1+\\frac{2}{x}\\right)}{x^{2}\\left(1-\\frac{1}{x}+\\frac{5}{x^{2}}\\right)}$$  \n\n2. **Cancel the common \\(x^{2}\\)** factor.  \n   $$\\frac{1+\\frac{2}{x}}{1-\\frac{1}{x}+\\frac{5}{x^{2}}}$$  \n\n3. **Let \\(x\\) go to \\(-\\infty\\)**; the terms with \\(1/x\\) and \\(1/x^{2}\\) vanish.  \n   $$\\lim_{x\\to -\\infty}\\frac{1+\\frac{2}{x}}{1-\\frac{1}{x}+\\frac{5}{x^{2}}}\n     =\\frac{1+0}{1-0+0}=1$$  \n\n**Answer:** \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{x^{2}+2x}{x^{2}-x+5}=1\\).  \n\nThese four examples bring together all the tools we have learned:\n\n* **Direct substitution** works when the function is already defined at the point.  \n* When we encounter the indeterminate form \\(\\frac{0}{0}\\), **factor** or **rationalize** to cancel the problematic piece.  \n* For limits at infinity, **compare the highest powers** of \\(x\\) to decide whether the limit is a ratio of leading coefficients, zero, or infinity.  \n\nPractice each step deliberately; the more you rewrite the expression, the clearer the limit becomes.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find $\\displaystyle \\lim_{x\\to 4}(5x-3)$.",
+   "a": "Since the function $5x-3$ is continuous, substitute $x=4$:\n\\[\n5(4)-3 = 20-3 = 17.\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Evaluate $\\displaystyle \\lim_{x\\to 1}\\frac{x^{2}-1}{x-1}$.",
+   "a": "Factor numerator: $x^{2}-1=(x-1)(x+1)$. Cancel $(x-1)$:\n\\[\n\\lim_{x\\to 1}(x+1)=1+1=2.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle \\lim_{x\\to 0}\\frac{\\sqrt{4x+9}-3}{x}$.",
+   "a": "Multiply by the conjugate $\\sqrt{4x+9}+3$:\n\\[\n\\frac{(\\sqrt{4x+9}-3)(\\sqrt{4x+9}+3)}{x(\\sqrt{4x+9}+3)}\n=\\frac{4x+9-9}{x(\\sqrt{4x+9}+3)}\n=\\frac{4x}{x(\\sqrt{4x+9}+3)}\n=\\frac{4}{\\sqrt{4x+9}+3}.\n\\]\nNow let $x\\to0$: $\\displaystyle \\frac{4}{\\sqrt{9}+3}= \\frac{4}{3+3}= \\frac{4}{6}= \\frac{2}{3}.$"
+  },
+  {
+   "level": "Medium",
+   "q": "Find $\\displaystyle \\lim_{x\\to\\infty}\\frac{7x^{3}-2x+1}{3x^{3}+5x^{2}}$.",
+   "a": "Both numerator and denominator are degree 3. Take the ratio of leading coefficients:\n\\[\n\\lim_{x\\to\\infty}\\frac{7x^{3}}{3x^{3}} = \\frac{7}{3}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Evaluate $\\displaystyle \\lim_{x\\to 2}\\frac{x^{3}-8}{x^{2}-4x+4}$.",
+   "a": "Factor numerator as a difference of cubes: $x^{3}-8=(x-2)(x^{2}+2x+4)$.\nDenominator: $x^{2}-4x+4=(x-2)^{2}$.\nCancel one $(x-2)$ factor:\n\\[\n\\lim_{x\\to 2}\\frac{x^{2}+2x+4}{x-2}.\n\\]\nNow direct substitution gives $\\frac{4+4+4}{0}$ → still $0/0$, so factor again? Actually numerator at $x=2$ is $4+4+4=12$, denominator $0$, so the limit is infinite. Check sign: for $x$ slightly greater than 2, $x-2>0$, numerator positive, so limit $+\\infty$; for $x$ slightly less, denominator negative, limit $-\\infty$. Since the two‑sided limit does not agree, the limit does **not exist** (DNE)."
+  },
+  {
+   "level": "Hard",
+   "q": "Determine $\\displaystyle \\lim_{x\\to\\infty}\\frac{2x^{4}+x^{2}-5}{x^{3}-7x+1}$.",
+   "a": "Degree of numerator (4) is higher than denominator (3). The limit will be infinite.\nCompare leading terms: $\\frac{2x^{4}}{x^{3}} = 2x$. As $x\\to\\infty$, $2x\\to\\infty$.\nSince the leading coefficients are positive, the limit is $+\\infty$."
+  }
+ ],
+ "recap": "Limits tell us what value a function approaches as x gets close to a point. Direct substitution works when the function is continuous, but if substitution gives 0/0 we must simplify using factoring, canceling, or rationalizing. For large x, only the highest‑power terms of polynomials matter, so the degree of numerator and denominator decides the limit at infinity.",
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value that a function approaches as the input gets arbitrarily close to a certain point."
+  },
+  {
+   "term": "continuous",
+   "meaning": "A function is continuous at a if the limit as x approaches a equals f(a)."
+  },
+  {
+   "term": "indeterminate form",
+   "meaning": "An expression like 0/0 that does not give enough information to determine the limit."
+  },
+  {
+   "term": "factoring",
+   "meaning": "Writing a polynomial as a product of simpler polynomials."
+  },
+  {
+   "term": "common factor",
+   "meaning": "A factor that appears in both the numerator and the denominator and can be cancelled."
+  },
+  {
+   "term": "rationalizing",
+   "meaning": "Multiplying by a conjugate to eliminate radicals in a numerator or denominator."
+  },
+  {
+   "term": "leading term",
+   "meaning": "The term with the highest power of x in a polynomial, together with its coefficient."
+  },
+  {
+   "term": "degree",
+   "meaning": "The largest exponent of x in a polynomial."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the limit of f(x)=3x+2 as x approaches 5?",
+   "options": [
+    "13",
+    "17",
+    "15",
+    "11"
+   ],
+   "answer": 0,
+   "why": "Direct substitution gives 3*5+2 = 17, which is option 1."
+  },
+  {
+   "q": "If direct substitution in a rational function gives 0/0, what should you try first?",
+   "options": [
+    "Plug in a different number",
+    "Factor and cancel common factors",
+    "Differentiate immediately",
+    "Ignore the limit"
+   ],
+   "answer": 1,
+   "why": "Factoring often removes the 0/0 indeterminate form."
+  },
+  {
+   "q": "Which of the following is the conjugate of (sqrt(x) - 3)?",
+   "options": [
+    "sqrt(x) + 3",
+    "sqrt(x) - 3",
+    "x - 9",
+    "x + 9"
+   ],
+   "answer": 0,
+   "why": "The conjugate changes the sign between the two terms."
+  },
+  {
+   "q": "For the polynomial 4x^5 - 2x^3 + 7, what is the leading term?",
+   "options": [
+    "4x^5",
+    "-2x^3",
+    "7",
+    "4x"
+   ],
+   "answer": 0,
+   "why": "The term with the highest power of x is 4x^5."
+  },
+  {
+   "q": "What is the limit as x -> infinity of (2x^3 + 5) / (x^3 - 4x)?",
+   "options": [
+    "0",
+    "2",
+    "Infinity",
+    "-2"
+   ],
+   "answer": 1,
+   "why": "Both numerator and denominator have degree 3; the ratio of leading coefficients 2/1 = 2."
+  },
+  {
+   "q": "If deg numerator < deg denominator, what is the limit of the rational function as x -> infinity?",
+   "options": [
+    "Infinity",
+    "0",
+    "The leading coefficient ratio",
+    "Does not exist"
+   ],
+   "answer": 1,
+   "why": "The denominator grows faster, so the limit is 0."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definition of a limit",
+   "back": "The value a function approaches as the input gets arbitrarily close to a certain point."
+  },
+  {
+   "front": "When can you use direct substitution?",
+   "back": "When the function is continuous at the point (no jumps or holes)."
+  },
+  {
+   "front": "What does 0/0 indicate?",
+   "back": "An indeterminate form that requires algebraic manipulation."
+  },
+  {
+   "front": "How to remove a common factor in a fraction?",
+   "back": "Factor numerator and denominator, then cancel the shared factor."
+  },
+  {
+   "front": "What is rationalizing?",
+   "back": "Multiplying by the conjugate to eliminate radicals."
+  },
+  {
+   "front": "Leading term of 5x^4 - 3x^2 + 1",
+   "back": "5x^4"
+  },
+  {
+   "front": "Degree of the polynomial 2x^6 + x^3 - 7",
+   "back": "6"
+  },
+  {
+   "front": "Limit at infinity when numerator degree > denominator degree",
+   "back": "The limit is infinity (or -infinity depending on sign)."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l11-factoring-with-blocks",
+   "title": "Physical blocks showing how a polynomial can be broken into common factors and cancelled.",
+   "alt": "Physical blocks showing how a polynomial can be broken into common factors and cancelled.",
+   "priority": 8,
+   "picture_title": "Factoring with Blocks",
+   "kind": "photo",
+   "subject": "A set of colored building blocks arranged to represent the expression (x³‑27)/(x²‑9). The blocks are grouped to show the factor (x‑3) appearing in both numerator and denominator, which can be removed before substitution.",
+   "layout": "Blocks placed on a table in two rows, numerator on top, denominator below, with matching colored blocks aligned vertically to indicate the common factor.",
+   "labels": [],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l11-rationalizing-conjugate",
+   "title": "Illustration of multiplying by the conjugate to remove a square‑root from the denominator.",
+   "alt": "Illustration of multiplying by the conjugate to remove a square‑root from the denominator.",
+   "priority": 7,
+   "picture_title": "Rationalizing Conjugate",
+   "kind": "illustration",
+   "subject": "A step‑by‑step visual showing the expression (√x+2)/(x‑4) being multiplied by (√x‑2)/(√x‑2). The picture highlights the conjugate pair and the resulting difference‑of‑squares.",
+   "layout": "Two side‑by‑side panels: left panel shows the original fraction with the conjugate written next to it; right panel shows the product simplified to (x‑4)/(x‑4) and then to 1.",
+   "labels": [
+    "original",
+    "conjugate",
+    "product",
+    "difference of squares"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l11-leading-term-dominance",
+   "title": "A bar chart comparing growth of polynomial terms as x becomes very large.",
+   "alt": "A bar chart comparing growth of polynomial terms as x becomes very large.",
+   "priority": 6,
+   "picture_title": "Leading Term Dominance",
+   "kind": "illustration",
+   "subject": "Bars representing terms x⁵, x³, x, and constant in a polynomial, with the tallest bar (x⁵) highlighted to show it dominates the behavior of the function at infinity.",
+   "layout": "Horizontal axis labeled 'Term', vertical axis labeled 'Growth as x→∞', bars ordered from highest degree to lowest, with the leading term colored differently.",
+   "labels": [
+    "x⁵",
+    "x³",
+    "x",
+    "constant"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Direct Substitution Process",
+   "steps": [
+    {
+     "label": "Identify point",
+     "text": "Find the value a that x approaches."
+    },
+    {
+     "label": "Plug in",
+     "text": "Replace x with a in the formula."
+    },
+    {
+     "label": "Check continuity",
+     "text": "If the function is continuous at a, the limit equals the plugged‑in value."
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Factoring to Cancel Common Factors",
+   "steps": [
+    {
+     "label": "Factor numerator",
+     "text": "Write the top polynomial as a product of simpler terms."
+    },
+    {
+     "label": "Factor denominator",
+     "text": "Write the bottom polynomial similarly."
+    },
+    {
+     "label": "Cancel common factor",
+     "text": "Remove the factor that appears in both numerator and denominator."
+    },
+    {
+     "label": "Substitute",
+     "text": "Plug the approaching value into the simplified expression."
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Direct Substitution vs. 0/0 Indeterminate",
+   "left": {
+    "name": "Direct Substitution",
+    "points": [
+     "Gives a single number",
+     "Works when function is continuous",
+     "Limit equals the plugged‑in value"
+    ]
+   },
+   "right": {
+    "name": "0/0 Indeterminate",
+    "points": [
+     "Both numerator and denominator become zero",
+     "Limit is not determined yet",
+     "Requires algebraic manipulation"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Limit at Infinity – Leading Term Dominates",
+   "fn": "(3*x^3 + 2*x^2 - 5)/(x^3 - 4)",
+   "xmin": -10,
+   "xmax": 10,
+   "points": [],
+   "caption": "As x → ±∞ the ratio approaches the ratio of leading coefficients 3/1 = 3.",
+   "after": 4
+  },
+  {
+   "type": "graph",
+   "title": "Example 11 Simplified Function",
+   "fn": "(x^2 + 3*x + 9)/(x + 3)",
+   "xmin": -2,
+   "xmax": 8,
+   "points": [
+    {
+     "x": 3,
+     "y": 4.5,
+     "label": "limit point",
+     "open": false
+    }
+   ],
+   "caption": "After canceling (x‑3), substitute x = 3 to get 9/2 = 4.5.",
+   "after": 6
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

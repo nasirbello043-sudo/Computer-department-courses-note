@@ -1,0 +1,353 @@
+{
+ "title": "Functions and Graphs",
+ "summary": "This lesson introduces the ideas of domain, range, and function notation, then shows how basic transformations change a graph’s shape and position.",
+ "objectives": [
+  "Identify the domain and range of a given function",
+  "Write and interpret function notation correctly",
+  "Apply vertical and horizontal shifts to a graph",
+  "Apply reflections and stretches/compressions to a graph",
+  "Sketch the graph of a transformed function from its equation"
+ ],
+ "prerequisites": "Students should be comfortable with basic algebraic operations and plotting points on a coordinate plane.",
+ "why": [
+  "Understanding domains and ranges tells us what inputs a real‑world model can accept – for example, a temperature conversion formula only works for temperatures above absolute zero.",
+  "Graph transformations let us quickly see how changes to a formula affect its picture, which is essential for modelling situations such as shifting a profit curve when costs change."
+ ],
+ "sections": [
+  {
+   "heading": "1. What is a Function?",
+   "body": "A function is simply a rule that takes an input, does something with it, and then gives exactly one output.  \nThink of a vending machine: you insert a coin (the input), press a button, and the machine delivers one specific snack (the output). The machine never gives you two different snacks for the same button‑press; that would be confusing. In mathematics we want the same kind of certainty: every allowed input must lead to one and only one result.\n\n> **Definition:** A *function* $f$ is a rule that assigns to each element $x$ in a set called the *domain* exactly one element $f(x)$ in another set called the *codomain*.\n\nThe symbol $f$ is just a name, like “Alice” or “Vending‑Machine‑1”. The parentheses around $x$ tell us which input we are using. Writing $f(x)$ reads “the value of the function $f$ at $x$”. It is not a product of $f$ and $x$; it is a single object that depends on $x$.\n\nWhy do we need this idea?  \nWhen we study changing quantities—such as distance over time, temperature over a day, or profit as a function of price—we need a precise way to say “what is the result when we plug in this particular number?”. The function notation gives us that precision and lets us manipulate the rule algebraically.\n\n### Example: A simple rule\n\nConsider the rule “multiply by 2”. We can write it as a function $f$ defined by  \n\n$$\nf(x)=2x .\n$$\n\nIf we choose $x=3$, then $f(3)=2\\cdot3=6$. If we choose $x=-1$, then $f(-1)=2\\cdot(-1)=-2$. No matter which $x$ we pick, the rule tells us exactly one number.\n\n> **In daily life:** Think of a recipe that tells you “for every cup of flour, use two cups of water”. The amount of water you need is a function of the amount of flour. If you use 1 cup of flour, you get 2 cups of water; if you use 2 cups, you get 4 cups, and so on.\n\n### One input, one output—no exceptions\n\nA common mistake is to think a rule can give two different outputs for the same input. For instance, the “rule” that says “if $x$ is even, output 0; if $x$ is odd, output 1; but also output $x$ itself” is **not** a function, because for $x=2$ it would want to give both $0$ and $2$. Functions must be single‑valued.\n\n> **Common mistake:** Assuming a relation like “$y^2 = x$” is a function of $x$. For $x=4$ we have $y=2$ **and** $y=-2$, so the rule does not assign a unique output.\n\n### How we write and read functions\n\nWhen we write $f(x)=2x+5$, we are describing the whole rule at once. The left side, $f(x)$, tells us “the output of $f$ for the input $x$”. The right side, $2x+5$, tells us how to compute that output. If you see $g(t)=t^2-3t$, you simply replace the placeholder $t$ with any number you like, and the formula gives the corresponding output.\n\n> **Remember:** The letter inside the parentheses (like $x$, $t$, or $n$) is just a placeholder. You can rename it, but the rule stays the same. For example, $f(x)=2x+5$ and $f(u)=2u+5$ describe the identical function.\n\n### Why the word “function” matters\n\nIn later topics—such as graphing, solving equations, or calculus—we will often talk about “the function $f$”. Having a clear, unambiguous definition lets us discuss properties like continuity, growth, or maximum values without confusion. It also lets us combine functions: if $g(x)=x^2$, then the composition $f(g(x))$ means “first apply $g$, then apply $f$”.\n\n> **Note:** The *domain* (the set of allowed inputs) and the *codomain* (the set where outputs live) are part of the definition, even if we do not list them every time. For $f(x)=2x$, a typical domain is all real numbers $\\mathbb{R}$, and the codomain is also $\\mathbb{R}$.\n\nIn summary, a function is a reliable rule that pairs each input with exactly one output, written as $f(x)$. This simple idea underlies all of the algebraic and graphical work we will do in the rest of the lesson.",
+   "code": ""
+  },
+  {
+   "heading": "2. Domain and Range",
+   "body": "When we talk about a **function**, we are really describing a rule that takes an input, does something to it, and gives back exactly one output.  \nThe **domain** is the collection of all inputs that we are allowed to feed into the rule without breaking any mathematical law (like taking the square‑root of a negative number).  \nThe **range** is the collection of all possible outputs that actually appear when we use every allowed input.\n\n> **Definition:** *Domain* – the set of all real numbers \\(x\\) for which the expression that defines the function is mathematically valid.  \n> **Definition:** *Range* – the set of all real numbers \\(y\\) that the function can produce from its domain.\n\nUnderstanding domain and range is useful because it tells us where a graph exists and what heights it can reach. In everyday life, think of a vending machine: the **domain** is the set of coins it will accept (only $0.25, $0.50, $1.00, etc.), while the **range** is the set of snacks it can actually dispense (chips, soda, candy). If you try to insert a $2 bill, the machine rejects it – that input is outside the domain.\n\n---\n\n### Step‑by‑step way to find the domain\n\n1. **Identify any restrictions** that would make the formula undefined.  \n   Common sources of restriction are:  \n   * Division by zero – the denominator cannot be zero.  \n   * Even roots (square‑root, fourth‑root, …) – the radicand must be non‑negative.  \n   * Logarithms – the argument must be positive.\n\n2. **Write each restriction as an inequality** (or equation) involving \\(x\\).\n\n3. **Solve the inequality** to describe all \\(x\\) that satisfy it.\n\n4. **Combine all conditions** using intersection (the values that satisfy *every* restriction).\n\n---\n\n**Example 1 (Easy): Find the domain of \\(f(x)=\\sqrt{x-2}\\).**  \n\n1. The square‑root sign tells us the radicand \\(x-2\\) must be \\(\\ge 0\\).  \n2. Write the inequality:  \n   $$x-2 \\ge 0$$  \n3. Solve for \\(x\\):  \n   $$x \\ge 2$$  \n4. No other restrictions exist, so the domain is all real numbers greater than or equal to 2.\n\n**Answer:** \\(\\displaystyle \\text{Domain}(f)=\\{x\\in\\mathbb{R}\\mid x\\ge 2\\}\\).\n\n---\n\n### Step‑by‑step way to find the range\n\nFinding the range can be a little trickier because we have to see what output values actually occur. A reliable method is:\n\n1. **Start with the definition** \\(y = \\text{function}(x)\\).  \n2. **Solve this equation for \\(x\\)** in terms of \\(y\\). This often involves algebraic manipulation such as squaring, isolating \\(x\\), or using inverse operations.  \n3. **Identify any new restrictions** that appear on \\(y\\) when you solve for \\(x\\). These come from the same sources as domain restrictions (e.g., square roots, denominators).  \n4. **Translate those restrictions** into a description of the range.\n\n> **Note:** Solving for \\(x\\) does not change the function; it merely rewrites the same relationship so we can see which \\(y\\) values are possible.\n\n---\n\n**Example 2 (Easy): Find the range of \\(g(x)=x^{2}\\) for \\(x\\ge 0\\).**  \n\n1. Write the relationship:  \n   $$y = x^{2}$$  \n2. Because we are given \\(x\\ge 0\\), we can take the square root of both sides without introducing a sign ambiguity:  \n   $$x = \\sqrt{y}$$  \n3. Since a square root is defined only for non‑negative numbers, we must have \\(y \\ge 0\\).  \n4. No further restriction appears, so every non‑negative \\(y\\) is attained when \\(x\\) runs over \\([0,\\infty)\\).\n\n**Answer:** \\(\\displaystyle \\text{Range}(g)=\\{y\\in\\mathbb{R}\\mid y\\ge 0\\}\\).\n\n---\n\n### Putting the ideas together\n\nSuppose we have a more involved expression, such as  \n\n$$h(x)=\\frac{\\sqrt{3x-6}}{x-4}.$$\n\nTo determine its domain we look at both the square‑root and the denominator:\n\n1. **Square‑root restriction:** \\(3x-6 \\ge 0 \\;\\Rightarrow\\; x \\ge 2\\).  \n2. **Denominator restriction:** \\(x-4 \\neq 0 \\;\\Rightarrow\\; x \\neq 4\\).\n\nCombine them: the domain is all real numbers \\(x\\) that are at least 2 **and** not equal to 4. In interval notation this is \\([2,4)\\cup(4,\\infty)\\).\n\nIf we wanted the range, we would set \\(y = \\frac{\\sqrt{3x-6}}{x-4}\\) and solve for \\(x\\). The algebra becomes longer, but the same principles apply: isolate the square root, square both sides (watch for extraneous solutions), and then check any resulting conditions on \\(y\\).\n\n> **Common mistake:** Forgetting to check that squaring both sides does not introduce extra solutions. After solving, always substitute back into the original equation to verify.\n\n---\n\n### Quick checklist for students\n\n- **Domain:** Look for division, even roots, logs. Write inequalities, solve, intersect.  \n- **Range:** Write \\(y = f(x)\\), solve for \\(x\\) in terms of \\(y\\), note any new restrictions on \\(y\\).  \n- **Verify:** Plug a few numbers from your proposed domain or range back into the original formula to be sure they work.  \n\n> **Remember:** The domain tells you *where* the graph lives on the horizontal axis; the range tells you *how high or low* the graph can go on the vertical axis. Mastering both lets you sketch accurate pictures of functions and avoid algebraic pitfalls.",
+   "code": ""
+  },
+  {
+   "heading": "3. Vertical Shifts",
+   "body": "When we add a constant number $k$ to a function, we are telling the graph to move straight up or straight down, without changing its shape.  \nIf $k$ is positive ($k>0$) the whole picture rises; if $k$ is negative ($k<0$) the picture drops.  \nWe write the new function as  \n\n$$g(x)=f(x)+k$$  \n\nwhere $f(x)$ is the original function and $g(x)$ is the shifted one.\n\n> **Definition:** A *vertical shift* adds the same number $k$ to every output value $f(x)$. The $x$‑coordinates stay exactly where they were.\n\nWhy does this work?  \nThe output of $f$ at a certain $x$ tells us how high the point is on the $y$‑axis. Adding $k$ means we increase (or decrease) that height by $k$ units for **every** $x$. Because the change is the same for all points, the whole curve slides up or down as a solid block.\n\n**In daily life:** Imagine a road that is drawn on a piece of paper. If you lift the paper 3 cm higher, every point on the road is now 3 cm higher, but the road’s shape does not change. That lift is exactly a vertical shift.\n\n---\n\n### Worked Example 3 (Medium): Sketch $y=(x-1)^2+3$ by shifting the basic parabola $y=x^2$\n\n1. **Identify the original function.**  \n   The basic parabola is $f(x)=x^2$.\n\n2. **Separate the transformations.**  \n   The expression $(x-1)^2+3$ can be read as  \n   $$\\underbrace{(x-1)^2}_{\\text{horizontal shift}} \\;+\\; \\underbrace{3}_{\\text{vertical shift}}.$$  \n   The “+ 3’’ tells us to move the graph **up** by $3$ units.\n\n3. **Apply the vertical shift.**  \n   Starting from the graph of $y=x^2$, raise every point $3$ units.  \n   The new equation is $g(x)=x^2+3$, which already shows the upward move.\n\n4. **Add the horizontal shift (for completeness).**  \n   The term $(x-1)$ means replace $x$ by $x-1$, which slides the whole curve **right** by $1$ unit.  \n   So the final graph is the parabola $y=(x-1)^2+3$.\n\n**Answer:** The graph of $y=(x-1)^2+3$ is the standard $y=x^2$ parabola moved right $1$ unit and up $3$ units. Its vertex, originally at $(0,0)$, is now at $(1,3)$.  \n\n---\n\n### Worked Example 4 (Medium): Determine the new maximum value of $h(x)= -2x^2 + 5$ after adding $-4$\n\n1. **Write the original function and its maximum.**  \n   $h(x) = -2x^2 + 5$ is a downward‑opening parabola (coefficient $-2<0$).  \n   Its vertex gives the maximum. For $ax^2+bx+c$, the $x$‑coordinate of the vertex is $-b/(2a)$. Here $a=-2$, $b=0$, so  \n   $$x_{\\text{max}} = -\\frac{0}{2(-2)} = 0.$$  \n   Plugging $x=0$ into $h$ gives the original maximum value $h(0)=5$.\n\n2. **Add the constant $k=-4$ to create the shifted function.**  \n   $$\\tilde h(x)=h(x)+(-4)= -2x^2 + 5 - 4 = -2x^2 + 1.$$\n\n3. **Find the maximum of the new function.**  \n   The vertex $x$‑coordinate is still $0$ because the $x$‑terms have not changed.  \n   Evaluate at $x=0$:  \n   $$\\tilde h(0)= -2(0)^2 + 1 = 1.$$\n\n**Answer:** After shifting the graph down by $4$ units, the maximum value of the function becomes $1$ (instead of $5$).  \n\n> **Remember:** A vertical shift does not affect where the maximum or minimum occurs horizontally; it only adds $k$ to the extreme value itself.\n\n---\n\n### Why vertical shifts matter\n\n* **Simplifying calculations.** When solving equations, it is often easier to first remove a constant term by shifting the graph, solve the simpler problem, then shift back.\n* **Modeling real situations.** In physics, the height of a projectile might be $s(t)= -\\frac12gt^2 + v_0t + h_0$. Changing the launch platform height $h_0$ is a vertical shift of the whole trajectory.\n* **Graphing quickly.** Knowing that $y=f(x)+k$ is just the graph of $f$ moved up or down lets you sketch many functions without plotting every point.\n\n> **Common mistake:** Thinking that adding $k$ changes the $x$‑coordinates. The $x$‑values stay exactly the same; only the $y$‑values are altered.\n\nIn summary, a vertical shift is a simple but powerful tool: add a constant $k$ to a function, and the entire graph slides $k$ units upward (if $k>0$) or downward (if $k<0$). This keeps the shape intact, preserves the locations of peaks and valleys horizontally, and makes many algebraic and graphical tasks much easier.",
+   "code": ""
+  },
+  {
+   "heading": "4. Horizontal Shifts",
+   "body": "When we replace the variable $x$ by the expression $(x-h)$ inside a function, we are telling the graph to **move sideways**.  \nIf $h$ is a positive number, the whole picture slides to the **right** by $h$ units.  \nIf $h$ is negative, the picture slides to the **left** by $|h|$ units.\n\n> **Definition:** A *horizontal shift* of a function $f(x)$ by $h$ units is the new function $g(x)=f(x-h)$.  \n\nWhy does this happen?  \nThe equation $y=f(x)$ tells us that for each input $x$ we get an output $y$.  \nIf we write $y=f(x-h)$, the output $y$ is produced when the input is **$x-h$**.  \nTo obtain the same output as before, we now need a larger input: $x$ must be $h$ larger than the old input. Hence the whole graph must be pushed $h$ units to the right. The same reasoning works for a negative $h$, which pushes the graph left.\n\nThink of a sliding door on a track. The door’s shape does not change, but the whole door moves along the track. The track is the horizontal axis, and the distance we slide the door is $h$.\n\n---\n\n### Worked example – medium difficulty  \n\n**Example 5 (Medium): Graph $y=\\sqrt{x-4}$ and describe its shift from $y=\\sqrt{x}$.**  \n\n1. **Identify the original function.**  \n   The basic function is $f(x)=\\sqrt{x}$.  \n\n2. **Write the new function in the form $f(x-h)$.**  \n   $$y=\\sqrt{x-4}=f(x-4)$$  \n   Here $h=4$, which is positive.  \n\n3. **Interpret the shift.**  \n   Because $h=4>0$, the graph of $f(x)=\\sqrt{x}$ moves **right** by $4$ units.  \n   Every point $(a,\\sqrt{a})$ on the original graph becomes $(a+4,\\sqrt{a})$ on the new graph.  \n\n**Answer:** The graph of $y=\\sqrt{x-4}$ is the graph of $y=\\sqrt{x}$ shifted 4 units to the right. The domain changes from $x\\ge 0$ to $x\\ge 4$, but the shape of the curve stays the same.  \n\n> **In daily life:** Imagine a road sign that says “Speed limit 50”. If the sign is moved 10 meters forward along the road, drivers will see it later, but the sign itself (the message) does not change. The sign’s movement is like a horizontal shift of a graph.\n\n---\n\n### Worked example – hard difficulty  \n\n**Example 6 (Hard): Combine a horizontal shift of 2 units right with a vertical shift of –1 for $y=(x-2)^2-1$.**  \n\n1. **Start with the basic parabola.**  \n   The simplest form is $f(x)=x^{2}$, a “U‑shaped” curve opening upward.  \n\n2. **Apply the horizontal shift.**  \n   Replace $x$ by $(x-2)$:  \n   $$g(x)=f(x-2)=(x-2)^{2}$$  \n   Because the replacement is $x-2$, the graph moves **right** $2$ units.  \n\n3. **Apply the vertical shift.**  \n   Subtract $1$ from the whole expression:  \n   $$h(x)=g(x)-1=(x-2)^{2}-1$$  \n   Subtracting $1$ moves the graph **down** $1$ unit (a negative vertical shift).  \n\n4. **Summarize the combined effect.**  \n   The final graph is the original parabola shifted right $2$ units and then down $1$ unit. Its vertex, originally at $(0,0)$, is now at $(2,-1)$.  \n\n**Answer:** The function $y=(x-2)^{2}-1$ is the parabola $y=x^{2}$ shifted 2 units to the right and 1 unit down. Its vertex is at the point $(2,-1)$.  \n\n> **Note:** A common mistake is to think that $x+2$ would shift the graph right. In fact, $f(x+2)$ moves the graph **left** by $2$ because the input must be $2$ smaller to produce the same output.\n\n---\n\n### Why horizontal shifts matter  \n\nHorizontal shifts let us **position** a familiar shape wherever we need it. In physics, the equation $s(t)=\\frac12gt^{2}$ gives the distance fallen from rest. If an object is dropped **after** a delay of $t_{0}$ seconds, we write $s(t)=\\frac12g(t-t_{0})^{2}$, which is simply a horizontal shift of the basic $t^{2}$ curve.  \n\n> **Remember:** To shift a graph right by $h$, replace $x$ with $(x-h)$. To shift left by $h$, replace $x$ with $(x+h)$. The sign inside the parentheses is opposite to the direction of motion.\n\nBy mastering this simple substitution, you can quickly sketch many transformed graphs without drawing them from scratch. The same idea works for any function—square roots, exponentials, trigonometric functions, and beyond.",
+   "code": ""
+  },
+  {
+   "heading": "5. Reflections, Stretches, and Compressions",
+   "body": "When we change a graph, we are really just moving every point in a systematic way.  \nA **reflection** flips the picture over a line, a **stretch** pulls it apart, and a **compression** squeezes it together.  \nThese operations are useful because they let us start from a simple “parent” graph (like $y=\\sqrt{x}$) and obtain many more shapes without having to redraw everything from scratch.\n\n> **Definition:** A *reflection* across the $x$‑axis changes each point $(x,y)$ to $(x,-y)$.  \n> **Definition:** A *reflection* across the $y$‑axis changes each point $(x,y)$ to $(-x,y)$.  \n\nThink of a reflection like looking at a picture in a mirror.  \nIf the mirror stands up‑and‑down (the $x$‑axis), the picture turns upside‑down; if the mirror stands left‑and‑right (the $y$‑axis), the picture swaps left and right.\n\nA **vertical stretch** makes the graph taller, while a **vertical compression** makes it shorter.  \nMathematically we multiply the whole function by a constant $a$:\n\n$$\ny = a\\,f(x)\n$$\n\nIf $|a|>1$ the graph is stretched (taller); if $0<|a|<1$ it is compressed (shorter).  \nIf $a$ is negative we also get a reflection across the $x$‑axis because the sign flips.\n\nA **horizontal stretch** or **compression** changes the width of the graph.  \nWe replace $x$ by $b x$ inside the function:\n\n$$\ny = f(bx)\n$$\n\nIf $|b|>1$ the graph is compressed horizontally (it looks “squeezed” left‑to‑right); if $0<|b|<1$ it is stretched horizontally (it looks “wider”).  \nAgain, a negative $b$ adds a reflection across the $y$‑axis because the input sign changes.\n\n> **Note:** The word “stretch” always refers to making something larger, while “compression” means making it smaller. The factor $a$ or $b$ tells us how much.\n\n---\n\n**Example 7 (Hard): Sketch $y = -3\\sqrt{2(x+1)}$ and list all transformations applied to $y = \\sqrt{x}$.**  \n\n1. **Start with the parent function** $y = \\sqrt{x}$.  \n2. **Horizontal shift:** replace $x$ by $x+1$, which moves the graph **left** 1 unit.  \n   $$y = \\sqrt{x+1}$$  \n3. **Horizontal stretch/compression:** replace $x$ by $2x$, i.e. $x \\to 2(x+1)$. Since the factor $2$ is inside the root, it compresses the graph **horizontally by a factor of $\\tfrac12$**.  \n   $$y = \\sqrt{2(x+1)}$$  \n4. **Vertical stretch:** multiply the whole function by $3$, making the graph three times taller.  \n   $$y = 3\\sqrt{2(x+1)}$$  \n5. **Reflection across the $x$‑axis:** multiply by $-1$, flipping the graph upside‑down.  \n   $$y = -3\\sqrt{2(x+1)}$$  \n\nAll transformations in order: left 1, horizontal compression by $\\tfrac12$, vertical stretch by $3$, and reflection across the $x$‑axis.\n\n**Answer:** The graph of $y = -3\\sqrt{2(x+1)}$ is the parent square‑root curve shifted left 1, squeezed horizontally to half its width, stretched vertically three times, and then turned upside‑down.\n\n---\n\n**Example 8 (Hard): Find the domain and sketch the graph of $y = \\dfrac{4}{x-2}$ after a vertical stretch by $2$ and a reflection across the $x$‑axis.**  \n\n1. **Original function:** $y = \\dfrac{4}{x-2}$.  \n   - The denominator cannot be zero, so $x \\neq 2$.  \n   - Domain: $\\{x \\mid x \\in \\mathbb{R},\\, x \\neq 2\\}$.  \n\n2. **Vertical stretch by $2$:** multiply the whole function by $2$.  \n   $$y = 2\\cdot\\frac{4}{x-2}= \\frac{8}{x-2}$$  \n\n3. **Reflection across the $x$‑axis:** multiply by $-1$, flipping the sign of every $y$‑value.  \n   $$y = -\\frac{8}{x-2}$$  \n\n4. **Domain after transformations:** The vertical stretch and reflection do not affect the denominator, so the domain remains $x \\neq 2$.  \n\n5. **Sketching the graph:**  \n   - The vertical asymptote is the line $x = 2$ (the function blows up there).  \n   - The horizontal asymptote comes from the leading term: as $|x| \\to \\infty$, $y \\to 0$, so $y = 0$ is the horizontal asymptote.  \n   - Because of the negative sign, the branch that was originally in the first quadrant (for $x>2$) now lies in the fourth quadrant, and the branch that was in the third quadrant (for $x<2$) now lies in the second quadrant.  \n\n**Answer:** The transformed function is $y = -\\dfrac{8}{x-2}$ with domain $x \\neq 2$. Its graph has a vertical asymptote at $x=2$, a horizontal asymptote at $y=0$, and is reflected across the $x$‑axis compared with the original hyperbola.\n\n> **Remember:** When you multiply a whole function by a negative number you get both a vertical stretch/compression *and* a reflection across the $x$‑axis in one step. This saves time and reduces errors.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Given $f(x)=x^2$, write the equation of the function that shifts $f$ up by 3 units and right by 2 units.",
+   "a": "First shift right 2 units: $f(x-2) = (x-2)^2$. Then shift up 3 units: $g(x) = (x-2)^2 + 3$. So the required function is $g(x) = (x-2)^2 + 3$."
+  },
+  {
+   "level": "Easy",
+   "q": "What is the domain of $h(x)=\\frac{1}{x-4}$?",
+   "a": "The denominator cannot be zero, so $x-4 \\neq 0 \\Rightarrow x \\neq 4$. All real numbers except $4$ are allowed. Hence the domain is $\\{x \\in \\mathbb{R}\\mid x \\neq 4\\}$."
+  },
+  {
+   "level": "Medium",
+   "q": "Sketch (or describe) the graph of $g(x)= -2\\,(x+1)^2 + 5$. Identify the vertex, direction of opening, and any reflections or stretches.",
+   "a": "Start with $y = x^2$.\n1. Replace $x$ by $x+1$: shift left 1 → vertex moves to $(-1,0)$.\n2. Multiply by $-2$: vertical stretch by factor $2$ and reflection about the $x$‑axis → parabola opens **downward** and is twice as tall.\n3. Add $5$: shift up 5 → vertex moves to $(-1,5)$.\nThus the vertex is $(-1,5)$, the parabola opens downward, is stretched vertically by $2$, and reflected across the $x$‑axis."
+  },
+  {
+   "level": "Medium",
+   "q": "Find the range of $k(x)=\\sqrt{3x-6}+4$.",
+   "a": "The square‑root part $\\sqrt{3x-6}$ is defined when $3x-6 \\ge 0 \\Rightarrow x \\ge 2$. Its minimum value is $0$ (when $x=2$). Therefore $\\sqrt{3x-6}$ takes all values $[0,\\infty)$. Adding $4$ shifts this interval up: range is $[4,\\infty)$."
+  },
+  {
+   "level": "Hard",
+   "q": "The function $p(x)=\\frac{2}{(x-1)^2} - 3$ is transformed from $f(x)=\\frac{1}{x^2}$. List all transformations in order and state their effect on the graph.",
+   "a": "Starting with $f(x)=\\frac{1}{x^2}$:\n1. Replace $x$ by $x-1$: horizontal shift right 1 → $f(x-1)=\\frac{1}{(x-1)^2}$.\n2. Multiply by $2$: vertical stretch by factor $2$ → $\\frac{2}{(x-1)^2}$.\n3. Subtract $3$: vertical shift down 3 → $\\frac{2}{(x-1)^2}-3$.\nSo the order is: right shift 1, vertical stretch by 2, down shift 3."
+  },
+  {
+   "level": "Hard",
+   "q": "Determine the domain and range of $q(x)=\\frac{1}{\\sqrt{5-x}}$. Explain each step.",
+   "a": "\n**Domain:** The denominator $\\sqrt{5-x}$ must be defined and non‑zero.\n- Inside the square root: $5-x \\ge 0 \\Rightarrow x \\le 5$.\n- It cannot be zero because division by zero is undefined: $5-x \\neq 0 \\Rightarrow x \\neq 5$.\nThus $x < 5$, so domain is $(-\\infty,5)$.\n**Range:** For $x<5$, the expression $5-x$ is positive, so $\\sqrt{5-x}>0$. Its values range from $(0,\\infty)$ as $x \\to -\\infty$ (the root grows without bound) and approach $0$ as $x \\to 5^{-}$.\nSince $q(x)=1/\\sqrt{5-x}$, taking reciprocals flips the interval: as the denominator grows large, $q(x)$ approaches $0^{+}$; as the denominator approaches $0^{+}$, $q(x)$ grows without bound.\nTherefore the range is $(0,\\infty)$."
+  }
+ ],
+ "recap": "A function assigns exactly one output to each allowed input, defined by its domain and range. Adding a constant shifts the graph vertically, while replacing x with (x-h) shifts it horizontally. Reflections flip the graph across an axis, and stretches or compressions change its size without altering its shape.",
+ "key_terms": [
+  {
+   "term": "function",
+   "meaning": "A rule that gives one output for each input in its domain."
+  },
+  {
+   "term": "domain",
+   "meaning": "The set of all inputs for which the function’s formula is valid."
+  },
+  {
+   "term": "range",
+   "meaning": "The set of all outputs the function actually produces."
+  },
+  {
+   "term": "vertical shift",
+   "meaning": "Adding a constant k to f(x) moves the whole graph up (k>0) or down (k<0)."
+  },
+  {
+   "term": "horizontal shift",
+   "meaning": "Replacing x with (x-h) moves the graph right h units if h>0, left if h<0."
+  },
+  {
+   "term": "reflection",
+   "meaning": "Flipping the graph across an axis; across x‑axis changes (x,y) to (x,-y), across y‑axis changes (x,y) to (-x,y)."
+  },
+  {
+   "term": "stretch",
+   "meaning": "Multiplying the output or input by a factor >1 makes the graph taller or wider."
+  },
+  {
+   "term": "compression",
+   "meaning": "Multiplying the output or input by a factor between 0 and 1 squeezes the graph."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does a function guarantee for each input in its domain?",
+   "options": [
+    "No output",
+    "Exactly one output",
+    "Multiple outputs",
+    "An undefined result"
+   ],
+   "answer": 1,
+   "why": "By definition a function assigns exactly one output to each input."
+  },
+  {
+   "q": "If f(x)=x^2, what is the graph of g(x)=f(x)+3?",
+   "options": [
+    "Shifted down 3 units",
+    "Shifted up 3 units",
+    "Shifted right 3 units",
+    "Shifted left 3 units"
+   ],
+   "answer": 1,
+   "why": "Adding 3 raises every y‑value by 3, a vertical shift up."
+  },
+  {
+   "q": "For h(x)=f(x-2), how does the graph move compared to f(x)?",
+   "options": [
+    "Right 2 units",
+    "Left 2 units",
+    "Up 2 units",
+    "Down 2 units"
+   ],
+   "answer": 0,
+   "why": "Replacing x with (x-2) shifts the graph right by 2."
+  },
+  {
+   "q": "Reflecting y=sqrt(x) across the y‑axis gives which equation?",
+   "options": [
+    "y=-sqrt(x)",
+    "y=sqrt(-x)",
+    "y=-sqrt(-x)",
+    "y=sqrt(x)"
+   ],
+   "answer": 1,
+   "why": "A y‑axis reflection changes x to -x, giving y=sqrt(-x)."
+  },
+  {
+   "q": "What is the effect of multiplying f(x) by 4?",
+   "options": [
+    "Vertical compression",
+    "Vertical stretch by factor 4",
+    "Horizontal stretch",
+    "Horizontal compression"
+   ],
+   "answer": 1,
+   "why": "Multiplying the output by 4 makes the graph four times taller (vertical stretch)."
+  },
+  {
+   "q": "If the domain of a function is all real numbers except x=0, which operation would likely cause that restriction?",
+   "options": [
+    "Square root",
+    "Division by x",
+    "Logarithm",
+    "Exponentiation"
+   ],
+   "answer": 1,
+   "why": "Dividing by x is undefined at x=0, removing it from the domain."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define a function in simple terms.",
+   "back": "A rule that assigns exactly one output to each allowed input."
+  },
+  {
+   "front": "What is the domain?",
+   "back": "All inputs for which the function’s formula works."
+  },
+  {
+   "front": "What is the range?",
+   "back": "All outputs the function actually produces."
+  },
+  {
+   "front": "How does adding k to f(x) affect the graph?",
+   "back": "It moves the whole graph up if k>0 or down if k<0."
+  },
+  {
+   "front": "How does replacing x with (x-h) affect the graph?",
+   "back": "It shifts the graph right h units if h>0, left if h<0."
+  },
+  {
+   "front": "What happens to a graph when reflected across the x‑axis?",
+   "back": "Every point (x,y) becomes (x,-y); the graph flips upside‑down."
+  },
+  {
+   "front": "What is a vertical stretch?",
+   "back": "Multiplying the output by a factor greater than 1 makes the graph taller."
+  },
+  {
+   "front": "What is a horizontal compression?",
+   "back": "Multiplying the input by a factor between 0 and 1 squeezes the graph horizontally."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l04-vending-machine-analogy",
+   "title": "A vending machine shows how one input (coin) gives exactly one output (snack).",
+   "alt": "A vending machine shows how one input (coin) gives exactly one output (snack).",
+   "priority": 8,
+   "picture_title": "Vending Machine Analogy",
+   "kind": "photo",
+   "subject": "A real vending machine with a coin slot, selection buttons, and a single snack compartment, illustrating the idea that each input leads to a single, definite output.",
+   "layout": "The machine is centered; a coin is shown entering the slot on the left, a button is highlighted in the middle, and the snack is emerging from the front on the right.",
+   "labels": [
+    "Coin slot",
+    "Button",
+    "Snack output"
+   ],
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Domain vs. Range",
+   "left": {
+    "name": "Domain",
+    "points": [
+     "All allowed inputs",
+     "Values where the rule works",
+     "Example: for f(x)=sqrt(x), domain is x ≥ 0"
+    ]
+   },
+   "right": {
+    "name": "Range",
+    "points": [
+     "All possible outputs",
+     "Values actually produced",
+     "Example: for f(x)=sqrt(x), range is y ≥ 0"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "How to Apply a Vertical Shift",
+   "steps": [
+    {
+     "label": "Choose shift amount",
+     "text": "Pick a constant k (positive = up, negative = down)."
+    },
+    {
+     "label": "Add to function",
+     "text": "Form the new rule g(x)=f(x)+k."
+    },
+    {
+     "label": "Plot new points",
+     "text": "Raise or lower every point of f by k units."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "How to Apply a Horizontal Shift",
+   "steps": [
+    {
+     "label": "Choose shift amount",
+     "text": "Pick a constant h (positive = right, negative = left)."
+    },
+    {
+     "label": "Replace x",
+     "text": "Form the new rule g(x)=f(x‑h)."
+    },
+    {
+     "label": "Plot new points",
+     "text": "Move every point of f left or right by h units."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "graph",
+   "title": "Vertical Shift Example",
+   "fn": "x^2",
+   "xmin": -4,
+   "xmax": 4,
+   "points": [
+    {
+     "x": 2,
+     "y": 4,
+     "label": "A",
+     "open": false
+    },
+    {
+     "x": 2,
+     "y": 7,
+     "label": "A'",
+     "open": false
+    }
+   ],
+   "caption": "Original f(x)=x^2 (point A) and shifted g(x)=x^2+3 (point A')",
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Reflections, Stretches, and Compressions",
+   "items": [
+    {
+     "name": "Reflection across x‑axis",
+     "role": "Changes (x,y) to (x,‑y)."
+    },
+    {
+     "name": "Reflection across y‑axis",
+     "role": "Changes (x,y) to (‑x,y)."
+    },
+    {
+     "name": "Vertical stretch",
+     "role": "Multiply output by a factor a>1: (x, a·y)."
+    },
+    {
+     "name": "Vertical compression",
+     "role": "Multiply output by 0<a<1: (x, a·y)."
+    },
+    {
+     "name": "Horizontal stretch",
+     "role": "Replace x by x/b with 0<b<1: (b·x, y)."
+    },
+    {
+     "name": "Horizontal compression",
+     "role": "Replace x by x/b with b>1: (x/b, y)."
+    }
+   ],
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

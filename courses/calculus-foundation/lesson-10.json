@@ -1,0 +1,308 @@
+{
+ "title": "Limits from Graphs",
+ "summary": "Students learn what a limit is by looking at graphs, how to read left‑hand and right‑hand limits, and how limits relate to continuity. They practice reading limits from several simple graphs and decide whether a function is continuous at a point.",
+ "objectives": [
+  "Define the limit of a function at a point using a graph",
+  "Identify left‑hand and right‑hand limits from a graph",
+  "State the condition for continuity at a point",
+  "Determine whether a given function is continuous at a specific point"
+ ],
+ "prerequisites": "Students should already know how to read basic Cartesian graphs and understand the idea of a function’s output for a given input.",
+ "why": [
+  "Limits describe how a quantity behaves as it gets very close to a certain value, which is essential for predicting real‑world behavior such as speed approaching a stop or temperature nearing a set point.",
+  "Continuity tells us whether a graph can be drawn without lifting the pencil, a concept that underpins reliable engineering designs, computer graphics, and smooth motion in physics."
+ ],
+ "sections": [
+  {
+   "heading": "What a Limit Means",
+   "body": "When we talk about a **limit**, we are asking a simple question: *what value does the function’s output get closer to as the input gets closer to a certain point?*  \nImagine you are walking along a straight road (the **x‑axis**) toward a particular street corner (the point \\(x=a\\)). As you step nearer to that corner from either side—coming from the left or from the right—you can look at the height of a hill beside the road (the **y‑value** of the function). If the hill’s height settles down to a single number no matter which side you approach from, that number is the limit of the function at \\(x=a\\).\n\n> **Definition:** The limit of a function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is the number \\(L\\) that \\(f(x)\\) gets arbitrarily close to when \\(x\\) gets arbitrarily close to \\(a\\) from **both** sides.  \n> We write this as \\(\\displaystyle \\lim_{x\\to a} f(x)=L\\).\n\nWhy is this idea useful? In many real‑world situations we cannot measure exactly at the point of interest (perhaps the point is a break in a road, or a sensor fails at a precise temperature). Yet we can still predict what would happen *near* that point by looking at values just before and just after it. The limit captures that predictive power.\n\n### Step‑by‑step picture of “approaching”\n\n1. **Choose a target point** \\(a\\) on the horizontal axis.  \n2. **Pick a sequence of x‑values** that get closer and closer to \\(a\\) from the left (e.g., \\(a-0.5, a-0.1, a-0.01,\\dots\\)).  \n3. **Read the corresponding y‑values** from the graph: \\(f(a-0.5), f(a-0.1), f(a-0.01),\\dots\\).  \n4. **Observe the trend**: do these y‑values settle toward a single number?  \n5. **Repeat from the right** using values \\(a+0.5, a+0.1, a+0.01,\\dots\\).  \n6. **If both trends meet at the same number**, that number is the limit.\n\nIf the two sides give different numbers, the overall limit does **not** exist (we will study that later). If one side fails to settle at any number, the limit also fails to exist.\n\n> **In daily life:** Think of a thermostat that reads temperature as you move a few centimeters toward a wall. From the left side of the wall the temperature might read 22 °C, and from the right side it might read 23 °C. If both readings get closer to 22.5 °C as you stand nearer the wall, the “limit temperature at the wall” would be 22.5 °C, even though the thermostat cannot sit exactly on the wall.\n\n### Worked example – a straight line\n\n**Example 1 (Easy): From the graph of \\(y = 2x\\), find the limit as \\(x\\) approaches 3.**\n\nWe use the straight‑line graph because it makes every step visible.\n\n1. **Identify the function**: \\(f(x)=2x\\).  \n2. **Choose points left of 3** (e.g., \\(x=2.5, 2.9, 2.99\\)) and compute the y‑values:  \n   $$f(2.5)=2(2.5)=5$$  \n   $$f(2.9)=2(2.9)=5.8$$  \n   $$f(2.99)=2(2.99)=5.98$$  \n   These numbers are getting closer to 6.  \n3. **Choose points right of 3** (e.g., \\(x=3.1, 3.01, 3.001\\)) and compute:  \n   $$f(3.1)=2(3.1)=6.2$$  \n   $$f(3.01)=2(3.01)=6.02$$  \n   $$f(3.001)=2(3.001)=6.002$$  \n   These also approach 6 from above.  \n\nSince both sides approach the same number, the limit exists and equals that common value.\n\n**Answer:** \\(\\displaystyle \\lim_{x\\to 3} 2x = 6\\). The function’s graph shows a straight line, so the y‑value at \\(x=3\\) would also be 6, but the limit concept does not rely on actually plugging in the point.\n\n### What the example tells us\n\n- For a **linear function** (a straight line), the limit as \\(x\\) approaches any point is simply the value of the line at that point.  \n- The process of “reading y‑values as x gets close” works the same for any curve; the only difference is that the y‑values may not line up so neatly.  \n- The example also shows why we talk about **approaching** rather than **reaching**: the limit cares about the behavior *near* the point, not necessarily the function’s value *at* the point.\n\n> **Common mistake:** Assuming that if the function is undefined at \\(x=a\\) then the limit cannot exist. In fact, the limit may still exist because it only looks at nearby points, not the point itself.\n\n### Visual cue\n\nWhen you look at a graph, draw a vertical dashed line at \\(x=a\\). Then imagine a tiny “window” around that line, shrinking from both sides. If the curve inside the window settles to a single height, that height is the limit. The smaller the window, the clearer the picture.\n\n> **Remember:** A limit is about *both* sides. One‑sided approaches are useful later, but the full limit requires agreement from the left and the right.\n\nBy mastering this idea—watching how the y‑values behave as we walk toward a point—we build the foundation for more advanced topics such as continuity, derivatives, and integrals. The next step will be to formalize the left‑hand and right‑hand limits, which let us talk about each side separately when they do not agree.",
+   "code": ""
+  },
+  {
+   "heading": "Left‑Hand and Right‑Hand Limits",
+   "body": "When we talk about a limit we are asking a simple question: *what number does the function get closer to as we move toward a certain point?*  \nSometimes we approach that point from the left side (smaller $x$ values) and sometimes from the right side (larger $x$ values). The two one‑sided approaches can give different answers, so we treat them separately.\n\n> **Definition:** The **left‑hand limit** of a function $f$ at $x=a$ is written $\\displaystyle\\lim_{x\\to a^-} f(x)$ and means “the value that $f(x)$ approaches as $x$ comes from values **smaller** than $a$.”  \n> **Definition:** The **right‑hand limit** of $f$ at $x=a$ is written $\\displaystyle\\lim_{x\\to a^+} f(x)$ and means “the value that $f(x)$ approaches as $x$ comes from values **greater** than $a$.”\n\nWhy do we need two limits? Imagine a road that splits at a fork. Cars coming from the left lane see a different sign than cars coming from the right lane. If the signs disagree, we cannot say there is a single, unambiguous instruction at the fork. In mathematics, if the left‑hand and right‑hand limits are different, the ordinary (two‑sided) limit $\\displaystyle\\lim_{x\\to a} f(x)$ does **not** exist.\n\n### Reading a graph\n\n1. **Locate the point $x=a$ on the horizontal axis.**  \n2. **Look at the curve just to the left of $a$** (the part with $x<a$). Follow the curve as it gets closer to $a$; note the height (the $y$‑value) it seems to be heading toward. That height is the left‑hand limit.  \n3. **Now look at the curve just to the right of $a$** (the part with $x>a$). Again follow the curve toward $a$ and record the height it approaches. That is the right‑hand limit.\n\nIf the two heights are the same, the graph suggests the overall limit exists and equals that common height. If they differ, the overall limit does not exist, even though each one‑sided limit does.\n\n> **In daily life:** Think of a temperature gauge that shows a different reading when you stand on the left side of a window versus the right side. Each side gives a consistent reading (one‑sided limit), but the room does not have a single temperature at the window if the two readings disagree.\n\n### Worked example\n\n**Example 2 (Medium): Left‑hand and right‑hand limits for a piecewise graph**  \nThe graph is defined by  \n\n\\[\nf(x)=\\begin{cases}\nx+1, & x<2,\\\\[4pt]\n5-x, & x\\ge 2 .\n\\end{cases}\n\\]\n\nFind $\\displaystyle\\lim_{x\\to 2^-} f(x)$ and $\\displaystyle\\lim_{x\\to 2^+} f(x)$.\n\n1. **Identify the formula that applies when $x$ is just left of 2.**  \n   For $x<2$ we use $f(x)=x+1$.  \n   $$\\lim_{x\\to 2^-} f(x)=\\lim_{x\\to 2^-} (x+1)$$\n\n2. **Evaluate the left‑hand limit by substituting $x=2$ into the left‑hand formula** (because a linear function has no jumps).  \n   $$\\lim_{x\\to 2^-} (x+1)=2+1=3$$\n\n3. **Identify the formula that applies when $x$ is just right of 2.**  \n   For $x\\ge 2$ we use $f(x)=5-x$.  \n   $$\\lim_{x\\to 2^+} f(x)=\\lim_{x\\to 2^+} (5-x)$$\n\n4. **Evaluate the right‑hand limit by substituting $x=2$ into the right‑hand formula.**  \n   $$\\lim_{x\\to 2^+} (5-x)=5-2=3$$\n\n**Answer:** Both one‑sided limits equal $3$, so $\\displaystyle\\lim_{x\\to 2^-} f(x)=3$ and $\\displaystyle\\lim_{x\\to 2^+} f(x)=3$. Because the two agree, the two‑sided limit $\\displaystyle\\lim_{x\\to 2} f(x)$ also exists and equals $3$.\n\n### What the example shows\n\n- The *piecewise* definition tells us which formula to use on each side of $a$.  \n- For each side we treat the function as if it were defined only there, then compute the ordinary limit.  \n- When the two results match, we have a single limit at the point.\n\n### Why this matters later\n\nLater we will use the fact that a limit exists **iff** the left‑hand and right‑hand limits are equal. This criterion is the backbone of the formal definition of continuity: a function is continuous at $a$ when the value at $a$ matches the common limit from both sides.\n\n> **Remember:** To check a limit at a point, always examine the left side and the right side **separately**. If they give the same number, that number is the limit; if they differ, the limit does not exist.\n\nBy mastering one‑sided limits on graphs, you gain a reliable visual tool that will help you handle more abstract algebraic limits and, eventually, the rigorous epsilon‑delta definition of a limit.",
+   "code": ""
+  },
+  {
+   "heading": "When Limits Exist",
+   "body": "When we talk about the limit of a function $f(x)$ as $x$ approaches a number $a$, we are asking: *what value does $f(x)$ get closer to when we look at points that are very near $a$?*  \nTo be sure that this “getting closer” really settles on a single number, we must check the behavior from **both sides** of $a$.\n\n> **Definition:** The **left‑hand limit** of $f$ at $a$, written $\\displaystyle\\lim_{x\\to a^-}f(x)$, is the value that $f(x)$ approaches when $x$ comes from values **smaller** than $a$ (the left side on the graph).  \n> The **right‑hand limit**, $\\displaystyle\\lim_{x\\to a^+}f(x)$, is the value approached when $x$ comes from values **greater** than $a$ (the right side).\n\nIf the two one‑sided limits are the same number, we say the (two‑sided) limit exists and we write  \n\n$$\\lim_{x\\to a}f(x)=L,$$  \n\nwhere $L$ is that common value. If they differ, the limit does **not** exist at $a$.\n\nWhy does this matter? Imagine you are driving toward a town that sits on a river. From the west side the road ends at a bridge that is 3 km long; from the east side the road ends at a ferry that is 5 km long. If you ask “how far is the town from the road?” you get two different answers depending on which side you come from, so there is no single distance that describes the town’s location relative to the road. In the same way, a function can approach two different numbers from the left and right, and then we cannot assign a single limit value at that point.\n\n### Step‑by‑step reasoning\n\n1. **Look at the graph near $x=a$.**  \n   Zoom in on the point $a$ but do **not** include the point itself (the function might be undefined there).  \n\n2. **Identify the left‑hand behavior.**  \n   Follow the curve as $x$ moves toward $a$ from values smaller than $a$. Record the value the curve seems to settle on; call it $L_-$.\n\n3. **Identify the right‑hand behavior.**  \n   Do the same from values larger than $a$, obtaining $L_+$.\n\n4. **Compare $L_-$ and $L_+$.**  \n   - If $L_- = L_+$, then the overall limit exists and equals that common number.  \n   - If $L_- \\neq L_+$, the limit does **not** exist.\n\n> **Remember:** A limit exists **iff** the left‑hand and right‑hand limits are equal.\n\n### Worked example\n\n**Example 3 (Medium): Using the same piecewise graph, determine if the overall limit at $x = 2$ exists.**  \n\nThe graph is defined by two line segments:  \n- For $x<2$, the segment follows $y = -x + 4$.  \n- For $x>2$, the segment follows $y = \\tfrac12 x + 0$.\n\nWe must decide whether $\\displaystyle\\lim_{x\\to 2} f(x)$ exists.\n\n1. **Find the left‑hand limit.**  \n   Approach $x=2$ from the left using the first piece.  \n   $$\\lim_{x\\to 2^-} f(x)=\\lim_{x\\to 2^-} (-x+4) = -(2)+4 = 2.$$\n\n2. **Find the right‑hand limit.**  \n   Approach $x=2$ from the right using the second piece.  \n   $$\\lim_{x\\to 2^+} f(x)=\\lim_{x\\to 2^+} \\left(\\tfrac12 x\\right) = \\tfrac12 (2) = 1.$$\n\n3. **Compare the two one‑sided limits.**  \n   The left‑hand limit is $2$, the right‑hand limit is $1$. Since $2 \\neq 1$, they are not equal.\n\n**Answer:** The overall limit $\\displaystyle\\lim_{x\\to 2} f(x)$ does **not** exist because the left‑hand and right‑hand limits are different.\n\n### Why the rule works\n\nThe definition of a limit uses the idea of “getting arbitrarily close.” Formally, $\\displaystyle\\lim_{x\\to a} f(x)=L$ means: for every tiny tolerance $\\varepsilon>0$, we can find a distance $\\delta>0$ such that whenever $0<|x-a|<\\delta$, the function value satisfies $|f(x)-L|<\\varepsilon$. This condition must hold for **all** points on both sides of $a$. If the left side wants $L$ to be $L_-$ and the right side wants $L$ to be $L_+$, the only way a single $L$ can satisfy both is when $L_- = L_+$. Hence equality of the one‑sided limits is not just a convenient test; it is exactly what the formal definition demands.\n\n> **In daily life:** Think of a thermostat that reads temperature from two sensors, one on the left wall and one on the right wall. The room temperature is considered well‑defined only if both sensors agree. If they disagree, we cannot claim a single temperature value for the room.\n\n### Common pitfalls\n\n> **Common mistake:** Assuming that a function “looks” like it approaches the same number from both sides just by eyeballing a coarse graph. A zoomed‑in view may reveal a jump or a hole that changes one side’s value. Always check the algebraic expressions that define each side, especially for piecewise functions.\n\n### Quick checklist for students\n\n- Identify the point $a$ where the limit is requested.  \n- Write down the expression for $f(x)$ on the left of $a$ and on the right of $a$.  \n- Compute $\\displaystyle\\lim_{x\\to a^-} f(x)$ using the left expression.  \n- Compute $\\displaystyle\\lim_{x\\to a^+} f(x)$ using the right expression.  \n- Compare the two results. If they match, state the common value as the limit; otherwise, state that the limit does not exist.\n\nBy following these steps, you can confidently decide whether a limit exists at any point on a graph, and you will have a solid foundation for later topics such as continuity and differentiability.",
+   "code": ""
+  },
+  {
+   "heading": "Continuity at a Point",
+   "body": "A function is **continuous at a point** when you can draw its graph at that point without lifting your pencil.  \nIn precise terms three conditions must all be true for a number \\(a\\):\n\n1. **The function is defined at \\(a\\).**  \n   This means there is a real number \\(f(a)\\) that the rule of the function actually gives when you plug in \\(a\\).\n\n2. **The limit as \\(x\\) approaches \\(a\\) exists.**  \n   When we look at the values of \\(f(x)\\) for numbers getting closer and closer to \\(a\\) from both sides, they must settle down to a single number.  \n\n3. **The limit equals the function’s value.**  \n   The number that the nearby values settle to must be exactly the same as the number the function actually gives at \\(a\\).\n\nWhen all three are satisfied we write  \n\n$$\\lim_{x\\to a} f(x)=f(a)$$  \n\nand say “\\(f\\) is continuous at \\(a\\).”\n\n> **Definition:** A function \\(f\\) is continuous at a point \\(a\\) iff  \n> 1) \\(f(a)\\) exists, 2) \\(\\displaystyle\\lim_{x\\to a}f(x)\\) exists, and 3) \\(\\displaystyle\\lim_{x\\to a}f(x)=f(a)\\).\n\n---\n\n### Why these three pieces matter  \n\n*If any one piece is missing, the graph will have a break, a jump, or a hole at that spot.*  \n- If the function isn’t defined at \\(a\\), there is a hole – you cannot even say what the height is.  \n- If the limit does not exist, the left‑hand and right‑hand values approach different numbers, creating a jump.  \n- If the limit exists but is different from \\(f(a)\\), the graph has a “plug” that does not match the surrounding curve.\n\nUnderstanding continuity lets us replace a complicated expression with its limit when evaluating things like derivatives or integrals, because the function behaves nicely around that point.\n\n> **In daily life:** Think of a road that is smooth and unbroken. You can drive over any point without a bump. If the road is missing a piece (a hole), has a sudden jump (a step), or a patch that doesn’t line up with the rest, the ride is not smooth. Continuity is the mathematical version of a smooth road.\n\n---\n\n### Worked Example  \n\n**Example 4 (Hard):** *For the piece‑wise function*  \n\n\\[\nf(x)=\n\\begin{cases}\nx^{2}, & x<1,\\\\[4pt]\n2, & x=1,\\\\[4pt]\n2x-1, & x>1,\n\\end{cases}\n\\]\n\n*decide if \\(f\\) is continuous at \\(x=1\\).*\n\n1. **Check that the function is defined at \\(x=1\\).**  \n   The rule tells us directly that \\(f(1)=2\\).  \n\n   $$\n   f(1)=2\n   $$\n\n2. **Find the left‑hand limit \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x)\\).**  \n   For \\(x<1\\) the formula is \\(x^{2}\\). As \\(x\\) approaches 1 from the left, \\(x^{2}\\) approaches \\(1^{2}=1\\).  \n\n   $$\n   \\lim_{x\\to 1^{-}} f(x)=\\lim_{x\\to 1^{-}} x^{2}=1\n   $$\n\n3. **Find the right‑hand limit \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x)\\).**  \n   For \\(x>1\\) the formula is \\(2x-1\\). As \\(x\\) approaches 1 from the right, \\(2x-1\\) approaches \\(2\\cdot1-1=1\\).  \n\n   $$\n   \\lim_{x\\to 1^{+}} f(x)=\\lim_{x\\to 1^{+}} (2x-1)=1\n   $$\n\n4. **Combine the one‑sided limits to get the two‑sided limit.**  \n   Since both one‑sided limits exist and are equal, the overall limit exists and equals that common value.  \n\n   $$\n   \\lim_{x\\to 1} f(x)=1\n   $$\n\n5. **Compare the limit with the function value.**  \n   We have \\(\\displaystyle\\lim_{x\\to 1} f(x)=1\\) while \\(f(1)=2\\). Because they are not the same, the third condition for continuity fails.  \n\n   $$\n   \\lim_{x\\to 1} f(x)\\neq f(1)\n   $$\n\n**Answer:** The function \\(f\\) is **not continuous** at \\(x=1\\) because the limit equals 1 but the function’s actual value is 2.\n\n> **Common mistake:** Forgetting to check the actual value \\(f(a)\\). Even if the left‑ and right‑hand limits match, a different defined value at \\(a\\) breaks continuity.\n\n---\n\n### Putting it all together  \n\nTo test continuity at any point \\(a\\):\n\n1. Verify that the function gives a number at \\(a\\).  \n2. Compute the left‑hand limit \\(\\displaystyle\\lim_{x\\to a^{-}} f(x)\\).  \n3. Compute the right‑hand limit \\(\\displaystyle\\lim_{x\\to a^{+}} f(x)\\).  \n4. If the two limits are equal, that common number is the two‑sided limit.  \n5. Finally, check whether this limit equals the function’s value \\(f(a)\\).\n\nIf every step succeeds, the graph has no break, jump, or mismatch at \\(a\\); the function is continuous there.\n\n> **Remember:** Continuity = *defined* + *limit exists* + *limit = value*. Each part is essential, just like the three legs of a stool must all be sturdy for the seat to stay level.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "When we have looked at limits from the left and from the right, we can finally use those ideas together to decide whether a function behaves nicely at a point.  \nThink of a road that sometimes has a smooth stretch, sometimes a sudden jump, and sometimes a missing piece that you have to “bridge” with a detour.  \nThe smooth stretch is where the limit from both sides agrees and the function actually reaches that value – we call that **continuous**.  \nA jump is where the left‑hand and right‑hand limits are different, so the road suddenly changes direction.  \nA hole is where the two one‑sided limits agree, but the function itself is not defined there – the road is missing a piece, even though the traffic would have passed through smoothly.\n\n> **Remember:** A limit exists at \\(x=a\\) only when the left‑hand limit \\(\\displaystyle\\lim_{x\\to a^-}f(x)\\) and the right‑hand limit \\(\\displaystyle\\lim_{x\\to a^+}f(x)\\) are equal.\n\n> **In daily life:** Imagine a river that flows steadily, then hits a waterfall (a jump), and later passes through a dry riverbed (a hole). The water’s speed (the limit) is the same just before and after the waterfall only if there is no jump.\n\n### Step‑by‑step checklist\n\n1. **Read the graph** – locate the point \\(x=a\\) and note the shape of the curve on both sides.  \n2. **Find the left‑hand limit** – follow the curve as it approaches \\(a\\) from smaller \\(x\\) values.  \n3. **Find the right‑hand limit** – follow the curve as it approaches \\(a\\) from larger \\(x\\) values.  \n4. **Compare the two one‑sided limits.**  \n   - If they are equal, write the overall limit \\(\\displaystyle\\lim_{x\\to a}f(x)\\).  \n   - If they differ, the overall limit does **not** exist.  \n5. **Check continuity.** The function is continuous at \\(a\\) when  \n   $$\\lim_{x\\to a}f(x)=f(a).$$  \n   This means the graph has no jump, no hole, and the point \\((a,f(a))\\) is actually drawn.\n\nNow let us apply this checklist to a more complicated picture.\n\n---\n\n**Example 5 (Hard): Jump, hole, and smooth point**  \nA graph shows a jump at \\(x=-1\\), a hole at \\(x=0\\), and a smooth curve elsewhere. State the left‑hand limit, right‑hand limit, overall limit, and continuity at \\(x=-1\\), \\(x=0\\), and \\(x=2\\).\n\n1. **Identify the three points** on the horizontal axis: \\(-1\\), \\(0\\), and \\(2\\).  \n2. **Left‑hand limit at \\(x=-1\\).** Follow the curve from the left side; the graph approaches the height \\(y=3\\).  \n   $$\\lim_{x\\to -1^-}f(x)=3$$  \n3. **Right‑hand limit at \\(x=-1\\).** From the right side the curve heads toward \\(y=1\\).  \n   $$\\lim_{x\\to -1^+}f(x)=1$$  \n4. **Overall limit at \\(x=-1\\).** Because the one‑sided limits are different, the limit does not exist.  \n   $$\\lim_{x\\to -1}f(x)\\text{ does not exist}$$  \n5. **Continuity at \\(x=-1\\).** The limit does not exist, so the function cannot be continuous there.  \n   **Answer:** Not continuous at \\(x=-1\\).\n\n6. **Left‑hand limit at \\(x=0\\).** Approaching from the left, the curve heads to the height \\(y=2\\).  \n   $$\\lim_{x\\to 0^-}f(x)=2$$  \n7. **Right‑hand limit at \\(x=0\\).** Approaching from the right, the curve also heads to \\(y=2\\).  \n   $$\\lim_{x\\to 0^+}f(x)=2$$  \n8. **Overall limit at \\(x=0\\).** Since the one‑sided limits agree, the overall limit exists and equals 2.  \n   $$\\lim_{x\\to 0}f(x)=2$$  \n9. **Continuity at \\(x=0\\).** The graph has a hole, meaning the point \\((0,2)\\) is not drawn; the actual function value \\(f(0)\\) is undefined.  \n   Because \\(\\lim_{x\\to0}f(x)=2\\neq f(0)\\), the function is not continuous at \\(0\\).  \n   **Answer:** Limit exists (2) but not continuous at \\(x=0\\).\n\n10. **Limits at a smooth point \\(x=2\\).** The curve is smooth, so both one‑sided limits equal the height of the curve at that point, say \\(y=5\\).  \n    $$\\lim_{x\\to 2^-}f(x)=5,\\qquad \\lim_{x\\to 2^+}f(x)=5$$  \n11. **Overall limit at \\(x=2\\).** Because the one‑sided limits match, the overall limit exists and equals 5.  \n    $$\\lim_{x\\to 2}f(x)=5$$  \n12. **Continuity at \\(x=2\\).** The point \\((2,5)\\) is drawn on the graph, so \\(f(2)=5\\). Since the limit equals the function value, the function is continuous there.  \n    **Answer:** Continuous at \\(x=2\\) with limit = 5.\n\n> **Definition:** A function is **continuous at a point** \\(a\\) if \\(\\displaystyle\\lim_{x\\to a}f(x)=f(a)\\).  \n\n> **Common mistake:** Forgetting to check the actual function value after the limits agree. A hole gives equal one‑sided limits but still breaks continuity.\n\n### Putting the pieces together\n\nWhen you look at a new graph, treat it like a story:\n\n- **First chapter:** Walk along the curve from the left and note where it heads as you reach the point of interest. That gives the left‑hand limit.  \n- **Second chapter:** Walk back from the right and note the destination. That gives the right‑hand limit.  \n- **Third chapter:** Compare the two destinations. If they match, the overall limit exists; if not, the limit is “undefined” (does not exist).  \n- **Final chapter:** Check whether the point itself is drawn and has the same height as the limit. If yes, the story is smooth – the function is continuous. If the point is missing or has a different height, the story has a break.\n\nBy following this systematic approach, you can handle any graph, no matter how many jumps or holes it contains. The same ideas will later help you evaluate limits algebraically, because the visual intuition tells you what the numbers should do. Keep practicing with different shapes, and the language of left‑hand and right‑hand limits will become second nature.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "On a graph, the curve approaches the height $3$ from both sides as $x$ approaches $2$. What is $\\displaystyle\\lim_{x\\to 2} f(x)$?",
+   "a": "Since the curve approaches $3$ from the left and from the right, the limit exists and equals $3$. Therefore $\\displaystyle\\lim_{x\\to 2} f(x)=3$."
+  },
+  {
+   "level": "Easy",
+   "q": "The left‑hand limit at $x=1$ is $-2$ and the right‑hand limit at $x=1$ is $-2$. What can you say about $\\displaystyle\\lim_{x\\to 1} f(x)$?",
+   "a": "Both one‑sided limits are equal to $-2$, so the two‑sided limit exists and $\\displaystyle\\lim_{x\\to 1} f(x) = -2$."
+  },
+  {
+   "level": "Medium",
+   "q": "A graph shows that as $x$ approaches $4$ from the left, $f(x)$ approaches $5$, but from the right $f(x)$ approaches $7$. State the limit $\\displaystyle\\lim_{x\\to 4} f(x)$ and explain why.",
+   "a": "The left‑hand limit is $5$ and the right‑hand limit is $7$. Because the one‑sided limits are not equal, the overall limit does **not** exist. Hence $\\displaystyle\\lim_{x\\to 4} f(x)$ DNE."
+  },
+  {
+   "level": "Medium",
+   "q": "At $x=0$, the graph has a hole (the point is missing) but the curve approaches the height $-1$ from both sides. Is $f$ continuous at $x=0$? Explain.",
+   "a": "The limit $\\displaystyle\\lim_{x\\to 0} f(x) = -1$ exists because both sides approach $-1$. However, $f(0)$ is not defined (the hole). Since condition 1 of continuity fails, $f$ is **not** continuous at $x=0$."
+  },
+  {
+   "level": "Hard",
+   "q": "The graph of $g$ has a jump at $x=3$: for $x<3$, $g(x)=2x$, and for $x>3$, $g(x)=2x+1$. Find $\\displaystyle\\lim_{x\\to 3^-} g(x)$, $\\displaystyle\\lim_{x\\to 3^+} g(x)$, and state whether $\\displaystyle\\lim_{x\\to 3} g(x)$ exists.",
+   "a": "\n- Left‑hand limit: $\\displaystyle\\lim_{x\\to 3^-} g(x)=\\lim_{x\\to 3^-} 2x = 2(3)=6$.\n- Right‑hand limit: $\\displaystyle\\lim_{x\\to 3^+} g(x)=\\lim_{x\\to 3^+} (2x+1)=2(3)+1=7$.\n- Because $6\\neq7$, the two‑sided limit does **not** exist. Thus $\\displaystyle\\lim_{x\\to 3} g(x)$ DNE."
+  },
+  {
+   "level": "Hard",
+   "q": "A piecewise function $h$ is defined by $$ h(x)=\\begin{cases} x^2 & \\text{if } x\\le 1,\\\\[4pt] 2x-1 & \\text{if } x>1. \\end{cases} $$ Determine $\\displaystyle\\lim_{x\\to 1} h(x)$, $h(1)$, and state whether $h$ is continuous at $x=1$.",
+   "a": "\n1. Left‑hand limit: $\\displaystyle\\lim_{x\\to 1^-} h(x)=\\lim_{x\\to 1^-} x^2 = 1^2 = 1$.\n2. Right‑hand limit: $\\displaystyle\\lim_{x\\to 1^+} h(x)=\\lim_{x\\to 1^+} (2x-1)=2(1)-1 = 1$.\n3. Since both one‑sided limits equal $1$, the two‑sided limit exists and $\\displaystyle\\lim_{x\\to 1} h(x)=1$.\n4. Evaluate the function at $1$: because the definition for $x\\le1$ applies, $h(1)=1^2=1$.\n5. All three continuity conditions are satisfied, so $h$ **is continuous** at $x=1$."
+  }
+ ],
+ "recap": "A limit describes the value a function approaches as x gets close to a point from both sides. One‑sided limits (left and right) must match for the two‑sided limit to exist. Continuity at a point means the function is defined, its limit exists, and the limit equals the function value.",
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The number that f(x) gets arbitrarily close to as x approaches a specific point."
+  },
+  {
+   "term": "two-sided limit",
+   "meaning": "The limit as x approaches a point from both left and right, written lim_{x->a} f(x)."
+  },
+  {
+   "term": "left-hand limit",
+   "meaning": "The value f(x) approaches as x comes from values smaller than a, written lim_{x->a-} f(x)."
+  },
+  {
+   "term": "right-hand limit",
+   "meaning": "The value f(x) approaches as x comes from values larger than a, written lim_{x->a+} f(x)."
+  },
+  {
+   "term": "limit exists",
+   "meaning": "Both left-hand and right-hand limits exist and are equal to the same number."
+  },
+  {
+   "term": "does not exist (DNE)",
+   "meaning": "The left-hand and right-hand limits are different or at least one does not exist."
+  },
+  {
+   "term": "continuity at a point",
+   "meaning": "A function is continuous at a if f(a) is defined, lim_{x->a} f(x) exists, and lim_{x->a} f(x) = f(a)."
+  },
+  {
+   "term": "removable discontinuity",
+   "meaning": "A hole in the graph where the two-sided limit exists but f(a) is undefined or different."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does lim_{x->a} f(x) = L mean?",
+   "options": [
+    "f(a) equals L",
+    "f(x) is always L",
+    "f(x) gets arbitrarily close to L as x approaches a from both sides",
+    "f(x) is undefined at a"
+   ],
+   "answer": 2,
+   "why": "The definition of a two-sided limit requires closeness from both sides."
+  },
+  {
+   "q": "Which statement is true about a left-hand limit?",
+   "options": [
+    "It considers x values larger than a",
+    "It is written lim_{x->a+} f(x)",
+    "It looks at x values smaller than a",
+    "It always equals the right-hand limit"
+   ],
+   "answer": 2,
+   "why": "Left-hand limit examines approach from smaller x values."
+  },
+  {
+   "q": "If lim_{x->a-} f(x) = 3 and lim_{x->a+} f(x) = 5, what can we say?",
+   "options": [
+    "The two-sided limit exists and equals 4",
+    "The limit does not exist at a",
+    "The function is continuous at a",
+    "Both one-sided limits are equal"
+   ],
+   "answer": 1,
+   "why": "Different one-sided limits mean the overall limit does not exist."
+  },
+  {
+   "q": "Which of the following is NOT required for continuity at a point a?",
+   "options": [
+    "f(a) must be defined",
+    "lim_{x->a} f(x) must exist",
+    "lim_{x->a} f(x) must equal f(a)",
+    "f(x) must be differentiable at a"
+   ],
+   "answer": 3,
+   "why": "Differentiability is stronger than continuity and not required."
+  },
+  {
+   "q": "A graph has a hole at x = 2 but approaches the value 7 from both sides. What type of discontinuity is this?",
+   "options": [
+    "Jump discontinuity",
+    "Infinite discontinuity",
+    "Removable discontinuity",
+    "Oscillatory discontinuity"
+   ],
+   "answer": 2,
+   "why": "A hole with matching one-sided limits is a removable discontinuity."
+  },
+  {
+   "q": "Which symbol represents a right-hand limit?",
+   "options": [
+    "lim_{x->a-}",
+    "lim_{x->a+}",
+    "lim_{x->a}",
+    "lim_{x->infinity}"
+   ],
+   "answer": 1,
+   "why": "The plus sign indicates approach from the right."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definition of a limit",
+   "back": "The number L that f(x) approaches as x gets arbitrarily close to a from both sides."
+  },
+  {
+   "front": "Two-sided limit notation",
+   "back": "lim_{x->a} f(x)"
+  },
+  {
+   "front": "Left-hand limit notation",
+   "back": "lim_{x->a-} f(x)"
+  },
+  {
+   "front": "Right-hand limit notation",
+   "back": "lim_{x->a+} f(x)"
+  },
+  {
+   "front": "Condition for a limit to exist",
+   "back": "Both left-hand and right-hand limits exist and are equal."
+  },
+  {
+   "front": "Continuity at a point",
+   "back": "f(a) defined, limit exists, and limit equals f(a)."
+  },
+  {
+   "front": "Removable discontinuity",
+   "back": "A hole where the two-sided limit exists but f(a) is missing or different."
+  },
+  {
+   "front": "Jump discontinuity",
+   "back": "Left-hand and right-hand limits exist but are different values."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l10-road-approach-analogy",
+   "title": "A road narrowing toward a corner shows approaching a point from left and right.",
+   "alt": "A road narrowing toward a corner shows approaching a point from left and right.",
+   "priority": 9,
+   "picture_title": "Road Approach Analogy",
+   "kind": "illustration",
+   "subject": "A simple road drawing with a point marked at the corner; arrows from both sides indicate approaching the point, mirroring left‑hand and right‑hand limits.",
+   "layout": "Road runs horizontally across the image, corner point centered, arrows on each side pointing toward the corner, labels on arrows for \"approach from left\" and \"approach from right\".",
+   "labels": [
+    "corner",
+    "left approach",
+    "right approach"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l10-jump-discontinuity",
+   "title": "A step‑like break in a line shows a jump where left and right limits differ.",
+   "alt": "A step‑like break in a line shows a jump where left and right limits differ.",
+   "priority": 7,
+   "picture_title": "Jump Discontinuity",
+   "kind": "illustration",
+   "subject": "A horizontal line that suddenly jumps up to a higher level, illustrating a function with different left‑hand and right‑hand limits at the jump point.",
+   "layout": "Line runs left‑to‑right, with a clear vertical gap at the jump; arrows point to the gap from each side, and a label marks the jump point.",
+   "labels": [
+    "jump point",
+    "left limit",
+    "right limit"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l10-missing-point-hole",
+   "title": "A small hole in a curve shows where the function is undefined but limits exist.",
+   "alt": "A small hole in a curve shows where the function is undefined but limits exist.",
+   "priority": 5,
+   "picture_title": "Missing Point (Hole)",
+   "kind": "illustration",
+   "subject": "A smooth curve with a tiny open circle (hole) at a point, indicating the function value is missing while the surrounding curve approaches a single number.",
+   "layout": "Curve spans the width of the image; the hole is centered; a faint dotted line marks the missing point; arrows from both sides converge on the hole.",
+   "labels": [
+    "hole",
+    "approach left",
+    "approach right"
+   ],
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Limit from Both Sides",
+   "fn": "(x^2-4)/(x-2)",
+   "xmin": 0,
+   "xmax": 4,
+   "points": [
+    {
+     "x": 2,
+     "y": 4,
+     "label": "hole",
+     "open": true
+    }
+   ],
+   "caption": "As x approaches 2 from left and right, y approaches 4.",
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Checking Continuity at a Point",
+   "steps": [
+    {
+     "label": "Defined",
+     "text": "Confirm f(a) exists."
+    },
+    {
+     "label": "Limit Exists",
+     "text": "Find left‑hand and right‑hand limits as x→a."
+    },
+    {
+     "label": "Match",
+     "text": "Check that the limit equals f(a)."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

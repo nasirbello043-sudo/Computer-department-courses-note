@@ -1,0 +1,331 @@
+{
+ "title": "Exponential and Logarithmic Functions",
+ "summary": "This lesson introduces exponential growth and decay, the laws of logarithms, and techniques for solving exponential equations. Students will see how these ideas model real‑world situations and learn step‑by‑step problem solving.",
+ "objectives": [
+  "Identify and describe exponential growth and decay situations",
+  "Apply the basic logarithm laws to simplify expressions",
+  "Solve exponential equations using logarithms and algebraic manipulation",
+  "Interpret the meaning of solutions in a real‑world context"
+ ],
+ "prerequisites": "Students should already understand basic algebraic operations, solving linear equations, and the concept of a function.",
+ "why": [
+  "Exponential models describe population change, radioactive decay, and interest growth, so mastering them helps predict future outcomes in science, finance, and everyday life.",
+  "Logarithms are the inverse of exponentials; they let us undo exponential processes, which is essential for data analysis, computer science, and engineering calculations."
+ ],
+ "sections": [
+  {
+   "heading": "1. Exponential Growth and Decay Basics",
+   "body": "Exponential functions describe situations where a quantity changes by the same *factor* every time the input increases by one unit.  \nThe most common form is  \n\n$$\ny = a\\,b^{x}\n$$  \n\nwhere  \n\n* $a$ is the **initial value** – the size of the quantity when $x=0$.  \n* $b$ is the **base** – the factor by which the quantity is multiplied each time $x$ goes up by 1.  \n* $x$ is the **exponent** – the number of steps (often time periods) that have passed.  \n\n> **Definition:** The expression $a\\,b^{x}$ is called an *exponential function* because the variable $x$ appears in the exponent.\n\n---\n\n### Why the base matters\n\nThe base $b$ tells us whether the function models **growth** or **decay**.\n\n* **Growth**: If $b>1$, each step makes the quantity larger. For example, with $b=2$ the value doubles each step: $a, 2a, 4a, 8a,\\dots$  \n* **Decay**: If $0<b<1$, each step makes the quantity smaller. For example, with $b=\\tfrac12$ the value halves each step: $a, \\tfrac12a, \\tfrac14a, \\tfrac18a,\\dots$\n\nThe number $b$ itself is called the **growth/decay factor**. It tells you exactly how much you multiply by for each unit increase in $x$.\n\n> **Note:** The factor $b$ is never negative in the basic exponential model; negative bases lead to oscillating signs and are not covered at this level.\n\n---\n\n### Understanding the factor with a simple picture\n\nImagine a bank account that starts with $a = \\$100$ and earns 5 % interest each year, compounded annually. The interest rate of 5 % means the account grows to $1.05$ times its previous amount each year. Here the base is  \n\n$$\nb = 1 + \\frac{5}{100} = 1.05 .\n$$  \n\nAfter one year the balance is $100 \\times 1.05 = \\$105$.  \nAfter two years it is $100 \\times 1.05^{2} = \\$110.25$, and so on. The factor $1.05$ is the **growth factor**.\n\nNow picture a cup of hot coffee cooling in a room. Suppose the temperature drops to 80 % of its previous value each minute. The base is $b = 0.80$, a **decay factor**. If the coffee starts at $90^\\circ\\text{C}$, after one minute it is $90 \\times 0.80 = 72^\\circ\\text{C}$; after two minutes $90 \\times 0.80^{2} = 57.6^\\circ\\text{C}$.\n\n> **In daily life:** Growth factors appear in population increase, investments, and viral spread. Decay factors appear in radioactive half‑life, cooling, and depreciation of a car’s value.\n\n---\n\n### Connecting the factor to percentage change\n\nIf the base is written as $b = 1 + r$, the number $r$ is the **percentage change per step** (expressed as a decimal).  \n\n* For growth, $r>0$ (e.g., $r=0.07$ means a 7 % increase each step).  \n* For decay, $r<0$ (e.g., $r=-0.15$ means a 15 % decrease each step, giving $b=0.85$).\n\nThus the exponential model can also be written  \n\n$$\ny = a\\,(1+r)^{x}.\n$$  \n\nThis form makes it easy to read the problem: “Start with $a$, then change by $r$ each period.”\n\n> **Remember:** The sign of $r$ tells you growth ($r>0$) or decay ($r<0$); the absolute size of $r$ tells you how fast the change happens.\n\n---\n\n### Quick check of the factor\n\nA common way to verify whether you have the right factor is to plug in $x=1$:\n\n$$\ny(1) = a\\,b^{1} = a\\,b .\n$$  \n\nIf you know the value after one step, divide it by the initial value $a$; the result is the factor $b$.  \n\n> **Common mistake:** Forgetting that $b$ is the *multiplier*, not the *increase*. For a 20 % increase, $b = 1.20$, not $0.20$.\n\nUnderstanding the base $b$ and its role as a growth or decay factor is the foundation for all later work with exponential and logarithmic functions. Once you can read $b$ and translate it into “multiply by … each step,” you can model many real‑world processes with confidence.",
+   "code": ""
+  },
+  {
+   "heading": "2. Simple Growth and Decay Calculations",
+   "body": "When we talk about **simple growth or decay**, we are looking at situations where something changes by the same factor every equal amount of time.  \nThe basic formula that captures this idea is  \n\n$$\ny = a\\,b^{x}\n$$  \n\n- $a$ is the **initial amount** (the value when $x=0$).  \n- $b$ is the **growth factor**. If $b>1$ the quantity grows; if $0<b<1$ it shrinks (decays).  \n- $x$ is the number of **time intervals** (or any other equal steps) that have passed.  \n- $y$ is the **amount after those intervals**.\n\n> **Definition:** The expression $a\\,b^{x}$ gives the value of a quantity that starts at $a$ and is multiplied by $b$ repeatedly $x$ times.\n\nWhy does this work? Imagine you have $a$ objects. After one interval you have $a\\cdot b$. After a second interval you multiply the new amount by $b$ again, giving $a\\cdot b\\cdot b = a\\,b^{2}$. Repeating this $x$ times gives $a\\,b^{x}$. This pattern is useful because many natural and engineered processes follow it: populations, bank interest, radioactive decay, and more.\n\n> **In daily life:** Think of a savings account that earns 5 % interest each year. If you start with \\$1000, after one year you have $1000\\times1.05$, after two years $1000\\times1.05^{2}$, and so on.\n\n### Step‑by‑step use of the formula\n\n1. **Identify the initial amount $a$.**  \n2. **Find the factor $b$.** For growth, $b = 1 + \\text{rate}$; for decay, $b = 1 - \\text{rate}$, or use the half‑life factor $b = \\frac12$ when appropriate.  \n3. **Count how many intervals $x$ have passed.**  \n4. **Plug the numbers into $y = a\\,b^{x}$ and compute.**  \n\nBelow we apply these steps to two concrete problems.\n\n---\n\n**Example 1 (Easy): Bacteria doubles every 3 hours**  \n\nA bacteria culture starts with 100 cells. How many cells are present after 9 hours?\n\n1. **Initial amount:** $a = 100$ cells.  \n2. **Growth factor:** The culture *doubles* each 3‑hour interval, so $b = 2$.  \n3. **Number of intervals:** 9 hours ÷ 3 hours per interval = $x = 3$.  \n4. **Apply the formula:**  \n\n$$\ny = 100 \\times 2^{3}\n$$  \n\n5. **Calculate the power:** $2^{3}=8$, so  \n\n$$\ny = 100 \\times 8 = 800\n$$  \n\n**Answer:** After 9 hours there are **800 bacteria cells**.\n\n> **Note:** Doubling means the factor $b$ is exactly 2. If the problem said “triples,” you would use $b=3$.\n\n---\n\n**Example 2 (Medium): Radioactive half‑life**  \n\nA radioactive isotope has a half‑life of 5 years. Starting with 200 g, how much remains after 15 years?\n\n1. **Initial amount:** $a = 200\\text{ g}$.  \n2. **Decay factor:** A half‑life means the amount is cut in half each period, so $b = \\frac12$.  \n3. **Number of intervals:** 15 years ÷ 5 years per half‑life = $x = 3$.  \n4. **Apply the formula:**  \n\n$$\ny = 200 \\times \\left(\\frac12\\right)^{3}\n$$  \n\n5. **Evaluate the power:** $\\left(\\frac12\\right)^{3}= \\frac{1}{8}$, therefore  \n\n$$\ny = 200 \\times \\frac{1}{8} = 25\n$$  \n\n**Answer:** After 15 years, **25 g** of the isotope remain.\n\n> **Common mistake:** Forgetting to convert the total time into the correct number of intervals. Always divide the total elapsed time by the length of one interval before using $x$.\n\n### Quick checklist for any simple growth/decay problem\n\n- Write down what each symbol ($a$, $b$, $x$) represents.  \n- Verify that $b$ correctly reflects growth (>1) or decay (<1).  \n- Count intervals carefully; use the same units as the given rate.  \n- Compute $b^{x}$ first, then multiply by $a$.\n\n> **Remember:** The power $x$ tells you *how many times* you multiply by the factor $b$. Once you master this counting, the formula works for any situation that changes by a constant factor.",
+   "code": ""
+  },
+  {
+   "heading": "3. Logarithm Laws",
+   "body": "> **Definition:** A *logarithm* $\\log_b M$ tells us **what power** we must raise the base $b$ to obtain the number $M$.  \n> **Note:** All logarithm laws work for any positive base $b\\neq 1$ and for any positive numbers $M$ and $N$.\n\nWhen we multiply two numbers, the exponents that produce them simply **add**.  \nFor example, $2^3\\cdot2^4 = 2^{3+4}=2^7$.  \nThe same idea works for logarithms, because a logarithm is just the inverse of an exponent.\n\n---\n\n### Product law  \n\n**Idea in plain words:**  \nIf you have two numbers $M$ and $N$ that share the same base $b$, the logarithm of their product equals the sum of the two separate logarithms.\n\n$$\\log_b(MN)=\\log_b M+\\log_b N$$  \n\n**Why it is useful:**  \nIt lets us turn a multiplication problem inside a logarithm into a simpler addition problem, which is easier to compute by hand or with a calculator.\n\n**Everyday comparison:**  \nThink of adding the lengths of two wooden planks. If each plank’s length is measured in meters, the total length is just the sum of the two measurements. The product law does the same for “log‑lengths”: the “log‑size” of a combined object is the sum of the individual “log‑sizes”.\n\n**Worked example**\n\n**Example 3 (Easy): Simplify $\\log_2 8 + \\log_2 4$**  \n\nWe want to combine the two logarithms into a single number.\n\n1. **Recognize the product law.** The expression matches $\\log_b M + \\log_b N$, so we can write it as one logarithm of a product.  \n   $$\\log_2 8 + \\log_2 4 = \\log_2 (8\\cdot 4)$$\n2. **Multiply the inside numbers.** $8\\cdot4 = 32$.  \n   $$\\log_2 (8\\cdot 4) = \\log_2 32$$\n3. **Convert the remaining logarithm to a known exponent.** $2^5 = 32$, so $\\log_2 32 = 5$.  \n   $$\\log_2 32 = 5$$\n\n**Answer:** $\\displaystyle \\log_2 8 + \\log_2 4 = 5$\n\n---\n\n### Quotient law  \n\nIf we divide two numbers, the exponents **subtract**: $2^7 / 2^3 = 2^{7-3}=2^4$.  \nThe logarithm version is\n\n$$\\log_b\\frac{M}{N}= \\log_b M-\\log_b N$$  \n\nIt changes a division inside a logarithm into a subtraction outside, which is again easier to handle.\n\n---\n\n### Power law  \n\n**Idea in plain words:**  \nWhen a number $M$ is raised to a power $k$ before we take the logarithm, the exponent $k$ can be moved in front of the logarithm.\n\n$$\\log_b(M^k)=k\\log_b M$$  \n\n**Why it is useful:**  \nIt lets us pull down exponents, turning a potentially complicated logarithm of a power into a simple multiplication.\n\n**Everyday comparison:**  \nImagine you have $k$ identical stacks of books, each stack containing $M$ books. The total number of books is $k\\cdot M$. The power law does the reverse: it tells us how many books are in each stack when we know the total and the number of stacks.\n\n**Worked example**\n\n**Example 4 (Medium): Write $\\log_5 125$ as a single number using the power law**  \n\nWe need to express the logarithm without any remaining logarithm symbols.\n\n1. **Recognize the number as a power of the base.** $125 = 5^3$.  \n   $$\\log_5 125 = \\log_5 (5^3)$$\n2. **Apply the power law to bring the exponent down.**  \n   $$\\log_5 (5^3) = 3\\log_5 5$$\n3. **Use the definition of logarithm:** $\\log_5 5 = 1$ because $5^1 = 5$.  \n   $$3\\log_5 5 = 3\\cdot 1 = 3$$\n\n**Answer:** $\\displaystyle \\log_5 125 = 3$\n\n> **In daily life:** The power law is like unwrapping a gift box that contains several identical smaller boxes. If the big box holds $k$ copies of a smaller box, you can count the total by multiplying $k$ by the number of items in one small box.\n\n---\n\n### Change‑of‑base formula  \n\nSometimes the base we need is not the one our calculator uses (most calculators have base $10$ or $e$). The change‑of‑base formula lets us rewrite any logarithm with a new base.\n\n$$\\log_b M = \\frac{\\log_c M}{\\log_c b}$$  \n\nHere $c$ can be any convenient base, often $10$ (common log) or $e$ (natural log).  \n\n**Why it is useful:**  \nIt converts a difficult logarithm into a ratio of two logarithms that your calculator can evaluate.\n\n**Everyday comparison:**  \nThink of converting currencies. If you know how many euros per dollar and how many yen per euro, you can find how many yen per dollar by multiplying the two rates. The change‑of‑base formula does a similar “conversion” between logarithm bases.\n\n> **Common mistake:** Forgetting that both the numerator and denominator must use the **same** new base $c$. Mixing bases gives an incorrect result.\n\n---\n\n### Putting the laws together  \n\nSuppose we need to simplify $\\log_3\\frac{27}{9}$. We can use the quotient law first, then the power law:\n\n1. Apply the quotient law:  \n   $$\\log_3\\frac{27}{9}= \\log_3 27 - \\log_3 9$$\n2. Recognize $27=3^3$ and $9=3^2$, then use the power law:  \n   $$\\log_3 27 = \\log_3 (3^3)=3\\log_3 3 = 3$$  \n   $$\\log_3 9 = \\log_3 (3^2)=2\\log_3 3 = 2$$\n3. Subtract the results:  \n   $$3-2 = 1$$\n\nThus $\\log_3\\frac{27}{9}=1$, confirming that $3^1 = 3$ indeed equals the original fraction $27/9$.\n\n> **Remember:** Each law is a tool for moving *inside* the logarithm (multiplication, division, powers) to the *outside* where we can add, subtract, or multiply—operations we handle more comfortably. Mastering these steps lets you solve many exponential and logarithmic problems quickly and accurately.",
+   "code": ""
+  },
+  {
+   "heading": "4. Solving Exponential Equations with Logarithms",
+   "body": "When an equation contains a variable in an exponent, we cannot isolate the variable with ordinary algebraic moves.  \nThe trick is to **take a logarithm of both sides**. A logarithm answers the question “to what power must we raise a certain base to get this number?” By applying the same operation to both sides, the exponent becomes a simple product that we can solve for.\n\n> **Definition:** A *logarithm* $\\log_b a$ is the exponent $x$ such that $b^x = a$.  \n> **Note:** Any positive base $b\\neq 1$ works, but the most common are $b=10$ (common log) and $b=e\\approx2.718$ (natural log, written $\\ln$).  \n\nWhy does this help?  \nIf we have $b^{f(x)} = c$, taking $\\log_b$ of both sides gives  \n\n$$\\log_b\\!\\bigl(b^{f(x)}\\bigr)=\\log_b c.$$  \n\nUsing the **log‑power rule** $\\log_b(b^{y}) = y$, the left side simplifies to $f(x)$. The variable is now out of the exponent and can be treated like any other algebraic term.\n\n> **In daily life:** Think of a secret code where each letter is shifted by a fixed number of places (a Caesar cipher). To find the shift, you compare the coded letter with the original; the “log” does the same comparison for exponents, turning a hidden multiplier into a visible number.\n\n---\n\n### Step‑by‑step procedure\n\n1. **Choose a convenient logarithm.**  \n   - If the base of the exponential term is simple (e.g., $2$, $3$, $5$), using $\\log$ with that same base often makes the next step tidy.  \n   - If the base is messy or you prefer a calculator, use the natural log $\\ln$ (or common log $\\log$); the change‑of‑base formula will handle the rest.\n\n2. **Apply the logarithm to both sides.**  \n   Write the equation, then place the same log function on each side. This keeps the equality true.\n\n3. **Use log rules to bring the exponent down.**  \n   The rule $\\log_b(b^{y}) = y$ (or $\\ln(e^{y}) = y$) turns the exponent into a coefficient.\n\n4. **Isolate the variable.**  \n   Now the equation is linear in the unknown; solve it with ordinary algebra (add, subtract, divide, multiply).\n\n5. **If you used a different base, convert back if needed.**  \n   Sometimes the answer is nicer expressed with a specific log, e.g., $\\log_5 20$ instead of a decimal.\n\n---\n\n**Example 5 (Hard): Solving \\(3^{2x}=7\\)**  \n\nWe need $x$ when the power of $3$ equals $7$.\n\n1. **Take natural logs of both sides.**  \n   $$\\ln\\!\\bigl(3^{2x}\\bigr)=\\ln 7$$  \n\n2. **Bring the exponent down using the power rule $\\ln(a^{b}) = b\\ln a$.**  \n   $$2x\\,\\ln 3 = \\ln 7$$  \n\n3. **Solve for $x$ by dividing.**  \n   $$x = \\frac{\\ln 7}{2\\ln 3}$$  \n\n**Answer:** $x=\\dfrac{\\ln 7}{2\\ln 3}\\approx 0.77$ (no units, just a number).\n\n---\n\n**Example 6 (Hard): Solving \\(5^{x+1}=20\\)**  \n\nFind $x$ that makes $5$ raised to the power $x+1$ equal $20$.\n\n1. **Apply a logarithm with the same base $5$** (this avoids extra conversion).  \n   $$\\log_5\\!\\bigl(5^{x+1}\\bigr)=\\log_5 20$$  \n\n2. **Use the power rule $\\log_b(b^{y}) = y$.**  \n   $$x+1 = \\log_5 20$$  \n\n3. **Subtract $1$ to isolate $x$.**  \n   $$x = \\log_5 20 - 1$$  \n\n**Answer:** $x = \\log_5 20 - 1 \\approx 0.86$.\n\n---\n\n### Why natural logs are often convenient\n\nWhen the base of the exponential term is not a simple integer, calculators only have buttons for $\\ln$ and $\\log_{10}$. The **change‑of‑base formula** lets us rewrite any logarithm:\n\n$$\\log_b a = \\frac{\\ln a}{\\ln b} = \\frac{\\log_{10} a}{\\log_{10} b}.$$\n\nThus, even if we start with $\\log_7 12$, we can compute it with $\\ln$:\n\n$$\\log_7 12 = \\frac{\\ln 12}{\\ln 7}.$$\n\nThis flexibility means you can always pick the log function your calculator provides, then convert back if you prefer a different base for the final answer.\n\n> **Common mistake:** Forgetting to apply the logarithm to *both* sides. The equality only holds when the same operation is performed on each side; otherwise the solution set changes.\n\n---\n\n### Quick checklist for solving exponential equations\n\n- **Identify** the exponential term and its base.  \n- **Choose** a log (same base if easy, otherwise $\\ln$).  \n- **Log both sides** of the equation.  \n- **Apply** the power rule to bring the exponent down.  \n- **Solve** the resulting linear equation for the variable.  \n- **Convert** the answer to a preferred log form if needed.\n\n> **Remember:** Taking logs does not change the solutions; it merely rewrites the problem in a form we can handle with ordinary algebra.  \n\nWith this method, any equation where the unknown appears only in the exponent becomes a straightforward linear problem. Practice with the examples above, then try your own: solve $2^{3x}=15$ or $e^{0.5x}=4$, following the same steps.",
+   "code": ""
+  },
+  {
+   "heading": "5. Real‑World Word Problems",
+   "body": "When a situation in the real world changes by a fixed percentage over equal time periods, we can describe it with an **exponential equation**.  \nThe word *exponential* means “something that multiplies by the same factor each step”.  \nIf we know the factor and the starting amount, we can write the amount after \\(t\\) steps as  \n\n$$A(t)=A_0\\;k^{\\,t}$$  \n\nwhere  \n\n* \\(A_0\\) is the **initial amount** (the value at time 0),  \n* \\(k\\) is the **growth factor** (greater than 1) or **decay factor** (between 0 and 1), and  \n* \\(t\\) is the number of equal time periods that have passed.\n\nOften we do not know \\(t\\) directly; we only know the final amount we want to reach.  \nTo solve for \\(t\\) we use **logarithms**, the inverse operation of exponentiation.  \nA logarithm answers the question: “to what power must we raise the base to get a given number?”  \n\n> **Definition:** The logarithm base \\(b\\) of a positive number \\(x\\) is written \\(\\log_b x\\) and satisfies \\(b^{\\log_b x}=x\\).\n\nBecause logarithms turn multiplication into addition, they let us “bring down” the exponent \\(t\\) from the power and solve for it.\n\n---\n\n**Example 7 (Hard): Savings growth**  \nA savings account pays 4 % interest compounded annually. How long will it take for \\$1 000 to grow to \\$1 500?\n\n1. **Write the exponential model.**  \n   The amount after \\(t\\) years is  \n   $$A(t)=1000\\;(1.04)^{\\,t}.$$\n2. **Set the model equal to the target amount.**  \n   $$1000\\;(1.04)^{\\,t}=1500.$$\n3. **Isolate the exponential term.**  \n   Divide both sides by 1000:  \n   $$(1.04)^{\\,t}=1.5.$$\n4. **Take the natural logarithm (ln) of both sides.**  \n   $$\\ln\\!\\big((1.04)^{\\,t}\\big)=\\ln 1.5.$$\n5. **Use the logarithm law \\(\\ln a^{b}=b\\ln a\\).**  \n   $$t\\;\\ln 1.04=\\ln 1.5.$$\n6. **Solve for \\(t\\).**  \n   $$t=\\frac{\\ln 1.5}{\\ln 1.04}.$$\n\n**Answer:** \\(t\\approx 10.2\\) years. It will take a little more than ten years for the \\$1 000 to become \\$1 500.\n\n> **In daily life:** This calculation tells you how long you must wait for an investment to reach a goal, helping you plan savings or compare different interest rates.\n\n---\n\n**Example 8 (Hard): Medication decay**  \nA medication’s concentration halves every 8 hours. If a patient receives a 200 mg dose, after how many hours will the amount drop below 25 mg?\n\n1. **Identify the decay factor.**  \n   Halving means the factor each 8‑hour block is \\(k=0.5\\).\n2. **Write the exponential decay model.**  \n   After \\(t\\) hours (where \\(t\\) may not be a multiple of 8) the amount is  \n   $$C(t)=200\\;(0.5)^{\\,t/8}.$$\n3. **Set the model less than the target amount.**  \n   $$200\\;(0.5)^{\\,t/8}<25.$$\n4. **Isolate the exponential term.**  \n   Divide by 200:  \n   $$(0.5)^{\\,t/8}<\\frac{25}{200}=0.125.$$\n5. **Take natural logarithms of both sides.**  \n   $$\\ln\\!\\big((0.5)^{\\,t/8}\\big)<\\ln 0.125.$$\n6. **Apply the power rule for logs.**  \n   $$\\frac{t}{8}\\,\\ln 0.5<\\ln 0.125.$$\n7. **Solve for \\(t\\).**  \n   $$t<8\\;\\frac{\\ln 0.125}{\\ln 0.5}.$$\n   Since \\(\\ln 0.125=\\ln\\!\\big(\\frac{1}{8}\\big)=-\\ln 8\\) and \\(\\ln 0.5=-\\ln 2\\), the fraction simplifies to \\(\\frac{\\ln 8}{\\ln 2}=3\\).  \n   $$t<8\\cdot 3=24.$$\n\n**Answer:** The concentration falls below 25 mg after **about 24 hours**.\n\n> **Common mistake:** Forgetting to divide the time variable by the period length (here 8 h) before taking the log. The exponent must be exactly the number of periods, not the raw hours.\n\n---\n\nThe steps above illustrate a general recipe for turning a word problem into an exponential equation and then solving it:\n\n1. **Identify** whether the situation is growth (\\(k>1\\)) or decay (\\(0<k<1\\)).  \n2. **Write** the model \\(A(t)=A_0k^{\\,t/T}\\) where \\(T\\) is the length of one period (e.g., 1 year, 8 h).  \n3. **Insert** the known numbers and set the equation equal to the target amount (or inequality).  \n4. **Isolate** the exponential term by dividing or moving other factors.  \n5. **Apply** the natural logarithm (or any log base) to both sides.  \n6. **Use** the log law \\(\\log_b a^{c}=c\\log_b a\\) to bring the exponent down.  \n7. **Solve** for the unknown time \\(t\\).  \n\n> **Remember:** Logarithms are just the “undo” button for exponentials. Whenever you see an unknown exponent, think “take a log”.\n\nBy practicing these steps with real‑world numbers, you become comfortable translating everyday growth or decay—like savings, population change, radioactive decay, or drug dosage—into precise mathematical predictions. This skill is valuable not only in mathematics class but also in finance, health, engineering, and many other fields where change happens at a steady percentage rate.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "A bacteria culture doubles every 3 hours. If you start with 50 bacteria, how many will there be after 9 hours?",
+   "a": "The growth factor per 3 hours is $2$. In 9 hours there are $9/3 = 3$ intervals. Number after 9 hours $= 50 \\times 2^{3}=50 \\times 8 = 400$ bacteria."
+  },
+  {
+   "level": "Easy",
+   "q": "The half‑life of a radioactive isotope is 5 years. How much of a 200 g sample remains after 15 years?",
+   "a": "Half‑life factor per 5 years is $\\frac12$. In 15 years there are $15/5 = 3$ half‑lives. Remaining mass $=200 \\times \\left(\\frac12\\right)^{3}=200 \\times \\frac18 = 25\\,$g."
+  },
+  {
+   "level": "Medium",
+   "q": "Solve for $x$: $3^{2x-1}=27$.",
+   "a": "Write $27$ as a power of $3$: $27 = 3^{3}$. Equation becomes $3^{2x-1}=3^{3}$. Equate exponents: $2x-1=3$. Solve: $2x=4 \\Rightarrow x=2$."
+  },
+  {
+   "level": "Medium",
+   "q": "If $ \\log_{2}(x) + \\log_{2}(x-3)=3$, find $x$.",
+   "a": "Use the product rule: $\\log_{2}(x(x-3)) = 3$. Convert to exponential form: $x(x-3)=2^{3}=8$. Expand: $x^{2}-3x-8=0$. Factor: $(x-4)(x+2)=0$. Solutions $x=4$ or $x=-2$. Since argument of log must be positive, $x=4$."
+  },
+  {
+   "level": "Hard",
+   "q": "A car’s value depreciates exponentially at a rate of 15% per year. Its initial value is \\$20,000. After how many years will the value be less than \\$8,000? (Round up to the nearest whole year.)",
+   "a": "Depreciation model: $V(t)=20000(0.85)^{t}$. Set $20000(0.85)^{t}<8000$. Divide: $(0.85)^{t}<\\frac{8}{20}=0.4$. Take natural logs: $t\\ln 0.85<\\ln 0.4$. Since $\\ln 0.85$ is negative, divide flips inequality: $t>\\frac{\\ln 0.4}{\\ln 0.85}$. Compute: $\\ln 0.4\\approx -0.9163$, $\\ln 0.85\\approx -0.1625$. Ratio $t> \\frac{-0.9163}{-0.1625}\\approx 5.64$. Round up → $6$ years."
+  },
+  {
+   "level": "Hard",
+   "q": "Solve for $x$: $5^{x+1}=3^{2x-4}$.",
+   "a": "Take natural log of both sides: $\\ln 5^{x+1}= \\ln 3^{2x-4}$. Bring exponents down: $(x+1)\\ln 5 = (2x-4)\\ln 3$. Distribute: $x\\ln 5 + \\ln 5 = 2x\\ln 3 -4\\ln 3$. Collect $x$ terms on one side: $x\\ln 5 -2x\\ln 3 = -4\\ln 3 -\\ln 5$. Factor $x$: $x(\\ln 5 -2\\ln 3)= -4\\ln 3 -\\ln 5$. Solve for $x$: $x = \\frac{-4\\ln 3 -\\ln 5}{\\ln 5 -2\\ln 3}$. Numerically, $\\ln 3\\approx1.0986$, $\\ln 5\\approx1.6094$. Numerator $= -4(1.0986)-1.6094 = -4.3944-1.6094 = -6.0038$. Denominator $=1.6094-2(1.0986)=1.6094-2.1972 = -0.5878$. Thus $x = \\frac{-6.0038}{-0.5878}\\approx 10.22$. So $x\\approx 10.2$."
+  }
+ ],
+ "recap": "This lesson introduced exponential functions as formulas of the form a*b^x, showing how the base determines growth or decay. It explained how repeated multiplication leads to the simple formula a*b^x and how logarithms reverse this process. The section on logarithm laws gave rules for combining logs, and the final parts showed how to solve exponential equations and apply them to real‑world problems using logs.",
+ "key_terms": [
+  {
+   "term": "exponential function",
+   "meaning": "A function written as a*b^x where the variable x is in the exponent."
+  },
+  {
+   "term": "initial value",
+   "meaning": "The amount a when the input x is zero."
+  },
+  {
+   "term": "base",
+   "meaning": "The factor b that multiplies the quantity each step; b>1 gives growth, 0<b<1 gives decay."
+  },
+  {
+   "term": "growth factor",
+   "meaning": "A base greater than 1 that causes the quantity to increase each interval."
+  },
+  {
+   "term": "decay factor",
+   "meaning": "A base between 0 and 1 that causes the quantity to decrease each interval."
+  },
+  {
+   "term": "logarithm",
+   "meaning": "The exponent you must raise a base to obtain a given number, written log_b(M)."
+  },
+  {
+   "term": "product law of logs",
+   "meaning": "log_b(MN)=log_b(M)+log_b(N)."
+  },
+  {
+   "term": "log‑power rule",
+   "meaning": "log_b(b^y)=y, which lets you bring the exponent down."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "If a quantity starts at 5 and doubles every period, what is the value after 3 periods?",
+   "options": [
+    "15",
+    "20",
+    "40",
+    "80"
+   ],
+   "answer": 2,
+   "why": "Doubling three times gives 5*2^3 = 5*8 = 40."
+  },
+  {
+   "q": "Which base indicates exponential decay?",
+   "options": [
+    "b=1.5",
+    "b=0.8",
+    "b=2",
+    "b=10"
+   ],
+   "answer": 1,
+   "why": "A base between 0 and 1 (0.8) makes the quantity shrink each step."
+  },
+  {
+   "q": "What does log_10(1000) equal?",
+   "options": [
+    "2",
+    "3",
+    "10",
+    "1000"
+   ],
+   "answer": 1,
+   "why": "10^3 = 1000, so the logarithm is 3."
+  },
+  {
+   "q": "Apply the product law: log_2(8*4). What is the result?",
+   "options": [
+    "5",
+    "6",
+    "7",
+    "8"
+   ],
+   "answer": 0,
+   "why": "log_2(8)=3 and log_2(4)=2, sum is 5."
+  },
+  {
+   "q": "Solve for x: 3^x = 81.",
+   "options": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "answer": 1,
+   "why": "3^4 = 81, so x=4."
+  },
+  {
+   "q": "A bacteria culture grows from 200 to 800 in 2 hours. What is the growth factor per hour?",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "answer": 0,
+   "why": "800 = 200*b^2 => b^2=4 => b=2."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is the general form of an exponential function?",
+   "back": "y = a*b^x"
+  },
+  {
+   "front": "Define the initial value in an exponential model.",
+   "back": "It is the amount a when x = 0."
+  },
+  {
+   "front": "When does an exponential function model growth?",
+   "back": "When the base b is greater than 1."
+  },
+  {
+   "front": "When does an exponential function model decay?",
+   "back": "When the base b is between 0 and 1."
+  },
+  {
+   "front": "State the product law of logarithms.",
+   "back": "log_b(MN) = log_b(M) + log_b(N)."
+  },
+  {
+   "front": "State the log‑power rule.",
+   "back": "log_b(b^y) = y."
+  },
+  {
+   "front": "How do you solve b^{f(x)} = c using logs?",
+   "back": "Take log_b of both sides to get f(x) = log_b(c)."
+  },
+  {
+   "front": "What does log_b(M) represent?",
+   "back": "The exponent you raise b to in order to get M."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l07-bacterial-colony-growth",
+   "title": "A petri dish showing a bacterial colony expanding over time.",
+   "alt": "A petri dish showing a bacterial colony expanding over time.",
+   "priority": 8,
+   "picture_title": "Bacterial Colony Growth",
+   "kind": "photo",
+   "subject": "The photo shows a clear, circular bacterial colony that gets larger each day, illustrating how a quantity can multiply by the same factor in equal time intervals.",
+   "layout": "The dish is centered with a ruler for scale; no labels needed.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l07-radioactive-decay-sample",
+   "title": "A sealed sample of a radioactive isotope with a decay timer.",
+   "alt": "A sealed sample of a radioactive isotope with a decay timer.",
+   "priority": 7,
+   "picture_title": "Radioactive Decay Sample",
+   "kind": "photo",
+   "subject": "The image displays a small container labeled with the isotope and a digital timer indicating the half‑life, helping students visualise exponential decay in a physical object.",
+   "layout": "Container in the foreground, timer displayed on a small screen beside it.",
+   "labels": [],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l07-population-pyramid-illustration",
+   "title": "A stylised illustration of a rapidly growing human population over generations.",
+   "alt": "A stylised illustration of a rapidly growing human population over generations.",
+   "priority": 6,
+   "picture_title": "Population Pyramid Illustration",
+   "kind": "illustration",
+   "subject": "The picture shows three stacked silhouettes representing successive generations, each larger than the previous, to convey exponential population increase in a real‑world context.",
+   "layout": "Three silhouettes stacked vertically, each labeled with a generation number; arrows point upward to indicate growth.",
+   "labels": [
+    "Gen 1",
+    "Gen 2",
+    "Gen 3"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Solving an Exponential Equation with Logarithms",
+   "steps": [
+    {
+     "label": "Write Equation",
+     "text": "Start with b^{f(x)} = c."
+    },
+    {
+     "label": "Take Log",
+     "text": "Apply log_b to both sides: f(x) = log_b c."
+    },
+    {
+     "label": "Isolate Variable",
+     "text": "Solve the resulting simple equation for x."
+    },
+    {
+     "label": "Check",
+     "text": "Substitute back to verify."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Growth vs. Decay",
+   "left": {
+    "name": "Growth (b > 1)",
+    "points": [
+     "Quantity multiplies each step",
+     "Graph rises steeply",
+     "Examples: population, money with interest"
+    ]
+   },
+   "right": {
+    "name": "Decay (0 < b < 1)",
+    "points": [
+     "Quantity shrinks each step",
+     "Graph falls toward zero",
+     "Examples: radioactive decay, cooling"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key Numbers for Exponential & Logarithmic Functions",
+   "items": [
+    {
+     "value": "b > 1",
+     "label": "Growth base"
+    },
+    {
+     "value": "0 < b < 1",
+     "label": "Decay base"
+    },
+    {
+     "value": "b = 10",
+     "label": "Common log base"
+    },
+    {
+     "value": "b = e ≈ 2.718",
+     "label": "Natural log base"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

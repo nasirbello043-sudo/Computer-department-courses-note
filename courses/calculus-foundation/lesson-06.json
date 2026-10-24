@@ -1,0 +1,321 @@
+{
+ "title": "Quadratics and Parabolas",
+ "summary": "This lesson teaches how to rewrite a quadratic by completing the square, find its vertex and roots, and use the quadratic formula. Students will see each method applied to real‑world problems.",
+ "objectives": [
+  "Complete the square for any quadratic expression",
+  "Identify the vertex of a parabola from its equation",
+  "Determine the roots using factoring, completing the square, and the quadratic formula",
+  "Apply the quadratic formula to solve word problems"
+ ],
+ "prerequisites": "Students should be comfortable with basic algebraic manipulation, expanding binomials, and solving linear equations.",
+ "why": [
+  "Quadratic relationships appear in physics (projectile motion), economics (profit curves), and engineering (bridge arches). Understanding how to locate the vertex and roots lets you predict maximum heights, break‑even points, and optimal designs.",
+  "The quadratic formula provides a reliable, universal tool for solving any quadratic, so students can tackle real‑world problems without guessing."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Quadratic Form",
+   "body": "A quadratic expression is a polynomial that contains the term $x^2$.  \nThe most common way to write it is  \n\n$$\nax^{2}+bx+c\n$$  \n\nwhere the letters $a$, $b$, and $c$ are numbers (they can be positive, negative, or zero).  \nEach of these numbers has a special name:\n\n> **Definition:** $a$ is called the **leading coefficient** because it multiplies the highest‑power term $x^{2}$.  \n> **Definition:** $b$ is the **linear coefficient** because it multiplies the first‑power term $x$.  \n> **Definition:** $c$ is the **constant term** because it does not involve $x$ at all.\n\nThe shape of the graph of a quadratic is a **parabola** – a smooth, U‑shaped curve.  \nThe sign of $a$ tells us which way the parabola opens:\n\n- If $a>0$, the parabola opens **upward** (like a smile).  \n- If $a<0$, it opens **downward** (like a frown).\n\nWhy do we care about writing a quadratic in this form?  \nFirst, it lets us see at a glance what the most important pieces are: the strength of the $x^{2}$ term ($a$), the tilt contributed by the $x$ term ($b$), and the height where the graph meets the $y$‑axis ($c$).  \nSecond, many later techniques – such as completing the square or using the quadratic formula – start from exactly this arrangement. If the expression is not in this shape, we must rearrange it before those tools work.\n\n### An everyday comparison\n\nThink of a recipe for a cake. The ingredients list might read “2 cups flour, 1 cup sugar, 3 eggs.”  \nHere, “flour” is like the $x^{2}$ term, “sugar” is like the $x$ term, and “eggs” are like the constant term.  \nJust as the amount of flour determines how tall the cake rises, the coefficient $a$ determines how steeply the parabola climbs or falls.\n\n### Identifying the coefficients\n\nLet’s look at a concrete example:\n\n$$\n5x^{2}-3x+7\n$$  \n\n- The number in front of $x^{2}$ is $5$, so $a=5$.  \n- The number in front of $x$ is $-3$, so $b=-3$.  \n- The number standing alone is $7$, so $c=7$.\n\nAnother example shows what happens when a coefficient is zero:\n\n$$\n-2x^{2}+4\n$$  \n\nHere $b=0$ because there is no $x$ term. The expression is still a quadratic because the $x^{2}$ term is present.\n\n> **Note:** A polynomial is **not** quadratic if the $x^{2}$ term is missing (i.e., $a=0$). Then it becomes linear or constant, which behaves very differently.\n\n### Quick checklist for recognizing a quadratic\n\n1. **Look for $x^{2}$** – the term with the variable squared must be there.  \n2. **Identify the number in front of $x^{2}$** – that is $a$.  \n3. **Find the $x$ term** – its coefficient is $b$ (if the term is absent, $b=0$).  \n4. **Find the term without $x$** – that is $c$ (if absent, $c=0$).\n\n> **Common mistake:** Forgetting to include the sign of a coefficient.  \n> For example, in $-x^{2}+6x-2$, the leading coefficient is $a=-1$, not $a=1$.\n\n### Why the letters matter later\n\nWhen we later “complete the square,” we will rewrite $ax^{2}+bx+c$ as a perfect square plus a constant.  \nWhen we later apply the quadratic formula, the same $a$, $b$, and $c$ appear in the formula  \n\n$$\nx=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}\n$$  \n\nIf we mis‑identify any coefficient now, every later step will give the wrong answer.\n\n> **Remember:** Always write the quadratic in the order $ax^{2}+bx+c$ before you start any manipulation. This simple habit keeps the algebra tidy and prevents errors.",
+   "code": ""
+  },
+  {
+   "heading": "2. Completing the Square",
+   "body": "When we “complete the square’’ we rewrite a quadratic expression  \n\n\\[\nax^{2}+bx+c\n\\]\n\nin the form  \n\n\\[\na\\,(x-h)^{2}+k .\n\\]\n\nThe new numbers \\(h\\) and \\(k\\) tell us where the parabola is shifted horizontally and vertically.  \nFinding this form is useful because the vertex of the parabola is simply \\((h,k)\\), and it also makes solving equations easier.\n\n> **Definition:** *Completing the square* means adding and subtracting just the right constant so that the first two terms become a perfect square \\((x-h)^{2}\\).\n\nThink of it like arranging books on a shelf. If you have a messy pile (the original quadratic), you add a small spacer (the constant) so the books line up perfectly into a neat block (the square). The spacer does not change the overall length of the pile; it only helps us see the shape clearly.\n\n---\n\n### Step‑by‑step procedure (for \\(a=1\\))\n\n1. **Identify the coefficient of \\(x\\).**  \n   In \\(x^{2}+bx\\) the coefficient is \\(b\\).\n\n2. **Take half of that coefficient and square it.**  \n   \\[\n   \\left(\\frac{b}{2}\\right)^{2}\n   \\]\n\n3. **Add and subtract this square inside the expression.**  \n   This creates a perfect square trinomial.\n\n4. **Factor the perfect square trinomial** into \\((x-h)^{2}\\) where \\(h = -\\frac{b}{2}\\).\n\n5. **Combine the remaining constant terms** to obtain the final \\(k\\).\n\nIf \\(a\\neq 1\\) we first factor \\(a\\) out of the first two terms, complete the square inside the parentheses, then distribute \\(a\\) back.\n\n> **Note:** The number we add and subtract is always \\(\\bigl(\\frac{b}{2a}\\bigr)^{2}\\) when the leading coefficient is \\(a\\).\n\n---\n\n## Worked examples\n\n### **Example 1 (Easy): Complete the square for \\(x^{2}+6x+5\\).**\n\nWe want to rewrite it as \\((x-h)^{2}+k\\).\n\n1. **Take half of the coefficient of \\(x\\).**  \n   \\[\n   \\frac{6}{2}=3\n   \\]\n\n2. **Square this half.**  \n   \\[\n   3^{2}=9\n   \\]\n\n3. **Add and subtract 9 inside the expression.**  \n   \\[\n   x^{2}+6x+9-9+5\n   \\]\n\n4. **Group the first three terms as a square and combine the constants.**  \n   \\[\n   (x+3)^{2}-4\n   \\]\n\n**Answer:** \\(\\displaystyle x^{2}+6x+5 = (x+3)^{2}-4.\\)\n\nThe vertex of the corresponding parabola is \\((-3,\\,-4)\\).\n\n---\n\n### **Example 2 (Medium): Complete the square for \\(2x^{2}-8x+3\\).**\n\nBecause the leading coefficient is not 1, we factor it out first.\n\n1. **Factor \\(2\\) from the first two terms.**  \n   \\[\n   2\\bigl(x^{2}-4x\\bigr)+3\n   \\]\n\n2. **Take half of the coefficient of \\(x\\) inside the parentheses** (which is \\(-4\\)).  \n   \\[\n   \\frac{-4}{2}=-2\n   \\]\n\n3. **Square this half** to get the number we need to add and subtract.  \n   \\[\n   (-2)^{2}=4\n   \\]\n\n4. **Add and subtract 4 inside the parentheses**, remembering that the whole parentheses are multiplied by \\(2\\).  \n   \\[\n   2\\bigl(x^{2}-4x+4-4\\bigr)+3\n   \\]\n\n5. **Rewrite the first three terms as a square** and keep the extra \\(-4\\) inside the parentheses.  \n   \\[\n   2\\bigl((x-2)^{2}-4\\bigr)+3\n   \\]\n\n6. **Distribute the \\(2\\) and combine constants.**  \n   \\[\n   2(x-2)^{2}-8+3 = 2(x-2)^{2}-5\n   \\]\n\n**Answer:** \\(\\displaystyle 2x^{2}-8x+3 = 2\\,(x-2)^{2}-5.\\)\n\nThe vertex of the parabola \\(y=2x^{2}-8x+3\\) is \\((2,\\,-5)\\).\n\n---\n\n> **Remember:** After completing the square, the expression is always of the shape \\(a(x-h)^{2}+k\\). The numbers \\(h\\) and \\(k\\) give the vertex directly, and the sign of \\(a\\) tells whether the parabola opens upward (\\(a>0\\)) or downward (\\(a<0\\)).",
+   "code": ""
+  },
+  {
+   "heading": "3. Vertex from Completed Square",
+   "body": "When a quadratic is written in the form  \n\n$$y = a(x-h)^2 + k$$  \n\nthe numbers \\(h\\) and \\(k\\) tell us exactly where the parabola turns.  \nThe point \\((h,k)\\) is called the **vertex**. It is the highest point if the parabola opens downward (\\(a<0\\)) and the lowest point if it opens upward (\\(a>0\\)).  \n\n> **Definition:** The **vertex** of a parabola is the point \\((h,k)\\) where the graph changes direction. In the completed‑square form \\(a(x-h)^2+k\\), the vertex is read directly as \\((h,k)\\).\n\nWhy does this work?  \nStarting from the basic shape \\(y = a x^2\\), the graph is symmetric about the vertical line \\(x=0\\). If we shift the whole picture \\(h\\) units to the right, every \\(x\\) becomes \\(x-h\\); the axis of symmetry moves to the line \\(x=h\\). Then we lift or lower the whole graph by \\(k\\) units, which moves every point up by \\(k\\). The point where the shifted and lifted graph meets its axis of symmetry is exactly \\((h,k)\\).  \n\nThink of a **see‑saw**. The pivot is the vertex. If you move the pivot a few steps to the right (changing \\(h\\)) and then raise it a little (changing \\(k\\)), the whole see‑saw tilts exactly the same way, but its highest or lowest point is now at the new pivot location.  \n\n---\n\n### How to read the vertex\n\n1. **Identify the completed‑square form.**  \n   Make sure the quadratic is written exactly as \\(a(x-h)^2+k\\).  \n2. **Read off \\(h\\).**  \n   The number inside the parentheses, with the opposite sign, is the \\(x\\)-coordinate of the vertex.  \n3. **Read off \\(k\\).**  \n   The constant term outside the parentheses is the \\(y\\)-coordinate of the vertex.  \n\n> **Remember:** The sign of \\(h\\) inside \\((x-h)\\) is opposite to the vertex’s \\(x\\)-coordinate.  \n\n---\n\n### Worked examples  \n\n**Example 3 (Easy): Find the vertex of \\(y = (x-2)^2 - 4\\).**  \n\n1. **Check the form.** The expression already matches \\(a(x-h)^2+k\\) with \\(a=1\\).  \n2. **Read \\(h\\).** Inside the parentheses we have \\((x-2)\\); therefore \\(h = 2\\).  \n3. **Read \\(k\\).** The term outside is \\(-4\\); thus \\(k = -4\\).  \n\n$$\\text{Vertex } = (h,k) = (2,\\,-4)$$  \n\n**Answer:** The vertex of the parabola is \\((2,\\,-4)\\).  \n\n---\n\n**Example 4 (Hard): Find the vertex of \\(y = -3(x+1)^2 + 7\\).**  \n\n1. **Confirm the structure.** The quadratic is in the form \\(a(x-h)^2+k\\) with \\(a=-3\\).  \n2. **Determine \\(h\\).** Inside the parentheses we see \\((x+1)\\), which can be written as \\((x-(-1))\\). Hence \\(h = -1\\).  \n3. **Determine \\(k\\).** The constant term outside the square is \\(+7\\); therefore \\(k = 7\\).  \n\n$$\\text{Vertex } = (h,k) = (-1,\\,7)$$  \n\n**Answer:** The vertex of the parabola is \\((-1,\\,7)\\).  \n\n---\n\n> **In daily life:** When you throw a ball, its path is a parabola. The highest point the ball reaches is the vertex. Knowing how to read the vertex lets you predict that peak without drawing the whole curve.  \n\n> **Common mistake:** Forgetting to change the sign of the number inside the parentheses. In \\((x+3)^2\\) the vertex’s \\(x\\)-coordinate is \\(-3\\), not \\(+3\\).  \n\nBy mastering the quick read‑off from the completed‑square form, you can locate the turning point of any quadratic instantly. This skill will speed up graphing, solving optimization problems, and checking work in later sections such as the quadratic formula.",
+   "code": ""
+  },
+  {
+   "heading": "4. Roots by Factoring and by Completing the Square",
+   "body": "When we want the **roots** of a quadratic we are looking for the values of \\(x\\) that make the expression equal to zero.  \nIn other words we solve the equation  \n\n$$ax^{2}+bx+c=0$$  \n\nby finding all numbers \\(x\\) that satisfy it.  \n\nThere are two main ways to do this:\n\n* **Factoring** – rewrite the quadratic as a product of two linear factors, then use the fact that a product is zero only when at least one factor is zero.  \n* **Completing the square** – turn the quadratic into a perfect square plus a constant, then isolate the square root.\n\nBoth methods come from the same idea: if we can express the left‑hand side in a simpler form, the equation becomes easy to solve.\n\n> **Note:** A *root* (or *zero*) of a function is a value of \\(x\\) where the function’s output is zero.  \n\n> **In daily life:** Think of a balance scale. If the total weight on the left pan is expressed as a quadratic formula, the roots are the exact weights you could place on the right pan to make the scale perfectly balanced (zero net weight).\n\n---\n\n### 1. Solving by factoring (when possible)\n\nFactoring means writing the quadratic as  \n\n$$ (x - r_1)(x - r_2)=0 $$  \n\nwhere \\(r_1\\) and \\(r_2\\) are numbers we hope to find.  \nBecause a product equals zero only if at least one factor equals zero, we immediately obtain  \n\n$$ x - r_1 = 0 \\quad\\text{or}\\quad x - r_2 = 0 $$  \n\nso the solutions are \\(x=r_1\\) and \\(x=r_2\\).\n\n#### **Example 5 (Easy): Solve \\(x^{2}-9=0\\) by factoring.**\n\nWe look for two numbers whose product is \\(-9\\) and whose sum is \\(0\\) (the coefficient of \\(x\\)).  \n\n1. **Identify the pair.** The numbers \\(3\\) and \\(-3\\) work because \\(3\\cdot(-3)=-9\\) and \\(3+(-3)=0\\).  \n2. **Write the factorisation.**  \n\n   $$ x^{2}-9 = (x+3)(x-3) $$  \n\n3. **Set each factor to zero and solve.**  \n\n   $$ x+3 = 0 \\quad\\Rightarrow\\quad x = -3 $$  \n   $$ x-3 = 0 \\quad\\Rightarrow\\quad x = 3 $$  \n\n**Answer:** The equation \\(x^{2}-9=0\\) has two roots, \\(x = -3\\) and \\(x = 3\\).\n\n---\n\n### 2. Solving by completing the square (when factoring is hard)\n\nIf the quadratic does not factor nicely, we can always rewrite it as a square.  \nStarting from  \n\n$$ ax^{2}+bx+c=0 $$  \n\nwe first make the coefficient of \\(x^{2}\\) equal to \\(1\\) (divide the whole equation by \\(a\\) if \\(a\\neq1\\)). Then we move the constant term to the right side and add the same number to both sides to create a perfect square on the left.\n\nA *perfect square* is an expression of the form \\((x+d)^{2}\\). The number we add is \\(\\left(\\frac{b}{2a}\\right)^{2}\\).\n\n#### **Example 6 (Medium): Solve \\(x^{2}+4x-5=0\\) by completing the square.**\n\n1. **Move the constant term.**  \n\n   $$ x^{2}+4x = 5 $$  \n\n2. **Find the number to complete the square.**  \n   Take half of the coefficient of \\(x\\) (which is \\(4\\)), giving \\(2\\). Square it: \\(2^{2}=4\\).  \n\n3. **Add this number to both sides.**  \n\n   $$ x^{2}+4x+4 = 5+4 $$  \n\n   The left side is now a perfect square:  \n\n   $$ (x+2)^{2} = 9 $$  \n\n4. **Take the square root of both sides.** Remember that both positive and negative roots are possible.  \n\n   $$ x+2 = \\pm 3 $$  \n\n5. **Solve for \\(x\\).**  \n\n   $$ x = -2 \\pm 3 $$  \n\n   This gives two separate solutions:  \n\n   $$ x = -2+3 = 1 $$  \n   $$ x = -2-3 = -5 $$  \n\n**Answer:** The equation \\(x^{2}+4x-5=0\\) has roots \\(x = 1\\) and \\(x = -5\\).\n\n---\n\n### 3. Why the two methods are equivalent\n\nBoth factoring and completing the square rely on the same algebraic principle: a quadratic expression can always be rewritten as a product of linear factors or as a shifted square. Factoring is quicker when the numbers line up nicely; completing the square works for every quadratic, even when the factors are irrational or complex.\n\n> **Remember:** If you can factor the quadratic easily, use factoring. If not, fall back on completing the square – it always works.\n\n---\n\n### 4. Quick checklist for finding roots\n\n1. **Write the equation in the form \\(ax^{2}+bx+c=0\\).**  \n2. **Try to factor:** look for two numbers whose product is \\(ac\\) and whose sum is \\(b\\).  \n3. **If factoring fails,** divide by \\(a\\) (if \\(a\\neq1\\)), move the constant term, and add \\(\\bigl(\\frac{b}{2a}\\bigr)^{2}\\) to both sides.  \n4. **Convert to a square,** take square roots, and solve for \\(x\\).  \n\nUsing these steps systematically will give you the roots of any quadratic you meet in algebra.",
+   "code": ""
+  },
+  {
+   "heading": "5. The Quadratic Formula",
+   "body": "The quadratic formula tells us exactly where a parabola $y=ax^{2}+bx+c$ crosses the $x$‑axis.  \nIn plain words: **if you know the numbers $a$, $b$, and $c$, you can write down the two $x$‑values (roots) without any guesswork**.  \nThese roots are the solutions of the equation $ax^{2}+bx+c=0$.  \nFinding them is useful because many real‑world problems—such as the height of a thrown ball at a given time—lead to a quadratic equation, and the formula gives the answer instantly.\n\n---\n\n### Deriving the formula\n\n1. **Start with the standard quadratic equation**  \n   $$ax^{2}+bx+c=0,$$  \n   where $a\\neq0$ (otherwise the equation would be linear).\n\n2. **Divide every term by $a$** so the coefficient of $x^{2}$ becomes 1.  \n   $$x^{2}+\\frac{b}{a}x+\\frac{c}{a}=0.$$\n\n3. **Move the constant term to the right side** to prepare for completing the square.  \n   $$x^{2}+\\frac{b}{a}x = -\\frac{c}{a}.$$\n\n4. **Complete the square**: add and subtract $\\left(\\frac{b}{2a}\\right)^{2}$ on the left.  \n   $$x^{2}+\\frac{b}{a}x+\\left(\\frac{b}{2a}\\right)^{2}= -\\frac{c}{a}+\\left(\\frac{b}{2a}\\right)^{2}.$$\n\n5. **Rewrite the left side as a perfect square**.  \n   $$\\left(x+\\frac{b}{2a}\\right)^{2}= -\\frac{c}{a}+\\frac{b^{2}}{4a^{2}}.$$\n\n6. **Put the right‑hand side over a common denominator** $4a^{2}$.  \n   $$\\left(x+\\frac{b}{2a}\\right)^{2}= \\frac{-4ac+b^{2}}{4a^{2}}.$$\n\n7. **Take the square root of both sides**, remembering the “plus‑or‑minus’’ sign.  \n   $$x+\\frac{b}{2a}= \\pm\\frac{\\sqrt{b^{2}-4ac}}{2a}.$$\n\n8. **Isolate $x$** by subtracting $\\frac{b}{2a}$ from both sides.  \n   $$x = \\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}.$$\n\n> **Definition:** The **quadratic formula** is  \n> $$x = \\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}.$$  \n> It gives the two possible values of $x$ (the “roots’’) for any quadratic equation $ax^{2}+bx+c=0$.\n\nThe expression under the square root, $b^{2}-4ac$, is called the **discriminant**.  \nIf it is positive, we get two different real roots; if it is zero, the two roots coincide (the parabola just touches the $x$‑axis); if it is negative, the roots are complex numbers and the parabola never crosses the axis.\n\n> **In daily life:** Imagine you are throwing a ball and you want to know when it will hit the ground again. The height $h(t)$ often follows a quadratic model $h(t)= -\\tfrac12gt^{2}+v_{0}t+h_{0}$. Setting $h(t)=0$ and using the quadratic formula tells you the exact times $t$ when the ball lands.\n\n---\n\n### Worked examples\n\n**Example 7 (Easy): Solve $x^{2}-2x-3=0$ using the quadratic formula.**  \n\n1. Identify the coefficients: $a=1$, $b=-2$, $c=-3$.  \n2. Plug them into the formula:  \n   $$x = \\frac{-(-2)\\pm\\sqrt{(-2)^{2}-4(1)(-3)}}{2(1)}.$$  \n3. Simplify inside the square root:  \n   $$x = \\frac{2\\pm\\sqrt{4+12}}{2} = \\frac{2\\pm\\sqrt{16}}{2}.$$  \n4. Evaluate the square root and finish:  \n   $$x = \\frac{2\\pm4}{2} \\;\\Longrightarrow\\; x = \\frac{2+4}{2}=3 \\quad\\text{or}\\quad x = \\frac{2-4}{2}=-1.$$\n\n**Answer:** The equation $x^{2}-2x-3=0$ has two real roots, $x=3$ and $x=-1$.\n\n---\n\n**Example 8 (Medium): Solve $3x^{2}+2x-5=0$ using the quadratic formula.**  \n\n1. Read off the coefficients: $a=3$, $b=2$, $c=-5$.  \n2. Insert them into the formula:  \n   $$x = \\frac{-2\\pm\\sqrt{2^{2}-4(3)(-5)}}{2\\cdot3}.$$  \n3. Compute the discriminant:  \n   $$x = \\frac{-2\\pm\\sqrt{4+60}}{6} = \\frac{-2\\pm\\sqrt{64}}{6}.$$  \n4. Take the square root and simplify:  \n   $$x = \\frac{-2\\pm8}{6}.$$  \n   This gives two possibilities:  \n   - $x = \\frac{-2+8}{6}= \\frac{6}{6}=1$  \n   - $x = \\frac{-2-8}{6}= \\frac{-10}{6}= -\\frac{5}{3}.$\n\n**Answer:** The solutions are $x=1$ and $x=-\\dfrac{5}{3}$.\n\n> **Common mistake:** Forgetting the “$\\pm$’’ after taking the square root. Doing so yields only one root and loses half of the solution set.\n\n---\n\n### Why the formula matters\n\n- **Speed:** Once you have memorised the formula, you can solve any quadratic in seconds, without trial‑and‑error.\n- **Reliability:** The derivation shows the formula works for *every* quadratic with $a\\neq0$, so you never need to check special cases separately.\n- **Insight:** The discriminant tells you the nature of the roots before you even compute them, helping you decide whether real solutions exist.\n\n> **Remember:** Always write the quadratic in the form $ax^{2}+bx+c=0$ first, then apply the formula exactly as derived. Check the discriminant to see whether the answer will be real or complex.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Write the quadratic $2x^{2}+8x+6$ in completed‑square form.",
+   "a": "Factor $2$: $2(x^{2}+4x)+6$. Half of $4$ is $2$, square gives $4$. Add‑subtract inside: $2[(x^{2}+4x+4)-4]+6 = 2(x+2)^{2}-8+6 = 2(x+2)^{2}-2$."
+  },
+  {
+   "level": "Easy",
+   "q": "From the completed‑square form $3(x-1)^{2}+5$, read off the vertex.",
+   "a": "Vertex is $(1,\\;5)$ because the form is $a(x-h)^{2}+k$ with $h=1$, $k=5$."
+  },
+  {
+   "level": "Medium",
+   "q": "Factor $x^{2}-5x+6$ and find its roots.",
+   "a": "Look for two numbers multiplying to $6$ and adding to $-5$: $-2$ and $-3$. So $x^{2}-5x+6=(x-2)(x-3)$. Set each factor to zero: $x-2=0\\Rightarrow x=2$, $x-3=0\\Rightarrow x=3$."
+  },
+  {
+   "level": "Medium",
+   "q": "Solve $4x^{2}+4x-15=0$ by completing the square.",
+   "a": "Divide by $4$: $x^{2}+x-\\frac{15}{4}=0$. Move constant: $x^{2}+x = \\frac{15}{4}$. Half of $1$ is $\\frac12$, square gives $\\frac14$. Add to both sides: $x^{2}+x+\\frac14 = \\frac{15}{4}+\\frac14 = 4$. Left side is $(x+\\frac12)^{2}=4$. Take square root: $x+\\frac12 = \\pm2$. So $x = -\\frac12 \\pm 2$. Hence $x = \\frac32$ or $x = -\\frac52$."
+  },
+  {
+   "level": "Hard",
+   "q": "Use the quadratic formula to solve $7x^{2}-2x-5=0$ and state the nature of the roots.",
+   "a": "Identify $a=7$, $b=-2$, $c=-5$. Compute discriminant: $b^{2}-4ac = (-2)^{2}-4(7)(-5)=4+140=144>0$. Roots are real and distinct.\n$$x=\\frac{-(-2)\\pm\\sqrt{144}}{2\\cdot7}= \\frac{2\\pm12}{14}.$$\nThus $x=\\frac{14}{14}=1$ or $x=\\frac{-10}{14}=-\\frac{5}{7}$."
+  },
+  {
+   "level": "Hard",
+   "q": "A parabola has vertex $( -3 , 4 )$ and passes through the point $(0,1)$. Find its equation in standard form $ax^{2}+bx+c=0$.",
+   "a": "Vertex form: $y = a(x+3)^{2}+4$. Plug $(0,1)$: $1 = a(0+3)^{2}+4 \\Rightarrow 1 = 9a+4 \\Rightarrow 9a = -3 \\Rightarrow a = -\\frac13$.\nExpand: $y = -\\frac13(x^{2}+6x+9)+4 = -\\frac13x^{2}-2x-3+4 = -\\frac13x^{2}-2x+1$.\nMultiply by $3$ to clear denominator: $-x^{2}-6x+3=0$ or $x^{2}+6x-3=0$ (multiply by $-1$). So the standard form is $x^{2}+6x-3=0$."
+  }
+ ],
+ "recap": "This lesson introduces the standard form of a quadratic ax^2+bx+c, explains how the sign of a determines the direction of its parabola, and shows how to rewrite a quadratic by completing the square to find its vertex (h,k). It then covers finding roots by factoring or completing the square, and presents the quadratic formula for quickly obtaining the solutions of ax^2+bx+c=0.",
+ "key_terms": [
+  {
+   "term": "quadratic expression",
+   "meaning": "A polynomial that includes an x^2 term, written as ax^2+bx+c."
+  },
+  {
+   "term": "leading coefficient",
+   "meaning": "The number a that multiplies the highest‑power term x^2."
+  },
+  {
+   "term": "vertex",
+   "meaning": "The point (h,k) where a parabola changes direction; it is the minimum if a>0 and the maximum if a<0."
+  },
+  {
+   "term": "completing the square",
+   "meaning": "A method of rewriting ax^2+bx+c as a(x-h)^2+k by adding and subtracting a suitable constant."
+  },
+  {
+   "term": "factoring",
+   "meaning": "Expressing a quadratic as a product of two linear factors, such as (px+q)(rx+s)."
+  },
+  {
+   "term": "quadratic formula",
+   "meaning": "The solution x = (-b +/- sqrt(b^2-4ac)) / (2a) for the equation ax^2+bx+c=0."
+  },
+  {
+   "term": "discriminant",
+   "meaning": "The value b^2-4ac that determines the number and type of roots of a quadratic."
+  },
+  {
+   "term": "axis of symmetry",
+   "meaning": "The vertical line x = h that passes through the vertex of a parabola."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the sign of the leading coefficient a tell you about a parabola?",
+   "options": [
+    "It determines the width of the parabola",
+    "It tells whether the parabola opens upward or downward",
+    "It gives the location of the vertex",
+    "It indicates the number of real roots"
+   ],
+   "answer": 1,
+   "why": "If a>0 the parabola opens upward; if a<0 it opens downward."
+  },
+  {
+   "q": "In the completed‑square form a(x-h)^2+k, what are h and k?",
+   "options": [
+    "The x‑ and y‑intercepts",
+    "The coordinates of the vertex",
+    "The factors of the quadratic",
+    "The coefficients of x and constant term"
+   ],
+   "answer": 1,
+   "why": "The vertex of the parabola is directly read as (h,k)."
+  },
+  {
+   "q": "Which step is NOT part of completing the square for ax^2+bx+c when a=1?",
+   "options": [
+    "Divide by a",
+    "Add (b/2)^2 to both sides",
+    "Factor out a from the x terms",
+    "Take the square root of both sides"
+   ],
+   "answer": 0,
+   "why": "When a=1 there is no need to divide by a; the other steps are required."
+  },
+  {
+   "q": "If the discriminant b^2-4ac is negative, how many real roots does the quadratic have?",
+   "options": [
+    "Zero",
+    "One",
+    "Two",
+    "Infinitely many"
+   ],
+   "answer": 0,
+   "why": "A negative discriminant means the quadratic has no real roots."
+  },
+  {
+   "q": "What is the vertex of y = 2(x-3)^2+5?",
+   "options": [
+    "(3,5)",
+    "(-3,5)",
+    "(3,-5)",
+    "(-3,-5)"
+   ],
+   "answer": 0,
+   "why": "The vertex is given directly as (h,k) = (3,5)."
+  },
+  {
+   "q": "Using the quadratic formula, what are the solutions of 2x^2-4x+2=0?",
+   "options": [
+    "x=1, x=1",
+    "x=1+sqrt(2), x=1-sqrt(2)",
+    "x=1, x=-1",
+    "x=2, x=0"
+   ],
+   "answer": 0,
+   "why": "The discriminant is zero, so there is one repeated root x = -b/(2a) = 1."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Standard form of a quadratic",
+   "back": "ax^2+bx+c, where a, b, c are constants and a ≠ 0."
+  },
+  {
+   "front": "Leading coefficient",
+   "back": "The coefficient a that multiplies x^2, determines opening direction of the parabola."
+  },
+  {
+   "front": "Vertex of a parabola",
+   "back": "The point (h,k) where the graph changes direction; found from a(x-h)^2+k."
+  },
+  {
+   "front": "Completing the square purpose",
+   "back": "Rewrites a quadratic into a perfect square plus a constant to locate the vertex and solve equations."
+  },
+  {
+   "front": "Factoring method for roots",
+   "back": "Express ax^2+bx+c as (px+q)(rx+s)=0, then set each factor to zero."
+  },
+  {
+   "front": "Quadratic formula",
+   "back": "x = (-b +/- sqrt(b^2-4ac)) / (2a) gives the roots of ax^2+bx+c=0."
+  },
+  {
+   "front": "Discriminant meaning",
+   "back": "b^2-4ac tells whether a quadratic has 0, 1, or 2 real roots."
+  },
+  {
+   "front": "Axis of symmetry",
+   "back": "The vertical line x = h in the form a(x-h)^2+k; it passes through the vertex."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l06-fig1",
+   "title": "y = (x-2)^2 - 3 has vertex (2,-3) and focus (2,-2)",
+   "alt": "Parabola from Completed‑Square Form",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 2,
+   "code": true
+  },
+  {
+   "type": "steps",
+   "title": "Completing the Square",
+   "steps": [
+    {
+     "label": "Factor a",
+     "text": "Factor out a from ax^2+bx"
+    },
+    {
+     "label": "Add/subtract (b/2a)^2",
+     "text": "Add and subtract (b/(2a))^2 inside the brackets"
+    },
+    {
+     "label": "Rewrite as square",
+     "text": "Express as a(x - h)^2 + k"
+    },
+    {
+     "label": "Identify h and k",
+     "text": "h = -b/(2a), k = c - b^2/(4a)"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Parabola Opening Direction",
+   "left": {
+    "name": "a > 0",
+    "points": [
+     "Opens upward",
+     "Vertex is minimum point",
+     "Graph looks like a cup"
+    ]
+   },
+   "right": {
+    "name": "a < 0",
+    "points": [
+     "Opens downward",
+     "Vertex is maximum point",
+     "Graph looks like an upside‑down cup"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "graph",
+   "title": "Quadratic Function and Roots",
+   "fn": "x^2 - 5*x + 6",
+   "xmin": -1,
+   "xmax": 6,
+   "points": [
+    {
+     "x": 2,
+     "y": 0,
+     "label": "root",
+     "open": false
+    },
+    {
+     "x": 3,
+     "y": 0,
+     "label": "root",
+     "open": false
+    }
+   ],
+   "caption": "The parabola y = x^2-5x+6 crosses the x‑axis at x=2 and x=3",
+   "after": 3
+  },
+  {
+   "type": "facts",
+   "title": "Quadratic Formula Components",
+   "items": [
+    {
+     "value": "b^2 - 4ac",
+     "label": "Discriminant"
+    },
+    {
+     "value": "-b",
+     "label": "Numerator part"
+    },
+    {
+     "value": "2a",
+     "label": "Denominator"
+    },
+    {
+     "value": "sqrt(b^2 - 4ac)",
+     "label": "Square‑root term"
+    }
+   ],
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

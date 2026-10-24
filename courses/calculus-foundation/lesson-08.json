@@ -1,0 +1,367 @@
+{
+ "title": "Trigonometry Basics",
+ "summary": "This lesson introduces the radian measure, the unit circle, and the basic trigonometric functions sine, cosine, and tangent. Students will learn how to read and use these values for common angles.",
+ "objectives": [
+  "Convert between degrees and radians",
+  "Identify coordinates of points on the unit circle",
+  "Compute sine, cosine, and tangent for standard angles",
+  "Apply trigonometric values to solve simple real‑world problems"
+ ],
+ "prerequisites": "Students should be comfortable with basic arithmetic and understand the concept of an angle measured in degrees.",
+ "why": [
+  "Trigonometry is used in fields such as engineering, physics, computer graphics, and navigation to model periodic phenomena and calculate distances.",
+  "Understanding radians and the unit circle provides a foundation for calculus, where angles are naturally expressed in radian measure."
+ ],
+ "sections": [
+  {
+   "heading": "1. Degrees vs. Radians",
+   "body": "When we measure angles we can use two different units: **degrees** and **radians**.  \nA *degree* is the old‑fashioned way that most people first meet in school: a full turn around a circle is split into $360$ equal parts, so one degree is one‑three‑hundred‑and‑sixtieth of a complete rotation.\n\nA *radian* is a unit that comes directly from the geometry of a circle. Imagine a circle with radius $r$. If we take a piece of the circle’s edge that is exactly the same length as the radius, and then swing that piece around the centre, the angle we sweep out is **one radian**. In other words, a radian is the angle whose arc length equals the radius.\n\n> **Definition:** One radian is the angle subtended at the centre of a circle by an arc whose length is equal to the radius of the circle.\n\nWhy is this useful? Because the radian ties together three fundamental quantities of a circle: radius, arc length, and angle. When we use radians, many formulas in calculus and physics become much simpler – for example, the length of an arc is simply $s = r\\theta$ when $\\theta$ is measured in radians.\n\n### Relating degrees and radians\n\nSince a full circle is both $360^\\circ$ and $2\\pi$ radians (the circumference of a unit circle is $2\\pi$), we can set up a proportion:\n\n$$\n\\frac{360^\\circ}{2\\pi\\ \\text{rad}} = \\frac{1^\\circ}{\\displaystyle\\frac{2\\pi}{360}\\ \\text{rad}} = \\frac{1\\ \\text{rad}}{\\displaystyle\\frac{180}{\\pi}^\\circ}.\n$$\n\nFrom this proportion we obtain the two conversion formulas:\n\n- To change **degrees to radians**, multiply by $\\displaystyle\\frac{\\pi}{180}$:\n  $$\\theta_{\\text{rad}} = \\theta_{\\text{deg}}\\times\\frac{\\pi}{180}.$$\n\n- To change **radians to degrees**, multiply by $\\displaystyle\\frac{180}{\\pi}$:\n  $$\\theta_{\\text{deg}} = \\theta_{\\text{rad}}\\times\\frac{180}{\\pi}.$$\n\nThese formulas work for any angle, whether it is small (like $30^\\circ$) or large (like $720^\\circ$).\n\n> **Note:** The number $\\pi$ (about $3.14159$) is the ratio of a circle’s circumference to its diameter. It appears naturally when we move from degrees to radians because a full circle has $2\\pi$ radians.\n\n### Worked examples\n\n**Example 1 (Easy): Convert $90^\\circ$ to radians.**  \nWe want to express a right angle in radian measure.\n\n1. Write down the conversion factor from degrees to radians: $\\displaystyle\\frac{\\pi}{180}$.  \n2. Multiply the given degree measure by this factor:  \n   $$90^\\circ \\times \\frac{\\pi}{180}.$$\n3. Simplify the fraction $\\frac{90}{180}= \\frac{1}{2}$:  \n   $$\\frac{1}{2}\\pi = \\frac{\\pi}{2}.$$\n\n**Answer:** $90^\\circ = \\displaystyle\\frac{\\pi}{2}\\ \\text{radians}.$  \n\n---\n\n**Example 2 (Easy): Convert $\\displaystyle\\frac{\\pi}{3}$ radians to degrees.**  \nNow we start with a radian measure and want degrees.\n\n1. Write down the conversion factor from radians to degrees: $\\displaystyle\\frac{180}{\\pi}$.  \n2. Multiply the radian value by this factor:  \n   $$\\frac{\\pi}{3}\\times\\frac{180}{\\pi}.$$\n3. Cancel the $\\pi$ and compute $\\frac{180}{3}=60$:  \n   $$60^\\circ.$$\n\n**Answer:** $\\displaystyle\\frac{\\pi}{3}\\ \\text{radians} = 60^\\circ.$  \n\n> **Remember:** Always keep track of the units while you multiply. The $\\pi$ in the numerator cancels with the $\\pi$ in the denominator, leaving a pure number that becomes the degree measure.\n\n### Why the conversion matters\n\nWhen you later study the unit circle, you will see angles written in radians because the coordinates $(\\cos\\theta,\\sin\\theta)$ are defined most naturally with $\\theta$ in radians. However, many textbooks and everyday problems still give angles in degrees. Being comfortable moving between the two systems lets you read any problem and apply the right formulas without confusion.\n\n> **In daily life:** A pizza cutter often marks a full turn as $360^\\circ$, but engineers designing rotating parts may specify the same turn as $2\\pi$ radians because the equations for angular speed become $ \\omega = \\frac{\\Delta\\theta}{\\Delta t}$ with $\\theta$ in radians.\n\nWith the conversion formulas mastered, you are ready to explore the unit circle, where each radian corresponds to a precise point on the circle’s edge. This bridge between geometry (arc length) and algebra (angles) is the foundation of all later calculus work.",
+   "code": ""
+  },
+  {
+   "heading": "2. The Unit Circle",
+   "body": "The unit circle is a simple picture that lets us turn any angle into a pair of numbers we can work with.  \nImagine a perfect circle drawn on a piece of paper, and make the distance from the centre to any point on the edge exactly **1**.  \nThat distance is called the **radius**. Because the radius is 1, every point \\((x,y)\\) on the edge satisfies a very neat relationship:\n\n$$x^{2}+y^{2}=1$$  \n\nThis equation tells us that the square of the horizontal coordinate plus the square of the vertical coordinate always adds up to 1.  \n\n> **Definition:** *Unit circle* – a circle with centre at the origin \\((0,0)\\) of a coordinate system and radius 1.\n\n---\n\n### How an angle becomes a point\n\nWhen we talk about an angle, we usually picture a ray (a half‑line) that starts at the centre of the circle and rotates around it.  \nThe amount of rotation, measured from the positive $x$‑axis, is the **angle**.  \n\nIf we stop the ray at any position, it will intersect the circle at exactly one point.  \nThat intersection point has coordinates \\((x,y)\\).  \nBecause the radius is 1, the coordinates are simply the **cosine** and **sine** of the angle:\n\n$$x = \\cos\\theta,\\qquad y = \\sin\\theta$$  \n\nwhere \\(\\theta\\) is the angle measured in radians (or degrees, after conversion).  \n\nWhy does this work? Think of a right‑angled triangle drawn inside the circle, with the hypotenuse equal to the radius 1.  \nThe side next to the angle is the horizontal distance from the centre to the point – that is exactly the definition of cosine.  \nThe side opposite the angle is the vertical distance – that is the definition of sine.  \n\n> **Note:** The terms *cosine* and *sine* are just names for the horizontal and vertical coordinates of the point where the angle’s ray meets the unit circle.\n\n---\n\n### Everyday comparison\n\nPicture a clock face. The centre of the clock is the origin, and the tip of the minute hand points to a spot on the circle.  \nIf the minute hand points straight to 12 o’clock, the point is \\((0,1)\\).  \nIf it points to 3 o’clock, the point is \\((1,0)\\).  \nEvery other minute position gives a different pair \\((x,y)\\) that still lies on the same circle of radius 1.  \nSo the unit circle is just a mathematical “clock” that works for any angle, not only the ones we use on a real clock.\n\n---\n\n### Worked example: Easy  \n\n**Example 3 (Easy): Find the coordinates of the point at 0 radians.**  \n\n1. Identify the angle: \\(0\\) radians means no rotation from the positive $x$‑axis.  \n2. Use the definitions \\(x=\\cos\\theta\\) and \\(y=\\sin\\theta\\) with \\(\\theta=0\\).  \n   $$x = \\cos 0 = 1$$  \n   $$y = \\sin 0 = 0$$  \n3. Write the coordinate pair as \\((x,y)\\).  \n\n**Answer:** The point is \\((1,\\,0)\\). It lies at the rightmost point of the unit circle.\n\n---\n\n### What the circle tells us about angles larger than a half‑turn\n\nAngles can be bigger than \\(180^\\circ\\) (or \\(\\pi\\) radians).  \nWhen the ray goes past the left side of the circle, the \\(x\\)‑coordinate becomes negative, while the \\(y\\)‑coordinate may stay positive or become negative depending on how far we have turned.  \nThe unit circle therefore gives us a quick visual way to know the sign (positive or negative) of sine and cosine for any angle.\n\n> **In daily life:** Pilots use a similar idea when they talk about “heading” – the direction an aircraft points measured from north. The heading can be turned into a point on a unit circle to compute wind components.\n\n---\n\n### Worked example: Medium  \n\n**Example 4 (Medium): Determine the coordinates for an angle of \\(135^\\circ\\).**  \n\n1. Convert the angle to radians because the unit‑circle formulas use radians.  \n   $$\\theta = 135^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{3\\pi}{4}\\ \\text{radians}$$  \n2. Find the cosine and sine of \\(\\frac{3\\pi}{4}\\).  \n   - The reference angle (the acute angle to the nearest axis) is \\(45^\\circ\\) or \\(\\frac{\\pi}{4}\\).  \n   - For \\(\\frac{3\\pi}{4}\\) we are in the second quadrant, where cosine is negative and sine is positive.  \n   $$x = \\cos\\frac{3\\pi}{4} = -\\cos\\frac{\\pi}{4} = -\\frac{\\sqrt{2}}{2}$$  \n   $$y = \\sin\\frac{3\\pi}{4} = \\sin\\frac{\\pi}{4} = \\frac{\\sqrt{2}}{2}$$  \n3. Combine the results into the coordinate pair.  \n\n**Answer:** The point is \\(\\displaystyle\\left(-\\frac{\\sqrt{2}}{2},\\ \\frac{\\sqrt{2}}{2}\\right)\\). It lies on the upper‑left part of the unit circle.\n\n---\n\n### Why the unit circle is useful in calculus\n\nLater we will need to differentiate and integrate trigonometric functions.  \nHaving the geometric picture of the unit circle lets us remember key facts instantly:  \n\n* The maximum distance from the centre is always 1, so \\(|\\sin\\theta|\\le 1\\) and \\(|\\cos\\theta|\\le 1\\).  \n* The circle’s symmetry shows that \\(\\sin(\\pi-\\theta)=\\sin\\theta\\) and \\(\\cos(\\pi-\\theta)=-\\cos\\theta\\), which become handy identities.  \n\n> **Remember:** Every angle, no matter how large, can be reduced to a point on the unit circle by “wrapping” it around the circle repeatedly. This idea of “wrapping” is called **periodicity**, and it will appear again when we study limits and series.\n\nWith the unit circle firmly understood, we can now move on to reading the sine and cosine values directly from the picture, and later use them as building blocks for more advanced calculus concepts.",
+   "code": ""
+  },
+  {
+   "heading": "3. Sine and Cosine from the Unit Circle",
+   "body": "The sine of an angle tells us how high a point sits on the unit circle, while the cosine tells us how far it sits to the right.  \nImagine a circle that is exactly one unit wide – that is, its radius is 1.  \nIf we start at the point $(1,0)$ on the far right and walk around the circle counter‑clockwise by an angle $\\theta$, we end at a new point.  \nThe coordinates of that point are written as $(x,y)$.  \n\n> **Definition:** For any angle $\\theta$, the **cosine** of $\\theta$ is the $x$‑coordinate of the point on the unit circle, and the **sine** of $\\theta$ is the $y$‑coordinate.  \n\nWhy does this work?  The unit circle satisfies the equation $x^{2}+y^{2}=1$ because every point is exactly one unit from the origin.  By definition of the trigonometric functions on a right‑triangle, the ratios of the sides are the same as these coordinates when the triangle is placed inside the circle.  Therefore the $x$‑coordinate behaves like the adjacent side over the hypotenuse (which is 1), giving the cosine, and the $y$‑coordinate behaves like the opposite side over the hypotenuse, giving the sine.\n\nThink of the unit circle as a compass rose on a map.  The cosine tells you how far east‑west you have moved, and the sine tells you how far north‑south you have moved.  If you need to know your exact position after turning a certain angle, you just read off the $x$ and $y$ values.\n\n---\n\n### Working with the definition\n\nWhen an angle is given, we locate its terminal side on the circle and read the coordinates.  \nFor angles that are multiples of $30^\\circ$ or $45^\\circ$, the coordinates are simple fractions or radicals that we can remember.\n\n> **Note:** Because the radius is 1, the coordinates themselves are the values of sine and cosine; no further division by the radius is needed.\n\n> **Remember:** The sign (positive or negative) of sine and cosine depends on the quadrant where the angle ends:\n> - Quadrant I (0° to 90°): both are positive.\n> - Quadrant II (90° to 180°): sine positive, cosine negative.\n> - Quadrant III (180° to 270°): both negative.\n> - Quadrant IV (270° to 360°): sine negative, cosine positive.\n\n---\n\n**Example 5 (Medium): Using the unit circle, find $\\sin\\!\\left(\\frac{\\pi}{6}\\right)$ and $\\cos\\!\\left(\\frac{\\pi}{6}\\right)$.**  \n\nWe want the sine and cosine of a $30^\\circ$ angle (since $\\frac{\\pi}{6}=30^\\circ$).\n\n1. **Locate the angle** – Starting from $(1,0)$, rotate $30^\\circ$ counter‑clockwise. The terminal side meets the unit circle in the first quadrant.  \n   $$\\theta = \\frac{\\pi}{6}\\ \\text{rad} = 30^\\circ$$  \n\n2. **Draw the right triangle** – Drop a perpendicular from the point on the circle to the $x$‑axis. This creates a right triangle with hypotenuse 1 (the radius). The adjacent side (along the $x$‑axis) has length $\\cos\\theta$, and the opposite side (along the $y$‑axis) has length $\\sin\\theta$.  \n\n3. **Use known geometry** – The $30^\\circ\\!-\\!60^\\circ\\!-\\!90^\\circ$ triangle has side ratios $1 : \\sqrt{3} : 2$; after scaling so the hypotenuse equals 1, the sides become $\\frac{1}{2}$ (adjacent) and $\\frac{\\sqrt{3}}{2}$ (opposite).  \n   $$\\cos\\!\\left(\\frac{\\pi}{6}\\right)=\\frac{1}{2},\\qquad \\sin\\!\\left(\\frac{\\pi}{6}\\right)=\\frac{\\sqrt{3}}{2}$$  \n\n**Answer:** $\\displaystyle \\sin\\!\\left(\\frac{\\pi}{6}\\right)=\\frac{\\sqrt{3}}{2}$ and $\\displaystyle \\cos\\!\\left(\\frac{\\pi}{6}\\right)=\\frac{1}{2}$.\n\n---\n\n**Example 6 (Medium): Find $\\sin(210^\\circ)$ and $\\cos(210^\\circ)$.**  \n\nThe angle $210^\\circ$ is larger than $180^\\circ$, so it lands in Quadrant III.\n\n1. **Determine the reference angle** – Subtract $180^\\circ$ to find the acute angle measured from the negative $x$‑axis.  \n   $$\\text{Reference angle}=210^\\circ-180^\\circ=30^\\circ$$  \n\n2. **Find the sine and cosine of the reference angle** – From Example 5 we already know  \n   $$\\sin 30^\\circ=\\frac{\\sqrt{3}}{2},\\qquad \\cos 30^\\circ=\\frac{1}{2}$$  \n\n3. **Apply the sign rules for Quadrant III** – Both sine and cosine are negative there.  \n   $$\\sin 210^\\circ = -\\frac{\\sqrt{3}}{2},\\qquad \\cos 210^\\circ = -\\frac{1}{2}$$  \n\n**Answer:** $\\displaystyle \\sin(210^\\circ)=-\\frac{\\sqrt{3}}{2}$ and $\\displaystyle \\cos(210^\\circ)=-\\frac{1}{2}$.\n\n---\n\n> **In daily life:** When you aim a laser pointer at a wall, the horizontal offset from the center is given by the cosine of the tilt angle, and the vertical offset by the sine.  Knowing these values lets you predict exactly where the dot will land.\n\nBy remembering that sine and cosine are simply the $y$‑ and $x$‑coordinates of a point on the unit circle, you can quickly read off values for many common angles and correctly handle signs in any quadrant. This geometric view also makes later topics—such as the periodic nature of trigonometric functions—much easier to visualise.",
+   "code": ""
+  },
+  {
+   "heading": "4. Tangent as Ratio of Sine and Cosine",
+   "body": "When we talk about the **tangent** of an angle θ, we are really looking at a simple relationship between the two most familiar trigonometric functions: sine and cosine.  \n\n> **Definition:** The tangent of θ, written $\\tan\\theta$, is defined as the ratio  \n\n$$\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}$$  \n\nIn words, “tangent equals sine divided by cosine.”  \n\nWhy does this definition make sense?  Imagine the unit circle, a circle of radius 1 centred at the origin of a coordinate plane.  Any angle θ measured from the positive $x$‑axis sweeps out a point $P(\\cos\\theta,\\sin\\theta)$ on the circle.  If we draw a line from the origin through $P$ and let it intersect the vertical line $x=1$, the height of that intersection point is exactly $\\frac{\\sin\\theta}{\\cos\\theta}$.  That height is what we call the tangent of the angle.  So the ratio $\\sin\\theta/\\cos\\theta$ captures how steep the line is – just like the slope of a hill tells you how steep it feels when you walk up it.\n\n> **Note:** Because a ratio compares two numbers, tangent is undefined whenever the denominator $\\cos\\theta$ is zero.  This happens at angles where the point on the unit circle lies exactly on the vertical axis, i.e., at $θ=90^\\circ$ (or $\\frac{\\pi}{2}$ radians), $θ=270^\\circ$ (or $\\frac{3\\pi}{2}$), and every $180^\\circ$ thereafter.\n\nThink of a **tangent** as the “steepness” of a road that starts at the origin and goes outwards.  If the road points straight up (a vertical line), its steepness is infinite – we cannot write a finite number for it.  That is why $\\tan 90^\\circ$ does not exist in ordinary arithmetic.\n\n---\n\n**Example 7 (Medium): Compute $\\tan\\!\\left(\\dfrac{\\pi}{4}\\right)$.**  \n\nWe want the tangent of the angle $\\frac{\\pi}{4}$ radians (which is $45^\\circ$).  \n\n1. **Find $\\sin\\!\\left(\\frac{\\pi}{4}\\right)$ and $\\cos\\!\\left(\\frac{\\pi}{4}\\right)$.**  \n   From the unit circle, both sine and cosine of $45^\\circ$ are $\\frac{\\sqrt2}{2}$.  \n\n   $$\\sin\\!\\left(\\frac{\\pi}{4}\\right)=\\frac{\\sqrt2}{2},\\qquad \n     \\cos\\!\\left(\\frac{\\pi}{4}\\right)=\\frac{\\sqrt2}{2}$$  \n\n2. **Form the ratio $\\sin\\theta/\\cos\\theta$.**  \n   $$\\tan\\!\\left(\\frac{\\pi}{4}\\right)=\\frac{\\sin\\!\\left(\\frac{\\pi}{4}\\right)}{\\cos\\!\\left(\\frac{\\pi}{4}\\right)}$$  \n\n3. **Simplify the fraction.**  \n   Because the numerator and denominator are the same, the fraction equals 1.  \n\n   $$\\tan\\!\\left(\\frac{\\pi}{4}\\right)=1$$  \n\n**Answer:** $\\displaystyle \\tan\\!\\left(\\frac{\\pi}{4}\\right)=1$ (a dimension‑less number).\n\n---\n\nNow that we have seen a simple case, let us look at a more challenging angle and also see why some angles give no tangent value.\n\n> **Common mistake:** Forgetting that cosine can be negative.  The sign of $\\cos\\theta$ matters because it appears in the denominator; a negative denominator flips the sign of the tangent.\n\n**Example 8 (Hard): Compute $\\tan(120^\\circ)$ and explain why $\\tan(90^\\circ)$ is undefined.**  \n\nWe will evaluate the tangent for $120^\\circ$ and then discuss the special case $90^\\circ$.  \n\n1. **Convert the angle to a reference angle in the first quadrant.**  \n   $120^\\circ$ is in the second quadrant. Its reference angle is $180^\\circ-120^\\circ=60^\\circ$.  \n\n2. **Find $\\sin(120^\\circ)$ and $\\cos(120^\\circ)$ using the reference angle.**  \n   - Sine is positive in the second quadrant, so $\\sin(120^\\circ)=\\sin(60^\\circ)=\\frac{\\sqrt3}{2}$.  \n   - Cosine is negative in the second quadrant, so $\\cos(120^\\circ)=-\\cos(60^\\circ)=-\\frac12$.  \n\n   $$\\sin(120^\\circ)=\\frac{\\sqrt3}{2},\\qquad \n     \\cos(120^\\circ)=-\\frac12$$  \n\n3. **Form the ratio $\\sin\\theta/\\cos\\theta$.**  \n\n   $$\\tan(120^\\circ)=\\frac{\\sin(120^\\circ)}{\\cos(120^\\circ)}\n     =\\frac{\\frac{\\sqrt3}{2}}{-\\frac12}$$  \n\n4. **Simplify the fraction.**  \n\n   $$\\tan(120^\\circ)=\\frac{\\sqrt3}{2}\\times\\left(-\\frac{2}{1}\\right)=-\\sqrt3$$  \n\n5. **Explain why $\\tan(90^\\circ)$ is undefined.**  \n   At $90^\\circ$ the point on the unit circle is $(0,1)$.  \n   - $\\sin(90^\\circ)=1$ (the $y$‑coordinate).  \n   - $\\cos(90^\\circ)=0$ (the $x$‑coordinate).  \n\n   Plugging into the definition gives  \n\n   $$\\tan(90^\\circ)=\\frac{\\sin(90^\\circ)}{\\cos(90^\\circ)}=\\frac{1}{0}$$  \n\n   Division by zero is not allowed in ordinary arithmetic, so the expression has no finite value.  Geometrically, the line through the origin and the point $(0,1)$ is vertical, and a vertical line has infinite slope.  \n\n**Answer:** $\\displaystyle \\tan(120^\\circ)=-\\sqrt3\\;$ (a dimension‑less number).  $\\tan(90^\\circ)$ is undefined because $\\cos(90^\\circ)=0$, making the ratio $\\frac{1}{0}$ impossible.\n\n---\n\n> **Remember:** $\\tan\\theta$ exists only when $\\cos\\theta\\neq0$.  Whenever the angle lands on the top or bottom of the unit circle (odd multiples of $90^\\circ$), the tangent does not have a real number value.\n\nUnderstanding tangent as a ratio helps you quickly compute many angles, spot where the function breaks, and see its connection to the slope of a line – a concept you will meet again in calculus when we study rates of change.",
+   "code": ""
+  },
+  {
+   "heading": "5. Trigonometric Values for Common Angles",
+   "body": "The trigonometric functions – sine, cosine and tangent – have special, easy‑to‑remember values at a few angles that appear over and over in geometry, physics and everyday calculations.  \nKnowing these “common‑angle” values lets you solve problems quickly without a calculator, and it also makes the unit‑circle picture clearer because you can see exactly where the points lie.\n\n> **Note:** The angles we list are given in both degrees (°) and radians (rad).  \n> One full turn around a circle is $360^\\circ$ or $2\\pi$ rad, so $90^\\circ = \\frac{\\pi}{2}$, $45^\\circ = \\frac{\\pi}{4}$, etc.\n\n---\n\n### 1. 0° (or $0$ rad)\n\nAt the very start of the unit circle the point is $(1,0)$.  \n* The $x$‑coordinate is the cosine, so $\\cos 0^\\circ = 1$.  \n* The $y$‑coordinate is the sine, so $\\sin 0^\\circ = 0$.  \n* Tangent is the ratio $\\frac{\\sin}{\\cos}$, therefore $\\tan 0^\\circ = 0$.\n\n---\n\n### 2. 30° (or $\\frac{\\pi}{6}$ rad)\n\nImagine an equilateral triangle split in half; each half is a $30^\\circ\\!-\\!60^\\circ\\!-\\!90^\\circ$ right triangle.  \nThe sides are in the ratio $1 : \\sqrt{3} : 2$ (short leg : long leg : hypotenuse).  \nDividing each side by the hypotenuse $2$ puts the triangle on the unit circle, giving:\n\n$$\n\\sin 30^\\circ = \\frac{1}{2},\\qquad\n\\cos 30^\\circ = \\frac{\\sqrt{3}}{2},\\qquad\n\\tan 30^\\circ = \\frac{\\sin 30^\\circ}{\\cos 30^\\circ}= \\frac{1}{\\sqrt{3}} = \\frac{\\sqrt{3}}{3}.\n$$\n\n---\n\n### 3. 45° (or $\\frac{\\pi}{4}$ rad)\n\nA right‑isosceles triangle has the two legs equal.  \nIf the hypotenuse is $1$ (the radius of the unit circle), each leg is $\\frac{\\sqrt{2}}{2}$, so\n\n$$\n\\sin 45^\\circ = \\cos 45^\\circ = \\frac{\\sqrt{2}}{2},\\qquad\n\\tan 45^\\circ = \\frac{\\sin 45^\\circ}{\\cos 45^\\circ}=1.\n$$\n\n> **Example 9 (Hard): Verify that $\\sin^{2}\\theta + \\cos^{2}\\theta = 1$ for $\\theta = 45^\\circ$.**  \n> **Question:** Show the Pythagorean identity holds at $45^\\circ$.  \n\n> 1. Write down the known sine and cosine values for $45^\\circ$.  \n>    $$\\sin 45^\\circ = \\frac{\\sqrt{2}}{2},\\qquad \\cos 45^\\circ = \\frac{\\sqrt{2}}{2}.$$  \n> 2. Square each value.  \n>    $$\\sin^{2} 45^\\circ = \\left(\\frac{\\sqrt{2}}{2}\\right)^{2}= \\frac{2}{4}= \\frac{1}{2},$$  \n>    $$\\cos^{2} 45^\\circ = \\left(\\frac{\\sqrt{2}}{2}\\right)^{2}= \\frac{1}{2}.$$  \n> 3. Add the squares and simplify.  \n>    $$\\sin^{2} 45^\\circ + \\cos^{2} 45^\\circ = \\frac{1}{2} + \\frac{1}{2}=1.$$  \n\n**Answer:** The identity $\\sin^{2}\\theta + \\cos^{2}\\theta = 1$ is true for $\\theta = 45^\\circ$, confirming the Pythagorean relationship on the unit circle.\n\n---\n\n### 4. 60° (or $\\frac{\\pi}{3}$ rad)\n\nThis is the complement of $30^\\circ$; the sine and cosine swap places.\n\n$$\n\\sin 60^\\circ = \\frac{\\sqrt{3}}{2},\\qquad\n\\cos 60^\\circ = \\frac{1}{2},\\qquad\n\\tan 60^\\circ = \\frac{\\sqrt{3}}{1}= \\sqrt{3}.\n$$\n\n---\n\n### 5. 90° (or $\\frac{\\pi}{2}$ rad)\n\nAt the top of the unit circle the point is $(0,1)$.  \n\n$$\n\\sin 90^\\circ = 1,\\qquad\n\\cos 90^\\circ = 0,\\qquad\n\\tan 90^\\circ = \\frac{1}{0}\\text{ (undefined).}\n$$\n\n---\n\n### 6. Multiples beyond 90°  \n\nBecause the unit circle repeats every $360^\\circ$, you can obtain values for angles like $180^\\circ$, $270^\\circ$, and $360^\\circ$ by reflecting the points across the axes.  \nA quick table:\n\n| Angle | $\\sin$ | $\\cos$ | $\\tan$ |\n|------|--------|--------|--------|\n| $0^\\circ$ | $0$ | $1$ | $0$ |\n| $30^\\circ$ | $\\frac12$ | $\\frac{\\sqrt3}{2}$ | $\\frac{\\sqrt3}{3}$ |\n| $45^\\circ$ | $\\frac{\\sqrt2}{2}$ | $\\frac{\\sqrt2}{2}$ | $1$ |\n| $60^\\circ$ | $\\frac{\\sqrt3}{2}$ | $\\frac12$ | $\\sqrt3$ |\n| $90^\\circ$ | $1$ | $0$ | undefined |\n| $180^\\circ$ | $0$ | $-1$ | $0$ |\n| $270^\\circ$ | $-1$ | $0$ | undefined |\n| $360^\\circ$ | $0$ | $1$ | $0$ |\n\n> **Remember:** Tangent is undefined whenever cosine is $0$ (at $90^\\circ$ and $270^\\circ$), because division by zero is not allowed.\n\n---\n\n### 7. Using the table in a problem  \n\n> **Example 10 (Hard): A ladder leans against a wall forming a $30^\\circ$ angle with the ground. If the ladder is $5\\,$m long, find the height it reaches.**  \n\n> **Question:** Determine the vertical distance from the ground to the top of the ladder.  \n\n> 1. Visualise the ladder, wall and ground as a right triangle. The ladder is the hypotenuse, the angle between ladder and ground is $30^\\circ$, and the height we need is the side opposite that angle.  \n>    $$\\text{height}= (\\text{hypotenuse})\\times \\sin 30^\\circ.$$  \n> 2. Insert the known length and the sine value from the table.  \n>    $$\\text{height}=5\\;\\text{m}\\times \\frac12.$$  \n> 3. Multiply to obtain the height.  \n>    $$\\text{height}=2.5\\;\\text{m}.$$  \n\n**Answer:** The ladder reaches a height of $2.5\\,$m up the wall.\n\n> **In daily life:** Knowing that $\\sin 30^\\circ = \\frac12$ lets you quickly halve a length when you see a $30^\\circ$ slope, such as the pitch of a roof or the angle of a ramp.\n\n---\n\nWith these six angles and their multiples memorised, you can read off most simple trigonometric values instantly. When a new angle appears, you can often relate it to one of the familiar ones by symmetry, periodicity (adding $360^\\circ$), or by using the complementary relationship $\\sin(90^\\circ\\!-\\!\\theta)=\\cos\\theta$. This toolbox will speed up calculations throughout calculus and physics.",
+   "code": ""
+  },
+  {
+   "heading": "6. Quick Real‑World Application",
+   "body": "When we need to know how far two points are from each other, trigonometry lets us turn a “turn‑and‑go” description into a straight‑line distance.  \nThink of a map as a giant piece of graph paper.  If you walk a certain distance in one direction, then turn a known angle and walk again, the two legs form a triangle.  The side opposite the turn is the direct distance back to where you started.  By using the sine and cosine values for the turn angle, we can break each leg into horizontal (east‑west) and vertical (north‑south) pieces, add them up, and then apply the Pythagorean theorem.\n\n> **In daily life:**  Pilots, sailors, hikers and even video‑game characters use this idea to find the shortest route back to a base or to a target.\n\n### How the method works\n\n1. **Convert the turn into a standard angle.**  \n   Angles measured from the positive $x$‑axis (east) counter‑clockwise are called *standard position*.  In our example the boat turns $60^\\circ$ north of east, which is exactly $60^\\circ$ in standard position.\n\n2. **Find the horizontal and vertical components of each leg.**  \n   For a leg of length $r$ that makes an angle $\\theta$ with the $x$‑axis, the horizontal component is $r\\cos\\theta$ and the vertical component is $r\\sin\\theta$.  \n   This follows from the definition of cosine and sine on the unit circle: the $x$‑coordinate of a point on the circle is $\\cos\\theta$, the $y$‑coordinate is $\\sin\\theta$.  Scaling the unit circle by $r$ multiplies both coordinates by $r$.\n\n3. **Add the components to get the total displacement.**  \n   The total horizontal shift is the sum of all horizontal components; the total vertical shift is the sum of all vertical components.\n\n4. **Use the Pythagorean theorem** to turn the two‑component displacement into a single straight‑line distance $d$:  \n   $$d = \\sqrt{(\\text{total horizontal})^2 + (\\text{total vertical})^2}.$$\n\n> **Remember:**  Always keep the same unit (kilometres, metres, miles…) for every length you use; otherwise the final distance will be wrong.\n\n### Worked example\n\n**Example 11 (Hard): Boat navigation problem**  \nA boat travels east for $3\\ \\text{km}$, then turns $60^\\circ$ north of east and travels another $4\\ \\text{km}$. Find the straight‑line distance from the starting point.\n\n1. **Identify the two legs and their angles.**  \n   - First leg: $r_1 = 3\\ \\text{km}$, angle $\\theta_1 = 0^\\circ$ (pure east).  \n   - Second leg: $r_2 = 4\\ \\text{km}$, angle $\\theta_2 = 60^\\circ$ (north of east).\n\n2. **Compute horizontal components.**  \n   - For the first leg: $x_1 = r_1\\cos\\theta_1 = 3\\cos 0^\\circ = 3\\cdot 1 = 3\\ \\text{km}$.  \n   - For the second leg: $x_2 = r_2\\cos\\theta_2 = 4\\cos 60^\\circ = 4\\cdot \\tfrac12 = 2\\ \\text{km}$.  \n   $$x_{\\text{total}} = x_1 + x_2 = 3 + 2 = 5\\ \\text{km}.$$\n\n3. **Compute vertical components.**  \n   - First leg has no north‑south movement: $y_1 = 0$.  \n   - Second leg: $y_2 = r_2\\sin\\theta_2 = 4\\sin 60^\\circ = 4\\cdot \\tfrac{\\sqrt3}{2} = 2\\sqrt3\\ \\text{km}$.  \n   $$y_{\\text{total}} = y_1 + y_2 = 0 + 2\\sqrt3 \\approx 3.46\\ \\text{km}.$$\n\n4. **Apply the Pythagorean theorem.**  \n   $$d = \\sqrt{x_{\\text{total}}^{\\,2} + y_{\\text{total}}^{\\,2}}\n        = \\sqrt{5^{2} + (2\\sqrt3)^{2}}\n        = \\sqrt{25 + 12}\n        = \\sqrt{37}\n        \\approx 6.08\\ \\text{km}.$$\n\n**Answer:** The boat is about $6.1\\ \\text{km}$ straight‑line distance from its starting point.\n\n### Why this matters\n\nImagine you are a rescue team trying to locate a lost hiker who walked 2 km north, then 1 km east.  By turning the description into components, you can plot the hiker’s exact position on a map without guessing.  The same calculation tells a drone how far to fly directly to the hiker, saving fuel and time.\n\n> **Note:**  The sine and cosine values for $30^\\circ$, $45^\\circ$, $60^\\circ$ are memorised early in trigonometry because they appear in many real‑world problems like this one.\n\n### Quick checklist for any navigation problem\n\n1. Write down each leg’s length and its angle measured from east (counter‑clockwise).  \n2. Use $r\\cos\\theta$ for east‑west (horizontal) and $r\\sin\\theta$ for north‑south (vertical).  \n3. Add all horizontals together, add all verticals together.  \n4. Square each total, add the squares, and take the square root.\n\n> **Common mistake:**  Forgetting to keep the angle in the same unit (degrees vs. radians) when using a calculator.  Most calculators expect degrees for these common angles, but if you have set the mode to radians you will get a wrong component.\n\nBy mastering this step‑by‑step breakdown, you can turn any “go this way, then that way” description into a simple distance formula.  That skill is the bridge from the abstract unit circle to the concrete world of maps, GPS, and everyday navigation.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Convert $135^\\circ$ to radians.",
+   "a": "$135^\\circ \\times \\frac{\\pi}{180} = \\frac{135\\pi}{180} = \\frac{3\\pi}{4}$ radians."
+  },
+  {
+   "level": "Easy",
+   "q": "On the unit circle, what are the coordinates of the point that corresponds to $\\theta = \\frac{\\pi}{3}$?",
+   "a": "$\\cos\\frac{\\pi}{3} = \\frac12$, $\\sin\\frac{\\pi}{3} = \\frac{\\sqrt3}{2}$, so the point is $\\left(\\frac12,\\;\\frac{\\sqrt3}{2}\\right)$."
+  },
+  {
+   "level": "Medium",
+   "q": "Find $\\tan 75^\\circ$ using the angle‑addition formula $\\tan(A+B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}$ with $75^\\circ = 45^\\circ+30^\\circ$.",
+   "a": "\n1. $\\tan45^\\circ = 1$, $\\tan30^\\circ = \\frac{1}{\\sqrt3}$.\n2. $\\tan75^\\circ = \\frac{1 + \\frac{1}{\\sqrt3}}{1 - 1\\cdot\\frac{1}{\\sqrt3}} = \\frac{\\frac{\\sqrt3+1}{\\sqrt3}}{\\frac{\\sqrt3-1}{\\sqrt3}} = \\frac{\\sqrt3+1}{\\sqrt3-1}$.\n3. Multiply numerator and denominator by $(\\sqrt3+1)$: $\\frac{(\\sqrt3+1)^2}{(\\sqrt3)^2-1^2} = \\frac{3+2\\sqrt3+1}{3-1} = \\frac{4+2\\sqrt3}{2}=2+\\sqrt3$.\nSo $\\tan75^\\circ = 2+\\sqrt3$."
+  },
+  {
+   "level": "Medium",
+   "q": "A ladder leans against a wall forming a $60^\\circ$ angle with the ground. If the foot of the ladder is $5$ m from the wall, how long is the ladder?",
+   "a": "\n1. The distance from foot to wall is the adjacent side: $5 = L\\cos60^\\circ$.\n2. $\\cos60^\\circ = \\frac12$, so $5 = L\\cdot\\frac12$.\n3. Solve for $L$: $L = \\frac{5}{1/2}=10$ m.\nThus the ladder is $10$ m long."
+  },
+  {
+   "level": "Hard",
+   "q": "Prove that $\\sin^2\\theta + \\cos^2\\theta = 1$ using the unit circle definition.",
+   "a": "\n1. Any point on the unit circle satisfies $x^2 + y^2 = 1$ (radius $=1$).\n2. By definition, $x = \\cos\\theta$ and $y = \\sin\\theta$.\n3. Substitute: $(\\cos\\theta)^2 + (\\sin\\theta)^2 = 1$.\nHence $\\sin^2\\theta + \\cos^2\\theta = 1$."
+  },
+  {
+   "level": "Hard",
+   "q": "Solve for $\\theta$ in $0\\le\\theta<2\\pi$ given $\\displaystyle \\tan\\theta = -\\sqrt{3}$.",
+   "a": "\n1. $\\tan\\theta = -\\sqrt{3}$ corresponds to reference angle $\\frac{\\pi}{3}$ because $\\tan\\frac{\\pi}{3} = \\sqrt{3}$.\n2. Tangent is negative in Quadrants II and IV.\n3. Therefore $\\theta = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$ (Quadrant II) or $\\theta = 2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$ (Quadrant IV).\n4. Both angles lie in $[0,2\\pi)$.\nSo $\\theta = \\frac{2\\pi}{3}$ or $\\theta = \\frac{5\\pi}{3}$."
+  }
+ ],
+ "recap": "This lesson introduces how angles are measured in degrees and radians, explains the unit circle and how it defines sine, cosine and tangent, and lists the basic trigonometric values for common angles. It shows why radians are useful, how the unit circle links angles to coordinate points, and gives a real‑world example of using trigonometric ratios to find distances.",
+ "key_terms": [
+  {
+   "term": "Degree",
+   "meaning": "A unit of angle where a full circle equals 360 degrees."
+  },
+  {
+   "term": "Radian",
+   "meaning": "An angle whose arc length equals the radius of the circle; a full circle equals 2 pi radians."
+  },
+  {
+   "term": "Unit Circle",
+   "meaning": "A circle with centre at the origin and radius 1, used to define trigonometric functions."
+  },
+  {
+   "term": "Sine",
+   "meaning": "The y‑coordinate of the point on the unit circle at a given angle."
+  },
+  {
+   "term": "Cosine",
+   "meaning": "The x‑coordinate of the point on the unit circle at a given angle."
+  },
+  {
+   "term": "Tangent",
+   "meaning": "The ratio of sine to cosine for an angle."
+  },
+  {
+   "term": "Common Angles",
+   "meaning": "Angles like 0, 30, 45, 60, 90 degrees (or 0, pi/6, pi/4, pi/3, pi/2 radians) with known sine, cosine and tangent values."
+  },
+  {
+   "term": "Conversion",
+   "meaning": "Changing an angle measurement from degrees to radians or vice‑versa using the factor pi/180."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the radian measure of a 180 degree angle?",
+   "options": [
+    "pi",
+    "2 pi",
+    "pi/2",
+    "3 pi"
+   ],
+   "answer": 0,
+   "why": "180 degrees equals half a turn, which is pi radians."
+  },
+  {
+   "q": "On the unit circle, what are the coordinates of the point corresponding to 90 degrees?",
+   "options": [
+    "(0,1)",
+    "(1,0)",
+    "(-1,0)",
+    "(0,-1)"
+   ],
+   "answer": 0,
+   "why": "At 90 degrees the point is straight up, giving x=0 and y=1."
+  },
+  {
+   "q": "Which of the following is the definition of cosine?",
+   "options": [
+    "y‑coordinate on the unit circle",
+    "x‑coordinate on the unit circle",
+    "ratio opposite over hypotenuse",
+    "ratio adjacent over opposite"
+   ],
+   "answer": 1,
+   "why": "Cosine equals the x‑coordinate of the unit‑circle point."
+  },
+  {
+   "q": "If cosθ = 1/2, what is tanθ?",
+   "options": [
+    "sqrt(3)",
+    "1/sqrt(3)",
+    "sqrt(3)/3",
+    "0"
+   ],
+   "answer": 0,
+   "why": "When cosθ=1/2, sinθ= sqrt(3)/2, so tanθ = sinθ/cosθ = (sqrt(3)/2)/(1/2)= sqrt(3)."
+  },
+  {
+   "q": "How many radians are in one full turn?",
+   "options": [
+    "2 pi",
+    "pi",
+    "4 pi",
+    "pi/2"
+   ],
+   "answer": 0,
+   "why": "A full circle equals 2 pi radians."
+  },
+  {
+   "q": "Which angle has sine 0 and cosine -1?",
+   "options": [
+    "180 degrees",
+    "90 degrees",
+    "0 degrees",
+    "270 degrees"
+   ],
+   "answer": 0,
+   "why": "At 180 degrees the point is (-1,0), giving sine 0 and cosine -1."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Degree",
+   "back": "360 degrees = one full rotation."
+  },
+  {
+   "front": "Radian",
+   "back": "2 pi radians = one full rotation; radian ties arc length to radius."
+  },
+  {
+   "front": "Unit Circle Definition",
+   "back": "Circle centered at (0,0) with radius 1; x^2 + y^2 = 1."
+  },
+  {
+   "front": "Sine of an angle",
+   "back": "y‑coordinate of the point on the unit circle at that angle."
+  },
+  {
+   "front": "Cosine of an angle",
+   "back": "x‑coordinate of the point on the unit circle at that angle."
+  },
+  {
+   "front": "Tangent formula",
+   "back": "tanθ = sinθ / cosθ."
+  },
+  {
+   "front": "Common angle 45 degrees",
+   "back": "sin = sqrt(2)/2, cos = sqrt(2)/2, tan = 1."
+  },
+  {
+   "front": "Convert 60 degrees to radians",
+   "back": "60 degrees = pi/3 radians (multiply by pi/180)."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l08-fig1",
+   "title": "Circle of radius 1 centred at the origin; point P shows the start of angle measurement.",
+   "alt": "Unit Circle",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 1,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l08-protractor-with-radian-marks",
+   "title": "A protractor showing both degree and radian measurements.",
+   "alt": "A protractor showing both degree and radian measurements.",
+   "priority": 8,
+   "picture_title": "Protractor with Radian Marks",
+   "kind": "photo",
+   "subject": "A close‑up view of a standard protractor where the outer edge is marked in degrees (0°–360°) and the inner edge is marked in radians (0–2π). This helps students see how the two units correspond on a familiar tool.",
+   "layout": "Protractor centered, degree markings on the outer rim, radian markings on the inner rim, with a small legend linking key angles (e.g., 90° = π/2).",
+   "labels": [
+    "0°",
+    "90°",
+    "180°",
+    "270°",
+    "360°",
+    "0",
+    "π/2",
+    "π",
+    "3π/2",
+    "2π"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l08-map-navigation-example",
+   "title": "Using trigonometry to find the straight‑line distance between two points on a map.",
+   "alt": "Using trigonometry to find the straight‑line distance between two points on a map.",
+   "priority": 7,
+   "picture_title": "Map Navigation Example",
+   "kind": "illustration",
+   "subject": "A simple map showing a starting point, a walk north for a certain distance, a turn of a known angle, and a second walk. The triangle formed is labelled with sides and the turn angle, illustrating how sine and cosine break the legs into horizontal and vertical components.",
+   "layout": "Map background with a path drawn in two segments, a right‑hand triangle overlay, angle label at the turn, side labels a, b, and c.",
+   "labels": [
+    "Start",
+    "Turn",
+    "Distance A",
+    "Distance B",
+    "Direct distance",
+    "θ"
+   ],
+   "after": 5
+  },
+  {
+   "type": "compare",
+   "title": "Degrees vs. Radians",
+   "left": {
+    "name": "Degrees",
+    "points": [
+     "Full circle = 360°",
+     "Common in everyday life",
+     "1° = 1/360 of a turn"
+    ]
+   },
+   "right": {
+    "name": "Radians",
+    "points": [
+     "Full circle = 2π rad",
+     "Based on arc length = radius",
+     "1 rad = arc length equal to radius"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Sine and Cosine on the Unit Circle",
+   "items": [
+    {
+     "name": "Cosine",
+     "role": "x‑coordinate of the point"
+    },
+    {
+     "name": "Sine",
+     "role": "y‑coordinate of the point"
+    },
+    {
+     "name": "Angle θ",
+     "role": "measured from positive x‑axis"
+    },
+    {
+     "name": "Point (cosθ, sinθ)",
+     "role": "position on the circle"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "facts",
+   "title": "Common Angle Values",
+   "items": [
+    {
+     "value": "0",
+     "label": "sin 0 = 0, cos 0 = 1"
+    },
+    {
+     "value": "π/6 (30°)",
+     "label": "sin = 1/2, cos = √3/2"
+    },
+    {
+     "value": "π/4 (45°)",
+     "label": "sin = √2/2, cos = √2/2"
+    },
+    {
+     "value": "π/3 (60°)",
+     "label": "sin = √3/2, cos = 1/2"
+    },
+    {
+     "value": "π/2 (90°)",
+     "label": "sin = 1, cos = 0"
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "graph",
+   "title": "Tangent as Ratio of Sine and Cosine",
+   "fn": "tan(x)",
+   "xmin": -1.4,
+   "xmax": 1.4,
+   "points": [
+    {
+     "x": 0,
+     "y": 0,
+     "label": "0",
+     "open": false
+    }
+   ],
+   "caption": "Graph of tan θ = sin θ / cos θ showing the vertical asymptotes at ±π/2.",
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

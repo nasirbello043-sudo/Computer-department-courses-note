@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **7** | Uploaded: **41** | Covers waiting: **6**
+Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
 
 ## Course covers
 
@@ -100,6 +100,22 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "MATHS 104"
 - Subtitle under it, smaller: "Discover Patterns, Shapes, and Numbers Everywhere"
 The spine shows "MATHS 104" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Calculus Foundation
+
+Save as:
+```
+cover-calculus-foundation.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a green colour palette, showing a lively scene built around: graph of a function, tangent line, derivative symbol (dy/dx), integral sign (∫), limit approaching a point, area under a curve, parabolic curve, infinitesimal slice, rate of change illustration, sequence converging to a limit.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "CALCULUS FOUNDATION"
+- Subtitle under it, smaller: "Unlocking Change: From Slopes to Areas"
+The spine shows "CALCULUS FOUNDATION" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -257,6 +273,221 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 2: Structure of Carbon Compounds
+
+Save as:
+```
+organic-chemistry-l02-covalent-bond-sharing-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: Shows the overlap of two atomic orbitals with the shared electron pair between them, highlighting the concept of electron sharing that creates a covalent bond.
+
+Layout: Two atoms on opposite sides, their orbitals overlapping in the centre with a double‑headed arrow indicating the shared electron pair; labels point to each atom and the shared electrons.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Atom A"
+- "Atom B"
+- "Shared electrons"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Calculus Foundation
+
+### Lesson 1: Exponents and Radicals
+
+Save as:
+```
+calculus-foundation-l01-exponent-blocks.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A set of identical cubes labeled with the base number a, arranged in a row of n cubes to represent aⁿ as repeated multiplication.
+
+Layout: A horizontal row of n identical cubes with the label "a" on each; an arrow points from the row to the expression aⁿ.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "a"
+- "aⁿ"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 2: Factoring and Simplifying
+
+Save as:
+```
+calculus-foundation-l02-gcf-block-model.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: Three algebraic terms are represented by stacked blocks; the largest common block (the GCF) is highlighted and pulled out, leaving smaller remainder blocks.
+
+Layout: Three vertical stacks side‑by‑side; a colored block representing the GCF is shaded across all three and an arrow points to a separate box containing the factored expression.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Term 1"
+- "Term 2"
+- "Term 3"
+- "GCF"
+- "Remainder"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+calculus-foundation-l02-difference-of-squares-area.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A large square of side a is drawn, a smaller square of side b is removed, leaving an L‑shaped region that is split into two rectangles representing (a‑b) and (a+b).
+
+Layout: Large outer square with inner square cut out; the remaining L‑shape is divided by a line into two rectangles, each labelled with its dimensions.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "a²"
+- "b²"
+- "a‑b"
+- "a+b"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: Functions and Graphs
+
+Save as:
+```
+calculus-foundation-l04-vending-machine-analogy.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A real vending machine with a coin slot, selection buttons, and a single snack compartment, illustrating the idea that each input leads to a single, definite output.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 5: Lines and Slope
+
+Save as:
+```
+calculus-foundation-l05-hill-gradient.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple drawing of a hill with a horizontal line (run) and a vertical line (rise) marked, illustrating how the steepness (gradient) is the ratio of rise to run.
+
+Layout: Hill on the right, horizontal run line at the base, vertical rise line from base to top, with arrows and ratio label.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "run"
+- "rise"
+- "gradient"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+calculus-foundation-l05-perpendicular-ramp-intersection.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A side view drawing of a ramp that rises at a 45° angle and meets a horizontal platform, highlighting the negative reciprocal relationship of their slopes.
+
+Layout: Ramp on the left, horizontal platform on the bottom, right angle marker at the junction, with slope labels on each line.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "slope 1"
+- "slope -1"
+- "right angle"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 7: Exponential and Logarithmic Functions
+
+Save as:
+```
+calculus-foundation-l07-bacterial-colony-growth.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The photo shows a clear, circular bacterial colony that gets larger each day, illustrating how a quantity can multiply by the same factor in equal time intervals.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 8: Trigonometry Basics
+
+Save as:
+```
+calculus-foundation-l08-protractor-with-radian-marks.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A close‑up view of a standard protractor where the outer edge is marked in degrees (0°–360°) and the inner edge is marked in radians (0–2π). This helps students see how the two units correspond on a familiar tool.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 9: Trigonometric Identities
+
+Save as:
+```
+calculus-foundation-l09-ladder-angle-problem.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A wooden ladder rests against a vertical wall, forming an angle θ with the ground; the lengths of the ladder, wall, and ground are labeled.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 10: Limits from Graphs
+
+Save as:
+```
+calculus-foundation-l10-road-approach-analogy.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple road drawing with a point marked at the corner; arrows from both sides indicate approaching the point, mirroring left‑hand and right‑hand limits.
+
+Layout: Road runs horizontally across the image, corner point centered, arrows on each side pointing toward the corner, labels on arrows for "approach from left" and "approach from right".
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "corner"
+- "left approach"
+- "right approach"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
