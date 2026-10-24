@@ -290,17 +290,17 @@ Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: The diagram shows a tetrahedral carbon atom with four distinct substituents (e.g., H, Cl, CH3, OH). Two versions are displayed: the original molecule and its mirror image, highlighting that they cannot be rotated to match each other.
+Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how the two cannot be rotated to match each other.
 
-Layout: Two tetrahedral models side‑by‑side, each with bonds drawn as wedges and dashes; arrows point from each model to a label indicating 'original' and 'mirror image'.
+Layout: Two tetrahedral models side‑by‑side, left is the original molecule, right is its mirror image, with dashed lines indicating the mirror plane.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "C"
-- "H"
-- "Cl"
-- "CH3"
-- "OH"
-- "mirror image"
+- "R1"
+- "R2"
+- "R3"
+- "R4"
+- "mirror"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.

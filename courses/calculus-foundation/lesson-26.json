@@ -1,60 +1,18 @@
 {
- "plan": {
-  "summary": "This lesson shows how to use definite integrals to find areas under a curve, areas between curves, and to solve motion problems. Students will learn step‑by‑step methods and work through several examples.",
-  "objectives": [
-   "Calculate the area under a single function on a given interval",
-   "Find the area enclosed between two functions",
-   "Solve basic motion problems using position, velocity, and acceleration integrals",
-   "Set up and evaluate definite integrals for real‑world scenarios"
-  ],
-  "prerequisites": "Students should already understand definite integrals, the Fundamental Theorem of Calculus, and basic algebraic manipulation.",
-  "why": [
-   "Area calculations are essential in fields like engineering, physics, and economics, where you need to measure quantities such as material usage, probability, or total cost over time.",
-   "Motion problems connect calculus to everyday experiences—predicting how far a car travels, how a ball falls, or how a rocket accelerates—making the abstract ideas concrete and useful."
-  ],
-  "calculation": true,
-  "sections": [
-   {
-    "heading": "1. Review: Definite Integral as Area",
-    "points": "Recall that the definite integral of f(x) from a to b gives the net signed area under the curve.",
-    "examples": []
-   },
-   {
-    "heading": "2. Area Under a Positive Curve",
-    "points": "Learn to compute the area when the function stays above the x‑axis on the interval.",
-    "examples": [
-     "Easy: Find the area under f(x)=2x from x=0 to x=3.",
-     "Medium: Compute the area under f(x)=x^2+1 from x=−1 to x=2."
-    ]
-   },
-   {
-    "heading": "3. Area Between Two Curves",
-    "points": "Subtract the lower function from the upper function and integrate the difference.",
-    "examples": [
-     "Easy: Find the area between y= x and y= x^2 on [0,1].",
-     "Medium: Determine the area enclosed by y=4−x^2 and y= x+1.",
-     "Hard: Compute the area between y= sin x and y= cos x from x=0 to x=π/2."
-    ]
-   },
-   {
-    "heading": "4. Motion: Position, Velocity, and Acceleration",
-    "points": "Use integrals to go from acceleration to velocity to position, applying initial conditions.",
-    "examples": [
-     "Easy: A particle has velocity v(t)=3t. Find the distance traveled from t=0 to t=4.",
-     "Medium: Acceleration a(t)=6t, with v(0)=2 m/s and s(0)=5 m. Find s(3).",
-     "Hard: A car’s acceleration is a(t)=12−2t (m/s^2). Given v(0)=0 and s(0)=0, find the total distance traveled by t=5 s."
-    ]
-   },
-   {
-    "heading": "5. Putting It All Together: Mixed Application Problem",
-    "points": "Combine area and motion ideas in a single, multi‑step problem.",
-    "examples": [
-     "Hard: A water tank is being filled so that the water height h(t) satisfies dh/dt = 0.5√t (m/s). The tank’s cross‑sectional area varies with height as A(h)=2h+1 (m^2). Find the total volume of water added from t=0 to t=9 s."
-    ]
-   }
-  ]
- },
- "secs": [
+ "title": "Applications of Integration",
+ "summary": "This lesson shows how to use definite integrals to find areas under a curve, areas between curves, and to solve motion problems. Students will learn step‑by‑step methods and work through several examples.",
+ "objectives": [
+  "Calculate the area under a single function on a given interval",
+  "Find the area enclosed between two functions",
+  "Solve basic motion problems using position, velocity, and acceleration integrals",
+  "Set up and evaluate definite integrals for real‑world scenarios"
+ ],
+ "prerequisites": "Students should already understand definite integrals, the Fundamental Theorem of Calculus, and basic algebraic manipulation.",
+ "why": [
+  "Area calculations are essential in fields like engineering, physics, and economics, where you need to measure quantities such as material usage, probability, or total cost over time.",
+  "Motion problems connect calculus to everyday experiences—predicting how far a car travels, how a ball falls, or how a rocket accelerates—making the abstract ideas concrete and useful."
+ ],
+ "sections": [
   {
    "heading": "1. Review: Definite Integral as Area",
    "body": "The definite integral is a way to add up infinitely many tiny pieces of a region.  \nImagine you have a curve drawn by the function $f(x)$ on a piece of paper, and you want to know how much paper lies **under** that curve between two vertical lines $x=a$ and $x=b$.  \n\n> **Definition:** The **definite integral** $\\displaystyle\\int_{a}^{b} f(x)\\,dx$ is the *net signed area* between the graph of $f$ and the $x$‑axis from $x=a$ to $x=b$.\n\n### Why does this work?\n\nThink of the interval $[a,b]$ as a long strip that we cut into many thin rectangles.  \nIf we split the interval into $n$ equal parts, each part has width $\\Delta x=\\frac{b-a}{n}$.  \nAt a chosen point $x_i^*$ inside the $i$‑th sub‑interval we evaluate the height $f(x_i^*)$.  \nThe area of the tiny rectangle is approximately $f(x_i^*)\\Delta x$.  \n\nAdding all those rectangles gives a sum  \n\n$$S_n=\\sum_{i=1}^{n} f(x_i^*)\\,\\Delta x.$$\n\nWhen we let the number of rectangles grow larger and larger ($n\\to\\infty$), the width $\\Delta x$ becomes infinitesimally small, and the sum approaches a single number. That limit is exactly the definite integral:\n\n$$\\int_{a}^{b} f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^{n} f(x_i^*)\\,\\Delta x.$$\n\nBecause each rectangle can be **above** the $x$‑axis (positive height) or **below** it (negative height), the integral counts area above the axis as positive and area below as negative. That is why we call it *net signed* area.\n\n> **Note:** If $f(x)$ is always non‑negative on $[a,b]$, the integral equals the ordinary geometric area. If $f(x)$ is sometimes negative, the integral subtracts the area that lies below the axis.\n\n### Everyday comparison\n\nPicture a garden with a fence that follows the curve $y=f(x)$.  \nYou want to know how much soil you would need to fill the garden from the fence down to ground level.  \nWhere the fence is above ground, you need soil (positive area).  \nWhere the fence dips below ground, you actually have a hole that you would have to **remove** soil from (negative area).  \nThe definite integral tells you the total amount of soil after both filling and digging are taken into account.\n\n### Simple example\n\nLet $f(x)=x$ on the interval $[0,3]$.  \nThe rectangles become thinner and thinner, and the limit gives\n\n$$\\int_{0}^{3} x\\,dx = \\frac{1}{2}x^{2}\\Big|_{0}^{3}= \\frac{1}{2}(9-0)=4.5.$$\n\nGeometrically this is the area of a right triangle with base $3$ and height $3$, which is $\\frac{1}{2}\\times3\\times3=4.5$ square units.\n\n### What the integral tells us\n\n- It provides a single number that summarizes the whole region under a curve.\n- It works for any shape that can be described by a function, no matter how wavy.\n- It is the foundation for later topics such as finding areas between curves, volumes, and solving motion problems.\n\n> **In daily life:** Engineers use definite integrals to calculate the amount of material needed for a curved beam, and economists use them to find total profit over time when profit changes continuously.\n\n> **Common mistake:** Forgetting that parts of the curve below the $x$‑axis count **negative** area. Always check the sign of $f(x)$ on the interval before interpreting the integral as a plain geometric area.\n\n> **Remember:** The definite integral is a limit of sums of tiny rectangles; it gives the net signed area between a curve and the $x$‑axis from $a$ to $b$. This idea will be the building block for all the applications that follow.",
@@ -81,6 +39,8 @@
    "code": ""
   }
  ],
+ "examples": [],
+ "examples_version": 3,
  "practice": [
   {
    "level": "Easy",
@@ -112,5 +72,249 @@
    "q": "A particle moves along a line with velocity \\(v(t)=t^{3}-6t^{2}+9t\\) (m/s) for \\(0\\le t\\le 5\\). (a) Find the total distance traveled. (b) Find the displacement.",
    "a": "\n**Step 1 – Find when velocity changes sign** (critical points): solve \\(v(t)=0\\).\n\\(t^{3}-6t^{2}+9t = t(t^{2}-6t+9)=t(t-3)^{2}=0\\).\nZeros at \\(t=0\\) and \\(t=3\\) (double root). Sign analysis:\n- For \\(0<t<3\\), pick \\(t=1\\): \\(v(1)=1-6+9=4>0\\).\n- For \\(3<t\\le5\\), pick \\(t=4\\): \\(v(4)=64-96+36=4>0\\).\nVelocity never negative, so distance = displacement.\n**(a) Distance**\n\\[\n\\text{Distance}= \\int_{0}^{5} v(t)\\,dt = \\int_{0}^{5} (t^{3}-6t^{2}+9t)\\,dt\n= \\Big[\\frac{t^{4}}{4}-2t^{3}+ \\frac{9t^{2}}{2}\\Big]_{0}^{5}\n\\]\n\\[\n= \\left(\\frac{625}{4} - 2\\cdot125 + \\frac{9\\cdot25}{2}\\right) - 0\n= \\frac{625}{4} - 250 + \\frac{225}{2}\n= \\frac{625}{4} - \\frac{1000}{4} + \\frac{450}{4}\n= \\frac{75}{4}=18.75\\ \\text{m}.\n\\]\n**(b) Displacement**\nSince velocity never negative, displacement equals the same value: \\(18.75\\) m.\n---\nThese questions give you practice moving from the geometric meaning of integrals to concrete calculations in geometry and physics. Keep working through each step carefully!"
   }
+ ],
+ "recap": "This lesson reviews how the definite integral gives the net signed area under a curve and how it can be used to find area under a single positive function, area between two curves, and to relate velocity and acceleration to position. It explains why slicing a region into thin rectangles leads to the integral formula. The concepts are then combined in a mixed application problem that shows how the same idea works for volume and distance.",
+ "key_terms": [
+  {
+   "term": "definite integral",
+   "meaning": "The limit of the sum of areas of thin rectangles under a curve from a to b, giving net signed area."
+  },
+  {
+   "term": "net signed area",
+   "meaning": "Area counted positive above the x‑axis and negative below, summed over the interval."
+  },
+  {
+   "term": "upper function",
+   "meaning": "The function with the larger y‑value on a given interval when finding area between curves."
+  },
+  {
+   "term": "lower function",
+   "meaning": "The function with the smaller y‑value on a given interval when finding area between curves."
+  },
+  {
+   "term": "velocity",
+   "meaning": "The derivative of position with respect to time; rate of change of position."
+  },
+  {
+   "term": "acceleration",
+   "meaning": "The derivative of velocity with respect to time; rate of change of velocity."
+  },
+  {
+   "term": "initial condition",
+   "meaning": "A known value of a function at a specific point, used to determine the constant of integration."
+  },
+  {
+   "term": "mixed application problem",
+   "meaning": "A problem that uses integration for both area/volume and motion concepts together."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the definite integral of f(x) from a to b represent?",
+   "options": [
+    "The average value of f on [a,b]",
+    "The net signed area between the graph of f and the x‑axis from a to b",
+    "The maximum value of f on [a,b]",
+    "The length of the curve y=f(x)"
+   ],
+   "answer": 1,
+   "why": "It is defined as the net signed area under the curve between the limits."
+  },
+  {
+   "q": "If f(x) is always non‑negative on [a,b], what does the integral of f(x) dx equal?",
+   "options": [
+    "The area under the curve",
+    "The perimeter of the region",
+    "The volume of a solid of revolution",
+    "The average rate of change"
+   ],
+   "answer": 0,
+   "why": "When f is non‑negative, the integral gives the actual area under the curve."
+  },
+  {
+   "q": "To find the area between two curves, which expression is integrated?",
+   "options": [
+    "upper(x)+lower(x)",
+    "upper(x)-lower(x)",
+    "lower(x)-upper(x)",
+    "upper(x)*lower(x)"
+   ],
+   "answer": 1,
+   "why": "The vertical distance is upper minus lower, giving a positive area."
+  },
+  {
+   "q": "If velocity v(t) = ds/dt, how do you obtain position s(t)?",
+   "options": [
+    "Integrate v(t) dt and add a constant",
+    "Differentiate v(t) with respect to t",
+    "Multiply v(t) by t",
+    "Take the limit of v(t) as t approaches infinity"
+   ],
+   "answer": 0,
+   "why": "Integration reverses differentiation, giving s(t) plus a constant determined by an initial condition."
+  },
+  {
+   "q": "What is the role of an initial condition in integration?",
+   "options": [
+    "It tells you the slope of the function",
+    "It determines the constant of integration",
+    "It changes the variable of integration",
+    "It eliminates the need for limits"
+   ],
+   "answer": 1,
+   "why": "The constant C is fixed by knowing the function’s value at a specific point."
+  },
+  {
+   "q": "In a mixed application problem, which of the following could be found using a single integral?",
+   "options": [
+    "Area of a region and distance traveled",
+    "Volume of a solid and the object's mass",
+    "Temperature and pressure",
+    "Probability and frequency"
+   ],
+   "answer": 0,
+   "why": "The same integral concept can compute area and accumulated distance."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definite integral definition",
+   "back": "Limit of sum of thin rectangle areas under a curve, giving net signed area between a and b."
+  },
+  {
+   "front": "Net signed area",
+   "back": "Area counted positive above the x‑axis and negative below, summed over the interval."
+  },
+  {
+   "front": "How to compute area under a positive curve",
+   "back": "Integrate the function from a to b; A = integral_a^b f(x) dx."
+  },
+  {
+   "front": "Area between two curves formula",
+   "back": "A = integral_a^b [upper(x) - lower(x)] dx."
+  },
+  {
+   "front": "Relationship between velocity and position",
+   "back": "v(t) = ds/dt and s(t) = integral v(t) dt + C."
+  },
+  {
+   "front": "Relationship between acceleration and velocity",
+   "back": "a(t) = dv/dt and v(t) = integral a(t) dt + C."
+  },
+  {
+   "front": "What is an initial condition?",
+   "back": "A known value of the function at a specific point, used to find the constant of integration."
+  },
+  {
+   "front": "Mixed application problem purpose",
+   "back": "Shows how one integral can measure area, volume, or distance by adding up tiny pieces."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l26-area-between-curves",
+   "title": "Shows the region between two functions and how its height is the difference of the functions.",
+   "alt": "Shows the region between two functions and how its height is the difference of the functions.",
+   "priority": 8,
+   "picture_title": "Area Between Curves",
+   "kind": "illustration",
+   "subject": "A picture of two curves on the same set of axes, the upper curve in blue, the lower curve in red, and the shaded area between them. Small vertical strips illustrate the height = upper‑minus‑lower.",
+   "layout": "Curves run left‑to‑right across the page; the shaded region fills the space between them; vertical slice lines are drawn at several x‑values with arrows pointing to the height label.",
+   "labels": [
+    "upper curve",
+    "lower curve",
+    "height",
+    "shaded area",
+    "x‑axis",
+    "slice"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l26-position-velocity-acceleration",
+   "title": "Depicts a moving object with its position, velocity and acceleration graphs aligned in time.",
+   "alt": "Depicts a moving object with its position, velocity and acceleration graphs aligned in time.",
+   "priority": 9,
+   "picture_title": "Position‑Velocity‑Acceleration",
+   "kind": "illustration",
+   "subject": "A side view of a car moving along a straight road, with three small graphs underneath: position vs. time, velocity vs. time, and acceleration vs. time. Arrows indicate how the area under the velocity graph gives displacement.",
+   "layout": "Car illustration centered at top; three rectangular graph panels stacked below, each labelled; arrows from the car to the position graph, then to velocity and acceleration graphs.",
+   "labels": [
+    "position",
+    "velocity",
+    "acceleration",
+    "time",
+    "area under v(t)"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l26-volume-from-rotating-area",
+   "title": "Shows a region under a curve being rotated around the x‑axis to form a solid.",
+   "alt": "Shows a region under a curve being rotated around the x‑axis to form a solid.",
+   "priority": 7,
+   "picture_title": "Volume from Rotating Area",
+   "kind": "illustration",
+   "subject": "A shaded region under a curve f(x) between x = a and x = b, with the region revolved around the x‑axis to create a three‑dimensional solid. Cross‑sectional disks are shown to illustrate the integral of π[f(x)]² dx.",
+   "layout": "Left side: 2‑D plot with shaded area; right side: 3‑D solid with transparent slices; lines connect the region to the solid, and a small disk slice is highlighted.",
+   "labels": [
+    "curve f(x)",
+    "axis of rotation",
+    "solid of revolution",
+    "disk slice"
+   ],
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Motion quantities",
+   "items": [
+    {
+     "name": "Position s(t)",
+     "role": "where the object is at time t"
+    },
+    {
+     "name": "Velocity v(t)",
+     "role": "rate of change of position"
+    },
+    {
+     "name": "Acceleration a(t)",
+     "role": "rate of change of velocity"
+    },
+    {
+     "name": "Integral of v(t)",
+     "role": "gives position up to a constant"
+    }
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Mixed application: area → volume → distance",
+   "steps": [
+    {
+     "label": "Find area",
+     "text": "Integrate the cross‑sectional function to get A(x)."
+    },
+    {
+     "label": "Form volume",
+     "text": "Integrate A(x) along the length to get V."
+    },
+    {
+     "label": "Relate to motion",
+     "text": "If V(t) changes, differentiate to get rate of change, or integrate a velocity function to get distance."
+    }
+   ],
+   "loop": false,
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
  ]
 }

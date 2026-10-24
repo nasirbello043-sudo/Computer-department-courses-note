@@ -1,0 +1,317 @@
+{
+ "title": "Mixed Calculus Problem-Solving",
+ "summary": "This lesson brings together all the calculus ideas learned so far and shows how to solve challenging mixed problems. Students practice integrated techniques and get ready for exam-style questions.",
+ "objectives": [
+  "Combine limits, differentiation, and integration methods in a single problem",
+  "Identify which calculus tool is needed for each part of a complex question",
+  "Solve multi‑step exam problems with clear, justified steps",
+  "Check answers using alternative methods or verification techniques"
+ ],
+ "prerequisites": "Students should already understand limits, derivatives, basic integration, and how to apply each to simple functions.",
+ "why": [
+  "Real‑world situations—such as optimizing a production process while accounting for changing rates—often require several calculus ideas at once. Being able to blend concepts lets you model and solve these problems accurately.",
+  "Exam success depends on recognizing which tool fits each part of a question. Mastering mixed problem‑solving builds confidence and saves time during tests."
+ ],
+ "sections": [
+  {
+   "heading": "Review of Core Tools",
+   "body": "When we start a calculus problem we first ask: *what do we already know about the function?*  \nThe three tools we use most often are **limits**, **derivatives**, and **integrals**.  Each one tells us something different, but they are linked together like the gears of a clock.\n\n> **Definition:** A *limit* describes the value that a function $f(x)$ approaches as the input $x$ gets very close to a particular number $a$.  \n> $$\\lim_{x\\to a} f(x)=L$$  \nIf we can make $f(x)$ as close as we want to $L$ by choosing $x$ sufficiently near $a$, then $L$ is the limit.\n\nWhy is this useful?  Imagine you are driving toward a stop sign.  Your speed at each moment is a function of time, $v(t)$.  The limit $\\lim_{t\\to T} v(t)$ tells you the speed you are *about to* have exactly at the moment you reach the sign, even if you never actually stop there for a whole second.  In mathematics we often cannot plug $a$ directly into $f(x)$ (for example $f(x)=\\frac{x^2-1}{x-1}$ at $x=1$), but the limit still exists and gives the “true” behavior.\n\nOnce a limit exists, we can define the **derivative**.  The derivative measures how fast a quantity changes at a single point, just like the instant speed of a car.  Formally, the derivative of $f$ at $a$ is the limit of the average rate of change over a tiny interval:\n\n$$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$$  \n\nHere $h$ is a very small step in the input.  The fraction $\\frac{f(a+h)-f(a)}{h}$ is the *difference quotient*, the average slope of the secant line joining $(a,f(a))$ and $(a+h,f(a+h))$.  As $h$ shrinks, the secant line becomes the *tangent line*, whose slope is $f'(a)$.\n\n> **Note:** The power rule $ \\frac{d}{dx}x^n = n x^{\\,n-1}$ works for any real exponent $n$.  It follows from applying the limit definition to $x^n$ and using algebraic tricks such as factoring $x^n-(a)^n$.\n\nOther common rules are the *sum rule* $(f+g)'=f'+g'$, the *product rule* $(fg)'=f'g+fg'$, and the *quotient rule* $(\\frac{f}{g})'=\\frac{f'g-fg'}{g^2}$.  Each of these can be proved by writing the derivative as a limit and rearranging terms; the proofs are short but rely on the same idea of letting a small change $h$ go to zero.\n\nAfter we know how to differentiate, we often need the reverse operation: **integration**.  The basic (indefinite) integral asks for a function $F$ whose derivative is a given function $f$:\n\n$$\\int f(x)\\,dx = F(x)+C$$  \n\nThe symbol $\\int$ is a stretched “S”, standing for *sum*.  The constant $C$ appears because many different functions have the same derivative; adding any constant does not change the slope.\n\nThe simplest integration technique is the *reverse power rule*:  \n\n> **In daily life:** If you know how fast a car travels (its speed function), integrating that speed over time tells you the total distance driven, just like adding up many tiny distance pieces.\n\n$$\\int x^n\\,dx = \\frac{x^{\\,n+1}}{n+1}+C\\qquad (n\\neq -1)$$  \n\nFor $n=-1$ we get the special case  \n\n$$\\int \\frac{1}{x}\\,dx = \\ln|x|+C$$  \n\nOther basic tools are *substitution* (changing variables to simplify the integrand) and *integration by parts* (the product rule turned backwards).  Both are derived from the derivative rules we already trust.\n\n> **Remember:** Limits give us the language to talk about “getting arbitrarily close”.  Derivatives turn that language into a concrete slope, and integrals turn slopes back into accumulated quantities.  Mastering each step—definition, rule, and simple example—lets you move smoothly from one tool to the next when solving mixed calculus problems.",
+   "code": ""
+  },
+  {
+   "heading": "Choosing the Right Tool",
+   "body": "When you see a calculus problem, the first question is **what kind of question is it asking?**  \nIf it talks about “what happens as $x$ gets very close to a number,” you are looking at a **limit**.  \nIf it asks for “how fast something is changing at a particular point,” you need a **derivative**.  \nIf it asks for “how much total quantity is accumulated over an interval,” you will use an **integral**.  \n\nUnderstanding the wording helps you pick the right tool before you start writing any symbols.  \n\n> **Definition:** A *limit* describes the value that a function approaches as the input gets arbitrarily close to a certain point.  \n> **Definition:** A *derivative* measures the instantaneous rate of change of a function at a specific point.  \n> **Definition:** An *integral* gives the total accumulation of a quantity, often interpreted as area under a curve, over an interval.  \n\n### Why the distinction matters  \n\nThink of a kitchen recipe.  \n- A **limit** is like checking the temperature of the oven as it gets close to the required heat – you are interested in the behavior *near* a point.  \n- A **derivative** is like measuring how quickly the batter thickens at a particular moment – a snapshot of change.  \n- An **integral** is like adding up all the ingredients to know the total amount of mixture you will have – a sum over a range.  \n\nIf you try to bake a cake by measuring the *rate* of thickening (derivative) when the recipe actually asks for the *total* amount of batter (integral), the result will be a mess. The same happens in mathematics: using the wrong tool gives a wrong or meaningless answer.  \n\n### A simple decision tree  \n\n1. **Keyword check** – Look for words such as “approaches,” “as $x$ → …”, “limit,” “behaviour near,” → think *limit*.  \n2. **Rate language** – Words like “speed,” “instantaneous,” “rate of change,” “slope at a point,” → think *derivative*.  \n3. **Accumulation language** – Phrases such as “total area,” “total distance,” “amount accumulated,” “sum from $a$ to $b$,” → think *integral*.  \n\nSometimes a problem needs more than one step. For example, you might first find a limit to simplify a function, then differentiate the simplified result. Recognizing that a problem can be broken into stages is a key skill.  \n\n> **Note:** It is common to encounter a problem that first requires a limit to remove an indeterminate form (like $0/0$) before you can differentiate.  \n\n### Worked Example 1 (Easy): Finding a limit and then differentiating  \n\n**Question:** Find the limit of $\\displaystyle\\frac{\\sin x}{x}$ as $x\\to0$, then differentiate the resulting constant.  \n\n1. **Identify the tool for the first part.**  \n   The phrase “as $x\\to0$” tells us to use a *limit*.  \n\n2. **Compute the limit.**  \n   We know the standard limit  \n   $$\\lim_{x\\to0}\\frac{\\sin x}{x}=1.$$  \n\n3. **Interpret the result.**  \n   The limit is the constant number $1$.  \n\n4. **Choose the tool for the second part.**  \n   “Differentiate the resulting constant” asks for the *derivative* of the constant $1$ with respect to $x$.  \n\n5. **Differentiate.**  \n   The derivative of any constant $c$ is $0$:  \n   $$\\frac{d}{dx}(1)=0.$$  \n\n**Answer:** The limit is $1$, and the derivative of that constant is $0$.  \n\n### Worked Example 2 (Easy): Integrating a simple function and then finding a rate of change  \n\n**Question:** Determine the area under $f(x)=2x$ from $x=0$ to $x=3$, then find the average rate of change of that area with respect to the upper limit.  \n\n1. **Identify the first tool.**  \n   “Area under … from $0$ to $3$” signals an *integral*.  \n\n2. **Set up the integral.**  \n   $$A=\\int_{0}^{3}2x\\,dx.$$  \n\n3. **Evaluate the integral.**  \n   $$A=\\left[x^{2}\\right]_{0}^{3}=3^{2}-0^{2}=9.$$  \n   So the area (total accumulation) is $9$ square units.  \n\n4. **Identify the second tool.**  \n   “Average rate of change of that area with respect to the upper limit” means we look at how $A$ changes as the upper bound $b$ changes – that is the *derivative* of the area function $A(b)$ with respect to $b$.  \n\n5. **Write the area as a function of the upper limit $b$.**  \n   $$A(b)=\\int_{0}^{b}2x\\,dx=\\left[x^{2}\\right]_{0}^{b}=b^{2}.$$  \n\n6. **Differentiate $A(b)$ with respect to $b$.**  \n   $$\\frac{dA}{db}= \\frac{d}{db}\\,b^{2}=2b.$$  \n\n7. **Evaluate at the given upper limit $b=3$.**  \n   $$\\frac{dA}{db}\\Big|_{b=3}=2\\cdot3=6.$$  \n\n**Answer:** The area under $f(x)=2x$ from $0$ to $3$ is $9$ (units$^{2}$). The average rate at which this area grows as the upper limit moves is $6$ (units$^{2}$ per unit of $x$).  \n\n> **In daily life:** Deciding whether to use a limit, derivative, or integral is like choosing the right tool in a toolbox – a screwdriver for screws, a hammer for nails. Using the wrong one makes the job harder or impossible.  \n\n> **Common mistake:** Jumping straight to differentiation when the problem first asks for a limit. Always read the whole question and break it into logical steps.  \n\nBy carefully listening to the words, matching them to the appropriate calculus concept, and remembering that many problems are a short *sequence* of steps, you can confidently choose the right tool every time.",
+   "code": ""
+  },
+  {
+   "heading": "Combining Limits and Derivatives",
+   "body": "When we talk about the **derivative** of a function we are really asking: *how fast does the function change at a particular point?*  \nThe most fundamental way to answer this question is to use the **limit definition** of the derivative.  \nFor any function $f$, the derivative at a point $a$ is  \n\n$$\nf'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}.\n$$  \n\n> **Definition:** The expression $\\displaystyle\\frac{f(a+h)-f(a)}{h}$ is called the *difference quotient*. It measures the average rate of change over a tiny interval of width $h$.  \n> **Note:** As $h$ gets smaller, the average rate of change approaches the *instantaneous* rate of change, which is the derivative.\n\nWhy is this useful?  \nImagine you are driving and you look at your speedometer. The speedometer tells you your **instantaneous speed** at that moment, not the average speed over the last mile. The limit definition works the same way: it turns an average slope of a secant line into the exact slope of the tangent line at a single point.\n\n### Step‑by‑step use of the definition\n\n1. **Write the difference quotient** for the given function and the point of interest.  \n2. **Simplify** the algebraic expression as much as possible.  \n3. **Take the limit** as $h\\to 0$. Often we need to rationalise radicals or use piecewise definitions carefully.  \n4. The resulting number is the derivative $f'(a)$, which tells us the slope of the tangent line at $x=a$.\n\nBelow we apply these steps to two common situations: a function that contains a square‑root (a radical) and a function that is defined by different formulas on different intervals (piecewise).\n\n---\n\n**Example 3 (Medium): Use the limit definition to differentiate $g(x)=\\sqrt{x+4}$ at $x=5$.**  \n\nWe want $g'(5)$.\n\n1. **Set up the difference quotient.**  \n   $$\\frac{g(5+h)-g(5)}{h}= \\frac{\\sqrt{(5+h)+4}-\\sqrt{5+4}}{h}\n   =\\frac{\\sqrt{9+h}-3}{h}.$$\n\n2. **Rationalise the numerator** (multiply by the conjugate) to eliminate the radical.  \n   $$\\frac{\\sqrt{9+h}-3}{h}\\cdot\\frac{\\sqrt{9+h}+3}{\\sqrt{9+h}+3}\n   =\\frac{(9+h)-9}{h\\bigl(\\sqrt{9+h}+3\\bigr)}\n   =\\frac{h}{h\\bigl(\\sqrt{9+h}+3\\bigr)}.$$\n\n3. **Cancel the common factor $h$** (allowed because $h\\neq0$ in the quotient).  \n   $$\\frac{1}{\\sqrt{9+h}+3}.$$\n\n4. **Take the limit as $h\\to0$.**  \n   $$\\lim_{h\\to0}\\frac{1}{\\sqrt{9+h}+3}= \\frac{1}{\\sqrt{9}+3}= \\frac{1}{3+3}= \\frac{1}{6}.$$\n\n**Answer:** $g'(5)=\\dfrac{1}{6}$. The slope of the tangent to $y=\\sqrt{x+4}$ at $x=5$ is $1/6$.\n\n> **In daily life:** This tells us that near $x=5$, the graph of $\\sqrt{x+4}$ rises only a little when $x$ increases—a gentle slope, just like a shallow hill.\n\n---\n\n**Example 4 (Medium): Compute the derivative of the piecewise function**  \n\n\\[\nh(x)=\\begin{cases}\nx^{2}, & x\\le 1,\\\\[4pt]\n2x+1, & x>1,\n\\end{cases}\n\\]\n\n**at $x=1$ using limits.**  \n\nBecause the formula changes at $x=1$, we must check the limit from the left and from the right.\n\n1. **Left‑hand limit** (approach $1$ with $h<0$).  \n   $$\\lim_{h\\to0^-}\\frac{h(1+h)-h(1)}{h}\n   =\\lim_{h\\to0^-}\\frac{(1+h)^{2}-1^{2}}{h}.$$\n   Expand the numerator: $(1+h)^{2}=1+2h+h^{2}$.  \n   $$\\frac{1+2h+h^{2}-1}{h}= \\frac{2h+h^{2}}{h}=2+h.$$\n   Now take the limit: $\\displaystyle\\lim_{h\\to0^-}(2+h)=2.$\n\n2. **Right‑hand limit** (approach $1$ with $h>0$).  \n   $$\\lim_{h\\to0^+}\\frac{h(1+h)-h(1)}{h}\n   =\\lim_{h\\to0^+}\\frac{(2(1+h)+1)-(2\\cdot1+1)}{h}.$$\n   Simplify the numerator: $2(1+h)+1=2+2h+1=3+2h$, and $2\\cdot1+1=3$.  \n   $$\\frac{(3+2h)-3}{h}= \\frac{2h}{h}=2.$$\n   The limit is $\\displaystyle\\lim_{h\\to0^+}2=2.$\n\n3. **Compare the two one‑sided limits.**  \n   Both equal $2$, so the overall limit exists and equals $2$.\n\n**Answer:** $h'(1)=2$. The function is differentiable at $x=1$, and the tangent line there has slope $2$.\n\n> **Common mistake:** Forgetting to treat the left and right sides separately for a piecewise function. The derivative exists only if the two one‑sided limits match.\n\n---\n\nBy turning the abstract idea of “instantaneous change” into a concrete algebraic process, the limit definition lets us handle even tricky functions—those with radicals or different formulas on different intervals. Mastering these steps builds a solid foundation for later topics such as the chain rule and the Fundamental Theorem of Calculus. Remember to always write the difference quotient first, simplify carefully, and then let $h$ shrink to zero.",
+   "code": ""
+  },
+  {
+   "heading": "Linking Differentiation and Integration",
+   "body": "When we talk about **linking differentiation and integration**, we are really saying that two seemingly opposite operations are actually two sides of the same coin.  \n\nDifferentiation tells us how fast something is changing at a single instant – it gives a *rate*.  \nIntegration, on the other hand, adds up tiny pieces of change to give the *total amount* that has accumulated over an interval.  \n\nThe bridge between them is the **Fundamental Theorem of Calculus (FTC)**. It says that if we start with a rate function, integrate it we obtain the accumulated quantity; and if we then differentiate that accumulated quantity, we get back the original rate. This is useful because many real‑world problems give us a rate (like how fast water flows into a tank) and ask for the total amount, or give us a total amount and ask for the instantaneous rate.\n\n> **Definition:** *Fundamental Theorem of Calculus* –  \n> If \\(F\\) is an antiderivative of a continuous function \\(f\\) on \\([a,b]\\) (that is, \\(F'(x)=f(x)\\)), then  \n> $$\\int_{a}^{b} f(x)\\,dx = F(b)-F(a).$$  \n> Moreover, the function \\(G(x)=\\int_{a}^{x} f(t)\\,dt\\) satisfies \\(G'(x)=f(x)\\).\n\nIn everyday terms, think of a car’s odometer. The speedometer tells you the *instantaneous speed* (a rate). If you record the speed every second and add up all those tiny distances, you obtain the total miles driven – the odometer reading. The FTC guarantees that the derivative of the odometer reading (total distance) gives back the speedometer reading (instantaneous speed).\n\nBefore we use the theorem, let’s be clear about a few words:\n\n* **Rate function** – a formula that tells how fast something changes, e.g., liters per minute.  \n* **Accumulated quantity** – the total amount gathered over time, e.g., total liters in a tank.  \n* **Antiderivative** – a function whose derivative is the given rate function; also called an *indefinite integral*.  \n\nNow we apply the idea step by step.\n\n---\n\n**Example 5 (Hard): Tank filling problem**  \nA tank fills at a rate \\(r(t)=3t^{2}\\) L/min. Find the total volume after 4 minutes and then determine the instantaneous filling rate at that moment by differentiating the accumulated volume.\n\n1. **Integrate the rate to get the accumulated volume.**  \n   We need an antiderivative \\(V(t)\\) of \\(r(t)\\).  \n   $$V(t)=\\int 3t^{2}\\,dt = t^{3}+C.$$\n2. **Choose the constant of integration.**  \n   At time \\(t=0\\) the tank is empty, so \\(V(0)=0\\).  \n   $$0 = 0^{3}+C \\;\\Rightarrow\\; C=0,$$  \n   thus \\(V(t)=t^{3}\\) L.\n3. **Evaluate the volume at \\(t=4\\) min.**  \n   $$V(4)=4^{3}=64\\text{ L}.$$\n4. **Differentiate the accumulated volume to recover the rate at \\(t=4\\).**  \n   $$\\frac{dV}{dt}=V'(t)=3t^{2}=r(t).$$  \n   At \\(t=4\\):  \n   $$r(4)=3\\cdot4^{2}=48\\text{ L/min}.$$\n\n**Answer:** After 4 minutes the tank holds **64 L**, and the instantaneous filling rate at that moment is **48 L/min**.\n\n---\n\nThe first part used integration to turn a rate into a total amount. The second part showed that differentiating that total brings us back to the original rate, exactly as the FTC predicts.\n\n> **Note:** When you integrate a rate, always add a constant \\(C\\) and determine it from an initial condition (e.g., “the tank is empty at \\(t=0\\)”). Forgetting this step gives a wrong accumulated quantity.\n\nNow let’s see the reverse direction: we start with a rate, integrate to get position, then use the average‑value idea.\n\n**Example 6 (Hard): Motion problem**  \nGiven the velocity \\(v(t)=4t-2\\) m/s, find the position function \\(s(t)\\) with \\(s(0)=5\\) m, then compute the average speed between \\(t=2\\) s and \\(t=5\\) s.\n\n1. **Integrate the velocity to obtain the position function.**  \n   $$s(t)=\\int (4t-2)\\,dt = 2t^{2}-2t + C.$$\n2. **Use the initial condition \\(s(0)=5\\) to find \\(C\\).**  \n   $$5 = 2\\cdot0^{2}-2\\cdot0 + C \\;\\Rightarrow\\; C=5,$$  \n   so \\(s(t)=2t^{2}-2t+5\\) m.\n3. **Compute the positions at the endpoints of the interval.**  \n   $$s(2)=2(2)^{2}-2(2)+5 = 8-4+5 = 9\\text{ m},$$  \n   $$s(5)=2(5)^{2}-2(5)+5 = 50-10+5 = 45\\text{ m}.$$\n4. **Find the average speed on \\([2,5]\\).**  \n   Average speed = (total distance traveled) / (time elapsed).  \n   $$\\text{Average speed}= \\frac{s(5)-s(2)}{5-2}= \\frac{45-9}{3}=12\\text{ m/s}.$$\n\n**Answer:** The position function is \\(s(t)=2t^{2}-2t+5\\) m. Between \\(t=2\\) s and \\(t=5\\) s the average speed is **12 m/s**.\n\n---\n\nThese two examples illustrate the two directions of the Fundamental Theorem of Calculus:\n\n* **From rate to total** – integrate the rate, add the constant using an initial condition, then you have the accumulated quantity.  \n* **From total back to rate** – differentiate the accumulated quantity to retrieve the original rate.\n\n> **In daily life:** When you track how much water you drink each hour (rate) and add it up, you know your total intake for the day. If you later look at the total and ask “how fast was I drinking at 3 pm?”, you simply differentiate the total‑drank curve at that time.\n\n> **Remember:** Integration and differentiation are inverse processes *provided the functions are nice enough* (continuous on the interval). Always check the problem’s conditions before applying the FTC.\n\nBy mastering this link, you can move freely between “how fast?” and “how much?” – a skill that appears in physics, economics, biology, and many other fields.",
+   "code": ""
+  },
+  {
+   "heading": "Multi‑Step Problem Solving",
+   "body": "> **Note:** In a multi‑step problem we often have to use more than one calculus tool—limits, derivatives, integrals—one after another. Each step must be checked so the whole answer makes sense.\n\nWhen we solve a problem that needs several ideas, think of it like following a recipe. First we **measure** the right ingredients (find a derivative), then we **mix** them (set the derivative to zero), and finally we **bake** (evaluate the function or integrate). If any single step is wrong, the final “dish’’ will be off.\n\n---\n\n**Example 7 (Intermediate): Maximum height of a projectile**  \n\nA projectile follows the height equation  \n\n$$y(t)= -5t^{2}+20t+2,$$  \n\nwhere \\(t\\) is time in seconds and \\(y\\) is height in metres.  \n\nFind (a) the time when the height is maximum, (b) the maximum height, and (c) the total distance travelled until the projectile hits the ground.\n\n1. **Find the time of maximum height** – the height is a function of \\(t\\). Its maximum occurs where the derivative \\(y'(t)\\) equals zero (a critical point).  \n\n   $$y'(t)=\\frac{d}{dt}\\bigl(-5t^{2}+20t+2\\bigr) = -10t+20.$$\n\n2. **Set the derivative to zero and solve for \\(t\\).**  \n\n   $$-10t+20=0 \\quad\\Longrightarrow\\quad t=2\\ \\text{s}.$$\n\n   This tells us the projectile reaches its highest point after 2 seconds.\n\n3. **Compute the maximum height** by substituting \\(t=2\\) back into the original height formula.  \n\n   $$y(2)= -5(2)^{2}+20(2)+2 = -20+40+2 = 22\\ \\text{m}.$$\n\n4. **Find when the projectile hits the ground** – the ground corresponds to \\(y=0\\). Solve the quadratic equation  \n\n   $$-5t^{2}+20t+2=0.$$\n\n   Use the quadratic formula \\(t=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}\\) with \\(a=-5,\\;b=20,\\;c=2\\):\n\n   $$t=\\frac{-20\\pm\\sqrt{20^{2}-4(-5)(2)}}{2(-5)}\n     =\\frac{-20\\pm\\sqrt{400+40}}{-10}\n     =\\frac{-20\\pm\\sqrt{440}}{-10}.$$\n\n   The positive root is  \n\n   $$t=\\frac{-20+\\sqrt{440}}{-10}= \\frac{20-\\sqrt{440}}{10}\\approx 4.19\\ \\text{s}.$$\n\n5. **Total distance travelled** – because the projectile rises then falls, the distance is the sum of the upward travel (from \\(t=0\\) to \\(t=2\\)) and the downward travel (from \\(t=2\\) to the landing time). The upward distance is the maximum height itself, \\(22\\) m. The downward distance is the same height, because it returns to the ground level.  \n\n   $$\\text{Total distance}=22\\ \\text{m (up)}+22\\ \\text{m (down)} = 44\\ \\text{m}.$$\n\n**Answer:** The projectile reaches its highest point at \\(t=2\\) s, the maximum height is \\(22\\) m, and it travels a total of \\(44\\) m before hitting the ground.\n\n> **In daily life:** Finding a maximum is like looking for the highest point on a hill while hiking—you check the slope (derivative) and stop when the slope becomes flat.\n\n---\n\n> **Definition:** *Marginal cost* is the derivative of the total cost function, \\(C'(x)\\). It tells how much extra cost is added when production is increased by one more unit.\n\n**Example 8 (Advanced): Cost optimisation and saved cost**  \n\nThe total cost of producing \\(x\\) units is  \n\n$$C(x)=0.5x^{2}-4x+20,$$  \n\nwhere \\(C\\) is measured in dollars.  \n\nFirst, find the production level \\(x\\) that minimises cost. Then, using the marginal cost, calculate how much money is saved when production is increased from the optimal \\(x\\) to \\(x+5\\) units.\n\n1. **Differentiate the cost function** to obtain marginal cost.  \n\n   $$C'(x)=\\frac{d}{dx}\\bigl(0.5x^{2}-4x+20\\bigr)=x-4.$$\n\n2. **Set the marginal cost to zero** to locate the minimum (a critical point).  \n\n   $$x-4=0 \\quad\\Longrightarrow\\quad x=4.$$\n\n   Because the second derivative \\(C''(x)=1>0\\), the critical point is indeed a minimum.\n\n3. **Compute the minimum total cost** by plugging \\(x=4\\) into \\(C(x)\\).  \n\n   $$C(4)=0.5(4)^{2}-4(4)+20 =0.5(16)-16+20 =8-16+20 =12\\ \\text{dollars}.$$\n\n4. **Find the marginal cost function** (already obtained): \\(C'(x)=x-4\\). To know the extra cost of producing each of the next five units, we integrate the marginal cost from \\(x=4\\) to \\(x=9\\).  \n\n   $$\\text{Extra cost}= \\int_{4}^{9} (x-4)\\,dx.$$\n\n5. **Evaluate the integral** – integration is the reverse of differentiation, giving the accumulated cost over the interval.  \n\n   $$\\int (x-4)\\,dx = \\frac{x^{2}}{2}-4x + K,$$  \n\n   so  \n\n   $$\\text{Extra cost}= \\left[\\frac{x^{2}}{2}-4x\\right]_{4}^{9}\n     =\\left(\\frac{9^{2}}{2}-4\\cdot9\\right)-\\left(\\frac{4^{2}}{2}-4\\cdot4\\right)$$  \n   $$= \\left(\\frac{81}{2}-36\\right)-\\left(\\frac{16}{2}-16\\right)\n     =\\left(40.5-36\\right)-\\left(8-16\\right)$$  \n   $$=4.5-(-8)=12.5\\ \\text{dollars}.$$\n\n6. **Calculate the saved cost** – the cost at the optimal level is \\$12. Producing five more units costs an additional \\$12.5, so the *saved* amount compared with producing at a non‑optimal level would be the difference between the cost at \\(x+5\\) and the cost if we kept the higher marginal cost. Here we simply state the extra expense:  \n\n   $$\\text{Total cost at }x+5 = C(9)=0.5(9)^{2}-4(9)+20 =0.5(81)-36+20 =40.5-36+20 =24.5\\ \\text{dollars}.$$\n\n   The increase from the minimum (\\$12) to the new level (\\$24.5) is  \n\n   $$24.5-12 = 12.5\\ \\text{dollars},$$  \n\n   which matches the integral result.\n\n**Answer:** The cost is minimised at \\(x=4\\) units with a total cost of \\$12. Producing five additional units raises the total cost to \\$24.5, an extra \\$12.5; this extra amount is exactly the integral of the marginal cost from 4 to 9.\n\n> **Common mistake:** Forgetting to check the second derivative after finding a critical point. The sign of \\(C''(x)\\) tells you whether you have a minimum (positive) or a maximum (negative).\n\nBy breaking a complex problem into clear, single‑tool steps—differentiate, set to zero, solve, then integrate—we keep each calculation reliable and the whole solution consistent. This disciplined approach works for physics, economics, and any situation where several calculus ideas meet.",
+   "code": ""
+  },
+  {
+   "heading": "Exam Practice",
+   "body": "We will solve a complete exam‑style problem that asks us to **choose the right tool**, use a **limit**, take a **derivative**, and finally apply an **integral**.  \nThe story is about a company that makes a product. Its profit (in thousands of dollars) as a function of the quantity produced \\(q\\) (in thousands of units) is  \n\n\\[\nP(q)= -0.02q^{3}+0.9q^{2}-15q+200 .\n\\]\n\nOur tasks are  \n\n1. Find the production level \\(q\\) that gives the greatest profit.  \n2. Compute that maximum profit.  \n3. Determine how much total profit changes when the company raises production from \\(30\\) k to \\(40\\) k units, using the **marginal profit** (the derivative of \\(P\\)) and integrating it.\n\n---\n\n**Example 9 (Level 1): Finding the profit‑maximising production**\n\n*Question:* Which value of \\(q\\) makes \\(P(q)\\) as large as possible?\n\n1. **Take the derivative** of the profit function. The derivative tells us the *rate of change* of profit with respect to production; where this rate is zero we have a horizontal tangent, a candidate for a maximum or minimum.  \n   $$\n   P'(q)=\\frac{d}{dq}\\bigl(-0.02q^{3}+0.9q^{2}-15q+200\\bigr)\n        =-0.06q^{2}+1.8q-15 .\n   $$\n\n2. **Set the derivative equal to zero** and solve for \\(q\\). This gives the *critical points* where the profit curve could turn.  \n   $$\n   -0.06q^{2}+1.8q-15=0 .\n   $$  \n   Divide by \\(-0.06\\) to simplify:  \n   $$\n   q^{2}-30q+250=0 .\n   $$  \n   Solve the quadratic:  \n   $$\n   q=\\frac{30\\pm\\sqrt{30^{2}-4\\cdot250}}{2}\n     =\\frac{30\\pm\\sqrt{900-1000}}{2}\n     =\\frac{30\\pm\\sqrt{-100}}{2}.\n   $$  \n   The discriminant is negative, so we made an algebraic slip. Check the division step: dividing by \\(-0.06\\) gives  \n\n   $$\n   q^{2}-30q+250=0\\quad\\text{(correct)} .\n   $$  \n\n   Compute the discriminant again:  \n\n   $$\n   \\Delta = (-30)^{2}-4\\cdot1\\cdot250 = 900-1000 = -100 .\n   $$  \n\n   A negative discriminant means **no real roots**, which cannot be right because a cubic profit function must have a turning point. The error is in the sign when we divided:  \n\n   $$\n   -0.06q^{2}+1.8q-15=0 \\;\\Longrightarrow\\; 0.06q^{2}-1.8q+15=0 .\n   $$  \n\n   Multiply by \\(100\\) to avoid decimals:  \n\n   $$\n   6q^{2}-180q+1500=0 .\n   $$  \n\n   Divide by \\(6\\):  \n\n   $$\n   q^{2}-30q+250=0 .\n   $$  \n\n   The discriminant is still negative, so we re‑examine the original profit function. It is a cubic with a negative leading coefficient, so it opens downward for large \\(q\\) and must have a single local maximum. The mistake lies in the coefficient of the linear term: the original profit is \\(-15q\\), derivative gives \\(-15\\), correct. Therefore the algebra is fine; the discriminant being negative tells us the quadratic has **no real roots**, meaning the derivative never crosses zero – the profit is strictly decreasing.  \n\n   However, a cubic with negative leading coefficient can have a maximum at the endpoint of the feasible region. In practice, production cannot be negative, so we check the endpoint where profit stops decreasing. Compute \\(P'(0)= -15 <0\\) and \\(P'(10)= -0.06(100)+1.8(10)-15 = -6+18-15 = -3 <0\\). The derivative stays negative, confirming profit falls as \\(q\\) grows. Thus the **maximum profit occurs at the smallest realistic production**, \\(q=0\\).  \n\n   In many textbook problems the coefficients are chosen so the derivative has real roots. To keep the example instructive, we will *adjust* the profit function slightly to  \n\n   \\[\n   \\tilde P(q)= -0.02q^{3}+0.9q^{2}-5q+200,\n   \\]  \n\n   whose derivative is  \n\n   $$\n   \\tilde P'(q)= -0.06q^{2}+1.8q-5 .\n   $$  \n\n   Set this to zero:  \n\n   $$\n   -0.06q^{2}+1.8q-5=0 \\;\\Longrightarrow\\; 0.06q^{2}-1.8q+5=0 .\n   $$  \n\n   Multiply by \\(100\\):  \n\n   $$\n   6q^{2}-180q+500=0 .\n   $$  \n\n   Divide by \\(2\\):  \n\n   $$\n   3q^{2}-90q+250=0 .\n   $$  \n\n   Solve:  \n\n   $$\n   q=\\frac{90\\pm\\sqrt{90^{2}-4\\cdot3\\cdot250}}{2\\cdot3}\n     =\\frac{90\\pm\\sqrt{8100-3000}}{6}\n     =\\frac{90\\pm\\sqrt{5100}}{6}\n     =\\frac{90\\pm 10\\sqrt{51}}{6}.\n   $$  \n\n   The two critical points are approximately  \n\n   $$\n   q_{1}\\approx\\frac{90-71.4}{6}=3.1,\\qquad\n   q_{2}\\approx\\frac{90+71.4}{6}=26.9 .\n   $$\n\n3. **Test which critical point gives a maximum** using the second derivative or a sign chart. The second derivative is  \n\n   $$\n   \\tilde P''(q)=\\frac{d}{dq}\\bigl(-0.06q^{2}+1.8q-5\\bigr) = -0.12q+1.8 .\n   $$  \n\n   Evaluate at \\(q_{1}=3.1\\):  \n\n   $$\n   \\tilde P''(3.1)= -0.12(3.1)+1.8 \\approx -0.372+1.8 = 1.428>0,\n   $$  \n\n   indicating a **local minimum**.  \n\n   Evaluate at \\(q_{2}=26.9\\):  \n\n   $$\n   \\tilde P''(26.9)= -0.12(26.9)+1.8 \\approx -3.228+1.8 = -1.428<0,\n   $$  \n\n   indicating a **local maximum**.\n\n> **Remember:** A negative second derivative at a critical point means the function is curving downwards there – a local maximum.\n\n**Answer:** The profit is maximised when the company produces about \\(q\\approx 27\\) (thousand units).  \n\n---\n\n**Example 10 (Level 2): Computing the maximum profit**\n\n*Question:* What is the profit value at the optimal production level found above?\n\n1. **Substitute the optimal \\(q\\)** back into the profit formula \\(\\tilde P(q)\\).  \n   $$\n   \\tilde P(26.9)= -0.02(26.9)^{3}+0.9(26.9)^{2}-5(26.9)+200 .\n   $$\n\n2. **Calculate each term** (use a calculator for accuracy).  \n\n   \\[\n   (26.9)^{3}\\approx 19468,\\qquad\n   (26.9)^{2}\\approx 724 .\n   \\]  \n\n   Then  \n\n   $$\n   -0.02\\cdot19468 \\approx -389.36,\\\\\n   0.9\\cdot724 \\approx 651.6,\\\\\n   -5\\cdot26.9 \\approx -134.5 .\n   $$  \n\n3. **Add the pieces together** with the constant \\(200\\).  \n\n   $$\n   \\tilde P(26.9)\\approx -389.36+651.6-134.5+200 = 327.74 .\n   $$  \n\n   The profit is measured in thousands of dollars, so the company earns about \\(\\$327{,}740\\).\n\n> **In daily life:** Finding the maximum profit is like a farmer deciding how many acres to plant – too few and the harvest is small, too many and the cost outweighs the gain. The sweet spot gives the biggest net return.\n\n**Answer:** Maximum profit ≈ \\(\\$327{,}740\\) (i.e., \\(327.7\\) thousand dollars) when producing about \\(27\\) k units.\n\n---\n\n**Example 11 (Level 3): Profit change from 30 k to 40 k units using integration**\n\n*Question:* How much total profit is added when production increases from \\(30\\) k to \\(40\\) k units? Use the **marginal profit** \\( \\tilde P'(q) \\) and integrate it over the interval \\([30,40]\\).\n\n1. **Write the marginal profit function.** This is the derivative we already computed:  \n\n   $$\n   \\tilde P'(q)= -0.06q^{2}+1.8q-5 .\n   $$\n\n2. **Set up the definite integral** of the marginal profit from \\(30\\) to \\(40\\). The integral of a rate of change gives the total change in the original quantity.  \n\n   $$\n   \\Delta\\text{Profit}= \\int_{30}^{40}\\bigl(-0.06q^{2}+1.8q-5\\bigr)\\,dq .\n   $$\n\n3. **Integrate term by term.**  \n\n   $$\n   \\int\\bigl(-0.06q^{2}\\bigr)\\,dq = -0.06\\frac{q^{3}}{3}= -0.02q^{3},\\\\\n   \\int 1.8q\\,dq = 1.8\\frac{q^{2}}{2}=0.9q^{2},\\\\\n   \\int (-5)\\,dq = -5q .\n   $$  \n\n   Therefore  \n\n   $$\n   \\Delta\\text{Profit}= \\Bigl[-0.02q^{3}+0.9q^{2}-5q\\Bigr]_{30}^{40}.\n   $$\n\n4. **Evaluate at the bounds.**  \n\n   At \\(q=40\\):  \n\n   $$\n   -0.02(40)^{3}+0.9(40)^{2}-5(40)\n   = -0.02\\cdot64000+0.9\\cdot1600-200\n   = -1280+1440-200 = -40 .\n   $$  \n\n   At \\(q=30\\):  \n\n   $$\n   -0.02(30)^{3}+0.9(30)^{2}-5(30)\n   = -0.02\\cdot27000+0.9\\cdot900-150\n   = -540+810-150 = 120 .\n   $$  \n\n   Subtract lower from upper:  \n\n   $$\n   \\Delta\\text{Profit}= (-40) - (120) = -160 .\n   $$  \n\n   The result is in thousands of dollars, so the profit **decreases** by \\(160\\) k dollars when production rises from \\(30\\) k to \\(40\\) k units.\n\n> **Common mistake:** Forgetting to subtract the lower‑limit value after evaluating the antiderivative. Always compute “upper – lower”.\n\n**Answer:** Total profit change = \\(-\\$160{,}000\\); the company loses profit when increasing production from 30 k to 40 k units.  \n\n---\n\nThese three linked steps illustrate how an exam problem can require us to **choose a tool** (derivative for optimisation, integral for total change), **apply limits** implicitly when checking endpoints, and **combine several calculus ideas** to reach a complete answer. Practice similar multi‑step questions to become comfortable moving fluidly between differentiation and integration.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find $\\displaystyle\\lim_{x\\to 2}\\frac{x^2-4}{x-2}$.",
+   "a": "Factor the numerator: $x^2-4=(x-2)(x+2)$. Cancel the common factor $(x-2)$ (allowed because we are taking a limit, not evaluating at $x=2$). The expression becomes $x+2$. Now substitute $x=2$: $2+2=4$. Hence the limit is $4$."
+  },
+  {
+   "level": "Easy",
+   "q": "Compute the derivative of $f(x)=3x^2-5x+7$ at $x=1$.",
+   "a": "Use the power rule: $f'(x)=6x-5$. Evaluate at $x=1$: $f'(1)=6(1)-5=1$. So the instantaneous rate of change at $x=1$ is $1$."
+  },
+  {
+   "level": "Medium",
+   "q": "Evaluate the definite integral $\\displaystyle\\int_{0}^{3} (2x+1)\\,dx$.",
+   "a": "Find an antiderivative: $\\int (2x+1)\\,dx = x^2 + x + C$. Apply the Fundamental Theorem of Calculus:\n$$\\bigl[x^2 + x\\bigr]_{0}^{3}= (3^2+3) - (0^2+0)= (9+3)-0=12.$$\nThus the net area is $12$."
+  },
+  {
+   "level": "Medium",
+   "q": "A particle moves along a line with velocity $v(t)=4t-3$ (meters per second). If its position at $t=0$ is $s(0)=5$ meters, find its position at $t=2$ seconds.",
+   "a": "Position is the integral of velocity:\n$$s(t)=s(0)+\\int_{0}^{t} v(u)\\,du =5+\\int_{0}^{t} (4u-3)\\,du.$$\nCompute the antiderivative: $\\int (4u-3)\\,du = 2u^2-3u$. Evaluate from $0$ to $2$:\n$[2u^2-3u]_{0}^{2}= (2\\cdot4-3\\cdot2)-(0)= (8-6)=2$.\nAdd the initial position: $s(2)=5+2=7$ meters."
+  },
+  {
+   "level": "Hard",
+   "q": "Find $\\displaystyle\\lim_{x\\to0}\\frac{\\sin(5x)}{x}$ using the definition of derivative.",
+   "a": "Recognize the limit as the derivative of $\\sin(5x)$ at $x=0$. Write $f(x)=\\sin(5x)$. Then\n$$f'(0)=\\lim_{h\\to0}\\frac{f(0+h)-f(0)}{h}= \\lim_{h\\to0}\\frac{\\sin(5h)-\\sin0}{h}= \\lim_{h\\to0}\\frac{\\sin(5h)}{h}.$$\nWe know $\\displaystyle\\lim_{u\\to0}\\frac{\\sin u}{u}=1$. Let $u=5h$, so $h=u/5$. Then\n$$\\frac{\\sin(5h)}{h}= \\frac{\\sin u}{u/5}=5\\frac{\\sin u}{u}\\to5\\cdot1=5.$$\nThus the original limit equals $5$."
+  },
+  {
+   "level": "Hard",
+   "q": "Let $g(x)=\\displaystyle\\int_{1}^{x^2} \\frac{1}{t}\\,dt$. Find $g'(4)$.",
+   "a": "Use the Leibniz rule for differentiation of an integral with a variable upper limit:\n$$g'(x)=\\frac{d}{dx}\\int_{1}^{x^2}\\frac{1}{t}\\,dt = \\frac{1}{x^2}\\cdot\\frac{d}{dx}(x^2)=\\frac{1}{x^2}\\cdot 2x = \\frac{2}{x}.$$\nNow evaluate at $x=4$: $g'(4)=\\frac{2}{4}= \\frac{1}{2}$.\n---\nThese examples illustrate how to move smoothly from limits to derivatives to integrals, and how to combine several steps in a single problem. Practice the patterns, and you’ll be ready for exam questions that require exactly this kind of reasoning."
+  }
+ ],
+ "recap": "The lesson reviews the three main calculus tools—limits, derivatives, and integrals—and shows how to choose the right one for a problem. It explains the limit definition of the derivative and links differentiation with integration via the Fundamental Theorem of Calculus. Multi‑step problems often require using several tools in sequence, as illustrated with projectile and profit examples.",
+ "key_terms": [
+  {
+   "term": "limit",
+   "meaning": "The value a function approaches as the input gets arbitrarily close to a certain point."
+  },
+  {
+   "term": "derivative",
+   "meaning": "The instantaneous rate of change of a function at a specific point."
+  },
+  {
+   "term": "integral",
+   "meaning": "The total accumulation of a quantity, often interpreted as area under a curve."
+  },
+  {
+   "term": "difference quotient",
+   "meaning": "The expression (f(a+h)-f(a))/h that gives the average rate of change over a small interval."
+  },
+  {
+   "term": "Fundamental Theorem of Calculus",
+   "meaning": "States that differentiation and integration are inverse processes; integrating a rate function and then differentiating returns the original rate."
+  },
+  {
+   "term": "marginal profit",
+   "meaning": "The derivative of a profit function, representing the change in profit for a small change in production."
+  },
+  {
+   "term": "critical point",
+   "meaning": "A point where the derivative is zero or undefined, used to locate maxima or minima."
+  },
+  {
+   "term": "multi‑step problem",
+   "meaning": "A problem that requires applying more than one calculus tool in a logical sequence."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which tool should you use when a problem asks 'what happens as x approaches a number'?",
+   "options": [
+    "Derivative",
+    "Integral",
+    "Limit",
+    "Series"
+   ],
+   "answer": 2,
+   "why": "Limits describe the behavior of a function near a specific point."
+  },
+  {
+   "q": "What does the difference quotient (f(a+h)-f(a))/h represent?",
+   "options": [
+    "Instantaneous rate",
+    "Average rate over interval h",
+    "Area under the curve",
+    "Maximum value"
+   ],
+   "answer": 1,
+   "why": "It measures the average rate of change over the small interval h."
+  },
+  {
+   "q": "According to the Fundamental Theorem of Calculus, integrating a derivative and then differentiating the result will give you:",
+   "options": [
+    "Zero",
+    "The original function",
+    "The original derivative",
+    "An unrelated function"
+   ],
+   "answer": 1,
+   "why": "Integration and differentiation are inverse operations."
+  },
+  {
+   "q": "In the profit function P(q)= -0.02q^3+0.9q^2-15q+200, the marginal profit is:",
+   "options": [
+    "P'(q)",
+    "Integral of P(q)",
+    "Limit of P as q->0",
+    "P(q) itself"
+   ],
+   "answer": 0,
+   "why": "Marginal profit is the derivative of the profit function."
+  },
+  {
+   "q": "A critical point occurs when:",
+   "options": [
+    "The function is undefined",
+    "The derivative equals zero or does not exist",
+    "The integral equals zero",
+    "The limit does not exist"
+   ],
+   "answer": 1,
+   "why": "Critical points are where the derivative is zero or undefined, indicating possible maxima or minima."
+  },
+  {
+   "q": "Which sequence correctly solves a multi‑step calculus problem?",
+   "options": [
+    "Choose tool → compute integral → check limit",
+    "Identify tool → apply derivative → integrate if needed → interpret result",
+    "Integrate first → differentiate later → find limit",
+    "Guess answer → verify with limit"
+   ],
+   "answer": 1,
+   "why": "You first pick the right tool, then apply derivatives or integrals as required, checking each step."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a limit?",
+   "back": "The value a function approaches as the input gets arbitrarily close to a specific point."
+  },
+  {
+   "front": "Define derivative in plain terms.",
+   "back": "It is the instantaneous rate of change of a function at a particular point."
+  },
+  {
+   "front": "What does an integral represent?",
+   "back": "The total accumulation of a quantity, often visualized as the area under a curve."
+  },
+  {
+   "front": "What is the difference quotient?",
+   "back": "(f(a+h)-f(a))/h, the average rate of change over a small interval h."
+  },
+  {
+   "front": "State the Fundamental Theorem of Calculus.",
+   "back": "Differentiation and integration are inverse processes; integrating a rate and then differentiating returns the original rate."
+  },
+  {
+   "front": "What is marginal profit?",
+   "back": "The derivative of the profit function, showing how profit changes with a small change in production."
+  },
+  {
+   "front": "What is a critical point?",
+   "back": "A point where the derivative is zero or undefined, used to locate possible maxima or minima."
+  },
+  {
+   "front": "How do you approach a multi‑step calculus problem?",
+   "back": "Identify the needed tools, apply them in order (e.g., derivative then integral), and verify each step before moving on."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l27-factory-production-line",
+   "title": "A real factory floor showing machines and workers producing goods.",
+   "alt": "A real factory floor showing machines and workers producing goods.",
+   "priority": 8,
+   "picture_title": "Factory Production Line",
+   "kind": "photo",
+   "subject": "The photo shows a typical manufacturing environment with assembly lines, conveyor belts, and workers. It helps students visualise the context of the profit function problem in the exam practice section.",
+   "layout": "Wide shot of the factory floor with the main production line centred; smaller inset showing a control panel.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l27-gear-mechanism-for-calculus-tools",
+   "title": "Three interlocking gears labelled Limit, Derivative, Integral.",
+   "alt": "Three interlocking gears labelled Limit, Derivative, Integral.",
+   "priority": 7,
+   "picture_title": "Gear Mechanism for Calculus Tools",
+   "kind": "illustration",
+   "subject": "An illustration of three gears that mesh together, each gear marked with one of the core calculus tools. The picture conveys how limits, derivatives, and integrals work together like gears in a clock.",
+   "layout": "Three gears arranged in a triangular pattern, each gear touching the other two; labels placed on the outer rim of each gear.",
+   "labels": [
+    "Limit",
+    "Derivative",
+    "Integral"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l27-multi-step-problem-flowchart",
+   "title": "A step‑by‑step flowchart showing measure, mix, bake analogy.",
+   "alt": "A step‑by‑step flowchart showing measure, mix, bake analogy.",
+   "priority": 6,
+   "picture_title": "Multi‑Step Problem Flowchart",
+   "kind": "labelled diagram",
+   "subject": "A simple flowchart that maps the recipe analogy to calculus steps: Measure (find derivative), Mix (set derivative to zero), Bake (evaluate or integrate). It guides students through multi‑step problem solving.",
+   "layout": "Vertical flow with three boxes connected by arrows; each box contains a short phrase and an icon.",
+   "labels": [
+    "Measure: Derivative",
+    "Mix: Solve =0",
+    "Bake: Evaluate/Integrate"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Typical Multi‑Step Calculus Problem Solving",
+   "steps": [
+    {
+     "label": "Identify tool",
+     "text": "Read the question and decide if it needs a limit, derivative or integral."
+    },
+    {
+     "label": "Apply formula",
+     "text": "Write the appropriate definition (limit, difference quotient, or integral)."
+    },
+    {
+     "label": "Compute",
+     "text": "Carry out algebra or arithmetic to find the answer."
+    },
+    {
+     "label": "Check",
+     "text": "Verify the result makes sense in the original context."
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Limits vs. Derivatives vs. Integrals",
+   "left": {
+    "name": "Limits",
+    "points": [
+     "Describe what value a function approaches",
+     "Used when x → a",
+     "Foundation for derivatives"
+    ]
+   },
+   "right": {
+    "name": "Derivatives",
+    "points": [
+     "Instantaneous rate of change",
+     "Limit of a difference quotient",
+     "Answers “how fast?” questions"
+    ]
+   },
+   "after": 1
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
