@@ -79,17 +79,83 @@
     }
     if (on) addPlusButton();
   }
+  var picker = null;
   function addPlusButton() {
     if (document.getElementById('lh-plus')) return;
     var bar = document.querySelector('.inp');
     if (!bar) return;
+    picker = document.createElement('input');
+    picker.type = 'file';
+    picker.accept = 'image/jpeg,image/png,image/webp';
+    picker.style.display = 'none';
+    picker.id = 'lh-picker';
+    picker.onchange = function () {
+      var f = picker.files && picker.files[0];
+      picker.value = '';
+      if (f) sendPicture(f);
+    };
+    document.body.appendChild(picker);
     var plus = document.createElement('button');
     plus.id = 'lh-plus';
     plus.type = 'button';
     plus.textContent = '+';
-    plus.setAttribute('aria-label', 'Upload a picture');
-    plus.onclick = function () { addMsg('ai', 'Uploads are coming soon. For now, use /image to make a picture.'); };
+    plus.setAttribute('aria-label', 'Choose a picture to ask about');
+    plus.onclick = function () { picker.click(); };
     bar.insertBefore(plus, bar.firstChild);
+  }
+
+  // Makes the picture small enough to send (phone photos can be several megabytes).
+  function shrink(file, max) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var url = URL.createObjectURL(file);
+      img.onload = function () {
+        var scale = Math.min(1, max / Math.max(img.width, img.height));
+        var w = Math.max(1, Math.round(img.width * scale));
+        var h = Math.max(1, Math.round(img.height * scale));
+        var c = document.createElement('canvas');
+        c.width = w;
+        c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('picture')); };
+      img.src = url;
+    });
+  }
+
+  function sendPicture(file) {
+    if (!file || !/^image\//.test(file.type)) { addMsg('ai', 'Please choose a picture file.'); return; }
+    var t = token();
+    if (!t) { addMsg('ai', 'Enter your access code first. Type /code followed by your code.'); return; }
+    if (!base) { addMsg('ai', 'Nova is not connected yet.'); return; }
+    var q = document.getElementById('q');
+    var question = q ? q.value.trim() : '';
+    clearInput();
+    shrink(file, 1024).then(function (dataUrl) {
+      var userBub = addMsg('user', question || 'Describe this picture.');
+      var thumb = document.createElement('img');
+      thumb.className = 'lh-img';
+      thumb.alt = 'Your picture';
+      thumb.src = dataUrl;
+      userBub.appendChild(thumb);
+      var b = addMsg('ai', '', { typing: true });
+      post('/vision', { token: t, question: question, image: dataUrl }).then(function (res) {
+        b.parentNode.remove();
+        if (res.ok && res.json.answer) {
+          addMsg('ai', res.json.answer + '\n\nPicture questions left today: ' + res.json.remaining);
+        } else {
+          if (res.status === 401) { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} setPremiumLook(false); }
+          addMsg('ai', (res.json && res.json.error) || 'Nova could not look at that picture. Please try again.');
+        }
+      }).catch(function () {
+        b.parentNode.remove();
+        addMsg('ai', 'No internet connection, or Nova is unreachable. Please try again.');
+      });
+    }).catch(function () {
+      addMsg('ai', 'That picture could not be opened. Please try another one.');
+    });
   }
 
   function handleCode(arg) {
