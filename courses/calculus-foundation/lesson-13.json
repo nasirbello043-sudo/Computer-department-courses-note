@@ -1,0 +1,373 @@
+{
+ "title": "Differentiation from First Principles",
+ "summary": "Students learn how to find the derivative of a function directly from the definition using limits. The lesson walks through the difference quotient and shows step‑by‑step calculations for several common functions.",
+ "objectives": [
+  "Write the difference quotient for a given function",
+  "Evaluate the limit that defines the derivative",
+  "Compute derivatives of polynomial and simple rational functions from first principles",
+  "Explain why the limit process gives the slope of the tangent line"
+ ],
+ "prerequisites": "Students should already understand basic algebra, how to simplify fractions, and the concept of a limit from previous lessons.",
+ "why": [
+  "Derivatives describe how quickly quantities change, which is essential in physics for speed and acceleration, in economics for marginal cost, and in biology for growth rates.",
+  "Knowing the definition builds a solid foundation; it shows why the shortcut rules work and helps students spot errors when applying them."
+ ],
+ "sections": [
+  {
+   "heading": "1. What is the Difference Quotient?",
+   "body": "The **difference quotient** is the starting point for all of calculus.  \nIt tells us how much a function $f$ changes, on average, when we move a tiny step $h$ to the right of a point $x$.\n\nImagine you are driving from mile marker $x$ to mile marker $x+h$ on a straight road.  \nYour speedometer shows the *average speed* for that short trip: distance travelled divided by time taken.  \nIn the same way, the difference quotient measures the *average rate of change* of $f$ over the interval $[x,\\;x+h]$.\n\n> **Definition:** The difference quotient of a function $f$ at the point $x$ with step $h$ is  \n> $$\\frac{f(x+h)-f(x)}{h}.$$  \n\nHere each symbol has a meaning:\n\n* $f(x)$ – the value of the function at the starting point $x$.  \n* $f(x+h)$ – the value of the function after we have moved a little distance $h$ to the right.  \n* $f(x+h)-f(x)$ – the *change* in the function’s value over that interval.  \n* $h$ – the length of the interval (how far we moved).  \n* The whole fraction – the *average change per unit of $h$*, i.e., the average slope of the curve between the two points.\n\nWhy do we care about this average slope?  \nIf we draw the graph of $f$, the two points $(x,\\;f(x))$ and $(x+h,\\;f(x+h))$ determine a straight line called the **secant line**. The slope of that secant line is exactly the difference quotient. It tells us how steep the curve is, on average, between the two points.\n\n> **In daily life:** Think of a hill you are climbing. If you measure how high you are at the bottom ($x$) and again a few meters up the path ($x+h$), the difference quotient is like asking, “On average, how many meters do I rise for each meter I walk?”  \n\nWhen $h$ is large, the secant line may be far from the curve’s true direction at $x$. But as we make $h$ smaller and smaller, the secant line rotates and approaches a line that just *touches* the curve at $(x,\\;f(x))$ without crossing it. That special line is the **tangent line**, and its slope is the *instantaneous* rate of change – the derivative.\n\n> **Note:** The difference quotient itself is not yet the derivative. It becomes the derivative only after we let $h$ approach zero, written as $\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$. The limit process squeezes $h$ down to an infinitesimally small size, turning the average into an exact, instantaneous value.\n\nA common first mistake is to think the quotient gives the exact slope for any $h$. It only gives an *average* slope; the exact slope appears after the limit.  \n\n> **Remember:** The difference quotient is a *tool* that captures how a function changes over a tiny interval. By shrinking that interval (letting $h\\to0$), we uncover the function’s true, instantaneous rate of change – the derivative.  \n\nIn the next parts of this lesson we will apply the difference quotient to specific kinds of functions (linear, quadratic, rational) and see how the limit works in each case. For now, keep the picture of two points on a curve, a secant line between them, and the idea that making the points closer together reveals the curve’s true direction at a single point.",
+   "code": ""
+  },
+  {
+   "heading": "2. Taking the Limit as h → 0",
+   "body": "The derivative of a function at a point tells us how fast the function’s value is changing **right at that point**.  \nTo obtain this number we start with the *difference quotient*  \n\n\\[\n\\frac{f(x+h)-f(x)}{h},\n\\]\n\nwhich measures the average rate of change of \\(f\\) over a short interval of length \\(h\\).  \nIf we let the interval become smaller and smaller—mathematically, we let \\(h\\) **approach** zero—the average rate of change settles down to a single value. That limiting value is the **derivative**.\n\n> **Definition:** The derivative of \\(f\\) at \\(x\\) is  \n> $$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h},$$  \n> provided the limit exists.  \n\nIn plain words, we are asking: *What would the slope be if we could draw a line that just touches the curve at the point \\((x,f(x))\\) without cutting through it?* That line is called the **tangent line**, and its slope is exactly the derivative.\n\nWhy is this useful?  \nThe derivative gives the **instantaneous rate of change**, just as a speedometer tells you how fast a car is moving at a particular instant, not just the average speed over a trip. In physics, economics, biology, and many other fields, knowing the instantaneous rate lets us predict future behavior, find optimal points, and understand how systems respond to small changes.\n\n> **In daily life:** Imagine you are walking up a hill. The steepness you feel at any moment is the derivative of the hill’s height with respect to horizontal distance. If the hill gets steeper, the derivative is larger; if it flattens, the derivative drops toward zero.\n\n### How the limit works\n\nWhen we write \\(\\lim_{h\\to0}\\), we mean we consider values of \\(h\\) that are **very** close to zero—both positive (to the right of the point) and negative (to the left). If the fraction \\(\\frac{f(x+h)-f(x)}{h}\\) approaches the same number from both sides, that number is the limit. If the two sides give different numbers, the limit does **not** exist, and the function has no derivative at that point.\n\nA common mistake is to think that we can simply plug \\(h=0\\) into the difference quotient. Doing so makes the denominator zero, which is undefined. The limit process is different: we look at the behavior of the fraction as \\(h\\) gets arbitrarily small, not at the value when \\(h\\) is exactly zero.\n\n> **Remember:** The limit is about approaching, not reaching. Never substitute \\(h=0\\) directly into the difference quotient.\n\n### Worked example\n\n**Example 1 (Easy):** *Find the derivative of \\(f(x)=2x\\) using the definition.*\n\n1. **Write the difference quotient.**  \n   $$\\frac{f(x+h)-f(x)}{h}=\\frac{2(x+h)-2x}{h}.$$\n\n2. **Simplify the numerator.**  \n   $$\\frac{2x+2h-2x}{h}=\\frac{2h}{h}.$$\n\n3. **Cancel the common factor \\(h\\).**  \n   $$\\frac{2h}{h}=2.$$\n\n   Now the expression no longer contains \\(h\\), so the limit as \\(h\\to0\\) is simply the constant 2.\n\n**Answer:** The derivative is \\(f'(x)=2\\). This means the function \\(2x\\) increases by 2 units of output for every 1 unit increase in input, no matter where you look on the line.\n\n### Interpreting the result\n\nFor the linear function \\(f(x)=2x\\), the graph is a straight line with slope 2. Because the slope is the same everywhere, the derivative is the same constant 2 at every point. This matches our intuition: a straight line does not change its steepness, so the instantaneous rate of change is just the constant slope.\n\nIf we tried a more complicated function, the algebra would be longer, but the steps are identical:\n\n1. Form the difference quotient.\n2. Expand and simplify algebraically.\n3. Cancel any factor of \\(h\\) that appears.\n4. Take the limit as \\(h\\to0\\).\n\nWhen the cancellation step works, the limit becomes immediate. When it does not, we may need to use algebraic tricks (like multiplying by a conjugate) or known limit laws.\n\n> **Note:** The derivative exists at a point only if the limit from the left and the limit from the right are equal. If they differ, the function has a “corner” or “cusp” there, and the derivative is undefined.\n\n### Summary of the process\n\n1. **Start with the definition** \\(f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}\\).  \n2. **Plug the function** into the numerator \\(f(x+h)\\) and \\(f(x)\\).  \n3. **Simplify** the fraction algebraically, looking for a factor of \\(h\\) that can be cancelled.  \n4. **Take the limit** by letting \\(h\\) become arbitrarily small; any remaining \\(h\\) in the denominator would make the limit infinite or undefined.  \n5. **Interpret** the resulting number as the instantaneous rate of change at the chosen point.\n\nUnderstanding this limit process is the cornerstone of differential calculus. It turns the intuitive idea of “instantaneous slope” into a precise, calculable quantity that we will use throughout the rest of the course.",
+   "code": ""
+  },
+  {
+   "heading": "3. Linear Functions",
+   "body": "For a straight line the graph never bends – it has the same steepness everywhere.  \nThat steepness is what the derivative measures.  \nIf we can show that the derivative of any line $f(x)=mx+b$ is the constant number $m$, we will have a simple rule we can use over and over again.\n\n---\n\n**Idea in plain words**  \nThe *difference quotient* looks at how much the function’s value changes when we move a tiny step $h$ to the right, and then divides that change by the step size $h$.  \nFor a line the change in $y$ is always $m$ times the change in $x$, no matter how small the step is.  \nWhen we let the step become *infinitely* small (take the limit as $h\\to0$), the fraction settles down to exactly $m$.\n\n> **Definition:** The derivative of $f$ at $x$ is  \n> $$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$$  \n> if this limit exists.\n\n> **Note:** $m$ is called the *slope* of the line; it tells us how many units $y$ rises (or falls) when $x$ increases by one unit.\n\n> **In daily life:** Imagine walking up a perfectly straight ramp. No matter where you stand, the steepness you feel is the same. That constant steepness is the derivative of the ramp’s height function.\n\n---\n\n### Deriving the formula\n\nTake the generic line  \n\n$$f(x)=mx+b,$$\n\nwhere $m$ and $b$ are constants.  \nInsert $f$ into the definition of the derivative:\n\n$$\n\\begin{aligned}\nf'(x)&=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}\\\\[4pt]\n&=\\lim_{h\\to0}\\frac{m(x+h)+b-\\big(mx+b\\big)}{h}.\n\\end{aligned}\n$$\n\nNow simplify the numerator:\n\n$$\nm(x+h)+b-mx-b = mx+mh+b-mx-b = mh.\n$$\n\nSo the whole fraction becomes\n\n$$\n\\frac{mh}{h}.\n$$\n\nBecause $h\\neq0$ (we are only looking at the limit, not actually setting $h=0$), we can cancel $h$:\n\n$$\n\\frac{mh}{h}=m.\n$$\n\nThe expression no longer depends on $h$, so the limit is simply $m$:\n\n$$\nf'(x)=\\lim_{h\\to0} m = m.\n$$\n\nThus **the derivative of any linear function $mx+b$ is the constant $m$**, the slope of the line.\n\n> **Remember:** For a straight line the derivative does not change with $x$; it is the same number everywhere.\n\n---\n\n### Worked example\n\n**Example 2 (Easy): Using the definition to differentiate $f(x)=5x-3$**  \n\n*Question:* Find $f'(x)$ directly from the definition of the derivative.\n\n1. **Write the difference quotient.**  \n   $$\\frac{f(x+h)-f(x)}{h} = \\frac{(5(x+h)-3)-(5x-3)}{h}$$  \n\n2. **Simplify the numerator.**  \n   $$5(x+h)-3-5x+3 = 5x+5h-3-5x+3 = 5h.$$  \n\n3. **Cancel the $h$ and take the limit.**  \n   $$\\frac{5h}{h}=5\\quad\\Longrightarrow\\quad f'(x)=\\lim_{h\\to0}5 = 5.$$\n\n**Answer:** $f'(x)=5$. The derivative is the constant slope $5$, meaning the line rises 5 units in $y$ for each unit increase in $x$.\n\n---\n\n### Why this result is useful\n\n1. **Speed:** Once we know the rule “derivative of $mx+b$ is $m$”, we never need to redo the limit for each linear function.  \n2. **Building block:** More complicated functions are often broken into linear pieces (e.g., piecewise definitions, tangent lines). Knowing the derivative of each piece instantly gives the derivative of the whole.  \n3. **Checking work:** If you ever compute a derivative and obtain something that varies with $x$ for a straight line, you have made a mistake.\n\n> **Common mistake:** Forgetting to cancel the $h$ before taking the limit, leading to an undefined expression $0/0$. Always simplify first.\n\n---\n\n### Quick sanity check\n\nTake another line, say $g(x)=-2x+7$. Apply the rule:\n\n$$g'(x)= -2.$$\n\nIf we plug $x=4$ into $g$, we get $g(4) = -2\\cdot4+7 = -1$.  \nIncreasing $x$ by a tiny amount $\\Delta x$ changes $g$ by approximately $-2\\Delta x$, exactly what the derivative $-2$ predicts.\n\n---\n\nIn summary, the derivative of a linear function $f(x)=mx+b$ is the constant $m$, the slope of the line. This follows directly from the definition of the derivative by simplifying the difference quotient and letting the step size shrink to zero. The result gives us an immediate, reliable tool for any straight‑line situation we encounter in calculus.",
+   "code": ""
+  },
+  {
+   "heading": "4. Quadratic Functions",
+   "body": "When we talk about the **derivative** of a function, we are asking: *how fast does the function change at a particular point?*  \nThe formal way to answer this uses the **difference quotient**, which measures the average rate of change over a tiny step $h$, and then we let that step shrink to zero.  \n\n> **Definition:** The difference quotient of a function $f$ at $x$ is  \n> $$\\frac{f(x+h)-f(x)}{h}.$$  \n> It tells us the slope of the secant line that joins the points $(x,f(x))$ and $(x+h,f(x+h))$.\n\nFor a **quadratic function**—a function whose graph is a parabola—this process is especially clear because the algebra works out neatly.  A general quadratic can be written as  \n\n$$f(x)=ax^{2}+bx+c,$$  \n\nwhere $a,b,c$ are constants (fixed numbers).  Our goal is to simplify the difference quotient for this $f$ and then let $h\\to0$.\n\n---\n\n### Step‑by‑step simplification\n\n1. **Write the numerator** $f(x+h)-f(x)$.  \n   First substitute $x+h$ into the formula for $f$:\n   $$f(x+h)=a(x+h)^{2}+b(x+h)+c.$$  \n   Expand the square:\n   $$a(x^{2}+2xh+h^{2})+b x+b h+c\n   =a x^{2}+2a x h+a h^{2}+b x+b h+c.$$\n\n2. **Subtract $f(x)$** (which is $a x^{2}+b x+c$):\n   \\[\n   f(x+h)-f(x)=\\bigl(a x^{2}+2a x h+a h^{2}+b x+b h+c\\bigr)\n               -\\bigl(a x^{2}+b x+c\\bigr).\n   \\]\n\n3. **Cancel the terms that appear in both expressions**.  \n   The $a x^{2}$, $b x$, and $c$ disappear, leaving\n   \\[\n   f(x+h)-f(x)=2a x h+a h^{2}+b h.\n   \\]\n\n4. **Factor out the common $h$** (every remaining term contains $h$):\n   \\[\n   f(x+h)-f(x)=h\\bigl(2a x+a h+b\\bigr).\n   \\]\n\n5. **Form the difference quotient** by dividing by $h$:\n   \\[\n   \\frac{f(x+h)-f(x)}{h}= \\frac{h\\bigl(2a x+a h+b\\bigr)}{h}\n   =2a x+a h+b.\n   \\]\n\n6. **Take the limit as $h\\to0$**.  \n   When $h$ becomes extremely small, the term $a h$ disappears:\n   \\[\n   \\lim_{h\\to0}\\bigl(2a x+a h+b\\bigr)=2a x+b.\n   \\]\n\nThus the derivative of any quadratic $ax^{2}+bx+c$ is  \n\n$$f'(x)=2a x+b.$$\n\n> **Remember:** The $c$ term (the constant) vanishes because a constant does not change; its slope is zero.\n\nThe result tells us that the slope of a parabola at any $x$ is a straight line—another parabola’s “tangent line” is linear.\n\n---\n\n### Worked Example 3 (Medium): Derivative of $f(x)=3x^{2}+2x-1$\n\n**Question:** Find $f'(x)$ using the limit definition.\n\n1. **Write the difference quotient.**  \n   $$\\frac{f(x+h)-f(x)}{h}\n   =\\frac{3(x+h)^{2}+2(x+h)-1-\\bigl(3x^{2}+2x-1\\bigr)}{h}.$$\n\n2. **Expand and simplify the numerator.**  \n   \\[\n   3\\bigl(x^{2}+2xh+h^{2}\\bigr)+2x+2h-1-3x^{2}-2x+1\n   =6x h+3h^{2}+2h.\n   \\]\n\n3. **Factor out $h$ and cancel.**  \n   \\[\n   \\frac{6x h+3h^{2}+2h}{h}=6x+3h+2.\n   \\]\n\n4. **Take the limit $h\\to0$.**  \n   \\[\n   \\lim_{h\\to0}(6x+3h+2)=6x+2.\n   \\]\n\n**Answer:** $f'(x)=6x+2.$  \nThe slope at any point $x$ on the curve $3x^{2}+2x-1$ is given by the linear function $6x+2$.\n\n---\n\n### Worked Example 4 (Medium): Derivative of $f(x)=x^{2}$ at $x=4$\n\n**Question:** Compute $f'(4)$ using the limit definition.\n\n1. **Set up the quotient for the specific point $x=4$.**  \n   $$\\frac{f(4+h)-f(4)}{h}\n   =\\frac{(4+h)^{2}-4^{2}}{h}.$$\n\n2. **Expand the numerator.**  \n   \\[\n   (4^{2}+8h+h^{2})-16=8h+h^{2}.\n   \\]\n\n3. **Factor $h$ and cancel.**  \n   \\[\n   \\frac{8h+h^{2}}{h}=8+h.\n   \\]\n\n4. **Let $h\\to0$.**  \n   \\[\n   \\lim_{h\\to0}(8+h)=8.\n   \\]\n\n**Answer:** $f'(4)=8.$  \nSo at $x=4$, the parabola $y=x^{2}$ is rising at a rate of $8$ units of $y$ for each unit of $x$.\n\n> **In daily life:** Imagine a car’s speedometer. The derivative tells you the instantaneous speed (how fast the distance changes right now), just as we found the exact “speed” of the parabola at a particular $x$.\n\n> **Common mistake:** Forgetting to cancel the $h$ before taking the limit. If you plug $h=0$ into the unsimplified quotient, you get $0/0$, an undefined expression. Always simplify first.\n\nWith the quadratic case mastered, you can now approach more complicated functions, confident that the algebraic steps—expand, cancel, factor, limit—will guide you to the derivative.",
+   "code": ""
+  },
+  {
+   "heading": "5. Rational Functions (Simple Fractions)",
+   "body": "The idea of a **rational function** is simply a fraction whose numerator and denominator are polynomials.  \nFor the simplest case we look at  \n\n\\[\nf(x)=\\frac{1}{x},\n\\]\n\nand we will apply the definition of the derivative (the *difference quotient*) directly, without using any shortcut rules.\n\n> **Definition:** The derivative of a function $f$ at a point $x$ is  \n\n\\[\nf'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h},\n\\]\n\nprovided the limit exists.  \nThe expression inside the limit is called the *difference quotient*.\n\nThe reason this definition works is that it measures the average rate of change of the function over a tiny interval of width $h$, and then asks what happens when that interval becomes infinitesimally small. In everyday life this is like watching a car’s speedometer: the speedometer shows the average speed over a short time span, and as the time span shrinks the reading approaches the car’s instantaneous speed.\n\n---\n\n### Step‑by‑step for $f(x)=\\dfrac{1}{x}$\n\n**Example 5 (Hard): Derivative of $f(x)=\\dfrac{1}{x}$ from first principles**  \n\nFind $f'(x)$ using the definition.\n\n1. **Write the difference quotient.**  \n   Replace $f$ by $1/x$ in the definition:  \n\n   $$\n   \\frac{f(x+h)-f(x)}{h}\n   =\\frac{\\dfrac{1}{x+h}-\\dfrac{1}{x}}{h}.\n   $$\n\n2. **Combine the two fractions in the numerator.**  \n   To subtract $\\dfrac{1}{x+h}$ and $\\dfrac{1}{x}$ we need a common denominator $(x+h)x$:  \n\n   $$\n   \\frac{1}{x+h}-\\frac{1}{x}\n   =\\frac{x-(x+h)}{x(x+h)}\n   =\\frac{-h}{x(x+h)}.\n   $$\n\n3. **Insert this result back into the quotient and simplify.**  \n\n   $$\n   \\frac{-h}{x(x+h)}\\;\\Big/\\;h\n   =\\frac{-h}{x(x+h)}\\cdot\\frac{1}{h}\n   =-\\frac{1}{x(x+h)}.\n   $$\n\n4. **Take the limit as $h\\to 0$.**  \n   The only $h$ left is inside the factor $(x+h)$. As $h$ approaches $0$, $(x+h)$ approaches $x$:  \n\n   $$\n   f'(x)=\\lim_{h\\to 0}\\!\\left(-\\frac{1}{x(x+h)}\\right)\n   =-\\frac{1}{x\\cdot x}\n   =-\\frac{1}{x^{2}}.\n   $$\n\n**Answer:**  \n\\[\nf'(x)=-\\frac{1}{x^{2}}.\n\\]  \nThe derivative tells us that the slope of the curve $y=1/x$ is always negative and becomes steeper (more negative) as $x$ gets smaller in magnitude.\n\n> **Note:** When you see a subtraction of two fractions, always find a common denominator first. Skipping this step is a common source of algebraic errors.\n\n---\n\n### Using the result at a specific point\n\nNow we apply the same definition to a slightly more complicated rational function, but we only need the derivative at a single point, $x=2$.\n\n**Example 6 (Hard): Determine $f'(2)$ for $f(x)=\\dfrac{4x+1}{x}$ by the definition**  \n\n1. **Write the function and the difference quotient at $x=2$.**  \n\n   $$\n   f'(2)=\\lim_{h\\to 0}\\frac{f(2+h)-f(2)}{h},\n   \\qquad\n   f(x)=\\frac{4x+1}{x}.\n   $$\n\n2. **Evaluate $f(2+h)$ and $f(2)$.**  \n\n   $$\n   f(2+h)=\\frac{4(2+h)+1}{2+h}\n   =\\frac{8+4h+1}{2+h}\n   =\\frac{9+4h}{2+h},\n   $$\n   $$\n   f(2)=\\frac{4\\cdot2+1}{2}\n   =\\frac{9}{2}.\n   $$\n\n3. **Form the numerator $f(2+h)-f(2)$ and combine into a single fraction.**  \n\n   $$\n   \\frac{9+4h}{2+h}-\\frac{9}{2}\n   =\\frac{2(9+4h)-9(2+h)}{2(2+h)}\n   =\\frac{18+8h-18-9h}{2(2+h)}\n   =\\frac{-h}{2(2+h)}.\n   $$\n\n4. **Divide by $h$ (the denominator of the difference quotient).**  \n\n   $$\n   \\frac{-h}{2(2+h)}\\;\\Big/\\;h\n   =\\frac{-h}{2(2+h)}\\cdot\\frac{1}{h}\n   =-\\frac{1}{2(2+h)}.\n   $$\n\n5. **Take the limit as $h\\to 0$.**  \n\n   $$\n   f'(2)=\\lim_{h\\to 0}\\!\\left(-\\frac{1}{2(2+h)}\\right)\n   =-\\frac{1}{2\\cdot2}\n   =-\\frac{1}{4}.\n   $$\n\n**Answer:**  \n\\[\nf'(2)=-\\frac{1}{4}.\n\\]  \nSo at $x=2$ the graph of $y=\\dfrac{4x+1}{x}$ is decreasing, and the instantaneous rate of change is $-0.25$ units of $y$ per unit of $x$.\n\n> **In daily life:** Think of $f(x)=\\frac{4x+1}{x}$ as a recipe that tells you how many cups of ingredient you need for $x$ servings. The derivative at $x=2$ tells you how the amount changes if you add a tiny extra serving—here it actually *decreases* a little, because the extra serving spreads the fixed “+1” part over more servings.\n\n> **Remember:** After you combine fractions, always look for a factor of $h$ that can cancel before you take the limit. Cancelling early prevents the limit from becoming an indeterminate form $\\frac{0}{0}$.\n\n---\n\nBy working through these two examples we have seen how the definition of the derivative works for simple rational functions. The key steps are:\n\n1. Write the difference quotient.  \n2. Put all terms over a common denominator.  \n3. Simplify algebraically, looking for a factor of $h$ that cancels.  \n4. Let $h$ go to $0$ and read off the final expression.\n\nWith practice, these steps become routine, and you can apply them to more complicated fractions or to piecewise functions later in the course.",
+   "code": ""
+  },
+  {
+   "heading": "6. Practice with a Piecewise Function",
+   "body": "When a function is given by **different formulas on each side of a point**, we have to check the two “one‑sided” limits that appear in the definition of the derivative.  \nThe derivative at a point $a$ exists only if the limit  \n\n$$\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$$  \n\ngives the same number when $h$ approaches $0$ from the left ($h<0$) and from the right ($h>0$).  \nIf the two one‑sided limits are different, the slope of the graph jumps at $a$ and the derivative does **not** exist there.\n\n> **Definition:** The *one‑sided derivative* from the left at $a$ is  \n> $$f'_-(a)=\\lim_{h\\to 0^-}\\frac{f(a+h)-f(a)}{h},$$  \n> and from the right is  \n> $$f'_+(a)=\\lim_{h\\to 0^+}\\frac{f(a+h)-f(a)}{h}.$$  \n> The derivative $f'(a)$ exists only when $f'_-(a)=f'_+(a)$.\n\nThink of a road that changes from a smooth hill to a flat sidewalk exactly at a curb. If you ride a bike across the curb, the direction you are traveling changes abruptly; you cannot describe the motion with a single smooth slope. The same idea applies to a graph of a piecewise function.\n\nBelow we work through a concrete piecewise function and see step‑by‑step how to decide whether $f'(0)$ exists.\n\n---\n\n**Example 7 (Intermediate): Derivative of a piecewise function at the joining point**  \n\nFor  \n\n\\[\nf(x)=\\begin{cases}\nx^{2}, & x\\le 0,\\\\[4pt]\n2x+1, & x>0,\n\\end{cases}\n\\]\n\nfind $f'(0)$ using the definition.\n\n1. **Write the difference quotient for the left side**  \n   When $h<0$, $0+h\\le0$, so we must use the formula $f(x)=x^{2}$.  \n   $$\\frac{f(0+h)-f(0)}{h}= \\frac{(0+h)^{2}-0^{2}}{h}= \\frac{h^{2}}{h}=h.$$\n\n2. **Take the limit as $h\\to0^{-}$**  \n   The expression from step 1 simplifies to $h$, whose limit from the left is simply $0$.  \n   $$\\lim_{h\\to0^{-}}h = 0.$$  \n   Hence $f'_-(0)=0$.\n\n3. **Write the difference quotient for the right side**  \n   When $h>0$, $0+h>0$, so we use $f(x)=2x+1$.  \n   $$\\frac{f(0+h)-f(0)}{h}= \\frac{(2(0+h)+1)-f(0)}{h}.$$\n   First compute $f(0)$. Because $0\\le0$, we use the left formula: $f(0)=0^{2}=0$.  \n   Substituting,  \n   $$\\frac{2h+1-0}{h}= \\frac{2h+1}{h}=2+\\frac{1}{h}.$$\n\n4. **Take the limit as $h\\to0^{+}$**  \n   The term $\\frac{1}{h}$ grows without bound when $h$ approaches $0$ from the right, so the limit does not exist (it diverges to $+\\infty$).  \n   $$\\lim_{h\\to0^{+}}\\left(2+\\frac{1}{h}\\right)=+\\infty.$$  \n   Therefore $f'_+(0)$ does not exist as a finite number.\n\n**Answer:** The left‑hand derivative at $0$ is $0$, but the right‑hand derivative is infinite. Since the two one‑sided limits are not equal, the derivative $f'(0)$ does **not** exist.\n\n---\n\n### Why the result matters\n\nWhen a function changes its rule at a point, the graph may have a corner, a cusp, or a vertical jump. The derivative measures the instantaneous rate of change, which is only meaningful if the graph has a single, well‑defined tangent line at that point. In our example the graph is a smooth parabola for $x\\le0$ and a straight line for $x>0$. At $x=0$ the line meets the parabola with a sharp corner, so there is no single tangent line—hence no derivative.\n\n> **In daily life:** Imagine a skateboard ramp that ends abruptly and turns into a flat surface. While you can ride on each part smoothly, the instant you reach the edge you experience a sudden change in direction. That instant is like a point where the derivative does not exist.\n\n> **Common mistake:** Forgetting to evaluate $f(a)$ using the correct piece of the definition. In the example we used $f(0)=0$ from the left piece; using the right piece would give $f(0)=1$, which would lead to an incorrect difference quotient.\n\n> **Remember:** Always check both sides separately for a piecewise function. Write two limits, simplify each, and then compare the results.\n\n### Quick checklist for piecewise derivatives\n\n1. Identify the point $a$ where the formula changes.  \n2. Determine which formula applies for $x<a$ (left) and for $x>a$ (right).  \n3. Compute the left‑hand difference quotient and its limit as $h\\to0^{-}$.  \n4. Compute the right‑hand difference quotient and its limit as $h\\to0^{+}$.  \n5. Compare the two limits: if they are equal, that common value is $f'(a)$; otherwise, $f'(a)$ does not exist.\n\nUsing this systematic approach ensures you never miss a subtle sign change or an undefined expression, and it makes the process of differentiating piecewise functions as reliable as differentiating any smooth function.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Use the difference quotient to find the derivative of $f(x)=3x+4$.",
+   "a": "\n\\[\n\\begin{aligned}\nf'(x)&=\\lim_{h\\to0}\\frac{3(x+h)+4-(3x+4)}{h}\\\\\n&=\\lim_{h\\to0}\\frac{3x+3h+4-3x-4}{h}\\\\\n&=\\lim_{h\\to0}\\frac{3h}{h}=3.\n\\end{aligned}\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Find $f'(2)$ for $f(x)=x^{2}$ using first principles.",
+   "a": "\n\\[\n\\begin{aligned}\nf'(2)&=\\lim_{h\\to0}\\frac{(2+h)^{2}-2^{2}}{h}\\\\\n&=\\lim_{h\\to0}\\frac{4+4h+h^{2}-4}{h}\\\\\n&=\\lim_{h\\to0}\\frac{4h+h^{2}}{h}\n=\\lim_{h\\to0}(4+h)=4.\n\\end{aligned}\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Compute the derivative of $f(x)=\\dfrac{1}{x+2}$ from first principles.",
+   "a": "\n\\[\n\\begin{aligned}\nf'(x)&=\\lim_{h\\to0}\\frac{\\frac{1}{x+h+2}-\\frac{1}{x+2}}{h}\\\\\n&=\\lim_{h\\to0}\\frac{(x+2)-(x+h+2)}{h\\,(x+h+2)(x+2)}\\\\\n&=\\lim_{h\\to0}\\frac{-h}{h\\,(x+h+2)(x+2)}\\\\\n&=\\frac{-1}{(x+2)^{2}}.\n\\end{aligned}\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "For the piecewise function $f(x)=\\begin{cases}x^{2}&x\\le0\\\\-x&x>0\\end{cases}$, determine if $f$ is differentiable at $x=0$.",
+   "a": "\nLeft‑hand derivative:\n\\[\nf'_{-}(0)=\\lim_{h\\to0^{-}}\\frac{(0+h)^{2}-0^{2}}{h}\n=\\lim_{h\\to0^{-}}\\frac{h^{2}}{h}= \\lim_{h\\to0^{-}}h=0.\n\\]\nRight‑hand derivative:\n\\[\nf'_{+}(0)=\\lim_{h\\to0^{+}}\\frac{- (0+h)-0}{h}\n=\\lim_{h\\to0^{+}}\\frac{-h}{h}= -1.\n\\]\nSince $0\\neq-1$, the one‑sided limits differ; $f$ is **not** differentiable at $x=0$."
+  },
+  {
+   "level": "Hard",
+   "q": "Using first principles, find the derivative of $f(x)=x^{3}-3x$ and then evaluate $f'(1)$.",
+   "a": "\n\\[\n\\begin{aligned}\nf'(x)&=\\lim_{h\\to0}\\frac{(x+h)^{3}-3(x+h)-\\bigl(x^{3}-3x\\bigr)}{h}\\\\\n&=\\lim_{h\\to0}\\frac{x^{3}+3x^{2}h+3xh^{2}+h^{3}-3x-3h-x^{3}+3x}{h}\\\\\n&=\\lim_{h\\to0}\\frac{3x^{2}h+3xh^{2}+h^{3}-3h}{h}\\\\\n&=\\lim_{h\\to0}\\bigl(3x^{2}+3xh+h^{2}-3\\bigr)\\\\\n&=3x^{2}-3.\n\\end{aligned}\n\\]\nNow $f'(1)=3(1)^{2}-3=0$."
+  },
+  {
+   "level": "Hard",
+   "q": "Let $f(x)=\\dfrac{x}{x^{2}+1}$. Find $f'(x)$ from first principles.",
+   "a": "\n\\[\n\\begin{aligned}\nf'(x)&=\\lim_{h\\to0}\\frac{\\frac{x+h}{(x+h)^{2}+1}-\\frac{x}{x^{2}+1}}{h}\\\\\n&=\\lim_{h\\to0}\\frac{(x+h)(x^{2}+1)-x\\bigl[(x+h)^{2}+1\\bigr]}{h\\bigl[(x+h)^{2}+1\\bigr](x^{2}+1)}\\\\\n&=\\lim_{h\\to0}\\frac{x^{3}+x+h x^{2}+h-(x^{3}+2x^{2}h+xh^{2}+x)}{h\\bigl[(x+h)^{2}+1\\bigr](x^{2}+1)}\\\\\n&=\\lim_{h\\to0}\\frac{h x^{2}+h -2x^{2}h - xh^{2}}{h\\bigl[(x+h)^{2}+1\\bigr](x^{2}+1)}\\\\\n&=\\lim_{h\\to0}\\frac{h(1 - x^{2}) - xh^{2}}{h\\bigl[(x+h)^{2}+1\\bigr](x^{2}+1)}\\\\\n&=\\lim_{h\\to0}\\frac{1 - x^{2} - xh}{\\bigl[(x+h)^{2}+1\\bigr](x^{2}+1)}\\\\\n&=\\frac{1 - x^{2}}{(x^{2}+1)^{2}}.\n\\end{aligned}\n\\]"
+  }
+ ],
+ "recap": "The lesson introduces the difference quotient as the average rate of change of a function over a small interval. By taking the limit as the interval h approaches zero, we obtain the derivative, which gives the instantaneous slope at a point. Examples with linear, quadratic, rational, and piecewise functions show how to apply the definition.",
+ "key_terms": [
+  {
+   "term": "difference quotient",
+   "meaning": "The expression (f(x+h)-f(x))/h that measures average change of f over a step h"
+  },
+  {
+   "term": "derivative",
+   "meaning": "The limit of the difference quotient as h goes to 0, denoted f'(x)"
+  },
+  {
+   "term": "limit",
+   "meaning": "The value a function approaches as the input gets arbitrarily close to a point"
+  },
+  {
+   "term": "tangent line",
+   "meaning": "A line that touches a curve at a single point and has the same slope as the derivative at that point"
+  },
+  {
+   "term": "one‑sided derivative",
+   "meaning": "The limit of the difference quotient taken only from the left or right of a point"
+  },
+  {
+   "term": "linear function",
+   "meaning": "A function of the form f(x)=mx+b whose derivative is the constant slope m"
+  },
+  {
+   "term": "quadratic function",
+   "meaning": "A function of the form f(x)=ax^2+bx+c whose derivative is 2ax+b"
+  },
+  {
+   "term": "rational function",
+   "meaning": "A function that is a ratio of two polynomials, e.g., f(x)=1/x"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the difference quotient (f(x+h)-f(x))/h represent?",
+   "options": [
+    "The exact slope of the curve at x",
+    "The average rate of change of f over the interval [x, x+h]",
+    "The area under the curve between x and x+h",
+    "The value of f at x+h"
+   ],
+   "answer": 1,
+   "why": "It measures how much f changes on average over the small step h."
+  },
+  {
+   "q": "The derivative of a linear function f(x)=mx+b is:",
+   "options": [
+    "m+b",
+    "m",
+    "b",
+    "0"
+   ],
+   "answer": 1,
+   "why": "The slope m is constant, so the limit of the difference quotient equals m."
+  },
+  {
+   "q": "For f(x)=ax^2+bx+c, what is f'(x)?",
+   "options": [
+    "2ax+b",
+    "ax^2+bx",
+    "a+2bx",
+    "2a+bx"
+   ],
+   "answer": 0,
+   "why": "Applying the definition gives the derivative 2ax+b."
+  },
+  {
+   "q": "When computing the derivative of f(x)=1/x, which algebraic step is essential?",
+   "options": [
+    "Multiplying numerator and denominator by x",
+    "Rationalizing the denominator",
+    "Multiplying numerator and denominator by (x+h)",
+    "Expanding (x+h)^2"
+   ],
+   "answer": 2,
+   "why": "Multiplying by (x+h) simplifies the fraction to reveal the limit."
+  },
+  {
+   "q": "A derivative at a point does NOT exist if:",
+   "options": [
+    "The function is continuous there",
+    "The left‑hand and right‑hand limits of the difference quotient are different",
+    "The function has a constant slope",
+    "The function is linear"
+   ],
+   "answer": 1,
+   "why": "Different one‑sided limits mean the slope jumps, so no derivative."
+  },
+  {
+   "q": "The tangent line to y=f(x) at x=a has equation:",
+   "options": [
+    "y = f(a) + f'(a)(x-a)",
+    "y = f'(a) + f(a)(x-a)",
+    "y = f(a) - f'(a)(x-a)",
+    "y = f'(a)(x-a)"
+   ],
+   "answer": 0,
+   "why": "This line passes through (a,f(a)) with slope f'(a)."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Difference Quotient",
+   "back": "(f(x+h)-f(x))/h measures average change of f over a small step h."
+  },
+  {
+   "front": "Derivative Definition",
+   "back": "f'(x)=limit as h->0 of (f(x+h)-f(x))/h."
+  },
+  {
+   "front": "Tangent Line",
+   "back": "A line that touches a curve at one point and has slope equal to the derivative at that point."
+  },
+  {
+   "front": "Derivative of f(x)=mx+b",
+   "back": "The derivative is the constant m."
+  },
+  {
+   "front": "Derivative of f(x)=ax^2+bx+c",
+   "back": "f'(x)=2ax+b."
+  },
+  {
+   "front": "One‑Sided Derivative",
+   "back": "Limits of the difference quotient taken from only the left or right of a point."
+  },
+  {
+   "front": "When does a derivative NOT exist?",
+   "back": "When the left‑hand and right‑hand limits of the difference quotient are not equal."
+  },
+  {
+   "front": "Derivative of f(x)=1/x",
+   "back": "f'(x) = -1/x^2, found by simplifying the difference quotient."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l13-car-speedometer",
+   "title": "Shows average speed, analogous to the difference quotient.",
+   "alt": "Shows average speed, analogous to the difference quotient.",
+   "priority": 9,
+   "picture_title": "Car Speedometer",
+   "kind": "photo",
+   "subject": "A close‑up photograph of a car speedometer displaying a numeric speed reading.",
+   "layout": "Speedometer centered in the frame with the needle pointing to a speed value.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l13-road-mile-markers",
+   "title": "Driving from marker x to x + h illustrates the interval used in the difference quotient.",
+   "alt": "Driving from marker x to x + h illustrates the interval used in the difference quotient.",
+   "priority": 7,
+   "picture_title": "Road Mile Markers",
+   "kind": "photo",
+   "subject": "A straight road with two visible mile markers labeled x and x + h, showing the distance between them.",
+   "layout": "Markers placed at each end of the visible road segment; the road runs horizontally across the image.",
+   "labels": [
+    "x",
+    "x + h"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l13-piecewise-function-kink",
+   "title": "A visual of a function that changes formula at a point, requiring one‑sided limits.",
+   "alt": "A visual of a function that changes formula at a point, requiring one‑sided limits.",
+   "priority": 6,
+   "picture_title": "Piecewise Function Kink",
+   "kind": "illustration",
+   "subject": "A simple sketch of a curve that follows one line on the left of a point a and a different line on the right, creating a noticeable corner.",
+   "layout": "Two line segments meeting at point a; the left segment labeled f₁(x), the right segment labeled f₂(x).",
+   "labels": [
+    "a",
+    "f₁(x)",
+    "f₂(x)"
+   ],
+   "after": 5
+  },
+  {
+   "type": "graph",
+   "title": "Secant line for the difference quotient",
+   "fn": "x^2",
+   "xmin": -2,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 1,
+     "y": 1,
+     "label": "A",
+     "open": false
+    },
+    {
+     "x": 2,
+     "y": 4,
+     "label": "B",
+     "open": false
+    }
+   ],
+   "caption": "Secant line between (1,1) and (2,4) shows the average rate of change.",
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Derivative of a line vs a parabola",
+   "left": {
+    "name": "Linear f(x)=mx+b",
+    "points": [
+     "Derivative is constant m",
+     "Graph is a straight line",
+     "Slope never changes"
+    ]
+   },
+   "right": {
+    "name": "Quadratic f(x)=ax^2+bx+c",
+    "points": [
+     "Derivative is 2ax+b",
+     "Slope varies with x",
+     "Graph is a parabola"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Derivative of f(x)=1/x at x=1",
+   "fn": "1/x",
+   "xmin": -3,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 1,
+     "y": 1,
+     "label": "P",
+     "open": false
+    }
+   ],
+   "caption": "Tangent line at (1,1) has slope -1.",
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Finding the derivative of a line from first principles",
+   "steps": [
+    {
+     "label": "Write difference quotient",
+     "text": " (mx+b+h m - (mx+b))/h "
+    },
+    {
+     "label": "Simplify",
+     "text": " (mh)/h = m "
+    },
+    {
+     "label": "Take limit",
+     "text": " limit as h→0 of m = m "
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "One‑sided derivatives for a piecewise function",
+   "left": {
+    "name": "Left‑hand limit",
+    "points": [
+     "Use formula for x<a",
+     "Compute limit as h→0‑",
+     "Gives slope L"
+    ]
+   },
+   "right": {
+    "name": "Right‑hand limit",
+    "points": [
+     "Use formula for x>a",
+     "Compute limit as h→0+",
+     "Gives slope R"
+    ]
+   },
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

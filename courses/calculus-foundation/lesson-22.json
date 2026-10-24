@@ -1,0 +1,357 @@
+{
+ "title": "Basic Integration Rules",
+ "summary": "Students learn the basic integration rules for powers, sums, differences, exponentials, and trigonometric functions. They practice applying each rule to simple antiderivatives.",
+ "objectives": [
+  "Apply the power rule to find antiderivatives of polynomial terms",
+  "Integrate sums and differences by integrating each term separately",
+  "Find antiderivatives of exponential functions",
+  "Integrate basic sine and cosine functions",
+  "Combine the rules to solve mixed‑type integrals"
+ ],
+ "prerequisites": "Students should already know how to differentiate basic functions and understand the concept of a function’s area interpretation.",
+ "why": [
+  "Integration is used to calculate total distance from a speed graph, the amount of material needed for a shape, and the accumulated growth of investments. Knowing the basic rules lets you turn real‑world rate data into useful totals.",
+  "In physics, biology, and economics, many models are expressed as rates (e.g., velocity, population growth, interest). Being able to integrate these rates quickly gives you the original quantity, which is essential for prediction and planning."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Antiderivative Concept",
+   "body": "When we talk about “integrating’’ a function we are really looking for another function whose **derivative** is the original one.  \n\n> **Definition:** An *antiderivative* of a function $f(x)$ is a function $F(x)$ such that  \n> $$F'(x)=f(x).$$  \n\nThink of a derivative as a machine that tells you the instant rate of change of a quantity. The antiderivative is the reverse machine: it takes a rate of change and rebuilds a possible original quantity.  \n\nWhy does this matter? Suppose you know how fast a car is moving at every instant – that speed is a function $v(t)$. If you want to know **how far** the car has traveled after a certain time, you need a function whose derivative gives you the speed. That new function is exactly an antiderivative of $v(t)$.  \n\nThe symbol we use for “the set of all antiderivatives of $f$’’ is the **integral sign**. It looks like a long, stretched‑out “S’’ and comes from the Latin word *summa* (meaning “sum”).  \n\n> **Note:** The expression  \n> $$\\int f(x)\\,dx$$  \n> is read “the integral of $f$ of $x$ with respect to $x$’’ and represents *the family* of all antiderivatives of $f$.  \n\nThe little “$dx$’’ at the end tells us the variable we are integrating with respect to. If we write $\\int f(t)\\,dt$, we are looking for a function of $t$ whose derivative with respect to $t$ equals $f(t)$.  \n\nEvery antiderivative is not unique; you can always add a constant and still have the same derivative, because the derivative of a constant is zero.  \n\n> **Remember:** If $F(x)$ is an antiderivative of $f(x)$, then $F(x)+C$ is also an antiderivative, where $C$ is any real number.  \n\nFor example, consider $f(x)=2x$. A function whose derivative is $2x$ is $F(x)=x^{2}$, because $ \\frac{d}{dx}x^{2}=2x$. Adding any constant $C$ gives another antiderivative: $F(x)=x^{2}+C$. All of these are captured by the integral notation:  \n\n$$\\int 2x\\,dx = x^{2}+C.$$  \n\nIn everyday language, think of an antiderivative like a **recipe** that tells you how to reconstruct a finished dish (the original quantity) from the list of ingredients (the rates). The recipe can be tweaked by adding a pinch of “nothing’’—the constant $C$—without changing the taste (the derivative).  \n\n> **In daily life:** If a water tank fills at a rate of $5$ liters per minute, the amount of water after $t$ minutes is an antiderivative of the rate: $W(t)=5t+C$. The constant $C$ represents how much water was already in the tank before we started timing.  \n\nA common slip is to forget the $dx$ (or $dt$, $dy$, etc.) when writing an integral. Without it, the expression is ambiguous because the variable tells us which quantity we are “undoing’’ the derivative of.  \n\n> **Common mistake:** Writing $\\int f(x)$ without the $dx$ can lead to confusion; always include the differential, e.g., $\\int f(x)\\,dx$.  \n\nUnderstanding antiderivatives is the first step toward the powerful technique of integration. Once we can recognize that $\\int f(x)\\,dx$ means “find a function whose derivative is $f(x)$,” we can begin to apply systematic rules—like the power rule, sum rule, and others—to evaluate many integrals quickly. This foundation will let us move from abstract rates to concrete totals in the next sections.",
+   "code": ""
+  },
+  {
+   "heading": "2. Power Rule for Integration",
+   "body": "The power rule tells us how to find an antiderivative (a function whose derivative gives the original) for any simple power of $x$.  \nIn plain words: **if you have a term like $x^n$, you can “undo” the derivative by raising the exponent by 1 and then dividing by the new exponent**.  \n\nWhy does this work?  Remember the basic rule for differentiation (the derivative) of a power:  \n\n$$\\frac{d}{dx}\\,x^{n+1} = (n+1)x^{n}.$$  \n\nIf we want a function $F(x)$ whose derivative is $x^{n}$, we look for a function of the form $k\\,x^{n+1}$.  Differentiating $k\\,x^{n+1}$ gives  \n\n$$\\frac{d}{dx}\\bigl(k\\,x^{n+1}\\bigr)=k\\,(n+1)x^{n}.$$  \n\nTo make this equal to $x^{n}$ we need $k\\,(n+1)=1$, so $k=\\frac{1}{n+1}$.  Thus  \n\n$$F(x)=\\frac{x^{n+1}}{n+1}$$  \n\nhas derivative $x^{n}$.  Adding any constant $C$ does not change the derivative, because the derivative of a constant is zero.  Therefore  \n\n$$\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C,\\qquad n\\neq -1.$$  \n\nThe restriction $n\\neq -1$ appears because the denominator would be zero; the case $n=-1$ leads to a different rule (the natural logarithm), which we will meet later.\n\n> **Definition:** The **power rule for integration** states  \n> $$\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C\\quad\\text{for }n\\neq -1,$$  \n> where $C$ is the **constant of integration** (any fixed number).\n\n> **Note:** The rule works for any real exponent $n$ except $-1$.  It is the exact reverse of the power rule for differentiation.\n\n> **In daily life:** Think of climbing a staircase.  The derivative tells you how steep each step is (the rise per step).  The integral tells you how many steps you have taken to reach a certain height.  Adding one to the exponent is like counting one more step, and dividing by the new exponent spreads the total height evenly across all steps.\n\n> **Common mistake:** Forgetting the “+ 1” in the exponent or dividing by the original $n$ instead of $n+1$.  This gives a wrong antiderivative that does not differentiate back to the original function.\n\n---\n\n### Worked examples\n\n**Example 1 (Easy):** Find the antiderivative of $x^{3}$.\n\n1. Identify the exponent $n=3$.  \n2. Apply the power rule: increase the exponent by 1 (to $4$) and divide by the new exponent.  \n   $$\\int x^{3}\\,dx = \\frac{x^{4}}{4}+C.$$\n3. Write the result with the constant of integration.\n\n**Answer:** $\\displaystyle \\frac{x^{4}}{4}+C$.\n\n---\n\n**Example 2 (Medium):** Compute $\\displaystyle\\int 5x^{2}\\,dx$.\n\n1. Pull the constant factor $5$ outside the integral (constants can be moved out).  \n   $$\\int 5x^{2}\\,dx = 5\\int x^{2}\\,dx.$$\n2. Use the power rule on $x^{2}$: $n=2$, so increase to $3$ and divide by $3$.  \n   $$5\\int x^{2}\\,dx = 5\\left(\\frac{x^{3}}{3}+C\\right).$$\n3. Distribute the $5$ (the constant $C$ can be renamed as a new constant $C'$).  \n   $$5\\left(\\frac{x^{3}}{3}+C\\right)=\\frac{5x^{3}}{3}+C'.$$\n\n**Answer:** $\\displaystyle \\frac{5x^{3}}{3}+C'$ (any constant $C'$).\n\n---\n\n### Why the rule is useful\n\n- **Speed:** Instead of guessing and checking, you can write the antiderivative instantly.\n- **Building block:** More complicated integrals are often broken into sums of simple powers; the power rule handles each piece.\n- **Connection to area:** The integral $\\int x^{n}\\,dx$ represents the accumulated “area under the curve” of $x^{n}$, and the formula gives a quick way to compute that area for any power.\n\n> **Remember:** Always add the constant $C$ at the end, and never apply the rule when $n=-1$ (that case uses $\\int \\frac{1}{x}\\,dx = \\ln|x|+C$).\n\nWith the power rule firmly understood, you can now tackle integrals that involve several terms, each a different power of $x$, by applying the rule term‑by‑term.  The next sections will show how to combine these results and extend the idea to exponentials and trigonometric functions.",
+   "code": ""
+  },
+  {
+   "heading": "3. Integrating Sums and Differences",
+   "body": "When we add or subtract two functions, we can integrate each piece *separately* and then combine the results.  \nIn plain words: the integral of a sum (or difference) is just the sum (or difference) of the integrals.  \n\nWhy does this work?  \nThe integral is the “reverse” of differentiation. Differentiation follows the **linearity** rule: the derivative of $f(x)\\pm g(x)$ is $f'(x)\\pm g'(x)$. Since integration undoes differentiation, the same linear behaviour carries back to integrals.  \n\nThink of it like a grocery bill: if you buy apples for \\$3 and bananas for \\$2, the total cost is \\$3 + \\$2. You could add the prices first and then pay, or pay for each item separately and then add the receipts—the result is the same. Integration behaves the same way with functions.\n\n> **Definition:** For any functions $f(x)$ and $g(x)$ that are integrable on an interval,  \n> $$\\int\\!\\bigl[f(x)\\pm g(x)\\bigr]\\,dx \\;=\\; \\int f(x)\\,dx \\;\\pm\\; \\int g(x)\\,dx.$$  \n\n> **Note:** The constant of integration $C$ appears only once, after all separate integrals have been added or subtracted.\n\n> **Common mistake:** Forgetting to keep the same constant $C$ for the whole expression, or writing two different constants like $C_1$ and $C_2$. Since both antiderivatives differ only by a constant, we combine them into a single $C$.\n\n> **Remember:** The rule works for any finite number of terms, not just two.\n\n---\n\n### How to apply the rule step‑by‑step  \n\n1. **Identify** the separate parts of the integrand that are added or subtracted.  \n2. **Integrate** each part **independently** using the appropriate rule (power rule, exponential rule, etc.).  \n3. **Combine** the results with the same plus or minus signs that appeared in the original integrand.  \n4. **Add** a single constant $C$ at the end.\n\n---\n\n## Worked examples\n\n**Example 3 (Easy): Integrating a simple polynomial sum**  \n\nFind the antiderivative of $\\,\\displaystyle \\int\\!\\bigl(x^{2}+4x\\bigr)\\,dx\\,$.\n\n1. *Separate the terms.*  \n   $$\\int\\!\\bigl(x^{2}+4x\\bigr)\\,dx \\;=\\; \\int x^{2}\\,dx \\;+\\; \\int 4x\\,dx.$$\n\n2. *Integrate each term using the power rule $\\displaystyle\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C$.*  \n   $$\\int x^{2}\\,dx = \\frac{x^{3}}{3}+C_1,$$  \n   $$\\int 4x\\,dx = 4\\int x\\,dx = 4\\left(\\frac{x^{2}}{2}+C_2\\right)=2x^{2}+C_3.$$\n\n3. *Combine the results and keep a single constant.*  \n   $$\\frac{x^{3}}{3}+2x^{2}+C,$$  \n   where $C = C_1+C_3$ is just one arbitrary constant.\n\n**Answer:**  \n$$\\boxed{\\displaystyle \\int\\!\\bigl(x^{2}+4x\\bigr)\\,dx = \\frac{x^{3}}{3}+2x^{2}+C}$$  \n\nThe antiderivative tells us a family of functions whose derivative would give back $x^{2}+4x$.\n\n---\n\n**Example 4 (Medium): A higher‑degree polynomial with a subtraction**  \n\nCompute $\\,\\displaystyle \\int\\!\\bigl(3x^{4}-2x\\bigr)\\,dx\\,$.\n\n1. *Write the integral as two separate pieces.*  \n   $$\\int\\!\\bigl(3x^{4}-2x\\bigr)\\,dx \\;=\\; \\int 3x^{4}\\,dx \\;-\\; \\int 2x\\,dx.$$\n\n2. *Integrate each piece.*  \n   - For the first term, pull out the constant $3$:  \n     $$\\int 3x^{4}\\,dx = 3\\int x^{4}\\,dx = 3\\left(\\frac{x^{5}}{5}+C_1\\right)=\\frac{3x^{5}}{5}+C_1'.$$  \n   - For the second term, pull out $2$:  \n     $$\\int 2x\\,dx = 2\\int x\\,dx = 2\\left(\\frac{x^{2}}{2}+C_2\\right)=x^{2}+C_2'.$$\n\n3. *Subtract the results and attach a single constant.*  \n   $$\\frac{3x^{5}}{5} - x^{2} + C,$$  \n   where $C = C_1' - C_2'$ is an arbitrary constant.\n\n**Answer:**  \n$$\\boxed{\\displaystyle \\int\\!\\bigl(3x^{4}-2x\\bigr)\\,dx = \\frac{3x^{5}}{5} - x^{2} + C}$$  \n\n---\n\n### Why this rule is useful  \n\n- **Speed:** You can break a complicated looking integrand into tiny, familiar pieces, each of which you already know how to integrate.  \n- **Clarity:** Working term‑by‑term reduces algebraic errors, because you never have to juggle many powers at once.  \n- **Flexibility:** The same idea extends to more than two terms, to functions multiplied by constants, and even to piecewise‑defined functions.\n\n> **In daily life:** Adding up the total distance you travel each day is the same as adding the distances of each leg of the trip. Integration does the same for continuous “infinitesimal” pieces.\n\nBy mastering the sum‑and‑difference rule, you now have a reliable tool for handling almost any polynomial integrand, and you are ready to combine it with other rules (exponential, trigonometric, etc.) in later sections.",
+   "code": ""
+  },
+  {
+   "heading": "4. Exponential Integrals",
+   "body": "When we talk about **integration**, we are looking for a function whose derivative gives us back the original expression.  \nFor exponential functions this is especially simple because the derivative of an exponential is almost the same as the function itself.\n\n> **Definition:** The *antiderivative* (or *indefinite integral*) of a function \\(f(x)\\) is a new function \\(F(x)\\) such that \\(F'(x)=f(x)\\). We write this as \\(\\displaystyle \\int f(x)\\,dx = F(x)+C\\), where \\(C\\) is an arbitrary constant.\n\n---\n\n### 1. The rule for \\(e^{kx}\\)\n\nThe natural exponential function \\(e^{x}\\) has the special property that its derivative is itself: \\(\\frac{d}{dx}e^{x}=e^{x}\\).  \nIf we stretch the input by a constant factor \\(k\\) (so we have \\(e^{kx}\\)), the chain rule tells us\n\n\\[\n\\frac{d}{dx}e^{kx}=k\\,e^{kx}.\n\\]\n\nTo reverse this process—i.e., to find an antiderivative—we need to “undo’’ the extra factor \\(k\\). Dividing by \\(k\\) does exactly that.\n\n\\[\n\\boxed{\\displaystyle \\int e^{kx}\\,dx = \\frac{1}{k}\\,e^{kx}+C\\qquad(k\\neq 0)}\n\\]\n\nWhy is this useful? Whenever a problem contains \\(e^{kx}\\) we can integrate it instantly without any algebraic manipulation. Think of it like a **speedometer** that already shows the speed in the correct units; you only need to note the reading, not convert it.\n\n---\n\n**Example 5 (Easy): Integrate \\(e^{2x}\\)**  \n\nWe want \\(\\displaystyle \\int e^{2x}\\,dx\\).\n\n1. **Identify the constant \\(k\\).** Here the exponent is \\(2x\\), so \\(k=2\\).  \n2. **Apply the rule** \\(\\displaystyle \\int e^{kx}\\,dx = \\frac{1}{k}e^{kx}+C\\).  \n   $$\\int e^{2x}\\,dx = \\frac{1}{2}\\,e^{2x}+C$$\n3. **Write the final answer.**  \n\n**Answer:** \\(\\displaystyle \\frac{1}{2}e^{2x}+C\\).\n\n---\n\n### 2. The rule for a general base \\(a\\)\n\nNot all exponentials use the natural base \\(e\\). A function like \\(a^{x}\\) (where \\(a>0\\) and \\(a\\neq 1\\)) also has a simple derivative, but a constant appears:\n\n\\[\n\\frac{d}{dx}a^{x}= (\\ln a)\\,a^{x},\n\\]\n\nwhere \\(\\ln a\\) is the natural logarithm of \\(a\\). The natural logarithm tells us “how many times must we multiply \\(e\\) by itself to get \\(a\\).”  \n\nTo find the antiderivative we again divide by the extra constant \\(\\ln a\\):\n\n\\[\n\\boxed{\\displaystyle \\int a^{x}\\,dx = \\frac{a^{x}}{\\ln a}+C\\qquad(a>0,\\;a\\neq 1)}\n\\]\n\nThis rule lets us integrate any exponential with a constant base, such as \\(2^{x},\\;5^{x},\\;10^{x}\\), etc. It is like converting a foreign currency: the exchange rate \\(\\ln a\\) tells us how many “local units” (the derivative) correspond to one “foreign unit” (the original function).\n\n> **Note:** The constant \\(\\ln a\\) is never zero for allowed bases, so division is safe.\n\n---\n\n**Example 6 (Hard): Integrate \\(3\\cdot5^{x}\\)**  \n\nFind \\(\\displaystyle \\int 3\\cdot5^{x}\\,dx\\).\n\n1. **Factor out the constant 3.** Constants can be moved outside the integral:  \n   $$\\int 3\\cdot5^{x}\\,dx = 3\\int 5^{x}\\,dx.$$\n2. **Identify the base \\(a\\).** Here \\(a=5\\), so \\(\\ln a = \\ln 5\\). Apply the rule for \\(a^{x}\\):  \n   $$\\int 5^{x}\\,dx = \\frac{5^{x}}{\\ln 5}+C.$$\n3. **Multiply back the 3** and combine the constants (the two “\\(C\\)”s merge into a single constant).  \n   $$3\\int 5^{x}\\,dx = 3\\cdot\\frac{5^{x}}{\\ln 5}+C.$$\n\n**Answer:** \\(\\displaystyle \\frac{3\\cdot5^{x}}{\\ln 5}+C\\).\n\n---\n\n### 3. Why these formulas work together\n\nBoth rules come from the chain rule in differentiation. The chain rule says that when a function is composed with a linear change of variable, the derivative picks up the slope of that inner linear function. Integration simply reverses this process by dividing by that slope (for \\(e^{kx}\\)) or by the logarithmic factor (for \\(a^{x}\\)).  \n\n> **In daily life:** Imagine you are climbing a hill that rises at a steady rate \\(k\\) meters per minute. Your speed (the derivative) is \\(k\\). To find how far you have traveled after a certain time, you divide the distance by the speed—exactly what the integration formulas do.\n\n---\n\n### 4. Quick checklist before you integrate\n\n- **Check the base:** Is it the natural base \\(e\\) or another constant \\(a\\)?\n- **Identify the coefficient in the exponent:** For \\(e^{kx}\\) the coefficient is \\(k\\); for \\(a^{x}\\) it is implicitly \\(1\\) (so \\(\\ln a\\) appears).\n- **Pull out any constant multipliers** (like the 3 in the hard example) before applying the rule.\n- **Don’t forget the “+ C”.** Every indefinite integral needs an arbitrary constant because many functions share the same derivative.\n\n> **Common mistake:** Forgetting to divide by \\(\\ln a\\) when integrating \\(a^{x}\\). The result would be missing a crucial factor and would not differentiate back to the original function.\n\nWith these two exponential integration rules at hand, you can handle any problem that involves \\(e^{kx}\\) or \\(a^{x}\\). They are the building blocks for more complicated integrals that combine several types of functions. Keep the checklist in mind, and the process will become automatic.",
+   "code": ""
+  },
+  {
+   "heading": "5. Basic Trigonometric Integrals",
+   "body": "When we talk about **integrating** a function we are looking for another function whose derivative gives us back the original one. This new function is called an *antiderivative* or *indefinite integral*. For trigonometric functions the antiderivatives are especially simple, and they follow the same pattern as the derivatives you already know.\n\n> **Definition:** The antiderivative of $\\sin x$ is a function $F(x)$ such that $F'(x)=\\sin x$.  \n> **Definition:** The antiderivative of $\\cos x$ is a function $G(x)$ such that $G'(x)=\\cos x$.\n\nWhy does $\\int \\sin x\\,dx = -\\cos x + C$?  \nRecall the derivative rule $\\frac{d}{dx}\\bigl(\\cos x\\bigr) = -\\sin x$. If we multiply both sides by $-1$ we get $\\frac{d}{dx}\\bigl(-\\cos x\\bigr)=\\sin x$. In other words, the function $-\\cos x$ changes at the rate $\\sin x$. Therefore the “undo‑operation” of differentiation – integration – must give us $-\\cos x$ (plus a constant $C$, because any constant disappears when we differentiate).\n\nSimilarly, the derivative rule $\\frac{d}{dx}\\bigl(\\sin x\\bigr)=\\cos x$ tells us directly that the antiderivative of $\\cos x$ is $\\sin x$ (again plus a constant).\n\nThese two formulas are the building blocks for many problems that involve trigonometric functions. They also work when the angle is stretched or squeezed by a constant factor. If we have $\\sin(kx)$ or $\\cos(kx)$, the chain rule tells us that an extra factor $k$ appears when we differentiate. To reverse that, we divide by $k$ when we integrate.\n\n> **Note:** For any constant $k\\neq0$,  \n> $$\\int \\sin(kx)\\,dx = -\\frac{1}{k}\\cos(kx)+C,$$  \n> $$\\int \\cos(kx)\\,dx = \\frac{1}{k}\\sin(kx)+C.$$\n\nThink of it like walking on a treadmill that runs faster or slower. If the treadmill speed is $k$ times normal, you have to take $1/k$ of a step to cover the same ground you would on a normal treadmill. The same idea appears in the formulas above.\n\n---\n\n**Example 7 (Easy): Integrate $\\sin x$**  \nFind the indefinite integral $\\displaystyle\\int \\sin x \\,dx$.\n\n1. Recognize the pattern: the antiderivative of $\\sin x$ is $-\\cos x$ plus a constant.  \n   $$\\int \\sin x \\,dx = -\\cos x + C$$\n2. Write the result, adding the constant of integration $C$ to indicate any vertical shift is possible.\n\n**Answer:** $\\displaystyle\\int \\sin x \\,dx = -\\cos x + C.$  \n\n---\n\nNow let us see how the rule works when the angle is multiplied by a number.\n\n**Example 8 (Medium): Integrate $4\\cos(3x)$**  \nCompute $\\displaystyle\\int 4\\cos(3x)\\,dx$.\n\n1. Pull the constant factor $4$ outside the integral (constants can be moved in or out freely).  \n   $$\\int 4\\cos(3x)\\,dx = 4\\int \\cos(3x)\\,dx$$\n2. Apply the rule for $\\cos(kx)$ with $k=3$: the antiderivative is $\\frac{1}{3}\\sin(3x)$.  \n   $$4\\int \\cos(3x)\\,dx = 4\\left(\\frac{1}{3}\\sin(3x)\\right)+C$$\n3. Simplify the coefficient $4\\cdot\\frac{1}{3}$ to $\\frac{4}{3}$.  \n   $$4\\left(\\frac{1}{3}\\sin(3x)\\right)+C = \\frac{4}{3}\\sin(3x)+C$$\n\n**Answer:** $\\displaystyle\\int 4\\cos(3x)\\,dx = \\frac{4}{3}\\sin(3x)+C.$  \n\n---\n\nThese two examples illustrate the whole method:\n\n1. **Identify** whether the integrand is a sine or cosine (or a multiple of them).  \n2. **Extract** any constant multiplier in front of the trigonometric function.  \n3. **Apply** the basic rule, remembering to divide by the inner coefficient $k$ if the angle is $kx$.  \n4. **Add** the constant $C$ at the end.\n\n> **Remember:** Always include “$+C$” for indefinite integrals; it represents all possible vertical shifts of the antiderivative.\n\nA common slip is to forget the division by $k$ when the argument of the sine or cosine is not just $x$.\n\n> **Common mistake:** Writing $\\int \\cos(5x)\\,dx = \\sin(5x)+C$ (missing the factor $\\frac{1}{5}$). The correct result is $\\displaystyle\\int \\cos(5x)\\,dx = \\frac{1}{5}\\sin(5x)+C$.\n\nIn everyday life, these integrals appear whenever we need the *area under a wave* or the *total displacement* from a periodic motion. For instance, if a pendulum swings with angular position $\\theta(t)=\\sin(t)$ radians, the integral $\\int \\sin t\\,dt$ tells us the change in angle over a time interval, which is useful for energy calculations.\n\nBy mastering these simple trigonometric integrals, you gain a tool that works hand‑in‑hand with the power rule, sum rule, and exponential rule you have already learned. They will reappear in physics, engineering, and even in the analysis of sound waves, making them a cornerstone of calculus.",
+   "code": ""
+  },
+  {
+   "heading": "6. Combining Rules in One Integral",
+   "body": "When we meet a complicated looking integrand, the first thing to remember is that **integration is linear**.  \nIn plain words this means we can break a sum (or difference) of several functions into separate pieces, integrate each piece on its own, and then add the results back together.  \nWhy does this work? The definition of the definite integral as the limit of sums shows that adding the areas under two curves is the same as the area under the curve that is their sum. The same property carries over to the indefinite integral (the antiderivative).  \n\n> **Remember:**  If $F'(x)=f(x)$ and $G'(x)=g(x)$, then $(F+G)'(x)=f(x)+g(x)$.  \n> Consequently, $\\displaystyle\\int\\!\\bigl(f(x)+g(x)\\bigr)\\,dx = \\int f(x)\\,dx + \\int g(x)\\,dx + C$.\n\nThink of it like a grocery list: you can add up the cost of apples, bananas, and oranges separately, then total the three amounts. Splitting the list makes the calculation easier because each item has its own price rule.  \n\n### Step‑by‑step strategy\n\n1. **Identify each term** in the integrand. Look for powers of $x$, exponentials $e^{x}$, trigonometric functions $\\sin x$, $\\cos x$, etc.  \n2. **Match each term** with the integration rule you already know (power rule, exponential rule, trig rule).  \n3. **Integrate each term** independently, writing a small antiderivative for each.  \n4. **Combine the results** and add a single constant $C$ at the end.\n\nBelow we illustrate the whole process with a worked example that uses three different rules at once.\n\n---\n\n**Example 9 (Hard): Splitting a mixed integrand**  \n\nFind the antiderivative of  \n\n\\[\n\\int\\!\\bigl(2x^{3}+e^{x}-5\\sin x\\bigr)\\,dx .\n\\]\n\n**Step 1 – Separate the integrand**  \nWrite the integral as a sum of three simpler integrals.\n\n\\[\n\\int\\!\\bigl(2x^{3}+e^{x}-5\\sin x\\bigr)\\,dx\n=\n\\int 2x^{3}\\,dx \\;+\\; \\int e^{x}\\,dx \\;-\\; \\int 5\\sin x\\,dx .\n\\]\n\n**Step 2 – Apply the power rule to the first term**  \nThe power rule says $\\displaystyle\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}+C$ for $n\\neq -1$.  \nHere $n=3$ and there is a constant factor $2$.\n\n\\[\n\\int 2x^{3}\\,dx = 2\\;\\frac{x^{4}}{4}= \\frac{1}{2}x^{4}.\n\\]\n\n**Step 3 – Apply the exponential rule to the second term**  \nFor the exponential function, $\\displaystyle\\int e^{x}\\,dx = e^{x}+C$.\n\n\\[\n\\int e^{x}\\,dx = e^{x}.\n\\]\n\n**Step 4 – Apply the sine rule to the third term**  \nThe antiderivative of $\\sin x$ is $-\\cos x$. A constant factor $5$ stays outside.\n\n\\[\n\\int 5\\sin x\\,dx = 5\\;(-\\cos x)= -5\\cos x.\n\\]\n\nBecause the original term was “$-5\\sin x$”, subtracting this integral gives\n\n\\[\n-\\int 5\\sin x\\,dx = -\\bigl(-5\\cos x\\bigr)= 5\\cos x.\n\\]\n\n**Step 5 – Put everything together**  \nAdd the three results and attach a single constant $C$.\n\n\\[\n\\int\\!\\bigl(2x^{3}+e^{x}-5\\sin x\\bigr)\\,dx\n= \\frac{1}{2}x^{4}+e^{x}+5\\cos x + C .\n\\]\n\n**Answer:**  \n\\[\n\\boxed{\\displaystyle \\frac{1}{2}x^{4}+e^{x}+5\\cos x + C}\n\\]\n\nThe antiderivative combines the three separate pieces, each handled with the rule that matches its shape.\n\n---\n\n> **Note:**  Do **not** forget to keep the constant $C$ only once, after you have added all the pieces. Adding $C$ to each piece would count the same “unknown constant” multiple times.\n\n### Another quick illustration\n\nSuppose we need  \n\n\\[\n\\int\\!\\bigl(7x^{2} - 3e^{x} + 4\\cos x\\bigr)\\,dx .\n\\]\n\nFollowing the same steps:\n\n1. Split: $\\int 7x^{2}\\,dx - \\int 3e^{x}\\,dx + \\int 4\\cos x\\,dx$  \n2. Power rule: $\\displaystyle\\int 7x^{2}\\,dx = 7\\frac{x^{3}}{3}= \\frac{7}{3}x^{3}$  \n3. Exponential rule: $\\displaystyle\\int 3e^{x}\\,dx = 3e^{x}$ (remember the minus sign in front)  \n4. Cosine rule: $\\displaystyle\\int 4\\cos x\\,dx = 4\\sin x$  \n\nCombine:\n\n\\[\n\\int\\!\\bigl(7x^{2} - 3e^{x} + 4\\cos x\\bigr)\\,dx\n= \\frac{7}{3}x^{3} - 3e^{x} + 4\\sin x + C .\n\\]\n\nThis short example reinforces the same idea: **break, match, integrate, recombine**.\n\n> **In daily life:**  Splitting a complex problem into familiar parts is like assembling furniture with an instruction manual—each step uses a known tool (screwdriver, hammer) before the whole piece comes together.\n\nWhen you practice, always write the integrand as a sum (or difference) of terms you can recognise. Then the collection of basic rules becomes a powerful toolbox that lets you handle even the most tangled expressions.",
+   "code": ""
+  },
+  {
+   "heading": "7. Real‑World Application: Distance from Velocity",
+   "body": "When we know a **velocity** function $v(t)$, the total distance an object travels between two times is the area under the curve of $v(t)$.  \nMathematically this area is the **definite integral** of $v(t)$ from the starting time $a$ to the ending time $b$:\n\n$$\n\\text{distance}= \\int_{a}^{b} v(t)\\,dt .\n$$\n\nThe integral adds up infinitely many tiny pieces of distance $v(t)\\,dt$.  \nIf we can write $v(t)$ as a sum of simple pieces, we can use the integration rules we have just learned:  \n\n* **Power rule** – $\\displaystyle\\int t^{n}\\,dt = \\frac{t^{\\,n+1}}{n+1}+C$ for $n\\neq -1$  \n* **Exponential rule** – $\\displaystyle\\int e^{t}\\,dt = e^{t}+C$  \n* **Trigonometric rule** – $\\displaystyle\\int \\cos t\\,dt = \\sin t +C$  \n\nBecause integration is linear, we may integrate each term separately and then combine the results.\n\n> **Note:** The constant of integration $C$ disappears in a definite integral because we subtract the antiderivative evaluated at the lower limit from the one evaluated at the upper limit.\n\n---\n\n**Example 10 (Hard): Distance from a mixed velocity function**  \n\n*Question:*  \nFind the total distance travelled from $t=0$ to $t=1$ if the velocity is  \n\n$$\nv(t)=3t^{2}+2e^{t}-4\\cos t .\n$$\n\n*Solution steps*\n\n1. **Write the integral of the whole velocity.**  \n   We need $\\displaystyle\\int_{0}^{1}\\bigl(3t^{2}+2e^{t}-4\\cos t\\bigr)\\,dt$.\n\n   $$\n   \\int_{0}^{1}\\bigl(3t^{2}+2e^{t}-4\\cos t\\bigr)\\,dt .\n   $$\n\n2. **Split the integral into three easier pieces** using the sum rule.  \n\n   $$\n   \\int_{0}^{1}3t^{2}\\,dt\\;+\\;\\int_{0}^{1}2e^{t}\\,dt\\;-\\;\\int_{0}^{1}4\\cos t\\,dt .\n   $$\n\n3. **Integrate each piece** with the appropriate rule.  \n\n   * For $3t^{2}$, apply the power rule:  \n\n     $$\n     \\int 3t^{2}\\,dt = 3\\cdot\\frac{t^{3}}{3}=t^{3}.\n     $$\n\n   * For $2e^{t}$, use the exponential rule:  \n\n     $$\n     \\int 2e^{t}\\,dt = 2e^{t}.\n     $$\n\n   * For $4\\cos t$, use the trigonometric rule (remember the minus sign in front):  \n\n     $$\n     \\int -4\\cos t\\,dt = -4\\sin t .\n     $$\n\n   Putting the three antiderivatives together gives the **combined antiderivative**\n\n   $$\n   F(t)=t^{3}+2e^{t}-4\\sin t .\n   $$\n\n4. **Evaluate the antiderivative at the limits** $t=1$ and $t=0$, then subtract.  \n\n   $$\n   \\text{distance}=F(1)-F(0)\n   =\\bigl(1^{3}+2e^{1}-4\\sin 1\\bigr)-\\bigl(0^{3}+2e^{0}-4\\sin 0\\bigr).\n   $$\n\n   Simplify each term:\n\n   * $1^{3}=1$  \n   * $2e^{1}=2e$  \n   * $4\\sin 1$ stays as $4\\sin 1$ (a number you can compute with a calculator)  \n   * $2e^{0}=2\\cdot1=2$  \n   * $\\sin 0 =0$\n\n   Hence  \n\n   $$\n   \\text{distance}= \\bigl(1+2e-4\\sin 1\\bigr)-\\bigl(0+2-0\\bigr)\n   =1+2e-4\\sin 1-2 .\n   $$\n\n**Answer:**  \nThe object travels  \n\n$$\n\\boxed{\\,1+2e-4\\sin 1-2\\,}\n$$  \n\nunits of distance (e.g., meters) between $t=0$ and $t=1$. Numerically this is about $1+2(2.718)-4(0.842)-2\\approx 1+5.436-3.368-2\\approx 1.068$ meters.\n\n> **In daily life:** Imagine a car whose speed changes according to $v(t)$. By integrating the speed over one hour, you find exactly how many miles the car has driven, even if the speed is constantly accelerating, decelerating, or wobbling.\n\n> **Common mistake:** Forgetting to apply the minus sign when integrating $-4\\cos t$. The antiderivative of $\\cos t$ is $\\sin t$, so the whole term becomes $-4\\sin t$, not $+4\\sin t$.\n\n> **Remember:** When you have a sum or difference of functions, integrate each part separately, then combine the results before plugging in the limits.\n\nThis example shows how the rules we practiced—power, exponential, and trigonometric integrals—work together to solve a realistic problem. By turning a velocity description into an area calculation, we obtain the total distance without having to measure it step by step.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find $\\displaystyle\\int x^{3}\\,dx$.",
+   "a": "Apply the power rule with $n=3$:\n\\[\n\\int x^{3}\\,dx = \\frac{x^{3+1}}{3+1}+C = \\frac{x^{4}}{4}+C.\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Compute $\\displaystyle\\int (5\\cos x - 2)\\,dx$.",
+   "a": "Use linearity:\n\\[\n\\int (5\\cos x - 2)\\,dx = 5\\int\\cos x\\,dx - 2\\int 1\\,dx.\n\\]\n\\[\n5\\int\\cos x\\,dx = 5\\sin x,\\qquad -2\\int 1\\,dx = -2x.\n\\]\nCombine and add $C$:\n\\[\n\\int (5\\cos x - 2)\\,dx = 5\\sin x - 2x + C.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Evaluate $\\displaystyle\\int \\left(4x^{2} + 3e^{2x}\\right)dx$.",
+   "a": "Separate the integral:\n\\[\n\\int 4x^{2}dx + \\int 3e^{2x}dx.\n\\]\nFirst term: power rule $n=2$\n\\[\n\\int 4x^{2}dx = 4\\cdot\\frac{x^{3}}{3}= \\frac{4}{3}x^{3}.\n\\]\nSecond term: exponential rule with $k=2$\n\\[\n\\int 3e^{2x}dx = 3\\cdot\\frac{1}{2}e^{2x}= \\frac{3}{2}e^{2x}.\n\\]\nAdd them and $C$:\n\\[\n\\int \\left(4x^{2} + 3e^{2x}\\right)dx = \\frac{4}{3}x^{3} + \\frac{3}{2}e^{2x}+C.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "A particle moves with velocity $v(t)=6t - 4e^{-t}$. Find its position function $s(t)$ given that $s(0)=5$.",
+   "a": "Integrate $v(t)$:\n\\[\ns(t)=\\int (6t - 4e^{-t})dt + C.\n\\]\nFirst term: $\\int 6t\\,dt = 6\\cdot\\frac{t^{2}}{2}=3t^{2}$.\nSecond term: $\\int -4e^{-t}dt = -4\\cdot\\frac{-1}{1}e^{-t}=4e^{-t}$.\nSo $s(t)=3t^{2}+4e^{-t}+C$.\nUse $s(0)=5$:\n\\[\n5 = 3\\cdot0^{2}+4e^{0}+C = 4 + C \\;\\Rightarrow\\; C =1.\n\\]\nTherefore,\n\\[\n\\boxed{s(t)=3t^{2}+4e^{-t}+1}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Compute $\\displaystyle\\int \\frac{x^{2}+2x+1}{x^{3}}\\,dx$. Simplify the integrand first.",
+   "a": "Rewrite the fraction by dividing each term:\n\\[\n\\frac{x^{2}}{x^{3}}+\\frac{2x}{x^{3}}+\\frac{1}{x^{3}} = x^{-1}+2x^{-2}+x^{-3}.\n\\]\nNow integrate term‑by‑term:\n\\[\n\\int x^{-1}dx = \\ln|x|,\\qquad\n\\int 2x^{-2}dx = 2\\cdot\\frac{x^{-1}}{-1}= -2x^{-1},\n\\]\n\\[\n\\int x^{-3}dx = \\frac{x^{-2}}{-2}= -\\frac{1}{2}x^{-2}.\n\\]\nCombine and add $C$:\n\\[\n\\int \\frac{x^{2}+2x+1}{x^{3}}dx = \\ln|x| - 2x^{-1} - \\frac{1}{2}x^{-2}+C.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A car’s velocity is $v(t)=3t^{2} - 6\\sin t + 4e^{t}$. Find the total distance traveled from $t=0$ to $t=\\pi$. (Assume $v(t)\\ge0$ on this interval.)",
+   "a": "First find an antiderivative $s(t)$:\n\\[\ns(t)=\\int (3t^{2} - 6\\sin t + 4e^{t})dt + C.\n\\]\nIntegrate each term:\n1. $\\int 3t^{2}dt = 3\\cdot\\frac{t^{3}}{3}=t^{3}$.\n2. $\\int -6\\sin t\\,dt = -6(-\\cos t)=6\\cos t$.\n3. $\\int 4e^{t}dt = 4e^{t}$.\nThus\n\\[\ns(t)=t^{3}+6\\cos t+4e^{t}+C.\n\\]\nDistance from $0$ to $\\pi$ is $s(\\pi)-s(0)$ (the constant $C$ cancels).\n\\[\ns(\\pi)=\\pi^{3}+6\\cos\\pi+4e^{\\pi}= \\pi^{3}+6(-1)+4e^{\\pi}= \\pi^{3}-6+4e^{\\pi}.\n\\]\n\\[\ns(0)=0^{3}+6\\cos0+4e^{0}=0+6(1)+4(1)=10.\n\\]\nTherefore\n\\[\n\\text{Distance}= (\\pi^{3}-6+4e^{\\pi})-10 = \\pi^{3}+4e^{\\pi}-16.\n\\]\nSo the total distance traveled is\n\\[\n\\boxed{\\pi^{3}+4e^{\\pi}-16\\ \\text{units}}.\n\\]"
+  }
+ ],
+ "recap": "This lesson explains that integration finds a function whose derivative matches the given one, called an antiderivative. It introduces the power rule, the linearity rule for sums and differences, and basic formulas for exponential and trigonometric functions. Real‑world examples show how integrating a velocity function gives distance traveled.",
+ "key_terms": [
+  {
+   "term": "Antiderivative",
+   "meaning": "A function F(x) whose derivative F'(x) equals the original function f(x)."
+  },
+  {
+   "term": "Indefinite Integral",
+   "meaning": "The set of all antiderivatives of a function, written as integral of f(x) dx = F(x)+C."
+  },
+  {
+   "term": "Power Rule for Integration",
+   "meaning": "Integral of x^n dx equals x^(n+1)/(n+1)+C for n not equal to -1."
+  },
+  {
+   "term": "Linearity of Integration",
+   "meaning": "The integral of a sum or difference equals the sum or difference of the integrals."
+  },
+  {
+   "term": "Exponential Integral",
+   "meaning": "Integral of e^(kx) dx equals e^(kx)/k + C."
+  },
+  {
+   "term": "Trigonometric Integral",
+   "meaning": "Integral of sin x dx equals -cos x + C and integral of cos x dx equals sin x + C."
+  },
+  {
+   "term": "Constant of Integration",
+   "meaning": "The arbitrary constant C added to an antiderivative because derivatives erase constants."
+  },
+  {
+   "term": "Definite Integral (Distance)",
+   "meaning": "Integral from a to b of v(t) dt gives the total distance traveled between times a and b."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the antiderivative of x^3?",
+   "options": [
+    "x^4/4 + C",
+    "4x^3 + C",
+    "x^2/2 + C",
+    "3x^2 + C"
+   ],
+   "answer": 0,
+   "why": "Differentiating x^4/4 gives x^3, so it is the correct antiderivative."
+  },
+  {
+   "q": "Which rule allows you to integrate f(x)+g(x) by integrating each part separately?",
+   "options": [
+    "Power rule",
+    "Chain rule",
+    "Linearity rule",
+    "Product rule"
+   ],
+   "answer": 2,
+   "why": "Linearity states that the integral of a sum equals the sum of the integrals."
+  },
+  {
+   "q": "Integrate e^(5x) with respect to x.",
+   "options": [
+    "e^(5x)/5 + C",
+    "5e^(5x) + C",
+    "e^(5x) + C",
+    "e^(x)/5 + C"
+   ],
+   "answer": 0,
+   "why": "The antiderivative of e^(kx) is e^(kx)/k."
+  },
+  {
+   "q": "What is the integral of sin x dx?",
+   "options": [
+    "-cos x + C",
+    "cos x + C",
+    "-sin x + C",
+    "sin x + C"
+   ],
+   "answer": 0,
+   "why": "The derivative of -cos x is sin x, so -cos x + C is the antiderivative."
+  },
+  {
+   "q": "If v(t)=3t^2, what is the distance traveled from t=0 to t=2?",
+   "options": [
+    "8 + C",
+    "8",
+    "12",
+    "24"
+   ],
+   "answer": 1,
+   "why": "Integral of 3t^2 dt is t^3, evaluated from 0 to 2 gives 8."
+  },
+  {
+   "q": "Which expression represents the constant of integration?",
+   "options": [
+    "C",
+    "0",
+    "1",
+    "Infinity"
+   ],
+   "answer": 0,
+   "why": "C denotes the arbitrary constant added to indefinite integrals."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define antiderivative.",
+   "back": "A function whose derivative equals the given function; F'(x)=f(x)."
+  },
+  {
+   "front": "Write the power rule for integration.",
+   "back": "Integral of x^n dx = x^(n+1)/(n+1) + C, n not -1."
+  },
+  {
+   "front": "State the linearity property of integrals.",
+   "back": "Integral of [f(x) +/- g(x)] dx = integral f(x) dx +/- integral g(x) dx."
+  },
+  {
+   "front": "What is the integral of e^(kx) dx?",
+   "back": "e^(kx)/k + C."
+  },
+  {
+   "front": "Give the antiderivative of sin x.",
+   "back": "-cos x + C."
+  },
+  {
+   "front": "Give the antiderivative of cos x.",
+   "back": "sin x + C."
+  },
+  {
+   "front": "How does a definite integral of velocity give distance?",
+   "back": "Distance = integral from a to b of v(t) dt, the area under the velocity curve."
+  },
+  {
+   "front": "Why do we add a constant C to indefinite integrals?",
+   "back": "Because differentiation removes constants, so any constant could have been present in the original function."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l22-speedometer-reading",
+   "title": "A car speedometer showing instantaneous speed, used to illustrate velocity as a rate.",
+   "alt": "A car speedometer showing instantaneous speed, used to illustrate velocity as a rate.",
+   "priority": 8,
+   "picture_title": "Speedometer Reading",
+   "kind": "photo",
+   "subject": "A close‑up photograph of an analog speedometer needle pointing to a speed value. The image helps students connect the abstract idea of a velocity function with a real‑world device that measures speed.",
+   "layout": "Speedometer centered in the frame with the needle highlighted; no additional elements.",
+   "labels": [],
+   "after": 6
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l22-layered-cake-analogy",
+   "title": "Thin cake layers stacked together represent adding many small pieces to find a total.",
+   "alt": "Thin cake layers stacked together represent adding many small pieces to find a total.",
+   "priority": 7,
+   "picture_title": "Layered Cake Analogy",
+   "kind": "illustration",
+   "subject": "An illustration of a multi‑layered cake where each thin slice represents a tiny piece of area. Stacking the slices shows how integration adds up infinitely many small contributions.",
+   "layout": "Cake shown from the side; each layer labeled with a small thickness symbol; arrows point from individual layers to the whole cake.",
+   "labels": [
+    "layer",
+    "thickness",
+    "total"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l22-water-flow-into-tank",
+   "title": "Water filling a tank visualizes accumulating distance from a velocity function.",
+   "alt": "Water filling a tank visualizes accumulating distance from a velocity function.",
+   "priority": 6,
+   "picture_title": "Water Flow Into Tank",
+   "kind": "illustration",
+   "subject": "A side view of a rectangular tank being filled by a faucet. The water level rises as time passes, symbolising the integral of a velocity (flow rate) to give total volume (distance).",
+   "layout": "Tank on the right, faucet on the left; water level marked with a rising line; time arrows above the faucet.",
+   "labels": [
+    "water level",
+    "time",
+    "flow rate"
+   ],
+   "after": 6
+  },
+  {
+   "type": "steps",
+   "title": "Integrating a Power Term",
+   "steps": [
+    {
+     "label": "Identify exponent",
+     "text": "Find n in x^n."
+    },
+    {
+     "label": "Add one",
+     "text": "Compute n+1."
+    },
+    {
+     "label": "Divide",
+     "text": "Write (x^(n+1))/(n+1)."
+    },
+    {
+     "label": "Add constant",
+     "text": "Append + C."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Derivative vs Antiderivative of x^n",
+   "left": {
+    "name": "Derivative",
+    "points": [
+     "d/dx x^(n+1) = (n+1)x^n",
+     "Lowers exponent by 1"
+    ]
+   },
+   "right": {
+    "name": "Antiderivative",
+    "points": [
+     "∫ x^n dx = x^(n+1)/(n+1) + C",
+     "Raises exponent by 1"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Function and Its Antiderivative",
+   "fn": "x^2",
+   "xmin": -2,
+   "xmax": 2,
+   "points": [
+    {
+     "x": 0,
+     "y": 0,
+     "label": "Origin",
+     "open": false
+    }
+   ],
+   "caption": "f(x)=x^2 and its integral F(x)=x^3/3 (shown as area under curve).",
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Components of an Antiderivative",
+   "items": [
+    {
+     "name": "Original function f(x)",
+     "role": "Rate of change we start with"
+    },
+    {
+     "name": "Antiderivative F(x)",
+     "role": "Function whose derivative is f(x)"
+    },
+    {
+     "name": "Constant C",
+     "role": "Any constant, because derivative of constant is 0"
+    }
+   ],
+   "after": 0
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

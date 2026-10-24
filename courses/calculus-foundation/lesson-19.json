@@ -1,0 +1,351 @@
+{
+ "title": "Applications of Differentiation",
+ "summary": "In this lesson students learn how to use derivatives to find tangents, normals, stationary points and to solve optimisation problems. They will apply these ideas to locate maxima, minima and the best solutions in real‑world contexts.",
+ "objectives": [
+  "Find the equation of a tangent and a normal line to a curve at a given point",
+  "Identify stationary points and classify them as maxima, minima or points of inflection",
+  "Set up and solve optimisation problems using derivatives"
+ ],
+ "prerequisites": "Students should already know basic differentiation rules and how to compute first derivatives of polynomial, rational, exponential and trigonometric functions.",
+ "why": [
+  "Understanding tangents and normals helps engineers design roads, ramps and lenses where the slope at a point matters. Knowing where a function reaches its highest or lowest values is essential for budgeting, resource allocation and safety limits.",
+  "Optimization is at the heart of many everyday decisions – from minimizing travel time to maximizing profit. Calculus gives a systematic way to find the best possible outcome rather than guessing."
+ ],
+ "sections": [
+  {
+   "heading": "1. Tangent and Normal Lines",
+   "body": "When a curve is drawn on a graph, the **tangent line** is the straight line that just touches the curve at one point and points in the same direction as the curve there. Imagine a road that follows a hill: at any exact spot the road’s direction is the same as the hill’s slope at that spot. The derivative of a function, written $f'(x)$, tells us that slope.  \n\n> **Definition:** The derivative $f'(a)$ of a function $f$ at $x=a$ is the limit of the ratio of the change in $y$ to the change in $x$ as the change in $x$ becomes infinitely small. In symbols, $f'(a)=\\displaystyle\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$.\n\nBecause the slope of the tangent line equals $f'(a)$, we can write the equation of the tangent line using the point‑slope form of a straight line:\n\n$$\ny - f(a) = f'(a)\\,(x-a).\n$$\n\nThe **normal line** is the line that is perpendicular (at a right angle) to the tangent line at the same point. Two lines are perpendicular when the product of their slopes is $-1$. Therefore, if the tangent has slope $m_{\\text{tan}}=f'(a)$, the normal has slope  \n\n$$\nm_{\\text{norm}} = -\\frac{1}{f'(a)}.\n$$\n\nThen the normal line equation is\n\n$$\ny - f(a) = -\\frac{1}{f'(a)}\\,(x-a).\n$$\n\nWhy is this useful? Knowing the tangent gives a linear approximation to the curve near the point, which is handy for estimating values without a calculator. The normal line is useful in geometry (e.g., finding the shortest distance from a point to a curve) and in physics when dealing with forces acting perpendicular to a surface.\n\n> **In daily life:** Think of a skateboarder riding on a smooth ramp. At any instant, the direction the board is pointing is the tangent direction; the direction straight up from the ramp (the normal) is where a force would push the board away from the surface.\n\n---\n\n**Example 1 (Easy): Find the tangent line to $y = x^{2}$ at $x = 1$.**  \n\n1. **Compute the derivative.**  \n   The derivative of $y = x^{2}$ is $y' = 2x$.  \n\n2. **Evaluate the derivative at $x=1$.**  \n   $$f'(1)=2\\cdot1=2.$$  \n   This is the slope of the tangent line.  \n\n3. **Find the point on the curve.**  \n   When $x=1$, $y = 1^{2}=1$, so the point is $(1,1)$.  \n\n4. **Write the tangent line using point‑slope form.**  \n   $$y-1 = 2\\,(x-1).$$  \n\n**Answer:** The tangent line is $y = 2x-1$, which touches the parabola $y=x^{2}$ exactly at the point $(1,1)$.  \n\n---\n\nNow that we have the tangent, we can also write the normal line at the same point.\n\n> **Note:** The normal slope is the negative reciprocal of the tangent slope, provided the tangent slope is not zero.\n\n**Example 2 (Medium): Find both the tangent and normal lines to $y = \\sqrt{x}$ at $x = 4$.**  \n\n1. **Differentiate the function.**  \n   Write $y = x^{1/2}$. Using the power rule, $y' = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}$.  \n\n2. **Evaluate the derivative at $x=4$.**  \n   $$f'(4)=\\frac{1}{2\\sqrt{4}}=\\frac{1}{2\\cdot2}= \\frac{1}{4}.$$  \n   So the tangent slope is $m_{\\text{tan}} = \\frac14$.  \n\n3. **Find the point on the curve.**  \n   $y = \\sqrt{4}=2$, giving the point $(4,2)$.  \n\n4. **Write the tangent line equation.**  \n   $$y-2 = \\frac14\\,(x-4).$$  \n\n5. **Find the normal slope.**  \n   The normal slope is the negative reciprocal:  \n   $$m_{\\text{norm}} = -\\frac{1}{\\frac14}= -4.$$  \n\n6. **Write the normal line equation.**  \n   $$y-2 = -4\\,(x-4).$$  \n\n**Answer:**  \n- Tangent line: $y = \\frac14 x + 1$ (passes through $(4,2)$).  \n- Normal line: $y = -4x + 18$ (also passes through $(4,2)$).  \n\nThese two lines intersect the curve at the same point but head in opposite directions: the tangent follows the curve’s rise, while the normal points straight away from it.\n\n> **Remember:** Always check that the derivative exists at the point of interest; if $f'(a)$ does not exist, the curve may have a corner or cusp, and a single tangent line cannot be defined.\n\nWith the ideas of tangent and normal lines clear, you can now use the derivative as a powerful tool to describe how a curve behaves locally, and you are ready to move on to locating stationary points where the tangent becomes horizontal.",
+   "code": ""
+  },
+  {
+   "heading": "2. Stationary Points",
+   "body": "When we talk about a **stationary point** we mean a place on the graph of a function where the curve stops rising or falling for an instant – it is “flat” for a moment.  \nMathematically this happens when the slope of the curve, given by the first derivative, is zero.\n\n> **Definition:** A *stationary point* of a differentiable function $f(x)$ is any $x$‑value where $f'(x)=0$.\n\nWhy does setting the derivative to zero locate those flat spots?  \nThe derivative $f'(x)$ tells us the instantaneous rate of change of $f$ with respect to $x$; it is the slope of the tangent line at that point. If the slope is positive, the graph is climbing; if it is negative, the graph is descending. When the slope is exactly $0$, the tangent line is horizontal, so the graph is momentarily neither going up nor down – that is the definition of a flat spot.\n\n**In daily life:** Imagine driving a car up a hill. While the car is climbing, the speedometer (the derivative) shows a positive increase in height. At the very top of the hill, the car stops rising for an instant before it starts to descend; at that exact moment the rate of change of height is $0$. That moment corresponds to a stationary point on the height‑versus‑distance graph.\n\n---\n\n### How to find stationary points\n\n1. **Differentiate** the given function to obtain $f'(x)$.  \n2. **Set the derivative equal to zero** and solve the resulting equation for $x$.  \n3. **Plug each $x$ back into the original function** to find the corresponding $y$‑coordinate, giving the full point $(x,\\,f(x))$.\n\nThese steps give every point where the curve is flat. Later we will decide whether each point is a maximum, a minimum, or something else, but first we just locate them.\n\n---\n\n**Example 3 (Easy): Determine the stationary points of $f(x)=x^{3}-3x$.**\n\n1. *Differentiate the function.*  \n   $$f'(x)=\\frac{d}{dx}\\bigl(x^{3}-3x\\bigr)=3x^{2}-3.$$\n2. *Set the derivative to zero and solve for $x$.*  \n   $$3x^{2}-3=0\\quad\\Longrightarrow\\quad x^{2}=1\\quad\\Longrightarrow\\quad x=\\pm1.$$\n3. *Find the $y$‑coordinates by substituting back into $f(x)$.*  \n   For $x=1$: $$f(1)=1^{3}-3\\cdot1=1-3=-2.$$  \n   For $x=-1$: $$f(-1)=(-1)^{3}-3(-1)=-1+3=2.$$\n\n**Answer:** The stationary points are $(-1,\\,2)$ and $(1,\\,-2)$.\n\n---\n\n> **Note:** Solving $f'(x)=0$ may give several solutions, a single solution, or none at all. Each solution is a candidate for a stationary point; we must still check the original function to obtain the full coordinate.\n\nNow we move to a slightly harder polynomial where the derivative is a quartic expression.\n\n**Example 4 (Medium): Find the stationary points of $f(x)=x^{4}-4x^{2}+1$.**\n\n1. *Differentiate the function.*  \n   $$f'(x)=\\frac{d}{dx}\\bigl(x^{4}-4x^{2}+1\\bigr)=4x^{3}-8x.$$\n2. *Set the derivative to zero and factor.*  \n   $$4x^{3}-8x=0\\quad\\Longrightarrow\\quad 4x(x^{2}-2)=0.$$  \n   This gives three possibilities: $x=0$ or $x^{2}=2$, i.e. $x=\\pm\\sqrt{2}$.\n3. *Compute the $y$‑coordinates.*  \n   - For $x=0$: $$f(0)=0^{4}-4\\cdot0^{2}+1=1.$$  \n   - For $x=\\sqrt{2}$: $$f(\\sqrt{2})=(\\sqrt{2})^{4}-4(\\sqrt{2})^{2}+1=4-8+1=-3.$$  \n   - For $x=-\\sqrt{2}$: because the function contains only even powers of $x$, $f(-\\sqrt{2})=f(\\sqrt{2})=-3.$\n\n**Answer:** The stationary points are $(0,\\,1)$, $\\bigl(\\sqrt{2},\\,-3\\bigr)$ and $\\bigl(-\\sqrt{2},\\,-3\\bigr)$.\n\n---\n\n> **Common mistake:** Forgetting to include all solutions of $f'(x)=0$. After factoring, always write down every factor that can be zero; otherwise you will miss stationary points.\n\n### What the list of stationary points tells us\n\nAt this stage we simply know where the graph is flat. Some of these points will be the highest or lowest spots locally (maxima or minima), while others might be points of inflection where the curve changes its curvature but not its direction of increase/decrease. The next sections will give tools—second derivative test and sign analysis—to classify each stationary point.\n\nFor now, remember the core recipe:\n\n> **Remember:** *Find stationary points by differentiating, setting the derivative equal to zero, solving for $x$, and then evaluating the original function at those $x$ values.*\n\nWith practice, spotting these flat spots becomes quick, and you will be ready to decide whether each one is a hilltop, a valley, or a flat plateau on the graph of the function.",
+   "code": ""
+  },
+  {
+   "heading": "3. Classifying Maxima and Minima",
+   "body": "When a curve has a **stationary point** (where the slope is zero) we still need to know what the curve is doing there.  \nIs it turning up like a valley (a **minimum**), turning down like a hill (a **maximum**), or simply flattening out without changing direction (an **inflection point**)?  \nThe answer tells us where a function reaches its highest or lowest values locally, which is essential for optimisation problems and for understanding the shape of graphs.\n\n> **Definition:** A *stationary point* of a function $f(x)$ is a point $x=c$ where the first derivative $f'(c)=0$ (the tangent line is horizontal).\n\n### The first‑derivative test  \n\nThe first‑derivative test looks at the sign of $f'(x)$ just to the left and right of the stationary point.\n\n1. **If $f'(x)$ changes from positive to negative** as we pass $x=c$, the function goes from increasing to decreasing, so $c$ is a **local maximum**.  \n2. **If $f'(x)$ changes from negative to positive**, the function goes from decreasing to increasing, giving a **local minimum**.  \n3. **If $f'(x)$ does not change sign** (both sides are positive or both are negative), the point is not a maximum or minimum; it is usually a **point of inflection**.\n\nWhy does this work?  \nThe sign of $f'(x)$ tells us whether the graph is rising ($f'>0$) or falling ($f'<0$). A change of sign means the direction of motion reverses, which is exactly what a peak or a trough does.\n\n### The second‑derivative test  \n\nSometimes checking signs on both sides is cumbersome. The second‑derivative test uses the curvature of the graph.\n\n> **Note:** The *second derivative* $f''(x)$ measures how the slope $f'(x)$ is changing.  \n> - $f''(x)>0$ means the slope is increasing → the graph is **concave up** (shaped like a cup).  \n> - $f''(x)<0$ means the slope is decreasing → the graph is **concave down** (shaped like a cap).\n\nThe test:\n\n1. Find a stationary point $x=c$ where $f'(c)=0$.  \n2. Compute $f''(c)$.  \n   - If $f''(c)>0$, the graph is concave up at $c$, so $c$ is a **local minimum**.  \n   - If $f''(c)<0$, the graph is concave down at $c$, so $c$ is a **local maximum**.  \n   - If $f''(c)=0$, the test is inconclusive; we must revert to the first‑derivative test or higher‑order derivatives.\n\n> **In daily life:** Think of a road that first climbs, then flattens, then climbs again. The flat spot where the road stops rising but soon continues to rise is like an inflection point—no peak or valley, just a brief pause.\n\n> **Remember:** The second‑derivative test works only at points where the first derivative is zero and the second derivative exists.\n\n---\n\n### **Example 5 (Easy): Classify the stationary points of $f(x)=x^{3}-6x^{2}+9x$**\n\nWe will use the first‑derivative test because the polynomial is simple.\n\n1. **Find the derivative**  \n   $$f'(x)=3x^{2}-12x+9.$$\n2. **Set the derivative to zero** to locate stationary points  \n   $$3x^{2}-12x+9=0 \\quad\\Longrightarrow\\quad x^{2}-4x+3=0.$$  \n   Solving the quadratic gives $x=1$ and $x=3$.\n3. **Test the sign of $f'(x)$ on each side**  \n\n   - For $x<1$ (choose $x=0$): $f'(0)=9>0$ (positive).  \n   - Between $1$ and $3$ (choose $x=2$): $f'(2)=3(4)-24+9= -3<0$ (negative).  \n   - For $x>3$ (choose $x=4$): $f'(4)=3(16)-48+9=9>0$ (positive).\n\n   The sign changes **positive → negative** at $x=1$ → **local maximum**.  \n   The sign changes **negative → positive** at $x=3$ → **local minimum**.\n\n**Answer:** $f(x)$ has a local maximum at $x=1$ (value $f(1)=4$) and a local minimum at $x=3$ (value $f(3)=0$).  \n\n---\n\n### **Example 6 (Medium): Use the second‑derivative test on $f(x)=x^{4}-8x^{2}+16$**\n\nHere the second‑derivative test is convenient because the function is smooth and the second derivative is easy to compute.\n\n1. **First derivative** (to find stationary points)  \n   $$f'(x)=4x^{3}-16x.$$\n2. **Set $f'(x)=0$**  \n   $$4x^{3}-16x=0 \\quad\\Longrightarrow\\quad 4x(x^{2}-4)=0.$$  \n   Hence $x=0,\\;x=2,\\;x=-2$.\n3. **Second derivative**  \n   $$f''(x)=12x^{2}-16.$$\n   Evaluate at each stationary point:\n\n   - At $x=0$: $f''(0)= -16<0$ → concave down → **local maximum**.  \n   - At $x=2$: $f''(2)=12(4)-16=32>0$ → concave up → **local minimum**.  \n   - At $x=-2$: $f''(-2)=12(4)-16=32>0$ → concave up → **local minimum**.\n\n**Answer:** $f(x)$ has a local maximum at $x=0$ (value $f(0)=16$) and local minima at $x=\\pm2$ (each with value $f(\\pm2)=0$).  \n\n> **Common mistake:** Forgetting to check that $f'(c)=0$ before applying the second‑derivative test. The test only tells us about curvature; without a horizontal tangent it does not indicate a maximum or minimum.\n\nWith these two tests, you can quickly decide the nature of any stationary point you encounter. The first‑derivative test is always reliable, while the second‑derivative test is faster when the second derivative is easy to evaluate and non‑zero. Practice both, and you will be comfortable classifying peaks, valleys, and flat inflection points on any curve.",
+   "code": ""
+  },
+  {
+   "heading": "4. Simple Optimisation Problems",
+   "body": "When we talk about **optimisation** we are looking for the biggest or the smallest value that a quantity can take, while some condition stays the same.  \nIn calculus the usual way is:\n\n1. **Translate** the word problem into a mathematical function $f(x)$ that expresses the quantity we want to maximise or minimise.  \n2. **Differentiate** the function to get $f'(x)$. The derivative tells us how fast $f$ changes; where the change stops ($f'(x)=0$) we have a *stationary point*.  \n3. **Locate** the stationary points by solving $f'(x)=0$.  \n4. **Decide** whether each stationary point is a maximum, a minimum, or something else by looking at the sign of $f'$ on each side, or by using the second‑derivative test.  \n\n> **Definition:** A *stationary point* of a function $f$ is a point $x$ where the derivative $f'(x)=0$ (the graph is flat there).  \n\n> **Note:** The condition “fixed perimeter” or “fixed material” is the *constraint* that keeps the problem realistic; it turns the geometry into a single‑variable function.\n\n---\n\n### Example 7 (Level: Easy) – Rectangle with fixed perimeter\n\n**Question:** A rectangle has a fixed perimeter of $20\\,$m. Find the dimensions that give the maximum area.\n\n**Steps**\n\n1. **Write the constraint as an equation.**  \n   If the sides are $x$ (length) and $y$ (width), the perimeter is  \n   $$2x+2y = 20.$$  \n   Solve for one variable, e.g. $y = 10 - x$.\n\n2. **Express the quantity to optimise as a function of one variable.**  \n   Area $A = x y = x(10 - x) = 10x - x^{2}.$  \n   So $A(x)=10x - x^{2}$.\n\n3. **Differentiate and find stationary points.**  \n   $$A'(x)=10-2x.$$  \n   Set the derivative to zero: $10-2x=0 \\;\\Longrightarrow\\; x=5.$  \n\n4. **Check that this gives a maximum.**  \n   The second derivative $A''(x) = -2 < 0$, so the graph is concave down and $x=5$ is a maximum.\n\n**Answer:** The rectangle with maximum area has $x=5\\,$m and $y=10-5=5\\,$m; it is a square of side $5\\,$m, giving area $25\\,$m².\n\n> **In daily life:** When you stretch a rubber band into a rectangle with a fixed length, the shape that encloses the most space is a square.\n\n---\n\n### Example 8 (Level: Medium) – Open box from a sheet\n\n**Question:** A sheet of cardboard $30\\,$cm by $40\\,$cm is cut by removing equal squares of side $x$ from each corner and then folded up to form an open box. Find $x$ that gives the maximum volume.\n\n**Steps**\n\n1. **Draw the situation and write the dimensions after cutting.**  \n   After removing squares, the base dimensions become $(30-2x)$ and $(40-2x)$.  \n   The height of the box is the cut size $x$.\n\n2. **Write the volume as a function of $x$.**  \n   $$V(x)=x\\,(30-2x)\\,(40-2x).$$  \n   Expand if you wish, but differentiation works directly.\n\n3. **Differentiate and set to zero.**  \n   First compute the derivative (product rule or expand first). Expanding:  \n   $$V(x)=x\\,(1200-140x+4x^{2}) = 1200x-140x^{2}+4x^{3}.$$  \n   Then  \n   $$V'(x)=1200-280x+12x^{2}.$$\n\n   Solve $V'(x)=0$:  \n   $$12x^{2}-280x+1200=0.$$  \n   Divide by $4$: $3x^{2}-70x+300=0.$  \n   Use the quadratic formula:  \n   $$x=\\frac{70\\pm\\sqrt{70^{2}-4\\cdot3\\cdot300}}{2\\cdot3}\n     =\\frac{70\\pm\\sqrt{4900-3600}}{6}\n     =\\frac{70\\pm\\sqrt{1300}}{6}.$$\n\n   $\\sqrt{1300}\\approx 36.06$, so the two candidates are  \n   $$x_{1}\\approx\\frac{70-36.06}{6}=5.66\\text{ cm},\\qquad\n     x_{2}\\approx\\frac{70+36.06}{6}=17.68\\text{ cm}.$$\n\n4. **Reject impossible values and decide which gives the maximum.**  \n   The cut size cannot exceed half the shorter side, so $x<15$ cm; thus $x_{2}$ is impossible.  \n   Check the second derivative:  \n   $$V''(x)= -280+24x.$$  \n   At $x=5.66$, $V''(5.66)= -280+24(5.66)\\approx -151<0$, confirming a maximum.\n\n**Answer:** Cut squares of side approximately $5.7\\,$cm from each corner. The resulting box has dimensions  \n$(30-2x)\\approx18.6\\,$cm by $(40-2x)\\approx28.6\\,$cm by $x\\approx5.7\\,$cm, giving a maximum volume of about $3020\\,$cm³.\n\n> **Common mistake:** Forgetting to check that the stationary point lies inside the feasible interval (here $0<x<15$). A mathematically correct stationary point can still be physically impossible.\n\n---\n\nBy following the same four‑step routine—*model, differentiate, solve $f'(x)=0$, and test*—you can handle many optimisation problems that appear in physics, economics, and everyday design. Remember that the derivative is the tool that tells us where the “flat spots” are; those are the only places where a maximum or minimum can occur.",
+   "code": ""
+  },
+  {
+   "heading": "5. More Complex Optimisation",
+   "body": "When a problem has more than one condition, we cannot just take a single derivative and set it to zero.  \nWe must keep the extra condition (the **constraint**) in mind while we look for the best (maximum or minimum) value.  \nThe usual way is to **express every variable in terms of a single one** using the constraint, then **differentiate** the single‑variable expression and find where its derivative is zero.  \nThis technique lets us solve optimisation problems that appear in engineering, economics, biology and many everyday situations.\n\n> **Definition:** A *constraint* is an equation that must be satisfied together with the quantity we want to optimise.  \n> **Note:** By substituting the constraint we reduce the problem to one variable, which we can handle with the ordinary differentiation tools from earlier lessons.  \n\n---\n\n### Step‑by‑step method for constrained optimisation  \n\n1. **Write down the quantity to be optimised.**  \n   This could be an area, a cost, a time, etc. Call it \\(F\\).  \n\n2. **Write the constraint equation.**  \n   Relate the variables that appear in \\(F\\) using the condition given in the problem.  \n\n3. **Solve the constraint for one variable** and substitute it into \\(F\\).  \n   After substitution, \\(F\\) becomes a function of a single variable, say \\(x\\).  \n\n4. **Differentiate the single‑variable function** with respect to \\(x\\).  \n\n5. **Set the derivative equal to zero** and solve for the critical point(s).  \n\n6. **Check that the critical point gives a maximum or minimum** (second‑derivative test or reasoning about the problem).  \n\n7. **Translate the result back** to the original variables using the constraint.\n\nNow let us see the method in action.\n\n---\n\n**Example 9 (Hard): Maximum area of a field next to a river**  \n\nA farmer has 120 m of fencing to enclose a rectangular field that lies beside a straight river. No fence is needed along the river side. What dimensions give the maximum possible area?\n\n1. **Identify the quantity to maximise.**  \n   The area of the rectangle is \\(A = \\text{length} \\times \\text{width}\\).  \n   Let the side parallel to the river be \\(L\\) (no fence) and the two equal sides perpendicular to the river be \\(W\\). Then  \n   $$A = L \\, W.$$\n\n2. **Write the constraint.**  \n   The total fencing used is the two widths plus the far side length:  \n   $$2W + L = 120 \\quad\\text{(metres)}.$$\n\n3. **Express one variable from the constraint.**  \n   Solve for \\(L\\):  \n   $$L = 120 - 2W.$$\n\n4. **Substitute into the area formula.**  \n   $$A(W) = (120 - 2W)\\,W = 120W - 2W^{2}.$$\n\n5. **Differentiate with respect to \\(W\\).**  \n   $$\\frac{dA}{dW} = 120 - 4W.$$\n\n6. **Set the derivative to zero and solve.**  \n   $$120 - 4W = 0 \\;\\Longrightarrow\\; W = 30\\ \\text{m}.$$\n\n7. **Find the corresponding length using the constraint.**  \n   $$L = 120 - 2(30) = 60\\ \\text{m}.$$\n\n8. **Confirm it is a maximum.**  \n   The second derivative \\(\\frac{d^{2}A}{dW^{2}} = -4 < 0\\), so the critical point gives a maximum.\n\n**Answer:** The farmer should make the field 60 m long along the river and 30 m deep away from the river, giving a maximum area of \\(60 \\times 30 = 1800\\ \\text{m}^{2}\\).\n\n> **In daily life:** This same idea works for any situation where you have a fixed amount of material (fence, rope, budget) and want to enclose the largest possible region.\n\n---\n\n**Example 10 (Hard): Minimising the cost of a cylindrical can**  \n\nA cylindrical can must hold exactly \\(500\\ \\text{cm}^{3}\\) of liquid. The material for the top and bottom costs twice as much per unit area as the material for the side. Find the dimensions (radius \\(r\\) and height \\(h\\)) that minimise the total cost.\n\n1. **Write the cost expression.**  \n   Let the unit cost of the side material be \\(c\\) (currency per cm\\(^2\\)).  \n   Then the top and bottom each cost \\(2c\\) per cm\\(^2\\).  \n   Surface areas: side \\(= 2\\pi r h\\); each end \\(= \\pi r^{2}\\).  \n   Total cost:  \n   $$C = c\\,(2\\pi r h) \\;+\\; 2c\\,( \\pi r^{2}) \\;+\\; 2c\\,( \\pi r^{2}) \n        = 2c\\pi r h + 4c\\pi r^{2}.$$\n\n2. **Write the volume constraint.**  \n   Volume of a cylinder:  \n   $$V = \\pi r^{2} h = 500\\ \\text{cm}^{3}.$$\n\n3. **Solve the constraint for \\(h\\).**  \n   $$h = \\frac{500}{\\pi r^{2}}.$$\n\n4. **Substitute \\(h\\) into the cost formula.**  \n   $$C(r) = 2c\\pi r \\left(\\frac{500}{\\pi r^{2}}\\right) + 4c\\pi r^{2}\n          = \\frac{1000c}{r} + 4c\\pi r^{2}.$$\n\n5. **Differentiate with respect to \\(r\\).**  \n   $$\\frac{dC}{dr} = -\\frac{1000c}{r^{2}} + 8c\\pi r.$$\n\n6. **Set derivative to zero and solve for \\(r\\).**  \n   $$-\\frac{1000c}{r^{2}} + 8c\\pi r = 0\n      \\;\\Longrightarrow\\; 8\\pi r^{3} = 1000\n      \\;\\Longrightarrow\\; r^{3} = \\frac{125}{\\pi}.$$\n   Hence  \n   $$r = \\left(\\frac{125}{\\pi}\\right)^{\\!1/3} \\approx 3.4\\ \\text{cm}.$$\n\n7. **Find the height using the constraint.**  \n   $$h = \\frac{500}{\\pi r^{2}}\n        = \\frac{500}{\\pi (3.4)^{2}} \\approx 13.8\\ \\text{cm}.$$\n\n8. **Check that this gives a minimum.**  \n   Second derivative:  \n   $$\\frac{d^{2}C}{dr^{2}} = \\frac{2000c}{r^{3}} + 8c\\pi > 0,$$  \n   so the critical point is indeed a minimum.\n\n**Answer:** The cheapest can has radius about \\(3.4\\ \\text{cm}\\) and height about \\(13.8\\ \\text{cm}\\).  \n\n> **Common mistake:** Forgetting to substitute the constraint before differentiating leads to an equation that does not respect the given condition, giving wrong dimensions.\n\n> **Remember:** Always reduce the problem to one variable using the constraint; then the familiar derivative‑zero rule works exactly as in unconstrained cases.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the equation of the tangent line to $y = x^2$ at $x = 3$.",
+   "a": "First compute the derivative $y' = 2x$. At $x=3$, $y' = 2(3)=6$. The point on the curve is $(3, 3^2) = (3,9)$. Tangent line: $y-9 = 6(x-3)$ → $y = 6x -9$."
+  },
+  {
+   "level": "Easy",
+   "q": "A rectangle has perimeter $20\\,$cm. Express its area $A$ as a function of its length $l$, then find the value of $l$ that gives the maximum area.",
+   "a": "Let width be $w$. Perimeter: $2l+2w=20 \\Rightarrow w = 10-l$. Area: $A(l)=l w = l(10-l)=10l - l^2$. Differentiate: $A'(l)=10-2l$. Set $A'(l)=0$ → $10-2l=0 \\Rightarrow l=5$. Second derivative $A''(l)=-2<0$, so $l=5$ cm gives the maximum area $A=5(5)=25\\,$cm²."
+  },
+  {
+   "level": "Medium",
+   "q": "Determine whether the stationary point of $f(x)=x^3-3x^2+2$ at $x=0$ is a maximum, minimum, or point of inflection.",
+   "a": "Compute $f'(x)=3x^2-6x$. Set $f'(x)=0$: $3x(x-2)=0$ → $x=0$ or $x=2$. At $x=0$, $f''(x)=6x-6$. Evaluate $f''(0) = -6 < 0$, so the test suggests a local maximum. Check sign change of $f'$: for $x<0$, $f'(x)=3x^2-6x>0$; for $0<x<2$, $f'(x)<0$. Hence $f'$ changes from positive to negative → local maximum at $x=0$ with $f(0)=2$."
+  },
+  {
+   "level": "Medium",
+   "q": "A farmer has 120 m of fencing to make a rectangular pen against a straight wall (the wall acts as one side). Find the dimensions that give the largest possible area.",
+   "a": "Let the side parallel to the wall be $L$ and the two perpendicular sides each be $W$. Fencing used: $L+2W=120 \\Rightarrow L=120-2W$. Area: $A(W)=L\\cdot W = (120-2W)W = 120W-2W^2$. Differentiate: $A'(W)=120-4W$. Set $A'(W)=0$ → $W=30$ m. Then $L = 120-2(30)=60$ m. Second derivative $A''(W)=-4<0$, so this gives the maximum area $A=60\\times30=1800\\,$m²."
+  },
+  {
+   "level": "Hard",
+   "q": "Find the dimensions of the right circular cone of fixed volume $V=1000\\,$cm³ that has the smallest possible surface area (including base).",
+   "a": "Let radius $r$ and height $h$. Volume: $V=\\frac13\\pi r^2 h =1000 \\Rightarrow h = \\frac{3000}{\\pi r^2}$. Surface area (base + lateral): $S = \\pi r^2 + \\pi r\\sqrt{r^2+h^2}$. Substitute $h$:\n$$S(r)=\\pi r^2 + \\pi r\\sqrt{r^2+\\left(\\frac{3000}{\\pi r^2}\\right)^2}.$$\nDifferentiate $S(r)$ with respect to $r$ (use chain rule). After simplification, set $S'(r)=0$ leads to the condition $r = \\left(\\frac{3V}{2\\pi}\\right)^{1/3}$. Plug $V=1000$:\n$$r = \\left(\\frac{3\\cdot1000}{2\\pi}\\right)^{1/3} \\approx 7.23\\text{ cm}.$$\nThen $h = \\frac{3000}{\\pi r^2} \\approx \\frac{3000}{\\pi (7.23)^2} \\approx 18.3\\text{ cm}.$\nThus the cone with radius ≈ 7.23 cm and height ≈ 18.3 cm minimises surface area."
+  },
+  {
+   "level": "Hard",
+   "q": "Use Lagrange multipliers to find the maximum value of $f(x,y)=xy$ subject to the constraint $x^2+4y^2=16$.",
+   "a": "Set up $L(x,y,\\lambda)=xy + \\lambda(16 - x^2 - 4y^2)$.\nPartial derivatives:\n\\[\n\\frac{\\partial L}{\\partial x}=y - 2\\lambda x =0 \\quad (1)\\\\\n\\frac{\\partial L}{\\partial y}=x - 8\\lambda y =0 \\quad (2)\\\\\n\\frac{\\partial L}{\\partial \\lambda}=16 - x^2 - 4y^2 =0 \\quad (3)\n\\]\nFrom (1): $y = 2\\lambda x$. From (2): $x = 8\\lambda y$. Substitute $y$ from (1) into (2): $x = 8\\lambda (2\\lambda x) = 16\\lambda^2 x$. Hence $16\\lambda^2 =1 \\Rightarrow \\lambda = \\pm \\frac14$.\nTake $\\lambda = \\frac14$: then $y = 2(\\frac14)x = \\frac12 x$. Plug into constraint (3): $x^2 + 4(\\frac12 x)^2 = x^2 + x^2 = 2x^2 =16 \\Rightarrow x^2 =8 \\Rightarrow x = \\pm 2\\sqrt2$. Corresponding $y = \\frac12 x = \\pm \\sqrt2$.\nCompute $f = xy$: for $(2\\sqrt2,\\sqrt2)$, $f = 2\\sqrt2 \\cdot \\sqrt2 = 4$. For the negative pair, $f = (-2\\sqrt2)(-\\sqrt2)=4$ as well.\nThus the maximum value of $xy$ under the given ellipse is $4$, attained at $(x,y) = (\\pm 2\\sqrt2,\\pm \\sqrt2)$."
+  }
+ ],
+ "recap": "This lesson explains how the derivative gives the slope of the tangent line and how to write its equation, defines stationary points where the derivative is zero, shows how to classify maxima and minima using the first‑derivative test, and outlines steps for solving simple and constrained optimisation problems.",
+ "key_terms": [
+  {
+   "term": "tangent line",
+   "meaning": "A straight line that touches a curve at one point and has the same direction as the curve there."
+  },
+  {
+   "term": "normal line",
+   "meaning": "A line perpendicular to the tangent line at the point of contact."
+  },
+  {
+   "term": "derivative",
+   "meaning": "The limit of the ratio of change in y to change in x as the change in x approaches zero; it gives the instantaneous slope."
+  },
+  {
+   "term": "stationary point",
+   "meaning": "A point on the graph where the derivative equals zero, so the tangent is horizontal."
+  },
+  {
+   "term": "local maximum",
+   "meaning": "A stationary point where the function changes from increasing to decreasing."
+  },
+  {
+   "term": "local minimum",
+   "meaning": "A stationary point where the function changes from decreasing to increasing."
+  },
+  {
+   "term": "first‑derivative test",
+   "meaning": "A method that looks at the sign of the derivative on each side of a stationary point to determine its type."
+  },
+  {
+   "term": "constraint",
+   "meaning": "An additional equation that must be satisfied when optimising a quantity."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the derivative f'(a) represent for the graph of y=f(x) at x=a?",
+   "options": [
+    "The y‑intercept of the tangent line",
+    "The slope of the tangent line",
+    "The curvature of the graph",
+    "The distance from the origin"
+   ],
+   "answer": 1,
+   "why": "The derivative gives the slope of the tangent line at that point."
+  },
+  {
+   "q": "Which line is perpendicular to the tangent line at a given point on a curve?",
+   "options": [
+    "Secant line",
+    "Normal line",
+    "Chord line",
+    "Asymptote"
+   ],
+   "answer": 1,
+   "why": "By definition, the normal line is perpendicular to the tangent line."
+  },
+  {
+   "q": "If f'(x)=0 at x=c, what is c called?",
+   "options": [
+    "Critical point",
+    "Inflection point",
+    "Stationary point",
+    "Turning point"
+   ],
+   "answer": 2,
+   "why": "A point where the derivative is zero is a stationary point."
+  },
+  {
+   "q": "In the first‑derivative test, what sign change indicates a local maximum?",
+   "options": [
+    "Positive to positive",
+    "Negative to negative",
+    "Positive to negative",
+    "Negative to positive"
+   ],
+   "answer": 2,
+   "why": "The function goes from increasing (positive slope) to decreasing (negative slope)."
+  },
+  {
+   "q": "Which test uses the second derivative to classify stationary points?",
+   "options": [
+    "First‑derivative test",
+    "Second‑derivative test",
+    "Limit test",
+    "Integral test"
+   ],
+   "answer": 1,
+   "why": "The second‑derivative test examines the concavity to decide max or min."
+  },
+  {
+   "q": "When solving a constrained optimisation problem, what is the first step after writing the constraint?",
+   "options": [
+    "Differentiate the original function",
+    "Substitute the constraint to get a single‑variable function",
+    "Find the second derivative",
+    "Plot the graph"
+   ],
+   "answer": 1,
+   "why": "Substituting the constraint reduces the problem to one variable."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Equation of the tangent line at x=a",
+   "back": "y - f(a) = f'(a) (x - a)"
+  },
+  {
+   "front": "Definition of a normal line",
+   "back": "A line perpendicular to the tangent line at the same point on the curve"
+  },
+  {
+   "front": "What is a stationary point?",
+   "back": "A point where the first derivative equals zero, giving a horizontal tangent"
+  },
+  {
+   "front": "How to identify a local minimum using the first‑derivative test",
+   "back": "Derivative changes from negative to positive as x passes the point"
+  },
+  {
+   "front": "What does a constraint do in optimisation?",
+   "back": "It provides an additional equation that must be satisfied while maximizing or minimizing the objective function"
+  },
+  {
+   "front": "Step‑by‑step method for simple optimisation",
+   "back": "1. Write the function, 2. Differentiate, 3. Set derivative to zero, 4. Classify the stationary points"
+  },
+  {
+   "front": "What is the second‑derivative test result for a local maximum?",
+   "back": "If f''(c) < 0 at a stationary point c, the point is a local maximum"
+  },
+  {
+   "front": "Why is the derivative called an instantaneous rate of change?",
+   "back": "Because it measures how the function changes at an infinitely small interval around a point"
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l19-road-on-hill",
+   "title": "A road following a hill shows how the tangent line matches the slope at a single point.",
+   "alt": "A road following a hill shows how the tangent line matches the slope at a single point.",
+   "priority": 8,
+   "picture_title": "Road on Hill",
+   "kind": "photo",
+   "subject": "A winding road climbing a gentle hill with a small inset showing a close‑up of the road touching the hill at one point, illustrating the idea of a tangent line touching a curve.",
+   "layout": "The full road scene fills the frame; a zoomed‑in box in the corner highlights the contact point with a faint line drawn as the tangent.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l19-roller-coaster-peaks",
+   "title": "Maximum and minimum points on a roller‑coaster track correspond to stationary points of the curve.",
+   "alt": "Maximum and minimum points on a roller‑coaster track correspond to stationary points of the curve.",
+   "priority": 7,
+   "picture_title": "Roller Coaster Peaks",
+   "kind": "illustration",
+   "subject": "A side view of a roller‑coaster track showing a high crest (maximum) and a low valley (minimum) with arrows indicating where the slope is zero.",
+   "layout": "Track runs left‑to‑right; the crest and valley are highlighted with colored circles and short arrows pointing to the flat spots.",
+   "labels": [
+    "Maximum",
+    "Minimum",
+    "Zero slope"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l19-factory-production-line",
+   "title": "Optimising output under a constraint is like arranging machines on a production line for maximum efficiency.",
+   "alt": "Optimising output under a constraint is like arranging machines on a production line for maximum efficiency.",
+   "priority": 6,
+   "picture_title": "Factory Production Line",
+   "kind": "photo",
+   "subject": "A modern factory floor with several machines; a visible constraint such as a limited power supply cable is shown, emphasizing how the layout must respect the constraint while maximising production.",
+   "layout": "Machines arranged in rows; a highlighted power line runs across the floor with a label indicating the constraint.",
+   "labels": [
+    "Constraint",
+    "Machines",
+    "Output"
+   ],
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Tangent line vs Normal line",
+   "left": {
+    "name": "Tangent line",
+    "points": [
+     "Touches the curve at one point",
+     "Direction matches the curve's slope",
+     "Slope equals f'(a)"
+    ]
+   },
+   "right": {
+    "name": "Normal line",
+    "points": [
+     "Perpendicular to the tangent",
+     "Slope is -1/f'(a) (if f'(a) ≠ 0)",
+     "Used for geometry and physics applications"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "graph",
+   "title": "Tangent line to f(x)=x^2 at x=1",
+   "fn": "x^2",
+   "xmin": -1,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 1,
+     "y": 1,
+     "label": "P",
+     "open": false
+    }
+   ],
+   "caption": "The curve y=x^2 (blue) and its tangent at (1,1) with slope 2",
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Types of stationary points",
+   "items": [
+    {
+     "name": "Local maximum",
+     "role": "Highest point in a small neighbourhood"
+    },
+    {
+     "name": "Local minimum",
+     "role": "Lowest point in a small neighbourhood"
+    },
+    {
+     "name": "Inflection point",
+     "role": "Slope zero but curvature changes sign"
+    },
+    {
+     "name": "Saddle point",
+     "role": "Flat spot that is neither max nor min"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Simple optimisation process",
+   "steps": [
+    {
+     "label": "Model",
+     "text": "Write the quantity to optimise as a function f(x)."
+    },
+    {
+     "label": "Differentiate",
+     "text": "Find f'(x) to see where the rate of change is zero."
+    },
+    {
+     "label": "Solve",
+     "text": "Set f'(x)=0 and solve for x (stationary points)."
+    },
+    {
+     "label": "Classify",
+     "text": "Use the first‑derivative test or second derivative to decide max or min."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

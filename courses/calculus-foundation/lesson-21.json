@@ -1,0 +1,351 @@
+{
+ "title": "Integration Basics",
+ "summary": "Students learn what antiderivatives are, how to write indefinite integrals, and why a constant of integration must be added. They practice finding antiderivatives and using the constant in simple problems.",
+ "objectives": [
+  "Identify the antiderivative of a basic function",
+  "Write an indefinite integral notation correctly",
+  "Explain the role of the constant of integration",
+  "Compute antiderivatives for polynomial and simple trigonometric functions",
+  "Check a solution by differentiating back"
+ ],
+ "prerequisites": "Students should already know how to differentiate basic power, constant, and trigonometric functions.",
+ "why": [
+  "Integration is the reverse of differentiation, allowing us to recover original quantities such as distance from a speed graph. This is essential in physics, engineering, and economics where we often know rates but need total amounts.",
+  "Understanding the constant of integration prevents mistakes when solving real‑world problems, because many different original functions can share the same derivative. Recognising this helps in modelling situations like total profit when only marginal profit is given."
+ ],
+ "sections": [
+  {
+   "heading": "What is an Antiderivative?",
+   "body": "An antiderivative is simply a function that “undoes” differentiation.  \nIf you have a function $f(x)$ and you can find another function $F(x)$ whose derivative is exactly $f(x)$, then $F$ is called an **antiderivative** of $f$.\n\n> **Definition:** A function $F$ is an antiderivative of $f$ on an interval if $F'(x)=f(x)$ for every $x$ in that interval.\n\nWhy does this matter?  Differentiation tells us how a quantity changes at each instant – for example, speed is the derivative of position.  Sometimes we start with the rate of change (the speed) and we want to recover the original quantity (the position).  Finding an antiderivative does exactly that: it reconstructs the original function from its rate of change.\n\nThink of a movie reel.  Watching the film forward shows each frame changing into the next – that is like taking a derivative, looking at how the picture changes moment by moment.  Playing the reel backward, frame by frame, restores the earlier scenes – that is like finding an antiderivative, rebuilding the whole picture from the changes you observed.\n\nTo see the idea in action, start with a very simple function:\n$$f(x)=2x.$$\nWe ask: “What function has a derivative equal to $2x$?”  Recall the power rule for differentiation: if $G(x)=x^n$, then $G'(x)=n x^{\\,n-1}$.  To reverse the rule, we need a function whose exponent, when reduced by one and multiplied by the original exponent, gives $2x$.  Trying $F(x)=x^2$ works because\n$$F'(x)=\\frac{d}{dx}\\bigl(x^2\\bigr)=2x,$$\nso $F$ is an antiderivative of $f$.\n\nNotice that $x^2$ is not the only answer.  Adding any constant $C$ does not change the derivative, because the derivative of a constant is zero:\n$$\\frac{d}{dx}(x^2+C)=2x+0=2x.$$\nThus every function of the form $F(x)=x^2+C$ is an antiderivative of $2x$.  This family of functions is called the **indefinite integral** of $f$, and the constant $C$ is the **constant of integration**.\n\n> **Note:** The constant $C$ appears because differentiation erases information about vertical shifts.  When we “undo” differentiation we must allow for any possible shift.\n\nAnother everyday example: imagine you are tracking the amount of water flowing into a tank each minute.  The flow rate $r(t)$ (liters per minute) might be constant, say $r(t)=5$.  To find the total volume $V(t)$ in the tank after $t$ minutes, we need a function whose derivative is $5$.  The antiderivative is $V(t)=5t+C$, where $C$ represents the initial amount of water already in the tank at time $t=0$.\n\n> **In daily life:** Finding an antiderivative is like asking, “If I know how fast something is changing, what was the original amount?”  It lets us reconstruct the original story from the speed‑of‑change data.\n\nA common mistake is to think that the antiderivative is unique.  Because any constant can be added without affecting the derivative, there are infinitely many antiderivatives for a given function.  Remember to always include the “$+C$” when you write an indefinite integral.\n\n> **Remember:** Always write “$+C$” when you give an antiderivative, unless a specific condition (like an initial value) tells you which constant to choose.\n\nIn summary, an antiderivative reverses the process of differentiation.  It answers the question, “Which function, when differentiated, gives the function I started with?”  Understanding this concept is the first step toward mastering integration, where we systematically find antiderivatives for many different kinds of functions.",
+   "code": ""
+  },
+  {
+   "heading": "Finding Simple Antiderivatives",
+   "body": "When we look for an antiderivative we are trying to answer the question: *Which function, when we differentiate it, gives back the function we started with?*  \nIn other words, if we have a function $f(x)$, an antiderivative $F(x)$ satisfies  \n\n$$\\frac{d}{dx}F(x)=f(x).$$  \n\nFinding $F(x)$ is useful because it lets us recover the original “building‑up” process that differentiation performed. Think of it like un‑wrapping a gift: differentiation wraps a function in a simpler form, and the antiderivative unwraps it to reveal the original shape.\n\n> **Definition:** An *antiderivative* of $f(x)$ is any function $F(x)$ such that $F'(x)=f(x)$.  \n> **Note:** Antiderivatives are never unique; any two differ by a constant, because the derivative of a constant is $0$.\n\n### Power rule reversal\n\nFor polynomial terms the antiderivative is obtained by reversing the power rule for differentiation.  \nRecall the power rule:  \n\n$$\\frac{d}{dx}x^n = n x^{\\,n-1}\\qquad (n\\neq 0).$$  \n\nTo go backwards, we increase the exponent by $1$ and divide by the new exponent. In symbols,\n\n$$\\int x^n\\,dx = \\frac{x^{\\,n+1}}{n+1}+C\\qquad (n\\neq -1),$$  \n\nwhere $\\int$ denotes the *indefinite integral* (the collection of all antiderivatives) and $C$ is the constant of integration.\n\n#### Worked example 1 (Easy): simple power\n\n**Example 1 (Easy): Find an antiderivative of $f(x)=3x^{2}$.**  \n\n1. **Identify the power.** The term is $x^{2}$, so $n=2$.  \n2. **Increase the exponent by one.** $n+1 = 3$, giving $x^{3}$.  \n3. **Divide by the new exponent and keep the coefficient.**  \n\n   $$\\int 3x^{2}\\,dx = 3\\;\\frac{x^{3}}{3}+C.$$  \n\n4. **Simplify.**  \n\n   $$\\int 3x^{2}\\,dx = x^{3}+C.$$\n\n**Answer:** $F(x)=x^{3}+C.$  \n\nThe steps show exactly how the power rule reversal works: we “undo” the differentiation that would have turned $x^{3}$ into $3x^{2}$.\n\n### Basic trigonometric antiderivatives\n\nTrigonometric functions have their own simple antiderivatives, which are also easy to remember because they are the reverse of the most common derivatives:\n\n$$\\frac{d}{dx}\\sin x = \\cos x,\\qquad \\frac{d}{dx}\\cos x = -\\sin x.$$\n\nTherefore,\n\n$$\\int \\cos x\\,dx = \\sin x + C,\\qquad \\int \\sin x\\,dx = -\\cos x + C.$$\n\nIf a constant multiplies the trigonometric function, the constant stays outside the integral.\n\n#### Worked example 2 (Easy): cosine with a coefficient\n\n**Example 2 (Easy): Find an antiderivative of $f(x)=5\\cos x$.**  \n\n1. **Recognize the basic form.** $\\cos x$ is the derivative of $\\sin x$.  \n2. **Pull the constant $5$ out of the integral.**  \n\n   $$\\int 5\\cos x\\,dx = 5\\int \\cos x\\,dx.$$  \n\n3. **Integrate $\\cos x$.**  \n\n   $$5\\int \\cos x\\,dx = 5\\bigl(\\sin x\\bigr)+C.$$  \n\n4. **Write the final expression.**  \n\n   $$\\int 5\\cos x\\,dx = 5\\sin x + C.$$\n\n**Answer:** $F(x)=5\\sin x + C.$  \n\nHere the constant $5$ does not change; it simply scales the height of the sine wave after integration.\n\n> **In daily life:** Think of the antiderivative as a “recipe” that tells you how much of each ingredient (term) you need to combine so that, after cooking (differentiating), you end up with the taste (function) you started with.\n\n### Putting the two ideas together\n\nOften a function is a sum of a power term and a trigonometric term. Because integration is linear, we can treat each part separately and then add the results.\n\n#### Worked example 3 (Moderate): mixed terms\n\n**Example 3 (Moderate): Find an antiderivative of $f(x)=2x^{3}+4\\sin x$.**  \n\n1. **Split the integral into two easier pieces.**  \n\n   $$\\int\\bigl(2x^{3}+4\\sin x\\bigr)\\,dx = \\int 2x^{3}\\,dx + \\int 4\\sin x\\,dx.$$  \n\n2. **Integrate the power term.**  \n\n   - Increase exponent: $3+1=4$.  \n   - Divide by new exponent and keep the coefficient.  \n\n   $$\\int 2x^{3}\\,dx = 2\\;\\frac{x^{4}}{4}+C_{1}= \\frac{1}{2}x^{4}+C_{1}.$$  \n\n3. **Integrate the sine term.**  \n\n   - Pull out the constant $4$.  \n   - Use $\\int \\sin x\\,dx = -\\cos x$.  \n\n   $$\\int 4\\sin x\\,dx = 4\\bigl(-\\cos x\\bigr)+C_{2}= -4\\cos x + C_{2}.$$  \n\n4. **Combine the two results and a single constant $C$.**  \n\n   $$\\int\\bigl(2x^{3}+4\\sin x\\bigr)\\,dx = \\frac{1}{2}x^{4} - 4\\cos x + C,$$  \n\n   where $C = C_{1}+C_{2}$ absorbs both previous constants.\n\n**Answer:** $F(x)=\\dfrac{1}{2}x^{4} - 4\\cos x + C.$  \n\nThis example shows that we never have to treat a sum as a single complicated object; we can “break it apart,” integrate each piece using the rules we already know, and then put the pieces back together.\n\n> **Common mistake:** Forgetting to add the constant $C$ after each separate integration step. Even if you combine the pieces later, one overall constant is enough, but omitting it entirely gives an incomplete antiderivative.\n\n### Quick checklist for simple antiderivatives\n\n1. Identify each term (power of $x$, $\\sin x$, $\\cos x$, etc.).  \n2. Apply the appropriate reversal rule:  \n   - Power: increase exponent, divide by the new exponent.  \n   - $\\cos x$: becomes $\\sin x$.  \n   - $\\sin x$: becomes $-\\cos x$.  \n3. Keep any constants in front of the integral unchanged.  \n4. Add a single constant $C$ at the end.  \n\n> **Remember:** The antiderivative undoes differentiation, so every step you take should be the exact opposite of a differentiation rule you already know. By practicing these reversals, you build a reliable toolbox for many calculus problems.",
+   "code": ""
+  },
+  {
+   "heading": "Writing Indefinite Integrals",
+   "body": "When we have found an antiderivative of a function, we usually want to write it in a compact, standard form.  \nThe symbol **∫** (called the *integral sign*) is a shorthand that tells the reader “take the antiderivative of … with respect to …”.  \nWriting an antiderivative with this symbol is called an **indefinite integral** because we do not yet specify any limits of integration; we are only describing the whole family of antiderivatives.\n\n> **Definition:** An *indefinite integral* of a function $f(x)$ is the set of all functions $F(x)$ such that $F'(x)=f(x)$. It is written as  \n> $$\\int f(x)\\,dx = F(x) + C,$$  \n> where $C$ is an arbitrary constant.\n\nThe “$dx$” at the end tells us the variable we are integrating with respect to. It is important because the same expression could look different if we were integrating with respect to another variable (for example $dy$).\n\nWhy is this useful?  \nWhen we see the integral sign, we instantly know we need to *undo* differentiation. This lets us move from a rate or a slope (the derivative) back to the original quantity (the function). In physics, for instance, if we know the velocity $v(t)$ of a car, writing $\\int v(t)\\,dt$ gives us the position function up to an unknown starting point.\n\n**Everyday comparison**  \nThink of a recipe that tells you how much flour to add each minute while baking a cake. The rate “flour per minute” is like a derivative. If you want to know the total amount of flour used after the whole baking time, you would *sum* (integrate) the rate over time. The integral sign is just a neat way of writing that summation without listing each minute individually.\n\n---\n\n### Worked examples\n\n**Example 3 (Easy): Write the indefinite integral for $f(x)=4x^{3}$.**  \n\nWe want to express the antiderivative of $4x^{3}$ using the integral sign.\n\n1. **Identify the power rule for antiderivatives.**  \n   For $x^{n}$, an antiderivative is $\\dfrac{x^{n+1}}{n+1}$, provided $n\\neq -1$.\n\n2. **Apply the rule to $4x^{3}$.**  \n   Multiply the constant $4$ by the antiderivative of $x^{3}$:  \n   $$\\int 4x^{3}\\,dx = 4\\int x^{3}\\,dx.$$\n\n3. **Integrate $x^{3}$ and add the constant $C$.**  \n   $$\\int x^{3}\\,dx = \\frac{x^{4}}{4} + C.$$  \n   Multiplying by $4$ gives  \n   $$\\int 4x^{3}\\,dx = 4\\left(\\frac{x^{4}}{4}+C\\right)=x^{4}+C.$$\n\n**Answer:** $$\\int 4x^{3}\\,dx = x^{4}+C.$$\n\n---\n\n**Example 4 (Easy): Write the indefinite integral for $f(x)=2\\sin x$.**  \n\nNow we handle a trigonometric function.\n\n1. **Recall the antiderivative of $\\sin x$.**  \n   The derivative of $-\\cos x$ is $\\sin x$, so an antiderivative of $\\sin x$ is $-\\cos x$.\n\n2. **Factor out the constant $2$.**  \n   $$\\int 2\\sin x\\,dx = 2\\int \\sin x\\,dx.$$\n\n3. **Integrate $\\sin x$ and attach $C$.**  \n   $$\\int \\sin x\\,dx = -\\cos x + C.$$  \n   Multiplying by $2$ gives  \n   $$\\int 2\\sin x\\,dx = 2(-\\cos x + C)= -2\\cos x + C.$$\n\n**Answer:** $$\\int 2\\sin x\\,dx = -2\\cos x + C.$$\n\n> **Note:** The constant $C$ appears only once in the final result, even if you multiplied by a constant earlier. It represents any real number, covering all possible antiderivatives.\n\n> **Remember:** Always write “$dx$” (or the appropriate variable) after the integrand. Omitting it can lead to confusion about which variable you are integrating with respect to.\n\n> **Common mistake:** Forgetting to add the constant $C$. Without $C$, the expression describes only one antiderivative, while the indefinite integral actually represents an entire family of functions that differ by a constant.\n\n---\n\n### Putting the pieces together\n\n1. **Start with the function** you want to integrate, $f(x)$.  \n2. **Write the integral sign** followed by the function and the differential: $\\int f(x)\\,dx$.  \n3. **Apply the appropriate antiderivative rule** (power rule, trig rule, etc.).  \n4. **Add the constant $C$** at the end to capture all possible antiderivatives.\n\nBy following these steps, you can translate any simple derivative back into its original form using the concise notation of indefinite integrals. This skill is the foundation for later topics such as definite integrals, area calculations, and solving differential equations.",
+   "code": ""
+  },
+  {
+   "heading": "The Constant of Integration",
+   "body": "When we find an antiderivative of a function, we are looking for a new function whose derivative brings us back to the original one.  \nSuppose we start with the simple function  \n\n$$f(x)=2x.$$  \n\nAny function \\(F(x)\\) that satisfies \\(F'(x)=2x\\) is called an **antiderivative** of \\(f\\).  \nIf we differentiate \\(x^{2}+3\\) we get  \n\n$$\\frac{d}{dx}(x^{2}+3)=2x,$$  \n\nand the same happens for \\(x^{2}-7\\). Both give the same derivative, even though the two functions look different.  \n\nWhy can we add a constant and still have the same derivative? The reason is that the derivative of a constant is zero:\n\n$$\\frac{d}{dx}(C)=0\\qquad\\text{for any number }C.$$\n\nTherefore, if \\(F(x)\\) works, then \\(F(x)+C\\) also works, because  \n\n$$\\frac{d}{dx}\\bigl(F(x)+C\\bigr)=F'(x)+0=F'(x).$$  \n\nThis is why every indefinite integral is written with a “\\(+C\\)” at the end. The symbol \\(C\\) stands for **the constant of integration** – an unknown number that could be any real value. It reminds us that there are infinitely many antiderivatives, all differing only by a constant shift up or down on the graph.\n\n> **Note:** The constant of integration does **not** affect the slope of the function; it only moves the whole graph vertically.\n\nThink of the constant of integration like the “starting point” on a road trip. If you know how fast you are traveling (the derivative), you can figure out how far you have gone at any time, but you also need to know where you started. Different starting points give different total distances, even though the speed pattern is the same.\n\n---\n\n**Example 5 (Easy): Two functions with the same derivative**  \nShow that both \\(F_{1}(x)=x^{2}+3\\) and \\(F_{2}(x)=x^{2}-7\\) are antiderivatives of \\(f(x)=2x\\).\n\n1. Differentiate \\(F_{1}(x)\\).  \n   $$\\frac{d}{dx}(x^{2}+3)=2x.$$  \n2. Differentiate \\(F_{2}(x)\\).  \n   $$\\frac{d}{dx}(x^{2}-7)=2x.$$  \n3. Since both derivatives equal \\(f(x)=2x\\), each function is an antiderivative of \\(f\\).  \n\n**Answer:** Both \\(F_{1}(x)=x^{2}+3\\) and \\(F_{2}(x)=x^{2}-7\\) satisfy \\(F'(x)=2x\\); they differ only by the constant \\(C=10\\) (because \\(3-(-7)=10\\)).  \n\n---\n\nNow consider a situation where we know one antiderivative but also have extra information, such as a specific function value. This lets us determine the exact constant \\(C\\).\n\n> **In daily life:** Knowing a point on a curve is like knowing your exact address on a map; the shape of the road (the derivative) tells you the direction, while the address (the constant) tells you where you are.\n\n**Example 6 (Medium): Finding the constant from a condition**  \nGiven that one antiderivative of \\(f(x)=6x\\) is \\(F(x)=3x^{2}+C\\), find \\(C\\) if \\(F(1)=10\\).\n\n1. Write the condition using the given point.  \n   $$F(1)=3(1)^{2}+C=10.$$  \n2. Solve the equation for \\(C\\).  \n   $$3+ C = 10 \\;\\Longrightarrow\\; C = 10-3 = 7.$$  \n3. Substitute \\(C\\) back into the antiderivative to obtain the specific function.  \n   $$F(x)=3x^{2}+7.$$  \n\n**Answer:** The constant of integration is \\(C=7\\), so the antiderivative that passes through the point \\((1,10)\\) is \\(F(x)=3x^{2}+7\\).\n\n---\n\nWhen you write an indefinite integral, you always attach “\\(+C\\)” to capture all possible antiderivatives:\n\n$$\\int 2x\\,dx = x^{2}+C.$$\n\nIf later you are given a condition such as \\(F(a)=b\\), you can solve for the exact value of \\(C\\) and obtain a single, fully determined function.\n\n> **Remember:** The constant of integration represents every possible vertical shift of the antiderivative; without it, the integral would incorrectly suggest a single, unique answer.\n\nIn summary, the “\\(+C\\)” is essential because differentiation erases constant information. Adding \\(C\\) back restores the missing piece, ensuring that the antiderivative family is complete and that we can pinpoint the exact original function whenever extra data are available.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "When we have learned how to find an antiderivative, write it with the constant $C$, and check our work by differentiating, we can combine these steps to solve problems that look more like the ones we meet in physics or engineering. The idea is simple: **first translate the word problem into a mathematical expression**, then **integrate** to get the unknown function, and finally **use any given condition** (such as a starting value) to determine the constant of integration.  \n\n> **Remember:**  Solving a real‑world problem with integration always follows the three‑step cycle  \n> 1. *Model* – write the rate (derivative) that is given.  \n> 2. *Integrate* – find the family of functions whose derivative matches the rate.  \n> 3. *Apply conditions* – plug in known values to pick the exact function we need.\n\nWhy does this work?  Differentiation and integration are inverse operations (the Fundamental Theorem of Calculus).  If we know the derivative of a quantity, integrating “undoes” the differentiation and returns the original quantity, up to a constant.  The constant is fixed when we know the value of the quantity at a particular point.\n\n---\n\n**Example 7 (Medium): General antiderivative of a polynomial‑trigonometric sum**  \n\nFind the general antiderivative of  \n\\[\nf(x)=4x^{3}-2\\sin x .\n\\]\n\n1. **Identify each term** that can be integrated separately.  \n   The function is a sum of $4x^{3}$ and $-2\\sin x$, so we will integrate them one after the other.  \n\n2. **Integrate term by term** using the power rule $\\int x^{n}\\,dx=\\frac{x^{n+1}}{n+1}$ and the rule $\\int \\sin x\\,dx=-\\cos x$.  \n   $$\n   \\int 4x^{3}\\,dx = 4\\cdot\\frac{x^{4}}{4}=x^{4},\n   \\qquad\n   \\int -2\\sin x\\,dx = -2(-\\cos x)=2\\cos x .\n   $$\n\n3. **Combine the results** and add the constant of integration $C$.  \n   $$\n   \\int\\bigl(4x^{3}-2\\sin x\\bigr)\\,dx = x^{4}+2\\cos x + C .\n   $$\n\n**Answer:** The general antiderivative is $F(x)=x^{4}+2\\cos x + C$, where $C$ is any real constant.  \n\n---\n\nNow that we have practiced a pure mathematical antiderivative, let us see how the same steps help us solve a physics‑type problem where a condition is given.\n\n**Example 8 (Hard): Position of a particle from its velocity**  \n\nA particle moves along a straight line with velocity $v(t)=5t^{2}-3$ (meters per second). Its position at time $t=0$ is $s(0)=4$ meters. Find the position function $s(t)$.  \n\n1. **Recognize that velocity is the derivative of position:** $v(t)=\\dfrac{ds}{dt}$.  Therefore $s(t)$ is an antiderivative of $v(t)$.  \n\n2. **Integrate the velocity function term by term.**  \n   $$\n   \\int 5t^{2}\\,dt = 5\\cdot\\frac{t^{3}}{3}= \\frac{5}{3}t^{3},\n   \\qquad\n   \\int (-3)\\,dt = -3t .\n   $$  \n   Putting them together,  \n   $$\n   s(t)=\\frac{5}{3}t^{3}-3t + C .\n   $$\n\n3. **Use the given condition** $s(0)=4$ to find $C$. Substitute $t=0$:  \n   $$\n   s(0)=\\frac{5}{3}\\cdot0^{3}-3\\cdot0 + C = C = 4 .\n   $$  \n   Hence $C=4$.\n\n4. **Write the final position function** by inserting $C=4$ back into the expression.  \n   $$\n   s(t)=\\frac{5}{3}t^{3}-3t+4 .\n   $$\n\n**Answer:** The particle’s position is $s(t)=\\dfrac{5}{3}t^{3}-3t+4$ meters.  \n\n---\n\nThese examples illustrate the full workflow.  First we turned a description (“velocity is …”) into a derivative equation, then we integrated, and finally we used a known point to lock down the constant.  The same pattern works for many other contexts:  \n\n* **Economics:** If marginal cost $C'(q)$ is known, integrate to obtain total cost $C(q)$.  \n* **Biology:** If a population’s growth rate $\\frac{dP}{dt}$ is given, integrate to find the population $P(t)$.  \n\n> **In daily life:**  Think of a bathtub.  The water flow rate (gallons per minute) tells you how fast the water level is rising.  Integrating the flow rate over time gives you the total volume of water that has entered, just as we added up velocity to get position.  \n\n> **Common mistake:**  Forgetting to add the constant $C$ after integration, or forgetting to use the given condition to solve for it.  Without $C$, the answer is incomplete and may not satisfy the original problem.  \n\n> **Note:**  When the integrand is a sum, you may integrate each part separately and then add the results.  This property is called *linearity of the integral* and it saves a lot of algebra.  \n\nFinally, always **verify** your answer by differentiating the result.  If you differentiate $s(t)=\\frac{5}{3}t^{3}-3t+4$, you obtain $s'(t)=5t^{2}-3$, which matches the original velocity.  This check confirms that no arithmetic slip occurred during integration.  \n\n> **Definition:**  *Verification by differentiation* means taking the derivative of the antiderivative you found and confirming that it equals the original function you started with.  \n\nBy practicing this complete cycle—model, integrate, apply conditions, verify—you will become comfortable solving realistic problems that involve rates and accumulated quantities.  The skill is foundational for all later calculus topics, such as solving differential equations and computing areas under curves.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find an antiderivative of $f(x)=3x^2$.",
+   "a": "We use the power rule for antiderivatives. Increase the exponent by 1 and divide by the new exponent:\n$$\\int 3x^2\\,dx = 3\\cdot\\frac{x^{3}}{3}+C = x^{3}+C.$$"
+  },
+  {
+   "level": "Easy",
+   "q": "Write the indefinite integral for $f(x)=\\frac{1}{x}$.",
+   "a": "The antiderivative of $x^{-1}$ is the natural logarithm:\n$$\\int \\frac{1}{x}\\,dx = \\int x^{-1}\\,dx = \\ln|x|+C.$$"
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle\\int (4x^3-2x+7)\\,dx$.",
+   "a": "Integrate term‑by‑term using the power rule:\n\\[\n\\begin{aligned}\n\\int 4x^3\\,dx &= 4\\cdot\\frac{x^{4}}{4}=x^{4},\\\\\n\\int (-2x)\\,dx &= -2\\cdot\\frac{x^{2}}{2}= -x^{2},\\\\\n\\int 7\\,dx &= 7x.\n\\end{aligned}\n\\]\nCombine the results and add $C$:\n$$\\int (4x^3-2x+7)\\,dx = x^{4}-x^{2}+7x+C.$$"
+  },
+  {
+   "level": "Medium",
+   "q": "A particle moves so that its velocity is $v(t)=6t-5$. Find its position function $s(t)$, given that $s(0)=3$.",
+   "a": "Position is an antiderivative of velocity.\n\\[\n\\int (6t-5)\\,dt = 6\\cdot\\frac{t^{2}}{2}-5t + C = 3t^{2}-5t + C.\n\\]\nUse the condition $s(0)=3$:\n$$3 = 3(0)^2 -5(0) + C \\;\\Rightarrow\\; C = 3.$$\nThus\n$$s(t)=3t^{2}-5t+3.$$"
+  },
+  {
+   "level": "Hard",
+   "q": "Find $\\displaystyle\\int \\frac{x^2+1}{x}\\,dx$ and simplify the result.",
+   "a": "First split the fraction:\n\\[\n\\frac{x^2+1}{x}= \\frac{x^2}{x}+\\frac{1}{x}= x + \\frac{1}{x}.\n\\]\nNow integrate each part:\n\\[\n\\int x\\,dx = \\frac{x^{2}}{2},\\qquad\n\\int \\frac{1}{x}\\,dx = \\ln|x|.\n\\]\nCombine and add $C$:\n\\[\n\\int \\frac{x^2+1}{x}\\,dx = \\frac{x^{2}}{2}+\\ln|x|+C.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Determine the antiderivative $F(x)$ of $f(x)=\\frac{3}{\\sqrt{x}}$ and then find the constant $C$ such that $F(4)=10$.",
+   "a": "Rewrite $f(x)$ with a power: $\\displaystyle \\frac{3}{\\sqrt{x}} = 3x^{-1/2}$.\nIntegrate:\n\\[\n\\int 3x^{-1/2}\\,dx = 3\\cdot\\frac{x^{1/2}}{1/2}+C = 3\\cdot 2x^{1/2}+C = 6\\sqrt{x}+C.\n\\]\nSo $F(x)=6\\sqrt{x}+C$. Use $F(4)=10$:\n\\[\n10 = 6\\sqrt{4}+C = 6\\cdot2 + C = 12 + C \\;\\Rightarrow\\; C = 10-12 = -2.\n\\]\nHence the antiderivative satisfying the condition is\n\\[\nF(x)=6\\sqrt{x}-2.\n\\]"
+  }
+ ],
+ "recap": "An antiderivative reverses differentiation, giving a function whose derivative matches the original. Indefinite integrals use the integral sign to represent all antiderivatives, adding a constant C because any constant disappears when differentiating. The constant of integration is essential for matching real‑world conditions. Solving problems involves modeling the rate, integrating, and applying given conditions to find the specific solution.",
+ "key_terms": [
+  {
+   "term": "Antiderivative",
+   "meaning": "A function whose derivative equals the given function on an interval."
+  },
+  {
+   "term": "Indefinite Integral",
+   "meaning": "The set of all antiderivatives of a function, written as integral f(x) dx = F(x) + C."
+  },
+  {
+   "term": "Constant of Integration",
+   "meaning": "An arbitrary constant C added to an antiderivative because the derivative of any constant is zero."
+  },
+  {
+   "term": "Power Rule Reversal",
+   "meaning": "To integrate x^n, increase the exponent by one and divide by the new exponent (n != -1)."
+  },
+  {
+   "term": "dx",
+   "meaning": "Indicates the variable with respect to which the integration is performed."
+  },
+  {
+   "term": "Family of Functions",
+   "meaning": "All antiderivatives that differ only by a constant."
+  },
+  {
+   "term": "Model-Integrate-Apply Cycle",
+   "meaning": "Steps to solve real‑world problems: write the rate, integrate, then use conditions to find C."
+  },
+  {
+   "term": "Derivative",
+   "meaning": "The rate of change of a function, denoted as F'(x) or dF/dx."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the symbol ∫ represent in calculus?",
+   "options": [
+    "Multiplication",
+    "Derivative",
+    "Indefinite integral",
+    "Limit"
+   ],
+   "answer": 2,
+   "why": "It denotes taking the antiderivative of a function."
+  },
+  {
+   "q": "If F'(x)=3x^2, which of the following could be F(x)?",
+   "options": [
+    "x^3 + C",
+    "3x + C",
+    "x^2 + C",
+    "2x^3 + C"
+   ],
+   "answer": 0,
+   "why": "Integrating 3x^2 gives x^3 plus a constant."
+  },
+  {
+   "q": "Why do we add a constant C to an indefinite integral?",
+   "options": [
+    "Because integration is undefined without it",
+    "Because the derivative of a constant is zero",
+    "Because C represents the speed",
+    "Because C stands for calculus"
+   ],
+   "answer": 1,
+   "why": "Any constant disappears when differentiating, so all antiderivatives differ by a constant."
+  },
+  {
+   "q": "What is the antiderivative of 5?",
+   "options": [
+    "5x + C",
+    "5 + C",
+    "x^5 + C",
+    "C"
+   ],
+   "answer": 0,
+   "why": "Integrating a constant 5 gives 5x plus a constant."
+  },
+  {
+   "q": "Which rule is used to integrate x^n (n ≠ -1)?",
+   "options": [
+    "Product rule",
+    "Quotient rule",
+    "Power rule reversal",
+    "Chain rule"
+   ],
+   "answer": 2,
+   "why": "We increase the exponent by one and divide by the new exponent."
+  },
+  {
+   "q": "In the expression integral f(x) dx, what does dx indicate?",
+   "options": [
+    "The function is multiplied by x",
+    "The variable of integration is x",
+    "The derivative of f",
+    "The limit of integration"
+   ],
+   "answer": 1,
+   "why": "dx tells us we are integrating with respect to the variable x."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Antiderivative",
+   "back": "A function whose derivative equals the original function."
+  },
+  {
+   "front": "Indefinite Integral",
+   "back": "Integral sign with dx, representing all antiderivatives plus C."
+  },
+  {
+   "front": "Constant of Integration",
+   "back": "The arbitrary constant added because its derivative is zero."
+  },
+  {
+   "front": "Power Rule Reversal",
+   "back": "Integrate x^n by (x^(n+1))/(n+1) + C, for n ≠ -1."
+  },
+  {
+   "front": "dx",
+   "back": "Specifies the variable of integration."
+  },
+  {
+   "front": "Family of Functions",
+   "back": "All antiderivatives that differ only by a constant."
+  },
+  {
+   "front": "Model‑Integrate‑Apply Cycle",
+   "back": "1) Write the rate, 2) integrate, 3) use conditions to find C."
+  },
+  {
+   "front": "Why is differentiation the inverse of integration?",
+   "back": "Differentiating an antiderivative returns the original function."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l21-unwrapping-a-gift",
+   "title": "An illustration of a wrapped box being opened to represent finding an antiderivative.",
+   "alt": "An illustration of a wrapped box being opened to represent finding an antiderivative.",
+   "priority": 8,
+   "picture_title": "Unwrapping a Gift",
+   "kind": "illustration",
+   "subject": "A simple drawing of a gift box with a ribbon, showing the box closed on the left and opened on the right, symbolising how integration ‘unwraps’ a function.",
+   "layout": "Two side‑by‑side panels; left panel shows a closed box, right panel shows the same box opened with the contents visible.",
+   "labels": [
+    "Closed box",
+    "Opened box",
+    "Ribbon"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l21-car-odometer",
+   "title": "A photo of a car odometer illustrating how distance accumulates while speed changes.",
+   "alt": "A photo of a car odometer illustrating how distance accumulates while speed changes.",
+   "priority": 7,
+   "picture_title": "Car Odometer",
+   "kind": "photo",
+   "subject": "A close‑up photograph of a car dashboard showing the odometer reading, with a small inset of the speedometer. The odometer represents the accumulated distance (the integral) while the speedometer shows the instantaneous speed (the derivative).",
+   "layout": "Main focus on the odometer display; speedometer shown in the corner; no additional labels.",
+   "labels": [],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Solve a real‑world problem with integration",
+   "steps": [
+    {
+     "label": "Model",
+     "text": "Write the given rate as a derivative"
+    },
+    {
+     "label": "Integrate",
+     "text": "Find the antiderivative (add +C)"
+    },
+    {
+     "label": "Apply condition",
+     "text": "Use the given value to determine C"
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Derivative vs Antiderivative",
+   "left": {
+    "name": "Derivative",
+    "points": [
+     "Gives instantaneous rate of change",
+     "Maps a function to its slope function",
+     "Unique for a given function"
+    ]
+   },
+   "right": {
+    "name": "Antiderivative",
+    "points": [
+     "Reconstructs original function from its rate",
+     "Family of functions differing by a constant",
+     "Written as an indefinite integral"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "facts",
+   "title": "Key ideas",
+   "items": [
+    {
+     "value": "F'(x)=f(x)",
+     "label": "Antiderivative definition"
+    },
+    {
+     "value": "∫ f(x)dx = F(x)+C",
+     "label": "Indefinite integral"
+    },
+    {
+     "value": "C is any constant",
+     "label": "Constant of integration"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "graph",
+   "title": "Antiderivative of f(x)=2x",
+   "fn": "x^2",
+   "xmin": -3,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 0,
+     "y": 0,
+     "label": "origin",
+     "open": false
+    }
+   ],
+   "caption": "f(x)=2x has antiderivative F(x)=x^2 (plus any constant)",
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Components of an indefinite integral",
+   "items": [
+    {
+     "name": "∫ (integral sign)",
+     "role": "tells us to take an antiderivative"
+    },
+    {
+     "name": "f(x) (integrand)",
+     "role": "the function we are integrating"
+    },
+    {
+     "name": "dx",
+     "role": "indicates the variable of integration"
+    },
+    {
+     "name": "+ C",
+     "role": "accounts for all possible constants"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

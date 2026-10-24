@@ -1,0 +1,399 @@
+{
+ "title": "Advanced Differentiation Rules",
+ "summary": "In this lesson students learn how to differentiate products, quotients, and compositions of functions using the product, quotient, and chain rules. The rules are applied step‑by‑step to build confidence for more complex calculus problems.",
+ "objectives": [
+  "Apply the product rule to find derivatives of multiplied functions",
+  "Use the quotient rule to differentiate ratios of functions",
+  "Implement the chain rule for composite functions",
+  "Combine the three rules in multi‑step differentiation problems"
+ ],
+ "prerequisites": "Students should already know basic differentiation rules for powers, constants, and simple functions from the \"Basic Differentiation Rules\" lesson.",
+ "why": [
+  "Differentiation describes how quantities change, which is essential in physics for calculating velocity, acceleration, and forces. Understanding how to handle products, quotients, and compositions lets students model real‑world situations like population growth (product of time and rate) or economics (price as a function of supply and demand).",
+  "In engineering and computer graphics, rates of change appear in optimization and motion planning. Mastering these rules gives students the tools to solve practical problems such as maximizing profit, analyzing electrical circuits, or animating realistic movements."
+ ],
+ "sections": [
+  {
+   "heading": "Review of Basic Rules",
+   "body": "When we start to find the slope of a curve, we first look at the simplest patterns that the derivative follows.  \nThink of a derivative as a “speedometer” that tells us how fast a quantity is changing at each instant.  \nBefore we can handle more complicated formulas, we need three basic “speedometer rules’’ that work for almost any function we meet.\n\n> **Definition:** The **power rule** says that for a power function $f(x)=x^{n}$, where $n$ is any real number, the derivative is  \n\n$$\\frac{d}{dx}\\,x^{n}=n\\,x^{\\,n-1}.$$\n\nWhy does this work? Imagine a tiny stretch of the graph near a point $x$. Raising $x$ to the $n$‑th power stretches the distance from the origin by a factor that grows like $x^{n-1}$, and the extra factor $n$ comes from counting how many ways a small change in $x$ can affect the product of $n$ copies of $x$. In everyday terms, if you double the length of a side of a square ($n=2$), the area grows four times, which is $2\\cdot x^{2-1}=2x$. The rule captures that same idea for any exponent.\n\n> **Note:** The power rule also works for negative and fractional exponents, such as $x^{-3}$ or $x^{1/2}$, as long as the function is defined at the point we are differentiating.\n\nThe next rule tells us what happens when a constant sits in front of a function.\n\n> **Definition:** The **constant multiple rule** states that if $c$ is a constant and $f(x)$ is any differentiable function, then  \n\n$$\\frac{d}{dx}\\,[c\\,f(x)]=c\\,\\frac{d}{dx}f(x).$$\n\nIn plain words, pulling a constant out of the derivative is like taking a weight off a scale: the weight does not affect how fast the scale moves, it only scales the reading. For example, if a car travels at speed $v(t)$ meters per second, then $5v(t)$ means the car is five times faster, and the rate of change of $5v(t)$ is simply five times the rate of change of $v(t)$.\n\nThe third rule deals with adding or subtracting functions.\n\n> **Definition:** The **sum and difference rule** says that the derivative of a sum or difference is the sum or difference of the derivatives:  \n\n$$\\frac{d}{dx}\\,[f(x)\\pm g(x)]=\\frac{d}{dx}f(x)\\pm\\frac{d}{dx}g(x).$$\n\nImagine two friends walking side by side, each with their own speed. The combined distance they cover together changes at a rate equal to the sum of their individual speeds. If one friend turns back (a subtraction), the overall change is the difference of the two speeds. This rule lets us break a complicated expression into pieces we already understand.\n\nPutting the three rules together, we can differentiate any simple polynomial.  \nFor example, let  \n\n$$h(x)=3x^{4}-5x^{2}+7.$$\n\nUsing the power rule on each term, the constant multiple rule for the coefficients $3$ and $-5$, and the sum rule to combine them, we get  \n\n$$h'(x)=3\\cdot4x^{3}-5\\cdot2x^{1}+0=12x^{3}-10x.$$\n\nNotice the constant $7$ disappears because the derivative of a constant is zero—a direct consequence of the constant multiple rule with $c=0$.\n\n> **Remember:** Always apply the power rule first, then pull out any constants, and finally add or subtract the resulting pieces. Skipping any step can lead to a sign error or a missing factor.\n\nThese three foundational ideas are the “building blocks’’ for the more advanced product, quotient, and chain rules that follow. Mastering them means you can treat any algebraic expression as a collection of simple parts, each with a clear rule for how its slope behaves. Once you are comfortable with these, the next step—combining the pieces—becomes much easier.",
+   "code": ""
+  },
+  {
+   "heading": "Product Rule",
+   "body": "When we have two functions multiplied together, the rate at which the product changes is **not** just the product of the individual rates.  \nThe **product rule** tells us exactly how to combine the derivatives.\n\n> **Definition:** If $f(x)$ and $g(x)$ are differentiable, then  \n> $$\\frac{d}{dx}\\bigl[f(x)\\,g(x)\\bigr]=f'(x)\\,g(x)+f(x)\\,g'(x).$$  \n\nIn words: *the derivative of a product equals the derivative of the first factor times the second factor, plus the first factor times the derivative of the second factor.*  \n\nWhy does this work? Imagine the product $f(x)g(x)$ as the area of a rectangle whose side lengths are $f(x)$ and $g(x)$. When $x$ changes a little, both sides may grow or shrink. The total change in area comes from two contributions: the change caused by the first side while the second side stays the same, plus the change caused by the second side while the first side stays the same. Adding these two contributions gives the formula above.\n\n> **In daily life:** Think of a bakery that makes loaves of bread. The total number of loaves produced per day is the product of *hours worked* ($h$) and *loaves per hour* ($\\ell$). If the workers stay longer (change in $h$) **or** they become faster (change in $\\ell$), the total output changes. The product rule captures both effects at once.\n\n### Step‑by‑step reasoning\n\n1. **Start with the definition of derivative** as a limit:  \n   $$\\frac{d}{dx}[f(x)g(x)]=\\lim_{h\\to0}\\frac{f(x+h)g(x+h)-f(x)g(x)}{h}.$$\n2. **Add and subtract the term $f(x)g(x+h)$** inside the numerator so we can split the fraction:  \n   $$f(x+h)g(x+h)-f(x)g(x)=\\bigl[f(x+h)g(x+h)-f(x)g(x+h)\\bigr]+\\bigl[f(x)g(x+h)-f(x)g(x)\\bigr].$$\n3. **Factor each bracket**: the first becomes $(f(x+h)-f(x))g(x+h)$, the second becomes $f(x)(g(x+h)-g(x))$.\n4. **Divide by $h$ and take the limit**. The first part tends to $f'(x)g(x)$ because $g(x+h)\\to g(x)$. The second part tends to $f(x)g'(x)$. Adding them yields the product rule.\n\nNow that we understand where the rule comes from, let us apply it directly.\n\n---\n\n**Example 1 (Easy): Differentiate $h(x)=x^{2}\\,\\sin x$**\n\nWe have a product of $f(x)=x^{2}$ and $g(x)=\\sin x$.\n\n1. **Find the derivatives of the individual factors.**  \n   $$f'(x)=\\frac{d}{dx}x^{2}=2x,$$  \n   $$g'(x)=\\frac{d}{dx}\\sin x=\\cos x.$$\n2. **Apply the product rule** $h'(x)=f'(x)g(x)+f(x)g'(x)$.  \n   $$h'(x)=\\bigl(2x\\bigr)\\sin x + x^{2}\\bigl(\\cos x\\bigr).$$\n3. **Simplify if desired.** The expression is already clear, so we leave it as  \n   $$h'(x)=2x\\sin x + x^{2}\\cos x.$$\n\n**Answer:** $\\displaystyle h'(x)=2x\\sin x + x^{2}\\cos x.$ The derivative tells us how fast the quantity $x^{2}\\sin x$ changes with $x$.\n\n---\n\n**Example 2 (Medium): Find the derivative of $p(t)=\\bigl(3t^{3}+2\\bigr)\\,e^{t}$**\n\nHere $f(t)=3t^{3}+2$ and $g(t)=e^{t}$.\n\n1. **Differentiate each factor.**  \n   $$f'(t)=\\frac{d}{dt}(3t^{3}+2)=9t^{2},$$  \n   $$g'(t)=\\frac{d}{dt}e^{t}=e^{t}.$$\n2. **Insert into the product rule.**  \n   $$p'(t)=f'(t)g(t)+f(t)g'(t).$$  \n   Substituting the known pieces gives  \n   $$p'(t)=\\bigl(9t^{2}\\bigr)e^{t}+\\bigl(3t^{3}+2\\bigr)e^{t}.$$\n3. **Factor the common $e^{t}$** to make the result tidy.  \n   $$p'(t)=e^{t}\\bigl(9t^{2}+3t^{3}+2\\bigr)=e^{t}\\bigl(3t^{3}+9t^{2}+2\\bigr).$$\n\n**Answer:** $\\displaystyle p'(t)=e^{t}\\bigl(3t^{3}+9t^{2}+2\\bigr).$ This derivative combines the exponential growth of $e^{t}$ with the polynomial change of $3t^{3}+2$.\n\n---\n\n> **Common mistake:** Forgetting to add the two terms. Some students write only $f'(x)g(x)$ or only $f(x)g'(x)$. Remember, both sides of the product can change, so both contributions must be included.\n\n> **Remember:** The product rule works for any number of factors if you apply it repeatedly. For three functions $u,v,w$, first treat $u\\cdot v$ as a single product, differentiate, then multiply by $w$, and apply the rule again.\n\n### Quick checklist for using the product rule\n\n- Identify the two factors $f$ and $g$.  \n- Compute $f'$ and $g'$ separately.  \n- Write $f' g + f g'$ exactly as shown.  \n- Simplify if possible, but never drop a term.  \n\nWith this tool, you can handle many calculus problems where quantities are multiplied together, from physics (force × distance) to economics (price × quantity). The product rule turns a seemingly complicated change into a sum of two understandable pieces.",
+   "code": ""
+  },
+  {
+   "heading": "Quotient Rule",
+   "body": "When we have a fraction of two functions, say  \n\n\\[\n\\frac{f(x)}{g(x)},\n\\]\n\nand we want its rate of change, we cannot just divide the derivatives.  \nThe **quotient rule** tells us exactly how to differentiate such a fraction.\n\n> **Definition:** If $f$ and $g$ are differentiable and $g(x)\\neq0$, then  \n\n\\[\n\\left(\\frac{f}{g}\\right)'(x)=\\frac{f'(x)\\,g(x)-f(x)\\,g'(x)}{[g(x)]^{2}} .\n\\]\n\nIn words: *differentiate the top, keep the bottom; subtract the product of the original top and the derivative of the bottom; finally divide everything by the square of the bottom.*  \n\nWhy does this work? Think of the fraction as a product:  \n\n\\[\n\\frac{f}{g}=f\\cdot \\frac{1}{g}.\n\\]\n\nWe already know how to differentiate a product (product rule) and we also know how to differentiate $1/g$ using the chain rule, because $1/g = (g)^{-1}$.  \nApplying the product rule to $f\\cdot g^{-1}$ and the chain rule to $g^{-1}$ gives exactly the formula above.  \n\n> **Note:** The denominator $g(x)$ must never be zero, otherwise the fraction is undefined and the derivative does not exist there.\n\nAn everyday comparison helps: imagine you are driving a car whose speed $v(t)$ is the ratio of distance traveled $d(t)$ to time $t$. If both distance and time change, the change in speed is not simply “change in distance ÷ change in time”. You must account for how the time itself is stretching or shrinking, which is what the subtraction term does.\n\n---\n\n### Worked Example (Medium)\n\n**Example 3 (Medium): Differentiate $q(x)=\\dfrac{x^{2}+1}{\\,x-3\\,}$**\n\nWe need $q'(x)$.\n\n1. **Identify $f$ and $g$.**  \n   $f(x)=x^{2}+1$, $g(x)=x-3$.\n\n2. **Find the derivatives of $f$ and $g$.**  \n   $$f'(x)=2x,\\qquad g'(x)=1.$$\n\n3. **Plug into the quotient rule.**  \n   $$q'(x)=\\frac{f'(x)\\,g(x)-f(x)\\,g'(x)}{[g(x)]^{2}}\n          =\\frac{(2x)(x-3)-(x^{2}+1)(1)}{(x-3)^{2}}.$$\n\n4. **Simplify the numerator.**  \n   $$\\begin{aligned}\n   (2x)(x-3)-(x^{2}+1)\n   &=2x^{2}-6x-x^{2}-1\\\\\n   &=x^{2}-6x-1.\n   \\end{aligned}$$\n\n5. **Write the final derivative.**  \n   $$q'(x)=\\frac{x^{2}-6x-1}{(x-3)^{2}}.$$\n\n**Answer:** $\\displaystyle q'(x)=\\frac{x^{2}-6x-1}{(x-3)^{2}}.$ This tells us how fast the ratio $\\frac{x^{2}+1}{x-3}$ changes at any $x\\neq3$.\n\n---\n\n### Worked Example (Hard)\n\n**Example 4 (Hard): Compute the derivative of $r(t)=\\dfrac{e^{2t}+t^{2}}{\\sin t}$**\n\n1. **Set $f$ and $g$.**  \n   $f(t)=e^{2t}+t^{2}$, $g(t)=\\sin t$.\n\n2. **Differentiate each part.**  \n   $$f'(t)=\\frac{d}{dt}\\big(e^{2t}\\big)+\\frac{d}{dt}\\big(t^{2}\\big)\n          =2e^{2t}+2t,$$  \n   $$g'(t)=\\cos t.$$\n\n3. **Apply the quotient rule.**  \n   $$r'(t)=\\frac{f'(t)\\,g(t)-f(t)\\,g'(t)}{[g(t)]^{2}}\n          =\\frac{(2e^{2t}+2t)\\sin t-(e^{2t}+t^{2})\\cos t}{\\sin^{2}t}.$$\n\n4. **Factor where possible (optional but clarifies the result).**  \n   $$\\begin{aligned}\n   r'(t)&=\\frac{2e^{2t}\\sin t+2t\\sin t-e^{2t}\\cos t-t^{2}\\cos t}{\\sin^{2}t}\\\\\n        &=\\frac{e^{2t}\\big(2\\sin t-\\cos t\\big)+t\\big(2\\sin t-t\\cos t\\big)}{\\sin^{2}t}.\n   \\end{aligned}$$\n\n5. **State the derivative clearly.**  \n   $$r'(t)=\\frac{(2e^{2t}+2t)\\sin t-(e^{2t}+t^{2})\\cos t}{\\sin^{2}t}.$$\n\n**Answer:** $\\displaystyle r'(t)=\\frac{(2e^{2t}+2t)\\sin t-(e^{2t}+t^{2})\\cos t}{\\sin^{2}t}.$ This expression gives the instantaneous rate of change of the ratio $\\frac{e^{2t}+t^{2}}{\\sin t}$ for any $t$ where $\\sin t\\neq0$.\n\n> **In daily life:** When you compare two changing quantities—like cost per item (total cost ÷ number of items) or speed (distance ÷ time)—the quotient rule tells you how the ratio itself changes, taking both numerator and denominator variations into account.\n\n> **Common mistake:** Forgetting to square the denominator or swapping the order of the two products in the numerator. The correct order is *top‑derivative × bottom* **minus** *top × bottom‑derivative*.\n\n> **Remember:** Always check that the denominator $g(x)$ is not zero before applying the rule; points where $g(x)=0$ are points of discontinuity, and the derivative does not exist there.",
+   "code": ""
+  },
+  {
+   "heading": "Chain Rule",
+   "body": "When we have a function inside another function, the rate at which the whole expression changes depends on **both** how the outer function changes and how the inner function changes.  \nIn plain words, the *chain rule* tells us:  \n\n> **Definition:** If $y = f\\bigl(g(x)\\bigr)$, then the derivative of $y$ with respect to $x$ is  \n> $$\\frac{dy}{dx}=f'\\bigl(g(x)\\bigr)\\;g'(x).$$  \n\nHere  \n\n* **Derivative** ($\\frac{dy}{dx}$) means “the instantaneous rate of change of $y$ as $x$ moves a tiny bit.”  \n* **Outer function** $f$ is the function that we apply **after** we have already computed $g(x)$.  \n* **Inner function** $g$ is the function that we compute **first** from $x$.  \n\nWhy does this work? Imagine you are walking on a moving walkway at an airport. Your speed relative to the ground is the sum of two pieces: the speed of the walkway itself (inner motion) and your walking speed on the walkway (outer motion). If the walkway speeds up, even if you keep the same walking speed, your overall speed changes. The chain rule captures exactly this two‑step effect for rates of change.\n\n> **In daily life:** Think of a recipe where you first blend fruit (inner step) and then bake the mixture (outer step). The final taste changes when you adjust the amount of fruit *and* when you change the baking temperature. Both adjustments matter, just as both $f'$ and $g'$ matter in the formula.\n\n### Step‑by‑step reasoning  \n\n1. **Start with the inner change.** The inner function $g(x)$ tells us how the intermediate quantity varies with $x$. Its derivative $g'(x)$ measures that variation.  \n2. **Pass that change to the outer function.** The outer function $f$ receives the value $g(x)$. How $f$ reacts to a small change in its input is given by $f'$ evaluated at that input, i.e. $f'\\bigl(g(x)\\bigr)$.  \n3. **Combine the two effects.** Multiply the two rates: the inner change $g'(x)$ and the outer sensitivity $f'\\bigl(g(x)\\bigr)$. The product gives the total change of $y$ with respect to $x$.\n\nBecause multiplication of rates is the natural way to combine them, the chain rule is a direct consequence of the definition of derivative and the limit process. It is one of the most useful tools in calculus, allowing us to differentiate complicated expressions by breaking them into simpler pieces.\n\n---\n\n**Example 5 (Easy): Differentiate $s(x)= (3x+5)^4$**  \n\nWe want $s'(x)$.  \n\n1. Identify the outer and inner functions.  \n   * Outer: $f(u)=u^{4}$, where $u$ will stand for the inner expression.  \n   * Inner: $g(x)=3x+5$.  \n2. Differentiate each piece.  \n   $$f'(u)=4u^{3}$$  \n   $$g'(x)=3$$  \n3. Apply the chain rule: replace $u$ by $g(x)$ in $f'(u)$ and multiply by $g'(x)$.  \n   $$s'(x)=4\\bigl(3x+5\\bigr)^{3}\\cdot 3$$  \n\n**Answer:** $s'(x)=12\\,(3x+5)^{3}$. The derivative tells us how fast $s$ grows for a tiny change in $x$.\n\n---\n\n**Example 6 (Medium): Find the derivative of $u(t)=\\sqrt{1+t^{3}}$**  \n\nHere the square‑root and the cubic are nested.  \n\n1. Write the function in exponent form to see the outer/inner structure.  \n   $$u(t)=\\bigl(1+t^{3}\\bigr)^{\\tfrac12}$$  \n   * Outer: $f(v)=v^{1/2}$.  \n   * Inner: $g(t)=1+t^{3}$.  \n2. Differentiate each part.  \n   $$f'(v)=\\frac12 v^{-1/2}$$  \n   $$g'(t)=3t^{2}$$  \n3. Apply the chain rule, substituting $v=g(t)$ and multiplying.  \n   $$u'(t)=\\frac12\\bigl(1+t^{3}\\bigr)^{-1/2}\\cdot 3t^{2}$$  \n\n4. Simplify if desired.  \n   $$u'(t)=\\frac{3t^{2}}{2\\sqrt{1+t^{3}}}$$  \n\n**Answer:** $u'(t)=\\dfrac{3t^{2}}{2\\sqrt{1+t^{3}}}$. This rate tells us how quickly the square‑root expression changes as $t$ varies.\n\n> **Common mistake:** Forgetting to replace the inner variable after differentiating the outer function. Always substitute $g(x)$ back into $f'$ before multiplying by $g'(x)$.\n\n### When to use the chain rule  \n\nAny time you see a composition—something raised to a power, a trigonometric function of a polynomial, a logarithm of a rational expression—the chain rule is the tool that unlocks the derivative. It works together with other rules (product, quotient) so that even very tangled expressions become manageable.\n\n> **Remember:** Write the function as “outer of inner,” differentiate each piece separately, then multiply. This systematic approach prevents errors and makes complex problems feel routine.\n\nBy mastering the chain rule, you gain the ability to track how changes travel through layers of formulas, just as you would track how a small push on a gear influences the motion of an entire machine. This insight is essential not only for calculus exams but also for modelling real‑world systems where one quantity depends on another that itself changes over time.",
+   "code": ""
+  },
+  {
+   "heading": "Combining Rules",
+   "body": "When a function is built from several simpler pieces, we often have to use more than one differentiation rule at the same time.  \nThink of a recipe that mixes several ingredients: you first blend the flour and sugar (product rule), then you pour the mixture into a pan that is already moving (quotient rule), and finally you bake it while the oven temperature is changing (chain rule).  \nIn calculus the same idea applies: we break the problem into small, familiar steps, apply the rule that matches each step, and then put the pieces together.\n\n> **Definition:** The **product rule** says that if $u(x)$ and $v(x)$ are differentiable, then  \n> $$\\frac{d}{dx}[u(x)v(x)] = u'(x)v(x)+u(x)v'(x).$$  \n> The **quotient rule** says that for differentiable $p(x)$ and $q(x)$ with $q(x)\\neq0$,  \n> $$\\frac{d}{dx}\\!\\left[\\frac{p(x)}{q(x)}\\right]=\\frac{p'(x)q(x)-p(x)q'(x)}{[q(x)]^{2}}.$$  \n> The **chain rule** handles a composition $f(g(x))$:  \n> $$\\frac{d}{dx}f(g(x)) = f'(g(x))\\;g'(x).$$  \n\nWe will see how to layer these rules without getting lost.\n\n---\n\n**Example 7 (Hard): Differentiate**  \n\\[\nw(x)=\\frac{x^{2}\\,e^{x}}{1+\\sin x}.\n\\]\n\nThe function is a **quotient** whose numerator itself is a **product** of $x^{2}$ and $e^{x}$. Both factors involve simple functions, but $e^{x}$ is itself a composition of the exponential function with the identity, so the chain rule will appear when we differentiate $e^{x}$ (though its derivative is just $e^{x}$, the rule still underlies it).\n\n1. **Identify the pieces.**  \n   Let $p(x)=x^{2}e^{x}$ (the numerator) and $q(x)=1+\\sin x$ (the denominator).\n\n2. **Differentiate the numerator using the product rule.**  \n   - Set $u(x)=x^{2}$ and $v(x)=e^{x}$.  \n   - Compute $u'(x)=2x$ and $v'(x)=e^{x}$ (by the chain rule, $d/dx\\,e^{x}=e^{x}$).  \n   - Apply the product rule:  \n   $$p'(x)=u'(x)v(x)+u(x)v'(x)=2x\\,e^{x}+x^{2}e^{x}.$$\n\n3. **Differentiate the denominator.**  \n   - $q'(x)=\\cos x$ because the derivative of $\\sin x$ is $\\cos x$ and the constant $1$ disappears.\n\n4. **Apply the quotient rule.**  \n   $$w'(x)=\\frac{p'(x)q(x)-p(x)q'(x)}{[q(x)]^{2}}.$$\n   Substitute the expressions we have:  \n   $$w'(x)=\\frac{(2x e^{x}+x^{2}e^{x})(1+\\sin x)-x^{2}e^{x}\\cos x}{(1+\\sin x)^{2}}.$$\n\n5. **Simplify (optional but helpful).**  \n   Factor $e^{x}$ from the numerator:  \n   $$w'(x)=\\frac{e^{x}\\big[(2x+x^{2})(1+\\sin x)-x^{2}\\cos x\\big]}{(1+\\sin x)^{2}}.$$\n\n**Answer:**  \n\\[\n\\boxed{w'(x)=\\dfrac{e^{x}\\big[(2x+x^{2})(1+\\sin x)-x^{2}\\cos x\\big]}{(1+\\sin x)^{2}} }.\n\\]  \nThe derivative tells how fast the ratio of the growing term $x^{2}e^{x}$ to the oscillating denominator $1+\\sin x$ changes at any $x$.\n\n---\n\n> **Note:** When a numerator or denominator contains a product, always differentiate that part first before plugging into the quotient rule. Skipping this step is a common source of errors.\n\nNow we move to a more intricate example where a product, a quotient, and a chain rule all appear together.\n\n**Example 8 (Very Hard): Find**  \n\\[\n\\frac{d}{dt}z(t)=\\frac{(t^{2}+1)^{3}\\,\\cos t}{\\sqrt{t^{4}+4}}.\n\\]\n\nHere the numerator is a product of $(t^{2}+1)^{3}$ and $\\cos t$, while the whole fraction is divided by $\\sqrt{t^{4}+4}$, a square‑root function (which is a power of a composition). We will need the product rule, the quotient rule, and the chain rule twice.\n\n1. **Set up numerator and denominator.**  \n   Let $P(t)=(t^{2}+1)^{3}\\cos t$ and $Q(t)=\\sqrt{t^{4}+4}=(t^{4}+4)^{1/2}$.\n\n2. **Differentiate $P(t)$ using the product rule.**  \n   - Take $a(t)=(t^{2}+1)^{3}$ and $b(t)=\\cos t$.  \n   - Differentiate $a(t)$: it is a composition of the cube function with $t^{2}+1$.  \n     *Inner derivative*: $\\frac{d}{dt}(t^{2}+1)=2t$.  \n     *Outer derivative*: $3(u)^{2}$ where $u=t^{2}+1$.  \n     Hence  \n     $$a'(t)=3(t^{2}+1)^{2}\\cdot 2t =6t(t^{2}+1)^{2}.$$\n   - Differentiate $b(t)$: $b'(t)=-\\sin t$ (chain rule with inner $t$).  \n   - Apply product rule:  \n     $$P'(t)=a'(t)b(t)+a(t)b'(t)=6t(t^{2}+1)^{2}\\cos t-(t^{2}+1)^{3}\\sin t.$$\n\n3. **Differentiate $Q(t)$ using the chain rule.**  \n   Write $Q(t)=(t^{4}+4)^{1/2}$.  \n   - Inner function $u(t)=t^{4}+4$, $u'(t)=4t^{3}$.  \n   - Outer function $v(u)=u^{1/2}$, $v'(u)=\\frac{1}{2}u^{-1/2}$.  \n   Combine:  \n   $$Q'(t)=\\frac{1}{2}(t^{4}+4)^{-1/2}\\cdot 4t^{3}= \\frac{2t^{3}}{\\sqrt{t^{4}+4}}.$$\n\n4. **Apply the quotient rule to $z(t)=P(t)/Q(t)$.**  \n   $$z'(t)=\\frac{P'(t)Q(t)-P(t)Q'(t)}{[Q(t)]^{2}}.$$\n   Substitute the pieces:  \n   $$z'(t)=\\frac{\\big[6t(t^{2}+1)^{2}\\cos t-(t^{2}+1)^{3}\\sin t\\big]\\sqrt{t^{4}+4}-(t^{2}+1)^{3}\\cos t\\;\\frac{2t^{3}}{\\sqrt{t^{4}+4}}}{\\big(\\sqrt{t^{4}+4}\\big)^{2}}.$$\n\n5. **Simplify the denominator and combine terms.**  \n   Since $[Q(t)]^{2}=t^{4}+4$, the expression becomes  \n   $$z'(t)=\\frac{6t(t^{2}+1)^{2}\\cos t\\sqrt{t^{4}+4}-(t^{2}+1)^{3}\\sin t\\sqrt{t^{4}+4}-\\frac{2t^{3}(t^{2}+1)^{3}\\cos t}{\\sqrt{t^{4}+4}}}{t^{4}+4}.$$\n   Multiply the first two terms by $\\sqrt{t^{4}+4}$ to have a common denominator $\\sqrt{t^{4}+4}$, then combine:  \n   $$z'(t)=\\frac{ \\big[6t(t^{2}+1)^{2}\\cos t-(t^{2}+1)^{3}\\sin t\\big](t^{4}+4)-2t^{3}(t^{2}+1)^{3}\\cos t}{(t^{4}+4)^{3/2}}.$$\n\n**Answer:**  \n\\[\n\\boxed{z'(t)=\\frac{ \\big[6t(t^{2}+1)^{2}\\cos t-(t^{2}+1)^{3}\\sin t\\big](t^{4}+4)-2t^{3}(t^{2}+1)^{3}\\cos t}{(t^{4}+4)^{3/2}} }.\n\\]  \nThis derivative captures how the complicated blend of polynomial growth, trigonometric oscillation, and radical scaling changes with time.\n\n> **Remember:** Write each derivative step on its own line, label the rule you are using, and keep track of parentheses. Missing a pair of parentheses is a frequent source of algebraic mistakes.",
+   "code": ""
+  },
+  {
+   "heading": "Real‑World Application",
+   "body": "When we talk about **power** in physics we mean how fast energy is being transferred or used.  \nIf a force $F(t)$ pushes an object and the object moves with velocity $v(t)$, the instantaneous power is  \n\n$$\nP(t)=F(t)\\,v(t).\n$$  \n\nBoth $F$ and $v$ can change with time, so $P$ is also a function of time.  \nTo see how quickly the power is changing we need the derivative $\\dfrac{dP}{dt}$.  \nBecause $P$ is the product of two time‑dependent functions, the **product rule** for differentiation is the tool we use.\n\n> **Definition:** The product rule states that if $u(t)$ and $v(t)$ are differentiable, then  \n> $$\\frac{d}{dt}\\bigl(u(t)v(t)\\bigr)=u'(t)v(t)+u(t)v'(t).$$  \n> It tells us that the rate of change of a product is the first factor’s rate times the second factor, **plus** the first factor times the second factor’s rate.\n\nThink of it like two workers on an assembly line. One worker (the force) adds pieces at a speed that can vary, while the other worker (the velocity) moves the finished product along, also at a varying speed. The total output (power) depends on both speeds. If either worker speeds up or slows down, the overall output changes, and the product rule captures both contributions.\n\n---\n\n**Example 9 (Level): Power change for a quadratic force and exponential decay velocity**  \n*If $F(t)=3t^{2}$ newtons and $v(t)=e^{-t}$ meters per second, find $\\dfrac{dP}{dt}$ at $t=1$ second.*\n\n1. **Write the power function.**  \n   $$P(t)=F(t)\\,v(t)=3t^{2}\\,e^{-t}.$$\n\n2. **Apply the product rule.**  \n   Let $u(t)=3t^{2}$ and $v(t)=e^{-t}$.  \n   Then $u'(t)=6t$ and $v'(t)=-e^{-t}$.  \n   $$\\frac{dP}{dt}=u'(t)v(t)+u(t)v'(t)=6t\\,e^{-t}+3t^{2}\\,(-e^{-t}).$$\n\n3. **Simplify the expression.**  \n   Factor out $e^{-t}$:  \n   $$\\frac{dP}{dt}=e^{-t}\\bigl(6t-3t^{2}\\bigr).$$  \n   Now substitute $t=1$:  \n   $$\\frac{dP}{dt}\\Big|_{t=1}=e^{-1}\\bigl(6\\cdot1-3\\cdot1^{2}\\bigr)=e^{-1}(6-3)=3e^{-1}.$$\n\n**Answer:** $\\displaystyle \\frac{dP}{dt}\\Big|_{t=1}=3e^{-1}\\ \\text{watts per second}\\approx1.10\\ \\text{W/s}.$  \nThe power is increasing at about $1.10$ watts each second at $t=1\\,$s.\n\n---\n\nNow imagine a situation where the force itself is a quotient, such as air‑resistance force $F(t)=\\dfrac{k}{t+1}$, while the velocity still follows some other rule. In that case we would need the **quotient rule** as well. The quotient rule says\n\n> **Note:** If $u(t)$ and $v(t)$ are differentiable and $v(t)\\neq0$, then  \n> $$\\frac{d}{dt}\\!\\left(\\frac{u(t)}{v(t)}\\right)=\\frac{u'(t)v(t)-u(t)v'(t)}{[v(t)]^{2}}.$$\n\nThis tells us how the rate of change of a fraction depends on the rates of its numerator and denominator.\n\n---\n\n**Example 10 (Level): Power with a force that decays as a fraction**  \n*Let $F(t)=\\dfrac{5}{t+2}$ newtons and $v(t)=\\sin t$ meters per second. Find $\\dfrac{dP}{dt}$ at $t=\\pi/2$.*\n\n1. **Form the power function.**  \n   $$P(t)=\\frac{5}{t+2}\\,\\sin t.$$\n\n2. **Differentiate using the product rule, but first find $F'(t)$ with the quotient rule.**  \n   For $F(t)=\\dfrac{5}{t+2}$, write $u(t)=5$, $v(t)=t+2$.  \n   $u'(t)=0$, $v'(t)=1$.  \n   $$F'(t)=\\frac{0\\cdot (t+2)-5\\cdot1}{(t+2)^{2}}=-\\frac{5}{(t+2)^{2}}.$$\n\n   Now apply the product rule to $P(t)=F(t)\\,v(t)$ with $v(t)=\\sin t$, $v'(t)=\\cos t$:  \n   $$\\frac{dP}{dt}=F'(t)\\sin t+F(t)\\cos t.$$\n\n3. **Insert the expressions and evaluate at $t=\\pi/2$.**  \n   $$\\frac{dP}{dt}= -\\frac{5}{(t+2)^{2}}\\sin t+\\frac{5}{t+2}\\cos t.$$\n\n   At $t=\\pi/2$: $\\sin(\\pi/2)=1$, $\\cos(\\pi/2)=0$, and $t+2=\\pi/2+2$.  \n   $$\\frac{dP}{dt}\\Big|_{t=\\pi/2}= -\\frac{5}{\\bigl(\\frac{\\pi}{2}+2\\bigr)^{2}}\\cdot1+\\frac{5}{\\frac{\\pi}{2}+2}\\cdot0\n   =-\\frac{5}{\\bigl(\\frac{\\pi}{2}+2\\bigr)^{2}}.$$\n\n**Answer:** $\\displaystyle \\frac{dP}{dt}\\Big|_{t=\\pi/2}= -\\frac{5}{\\left(\\frac{\\pi}{2}+2\\right)^{2}}\\ \\text{watts per second}\\approx -0.38\\ \\text{W/s}.$  \nThe negative sign shows that power is decreasing at that instant.\n\n---\n\nThese examples illustrate how the differentiation rules let us translate a physical description—force and velocity changing over time—into a precise statement about how power changes.  \n\n> **In daily life:** Just as a car’s engine power can rise when you press the accelerator (increasing force) or fall when you let off the gas (decreasing velocity), the math tells us exactly how fast that power is changing at any moment.\n\nWhen you encounter a new problem, follow these steps:\n\n1. Write the quantity you need (here $P=Fv$).  \n2. Identify which rule(s) apply (product, quotient, chain).  \n3. Compute each derivative carefully, remembering the definitions.  \n4. Substitute the given time (or other variable) to get a numeric rate.\n\n> **Remember:** Always keep track of units; derivatives of power have units of watts per second, which tells you how quickly the energy flow is speeding up or slowing down.",
+   "code": ""
+  },
+  {
+   "heading": "Summary and Practice Checklist",
+   "body": "Recall the three most useful differentiation rules and the steps that keep them reliable.  \n\n> **Definition:** **Product Rule** – If $y = u(x)\\,v(x)$, then  \n$$\\frac{dy}{dx}=u'(x)v(x)+u(x)v'(x).$$  \n\n> **Definition:** **Quotient Rule** – If $y = \\dfrac{u(x)}{v(x)}$, then  \n$$\\frac{dy}{dx}= \\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^{2}}.$$  \n\n> **Definition:** **Chain Rule** – If $y = f\\big(g(x)\\big)$, then  \n$$\\frac{dy}{dx}=f'\\big(g(x)\\big)\\,g'(x).$$  \n\nThese formulas let us turn a complicated product, fraction, or composition of functions into a sum of simpler derivatives. Think of each rule as a “recipe”: you identify the parts (the inner functions), apply the appropriate derivative to each part, and then combine them exactly as the formula tells you.  \n\n**Why they are true (plain words).**  \n- The product rule comes from looking at a tiny change in $u\\cdot v$: the change comes from $u$ changing while $v$ stays fixed, plus $v$ changing while $u$ stays fixed.  \n- The quotient rule is the product rule applied to $u\\cdot v^{-1}$, using the fact that the derivative of $v^{-1}$ is $-v^{-2}v'$.  \n- The chain rule follows the idea that a change in $x$ first moves $g(x)$, then $f$ reacts to that new input.  \n\n**Everyday comparison.** Imagine you are mixing two drinks. The total flavor intensity $F$ is the product of “sweetness” $S$ and “spiciness” $P$. If you add a little more sugar (changing $S$) while keeping $P$ the same, the flavor changes by $P\\,dS$. If you add a pinch of pepper (changing $P$) while $S$ stays the same, the flavor changes by $S\\,dP$. The total tiny change is the sum of those two pieces – exactly the product rule.  \n\n**Key steps to avoid mistakes**  \n\n1. **Identify each function** – write $u(x)$ and $v(x)$ (or numerator and denominator, or inner and outer).  \n2. **Differentiate each part separately** – compute $u'(x)$, $v'(x)$, $g'(x)$, $f'(g(x))$ as needed.  \n3. **Plug into the correct formula** – keep the order of subtraction in the quotient rule, and remember to multiply by the derivative of the inner function in the chain rule.  \n4. **Simplify carefully** – cancel common factors, combine like terms, and check that no denominator is left squared unintentionally.  \n\n> **Common mistake:** Forgetting the minus sign in the quotient rule numerator, i.e., writing $u'v+uv'$ instead of $u'v-u v'$.  \n\n> **Remember:** After using any rule, always verify by plugging a simple number (like $x=0$) into both the original function and the derivative to see if the slope makes sense.  \n\n---\n\n### **Example 10 (Intermediate): Differentiating a product‑quotient‑chain combination**\n\nFind $\\displaystyle \\frac{d}{dx}\\Bigl[\\,\\frac{x^{2}\\,\\sin(x)}{e^{x^{2}}}\\Bigr]$.\n\n1. **Identify the structure.** The whole expression is a quotient: numerator $N(x)=x^{2}\\sin(x)$, denominator $D(x)=e^{x^{2}}$.  \n2. **Differentiate the numerator** using the product rule:  \n   - $u(x)=x^{2}$, $u'(x)=2x$  \n   - $v(x)=\\sin(x)$, $v'(x)=\\cos(x)$  \n   $$N'(x)=u'(x)v(x)+u(x)v'(x)=2x\\sin(x)+x^{2}\\cos(x).$$  \n3. **Differentiate the denominator** using the chain rule (since $e^{x^{2}}$ is $f(g(x))$ with $f(t)=e^{t}$, $g(x)=x^{2}$):  \n   $$D'(x)=e^{x^{2}}\\cdot 2x=2x\\,e^{x^{2}}.$$  \n4. **Apply the quotient rule.**  \n   $$\\frac{d}{dx}\\Bigl[\\frac{N}{D}\\Bigr]=\\frac{N' D - N D'}{D^{2}}.$$  \n   Substitute the pieces:  \n   $$\\frac{d}{dx}\\Bigl[\\frac{x^{2}\\sin(x)}{e^{x^{2}}}\\Bigr]=\\frac{\\bigl(2x\\sin(x)+x^{2}\\cos(x)\\bigr)e^{x^{2}}-x^{2}\\sin(x)\\bigl(2x e^{x^{2}}\\bigr)}{\\bigl(e^{x^{2}}\\bigr)^{2}}.$$  \n5. **Simplify.** Cancel one $e^{x^{2}}$ from numerator and denominator:  \n   $$=\\frac{2x\\sin(x)+x^{2}\\cos(x)-2x^{3}\\sin(x)}{e^{x^{2}}}.$$  \n   Factor $x$ if desired:  \n   $$=\\frac{x\\bigl(2\\sin(x)+x\\cos(x)-2x^{2}\\sin(x)\\bigr)}{e^{x^{2}}}.$$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}\\Bigl[\\frac{x^{2}\\sin(x)}{e^{x^{2}}}\\Bigr]=\\frac{x\\bigl(2\\sin(x)+x\\cos(x)-2x^{2}\\sin(x)\\bigr)}{e^{x^{2}}}.$  \n\nThe example shows how the three rules can be layered: product inside the numerator, chain inside the denominator, and finally the quotient rule to combine them.\n\n---\n\n### Practice Checklist – Self‑Assessment\n\n- **Identify the rule** needed (product, quotient, or chain) before taking any derivative.  \n- **Write each component** $u$, $v$, $g$, $f$ explicitly; do not rely on memory alone.  \n- **Differentiate each component** correctly; double‑check signs and powers.  \n- **Insert the pieces** into the formula exactly as written, paying attention to the order of subtraction in the quotient rule.  \n- **Simplify** step by step: cancel common factors, factor where possible, and keep the denominator clear.  \n- **Test a simple value** (e.g., $x=0$) to see if the derivative behaves plausibly.  \n\nIf you can complete all items without hesitation, you have mastered the advanced differentiation rules and are ready to apply them to real‑world problems.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Differentiate $f(x)=3x^4$.",
+   "a": "Using the Power Rule, $f'(x)=4\\cdot3x^{4-1}=12x^{3}$."
+  },
+  {
+   "level": "Easy",
+   "q": "Find the derivative of $g(x)=\\sin x\\;\\cos x$.",
+   "a": "Apply the Product Rule:\n\\[\ng'(x)=\\cos x\\cdot\\cos x+\\sin x\\cdot(-\\sin x)=\\cos^{2}x-\\sin^{2}x.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle \\frac{d}{dx}\\Bigl(\\frac{x^2}{e^x}\\Bigr)$.",
+   "a": "Use the Quotient Rule with $u=x^2$, $v=e^x$:\n\\[\n\\frac{d}{dx}\\Bigl(\\frac{x^2}{e^x}\\Bigr)=\\frac{2x\\cdot e^x - x^2\\cdot e^x}{(e^x)^2}\n=\\frac{e^x(2x-x^2)}{e^{2x}}=\\frac{2x-x^2}{e^x}.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Differentiate $h(x)=\\ln\\!\\bigl((5x+1)^3\\bigr)$.",
+   "a": "First rewrite $h(x)=3\\ln(5x+1)$.\nThen apply the Chain Rule:\n\\[\nh'(x)=3\\cdot\\frac{1}{5x+1}\\cdot5 = \\frac{15}{5x+1}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Find the derivative of $p(x)=\\dfrac{x^3\\;e^{2x}}{\\sqrt{1+4x}}$.",
+   "a": "Write $p(x)=x^3 e^{2x}(1+4x)^{-1/2}$.\nLet $u=x^3 e^{2x}$ and $v=(1+4x)^{-1/2}$.\n1. $u' = 3x^{2}e^{2x}+x^{3}\\cdot2e^{2x}=e^{2x}(3x^{2}+2x^{3})$.\n2. $v' = -\\tfrac12(1+4x)^{-3/2}\\cdot4 = -\\frac{2}{(1+4x)^{3/2}}$.\nNow apply the Product Rule:\n\\[\np' = u'v + uv' = e^{2x}(3x^{2}+2x^{3})(1+4x)^{-1/2}\n+ x^{3}e^{2x}\\Bigl(-\\frac{2}{(1+4x)^{3/2}}\\Bigr).\n\\]\nFactor $e^{2x}x^{2}(1+4x)^{-3/2}$:\n\\[\np' = \\frac{e^{2x}x^{2}}{(1+4x)^{3/2}}\\Bigl[(3+2x)(1+4x)-2x\\Bigr].\n\\]\nSimplify inside the brackets:\n\\[\n(3+2x)(1+4x)-2x = 3+12x+2x+8x^{2}-2x = 3+12x+8x^{2}.\n\\]\nThus\n\\[\n\\boxed{p'(x)=\\frac{e^{2x}x^{2}\\bigl(8x^{2}+12x+3\\bigr)}{(1+4x)^{3/2}} }.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A particle moves along a line with position $s(t)=\\frac{t^2}{\\sqrt{t^2+1}}$. Find its velocity $v(t)$ and acceleration $a(t)$.",
+   "a": "\n1. **Velocity** $v(t)=s'(t)$. Write $s(t)=t^{2}(t^{2}+1)^{-1/2}$.\n- Let $u=t^{2}$, $v=(t^{2}+1)^{-1/2}$.\n- $u'=2t$, $v'=-\\tfrac12(t^{2}+1)^{-3/2}\\cdot2t = -\\frac{t}{(t^{2}+1)^{3/2}}$.\nApply Product Rule:\n\\[\nv(t)=2t\\,(t^{2}+1)^{-1/2}+t^{2}\\Bigl(-\\frac{t}{(t^{2}+1)^{3/2}}\\Bigr)\n=\\frac{2t}{\\sqrt{t^{2}+1}}-\\frac{t^{3}}{(t^{2}+1)^{3/2}}.\n\\]\nCombine over common denominator $(t^{2}+1)^{3/2}$:\n\\[\nv(t)=\\frac{2t(t^{2}+1)-t^{3}}{(t^{2}+1)^{3/2}}\n=\\frac{2t^{3}+2t-t^{3}}{(t^{2}+1)^{3/2}}\n=\\frac{t^{3}+2t}{(t^{2}+1)^{3/2}}.\n\\]\n2. **Acceleration** $a(t)=v'(t)$. Differentiate $v(t)=\\dfrac{t(t^{2}+2)}{(t^{2}+1)^{3/2}}$.\nUse Quotient Rule with numerator $N=t(t^{2}+2)=t^{3}+2t$, denominator $D=(t^{2}+1)^{3/2}$.\n- $N' = 3t^{2}+2$.\n- $D' = \\tfrac32 (t^{2}+1)^{1/2}\\cdot2t = 3t\\sqrt{t^{2}+1}$.\nThen\n\\[\na(t)=\\frac{(3t^{2}+2)D - N D'}{D^{2}}\n=\\frac{(3t^{2}+2)(t^{2}+1)^{3/2} - (t^{3}+2t)(3t\\sqrt{t^{2}+1})}{(t^{2}+1)^{3}}.\n\\]\nFactor $\\sqrt{t^{2}+1}$ from numerator:\n\\[\na(t)=\\frac{\\sqrt{t^{2}+1}\\big[(3t^{2}+2)(t^{2}+1) -3t(t^{3}+2t)\\big]}{(t^{2}+1)^{3}}.\n\\]\nSimplify inside brackets:\n\\[\n(3t^{2}+2)(t^{2}+1)=3t^{4}+3t^{2}+2t^{2}+2=3t^{4}+5t^{2}+2,\n\\]\n\\[\n3t(t^{3}+2t)=3t^{4}+6t^{2}.\n\\]\nSubtract:\n\\[\n(3t^{4}+5t^{2}+2)-(3t^{4}+6t^{2}) = -t^{2}+2.\n\\]\nHence\n\\[\na(t)=\\frac{\\sqrt{t^{2}+1}\\,(-t^{2}+2)}{(t^{2}+1)^{3}}\n=\\frac{2 - t^{2}}{(t^{2}+1)^{5/2}}.\n\\]\n**Result:**\n\\[\n\\boxed{v(t)=\\frac{t^{3}+2t}{(t^{2}+1)^{3/2}},\\qquad\na(t)=\\frac{2 - t^{2}}{(t^{2}+1)^{5/2}} }.\n\\]"
+  }
+ ],
+ "recap": "This lesson reviews the three main differentiation rules – product, quotient, and chain – explaining how each works and why. It shows how to combine the rules for more complex functions and gives a real‑world example using power. Simple analogies help students picture the rules in everyday terms.",
+ "key_terms": [
+  {
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function at a point, like a speedometer reading."
+  },
+  {
+   "term": "Power rule",
+   "meaning": "For f(x)=x^n, the derivative is n*x^(n-1)."
+  },
+  {
+   "term": "Product rule",
+   "meaning": "The derivative of f(x)*g(x) is f'(x)*g(x) + f(x)*g'(x)."
+  },
+  {
+   "term": "Quotient rule",
+   "meaning": "The derivative of f(x)/g(x) is (f'(x)*g(x) - f(x)*g'(x)) / g(x)^2."
+  },
+  {
+   "term": "Chain rule",
+   "meaning": "For a composition y = f(g(x)), the derivative is f'(g(x)) * g'(x)."
+  },
+  {
+   "term": "Inner function",
+   "meaning": "The function that is evaluated first inside a composition, g(x) in f(g(x))."
+  },
+  {
+   "term": "Outer function",
+   "meaning": "The function applied after the inner function, f in f(g(x))."
+  },
+  {
+   "term": "Composition of functions",
+   "meaning": "A function built by feeding the output of one function into another."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the derivative of x^5?",
+   "options": [
+    "5*x^4",
+    "x^4",
+    "5*x^5",
+    "4*x^5"
+   ],
+   "answer": 0,
+   "why": "Using the power rule, bring down the exponent and subtract one."
+  },
+  {
+   "q": "If f(x)=x^2 and g(x)=sin x, what is (f*g)'?",
+   "options": [
+    "2x*sin x + x^2*cos x",
+    "2x*sin x - x^2*cos x",
+    "2x*cos x + x^2*sin x",
+    "x^2*sin x"
+   ],
+   "answer": 0,
+   "why": "Apply the product rule: f'*g + f*g'."
+  },
+  {
+   "q": "Find the derivative of h(x)= (3x^2)/(x+1).",
+   "options": [
+    "(6x*(x+1) - 3x^2)/ (x+1)^2",
+    "(6x*(x+1) + 3x^2)/ (x+1)^2",
+    "(6x - 3x^2)/(x+1)",
+    "(3x^2)'/(x+1)"
+   ],
+   "answer": 0,
+   "why": "Use the quotient rule with numerator 3x^2 and denominator x+1."
+  },
+  {
+   "q": "If y = (2x+3)^4, what is dy/dx?",
+   "options": [
+    "4*(2x+3)^3 * 2",
+    "4*(2x+3)^3",
+    "8*(2x+3)^3",
+    "(2x+3)^4 * 4"
+   ],
+   "answer": 0,
+   "why": "Apply the chain rule: outer derivative times inner derivative."
+  },
+  {
+   "q": "Which rule is needed to differentiate f(x)= (x^2 * e^x) / sqrt(x+1)?",
+   "options": [
+    "Only product rule",
+    "Product and quotient rules",
+    "Product, quotient, and chain rules",
+    "Only chain rule"
+   ],
+   "answer": 2,
+   "why": "The expression combines a product, a quotient, and a composition inside the square root."
+  },
+  {
+   "q": "In the real‑world power example P(t)=F(t)*v(t), what does P'(t) represent?",
+   "options": [
+    "The total force",
+    "The change in power over time",
+    "The velocity",
+    "The acceleration"
+   ],
+   "answer": 1,
+   "why": "P'(t) is the derivative of power, giving its rate of change."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What does the derivative measure?",
+   "back": "The instantaneous rate of change of a function at a point."
+  },
+  {
+   "front": "State the power rule.",
+   "back": "If f(x)=x^n, then f'(x)=n*x^(n-1)."
+  },
+  {
+   "front": "State the product rule.",
+   "back": "Derivative of f*g is f'*g + f*g'."
+  },
+  {
+   "front": "State the quotient rule.",
+   "back": "Derivative of f/g is (f'*g - f*g') / g^2."
+  },
+  {
+   "front": "State the chain rule.",
+   "back": "If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x)."
+  },
+  {
+   "front": "What is the inner function in y = ln(3x^2+1)?",
+   "back": "The inner function is 3x^2+1."
+  },
+  {
+   "front": "When differentiating a product of three functions, what do you do?",
+   "back": "Apply the product rule repeatedly, treating two at a time."
+  },
+  {
+   "front": "Why can't we just divide derivatives to get the derivative of a quotient?",
+   "back": "Because the numerator and denominator both change, and their changes interact as described by the quotient rule."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l15-assembly-line-process",
+   "title": "Workers combine parts, illustrating the product rule step by step.",
+   "alt": "Workers combine parts, illustrating the product rule step by step.",
+   "priority": 8,
+   "picture_title": "Assembly Line Process",
+   "kind": "illustration",
+   "subject": "A simple factory line where two separate components are assembled into a final product, showing each component being added one after the other.",
+   "layout": "Three panels left‑to‑right: first panel shows component A, second shows component B, third shows the assembled product with arrows linking the parts.",
+   "labels": [
+    "Component A",
+    "Component B",
+    "Assembled Product"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l15-gear-train-mechanism",
+   "title": "A series of gears turning together demonstrates the chain rule.",
+   "alt": "A series of gears turning together demonstrates the chain rule.",
+   "priority": 7,
+   "picture_title": "Gear Train Mechanism",
+   "kind": "photo",
+   "subject": "A close‑up photograph of three meshed gears of different sizes rotating, highlighting how the motion of one gear drives the next.",
+   "layout": "Gear 1 on the left, Gear 2 in the middle, Gear 3 on the right; arrows indicate direction of rotation.",
+   "labels": [
+    "Input Gear",
+    "Intermediate Gear",
+    "Output Gear"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l15-power-calculation-in-a-car",
+   "title": "Force and velocity multiplied give power, matching the product‑rule example.",
+   "alt": "Force and velocity multiplied give power, matching the product‑rule example.",
+   "priority": 6,
+   "picture_title": "Power Calculation in a Car",
+   "kind": "photo",
+   "subject": "A car on a dynamometer bench showing a force sensor attached to the wheel and a speed readout, representing the variables F(t) and v(t).",
+   "layout": "The car occupies the centre, with the force sensor on the left and the speed gauge on the right; lines point to each device.",
+   "labels": [
+    "Force Sensor",
+    "Speed Gauge",
+    "Car"
+   ],
+   "after": 5
+  },
+  {
+   "type": "steps",
+   "title": "Product Rule Process",
+   "steps": [
+    {
+     "label": "Identify factors",
+     "text": "Write the function as u(x)·v(x)."
+    },
+    {
+     "label": "Differentiate first",
+     "text": "Find u'(x) and keep v(x)."
+    },
+    {
+     "label": "Differentiate second",
+     "text": "Find v'(x) and keep u(x)."
+    },
+    {
+     "label": "Add results",
+     "text": "Combine: u'(x)v(x)+u(x)v'(x)."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Quotient Rule Process",
+   "steps": [
+    {
+     "label": "Write as fraction",
+     "text": "Express the function as u(x)/v(x)."
+    },
+    {
+     "label": "Differentiate numerator",
+     "text": "Find u'(x) and keep v(x)."
+    },
+    {
+     "label": "Differentiate denominator",
+     "text": "Find v'(x) and keep u(x)."
+    },
+    {
+     "label": "Combine with minus",
+     "text": "Form u'(x)v(x) - u(x)v'(x)."
+    },
+    {
+     "label": "Divide by square",
+     "text": "Divide the result by [v(x)]^2."
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Chain Rule Process",
+   "steps": [
+    {
+     "label": "Identify inner function",
+     "text": "Write the function as f(g(x))."
+    },
+    {
+     "label": "Differentiate outer",
+     "text": "Find f'(g(x))."
+    },
+    {
+     "label": "Differentiate inner",
+     "text": "Find g'(x)."
+    },
+    {
+     "label": "Multiply results",
+     "text": "Multiply: f'(g(x))·g'(x)."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Combining Differentiation Rules",
+   "items": [
+    {
+     "name": "Product Rule",
+     "role": "Handles multiplication of two functions."
+    },
+    {
+     "name": "Quotient Rule",
+     "role": "Handles division of two functions."
+    },
+    {
+     "name": "Chain Rule",
+     "role": "Handles composition of functions."
+    },
+    {
+     "name": "Power Rule",
+     "role": "Simplifies derivatives of x^n."
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Power‑Related Real‑World Example",
+   "items": [
+    {
+     "value": "P(t)=F(t)·v(t)",
+     "label": "Power formula"
+    },
+    {
+     "value": "dP/dt = F'(t)v(t)+F(t)v'(t)",
+     "label": "Derivative using product rule"
+    },
+    {
+     "value": "Units: watts (J/s)",
+     "label": "Physical unit"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

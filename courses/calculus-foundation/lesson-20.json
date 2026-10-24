@@ -1,0 +1,385 @@
+{
+ "title": "Curve Sketching",
+ "summary": "Students learn how to analyse a function’s graph by finding its intercepts, turning points, intervals of increase/decrease, and concavity, then use this information to sketch the curve. The lesson combines theory with step‑by‑step calculations.",
+ "objectives": [
+  "Identify x‑ and y‑intercepts of a given function",
+  "Determine turning points and classify them as maxima or minima",
+  "Find intervals where the function is increasing or decreasing",
+  "Determine concave up and concave down intervals using the second derivative",
+  "Combine all information to produce a clear sketch of the function"
+ ],
+ "prerequisites": "Students should already know how to compute first and second derivatives and understand basic function notation.",
+ "why": [
+  "Being able to sketch curves helps engineers and scientists predict behaviour of physical systems, such as the motion of a projectile or the shape of a bridge arch, without needing a computer.",
+  "In everyday life, curve sketching lets you quickly judge profit trends, population growth, or drug dosage effects, making informed decisions based on the shape of the data."
+ ],
+ "sections": [
+  {
+   "heading": "1. Intercepts",
+   "body": "When we talk about **intercepts** we mean the points where a curve meets the coordinate axes.  \nThe *x‑intercepts* are the places where the graph crosses the horizontal axis (the $x$‑axis).  \nAt those points the height of the curve is zero, so the function value $f(x)$ must equal 0.  \nThe *y‑intercept* is where the graph crosses the vertical axis (the $y$‑axis).  \nThere the horizontal coordinate is zero, so we simply evaluate the function at $x=0$.\n\n> **Definition:**  \n> *x‑intercept*: a point $(x_0,0)$ such that $f(x_0)=0$.  \n> *y‑intercept*: the point $(0,f(0))$.\n\nFinding intercepts is the first step in sketching a curve because they give us fixed “anchor” points.  \nThink of drawing a road map: you first mark the cities (intercepts) before you draw the highways (the rest of the curve).  \n\n---\n\n### How to find the x‑intercepts  \n\n1. **Set the function equal to zero.**  \n   Write the equation $f(x)=0$. This expresses the condition “the height is zero”.\n\n2. **Solve the resulting equation for $x$.**  \n   The solutions $x_1,x_2,\\dots$ are the $x$‑coordinates of the intercepts.  \n   Each solution gives a point $(x_i,0)$ on the graph.\n\nIf the equation cannot be solved exactly, you may use factoring, the quadratic formula, or numerical methods, depending on the type of function.\n\n### How to find the y‑intercept  \n\n1. **Replace $x$ by $0$ in the formula.**  \n   Compute $f(0)$.  \n\n2. **Write the point $(0,f(0))$.**  \n   This is the location where the curve meets the $y$‑axis.\n\n> **Note:**  \n> The y‑intercept exists for every function that is defined at $x=0$. If the function is not defined there (for example $f(x)=\\frac{1}{x}$), there is no y‑intercept.\n\n---\n\n## Worked examples  \n\n**Example 1 (Easy): Find the intercepts of $f(x)=x^{3}-3x$.**  \n\n1. *Find the x‑intercepts.*  \n   Set the function to zero:  \n   $$x^{3}-3x=0$$  \n   Factor out the common factor $x$:  \n   $$x\\,(x^{2}-3)=0$$  \n   This product is zero when either factor is zero, so  \n   $$x=0 \\quad\\text{or}\\quad x^{2}-3=0.$$  \n   Solve the second equation:  \n   $$x^{2}=3 \\;\\Longrightarrow\\; x=\\pm\\sqrt{3}.$$  \n   Hence the x‑intercepts are the points  \n   $$(0,0),\\;(\\sqrt{3},0),\\;(-\\sqrt{3},0).$$  \n\n2. *Find the y‑intercept.*  \n   Evaluate the function at $x=0$:  \n   $$f(0)=0^{3}-3\\cdot0=0.$$  \n   So the y‑intercept is the same point $(0,0)$.  \n\n**Answer:**  \nx‑intercepts: $(0,0),\\;(\\sqrt{3},0),\\;(-\\sqrt{3},0)$.  \ny‑intercept: $(0,0)$.  \n\n---\n\n**Example 2 (Medium): Find the intercepts of $f(x)=2e^{x}-5$.**  \n\n1. *Find the x‑intercepts.*  \n   Set $f(x)$ equal to zero:  \n   $$2e^{x}-5=0.$$  \n   Isolate the exponential term:  \n   $$2e^{x}=5 \\;\\Longrightarrow\\; e^{x}=\\frac{5}{2}.$$  \n   Take the natural logarithm (ln) of both sides to solve for $x$:  \n   $$x=\\ln\\!\\left(\\frac{5}{2}\\right).$$  \n   Therefore the single x‑intercept is  \n   $$\\bigl(\\ln(5/2),\\,0\\bigr).$$  \n\n2. *Find the y‑intercept.*  \n   Substitute $x=0$ into the function:  \n   $$f(0)=2e^{0}-5=2\\cdot1-5=-3.$$  \n   The y‑intercept is the point $(0,-3)$.  \n\n**Answer:**  \nx‑intercept: $\\bigl(\\ln(5/2),0\\bigr)\\approx(0.916,0)$.  \ny‑intercept: $(0,-3)$.  \n\n> **In daily life:**  \n> Finding where a profit curve meets the horizontal axis tells you the break‑even sales level (where profit = 0). Finding the y‑intercept tells you the profit (or loss) when you sell nothing.\n\n> **Common mistake:**  \n> Forgetting to check all factors after factoring. In Example 1 the factor $x$ gave the intercept at the origin, which could be missed if you only solved $x^{2}-3=0$.\n\n> **Remember:**  \n> Always write the intercepts as ordered pairs: $(x,0)$ for x‑intercepts and $(0,y)$ for the y‑intercept. This makes it easy to plot them later when you sketch the whole curve.",
+   "code": ""
+  },
+  {
+   "heading": "2. First Derivative and Critical Points",
+   "body": "When we want to draw the shape of a function, the first thing to look at is where its slope is zero.  \nThe **slope** of a function at a point is given by its *derivative*, written $f'(x)$.  \nIf $f'(x)=0$ at some $x$, the graph is neither rising nor falling there – it is “flat”.  \nSuch $x$‑values are called **critical points**. They are the only places where a curve can change from going up to going down (or the reverse), so they are the natural candidates for *turning points* (maxima or minima).\n\n> **Definition:** A **critical point** of a function $f$ is any number $c$ in the domain of $f$ where $f'(c)=0$ or where $f'$ does not exist.\n\nWhy does this work?  \nThink of walking up a hill. While you are climbing, your altitude is increasing – the slope is positive. When you reach the very top, you stop rising for an instant before you start descending; at that instant your vertical speed is zero. The same idea applies to any smooth curve: the only moments when the direction of motion can switch are when the instantaneous rate of change (the derivative) is zero.\n\n> **In daily life:** Imagine a car’s speedometer. When the needle points to “0 km/h”, the car is momentarily stopped. That instant is a critical point for the car’s position as a function of time.\n\n---\n\n### How to find critical points\n\n1. **Differentiate** the function to obtain $f'(x)$.  \n2. **Set the derivative equal to zero** and solve the equation $f'(x)=0$ for $x$.  \n3. **Check the domain** – keep only the solutions that lie inside the interval where the original function is defined.  \n4. (Optional) If $f'(x)$ is undefined at some $x$ that belongs to the domain of $f$, that $x$ is also a critical point.\n\nThe solutions you obtain are *candidates* for turning points. Later sections will tell us how to decide whether each candidate is a maximum, a minimum, or something else.\n\n---\n\n**Example 3 (Easy): Find the critical points of** $f(x)=x^{3}-6x^{2}+9x$.\n\n1. *Differentiate the function.*  \n   $$f'(x)=3x^{2}-12x+9$$\n2. *Set the derivative equal to zero and solve.*  \n   $$3x^{2}-12x+9=0$$  \n   Divide by 3: $$x^{2}-4x+3=0$$  \n   Factor: $$(x-1)(x-3)=0$$  \n   Hence $x=1$ or $x=3$.\n3. *Check that these $x$‑values are in the domain.*  \n   The original polynomial is defined for all real numbers, so both are valid.\n\n**Answer:** The critical points are at $x=1$ and $x=3$.  \n\n---\n\n> **Note:** For a polynomial, the derivative always exists everywhere, so we only need to solve $f'(x)=0$.\n\nNow let us see a function where the derivative involves a fraction and the domain is limited.\n\n**Example 4 (Medium): Find the critical points of** $f(x)=\\ln\\!\\bigl(x^{2}+1\\bigr)$.\n\n1. *Differentiate using the chain rule.*  \n   $$f'(x)=\\frac{1}{x^{2}+1}\\cdot 2x=\\frac{2x}{x^{2}+1}$$\n2. *Set the derivative equal to zero.*  \n   $$\\frac{2x}{x^{2}+1}=0$$  \n   A fraction is zero only when its numerator is zero (the denominator cannot be zero because $x^{2}+1>0$ for all $x$).  \n   So $2x=0\\;\\Rightarrow\\;x=0$.\n3. *Verify that $x=0$ lies in the domain.*  \n   The argument of the logarithm, $x^{2}+1$, is always positive, so the domain is all real numbers. $x=0$ is allowed.\n\n**Answer:** The only critical point is at $x=0$.\n\n> **Common mistake:** Forgetting to consider points where $f'(x)$ does not exist. For functions with radicals, fractions, or logarithms, such points can also be critical.\n\n---\n\n### What to do after finding critical points\n\nAt this stage we have a list of $x$‑values where the slope is zero (or undefined). In the next part of curve sketching we will test each interval between these points to see whether the function is increasing or decreasing, and we will use the second derivative to check concavity. Those tests will tell us which critical points are actual maxima or minima.\n\n> **Remember:** A critical point is only a *candidate* for a turning point. You must later examine the behavior of $f'(x)$ on either side (or use $f''(x)$) to confirm its nature.\n\nBy mastering the simple steps of differentiating, setting the derivative to zero, and checking the domain, you now have a reliable tool for locating the key “flat spots” on any smooth curve. These spots are the anchors around which the rest of the sketch will be built.",
+   "code": ""
+  },
+  {
+   "heading": "3. Classifying Turning Points",
+   "body": "When we have found the **critical points** of a function – the $x$‑values where the first derivative $f'(x)$ is zero or does not exist – we still do not know what the graph does there.  \nA critical point can be a **local maximum** (a little hill), a **local minimum** (a little valley), or it might be a flat spot that is neither.  \nTo decide which case we have, we use the **first‑derivative test** or the **second‑derivative test**.\n\n> **Definition:** A *local maximum* at $x=c$ means $f(c)$ is larger than all nearby function values; a *local minimum* means $f(c)$ is smaller than all nearby values.\n\n> **Note:** The tests only tell us about the shape *near* the point. They do not give global information about the whole graph.\n\n### 1. First‑derivative test  \nLook at the sign of $f'(x)$ just to the left and just to the right of a critical point $c$.\n\n| Sign change of $f'$ | What it means |\n|----------------------|---------------|\n| $f'$ changes from **positive** to **negative** | $c$ is a **local maximum** |\n| $f'$ changes from **negative** to **positive** | $c$ is a **local minimum** |\n| $f'$ does **not** change sign | $c$ is **neither** (possible inflection) |\n\nWhy does this work?  \nIf $f'$ is positive, the function is rising; if it is negative, the function is falling. A change from rising to falling creates a hill, and a change from falling to rising creates a valley.\n\n### 2. Second‑derivative test  \nSometimes checking signs of $f'$ on both sides is messy. The second derivative $f''(x)$ measures the *concavity* of the graph.\n\n- If $f'(c)=0$ **and** $f''(c)>0$, the graph is **concave up** (shaped like a cup) at $c$, so $c$ is a **local minimum**.  \n- If $f'(c)=0$ **and** $f''(c)<0$, the graph is **concave down** (shaped like a cap) at $c$, so $c$ is a **local maximum**.  \n- If $f'(c)=0$ **and** $f''(c)=0$, the test is inconclusive; we must return to the first‑derivative test or higher derivatives.\n\n> **In daily life:** Think of a road that goes up a hill, flattens at the top, then goes down. The slope (first derivative) is zero at the flat top. If the road curves upward on both sides (a “U” shape), the hill top is actually a valley (minimum). If it curves downward (an upside‑down “U”), it is a true hill (maximum).\n\n> **Common mistake:** Assuming that every point where $f'(x)=0$ must be a maximum or minimum. Some flat spots are just points of inflection.\n\n---\n\n**Example 5 (Hard): Classify the turning points of** $f(x)=x^{4}-4x^{3}+6x^{2}$.\n\nWe will use the first‑derivative test.\n\n1. **Find the first derivative.**  \n   $$f'(x)=4x^{3}-12x^{2}+12x.$$\n\n2. **Set the derivative to zero and solve for critical points.**  \n   $$4x^{3}-12x^{2}+12x=0$$  \n   Factor: $$4x(x^{2}-3x+3)=0.$$  \n   The quadratic $x^{2}-3x+3$ has discriminant $(-3)^{2}-4\\cdot1\\cdot3=9-12=-3<0$, so it has no real roots.  \n   Hence the only real critical point is $$x=0.$$\n\n3. **Test the sign of $f'$ on each side of $x=0$.**  \n   Choose $x=-1$: $f'(-1)=4(-1)^{3}-12(-1)^{2}+12(-1)=-4-12-12=-28<0$.  \n   Choose $x=1$: $f'(1)=4-12+12=4>0$.  \n   The sign changes from negative (left) to positive (right), so $f$ goes from decreasing to increasing.\n\n**Answer:** $x=0$ is a **local minimum**. The minimum value is $f(0)=0$.\n\n---\n\n**Example 6 (Hard): Use the second‑derivative test for** $f(x)=\\sin x+\\tfrac12 x$.\n\nWe will locate critical points and then apply the second‑derivative test.\n\n1. **Compute the first derivative and set it to zero.**  \n   $$f'(x)=\\cos x+\\tfrac12.$$  \n   Solve $\\cos x+\\tfrac12=0$:  \n   $$\\cos x=-\\tfrac12 \\quad\\Longrightarrow\\quad x=\\frac{2\\pi}{3}+2k\\pi\\ \\text{or}\\ x=\\frac{4\\pi}{3}+2k\\pi,\\;k\\in\\mathbb Z.$$\n\n2. **Compute the second derivative.**  \n   $$f''(x)=-\\sin x.$$\n\n3. **Evaluate $f''$ at each critical point.**  \n\n   - For $x=\\frac{2\\pi}{3}+2k\\pi$:  \n     $$f''\\!\\left(\\frac{2\\pi}{3}+2k\\pi\\right)=-\\sin\\!\\left(\\frac{2\\pi}{3}\\right)=-\\frac{\\sqrt3}{2}<0,$$  \n     so the graph is concave down → **local maximum**.\n\n   - For $x=\\frac{4\\pi}{3}+2k\\pi$:  \n     $$f''\\!\\left(\\frac{4\\pi}{3}+2k\\pi\\right)=-\\sin\\!\\left(\\frac{4\\pi}{3}\\right)=-\\left(-\\frac{\\sqrt3}{2}\\right)=\\frac{\\sqrt3}{2}>0,$$  \n     so the graph is concave up → **local minimum**.\n\n**Answer:**  \n- At $x=\\frac{2\\pi}{3}+2k\\pi$ the function has a **local maximum**.  \n- At $x=\\frac{4\\pi}{3}+2k\\pi$ the function has a **local minimum**.  \n\nThese classifications repeat every $2\\pi$ because of the periodic nature of the sine function.\n\n> **Remember:** The second‑derivative test is quick when $f''(c)\\neq0$, but always check that $f'(c)=0$ first. If $f''(c)=0$, fall back to the first‑derivative test.",
+   "code": ""
+  },
+  {
+   "heading": "4. Increasing and Decreasing Intervals",
+   "body": "When we talk about a function “going up” or “going down” we are really looking at the sign of its first derivative $f'(x)$.  \nIf $f'(x)$ is **positive** (greater than zero) on an interval, the original function $f(x)$ is rising there – we say it is *increasing*.  \nIf $f'(x)$ is **negative** (less than zero) on an interval, $f(x)$ is falling there – we call it *decreasing*.  \n\nWhy does this work?  The derivative measures the instantaneous rate of change: it tells us how steep the graph is at each point.  A positive slope points upward, a negative slope points downward.  By checking where the slope is above or below the horizontal axis, we can map out the whole “up‑and‑down” pattern of the curve.\n\nThink of a road that goes up and down hills.  If you drive forward and the road is sloping upward, your speedometer (which shows the rate of change of height with respect to distance) reads a positive number.  When the road slopes downward, the reading becomes negative.  Plotting those readings along the road tells you exactly where the hills start and end.  The same idea works for any function.\n\n---\n\n> **Definition:** *Increasing interval* – a set of $x$‑values on which $f'(x)>0$.  \n> **Definition:** *Decreasing interval* – a set of $x$‑values on which $f'(x)<0$.\n\nTo find these intervals we use a **sign chart**.  The steps are:\n\n1. **Find the derivative** $f'(x)$.  \n2. **Locate the critical points** – the $x$‑values where $f'(x)=0$ or where $f'(x)$ does not exist. These points split the real line into separate intervals.  \n3. **Pick a test point** inside each interval and evaluate the sign of $f'(x)$ there.  \n4. **Record the sign**: “+” means increasing, “–” means decreasing.  \n5. **Write the intervals** in proper notation.\n\nBelow we apply the procedure to two concrete functions.\n\n---\n\n**Example 7 (Easy): Determine the increasing/decreasing intervals of $f(x)=x^{3}-3x$.**\n\n1. *Compute the derivative.*  \n   $$f'(x)=3x^{2}-3.$$  \n\n2. *Find critical points by solving $f'(x)=0$.*  \n   $$3x^{2}-3=0\\;\\Longrightarrow\\;x^{2}=1\\;\\Longrightarrow\\;x=\\pm1.$$  \n\n3. *Create intervals using the critical points.*  \n   The real line is split into $(-\\infty,-1)$, $(-1,1)$, and $(1,\\infty)$.\n\n4. *Choose a test point in each interval and check the sign of $f'(x)$.*\n   - For $x=-2$ (in $(-\\infty,-1)$):  \n     $$f'(-2)=3(-2)^{2}-3=12-3=9>0,$$  \n     so $f'(x)$ is positive → $f$ is increasing there.\n   - For $x=0$ (in $(-1,1)$):  \n     $$f'(0)=3(0)^{2}-3=-3<0,$$  \n     so $f$ is decreasing on $(-1,1)$.\n   - For $x=2$ (in $(1,\\infty)$):  \n     $$f'(2)=3(2)^{2}-3=12-3=9>0,$$  \n     so $f$ is increasing on $(1,\\infty)$.\n\n5. *Write the result.*  \n\n**Answer:** $f(x)=x^{3}-3x$ is increasing on $(-\\infty,-1)\\cup(1,\\infty)$ and decreasing on $(-1,1)$.\n\n---\n\n> **Note:** The critical points themselves are *not* automatically part of an increasing or decreasing interval; they are the boundaries where the behavior can change.\n\n---\n\n**Example 8 (Medium): Determine the intervals for $f(x)=e^{-x^{2}}$.**\n\n1. *Differentiate the function.*  \n   Using the chain rule,  \n   $$f'(x)=e^{-x^{2}}\\cdot(-2x)=-2xe^{-x^{2}}.$$\n\n2. *Set the derivative equal to zero to find critical points.*  \n   $$-2xe^{-x^{2}}=0.$$  \n   Since $e^{-x^{2}}$ is never zero, we must have $-2x=0$, so $x=0$ is the only critical point.\n\n3. *Split the domain at $x=0$.*  \n   The intervals are $(-\\infty,0)$ and $(0,\\infty)$.\n\n4. *Test a point in each interval.*  \n   - For $x=-1$ (in $(-\\infty,0)$):  \n     $$f'(-1)=-2(-1)e^{-(-1)^{2}}=2e^{-1}>0,$$  \n     so $f$ is increasing on $(-\\infty,0)$.\n   - For $x=1$ (in $(0,\\infty)$):  \n     $$f'(1)=-2(1)e^{-1}=-2e^{-1}<0,$$  \n     so $f$ is decreasing on $(0,\\infty)$.\n\n5. *Summarize the intervals.*  \n\n**Answer:** $f(x)=e^{-x^{2}}$ increases on $(-\\infty,0)$ and decreases on $(0,\\infty)$.\n\n---\n\n> **In daily life:** Knowing where a graph rises or falls helps you predict maximum profit, optimal speed, or the point where a population stops growing.  The sign chart is a systematic “road map” for those predictions.\n\n> **Common mistake:** Forgetting to test the sign *inside* each interval.  Simply assuming the sign stays the same on both sides of a critical point can lead to wrong conclusions.\n\n> **Remember:** The derivative’s sign tells the whole story of increase and decrease; once you have the sign chart, you have the backbone of the curve’s shape.",
+   "code": ""
+  },
+  {
+   "heading": "5. Concavity and Points of Inflection",
+   "body": "When we talk about **concavity** we are looking at how the graph of a function bends.  \nIf the graph bends upward like a smile, we say it is *concave up*; if it bends downward like a frown, it is *concave down*.  \n\nMathematically, the bending is measured by the **second derivative** $f''(x)$.  \n- $f''(x) > 0$  → the curve is concave up on that interval.  \n- $f''(x) < 0$  → the curve is concave down on that interval.  \n\nWhy does this work? The first derivative $f'(x)$ tells us the slope of the tangent line.  \nIf $f'(x)$ is increasing (the slope gets steeper as we move right), the graph is curving upward, which means $f''(x)$, the rate of change of the slope, is positive.  \nIf $f'(x)$ is decreasing, the slope is getting less steep, so the graph curves downward and $f''(x)$ is negative.\n\n> **Definition:** *Point of inflection* – a point where the concavity changes sign (from up to down or vice‑versa). At an inflection point $f''(x)$ is zero **or** undefined, and the sign of $f''$ on each side of the point must be opposite.\n\n> **Note:** A zero of $f''(x)$ does **not** automatically give an inflection point; you must check that the sign really changes.\n\n> **In daily life:** Think of a road that first climbs gently, then flattens, then starts to dip. The spot where the road stops climbing and begins to dip is like an inflection point – the curvature of the road switches direction.\n\n> **Remember:** To find concave‑up/down intervals and inflection points, follow three steps:  \n> 1. Compute $f''(x)$.  \n> 2. Solve $f''(x)=0$ (or find where $f''$ is undefined).  \n> 3. Test the sign of $f''$ in each interval created by those critical numbers.\n\n---\n\n### Worked example 9 (Easy): Concave up/down for $f(x)=x^{3}$  \n\n**Question:** Determine where the graph of $f(x)=x^{3}$ is concave up and where it is concave down.\n\n1. **Find the second derivative.**  \n   First differentiate twice:  \n   $$f'(x)=3x^{2}$$  \n   $$f''(x)=6x$$  \n\n2. **Locate where $f''(x)=0$ or is undefined.**  \n   Set $6x=0$ → $x=0$. The second derivative exists everywhere, so the only candidate is $x=0$.\n\n3. **Test the sign of $f''$ on each side of $x=0$.**  \n   - For $x<0$, pick $x=-1$: $f''(-1)=6(-1)=-6<0$ → concave down.  \n   - For $x>0$, pick $x=1$: $f''(1)=6(1)=6>0$ → concave up.\n\n**Answer:** $f(x)=x^{3}$ is concave down on $(-\\infty,0)$, concave up on $(0,\\infty)$, and has an inflection point at $(0,0)$ because the concavity changes sign there.\n\n---\n\n### Worked example 10 (Medium): Inflection points of $f(x)=x^{4}-4x^{3}+6x^{2}$  \n\n**Question:** Find all inflection points of $f(x)=x^{4}-4x^{3}+6x^{2}$.\n\n1. **Compute the first and second derivatives.**  \n   $$f'(x)=4x^{3}-12x^{2}+12x$$  \n   $$f''(x)=12x^{2}-24x+12$$  \n\n2. **Solve $f''(x)=0$ to get possible inflection points.**  \n   Factor the quadratic:  \n   $$12x^{2}-24x+12=12\\bigl(x^{2}-2x+1\\bigr)=12(x-1)^{2}$$  \n   Setting this equal to zero gives $(x-1)^{2}=0$, so $x=1$ is the only candidate.\n\n3. **Check the sign of $f''$ on each side of $x=1$.**  \n   Choose a test point left of 1, say $x=0$:  \n   $$f''(0)=12(0)^{2}-24(0)+12=12>0$$ (concave up)  \n   Choose a test point right of 1, say $x=2$:  \n   $$f''(2)=12(4)-24(2)+12=48-48+12=12>0$$ (concave up)\n\n   The sign of $f''$ is **positive on both sides**, so the concavity does **not** change at $x=1$.\n\n4. **Conclusion about inflection points.**  \n   Since there is no sign change, $x=1$ is **not** an inflection point. Because $f''(x)$ never becomes negative, the graph is concave up everywhere.\n\n**Answer:** The function $f(x)=x^{4}-4x^{3}+6x^{2}$ has **no inflection points**; it is concave up for all real $x$.\n\n---\n\nNow you have the complete procedure:\n\n1. Differentiate twice to obtain $f''(x)$.  \n2. Find where $f''(x)=0$ or does not exist.  \n3. Use test points to see whether $f''$ is positive or negative in each interval.  \n4. Record intervals of concave up ($f''>0$) and concave down ($f''<0$).  \n5. Mark any points where the sign switches as inflection points.\n\nApplying these steps each time will give you a clear picture of how the graph bends, which is essential before you combine all the information to sketch the whole curve.",
+   "code": ""
+  },
+  {
+   "heading": "6. Putting It All Together – Sketching the Curve",
+   "body": "When we have collected all the information – where the graph meets the axes, where the slope is zero, where the function rises or falls, and where it bends – we can finally **draw the picture**.  \nThink of it like assembling a jigsaw puzzle: each piece (intercept, turning point, interval of increase, concavity) tells you where a part of the curve belongs. By placing the pieces in the right order we obtain a complete, labelled sketch.\n\n---\n\n> **Remember:** A sketch is not a precise plot; it shows the *shape* of the function and the important features we have identified.\n\n### Step 1: Plot the intercepts  \n\nThe **x‑intercept(s)** are points where the graph crosses the x‑axis ($f(x)=0$).  \nThe **y‑intercept** is where the graph crosses the y‑axis ($x=0$).  \nMark these points on a set of axes; they are the anchors of the curve.\n\n### Step 2: Mark the critical points  \n\nCritical points occur where the first derivative $f'(x)$ is zero or undefined.  \nThese are the **turning points** (possible maxima or minima).  \nWrite their coordinates and place a dot on the graph.\n\n### Step 3: Use monotonicity (increasing / decreasing)  \n\nFrom the sign of $f'(x)$ we know on which intervals the function rises or falls.  \nDraw a light **arrow** on each interval: upward arrows for increasing, downward arrows for decreasing.  \nThe arrows tell you how the curve moves between the points already plotted.\n\n### Step 4: Add concavity and inflection points  \n\nThe second derivative $f''(x)$ tells us whether the curve is **concave up** (shaped like a cup, $f''(x)>0$) or **concave down** (shaped like a cap, $f''(x)<0$).  \nPoints where $f''(x)=0$ and changes sign are **inflection points**; mark them.  \nBetween inflection points, sketch the curve with the appropriate “bowl” shape.\n\n### Step 5: Connect the dots smoothly  \n\nNow draw a smooth curve that passes through all the marked points, follows the arrows, and respects the concavity in each region.  \nLabel the important points (intercepts, maxima, minima, inflection points) and indicate the intervals of increase/decrease and concavity if desired.\n\n---\n\n> **In daily life:** Sketching a hill‑road on a map works the same way – you know where the road starts (intercept), where it reaches a summit (turning point), whether it climbs or descends (monotonicity), and whether the road curves gently or sharply (concavity).\n\nBelow we apply the whole procedure to two functions that require every step.\n\n---\n\n**Example 11 (Hard): Sketch \\(f(x)=x^{3}-6x^{2}+9x\\) using all information gathered.**  \n\n1. **Find intercepts**  \n   - Set \\(x=0\\): \\(f(0)=0\\) → y‑intercept \\((0,0)\\).  \n   - Solve \\(x^{3}-6x^{2}+9x=0\\):  \n     $$x(x^{2}-6x+9)=x(x-3)^{2}=0$$  \n     → x‑intercepts at \\(x=0\\) and \\(x=3\\). Points: \\((0,0)\\) and \\((3,0)\\).\n\n2. **Compute first derivative and critical points**  \n   $$f'(x)=3x^{2}-12x+9=3(x^{2}-4x+3)=3(x-1)(x-3)$$  \n   Set \\(f'(x)=0\\): \\(x=1\\) and \\(x=3\\).  \n   Evaluate \\(f\\) at these x‑values:  \n   $$f(1)=1-6+9=4,\\qquad f(3)=27-54+27=0$$  \n   Critical points: \\((1,4)\\) (possible max) and \\((3,0)\\) (also an intercept).\n\n3. **Determine increasing / decreasing intervals**  \n   Test a value in each interval determined by the critical points:  \n\n   - For \\(x<1\\) (e.g., \\(x=0\\)): \\(f'(0)=9>0\\) → increasing.  \n   - For \\(1<x<3\\) (e.g., \\(x=2\\)): \\(f'(2)=3(4-8+3)=-3<0\\) → decreasing.  \n   - For \\(x>3\\) (e.g., \\(x=4\\)): \\(f'(4)=3(16-16+3)=9>0\\) → increasing.  \n\n   So the function rises, falls, then rises again.\n\n4. **Compute second derivative and concavity**  \n   $$f''(x)=6x-12$$  \n   Set \\(f''(x)=0\\): \\(6x-12=0\\Rightarrow x=2\\).  \n   Test intervals:  \n\n   - \\(x<2\\): \\(f''(1)= -6<0\\) → concave down.  \n   - \\(x>2\\): \\(f''(3)=6>0\\) → concave up.  \n\n   Thus an inflection point occurs at \\(x=2\\). Find its y‑value:  \n   $$f(2)=8-24+18=2$$  \n   Inflection point: \\((2,2)\\).\n\n5. **Sketch**  \n   - Plot intercepts \\((0,0)\\) and \\((3,0)\\).  \n   - Plot critical point \\((1,4)\\) (local maximum).  \n   - Plot inflection point \\((2,2)\\).  \n   - Draw arrows: up on \\((-\\infty,1)\\), down on \\((1,3)\\), up on \\((3,\\infty)\\).  \n   - Curve is concave down left of \\(x=2\\) and concave up right of \\(x=2\\).  \n   - Connect smoothly, respecting the shape changes.\n\n**Answer:** The graph starts at the origin, climbs to a peak at \\((1,4)\\), bends downward crossing the x‑axis at \\((3,0)\\), and then rises forever. It is concave down from \\(-\\infty\\) to \\(x=2\\) and concave up thereafter, with an inflection at \\((2,2)\\).\n\n---\n\n**Example 12 (Hard): Sketch \\(f(x)=e^{-x^{2}}+x\\).**  \n\n1. **Intercepts**  \n   - y‑intercept: \\(f(0)=e^{0}+0=1\\) → \\((0,1)\\).  \n   - Solve \\(e^{-x^{2}}+x=0\\). This equation has no elementary closed form; we locate the root numerically.  \n     Testing values: \\(x=-1\\) gives \\(e^{-1}+(-1)\\approx0.368-1=-0.632\\) (negative);  \n     \\(x=0\\) gives \\(1\\) (positive). By the Intermediate Value Theorem a root lies between \\(-1\\) and \\(0\\).  \n     Using a quick Newton step, \\(x\\approx-0.7\\). So the x‑intercept is approximately \\((-0.7,0)\\).\n\n2. **First derivative and critical points**  \n   $$f'(x)=\\frac{d}{dx}\\big(e^{-x^{2}}\\big)+1 = -2xe^{-x^{2}}+1$$  \n   Set \\(f'(x)=0\\):  \n   $$-2xe^{-x^{2}}+1=0\\;\\Longrightarrow\\;2xe^{-x^{2}}=1\\;\\Longrightarrow\\;x e^{-x^{2}}=\\tfrac12$$  \n   This equation also requires a numerical solution. Trying \\(x=0.5\\): \\(0.5e^{-0.25}\\approx0.5(0.778)=0.389\\) (too small).  \n   Try \\(x=0.8\\): \\(0.8e^{-0.64}\\approx0.8(0.527)=0.422\\).  \n   Try \\(x=1.2\\): \\(1.2e^{-1.44}\\approx1.2(0.236)=0.283\\).  \n   The left side decreases after a certain point, so the solution is near \\(x\\approx0.6\\). Refine to \\(x\\approx0.62\\).  \n   Hence a single critical point at approximately \\((0.62,\\;f(0.62))\\). Compute the y‑value:  \n   $$f(0.62)=e^{-0.3844}+0.62\\approx0.681+0.62=1.301$$  \n\n3. **Monotonicity**  \n   Evaluate \\(f'(x)\\) left and right of the critical point:  \n\n   - For \\(x=0\\): \\(f'(0)=1>0\\) → increasing.  \n   - For \\(x=1\\): \\(f'(1)=-2e^{-1}+1\\approx-0.736+1=0.264>0\\) (still increasing).  \n   - For \\(x=2\\): \\(f'(2)=-4e^{-4}+1\\approx-4(0.018)+1\\approx0.928>0\\).  \n\n   Actually \\(f'(x)\\) never becomes negative; the critical point is where the slope is **minimum**, not a maximum or minimum of the function itself. The function is increasing everywhere.\n\n4. **Second derivative and concavity**  \n   $$f''(x)=\\frac{d}{dx}\\big(-2xe^{-x^{2}}+1\\big)= -2e^{-x^{2}}+4x^{2}e^{-x^{2}} = 2e^{-x^{2}}(2x^{2}-1)$$  \n   Set \\(f''(x)=0\\):  \n   $$2e^{-x^{2}}(2x^{2}-1)=0\\;\\Longrightarrow\\;2x^{2}-1=0\\;\\Longrightarrow\\;x=\\pm\\frac{1}{\\sqrt{2}}\\approx\\pm0.707$$  \n   Test intervals:  \n\n   - For \\(|x|<0.707\\): pick \\(x=0\\): \\(f''(0)= -2<0\\) → concave down.  \n   - For \\(|x|>0.707\\): pick \\(x=1\\): \\(f''(1)=2e^{-1}(2-1)=2e^{-1}>0\\) → concave up.  \n\n   Thus inflection points at \\(\\big(-\\frac{1}{\\sqrt{2}},\\,f(-\\frac{1}{\\sqrt{2}})\\big)\\) and \\(\\big(\\frac{1}{\\sqrt{2}},\\,f(\\frac{1}{\\sqrt{2}})\\big)\\). Approximate y‑values:  \n\n   $$f\\!\\left(\\pm\\frac{1}{\\sqrt{2}}\\right)=e^{-1/2}\\pm\\frac{1}{\\sqrt{2}}\\approx0.607\\pm0.707$$  \n   So points \\((-0.707,\\,-0.100)\\) and \\((0.707,\\,1.314)\\).\n\n5. **Sketch**  \n   - Plot y‑intercept \\((0,1)\\) and x‑intercept \\((-0.7,0)\\).  \n   - Mark the critical point \\((0.62,1.30)\\) (a point of smallest slope).  \n   - Mark inflection points at \\((-0.707,-0.10)\\) and \\((0.707,1.31)\\).  \n   - Since the function is increasing everywhere, draw arrows pointing rightward on the whole line.  \n   - Draw the curve concave down from \\(-\\infty\\) to \\(-0.707\\), then concave up after \\(-0.707\\); it stays concave up for all larger x because \\(f''>0\\) there.  \n   - The exponential term forces the graph to level off as \\(x\\to\\pm\\infty\\), while the linear term \\(+x\\) makes it drift upward on the right and downward on the left.\n\n**Answer:** The graph starts low on the left, rises slowly, passes through the x‑intercept near \\((-0.7,0)\\), continues upward, is always increasing, changes concavity at \\(x=\\pm0.707\\), and for large positive \\(x\\) behaves like the line \\(y=x\\) (the exponential term becomes negligible).  \n\n---\n\nBy following these systematic steps—plotting intercepts, marking critical and inflection points, indicating where the function climbs or falls, and showing its bending—we can turn algebraic information into a clear, labelled sketch that reveals the behaviour of any differentiable function.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Find the x‑intercepts and y‑intercept of $f(x)=x^2-4$.",
+   "a": "Set $f(x)=0$: $x^2-4=0 \\Rightarrow x^2=4 \\Rightarrow x=\\pm2$.  So the x‑intercepts are $(-2,0)$ and $(2,0)$.  The y‑intercept is $f(0)=0^2-4=-4$, giving the point $(0,-4)$."
+  },
+  {
+   "level": "Easy",
+   "q": "For $f(x)=x^3$, compute $f'(x)$ and state where the function is increasing or decreasing.",
+   "a": "$f'(x)=3x^2$.  Since $3x^2\\ge0$ for all $x$ and equals $0$ only at $x=0$, the derivative is never negative.  Therefore $f(x)$ is increasing on $(-\\infty,\\infty)$."
+  },
+  {
+   "level": "Medium",
+   "q": "Sketch the curve of $f(x)=x^3-3x$ by following the steps of the lesson.",
+   "a": "\n1. **Intercepts**: $f(x)=0 \\Rightarrow x(x^2-3)=0 \\Rightarrow x=0,\\pm\\sqrt3$.  So x‑intercepts at $(0,0)$, $(\\sqrt3,0)$, $(-\\sqrt3,0)$.  y‑intercept $f(0)=0$.\n2. **First derivative**: $f'(x)=3x^2-3=3(x^2-1)$.  Critical points when $f'(x)=0 \\Rightarrow x=\\pm1$.\n3. **Classify**: Test intervals:\n- For $x<-1$, pick $x=-2$: $f'(-2)=3(4-1)=9>0$ (increasing).\n- Between $-1$ and $1$, pick $x=0$: $f'(0)=-3<0$ (decreasing).\n- For $x>1$, pick $x=2$: $f'(2)=9>0$ (increasing).\nHence $x=-1$ is a local maximum, $x=1$ a local minimum.\n4. **Second derivative**: $f''(x)=6x$.  Set $f''(x)=0 \\Rightarrow x=0$.  Test sign: $f''(-1)=-6<0$ (concave down), $f''(1)=6>0$ (concave up).  So $(0,0)$ is an inflection point.\n5. **Plot**: Mark intercepts, max at $(-1,2)$, min at $(1,-2)$, inflection at $(0,0)$.  Draw a smooth S‑shaped curve passing through these points, increasing left of $-1$, decreasing between $-1$ and $1$, increasing right of $1$."
+  },
+  {
+   "level": "Medium",
+   "q": "Determine all intervals of concavity and the inflection points for $f(x)=\\frac{1}{x}$, $x\\neq0$.",
+   "a": "\n1. $f'(x)=-\\frac{1}{x^2}$.\n2. $f''(x)=\\frac{2}{x^3}$.\n3. Set $f''(x)=0$: $\\frac{2}{x^3}=0$ has no solution, so there is **no** point where $f''$ is zero.\n4. Sign of $f''$:\n- For $x>0$, $x^3>0 \\Rightarrow f''(x)>0$ → concave up on $(0,\\infty)$.\n- For $x<0$, $x^3<0 \\Rightarrow f''(x)<0$ → concave down on $(-\\infty,0)$.\n5. Because the sign changes at $x=0$, which is not in the domain, there is **no inflection point** on the graph."
+  },
+  {
+   "level": "Hard",
+   "q": "For $f(x)=x^4-4x^3+6x^2$, find all critical points, classify each as a local max, min, or neither, and determine the intervals of increase/decrease and concavity. Sketch a rough graph.",
+   "a": "\n1. **First derivative**: $f'(x)=4x^3-12x^2+12x=4x(x^2-3x+3)$.\n2. Solve $f'(x)=0$: $x=0$ or $x^2-3x+3=0$.  The quadratic discriminant $D=9-12=-3<0$, so no real roots.  Thus the only critical point is $x=0$.\n3. **Second derivative**: $f''(x)=12x^2-24x+12=12(x^2-2x+1)=12(x-1)^2$.\n- $f''(0)=12(1)=12>0$, so the graph is concave up at $x=0$.\n4. **Classify $x=0$**: Since $f'(x)$ changes sign?  Test $x=-1$: $f'(-1)=4(-1)[1+3+3]= -4*7<0$.  Test $x=1$: $f'(1)=4*1[1-3+3]=4>0$.  So $f'$ goes from negative to positive → local **minimum** at $x=0$.\n5. **Increase/Decrease**:\n- $f'(x)<0$ for $x<0$ (as shown).\n- $f'(x)>0$ for $x>0$ (since the quadratic factor is always positive).\nHence decreasing on $(-\\infty,0)$, increasing on $(0,\\infty)$.\n6. **Concavity**: $f''(x)=12(x-1)^2\\ge0$ for all $x$, and equals $0$ only at $x=1$.  Because the square never changes sign, the graph is **concave up everywhere**; $x=1$ is a point where $f''=0$ but no sign change, so **not an inflection point**.\n7. **Intercepts**: $f(0)=0$ (y‑intercept).  Solve $f(x)=0$: $x^2(x^2-4x+6)=0 \\Rightarrow x=0$ (double root) and the quadratic $x^2-4x+6=0$ has discriminant $16-24<0$, so no other real x‑intercepts.\n8. **Sketch**: Plot the minimum at $(0,0)$, note the function is decreasing left of the origin, increasing right of it, and always concave up. The curve looks like a “U” that is steeper on the right side because of the $x^4$ term."
+  },
+  {
+   "level": "Hard",
+   "q": "A function $g$ satisfies $g'(x)=\\frac{x-2}{(x+1)^2}$ and $g(0)=3$. (a) Find $g(x)$. (b) Locate all critical points and determine their nature. (c) State the intervals where $g$ is increasing or decreasing and where it is concave up or down.",
+   "a": "\n**(a) Integrate $g'(x)$**\n\\[\ng(x)=\\int \\frac{x-2}{(x+1)^2}\\,dx + C.\n\\]\nWrite the integrand as a sum of simpler fractions:\n\\[\n\\frac{x-2}{(x+1)^2}= \\frac{(x+1)-3}{(x+1)^2}= \\frac{1}{x+1}-\\frac{3}{(x+1)^2}.\n\\]\nNow integrate:\n\\[\n\\int\\frac{1}{x+1}\\,dx = \\ln|x+1|,\\qquad\n\\int\\frac{-3}{(x+1)^2}\\,dx = \\frac{3}{x+1}.\n\\]\nThus\n\\[\ng(x)=\\ln|x+1|+\\frac{3}{x+1}+C.\n\\]\nUse $g(0)=3$:\n\\[\n3 = \\ln|1|+\\frac{3}{1}+C = 0+3+C \\Rightarrow C=0.\n\\]\nSo\n\\[\n\\boxed{g(x)=\\ln|x+1|+\\frac{3}{x+1}}.\n\\]\n**(b) Critical points** – set $g'(x)=0$:\n\\[\n\\frac{x-2}{(x+1)^2}=0 \\Longrightarrow x-2=0 \\Longrightarrow x=2.\n\\]\nDomain restriction: $x\\neq -1$.  Only critical point at $x=2$.\nSecond derivative:\n\\[\ng''(x)=\\frac{d}{dx}\\!\\left(\\frac{x-2}{(x+1)^2}\\right)\n=\\frac{(1)(x+1)^2-(x-2)2(x+1)}{(x+1)^4}\n=\\frac{(x+1)-2(x-2)}{(x+1)^3}\n=\\frac{x+1-2x+4}{(x+1)^3}\n=\\frac{5-x}{(x+1)^3}.\n\\]\nEvaluate at $x=2$: $g''(2)=\\frac{5-2}{3^3}= \\frac{3}{27}>0$, so the graph is concave up there and the critical point is a **local minimum**.\n**(c) Increasing / decreasing**\nSign of $g'(x)=\\frac{x-2}{(x+1)^2}$: denominator $(x+1)^2$ is always positive (except $x=-1$).\n- For $x<2$ (but $x\\neq -1$), numerator $x-2<0$ → $g'(x)<0$ → decreasing.\n- For $x>2$, numerator $x-2>0$ → $g'(x)>0$ → increasing.\n**Concavity** – sign of $g''(x)=\\frac{5-x}{(x+1)^3}$:\n- Denominator $(x+1)^3$ keeps the sign of $(x+1)$.\n- Critical sign change when numerator $5-x=0 \\Rightarrow x=5$.\nTest intervals:\n| Interval | sign of $(5-x)$ | sign of $(x+1)^3$ | sign of $g''(x)$ | Concavity |\n|----------|----------------|-------------------|-----------------|-----------|\n| $(-\\infty,-1)$ | $+$ (since $x<5$) | negative | negative | concave down |\n| $(-1,5)$ | $+$ | positive | positive | concave up |\n| $(5,\\infty)$ | negative | positive | negative | concave down |\nThus a **point of inflection** occurs at $x=5$ (where $g''$ changes sign).\n**"
+  }
+ ],
+ "recap": "The lesson explains how to sketch a curve by first finding its intercepts, then locating critical points where the first derivative is zero or undefined. It shows how to classify those points using the first‑ or second‑derivative tests, determine intervals of increase and decrease, and identify concavity and inflection points with the second derivative. Finally, it combines all this information to draw a rough but accurate picture of the function's shape.",
+ "key_terms": [
+  {
+   "term": "intercept",
+   "meaning": "A point where the graph meets an axis; x‑intercept has y=0, y‑intercept has x=0."
+  },
+  {
+   "term": "critical point",
+   "meaning": "A value of x where f'(x)=0 or f' does not exist, indicating a possible max, min, or flat spot."
+  },
+  {
+   "term": "local maximum",
+   "meaning": "A point where the function value is higher than all nearby values."
+  },
+  {
+   "term": "local minimum",
+   "meaning": "A point where the function value is lower than all nearby values."
+  },
+  {
+   "term": "first‑derivative test",
+   "meaning": "A method that looks at the sign change of f' around a critical point to decide if it is a max or min."
+  },
+  {
+   "term": "second‑derivative test",
+   "meaning": "A method that uses the sign of f'' at a critical point: f''>0 gives a local minimum, f''<0 gives a local maximum."
+  },
+  {
+   "term": "increasing interval",
+   "meaning": "An interval where f'(x) is positive, so the function rises."
+  },
+  {
+   "term": "concave up",
+   "meaning": "A region where f''(x) is positive, the graph bends like a smile."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What do you set equal to zero to find x‑intercepts?",
+   "options": [
+    "f(x)",
+    "f'(x)",
+    "f''(x)",
+    "x"
+   ],
+   "answer": 0,
+   "why": "x‑intercepts are where the function value f(x) equals zero."
+  },
+  {
+   "q": "Which of the following is NOT a possible critical point?",
+   "options": [
+    "f'(c)=0",
+    "f' does not exist at c",
+    "f''(c)=0",
+    "c is in the domain of f"
+   ],
+   "answer": 2,
+   "why": "A critical point is defined by f'(c)=0 or f' undefined, not by f''(c)=0."
+  },
+  {
+   "q": "If f'(x) changes from positive to negative at x=c, what does the first‑derivative test say?",
+   "options": [
+    "local minimum",
+    "local maximum",
+    "point of inflection",
+    "no conclusion"
+   ],
+   "answer": 1,
+   "why": "The sign change positive→negative indicates a local maximum."
+  },
+  {
+   "q": "When f''(x) is negative on an interval, the graph is:",
+   "options": [
+    "increasing",
+    "decreasing",
+    "concave up",
+    "concave down"
+   ],
+   "answer": 3,
+   "why": "Negative second derivative means the graph is concave down."
+  },
+  {
+   "q": "A point where the concavity changes sign is called:",
+   "options": [
+    "critical point",
+    "local extremum",
+    "inflection point",
+    "intercept"
+   ],
+   "answer": 2,
+   "why": "An inflection point is where concavity switches from up to down or vice versa."
+  },
+  {
+   "q": "Which step comes first when sketching a curve?",
+   "options": [
+    "Identify concavity",
+    "Find intercepts",
+    "Locate critical points",
+    "Determine increasing intervals"
+   ],
+   "answer": 1,
+   "why": "Intercepts give fixed anchor points and are found first."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is an x‑intercept?",
+   "back": "A point (x0,0) where the function value f(x0)=0."
+  },
+  {
+   "front": "What is a y‑intercept?",
+   "back": "The point (0,f(0)) where the graph crosses the y‑axis."
+  },
+  {
+   "front": "Define a critical point.",
+   "back": "A number c in the domain where f'(c)=0 or f' does not exist."
+  },
+  {
+   "front": "How does the first‑derivative test classify a critical point?",
+   "back": "By checking the sign of f' on each side: + to - gives a local max, - to + gives a local min."
+  },
+  {
+   "front": "What does f''(x)>0 tell you about the graph?",
+   "back": "The graph is concave up on that interval."
+  },
+  {
+   "front": "What is a local maximum?",
+   "back": "A point where the function value is greater than all nearby values."
+  },
+  {
+   "front": "When is a function increasing?",
+   "back": "When its first derivative f'(x) is positive on an interval."
+  },
+  {
+   "front": "What is an inflection point?",
+   "back": "A point where the concavity of the graph changes sign."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l20-bridge-arch-shape",
+   "title": "A real bridge arch showing concave up curvature.",
+   "alt": "A real bridge arch showing concave up curvature.",
+   "priority": 9,
+   "picture_title": "Bridge Arch Shape",
+   "kind": "photo",
+   "subject": "A photograph of a stone or steel bridge arch that curves upward like a smile, illustrating the idea of a function that is concave up on an interval.",
+   "layout": "The bridge spans the frame horizontally; the arch is centered with a faint overlay arrow indicating the upward bend.",
+   "labels": [],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l20-roller-coaster-peaks",
+   "title": "A roller‑coaster track with a clear maximum and minimum.",
+   "alt": "A roller‑coaster track with a clear maximum and minimum.",
+   "priority": 8,
+   "picture_title": "Roller Coaster Peaks",
+   "kind": "photo",
+   "subject": "A side view of a roller‑coaster where the track rises to a high point (local maximum) then drops into a valley (local minimum), helping students visualise turning points.",
+   "layout": "The track runs left‑to‑right across the image; red circles mark the highest and lowest points.",
+   "labels": [
+    "local max",
+    "local min"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l20-increasing-vs-decreasing-slope",
+   "title": "A road that steepens then flattens, showing positive and negative slopes.",
+   "alt": "A road that steepens then flattens, showing positive and negative slopes.",
+   "priority": 6,
+   "picture_title": "Increasing vs Decreasing Slope",
+   "kind": "illustration",
+   "subject": "A simple illustration of a road on a hill: the left side climbs upward (positive slope, increasing function) and the right side descends (negative slope, decreasing function).",
+   "layout": "Road drawn from left to right with arrows indicating direction of travel; gradient arrows above the road show steepness.",
+   "labels": [
+    "increasing",
+    "decreasing"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Steps for Sketching a Curve",
+   "steps": [
+    {
+     "label": "Find intercepts",
+     "text": "Locate where the graph meets the axes."
+    },
+    {
+     "label": "Compute first derivative",
+     "text": "Identify critical points where f'(x)=0 or undefined."
+    },
+    {
+     "label": "Classify turning points",
+     "text": "Use first‑ or second‑derivative test to tell max or min."
+    },
+    {
+     "label": "Determine increase/decrease",
+     "text": "Check the sign of f'(x) on each interval."
+    },
+    {
+     "label": "Check concavity",
+     "text": "Use f''(x) to find concave up/down and inflection points."
+    },
+    {
+     "label": "Combine information",
+     "text": "Draw the rough sketch using all the pieces."
+    }
+   ],
+   "loop": false,
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "x‑intercept vs y‑intercept",
+   "left": {
+    "name": "x‑intercept",
+    "points": [
+     "Point where graph crosses the x‑axis",
+     "y‑coordinate is 0",
+     "Solve f(x)=0"
+    ]
+   },
+   "right": {
+    "name": "y‑intercept",
+    "points": [
+     "Point where graph crosses the y‑axis",
+     "x‑coordinate is 0",
+     "Evaluate f(0)"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "facts",
+   "title": "Critical Point Definition",
+   "items": [
+    {
+     "value": "f'(c)=0",
+     "label": "Derivative zero"
+    },
+    {
+     "value": "f' undefined",
+     "label": "Derivative does not exist"
+    },
+    {
+     "value": "c in domain of f",
+     "label": "Valid x‑value"
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "First‑Derivative Test Outcomes",
+   "items": [
+    {
+     "name": "Sign change + to –",
+     "role": "Local maximum"
+    },
+    {
+     "name": "Sign change – to +",
+     "role": "Local minimum"
+    },
+    {
+     "name": "No sign change",
+     "role": "Neither (flat spot)"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Example: f(x)=x^3‑3x",
+   "fn": "x^3-3*x",
+   "xmin": -3,
+   "xmax": 3,
+   "points": [
+    {
+     "x": -1,
+     "y": 2,
+     "label": "max",
+     "open": false
+    },
+    {
+     "x": 1,
+     "y": -2,
+     "label": "min",
+     "open": false
+    }
+   ],
+   "caption": "Shows intercepts, critical points, increase/decrease and concavity.",
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

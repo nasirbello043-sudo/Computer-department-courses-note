@@ -1,0 +1,377 @@
+{
+ "title": "Differentiating Special Functions",
+ "summary": "In this lesson students learn how to differentiate the three most common families of functions: trigonometric, exponential, and logarithmic. They will see the rules, practice them, and understand when each rule applies.",
+ "objectives": [
+  "differentiate basic sine, cosine, and tangent functions",
+  "differentiate exponential functions with any constant base",
+  "differentiate natural and common logarithm functions",
+  "apply the chain rule to compositions of these functions",
+  "solve real‑world rate problems using these derivatives"
+ ],
+ "prerequisites": "Students should already know basic differentiation rules for powers and the constant rule, and be familiar with the graphs of sin x, eˣ, and ln x.",
+ "why": [
+  "Derivatives of trigonometric, exponential, and logarithmic functions appear in physics (e.g., harmonic motion, radioactive decay, and growth models). Knowing these formulas lets you predict how quantities change over time.",
+  "In engineering and economics, these functions model waves, population growth, and interest rates. Being able to differentiate them is essential for optimization and for understanding dynamic systems."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Basic Rules",
+   "body": "When we talk about the **derivative** of a function we are asking: *how fast does the output change when the input changes a little bit?*  \nThink of driving a car. The speedometer tells you how many miles you travel in one hour. If you look at the speed at a particular moment, you are seeing the **instantaneous rate of change** of distance with respect to time – exactly what a derivative measures.\n\n---\n\n> **Definition:** The derivative of a function $f(x)$ with respect to $x$ is written $\\displaystyle\\frac{d}{dx}\\,f(x)$ and is defined as  \n> $$\\frac{d}{dx}f(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}.$$  \n> This limit captures the idea of “zooming in” until the curve looks like a straight line; the slope of that line is the derivative.\n\nIn practice we rarely compute the limit from scratch. Instead we use a handful of **basic rules** that tell us how to differentiate common algebraic expressions quickly. Below we recall three of the most useful ones.\n\n### 1. Power Rule  \n\nIf a function is a simple power of $x$, say $f(x)=x^{n}$ where $n$ is any real number, its derivative is obtained by **bringing the exponent down** and then **subtracting one** from the exponent:\n\n$$\\frac{d}{dx}x^{n}=n\\,x^{\\,n-1}.$$\n\nWhy does this work? Imagine $x^{n}$ as $x$ multiplied by itself $n$ times. When $x$ grows a tiny amount $h$, each factor contributes roughly $h$ to the total change, and there are $n$ such factors. The algebra of the limit formalises this intuition, leading to the formula above.\n\n> **Note:** The power rule works for positive integers, zero, negative integers, and even fractions (e.g., $x^{1/2}$).  \n\n### 2. Constant Multiple Rule  \n\nSuppose a function is a constant $c$ multiplied by another function $g(x)$: $f(x)=c\\;g(x)$. The derivative respects the constant:\n\n$$\\frac{d}{dx}\\bigl(c\\,g(x)\\bigr)=c\\,\\frac{d}{dx}g(x).$$\n\nIn words, scaling a whole graph up or down does not change *how* it slopes; it only scales the steepness by the same factor. If you double the height of a hill, the steepness at each point also doubles.\n\n> **In daily life:** If a recipe calls for twice as much sugar, the total sweetness doubles, but the way sweetness changes when you add a pinch stays proportional.\n\n### 3. Sum (and Difference) Rule  \n\nWhen two functions are added (or subtracted), we can differentiate each part separately:\n\n$$\\frac{d}{dx}\\bigl(g(x)+h(x)\\bigr)=\\frac{d}{dx}g(x)+\\frac{d}{dx}h(x),$$  \n$$\\frac{d}{dx}\\bigl(g(x)-h(x)\\bigr)=\\frac{d}{dx}g(x)-\\frac{d}{dx}h(x).$$\n\nThink of a playlist that mixes two songs. The overall volume at any moment is just the sum of the volumes of the individual tracks. Changing the volume of each track independently changes the total in the same way.\n\n> **Common mistake:** Forgetting to apply the sum rule when a function looks “complicated.” Always look for terms that are simply added or subtracted; differentiate them one by one.\n\n---\n\nPutting the three rules together lets us handle many algebraic expressions. For example, to differentiate  \n\n$$f(x)=3x^{4}-5x^{2}+7,$$\n\nfirst split the function into three separate terms (using the sum rule), then apply the constant multiple rule to each, and finally use the power rule:\n\n\\[\n\\frac{d}{dx}f(x)=3\\cdot\\frac{d}{dx}x^{4}-5\\cdot\\frac{d}{dx}x^{2}+ \\frac{d}{dx}7\n=3\\cdot4x^{3}-5\\cdot2x^{1}+0\n=12x^{3}-10x.\n\\]\n\nNotice the constant $7$ disappears because the derivative of any constant is zero – a special case of the constant multiple rule with $c=0$.\n\n> **Remember:** Whenever you see a polynomial or a sum of simple terms, break it down, apply the constant multiple rule, then the power rule, and finally combine the results with the sum rule. This systematic approach keeps mistakes to a minimum and builds confidence for the more advanced functions we will meet later.",
+   "code": ""
+  },
+  {
+   "heading": "2. Differentiating Trigonometric Functions",
+   "body": "When we talk about **differentiating** a function we are asking: *how fast does the function change at a particular point?*  \nFor the three basic trigonometric functions – sine, cosine and tangent – the rates of change have simple, memor‑able forms. Knowing these formulas lets us handle many physics and engineering problems, such as describing the speed of a pendulum or the voltage in an alternating‑current circuit.\n\n> **Definition:** The derivative of a function $f(x)$, written $\\dfrac{d}{dx}f(x)$ or $f'(x)$, is the limit of the average rate of change as the interval shrinks to zero.  \n\nIn the case of trigonometric functions the limit can be evaluated using geometry on the unit circle. The key results are:\n\n$$\\frac{d}{dx}\\bigl(\\sin x\\bigr)=\\cos x,$$\n$$\\frac{d}{dx}\\bigl(\\cos x\\bigr)=-\\sin x,$$\n$$\\frac{d}{dx}\\bigl(\\tan x\\bigr)=\\sec^{2}x.$$\n\nThese three formulas are the **foundation** for all later work with trigonometric derivatives.\n\n### Why the formulas are true\n\nImagine a point moving around a unit circle (radius = 1) at an angle $x$ measured from the positive $x$‑axis. Its coordinates are $(\\cos x,\\;\\sin x)$. If $x$ increases a tiny amount $\\Delta x$, the point moves a short arc length $\\Delta s \\approx \\Delta x$ (because the radius is 1).  \n\nThe change in the $y$‑coordinate is $\\Delta(\\sin x) \\approx \\cos x\\,\\Delta x$, because the slope of the circle at that point is $\\cos x$. Dividing by $\\Delta x$ and letting $\\Delta x\\to0$ gives the derivative $\\cos x$. A similar geometric argument gives the derivative of $\\cos x$ as $-\\sin x$, and using the quotient rule $\\tan x = \\dfrac{\\sin x}{\\cos x}$ leads to $\\sec^{2}x$.\n\n> **In daily life:** Think of a Ferris wheel. The height of a seat as a function of time is a sine curve. The derivative tells you the vertical speed of the seat at any instant – when the seat is at the highest point, the derivative (speed) is zero because the seat momentarily stops moving upward.\n\n### Worked examples\n\n**Example 1 (Easy): Find $\\dfrac{d}{dx}\\bigl[\\sin x\\bigr]$.**  \n\n1. Identify the function as $\\sin x$, whose derivative rule we have just stated.  \n2. Apply the rule directly: replace $\\sin x$ with its derivative $\\cos x$.  \n3. Write the result as a displayed equation.  \n\n$$\\frac{d}{dx}\\bigl(\\sin x\\bigr)=\\cos x.$$\n\n**Answer:** The rate of change of $\\sin x$ with respect to $x$ is $\\cos x$.\n\n---\n\n**Example 2 (Easy): Find $\\dfrac{d}{dx}\\bigl[3\\cos x\\bigr]$.**  \n\n1. Recognize the constant multiple rule: the derivative of a constant times a function equals the constant times the derivative of the function.  \n2. First differentiate $\\cos x$ using the basic rule $ \\dfrac{d}{dx}(\\cos x) = -\\sin x$.  \n3. Multiply the result by the constant $3$ and write it out.  \n\n$$\\frac{d}{dx}\\bigl(3\\cos x\\bigr)=3\\cdot\\frac{d}{dx}(\\cos x)=3\\cdot(-\\sin x)=-3\\sin x.$$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}[3\\cos x] = -3\\sin x.$\n\n### Extending the ideas\n\nNow that we have the three core derivatives, we can handle any expression built from $\\sin x$, $\\cos x$, and $\\tan x$ using the **sum rule** (derivative of a sum is the sum of the derivatives) and the **constant multiple rule** (already used above).  \n\nFor instance, to differentiate $f(x)=2\\sin x - 5\\cos x$, we treat each term separately:\n\n$$\\frac{d}{dx}\\bigl(2\\sin x - 5\\cos x\\bigr)=2\\frac{d}{dx}(\\sin x)-5\\frac{d}{dx}(\\cos x)=2\\cos x-5(-\\sin x)=2\\cos x+5\\sin x.$$\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting the negative sign when differentiating $\\cos x$. The derivative is $-\\sin x$, not $+\\sin x$. This error flips the sign of many later results, especially in physics where direction matters.\n\n### Quick memory aid\n\n> **Remember:** “Sine goes to cosine, cosine goes negative sine, tangent goes to sec‑squared.”  \n> You can picture the unit circle: moving a tiny angle turns the $y$‑coordinate (sine) into the $x$‑coordinate (cosine), while the $x$‑coordinate (cosine) turns into the negative $y$‑coordinate (‑sine). Tangent, being $\\sin/\\cos$, differentiates to the square of the secant, $\\sec^{2}=1/\\cos^{2}$.\n\n### Why we need these derivatives\n\nIn many real‑world models, angles change with time. A simple pendulum’s angular position might be $θ(t)=\\sin(ωt)$, where $ω$ is the angular frequency. Its angular velocity is $θ'(t)=ω\\cos(ωt)$, obtained by applying the chain rule together with the derivative of $\\sin$. Without the basic trigonometric derivative formulas, we could not compute such velocities or accelerations.\n\nBy mastering these three formulas, you now have a toolbox that will let you differentiate any combination of sine, cosine, and tangent quickly and correctly. The next sections will show how to combine them with exponential and logarithmic functions, and how to use the chain rule when the angle itself is a more complicated function of $x$.",
+   "code": ""
+  },
+  {
+   "heading": "3. Differentiating Exponential Functions",
+   "body": "When we talk about an **exponential function** we mean a rule that raises a fixed number, called the *base*, to a variable power.  \nThe most common bases are the natural number $e\\approx2.71828$ and any positive constant $a>0$.  \nOur goal is to find a simple formula for the derivative – the instantaneous rate of change – of such functions.\n\n> **Definition:** The derivative of a function $f(x)$, written $f'(x)$ or $\\dfrac{d}{dx}f(x)$, measures how fast $f$ changes as $x$ changes by a tiny amount.\n\n---\n\n### 1.  Derivative of $a^{x}$ (any positive base)\n\nStart with the limit definition of the derivative:\n\n$$\n\\frac{d}{dx}a^{x}= \\lim_{h\\to0}\\frac{a^{x+h}-a^{x}}{h}.\n$$\n\nFactor out $a^{x}$, because it does not depend on $h$:\n\n$$\n\\frac{d}{dx}a^{x}= a^{x}\\,\\lim_{h\\to0}\\frac{a^{h}-1}{h}.\n$$\n\nThe remaining limit is a constant; it depends only on the base $a$.  \nWe call this constant $\\ln a$ (the *natural logarithm* of $a$). The natural logarithm is defined precisely as that limit:\n\n$$\n\\ln a = \\lim_{h\\to0}\\frac{a^{h}-1}{h}.\n$$\n\nTherefore\n\n$$\n\\boxed{\\frac{d}{dx}a^{x}=a^{x}\\ln a }.\n$$\n\n> **Note:** $\\ln a$ tells us how quickly the exponential $a^{x}$ grows. Larger bases give larger $\\ln a$ values.\n\n---\n\n### 2.  Special case $e^{x}$\n\nIf we choose the base $a=e$, the constant $\\ln e$ becomes\n\n$$\n\\ln e = 1,\n$$\n\nbecause the natural logarithm is the inverse of the exponential with base $e$. Substituting $\\ln e =1$ into the general rule gives\n\n$$\n\\boxed{\\frac{d}{dx}e^{x}=e^{x}}.\n$$\n\nIn words: the rate of change of $e^{x}$ at any point is exactly the same as its current value. This self‑replicating property makes $e^{x}$ especially useful in modelling continuous growth, such as population or compound interest.\n\n> **In daily life:** Think of a bank account that earns interest continuously. If the balance follows $e^{x}$, the amount of interest earned in the next instant equals the current balance – the account “grows by itself”.\n\n---\n\n### 3.  Constant factor rule\n\nOften the exponential function is multiplied by a constant, for example $k\\,a^{x}$ where $k$ does not depend on $x$. The derivative of a constant times a function follows directly from the *linearity* of differentiation:\n\n$$\n\\frac{d}{dx}\\bigl(k\\,a^{x}\\bigr)=k\\,\\frac{d}{dx}a^{x}=k\\,a^{x}\\ln a.\n$$\n\nThe constant $k$ simply stays in front; it does not affect the shape of the derivative.\n\n> **Remember:** When you see a constant multiplied by an exponential, keep the constant outside the derivative and apply the rule to the exponential part.\n\n---\n\n### Worked examples\n\n**Example 3 (Medium):** *Differentiate $5\\,e^{2x}$.*\n\nWe need the derivative of a constant $5$ times the exponential $e^{2x}$.\n\n1. **Apply the constant factor rule.**  \n   Keep $5$ outside and differentiate $e^{2x}$.\n\n   $$\n   \\frac{d}{dx}\\bigl(5\\,e^{2x}\\bigr)=5\\,\\frac{d}{dx}\\bigl(e^{2x}\\bigr).\n   $$\n\n2. **Use the chain rule for the inner function $2x$.**  \n   The derivative of $e^{u}$ with respect to $x$ is $e^{u}\\,u'$, where $u=2x$ and $u'=2$.\n\n   $$\n   \\frac{d}{dx}\\bigl(e^{2x}\\bigr)=e^{2x}\\cdot 2.\n   $$\n\n3. **Combine the pieces.**  \n\n   $$\n   5\\,\\bigl(e^{2x}\\cdot 2\\bigr)=10\\,e^{2x}.\n   $$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}\\bigl(5\\,e^{2x}\\bigr)=10\\,e^{2x}.$\n\n---\n\n**Example 4 (Medium):** *Differentiate $7^{x}$.*\n\nHere the base is $a=7$, not $e$, so we use the general formula $a^{x}\\ln a$.\n\n1. **Identify the base and apply the rule for $a^{x}$.**  \n\n   $$\n   \\frac{d}{dx}7^{x}=7^{x}\\ln 7.\n   $$\n\n2. **No extra factors are present, so the expression is already simplified.**  \n\n   $$\n   \\frac{d}{dx}7^{x}=7^{x}\\ln 7.\n   $$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}7^{x}=7^{x}\\,\\ln 7.$\n\n---\n\n### 4.  Why the rule matters\n\nKnowing that $\\dfrac{d}{dx}a^{x}=a^{x}\\ln a$ lets us handle many real‑world problems quickly.  \nIf a quantity grows proportionally to its current size, we can write it as $A(t)=A_{0}a^{t}$ and immediately find its growth rate $A'(t)=A_{0}a^{t}\\ln a$.  \nThe constant $\\ln a$ tells us the *percentage* increase per unit of $t$.\n\n> **Common mistake:** Forgetting the $\\ln a$ factor and writing $\\dfrac{d}{dx}a^{x}=a^{x}$. This is only true when $a=e$.\n\nWith the rule and the constant‑factor property, you can differentiate any expression that mixes exponentials, constants, and even more complicated inner functions using the chain rule. This foundation will be essential when we later study exponential models of population, radioactive decay, and electrical circuits.",
+   "code": ""
+  },
+  {
+   "heading": "4. Differentiating Logarithmic Functions",
+   "body": "When we talk about the **logarithm** we are really talking about the inverse of the exponential function.  \nIf $e^y = x$ then $y = \\ln x$; the symbol “$\\ln$” means “logarithm base $e$”.  \nBecause it undoes the exponential, the shape of the graph of $\\ln x$ is the mirror image of $e^x$ across the line $y=x$. This symmetry is the reason why the derivative of $\\ln x$ is so simple.\n\n> **Definition:** The natural logarithm $\\ln x$ is defined only for positive numbers $x>0$. Its graph rises slowly, never touching the vertical axis, and passes through the point $(1,0)$ because $\\ln 1 = 0$.\n\n### Derivative of $\\boldsymbol{\\ln x}$  \n\nThink of $\\ln x$ as the inverse of $e^x$. If $y=\\ln x$, then $e^y = x$. Differentiate both sides with respect to $x$ using implicit differentiation:\n\n1. Write the relationship: $e^{\\ln x}=x$.\n2. Differentiate both sides: the left side uses the chain rule, the right side becomes $1$.\n   $$\n   \\frac{d}{dx}\\big(e^{\\ln x}\\big)=\\frac{d}{dx}(x)\\quad\\Longrightarrow\\quad e^{\\ln x}\\cdot\\frac{d}{dx}(\\ln x)=1.\n   $$\n3. Since $e^{\\ln x}=x$, solve for $\\frac{d}{dx}(\\ln x)$:\n   $$\n   x\\cdot\\frac{d}{dx}(\\ln x)=1\\;\\Longrightarrow\\;\\frac{d}{dx}(\\ln x)=\\frac{1}{x}.\n   $$\n\nThus the slope of the curve $\\ln x$ at any point $x$ is simply the reciprocal $1/x$.\n\n> **Note:** The formula $\\displaystyle \\frac{d}{dx}\\ln x=\\frac{1}{x}$ holds only for $x>0$. For $x\\le 0$ the natural logarithm is not defined in the real number system, so the derivative does not exist there.\n\n### Derivative of a General Logarithm $\\boldsymbol{\\log_a x}$  \n\nA logarithm with any positive base $a\\neq1$ can be written in terms of the natural logarithm:\n\n$$\n\\log_a x = \\frac{\\ln x}{\\ln a}.\n$$\n\nHere $\\ln a$ is just a constant (the natural log of the base). Differentiating:\n\n1. Express $\\log_a x$ as a constant multiple of $\\ln x$.\n2. Pull the constant $\\frac{1}{\\ln a}$ outside the derivative.\n   $$\n   \\frac{d}{dx}\\big(\\log_a x\\big)=\\frac{1}{\\ln a}\\,\\frac{d}{dx}(\\ln x).\n   $$\n3. Replace $\\frac{d}{dx}(\\ln x)$ with $\\frac{1}{x}$ from the previous result.\n   $$\n   \\frac{d}{dx}\\big(\\log_a x\\big)=\\frac{1}{\\ln a}\\cdot\\frac{1}{x}\n   =\\frac{1}{x\\,\\ln a}.\n   $$\n\nAgain the domain restriction is $x>0$, because the logarithm is only defined for positive arguments.\n\n> **Remember:** No matter what base $a$ you choose (as long as $a>0$, $a\\neq1$), the derivative always looks like $\\displaystyle \\frac{1}{x\\ln a}$.\n\n### Worked Examples  \n\n**Example 5 (Medium):** Find $\\displaystyle \\frac{d}{dx}\\big[\\ln(3x)\\big]$.\n\n1. Identify the outer function $\\ln(u)$ with $u=3x$.  \n2. Apply the chain rule: derivative of $\\ln(u)$ is $\\frac{1}{u}$ times $u'$.\n   $$\n   \\frac{d}{dx}\\big[\\ln(3x)\\big]=\\frac{1}{3x}\\cdot\\frac{d}{dx}(3x).\n   $$\n3. Compute $u'=\\frac{d}{dx}(3x)=3$ and simplify.\n   $$\n   \\frac{1}{3x}\\cdot 3 = \\frac{1}{x}.\n   $$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}\\big[\\ln(3x)\\big]=\\frac{1}{x}$ for $x>0$.\n\n---\n\n**Example 6 (Hard):** Find $\\displaystyle \\frac{d}{dx}\\big[\\log_{2}(x^{2}+1)\\big]$.\n\n1. Write the logarithm in natural‑log form: $\\log_{2}(x^{2}+1)=\\dfrac{\\ln(x^{2}+1)}{\\ln 2}$.\n2. Pull the constant $\\frac{1}{\\ln 2}$ outside the derivative.\n   $$\n   \\frac{d}{dx}\\big[\\log_{2}(x^{2}+1)\\big]=\\frac{1}{\\ln 2}\\,\\frac{d}{dx}\\big[\\ln(x^{2}+1)\\big].\n   $$\n3. Differentiate $\\ln(x^{2}+1)$ using the chain rule: derivative is $\\frac{1}{x^{2}+1}$ times the derivative of the inside $x^{2}+1$, which is $2x$.\n   $$\n   \\frac{d}{dx}\\big[\\ln(x^{2}+1)\\big]=\\frac{1}{x^{2}+1}\\cdot 2x=\\frac{2x}{x^{2}+1}.\n   $$\n4. Combine the pieces.\n   $$\n   \\frac{1}{\\ln 2}\\cdot\\frac{2x}{x^{2}+1}= \\frac{2x}{(x^{2}+1)\\,\\ln 2}.\n   $$\n\n**Answer:** $\\displaystyle \\frac{d}{dx}\\big[\\log_{2}(x^{2}+1)\\big]=\\frac{2x}{(x^{2}+1)\\,\\ln 2}$ for all real $x$ (the argument $x^{2}+1$ is always positive, so the domain restriction is automatically satisfied).\n\n> **In daily life:** Logarithms turn multiplication into addition. When you differentiate a logarithm you are essentially measuring how fast a quantity that grows multiplicatively (like population or money with compound interest) is changing relative to its current size. The result $1/x$ tells you that larger values change more slowly in proportion to themselves.\n\n> **Common mistake:** Forgetting the domain restriction and writing the derivative for $x\\le0$. Always check that the argument of the logarithm is positive before applying the formula.",
+   "code": ""
+  },
+  {
+   "heading": "5. Chain Rule with Special Functions",
+   "body": "> **Definition:** The **chain rule** tells us how to differentiate a composition of two functions, \\(f(g(x))\\).  \n> It says that the derivative is the derivative of the outer function evaluated at the inner function, multiplied by the derivative of the inner function:  \n> $$\\frac{d}{dx}\\,f(g(x)) = f'\\bigl(g(x)\\bigr)\\;g'(x).$$  \n\nThink of the chain rule like a two‑step machine. First the inner part \\(g(x)\\) does something to the input \\(x\\). Then the outer part \\(f\\) works on the result of \\(g\\). To see how fast the whole machine changes, we need to know how fast each step changes and then multiply the two rates together.\n\n> **Note:** The rule works no matter how complicated the inner function is, as long as each piece is differentiable (has a derivative).\n\n### Applying the rule to trigonometric‑exponential compositions  \n\nSuppose we have \\(h(x)=\\sin\\!\\bigl(e^{3x}\\bigr)\\).  \nHere the **outer function** is \\(f(u)=\\sin u\\) and the **inner function** is \\(g(x)=e^{3x}\\).  \n\n**Example 7 (Hard): Differentiate \\(\\sin(e^{3x})\\)**  \n\nWe want \\(\\dfrac{d}{dx}\\bigl[\\sin(e^{3x})\\bigr]\\).\n\n1. **Identify the outer and inner functions.**  \n   - Outer: \\(f(u)=\\sin u\\) → \\(f'(u)=\\cos u\\).  \n   - Inner: \\(g(x)=e^{3x}\\) → we must differentiate \\(e^{3x}\\) next.  \n\n2. **Differentiate the inner function.**  \n   Use the rule for exponentials: \\(\\dfrac{d}{dx}e^{3x}=e^{3x}\\cdot 3\\).  \n   $$g'(x)=3\\,e^{3x}.$$\n\n3. **Apply the chain rule.**  \n   Multiply the outer derivative evaluated at the inner function by the inner derivative:  \n   $$\\frac{d}{dx}\\bigl[\\sin(e^{3x})\\bigr]=\\cos\\!\\bigl(e^{3x}\\bigr)\\;\\cdot\\;3\\,e^{3x}.$$\n\n**Answer:** \\(\\displaystyle \\frac{d}{dx}\\bigl[\\sin(e^{3x})\\bigr]=3\\,e^{3x}\\cos\\!\\bigl(e^{3x}\\bigr).\\)\n\nThe result shows three factors: the cosine of the exponential (the outer rate), the exponential itself, and the constant 3 coming from the inner linear factor.\n\n### Applying the rule to logarithmic‑trigonometric compositions  \n\nNow look at \\(k(x)=\\ln\\!\\bigl(5\\cos x\\bigr)\\).  \nThe outer function is \\(f(u)=\\ln u\\) with derivative \\(f'(u)=\\dfrac{1}{u}\\).  \nThe inner function is \\(g(x)=5\\cos x\\).\n\n**Example 8 (Hard): Differentiate \\(\\ln(5\\cos x)\\)**  \n\nFind \\(\\dfrac{d}{dx}\\bigl[\\ln(5\\cos x)\\bigr]\\).\n\n1. **Identify outer and inner parts.**  \n   - Outer: \\(f(u)=\\ln u\\) → \\(f'(u)=\\dfrac{1}{u}\\).  \n   - Inner: \\(g(x)=5\\cos x\\).  \n\n2. **Differentiate the inner function.**  \n   The derivative of \\(\\cos x\\) is \\(-\\sin x\\); the constant 5 stays in front:  \n   $$g'(x)=5\\;(-\\sin x)=-5\\sin x.$$\n\n3. **Apply the chain rule.**  \n   $$\\frac{d}{dx}\\bigl[\\ln(5\\cos x)\\bigr]=\\frac{1}{5\\cos x}\\;\\cdot\\;(-5\\sin x).$$  \n\n   Simplify the fraction: the 5’s cancel, leaving  \n   $$\\frac{d}{dx}\\bigl[\\ln(5\\cos x)\\bigr]=-\\frac{\\sin x}{\\cos x}.$$\n\n**Answer:** \\(\\displaystyle \\frac{d}{dx}\\bigl[\\ln(5\\cos x)\\bigr]=-\\tan x.\\)\n\nThe negative sign appears because the cosine function is decreasing where its slope is negative; the tangent function \\(\\tan x = \\dfrac{\\sin x}{\\cos x}\\) captures the ratio of the two basic trig functions.\n\n> **In daily life:** Imagine a car that first speeds up (inner function) and then goes through a gear that changes the speed (outer function). The overall acceleration you feel is the product of how fast the car is increasing its speed and how the gear amplifies that change.\n\n### A few more quick tips  \n\n- **Always write down the inner and outer functions before differentiating.** This prevents mixing up which derivative to use.  \n- **When the inner function has a constant factor**, keep it with the inner derivative; it will often cancel later, as we saw with the 5 in the logarithmic example.  \n- **If the outer function is a logarithm or exponential**, remember their simple derivatives: \\(\\dfrac{d}{dx}\\ln u = \\dfrac{u'}{u}\\) and \\(\\dfrac{d}{dx}e^{u}=e^{u}u'\\). These are just the chain rule written in a compact form.\n\n> **Common mistake:** Forgetting to multiply by the derivative of the inner function. For instance, writing \\(\\dfrac{d}{dx}\\sin(e^{3x}) = \\cos(e^{3x})\\) omits the crucial factor \\(3e^{3x}\\) and gives a completely wrong rate of change.\n\nWith the chain rule, any composition—no matter how many layers—can be untangled step by step. Practice by picking a function, labeling the layers, differentiating each layer, and then multiplying the results. Soon the process will feel as natural as following a recipe: list the ingredients (functions), prepare each one (differentiate), then combine them (multiply).",
+   "code": ""
+  },
+  {
+   "heading": "6. Real‑World Application: Growth and Oscillation",
+   "body": "The idea behind a **real‑world application** is to see how the derivative tells us the *instantaneous* rate of change of something that varies with time.  \nWhen a quantity grows or oscillates, the derivative gives its speed at any exact moment, just like a speedometer tells a driver how fast the car is moving right now.\n\n---\n\n> **Definition:** The *instantaneous growth rate* of a function $P(t)$ is its derivative $P'(t)$. It tells how fast the population is changing at the precise time $t$.\n\n> **In daily life:** Think of a bathtub filling with water. The water level $h(t)$ rises over time. The derivative $h'(t)$ is the flow rate of the faucet at that instant – if you glance at the faucet you can say “the water is coming in at about 3 L min\\(^{-1}\\) right now.”\n\n### 1. Exponential growth – population model  \n\nA common model for unrestricted population growth is  \n\n$$\nP(t)=P_{0}\\,e^{k t},\n$$  \n\nwhere  \n\n* $P_{0}$ is the initial population at time $t=0$,  \n* $k$ is the *growth constant* (units $ \\text{time}^{-1}$), and  \n* $e$ is the base of natural logarithms (≈ 2.71828).\n\nWhy does the derivative give the growth rate?  \nBecause the exponential function changes proportionally to its current size: each tiny time step adds a fraction $k$ of the present population. Differentiating captures exactly that proportional change.\n\nThe derivative is found using the rule $\\frac{d}{dt}e^{k t}=k e^{k t}$:\n\n$$\nP'(t)=P_{0}\\,k\\,e^{k t}=k\\,P(t).\n$$  \n\nSo the instantaneous growth rate is simply the constant $k$ multiplied by the current population.\n\n#### **Example 9 (Hard): Instantaneous growth rate of a growing town**  \nIf $P(t)=200\\,e^{0.04t}$ (people, $t$ in years), find the instantaneous growth rate at $t=5$.\n\n1. **Write the derivative formula.**  \n   Using $P'(t)=k\\,P(t)$ with $k=0.04$, we have  \n\n   $$P'(t)=0.04\\,P(t).$$\n\n2. **Evaluate $P(t)$ at $t=5$.**  \n   $$P(5)=200\\,e^{0.04\\cdot5}=200\\,e^{0.20}.$$\n\n3. **Multiply by $k$ to get the rate.**  \n   $$P'(5)=0.04\\bigl(200\\,e^{0.20}\\bigr)=8\\,e^{0.20}.$$\n\n**Answer:** The town’s population is increasing at $8\\,e^{0.20}\\approx 9.8$ people per year when $t=5$ years.  \n\n---\n\n> **Note:** The derivative of an exponential is never zero; exponential growth never stops unless something else (like limited resources) changes the model.\n\n### 2. Simple harmonic motion – oscillating object  \n\nA mass on a spring or a pendulum that swings back and forth can be described by a sine function  \n\n$$\ns(t)=A\\sin(\\omega t),\n$$  \n\nwhere  \n\n* $s(t)$ is the displacement from the equilibrium position,  \n* $A$ is the *amplitude* (maximum distance from equilibrium),  \n* $\\omega$ is the *angular frequency* (radians per second), and  \n* $t$ is time.\n\nThe derivative $s'(t)$ gives the **velocity** of the object at any instant. Differentiating $\\sin(\\omega t)$ uses the rule $\\frac{d}{dt}\\sin(u)=\\cos(u)\\,u'$:\n\n$$\ns'(t)=A\\omega\\cos(\\omega t).\n$$  \n\nThus the speed depends on both the amplitude and the frequency, and it reaches its maximum $A\\omega$ when $\\cos(\\omega t)=\\pm1$ (the object passes through the equilibrium point).\n\n#### **Example 10 (Hard): Velocity of a vibrating string**  \nFor $s(t)=0.5\\,\\sin(2\\pi t)$ (meters, $t$ in seconds), find the velocity at $t=0.25\\,$s.\n\n1. **Identify $A$ and $\\omega$.**  \n   Here $A=0.5$ m and $\\omega=2\\pi$ rad s\\(^{-1}\\).\n\n2. **Write the velocity formula.**  \n   $$v(t)=s'(t)=A\\omega\\cos(\\omega t)=0.5\\,(2\\pi)\\cos(2\\pi t).$$\n\n3. **Plug in $t=0.25$ s.**  \n   $$v(0.25)=0.5\\,(2\\pi)\\cos\\bigl(2\\pi\\cdot0.25\\bigr)\n           =\\pi\\cos\\!\\left(\\frac{\\pi}{2}\\right).$$  \n   Since $\\cos(\\pi/2)=0$,  \n\n   $$v(0.25)=\\pi\\cdot0=0\\ \\text{m s}^{-1}.$$\n\n**Answer:** The string’s velocity is $0\\,$m s\\(^{-1}\\) at $t=0.25$ s; it momentarily stops as it reaches the extreme of its motion.\n\n---\n\n> **Common mistake:** Forgetting to multiply by the inner derivative $u'$ when applying the chain rule. For $s(t)=A\\sin(\\omega t)$ the derivative is not just $A\\cos(\\omega t)$; the factor $\\omega$ must be included.\n\n### 3. Connecting the two ideas  \n\nBoth examples show the same principle: the derivative converts a description of *how* something changes (the function) into a description of *how fast* it changes at any instant (the derivative).  \n\n* In the population model, the derivative tells us the number of new individuals per unit time.  \n* In the oscillation model, the derivative tells us the instantaneous speed of the moving object.\n\nBecause the formulas are simple—just multiply by a constant ($k$ for growth, $A\\omega$ for motion)—we can quickly compute rates without needing to simulate the whole process.\n\n> **Remember:** Whenever you see a function of the form $C\\,e^{kt}$ or $A\\sin(\\omega t)$, the derivative will be $k$ times the original exponential, or $A\\omega\\cos(\\omega t)$ for the sine, respectively. This pattern lets you answer “how fast?” questions instantly.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Differentiate $f(x)=7\\sin x$.",
+   "a": "Apply the constant multiple rule and the derivative of $\\sin x$:\n\\[\nf'(x)=7\\cdot\\frac{d}{dx}(\\sin x)=7\\cos x.\n\\]"
+  },
+  {
+   "level": "Easy",
+   "q": "Find $\\displaystyle \\frac{d}{dx}\\bigl(\\ln(4x)\\bigr)$.",
+   "a": "Use the derivative of $\\ln u$:\n\\[\n\\frac{d}{dx}\\ln(4x)=\\frac{(4x)'}{4x}= \\frac{4}{4x}= \\frac{1}{x}.\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Differentiate $g(x)=e^{2x}\\cos(3x)$.",
+   "a": "Use the product rule: $(uv)'=u'v+uv'$.\n\\[\n\\begin{aligned}\nu &= e^{2x}, & u' &= 2e^{2x},\\\\\nv &= \\cos(3x), & v' &= -3\\sin(3x).\\\\[4pt]\ng'(x) &= u'v + uv' \\\\\n&= 2e^{2x}\\cos(3x) + e^{2x}\\bigl(-3\\sin(3x)\\bigr)\\\\\n&= e^{2x}\\bigl(2\\cos(3x)-3\\sin(3x)\\bigr).\n\\end{aligned}\n\\]"
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle \\frac{d}{dx}\\bigl(\\log_{5}(x^2+1)\\bigr)$.",
+   "a": "Apply the log‑base‑$a$ rule with $u(x)=x^2+1$:\n\\[\n\\frac{d}{dx}\\log_{5}(x^2+1)=\\frac{(x^2+1)'}{(x^2+1)\\ln 5}\n= \\frac{2x}{(x^2+1)\\ln 5}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "Find the derivative of $h(x)=\\displaystyle \\frac{\\sin(x^2)}{e^{x}}$.",
+   "a": "Use the quotient rule: $\\displaystyle \\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}$.\n\\[\n\\begin{aligned}\nu &= \\sin(x^2), & u' &= \\cos(x^2)\\cdot 2x = 2x\\cos(x^2),\\\\\nv &= e^{x},      & v' &= e^{x}.\\\\[4pt]\nh'(x) &= \\frac{(2x\\cos(x^2))e^{x} - \\sin(x^2)e^{x}}{(e^{x})^{2}}\\\\\n&= \\frac{e^{x}\\bigl(2x\\cos(x^2)-\\sin(x^2)\\bigr)}{e^{2x}}\\\\\n&= e^{-x}\\bigl(2x\\cos(x^2)-\\sin(x^2)\\bigr).\n\\end{aligned}\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A population follows $P(t)=\\displaystyle \\frac{1000}{1+9e^{-0.3t}}$. Find the instantaneous growth rate $P'(t)$.",
+   "a": "Differentiate using the quotient rule or rewrite as $P(t)=1000\\bigl(1+9e^{-0.3t}\\bigr)^{-1}$.\nLet $u(t)=1+9e^{-0.3t}$, then $P(t)=1000u^{-1}$.\n\\[\nu'(t)=9e^{-0.3t}(-0.3) = -2.7e^{-0.3t}.\n\\]\nNow apply the chain rule:\n\\[\nP'(t)=1000\\cdot(-1)u^{-2}\\cdot u'(t)\n= -1000\\,\\frac{-2.7e^{-0.3t}}{(1+9e^{-0.3t})^{2}}\n= \\frac{2700e^{-0.3t}}{(1+9e^{-0.3t})^{2}}.\n\\]\nThus the instantaneous growth rate is\n\\[\n\\boxed{P'(t)=\\displaystyle \\frac{2700e^{-0.3t}}{\\bigl(1+9e^{-0.3t}\\bigr)^{2}} }.\n\\]"
+  }
+ ],
+ "recap": "This lesson reviews how to find derivatives using basic rules, then gives the formulas for the derivatives of sine, cosine, tangent, exponential functions a^x and e^x, and the natural logarithm. It explains the chain rule for compositions of these special functions and shows how derivatives describe real‑world rates like growth and oscillation.",
+ "key_terms": [
+  {
+   "term": "Derivative",
+   "meaning": "The instantaneous rate of change of a function, found as the limit of average rates as the interval shrinks to zero."
+  },
+  {
+   "term": "Instantaneous rate of change",
+   "meaning": "The slope of the tangent line to the curve at a specific point, representing how fast the output changes at that exact input."
+  },
+  {
+   "term": "Chain rule",
+   "meaning": "A method for differentiating a composition f(g(x)): the derivative is f'(g(x)) times g'(x)."
+  },
+  {
+   "term": "Derivative of sin x",
+   "meaning": "cos x"
+  },
+  {
+   "term": "Derivative of a^x",
+   "meaning": "a^x times ln a, where a is a positive constant."
+  },
+  {
+   "term": "Derivative of ln x",
+   "meaning": "1/x for x greater than 0."
+  },
+  {
+   "term": "Exponential growth model",
+   "meaning": "P(t) = P0 * e^(k t), where the derivative P'(t) = k * P(t) gives the growth rate."
+  },
+  {
+   "term": "Tangent function derivative",
+   "meaning": "sec^2 x"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the derivative of cos x?",
+   "options": [
+    "-sin x",
+    "sin x",
+    "-cos x",
+    "cos x"
+   ],
+   "answer": 0,
+   "why": "The derivative of cosine is negative sine."
+  },
+  {
+   "q": "If f(x) = a^x, which constant appears in its derivative?",
+   "options": [
+    "a",
+    "ln a",
+    "e",
+    "1/a"
+   ],
+   "answer": 1,
+   "why": "The derivative is a^x * ln a."
+  },
+  {
+   "q": "Using the chain rule, what is the derivative of h(x) = sin(e^(3x))?",
+   "options": [
+    "cos(e^(3x)) * e^(3x)",
+    "cos(e^(3x)) * 3e^(3x)",
+    "e^(3x) * cos(3x)",
+    "3 * cos(e^(3x))"
+   ],
+   "answer": 1,
+   "why": "Derivative = cos(e^(3x)) * derivative of e^(3x) which is 3e^(3x)."
+  },
+  {
+   "q": "What is the derivative of ln x?",
+   "options": [
+    "x",
+    "1/x",
+    "ln x",
+    "e^x"
+   ],
+   "answer": 1,
+   "why": "The derivative of the natural logarithm is 1 divided by x."
+  },
+  {
+   "q": "For the exponential growth model P(t) = P0 * e^(k t), what is P'(t)?",
+   "options": [
+    "k * P0",
+    "k * e^(k t)",
+    "k * P(t)",
+    "P0 * e^(k t)"
+   ],
+   "answer": 2,
+   "why": "Differentiating gives k * P0 * e^(k t) which equals k * P(t)."
+  },
+  {
+   "q": "Which of the following is the derivative of tan x?",
+   "options": [
+    "sec x",
+    "sec^2 x",
+    "cot x",
+    "csc^2 x"
+   ],
+   "answer": 1,
+   "why": "The derivative of tangent is secant squared."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definition of derivative",
+   "back": "Limit of (f(x+h)-f(x))/h as h approaches 0; gives instantaneous rate of change."
+  },
+  {
+   "front": "Derivative of sin x",
+   "back": "cos x"
+  },
+  {
+   "front": "Derivative of cos x",
+   "back": "-sin x"
+  },
+  {
+   "front": "Derivative of tan x",
+   "back": "sec^2 x"
+  },
+  {
+   "front": "Derivative of a^x (a>0)",
+   "back": "a^x * ln a"
+  },
+  {
+   "front": "Derivative of e^x",
+   "back": "e^x"
+  },
+  {
+   "front": "Derivative of ln x (x>0)",
+   "back": "1/x"
+  },
+  {
+   "front": "Chain rule formula",
+   "back": "d/dx [f(g(x))] = f'(g(x)) * g'(x)"
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l16-pendulum-motion",
+   "title": "A swinging pendulum showing how sine and cosine describe its position over time.",
+   "alt": "A swinging pendulum showing how sine and cosine describe its position over time.",
+   "priority": 8,
+   "picture_title": "Pendulum Motion",
+   "kind": "illustration",
+   "subject": "A simple pendulum with a bob attached to a string, drawn at several positions to illustrate the sinusoidal path of its horizontal displacement.",
+   "layout": "Pendulum on the left, three snapshots of the bob at different angles arranged vertically with arrows pointing to a small sine wave graph beside each snapshot.",
+   "labels": [
+    "bob",
+    "string",
+    "pivot",
+    "angle",
+    "horizontal displacement"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l16-bacterial-growth-curve",
+   "title": "A culture of bacteria expanding exponentially, linked to the function eˣ.",
+   "alt": "A culture of bacteria expanding exponentially, linked to the function eˣ.",
+   "priority": 7,
+   "picture_title": "Bacterial Growth Curve",
+   "kind": "photo",
+   "subject": "A petri dish with a dense bacterial colony that becomes progressively larger in a series of three dishes, representing the rapid increase of an exponential function.",
+   "layout": "Three dishes placed side‑by‑side from left (small colony) to right (large colony), each labelled with the corresponding time point.",
+   "labels": [],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l16-chain-rule-machine",
+   "title": "Two‑step machine visualising f(g(x)) and the product of their derivatives.",
+   "alt": "Two‑step machine visualising f(g(x)) and the product of their derivatives.",
+   "priority": 6,
+   "picture_title": "Chain‑Rule Machine",
+   "kind": "labelled diagram",
+   "subject": "A schematic of a two‑stage conveyor: the first stage (g) transforms raw material, the second stage (f) refines it; arrows indicate the flow and the multiplication of rates.",
+   "layout": "Left box labelled g(x) feeding into right box labelled f(g(x)), with a separate small box showing g'(x) and f'(g(x)) multiplied together below.",
+   "labels": [
+    "g(x)",
+    "f(g(x))",
+    "g'(x)",
+    "f'(g(x))",
+    "product"
+   ],
+   "after": 5
+  },
+  {
+   "type": "graph",
+   "title": "Sine function and its slope",
+   "fn": "sin(x)",
+   "xmin": -6.28,
+   "xmax": 6.28,
+   "points": [
+    {
+     "x": 0,
+     "y": 0,
+     "label": "origin",
+     "open": false
+    }
+   ],
+   "caption": "The curve y=sin(x) with a tangent at x=0 showing the instantaneous rate of change (cos 0 = 1).",
+   "after": 1
+  },
+  {
+   "type": "graph",
+   "title": "Exponential function a^x (a>0)",
+   "fn": "2^x",
+   "xmin": -2,
+   "xmax": 3,
+   "points": [
+    {
+     "x": 0,
+     "y": 1,
+     "label": "1",
+     "open": false
+    }
+   ],
+   "caption": "y=2^x grows faster than a line; its derivative is 2^x·ln2.",
+   "after": 2
+  },
+  {
+   "type": "graph",
+   "title": "Natural logarithm",
+   "fn": "ln(x)",
+   "xmin": 0.1,
+   "xmax": 5,
+   "points": [
+    {
+     "x": 1,
+     "y": 0,
+     "label": "(1,0)",
+     "open": false
+    }
+   ],
+   "caption": "y=ln(x) rises slowly; its slope at any x is 1/x.",
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Applying the Chain Rule",
+   "steps": [
+    {
+     "label": "Identify inner function",
+     "text": "Find g(x) inside the composition."
+    },
+    {
+     "label": "Differentiate inner",
+     "text": "Compute g'(x)."
+    },
+    {
+     "label": "Identify outer function",
+     "text": "Write f(u) with u = g(x)."
+    },
+    {
+     "label": "Differentiate outer",
+     "text": "Find f'(u) and replace u by g(x)."
+    },
+    {
+     "label": "Multiply",
+     "text": "Result = f'(g(x))·g'(x)."
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Derivative of Trig vs Exponential",
+   "left": {
+    "name": "Trig functions",
+    "points": [
+     "d/dx sin x = cos x",
+     "d/dx cos x = -sin x",
+     "d/dx tan x = sec^2 x"
+    ]
+   },
+   "right": {
+    "name": "Exponential functions",
+    "points": [
+     "d/dx a^x = a^x·ln a",
+     "d/dx e^x = e^x",
+     "Base a>0, a≠1"
+    ]
+   },
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

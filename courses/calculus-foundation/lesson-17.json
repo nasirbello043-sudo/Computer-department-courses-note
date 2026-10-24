@@ -1,0 +1,365 @@
+{
+ "title": "Implicit Differentiation",
+ "summary": "Implicit differentiation lets us find dy/dx when y is hidden inside an equation rather than isolated. This technique extends differentiation to curves like circles and ellipses.",
+ "objectives": [
+  "differentiate equations where y appears implicitly",
+  "solve for dy/dx using algebraic manipulation",
+  "apply implicit differentiation to find slopes of tangent lines",
+  "use the method in related rates problems"
+ ],
+ "prerequisites": "Students should already know basic differentiation rules (power, product, chain rules) and how to solve simple algebraic equations.",
+ "why": [
+  "In physics and engineering, many relationships are given by equations such as x^2 + y^2 = r^2, where the variables are not solved for explicitly. Implicit differentiation provides a quick way to compute rates of change without rearranging the whole equation.",
+  "Real‑world examples include finding the speed of a shadow moving along a wall, the slope of a hill described by an ellipse, or how pressure changes with volume in thermodynamic formulas. Mastering this tool expands the kinds of problems you can solve."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of the Chain Rule",
+   "body": "When we talk about **differentiating** a function we mean finding how fast its output changes when its input changes a little bit.  \nSometimes the function we are given is not just a single “layer’’ of $x$, but a **composition** of several layers: one function is plugged into another.  \n\n> **Definition:** A *composite function* is a function formed by putting one function inside another, written as $f(g(x))$.  \n> **Note:** The inner function $g$ is applied first, then the outer function $f$ uses the result.\n\n---\n\n### Why we need a special rule\n\nIf $y = f(g(x))$, the change in $y$ comes from two sources:\n\n1. How fast $g(x)$ changes with $x$ (the inner change).  \n2. How fast $f(u)$ changes with its own input $u$, evaluated at $u = g(x)$ (the outer change).\n\nIf we tried to treat $f(g(x))$ as a single function and differentiate directly, we would miss the contribution of the inner change. The **Chain Rule** tells us exactly how to combine the two rates of change.\n\n---\n\n### The Chain Rule statement\n\nIf $y = f(g(x))$ and both $f$ and $g$ are differentiable, then  \n\n$$\n\\frac{dy}{dx}=f'(g(x))\\;g'(x).\n$$\n\nIn words: *the derivative of the whole composition equals the derivative of the outer function evaluated at the inner function, multiplied by the derivative of the inner function.*  \n\nThink of it as a **gear system**: the inner gear $g$ turns a little, and that motion is transferred to the outer gear $f$. The overall speed is the product of the two individual speeds.\n\n---\n\n### Step‑by‑step example\n\nConsider $y = \\sin\\!\\bigl(3x^2+1\\bigr)$.  \nIdentify the layers:\n\n* Inner function: $g(x)=3x^2+1$.  \n* Outer function: $f(u)=\\sin u$, where $u=g(x)$.\n\nNow apply the rule:\n\n1. Differentiate the outer part: $f'(u)=\\cos u$.  \n2. Replace $u$ by the inner function: $f'(g(x)) = \\cos(3x^2+1)$.  \n3. Differentiate the inner part: $g'(x)=6x$.  \n\nMultiply them:\n\n$$\n\\frac{dy}{dx}= \\cos(3x^2+1)\\cdot 6x = 6x\\cos(3x^2+1).\n$$\n\nYou can check this by first expanding the composition (which is impossible here) and then differentiating; the result would be the same.\n\n---\n\n### Another everyday comparison\n\nImagine you are walking on a moving walkway at an airport. Your **speed relative to the ground** equals the speed you walk **relative to the walkway** plus the speed of the walkway itself. In the chain rule, the “walkway speed’’ is $g'(x)$, and the “walking speed’’ that depends on where you are on the walkway is $f'(g(x))$. The total speed is their product because the walkway’s motion scales how much your walking contributes.\n\n---\n\n### Common mistake to avoid\n\n> **Common mistake:** Forgetting to evaluate the outer derivative at the inner function.  \n> If we wrote $\\frac{dy}{dx}= \\cos x \\cdot 6x$ for the example above, we would be using $\\cos x$ instead of $\\cos(3x^2+1)$. That ignores the fact that the outer function sees the *output* of the inner function, not the original $x$.\n\n---\n\n### Quick checklist\n\n> **Remember:**  \n> 1. Identify inner and outer functions.  \n> 2. Differentiate the outer function **but do not replace its variable yet**.  \n> 3. Substitute the inner function into that derivative.  \n> 4. Multiply by the derivative of the inner function.\n\nWith this systematic approach, the chain rule becomes a reliable tool. It will later allow us to differentiate equations where $y$ is hidden inside another expression—exactly what we need for **implicit differentiation**.",
+   "code": ""
+  },
+  {
+   "heading": "2. Basic Implicit Differentiation",
+   "body": "When we have an equation that mixes \\(x\\) and \\(y\\), such as the circle  \n\n\\[\nx^{2}+y^{2}=25,\n\\]\n\nthe variable \\(y\\) is **not** standing alone; it depends on \\(x\\).  \nThink of \\(y\\) as a hidden function \\(y(x)\\) that we cannot write down explicitly.  \n**Implicit differentiation** means we differentiate the whole equation **with respect to \\(x\\)**, pretending that every occurrence of \\(y\\) is actually \\(y(x)\\).  \nWhenever we see a \\(y\\) we must also write a factor \\(\\dfrac{dy}{dx}\\) because of the chain rule (the rule for differentiating a composition of functions).\n\n> **Definition:** *Implicit differentiation* is the process of differentiating an equation that defines \\(y\\) implicitly as a function of \\(x\\), by applying \\(\\dfrac{d}{dx}\\) to each term and remembering that \\(\\dfrac{d}{dx}[y]=\\dfrac{dy}{dx}\\).\n\nWhy does this work?  \nIf \\(y\\) really is a function of \\(x\\), then any change in \\(x\\) will cause a change in \\(y\\). The derivative \\(\\dfrac{dy}{dx}\\) measures exactly that rate of change. By differentiating both sides of the equation, we create an algebraic relation that includes \\(\\dfrac{dy}{dx}\\). Solving that relation gives us the slope of the curve at any point.\n\nA everyday comparison: imagine a rope tied to a moving cart (the \\(x\\)-direction). The height of the rope above the ground is \\(y\\). As the cart moves, the rope’s height changes. Differentiating the rope’s length equation with respect to the cart’s position tells us how steep the rope is at each point—just what \\(\\dfrac{dy}{dx}\\) represents.\n\n---\n\n### Step‑by‑step procedure\n\n1. **Write the original equation.**  \n2. **Apply \\(\\dfrac{d}{dx}\\) to every term.** Remember:\n   * The derivative of a constant is \\(0\\).  \n   * For a term that contains \\(y\\), use the chain rule: treat \\(y\\) as \\(y(x)\\) and multiply by \\(\\dfrac{dy}{dx}\\).  \n3. **Collect all \\(\\dfrac{dy}{dx}\\) terms on one side.**  \n4. **Solve algebraically for \\(\\dfrac{dy}{dx}\\).**  \n\nWe now see this method in action.\n\n---\n\n**Example 1 (Easy): Differentiate \\(x^{2}+y^{2}=25\\) to find \\(\\dfrac{dy}{dx}\\).**  \n\n1. Differentiate each term with respect to \\(x\\).  \n   $$\\frac{d}{dx}\\bigl(x^{2}\\bigr)+\\frac{d}{dx}\\bigl(y^{2}\\bigr)=\\frac{d}{dx}(25)$$  \n\n2. Compute the derivatives, remembering the chain rule for \\(y^{2}\\).  \n   $$2x+2y\\frac{dy}{dx}=0$$  \n\n3. Isolate \\(\\dfrac{dy}{dx}\\).  \n   $$2y\\frac{dy}{dx}=-2x\\qquad\\Longrightarrow\\qquad\\frac{dy}{dx}=-\\frac{x}{y}$$  \n\n**Answer:** \\(\\displaystyle \\frac{dy}{dx}=-\\frac{x}{y}\\).  \nThe slope at any point \\((x,y)\\) on the circle is the negative ratio of the coordinates.\n\n---\n\n**Example 2 (Easy): Differentiate \\(xy=6\\) to find \\(\\dfrac{dy}{dx}\\).**  \n\n1. Differentiate both sides with respect to \\(x\\).  \n   $$\\frac{d}{dx}(xy)=\\frac{d}{dx}(6)$$  \n\n2. Use the product rule for the left side (the derivative of a product \\(u\\!v\\) is \\(u'v+uv'\\)).  \n   $$x\\frac{dy}{dx}+y=0$$  \n\n3. Solve for \\(\\dfrac{dy}{dx}\\).  \n   $$x\\frac{dy}{dx}=-y\\qquad\\Longrightarrow\\qquad\\frac{dy}{dx}=-\\frac{y}{x}$$  \n\n**Answer:** \\(\\displaystyle \\frac{dy}{dx}=-\\frac{y}{x}\\).  \nOn the hyperbola defined by \\(xy=6\\), the slope at any point is the negative reciprocal of the coordinate ratio.\n\n> **Note:** Whenever a term contains \\(y\\) alone, its derivative is \\(\\dfrac{dy}{dx}\\); when it contains \\(y\\) multiplied by something else, apply the product rule as shown.\n\n> **Common mistake:** Forgetting the extra \\(\\dfrac{dy}{dx}\\) factor for a term like \\(y^{2}\\) or \\(y\\). The derivative of \\(y^{2}\\) is **not** \\(2y\\) but \\(2y\\frac{dy}{dx}\\) because \\(y\\) changes with \\(x\\).\n\n> **Remember:** After differentiating, you always end up with an equation that includes \\(\\dfrac{dy}{dx}\\). The final step is purely algebraic—move terms, factor, and divide—to isolate the derivative.\n\nWith these steps, implicit differentiation becomes a reliable tool for finding slopes of curves that are given only implicitly. The next sections will show how to use the result to write equations of tangent lines and to solve related‑rates problems.",
+   "code": ""
+  },
+  {
+   "heading": "3. Solving for dy/dx",
+   "body": "When we differentiate an equation that defines $y$ implicitly, the derivative $dy/dx$ usually appears together with other terms.  \nThe goal of this step is to **collect every term that contains $dy/dx$ on one side of the equation** and then solve the resulting algebraic equation for $dy/dx$.  \nThink of it like gathering all the coins of the same colour into one pile before counting them.\n\n> **Note:**  “Collecting terms” means moving every piece that has $dy/dx$ to the left‑hand side (or right‑hand side) and moving everything else to the opposite side, using the same algebraic rules you already know (add, subtract, factor).\n\n---\n\n### Why we do this\n\nIf $dy/dx$ is mixed with other expressions, we cannot read its value directly. By isolating it, we turn the messy implicit derivative into a clean formula that can be evaluated at any point on the curve. This is exactly what we need when we later compute slopes of tangent lines or rates of change.\n\n---\n\n### General procedure\n\n1. **Differentiate** the whole original equation with respect to $x$, remembering to apply the chain rule whenever a $y$ is differentiated (because $y$ is a function of $x$).  \n2. **Identify** every term that contains the factor $dy/dx$.  \n3. **Move** all those terms to one side of the equation, using addition or subtraction.  \n4. **Factor** $dy/dx$ out of the left‑hand side.  \n5. **Divide** both sides by the remaining factor to solve for $dy/dx$.\n\n---\n\n## Worked examples\n\n**Example 3 (Medium):** *For $x^{2}y + y^{3} = 4$, find $dy/dx$.*\n\n1. Differentiate each term with respect to $x$.  \n   - The derivative of $x^{2}y$ uses the product rule:  \n   $$\\frac{d}{dx}(x^{2}y)=2x\\,y + x^{2}\\frac{dy}{dx}.$$  \n   - The derivative of $y^{3}$ uses the chain rule:  \n   $$\\frac{d}{dx}(y^{3})=3y^{2}\\frac{dy}{dx}.$$  \n   - The derivative of the constant $4$ is $0$.  \n\n   Putting them together:  \n   $$2x\\,y + x^{2}\\frac{dy}{dx} + 3y^{2}\\frac{dy}{dx}=0.$$\n\n2. Collect the terms that contain $dy/dx$ on one side.  \n   $$x^{2}\\frac{dy}{dx} + 3y^{2}\\frac{dy}{dx}= -2x\\,y.$$\n\n3. Factor $dy/dx$ out of the left‑hand side.  \n   $$\\left(x^{2}+3y^{2}\\right)\\frac{dy}{dx}= -2x\\,y.$$\n\n4. Divide by the factor in parentheses to solve for $dy/dx$.  \n   $$\\frac{dy}{dx}= \\frac{-2x\\,y}{\\,x^{2}+3y^{2}\\,}.$$\n\n**Answer:** $\\displaystyle \\frac{dy}{dx}= \\frac{-2xy}{x^{2}+3y^{2}}.$ This formula gives the slope of the curve at any point $(x,y)$ that satisfies $x^{2}y + y^{3}=4$.\n\n---\n\n**Example 4 (Medium):** *Differentiate $\\sin(xy)=x+y$ and solve for $dy/dx$.*\n\n1. Differentiate both sides with respect to $x$.  \n   - For the left side, use the chain rule: the outer function is $\\sin(u)$ with $u=xy$, so  \n   $$\\frac{d}{dx}\\sin(xy)=\\cos(xy)\\,\\frac{d}{dx}(xy).$$  \n   - The derivative of $xy$ again needs the product rule:  \n   $$\\frac{d}{dx}(xy)=y + x\\frac{dy}{dx}.$$  \n   Hence the left side becomes  \n   $$\\cos(xy)\\bigl(y + x\\frac{dy}{dx}\\bigr).$$  \n   - The right side differentiates to $1+\\frac{dy}{dx}$.\n\n   Putting everything together:  \n   $$\\cos(xy)\\bigl(y + x\\frac{dy}{dx}\\bigr)=1+\\frac{dy}{dx}.$$\n\n2. Expand the left side and bring all $dy/dx$ terms to one side.  \n   $$\\cos(xy)\\,y + \\cos(xy)\\,x\\frac{dy}{dx}=1+\\frac{dy}{dx}.$$  \n   Subtract $\\frac{dy}{dx}$ from both sides:  \n   $$\\cos(xy)\\,x\\frac{dy}{dx}-\\frac{dy}{dx}=1-\\cos(xy)\\,y.$$\n\n3. Factor $dy/dx$ out of the left‑hand side.  \n   $$\\left(\\cos(xy)\\,x-1\\right)\\frac{dy}{dx}=1-\\cos(xy)\\,y.$$\n\n4. Divide by the bracketed factor to isolate $dy/dx$.  \n   $$\\frac{dy}{dx}= \\frac{1-\\cos(xy)\\,y}{\\cos(xy)\\,x-1}.$$\n\n**Answer:** $\\displaystyle \\frac{dy}{dx}= \\frac{1-\\;y\\cos(xy)}{x\\cos(xy)-1}.$ This expression tells us the slope of the curve defined implicitly by $\\sin(xy)=x+y$ at any point $(x,y)$.\n\n---\n\n> **Remember:**  After differentiating, always **move all $dy/dx$ terms to one side**, factor them out, and then **divide**. Skipping any of these algebraic steps can lead to an incorrect slope.",
+   "code": ""
+  },
+  {
+   "heading": "4. Tangent Lines to Implicit Curves",
+   "body": "When we have an equation that defines a curve without solving for $y$ explicitly, we can still find the line that just touches the curve at a single point – the **tangent line**.  \nThe slope of that line is the derivative $\\displaystyle \\frac{dy}{dx}$ evaluated at the point of interest.  \nOnce the slope $m$ and the point $(x_0,y_0)$ are known, the tangent line is written with the point‑slope form  \n\n$$\ny-y_0 = m\\,(x-x_0).\n$$  \n\n> **Definition:** *Tangent line* – a straight line that meets a curve at one point and has the same instantaneous direction (slope) as the curve there.\n\n---\n\n### Why the derivative gives the slope of the tangent\n\nThink of a road that winds through hills. At any exact spot, the road has a direction you could point a compass toward. That direction is the road’s *instantaneous* slope. The derivative $\\frac{dy}{dx}$ measures exactly that instantaneous change of $y$ with respect to $x$. Therefore, at a specific point, the derivative equals the slope of the line that just “kisses” the curve – the tangent.\n\n---\n\n### Step‑by‑step procedure\n\n1. **Differentiate the whole equation implicitly** to obtain an expression for $\\displaystyle \\frac{dy}{dx}$ that may still contain $x$ and $y$.  \n2. **Plug the coordinates of the given point** into that expression; solve for the numeric slope $m$.  \n3. **Write the tangent line** using the point‑slope formula $y-y_0=m(x-x_0)$.  \n\nWe now apply these steps in two worked examples.\n\n---\n\n**Example 5 (Hard): Tangent to an ellipse**  \nFind the equation of the tangent line to the ellipse  \n\n\\[\n\\frac{x^{2}}{9}+\\frac{y^{2}}{4}=1\n\\]\n\nat the point $(3,0)$.\n\n1. *Differentiate implicitly.*  \n   Treat both fractions as functions of $x$ and $y$, remembering that $y$ depends on $x$.  \n\n   $$\n   \\frac{2x}{9}+\\frac{2y}{4}\\frac{dy}{dx}=0\n   $$\n\n2. *Solve for $\\displaystyle \\frac{dy}{dx}$.*  \n   Isolate the derivative term and simplify.  \n\n   $$\n   \\frac{dy}{dx}= -\\frac{2x/9}{2y/4}= -\\frac{4x}{9y}\n   $$\n\n3. *Evaluate at $(3,0)$.*  \n   Substitute $x=3$, $y=0$ into the formula. Because $y=0$ appears in the denominator, we see the slope is undefined, which means the tangent is **vertical**. A vertical line has the equation $x = x_0$.\n\n   $$\n   x = 3\n   $$\n\n**Answer:** The tangent line to the ellipse at $(3,0)$ is the vertical line $x=3$.\n\n> **Note:** When the derivative becomes infinite (division by zero), the tangent line is vertical. Use $x=x_0$ instead of the point‑slope form.\n\n---\n\n**Example 6 (Hard): Tangent to a cubic curve**  \nFor the curve  \n\n\\[\nx^{3}+y^{3}=6xy,\n\\]\n\nfind the slope at the point $(2,2)$ and write the equation of the tangent line.\n\n1. *Differentiate implicitly.*  \n   Differentiate each term, remembering $\\frac{d}{dx}(y^{3})=3y^{2}\\frac{dy}{dx}$ and $\\frac{d}{dx}(6xy)=6\\bigl(y+x\\frac{dy}{dx}\\bigr)$.  \n\n   $$\n   3x^{2}+3y^{2}\\frac{dy}{dx}=6y+6x\\frac{dy}{dx}\n   $$\n\n2. *Collect the $\\displaystyle \\frac{dy}{dx}$ terms and solve for the derivative.*  \n\n   $$\n   3y^{2}\\frac{dy}{dx}-6x\\frac{dy}{dx}=6y-3x^{2}\n   $$\n\n   Factor $\\frac{dy}{dx}$:\n\n   $$\n   \\frac{dy}{dx}\\bigl(3y^{2}-6x\\bigr)=6y-3x^{2}\n   $$\n\n   Hence  \n\n   $$\n   \\frac{dy}{dx}= \\frac{6y-3x^{2}}{3y^{2}-6x}.\n   $$\n\n3. *Evaluate at $(2,2)$.*  \n\n   $$\n   \\frac{dy}{dx}\\Big|_{(2,2)}= \\frac{6(2)-3(2)^{2}}{3(2)^{2}-6(2)}\n   =\\frac{12-12}{12-12}= \\frac{0}{0}.\n   $$\n\n   The expression gives an indeterminate form, so we return to the original differentiated equation and substitute $x=2$, $y=2$ before solving for $\\frac{dy}{dx}$:\n\n   $$\n   3(2)^{2}+3(2)^{2}\\frac{dy}{dx}=6(2)+6(2)\\frac{dy}{dx}\n   $$\n\n   Simplify:\n\n   $$\n   12+12\\frac{dy}{dx}=12+12\\frac{dy}{dx}.\n   $$\n\n   Both sides are identical, meaning any slope satisfies the equation – the curve has a **horizontal tangent** at this point. The only consistent slope is $m=0$.\n\n4. *Write the tangent line.*  \n   Using $m=0$ and $(x_0,y_0)=(2,2)$:\n\n   $$\n   y-2 = 0\\,(x-2)\\quad\\Longrightarrow\\quad y=2.\n   $$\n\n**Answer:** The tangent line to $x^{3}+y^{3}=6xy$ at $(2,2)$ is the horizontal line $y=2$.\n\n> **Common mistake:** After obtaining $\\frac{dy}{dx}$, always substitute the point **before** simplifying the fraction. Substituting too early can lead to $0/0$ and loss of information, as seen above.\n\n---\n\n> **Remember:** The tangent line gives the best linear approximation to the curve near the chosen point. It is useful for estimating values, solving related‑rate problems, and understanding the local shape of the graph.",
+   "code": ""
+  },
+  {
+   "heading": "5. Implicit Differentiation in Related Rates",
+   "body": "When two quantities change together over time, we can often relate their rates by **differentiating an equation that connects them**.  \nIf the equation is not solved for one variable, we treat it *implicitly*: we differentiate each term with respect to time $t$, remembering that every variable that depends on $t$ brings a factor $\\dfrac{dx}{dt}$ (or $\\dfrac{dy}{dt}$, etc.). This is exactly the same idea as implicit differentiation for $y$ as a function of $x$, but the “outside variable’’ is now time.\n\n> **Definition:** *Related rates* problems ask for the speed at which one quantity changes, given the speed of another, using a relationship that ties the quantities together.\n\nWhy does this work?  \nThink of a rubber sheet stretched over a frame. If you pull one corner, the whole sheet moves; the motion of any other point is linked to the motion you caused. The sheet’s equation (its shape) stays true at every instant, so differentiating it with respect to time tells us how the motions are linked.\n\n> **In daily life:** When a balloon inflates, its radius grows, and so does its surface area and volume. Knowing how fast the radius is increasing lets us compute how fast the volume is increasing, without measuring the volume directly.\n\n### Step‑by‑step procedure\n\n1. **Write down the relationship** between the quantities (often a geometric formula).  \n2. **Differentiate every term with respect to $t$**. Whenever a variable depends on $t$, multiply by its derivative $\\dfrac{d(\\text{variable})}{dt}$.  \n3. **Insert the known rates** (the given $\\dfrac{dx}{dt}$, $\\dfrac{dr}{dt}$, …).  \n4. **Solve for the unknown rate**.  \n\nBelow we apply the steps to two classic problems.\n\n---\n\n**Example 7 (Intermediate): Ladder sliding down a wall**  \nA 10 ft ladder leans against a vertical wall. The bottom slides away from the wall at $1\\ \\text{ft/s}$. Find how fast the top is descending when the bottom is $6\\ \\text{ft}$ from the wall.\n\n1. **Set up the geometric relation.**  \n   The ladder, wall, and ground form a right triangle, so  \n   $$x^{2}+y^{2}=L^{2},$$  \n   where $x$ = distance of the bottom from the wall, $y$ = height of the top, and $L=10\\ \\text{ft}$ is constant.\n\n2. **Differentiate with respect to $t$.**  \n   $$2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0,$$  \n   because $L$ does not change, so its derivative is $0$.\n\n3. **Plug in the known values.**  \n   $x=6\\ \\text{ft}$, $\\dfrac{dx}{dt}=1\\ \\text{ft/s}$, and we first find $y$ from the original triangle:  \n   $$y=\\sqrt{L^{2}-x^{2}}=\\sqrt{10^{2}-6^{2}}=\\sqrt{64}=8\\ \\text{ft}.$$  \n   Substituting,  \n   $$2(6)(1)+2(8)\\frac{dy}{dt}=0.$$\n\n4. **Solve for $\\dfrac{dy}{dt}$.**  \n   $$12+16\\frac{dy}{dt}=0\\quad\\Longrightarrow\\quad\\frac{dy}{dt}=-\\frac{12}{16}=-\\frac{3}{4}\\ \\text{ft/s}.$$\n\n**Answer:** The top of the ladder is descending at $0.75\\ \\text{ft/s}$ when the bottom is $6\\ \\text{ft}$ from the wall. The negative sign indicates downward motion.\n\n---\n\n> **Common mistake:** Forgetting to multiply by $\\dfrac{dx}{dt}$ (or $\\dfrac{dy}{dt}$) when differentiating a term that contains a variable depending on time. Always apply the chain rule, even in related‑rates problems.\n\n**Example 8 (Advanced): Expanding oil spill**  \nThe area $A$ of a circular oil spill satisfies $A=\\pi r^{2}$. The radius grows at $0.5\\ \\text{m/s}$. Find the rate at which the circumference $C=2\\pi r$ is changing when $r=4\\ \\text{m}$.\n\n1. **Write the two relationships.**  \n   $$A=\\pi r^{2},\\qquad C=2\\pi r.$$\n\n2. **Differentiate each with respect to $t$.**  \n   For the area:  \n   $$\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.$$  \n   For the circumference:  \n   $$\\frac{dC}{dt}=2\\pi\\frac{dr}{dt}.$$\n\n3. **Insert the given rate and the specific radius.**  \n   $\\dfrac{dr}{dt}=0.5\\ \\text{m/s}$ and $r=4\\ \\text{m}$.  \n   $$\\frac{dC}{dt}=2\\pi(0.5)=\\pi\\ \\text{m/s}.$$\n\n4. **Interpret the result.**  \n   The circumference is increasing at $\\pi\\ \\text{m/s}\\approx3.14\\ \\text{m/s}$ when the radius is $4\\ \\text{m}$.\n\n**Answer:** The spill’s circumference grows at about $3.14\\ \\text{m/s}$ at that instant.\n\n---\n\n> **Remember:** In related‑rates problems the *same* instant in time is used for all quantities. Always evaluate the known variables (like $x$, $y$, $r$) at the moment the question asks about before solving for the unknown rate.\n\n### Why implicit differentiation is essential here\n\nOften the relationship is not solved for the variable whose rate we need. For the ladder, solving $y=\\sqrt{L^{2}-x^{2}}$ first would work, but differentiating the unsolved equation $x^{2}+y^{2}=L^{2}$ avoids messy square‑root derivatives and keeps the algebra tidy. The same principle applies to many physics and engineering contexts where formulas are given implicitly.\n\nBy mastering this technique, you can tackle any problem where “something changes because something else changes,” from growing bacteria colonies to moving shadows. The key is to keep the chain rule in mind, treat time $t$ as the independent variable, and follow the four‑step recipe without skipping algebraic simplifications.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Differentiate the equation $x^2 + y = 7$ implicitly and solve for $\\displaystyle \\frac{dy}{dx}$.",
+   "a": "Differentiate term by term: $\\frac{d}{dx}(x^2)=2x$, $\\frac{d}{dx}(y)=\\frac{dy}{dx}$, $\\frac{d}{dx}(7)=0$.\nSo $2x + \\frac{dy}{dx}=0 \\;\\Longrightarrow\\; \\frac{dy}{dx}= -2x$."
+  },
+  {
+   "level": "Easy",
+   "q": "For the circle $x^2+y^2=9$, find the slope of the tangent line at the point $(2, \\sqrt5)$.",
+   "a": "Implicitly differentiate: $2x+2y\\frac{dy}{dx}=0 \\;\\Longrightarrow\\; \\frac{dy}{dx}= -\\frac{x}{y}$.\nPlug in $x=2$, $y=\\sqrt5$: $\\displaystyle \\frac{dy}{dx}= -\\frac{2}{\\sqrt5}= -\\frac{2\\sqrt5}{5}$."
+  },
+  {
+   "level": "Medium",
+   "q": "Implicitly differentiate $x^3y + y^2 = 4$ and solve for $\\displaystyle \\frac{dy}{dx}$.",
+   "a": "Differentiate each term:\n- $\\frac{d}{dx}(x^3y)=3x^2y + x^3\\frac{dy}{dx}$ (product rule).\n- $\\frac{d}{dx}(y^2)=2y\\frac{dy}{dx}$.\n- $\\frac{d}{dx}(4)=0$.\nThus $3x^2y + x^3\\frac{dy}{dx} + 2y\\frac{dy}{dx}=0$.\nCollect $\\frac{dy}{dx}$ terms: $\\bigl(x^3+2y\\bigr)\\frac{dy}{dx}= -3x^2y$.\nHence $\\displaystyle \\frac{dy}{dx}= -\\frac{3x^2y}{x^3+2y}$."
+  },
+  {
+   "level": "Medium",
+   "q": "A rectangular garden has area $A=xy=120\\ \\text{m}^2$. If the length $x$ is increasing at $3\\ \\text{m/s}$, find $\\displaystyle \\frac{dy}{dt}$ when $x=10\\ \\text{m}$.",
+   "a": "Differentiate $xy=120$ with respect to $t$: $x\\frac{dy}{dt}+y\\frac{dx}{dt}=0$.\nFirst find $y$ when $x=10$: $10y=120 \\Rightarrow y=12$.\nPlug values: $10\\frac{dy}{dt}+12(3)=0 \\Rightarrow 10\\frac{dy}{dt}+36=0$.\nThus $\\displaystyle \\frac{dy}{dt}= -\\frac{36}{10}= -3.6\\ \\text{m/s}$ (the width is decreasing)."
+  },
+  {
+   "level": "Hard",
+   "q": "Implicitly differentiate $e^{xy} + \\sin(y) = x^2$ and solve for $\\displaystyle \\frac{dy}{dx}$.",
+   "a": "Differentiate each term:\n- $\\frac{d}{dx}\\bigl(e^{xy}\\bigr)=e^{xy}\\cdot\\frac{d}{dx}(xy)=e^{xy}(y + x\\frac{dy}{dx})$ (chain + product).\n- $\\frac{d}{dx}\\bigl(\\sin y\\bigr)=\\cos y\\frac{dy}{dx}$.\n- $\\frac{d}{dx}(x^2)=2x$.\nSet up: $e^{xy}(y + x\\frac{dy}{dx}) + \\cos y\\frac{dy}{dx}=2x$.\nDistribute: $e^{xy}y + e^{xy}x\\frac{dy}{dx} + \\cos y\\frac{dy}{dx}=2x$.\nCollect $\\frac{dy}{dx}$ terms: $\\bigl(e^{xy}x + \\cos y\\bigr)\\frac{dy}{dx}=2x - e^{xy}y$.\nTherefore\n\\[\n\\boxed{\\displaystyle \\frac{dy}{dx}= \\frac{2x - e^{xy}y}{e^{xy}x + \\cos y}}.\n\\]"
+  },
+  {
+   "level": "Hard",
+   "q": "A conical tank with height $h=12\\,$m and radius $r=6\\,$m is being filled with water. The water depth $y$ and water radius $x$ satisfy $\\displaystyle \\frac{x}{y}= \\frac{r}{h}= \\frac{1}{2}$. If the water level is rising at $\\displaystyle \\frac{dy}{dt}=0.3\\,$m/min when $y=8\\,$m, find the rate at which the water volume $V=\\frac13\\pi x^2 y$ is changing.",
+   "a": "First relate $x$ and $y$: $x = \\frac{y}{2}$. Differentiate: $\\displaystyle \\frac{dx}{dt}= \\frac{1}{2}\\frac{dy}{dt}=0.15\\,$m/min.\nVolume: $V=\\frac13\\pi x^2 y$. Differentiate with respect to $t$ using product and chain rules:\n\\[\n\\frac{dV}{dt}= \\frac13\\pi\\bigl(2x\\frac{dx}{dt}\\,y + x^2\\frac{dy}{dt}\\bigr).\n\\]\nSubstitute $x=\\frac{y}{2}=4$ m (since $y=8$), $\\frac{dx}{dt}=0.15$, $\\frac{dy}{dt}=0.3$:\n\\[\n\\frac{dV}{dt}= \\frac13\\pi\\bigl(2\\cdot4\\cdot0.15\\cdot8 + 4^2\\cdot0.3\\bigr)\n= \\frac13\\pi\\bigl(8\\cdot0.15\\cdot8 + 16\\cdot0.3\\bigr)\n= \\frac13\\pi\\bigl(9.6 + 4.8\\bigr)\n= \\frac13\\pi(14.4)\n= 4.8\\pi\\ \\text{m}^3\\!/\\text{min}.\n\\]\nSo the water volume is increasing at $\\boxed{4.8\\pi\\ \\text{m}^3/\\text{min}}$."
+  }
+ ],
+ "recap": "Implicit differentiation lets us find dy/dx when y is defined by an equation with x, without solving for y explicitly. We apply the derivative to each term, using the chain rule whenever y appears, then solve algebraically for dy/dx. The resulting derivative gives the slope of tangent lines and is useful in related rates problems.",
+ "key_terms": [
+  {
+   "term": "Composite function",
+   "meaning": "A function formed by putting one function inside another, written as f(g(x))."
+  },
+  {
+   "term": "Chain rule",
+   "meaning": "A rule that says the derivative of f(g(x)) is f'(g(x)) * g'(x)."
+  },
+  {
+   "term": "Implicit differentiation",
+   "meaning": "Differentiating an equation that defines y implicitly as a function of x, treating y as y(x) and adding dy/dx wherever y appears."
+  },
+  {
+   "term": "dy/dx",
+   "meaning": "The derivative of y with respect to x, representing the slope of the curve at a point."
+  },
+  {
+   "term": "Tangent line",
+   "meaning": "A straight line that touches a curve at one point and has the same instantaneous slope as the curve there."
+  },
+  {
+   "term": "Related rates",
+   "meaning": "Problems that find how fast one quantity changes by differentiating a relationship between several changing quantities."
+  },
+  {
+   "term": "Point-slope form",
+   "meaning": "An equation of a line written as y - y0 = m (x - x0), where m is the slope and (x0, y0) is a point on the line."
+  },
+  {
+   "term": "Collecting terms",
+   "meaning": "Moving all expressions containing dy/dx to one side of an equation so that dy/dx can be isolated."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "If y is defined by x^2 + y^2 = 25, what is dy/dx after implicit differentiation?",
+   "options": [
+    "-x/y",
+    "x/y",
+    "-y/x",
+    "y/x"
+   ],
+   "answer": 0,
+   "why": "Differentiating gives 2x + 2y dy/dx = 0, so dy/dx = -x/y."
+  },
+  {
+   "q": "Which rule is used when differentiating f(g(x))?",
+   "options": [
+    "Product rule",
+    "Quotient rule",
+    "Chain rule",
+    "Power rule"
+   ],
+   "answer": 2,
+   "why": "The chain rule handles derivatives of composite functions."
+  },
+  {
+   "q": "In related rates, if volume V = (4/3) pi r^3 and dr/dt = 2, what is dV/dt when r = 3?",
+   "options": [
+    "24 pi",
+    "36 pi",
+    "48 pi",
+    "72 pi"
+   ],
+   "answer": 2,
+   "why": "dV/dt = 4 pi r^2 dr/dt = 4 pi *9 *2 = 72 pi."
+  },
+  {
+   "q": "The slope of the tangent line to a curve at (x0, y0) is:",
+   "options": [
+    "dy/dx evaluated at (x0, y0)",
+    "y0/x0",
+    "dx/dy evaluated at (x0, y0)",
+    "the second derivative"
+   ],
+   "answer": 0,
+   "why": "The derivative dy/dx gives the instantaneous slope at that point."
+  },
+  {
+   "q": "When solving for dy/dx, why do we move all terms with dy/dx to one side?",
+   "options": [
+    "To simplify the equation",
+    "To isolate dy/dx for solving",
+    "Because dy/dx must be positive",
+    "To apply the product rule"
+   ],
+   "answer": 1,
+   "why": "Collecting terms isolates dy/dx so we can solve for it algebraically."
+  },
+  {
+   "q": "If the equation x y + y^2 = 7 defines y implicitly, what is dy/dx?",
+   "options": [
+    "-y/(x+2y)",
+    "-x/(y+2x)",
+    "-x/(y+2y)",
+    "-y/(x+2x)"
+   ],
+   "answer": 0,
+   "why": "Differentiating gives y + x dy/dx + 2y dy/dx = 0, so dy/dx = -y/(x+2y)."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a composite function?",
+   "back": "A function formed by inserting one function into another, written as f(g(x))."
+  },
+  {
+   "front": "State the chain rule.",
+   "back": "If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x)."
+  },
+  {
+   "front": "Define implicit differentiation.",
+   "back": "Differentiating an equation that defines y implicitly as a function of x, treating y as y(x) and adding dy/dx wherever y appears."
+  },
+  {
+   "front": "How do you find the tangent line to an implicit curve at a point?",
+   "back": "First find dy/dx by implicit differentiation, evaluate it at the point to get the slope m, then use y - y0 = m (x - x0)."
+  },
+  {
+   "front": "What does dy/dx represent?",
+   "back": "The instantaneous rate of change of y with respect to x, i.e., the slope of the curve at a given point."
+  },
+  {
+   "front": "Explain related rates in one sentence.",
+   "back": "They are problems that find how fast one quantity changes by differentiating a relationship between several changing quantities."
+  },
+  {
+   "front": "Why do we collect terms containing dy/dx?",
+   "back": "To isolate dy/dx so we can solve for it and obtain a clear formula."
+  },
+  {
+   "front": "Write the point‑slope form of a line.",
+   "back": "y - y0 = m (x - x0), where m is the slope and (x0, y0) is a point on the line."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l17-fig1",
+   "title": "Circle with radius 5 and point (3,4) where dy/dx = -x/y = -3/4",
+   "alt": "Circle x^2 + y^2 = 25",
+   "priority": 10,
+   "kind": "drawn by code",
+   "after": 1,
+   "code": true
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l17-sliding-ladder",
+   "title": "A ladder leaning against a wall slides down, illustrating related rates and implicit differentiation.",
+   "alt": "A ladder leaning against a wall slides down, illustrating related rates and implicit differentiation.",
+   "priority": 9,
+   "picture_title": "Sliding Ladder",
+   "kind": "photo",
+   "subject": "A wooden ladder of known length rests against a vertical wall. As the bottom slides away, the top slides down, showing how the distances are linked by the ladder length.",
+   "layout": "The ladder is centered in the frame with the wall on the right; arrows indicate the directions of motion of the bottom and top points.",
+   "labels": [
+    "ladder length",
+    "bottom distance",
+    "top height",
+    "wall"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l17-inflating-balloon",
+   "title": "A balloon being inflated, used to model volume and radius changes in related‑rate problems.",
+   "alt": "A balloon being inflated, used to model volume and radius changes in related‑rate problems.",
+   "priority": 7,
+   "picture_title": "Inflating Balloon",
+   "kind": "photo",
+   "subject": "A clear latex balloon being blown up, showing the expanding spherical shape so students can relate radius growth to volume change.",
+   "layout": "The balloon is in the centre with a ruler beside it; a dotted line marks the radius from the centre to the surface.",
+   "labels": [
+    "radius",
+    "volume"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l17-gear-train",
+   "title": "Interlocking gears whose rotation speeds are linked, demonstrating implicit relationships between angular variables.",
+   "alt": "Interlocking gears whose rotation speeds are linked, demonstrating implicit relationships between angular variables.",
+   "priority": 6,
+   "picture_title": "Gear Train",
+   "kind": "illustration",
+   "subject": "Two meshed gears of different sizes rotating together, showing how the angular displacement of one gear determines the other's.",
+   "layout": "Two gears side‑by‑side; arrows indicate rotation direction; a line connects the teeth to highlight the contact point.",
+   "labels": [
+    "gear A",
+    "gear B",
+    "teeth contact"
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Implicit Differentiation Process",
+   "steps": [
+    {
+     "label": "Identify equation",
+     "text": "Write the relation involving x and y."
+    },
+    {
+     "label": "Differentiate both sides",
+     "text": "Take d/dx of every term, remembering dy/dx for each y."
+    },
+    {
+     "label": "Collect dy/dx terms",
+     "text": "Move all terms with dy/dx to one side."
+    },
+    {
+     "label": "Solve for dy/dx",
+     "text": "Factor out dy/dx and isolate it."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Finding the Tangent Line",
+   "steps": [
+    {
+     "label": "Compute slope",
+     "text": "Use dy/dx at the point to get m."
+    },
+    {
+     "label": "Point‑slope form",
+     "text": "Write y - y0 = m (x - x0)."
+    },
+    {
+     "label": "Simplify",
+     "text": "Arrange into y = mx + b if desired."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Explicit vs Implicit Differentiation",
+   "left": {
+    "name": "Explicit",
+    "points": [
+     "y is isolated as a function of x",
+     "Differentiate directly",
+     "No extra dy/dx factors"
+    ]
+   },
+   "right": {
+    "name": "Implicit",
+    "points": [
+     "y appears mixed with x",
+     "Differentiate whole equation",
+     "Each y brings a dy/dx factor"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "facts",
+   "title": "Key Numbers for the Circle Example",
+   "items": [
+    {
+     "value": "25",
+     "label": "Radius squared"
+    },
+    {
+     "value": "5",
+     "label": "Radius"
+    },
+    {
+     "value": "-3/4",
+     "label": "Slope dy/dx at (3,4)"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

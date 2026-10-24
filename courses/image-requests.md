@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
+Waiting: **17** | Uploaded: **41** | Covers waiting: **7**
 
 ## Course covers
 
@@ -278,31 +278,6 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
-## Organic Chemistry
-
-### Lesson 2: Structure of Carbon Compounds
-
-Save as:
-```
-organic-chemistry-l02-covalent-bond-sharing-2.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: Shows the overlap of two atomic orbitals with the shared electron pair between them, highlighting the concept of electron sharing that creates a covalent bond.
-
-Layout: Two atoms on opposite sides, their orbitals overlapping in the centre with a double‑headed arrow indicating the shared electron pair; labels point to each atom and the shared electrons.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Atom A"
-- "Atom B"
-- "Shared electrons"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
 ## Calculus Foundation
 
 ### Lesson 1: Exponents and Radicals
@@ -352,39 +327,30 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
+### Lesson 3: Equations and Inequalities
+
 Save as:
 ```
-calculus-foundation-l02-difference-of-squares-area.png
+calculus-foundation-l03-balancing-equation-scale.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A large square of side a is drawn, a smaller square of side b is removed, leaving an L‑shaped region that is split into two rectangles representing (a‑b) and (a+b).
+Show: A simple two‑pan balance with the variable x on one side and numbers on the other, arrows indicating the same operation applied to both pans.
 
-Layout: Large outer square with inner square cut out; the remaining L‑shape is divided by a line into two rectangles, each labelled with its dimensions.
+Layout: Scale centred, left pan labelled with the variable expression, right pan with constant expression, operation symbols placed above the pans.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "a²"
-- "b²"
-- "a‑b"
-- "a+b"
+- "x"
+- "constant"
+- "add"
+- "subtract"
+- "multiply"
+- "divide"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 4: Functions and Graphs
-
-Save as:
-```
-calculus-foundation-l04-vending-machine-analogy.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: A real vending machine with a coin slot, selection buttons, and a single snack compartment, illustrating the idea that each input leads to a single, definite output.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
 ### Lesson 5: Lines and Slope
@@ -408,53 +374,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-Save as:
-```
-calculus-foundation-l05-perpendicular-ramp-intersection.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A side view drawing of a ramp that rises at a 45° angle and meets a horizontal platform, highlighting the negative reciprocal relationship of their slopes.
-
-Layout: Ramp on the left, horizontal platform on the bottom, right angle marker at the junction, with slope labels on each line.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "slope 1"
-- "slope -1"
-- "right angle"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 7: Exponential and Logarithmic Functions
-
-Save as:
-```
-calculus-foundation-l07-bacterial-colony-growth.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: The photo shows a clear, circular bacterial colony that gets larger each day, illustrating how a quantity can multiply by the same factor in equal time intervals.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-### Lesson 8: Trigonometry Basics
-
-Save as:
-```
-calculus-foundation-l08-protractor-with-radian-marks.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: A close‑up view of a standard protractor where the outer edge is marked in degrees (0°–360°) and the inner edge is marked in radians (0–2π). This helps students see how the two units correspond on a familiar tool.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
 ### Lesson 9: Trigonometric Identities
@@ -491,4 +410,56 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 13: Differentiation from First Principles
+
+Save as:
+```
+calculus-foundation-l13-car-speedometer.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A close‑up photograph of a car speedometer displaying a numeric speed reading.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 17: Implicit Differentiation
+
+Save as:
+```
+calculus-foundation-l17-sliding-ladder.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A wooden ladder of known length rests against a vertical wall. As the bottom slides away, the top slides down, showing how the distances are linked by the ladder length.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 20: Curve Sketching
+
+Save as:
+```
+calculus-foundation-l20-bridge-arch-shape.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A photograph of a stone or steel bridge arch that curves upward like a smile, illustrating the idea of a function that is concave up on an interval.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 23: Definite Integrals
+
+Save as:
+```
+calculus-foundation-l23-water-filling-a-tank.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A clear container being poured with water, with a stopwatch showing elapsed time and a volume gauge indicating the increasing amount of water.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```

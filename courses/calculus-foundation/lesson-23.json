@@ -1,0 +1,382 @@
+{
+ "title": "Definite Integrals",
+ "summary": "In this lesson students learn how to evaluate definite integrals and interpret the meaning of the limits of integration. They will see how the area under a curve is calculated and how changing limits affects the result.",
+ "objectives": [
+  "Compute definite integrals using antiderivatives",
+  "Explain the role of the lower and upper limits",
+  "Apply the Fundamental Theorem of Calculus to find areas",
+  "Set up and solve real‑world problems involving total accumulation"
+ ],
+ "prerequisites": "Students should already know basic integration rules and how to find antiderivatives.",
+ "why": [
+  "Definite integrals give the exact total of quantities that change continuously, such as distance traveled from a speed graph or the amount of water flowing through a pipe.",
+  "Understanding limits of integration lets engineers, scientists, and economists calculate areas, volumes, and accumulated costs accurately, which is essential for design and decision‑making."
+ ],
+ "sections": [
+  {
+   "heading": "What a Definite Integral Represents",
+   "body": "Imagine you have a curve drawn on a piece of paper.  \nThe curve is the graph of a function $f(x)$, which tells you a height (the $y$‑value) for every horizontal position $x$.  \nNow pick two numbers on the horizontal axis, call them $a$ and $b$, with $a<b$.  \nYou want to know **how much space lies between the curve and the $x$‑axis from $x=a$ to $x=b$**.  \n\n> **Definition:** The *definite integral* of $f$ from $a$ to $b$, written $\\displaystyle\\int_{a}^{b} f(x)\\,dx$, is the exact total area that is bounded by the curve $y=f(x)$, the $x$‑axis, and the vertical lines $x=a$ and $x=b$.\n\nWhy do we need a special symbol for this area?  \nIf the curve were a straight line, the area would be a simple rectangle or triangle, and we could compute it with elementary geometry.  \nMost curves, however, are wavy: they bend up and down, sometimes crossing the $x$‑axis.  Adding up the tiny slivers of area under the curve becomes difficult to do by hand.  The definite integral packages this “adding up” into one compact notation.\n\nThink of the process like slicing a loaf of bread.  \nIf you cut the loaf into very thin slices, each slice has a tiny volume that is easy to measure.  \nAdding the volumes of all slices gives you the total volume of the loaf.  In the same way, we can cut the region under the curve into many thin vertical strips.  \nA strip at position $x$ has width $dx$ (an infinitesimally small change in $x$) and height $f(x)$.  \nIts tiny area is approximately $f(x)\\,dx$.  Summing all those tiny areas from $x=a$ to $x=b$ is exactly what the integral does.\n\nMathematically we write this sum as a limit of Riemann sums, but the integral sign $\\int$ already tells us to perform that limiting process.  \nThe symbol $\\int$ was chosen because it looks like a long “S”, standing for “sum”.\n\nIf the function stays **above** the $x$‑axis on the whole interval $[a,b]$, the integral’s value is a positive number equal to the geometric area.  \nIf the function is **below** the $x$‑axis, the integral gives a negative number; the magnitude still represents the area, but the sign tells us the region lies under the axis.  \nWhen the curve crosses the axis, the integral automatically subtracts the area below from the area above, giving a net signed area.\n\n> **Note:** The definite integral is *not* just a number; it also depends on the limits $a$ and $b$. Changing either limit changes the region you are measuring, and therefore changes the value of the integral.\n\nA simple example helps.  \nConsider $f(x)=x$ on the interval $[0,2]$.  \nThe region under the line is a right triangle with base $2$ and height $2$.  \nIts geometric area is $\\frac12\\cdot 2\\cdot 2 = 2$.  \nUsing the integral we write  \n\n$$\\int_{0}^{2} x\\,dx = 2.$$\n\nThe calculation (which we will learn later) confirms the picture.\n\n> **In daily life:** Think of a car’s speedometer showing miles per hour.  \nIf you record the speed $v(t)$ every moment $t$ during a trip from $t=a$ to $t=b$, the definite integral $\\int_{a}^{b} v(t)\\,dt$ gives the total distance traveled.  \nHere the “area under the speed‑time curve” is exactly the distance.\n\nFinally, remember that the definite integral gives a **single number** that summarizes the whole region between $a$ and $b$.  \nIt is a powerful tool because it turns a geometric idea—area—into an algebraic expression that we can manipulate, compare, and compute.  \n\n> **Remember:** Whenever you see $\\displaystyle\\int_{a}^{b} f(x)\\,dx$, think “add up all the tiny pieces of area under $f(x)$ from $x=a$ to $x=b$”.",
+   "code": ""
+  },
+  {
+   "heading": "Using Antiderivatives to Evaluate",
+   "body": "When we write a definite integral  \n\n\\[\n\\int_{a}^{b} f(x)\\,dx ,\n\\]\n\nwe are asking for the net signed area under the curve \\(y=f(x)\\) from the point \\(x=a\\) to the point \\(x=b\\).  \nThe **Fundamental Theorem of Calculus (FTC)** tells us that we do not have to add up tiny rectangles one by one.  \nIf we can find a function \\(F(x)\\) whose derivative is exactly \\(f(x)\\) – that is, \\(F'(x)=f(x)\\) – then the whole integral collapses to a simple subtraction:\n\n\\[\n\\int_{a}^{b} f(x)\\,dx = F(b)-F(a).\n\\]\n\n> **Definition:** An *antiderivative* of a function \\(f\\) is any function \\(F\\) such that \\(F'(x)=f(x)\\) for every \\(x\\) in the interval of interest.\n\nWhy does this work?  \nThink of \\(F(x)\\) as a “running total” of the area accumulated as we move from the left‑most point toward the right.  \nWhen we reach the right endpoint \\(b\\), the total accumulated area is \\(F(b)\\).  \nWhen we are still at the left endpoint \\(a\\), the total accumulated area is \\(F(a)\\).  \nThe extra area we have added while traveling from \\(a\\) to \\(b\\) is therefore the difference \\(F(b)-F(a)\\).  \n\nAn everyday comparison: imagine you are filling a bathtub with water.  \nThe faucet’s flow rate at any moment is \\(f(t)\\) liters per minute.  \nIf you know a function \\(F(t)\\) that tells you how many liters are in the tub after \\(t\\) minutes (so \\(F'(t)=f(t)\\)), then the amount of water added between minute \\(a\\) and minute \\(b\\) is simply the water level at minute \\(b\\) minus the level at minute \\(a\\).  \nNo need to count each tiny splash; the difference does the work for you.\n\nThe FTC is useful because finding an antiderivative is usually much easier than trying to evaluate the limit of a Riemann sum directly.  \nMost elementary functions have well‑known antiderivatives, and we can combine them using algebraic rules.\n\n> **Note:** The antiderivative \\(F\\) is not unique; any constant \\(C\\) can be added, giving \\(F(x)+C\\).  \nWhen we compute \\(F(b)-F(a)\\) the constants cancel, so the definite integral has a single, well‑defined value.\n\n### Worked example\n\n**Example 1 (Easy): Find \\(\\displaystyle\\int_{0}^{2} 3x\\,dx\\) by computing an antiderivative and evaluating at the limits.**\n\nWe will follow the three‑step recipe that the FTC suggests.\n\n1. **Find an antiderivative of the integrand.**  \n   The integrand is \\(f(x)=3x\\).  \n   We look for a function \\(F(x)\\) whose derivative is \\(3x\\).  \n   Because the derivative of \\(x^{2}\\) is \\(2x\\), we need a factor that turns \\(2x\\) into \\(3x\\).  \n   Multiplying by \\(\\tfrac{3}{2}\\) does the job:\n\n   $$\n   F(x)=\\frac{3}{2}x^{2}\\qquad\\text{since}\\qquad F'(x)=\\frac{3}{2}\\cdot2x=3x.\n   $$\n\n2. **Evaluate the antiderivative at the upper limit \\(b=2\\).**  \n\n   $$\n   F(2)=\\frac{3}{2}\\,(2)^{2}= \\frac{3}{2}\\cdot4 = 6.\n   $$\n\n3. **Evaluate the antiderivative at the lower limit \\(a=0\\).**  \n\n   $$\n   F(0)=\\frac{3}{2}\\,(0)^{2}=0.\n   $$\n\n4. **Subtract the two values** (upper minus lower) to obtain the integral.\n\n   $$\n   \\int_{0}^{2} 3x\\,dx = F(2)-F(0)=6-0=6.\n   $$\n\n**Answer:** The definite integral equals \\(6\\). Geometrically, this is the area of the triangle under the line \\(y=3x\\) from \\(x=0\\) to \\(x=2\\).\n\n> **Remember:** Always subtract the lower‑limit value from the upper‑limit value; the order matters.\n\n### Why the subtraction works algebraically\n\nSuppose we have two points \\(a<b\\) and an antiderivative \\(F\\).  \nConsider the function  \n\n\\[\nG(x)=\\int_{a}^{x} f(t)\\,dt .\n\\]\n\nBy definition, \\(G(a)=0\\) because the interval has zero length.  \nDifferentiating \\(G\\) with respect to \\(x\\) (using the Leibniz rule) gives \\(G'(x)=f(x)\\).  \nThus \\(G\\) is itself an antiderivative of \\(f\\).  \nSince any two antiderivatives differ only by a constant, we have  \n\n\\[\nG(x)=F(x)+C .\n\\]\n\nEvaluating at \\(x=a\\) gives \\(0 = F(a)+C\\), so \\(C=-F(a)\\).  \nTherefore  \n\n\\[\nG(b)=F(b)-F(a)=\\int_{a}^{b} f(t)\\,dt .\n\\]\n\nThis short algebraic argument underlies the FTC and explains why the constant disappears.\n\n> **In daily life:** When a car’s speedometer reads \\(v(t)\\) miles per hour, the distance traveled from time \\(t=a\\) to \\(t=b\\) is \\(\\int_{a}^{b} v(t)\\,dt\\).  \nIf we know a function \\(s(t)\\) giving total miles driven up to time \\(t\\) (so \\(s'(t)=v(t)\\)), then the trip distance is simply \\(s(b)-s(a)\\).  \nYou don’t need to add up every tiny mile; the odometer does it for you.\n\n### A second quick example (to reinforce the idea)\n\n**Example 2 (Easy): Compute \\(\\displaystyle\\int_{1}^{4} (2x+5)\\,dx\\).**\n\n1. Antiderivative:  \n\n   $$\n   F(x)=x^{2}+5x \\quad\\text{because}\\quad F'(x)=2x+5.\n   $$\n\n2. Upper limit:  \n\n   $$\n   F(4)=4^{2}+5\\cdot4=16+20=36.\n   $$\n\n3. Lower limit:  \n\n   $$\n   F(1)=1^{2}+5\\cdot1=1+5=6.\n   $$\n\n4. Subtract:  \n\n   $$\n   \\int_{1}^{4} (2x+5)\\,dx = 36-6 = 30.\n   $$\n\n**Answer:** The integral equals \\(30\\). This represents the net area between the line \\(y=2x+5\\) and the \\(x\\)-axis from \\(x=1\\) to \\(x=4\\).\n\n> **Common mistake:** Forgetting to apply the minus sign correctly, i.e., computing \\(F(a)-F(b)\\) instead of \\(F(b)-F(a)\\). The result would have the opposite sign and would not match the geometric interpretation.\n\nWith these steps, the Fundamental Theorem of Calculus turns the abstract notion of “adding up infinitely many tiny pieces” into a straightforward evaluation of an antiderivative at the two endpoints. Once you have the antiderivative, the definite integral is just a subtraction. This powerful shortcut will be used repeatedly throughout calculus.",
+   "code": ""
+  },
+  {
+   "heading": "Integrals of Common Functions",
+   "body": "When we talk about the **integral of a common function**, we are really asking: *what area does the graph of this simple curve sweep out between two points?*  \nFor polynomials, constants, and the basic trigonometric functions we can write down a short “recipe’’ that turns the picture into a number without having to add up tiny strips one by one.\n\n> **Definition:** The *definite integral* $\\displaystyle\\int_{a}^{b} f(x)\\,dx$ is the net area between the curve $y=f(x)$ and the $x$‑axis from $x=a$ to $x=b$. “Net’’ means that area above the axis counts positive and area below counts negative.\n\nWhy does this work?  \nThe Fundamental Theorem of Calculus tells us that if $F$ is an *antiderivative* of $f$ (that is, $F'(x)=f(x)$), then  \n\n$$\\int_{a}^{b} f(x)\\,dx = F(b)-F(a).$$  \n\nSo once we know a simple formula for $F$, the whole integral collapses to evaluating $F$ at the two endpoints and subtracting. This is useful because finding $F$ is often much easier than trying to measure the area directly.\n\nThink of it like a **road trip**: instead of counting every mile you travel, you just look at the odometer at the start and at the end; the difference tells you the total distance. The antiderivative plays the role of the odometer.\n\n---\n\n### 1. Polynomials  \n\nA polynomial is a sum of terms of the form $c x^{n}$ where $c$ is a constant and $n$ is a non‑negative integer.  \nThe antiderivative of $c x^{n}$ is obtained by **raising the exponent by one** and **dividing by the new exponent**:\n\n$$\\int c x^{n}\\,dx = \\frac{c}{n+1}x^{\\,n+1}+C,$$\n\nwhere $C$ is the constant of integration (not needed for a definite integral).\n\n**Example 2 (Easy): Compute $\\displaystyle\\int_{1}^{4} 2x^{2}\\,dx$.**  \n\n1. *Find an antiderivative.*  \n   $$\\int 2x^{2}\\,dx = \\frac{2}{3}x^{3}+C.$$  \n\n2. *Evaluate at the upper limit $x=4$.*  \n   $$F(4)=\\frac{2}{3}\\cdot4^{3}= \\frac{2}{3}\\cdot64 = \\frac{128}{3}.$$  \n\n3. *Evaluate at the lower limit $x=1$ and subtract.*  \n   $$F(1)=\\frac{2}{3}\\cdot1^{3}= \\frac{2}{3}.$$  \n   $$\\int_{1}^{4} 2x^{2}\\,dx = F(4)-F(1)=\\frac{128}{3}-\\frac{2}{3}= \\frac{126}{3}=42.$$\n\n**Answer:** The area under $y=2x^{2}$ from $x=1$ to $x=4$ is $42$ square units.\n\n> **Note:** Always add “+ C’’ when you first write an antiderivative, but you can drop it when you apply the Fundamental Theorem because the constants cancel.\n\n---\n\n### 2. Constant Functions  \n\nA constant function looks like $f(x)=k$, a horizontal line. Its antiderivative is simply the constant multiplied by $x$:\n\n$$\\int k\\,dx = kx + C.$$\n\nGeometrically this is the area of a rectangle: height $k$, width $b-a$.\n\n**Example 3 (Medium): Evaluate $\\displaystyle\\int_{0}^{\\pi/2} \\sin x \\,dx$.**  \n\n1. *Find an antiderivative of $\\sin x$.*  \n   $$\\int \\sin x \\,dx = -\\cos x + C.$$  \n\n2. *Plug in the upper limit $x=\\pi/2$.*  \n   $$F\\!\\left(\\frac{\\pi}{2}\\right)= -\\cos\\!\\left(\\frac{\\pi}{2}\\right)= -0 = 0.$$  \n\n3. *Plug in the lower limit $x=0$ and subtract.*  \n   $$F(0)= -\\cos 0 = -1.$$  \n   $$\\int_{0}^{\\pi/2} \\sin x \\,dx = F\\!\\left(\\frac{\\pi}{2}\\right)-F(0)=0-(-1)=1.$$\n\n**Answer:** The total area under the curve $y=\\sin x$ from $0$ to $\\pi/2$ equals $1$ (in the same units as $x$ and $y$).\n\n> **In daily life:** The integral of a constant speed $v$ over a time interval $[t_1,t_2]$ gives the distance traveled: $\\int_{t_1}^{t_2} v\\,dt = v\\,(t_2-t_1)$. This is exactly the rectangle idea.\n\n---\n\n### 3. Simple Trigonometric Functions  \n\nThe most common trig functions that appear in elementary integrals are $\\sin x$, $\\cos x$, and sometimes $\\sec^{2}x$. Their antiderivatives are:\n\n$$\\int \\sin x \\,dx = -\\cos x + C,\\qquad\n\\int \\cos x \\,dx = \\sin x + C,\\qquad\n\\int \\sec^{2}x \\,dx = \\tan x + C.$$\n\nThese formulas come from the fact that differentiation and integration are inverse operations. Remember that the derivative of $\\cos x$ is $-\\sin x$, so the integral of $\\sin x$ must be $-\\cos x$.\n\n> **Common mistake:** Forgetting the minus sign when integrating $\\sin x$. Always check by differentiating your antiderivative: $\\frac{d}{dx}(-\\cos x)=\\sin x$.\n\n---\n\n### 4. Putting It All Together  \n\nSuppose we need the integral of a sum, such as $f(x)=3x^{3}+5-\\cos x$. Because integration is *linear* (the integral of a sum equals the sum of the integrals), we treat each term separately:\n\n$$\\int (3x^{3}+5-\\cos x)\\,dx\n= \\int 3x^{3}\\,dx + \\int 5\\,dx - \\int \\cos x\\,dx.$$\n\nCompute each piece using the rules above, then combine and apply the limits.\n\n---\n\n### Summary of Key Points  \n\n> **Remember:** To integrate a polynomial term $c x^{n}$, increase the exponent by one and divide by the new exponent.  \n\n> **Note:** For a constant $k$, the integral over $[a,b]$ is simply $k(b-a)$.  \n\n> **In daily life:** Integrating speed over time gives distance; integrating a rate of water flow gives total volume.  \n\nThese simple patterns let you handle the most common functions quickly, leaving the more complicated curves for later chapters.",
+   "code": ""
+  },
+  {
+   "heading": "Changing Limits and Shifting Intervals",
+   "body": "When we change the limits of a definite integral we are simply moving the “window’’ over which we add up the tiny pieces of area.  \nThink of the integral as a ruler that measures the total height of a curve between two points $a$ and $b$.  \nIf we slide the ruler left or right, the numbers we read will change, but the way we compute them stays the same.\n\n> **Note:** The *limit* of an integral is the number that tells us where the interval starts ($a$) and where it ends ($b$).  \n\n### Translating the interval\n\nSuppose we know the integral of a function $f(x)$ from $0$ to $c$:\n\n$$\\int_{0}^{c} f(x)\\,dx = A.$$\n\nIf we want the integral from $d$ to $d+c$, we can use a simple substitution: let $u = x-d$.  \nThen $x = u+d$ and $dx = du$. When $x = d$, $u = 0$; when $x = d+c$, $u = c$. The integral becomes\n\n$$\\int_{d}^{d+c} f(x)\\,dx\n   = \\int_{0}^{c} f(u+d)\\,du.$$\n\nSo shifting the whole interval by $d$ does not change the shape of the integrand; it only replaces $x$ by $x-d$ inside the function. This is useful when the function has a known antiderivative that is easier to write with the shifted variable.\n\n> **Remember:** To shift an interval, replace $x$ by $x-d$ (or $u+d$) and adjust the limits accordingly.\n\n### Handling negative limits\n\nNegative limits are no different from positive ones; they just mean the interval starts to the left of the origin on the number line.  \nIf the lower limit is larger than the upper limit, the integral changes sign:\n\n$$\\int_{b}^{a} f(x)\\,dx = -\\int_{a}^{b} f(x)\\,dx.$$\n\nThis rule lets us flip the order of limits whenever it makes the computation easier.\n\n> **In daily life:** Imagine walking from point $-3$ meters to point $2$ meters along a straight path. The distance you travel is the same as walking from $2$ to $-3$ but in the opposite direction, so the signed distance changes sign.\n\n### Worked examples\n\n**Example 4 (Medium): Zero result from a symmetric interval**  \nFind $\\displaystyle\\int_{-1}^{1} x^{3}\\,dx$ and discuss why the answer is zero.\n\n1. **Identify symmetry.** The function $x^{3}$ is *odd*: $(-x)^{3} = -x^{3}$.  \n2. **Set up the integral.**  \n   $$\\int_{-1}^{1} x^{3}\\,dx.$$\n3. **Use the property of odd functions.** The area under an odd function from $-a$ to $a$ cancels out because the part on the left is the negative of the part on the right. Hence the integral equals $0$.\n\n**Answer:** $\\displaystyle\\int_{-1}^{1} x^{3}\\,dx = 0.$  \nThe result is zero because the positive and negative contributions balance perfectly.\n\n---\n\n**Example 5 (Hard): Shifting limits and using an antiderivative**  \nEvaluate $\\displaystyle\\int_{2}^{5} (4 - x)\\,dx$ by first finding an antiderivative.\n\n1. **Find an antiderivative of the integrand.**  \n   An antiderivative $F(x)$ satisfies $F'(x)=4-x$.  \n   $$F(x)=4x-\\frac{x^{2}}{2}+C,$$  \n   where $C$ is a constant that will cancel out.\n2. **Apply the Fundamental Theorem of Calculus.**  \n   The definite integral equals $F(5)-F(2)$.  \n   $$F(5)=4(5)-\\frac{5^{2}}{2}=20-\\frac{25}{2}=20-\\12.5=7.5,$$  \n   $$F(2)=4(2)-\\frac{2^{2}}{2}=8-\\frac{4}{2}=8-2=6.$$\n3. **Subtract the two values.**  \n   $$\\int_{2}^{5} (4 - x)\\,dx = F(5)-F(2)=7.5-6=1.5.$$\n\n**Answer:** $\\displaystyle\\int_{2}^{5} (4 - x)\\,dx = 1.5.$  \nThe positive result tells us that, over the interval $[2,5]$, the curve $y=4-x$ lies mostly below the $x$‑axis, but because we integrated the *negative* part (the function itself is decreasing), the net signed area is $1.5$ square units.\n\n### Why these ideas matter\n\nChanging limits lets us compare integrals on different intervals without re‑doing all the work.  \nIf a problem gives an integral from $a$ to $b$ but we already know the antiderivative on $0$ to $b-a$, we can shift the interval and reuse that result.  \nHandling negative limits correctly avoids sign errors, especially when the region of interest crosses the origin.\n\n> **Common mistake:** Forgetting to change the sign when swapping the order of limits. Remember to insert a minus sign if you reverse $a$ and $b$.\n\nBy mastering interval translation and the sign rule for limits, you gain a flexible tool for tackling a wide variety of definite integrals, whether the bounds are positive, negative, or a mix of both.",
+   "code": ""
+  },
+  {
+   "heading": "Real‑World Application: Total Accumulation",
+   "body": "When we talk about a **definite integral** we are really asking the question: *If we know how fast something is changing at each instant, how much of that thing have we accumulated over a whole time interval?*  \n\nThe function that tells us the rate of change is called a **rate function**.  Its value at a particular time tells us “how much per unit time” is happening right then.  By adding up (integrating) all those tiny pieces from the start time $a$ to the end time $b$, we obtain the **total quantity** that has been built up.\n\n> **Definition:** The definite integral $\\displaystyle\\int_{a}^{b} f(t)\\,dt$ gives the net accumulation of the quantity whose instantaneous rate is $f(t)$ from time $t=a$ to $t=b$.\n\nWhy does this work?  Imagine cutting the interval $[a,b]$ into many very short sub‑intervals of length $\\Delta t$.  On each sub‑interval the rate $f(t)$ is almost constant, so the amount added is approximately $f(t_i)\\,\\Delta t$.  Adding all these pieces gives a sum that approaches the integral as the sub‑intervals become infinitely small.  This is exactly the idea behind the Riemann sum, the foundation of integration.\n\nA useful everyday picture is filling a bathtub.  If the faucet lets water flow at $3$ gallons per minute, after $10$ minutes you will have about $30$ gallons.  If the flow rate changes—say it slows down as the tank fills—then you need to add up the varying rates over each minute.  The integral does that automatically.\n\nBelow we apply the idea to two realistic situations.  Each example shows every step, from writing the integral to evaluating it with antiderivatives.\n\n**Example 6 (Hard): Car distance from a changing speed**  \nA car’s speed is $v(t)=60-4t$ mph for $0\\le t\\le 10$ hours.  Compute the total distance traveled.\n\n1. **Write the integral for total distance.**  \n   Distance $D$ equals the integral of speed over time:  \n   $$D=\\int_{0}^{10} \\bigl(60-4t\\bigr)\\,dt.$$\n\n2. **Find an antiderivative of the integrand.**  \n   An antiderivative $F(t)$ satisfies $F'(t)=60-4t$.  Integrate term‑by‑term:  \n   $$F(t)=60t-2t^{2}+C,$$  \n   where $C$ is a constant that will cancel out.\n\n3. **Evaluate the antiderivative at the limits and subtract.**  \n   $$D = \\Bigl[60t-2t^{2}\\Bigr]_{0}^{10}\n        =\\bigl(60\\cdot10-2\\cdot10^{2}\\bigr)-\\bigl(60\\cdot0-2\\cdot0^{2}\\bigr)$$  \n   $$\\qquad =\\bigl(600-200\\bigr)-0 = 400.$$\n\n**Answer:** The car travels $400$ miles in the 10‑hour interval.\n\n> **In daily life:** This calculation is exactly what a GPS device does when it converts a speed‑vs‑time log into the miles you have driven.\n\n**Example 7 (Very Hard): Water added to a tank**  \nWater flows into a tank at rate $R(t)=5e^{-0.2t}$ liters per minute.  Find the total volume added from $t=0$ to $t=15$ minutes.\n\n1. **Set up the integral for total volume.**  \n   $$V=\\int_{0}^{15} 5e^{-0.2t}\\,dt.$$\n\n2. **Integrate the exponential function.**  \n   The antiderivative of $e^{kt}$ is $\\frac{1}{k}e^{kt}$.  Here $k=-0.2$, so  \n   $$\\int 5e^{-0.2t}\\,dt = 5\\left(\\frac{1}{-0.2}\\right)e^{-0.2t}+C\n      = -25e^{-0.2t}+C.$$\n\n3. **Evaluate from $0$ to $15$.**  \n   $$V = \\Bigl[-25e^{-0.2t}\\Bigr]_{0}^{15}\n        = -25e^{-0.2\\cdot15} -\\bigl(-25e^{0}\\bigr)$$  \n   $$\\qquad = -25e^{-3}+25\n        = 25\\bigl(1-e^{-3}\\bigr).$$  \n\n   Using $e^{-3}\\approx 0.0498$,  \n   $$V \\approx 25(1-0.0498)=25(0.9502)\\approx 23.76\\text{ liters}.$$\n\n**Answer:** About $23.8$ liters of water are added to the tank during the first 15 minutes.\n\n> **Note:** Exponential decay rates like $e^{-0.2t}$ often model cooling, radioactive decay, or diminishing flows.  The integral captures the total amount that has occurred despite the rate getting smaller.\n\n> **Common mistake:** Forgetting to multiply by the constant outside the exponential when finding the antiderivative.  In the example above, the factor $5$ must stay with the $-1/0.2$ term; otherwise the final volume would be off by a factor of five.\n\n> **Remember:** Always check the units.  The rate $R(t)$ was in liters per minute, the variable $t$ was in minutes, so the integral’s result is in liters—exactly the quantity we wanted.\n\nBy turning a rate function into a definite integral, we can answer many practical questions: how far a vehicle travels, how much fuel a rocket uses, how much medication enters the bloodstream, or how much rainwater collects in a basin.  The mathematics guarantees that, no matter how the rate wiggles, the integral gives the precise total accumulation.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Evaluate $\\displaystyle \\int_{0}^{3} 2\\,dx$.",
+   "a": "An antiderivative of $2$ is $F(x)=2x$. Apply the Fundamental Theorem: $F(3)-F(0)=2(3)-2(0)=6-0=6$."
+  },
+  {
+   "level": "Easy",
+   "q": "What does $\\displaystyle \\int_{-2}^{2} x\\,dx$ represent geometrically?",
+   "a": "The graph of $y=x$ is a straight line through the origin. The area above the axis from $0$ to $2$ is positive, and the area below from $-2$ to $0$ is negative but equal in magnitude. Hence the net area is $0$."
+  },
+  {
+   "level": "Medium",
+   "q": "Compute $\\displaystyle \\int_{1}^{4} (3x^{2}-4x+1)\\,dx$.",
+   "a": "Find an antiderivative:\n$F(x)=3\\frac{x^{3}}{3}-4\\frac{x^{2}}{2}+x = x^{3}-2x^{2}+x$.\nEvaluate: $F(4)-F(1) = (64-32+4) - (1-2+1) = 36 - 0 = 36$."
+  },
+  {
+   "level": "Medium",
+   "q": "A tank fills at a rate $r(t)=5t$ liters per minute. How many liters are in the tank after 4 minutes, assuming it starts empty?",
+   "a": "Total volume $= \\int_{0}^{4} 5t\\,dt$.\nAntiderivative $F(t)=\\frac{5t^{2}}{2}$.\n$F(4)-F(0)=\\frac{5\\cdot16}{2}-0 = \\frac{80}{2}=40$ liters."
+  },
+  {
+   "level": "Hard",
+   "q": "Evaluate $\\displaystyle \\int_{0}^{\\pi} \\sin^{2}x\\,dx$ using a trigonometric identity.",
+   "a": "Use $\\sin^{2}x = \\frac{1-\\cos 2x}{2}$.\nIntegral becomes $\\int_{0}^{\\pi} \\frac{1-\\cos 2x}{2}\\,dx = \\frac12\\int_{0}^{\\pi}1\\,dx - \\frac12\\int_{0}^{\\pi}\\cos 2x\\,dx$.\nFirst part: $\\frac12[\\;x\\;]_{0}^{\\pi}= \\frac12(\\pi-0)=\\frac{\\pi}{2}$.\nSecond part: $\\frac12\\left[\\frac{\\sin 2x}{2}\\right]_{0}^{\\pi}= \\frac12\\left(\\frac{\\sin 2\\pi}{2}-\\frac{\\sin 0}{2}\\right)=0$.\nResult: $\\frac{\\pi}{2}$."
+  },
+  {
+   "level": "Hard",
+   "q": "Let $f(x)=e^{x^2}$. Use the substitution $u = x^2$ to rewrite $\\displaystyle \\int_{0}^{1} 2x e^{x^{2}}\\,dx$ and evaluate it.",
+   "a": "Set $u = x^{2}$, then $du = 2x\\,dx$. When $x=0$, $u=0$; when $x=1$, $u=1$.\nThe integral becomes $\\int_{0}^{1} e^{u}\\,du$.\nAntiderivative of $e^{u}$ is $e^{u}$. Evaluate: $e^{1}-e^{0}=e-1$."
+  }
+ ],
+ "recap": "A definite integral measures the net area between a curve and the x‑axis from a to b, or the total accumulation of a quantity over time. The Fundamental Theorem of Calculus lets us compute it by finding an antiderivative and evaluating it at the limits. Shifting the interval changes the variable but not the method. Real‑world examples treat the integral as adding up tiny pieces of a rate to get total amount.",
+ "key_terms": [
+  {
+   "term": "definite integral",
+   "meaning": "The exact net area under a function between two points a and b, written as integral from a to b f(x) dx."
+  },
+  {
+   "term": "antiderivative",
+   "meaning": "A function F whose derivative is the original function f, so F'(x)=f(x)."
+  },
+  {
+   "term": "Fundamental Theorem of Calculus",
+   "meaning": "States that the definite integral of f from a to b equals F(b)-F(a) if F is an antiderivative of f."
+  },
+  {
+   "term": "net area",
+   "meaning": "Area above the x‑axis counted positive and area below counted negative."
+  },
+  {
+   "term": "limit of integration",
+   "meaning": "The numbers a and b that define the start and end of the interval for a definite integral."
+  },
+  {
+   "term": "substitution (changing limits)",
+   "meaning": "A method that shifts or rescales the variable to rewrite an integral with new limits, often using u = x‑d."
+  },
+  {
+   "term": "rate function",
+   "meaning": "A function that gives the instantaneous rate of change of a quantity, whose integral gives total accumulation."
+  },
+  {
+   "term": "total accumulation",
+   "meaning": "The overall amount built up over an interval, obtained by integrating the rate function."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the definite integral integral from a to b f(x) dx represent?",
+   "options": [
+    "The average value of f on [a,b]",
+    "The net area between the curve and the x‑axis from a to b",
+    "The derivative of f at a point",
+    "The length of the curve"
+   ],
+   "answer": 1,
+   "why": "It measures the signed area under the curve between the limits."
+  },
+  {
+   "q": "If F'(x)=f(x), how do you compute integral from a to b f(x) dx?",
+   "options": [
+    "F(a)-F(b)",
+    "F(b)+F(a)",
+    "F(b)-F(a)",
+    "F(a)*F(b)"
+   ],
+   "answer": 2,
+   "why": "The Fundamental Theorem of Calculus gives F(b)-F(a)."
+  },
+  {
+   "q": "Which term describes area below the x‑axis in a definite integral?",
+   "options": [
+    "Positive area",
+    "Negative area",
+    "Zero area",
+    "Undefined area"
+   ],
+   "answer": 1,
+   "why": "Below the axis counts as negative in net area."
+  },
+  {
+   "q": "When shifting an integral from [0,c] to [d,d+c], which substitution is used?",
+   "options": [
+    "u = x+d",
+    "u = x-d",
+    "u = d-x",
+    "u = c-x"
+   ],
+   "answer": 1,
+   "why": "Let u = x-d so that the new limits become 0 and c."
+  },
+  {
+   "q": "What is the antiderivative of the constant function f(x)=5?",
+   "options": [
+    "5x",
+    "5x^2",
+    "x/5",
+    "0"
+   ],
+   "answer": 0,
+   "why": "The derivative of 5x is 5, so 5x is an antiderivative."
+  },
+  {
+   "q": "In a real‑world context, integrating a rate function gives:",
+   "options": [
+    "The instantaneous speed",
+    "The total distance traveled",
+    "The maximum speed",
+    "The average rate"
+   ],
+   "answer": 1,
+   "why": "Integrating a rate accumulates the quantity, such as total distance."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Definite integral",
+   "back": "Net area under a curve between two limits a and b, written integral from a to b f(x) dx."
+  },
+  {
+   "front": "Antiderivative",
+   "back": "Function F whose derivative equals the original function f; F'(x)=f(x)."
+  },
+  {
+   "front": "Fundamental Theorem of Calculus",
+   "back": "If F'(x)=f(x), then integral from a to b f(x) dx = F(b)-F(a)."
+  },
+  {
+   "front": "Net area",
+   "back": "Positive for regions above the x‑axis, negative for regions below; total signed area."
+  },
+  {
+   "front": "Limit of integration",
+   "back": "The endpoints a (lower) and b (upper) that define the interval of a definite integral."
+  },
+  {
+   "front": "Substitution (changing limits)",
+   "back": "Replace x with u+d (or similar) to shift the interval; adjust dx and limits accordingly."
+  },
+  {
+   "front": "Rate function",
+   "back": "A function giving instantaneous change per unit (e.g., speed), whose integral yields total change."
+  },
+  {
+   "front": "Total accumulation",
+   "back": "Result of integrating a rate function over time; the overall amount accumulated."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l23-water-filling-a-tank",
+   "title": "A tank being filled shows how the volume accumulates over time, illustrating a definite integral as total accumulation.",
+   "alt": "A tank being filled shows how the volume accumulates over time, illustrating a definite integral as total accumulation.",
+   "priority": 9,
+   "picture_title": "Water Filling a Tank",
+   "kind": "photo",
+   "subject": "A clear container being poured with water, with a stopwatch showing elapsed time and a volume gauge indicating the increasing amount of water.",
+   "layout": "Tank centered, water level rising from left to right; stopwatch and gauge placed to the right of the tank.",
+   "labels": [
+    "tank",
+    "water level",
+    "time",
+    "volume"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l23-cross-section-area-measurement",
+   "title": "A cross‑section of an irregular object with a grid overlay demonstrates how area between a curve and a baseline is measured.",
+   "alt": "A cross‑section of an irregular object with a grid overlay demonstrates how area between a curve and a baseline is measured.",
+   "priority": 7,
+   "picture_title": "Cross‑Section Area Measurement",
+   "kind": "illustration",
+   "subject": "An irregularly shaped piece of material placed on graph paper, showing the region between its outline and a straight baseline.",
+   "layout": "Object outline in the centre, grid lines visible behind; baseline drawn along the bottom with arrows indicating the interval a to b.",
+   "labels": [
+    "outline",
+    "baseline",
+    "grid"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l23-sliding-measurement-ruler",
+   "title": "A ruler sliding along a curve visualizes changing limits of integration.",
+   "alt": "A ruler sliding along a curve visualizes changing limits of integration.",
+   "priority": 5,
+   "picture_title": "Sliding Measurement Ruler",
+   "kind": "illustration",
+   "subject": "A horizontal ruler positioned over a smooth curve, with two markers indicating the current limits a and b; arrows show the ruler moving left or right.",
+   "layout": "Curve spans the width of the image; ruler placed over it with markers at each end; arrows on either side of the ruler.",
+   "labels": [
+    "a",
+    "b",
+    "ruler"
+   ],
+   "after": 3
+  },
+  {
+   "type": "graph",
+   "title": "Area under f(x)=x^2 from a to b",
+   "fn": "x^2",
+   "xmin": -1,
+   "xmax": 4,
+   "points": [
+    {
+     "x": 0,
+     "y": 0,
+     "label": "a",
+     "open": false
+    },
+    {
+     "x": 3,
+     "y": 9,
+     "label": "b",
+     "open": false
+    }
+   ],
+   "caption": "The shaded region between x=0 and x=3 represents ∫_0^3 x^2 dx.",
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Net signed area vs geometric area",
+   "left": {
+    "name": "Net signed area",
+    "points": [
+     "Above the x‑axis counts positive",
+     "Below the x‑axis counts negative",
+     "Result can be zero if equal parts cancel"
+    ]
+   },
+   "right": {
+    "name": "Geometric (absolute) area",
+    "points": [
+     "All parts counted as positive",
+     "Ignores sign of the function",
+     "Used when only size of region matters"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Components of a definite integral",
+   "items": [
+    {
+     "name": "Integrand f(x)",
+     "role": "gives the height of the curve at each x"
+    },
+    {
+     "name": "Lower limit a",
+     "role": "left vertical boundary of the interval"
+    },
+    {
+     "name": "Upper limit b",
+     "role": "right vertical boundary of the interval"
+    },
+    {
+     "name": "dx",
+     "role": "indicates summation of infinitesimal widths"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Evaluating a definite integral using the FTC",
+   "steps": [
+    {
+     "label": "Find antiderivative",
+     "text": "Identify F(x) with F'(x)=f(x)."
+    },
+    {
+     "label": "Plug limits",
+     "text": "Compute F(b) and F(a)."
+    },
+    {
+     "label": "Subtract",
+     "text": "Result = F(b) – F(a)."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key facts about definite integrals",
+   "items": [
+    {
+     "value": "∫_a^b f(x)dx = F(b)−F(a)",
+     "label": "Fundamental Theorem of Calculus"
+    },
+    {
+     "value": "If f(x)≥0 on [a,b] then ∫_a^b f(x)dx = area",
+     "label": "Positive integrand"
+    },
+    {
+     "value": "∫_a^a f(x)dx = 0",
+     "label": "Zero‑length interval"
+    },
+    {
+     "value": "∫_a^b f(x)dx = −∫_b^a f(x)dx",
+     "label": "Reversing limits changes sign"
+    }
+   ],
+   "after": 1
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
