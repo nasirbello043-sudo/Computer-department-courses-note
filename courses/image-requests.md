@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
+Waiting: **17** | Uploaded: **41** | Covers waiting: **8**
 
 ## Course covers
 
@@ -116,6 +116,21 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "CALCULUS FOUNDATION"
 - Subtitle under it, smaller: "Unlocking Change: From Slopes to Areas"
 The spine shows "CALCULUS FOUNDATION" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Programming Course
+
+Save as:
+```
+cover-programming-course.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a purple colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "PROGRAMMING COURSE"
+The spine shows "PROGRAMMING COURSE" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -273,34 +288,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-## Organic Chemistry
-
-### Lesson 6: Isomerism
-
-Save as:
-```
-organic-chemistry-l06-chiral-carbon-center.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how the two cannot be rotated to match each other.
-
-Layout: Two tetrahedral models side‑by‑side, left is the original molecule, right is its mirror image, with dashed lines indicating the mirror plane.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
-- "R1"
-- "R2"
-- "R3"
-- "R4"
-- "mirror"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
