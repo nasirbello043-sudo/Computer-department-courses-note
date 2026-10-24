@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
+Waiting: **20** | Uploaded: **41** | Covers waiting: **8**
 
 ## Course covers
 
@@ -116,6 +116,21 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "CALCULUS FOUNDATION"
 - Subtitle under it, smaller: "Unlocking Change: From Slopes to Areas"
 The spine shows "CALCULUS FOUNDATION" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Programming Course
+
+Save as:
+```
+cover-programming-course.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a purple colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "PROGRAMMING COURSE"
+The spine shows "PROGRAMMING COURSE" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -273,34 +288,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-## Organic Chemistry
-
-### Lesson 6: Isomerism
-
-Save as:
-```
-organic-chemistry-l06-chiral-carbon-center.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how they cannot be aligned by rotation, illustrating molecular chirality.
-
-Layout: Two tetrahedral models side‑by‑side, left is the original molecule, right is its mirror image, with arrows indicating the lack of superposition.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C"
-- "Group A"
-- "Group B"
-- "Group C"
-- "Group D"
-- "Mirror Image"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -481,4 +468,71 @@ Prompt:
 Create a realistic photograph for a school lesson: The photo shows a person running outdoors, wearing a device that displays instantaneous speed (velocity) and cumulative distance, illustrating how integrating velocity gives distance.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Programming Course
+
+### Lesson 1: Introduction to Programming Concepts
+
+Save as:
+```
+programming-course-l01-robot-following-commands.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A cartoon robot with a speech bubble showing a short list of commands (e.g., move forward, turn left, stop). The robot follows the list exactly, showing how precise instructions make the robot work correctly.
+
+Layout: Robot on the left, command list on the right, arrows from each command to the robot's actions.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "move forward"
+- "turn left"
+- "stop"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l01-recipe-as-algorithm.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A kitchen scene with a recipe card that lists numbered steps (e.g., 1. Crack eggs, 2. Whisk, 3. Heat pan). Each step is linked to a corresponding action in the kitchen, demonstrating the step‑by‑step nature of algorithms.
+
+Layout: Recipe card centered, kitchen actions around it with lines pointing from each numbered step to the action.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "step 1"
+- "step 2"
+- "step 3"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l01-data-as-ingredients.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A kitchen countertop displaying three bowls: one with numbered tokens (5, -12, 3.14), one with alphabet tiles forming words, and one with two colored chips representing true and false. This visualises data types as tangible ingredients.
+
+Layout: Three bowls side by side, each labelled with its data type; arrows point from each bowl to a simple dish being assembled.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "numbers"
+- "text"
+- "boolean"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
