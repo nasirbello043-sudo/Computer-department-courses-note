@@ -1,0 +1,407 @@
+{
+ "title": "Integration Techniques",
+ "summary": "This lesson introduces three core integration techniques—substitution, integration by parts, and partial fractions—and shows how to apply them step‑by‑step. Students will practice each method with clear, worked examples that build confidence for more complex integrals.",
+ "objectives": [
+  "Apply the substitution method to evaluate integrals with inner functions",
+  "Use integration by parts to integrate products of functions",
+  "Decompose rational functions into partial fractions and integrate each term",
+  "Choose the appropriate technique for a given integral problem"
+ ],
+ "prerequisites": "Students should already know basic antiderivatives, the power rule for integration, and how to simplify algebraic expressions.",
+ "why": [
+  "Integration techniques let us find areas, volumes, and accumulated quantities that appear in physics, engineering, and economics, such as work done by a variable force or total profit over time.",
+  "Being able to select and execute the right technique is essential for solving real‑world problems and for succeeding in higher‑level mathematics courses."
+ ],
+ "sections": [
+  {
+   "heading": "1. Review of Basic Integration",
+   "body": "When we talk about **integrating**, we are looking for a function whose derivative gives us the original function we started with.  \nIn other words, if we have a function $f(x)$ and we can find another function $F(x)$ such that  \n\n$$\\frac{d}{dx}F(x)=f(x),$$  \n\nthen $F$ is called an **antiderivative** of $f$.  \n\n> **Definition:** An antiderivative of $f(x)$ is any function $F(x)$ satisfying $F'(x)=f(x)$.  \n\nBecause derivatives measure how a quantity changes, an antiderivative tells us the original quantity before it started changing. This idea is the foundation of all integration techniques we will learn later.\n\n---\n\n### The simplest case: power functions  \n\nA *power function* looks like $x^n$, where $n$ is a real number (often an integer). The derivative of $x^n$ is well‑known:\n\n$$\\frac{d}{dx}x^{n}=n\\,x^{\\,n-1}.$$\n\nIf we want the antiderivative, we need to reverse this process. We ask: *what power of $x$ becomes $x^n$ after we differentiate it?*  \n\nSuppose $F(x)=x^{m}$. Differentiating gives $F'(x)=m\\,x^{m-1}$. To match $x^n$, we set $m-1=n$, so $m=n+1$. Then we must also divide by the new exponent $m$ to cancel the factor $m$ that appears when we differentiate. This leads to the **power rule for integration**:\n\n$$\\int x^{n}\\,dx=\\frac{x^{\\,n+1}}{n+1}+C,\\qquad n\\neq -1.$$\n\nThe symbol $\\int$ is the integral sign, and the small $dx$ tells us the variable of integration. The constant $C$ appears because any constant disappears when we differentiate; therefore every antiderivative is determined only up to an added constant.\n\n> **Note:** The rule does **not** work for $n=-1$ because the denominator $n+1$ would be zero. The case $n=-1$ gives the logarithmic antiderivative $\\int \\frac{1}{x}\\,dx=\\ln|x|+C$.\n\n---\n\n### Why the power rule is useful  \n\nImagine you are tracking the distance a car travels. If the car’s speed at time $t$ is $v(t)=t^{2}$ (meters per second), then the total distance covered from the start up to time $t$ is the antiderivative of $v$. Using the power rule:\n\n$$\\int t^{2}\\,dt=\\frac{t^{3}}{3}+C.$$\n\nChoosing $C=0$ (since at $t=0$ the distance is zero) gives $s(t)=\\frac{t^{3}}{3}$. This simple formula lets us compute distance without adding up infinitely many tiny speed measurements.\n\n> **In daily life:** Integration is like “undoing” a recipe step. If mixing ingredients (derivative) gives a batter, then the original ingredients (antiderivative) are what you need to start with.\n\n---\n\n### Checking our work  \n\nA good habit is to **differentiate** the result you obtain and see if you get back the original integrand. For the example above:\n\n$$\\frac{d}{dt}\\left(\\frac{t^{3}}{3}\\right)=\\frac{3t^{2}}{3}=t^{2},$$  \n\nwhich matches the speed function, confirming the antiderivative is correct.\n\n> **Common mistake:** Forgetting the “$+C$”. Always add the constant of integration when you write an indefinite integral; otherwise you may miss solutions that differ by a constant.\n\n---\n\n### Quick practice  \n\n1. Find $\\displaystyle\\int x^{5}\\,dx$.  \n2. Find $\\displaystyle\\int \\frac{1}{x}\\,dx$.  \n\nUse the power rule for the first and remember the special case for the second.\n\n---\n\nWith this basic tool—recognizing antiderivatives and applying the power rule—we have a solid starting point. The next sections will show how to handle more complicated expressions where the simple power rule alone is not enough.",
+   "code": ""
+  },
+  {
+   "heading": "2. Substitution Method",
+   "body": "When we integrate a function that looks like a “compound” expression, it is often helpful to **undo** the chain rule that we use when differentiating.  \nThe idea is to spot a part of the integrand that is the derivative of another part.  \nIf we call that inner part **\\(u\\)**, we can rewrite the whole integral in terms of **\\(u\\)**, integrate, and then change back to the original variable.  \n\n> **Definition:** *\\(u\\)-substitution* is the process of replacing an inner function \\(g(x)\\) by a new variable \\(u=g(x)\\) and replacing \\(dx\\) by \\(\\frac{du}{g'(x)}\\).  \n\nWhy does this work?  \nWhen we differentiate a composition \\(F(g(x))\\), the chain rule tells us  \n\n$$\\frac{d}{dx}F(g(x)) = F'(g(x))\\;g'(x).$$  \n\nIf we integrate the product \\(F'(g(x))\\,g'(x)\\), the antiderivative is simply \\(F(g(x))\\).  \nThus, if the integrand contains a factor that is exactly the derivative of another factor, we can treat the whole product as the derivative of a composition and integrate directly.  \n\nThink of it like **unpacking a gift**: the outer box is the whole integrand, and inside there is a smaller box (the inner function). By opening the inner box first (setting \\(u=g(x)\\)), we see the simpler content (the remaining part of the integrand) and can finish the job more easily.\n\n---\n\n### Steps for \\(u\\)-substitution  \n\n1. **Identify an inner function** \\(g(x)\\) whose derivative \\(g'(x)\\) also appears (perhaps up to a constant factor) in the integrand.  \n2. **Set** \\(u = g(x)\\). Write down the differential: \\(du = g'(x)\\,dx\\).  \n3. **Rewrite** the integral: replace every occurrence of \\(g(x)\\) by \\(u\\) and \\(dx\\) by \\(\\frac{du}{g'(x)}\\). The integral should now involve only \\(u\\) and \\(du\\).  \n4. **Integrate** with respect to \\(u\\).  \n5. **Substitute back** \\(u = g(x)\\) to express the antiderivative in the original variable.\n\n> **Remember:** The substitution is valid only if the differential \\(du\\) matches a factor in the integrand; otherwise you may need to adjust by a constant.\n\n---\n\n**Example 1 (Easy):** Integrate \\(\\displaystyle \\int 2x\\cos(x^{2})\\,dx\\).\n\n1. The inner function is \\(g(x)=x^{2}\\) because its derivative \\(g'(x)=2x\\) appears in front.  \n2. Set \\(u = x^{2}\\). Then  \n\n$$du = 2x\\,dx.$$  \n\n3. Replace \\(2x\\,dx\\) by \\(du\\) and \\(\\cos(x^{2})\\) by \\(\\cos(u)\\):  \n\n$$\\int 2x\\cos(x^{2})\\,dx = \\int \\cos(u)\\,du.$$  \n\n4. Integrate with respect to \\(u\\):  \n\n$$\\int \\cos(u)\\,du = \\sin(u) + C.$$  \n\n5. Substitute back \\(u = x^{2}\\):  \n\n$$\\sin(u) + C = \\sin(x^{2}) + C.$$\n\n**Answer:** \\(\\displaystyle \\int 2x\\cos(x^{2})\\,dx = \\sin(x^{2}) + C.\\)\n\n---\n\n**Example 2 (Medium):** Integrate \\(\\displaystyle \\int \\frac{3x^{2}}{\\sqrt{x^{3}+1}}\\,dx\\).\n\n1. Notice the inner function \\(g(x)=x^{3}+1\\); its derivative is \\(g'(x)=3x^{2}\\), which is exactly the numerator.  \n2. Set \\(u = x^{3}+1\\). Then  \n\n$$du = 3x^{2}\\,dx.$$  \n\n3. Replace the numerator and \\(dx\\) by \\(du\\), and the denominator \\(\\sqrt{x^{3}+1}\\) by \\(\\sqrt{u}\\):  \n\n$$\\int \\frac{3x^{2}}{\\sqrt{x^{3}+1}}\\,dx = \\int \\frac{1}{\\sqrt{u}}\\,du.$$  \n\n4. Write \\(\\frac{1}{\\sqrt{u}} = u^{-1/2}\\) and integrate:  \n\n$$\\int u^{-1/2}\\,du = \\frac{u^{1/2}}{1/2}+C = 2\\sqrt{u}+C.$$  \n\n5. Substitute back \\(u = x^{3}+1\\):  \n\n$$2\\sqrt{u}+C = 2\\sqrt{x^{3}+1}+C.$$\n\n**Answer:** \\(\\displaystyle \\int \\frac{3x^{2}}{\\sqrt{x^{3}+1}}\\,dx = 2\\sqrt{x^{3}+1}+C.\\)\n\n---\n\n### Why the method is useful  \n\n- It turns a complicated-looking integral into a simple power‑rule or trigonometric integral.  \n- It works for many functions that involve compositions, such as \\(\\sin(e^{x})\\), \\(\\ln(5x+2)\\), or rational expressions with a polynomial inside a root.  \n\n> **In daily life:** Imagine you have a tangled ball of yarn. By finding the *core* strand (the inner function) and pulling it out, the rest of the yarn (the outer part) becomes straight and easy to handle.\n\n---\n\n### Common pitfalls  \n\n> **Common mistake:** Forgetting to replace **all** instances of \\(dx\\) and the inner function, or mixing up the sign when \\(du = -g'(x)dx\\). Always write the differential equation clearly before substituting.\n\n---\n\nWith these steps and the careful identification of the inner function, \\(u\\)-substitution becomes a reliable tool for many integration problems. Practice by looking for a piece of the integrand that is the derivative of something else, and the rest will follow smoothly.",
+   "code": ""
+  },
+  {
+   "heading": "3. Integration by Parts Formula",
+   "body": "Integration by parts is a tool that lets us turn a difficult integral into something easier.  \nThe idea comes from the product rule for differentiation, which says  \n\n$$\\frac{d}{dx}(uv)=u\\,\\frac{dv}{dx}+v\\,\\frac{du}{dx}.$$\n\nIf we rearrange this formula and then integrate both sides, we obtain the **integration‑by‑parts formula**\n\n$$\\int u\\,dv = uv - \\int v\\,du.$$\n\nIn words: *pick one part of the integrand to be* $u$ *and the other part to be* $dv$; *differentiate* $u$ *to get* $du$, *integrate* $dv$ *to get* $v$, *multiply* $u$ *and* $v$, *then subtract the integral of* $v\\,du$.\n\n> **Definition:**  $\\displaystyle\\int u\\,dv = uv - \\int v\\,du$ where $u$ and $dv$ are chosen from the original integrand.\n\nWhy does this help? Often the new integral $\\int v\\,du$ is simpler than the original one. The trick is to choose $u$ and $dv$ wisely. A common guideline is the **LIATE rule**:\n\n- **L**ogarithmic functions (e.g., $\\ln x$)  \n- **I**nverse trigonometric functions (e.g., $\\arctan x$)  \n- **A**lgebraic functions (polynomials like $x^2$)  \n- **T**rigonometric functions (e.g., $\\sin x$)  \n- **E**xponential functions (e.g., $e^x$)\n\nWe usually let the function that appears earlier in this list become $u$, because differentiating it makes it simpler, while the later function becomes $dv$, because integrating it does not make it harder.\n\n> **Note:** The LIATE rule is a heuristic, not a strict law. If a different choice leads to a simpler $\\int v\\,du$, that choice is better.\n\n### Worked Example 3 (Easy):  $\\displaystyle\\int x\\,e^{x}\\,dx$\n\nWe want to integrate the product of a polynomial $x$ and an exponential $e^{x}$.\n\n1. **Choose $u$ and $dv$**  \n   According to LIATE, the algebraic term $x$ comes before the exponential term $e^{x}$, so set  \n   $$u = x,\\qquad dv = e^{x}\\,dx.$$\n\n2. **Compute $du$ and $v$**  \n   Differentiate $u$:  \n   $$du = \\frac{d}{dx}(x)\\,dx = 1\\,dx.$$  \n   Integrate $dv$:  \n   $$v = \\int e^{x}\\,dx = e^{x}.$$\n\n3. **Apply the formula**  \n   Plug into $\\int u\\,dv = uv - \\int v\\,du$:  \n   $$\\int x\\,e^{x}\\,dx = x\\,e^{x} - \\int e^{x}\\cdot 1\\,dx.$$  \n   The remaining integral is straightforward:  \n   $$\\int e^{x}\\,dx = e^{x}.$$\n\n4. **Combine the results**  \n   $$\\int x\\,e^{x}\\,dx = x\\,e^{x} - e^{x} + C,$$  \n   where $C$ is the constant of integration.\n\n**Answer:** $\\displaystyle\\int x\\,e^{x}\\,dx = e^{x}(x-1)+C.$  \n\nThe result shows that the original product turned into a single exponential factor multiplied by a simple polynomial.\n\n### Worked Example 4 (Medium):  $\\displaystyle\\int \\ln(x)\\,dx$\n\nAt first glance there is no obvious “product,” but we can treat $\\ln(x)$ as $u$ and $dx$ as $dv$.\n\n1. **Choose $u$ and $dv$**  \n   Let  \n   $$u = \\ln(x),\\qquad dv = dx.$$  \n   Here $dv$ is just $dx$, whose integral is easy.\n\n2. **Compute $du$ and $v$**  \n   Differentiate $u$:  \n   $$du = \\frac{d}{dx}\\bigl(\\ln x\\bigr)\\,dx = \\frac{1}{x}\\,dx.$$  \n   Integrate $dv$:  \n   $$v = \\int dx = x.$$\n\n3. **Apply the formula**  \n   $$\\int \\ln(x)\\,dx = \\ln(x)\\,x - \\int x\\cdot\\frac{1}{x}\\,dx.$$  \n   Simplify the integrand inside the remaining integral: $x\\cdot\\frac{1}{x}=1$.\n\n4. **Integrate the simple term**  \n   $$\\int 1\\,dx = x.$$\n\n5. **Combine the pieces**  \n   $$\\int \\ln(x)\\,dx = x\\ln(x) - x + C.$$\n\n**Answer:** $\\displaystyle\\int \\ln(x)\\,dx = x\\bigl(\\ln(x)-1\\bigr)+C.$  \n\nEven though the original integral looked “alone,” writing it as a product with $dx$ let us use integration by parts and obtain a tidy antiderivative.\n\n> **In daily life:** Integration by parts is like untangling a knot. You pick one strand to loosen (differentiate $u$) and another to pull through (integrate $dv$). After a few moves the knot becomes a simple loop that’s easy to straighten.\n\n> **Common mistake:** Forgetting the minus sign in the formula. The correct relationship is $uv - \\int v\\,du$, not $uv + \\int v\\,du$.\n\n> **Remember:** After choosing $u$ and $dv$, always write down $du$ and $v$ before substituting into the formula. This prevents sign errors and makes the algebra transparent.\n\nWith the integration‑by‑parts formula mastered, you can now tackle many integrals that involve products of functions, logarithms, or even repeated applications when the first use does not finish the job. Practice choosing $u$ and $dv$ using LIATE, and the process will become a natural part of your calculus toolbox.",
+   "code": ""
+  },
+  {
+   "heading": "4. Repeated Integration by Parts",
+   "body": "When we use integration by parts more than once, we are simply repeating the same rule  \n\n\\[\n\\int u\\,dv = uv-\\int v\\,du .\n\\]\n\nEach time we apply it, a new integral appears.  \nSometimes that new integral looks a lot like the one we started with.  \nIf we recognise this pattern, we can treat the unknown integral as a variable,\nmove it to the other side of an equation, and solve for it—just like solving a simple algebraic equation.\n\n> **Note:** Repeating integration by parts is useful when the integrand is a product of a polynomial and an exponential or trigonometric function. The polynomial degree drops each time, so after a few steps we get back to an integral we already know.\n\nThink of it like peeling an onion.  \nEach layer (each application of the formula) removes a piece of the polynomial, and after a few layers we reach a core that we have already seen.  \nInstead of discarding the onion, we collect the layers we removed, write an equation, and solve for the whole onion’s weight.\n\n---\n\n### Step‑by‑step idea\n\n1. **Choose** \\(u\\) and \\(dv\\) as usual.  \n   For a product of a polynomial and \\(e^{x}\\) or \\(\\sin x\\), let the polynomial be \\(u\\) (its derivative becomes simpler) and the exponential or trigonometric factor be \\(dv\\) (its antiderivative stays similar).\n\n2. **Apply** the integration‑by‑parts formula once.  \n   Write the new integral that appears.\n\n3. **Apply** the formula again to that new integral, using the same strategy.  \n   Often the new integral will be the original one, perhaps with a constant factor.\n\n4. **Set up** an algebraic equation: bring the repeated integral terms to one side and the known terms to the other.\n\n5. **Solve** for the original integral, just as you would solve for \\(x\\) in \\(ax = b\\).\n\n---\n\n**Example 5 (Hard): Repeated parts for \\(\\displaystyle\\int x^{2}e^{x}\\,dx\\)**  \n\nWe must integrate the product of a quadratic polynomial and the exponential function \\(e^{x}\\).  \n\n1. **First choice:** let \\(u = x^{2}\\) (so \\(du = 2x\\,dx\\)) and \\(dv = e^{x}\\,dx\\) (so \\(v = e^{x}\\)).  \n   Apply the formula:\n\n   $$\n   \\int x^{2}e^{x}\\,dx = x^{2}e^{x} - \\int 2x\\,e^{x}\\,dx .\n   $$\n\n2. **Second application** to the remaining integral \\(\\int 2x e^{x}\\,dx\\).  \n   Choose \\(u = 2x\\) (so \\(du = 2\\,dx\\)) and \\(dv = e^{x}\\,dx\\) (so \\(v = e^{x}\\)):\n\n   $$\n   \\int 2x e^{x}\\,dx = 2x e^{x} - \\int 2 e^{x}\\,dx .\n   $$\n\n   Substitute this back into the expression from step 1:\n\n   $$\n   \\int x^{2}e^{x}\\,dx = x^{2}e^{x} - \\bigl(2x e^{x} - \\int 2 e^{x}\\,dx\\bigr) .\n   $$\n\n3. **Simplify** the right‑hand side and evaluate the last integral:\n\n   $$\n   \\int x^{2}e^{x}\\,dx = x^{2}e^{x} - 2x e^{x} + \\int 2 e^{x}\\,dx .\n   $$\n\n   The remaining integral is easy:\n\n   $$\n   \\int 2 e^{x}\\,dx = 2 e^{x} .\n   $$\n\n   Putting everything together:\n\n   $$\n   \\int x^{2}e^{x}\\,dx = x^{2}e^{x} - 2x e^{x} + 2 e^{x} + C .\n   $$\n\n**Answer:** \\(\\displaystyle\\int x^{2}e^{x}\\,dx = e^{x}\\bigl(x^{2}-2x+2\\bigr)+C\\).  \nThe repeated use of parts reduced the polynomial degree each time, and the final integral was elementary.\n\n---\n\n### When the same integral reappears\n\nSometimes after two or three applications we obtain an integral that is *exactly* the one we started with, perhaps multiplied by a constant.  \nIn that case we treat the unknown integral as a symbol, say \\(I\\).\n\n**Example 6 (Medium): \\(\\displaystyle\\int e^{x}\\cos x\\,dx\\)**  \n\n1. Choose \\(u = e^{x}\\) (so \\(du = e^{x}\\,dx\\)) and \\(dv = \\cos x\\,dx\\) (so \\(v = \\sin x\\)):\n\n   $$\n   I = \\int e^{x}\\cos x\\,dx = e^{x}\\sin x - \\int e^{x}\\sin x\\,dx .\n   $$\n\n2. Apply parts again to the new integral \\(\\int e^{x}\\sin x\\,dx\\).  \n   Let \\(u = e^{x}\\), \\(dv = \\sin x\\,dx\\) (so \\(v = -\\cos x\\)):\n\n   $$\n   \\int e^{x}\\sin x\\,dx = -e^{x}\\cos x + \\int e^{x}\\cos x\\,dx = -e^{x}\\cos x + I .\n   $$\n\n3. Substitute this back:\n\n   $$\n   I = e^{x}\\sin x - \\bigl(-e^{x}\\cos x + I\\bigr) .\n   $$\n\n   Simplify:\n\n   $$\n   I = e^{x}\\sin x + e^{x}\\cos x - I .\n   $$\n\n4. **Solve** for \\(I\\) by adding \\(I\\) to both sides:\n\n   $$\n   2I = e^{x}(\\sin x + \\cos x) .\n   $$\n\n   Hence\n\n   $$\n   I = \\frac{e^{x}}{2}\\bigl(\\sin x + \\cos x\\bigr) + C .\n   $$\n\n**Answer:** \\(\\displaystyle\\int e^{x}\\cos x\\,dx = \\frac{e^{x}}{2}\\bigl(\\sin x + \\cos x\\bigr)+C\\).\n\n> **Remember:** When the same integral appears on both sides, move it to one side and divide by the coefficient. This turns the integration problem into a simple algebra problem.\n\n---\n\n### Tips for spotting the pattern\n\n- **Degree drops:** If the polynomial factor loses degree each time, you will eventually reach a constant, which is easy to integrate.\n- **Same form returns:** With products like \\(e^{x}\\sin x\\) or \\(e^{x}\\cos x\\), the integral after two steps often looks like the original. Recognise the repetition quickly.\n- **Keep track of signs:** Each application introduces a minus sign from the formula; forgetting a sign leads to wrong coefficients.\n\n> **In daily life:** Solving a repeated‑parts integral is like untangling a knot by pulling the same strand repeatedly until the knot loosens enough to see the whole rope. The algebraic step is the moment you finally see the whole rope’s length.\n\nBy practising these steps, you will become comfortable deciding when to apply integration by parts more than once and how to turn the resulting equation into the final answer.",
+   "code": ""
+  },
+  {
+   "heading": "5. Partial Fraction Decomposition",
+   "body": "When we integrate a rational function – a fraction whose numerator and denominator are polynomials – the denominator can often be broken into simpler pieces.  \nIf we can write  \n\n$$\\frac{P(x)}{Q(x)}=\\frac{A_1}{x-r_1}+\\frac{A_2}{x-r_2}+\\cdots+\\frac{B_1x+C_1}{(x^2+px+q)}+\\dots$$  \n\nthen each term is easy to integrate because we already know the antiderivatives of $\\frac1{x-a}$, $\\frac{x}{x^2+px+q}$, and $\\frac1{x^2+px+q}$. This process is called **partial fraction decomposition**.\n\n> **Definition:** *Partial fraction decomposition* is the rewriting of a rational function as a sum of simpler fractions whose denominators are linear (first‑degree) or irreducible quadratic factors.\n\nThe idea works because the set of simpler fractions forms a basis for all fractions with the same denominator. By solving for the unknown constants (the letters $A,B,\\dots$), we match the original numerator exactly.\n\nThink of it like splitting a large pizza into slices that are easier to eat. The whole pizza is the original fraction; each slice is a simpler fraction. Once we have the slices, we can enjoy (integrate) each one without choking on a huge bite.\n\n---\n\n### Step‑by‑step procedure\n\n1. **Factor the denominator completely** into linear factors $(x-a)$ and irreducible quadratic factors $(x^2+px+q)$.  \n2. **Write the ansatz** – a sum of unknown constants over each factor:  \n   - For each distinct linear factor $(x-a)$ use a term $\\frac{A}{x-a}$.  \n   - For a repeated linear factor $(x-a)^k$ use $\\frac{A_1}{x-a}+\\frac{A_2}{(x-a)^2}+\\dots+\\frac{A_k}{(x-a)^k}$.  \n   - For each irreducible quadratic factor $(x^2+px+q)$ use $\\frac{Bx+C}{x^2+px+q}$, and repeat for powers if needed.  \n3. **Multiply through** by the original denominator to clear fractions.  \n4. **Expand and collect like powers of $x$** on both sides of the resulting equation.  \n5. **Equate coefficients** of each power of $x$ to obtain a system of linear equations for the unknown constants.  \n6. **Solve the system**, substitute the constants back into the ansatz, and integrate each term.\n\n> **Note:** The decomposition is only possible when the degree of the numerator is **strictly less** than the degree of the denominator. If not, first perform polynomial long division.\n\n> **Common mistake:** Forgetting to include a term for a repeated factor (e.g., using only $\\frac{A}{(x-2)}$ when the denominator contains $(x-2)^2$). This leads to an unsolvable system of equations.\n\n---\n\n### Example 6 (Easy): Decompose and integrate $\\displaystyle\\int\\frac{1}{x^{2}-1}\\,dx$\n\nThe denominator factors as $(x-1)(x+1)$.  \nWe set  \n\n$$\\frac{1}{x^{2}-1}=\\frac{A}{x-1}+\\frac{B}{x+1}.$$\n\n**Steps**\n\n1. Multiply by $(x-1)(x+1)$:  \n\n   $$1=A(x+1)+B(x-1).$$\n2. Expand:  \n\n   $$1=Ax+A+Bx-B.$$\n3. Collect $x$ terms and constants:  \n\n   $$1=(A+B)x+(A-B).$$\n4. Equate coefficients:  \n\n   - Coefficient of $x$: $A+B=0$  \n   - Constant term: $A-B=1$\n\n   Solving gives $A=\\tfrac12$, $B=-\\tfrac12$.\n\n5. Substitute back:  \n\n   $$\\frac{1}{x^{2}-1}= \\frac{1/2}{x-1}-\\frac{1/2}{x+1}.$$\n\n6. Integrate term‑by‑term:  \n\n   $$\\int\\frac{1}{x^{2}-1}\\,dx=\\frac12\\int\\frac{dx}{x-1}-\\frac12\\int\\frac{dx}{x+1}.$$\n\n**Answer:**  \n\n$$\\boxed{\\int\\frac{1}{x^{2}-1}\\,dx=\\frac12\\ln|x-1|-\\frac12\\ln|x+1|+C}.$$\n\n---\n\n### Example 7 (Medium): Decompose and integrate $\\displaystyle\\int\\frac{2x+3}{x^{2}-x-2}\\,dx$\n\nFirst factor the denominator:  \n\n$$x^{2}-x-2=(x-2)(x+1).$$  \n\nSet up the decomposition  \n\n$$\\frac{2x+3}{x^{2}-x-2}= \\frac{A}{x-2}+\\frac{B}{x+1}.$$\n\n**Steps**\n\n1. Multiply by $(x-2)(x+1)$:  \n\n   $$2x+3=A(x+1)+B(x-2).$$\n2. Expand the right side:  \n\n   $$2x+3=Ax+A+Bx-2B.$$\n3. Group like terms:  \n\n   $$2x+3=(A+B)x+(A-2B).$$\n4. Equate coefficients:  \n\n   - For $x$: $A+B=2$  \n   - Constant: $A-2B=3$\n\n   Solving the system: from $A=2-B$, substitute into $2-B-2B=3$ → $2-3B=3$ → $-3B=1$ → $B=-\\tfrac13$, then $A=2-(-\\tfrac13)=\\tfrac{7}{3}$.\n\n5. Write the decomposition:  \n\n   $$\\frac{2x+3}{x^{2}-x-2}= \\frac{7/3}{x-2}-\\frac{1/3}{x+1}.$$\n\n6. Integrate:  \n\n   $$\\int\\frac{2x+3}{x^{2}-x-2}\\,dx=\\frac{7}{3}\\int\\frac{dx}{x-2}-\\frac{1}{3}\\int\\frac{dx}{x+1}.$$\n\n**Answer:**  \n\n$$\\boxed{\\int\\frac{2x+3}{x^{2}-x-2}\\,dx=\\frac{7}{3}\\ln|x-2|-\\frac{1}{3}\\ln|x+1|+C}.$$\n\n---\n\n### When the denominator has an irreducible quadratic\n\nSuppose we need to integrate  \n\n$$\\int\\frac{3x+5}{x^{2}+4x+5}\\,dx.$$\n\nThe quadratic $x^{2}+4x+5$ cannot be factored over the real numbers (its discriminant $4^{2}-4\\cdot1\\cdot5=-4<0$).  \nWe write  \n\n$$\\frac{3x+5}{x^{2}+4x+5}= \\frac{Ax+B}{x^{2}+4x+5}.$$\n\nMultiplying through gives  \n\n$$3x+5=Ax+B.$$\n\nBecause the denominators are the same, the numerators must be equal for all $x$, so $A=3$ and $B=5$. The integral becomes  \n\n$$\\int\\frac{3x+5}{x^{2}+4x+5}\\,dx = \\int\\frac{3x+4+1}{(x+2)^{2}+1}\\,dx,$$\n\nafter completing the square $x^{2}+4x+5=(x+2)^{2}+1$. Split the fraction:\n\n$$\\int\\frac{3(x+2)}{(x+2)^{2}+1}\\,dx+\\int\\frac{1}{(x+2)^{2}+1}\\,dx.$$\n\nBoth are standard: the first gives $\\tfrac32\\ln\\big((x+2)^{2}+1\\big)$, the second gives $\\arctan(x+2)$.  \n\n> **In daily life:** Decomposing a complex task into simpler subtasks (like assembling a piece of furniture step by step) mirrors partial fractions – each small piece is manageable, and together they solve the whole problem.\n\n---\n\n### Summary of the technique\n\n1. **Factor** the denominator fully.  \n2. **Write** an expression with unknown constants for each factor.  \n3. **Clear** denominators and **match** coefficients.  \n4. **Solve** for the constants.  \n5. **Integrate** each simple term.\n\nBy mastering this systematic approach, many seemingly difficult integrals become straightforward additions of logarithms and arctangents. Practice with the examples above, then try new rational functions to reinforce the steps.",
+   "code": ""
+  },
+  {
+   "heading": "6. Choosing the Right Technique",
+   "body": "When you look at an integral, the first thing to do is to **ask what the inside of the integral is trying to tell you**.  \nIs there a function and its derivative together?  \nIs there a product of two different kinds of functions?  \nOr does the fraction break into simpler pieces?  \n\nBy answering these questions you can match the integral to the technique that “fits like a puzzle piece”.  \nThink of it like sorting laundry: you separate whites, colors, and delicates before you start washing.  \nSorting the integral first saves time and avoids trying a method that will not simplify the problem.\n\n> **Remember:** The goal is to rewrite the integral into a form that matches a known rule (substitution, parts, or partial fractions).  \n\n### 1. Look for a composition – substitution is often best  \n\nIf the integrand contains a function $g(x)$ multiplied by its derivative $g'(x)$ (or a constant multiple of it), a **substitution** $u=g(x)$ will turn the integral into $\\int u\\,du$, which is easy to integrate.\n\n**Example 8 (Level: Easy):**  \nEvaluate $\\displaystyle \\int x\\sin\\!\\bigl(x^{2}\\bigr)\\,dx$.\n\n1. **Identify the inner function.**  \n   Inside the sine we have $x^{2}$, and outside we have a factor $x$.  \n   The derivative of $x^{2}$ is $2x$, which is almost the $x$ we see.\n\n2. **Choose the substitution.**  \n   Let $u = x^{2}$. Then $du = 2x\\,dx$, so $x\\,dx = \\dfrac{1}{2}\\,du$.\n\n   $$u = x^{2},\\qquad du = 2x\\,dx \\;\\Longrightarrow\\; x\\,dx = \\frac{1}{2}\\,du$$\n\n3. **Rewrite the integral.**  \n   Replace $x\\sin(x^{2})dx$ with $\\frac{1}{2}\\sin(u)\\,du$.\n\n   $$\\int x\\sin\\!\\bigl(x^{2}\\bigr)\\,dx = \\frac{1}{2}\\int \\sin(u)\\,du$$\n\n4. **Integrate the simple form.**  \n\n   $$\\frac{1}{2}\\int \\sin(u)\\,du = -\\frac{1}{2}\\cos(u) + C$$\n\n5. **Return to the original variable.**  \n\n   $$-\\frac{1}{2}\\cos(u) + C = -\\frac{1}{2}\\cos\\!\\bigl(x^{2}\\bigr) + C$$\n\n**Answer:** $\\displaystyle \\int x\\sin\\!\\bigl(x^{2}\\bigr)\\,dx = -\\frac{1}{2}\\cos\\!\\bigl(x^{2}\\bigr)+C$.\n\nThe substitution worked because the derivative of the inner function $x^{2}$ was present (up to a constant) outside the sine.\n\n### 2. Look for a product of different types – integration by parts  \n\nWhen the integrand is a product of two functions where one becomes simpler when differentiated and the other stays manageable when integrated, use **integration by parts**:\n\n$$\\int u\\,dv = uv - \\int v\\,du.$$\n\nTypical choices: a polynomial times an exponential, a logarithm, or a trigonometric function.\n\n> **Note:** Choose $u$ to be the part that gets simpler after differentiation; choose $dv$ to be the part you can integrate easily.\n\n### 3. Look for rational functions – partial fractions or long division  \n\nIf the integrand is a rational function (a polynomial divided by another polynomial), first check whether the numerator’s degree is **greater than or equal to** the denominator’s.  \nIf it is, perform **polynomial long division** to separate a polynomial part from a proper fraction.  \nThen decompose the proper fraction into **partial fractions**, which are simple pieces you can integrate directly.\n\n**Example 9 (Level: Medium):**  \nEvaluate $\\displaystyle \\int \\frac{x\\,e^{x}}{x+1}\\,dx$.\n\n1. **Observe the structure.**  \n   The fraction $\\frac{x}{x+1}$ suggests long division, while $e^{x}$ hints at a substitution later.\n\n2. **Perform long division.**  \n   Divide $x$ by $x+1$:\n\n   $$\\frac{x}{x+1}=1-\\frac{1}{x+1}.$$\n\n   So the integrand becomes  \n\n   $$\\int \\left(1-\\frac{1}{x+1}\\right) e^{x}\\,dx = \\int e^{x}\\,dx - \\int \\frac{e^{x}}{x+1}\\,dx.$$\n\n3. **Integrate the first term directly.**  \n\n   $$\\int e^{x}\\,dx = e^{x}+C.$$\n\n4. **Handle the second term with substitution.**  \n   Let $u = x+1$. Then $du = dx$ and $e^{x}=e^{u-1}=e^{-1}e^{u}$.\n\n   $$\\int \\frac{e^{x}}{x+1}\\,dx = \\int \\frac{e^{-1}e^{u}}{u}\\,du = e^{-1}\\int \\frac{e^{u}}{u}\\,du.$$\n\n   The integral $\\int \\frac{e^{u}}{u}\\,du$ does not have an elementary antiderivative; it is the **exponential integral**, denoted $\\operatorname{Ei}(u)$.  \n   For the purpose of this lesson we keep it in that form.\n\n5. **Combine the pieces.**  \n\n   $$\\int \\frac{x\\,e^{x}}{x+1}\\,dx = e^{x} - e^{-1}\\operatorname{Ei}(x+1) + C.$$\n\n**Answer:** $\\displaystyle \\int \\frac{x\\,e^{x}}{x+1}\\,dx = e^{x} - \\frac{1}{e}\\,\\operatorname{Ei}(x+1) + C.$\n\n> **Common mistake:** Trying integration by parts directly on $\\frac{x e^{x}}{x+1}$ would lead to a more complicated integral. Recognizing the rational structure first simplifies the problem.\n\n### 4. Putting the clues together  \n\nWhen you face a new integral, follow this checklist:\n\n1. **Is there a clear inner function with its derivative outside?** → try substitution.  \n2. **Is the integrand a product of two different‑type functions?** → consider integration by parts, picking $u$ to simplify on differentiation.  \n3. **Is the integrand a rational expression?** → do long division if needed, then partial fractions.  \n4. **If more than one clue appears, choose the one that reduces the integral the most.**  \n\n> **In daily life:** Deciding which technique to use is like choosing the right tool from a toolbox. A hammer works best for nails, a screwdriver for screws. Using the wrong tool makes the job harder and may damage the workpiece.\n\nBy practicing the “look‑first‑then‑choose” habit, you will quickly recognize the pattern of an integral and apply the most efficient method without trial and error.",
+   "code": ""
+  },
+  {
+   "heading": "7. Summary and Practice Problems",
+   "body": "> **Remember:**  Integration is the reverse process of differentiation; it finds the original function (the *antiderivative*) whose derivative gives the integrand.\n\nIn this final part we quickly revisit each tool we have learned, highlight the key step that makes it work, and then give you a list of practice integrals.  Treat the summary as a checklist you can flip through while solving problems.\n\n---\n\n### 1. Basic Integration  \n**Key idea:**  If you know a function’s derivative, you can write down its antiderivative directly.  \n\n| Technique | Typical form | What to look for |\n|-----------|--------------|-----------------|\n| Power rule | $\\displaystyle \\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C$ (for $n\\neq -1$) | A simple power of $x$ |\n| Constant multiple | $\\displaystyle \\int k\\,f(x)\\,dx = k\\int f(x)\\,dx$ | A constant factor outside the integral |\n| Sum rule | $\\displaystyle \\int [f(x)+g(x)]dx = \\int f(x)dx+\\int g(x)dx$ | Several terms added together |\n\n---\n\n### 2. Substitution Method  \n**Key idea:**  Replace a complicated inner function by a single variable $u$, turning the integral into a simpler one.  \n\n**Step:**  Identify a part $g(x)$ whose derivative $g'(x)$ also appears (up to a constant). Set $u=g(x)$, then $du=g'(x)\\,dx$.\n\n> **Note:**  The substitution works because differentiation and integration are inverse operations; swapping $x$ for $u$ does not change the area under the curve.\n\n---\n\n### 3. Integration by Parts  \n**Key idea:**  Use the product rule in reverse.  \n\n$$\\int u\\,dv = uv - \\int v\\,du$$  \n\nChoose $u$ to be the factor that becomes simpler when differentiated, and $dv$ the remaining part that can be integrated.\n\n> **Common mistake:**  Picking $u$ and $dv$ arbitrarily often leads to a more difficult integral. Look for the **LIATE** order (Logarithmic, Inverse trig, Algebraic, Trig, Exponential) to decide $u$.\n\n---\n\n### 4. Repeated Integration by Parts  \n**Key idea:**  When the first integration by parts leaves another product of the same type, apply the formula again. Often a pattern emerges, allowing you to solve for the original integral algebraically.\n\n---\n\n### 5. Partial Fraction Decomposition  \n**Key idea:**  Break a rational function (polynomial ÷ polynomial) into a sum of simpler fractions whose denominators are linear or irreducible quadratic factors.\n\n**Step:**  Factor the denominator, write unknown constants for each piece, solve for them, then integrate each piece using basic rules.\n\n> **In daily life:**  Think of splitting a complex bill into separate, easy‑to‑pay items; each item can be handled on its own.\n\n---\n\n### 6. Choosing the Right Technique  \nWhen you see an integral, ask:\n\n1. **Is it a simple power or constant multiple?** → Basic rule.  \n2. **Does a part of the integrand look like the derivative of another part?** → Substitution.  \n3. **Is it a product of two functions?** → Integration by parts (maybe repeatedly).  \n4. **Is it a rational function?** → Partial fractions.  \n\nOften more than one method is possible; pick the one that gives the shortest chain of steps.\n\n---\n\n## Worked Example  \n\n**Example 10 (Intermediate):**  Evaluate $\\displaystyle \\int \\frac{x^2}{(x+1)^2}\\,dx$.\n\n1. **Identify the technique.**  \n   The integrand is a rational function, so we try **partial fraction decomposition**. The denominator $(x+1)^2$ is a repeated linear factor.\n\n2. **Set up the decomposition.**  \n   Write  \n   $$\\frac{x^2}{(x+1)^2}= \\frac{A}{x+1}+\\frac{B}{(x+1)^2}.$$  \n\n3. **Solve for $A$ and $B$.**  \n   Multiply both sides by $(x+1)^2$:  \n   $$x^2 = A(x+1) + B.$$  \n   Expand: $x^2 = A x + A + B$.  \n   Match coefficients of like powers of $x$:  \n\n   - $x^2$ term: coefficient $1$ on the left, $0$ on the right → no $x^2$ term on the right, so we must add a missing term.  \n   Actually we see the decomposition needs a polynomial part because the numerator degree (2) is not less than denominator degree (2). Perform long division first:  \n\n   $$\\frac{x^2}{(x+1)^2}=1-\\frac{2x+1}{(x+1)^2}.$$  \n\n   Now decompose the remaining fraction:  \n\n   $$\\frac{2x+1}{(x+1)^2}= \\frac{C}{x+1}+ \\frac{D}{(x+1)^2}.$$  \n\n   Multiply: $2x+1 = C(x+1)+D$.  \n   Expand: $2x+1 = Cx + C + D$.  \n\n   Match coefficients:  \n\n   - $x$ term: $2 = C \\;\\Rightarrow\\; C=2$  \n   - Constant term: $1 = C + D = 2 + D \\;\\Rightarrow\\; D = -1$  \n\n   So  \n\n   $$\\frac{x^2}{(x+1)^2}=1-\\left(\\frac{2}{x+1}-\\frac{1}{(x+1)^2}\\right).$$  \n\n4. **Integrate term by term.**  \n\n   $$\\int \\frac{x^2}{(x+1)^2}\\,dx = \\int 1\\,dx - \\int \\frac{2}{x+1}\\,dx + \\int \\frac{1}{(x+1)^2}\\,dx.$$  \n\n   Compute each integral:  \n\n   $$\\int 1\\,dx = x,$$  \n   $$\\int \\frac{2}{x+1}\\,dx = 2\\ln|x+1|,$$  \n   $$\\int \\frac{1}{(x+1)^2}\\,dx = -\\frac{1}{x+1}.$$  \n\n5. **Combine results.**  \n\n   $$\\int \\frac{x^2}{(x+1)^2}\\,dx = x - 2\\ln|x+1| -\\frac{1}{x+1}+C.$$\n\n**Answer:** $\\displaystyle x - 2\\ln|x+1| -\\frac{1}{x+1}+C.$  \n\nThe example shows how a rational integral may need **both** long division and partial fractions before the basic rules finish the job.\n\n---\n\n## Practice Problems  \n\nUse the checklist above to decide which technique fits each integral. Write the full steps; the goal is to become comfortable switching methods when needed.\n\n1. $\\displaystyle \\int 5x^4\\,dx$  \n2. $\\displaystyle \\int \\cos(3x)\\,dx$  \n3. $\\displaystyle \\int x\\sin x\\,dx$  \n4. $\\displaystyle \\int e^{2x}\\cos(3x)\\,dx$  \n5. $\\displaystyle \\int \\frac{2x+3}{x^2+3x+2}\\,dx$  \n6. $\\displaystyle \\int \\frac{x}{(x^2+1)^2}\\,dx$  \n7. $\\displaystyle \\int \\ln x \\,dx$  \n8. $\\displaystyle \\int \\frac{x^3}{x^2-1}\\,dx$  \n9. $\\displaystyle \\int \\frac{1}{x\\sqrt{x^2+1}}\\,dx$  \n10. $\\displaystyle \\int (x^2+1)e^{x^3+3x}\\,dx$\n\nTry each problem without looking at solutions first. After you finish, compare your work with the answer key in the textbook or ask a teacher to check. Practicing the decision‑making process is as important as performing the algebra; the more you use the checklist, the faster you will recognize the right tool.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Evaluate $\\displaystyle \\int 3x^2\\,dx$.",
+   "a": "Use the power rule. $\\displaystyle \\int 3x^2\\,dx = 3\\int x^2\\,dx = 3\\left(\\frac{x^{3}}{3}\\right)+C = x^{3}+C$."
+  },
+  {
+   "level": "Easy",
+   "q": "Compute $\\displaystyle \\int \\cos(2x)\\,dx$ using substitution.",
+   "a": "Let $u=2x$, then $du=2dx$ or $dx=\\frac{du}{2}$.\n$\\displaystyle \\int \\cos(2x)\\,dx = \\int \\cos u \\cdot \\frac{du}{2}= \\frac12\\int \\cos u\\,du = \\frac12\\sin u +C = \\frac12\\sin(2x)+C$."
+  },
+  {
+   "level": "Medium",
+   "q": "Find $\\displaystyle \\int x e^{x}\\,dx$ by integration by parts.",
+   "a": "Choose $u = x$ (so $du = dx$) and $dv = e^{x}dx$ (so $v = e^{x}$).\nApply the formula:\n$\\displaystyle \\int x e^{x}\\,dx = uv - \\int v\\,du = x e^{x} - \\int e^{x}\\,dx = x e^{x} - e^{x}+C = e^{x}(x-1)+C$."
+  },
+  {
+   "level": "Medium",
+   "q": "Integrate $\\displaystyle \\int \\frac{2x+3}{x^2+3x+2}\\,dx$ using partial fractions.",
+   "a": "Factor denominator: $x^2+3x+2=(x+1)(x+2)$.\nWrite $\\displaystyle \\frac{2x+3}{(x+1)(x+2)} = \\frac{A}{x+1}+\\frac{B}{x+2}$.\nMultiply both sides by $(x+1)(x+2)$: $2x+3 = A(x+2)+B(x+1)$.\nSet $x=-1$: $2(-1)+3 = A(1) \\Rightarrow 1 = A$.\nSet $x=-2$: $2(-2)+3 = B(-1) \\Rightarrow -1 = -B \\Rightarrow B = 1$.\nThus integral becomes $\\displaystyle \\int\\left(\\frac{1}{x+1}+\\frac{1}{x+2}\\right)dx = \\ln|x+1|+\\ln|x+2|+C = \\ln|(x+1)(x+2)|+C$."
+  },
+  {
+   "level": "Hard",
+   "q": "Evaluate $\\displaystyle \\int x^2 \\sin x \\,dx$ using repeated integration by parts.",
+   "a": "First integration by parts: let $u = x^2$, $dv = \\sin x\\,dx$. Then $du = 2x\\,dx$, $v = -\\cos x$.\n$\\displaystyle \\int x^2 \\sin x\\,dx = -x^2\\cos x + \\int 2x\\cos x\\,dx$.\nNow integrate $\\int 2x\\cos x\\,dx$ again by parts: let $u = 2x$, $dv = \\cos x\\,dx$. Then $du = 2\\,dx$, $v = \\sin x$.\n$\\displaystyle \\int 2x\\cos x\\,dx = 2x\\sin x - \\int 2\\sin x\\,dx = 2x\\sin x + 2\\cos x + C$.\nCombine:\n$\\displaystyle \\int x^2 \\sin x\\,dx = -x^2\\cos x + \\big(2x\\sin x + 2\\cos x\\big)+C = -x^2\\cos x + 2x\\sin x + 2\\cos x + C$."
+  },
+  {
+   "level": "Hard",
+   "q": "Compute $\\displaystyle \\int \\frac{x^3}{x^2+1}\\,dx$ by first performing polynomial division, then integrating.",
+   "a": "Divide $x^3$ by $x^2+1$:\n$x^3 ÷ (x^2+1) = x$ with remainder $-x$. So\n$\\displaystyle \\frac{x^3}{x^2+1} = x + \\frac{-x}{x^2+1} = x - \\frac{x}{x^2+1}$.\nNow integrate term‑by‑term:\n$\\displaystyle \\int x\\,dx = \\frac{x^{2}}{2}+C_1$.\nFor $\\displaystyle \\int \\frac{x}{x^2+1}\\,dx$, use substitution $u = x^2+1$, $du = 2x\\,dx$, so $x\\,dx = \\frac{du}{2}$.\n$\\displaystyle \\int \\frac{x}{x^2+1}\\,dx = \\frac12\\int \\frac{du}{u} = \\frac12\\ln|u|+C_2 = \\frac12\\ln(x^2+1)+C_2$.\nCombine with the minus sign:\n$\\displaystyle \\int \\frac{x^3}{x^2+1}\\,dx = \\frac{x^{2}}{2} - \\frac12\\ln(x^2+1) + C$, where $C = C_1 - C_2$ is the overall constant."
+  }
+ ],
+ "recap": "This lesson introduced antiderivatives as the reverse of differentiation and covered basic integration rules, substitution, integration by parts, repeated parts, partial fractions, and how to choose the right technique. Each method was linked to a pattern in the integrand, making complex integrals easier to solve. Practice problems help reinforce recognizing these patterns and applying the appropriate method.",
+ "key_terms": [
+  {
+   "term": "antiderivative",
+   "meaning": "A function whose derivative equals the given function"
+  },
+  {
+   "term": "substitution",
+   "meaning": "Replacing an inner function with a new variable to simplify the integral"
+  },
+  {
+   "term": "integration by parts",
+   "meaning": "A technique based on the product rule that rewrites an integral of a product as uv minus the integral of v du"
+  },
+  {
+   "term": "repeated integration by parts",
+   "meaning": "Applying integration by parts multiple times, often leading to an equation that can be solved for the original integral"
+  },
+  {
+   "term": "partial fraction decomposition",
+   "meaning": "Breaking a rational function into a sum of simpler fractions that are easier to integrate"
+  },
+  {
+   "term": "power rule",
+   "meaning": "Integral of x^n is x^(n+1)/(n+1) plus constant, for n not equal to -1"
+  },
+  {
+   "term": "LIATE rule",
+   "meaning": "A guideline for choosing u in integration by parts: Logarithmic, Inverse trig, Algebraic, Trig, Exponential"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the antiderivative of 3x^2?",
+   "options": [
+    "x^3 + C",
+    "3x^3 + C",
+    "x^3/3 + C",
+    "x^2 + C"
+   ],
+   "answer": 0,
+   "why": "Integrating 3x^2 gives 3 * x^3/3 = x^3 plus constant."
+  },
+  {
+   "q": "In u‑substitution, if u = g(x), how is dx replaced?",
+   "options": [
+    "du = g'(x) dx",
+    "dx = du/g'(x)",
+    "du = dx/g'(x)",
+    "dx = g'(x) du"
+   ],
+   "answer": 1,
+   "why": "dx is expressed as du divided by the derivative g'(x)."
+  },
+  {
+   "q": "Which choice of u follows the LIATE rule for the integrand x*e^x?",
+   "options": [
+    "u = e^x",
+    "u = x",
+    "u = 1",
+    "u = ln(x)"
+   ],
+   "answer": 1,
+   "why": "Algebraic term x comes before exponential e^x in LIATE."
+  },
+  {
+   "q": "What is the result of applying integration by parts to ∫ u dv?",
+   "options": [
+    "uv + ∫ v du",
+    "uv - ∫ v du",
+    "u/v + ∫ v du",
+    "u - v + C"
+   ],
+   "answer": 1,
+   "why": "The formula is ∫ u dv = uv - ∫ v du."
+  },
+  {
+   "q": "When using repeated integration by parts on ∫ x e^x dx, what type of equation do you obtain?",
+   "options": [
+    "A quadratic equation",
+    "A linear equation in the original integral",
+    "An exponential equation",
+    "A trigonometric identity"
+   ],
+   "answer": 1,
+   "why": "The original integral reappears, giving a linear equation that can be solved."
+  },
+  {
+   "q": "Partial fraction decomposition is most useful for which kind of integrand?",
+   "options": [
+    "Products of polynomials",
+    "Rational functions where denominator factors",
+    "Trigonometric functions",
+    "Logarithmic functions"
+   ],
+   "answer": 1,
+   "why": "It breaks a rational function with a factorizable denominator into simpler fractions."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define antiderivative",
+   "back": "A function F(x) whose derivative F'(x) equals the given function f(x)."
+  },
+  {
+   "front": "State the power rule for integration",
+   "back": "Integral of x^n dx equals x^(n+1)/(n+1) plus C, for n not equal to -1."
+  },
+  {
+   "front": "What is the main idea of u‑substitution?",
+   "back": "Identify an inner function and its derivative, replace them with u and du to simplify the integral."
+  },
+  {
+   "front": "Write the integration by parts formula",
+   "back": "Integral of u dv equals uv minus integral of v du."
+  },
+  {
+   "front": "When should you use repeated integration by parts?",
+   "back": "When the integral after one application resembles the original, allowing you to solve for it algebraically."
+  },
+  {
+   "front": "What does partial fraction decomposition do?",
+   "back": "It rewrites a rational function as a sum of simpler fractions with linear or irreducible quadratic denominators."
+  },
+  {
+   "front": "What does the LIATE rule help you decide?",
+   "back": "Which part of the integrand to choose as u in integration by parts."
+  },
+  {
+   "front": "How do you choose the right integration technique?",
+   "back": "Look for patterns: a function and its derivative suggests substitution; a product suggests parts; a rational function suggests partial fractions."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "calculus-foundation-l25-u-substitution-workflow",
+   "title": "Step‑by‑step flowchart showing how to choose u, replace, integrate, and revert to x.",
+   "alt": "Step‑by‑step flowchart showing how to choose u, replace, integrate, and revert to x.",
+   "priority": 8,
+   "picture_title": "u‑substitution workflow",
+   "kind": "illustration",
+   "subject": "A simple diagram that starts with the original integral, points to the choice of the inner function u, shows the substitution du = g'(x)dx, the transformed integral in terms of u, and the final step of substituting back to x.",
+   "layout": "Vertical flow: original integral at top, arrow to box \"choose u\", arrow to box \"replace dx\", arrow to box \"integrate in u\", arrow to box \"substitute back\" at bottom.",
+   "labels": [
+    "Original integral",
+    "Choose u",
+    "Replace dx",
+    "Integrate",
+    "Back‑substitute"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l25-integration-by-parts-diagram",
+   "title": "Visual representation of the formula ∫u dv = uv − ∫v du.",
+   "alt": "Visual representation of the formula ∫u dv = uv − ∫v du.",
+   "priority": 7,
+   "picture_title": "Integration by parts diagram",
+   "kind": "labelled diagram",
+   "subject": "A diagram that splits an integral into two parts, labels u and dv, shows differentiation to du and integration to v, and connects them to the product uv and the remaining integral ∫v du.",
+   "layout": "Two columns: left column shows the original integral broken into u and dv; right column shows arrows to du (down) and v (up), then combines into uv at the top and ∫v du at the bottom.",
+   "labels": [
+    "u",
+    "dv",
+    "du",
+    "v",
+    "uv",
+    "∫v du"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "calculus-foundation-l25-partial-fraction-tree",
+   "title": "Tree diagram illustrating how a rational function is broken into simpler fractions.",
+   "alt": "Tree diagram illustrating how a rational function is broken into simpler fractions.",
+   "priority": 6,
+   "picture_title": "Partial fraction tree",
+   "kind": "illustration",
+   "subject": "A branching diagram that starts with a complex fraction, splits into linear factors and irreducible quadratics, and shows the corresponding A/(x‑r) or (Bx+C)/(quadratic) terms.",
+   "layout": "Root node at top with the original fraction, two branches for each factor, leaf nodes labeled with the partial fraction terms.",
+   "labels": [
+    "Original fraction",
+    "Linear factor",
+    "Quadratic factor",
+    "A/(x‑r)",
+    "Bx+C/(quadratic)"
+   ],
+   "after": 5
+  },
+  {
+   "type": "compare",
+   "title": "Power Rule vs Exponential Rule",
+   "left": {
+    "name": "Power Rule",
+    "points": [
+     "∫ x^n dx = x^(n+1)/(n+1) + C",
+     "n ≠ -1",
+     "Works for any polynomial term"
+    ]
+   },
+   "right": {
+    "name": "Exponential Rule",
+    "points": [
+     "∫ a^x dx = a^x / ln(a) + C",
+     "a > 0, a ≠ 1",
+     "Derivative of a^x is a^x ln(a)"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "u‑Substitution Process",
+   "steps": [
+    {
+     "label": "Identify inner function",
+     "text": "Find a part g(x) whose derivative also appears."
+    },
+    {
+     "label": "Set u = g(x)",
+     "text": "Replace g(x) with u."
+    },
+    {
+     "label": "Compute du",
+     "text": "Differentiate: du = g'(x) dx."
+    },
+    {
+     "label": "Rewrite integral",
+     "text": "Express everything in terms of u and du."
+    },
+    {
+     "label": "Integrate and back‑substitute",
+     "text": "Integrate in u, then replace u with g(x)."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Integration by Parts",
+   "steps": [
+    {
+     "label": "Choose u and dv",
+     "text": "Let u be the part that simplifies when differentiated."
+    },
+    {
+     "label": "Differentiate u",
+     "text": "Find du = u' dx."
+    },
+    {
+     "label": "Integrate dv",
+     "text": "Find v such that dv = v' dx."
+    },
+    {
+     "label": "Apply formula",
+     "text": "∫ u dv = u·v – ∫ v du."
+    },
+    {
+     "label": "Simplify remaining integral",
+     "text": "Often the new integral is easier or repeats."
+    }
+   ],
+   "loop": true,
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Partial Fraction Decomposition Parts",
+   "items": [
+    {
+     "name": "Linear factor",
+     "role": "Term A/(x‑r) gives simple log integral."
+    },
+    {
+     "name": "Repeated linear factor",
+     "role": "Terms A1/(x‑r) + A2/(x‑r)^2 handle powers."
+    },
+    {
+     "name": "Irreducible quadratic",
+     "role": "Term (Bx+C)/(x^2+px+q) splits into log + arctan."
+    },
+    {
+     "name": "Repeated quadratic",
+     "role": "Higher powers need several similar terms."
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Key Antiderivative Formulas",
+   "items": [
+    {
+     "value": "∫ x^n dx = x^(n+1)/(n+1) + C",
+     "label": "Power rule"
+    },
+    {
+     "value": "∫ e^x dx = e^x + C",
+     "label": "Exponential"
+    },
+    {
+     "value": "∫ sin x dx = -cos x + C",
+     "label": "Sine"
+    },
+    {
+     "value": "∫ 1/(x‑a) dx = ln|x‑a| + C",
+     "label": "Logarithm"
+    }
+   ],
+   "after": 6
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

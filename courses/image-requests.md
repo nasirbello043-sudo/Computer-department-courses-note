@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **17** | Uploaded: **41** | Covers waiting: **7**
+Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
 
 ## Course covers
 
@@ -278,29 +278,35 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
-## Calculus Foundation
+## Organic Chemistry
 
-### Lesson 1: Exponents and Radicals
+### Lesson 6: Isomerism
 
 Save as:
 ```
-calculus-foundation-l01-exponent-blocks.png
+organic-chemistry-l06-chiral-carbon-center.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A set of identical cubes labeled with the base number a, arranged in a row of n cubes to represent aⁿ as repeated multiplication.
+Show: The diagram shows a tetrahedral carbon atom with four distinct substituents (e.g., H, Cl, CH3, OH). Two versions are displayed: the original molecule and its mirror image, highlighting that they cannot be rotated to match each other.
 
-Layout: A horizontal row of n identical cubes with the label "a" on each; an arrow points from the row to the expression aⁿ.
+Layout: Two tetrahedral models side‑by‑side, each with bonds drawn as wedges and dashes; arrows point from each model to a label indicating 'original' and 'mirror image'.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "a"
-- "aⁿ"
+- "C"
+- "H"
+- "Cl"
+- "CH3"
+- "OH"
+- "mirror image"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
+
+## Calculus Foundation
 
 ### Lesson 2: Factoring and Simplifying
 
@@ -460,6 +466,19 @@ calculus-foundation-l23-water-filling-a-tank.png
 Prompt:
 ```
 Create a realistic photograph for a school lesson: A clear container being poured with water, with a stopwatch showing elapsed time and a volume gauge indicating the increasing amount of water.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 24: Fundamental Theorem of Calculus
+
+Save as:
+```
+calculus-foundation-l24-runner-with-speedometer.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The photo shows a person running outdoors, wearing a device that displays instantaneous speed (velocity) and cumulative distance, illustrating how integrating velocity gives distance.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
