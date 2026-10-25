@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **30** | Uploaded: **41** | Covers waiting: **8**
+Waiting: **29** | Uploaded: **41** | Covers waiting: **8**
 
 ## Course covers
 
@@ -289,33 +289,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-## Organic Chemistry
-
-### Lesson 7: Reaction Mechanisms Basics
-
-Save as:
-```
-organic-chemistry-l07-curved-arrow-mechanism.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: A simple reaction where a lone‑pair on a nucleophile attacks a carbon bearing a leaving group, with a curved arrow indicating electron flow and the leaving group arrow showing bond breakage.
-
-Layout: Molecule on the left with nucleophile, curved arrow pointing to electrophilic carbon, and a second arrow from the bond to the leaving group on the right; all parts labelled.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Nucleophile"
-- "Electrophile"
-- "Leaving group"
-- "Curved arrow"
-- "Bond break"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
