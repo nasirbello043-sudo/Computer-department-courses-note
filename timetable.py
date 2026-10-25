@@ -1,24 +1,16 @@
-"""Reads the timetable files in timetable-uploads/ into timetables/<name>.json and timetables/index.json,
-which the timetable page shows. A file whose name starts with "exam" is the exam timetable.
-Word and PDF files are read from their text (exact). Pictures are read by a vision AI (Groq).
-Runs from .github/workflows/timetable.yml. Never put keys in this file."""
-import base64, datetime, glob, hashlib, io, json, os, re, time, urllib.error, urllib.request, zipfile
+"""Reads the timetables you type or upload in timetable-uploads/ and writes timetables/<name>.json plus timetables/index.json
+for the timetable page. No AI is used anywhere in this file.
+
+A .txt file starts with @exam or @school (the first line), then one line per course:
+    MONDAY 28 SEPT 2026 | 15:15-18:15 | GST 112 | Science Hall          (exam: date, time, course, venue)
+    TUESDAY | 08:00-10:00 | COS 101, MTH 102 | Hall A | Dr Musa          (school: weekday, time, courses, venue, lecturer)
+    THURSDAY 1 OCT 2026 | PUBLIC HOLIDAY
+Lines starting with # are notes. An optional line  @title Second Semester Examination  gives the timetable a title.
+A Word (.docx) table is also read exactly, by its grid. Runs from .github/workflows/timetable.yml."""
+import datetime, glob, hashlib, json, os, re, time, zipfile
 
 UP, OUT = "timetable-uploads", "timetables"
-KEY = (os.environ.get("GROQ_TIMETABLE_KEY") or os.environ.get("GROQ_API_KEY") or "").strip()
-TEXT_MODEL = os.environ.get("TT_TEXT_MODEL", "openai/gpt-oss-120b")
-VISION_MODEL = os.environ.get("TT_VISION_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct")
-URL = "https://api.groq.com/openai/v1/chat/completions"
-NV_KEY = (os.environ.get("NVIDIA_API_KEY") or "").strip()
-NV_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
-NV_VISION = os.environ.get("TT_NV_VISION", "meta/llama-3.2-11b-vision-instruct")
-PICK = os.environ.get("TT_PICTURE_PROVIDER", "nvidia")  # "nvidia" or "groq" for pictures and scanned PDFs
-TEXT_PROVIDER = os.environ.get("TT_TEXT_PROVIDER", "nvidia")  # "nvidia" or "groq" for Word and text PDFs
-NV_TEXT = os.environ.get("TT_NV_TEXT", "meta/llama-3.1-70b-instruct")
-EXTS = (".jpg", ".jpeg", ".png", ".webp", ".pdf", ".docx")
 LOG = []
-SCHEMA = """Reply as JSON: {"title": "short title", "kind": "exam or class", "note": "venue or other notes that apply to everything, or empty", "entries": [{"date": "YYYY-MM-DD for an exam timetable, otherwise empty", "day": "Monday", "start": "HH:MM 24-hour", "end": "HH:MM 24-hour", "code": "COURSE CODE such as GST 112", "title": "course title if shown, else empty", "venue": "venue if shown, else empty", "lecturer": "lecturer if shown, else empty"}], "holidays": [{"date": "YYYY-MM-DD", "label": "Public holiday"}]}
-Write one entry for every course shown in the table. Do not invent anything that is not in the table. Use 24-hour times (3:15 pm is 15:15 and 12 noon is 12:00). Read the year from the heading. When a row gives a weekday and a date, copy both exactly as written."""
 
 
 def note(m):
@@ -37,127 +29,237 @@ def load(p, default):
         return default
 
 
-def chat(model, content, max_tokens=4000, nvidia=False):
-    """One call to Groq or NVIDIA. Returns the parsed JSON reply, or None."""
-    key, url = (NV_KEY, NV_URL) if nvidia else (KEY, URL)
-    if not key:
-        note(f"No {'NVIDIA_API_KEY' if nvidia else 'Groq key'} found, so {model} was not called")
-        return None
-    body = {"model": model, "temperature": 0, "max_tokens": max_tokens, "messages": [{"role": "user", "content": content}]}
-    if not nvidia:
-        body["max_completion_tokens"] = body.pop("max_tokens")
-        body["response_format"] = {"type": "json_object"}
-        if model.startswith("openai/gpt-oss"):
-            body["reasoning_effort"] = "low"
-    data = json.dumps(body).encode()
-    for attempt in range(3):
-        req = urllib.request.Request(url, data, {"Authorization": "Bearer " + key, "Content-Type": "application/json", "User-Agent": "timetable-reader/1.0"})
-        try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                txt = json.load(r)["choices"][0]["message"]["content"] or ""
-            m = re.search(r"\{[\s\S]*\}", txt)  # NVIDIA may wrap the JSON in words
-            return json.loads(m.group(0) if m else txt)
-        except urllib.error.HTTPError as e:
-            body_txt = e.read()[:300].decode("utf8", "ignore")
-            if e.code == 429 and attempt < 2:
-                time.sleep(min(float(e.headers.get("retry-after") or 20), 60) + 1)
-                continue
-            note(f"{'NVIDIA' if nvidia else 'Groq'} error {e.code} with {model}: {body_txt[:160]}")
-            return None
-        except (json.JSONDecodeError, KeyError, TypeError, urllib.error.URLError, OSError):
-            time.sleep(3)
-    return None
+# ---- Word timetables are read by their grid (no AI) ----
+
+CODE = re.compile(r"\b([A-Z]{2,4})\s?-?\s?(\d{3})\b")
+HOLIDAY = re.compile(r"PUBLIC\s+HOLIDAY|HOLIDAY", re.I)
+NOTE = re.compile(r"VENUE|HALL|BE WARNED|EXAMINATION", re.I)
+MONTHS = {"JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8, "SEP": 9, "SEPT": 9, "OCT": 10, "NOV": 11, "DEC": 12}
+WEEKDAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
 
 
-def groq(model, content, max_tokens=4000):
-    body = {"model": model, "temperature": 0, "max_completion_tokens": max_tokens, "response_format": {"type": "json_object"},
-            "messages": [{"role": "user", "content": content}]}
-    if model.startswith("openai/gpt-oss"):
-        body["reasoning_effort"] = "low"
-    data = json.dumps(body).encode()
-    for attempt in range(3):
-        req = urllib.request.Request(URL, data, {"Authorization": "Bearer " + KEY, "Content-Type": "application/json", "User-Agent": "timetable-reader/1.0"})
-        try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                return json.loads(json.load(r)["choices"][0]["message"]["content"])
-        except urllib.error.HTTPError as e:
-            txt = e.read()[:300].decode("utf8", "ignore")
-            if e.code == 429 and attempt < 2:
-                time.sleep(min(float(e.headers.get("retry-after") or 20), 60) + 1)
-                continue
-            note(f"Groq error {e.code} with {model}: {txt[:160]}")
-            return None
-        except (json.JSONDecodeError, KeyError, TypeError, urllib.error.URLError, OSError):
-            time.sleep(3)
-    return None
+def _text(xml):
+    return " ".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", xml)).strip()
 
 
-def file_text(path):
-    """Exact text of a Word or PDF file; None for pictures."""
-    ext = os.path.splitext(path)[1].lower()
-    if ext == ".docx":
-        x = zipfile.ZipFile(path).read("word/document.xml").decode("utf8", "ignore")
-        cell = lambda t: " ".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", t)).strip()
-        rows = [" | ".join(cell(c) for c in re.findall(r"<w:tc>.*?</w:tc>", tr, re.S)) for tr in re.findall(r"<w:tr[ >].*?</w:tr>", x, re.S)]
-        head = [cell(p) for p in re.findall(r"<w:p[ >].*?</w:p>", re.sub(r"<w:tbl>.*?</w:tbl>", "", x, flags=re.S), re.S)]
-        return "\n".join([h for h in head if h] + rows)
-    if ext == ".pdf":
-        try:
-            from pypdf import PdfReader
-        except ImportError:
-            note("PDF reading needs pypdf. Add the line 'pip install pypdf pillow' to the workflow.")
-            return ""
-        return "\n".join((pg.extract_text() or "") for pg in PdfReader(path).pages)
-    return None
+def _grid(xml):
+    """Rows of cells; each cell is (text, span). Merged cells keep their span."""
+    rows = []
+    for tr in re.findall(r"<w:tr[ >].*?</w:tr>", xml, re.S):
+        cells = []
+        for tc in re.findall(r"<w:tc>.*?</w:tc>", tr, re.S):
+            m = re.search(r'<w:gridSpan w:val="(\d+)"', tc)
+            span = int(m.group(1)) if m else 1
+            paras = [_text(p) for p in re.findall(r"<w:p[ >].*?</w:p>|<w:p/>", tc, re.S)]
+            cells.append(([p for p in paras if p], span))
+        rows.append(cells)
+    return rows
 
 
-def prep_image(raw):
+def _date(day_cell_lines):
+    """'MONDAY 28TH SEPT, 2026' -> (weekday, date). Accepts the day and date on one or two lines."""
+    txt = " ".join(day_cell_lines).upper()
+    wd = next((w.title() for w in WEEKDAYS if w in txt), "")
+    m = re.search(r"(\d{1,2})\s*(?:ST|ND|RD|TH)?\s+([A-Z]{3,4})\S*,?\s*(\d{4})", txt)
+    if not m or m.group(2) not in MONTHS:
+        return wd, None, "date not understood"
     try:
-        from PIL import Image, ImageOps
-        im = ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGB")
-        if max(im.size) > 2200:
-            im.thumbnail((2200, 2200))
-        b = io.BytesIO()
-        im.save(b, "JPEG", quality=88)
-        return b.getvalue()
-    except Exception:
-        return raw if len(raw) < 3_500_000 else None
+        d = datetime.date(int(m.group(3)), MONTHS[m.group(2)], int(m.group(1)))
+        return wd, d.isoformat(), ""
+    except ValueError:
+        return wd, None, "impossible date"
 
 
-def pdf_page_image(raw):
-    """First page of a PDF as a JPEG, using poppler's pdftoppm (installed by the workflow)."""
-    import shutil, subprocess, tempfile
-    if not shutil.which("pdftoppm"):
-        return None
-    with tempfile.TemporaryDirectory() as d:
-        open(f"{d}/in.pdf", "wb").write(raw)
-        subprocess.run(["pdftoppm", "-r", "200", "-f", "1", "-l", "1", "-jpeg", f"{d}/in.pdf", f"{d}/page"], capture_output=True, timeout=120)
-        pages = sorted(glob.glob(f"{d}/page*.jpg"))
-        return prep_image(open(pages[0], "rb").read()) if pages else None
-
-
-def clean(d, stem):
-    if not isinstance(d, dict) or not isinstance(d.get("entries"), list):
-        return None
-    out, warns = [], []
-    for e in d["entries"]:
-        m = re.search(r"([A-Za-z]{2,4})\s*-?\s*(\d{3})", str(e.get("code", ""))) if isinstance(e, dict) else None
-        if not m:
+def read_docx(path):
+    xml = zipfile.ZipFile(path).read("word/document.xml").decode("utf8", "ignore")
+    tables = re.findall(r"<w:tbl>.*?</w:tbl>", xml, re.S)
+    out = {"entries": [], "holidays": [], "warnings": [], "notes": []}
+    if not tables:
+        out["warnings"].append("No table found in this file.")
+        return out
+    rows = _grid(tables[0])
+    # time slots come from the header row: columns after the first
+    head = rows[0]
+    slots = []
+    for cell, span in head[1:]:
+        t = " ".join(cell)
+        m = re.search(r"(\d{1,2}(?::\d{2})?)\s*(am|pm|a\.m\.|p\.m\.|noon)?\s*[-–]\s*(\d{1,2}(?::\d{2})?)\s*(am|pm|a\.m\.|p\.m\.|noon)?", t, re.I)
+        slots.append(m.group(0) if m else t)
+    # column x of each slot counts the span of every cell
+    for cells in rows[1:]:
+        if not cells:
             continue
-        code, date, day = f"{m.group(1).upper()} {m.group(2)}", str(e.get("date") or ""), str(e.get("day") or "").strip().title()
-        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
-            try:
-                wd = datetime.date.fromisoformat(date).strftime("%A")
-                if day and day != wd:
-                    warns.append(f"{code}: the file says {day} but {date} is a {wd}. Check the date.")
-                day = wd
-            except ValueError:
-                date = ""
-        out.append({"date": date, "day": day, "start": str(e.get("start") or "")[:5], "end": str(e.get("end") or "")[:5], "code": code,
-                    "title": str(e.get("title") or ""), "venue": str(e.get("venue") or ""), "lecturer": str(e.get("lecturer") or "")})
-    hol = [{"date": str(h.get("date", "")), "label": str(h.get("label", "Holiday"))} for h in (d.get("holidays") or []) if isinstance(h, dict)]
-    return {"kind": "exam" if stem.startswith("exam") or d.get("kind") == "exam" else "class", "title": str(d.get("title") or stem),
-            "note": str(d.get("note") or ""), "entries": out, "holidays": hol, "warnings": warns}
+        day_lines, _ = cells[0]
+        if len(cells) == 1 and not any(w in " ".join(day_lines).upper() for w in WEEKDAYS):
+            out["notes"].append(" ".join(day_lines))  # a full-width note row such as the venue line
+            continue
+        wd, iso, err = _date(day_lines)
+        if err:
+            out["warnings"].append(f"Row '{' '.join(day_lines)}': {err}. Check it.")
+            continue
+        col = 0
+        for cell, span in cells[1:]:
+            text = " ".join(cell).strip()
+            if not text:
+                col += span
+                continue
+            if span >= len(slots) or HOLIDAY.search(text):
+                out["holidays"].append({"date": iso, "label": text.title()})
+            elif NOTE.search(text) and not CODE.search(text):
+                out["notes"].append(text)
+            else:
+                start_end = slots[col] if col < len(slots) else ""
+                times = re.findall(r"\d{1,2}(?::\d{2})?", start_end)
+                s = _hhmm(times[0], start_end) if times else ""
+                e = _hhmm(times[1], start_end) if len(times) > 1 else ""
+                codes = [f"{a} {b}" for a, b in CODE.findall(text.upper())]
+                if not codes:
+                    out["warnings"].append(f"{iso} {wd}: could not find a course code in '{text}'.")
+                for code in codes:
+                    entry = {"date": iso, "day": wd, "start": s, "end": e, "code": code, "title": "", "venue": "", "lecturer": ""}
+                    out["entries"].append(entry)
+            col += span
+    # a weekday that disagrees with its date is a warning, not a silent fix
+    for en in out["entries"]:
+        actual = datetime.date.fromisoformat(en["date"]).strftime("%A") if en["date"] else ""
+        if en["day"] and actual and en["day"].upper() != actual.upper():
+            out["warnings"].append(f"{en['code']}: the file says {en['day']} but {en['date']} is a {actual}. Check the date.")
+    return out
+
+
+def _hhmm(t, context):
+    h, _, mi = t.partition(":")
+    h = int(h)
+    mi = int(mi or 0)
+    pm = bool(re.search(r"p\.?m\.?|noon", context, re.I))
+    if pm and h < 12:
+        h += 12
+    if not pm and h == 12:
+        h = 12
+    return f"{h:02d}:{mi:02d}"
+
+
+# ---- Typed text timetables ----
+T_CODE = re.compile(r"\b([A-Z]{2,4})\s?-?\s?(\d{3}[A-Z]?)\b")
+T_DAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+T_MONTHS = {"JANUARY": 1, "JAN": 1, "FEBRUARY": 2, "FEB": 2, "MARCH": 3, "MAR": 3, "APRIL": 4, "APR": 4, "MAY": 5, "JUNE": 6, "JUN": 6,
+            "JULY": 7, "JUL": 7, "AUGUST": 8, "AUG": 8, "SEPTEMBER": 9, "SEPT": 9, "SEP": 9, "OCTOBER": 10, "OCT": 10,
+            "NOVEMBER": 11, "NOV": 11, "DECEMBER": 12, "DEC": 12}
+
+
+def t_when(s):
+    """(weekday, ISO date or None) from text such as 'MONDAY 28TH SEPT, 2026', '28/09/2026' or '2026-09-28'."""
+    u = s.upper()
+    wd = next((d.title() for d in T_DAYS if d in u), "") or next((d.title() for d in T_DAYS if re.search(r"\b" + d[:3] + r"\b", u)), "")
+    m = re.search(r"(\d{4})-(\d{1,2})-(\d{1,2})", u)
+    parts = (int(m.group(1)), int(m.group(2)), int(m.group(3))) if m else None
+    if not parts:
+        m = re.search(r"(\d{1,2})/(\d{1,2})/(\d{4})", u)
+        parts = (int(m.group(3)), int(m.group(2)), int(m.group(1))) if m else None
+    if not parts:
+        m = re.search(r"(\d{1,2})\s*(?:ST|ND|RD|TH)?\s+([A-Z]{3,9})\.?,?\s*(\d{4})", u)
+        if m and m.group(2) in T_MONTHS:
+            parts = (int(m.group(3)), T_MONTHS[m.group(2)], int(m.group(1)))
+    try:
+        return wd, datetime.date(*parts).isoformat() if parts else None
+    except ValueError:
+        return wd, None
+
+
+def t_hm(h, mi, ap):
+    h, mi, ap = int(h), int(mi or 0), (ap or "").lower().replace(".", "")
+    if ap == "pm" and h < 12:
+        h += 12
+    if ap == "am" and h == 12:
+        h = 0
+    return h * 60 + mi
+
+
+def t_time(s):
+    """('HH:MM', 'HH:MM') from '15:15-18:15', '3:15pm-6:15pm', '8-11am' or '12 noon-3pm'. None if not understood."""
+    m = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.|noon)?\s*(?:-|\u2013|to)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?", s, re.I)
+    if not m:
+        return None
+    h1, m1, a1, h2, m2, a2 = m.groups()
+    if a1 and a1.lower() == "noon":
+        a1 = "pm"
+    if not a1 and a2:
+        a1 = a2
+        if t_hm(h1, m1, a1) >= t_hm(h2, m2, a2) and a2.lower().startswith("p"):
+            a1 = "am"
+    start, end = t_hm(h1, m1, a1), t_hm(h2, m2, a2)
+    if not a1 and not a2 and end <= start and int(h2) <= 12:
+        end += 12 * 60
+    if end <= start or end > 24 * 60:
+        return None
+    return f"{start // 60:02d}:{start % 60:02d}", f"{end // 60:02d}:{end % 60:02d}"
+
+
+def parse_text(text, stem):
+    kind, title, entries, holidays, warns, seen = None, "", [], [], [], set()
+    for n, raw in enumerate(text.splitlines(), 1):
+        line = raw.strip().lstrip("\ufeff")
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("@"):
+            word = line[1:].strip()
+            low = word.lower()
+            if low.startswith("title"):
+                title = word[5:].strip(" :-")
+            elif low.startswith("exam"):
+                kind = "exam"
+            elif low.startswith(("school", "class", "normal", "lecture")):
+                kind = "class"
+            else:
+                warns.append(f"Line {n}: unknown marker '{line}'. Use @exam or @school.")
+            continue
+        if kind is None:
+            kind = "exam" if stem.startswith("exam") else "class"
+            warns.append(f"No @exam or @school line at the top, so this was treated as {'an exam' if kind == 'exam' else 'a school'} timetable.")
+        p = [x.strip() for x in line.split("|")]
+        wd, date = t_when(p[0])
+        if any(re.search(r"holiday", x, re.I) for x in p[1:]) or (len(p) == 1 and re.search(r"holiday", p[0], re.I)):
+            label = next((x for x in p[1:] if re.search(r"holiday", x, re.I)), p[0])
+            if date:
+                holidays.append({"date": date, "label": label.title()})
+            else:
+                warns.append(f"Line {n}: a holiday needs a date. '{line}'")
+            continue
+        if len(p) < 3:
+            warns.append(f"Line {n}: needs at least day or date | time | course. '{line}'")
+            continue
+        if kind == "exam" and not date:
+            warns.append(f"Line {n}: an exam line needs a date I can read, such as 28 SEPT 2026. '{p[0]}'")
+            continue
+        if kind == "class" and not wd:
+            warns.append(f"Line {n}: a school line needs a weekday, such as MONDAY. '{p[0]}'")
+            continue
+        tm = t_time(p[1])
+        if not tm:
+            warns.append(f"Line {n}: could not read the time '{p[1]}'. Write it like 08:00-11:00 or 3:15pm-6:15pm.")
+            continue
+        pieces = [x.strip() for x in re.split(r"[,/;]", p[2]) if x.strip()]
+        codes = []
+        for piece in pieces:
+            m = T_CODE.search(piece.upper())
+            if m:
+                codes.append(f"{m.group(1)} {m.group(2)}")
+            else:
+                warns.append(f"Line {n}: '{piece}' does not look like a course code (such as CSC 201).")
+        if date and wd and datetime.date.fromisoformat(date).strftime("%A") != wd:
+            warns.append(f"Line {n}: {wd} does not match {date}, which is a {datetime.date.fromisoformat(date).strftime('%A')}. Check the date.")
+        if date:
+            wd = datetime.date.fromisoformat(date).strftime("%A")
+        for code in codes:
+            key = (date or wd, tm[0], code)
+            if key in seen:
+                warns.append(f"Line {n}: {code} is listed twice for {date or wd} at {tm[0]}.")
+                continue
+            seen.add(key)
+            entries.append({"date": date or "", "day": wd, "start": tm[0], "end": tm[1], "code": code, "title": "",
+                            "venue": p[3] if len(p) > 3 else "", "lecturer": p[4] if len(p) > 4 else ""})
+    return {"kind": kind or "class", "title": title or stem.replace("-", " ").title(), "note": "", "entries": entries,
+            "holidays": holidays, "warnings": warns}
 
 
 def main():
@@ -168,55 +270,39 @@ def main():
             os.remove(f)
             note(f"Removed {os.path.basename(f)} because the file {d['source']} was deleted")
     for f in sorted(glob.glob(f"{UP}/*")):
-        if os.path.splitext(f)[1].lower() not in EXTS:
+        name = os.path.basename(f)
+        ext = os.path.splitext(f)[1].lower()
+        if name.lower().startswith("readme") or ext in (".md", ".json"):
             continue
-        name, stem = os.path.basename(f), slug(os.path.splitext(os.path.basename(f))[0])
+        stem = slug(os.path.splitext(name)[0])
         raw = open(f, "rb").read()
         sha = hashlib.sha1(raw).hexdigest()
         jp = f"{OUT}/{stem}.json"
         if load(jp, {}).get("sha") == sha:
             continue
-        if not (NV_KEY or KEY):
-            note(f"{name}: no NVIDIA_API_KEY or Groq key found, so it was not read")
-            continue
-        hint = "This is an exam timetable. " if stem.startswith("exam") else ""
-        text = file_text(f)
-        ext = os.path.splitext(f)[1].lower()
-        if text is None or (ext == ".pdf" and not text.strip()):
-            # pictures, and PDFs with no text layer (scans): look at the page with a vision model
-            if ext == ".pdf":
-                img = pdf_page_image(raw)
-                if img is None:
-                    note(f"{name}: this PDF has no text and could not be turned into a picture. Upload a photo of it instead.")
-                    continue
-            else:
-                img = prep_image(raw)
-            if img is None:
-                note(f"{name}: the picture is too large. Upload a smaller one.")
+        if ext == ".txt":
+            d = parse_text(raw.decode("utf-8", "ignore"), stem)
+            how = "typed text file"
+        elif ext == ".docx":
+            try:
+                g = read_docx(f)
+            except Exception as e:
+                note(f"{name}: the Word file could not be read ({str(e)[:80]}).")
                 continue
-            content = [{"type": "text", "text": f'Timetable picture "{name}". {hint}{SCHEMA}\nReply with valid JSON only.'},
-                       {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(img).decode()}}]
-            if PICK == "nvidia":
-                r = chat(NV_VISION, content, 4000, nvidia=True)
-                how = f"read from the picture by NVIDIA ({NV_VISION})"
-            else:
-                r = chat(VISION_MODEL, content, 4000)
-                how = f"read from the picture by Groq ({VISION_MODEL})"
+            d = {"kind": "exam" if stem.startswith("exam") else "class", "title": stem.replace("-", " ").title(), "note": "",
+                 "entries": g["entries"], "holidays": g["holidays"], "warnings": g["warnings"]}
+            how = "Word table"
         else:
-            prompt = f'Timetable file "{name}". {hint}Its text (table rows on separate lines, cells separated by |):\n{text[:9000]}\n{SCHEMA}\nReply with valid JSON only.'
-            if TEXT_PROVIDER == "nvidia":
-                r = chat(NV_TEXT, prompt, 4000, nvidia=True)
-                how = f"read from the text of the file by NVIDIA ({NV_TEXT})"
-            else:
-                r = chat(TEXT_MODEL, prompt)
-                how = f"read from the text of the file by Groq ({TEXT_MODEL})"
-        d = clean(r, stem)
-        if not d or not d["entries"]:
-            note(f"{name}: no courses could be read. It will be tried again on the next run.")
+            note(f"{name}: skipped. Type the timetable in a .txt file instead (see the example files).")
             continue
-        d.update({"id": stem, "source": name, "sha": sha, "read": how, "updated": time.strftime("%Y-%m-%d", time.gmtime())})
+        if not d["entries"]:
+            note(f"{name}: no courses were read from it.")
+            for w in d["warnings"]:
+                note("  Check: " + w)
+            continue
+        d.update({"id": stem, "source": name, "sha": sha, "read": how + " (no AI)", "updated": time.strftime("%Y-%m-%d", time.gmtime())})
         json.dump(d, open(jp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-        note(f"{name}: {len(d['entries'])} courses {how}" + (f", {len(d['warnings'])} to check" if d["warnings"] else ""))
+        note(f"{name}: {len(d['entries'])} course slots, {len(d['holidays'])} holidays ({d['kind']})" + (f", {len(d['warnings'])} to check" if d["warnings"] else ""))
         for w in d["warnings"]:
             note("  Check: " + w)
     items = []
@@ -228,10 +314,8 @@ def main():
                       "entries": len(d.get("entries", [])), "updated": d.get("updated", ""), "source": d.get("source", ""), "warnings": d.get("warnings", [])})
     json.dump(items, open(f"{OUT}/index.json", "w", encoding="utf-8"), indent=1)
     lines = ["# Timetable reader report", "", time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "",
-             f"- NVIDIA key found: {'yes' if NV_KEY else 'NO (add NVIDIA_API_KEY)'} | Groq key found: {'yes' if KEY else 'no'}",
-             f"- Word and text PDFs: {NV_TEXT + ' (NVIDIA)' if TEXT_PROVIDER == 'nvidia' else TEXT_MODEL + ' (Groq)'} | pictures and scanned PDFs: {NV_VISION + ' (NVIDIA)' if PICK == 'nvidia' else VISION_MODEL + ' (Groq)'}",
              f"- Timetables on the site: {', '.join(i['id'] + ' (' + i['kind'] + ')' for i in items) or 'none'}", "", "## What happened", ""]
-    open(f"{OUT}/read-report.md", "w", encoding="utf-8").write("\n".join(lines + [f"- {m}" for m in LOG] or lines) + "\n")
+    open(f"{OUT}/read-report.md", "w", encoding="utf-8").write("\n".join(lines + ([f"- {m}" for m in LOG] or ["- Nothing new to read."])) + "\n")
 
 
 if __name__ == "__main__":
