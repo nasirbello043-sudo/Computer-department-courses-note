@@ -1,0 +1,390 @@
+{
+ "title": "Data Structures",
+ "summary": "In this lesson students learn the main built‑in data structures in Python and how to store, retrieve, and modify data with them. They will see practical examples that show when to choose each structure.",
+ "objectives": [
+  "Identify and create arrays, lists, strings, tuples, sets, and dictionaries",
+  "Access, add, remove, and update elements in each data structure",
+  "Choose the appropriate data structure for a given problem",
+  "Write simple code that combines multiple data structures"
+ ],
+ "prerequisites": "Students should already know basic programming concepts such as variables, operators, and simple input/output.",
+ "why": [
+  "Data structures are the foundation of any program because they determine how information is organized and accessed. Knowing the right structure makes code faster, easier to read, and less error‑prone.",
+  "In real life, everything from a contact list on a phone to a shopping cart on a website relies on these structures. Understanding them lets you build useful applications and solve everyday problems efficiently."
+ ],
+ "sections": [
+  {
+   "heading": "Arrays and Lists",
+   "body": "Imagine you have a row of lockers, each with its own number.  \nThe lockers are **ordered** – locker 1 comes before locker 2, which comes before locker 3, and so on.  \nIf you want to put a book in locker 2, you simply open that locker and place the book there.  \nLater you can open locker 2 again and take the book out or replace it with something else.  \n\nIn programming, an *ordered collection* works the same way.  \nThe most common ordered collections are **arrays** and **lists**.  \nBoth store a sequence of items, and each item has a position called an *index* (the locker number).  \nThe first index is usually **0**, not 1, because computers start counting from zero.\n\n> **Definition:** An *array* (or *list*) is a container that holds a fixed number of elements, each accessible by its index.\n\n### Creating a list\n\nIn Python, you create a list by writing the items inside square brackets `[]`, separated by commas:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\n```\n\nHere `fruits` is a list of three strings.  \nThe list itself is a single object, but it *contains* three separate objects: the strings `\"apple\"`, `\"banana\"` and `\"cherry\"`.\n\nYou can also start with an empty list and add items later:\n\n```python\nnumbers = []          # empty list\nnumbers.append(5)     # now the list is [5]\nnumbers.append(10)    # now the list is [5, 10]\n```\n\n### Indexing – getting an item\n\nTo look at a specific item, write the list name followed by the index in square brackets:\n\n```python\nfirst_fruit = fruits[0]   # \"apple\"\nsecond_fruit = fruits[1]  # \"banana\"\n```\n\nIf you use a negative index, Python counts from the end:\n\n```python\nlast_fruit = fruits[-1]   # \"cherry\"\n```\n\nTrying to access an index that does not exist raises an *error* (the program stops).  \nThat is why it is useful to know the length of the list:\n\n```python\nlen(fruits)   # returns 3\n```\n\n### Changing a list – mutability\n\nA key property of Python lists is that they are **mutable**.  \n*Mutable* means you can change the contents after the list has been created.  \nFor example, you can replace the second fruit:\n\n```python\nfruits[1] = \"blueberry\"   # fruits becomes [\"apple\", \"blueberry\", \"cherry\"]\n```\n\nYou can also add or remove items:\n\n```python\nfruits.append(\"date\")     # add at the end\ndel fruits[0]             # remove the first item\n```\n\nBecause the list can be altered, it is stored in memory as a *reference* that points to the same underlying data wherever the list name is used.\n\n> **Note:** Mutability is useful when you need to update data many times, such as building a score board during a game.\n\n### Arrays in other languages\n\nIn languages like Java or C, the word *array* often refers to a fixed‑size container whose size cannot change after creation.  \nIf you need a resizable container, you would use a *list* class provided by the language’s standard library (e.g., `ArrayList` in Java).  \nPython’s built‑in list combines both ideas: it starts with a certain capacity, but it automatically grows when you append new items.\n\n### When to use a list\n\n- You need to keep items in the order you added them.  \n- You will frequently add, remove, or replace elements.  \n- You want fast access by position (indexing is $O(1)$ time).\n\nIf you need a collection that never changes after it is created, you might prefer an **immutable** type such as a *tuple* (covered later).  \n\n> **In daily life:** Think of a list like a grocery shopping list you can edit any time, while a tuple is like a printed receipt – you can read it, but you cannot change the items on it.\n\n### Small pitfalls\n\n> **Common mistake:** Assuming that assigning one list to another creates a copy.  \n\n```python\na = [1, 2, 3]\nb = a          # b refers to the same list, not a new one\nb[0] = 99\nprint(a)       # prints [99, 2, 3] – a changed too!\n```\n\nTo make an independent copy, use `b = a.copy()` or `b = list(a)`.\n\n### Summary\n\n- An *ordered collection* stores items with a definite position (index).  \n- In Python, a **list** is created with `[]` and can be empty or pre‑filled.  \n- Use `list[index]` to read, and `list[index] = value` to modify.  \n- Lists are **mutable**, meaning they can grow, shrink, or change contents.  \n- Understanding mutability helps you decide whether a list or an immutable structure (like a tuple) is the right tool for the job.",
+   "code": ""
+  },
+  {
+   "heading": "Strings",
+   "body": "Strings are just a series of characters placed next to each other, like the letters in a word or the symbols in a sentence.  \nThink of a string as a **train** where each carriage holds one character. The whole train can be moved, split, or joined with other trains, and you can look inside any carriage you want.\n\nWhen a programming language says that a variable holds a *string*, it means the variable stores that whole train of characters. For example:\n\n```python\ngreeting = \"Hello, world!\"\n```\n\nHere the variable `greeting` contains the characters `H`, `e`, `l`, `l`, `o`, `,`, space, `w`, `o`, `r`, `l`, `d`, `!`. The double quotes (`\"`) tell the computer where the string starts and ends.\n\n> **Definition:** A *string* is an ordered sequence of characters, stored as a single value in a program.\n\n### Accessing individual characters\n\nBecause the characters are ordered, each one has a position, called an *index*. The first character has index `0`, the second has index `1`, and so on. This is called **zero‑based indexing**.\n\n```python\nfirst_letter = greeting[0]   # 'H'\nsixth_letter = greeting[5]   # ','\n```\n\nIf you try to use an index that is outside the range of the string, the program will raise an error. That is why it is useful to know the length of the string:\n\n```python\nlength = len(greeting)   # 13\n```\n\n### Slicing – taking a piece of the train\n\n*Slice* means to cut out a contiguous part of the string. The syntax uses a colon `:` inside the brackets: `string[start:stop]`. The slice includes the character at `start` but **excludes** the character at `stop`.\n\n```python\nhello = greeting[0:5]      # 'Hello'\nworld = greeting[7:12]     # 'world'\n```\n\nIf you omit `start`, Python assumes `0`. If you omit `stop`, Python assumes the end of the string.\n\n```python\nfirst_part = greeting[:5]   # 'Hello'\nlast_part  = greeting[7:]   # 'world!'\n```\n\nYou can also step through the string by adding a third number: `string[start:stop:step]`. A step of `2` picks every second character.\n\n```python\nevery_second = greeting[0:13:2]   # 'Hlo ol!'\n```\n\n### Concatenation – joining trains together\n\nTo combine two strings, use the `+` operator. This is called **concatenation**.\n\n```python\nname = \"Alice\"\nwelcome = \"Hello, \" + name + \"!\"\n# welcome is 'Hello, Alice!'\n```\n\nConcatenation creates a **new** string; it does not change the original strings.\n\n> **Note:** Strings are *immutable* – once created, their characters cannot be changed in place. Operations like slicing or concatenation always produce a new string.\n\n### Common string methods\n\nProgramming languages provide built‑in *methods* (functions that belong to the string object) for frequent tasks. Here are a few that are especially useful:\n\n| Method | What it does | Example |\n|--------|--------------|---------|\n| `upper()` | Returns a copy with all letters in uppercase | `\"abc\".upper()` → `'ABC'` |\n| `lower()` | Returns a copy with all letters in lowercase | `\"ABC\".lower()` → `'abc'` |\n| `strip()` | Removes whitespace from the beginning and end | `\"  hi  \".strip()` → `'hi'` |\n| `replace(old, new)` | Replaces every occurrence of `old` with `new` | `\"apple\".replace(\"p\",\"b\")` → `'abble'` |\n| `find(sub)` | Returns the index of the first occurrence of `sub`, or `-1` if not found | `\"banana\".find(\"na\")` → `2` |\n\nYou can chain methods because each one returns a new string:\n\n```python\nclean = \"  Hello World!  \".strip().lower()\n# clean is 'hello world!'\n```\n\n### Why strings matter\n\nStrings let programs talk to people: they display messages, read user input, and store textual data like names, addresses, or file paths. Understanding how to cut, join, and change strings makes it possible to process natural language, generate reports, or build simple games.\n\n> **In daily life:** Think of a string like a sentence written on a strip of paper. You can cut out a word (slice), glue two strips together (concatenate), or rewrite the whole strip in capital letters (method).\n\n### Small pitfalls to avoid\n\n> **Common mistake:** Assuming that `s[0] = 'A'` will change the first character of `s`. Because strings are immutable, this raises an error. Instead, create a new string: `s = 'A' + s[1:]`.\n\n### Quick recap\n\n- A string is an ordered list of characters.\n- Use `[]` with an index to get a single character.\n- Use `start:stop` inside `[]` to slice a substring.\n- Use `+` to concatenate (join) strings.\n- Built‑in methods like `upper()`, `strip()`, and `replace()` help you transform text.\n- Remember that strings cannot be altered in place; every operation returns a new string.\n\nWith these tools you can handle almost any textual data that a simple program needs to work with.",
+   "code": ""
+  },
+  {
+   "heading": "Tuples",
+   "body": "A **tuple** is an ordered collection of items that cannot be changed after it is created.  \nThink of a tuple like a sealed envelope: you can look inside to see the letters (the items), and you know the exact order they were placed in, but once the envelope is sealed you cannot add, remove, or rearrange the letters.  \n\nBecause a tuple is *immutable* (the word “immutable” means “cannot be altered”), the Python interpreter can store it more efficiently than a list, and it can be used as a key in a dictionary (a place where we look up values by a unique identifier).  \n\n> **Definition:** A tuple is written with parentheses `(` `)` and items separated by commas, for example `my_point = (3, 5)`.\n\n### Creating a tuple\n\nYou can create a tuple by putting values inside parentheses:\n\n```python\ncoordinates = (10, 20)          # two numbers, order matters\nperson = (\"Alice\", 30, True)    # a string, an integer, a boolean\nempty = ()                      # a tuple with no items\nsingle = (42,)                  # a one‑item tuple; the comma is required\n```\n\nIf you omit the parentheses but keep the commas, Python still makes a tuple:\n\n```python\ncolors = \"red\", \"green\", \"blue\"\n```\n\n### Accessing items\n\nSince a tuple is ordered, each position has an *index* starting at 0.  \nYou can retrieve an item with square brackets `[]`:\n\n```python\nfirst_color = colors[0]   # \"red\"\nlast_color  = colors[2]   # \"blue\"\n```\n\nNegative indices count from the end:\n\n```python\nlast_color = colors[-1]   # \"blue\"\n```\n\n### Unpacking a tuple\n\n*Unpacking* means taking the items out of a tuple and assigning each one to a separate variable.  \nThe number of variables on the left side must match the number of items in the tuple.\n\n```python\nx, y = coordinates          # x becomes 10, y becomes 20\nname, age, is_student = person   # name=\"Alice\", age=30, is_student=True\n```\n\nIf you only need some of the values, you can use the underscore `_` as a throw‑away variable:\n\n```python\nfirst, _, third = colors    # first=\"red\", third=\"blue\"\n```\n\nYou can also capture the remaining items with an asterisk `*` (this creates a list, not a tuple):\n\n```python\nfirst, *middle, last = colors   # first=\"red\", middle=[\"green\"], last=\"blue\"\n```\n\n### When to use a tuple\n\nUse a tuple when the collection of items has a fixed meaning that should never change.  \nExamples:\n\n* **Coordinates** – a point on a map is always a pair `(x, y)`. Changing the order would turn it into a different point.\n* **Database records** – a row of data often has a set of fields (name, id, score) that stay together.\n* **Function returns** – a function can return several values at once as a tuple, e.g., `def min_max(nums): return (min(nums), max(nums))`.\n\nBecause tuples are immutable, they protect data from accidental modification. This makes your code safer, especially when you pass a tuple to another part of a program that should only read the values.\n\n> **In daily life:** Think of a tuple like a birth certificate: it records a set of facts (name, date of birth, place) in a fixed order, and you cannot change those facts later without issuing a new certificate.\n\n### Benefits of immutability\n\n* **Safety:** No part of the program can accidentally change the data.\n* **Performance:** Python can store tuples in a compact form and reuse them.\n* **Hashability:** An immutable tuple can be used as a key in a dictionary, while a list cannot.\n\n```python\nlookup = { (1, 2): \"point A\", (3, 4): \"point B\" }   # valid\n# lookup[ [1, 2] ] = \"error\"   # would raise TypeError because lists are mutable\n```\n\n### Common operations\n\n* **Concatenation** – you can join two tuples with `+`:\n\n  $$\\text{new\\_tuple} = \\text{tuple1} + \\text{tuple2}$$\n\n* **Repetition** – repeat the same pattern with `*`:\n\n  ```python\n  three_zeros = (0,) * 3   # (0, 0, 0)\n  ```\n\n* **Length** – find how many items with `len()`:\n\n  ```python\n  len(person)   # 3\n  ```\n\n### Common mistake\n\n> **Common mistake:** Forgetting the comma when creating a one‑item tuple.  \n> `single = (42)` creates just the integer `42` inside parentheses, not a tuple. Write `single = (42,)` instead.\n\n### Quick checklist\n\n* Use parentheses (or just commas) to define a tuple.  \n* Remember that the order of items matters.  \n* Unpack with the same number of variables as items.  \n* Choose a tuple when the data should stay constant and may be used as a dictionary key.\n\nBy keeping these ideas in mind, you’ll know when a tuple is the right tool and how to work with it confidently.",
+   "code": ""
+  },
+  {
+   "heading": "Sets",
+   "body": "Imagine you have a box that can hold many items, but you never want the same item to appear twice.  \nA **set** is exactly that: an unordered collection of *unique* elements.  \n“Unordered” means the set does not remember the position of each item – it only cares **what** is inside, not **where** it is.\n\n> **Definition:** A set is a data structure that stores distinct values without any particular order.\n\nBecause a set never keeps duplicates, adding an element that is already present does nothing.  \nThis property is useful whenever you need to know “how many different things there are” or “whether something has appeared before”.\n\n### How a set looks in code\n\nIn many programming languages (Python, Java, JavaScript, etc.) you create a set with special syntax, for example in Python:\n\n```python\nfruits = {\"apple\", \"banana\", \"orange\"}   # curly braces create a set\n```\n\nIf you later write `fruits.add(\"banana\")`, the set stays the same because `\"banana\"` is already there.\n\n### Basic set operations\n\nSets support a few mathematical operations that are very handy for comparing groups of items.\n\n1. **Union** – combines two sets and keeps every element only once.  \n   If `A = {1, 2, 3}` and `B = {3, 4, 5}`, then `A ∪ B = {1, 2, 3, 4, 5}`.\n\n   $$ A \\cup B = \\{x \\mid x \\in A \\text{ or } x \\in B\\} $$\n\n2. **Intersection** – keeps only the elements that appear in *both* sets.  \n   With the same `A` and `B`, `A ∩ B = {3}`.\n\n   $$ A \\cap B = \\{x \\mid x \\in A \\text{ and } x \\in B\\} $$\n\n3. **Difference** – removes the elements of one set from another.  \n   `A \\ B = {1, 2}` means “all items in `A` that are not in `B`”.\n\n   $$ A \\setminus B = \\{x \\mid x \\in A \\text{ and } x \\notin B\\} $$\n\n4. **Symmetric difference** – items that are in either set but *not* in both.  \n   `A △ B = {1, 2, 4, 5}`.\n\nThese operations are written in code as methods or operators (`|` for union, `&` for intersection, `-` for difference, `^` for symmetric difference in Python).\n\n### Everyday comparison\n\nThink of a set like a **guest list for a party**.  \nIf you invite friends from two different circles, you don’t want to write the same name twice.  \nThe final list (the union) shows every unique person invited.  \nIf you want to know who belongs to both circles, you look at the intersection – those are the friends you know from both sides.  \nIf you decide to exclude people who are already on another list, you use the difference.\n\n> **In daily life:** A set works like a “no‑duplicate” shopping list. Adding “milk” twice still leaves only one “milk” on the list.\n\n### Typical use cases in programs\n\n- **Removing duplicates** from a list of items (e.g., cleaning up user input).  \n- **Membership testing** – checking quickly whether an item belongs to a collection (`if item in my_set:`).  \n- **Finding common elements** between two datasets, such as users who liked both of two posts.  \n- **Performing fast look‑ups** because most set implementations use hash tables, giving average‑case $O(1)$ time for add, remove, and membership operations.\n\n### Small example\n\n```python\n# Two classes of students\nclass_a = {\"Alice\", \"Bob\", \"Charlie\"}\nclass_b = {\"Bob\", \"Diana\", \"Eve\"}\n\n# Students in either class\nall_students = class_a | class_b          # union\n# {'Alice', 'Bob', 'Charlie', 'Diana', 'Eve'}\n\n# Students in both classes\nboth = class_a & class_b                  # intersection\n# {'Bob'}\n\n# Students only in class A\nonly_a = class_a - class_b                # difference\n# {'Alice', 'Charlie'}\n```\n\n### Things to watch out for\n\n> **Common mistake:** Assuming a set keeps the order you added items. When you iterate over a set, the elements may appear in any order, so you should not rely on indexing like you would with a list.\n\n### Quick recap\n\n- A set stores **unique**, unordered items.  \n- Core operations: **union** (`|`), **intersection** (`&`), **difference** (`-`), **symmetric difference** (`^`).  \n- Use sets when you need to eliminate duplicates, test membership fast, or compare groups.  \n- Remember that sets do **not** preserve order; if order matters, convert the set to a list after the operation.",
+   "code": ""
+  },
+  {
+   "heading": "Dictionaries",
+   "body": "A dictionary is a collection that stores data as **pairs** – a *key* and a *value*.  \nThink of a real‑world phone book: you look up a person’s name (the key) to find their phone number (the value).  \nIn programming, a dictionary lets you retrieve a value instantly when you know its key, just like opening to the right page in a phone book.\n\n**Key** – the identifier you use to find something. It must be unique inside the same dictionary, so you never have two identical keys.  \n**Value** – the information attached to that key. Values can be numbers, strings, lists, even other dictionaries.\n\nWhy is this useful?  \nWhen you need fast look‑ups, a dictionary is much quicker than scanning through a list. The computer stores the keys in a way that lets it jump directly to the matching value, usually in constant time $O(1)$.\n\n---\n\n### Creating a dictionary\n\n```python\n# empty dictionary\nphone_book = {}\n\n# dictionary with some entries already\nphone_book = {\n    \"Alice\": \"555‑1234\",\n    \"Bob\":   \"555‑5678\"\n}\n```\n\n> **Definition:** A *dictionary* is a mutable (changeable) collection of key‑value pairs, written with curly braces `{}` and a colon `:` separating each key from its value.\n\n---\n\n### Adding entries\n\nYou add a new pair by assigning a value to a new key:\n\n```python\nphone_book[\"Charlie\"] = \"555‑9012\"\n```\n\nIf the key already exists, the assignment **replaces** the old value with the new one.\n\n> **Note:** Assignment to an existing key overwrites the previous value; it does not create a duplicate entry.\n\n---\n\n### Retrieving values\n\nTo get the value for a known key, use the same bracket syntax:\n\n```python\nbob_number = phone_book[\"Bob\"]      # returns \"555‑5678\"\n```\n\nIf you ask for a key that isn’t present, Python raises a `KeyError`. To avoid this, you can use the `get` method, which lets you provide a default value:\n\n```python\nunknown = phone_book.get(\"Dave\", \"not found\")   # returns \"not found\"\n```\n\n---\n\n### Deleting entries\n\nThere are two common ways to remove a pair:\n\n```python\n# remove by key\ndel phone_book[\"Alice\"]          # Alice is gone\n\n# pop returns the removed value\nbob_number = phone_book.pop(\"Bob\")   # returns \"555‑5678\"\n```\n\nAfter `pop`, the key no longer exists in the dictionary, and you also receive the value that was stored.\n\n> **Common mistake:** Using `del` on a key that isn’t present also raises a `KeyError`. Use `pop` with a default (`phone_book.pop(\"Eve\", None)`) if you are unsure.\n\n---\n\n### Iterating over a dictionary\n\nOften you want to look at every entry. Python gives three useful ways:\n\n```python\n# only keys\nfor name in phone_book:\n    print(name)\n\n# keys and values together\nfor name, number in phone_book.items():\n    print(name, \"->\", number)\n\n# only values\nfor number in phone_book.values():\n    print(number)\n```\n\n`phone_book.items()` returns a sequence of *(key, value)* tuples, which lets you unpack them directly in the `for` loop.\n\n> **In daily life:** Imagine walking through a grocery store aisle and reading each label (key) and its price (value). Iterating over a dictionary is the same systematic walk through all stored pairs.\n\n---\n\n### Choosing a dictionary\n\nUse a dictionary when:\n\n* You need to look up data by a meaningful identifier (name, ID, word, etc.).\n* The identifiers are unique.\n* You want fast insertion, deletion, and retrieval.\n\nIf you only need an ordered collection without a unique identifier, a list or tuple may be simpler. If you need to store only distinct items without any extra information, a set is the right tool.\n\n> **Remember:** A dictionary’s strength is the *key‑value mapping* – it turns a name into a fast, direct path to the data you need.",
+   "code": ""
+  },
+  {
+   "heading": "Basic Data Manipulation",
+   "body": "When you have data stored in a structure, the first thing you usually want to do is **use it** – look at it, change it, or move it somewhere else.  \nThink of a data structure as a container, like a backpack, a drawer, or a filing cabinet.  \nSometimes you need to take items out of one container and put them into another, or you might want to tidy the contents by sorting them or counting how many of each kind you have.  \nThese are the basic manipulations that let you turn raw data into useful information.\n\n### 1. Converting between structures  \n\nSuppose you have a list of student names:\n\n```python\nstudents = [\"Anna\", \"Ben\", \"Cara\", \"David\"]\n```\n\nIf you need fast lookup by name, a **set** is handy because it stores each element only once and lets you test membership in constant time.  \nYou can create a set from the list with one line:\n\n```python\nstudent_set = set(students)\n```\n\nNow `student_set` contains `{\"Anna\", \"Ben\", \"Cara\", \"David\"}`.  \nIf later you need the names back in a specific order, you can turn the set back into a list:\n\n```python\nordered_students = list(student_set)   # order is arbitrary for a set\nordered_students.sort()                # sort alphabetically\n```\n\n> **Definition:** *Conversion* means creating a new data structure that contains the same elements as the original, but organized according to the rules of the new type.\n\n### 2. Combining different structures  \n\nYou might have two separate collections that you want to treat as one.  \nImagine two sets of favorite fruits:\n\n```python\nfruits_a = {\"apple\", \"banana\", \"cherry\"}\nfruits_b = {\"banana\", \"date\", \"elderberry\"}\n```\n\nThe **union** operation gives you every fruit that appears in either set:\n\n```python\nall_fruits = fruits_a | fruits_b          # same as fruits_a.union(fruits_b)\n```\n\n`all_fruits` now holds `{\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"}`.  \nIf you need the result as a list for ordered processing, just convert:\n\n```python\nfruit_list = list(all_fruits)\nfruit_list.sort()\n```\n\n### 3. Simple transformations  \n\n#### Sorting a list  \n\nSorting arranges items in a defined order, usually ascending (smallest to largest) or alphabetical.  \nPython’s built‑in `sort` method changes the list in place, while `sorted` returns a new sorted list.\n\n```python\nnumbers = [42, 7, 19, 3]\nnumbers.sort()          # numbers becomes [3, 7, 19, 42]\n```\n\nIf you want the original list unchanged:\n\n```python\nsorted_numbers = sorted(numbers)   # returns a new list\n```\n\nThe sorting algorithm works by comparing pairs of elements. In mathematical terms, the result satisfies:\n\n$$\n\\forall i \\in \\{0,\\dots,n-2\\}: \\; a_i \\le a_{i+1}\n$$\n\nwhere $a_i$ is the element at index $i$ and $n$ is the length of the list.\n\n#### Counting items in a set  \n\nA set automatically removes duplicates, so its size tells you how many **unique** items you have.  \nUse the `len` function:\n\n```python\nunique_colors = {\"red\", \"blue\", \"red\", \"green\"}\nprint(len(unique_colors))   # prints 3\n```\n\nIf you need a count of each element (including duplicates), a **dictionary** works well:\n\n```python\nfrom collections import Counter\ncolors = [\"red\", \"blue\", \"red\", \"green\"]\ncolor_counts = Counter(colors)   # {'red': 2, 'blue': 1, 'green': 1}\n```\n\n> **In daily life:** Counting unique items is like checking how many different types of fruit you have in a basket, while counting all items tells you the total number of pieces.\n\n### 4. Putting it together  \n\nA common workflow is: start with raw data in a list, remove duplicates with a set, sort the unique values, and finally store the result in a dictionary that maps each value to its position.\n\n```python\nraw = [\"pear\", \"apple\", \"apple\", \"banana\"]\nunique = set(raw)               # {'pear', 'apple', 'banana'}\nsorted_unique = sorted(unique) # ['apple', 'banana', 'pear']\nposition = {fruit: i for i, fruit in enumerate(sorted_unique)}\n# {'apple': 0, 'banana': 1, 'pear': 2}\n```\n\n> **Remember:** Converting, combining, and transforming data are separate steps, but they often appear together in real programs. Master each step, then you can chain them to solve bigger problems.\n\n> **Common mistake:** Forgetting that `list.sort()` changes the original list while `sorted()` does not. If you need the original order later, use `sorted` or make a copy first.",
+   "code": ""
+  },
+  {
+   "heading": "Choosing the Right Structure",
+   "body": "When you pick a data structure you are really answering three simple questions:\n\n1. **Do I need the items in a specific order?**  \n2. **Will I ever change (add, remove, or edit) the items?**  \n3. **Can the same value appear more than once?**  \n\nAnswering these questions lets you match the problem to the structure that does the job most efficiently.\n\n> **Note:** *Ordering* means the sequence in which items are stored matters. *Mutability* means you can change the collection after it is created. *Uniqueness* means each value can appear only once.\n\n### Step‑by‑step guide\n\n| Requirement | Ordered? | Mutable? | Unique? | Best structure(s) | Why it fits |\n|-------------|----------|----------|---------|-------------------|------------|\n| Keep items exactly as they were added, and you will add or remove items later | ✅ | ✅ | ❌ | **List** (or **Array** in some languages) | Lists remember the insertion order and let you change the contents. |\n| Keep items exactly as they were added, never change them after creation | ✅ | ❌ | ❌ | **Tuple** | Tuples store items in order but cannot be altered, which saves memory and prevents accidental changes. |\n| Need fast test “Is this value present?” and you never care about order | ❌ | ✅ | ✅ | **Set** | Sets ignore order, forbid duplicates, and give O(1) lookup time. |\n| Need fast test “Is this key present?” and you also need to retrieve a related value | ❌ | ✅ | ✅ (keys) | **Dictionary** (or **Map**) | Dictionaries store pairs *key → value*. Keys are unique, lookup is O(1). |\n| Need to keep items in order **and** also need fast lookup by a key | ✅ | ✅ | ✅ (keys) | **Ordered Dictionary** (or **list of tuples**) | Keeps insertion order while allowing key‑based access. |\n| Need a simple collection that never changes and you only read it | ✅ or ❌ | ❌ | ✅ or ❌ | **Tuple** (if ordered) or **frozenset** (if unordered) | Immutable versions protect the data from accidental edits. |\n\n### How to use the table\n\n1. **Read the problem description** and decide if the order matters.  \n2. **Check if you will modify the collection later.** If you will, choose a mutable type; otherwise pick an immutable one.  \n3. **Ask whether duplicates are allowed.** If not, a set‑like structure is appropriate.  \n\nIf more than one column matches, pick the structure that gives the best performance for the operations you will use most often. For example, if you need both order and fast key lookup, an ordered dictionary is usually better than a list of pairs because the dictionary gives constant‑time search.\n\n### Decision flow (plain language)\n\n- **Do you need to keep the exact sequence?**  \n  - *Yes* → go to the next question.  \n  - *No* → consider **set** or **dictionary** (depending on whether you need a value attached to each item).  \n\n- **Will you ever change the collection?**  \n  - *Yes* → choose a mutable type: **list**, **set**, or **dictionary**.  \n  - *No* → choose an immutable type: **tuple**, **frozenset**, or **ordered dictionary** (if you need key‑value pairs).  \n\n- **Can the same value appear more than once?**  \n  - *Yes* → avoid sets; use **list** or **tuple**.  \n  - *No* → **set** or **dictionary** (keys are unique).  \n\n### Quick cheat sheet\n\n> **Remember:**  \n> - **List** = ordered + mutable + allows duplicates.  \n> - **Tuple** = ordered + immutable + allows duplicates.  \n> - **Set** = unordered + mutable + no duplicates.  \n> - **Dictionary** = unordered + mutable + unique keys (values can repeat).  \n\n### Example scenario\n\nYou are writing a program that stores the names of students in the order they register, but after the registration period ends you never change the list. Here you would use a **tuple**: it remembers the order, prevents accidental additions, and uses less memory than a list.\n\nAnother example: you need to keep track of which countries have already been visited in a travel app, and you only need to know “have I been there?” – order does not matter and you never want the same country listed twice. A **set** is perfect because it automatically removes duplicates and lets you check membership instantly.\n\nBy asking these three simple questions and consulting the table, you can choose the right structure without trial and error. This saves time, reduces bugs, and makes your code run faster.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is an array and how does it differ from a list in Python?",
+   "a": "An array is a collection of items stored at contiguous memory locations. In many languages, arrays have a fixed size and store elements of the same data type. In Python, the built‑in list type works like a dynamic array: it can grow or shrink, and it can hold items of different types. So the main differences are that traditional arrays have fixed length and uniform type, while Python lists are flexible in size and can contain mixed types."
+  },
+  {
+   "level": "Easy",
+   "q": "Explain why a set cannot contain duplicate elements.",
+   "a": "A set is defined as an unordered collection of unique items. When an element is added to a set, the set checks whether that element is already present. If it is, the set ignores the new insertion, keeping only one copy. This property ensures that every element appears at most once, which is useful for removing duplicates from a collection."
+  },
+  {
+   "level": "Medium",
+   "q": "Given the list `numbers = [4, 7, 2, 7, 3]`, show how to create a dictionary that maps each number to the number of times it appears in the list.",
+   "a": "Step 1: Start with an empty dictionary: `counts = {}`.\nStep 2: Iterate over each element in `numbers`.\n- For the first element 4: it is not in `counts`, so set `counts[4] = 1`.\n- For the second element 7: not in `counts`, set `counts[7] = 1`.\n- For the third element 2: not in `counts`, set `counts[2] = 1`.\n- For the fourth element 7: already in `counts` with value 1, increment it to 2 (`counts[7] = 2`).\n- For the fifth element 3: not in `counts`, set `counts[3] = 1`.\nStep 3: The final dictionary is `{4: 1, 7: 2, 2: 1, 3: 1}`."
+  },
+  {
+   "level": "Medium",
+   "q": "How would you use a tuple to store a point’s (x, y) coordinates and why might a tuple be preferred over a list for this purpose?",
+   "a": "Create the tuple as `point = (x, y)`, for example `point = (3, 5)`. A tuple is immutable, meaning its values cannot be changed after creation. This immutability signals that the coordinates represent a fixed location that should not be altered accidentally, providing safety and allowing the tuple to be used as a dictionary key if needed. A list, being mutable, does not give that guarantee."
+  },
+  {
+   "level": "Hard",
+   "q": "You have two sets: `A = {1, 2, 3, 4}` and `B = {3, 4, 5, 6}`. Write a single Python expression that produces a list of the elements that are in either `A` or `B` but not in both, and explain each part of the expression.",
+   "a": "Expression: `list((A ^ B))`\nExplanation:\n- `A ^ B` is the symmetric difference operator for sets; it returns a new set containing elements that are in exactly one of the two sets (i.e., not in both). For the given sets, `A ^ B` yields `{1, 2, 5, 6}`.\n- `list(...)` converts the resulting set into a list, because the question asks for a list output. The final result is `[1, 2, 5, 6]` (order may vary because sets are unordered)."
+  },
+  {
+   "level": "Hard",
+   "q": "Compare the time complexity of searching for an element in a list versus a dictionary, and give an example where choosing a dictionary is clearly more efficient.",
+   "a": "Searching in a list requires checking each element until the target is found, which is O(n) time in the worst case (linear time). Searching in a dictionary uses a hash table, giving average‑case O(1) time (constant time). Example: Suppose you have a large collection of student IDs and you need to look up each student’s grade many times. Storing grades in a dictionary like `grades = {id1: grade1, id2: grade2, ...}` lets you retrieve a grade with `grades[student_id]` in constant time, whereas scanning a list of `(id, grade)` pairs for each lookup would take linear time and become slow as the data grows."
+  }
+ ],
+ "recap": "This lesson introduces the main data structures used in programming: arrays/lists, strings, tuples, sets, and dictionaries. It explains how each structure stores items, whether the order matters, and if the collection can be changed after creation. Simple analogies like lockers, trains, sealed envelopes, and phone books help illustrate these concepts. Finally, it gives guidance on choosing the right structure based on ordering, mutability, and uniqueness.",
+ "key_terms": [
+  {
+   "term": "Array/List",
+   "meaning": "An ordered collection of elements accessed by a numeric index, usually starting at 0."
+  },
+  {
+   "term": "String",
+   "meaning": "An ordered sequence of characters treated as a single value."
+  },
+  {
+   "term": "Tuple",
+   "meaning": "An ordered, immutable collection of items; once created it cannot be changed."
+  },
+  {
+   "term": "Set",
+   "meaning": "An unordered collection that stores only unique elements, ignoring duplicates."
+  },
+  {
+   "term": "Dictionary",
+   "meaning": "A collection of key‑value pairs that allows fast lookup of a value using its unique key."
+  },
+  {
+   "term": "Index",
+   "meaning": "The position number of an element in an ordered collection, starting at 0 in most languages."
+  },
+  {
+   "term": "Mutable",
+   "meaning": "A property of a data structure that allows its contents to be changed after creation."
+  },
+  {
+   "term": "Immutable",
+   "meaning": "A property of a data structure that does not allow any changes after it is created."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the first index of a Python list?",
+   "options": [
+    "0",
+    "1",
+    "-1",
+    "2"
+   ],
+   "answer": 0,
+   "why": "Python, like most languages, starts counting list positions from zero."
+  },
+  {
+   "q": "Which data structure guarantees that no duplicate elements are stored?",
+   "options": [
+    "List",
+    "Tuple",
+    "Set",
+    "Dictionary"
+   ],
+   "answer": 2,
+   "why": "A set automatically discards duplicate entries, keeping only unique values."
+  },
+  {
+   "q": "Which of the following is immutable?",
+   "options": [
+    "list",
+    "set",
+    "tuple",
+    "dictionary"
+   ],
+   "answer": 2,
+   "why": "Tuples cannot be altered after creation, making them immutable."
+  },
+  {
+   "q": "How do you create an empty dictionary in Python?",
+   "options": [
+    "{}",
+    "[]",
+    "set()",
+    "()"
+   ],
+   "answer": 0,
+   "why": "Curly braces without items define an empty dictionary."
+  },
+  {
+   "q": "If you need fast look‑up by a unique identifier, which structure is most appropriate?",
+   "options": [
+    "List",
+    "Set",
+    "Dictionary",
+    "Tuple"
+   ],
+   "answer": 2,
+   "why": "Dictionaries map keys to values and provide O(1) average lookup time."
+  },
+  {
+   "q": "Which property is true for both lists and sets?",
+   "options": [
+    "Ordered",
+    "Mutable",
+    "Unique elements",
+    "Immutable"
+   ],
+   "answer": 1,
+   "why": "Both lists and sets can be changed after creation, so they are mutable."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is an array (or list) in programming?",
+   "back": "An ordered collection of elements accessed by their index, starting at 0."
+  },
+  {
+   "front": "How do you access the third character of a string `s` in Python?",
+   "back": "Use `s[2]` because indexing starts at 0."
+  },
+  {
+   "front": "What does immutable mean?",
+   "back": "The data structure cannot be changed after it is created."
+  },
+  {
+   "front": "Give an example of creating a tuple with three items.",
+   "back": "`my_tuple = (1, \"apple\", True)`"
+  },
+  {
+   "front": "How do you create a set containing the numbers 1, 2, and 3 in Python?",
+   "back": "`my_set = {1, 2, 3}`"
+  },
+  {
+   "front": "What is the key difference between a list and a set?",
+   "back": "A list is ordered and can contain duplicates; a set is unordered and stores only unique items."
+  },
+  {
+   "front": "How do you retrieve the value for key `'name'` from a dictionary `person`?",
+   "back": "`person['name']`"
+  },
+  {
+   "front": "When choosing a data structure, what three questions should you ask?",
+   "back": "Do I need ordering? Do I need mutability? Do I need uniqueness?"
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l08-lockers-as-arrays",
+   "title": "A row of numbered lockers showing ordered storage and direct access.",
+   "alt": "A row of numbered lockers showing ordered storage and direct access.",
+   "priority": 9,
+   "picture_title": "Lockers as Arrays",
+   "kind": "illustration",
+   "subject": "A series of identical lockers numbered 1, 2, 3, … each holding a book. The picture highlights that you can open any locker directly by its number, illustrating random access in arrays and lists.",
+   "layout": "Lockers in a horizontal line with numbers above each; arrows point from a hand to locker 2 and from locker 2 to a book inside.",
+   "labels": [
+    "Locker 1",
+    "Locker 2",
+    "Locker 3",
+    "Book"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l08-string-as-train",
+   "title": "A train where each carriage carries one character, showing how strings are ordered sequences.",
+   "alt": "A train where each carriage carries one character, showing how strings are ordered sequences.",
+   "priority": 8,
+   "picture_title": "String as Train",
+   "kind": "illustration",
+   "subject": "A simple train composed of several carriages, each labeled with a single letter (e.g., H, e, l, l, o). The whole train represents a string and can be split or joined, mirroring string operations.",
+   "layout": "Train viewed from the side, carriages in a line; each carriage has a large letter on it; a split point is shown between two carriages.",
+   "labels": [
+    "H",
+    "e",
+    "l",
+    "l",
+    "o"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l08-phone-book-dictionary",
+   "title": "A phone‑book page showing name‑key and number‑value pairs.",
+   "alt": "A phone‑book page showing name‑key and number‑value pairs.",
+   "priority": 7,
+   "picture_title": "Phone‑Book Dictionary",
+   "kind": "photo",
+   "subject": "An open phone‑book with several entries. Each entry displays a person's name (the key) on the left and their phone number (the value) on the right, illustrating how dictionaries map keys to values.",
+   "layout": "Page spread with three entries; arrows point from each name to its corresponding number.",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Arrays vs Lists",
+   "left": {
+    "name": "Array",
+    "points": [
+     "Fixed size",
+     "Fast indexed access",
+     "Usually immutable"
+    ]
+   },
+   "right": {
+    "name": "List",
+    "points": [
+     "Dynamic size",
+     "Mutable (add/remove)",
+     "Fast indexed access"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Common Data Structures",
+   "items": [
+    {
+     "name": "Array",
+     "role": "Ordered, fixed-size collection"
+    },
+    {
+     "name": "List",
+     "role": "Ordered, resizable collection"
+    },
+    {
+     "name": "Tuple",
+     "role": "Ordered, immutable collection"
+    },
+    {
+     "name": "Set",
+     "role": "Unordered, unique elements"
+    },
+    {
+     "name": "Dictionary",
+     "role": "Key‑value pairs for fast lookup"
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key Properties",
+   "items": [
+    {
+     "value": "0",
+     "label": "First index"
+    },
+    {
+     "value": "Ordered",
+     "label": "Keeps sequence"
+    },
+    {
+     "value": "Mutable",
+     "label": "Can change"
+    },
+    {
+     "value": "Unique",
+     "label": "No duplicates"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Choosing the Right Structure",
+   "steps": [
+    {
+     "label": "Check order",
+     "text": "Do you need items in a specific sequence?"
+    },
+    {
+     "label": "Check mutability",
+     "text": "Will you add, remove or edit items?"
+    },
+    {
+     "label": "Check uniqueness",
+     "text": "Can the same value appear more than once?"
+    }
+   ],
+   "loop": false,
+   "after": 5
+  },
+  {
+   "type": "facts",
+   "title": "Set Behaviour",
+   "items": [
+    {
+     "value": "No duplicates",
+     "label": "Adds only new items"
+    },
+    {
+     "value": "Unordered",
+     "label": "No index position"
+    },
+    {
+     "value": "Fast membership test",
+     "label": "Check existence quickly"
+    }
+   ],
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

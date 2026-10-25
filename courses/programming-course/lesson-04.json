@@ -1,0 +1,383 @@
+{
+ "title": "Input and Output",
+ "summary": "This lesson teaches how to read data from the user and show results on the screen. Students will also learn basic ways to format output for clear communication.",
+ "objectives": [
+  "Read text and numbers entered by the user",
+  "Print messages and results to the console",
+  "Use placeholders and formatting to align output",
+  "Create simple interactive prompts that respond to user choices"
+ ],
+ "prerequisites": "Students should already know how to write and run a basic program and understand simple variables and data types.",
+ "why": [
+  "In everyday life we constantly exchange information with computers – entering a password, choosing a menu option, or entering a number to calculate a bill. Knowing how to get that information from users and show them useful feedback is the foundation of any interactive software.",
+  "Professional programmers use input and output to build everything from command‑line tools to graphical applications. Clear, well‑formatted output makes programs easier to use and reduces mistakes, while proper input handling prevents crashes and security problems."
+ ],
+ "sections": [
+  {
+   "heading": "What is Input and Output?",
+   "body": "Input and output – often shortened to **I/O** – are the ways a program talks to the world outside of its own code.  \n\n**Input** is any data that a program receives from somewhere else. It could be a word you type on a keyboard, a number read from a file, or a signal from a sensor.  \n\n**Output** is any data that a program sends out, such as text shown on a screen, numbers written to a file, or a sound played through a speaker.  \n\n> **Definition:** *Input* = data coming **into** the program; *Output* = data going **out** of the program.  \n\nWhy do we need both? Imagine a calculator that can only add two numbers that are hard‑coded inside the program. It would always give the same answer, no matter who is using it. Real programs must be able to react to different users, different files, or changing conditions. That reaction is possible only when the program can **receive** information (input) and then **show** a result (output).  \n\nThink of a conversation between two people. One person asks a question (the question is input for the listener), the other person answers (the answer is output for the asker). If either side never speaks, the conversation cannot happen. In the same way, a computer program needs a way to “listen” and a way to “talk.”  \n\nThe simplest place for this listening and talking is the **console** (also called a terminal or command‑line window). When you run a program from the console, the console shows text that the program prints, and it lets you type characters that the program can read. The console is a very basic I/O device, but it works on almost every computer, so it is the perfect starting point for learning how I/O works.  \n\n> **In daily life:** Using the console is like writing a note on a piece of paper (output) and then reading a note someone else wrote (input). Both actions happen on the same sheet, just at different times.  \n\nWhen a program reads input, it usually waits until you finish typing and press the **Enter** key. Pressing Enter tells the console, “I am done; now give the whole line to the program.” The program then receives the characters as a **string** – a sequence of letters, digits, and symbols. If the program needs a number, it must **convert** that string into a numeric type (like an integer or a floating‑point number).  \n\nWhen a program prints output, it sends characters to the console, and the console immediately displays them. The program can also add special characters such as `\\n` (newline) to move the cursor to the next line, making the output easier to read.  \n\n> **Note:** The console handles text, not raw binary data. If you need to work with images or sound, you will use other I/O devices, but the same ideas of input and output still apply.  \n\nBecause input and output are the bridge between a program and its users, they are the first building blocks of **interactive programs** – programs that respond to what the user does. Even a simple “guess the number” game needs to read the user’s guess (input) and tell them whether they were right (output).  \n\nRemember that every piece of data that crosses the program’s boundary must be **explicitly** requested or sent. The computer will not magically know what you want; you must write code that asks for input and that prints the desired output.  \n\n> **Remember:** Without input, a program cannot adapt; without output, a program cannot communicate. Both are essential for any program that interacts with a person or another system.",
+   "code": ""
+  },
+  {
+   "heading": "Reading Text Input",
+   "body": "Imagine you are standing at a water faucet.  \nThe faucet is the **program**, and the water that comes out is the **input** you give it.  \nJust as you turn the knob to let water flow, a program asks the user for information, waits, and then receives that information as a **string** – a piece of text.\n\n> **Definition:** *Input* is any data that a program receives from the outside world while it is running.  \n> **In daily life:** Think of filling out a form on a website – the words you type into the boxes are the input that the site will later use.\n\n### Step‑by‑step: prompting the user\n\n1. **Show a message** that tells the user what to type.  \n   In most programming languages this is called a *prompt*.  \n   The prompt is just text printed to the screen; it does not affect the data you will receive.\n\n2. **Wait for the user to press the Enter key.**  \n   When the user finishes typing and hits **Enter**, the operating system sends everything typed before the newline character to the program.\n\n3. **Store the received line in a variable.**  \n   A *variable* is a named container that holds a value, like a labeled jar where you keep a specific ingredient.\n\nBelow is a tiny, complete example in Python, a language many beginners start with. The same ideas work in other languages – you just use a different command to read the line.\n\n```python\n# 1. Prompt the user\nprint(\"What is your favorite fruit? \", end='')   # end='' stops the automatic newline\n\n# 2. Read a whole line of text\nfavorite = input()          # input() waits until the user presses Enter\n\n# 3. The line is now stored in the variable named favorite\nprint(\"You entered:\", favorite)\n```\n\n#### What each line does\n\n- `print(\"What is your favorite fruit? \", end='')`  \n  - `print` is a command that displays text.  \n  - The argument inside the parentheses is the text to show.  \n  - `end=''` tells `print` **not** to add its usual newline after the text, so the cursor stays on the same line as the prompt.\n\n- `favorite = input()`  \n  - `input()` is a built‑in function that **reads one line** from the keyboard.  \n  - The function returns a *string* – a sequence of characters – which we assign to the variable `favorite` using the equals sign `=`.  \n  - The equals sign means “store the value on the right inside the name on the left”.\n\n- `print(\"You entered:\", favorite)`  \n  - This line shows that the program can now use the stored text.  \n  - The comma inside `print` automatically adds a space between the two pieces of output.\n\n> **Note:** In Python, `input()` always returns a string, even if the user typed numbers. If you need a number, you must convert it (e.g., `int(input())`). For pure text, no conversion is required.\n\n### Why store the text in a variable?\n\nStoring lets you use the same information many times without asking the user again.  \nFor example, you might later compare the entered fruit with a list of allowed choices:\n\n```python\nif favorite.lower() == \"apple\":\n    print(\"Apples are crunchy!\")\nelse:\n    print(\"Nice choice!\")\n```\n\nHere `favorite.lower()` creates a new string where all letters are lowercase, making the comparison case‑insensitive.\n\n### A real‑world analogy\n\nThink of a librarian who asks you for the title of a book you want.  \nThe librarian writes the title on a card (the variable) and then uses that card to look up the book, check its availability, and maybe suggest similar titles. The card stays the same while the librarian performs many different actions.\n\n> **Common mistake:** Forgetting to keep the prompt on the same line as the input.  \n> If you write `print(\"Enter name:\")` on one line and then `name = input()` on the next, the cursor moves to a new line after the prompt, which can feel less friendly to the user.\n\n### Quick checklist\n\n- Write a clear prompt that tells the user exactly what to type.  \n- Use the language’s function that reads a whole line (e.g., `input()` in Python, `Scanner.nextLine()` in Java, `getline(cin, variable)` in C++).  \n- Assign the returned string to a well‑named variable.  \n- Remember that the variable now holds the text and can be used later in any part of the program.\n\nBy following these steps, you give your program a reliable way to receive and remember any words, sentences, or symbols the user provides. This is the foundation for all interactive programs, from simple calculators to complex games.",
+   "code": ""
+  },
+  {
+   "heading": "Reading Numeric Input",
+   "body": "When a program asks a user to type something, the computer first receives that data as **text** – a sequence of characters like `1`, `2`, `.` or `a`.  \nEven if the user types a number, the computer still treats it as text until we tell it to treat it as a numeric value. This extra step is called **conversion**.\n\n> **Definition:** *Conversion* is the process of changing data from one type (for example, text) into another type (for example, an integer or a floating‑point number).\n\nWhy do we need conversion?  \nImagine you are sorting a list of ages. If the ages are stored as text, the computer would compare them alphabetically: `\"10\"` would appear before `\"2\"` because the character `'1'` comes before `'2'`. By converting the text `\"10\"` to the number `10`, the computer can compare values mathematically and get the correct order.\n\n### Converting to an Integer\n\nAn **integer** is a whole number without a fractional part, such as `-3`, `0`, or `42`.  \nIn most programming languages you use a function like `int()` (Python), `parseInt()` (JavaScript), or `Integer.parseInt()` (Java) to turn a text string into an integer.\n\n```python\ntext = \"27\"\nage = int(text)      # age now holds the number 27\n```\n\nIf the text contains anything that is not a digit (for example, `\"27a\"` or `\"twenty\"`), the conversion will fail and usually raise an **error** (sometimes called an *exception*).  \n\n> **Common mistake:** Forgetting to check that the input really looks like a number before calling the conversion function, which causes the program to crash.\n\n### Converting to a Floating‑Point Number\n\nA **floating‑point number** (often just called a *float*) can represent fractions, like `3.14` or `-0.001`. The conversion function is usually called `float()` (Python), `parseFloat()` (JavaScript), or `Double.parseDouble()` (Java).\n\n```python\ntext = \"3.1415\"\npi = float(text)     # pi now holds the number 3.1415\n```\n\nFloating‑point numbers use a decimal point (`.`) to separate the whole part from the fractional part. Some languages also accept scientific notation, such as `\"1e3\"` meaning $1 \\times 10^{3} = 1000$.\n\n### Checking for Valid Input\n\nBefore converting, it is good practice to **validate** the input – to make sure it looks like a number. A simple way is to try the conversion inside a *try‑catch* (or *try‑except*) block and handle the error gracefully.\n\n```python\nuser_text = input(\"Enter a price: \")\ntry:\n    price = float(user_text)\n    print(\"You entered:\", price)\nexcept ValueError:\n    print(\"That does not look like a number. Please try again.\")\n```\n\nIn this example:\n\n* `try:` starts a block of code that might cause an error.  \n* `except ValueError:` catches the specific error that occurs when conversion fails.  \n* The program then prints a friendly message instead of stopping abruptly.\n\nAnother technique is to use **regular expressions** or built‑in string methods to test the pattern before conversion. For instance, checking that every character is a digit (or a single decimal point) can filter out most bad inputs.\n\n> **In daily life:** Think of a vending machine that only accepts coins. Before it lets you buy a snack, it checks whether the inserted object is a valid coin. Similarly, a program checks whether the typed text is a valid number before accepting it.\n\n### Simple Formula for Checking an Integer\n\nIf you want to verify that a string `s` contains only digits, you can use:\n\n$$\n\\text{isInteger}(s) = \\bigl( \\forall\\,c \\in s,\\; c \\text{ is a digit} \\bigr)\n$$\n\nIf the condition is true, you can safely call `int(s)`.\n\n### Putting It All Together\n\n1. **Read** the raw text from the user.  \n2. **Validate** the text (optional but recommended).  \n3. **Convert** the text to the desired numeric type (`int` for whole numbers, `float` for decimals).  \n4. **Use** the numeric value in calculations, comparisons, or further logic.  \n\n> **Remember:** Always anticipate that a user might type something unexpected. Validating and handling conversion errors makes your program robust and user‑friendly.",
+   "code": ""
+  },
+  {
+   "heading": "Printing Simple Output",
+   "body": "Printing simple output is the first step in making a program talk to the user.  \nWhen we *print* something, we ask the computer to show a piece of text or a number on the screen.  \nThink of it like a teacher writing a note on the blackboard: the teacher decides what to write, and every student can see it. In a program, the `print` command is the teacher, and the screen is the blackboard.\n\n### The basic `print` statement  \n\nIn most programming languages the command is called `print`.  \nFor example, in Python we write:\n\n```python\nprint(\"Hello, world!\")\n```\n\nThe text inside the quotation marks is called a **string** – a sequence of characters that we want to display exactly as we typed it.  \nWhen the program runs, the screen will show:\n\n```\nHello, world!\n```\n\n> **Definition:** *String* – a series of characters (letters, numbers, symbols) enclosed in quotation marks.\n\n### Printing numbers  \n\nNumbers do not need quotation marks. They are a different data type called **numeric**.  \n\n```python\nprint(42)\n```\n\nThe output will be:\n\n```\n42\n```\n\nThe computer knows that `42` is a number, not a piece of text, so it can also use it in calculations later.\n\n### Combining strings and numbers  \n\nOften we want to show a message that includes both words and a value, such as a score or a temperature.  \nOne simple way is to let `print` take several arguments separated by commas:\n\n```python\nprint(\"Your score is\", 87)\n```\n\nThe comma tells the language to put a space between the parts, so the screen shows:\n\n```\nYour score is 87\n```\n\nAnother method is **string concatenation**, which means joining strings together.  \nBecause a number cannot be joined directly, we first turn it into a string with a function called `str()`:\n\n```python\nprint(\"Your score is \" + str(87))\n```\n\nThe `+` sign here means “join these two strings”. The result is the same as before.\n\n> **Note:** In many languages the `+` operator adds numbers but joins strings. Always convert a number to a string before using `+` for concatenation.\n\n### Using placeholders (formatting)  \n\nWhen a message becomes longer, writing many `+ str()` pieces gets messy.  \nA cleaner way is to use *placeholders* inside the string and tell the language to fill them in.  \nIn Python the most common placeholder is `{}` and we use the method `.format()`:\n\n```python\nprint(\"Hello, {}! You have {} new messages.\".format(\"Alice\", 5))\n```\n\nThe `{}` spots are replaced, in order, by the values inside `format()`.  \nThe output is:\n\n```\nHello, Alice! You have 5 new messages.\n```\n\nThe same idea works in other languages with slightly different syntax (e.g., `printf` in C or `Console.WriteLine` in C#).\n\n> **In daily life:** Think of a mail‑merge form where you write “Dear ___,” and the computer fills in each person's name automatically.\n\n### Printing on the same line  \n\nBy default, `print` adds a line break after it finishes, so the next `print` starts on a new line.  \nIf we want several pieces on the same line, we can change the end‑character. In Python:\n\n```python\nprint(\"Loading\", end=\" \")\nprint(\"...\")\n```\n\nThe first `print` ends with a space instead of a newline, so the screen shows:\n\n```\nLoading ...\n```\n\n### Why printing matters  \n\nPrinting is how we give feedback to the user, debug our code, or present results.  \nWithout it, a program would run silently, and we would never know what it is doing.\n\n> **Common mistake:** Forgetting the quotation marks around a string, which causes a syntax error because the language thinks you are referring to a variable that does not exist.\n\n### Quick recap  \n\n- Use `print(\"text\")` for plain words.  \n- Use `print(number)` for numeric values.  \n- Separate items with commas to let the language add spaces automatically.  \n- Convert numbers to strings with `str()` if you need to join them using `+`.  \n- Use placeholders (`{}`) and `.format()` for clearer, longer messages.  \n- Change the line ending with `end=` if you want output on the same line.\n\n> **Remember:** Every time you want the program to say something, you are using a *print* statement – the simplest way to make your code talk.",
+   "code": ""
+  },
+  {
+   "heading": "Formatting Output",
+   "body": "When a program shows information to the user, we usually want the result to look tidy, not like a jumble of characters.  \nThink of a school timetable printed on paper: each subject, start time, and room number line up in columns so you can read it quickly.  \nIn code we achieve the same effect with **formatting** – arranging the pieces of data so they line up, have the right number of decimal places, or include extra words that make the output meaningful.\n\n### 1. Putting pieces together with placeholders  \n\nA *placeholder* is a special symbol that says “put a value here later”.  \nIn many languages the placeholder looks like `{}` or `%s`.  \nWhen the program runs, the placeholder is replaced by the actual value you give it.\n\n```python\nname = \"Ana\"\nprint(\"Hello, {}!\".format(name))\n```\n\nHere `{}` is the placeholder. The `format` function tells the program to replace the first `{}` with the value of `name`.  \nThe result printed on the screen is:\n\n```\nHello, Ana!\n```\n\n> **Definition:** A placeholder is a marker inside a string that will be replaced by a variable’s value when the program runs.\n\n### 2. Simple string concatenation  \n\n*String concatenation* means joining two or more strings end‑to‑end. The `+` operator is the most common way.\n\n```python\nage = 17\nprint(\"You are \" + str(age) + \" years old.\")\n```\n\nBecause `age` is a number, we first turn it into a string with `str(age)`. The three parts are then glued together, producing:\n\n```\nYou are 17 years old.\n```\n\nWhile concatenation works, placeholders are usually clearer, especially when many values are involved.\n\n### 3. Aligning columns  \n\nWhen you print a list of items, aligning them in columns makes the output much easier to scan.  \nThe formatting syntax lets you specify a *field width* – the number of characters reserved for each value. If the value is shorter, spaces are added automatically.\n\n```python\nprint(\"{:<10} {:>5}\".format(\"Item\", \"Qty\"))\nprint(\"{:<10} {:>5}\".format(\"Apple\", 3))\nprint(\"{:<10} {:>5}\".format(\"Banana\", 12))\n```\n\nExplanation of the format string:\n\n- `{:<10}` – left‑align (`<`) the text inside a field 10 characters wide.\n- `{:>5}` – right‑align (`>`) the number inside a field 5 characters wide.\n\nThe output looks like a small table:\n\n```\nItem          Qty\nApple           3\nBanana         12\n```\n\n> **Note:** The colon `:` starts the formatting instructions, `<` or `>` set alignment, and the number after them sets the column width.\n\n### 4. Controlling decimal places  \n\nWhen you work with floating‑point numbers (numbers that have a fractional part), you often want only a certain number of digits after the decimal point.  \nThe format specifier `:.2f` means “show the number as a fixed‑point value with 2 digits after the decimal”.\n\n```python\nprice = 4.5678\nprint(\"Price: ${:.2f}\".format(price))\n```\n\nResult:\n\n```\nPrice: $4.57\n```\n\nThe number was rounded to two decimal places, which is typical for money.\n\n### 5. Building readable tables  \n\nCombining alignment and decimal control lets you create neat tables of data, such as a grade sheet.\n\n```python\nprint(\"{:<8} {:>6} {:>8}\".format(\"Student\", \"Score\", \"Grade\"))\nprint(\"{:<8} {:>6.1f} {:>8}\".format(\"Bob\", 88.75, \"A\"))\nprint(\"{:<8} {:>6.1f} {:>8}\".format(\"Sue\", 72.4, \"C\"))\n```\n\nThe format string `{:>6.1f}` tells Python to:\n\n- Right‑align the number,\n- Use a field width of 6 characters,\n- Show one digit after the decimal (`.1f`).\n\nOutput:\n\n```\nStudent   Score    Grade\nBob        88.8        A\nSue        72.4        C\n```\n\nNotice how the columns line up even though the names have different lengths.\n\n> **In daily life:** Think of a grocery receipt – each item name, quantity, and price occupies its own column so you can quickly verify the total.\n\n### 6. Quick reference formula  \n\nWhen you need to remember the general shape of a format specifier, use this template:\n\n$$\n\\text{placeholder} = \\{ \\text{alignment?}{\\text{width}}{\\text{.precision}{\\text{type}}? \\}\n$$\n\n- `alignment` can be `<` (left), `>` (right), or `^` (center).  \n- `width` is the number of characters reserved.  \n- `.precision` is used for numbers (`.2` means two decimal places).  \n- `type` tells Python how to treat the value (`f` for fixed‑point, `s` for string, `d` for integer).\n\n### 7. Putting it all together  \n\nWhenever you need to show several pieces of information, start by deciding:\n\n1. Which values need to appear together?  \n2. Do they need alignment or a specific number of decimals?  \n3. Choose placeholders and a format string that describe those requirements.  \n\nThen call `format` (or an equivalent function in your language) and print the result. The output will be clean, professional, and easy for anyone to read.\n\n> **Remember:** Clear formatting is not just decoration; it helps users understand the data quickly and reduces mistakes when they copy numbers from the screen.",
+   "code": ""
+  },
+  {
+   "heading": "Basic User Interaction Loops",
+   "body": "When a program talks to a person, it often needs to ask a question more than once.  \nFor example, imagine you are buying a ticket online. The website will keep asking you for a seat number until you type a seat that is still free, or you click “Cancel”.  \nIn programming we do the same thing with a **loop** – a piece of code that repeats until a condition is satisfied.\n\n### What a loop does\n\nA loop looks at a **condition** (a true/false test) before each repetition.  \nIf the condition is **true**, the loop runs another round; if it is **false**, the loop stops and the program continues with the next line of code.\n\nIn most languages the simplest loop for this purpose is a **while‑loop**:\n\n$$\n\\text{while (condition) \\{ body \\}}\n$$\n\nThe *body* is the group of statements that are executed each time the loop runs.\n\n> **Definition:** A *while‑loop* repeats its body while a given condition remains true.\n\n### Step‑by‑step example: asking for a positive integer\n\n1. **Show the prompt** – tell the user what you need.  \n2. **Read the input** – get the text the user typed.  \n3. **Check the input** – see if it meets the rule (e.g., “is a positive integer”).  \n4. **If it is good**, break out of the loop; otherwise, tell the user why it was wrong and go back to step 1.  \n\nHere is a concrete Python snippet that follows those steps:\n\n```python\nwhile True:                     # 1. start an endless loop\n    user_text = input(\"Enter a positive integer (or 'q' to quit): \")\n    if user_text.lower() == 'q':   # 2. allow the user to quit\n        print(\"Good‑bye!\")\n        break                     # 3. exit the loop\n    if user_text.isdigit():       # 4. test if the text is all digits\n        number = int(user_text)\n        if number > 0:            # 5. extra test for positivity\n            print(\"You entered:\", number)\n            break                 # 6. valid data, stop looping\n    # If we reach this point the input was not valid\n    print(\"Invalid input. Please try again.\")\n```\n\n**How it works**\n\n- `while True:` creates a loop that would run forever unless we tell it to stop.  \n- `break` is a special command that **immediately ends** the nearest enclosing loop.  \n- `input()` reads a line of text from the keyboard.  \n- `user_text.isdigit()` returns *true* only if every character is a digit, so “123” passes but “12a” does not.  \n- `int(user_text)` converts the text into a number we can compare with `$0$`.\n\n> **In daily life:** Think of the loop as a polite cashier who keeps asking “Do you have a loyalty card?” until you either show one or say “No, thanks”.\n\n### Adding a limit to the number of tries\n\nSometimes you don’t want an infinite loop; you might allow only three attempts. Replace the `while True` with a counter:\n\n```python\nattempts = 0\nmax_attempts = 3\nwhile attempts < max_attempts:\n    user_text = input(\"Enter a positive integer: \")\n    if user_text.isdigit() and int(user_text) > 0:\n        print(\"Thanks!\")\n        break\n    attempts += 1               # count this failed try\n    print(\"Try again.\")\nelse:                           # runs only if the loop finished without break\n    print(\"Too many failed attempts.\")\n```\n\nThe condition `attempts < max_attempts` becomes false after three bad inputs, so the loop ends automatically. The `else` block attached to the `while` runs only when the loop exits **without** hitting a `break`.\n\n> **Common mistake:** Forgetting to change the loop variable (like `attempts += 1`). If you never modify the condition, the loop may run forever.\n\n### Why these loops are useful\n\n- **Reliability:** The program never proceeds with bad data, preventing crashes later.  \n- **User friendliness:** The user gets clear feedback and a chance to correct mistakes.  \n- **Control:** You decide exactly when the program should stop asking (valid input, user quits, or a maximum number of tries).\n\n> **Remember:** A loop must have a way to become false – either by changing a variable, using `break`, or by reaching a limit. Without that, the program gets stuck in an endless cycle.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "Imagine you want a tiny computer assistant that greets a person, finds out how old they are, works out the year they were born, and then shows everything nicely.  \nPutting all the pieces we learned about **input**, **output**, and **basic loops** together lets us build exactly that.\n\n---\n\n### Step‑by‑step thinking  \n\n1. **Ask for a name** – we need to read a line of text from the user.  \n2. **Ask for an age** – this is a number, so we read it and turn the text into an integer.  \n3. **Calculate the birth year** – subtract the age from the current year.  \n4. **Show the result** – print a friendly sentence that includes the name, age, and birth year, using formatting so everything lines up nicely.  \n\nWhy do we break it down?  \nJust like assembling a piece of furniture: you first lay out the screws, then attach the legs, then tighten the bolts. Each small step is easy to check before moving on, and if something goes wrong you know exactly where to look.\n\n---\n\n### The program (Python)\n\n```python\n# 1. Get the person's name\nname = input(\"Enter your name: \")\n\n# 2. Get the person's age (as text) and convert it to an integer\nage_text = input(\"Enter your age: \")\nage = int(age_text)          # int() changes a string like \"23\" into the number 23\n\n# 3. Compute the birth year\ncurrent_year = 2026          # you could also get this automatically with a library\nbirth_year = current_year - age\n\n# 4. Print a formatted summary\nprint(\"\\n--- Summary ---\")\nprint(f\"Name       : {name}\")\nprint(f\"Age        : {age} years\")\nprint(f\"Birth year : {birth_year}\")\n```\n\n> **Definition:** `input()` is a built‑in function that pauses the program, shows the text inside the parentheses, and returns whatever the user types as a **string** (a sequence of characters).\n\n> **Note:** `int()` converts a string that looks like a whole number into an actual numeric value. If the user types something that isn’t a number, `int()` will raise an error.\n\n> **Common mistake:** Forgetting to convert the age from a string to an integer. If you write `birth_year = current_year - age_text`, Python tries to subtract a string from a number and crashes. Always use `int()` (or `float()` for decimals) before doing arithmetic.\n\n> **Remember:** Use **f‑strings** (`f\"...\"`) to embed variables directly inside a printed line. The braces `{}` tell Python to replace the content with the variable’s value.\n\n---\n\n### What each line does  \n\n- `name = input(\"Enter your name: \")`  \n  *Shows the prompt* “Enter your name: ” *and stores whatever the user types in the variable* `name`.\n\n- `age_text = input(\"Enter your age: \")`  \n  *Same idea, but the result is still a string.* We keep it separate (`age_text`) so we can see the conversion step clearly.\n\n- `age = int(age_text)`  \n  *Turns the string into a number.* Now `age` can be used in calculations.\n\n- `current_year = 2026`  \n  *A constant that represents the year the program runs.* In real programs you might ask the computer for the current date, but a fixed number keeps the example simple.\n\n- `birth_year = current_year - age`  \n  *The formula for birth year.*  \n  $$\\text{birth year} = \\text{current year} - \\text{age}$$\n\n- The three `print` statements at the end create a tidy block of output. The `\\n` at the start of the first `print` adds a blank line so the summary stands out.\n\n---\n\n### Try it yourself  \n\n1. Run the program.  \n2. Type **Alice** when asked for a name.  \n3. Type **30** when asked for an age.  \n\nYou should see:\n\n```\n--- Summary ---\nName       : Alice\nAge        : 30 years\nBirth year : 1996\n```\n\nIf you change the numbers, the birth year updates automatically. This shows how **input**, **processing**, and **output** work together: the program receives data, does something useful with it, and then shares the result.\n\n---\n\n### Extending the idea  \n\n- **Looping:** Ask several people their information in a row until the user types “quit”.  \n- **Validation:** Check that the age entered is a positive integer before doing the calculation.  \n- **Current year automatically:** Use `import datetime` and `datetime.datetime.now().year` to get the real current year.\n\nBy combining the small building blocks you already know, you can create programs that feel interactive and helpful—just like a friendly chatbot that remembers your name and birthday!",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Explain in your own words what “input” means in a program.",
+   "a": "Input is any data that a program receives from the outside world while it is running. This can be text typed by a user, numbers entered on a keyboard, or data read from a file. The program uses this information to make decisions or perform calculations."
+  },
+  {
+   "level": "Easy",
+   "q": "What is the difference between printing output and returning a value from a function?",
+   "a": "Printing output sends data to the screen (or another display device) so the user can see it immediately. Returning a value from a function sends data back to the part of the program that called the function, allowing the program to use that value later. Printing is for the user; returning is for the program’s internal logic."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare reading text input with reading numeric input. What extra step is often needed for numeric input?",
+   "a": "Reading text input stores the entered characters exactly as they appear, usually as a string. Reading numeric input also starts as a string, but the program must convert that string to a numeric type (like int or float) before it can be used in calculations. The extra step is this conversion, often done with functions such as `int()` or `float()`."
+  },
+  {
+   "level": "Medium",
+   "q": "Describe how you would create a loop that repeatedly asks the user for a number until they enter a positive value.",
+   "a": "1. Start a loop (e.g., `while True:`).\n2. Inside the loop, prompt the user with a message like “Enter a number:”.\n3. Read the input as text and convert it to a number using `int()` or `float()`.\n4. Check if the number is greater than 0.\n5. If it is, use `break` to exit the loop.\n6. If not, the loop repeats, asking again. This ensures the program only continues after a positive number is entered."
+  },
+  {
+   "level": "Hard",
+   "q": "Apply the concepts of input, output, and formatting: Write a short description of how you would design a program that asks for a user's name and age, then prints a greeting that says “Hello, [Name]! You are [Age] years old.” The age should be shown with a leading zero if it is a single digit (e.g., 07).",
+   "a": "1. Prompt the user for their name using an input statement and store the result as a string.\n2. Prompt the user for their age, read it as a string, and convert it to an integer.\n3. Use a formatting method (such as an f‑string or `format()` function) to build the output string.\n4. In the format specifier for the age, include `02d` to force two digits with a leading zero when needed.\n5. Print the final message: `print(f\"Hello, {name}! You are {age:02d} years old.\")`. This combines input, conversion, and formatted output."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain how you could combine a user‑interaction loop with formatted output to create a simple menu that repeats until the user chooses “Quit”. Include at least two menu options that require reading numeric input.",
+   "a": "1. Begin an infinite loop (`while True:`).\n2. Inside the loop, display the menu using `print()` statements, e.g.,\n```\n1. Add two numbers\n2. Multiply two numbers\n3. Quit\n```\n3. Prompt the user to enter a choice and read it as a string, then convert it to an integer.\n4. Use an `if‑elif‑else` block to handle the choice:\n- If the choice is 1, ask for two numbers, convert them, compute the sum, and print the result with formatting (e.g., `Result: {sum:.2f}`).\n- If the choice is 2, ask for two numbers, convert them, compute the product, and print similarly.\n- If the choice is 3, use `break` to exit the loop.\n- For any other input, print an error message and continue.\n5. Because the loop only breaks when “Quit” is selected, the menu repeats after each operation, demonstrating continuous user interaction, input handling, and formatted output."
+  }
+ ],
+ "recap": "Input and output (I/O) let programs communicate with the outside world: input brings data in, output sends data out. Text entered by users is read as strings and may need conversion to numbers for calculations. The print command displays strings or numbers, and formatting makes the output clear. Loops can repeat input prompts until valid data is received.",
+ "key_terms": [
+  {
+   "term": "Input",
+   "meaning": "Data received by a program from the user, a file, or another source while it runs."
+  },
+  {
+   "term": "Output",
+   "meaning": "Data sent by a program to the screen, a file, or another device."
+  },
+  {
+   "term": "String",
+   "meaning": "A sequence of characters enclosed in quotation marks."
+  },
+  {
+   "term": "Conversion",
+   "meaning": "Changing data from one type (e.g., text) to another type (e.g., integer)."
+  },
+  {
+   "term": "Integer",
+   "meaning": "A whole number without a fractional part."
+  },
+  {
+   "term": "Placeholder",
+   "meaning": "A symbol like {} or %s that is replaced by a value when formatting output."
+  },
+  {
+   "term": "Formatting",
+   "meaning": "Arranging output so it appears tidy, often using placeholders and format functions."
+  },
+  {
+   "term": "While-loop",
+   "meaning": "A control structure that repeats a block of code while a condition remains true."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the term 'input' refer to in programming?",
+   "options": [
+    "Data sent out of a program",
+    "Data stored permanently",
+    "Data received by a program",
+    "A type of loop"
+   ],
+   "answer": 2,
+   "why": "Input is any data a program receives from the outside while it runs."
+  },
+  {
+   "q": "Which of the following is a string?",
+   "options": [
+    "123",
+    "\"123\"",
+    "123.0",
+    "True"
+   ],
+   "answer": 1,
+   "why": "A string is text enclosed in quotation marks."
+  },
+  {
+   "q": "Why must numeric input often be converted from text?",
+   "options": [
+    "To make it look nicer",
+    "Because computers store numbers as text",
+    "To allow mathematical operations",
+    "To display it on screen"
+   ],
+   "answer": 2,
+   "why": "Conversion changes text to a numeric type so the program can perform calculations."
+  },
+  {
+   "q": "What does a placeholder do in formatted output?",
+   "options": [
+    "Stops the program",
+    "Creates a variable",
+    "Marks where a value will be inserted",
+    "Deletes characters"
+   ],
+   "answer": 2,
+   "why": "A placeholder indicates where a value should be placed when the string is formatted."
+  },
+  {
+   "q": "Which loop repeats as long as a condition is true?",
+   "options": [
+    "for-loop",
+    "while-loop",
+    "if‑statement",
+    "switch"
+   ],
+   "answer": 1,
+   "why": "A while-loop continues executing its body while its condition remains true."
+  },
+  {
+   "q": "What will the Python code `print(\"Hello, world!\")` output?",
+   "options": [
+    "Hello, world!",
+    "\"Hello, world!\"",
+    "print(\"Hello, world!\")",
+    "Error"
+   ],
+   "answer": 0,
+   "why": "The print function displays the text inside the quotes without the quotes themselves."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Input",
+   "back": "Data that a program receives from the user, a file, or another source."
+  },
+  {
+   "front": "Output",
+   "back": "Data that a program sends out to the screen, a file, or another device."
+  },
+  {
+   "front": "String",
+   "back": "A sequence of characters enclosed in quotation marks, e.g., \"hello\"."
+  },
+  {
+   "front": "Conversion",
+   "back": "Changing data from one type to another, such as turning \"42\" into the integer 42."
+  },
+  {
+   "front": "Integer",
+   "back": "A whole number without fractions, like -3, 0, or 15."
+  },
+  {
+   "front": "Placeholder",
+   "back": "A symbol like {} or %s used in a format string to mark where a value will be inserted."
+  },
+  {
+   "front": "Formatting",
+   "back": "Arranging output so it looks tidy, often using placeholders and format functions."
+  },
+  {
+   "front": "While-loop",
+   "back": "A loop that repeats its body while a given condition remains true."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l04-keyboard-and-screen",
+   "title": "A student typing on a keyboard while the program shows text on the screen.",
+   "alt": "A student typing on a keyboard while the program shows text on the screen.",
+   "priority": 8,
+   "picture_title": "Keyboard and Screen",
+   "kind": "photo",
+   "subject": "A close‑up photo of a computer keyboard and monitor displaying a simple program prompt and output, illustrating the flow of input from the keyboard into the program and output back to the screen.",
+   "layout": "Keyboard in the foreground, monitor behind it; the monitor shows a prompt like \"Enter name:\" and the typed text appears below.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l04-faucet-analogy",
+   "title": "The program is the faucet; water flowing represents input data.",
+   "alt": "The program is the faucet; water flowing represents input data.",
+   "priority": 7,
+   "picture_title": "Faucet Analogy",
+   "kind": "illustration",
+   "subject": "A simple drawing of a faucet labeled \"Program\" with water labeled \"Input\" flowing from the tap into a container, showing how the program receives data just like a faucet delivers water.",
+   "layout": "Faucet on the left, water stream pointing to a bucket on the right; labels attached with arrows.",
+   "labels": [
+    "Program",
+    "Input",
+    "Water"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l04-loop-flowchart",
+   "title": "A basic loop that repeats until a condition is met.",
+   "alt": "A basic loop that repeats until a condition is met.",
+   "priority": 6,
+   "picture_title": "Loop Flowchart",
+   "kind": "labelled diagram",
+   "subject": "A flowchart showing the steps: start → ask question → read input → check condition → if true go back to ask question, else continue. This visualises how loops work in user interaction.",
+   "layout": "Boxes arranged vertically with arrows pointing down; the decision diamond splits the flow.",
+   "labels": [
+    "Start",
+    "Ask Question",
+    "Read Input",
+    "Check Condition",
+    "Repeat",
+    "Continue"
+   ],
+   "after": 5
+  },
+  {
+   "type": "steps",
+   "title": "Typical Input Process",
+   "steps": [
+    {
+     "label": "Prompt",
+     "text": "Show a message asking for data"
+    },
+    {
+     "label": "Read",
+     "text": "Program waits and receives the text the user types"
+    },
+    {
+     "label": "Convert",
+     "text": "If needed, change the text to a number"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Input vs Output",
+   "left": {
+    "name": "Input",
+    "points": [
+     "Data comes into the program",
+     "Usually entered by a user or read from a file",
+     "Starts as text (string)"
+    ]
+   },
+   "right": {
+    "name": "Output",
+    "points": [
+     "Data leaves the program",
+     "Shown on screen, written to a file, or sent to a speaker",
+     "Uses print or write commands"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "facts",
+   "title": "Why Conversion Is Needed",
+   "items": [
+    {
+     "value": "\"10\" < \"2\"",
+     "label": "Alphabetical comparison"
+    },
+    {
+     "value": "10 > 2",
+     "label": "Numeric comparison"
+    },
+    {
+     "value": "int(\"10\")",
+     "label": "Convert text to number"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "While‑Loop for Re‑asking",
+   "steps": [
+    {
+     "label": "Check condition",
+     "text": "Is the answer valid?"
+    },
+    {
+     "label": "Execute body",
+     "text": "Ask the question again"
+    },
+    {
+     "label": "Repeat",
+     "text": "Go back to condition until true"
+    }
+   ],
+   "loop": true,
+   "after": 5
+  },
+  {
+   "type": "parts",
+   "title": "Components of a Print Statement",
+   "items": [
+    {
+     "name": "Command",
+     "role": "tells the program to display something"
+    },
+    {
+     "name": "String",
+     "role": "text inside quotes that appears exactly"
+    },
+    {
+     "name": "Variable",
+     "role": "holds a value that can be shown"
+    },
+    {
+     "name": "Formatting",
+     "role": "places variables into the string"
+    }
+   ],
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

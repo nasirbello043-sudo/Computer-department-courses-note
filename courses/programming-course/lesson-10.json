@@ -1,0 +1,383 @@
+{
+ "title": "Object-Oriented Programming",
+ "summary": "In this lesson students learn the core ideas of object‑oriented programming (OOP) and how to use them to design and write reusable code. They will see how classes, objects, constructors, methods, encapsulation, inheritance, and polymorphism work together.",
+ "objectives": [
+  "Define a class and create objects from it",
+  "Write constructors and methods that operate on object data",
+  "Apply encapsulation to protect internal state",
+  "Create a subclass that inherits from a parent class",
+  "Explain how polymorphism allows one interface to work with many object types"
+ ],
+ "prerequisites": "Students should already know basic programming concepts such as variables, control structures, and simple functions.",
+ "why": [
+  "OOP mirrors how real‑world things are organized, making it easier to model complex systems like games, business applications, or simulations. By grouping data and behavior together, code becomes clearer and more maintainable.",
+  "Most modern programming languages (Java, Python, C++, C#) rely on OOP. Understanding these ideas prepares students for further study, teamwork on large projects, and careers in software development."
+ ],
+ "sections": [
+  {
+   "heading": "What Is a Class?",
+   "body": "A class is like a **blueprint** for something you want to build in a program.  \nThink of a blueprint for a house: it tells you how many rooms there are, where the doors and windows go, and what materials to use. The blueprint itself is not a house—you cannot live in it—but it contains all the information needed to **create** many houses that look the same way.\n\nIn programming, a class does the same job for **objects**. An object is a concrete thing you can use while the program runs, just as a house is a concrete thing you can live in. The class tells the computer two important things about those objects:\n\n1. **Attributes** – the data that each object stores (like the number of rooms, the color of the walls, or the size of the garden).  \n2. **Methods** – the actions the object can perform (like opening a door, painting a wall, or calculating the total area).\n\n> **Definition:** A class is a blueprint that defines the attributes (data) and behaviors (methods) that its objects will have.\n\nWhy do we need a class?  \nWithout a class, every time we wanted a new house we would have to write down all its details again. That would be repetitive, error‑prone, and hard to change later. By writing a single class, we can create many objects that automatically share the same structure. If we later decide that every house should also have a garage, we only change the class once and all existing and future objects get the new feature.\n\n### Everyday comparison\n\nImagine you run a bakery that sells cupcakes.  \n- The **class** is the recipe for a cupcake: it lists the ingredients (flour, sugar, eggs) and the steps to bake it (mix, pour, bake).  \n- Each **object** is an actual cupcake you bake using that recipe. One cupcake might have chocolate frosting, another might have vanilla, but they all start from the same recipe.\n\nJust as a recipe tells you what you need and what to do, a class tells the program what data each object holds and what it can do.\n\n### Breaking down the new words\n\n- **Attribute**: a piece of information stored inside an object. In the cupcake example, an attribute could be `flavor = \"chocolate\"`.  \n- **Method**: a function that belongs to a class and can act on its objects. In code, a method might be `bake()` that changes the state of the cupcake from “raw” to “ready”.  \n- **Object**: an individual instance created from a class. Each cupcake you actually bake is an object of the cupcake class.\n\nWhen you write a class in code, you usually give it a name that starts with a capital letter, such as `Cupcake`. Inside the class you list its attributes and methods:\n\n```python\nclass Cupcake:\n    flavor = \"\"          # attribute\n    size = 0             # attribute\n\n    def bake(self):      # method\n        print(\"Baking the cupcake...\")\n```\n\nThe line `class Cupcake:` tells the computer, “Here is a new blueprint called *Cupcake*.” The lines that follow describe what every cupcake will know (`flavor`, `size`) and what it can do (`bake`).\n\n> **In daily life:** Think of a class as a cookie‑cutter shape. The cutter itself isn’t a cookie, but every time you press it into dough you get a cookie of the same shape. The cutter defines the shape (attributes) and you can also decide what to do with each cookie after it’s cut (methods).\n\n### Small step example\n\n1. **Define the class** – write the blueprint.  \n2. **Create an object** – ask the program to make a new instance of that class.  \n3. **Use its attributes and methods** – read or change its data, call its actions.\n\n```python\nmy_cupcake = Cupcake()   # step 2: create an object\nmy_cupcake.flavor = \"vanilla\"   # step 3: set an attribute\nmy_cupcake.bake()                # step 3: call a method\n```\n\nEach line after the class definition works with a specific object (`my_cupcake`). The object automatically has the attributes and methods defined by the class, so you don’t have to rewrite them.\n\n> **Remember:** A class is only a description; an object is the actual thing you work with in the program. The power of classes comes from being able to make many objects quickly and keep them organized.",
+   "code": ""
+  },
+  {
+   "heading": "Creating Objects",
+   "body": "Imagine you have a blueprint for a toy car. The blueprint tells you what parts the car must have – wheels, a body, a colour – but it is not a car you can play with.  \nWhen you follow the blueprint and actually build a car, you get a **real object** that you can roll around, paint, or crash.  \n\nIn programming a *class* works like that blueprint.  \nA class describes **what data** (called *attributes* or *fields*) an object will store and **what actions** (called *methods*) the object can perform.  \nTo **create an object** we *instantiate* the class – we ask the computer to build a concrete instance that follows the class’s description. Each instance has its own copy of the attributes, so two objects can have different states even though they come from the same class.\n\n> **Definition:** *Instantiating* a class means calling the class as if it were a function, which runs the class’s constructor and returns a new object.\n\n### Step‑by‑step example in Python\n\n```python\nclass Dog:\n    # This is the class definition (the blueprint)\n    def __init__(self, name, age):\n        # __init__ is the constructor; it runs when we create an object\n        self.name = name      # attribute storing the dog's name\n        self.age = age        # attribute storing the dog's age\n\n    def bark(self):\n        print(f\"{self.name} says woof!\")\n```\n\n1. **Read the class** – It tells us that every `Dog` will have a `name` and an `age`, and it can `bark()`.  \n2. **Instantiate** – We write the class name followed by parentheses, supplying the arguments that the constructor expects:\n\n```python\nbuddy = Dog(\"Buddy\", 3)      # creates one Dog object\nmax = Dog(\"Max\", 5)          # creates another Dog object\n```\n\nNow `buddy` and `max` are two separate objects. They each have their own `name` and `age` values:\n\n- `buddy.name` is `\"Buddy\"` and `buddy.age` is `3`.  \n- `max.name` is `\"Max\"` and `max.age` is `5`.\n\nIf we change one object's attribute, the other stays unchanged:\n\n```python\nbuddy.age = 4          # only Buddy gets older\nprint(max.age)        # still prints 5\n```\n\n> **In daily life:** Think of a class as a cookie cutter and each object as a cookie cut out of dough. The cutter (class) defines the shape, but each cookie (object) can be decorated differently.\n\n### Why we need separate objects\n\nHaving many objects lets us model real‑world collections. Suppose we are writing a game with many players. Each player needs its own score, position, and inventory. By creating a `Player` class and then instantiating it for every participant, we keep each player's data isolated and easy to manage.\n\n### The role of the constructor\n\nThe special method `__init__` in Python (or a method with the same name as the class in Java, C++) is called a **constructor**. It runs automatically when we instantiate the class and usually assigns the initial values to the object's attributes.\n\nMathematically we can think of an object as a tuple of its attribute values. If a class has *n* attributes, an instance can be represented as:\n\n$$\n\\text{object} = (a_1, a_2, \\dots , a_n)\n$$\n\nwhere each $a_i$ is the current value of the *i*‑th attribute. Each time we call the constructor we get a new tuple, independent of the others.\n\n### Using the object’s methods\n\nAfter we have an object, we can ask it to do something by calling its methods:\n\n```python\nbuddy.bark()   # prints: Buddy says woof!\nmax.bark()     # prints: Max says woof!\n```\n\nThe method `bark` uses the object's own `name` attribute (`self.name`) to produce a personalized message. This demonstrates that methods operate on the **state** (the stored data) of the particular object that called them.\n\n> **Note:** The word `self` inside a method always refers to the object that is currently executing the method. It is how the method accesses that object's own attributes.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to pass the required arguments to the constructor.  \nIf we write `Dog()` without a name and age, Python raises a `TypeError` because `__init__` expects two arguments. Always match the parameters defined in the constructor.\n\n### Quick checklist for creating objects\n\n1. Write the class definition with attributes and methods.  \n2. Provide a constructor (`__init__` or equivalent) that sets initial attribute values.  \n3. Instantiate the class using `ClassName(arguments)`.  \n4. Store the returned object in a variable so you can refer to it later.  \n5. Use the object's methods or read/write its attributes as needed.\n\n> **Remember:** Each time you instantiate a class you get a brand‑new object with its own independent state. This is the foundation for building larger programs that manipulate many separate pieces of data.",
+   "code": ""
+  },
+  {
+   "heading": "Constructors and Methods",
+   "body": "When you create a class, you are describing a *type* of thing – for example a **Car** or a **Student**.  \nBut just describing a type is not enough; you also need a way to *bring a particular example* of that type into existence. That is what a **constructor** does.  \n\nA constructor is a special method that runs automatically **once**, right after an object is created. Its job is to give the new object its initial values, just like how you might set up a new phone by inserting the SIM card, charging it, and choosing a language. Without this initial setup, the object would exist but would have no useful data inside it.\n\n> **Definition:** A **constructor** is a special method whose name is the same as the class (in many languages) and that is called automatically when a new object is instantiated. It prepares the object by assigning initial values to its fields (variables that belong to the object).\n\n### How a constructor looks\n\nIn a language such as Python, the constructor is called `__init__`. In Java or C++, it has the same name as the class. Here is a simple example in Python:\n\n```python\nclass Book:\n    def __init__(self, title, author):\n        self.title = title          # give the new book a title\n        self.author = author        # give the new book an author\n```\n\nThe line `self.title = title` is an **assignment**: it stores the value passed in (`title`) into the object's own variable (`self.title`). The same happens for `author`. After this constructor finishes, every `Book` object will already know its title and author.\n\nIf you forget to give a value to a field, the object may contain a default like `None` (meaning “nothing”) or an arbitrary number, which often leads to bugs later on.\n\n> **Common mistake:** Forgetting to initialise all important fields in the constructor, then trying to use those fields before they have a meaningful value.\n\n### Regular methods: actions an object can perform\n\nOnce an object exists, you usually want it to do something. Those *something* are expressed as **methods**. A method is just a function that belongs to a particular object, so it can read or change that object's own data.\n\nContinuing the `Book` example, we can add a method that tells us the book’s description:\n\n```python\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f\"'{self.title}' by {self.author}\"\n```\n\nWhen you call `my_book.description()`, the method uses the object's stored `title` and `author` to build a string and returns it. Notice that the method receives the object itself as the first parameter (`self` in Python). This lets the method know *which* object's data to work with.\n\n> **Note:** A method can **return** a value (using the `return` keyword) or it can simply perform an action, such as printing text or changing a field, without returning anything.\n\n### Why constructors and methods matter together\n\nThink of a **constructor** as the *setup* phase of a board game: you place the pieces, shuffle the cards, and decide who goes first. Think of **methods** as the *moves* you make during the game: drawing a card, moving a piece, or scoring points. Without the setup, you cannot play; without the moves, the game never progresses.\n\nIn code, you often see a pattern like this:\n\n$$\n\\text{object} = \\text{ClassName}(\\text{initial arguments})\n$$\n\nfollowed by\n\n$$\n\\text{object}.\\text{methodName}(\\text{more arguments})\n$$\n\nThe first line calls the constructor; the second line calls a regular method.\n\n### A tiny exercise\n\n1. Write a class `Student` with a constructor that receives `name` and `grade`.  \n2. Add a method `is_passing()` that returns `True` if `grade` is at least 60, otherwise `False`.  \n\nWhen you create `s = Student(\"Alice\", 75)` and then call `s.is_passing()`, the method will read the `grade` stored during construction and give you the correct answer.\n\n> **Remember:** The constructor runs **once** when the object is created; regular methods can be called **many times** after that, each time using the current state of the object.",
+   "code": ""
+  },
+  {
+   "heading": "Encapsulation",
+   "body": "Encapsulation is the idea of keeping the inner workings of a thing hidden from the outside, while still letting other code talk to it in a safe way.  \nThink of a **class** as a blueprint for an object, like a recipe for a cake. The recipe tells you what ingredients (data) are needed and what steps (behaviour) to follow, but you don’t need to know every tiny detail of how the oven works to bake the cake. In programming we hide the *ingredients* that should not be touched directly and give a *clean interface* – a set of simple commands – for the rest of the program.\n\n### Why hide data?\n\nIf every part of a program could change any variable of any object, it would be easy to introduce bugs.  \nFor example, imagine a bank account object that stores a balance. If some other piece of code could set the balance to a negative number directly, the whole system could become inconsistent. By making the balance **private** (only the class itself can see it) we force all changes to go through methods that can check the rules (e.g., “balance may never go below zero”).\n\n### Private attributes\n\nIn most languages the keyword `private` (or a naming convention such as a leading underscore) marks an attribute as hidden.  \n\n```python\nclass BankAccount:\n    def __init__(self, owner, initial):\n        self.__owner = owner          # private: name of the owner\n        self.__balance = initial      # private: amount of money\n```\n\nThe double underscore in Python triggers name‑mangling, making `__balance` inaccessible from outside the class. In Java you would write `private double balance;`.\n\n### Getter and setter methods\n\nTo let other code read or change a private attribute, we provide **public** (visible to everyone) methods.  \nA *getter* returns the current value, a *setter* receives a new value and can enforce rules.\n\n```python\n    def get_balance(self):\n        return self.__balance          # getter\n\n    def deposit(self, amount):\n        if amount > 0:                 # rule: only positive deposits\n            self.__balance += amount\n        else:\n            raise ValueError(\"Deposit must be positive\")\n```\n\nNotice that we did **not** write a generic `set_balance` method. Instead we gave a specific action (`deposit`) that checks the amount before changing the hidden data. This is a common pattern: expose only the operations that make sense, not raw access.\n\n> **Definition:** *Encapsulation* is the practice of keeping an object’s internal data private and exposing only selected methods to interact with that data.\n\n### Everyday comparison\n\nThink of a **remote control** for a TV. The remote lets you change the channel, volume, or power state, but you never open the TV and twist the internal wires yourself. The remote’s buttons are the public methods; the circuitry inside the TV is the private data. This separation protects the TV from accidental damage while still giving you control.\n\n### Step‑by‑step example\n\n1. **Declare the data as private.**  \n   ```java\n   private int age;\n   ```\n2. **Write a getter** that simply returns the value.  \n   ```java\n   public int getAge() { return age; }\n   ```\n3. **Write a setter** that validates the input before storing it.  \n   ```java\n   public void setAge(int newAge) {\n       if (newAge >= 0) {\n           age = newAge;\n       } else {\n           throw new IllegalArgumentException(\"Age cannot be negative\");\n       }\n   }\n   ```\n4. **Use the object** without ever touching `age` directly.  \n   ```java\n   Person p = new Person();\n   p.setAge(25);          // safe, validated\n   System.out.println(p.getAge()); // prints 25\n   ```\n\n> **Note:** The setter’s validation is the *why* behind encapsulation – it guarantees that the object stays in a correct state.\n\n### Benefits at a glance\n\n- **Control:** You decide exactly how data can be changed.  \n- **Safety:** Mistakes are caught early (e.g., trying to set a negative balance).  \n- **Flexibility:** If the internal representation changes (say you store balance in cents instead of dollars), the public methods can stay the same, so other code does not need to be rewritten.\n\n> **In daily life:** A **bank vault** only lets authorized staff open it with a keycard; the vault’s contents are hidden, but the bank’s customers can still deposit or withdraw money through the teller window.\n\n### Common mistake\n\n> **Common mistake:** Making attributes public just because it seems quicker. This defeats encapsulation and often leads to hard‑to‑track bugs later when other parts of the program modify the data in unexpected ways.\n\n### Quick reminder\n\n> **Remember:** Keep data private, expose only the actions that make sense, and always validate inputs in setters. This simple habit makes your classes robust and easier to maintain.",
+   "code": ""
+  },
+  {
+   "heading": "Inheritance",
+   "body": "Inheritance is the idea that one class (the **subclass**) can automatically receive the data and behavior of another class (the **parent class** or **superclass**).  \nWhen a subclass inherits, it gets all the attributes (variables that store data) and methods (functions that do things) that the parent already has. After that, the subclass can add new attributes or methods of its own, or it can change (override) the ones it inherited.\n\n> **Definition:** Inheritance lets a subclass reuse code from a parent class, while still being able to extend or modify that code.\n\n### Why inheritance is useful  \n\nImagine you are writing a program about animals. All animals have a name and can make a sound. You could write a class `Animal` that stores a name and has a method `makeSound()`. Later you need specific kinds of animals, like `Dog` and `Cat`. Instead of writing the name field and `makeSound()` again for each kind, you let `Dog` and `Cat` inherit from `Animal`. They automatically have the name field and the basic `makeSound()` method, so you only write the parts that are different.\n\n### Everyday comparison  \n\nThink of a family tree. A child inherits the eye colour, hair colour, and maybe a talent for music from a parent. The child also gets the chance to learn new skills, like playing a sport, or to develop a different style of music. In programming, the parent class is the parent in the family, and the subclass is the child. The child “gets” the parent’s traits (attributes and methods) and can add its own or change the inherited ones.\n\n### How it works step by step  \n\n1. **Declare the parent class** – Write the class that contains the common attributes and methods.  \n   ```python\n   class Animal:\n       def __init__(self, name):\n           self.name = name          # attribute\n       \n       def make_sound(self):\n           return \"some sound\"\n   ```\n2. **Declare the subclass** – Write a new class and tell the language which class it inherits from. In Python you put the parent name in parentheses after the subclass name.  \n   ```python\n   class Dog(Animal):\n       pass   # for now we do nothing extra\n   ```\n   The `Dog` class now has `name` and `make_sound()` automatically.\n\n3. **Add new features** – Give the subclass its own attributes or methods.  \n   ```python\n   class Dog(Animal):\n       def __init__(self, name, breed):\n           super().__init__(name)   # call the parent’s constructor\n           self.breed = breed       # new attribute\n       \n       def fetch(self):\n           return f\"{self.name} fetches the ball!\"\n   ```\n   The line `super().__init__(name)` calls the parent’s constructor so the `name` attribute is still set correctly.\n\n4. **Override a method** – Replace an inherited method with a new version that is more specific.  \n   ```python\n   class Dog(Animal):\n       def make_sound(self):\n           return \"Woof!\"\n   ```\n   Now `Dog().make_sound()` returns `\"Woof!\"` instead of `\"some sound\"`.\n\n> **Note:** Use `super()` (or the parent class name) to call the parent’s constructor or other methods when you need the original behavior as part of the new one.\n\n### The inheritance formula  \n\nWhen a subclass `S` inherits from a parent `P`, the set of members of `S` is  \n\n$$\n\\text{Members}(S) = \\text{Members}(P) \\cup \\text{NewMembers}(S) \\setminus \\text{Overridden}(S)\n$$  \n\nwhere `Members` means both attributes and methods, `NewMembers` are those defined only in `S`, and `Overridden` are the members from `P` that `S` replaces.\n\n### Common pitfalls  \n\n> **Common mistake:** Forgetting to call the parent’s constructor. If you write a new `__init__` in the subclass but do not call `super().__init__`, the inherited attributes will never be created, leading to errors when you try to use them.\n\n### Remember the benefits  \n\n> **Remember:** Inheritance reduces duplicated code, makes programs easier to extend, and mirrors real‑world hierarchies, so you can think in terms of “is‑a” relationships (a `Dog` **is a** `Animal`).  \n\nBy mastering inheritance, you can build clean, reusable class structures that grow naturally as your program becomes more complex.",
+   "code": ""
+  },
+  {
+   "heading": "Polymorphism",
+   "body": "Imagine you have a remote control that can work with many different devices – a TV, a DVD player, and a sound system. You press the same button **“Power”** and, no matter which device is connected, it turns on. The remote does not need to know the exact brand or the inner wiring of each device; it only knows that every device that can be powered on will respond to the **Power** command.  \n\nIn programming, **polymorphism** works the same way. It lets us write one piece of code that can operate on objects of many different classes, as long as those classes share a common **interface** (a set of method names and signatures). The code does not need to know the exact class of each object; it only needs to know that the object can perform the required actions.\n\n> **Definition:** *Polymorphism* means “many shapes”. In object‑oriented programming it is the ability for different classes to be treated through the same interface, allowing the same code to work with many object types.\n\n### Why is this useful?\n1. **Less duplicated code** – You write a single function once, instead of copying it for each class.\n2. **Easier maintenance** – If the algorithm changes, you edit it in one place.\n3. **Extensibility** – New classes can be added later without touching the existing code, as long as they follow the same interface.\n\n### How does it happen?\nThere are two main ways a language provides polymorphism:\n\n| Way | What it means | Example keyword |\n|-----|---------------|-----------------|\n| **Subtype polymorphism** (also called *inheritance‑based*) | A subclass *is a* kind of its parent class, so a variable typed as the parent can hold an instance of any subclass. | `extends` (Java), `:` (C++) |\n| **Ad‑hoc polymorphism** (also called *method overloading*) | The same method name can have different parameter lists, and the compiler picks the right one based on the arguments. | `overload` (C++), multiple `def` with same name (Python) |\n\nIn this section we focus on **subtype polymorphism**, because it is the one that lets us treat many different objects through a common interface.\n\n### Step‑by‑step example\n\nSuppose we are building a simple game with different kinds of characters: **Warrior**, **Archer**, and **Mage**. All characters can *attack*, but each does it in its own style.\n\n```java\n// 1. Define a common interface\ninterface Attacker {\n    void attack();          // every Attacker must have an attack method\n}\n\n// 2. Each class implements the interface\nclass Warrior implements Attacker {\n    public void attack() { System.out.println(\"Swing sword!\"); }\n}\nclass Archer implements Attacker {\n    public void attack() { System.out.println(\"Shoot arrow!\"); }\n}\nclass Mage implements Attacker {\n    public void attack() { System.out.println(\"Cast fireball!\"); }\n}\n\n// 3. A method that works with any Attacker\nvoid performAttack(Attacker a) {\n    a.attack();            // the same line works for all three classes\n}\n```\n\nWhen `performAttack` receives a `Warrior`, the call `a.attack()` executes the `Warrior` version; when it receives an `Archer`, the `Archer` version runs. The decision of *which* `attack` method to run is made at **runtime** (this is called *dynamic dispatch*). The programmer does not need an `if` or `switch` statement to check the object’s type.\n\n### The role of **dynamic dispatch**\nThe language keeps a **v‑table** (virtual method table) for each class that lists the actual code addresses for its methods. When you call `a.attack()`, the program looks up the correct address in the v‑table of the object’s real class and jumps to that code. This lookup happens each time the method is called, which is why the same line of source code can produce different behaviours.\n\n> **Note:** Dynamic dispatch works only for methods that are declared in the interface or a superclass. If you call a method that exists only in a subclass, the compiler will not allow you to treat the object as the superclass.\n\n### Everyday comparison\nThink of a **plug adapter** that lets you connect a European plug, a UK plug, or an Australian plug to the same wall socket. The socket (your code) only cares that the plug fits the adapter; it does not need to know the shape of each original plug. The adapter translates the specific shape into a common form that the socket understands. In programming, the interface is the adapter, and each class provides its own “shape” that fits.\n\n> **In daily life:** Using a universal remote that can control many brands of TVs is like polymorphism – one button works for many different devices.\n\n### When to use polymorphism\n- When several classes share a logical role (e.g., all are “shapes” that can be drawn).\n- When you anticipate adding new classes later (e.g., new kinds of sensors) and want existing processing code to keep working.\n- When you want to separate **what** an object does from **how** it does it, enabling cleaner design.\n\n### Common pitfalls\n> **Common mistake:** Declaring a variable of the concrete class (e.g., `Warrior w = new Warrior();`) and then trying to pass it to a method that expects the interface (`Attacker`). The variable must be typed as the interface (`Attacker a = new Warrior();`) to benefit from polymorphism.\n\n### Quick recap\n- Polymorphism = many forms; one interface, many implementations.\n- Write code against the **interface**, not the concrete class.\n- The language decides at runtime which concrete method to run.\n- It reduces duplication, improves flexibility, and makes programs easier to extend.\n\n> **Remember:** When you see the same method name being called on different objects, you are witnessing polymorphism in action.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "Imagine you want a simple game where a player can collect different kinds of treasure.  \nWe will write one small program that **uses every idea we have learned**: a class, objects, a constructor, methods, encapsulation, inheritance, and polymorphism.  \n\n---\n\n### 1. The basic idea  \n\nA **class** is like a blueprint for a real‑world object.  \nThink of a *recipe*: it tells you what ingredients (data) you need and what steps (behaviour) to follow.  \nFrom that recipe you can bake many cakes – each cake is an **object**.  \n\nIn our game the basic blueprint will be a `Treasure` class. It will store the treasure’s name and its value in gold coins.  \n\n```python\nclass Treasure:\n    def __init__(self, name, value):\n        self._name = name          # _name is hidden (encapsulation)\n        self._value = value\n\n    def get_name(self):\n        return self._name\n\n    def get_value(self):\n        return self._value\n\n    def describe(self):\n        print(f\"{self._name} is worth {self._value} gold coins.\")\n```\n\n> **Definition:** *Encapsulation* means keeping the data (the “ingredients”) private and letting other code interact with it only through **methods** (the “steps”).  \n> **Note:** The leading underscore `_` is a Python convention that signals “don’t touch this directly”.\n\n### 2. Adding a special kind of treasure  \n\nNow we want a treasure that can **change its value** when the player levels up.  \nWe create a new class `MagicTreasure` that **inherits** from `Treasure`. Inheritance is like saying, “Take everything the parent class has, and add a few extra ingredients.”  \n\n```python\nclass MagicTreasure(Treasure):\n    def __init__(self, name, base_value, bonus):\n        super().__init__(name, base_value)   # call the parent constructor\n        self._bonus = bonus\n\n    def get_value(self):\n        # This method replaces (overrides) the one from Treasure\n        return self._value + self._bonus\n\n    def describe(self):\n        # Polymorphism: same method name, different behaviour\n        print(f\"{self._name} glows! It is now worth {self.get_value()} gold coins.\")\n```\n\n> **In daily life:** *Polymorphism* is like a universal remote that can control many devices; you press “power” and the remote sends the right signal for each device, even though the button name is the same.\n\n### 3. The player class  \n\nA player needs a **list of treasures** and a method to add new ones.  \nWe also keep the player’s level private and give a method to increase it.\n\n```python\nclass Player:\n    def __init__(self, name):\n        self._name = name\n        self._level = 1\n        self._inventory = []   # empty list of Treasure objects\n\n    def add_treasure(self, treasure):\n        self._inventory.append(treasure)\n\n    def level_up(self):\n        self._level += 1\n        print(f\"{self._name} reached level {self._level}!\")\n\n    def show_inventory(self):\n        print(f\"{self._name}'s inventory:\")\n        for t in self._inventory:\n            t.describe()\n```\n\n### 4. Putting everything together  \n\nNow we write the **main part** of the program. This is where we **create objects** (instances) and make them interact.\n\n```python\ndef main():\n    # Create a player\n    hero = Player(\"Aria\")\n\n    # Create ordinary treasure\n    gold_coin = Treasure(\"Gold Coin\", 10)\n    hero.add_treasure(gold_coin)\n\n    # Create magic treasure; its bonus will grow when the player levels up\n    enchanted_gem = MagicTreasure(\"Enchanted Gem\", 50, 0)\n    hero.add_treasure(enchanted_gem)\n\n    # Show what the player has now\n    hero.show_inventory()\n\n    # Player levels up, we increase the bonus of the magic treasure\n    hero.level_up()\n    enchanted_gem._bonus += 20   # (in a real program we would use a method)\n\n    # Show inventory again – notice the changed description\n    hero.show_inventory()\n\nif __name__ == \"__main__\":\n    main()\n```\n\nWhen you run the program you will see:\n\n```\nAria's inventory:\nGold Coin is worth 10 gold coins.\nEnchanted Gem glows! It is now worth 50 gold coins.\nAria reached level 2!\nAria's inventory:\nGold Coin is worth 10 gold coins.\nEnchanted Gem glows! It is now worth 70 gold coins.\n```\n\n> **Common mistake:** Directly accessing a private attribute (like `enchanted_gem._bonus`) from outside the class defeats encapsulation. Instead, write a method `increase_bonus(self, amount)` and call that.\n\n### 5. Why this works  \n\n* **Class** `Treasure` gives us the basic shape.  \n* **Objects** `gold_coin` and `enchanted_gem` are concrete instances.  \n* **Constructor** `__init__` sets up each object’s initial state.  \n* **Methods** (`describe`, `get_value`, `add_treasure`) let us interact without touching internal data.  \n* **Encapsulation** keeps `_name`, `_value`, `_bonus` safe.  \n* **Inheritance** lets `MagicTreasure` reuse `Treasure` code and add its own.  \n* **Polymorphism** means we can call `describe()` on any treasure, and the correct version runs automatically.\n\nBy building this tiny game you have seen how all the OOP ideas fit together, just like pieces of a puzzle that form a complete picture. Feel free to add more treasure types, give the player health points, or let magic items grow automatically when the level changes—each extension will reuse the same concepts you have just mastered.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a class in object‑oriented programming?",
+   "a": "A class is a blueprint or template that defines the structure and behavior of objects. It lists the data (attributes) that each object will have and the functions (methods) that can operate on that data. Think of a class as a recipe; each time you follow it you create a new object (a dish) that follows the same pattern."
+  },
+  {
+   "level": "Easy",
+   "q": "How do you create an object from a class in Python? Write the code for a class named `Car` and create an object called `my_car`.",
+   "a": "First define the class:\n```python\nclass Car:\npass          # no attributes or methods needed for this example\n```\nThen create an object (instance) by calling the class name like a function:\n```python\nmy_car = Car()\n```\n`my_car` is now an object of type `Car`."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the role of a constructor. Write a simple constructor for a class `Student` that stores a name and an ID number.",
+   "a": "A constructor is a special method that runs automatically when a new object is created. Its purpose is to initialise the object’s attributes. In Python the constructor is named `__init__`.\n```python\nclass Student:\ndef __init__(self, name, id_number):\nself.name = name          # store the name\nself.id_number = id_number  # store the ID\n```\nWhen you create a student with `s = Student(\"Alice\", 12345)`, the `__init__` method sets `s.name` to `\"Alice\"` and `s.id_number` to `12345`."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare encapsulation and inheritance. Give one example of each.",
+   "a": "Encapsulation is about bundling data and the methods that work on that data inside a class, and restricting direct access from outside. Example: a `BankAccount` class keeps its balance private and provides `deposit()` and `withdraw()` methods to modify it.\nInheritance is a way for a new class (subclass) to acquire attributes and methods from an existing class (superclass). Example: a `Dog` class can inherit from an `Animal` class, gaining common features like `age` and `eat()` while adding its own method `bark()`."
+  },
+  {
+   "level": "Hard",
+   "q": "Write a class hierarchy for geometric shapes: a base class `Shape` with a method `area()`. Derive `Rectangle` and `Circle` classes that correctly implement `area()`. Show how polymorphism lets you compute the area of a list of mixed shapes without checking their types.",
+   "a": "Define the base class with an abstract `area` method (using `raise NotImplementedError`):\n```python\nimport math\nclass Shape:\ndef area(self):\nraise NotImplementedError(\"Subclasses must implement this\")\n```\nCreate subclasses:\n```python\nclass Rectangle(Shape):\ndef __init__(self, width, height):\nself.width = width\nself.height = height\ndef area(self):\nreturn self.width * self.height\nclass Circle(Shape):\ndef __init__(self, radius):\nself.radius = radius\ndef area(self):\nreturn math.pi * self.radius ** 2\n```\nNow use polymorphism:\n```python\nshapes = [Rectangle(3,4), Circle(2), Rectangle(5,2)]\ntotal = 0\nfor shape in shapes:\ntotal += shape.area()   # each object knows how to compute its own area\nprint(total)\n```\nThe loop calls `area()` on each object; Python automatically uses the method defined in the object's actual class, so no type checking is needed."
+  },
+  {
+   "level": "Hard",
+   "q": "A class `BankAccount` has a private attribute `__balance`. It provides `deposit(amount)` and `withdraw(amount)` methods that update the balance only if the amount is positive and, for withdrawal, if sufficient funds exist. Write the class and show what happens if a user tries to set `account.__balance = -1000` from outside the object.",
+   "a": "Implement the class:\n```python\nclass BankAccount:\ndef __init__(self, initial=0):\nself.__balance = initial          # private attribute\ndef deposit(self, amount):\nif amount > 0:\nself.__balance += amount\nreturn True\nreturn False\ndef withdraw(self, amount):\nif 0 < amount <= self.__balance:\nself.__balance -= amount\nreturn True\nreturn False\ndef get_balance(self):\nreturn self.__balance\n```\nTest the protection:\n```python\naccount = BankAccount(500)\naccount.deposit(200)          # balance becomes 700\naccount.withdraw(100)         # balance becomes 600\naccount.__balance = -1000     # attempts to set a new attribute named __balance\nprint(account.get_balance())  # still prints 600\nprint(account.__dict__)       # shows {'_BankAccount__balance': 600, '__balance': -1000}\n```\nBecause Python name‑mangles private attributes, `self.__balance` is stored as `_BankAccount__balance`. Assigning `account.__balance = -1000` creates a separate attribute that does not affect the real balance. The encapsulated balance remains unchanged, demonstrating encapsulation."
+  }
+ ],
+ "recap": "A class is a blueprint that defines the attributes and methods of objects. Creating an object is called instantiating the class, and a constructor sets up its initial state. Encapsulation hides internal data, inheritance lets a subclass reuse a parent’s code, and polymorphism lets the same operation work on different classes. Together these concepts form the core of object‑oriented programming.",
+ "key_terms": [
+  {
+   "term": "Class",
+   "meaning": "A blueprint that describes the data and behavior of objects."
+  },
+  {
+   "term": "Object",
+   "meaning": "A concrete instance created from a class."
+  },
+  {
+   "term": "Constructor",
+   "meaning": "A special method that runs once when an object is created to initialise its fields."
+  },
+  {
+   "term": "Encapsulation",
+   "meaning": "Hiding an object's internal data and exposing only safe methods."
+  },
+  {
+   "term": "Inheritance",
+   "meaning": "A mechanism where a subclass automatically receives attributes and methods from a parent class."
+  },
+  {
+   "term": "Polymorphism",
+   "meaning": "The ability for different classes to be used interchangeably through a common interface."
+  },
+  {
+   "term": "Method",
+   "meaning": "A function defined inside a class that operates on its objects."
+  },
+  {
+   "term": "Attribute",
+   "meaning": "A variable stored inside an object, representing its state."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does a constructor do?",
+   "options": [
+    "Deletes an object",
+    "Initialises an object's fields",
+    "Copies an object",
+    "Runs after the program ends"
+   ],
+   "answer": 1,
+   "why": "A constructor sets up initial values for a new object."
+  },
+  {
+   "q": "Which concept hides internal data from other code?",
+   "options": [
+    "Inheritance",
+    "Polymorphism",
+    "Encapsulation",
+    "Abstraction"
+   ],
+   "answer": 2,
+   "why": "Encapsulation is about keeping internal details hidden."
+  },
+  {
+   "q": "If class B inherits from class A, B can:",
+   "options": [
+    "Only use A's methods",
+    "Add new methods and override existing ones",
+    "Change A's source code",
+    "Never use A's attributes"
+   ],
+   "answer": 1,
+   "why": "Inheritance lets B reuse and extend or override A's members."
+  },
+  {
+   "q": "Polymorphism allows:",
+   "options": [
+    "One class to have many constructors",
+    "One method name to work with objects of different classes",
+    "Objects to change their class at runtime",
+    "Attributes to be private"
+   ],
+   "answer": 1,
+   "why": "Polymorphism means the same operation can apply to many shapes (classes)."
+  },
+  {
+   "q": "What is the term for creating an object from a class?",
+   "options": [
+    "Compiling",
+    "Instantiating",
+    "Linking",
+    "Parsing"
+   ],
+   "answer": 1,
+   "why": "Instantiating means building a concrete instance of a class."
+  },
+  {
+   "q": "Which of the following is NOT a typical attribute of a class?",
+   "options": [
+    "Method",
+    "Field",
+    "Variable",
+    "Constructor"
+   ],
+   "answer": 2,
+   "why": "A constructor is a special method, not a regular attribute/field."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a class?",
+   "back": "A blueprint that defines attributes (data) and methods (behaviour) for objects."
+  },
+  {
+   "front": "What is an object?",
+   "back": "A concrete instance created from a class, containing its own data."
+  },
+  {
+   "front": "Define constructor.",
+   "back": "A special method that runs automatically when an object is created to set initial values."
+  },
+  {
+   "front": "What does encapsulation achieve?",
+   "back": "It hides internal data and exposes only safe methods to interact with the object."
+  },
+  {
+   "front": "Explain inheritance.",
+   "back": "A subclass automatically receives the attributes and methods of a parent class, and can add or override them."
+  },
+  {
+   "front": "What is polymorphism?",
+   "back": "The ability for different classes to be used through the same interface or method name."
+  },
+  {
+   "front": "What is a method?",
+   "back": "A function defined inside a class that operates on its objects."
+  },
+  {
+   "front": "What is an attribute?",
+   "back": "A variable stored inside an object that represents its state."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l10-class-as-blueprint",
+   "title": "A house blueprint illustrating how a class defines structure before objects are built.",
+   "alt": "A house blueprint illustrating how a class defines structure before objects are built.",
+   "priority": 8,
+   "picture_title": "Class as Blueprint",
+   "kind": "illustration",
+   "subject": "The diagram shows a simple architectural blueprint with labeled rooms, doors and windows, representing a class that describes the parts of an object before any house is constructed.",
+   "layout": "Blueprint centered, with callout arrows pointing to labeled parts (rooms, doors, windows).",
+   "labels": [
+    "Rooms",
+    "Doors",
+    "Windows"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l10-toy-car-construction",
+   "title": "Building a toy car from a design sheet to illustrate object creation.",
+   "alt": "Building a toy car from a design sheet to illustrate object creation.",
+   "priority": 7,
+   "picture_title": "Toy Car Construction",
+   "kind": "photo",
+   "subject": "A photo of a child assembling a toy car using a printed design sheet, showing the transition from the design (class) to the finished car (object).",
+   "layout": "Design sheet on the left, assembled car on the right, with a simple arrow linking them.",
+   "labels": [],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l10-inheritance-tree",
+   "title": "A class hierarchy diagram showing a parent class and its subclasses.",
+   "alt": "A class hierarchy diagram showing a parent class and its subclasses.",
+   "priority": 9,
+   "picture_title": "Inheritance Tree",
+   "kind": "labelled diagram",
+   "subject": "The diagram displays a simple tree where a 'Vehicle' superclass branches into 'Car' and 'Bike' subclasses, each inheriting attributes and methods from the parent.",
+   "layout": "Parent class box at top, two subclass boxes below connected with lines.",
+   "labels": [
+    "Vehicle",
+    "Car",
+    "Bike"
+   ],
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Class vs. Object",
+   "left": {
+    "name": "Class",
+    "points": [
+     "Blueprint or recipe",
+     "Defines attributes and methods",
+     "No memory allocated"
+    ]
+   },
+   "right": {
+    "name": "Object",
+    "points": [
+     "Concrete instance",
+     "Has its own attribute values",
+     "Uses memory at runtime"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Parts of a Class",
+   "items": [
+    {
+     "name": "Attributes",
+     "role": "store data for each object"
+    },
+    {
+     "name": "Methods",
+     "role": "behaviour the object can perform"
+    },
+    {
+     "name": "Constructor",
+     "role": "initialises a new object"
+    },
+    {
+     "name": "Access Modifiers",
+     "role": "control visibility (encapsulation)"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Creating an Object (Instantiation)",
+   "steps": [
+    {
+     "label": "Define class",
+     "text": "Write the class with its attributes and methods."
+    },
+    {
+     "label": "Call constructor",
+     "text": "Use ClassName() to create a new instance."
+    },
+    {
+     "label": "Assign to variable",
+     "text": "Store the object reference for later use."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Inheritance: Parent vs. Subclass",
+   "left": {
+    "name": "Parent Class",
+    "points": [
+     "Provides common attributes",
+     "Provides common methods",
+     "Can be instantiated on its own"
+    ]
+   },
+   "right": {
+    "name": "Subclass",
+    "points": [
+     "Inherits everything from parent",
+     "Can add new attributes or methods",
+     "Can override inherited methods"
+    ]
+   },
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Polymorphism in Action",
+   "steps": [
+    {
+     "label": "Define common interface",
+     "text": "Create a method name shared by several classes."
+    },
+    {
+     "label": "Implement in each class",
+     "text": "Each class provides its own version of the method."
+    },
+    {
+     "label": "Use via base type",
+     "text": "Call the method on a variable of the parent type; the right version runs."
+    }
+   ],
+   "loop": false,
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

@@ -1,0 +1,396 @@
+{
+ "title": "Algorithms and Problem-Solving",
+ "summary": "In this lesson students learn how to break down problems and represent solutions using pseudocode and flowcharts, then explore basic searching and sorting techniques and understand algorithm efficiency. They will practice designing clear, step‑by‑step solutions before writing code.",
+ "objectives": [
+  "Break down a problem into smaller tasks",
+  "Write pseudocode for a given problem",
+  "Create a simple flowchart to illustrate algorithm flow",
+  "Apply linear search and bubble sort to small data sets",
+  "Explain why algorithm efficiency matters"
+ ],
+ "prerequisites": "Students should already know basic programming concepts such as variables, loops, and conditional statements from earlier lessons.",
+ "why": [
+  "Understanding how to analyse and organise a problem is essential for writing correct, maintainable code. In real life, developers use these skills to plan software, avoid bugs, and communicate ideas with teammates.",
+  "Efficient algorithms save time and resources. Knowing the difference between fast and slow methods helps when working with large data, such as searching a contact list or sorting product inventories.",
+  ""
+ ],
+ "sections": [
+  {
+   "heading": "Breaking Down Problems",
+   "body": "When you face a new programming task, the first thing to do is **break the problem down** into smaller, manageable pieces. Think of it like solving a jigsaw puzzle: you don’t start by forcing the whole picture together; you first sort the edge pieces, then group pieces by colour, and finally fit them together step by step. In programming, the “edge pieces” are the **goal**, the **inputs**, the **outputs**, and the **sub‑tasks** that connect them.\n\n**Goal** – the main thing the program must achieve.  \n**Inputs** – the data the program receives from the outside world (for example, numbers typed by a user, a file on disk, or a sensor reading).  \n**Outputs** – the results the program must produce (a printed report, a saved file, a visual display, etc.).  \n**Sub‑tasks** – smaller actions that together accomplish the goal, such as “read the data”, “sort the numbers”, “calculate the average”, and “display the result”.\n\n> **Definition:** *Breaking down a problem* means identifying the goal, inputs, outputs, and sub‑tasks before writing any code.\n\nWhy is this useful?  \nWhen you know exactly what you need to get in and what you must give out, you can design a clear plan. This prevents you from writing code that does extra work, misses a requirement, or becomes tangled and hard to understand. It also makes it easier to test each part separately, which is a key habit for reliable programming.\n\n### Step‑by‑step example\n\nImagine you are asked to write a program that tells a student whether they passed a test.\n\n1. **State the goal in one sentence.**  \n   *Goal:* Decide if a student’s score is high enough to pass.\n\n2. **List the inputs.**  \n   - The student’s numeric score (e.g., 78).  \n   - The passing threshold (e.g., 60).  \n\n3. **List the outputs.**  \n   - A message: “Pass” or “Fail”.\n\n4. **Identify sub‑tasks.**  \n   a. Read the score and the threshold.  \n   b. Compare the score to the threshold.  \n   c. Print the appropriate message.\n\nNow you can write a tiny piece of pseudocode that follows these sub‑tasks:\n\n```\nREAD score, threshold\nIF score >= threshold THEN\n    PRINT \"Pass\"\nELSE\n    PRINT \"Fail\"\nEND IF\n```\n\nNotice how each line corresponds directly to a sub‑task we listed earlier. If later you need to change the rule (for example, give a “Borderline” message for scores within 5 points of the threshold), you only modify the comparison part, not the whole program.\n\n> **In daily life:** When you bake a cake, you first decide the type of cake (goal), gather ingredients (inputs), follow the recipe steps (sub‑tasks), and finally present the baked cake (output). Skipping any of these steps usually leads to a disappointing result.\n\n### Formalising the breakdown\n\nYou can capture the relationship between inputs, outputs, and the goal with a simple formula:\n\n$$\n\\text{Program} : \\text{Inputs} \\;\\longrightarrow\\; \\text{Outputs}\n$$\n\nThe arrow means “takes these inputs and produces these outputs”. The **goal** sits above the arrow, describing *what* the transformation should achieve.\n\n### Common pitfalls\n\nA frequent mistake is to start coding before the breakdown is complete. This often leads to “trial‑and‑error” coding, where you keep adding and removing code until it seems to work. While it may produce a working program eventually, the code is usually messy, hard to read, and difficult to extend.\n\n> **Common mistake:** Jumping straight to code without first writing down the goal, inputs, outputs, and sub‑tasks.\n\n### Quick checklist before you code\n\n- [ ] Have I written a one‑sentence statement of the goal?  \n- [ ] Did I list **all** inputs the program needs?  \n- [ ] Did I list **all** outputs the program must produce?  \n- [ ] Have I broken the work into clear, ordered sub‑tasks?  \n- [ ] Can each sub‑task be described in a single simple sentence?\n\nIf you can answer “yes” to every question, you are ready to move on to pseudocode or a flowchart. If not, spend a few more minutes refining the breakdown; the extra effort now saves many hours later.\n\n> **Remember:** A well‑defined problem is half solved. The clearer your breakdown, the smoother the coding will be.",
+   "code": ""
+  },
+  {
+   "heading": "Writing Pseudocode",
+   "body": "Writing pseudocode is like describing a recipe in everyday language before you start cooking.  \nYou write the steps of an algorithm using simple sentences that anyone can read, even if they do not know any programming language. The goal is to capture the *logic* of the solution—what you do first, what you do next, and how you decide to repeat or stop—without worrying about exact syntax, punctuation, or variable types.\n\n**Why write pseudocode?**  \nWhen you first meet a problem, the hardest part is often figuring out *what* needs to happen, not *how* a computer will express it. By writing pseudocode you separate the thinking part from the coding part. This makes it easier to spot missing steps, logical errors, or unnecessary work before you type a single line of code.\n\n> **In daily life:** Think of planning a road trip. Before you drive, you might write a list: “1. Pack luggage, 2. Fill the tank, 3. Take Highway 101 north, 4. Stop for lunch after 100 km, 5. Continue to the destination.” The list is not a GPS program, but it tells you exactly what to do in order.\n\n### Steps to write good pseudocode\n\n1. **Understand the problem**  \n   Read the description carefully. Identify the input (what you start with) and the output (what you need to produce).  \n   Example: “Given a list of numbers, find the largest one.”  \n   - Input: a list of numbers.  \n   - Output: the largest number in that list.\n\n2. **Break the problem into smaller tasks**  \n   Ask yourself: what sub‑tasks must happen to reach the final answer? For the example above, you need to (a) look at each number, (b) keep track of the biggest one seen so far, and (c) return that biggest number at the end.\n\n3. **Write each task as a separate line**  \n   Use plain English verbs and nouns. Start each line with a capital letter and end with a period for readability.  \n   ```\n   Set max to the first element of the list.\n   For each remaining element in the list:\n       If the element is greater than max, set max to that element.\n   Output max.\n   ```\n\n4. **Use indentation to show structure**  \n   Indentation replaces curly braces or keywords like `begin`/`end`. It tells the reader which lines belong together, especially inside loops or conditionals. In the example, the two lines under “For each remaining element” are indented, indicating they belong to the loop.\n\n5. **Introduce control structures with clear words**  \n   - **Loop** – repeat a set of steps while a condition holds. Common words: “For each …”, “While …”.  \n   - **Conditional** – choose between two paths. Use “If … then … else …”.  \n   - **Return** – give back the final result.  \n\n   You do not need to write exact code like `for(i=0;i<n;i++)`. Just say “For each element”.\n\n6. **Name variables meaningfully**  \n   Choose names that describe their role, such as `max`, `total`, `counter`. This makes the pseudocode self‑explanatory. Avoid single letters unless they are universally understood (e.g., `i` for an index).\n\n7. **Check the flow**  \n   Read the pseudocode from top to bottom as if you were the computer. Does every possible path end with an output? Are there any steps that could be skipped? If something feels unclear, rewrite that line.\n\n8. **Add a brief comment if needed**  \n   A short comment can clarify a tricky part, but keep it short. For example:  \n   `# keep the highest value seen so far`.\n\n### Example: Finding the average of positive numbers\n\nProblem: “Given a list of integers, compute the average of only the positive numbers. If there are no positive numbers, output 0.”\n\nPseudocode:\n\n```\nSet sum to 0.\nSet count to 0.\nFor each number in the list:\n    If the number is greater than 0 then:\n        Add the number to sum.\n        Increase count by 1.\nIf count is equal to 0 then:\n    Output 0.\nElse:\n    Set average to sum divided by count.\n    Output average.\n```\n\nNotice how the mathematics is expressed simply: `sum divided by count`. The condition `count is equal to 0` prevents division by zero, a common error.\n\n> **Common mistake:** Forgetting to handle edge cases, such as an empty list or division by zero. Always think about the smallest possible input and write a line that deals with it.\n\n### Benefits of practicing pseudocode\n\n- **Clarity:** You can discuss the algorithm with classmates who may not know a specific programming language.  \n- **Error detection:** Logical mistakes appear as missing steps or contradictory conditions.  \n- **Portability:** The same pseudocode can be turned into Python, Java, or any other language with only syntax changes.\n\n> **Remember:** Pseudocode is not code; it is a bridge between the problem statement and the final program. Keep it simple, readable, and focused on the *what* rather than the *how*.",
+   "code": ""
+  },
+  {
+   "heading": "Flowcharts",
+   "body": "Flowcharts are pictures that show how a program or a solution moves from one step to the next.  \nInstead of reading a long list of instructions, you can look at a flowchart and see the whole process at a glance.  \n\nImagine you are giving directions to a friend who wants to bake a cake.  \nYou could write a paragraph that says “mix flour, add eggs, stir, bake…”, or you could draw a simple map: start → mix → check → bake → finish. The map is a flowchart. It tells the reader exactly what to do, when to decide something, and where to go next.\n\n### The basic symbols\n\n| Symbol | Name | What it means |\n|--------|------|---------------|\n| ![Oval](https://via.placeholder.com/15/000000/000000?text=O) | **Start/End** | Marks where the process begins and where it finishes. |\n| ![Rectangle](https://via.placeholder.com/15/000000/000000?text=R) | **Process** | Shows an action such as “add 5 to total” or “read input”. |\n| ![Diamond](https://via.placeholder.com/15/000000/000000?text=D) | **Decision** | Asks a yes/no (true/false) question, like “Is the number even?”. |\n| ![Parallelogram](https://via.placeholder.com/15/000000/000000?text=P) | **Input/Output** | Indicates data entering or leaving the program, e.g., “read name”. |\n| ![Arrow](https://via.placeholder.com/15/000000/000000?text=→) | **Flow line** | Shows the direction the process follows. |\n\n> **Definition:** A flowchart is a diagram that uses standardized symbols to represent the sequence of operations and decisions in an algorithm.\n\n### Building a flowchart step by step\n\n1. **Identify the start and end**  \n   Every algorithm has a clear beginning and a clear finish. Draw an oval at the top labeled **Start** and another at the bottom labeled **End**.\n\n2. **List the actions**  \n   Write each step of your algorithm on a separate piece of paper. For example, if you are writing a program that tells whether a number is positive, negative, or zero, your list might be:  \n   - Read the number  \n   - Is the number > 0?  \n   - If yes, print “positive”  \n   - If no, is the number < 0?  \n   - If yes, print “negative”  \n   - Otherwise print “zero”\n\n3. **Choose the right symbol**  \n   - Reading a number → **Input** (parallelogram)  \n   - Comparing the number → **Decision** (diamond)  \n   - Printing a word → **Output** (parallelogram)  \n\n4. **Connect the symbols with arrows**  \n   Arrows always point from one symbol to the next. When you reach a decision diamond, you need two arrows: one for the **yes** path and one for the **no** path. Label the arrows if it helps (e.g., “yes”, “no”).\n\n5. **Test the flow**  \n   Follow the arrows with a sample value. If you start at **Start**, go to **Input**, then to the first **Decision**, you should be able to reach **End** without any dead‑ends or loops that are not intended.\n\n### Example: Simple temperature check\n\n```\nStart\n   |\nRead temperature (input)\n   |\nIs temperature > 30? ----yes----> Print \"Hot\"\n   |                                 |\n   no                               End\n   |\nIs temperature < 10? ----yes----> Print \"Cold\"\n   |                                 |\n   no                               End\n   |\nPrint \"Warm\"\n   |\nEnd\n```\n\nIn the diagram above, the two decision diamonds split the flow into three possible outcomes. The arrows guide the program to the correct output.\n\n### Why flowcharts are useful\n\n- **Clarity**: Even a beginner can see the whole logic without reading code.  \n- **Communication**: Team members can discuss the algorithm by pointing to symbols rather than quoting lines of code.  \n- **Debugging**: If a program behaves incorrectly, you can trace the flowchart to locate the wrong decision or missing step.\n\n> **In daily life:** A flowchart works like a traffic map that tells cars when to turn left, go straight, or stop at a red light. Just as drivers follow the signs, a computer follows the arrows.\n\n### Common pitfalls\n\n> **Common mistake:** Drawing arrows that cross or loop back without a clear decision point. This makes the chart confusing and can hide logical errors. Always use a decision diamond when the flow can go in two different directions.\n\n### Tips for neat flowcharts\n\n- Keep symbols the same size.  \n- Space them evenly so arrows do not overlap.  \n- Use short, verb‑based labels inside the symbols (e.g., “Add 1”, “Check >0”).  \n- If a process is too long, break it into sub‑charts and link them with a “call” arrow.\n\n> **Remember:** A flowchart is a visual translation of pseudocode. If you can write the steps in plain words, you can always draw them as symbols. The clearer the picture, the easier it is to turn the chart into actual program code later.",
+   "code": ""
+  },
+  {
+   "heading": "Searching Algorithms",
+   "body": "Linear search is the simplest way to look for a particular item in a list.  \nImagine you have a stack of index cards on your desk and you are trying to find the card that says **“Alice”**. The most natural thing to do is to turn over the top card, read the name, then move to the next card, and keep doing this until you either see “Alice” or run out of cards. That is exactly what a linear search does with a computer list (also called an *array*).\n\n> **Definition:** *Linear search* is an algorithm that checks each element of a list one after another until it finds the target value or reaches the end of the list.\n\nWhy does this work? Because the algorithm does not assume anything about how the list is organized. It simply examines every element, so if the target is somewhere in the list, the algorithm is guaranteed to eventually see it. The trade‑off is that it may have to look at many elements before it succeeds.\n\n### When to use linear search\nLinear search is useful when:\n\n1. The list is **unsorted** – there is no order that would let us skip elements safely.  \n2. The list is **short** – checking a few items one by one is fast enough and easier to write than a more complex method.  \n3. The list is **changing frequently** – keeping it sorted would require extra work after each insertion or deletion, so a simple scan is cheaper overall.\n\nIf the list is already sorted, other methods such as binary search can be faster, but they need the ordering property to work correctly.\n\n### Step‑by‑step process\nSuppose we have a list `L = [4, 9, 2, 7, 5]` and we want to find the position of the number `7`.\n\n1. **Start at the first element** – set an index variable `i = 0`.  \n2. **Compare** the element `L[i]` with the target value `7`.  \n   - If they are equal, stop: we have found the target at position `i`.  \n   - If they are not equal, go to the next step.  \n3. **Move to the next element** – increase the index: `i = i + 1`.  \n4. **Check if we have reached the end** – if `i` is equal to the length of the list, the search fails because the target is not present.  \n5. **Repeat** steps 2‑4 until we either find the target or run out of elements.\n\nIn pseudocode, the algorithm looks like this:\n\n```\nfunction linearSearch(list, target):\n    for i from 0 to length(list) - 1:\n        if list[i] == target:\n            return i          // found, return position\n    return -1                 // not found\n```\n\nThe `for` loop automatically handles steps 1‑4 for us. The `return` statements end the search as soon as we know the answer.\n\n### How efficient is linear search?\nThe number of comparisons the algorithm makes depends on where the target is located.\n\n- **Best case:** the target is the first element → only 1 comparison.  \n- **Worst case:** the target is not in the list or is the last element → we compare every element.\n\nIf the list has `n` elements, the worst‑case number of comparisons is `n`. In big‑O notation, we write this as:\n\n$$\nT(n) = O(n)\n$$\n\nThis means the running time grows linearly with the size of the list.\n\n> **Note:** Linear search is *always* correct, but it is not the fastest method for large, sorted lists.\n\n> **In daily life:** Think of searching for a word in a printed dictionary that is not alphabetized (imagine a random jumble of pages). You would have to read each page until you find the word—just like linear search.\n\n> **Common mistake:** Forgetting to stop the loop when the target is found. If you keep scanning after you have already located the item, you waste time and may even return the wrong position.\n\n> **Remember:** Use linear search when the list is short, unsorted, or changes often. It is simple, reliable, and easy to implement, making it a good first tool in your algorithm toolbox.",
+   "code": ""
+  },
+  {
+   "heading": "Sorting Algorithms",
+   "body": "Sorting means putting a list of items in a specific order, such as from smallest to largest. One of the simplest ways to do this is **bubble sort**.  \n\n> **Definition:** *Bubble sort* is a sorting algorithm that repeatedly compares each pair of adjacent items and swaps them if they are in the wrong order.  \n\nThe idea is easy to picture. Imagine a row of numbered cards on a table. You look at the first two cards; if the left card is larger than the right one, you flip them. Then you move one step to the right and compare the next two cards, swapping if needed. You keep moving right until you reach the end of the row. At that moment, the largest number has “bubbled up” to the far right, just like a bubble rising to the surface of water.  \n\nWhy does this work? Each pass through the list guarantees that the biggest unsorted element moves to its final position at the end. After the first pass, the largest element is correctly placed. After the second pass, the second‑largest element is in its correct spot, and so on. When no more swaps are needed, the whole list is sorted.\n\n### Step‑by‑step description\n\n1. **Start** with the first element (index 0).  \n2. **Compare** it to the element right after it (index 1).  \n3. If the first element is larger, **swap** them. Swapping means exchanging their positions.  \n4. Move one step right and repeat steps 2‑3 until you reach the last pair.  \n5. After reaching the end, you have completed one **pass**.  \n6. Reduce the range of the next pass by one, because the last element is already the largest.  \n7. Repeat passes until a complete pass makes no swaps.  \n\nIn pseudocode, bubble sort looks like this:\n\n```text\nrepeat\n    swapped ← false\n    for i from 0 to n‑2\n        if a[i] > a[i+1] then\n            swap a[i] and a[i+1]\n            swapped ← true\n        end if\n    end for\nuntil not swapped\n```\n\nThe variable `swapped` tells us whether any exchange happened during the current pass. If no swap occurs, the list is already ordered and the algorithm can stop.\n\n### Everyday comparison\n\nThink of sorting a stack of books by height. You pick up the top two books, compare their heights, and if the taller one is on top, you put it underneath the shorter one. Then you move down the stack, always comparing the two books you are holding. After one walk through the stack, the tallest book will be at the bottom. You repeat the walk, each time ignoring the books that are already in the right place at the bottom. This is exactly what bubble sort does with numbers.\n\n> **In daily life:** Bubble sort is like repeatedly shaking a jar of mixed‑size marbles until the biggest marble rolls to the bottom.\n\n### How many steps does it need?\n\nIf the list has *n* items, the worst‑case number of comparisons is\n\n$$\n\\frac{n(n-1)}{2}\n$$\n\nbecause the first pass makes *n‑1* comparisons, the second makes *n‑2*, and so on. This quadratic growth ($O(n^2)$) means bubble sort becomes slow for large lists, but its simplicity makes it useful for teaching and for very small data sets.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to stop the algorithm early when no swaps occur. If you always run *n‑1* passes regardless of whether the list is already sorted, you waste time. Using the `swapped` flag avoids this extra work.\n\n### Quick checklist\n\n> **Remember:**  \n> - Compare only adjacent items.  \n> - Swap when the left item is larger than the right one.  \n> - After each full pass, the largest unsorted element is in its final spot.  \n> - Stop when a pass makes no swaps.  \n\nBubble sort may not be the fastest method, but its step‑by‑step nature makes it an excellent first example of how algorithms transform a messy problem into an ordered solution. By watching the “bubbles” rise, you can see the power of repeated, simple actions building up to a correct result.",
+   "code": ""
+  },
+  {
+   "heading": "Algorithm Efficiency",
+   "body": "When we talk about how good an algorithm is, we usually mean **how much work it has to do** to finish a task.  \nThe amount of work can be measured in two ways:\n\n* **Time** – how many steps the computer must execute.  \n* **Memory** – how much extra space the algorithm needs while it runs.\n\nIf an algorithm needs a lot of steps or a lot of memory, it will be slower or may even run out of resources on large inputs. That is why we care about **efficiency**: an efficient algorithm finishes quickly and uses little memory, even when the input is big.\n\n> **Definition:** *Algorithm efficiency* is a description of how the required time or memory grows as the size of the input grows.\n\n---\n\n### Describing growth without counting every single step\n\nCounting every operation for every possible input size would be impossible. Instead we look at the **trend** as the input becomes very large. We ignore small constant factors (like “+5” or “×2”) because they matter little when the input size is huge. This qualitative description is called **Big‑O notation**.\n\n*Big‑O* gives an upper bound on how fast the work can increase.  \nFor example, an algorithm that needs at most $n^2$ steps for an input of size $n$ is said to be **$O(n^2)$**. The symbol $n$ stands for the number of items the algorithm processes.\n\n> **Note:** The “O” does **not** stand for “zero”. It stands for “order of”. $O(n)$ means “order of $n$”.\n\nBig‑O lets us compare algorithms without worrying about the exact hardware or programming language. If one algorithm is $O(n)$ and another is $O(n^2)$, the first one will usually be faster for large $n$, because $n$ grows much slower than $n^2$.\n\n---\n\n### Everyday comparison\n\nThink of two ways to find a book in a messy bookshelf:\n\n1. **Linear search** – start at the leftmost book and look at each one until you find the title.  \n2. **Bubble sort** – first you rearrange the whole shelf so the books are in alphabetical order, then you can look for a title more easily.\n\nIf you only need one book, walking straight to it (linear search) is quicker. But if you plan to look up many books repeatedly, spending time to sort the shelf first (bubble sort) can save effort later. The key is to match the method to the problem size and frequency.\n\n---\n\n### Linear search: $O(n)$\n\nLinear search examines each element one by one until it finds the target or reaches the end. In the worst case (the target is not present), it looks at **all** $n$ items.\n\n$$\\text{Steps}_{\\text{linear}} \\le n$$\n\nBecause the number of steps grows directly with $n$, we call it **linear time**, written $O(n)$. It is simple and uses almost no extra memory.\n\n> **Common mistake:** Assuming linear search is always the best choice because it is simple. For very large lists that are searched many times, a faster‑looking method (like binary search on a sorted list) can be far better.\n\n---\n\n### Bubble sort: $O(n^2)$\n\nBubble sort repeatedly steps through the list, compares adjacent items, and swaps them if they are in the wrong order. After each full pass, the largest unsorted element “bubbles” to its final position.  \n\nIn the worst case (the list is in reverse order), the algorithm makes:\n\n$$\\text{Steps}_{\\text{bubble}} \\le n \\times (n-1) \\approx n^2$$\n\nThus bubble sort runs in **quadratic time**, written $O(n^2)$. The number of steps grows with the square of the input size, so when $n$ doubles, the work becomes roughly four times larger.\n\n> **In daily life:** Imagine sorting a deck of cards by repeatedly swapping any two out‑of‑order cards you happen to notice. For a small hand it’s fine, but for a full deck the effort quickly becomes overwhelming.\n\nBubble sort also needs only a tiny amount of extra memory (just a few temporary variables), but its time cost makes it unsuitable for large datasets.\n\n---\n\n### Putting it together\n\nWhen you choose an algorithm, ask two questions:\n\n1. **How many items will I handle?** If $n$ is small (a few dozen), even an $O(n^2)$ method like bubble sort may be acceptable.\n2. **How often will I repeat the work?** If I will search many times, it may be worth spending $O(n^2)$ time once to sort the data, then using a faster search later.\n\n> **Remember:** Big‑O describes growth, not exact speed. An $O(n)$ algorithm is usually faster than an $O(n^2)$ algorithm for large inputs, but constant factors and real‑world hardware can affect the actual running time for small inputs.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the purpose of writing pseudocode before you start coding a solution?",
+   "a": "Pseudocode is a plain‑language description of the steps a program will take. It helps you think through the logic without worrying about syntax. By writing pseudocode you can spot missing steps, unclear conditions, or unnecessary work early, which makes the later coding faster and reduces bugs."
+  },
+  {
+   "level": "Easy",
+   "q": "In a flowchart, which shape is used to represent a decision point, and what does it look like?",
+   "a": "A decision point is shown with a diamond shape. Inside the diamond you write a yes/no question (e.g., “Is x > 0?”). The flow splits into two arrows: one for the “yes” path and one for the “no” path."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare linear search and binary search in terms of how they work and their efficiency. When would you choose each?",
+   "a": "Linear search checks each element one by one from the start until it finds the target or reaches the end. Its time complexity is O(n), meaning it may look at every item. Binary search works only on a sorted list; it repeatedly halves the search interval by comparing the target to the middle element. Its time complexity is O(log n), much faster for large lists. Choose linear search when the list is unsorted or very small; choose binary search when the list is sorted and you need fast look‑ups."
+  },
+  {
+   "level": "Medium",
+   "q": "Write pseudocode for a simple algorithm that sorts a list of numbers using the bubble sort method.",
+   "a": "\n1. Set swapped = true\n2. While swapped is true\na. Set swapped = false\nb. For i from 0 to length‑2 of the list\ni. If list[i] > list[i+1] then\n– Swap list[i] and list[i+1]\n– Set swapped = true\n3. End while\nThe algorithm repeatedly passes through the list, swapping adjacent out‑of‑order pairs. When a full pass makes no swaps, the list is sorted."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain why the time complexity of quicksort is O(n log n) on average but can degrade to O(n²) in the worst case. Include a brief description of how the choice of pivot affects this.",
+   "a": "Quicksort works by picking a pivot, partitioning the array into elements less than the pivot and elements greater than the pivot, then recursively sorting the two partitions.\n- Average case: If the pivot roughly splits the array in half each time, the depth of recursion is log n and each level processes all n elements during partitioning, giving O(n log n).\n- Worst case: If the pivot is always the smallest or largest element, one partition has size n‑1 and the other size 0. The recursion depth becomes n, and each level still processes about n elements, leading to O(n²).\nThus, a good pivot (e.g., median‑of‑three or random choice) keeps partitions balanced and preserves the average O(n log n) performance."
+  },
+  {
+   "level": "Hard",
+   "q": "A problem requires you to find the second largest number in an unsorted list of distinct integers. Describe an algorithm that solves this in a single pass through the list, and analyze its time and space complexity.",
+   "a": "\nAlgorithm (single pass):\n1. Initialize `largest` = -∞, `secondLargest` = -∞.\n2. For each number `x` in the list:\na. If `x` > `largest` then\n– `secondLargest` = `largest`\n– `largest` = `x`\nb. Else if `x` > `secondLargest` then\n– `secondLargest` = `x`\n3. After the loop, `secondLargest` holds the answer.\nExplanation: The algorithm keeps track of the biggest and second biggest values seen so far. When a new maximum appears, the old maximum becomes the second largest. If the new value is not larger than the maximum but larger than the current second largest, it updates the second largest.\nComplexity:\n- Time: The list is scanned once, so O(n).\n- Space: Only two extra variables are used, so O(1) auxiliary space."
+  }
+ ],
+ "recap": "The lesson teaches how to break a programming problem into goal, inputs, outputs, and sub‑tasks, then plan solutions using pseudocode and flowcharts. It introduces linear search and bubble sort as simple searching and sorting algorithms, and explains why algorithm efficiency matters. By separating thinking from coding, students can spot errors early and choose better solutions.",
+ "key_terms": [
+  {
+   "term": "Goal",
+   "meaning": "The main result the program must achieve."
+  },
+  {
+   "term": "Inputs",
+   "meaning": "Data the program receives from the user, files, or sensors."
+  },
+  {
+   "term": "Outputs",
+   "meaning": "Results the program produces, such as printed text or saved files."
+  },
+  {
+   "term": "Pseudocode",
+   "meaning": "Plain‑language description of an algorithm that shows the logic without real code syntax."
+  },
+  {
+   "term": "Flowchart",
+   "meaning": "A diagram using symbols to show the sequence of steps and decisions in a process."
+  },
+  {
+   "term": "Linear Search",
+   "meaning": "A method that checks each list element one by one until the target is found or the list ends."
+  },
+  {
+   "term": "Bubble Sort",
+   "meaning": "A sorting technique that repeatedly swaps adjacent out‑of‑order items, moving the largest to the end each pass."
+  },
+  {
+   "term": "Algorithm Efficiency",
+   "meaning": "A measure of how the time or memory needed by an algorithm grows with input size."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What are the four main parts to identify when breaking down a programming problem?",
+   "options": [
+    "Variables, loops, functions, classes",
+    "Goal, inputs, outputs, sub‑tasks",
+    "Syntax, semantics, compilation, execution",
+    "Data, hardware, software, network"
+   ],
+   "answer": 1,
+   "why": "These four parts capture what the program must do, what it receives, what it produces, and the steps needed."
+  },
+  {
+   "q": "Why is pseudocode useful before writing actual code?",
+   "options": [
+    "It runs faster than real code",
+    "It helps spot logical errors early",
+    "It replaces the need for testing",
+    "It automatically converts to any language"
+   ],
+   "answer": 1,
+   "why": "Pseudocode separates thinking from coding, making missing steps or mistakes easier to see."
+  },
+  {
+   "q": "In a flowchart, which symbol represents a decision point?",
+   "options": [
+    "Oval",
+    "Rectangle",
+    "Diamond",
+    "Parallelogram"
+   ],
+   "answer": 2,
+   "why": "The diamond shape is the standard symbol for a yes/no or true/false decision."
+  },
+  {
+   "q": "What does a linear search assume about the order of items in a list?",
+   "options": [
+    "They are sorted alphabetically",
+    "They are sorted numerically",
+    "No particular order is required",
+    "They are grouped by type"
+   ],
+   "answer": 2,
+   "why": "Linear search works on any list because it checks each element sequentially without assuming order."
+  },
+  {
+   "q": "During bubble sort, what happens after the first full pass through the list?",
+   "options": [
+    "The smallest element is at the start",
+    "All elements are sorted",
+    "The largest unsorted element moves to the end",
+    "The list is reversed"
+   ],
+   "answer": 2,
+   "why": "Each pass moves the largest remaining unsorted element to its final position at the right end."
+  },
+  {
+   "q": "Which factor is NOT typically considered when evaluating algorithm efficiency?",
+   "options": [
+    "Time complexity",
+    "Memory usage",
+    "Color of the code editor",
+    "Input size growth"
+   ],
+   "answer": 2,
+   "why": "The visual appearance of the editor does not affect the algorithm's performance."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Goal",
+   "back": "The main outcome the program should achieve."
+  },
+  {
+   "front": "Inputs",
+   "back": "Data received from the user, files, sensors, etc."
+  },
+  {
+   "front": "Outputs",
+   "back": "The results the program produces, like printed text or saved files."
+  },
+  {
+   "front": "Pseudocode",
+   "back": "A plain‑language outline of an algorithm’s steps, without real code syntax."
+  },
+  {
+   "front": "Flowchart Symbol for Process",
+   "back": "A rectangle, indicating an action or operation."
+  },
+  {
+   "front": "Linear Search Definition",
+   "back": "An algorithm that checks each list element sequentially until it finds the target."
+  },
+  {
+   "front": "Bubble Sort Definition",
+   "back": "A sorting algorithm that repeatedly swaps adjacent out‑of‑order items, bubbling the largest to the end."
+  },
+  {
+   "front": "Algorithm Efficiency",
+   "back": "How the required time or memory grows as the input size increases."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l09-problem-breakdown-puzzle",
+   "title": "Shows how a programming task can be split into goal, inputs, outputs and sub‑tasks like sorting puzzle pieces.",
+   "alt": "Shows how a programming task can be split into goal, inputs, outputs and sub‑tasks like sorting puzzle pieces.",
+   "priority": 8,
+   "picture_title": "Problem Breakdown Puzzle",
+   "kind": "illustration",
+   "subject": "A jigsaw puzzle with edge pieces labeled \"Goal\", \"Inputs\", \"Outputs\" and interior pieces labeled as sub‑tasks, arranged to suggest assembling the whole picture step by step.",
+   "layout": "Puzzle outline in the centre, edge pieces around the border with text labels, interior pieces grouped by colour in the middle.",
+   "labels": [
+    "Goal",
+    "Inputs",
+    "Outputs",
+    "Sub‑task 1",
+    "Sub‑task 2",
+    "Sub‑task 3"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l09-simple-flowchart-map",
+   "title": "A visual map of the steps for baking a cake, illustrating how flowcharts guide program flow.",
+   "alt": "A visual map of the steps for baking a cake, illustrating how flowcharts guide program flow.",
+   "priority": 7,
+   "picture_title": "Simple Flowchart Map",
+   "kind": "labelled diagram",
+   "subject": "A flowchart with boxes for \"Start\", \"Mix ingredients\", \"Check batter\", \"Bake\", and \"Finish\", connected by arrows to show the sequence of actions.",
+   "layout": "Boxes arranged vertically with arrows pointing downwards; each box contains a short phrase.",
+   "labels": [
+    "Start",
+    "Mix",
+    "Check",
+    "Bake",
+    "Finish"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l09-linear-search-cards",
+   "title": "Illustrates a linear search by flipping through index cards until the target name is found.",
+   "alt": "Illustrates a linear search by flipping through index cards until the target name is found.",
+   "priority": 6,
+   "picture_title": "Linear Search Cards",
+   "kind": "photo",
+   "subject": "A hand holding a small stack of index cards on a desk, the top card visible with a name, and the next card partially visible, indicating the step‑by‑step checking process.",
+   "layout": "Cards fanned slightly, focus on the top two cards; background shows a simple desk surface.",
+   "labels": [],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Breaking Down a Programming Problem",
+   "steps": [
+    {
+     "label": "Define Goal",
+     "text": "What must the program achieve?"
+    },
+    {
+     "label": "Identify Inputs",
+     "text": "What data does the program receive?"
+    },
+    {
+     "label": "Identify Outputs",
+     "text": "What results must the program produce?"
+    },
+    {
+     "label": "List Sub‑tasks",
+     "text": "Smaller pieces that connect inputs to outputs"
+    },
+    {
+     "label": "Combine Pieces",
+     "text": "Arrange sub‑tasks into a workable order"
+    }
+   ],
+   "loop": false,
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Writing Pseudocode",
+   "steps": [
+    {
+     "label": "Describe in Plain Language",
+     "text": "Write each step as a simple sentence"
+    },
+    {
+     "label": "Show Logic Flow",
+     "text": "Indicate decisions and repetitions"
+    },
+    {
+     "label": "Check for Gaps",
+     "text": "Make sure no step is missing"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Flowchart vs. Pseudocode",
+   "left": {
+    "name": "Flowchart",
+    "points": [
+     "Visual symbols",
+     "Shows direction of flow",
+     "Good for quick overview"
+    ]
+   },
+   "right": {
+    "name": "Pseudocode",
+    "points": [
+     "Written in sentences",
+     "Focuses on logic details",
+     "Easy to turn into code"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Linear Search Process",
+   "steps": [
+    {
+     "label": "Start at First Element",
+     "text": "Set index to 0"
+    },
+    {
+     "label": "Compare with Target",
+     "text": "Is this element the one you need?"
+    },
+    {
+     "label": "Move to Next",
+     "text": "If not, increase index and repeat"
+    },
+    {
+     "label": "Finish",
+     "text": "Stop when found or when list ends"
+    }
+   ],
+   "loop": true,
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Bubble Sort Pass",
+   "steps": [
+    {
+     "label": "Compare Adjacent Pair",
+     "text": "Look at two neighboring items"
+    },
+    {
+     "label": "Swap if Out of Order",
+     "text": "Exchange them when left > right"
+    },
+    {
+     "label": "Move Right",
+     "text": "Proceed to the next pair"
+    },
+    {
+     "label": "End of Pass",
+     "text": "Largest item has bubbled to the right"
+    }
+   ],
+   "loop": true,
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
