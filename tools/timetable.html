@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1b4332;--gold:#c9a84c;--canvas:#f4f2ed;--line:#e2ddd4;--tx:#1a1a1a;--soft:#6f6c66}
+*{box-sizing:border-box;margin:0}body{font:15px/1.5 Inter,sans-serif;background:var(--canvas);color:var(--tx)}a{color:inherit}
+header{position:sticky;top:0;z-index:5;background:var(--green);border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:10px;padding:8px 12px;color:#fff}
+header a.bk{height:40px;padding:0 14px;border-radius:9px;background:#ffffff1a;display:flex;align-items:center;text-decoration:none;font-weight:600;font-size:.95rem;color:#fff}
+header img{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);background:#fff}header b{display:block;font:700 1.05rem "Playfair Display",serif;line-height:1.1}header small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.br{display:flex;align-items:center;gap:10px}
+main{max-width:640px;margin:0 auto;padding:14px 12px 60px}
+h1{font:700 1.5rem "Playfair Display",serif;color:var(--green);margin:4px 0 12px}
+.tabs,.dtabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto}.tabs button,.dtabs button{font:inherit;font-weight:600;font-size:.85rem;background:#fff;border:1px solid var(--line);border-radius:99px;padding:9px 16px;min-height:42px;color:var(--tx);white-space:nowrap;position:relative}
+.tabs button.on,.dtabs button.on{background:var(--green);color:#fff;border-color:var(--green)}.dtabs i{position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+details.pick{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 14px;margin-bottom:14px}details.pick summary{padding:14px 0;font-weight:700;cursor:pointer;min-height:48px;color:var(--green)}details.pick summary span{font-weight:500;color:var(--soft);font-size:.85rem}
+#sq{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;margin-bottom:10px}
+#chips{display:flex;flex-wrap:wrap;gap:8px;max-height:220px;overflow:auto;padding-bottom:12px}.ch{font:inherit;font-weight:600;font-size:.82rem;background:var(--canvas);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-height:40px}.ch.on{background:var(--green);color:#fff;border-color:var(--green)}
+#clr{font:inherit;background:none;border:0;color:var(--soft);text-decoration:underline;padding:4px 0 14px}
+.card{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}.card.empty{display:block;text-align:center;color:var(--soft);padding:24px 16px}.card.empty b{color:var(--tx);display:block;margin-bottom:4px}
+.dt,.tm{flex:none;width:56px;text-align:center;border-right:2px solid var(--gold);padding-right:12px;display:flex;flex-direction:column;justify-content:center}.dt b{font:700 1.7rem "Playfair Display",serif;color:var(--green);line-height:1}.dt span{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--soft)}
+.tm{width:78px}.tm b{font-size:.85rem;color:var(--green)}.tm span{font-size:.72rem;color:var(--soft)}
+.bd{flex:1;min-width:0}.wd{font-size:.78rem;color:var(--soft)}.wd em{font-style:normal;font-weight:600;color:var(--green)}.cd{font-size:1.15rem;font-weight:700;margin:1px 0}.mt{font-size:.82rem;color:var(--soft)}
+.card.next{border:2px solid var(--gold);background:#fffbee}.card.past{opacity:.5}.card.hol{background:#f1efe9;border-style:dashed}.card.hol .cd{font-size:1rem;color:var(--soft)}.warn{margin-top:6px;font-size:.78rem;font-weight:600;color:#b3261e;background:#fdeceb;border-radius:8px;padding:5px 9px}
+.tg{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.06em;background:#e6f5ec;color:#1d6b3c;border-radius:6px;padding:2px 7px;vertical-align:middle}.tg.now{background:var(--green);color:#fff}
+.btn{display:block;width:100%;font:inherit;font-weight:700;background:var(--green);color:#fff;border:0;border-radius:12px;padding:14px;margin-top:6px;min-height:50px}
+.fine{font-size:.78rem;color:var(--soft);margin-top:14px;text-align:center}.fine a{text-decoration:underline}
+</style>
+</head>
+<body>
+<header><a class="bk" href="../index.html">&#8249; Home</a><div><small>Learning Hub</small><b>Timetable</b></div></header>
+<main>
+<div id="top"></div>
+<details class="pick" id="pk" open><summary>My courses <span id="cnt"></span></summary><input id="sq" type="search" placeholder="Search a course code..." autocomplete="off"><div id="chips"></div><button id="clr">Clear my choices</button></details>
+<div id="out"></div>
+<p class="fine" id="src"></p>
+</main>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const get=u=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+let IDX=[],DATA={},kind='class',day='',mine=new Set();
+try{mine=new Set(JSON.parse(localStorage.getItem('myCourses')||'[]'))}catch(e){}
+const store=()=>{try{localStorage.setItem('myCourses',JSON.stringify([...mine]))}catch(e){}};
+const isEx=i=>i.kind==='exam',has=k=>IDX.some(i=>isEx(i)===(k==='exam'));
+const pool=k=>{const seen=new Set(),out=[];IDX.filter(i=>isEx(i)===(k==='exam')).forEach(i=>(DATA[i.id].entries||[]).forEach(e=>{const key=[e.date,e.day,e.start,e.code].join('|');if(!seen.has(key)){seen.add(key);out.push(e)}}));return out};
+const t2m=t=>{const m=/^(\d{1,2}):(\d{2})/.exec(t||'');return m?+m[1]*60+ +m[2]:null};
+const fmt=t=>{const m=t2m(t);if(m==null)return'';const h=Math.floor(m/60);return`${h%12||12}:${String(m%60).padStart(2,'0')} ${h<12?'am':'pm'}`};
+function head(){$('#top').innerHTML=has('exam')&&has('class')?`<div class="tabs"><button data-k="class" class="${kind==='class'?'on':''}">Class timetable</button><button data-k="exam" class="${kind==='exam'?'on':''}">Exam timetable</button></div>`:`<h1>${kind==='exam'?'Exam timetable':'Class timetable'}</h1>`;
+  $('#src').innerHTML=IDX.filter(i=>isEx(i)===(kind==='exam')).map(i=>esc(i.title||i.id)+(i.source?` · <a href="../timetable-uploads/${encodeURIComponent(i.source)}">original file</a>`:'')).join('<br>')+'<br>Always confirm with the official copy.'}
+function chips(){const codes=[...new Set(pool(kind).map(e=>e.code))].sort(),q=$('#sq').value.trim().toLowerCase(),n=codes.filter(c=>mine.has(c)).length;
+  $('#chips').innerHTML=codes.filter(c=>c.toLowerCase().includes(q)).map(c=>`<button class="ch${mine.has(c)?' on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('')||'<p class="fine">No courses found.</p>';
+  $('#cnt').textContent=n?`· ${n} selected`:'· choose yours'}
+function result(){const list=pool(kind).filter(e=>mine.has(e.code));
+  if(!list.length)return $('#out').innerHTML='<div class="card empty"><b>Choose the courses you offer</b>Tap your course codes under "My courses". Your own timetable appears here.</div>';
+  kind==='exam'?exam(list):klass(list)}
+const HOL=()=>IDX.filter(isEx).flatMap(i=>(DATA[i.id].holidays||[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x.date)));
+function exam(list){const today=new Date();today.setHours(0,0,0,0);
+  const L=list.filter(e=>e.date).sort((a,b)=>(a.date+(a.start||'')).localeCompare(b.date+(b.start||''))),ni=L.findIndex(e=>new Date(e.date+'T00:00')>=today),nx=L[ni];
+  const clash=e=>L.some(o=>o!==e&&o.date===e.date&&o.code!==e.code&&t2m(o.start)<t2m(e.end)&&t2m(e.start)<t2m(o.end));
+  const hs=L.length?HOL().filter(x=>x.date>=L[0].date&&x.date<=L[L.length-1].date):[];
+  const items=[...L.map(e=>({k:e.date+(e.start||'00:00'),e})),...hs.map(x=>({k:x.date+'00:00',x}))].sort((a,b)=>a.k.localeCompare(b.k));
+  $('#out').innerHTML=(ni<0?'<p class="fine">All your exams are done. Well done!</p>':'')+items.map(it=>{const v=it.e||it.x,d=new Date(v.date+'T00:00'),n=Math.round((d-today)/864e5),w=n<0?'Done':n===0?'Today':n===1?'Tomorrow':`in ${n} days`,dt=`<div class="dt"><b>${d.getDate()}</b><span>${d.toLocaleDateString('en-GB',{month:'short'})}</span></div>`,wd=d.toLocaleDateString('en-GB',{weekday:'long'});
+    if(it.x)return`<div class="card hol${n<0?' past':''}">${dt}<div class="bd"><div class="wd">${wd} · <em>${w}</em></div><div class="cd">${esc(it.x.label||'Public holiday')}</div></div></div>`;
+    const e=it.e;return`<div class="card${n<0?' past':''}${e===nx?' next':''}">${dt}<div class="bd"><div class="wd">${wd} · <em>${w}</em>${e===nx?' · <strong>NEXT</strong>':''}</div><div class="cd">${esc(e.code)}</div><div class="mt">${fmt(e.start)}${e.end?' to '+fmt(e.end):''}${e.venue?' · '+esc(e.venue):''}</div>${clash(e)?'<div class="warn">Clash: another exam at the same time</div>':''}</div></div>`}).join('')+'<button class="btn" id="ics">Add my exams to my calendar</button>';
+  $('#ics').onclick=()=>ics(L)}
+function klass(list){const days=DAYS.filter(d=>list.some(e=>e.day===d)),now=new Date(),td=DAYS[(now.getDay()+6)%7],cur=now.getHours()*60+now.getMinutes();
+  if(!days.includes(day))day=days.includes(td)?td:days[0];let nd=false;
+  const L=list.filter(e=>e.day===day).sort((a,b)=>t2m(a.start)-t2m(b.start));
+  $('#out').innerHTML=`<div class="dtabs">${days.map(d=>`<button data-d="${d}" class="${d===day?'on':''}">${d.slice(0,3)}${d===td?'<i></i>':''}</button>`).join('')}</div>`+L.map(e=>{let tag='';
+    if(day===td){const s=t2m(e.start),en=t2m(e.end);if(s!=null&&en!=null&&cur>=s&&cur<en)tag='<span class="tg now">NOW</span>';else if(s!=null&&s>cur&&!nd){tag=`<span class="tg">NEXT in ${s-cur<60?(s-cur)+' min':Math.round((s-cur)/6)/10+' h'}</span>`;nd=true}}
+    return`<div class="card"><div class="tm"><b>${fmt(e.start)}</b><span>${fmt(e.end)}</span></div><div class="bd"><div class="cd">${esc(e.code)} ${tag}</div>${e.title?`<div>${esc(e.title)}</div>`:''}<div class="mt">${[e.venue,e.lecturer].filter(Boolean).map(esc).join(' · ')}</div></div></div>`}).join('')}
+function ics(L){const dt=(d,t)=>d.replace(/-/g,'')+'T'+t.replace(':','')+'00',stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const ev=L.filter(e=>e.date&&e.start).map((e,i)=>['BEGIN:VEVENT',`UID:exam${i}-${e.code.replace(/\s/g,'')}@learning-hub`,`DTSTAMP:${stamp}`,`DTSTART:${dt(e.date,e.start)}`,`DTEND:${dt(e.date,e.end||e.start)}`,`SUMMARY:Exam: ${e.code}`,`LOCATION:${e.venue||''}`,'END:VEVENT'].join('\r\n'));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Learning Hub//EN\r\n'+ev.join('\r\n')+'\r\nEND:VCALENDAR'],{type:'text/calendar'}));a.download='my-exams.ics';a.click()}
+const all=()=>{head();chips();result()};
+$('#chips').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;const c=b.dataset.c;mine.has(c)?mine.delete(c):mine.add(c);store();chips();result()};
+$('#sq').oninput=chips;$('#clr').onclick=()=>{mine.clear();store();chips();result()};
+$('#top').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;kind=b.dataset.k;all()};
+$('#out').onclick=e=>{const b=e.target.closest('[data-d]');if(!b)return;day=b.dataset.d;result()};
+(async()=>{
+  try{IDX=await get('../timetables/index.json')}catch(e){IDX=[]}
+  if(!IDX.length){$('#pk').hidden=true;$('#out').innerHTML='<div class="card empty"><b>No timetable yet</b>Timetables appear here as soon as they are uploaded.</div>';return}
+  for(const i of IDX){try{DATA[i.id]=await get(`../timetables/${i.id}.json`)}catch(e){DATA[i.id]={entries:[]}}}
+  kind=has('exam')?'exam':'class';all()})();
+</script>
+</body>
+</html>
