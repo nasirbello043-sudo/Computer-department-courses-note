@@ -1,0 +1,391 @@
+{
+ "title": "Simple File Handling",
+ "summary": "In this lesson students learn how to read from and write to text files in Python, and how to handle possible errors. They also explore simple ways to store data between program runs.",
+ "objectives": [
+  "Read text from a file and display its contents",
+  "Write user input to a new text file",
+  "Use try‑except blocks to catch file‑related errors",
+  "Close files properly using with‑statements",
+  "Explain why file handling is useful for saving data"
+ ],
+ "prerequisites": "Students should already know basic Python syntax, variables, and how to use print and input functions.",
+ "why": [
+  "File handling lets programs keep information after they stop running, which is essential for things like saving game scores, logs, or user settings.",
+  "Understanding error handling prevents programs from crashing when a file is missing or unreadable, making software more reliable in real‑world situations."
+ ],
+ "sections": [
+  {
+   "heading": "What is a File?",
+   "body": "A file is simply a **container** that holds a collection of characters (letters, numbers, symbols) and lives on a storage device such as a hard‑disk, SSD, or USB stick. Think of it like a **paper notebook** you keep on a shelf. The notebook itself does not do anything; it just stores the words you write inside its pages. In the same way, a computer file stores the text you type, the code you write, or any other data you want to keep for later use.\n\nWhen a program needs to use that information, it must first **open** the file, which is like taking the notebook off the shelf and opening it to the right page. While the file is open, the program can **read** (look at) the characters, or **write** (add or change) characters, just as you would read a story or add a new entry in your notebook. When the program is finished, it **closes** the file, which is comparable to putting the notebook back on the shelf and closing the cover. Closing tells the computer that you are done using the file, allowing the operating system to safely store any changes and free up resources.\n\n> **Definition:** A file is a named collection of data stored on a storage medium, accessible by programs for reading or writing.\n\nWhy do we need files? Imagine you are writing a school essay. If you typed the whole essay directly into a program and then turned off the computer without saving, everything would disappear. By saving the essay into a file, the words are written to the disk, which keeps them even when the power is off. Later you can open the same file, continue editing, or share it with a friend. This persistence—keeping data beyond the life of a single program run—is one of the main reasons files exist.\n\n> **In daily life:** A file works like a physical folder on a desk. The folder (the file name) tells you what is inside, and the papers inside (the data) can be read or added to whenever you need them.\n\nA file has several important attributes:\n\n* **Name** – a label you give to the file, such as `story.txt` or `grades.csv`. The name usually includes an **extension** (the part after the dot) that hints at the type of data inside. For example, `.txt` suggests plain text, while `.csv` suggests comma‑separated values.\n* **Location** – the folder (also called a directory) where the file lives, like `C:\\Documents\\School\\` on Windows or `/home/alice/notes/` on Linux.\n* **Size** – how many bytes (units of digital information) the file occupies. One character typically uses one byte in plain text.\n\nWhen a program opens a file, it must specify **how** it wants to use it. The most common modes are:\n\n* **Read mode (`r`)** – you only want to look at the contents; you cannot change them.\n* **Write mode (`w`)** – you want to create a new file or replace the entire existing content.\n* **Append mode (`a`)** – you want to add new data to the end of an existing file without erasing what is already there.\n\nThese modes are expressed as single letters because they are short and easy for the computer to understand.\n\n> **Note:** Opening a file that does not exist in read mode will cause an error; opening in write mode will create a new empty file if it does not already exist.\n\nA file is stored on a **disk** as a sequence of **bytes**. A byte is a group of 8 bits, and each byte can represent a single character from a character set such as ASCII or UTF‑8. When you read a file, the operating system translates those bytes back into characters that your program can work with. When you write, the opposite happens: characters are turned into bytes and placed on the disk.\n\nBecause files are just sequences of bytes, you can also think of them as **streams** of data that flow into or out of a program. The term *stream* emphasizes that you often read or write the data piece by piece, rather than loading the whole file into memory at once.\n\n> **Remember:** Always close a file after you finish using it. Closing releases the system resources and makes sure that any buffered data is actually written to the disk.\n\nIn summary, a file is a named, persistent collection of characters stored on a storage device. It lets programs keep information beyond a single execution, share data with other programs or users, and organize information in a way that mirrors how we store paper documents in the real world. Understanding this simple concept is the first step toward mastering file handling in any programming language.",
+   "code": ""
+  },
+  {
+   "heading": "Opening and Closing Files",
+   "body": "When a program needs to look at information that is stored on disk, it must first **open** the file.  \nOpening a file is like turning the key in a lock: it tells the operating system, “I want to use this piece of storage now.”  \nThe program then receives a *file object* – a special handle that lets you read from or write to the file.  \n\nTo stop using the file you must **close** it. Closing is like taking the key out of the lock; it tells the system that you are finished and that the file can be safely used by other programs. If you forget to close a file, data may stay in a temporary buffer and never actually be written to disk, and the file may stay locked, preventing other programs from accessing it.\n\n### Opening a file\n\nThe built‑in function `open()` creates the file object.\n\n```python\nfile = open('notes.txt', 'r')\n```\n\n* The first argument is the **file name** (or path) – a string that tells the system which file you want.\n* The second argument is the **mode** – a short string that tells Python how you intend to use the file.  \n  * `'r'` – read only (the default).  \n  * `'w'` – write only; creates a new file or truncates an existing one.  \n  * `'a'` – append; writes data at the end of the existing file.  \n  * Adding `'b'` (e.g., `'rb'`) opens the file in **binary** mode, useful for non‑text data.\n\nWhen you open a file in read mode, Python checks that the file exists. If it does not, an exception (`FileNotFoundError`) is raised.\n\n### Closing a file\n\n```python\nfile.close()\n```\n\nCalling `close()` releases the lock and flushes any buffered output to the disk. After a file is closed, the file object should not be used again; trying to read or write will raise a `ValueError`.\n\n> **Note:** Closing a file is mandatory because the operating system has a limited number of file handles. Leaving many files open can exhaust this limit and cause your program to crash.\n\n### The safest way: the `with`‑statement\n\nPython provides a context manager that automatically closes the file for you, even if an error occurs inside the block. The syntax is:\n\n```python\nwith open('log.txt', 'a') as log_file:\n    log_file.write('Program started\\n')\n```\n\n* The `with` keyword starts a **context**.  \n* `open('log.txt', 'a')` creates the file object.  \n* `as log_file` gives a name to that object inside the block.  \n* When the indented block finishes—whether it ends normally or because an exception was raised—Python automatically calls `log_file.close()`.\n\nThink of the `with` block as a **borrow‑and‑return** system at a library. You borrow a book (`open`), read or write while you have it, and when you walk out of the library the book is automatically returned (`close`). You never have to remember to put it back yourself.\n\n> **Definition:** A *context manager* is an object that defines `__enter__` and `__exit__` methods, allowing the `with` statement to set up and tear down resources automatically.\n\n### Why the `with`‑statement is recommended\n\n1. **Safety** – If an unexpected error occurs, the file is still closed, preventing data loss.  \n2. **Readability** – The scope of file usage is visually clear: everything inside the indented block can use the file, nothing outside can.  \n3. **Conciseness** – You write fewer lines; no separate `close()` call is needed.\n\n> **Common mistake:** Opening a file with `open()` and forgetting to call `close()`. The program may appear to work, but the file can remain locked or incomplete, especially on Windows systems.\n\n### Quick example: reading and writing safely\n\n```python\n# Read the whole content of a file\nwith open('data.txt', 'r') as f:\n    contents = f.read()          # reads everything as a single string\n\n# Append a new line safely\nwith open('data.txt', 'a') as f:\n    f.write('New entry\\n')\n```\n\nIn the first block the file is opened for reading, its contents are stored in `contents`, and then the file is automatically closed. In the second block the same file is opened for appending, a new line is added, and the file is closed again.\n\n> **Remember:** Always prefer `with open(... ) as ...:`; it guarantees that the file is closed promptly and protects your data.",
+   "code": ""
+  },
+  {
+   "heading": "Reading Text Files",
+   "body": "When you open a text file for reading, the computer treats the file as a sequence of characters, just like a long string of letters, numbers, spaces and line‑break symbols.  \nThink of the file as a scroll of paper that already exists. Your program can **unroll** the scroll and look at the words written on it. The three most common ways to unroll that scroll are:\n\n1. **Read the whole scroll at once** – `read()`  \n2. **Read one line at a time** – `readline()`  \n3. **Walk through the scroll line by line automatically** – a `for` loop  \n\nEach method has its own purpose, and choosing the right one makes your code easier to understand and more efficient.\n\n> **Definition:** *A line* is a sequence of characters that ends with a newline character (`\\n`). In a text file, each line usually corresponds to one row you would see when the file is opened in a text editor.\n\n### 1. Reading the entire file with `read()`\n\nThe simplest way to get everything from a file is to call the method `read()` on the file object. It returns a single string that contains **all** characters in the file, including the newline characters.\n\n```python\nwith open('story.txt', 'r') as f:   # 'r' means \"read mode\"\n    whole_text = f.read()\nprint(whole_text)\n```\n\nWhy this works: `open()` creates a *file object* that knows where the beginning of the file is. `read()` tells that object, “Give me everything from where you are now until the end.” Because we opened the file at the start, we receive the whole content.\n\n**When to use it:**  \n- The file is small (a few kilobytes).  \n- You need the complete text at once, for example to count how many times a word appears.\n\n### 2. Reading one line at a time with `readline()`\n\nSometimes you only need the first line, or you want to process the file line by line without loading the whole thing into memory. `readline()` returns the next line each time you call it, moving the internal cursor forward.\n\n```python\nwith open('data.csv', 'r') as f:\n    first_line = f.readline()          # reads the header row\n    second_line = f.readline()         # reads the next row\n    print('Header:', first_line.strip())\n    print('First data row:', second_line.strip())\n```\n\n`strip()` removes the trailing newline so the printed output looks tidy.\n\n**Why it is useful:**  \nImagine a very long log file that is hundreds of megabytes. Loading it all at once could exhaust your computer’s memory. By reading one line at a time, you keep memory usage low while still being able to examine each entry.\n\n### 3. Iterating with a `for` loop\n\nPython lets you treat a file object as an *iterable*—something you can loop over. Each iteration automatically calls `readline()` behind the scenes, so you get one line per loop cycle without writing the call yourself.\n\n```python\nwith open('scores.txt', 'r') as f:\n    for line in f:\n        name, score = line.split(',')   # assume \"name,score\" format\n        print(f'{name} scored {score.strip()}')\n```\n\nThe loop stops when `readline()` returns an empty string, which signals the end of the file.\n\n> **In daily life:** This is like reading a recipe book page by page. You turn the page, read the ingredients, then move to the next page automatically until you finish the book.\n\n### Choosing the right method\n\n- Use `read()` when the file is small and you need the whole text as one piece.  \n- Use `readline()` when you need precise control over how many lines you read, or when you want to stop early.  \n- Use a `for` loop for the most Pythonic and memory‑friendly way to process every line.\n\n> **Common mistake:** Forgetting to close the file. If you open a file with `open()` and never close it, the operating system may keep the file locked. Using `with open(...) as f:` automatically closes the file when the block ends, so you avoid this error.\n\n> **Remember:** Always open the file in the correct mode—`'r'` for reading, `'w'` for writing, `'a'` for appending. Trying to read a file opened in write‑only mode raises an error.\n\nNow you have three clear tools for reading text files. Pick the one that matches the size of your data and the way you need to process it, and your programs will handle file input smoothly and safely.",
+   "code": ""
+  },
+  {
+   "heading": "Writing to Text Files",
+   "body": "When you want to **save** something that your program has created – a list of names, a score, a short story – you have to write that information into a file.  \nThink of a file as a **notebook** that lives on your computer’s hard drive. Opening a notebook lets you read what is already written, and closing it saves any new pages you added. In Python, the same idea is expressed with the `open()` function, but you also tell Python **how** you intend to use the notebook: for reading (`'r'`), for writing (`'w'`), or for adding to the end without destroying what is already there (`'a'`).\n\n### The basic steps\n\n1. **Open** the file with the mode `'w'` (write) or `'a'` (append).  \n2. **Write** the text you want.  \n3. **Close** the file so the operating system can finish saving the data.\n\n```python\nfile = open('story.txt', 'w')   # step 1: open for writing, erase old content\nfile.write('Once upon a time, ')   # step 2: write a string\nfile.close()                    # step 3: close the file\n```\n\nIf the file `story.txt` did not exist before, Python creates it automatically. If it already existed and you opened it with `'w'`, everything that was inside is **cleared** before the new text is written. That is why the mode matters.\n\n> **Note:** The mode `'w'` **overwrites** the whole file. Use `'a'` if you want to keep the old content and only add new lines at the end.\n\n### `write()` vs. `writelines()`\n\nBoth functions belong to the file object returned by `open()`.  \n\n* `write(string)` takes **one** string and puts it into the file exactly as it appears.  \n* `writelines(list_of_strings)` takes an **iterable** (most often a list) of strings and writes each element one after another. It does **not** add line breaks automatically; you have to include `'\\n'` yourself if you want separate lines.\n\n```python\nlines = ['Chapter 1: The Beginning\\n',\n         'Chapter 2: The Conflict\\n',\n         'Chapter 3: The Resolution\\n']\n\nwith open('book.txt', 'w') as f:   # using a context manager (explained later)\n    f.writelines(lines)           # writes all three strings in order\n```\n\nIn the example above, each string already ends with `'\\n'`, which is the newline character that moves the cursor to the next line, just like pressing **Enter** on a keyboard.\n\n### Appending without overwriting\n\nSometimes you need to keep what is already stored and simply add more information – for example, a log file that records each time a user logs in. Use the **append** mode `'a'`:\n\n```python\nwith open('log.txt', 'a') as log:\n    log.write('User Alice logged in at 10:15 AM\\n')\n```\n\nEvery call to `write()` (or `writelines()`) adds text after the existing content, leaving the old data untouched.\n\n> **In daily life:** Appending is like adding a new entry at the bottom of a diary without erasing yesterday’s notes.\n\n### A small, complete example\n\n```python\n# Step 1: create a file and write a header\nwith open('scores.txt', 'w') as f:\n    f.write('Player Scores\\n')\n    f.write('==============\\n')\n\n# Step 2: add some scores later, without losing the header\nwith open('scores.txt', 'a') as f:\n    f.write('Alice: 1500\\n')\n    f.write('Bob:   1200\\n')\n```\n\nWhen you open `scores.txt` after running the code, you will see:\n\n```\nPlayer Scores\n==============\nAlice: 1500\nBob:   1200\n```\n\nThe first `with` block created the file and wrote the header. The second block appended the actual scores.\n\n> **Definition:** `with open(filename, mode) as var:` is a **context manager**. It automatically closes the file when the indented block ends, even if an error occurs inside the block. This is safer than calling `close()` manually.\n\n### Things to watch out for\n\n* Forgetting the newline character `'\\n'` will cause all text to run together on a single line.  \n* Opening a file with `'w'` when you only meant to add data will erase everything that was there.  \n\n> **Common mistake:** Using `write()` inside a loop but opening the file with `'w'` each time. The file gets recreated on every iteration, so only the last piece of data remains. Open the file **once** (or use `'a'`) and write inside the loop.\n\n### Quick checklist\n\n- Choose the correct mode: `'w'` to start fresh, `'a'` to add.  \n- Use `write()` for a single string, `writelines()` for a list of strings.  \n- Remember to include `'\\n'` when you want separate lines.  \n- Prefer the `with` statement to ensure the file is closed properly.  \n\nBy mastering these simple steps, you can store any text your program creates, from game scores to generated reports, and retrieve it later for analysis or display.",
+   "code": ""
+  },
+  {
+   "heading": "Handling File Errors",
+   "body": "When a program works with files it is easy to forget that the file lives **outside** the program – on the disk, on a USB stick, or even on a network server.  \nIf something goes wrong while the program is trying to open, read, or write that file, Python will raise an **exception**. An exception is a special kind of signal that says “something unexpected happened”. If we do nothing about it, the program stops abruptly and the user sees a scary traceback (a long list of technical details).  \n\n> **Definition:** *Exception* – an error condition that interrupts the normal flow of a program and must be handled, otherwise the program terminates.\n\nTo keep the program running smoothly we use a **try‑except block**. The word *try* tells Python: “Attempt the code inside this block, but be ready for trouble.” The *except* part says: “If a certain kind of trouble occurs, catch it and do something else instead of crashing.”  \n\n### The basic pattern\n\n```python\ntry:\n    # code that might fail\n    f = open('data.txt', 'r')\n    content = f.read()\n    f.close()\nexcept FileNotFoundError:\n    print(\"Sorry, the file 'data.txt' does not exist.\")\n```\n\nIn this example the only thing we are watching for is **FileNotFoundError** – the error that Python raises when the file we asked for cannot be found.  \n\n> **In daily life:** Imagine you ask a friend to bring a book from the library. If the book is missing, instead of yelling, you politely say “The book isn’t there, can you check again?” The *except* clause is that polite response.\n\n### Other common file‑related exceptions\n\n| Exception | When it happens |\n|-----------|-----------------|\n| `FileNotFoundError` | The file name you gave does not exist in the given folder. |\n| `IOError` (or its modern alias `OSError`) | A broader input/output problem, such as trying to read from a disk that is full, a permission issue, or a hardware failure. |\n| `PermissionError` | You do not have the right to read or write the file (e.g., the file is read‑only). |\n\nYou can catch several exceptions in one block, or handle each separately to give more specific feedback.\n\n```python\ntry:\n    with open('report.txt', 'w') as f:   # 'with' auto‑closes the file\n        f.write('Results of the experiment')\nexcept FileNotFoundError:\n    print(\"The directory you specified does not exist.\")\nexcept PermissionError:\n    print(\"You do not have permission to write to 'report.txt'.\")\nexcept IOError as e:                     # catches other I/O problems\n    print(f\"An unexpected I/O error occurred: {e}\")\n```\n\nNotice the use of **`with`** – it automatically closes the file even if an error occurs, so we do not have to call `f.close()` ourselves.  \n\n> **Note:** Using `with open(...) as f:` is the recommended way to work with files because it guarantees the file is closed properly, even when an exception is raised.\n\n### Giving the user a graceful message\n\nWhen an error is caught we can print a short, friendly message, log the technical details for later debugging, or even ask the user to try again.\n\n```python\ndef load_config():\n    while True:\n        try:\n            with open('config.cfg', 'r') as f:\n                return f.read()\n        except FileNotFoundError:\n            print(\"Configuration file missing. Please place 'config.cfg' in the program folder.\")\n            break\n        except IOError as e:\n            print(f\"Cannot read the file right now ({e}). Please check your disk.\")\n            break\n```\n\nThe loop lets the user correct the problem (for example, by creating the file) without the program crashing.  \n\n> **Common mistake:** Catching *all* exceptions with a bare `except:`. This hides real bugs and makes debugging hard. Always catch the specific exceptions you expect.\n\n### Summarising the steps\n\n1. **Identify** the operations that may fail (opening, reading, writing).  \n2. **Wrap** them in a `try:` block.  \n3. **List** the exceptions you expect (`FileNotFoundError`, `IOError`, etc.) in separate `except` clauses.  \n4. **Provide** a clear, user‑friendly message or recovery action.  \n5. **Use** `with open(...) as f:` to ensure the file is closed automatically.\n\nBy handling file errors deliberately, your program becomes more robust, easier to use, and feels much more polite – just like a good conversation where you anticipate possible misunderstandings and respond kindly.  \n\n> **Remember:** Always catch the *specific* file‑related exceptions you anticipate, and give the user a helpful message instead of letting the program crash.",
+   "code": ""
+  },
+  {
+   "heading": "Simple Data Persistence Example",
+   "body": "Imagine you want a notebook that remembers the names you write in it, even after you close the notebook and open it tomorrow.  \nIn a computer, a **file** works like that notebook: you can write data to it, close it, and later open it again to read the same data.  \nBelow we will build a tiny program that does exactly this – it asks the user for names, saves them to a file, and when you run the program next time it loads the previously saved names and shows them.\n\n---\n\n### Step 1 – Choose a file name\n\nFirst we decide what the file will be called.  \nA *file name* is just a label the operating system uses to locate the file on the disk.  \nWe will store the names in a text file called `names.txt`.\n\n```python\nFILE_NAME = \"names.txt\"\n```\n\n> **Definition:** *File name* – the string that identifies a file on the storage medium (e.g., `\"names.txt\"`).\n\n---\n\n### Step 2 – Try to read the old list\n\nWhen the program starts we want to see if `names.txt` already exists and, if it does, read the names inside.  \nOpening a file can fail (for example, the file may not exist yet).  \nTo handle this safely we use a **try‑except** block: the code inside `try` is attempted, and if an error occurs the code inside `except` runs instead.\n\n```python\ndef load_names():\n    try:\n        with open(FILE_NAME, \"r\") as f:          # open for reading\n            # each line ends with a newline character, we strip it away\n            return [line.strip() for line in f]\n    except FileNotFoundError:                    # file does not exist yet\n        return []                                 # start with an empty list\n```\n\n> **Note:** `with open(... ) as f:` automatically **closes** the file when the block ends, so you never forget to close it.\n\nThe function returns a Python *list* (a collection of items) containing all previously saved names. If the file is missing, we simply start with an empty list.\n\n---\n\n### Step 3 – Ask the user for new names\n\nNow we have the old names, and we can let the user add more.  \nWe will keep asking until the user types an empty line (just presses **Enter**).\n\n```python\ndef ask_for_names(existing):\n    print(\"Current names:\", \", \".join(existing) if existing else \"none\")\n    while True:\n        new_name = input(\"Enter a name (or press Enter to finish): \").strip()\n        if not new_name:               # empty input ends the loop\n            break\n        existing.append(new_name)\n    return existing\n```\n\nThe `strip()` call removes any leading or trailing spaces, so `\"  Alice \"` becomes `\"Alice\"`.\n\n---\n\n### Step 4 – Save the updated list\n\nAfter the user finishes, we write the whole list back to `names.txt`.  \nWe open the file in **write** mode (`\"w\"`). This mode creates the file if it does not exist, and overwrites it if it does.\n\n```python\ndef save_names(names):\n    try:\n        with open(FILE_NAME, \"w\") as f:          # open for writing\n            for name in names:\n                f.write(name + \"\\n\")              # each name on its own line\n    except OSError as e:                         # any problem writing the file\n        print(\"Error saving names:\", e)\n```\n\n> **Common mistake:** forgetting the newline (`\"\\n\"`). Without it all names would appear on a single line when you read the file later.\n\n---\n\n### Step 5 – Put everything together\n\n```python\ndef main():\n    names = load_names()          # Step 2\n    names = ask_for_names(names)  # Step 3\n    save_names(names)             # Step 4\n    print(\"All saved names:\", \", \".join(names))\n\nif __name__ == \"__main__\":\n    main()\n```\n\nWhen you run the program the first time, `names.txt` does not exist, so `load_names()` returns an empty list.  \nYou type a few names, they are written to the file, and the program ends.  \nRun the program again, and you will see the previously entered names already listed – the data persisted between runs.\n\n> **In daily life:** Think of the file as a fridge where you store leftovers. You put food in (write), close the door (close), and later open it again (read) to eat the same food.\n\n---\n\n### Why this matters\n\n* **Persistence** – data stays alive after the program stops, which is essential for almost any real‑world application (games saving scores, apps remembering settings, etc.).\n* **Error handling** – using `try‑except` prevents the program from crashing when something unexpected happens, such as a missing file or a disk error.\n* **Clear structure** – separating loading, user interaction, and saving into functions makes the code easier to read and reuse.\n\nNow you have a complete, robust example of simple data persistence using file handling. Try modifying the program: store ages, write the data in CSV format, or add a menu to delete a name. Each change will reinforce the same core ideas you just learned.",
+   "code": ""
+  },
+  {
+   "heading": "Practice Exercise and Review",
+   "body": "Imagine you have a small address‑book program that stores names in a text file called **names.txt**.  \nWhen the program starts it reads all the names, lets you add a new one, and then saves the whole list back to the file.  \nNow we will extend this program so that you can also **delete** a name that you no longer need.  \nDoing this will make you use every idea we have learned: opening a file, reading lines, writing lines, and handling possible errors.\n\n---\n\n### Step‑by‑step plan\n\n1. **Read the current list** – open *names.txt* in read mode (`'r'`) and store each line in a Python list called `names`.  \n2. **Ask the user what to do** – present a simple menu:  \n   *1 – Add a name*  \n   *2 – Delete a name*  \n   *3 – Quit*  \n3. **If the user chooses 2 (delete)**, ask for the exact name to remove.  \n4. **Check whether the name exists** in the `names` list.  \n   * If it does, remove it with `list.remove()`.  \n   * If it does not, print a friendly message.  \n5. **Write the updated list back** – open *names.txt* in write mode (`'w'`) and write each remaining name on its own line.  \n6. **Close the file** – always close the file (or use a `with` block) so the operating system can finish the write operation.\n\n---\n\n### The code skeleton\n\n```python\ndef load_names():\n    try:\n        with open('names.txt', 'r') as f:\n            return [line.strip() for line in f]\n    except FileNotFoundError:\n        # If the file does not exist yet, start with an empty list\n        return []\n\ndef save_names(names):\n    with open('names.txt', 'w') as f:\n        for name in names:\n            f.write(name + '\\n')\n\ndef main():\n    names = load_names()\n    while True:\n        print(\"\\nMenu:\")\n        print(\"1 – Add a name\")\n        print(\"2 – Delete a name\")\n        print(\"3 – Quit\")\n        choice = input(\"Enter your choice: \")\n\n        if choice == '1':\n            new_name = input(\"Enter the name to add: \").strip()\n            names.append(new_name)\n            save_names(names)\n            print(f\"'{new_name}' added.\")\n        elif choice == '2':\n            del_name = input(\"Enter the name to delete: \").strip()\n            if del_name in names:\n                names.remove(del_name)\n                save_names(names)\n                print(f\"'{del_name}' removed.\")\n            else:\n                print(f\"'{del_name}' not found in the list.\")\n        elif choice == '3':\n            print(\"Goodbye!\")\n            break\n        else:\n            print(\"Please choose 1, 2, or 3.\")\n\nif __name__ == '__main__':\n    main()\n```\n\n> **Definition:** *`with open(... ) as f:`* – a *context manager* that automatically closes the file when the block ends, so you never forget to call `f.close()`.\n\n> **Note:** The `strip()` method removes the newline character (`\\n`) that was read from the file, giving you a clean name to compare.\n\n> **Common mistake:** Trying to delete a name that isn’t in the list will raise a `ValueError`. That is why we first test `if del_name in names:` before calling `remove()`.\n\n> **Remember:** Opening a file in **write mode** (`'w'`) erases the old content before new data is written. If you only want to add to the end, use **append mode** (`'a'`).\n\n---\n\n### Why this works\n\nWhen you read the file, each line becomes an element of the list `names`.  \nRemoving an element from the list changes the in‑memory representation, but the file on disk is still unchanged.  \nCalling `save_names(names)` rewrites the whole file, now missing the deleted entry. This mirrors how a real notebook works: you cross out a name on paper, then make a fresh copy without that line.\n\nThink of the file as a **shopping list** you keep on the fridge.  \nReading the list is like looking at the paper to see what you need.  \nAdding an item is writing a new line at the bottom.  \nDeleting an item is erasing a line, then rewriting the whole list so the erased line never appears again.  \n\n---\n\n### What to try on your own\n\n1. Run the program, add a few names, then delete one. Open *names.txt* in a text editor to see that the file matches the program’s output.  \n2. Modify the program so that it **ignores case** when searching for a name to delete (e.g., “alice” and “Alice” should be treated the same).  \n3. Add a feature that shows the current list of names before the menu appears, so the user can see what is stored at any moment.\n\nBy completing these steps you have practiced **opening**, **reading**, **writing**, and **error handling** with files, and you have seen how a small change—deleting a name—affects the whole data‑persistence cycle. Keep experimenting, and the concepts will become second nature.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a file in the context of programming, and why do we need to open it before reading or writing?",
+   "a": "A file is a collection of data stored on a storage device (like a hard drive) that a program can read from or write to. It is like a notebook that holds information. Before a program can read data from the file or add new data, it must open the file to tell the operating system which file it wants to work with and what mode (read, write, etc.) it will use. Opening establishes a connection, and closing releases that connection and saves any changes."
+  },
+  {
+   "level": "Easy",
+   "q": "Write the two Python statements needed to open a text file named `notes.txt` for reading and then close it immediately.",
+   "a": "1. Use the `open` function with mode `'r'` (read): `file = open('notes.txt', 'r')`\n2. Close the file with the `close` method: `file.close()`"
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between opening a file with mode `'r'` and mode `'w'`. What happens to the file’s existing content in each case?",
+   "a": "Mode `'r'` opens the file for reading only. The file must already exist; otherwise Python raises a `FileNotFoundError`. The existing content is left unchanged and can be read but not modified.\nMode `'w'` opens the file for writing. If the file already exists, Python truncates it—meaning it deletes all existing content—so the file starts empty. If the file does not exist, Python creates a new empty file."
+  },
+  {
+   "level": "Medium",
+   "q": "You have a file `scores.txt` that contains one integer per line. Write a short Python code snippet that opens the file, reads all numbers, computes their sum, and then closes the file.",
+   "a": "```python\ntotal = 0                     # start a running total\nf = open('scores.txt', 'r')   # open for reading\nfor line in f:                # iterate over each line\nnumber = int(line.strip())  # remove newline and convert to int\ntotal += number           # add to total\nf.close()                     # close the file\nprint('Sum:', total)          # display the result\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "Describe how you would use a `try`‑`except` block to handle the situation where a program tries to open a file that does not exist, and you want to display a friendly message instead of a crash. Provide a code example.",
+   "a": "1. Wrap the `open` call in a `try` block.\n2. Catch the specific exception `FileNotFoundError`.\n3. Inside the `except` block, print a user‑friendly message.\n4. Optionally, use a `finally` block to ensure the file is closed if it was opened.\n```python\ntry:\nf = open('data.txt', 'r')   # attempt to open\ncontent = f.read()          # read if successful\nexcept FileNotFoundError:\nprint('Sorry, the file \"data.txt\" was not found. Please check the filename.')\nelse:\nprint('File opened successfully. Content length:', len(content))\nfinally:\n# close only if the file was opened\ntry:\nf.close()\nexcept NameError:\npass   # f was never created, nothing to close\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "You need to store a list of student records (name and grade) so that the data persists after the program ends. Explain how you could use a text file to save this data, and write a Python function `save_records(records, filename)` that writes the list to the file, one record per line in the format `name,grade`. Also show how you would read the file back into a list of tuples.",
+   "a": "**Explanation:**\n- Choose a simple text representation: each line holds one record, with fields separated by a comma.\n- When saving, open the file in write mode (`'w'`) and write each record followed by a newline.\n- When loading, open the file in read mode (`'r'`), read each line, split on the comma, strip whitespace, and convert the grade to the appropriate type (e.g., `int`).\n**Saving function:**\n```python\ndef save_records(records, filename):\n\"\"\"\nrecords: list of tuples like [('Alice', 85), ('Bob', 92)]\nfilename: name of the file to write to\n\"\"\"\nf = open(filename, 'w')          # open for writing, truncates existing file\nfor name, grade in records:\nline = f'{name},{grade}\\n'    # create line in required format\nf.write(line)                # write line to file\nf.close()                        # close when done\n```\n**Loading function:**\n```python\ndef load_records(filename):\n\"\"\"\nReturns a list of (name, grade) tuples read from the file.\n\"\"\"\nrecords = []\nf = open(filename, 'r')          # open for reading\nfor line in f:\nname, grade_str = line.strip().split(',')  # split and remove newline\nrecords.append((name, int(grade_str)))    # convert grade to int\nf.close()\nreturn records\n```\nThese two functions let you persist the student data between program runs."
+  }
+ ],
+ "recap": "This lesson explains what a file is and how it works like a notebook that stores text on a disk. It shows how to open, read, write, and close files using Python’s open() function and different modes. The importance of closing files and handling errors with try‑except blocks is highlighted. Finally, a small example demonstrates persisting a list of names across program runs.",
+ "key_terms": [
+  {
+   "term": "File",
+   "meaning": "A container on storage that holds a sequence of characters or data."
+  },
+  {
+   "term": "Open (file)",
+   "meaning": "Create a file object so the program can read from or write to the file."
+  },
+  {
+   "term": "Close (file)",
+   "meaning": "Release the file object, ensuring data is saved and the file is unlocked."
+  },
+  {
+   "term": "Read mode ('r')",
+   "meaning": "Opens a file for reading; the file must already exist."
+  },
+  {
+   "term": "Write mode ('w')",
+   "meaning": "Opens a file for writing, erasing any existing content."
+  },
+  {
+   "term": "Append mode ('a')",
+   "meaning": "Opens a file for writing, adding new data to the end without deleting existing content."
+  },
+  {
+   "term": "Exception",
+   "meaning": "An error signal that interrupts normal program flow unless caught."
+  },
+  {
+   "term": "try‑except block",
+   "meaning": "A construct that attempts code and catches specified exceptions to prevent crashes."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the open() function return?",
+   "options": [
+    "A string with the file name",
+    "A file object/handle",
+    "The file’s contents",
+    "A boolean indicating success"
+   ],
+   "answer": 1,
+   "why": "open() creates and returns a file object that lets you interact with the file."
+  },
+  {
+   "q": "Which mode should you use to add data to the end of an existing file without deleting its current contents?",
+   "options": [
+    "'r'",
+    "'w'",
+    "'a'",
+    "'x'"
+   ],
+   "answer": 2,
+   "why": "'a' stands for append and writes new data after the existing content."
+  },
+  {
+   "q": "What can happen if you forget to close a file after writing?",
+   "options": [
+    "The file is automatically deleted",
+    "Data may remain in a buffer and not be saved",
+    "The program will crash immediately",
+    "The file becomes read‑only"
+   ],
+   "answer": 1,
+   "why": "Unclosed files may keep data in a temporary buffer, so it might never be written to disk."
+  },
+  {
+   "q": "Which of the following is NOT a typical way to read a text file in Python?",
+   "options": [
+    "read()",
+    "readline()",
+    "readlines()",
+    "readall()"
+   ],
+   "answer": 3,
+   "why": "readall() is not a built‑in method; read(), readline() and readlines() are."
+  },
+  {
+   "q": "What does the exception handling block 'try: ... except FileNotFoundError:' do?",
+   "options": [
+    "Creates the file if it does not exist",
+    "Ignores any error that occurs",
+    "Catches the specific error when the file is missing",
+    "Closes the file automatically"
+   ],
+   "answer": 2,
+   "why": "It catches FileNotFoundError, allowing the program to handle the missing‑file situation gracefully."
+  },
+  {
+   "q": "In the example program, what is the purpose of the constant FILE_NAME?",
+   "options": [
+    "To store the user's input",
+    "To specify the path of the file that holds the names",
+    "To count how many names are saved",
+    "To set the file mode"
+   ],
+   "answer": 1,
+   "why": "FILE_NAME holds the filename (e.g., \"names.txt\") used for reading and writing the name list."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a file in computing?",
+   "back": "A storage container that holds a sequence of characters or binary data on a disk, SSD, USB, etc."
+  },
+  {
+   "front": "How do you open a file for reading in Python?",
+   "back": "Use open('filename', 'r') which returns a file object in read mode."
+  },
+  {
+   "front": "What does the file mode 'w' do?",
+   "back": "Opens a file for writing and truncates (clears) any existing content."
+  },
+  {
+   "front": "Why must you close a file after you are done with it?",
+   "back": "To flush buffered data to disk and release the lock so other programs can use the file."
+  },
+  {
+   "front": "Name one way to read a file line by line automatically.",
+   "back": "Iterate over the file object in a for loop, e.g., for line in file:"
+  },
+  {
+   "front": "What is an exception?",
+   "back": "A signal that an error occurred during program execution, interrupting normal flow unless handled."
+  },
+  {
+   "front": "How do you safely handle file‑related errors?",
+   "back": "Wrap file operations in a try‑except block and catch specific exceptions like FileNotFoundError."
+  },
+  {
+   "front": "What is the difference between read() and readline()?",
+   "back": "read() returns the entire file content as one string; readline() returns only the next line each call."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l09-file-as-notebook",
+   "title": "A paper notebook representing a computer file on disk.",
+   "alt": "A paper notebook representing a computer file on disk.",
+   "priority": 8,
+   "picture_title": "File as Notebook",
+   "kind": "illustration",
+   "subject": "Shows a closed notebook on a shelf next to a computer screen, with an arrow indicating that the notebook stores the same kind of information as a digital file.",
+   "layout": "Notebook on the left, computer screen on the right, arrow connecting them, simple labels.",
+   "labels": [
+    "Notebook",
+    "Computer File",
+    "Storage"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l09-open-read-close-sequence",
+   "title": "The three steps a program follows when handling a file.",
+   "alt": "The three steps a program follows when handling a file.",
+   "priority": 7,
+   "picture_title": "Open‑Read‑Close Sequence",
+   "kind": "labelled diagram",
+   "subject": "A three‑panel diagram: first panel shows a key turning in a lock (open), second panel shows a scroll being read line by line (read), third panel shows the key being removed (close).",
+   "layout": "Horizontal sequence of three panels, each with a simple icon and a short label underneath.",
+   "labels": [
+    "Open",
+    "Read",
+    "Close"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l09-error-handling-flow",
+   "title": "How a program catches file‑related errors.",
+   "alt": "How a program catches file‑related errors.",
+   "priority": 6,
+   "picture_title": "Error Handling Flow",
+   "kind": "flowchart",
+   "subject": "A flowchart that starts with 'Try to open file', branches to 'Success → read/write' or 'Failure → catch exception', and ends with 'Close file' or 'Show error message'.",
+   "layout": "Top‑down flow with decision diamond for success/failure, arrows pointing to subsequent steps.",
+   "labels": [
+    "Try Open",
+    "Success",
+    "Failure",
+    "Read/Write",
+    "Catch Exception",
+    "Close",
+    "Show Error"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Opening and Closing a File",
+   "steps": [
+    {
+     "label": "Open file",
+     "text": "Call open() and get a file object"
+    },
+    {
+     "label": "Use file",
+     "text": "Read or write data"
+    },
+    {
+     "label": "Close file",
+     "text": "Call close() or use with‑statement"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "Reading a Text File – Three Ways",
+   "left": {
+    "name": "read()",
+    "points": [
+     "Gets whole file at once",
+     "Simple for small files",
+     "Uses more memory"
+    ]
+   },
+   "right": {
+    "name": "readline() / for loop",
+    "points": [
+     "Gets one line at a time",
+     "Works for any size",
+     "Easy to process line by line"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Writing to a Text File",
+   "steps": [
+    {
+     "label": "Open for write",
+     "text": "open('file.txt','w') or 'a'"
+    },
+    {
+     "label": "Write data",
+     "text": "use write() or writelines()"
+    },
+    {
+     "label": "Close file",
+     "text": "automatically with with‑statement"
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Handling File Errors",
+   "steps": [
+    {
+     "label": "Try block",
+     "text": "Attempt open/read/write"
+    },
+    {
+     "label": "Except block",
+     "text": "Catch IOError or OSError"
+    },
+    {
+     "label": "Finally block",
+     "text": "Ensure file is closed"
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "Simple Data Persistence Example",
+   "steps": [
+    {
+     "label": "Choose file name",
+     "text": "e.g., names.txt"
+    },
+    {
+     "label": "Read existing names",
+     "text": "open in 'r' and load into a list"
+    },
+    {
+     "label": "Add or delete names",
+     "text": "modify the list in memory"
+    },
+    {
+     "label": "Save list back",
+     "text": "open in 'w' and write all lines"
+    }
+   ],
+   "loop": true,
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

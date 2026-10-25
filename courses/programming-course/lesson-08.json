@@ -1,0 +1,350 @@
+{
+ "title": "Working with Collections",
+ "summary": "In this lesson students learn how to use Python collections—lists, tuples, and dictionaries—and perform basic operations such as indexing, adding elements, and iterating over them. The material builds step‑by‑step so every learner can follow along confidently.",
+ "objectives": [
+  "Create and modify a list, tuple, and dictionary",
+  "Access elements using indexing and keys",
+  "Add, remove, and update items in each collection type",
+  "Iterate through collections with loops to process data",
+  "Choose the appropriate collection for a given problem"
+ ],
+ "prerequisites": "Students should already know basic Python syntax, variables, and simple control flow like if‑statements and loops.",
+ "why": [
+  "Collections let programs store and organize multiple pieces of data, which is essential for everything from simple scripts to large applications. Understanding how to pick the right collection makes code clearer, faster, and easier to maintain.",
+  "In real life, lists can hold a shopping list, tuples can store fixed settings such as a GPS coordinate, and dictionaries can map usernames to passwords. Mastering these tools prepares students for data handling tasks in science, business, and everyday programming projects."
+ ],
+ "sections": [
+  {
+   "heading": "What Is a Collection?",
+   "body": "A **collection** is simply a way to keep several values together in one place.  \nInstead of having ten separate variables like `a1`, `a2`, `a3`, …, you store all of them inside a single object and refer to that object whenever you need the whole group or any part of it.\n\n> **Definition:** A collection is a data structure that holds multiple items, possibly of different types, as a single unit.\n\nWhy is this useful?  \nWhen a program works with many related pieces of information—such as the scores of all students in a class, the names of the planets, or the settings of a video game—it would be cumbersome to manage each piece with its own variable. Collections let us:\n\n1. **Add or remove items** without rewriting large parts of the code.  \n2. **Loop through** the items automatically, so the same operation can be performed on every element.  \n3. **Pass the whole group** to a function with a single argument, keeping function signatures short and clear.\n\nThink of a collection like a **mailbox**. Each letter inside the mailbox is an individual piece of mail, but you only need one address—the mailbox—to receive or send them all. If you wanted to check whether a particular letter is inside, you open the mailbox and look through its contents, rather than trying to remember the location of each letter separately.\n\nIn programming, the most common collections are **lists**, **tuples**, and **dictionaries**. They differ in how they store items and what you can do with them, but the core idea is the same: a single container that holds many values.\n\nWhen you create a collection, you give it a **name** (just like naming a variable) and then fill it with **elements** (the individual values). For example, a list of three numbers can be written as:\n\n$$\nnumbers = [4, 7, 2]\n$$\n\nHere `numbers` is the collection, and `4`, `7`, and `2` are its elements. The square brackets `[` `]` tell the computer that this is a list.\n\nCollections also have **properties**—characteristics that describe how they behave. Two important properties are:\n\n- **Order** – does the collection keep the items in the same sequence you added them?  \n- **Mutability** – can you change the items after the collection is created?\n\nUnderstanding these properties helps you decide which type of collection fits a particular problem.\n\n> **In daily life:** Imagine a playlist on a music streaming app. The playlist is a collection of songs. You can add new songs, remove old ones, and play them one after another in the order they appear. The playlist itself is a single object you can share with friends, even though it contains many individual tracks.\n\nWhen you start using collections, a common mistake is to treat them like a single value and forget that you can access each element individually. For example, trying to add two collections together with `+` will concatenate them (join them end‑to‑end) rather than adding each pair of numbers inside. This can lead to unexpected results if you expected element‑wise addition.\n\n> **Common mistake:** Assuming that `collection1 + collection2` adds corresponding elements; it actually joins the two collections into a longer one.\n\nRemember that collections are not just a convenience; they are essential for writing clean, maintainable code. By grouping related data, you reduce the number of variables, avoid repetitive code, and make it easier to reason about what your program is doing.\n\n> **Remember:** Use a collection whenever you have a set of items that belong together—this keeps your code organized and prepares you for powerful operations like looping, searching, and sorting.",
+   "code": ""
+  },
+  {
+   "heading": "Lists – Ordered, Mutable Sequences",
+   "body": "A list is a collection that stores several values **in the order you put them**.  \nThink of a list like a row of numbered lockers: each locker has a number (its *index*) and can hold one item. Because the lockers stay in the same line, you can always find an item by looking at its number, and you can open any locker to replace what is inside.\n\n---  \n\n> **Definition:** A *list* is an ordered, mutable sequence of elements.  \n> *Ordered* means the items keep the same relative position unless you change it.  \n> *Mutable* means you can add, remove, or change items after the list has been created.\n\n### Creating a list  \n\nIn Python you write a list by putting the items between square brackets `[` and `]`, separated by commas.\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\n```\n\nHere `fruits` is a list with three elements. The first element (`\"apple\"`) is at index `0`, the second (`\"banana\"`) at index `1`, and so on. Indexing starts at **zero**, not one.\n\n### Accessing items by index  \n\nTo look at a single element you write the list name followed by the index in square brackets.\n\n```python\nfirst = fruits[0]      # \"apple\"\nsecond = fruits[1]     # \"banana\"\n```\n\nIf you use a negative index, Python counts from the end of the list:\n\n```python\nlast = fruits[-1]      # \"cherry\"\nsecond_last = fruits[-2]  # \"banana\"\n```\n\n### Adding new items  \n\nBecause a list is mutable, you can grow it. The most common way is `append`, which puts a new element at the end.\n\n```python\nfruits.append(\"date\")\n# fruits is now [\"apple\", \"banana\", \"cherry\", \"date\"]\n```\n\nIf you need to insert an item at a specific position, use `insert`.\n\n```python\nfruits.insert(1, \"blueberry\")\n# [\"apple\", \"blueberry\", \"banana\", \"cherry\", \"date\"]\n```\n\n### Changing existing items  \n\nYou can replace the value stored at any index simply by assigning a new value to that position.\n\n```python\nfruits[2] = \"blackberry\"\n# [\"apple\", \"blueberry\", \"blackberry\", \"cherry\", \"date\"]\n```\n\nThe list keeps its length; only the content at that slot changes.\n\n### Looping through a list  \n\nOften you want to do something with every element. A `for` loop lets you visit each item in order.\n\n```python\nfor fruit in fruits:\n    print(\"I like\", fruit)\n```\n\nThe loop variable `fruit` takes the value of each element, one after another, until the list ends. The output will be:\n\n```\nI like apple\nI like blueberry\nI like blackberry\nI like cherry\nI like date\n```\n\nIf you also need the index while looping, use `enumerate`.\n\n```python\nfor i, fruit in enumerate(fruits):\n    print(i, \":\", fruit)\n```\n\nThis prints the index (`i`) and the corresponding item.\n\n---  \n\n> **In daily life:** Imagine a shopping list written on a notepad. You can add new items at the bottom, cross out (or replace) items you already bought, and read the list from top to bottom. That notepad behaves just like a Python list.\n\n> **Common mistake:** Forgetting that indexing starts at zero. Trying to access `fruits[3]` when the list has only three items (`[\"apple\",\"banana\",\"cherry\"]`) raises an `IndexError`. Always check the length with `len(fruits)` before using an index you are not sure about.\n\n> **Remember:** Lists keep the order you give them, and you can change that order any time. Use them when you need a flexible, ordered collection that you will modify while the program runs.  \n\n---  \n\nWith these basics—creating, indexing, adding, changing, and looping—you can handle most everyday tasks that involve a sequence of items. The same ideas apply no matter what the elements are: numbers, strings, or even other lists. Once you are comfortable with lists, you’ll find many problems become easier to express in code.",
+   "code": ""
+  },
+  {
+   "heading": "Tuples – Ordered, Immutable Sequences",
+   "body": "A tuple is a simple way to keep several values together, just like a list, but with one important rule: once you have created a tuple you cannot change any of its items.  \n\n> **Definition:** A *tuple* is an **ordered**, **immutable** sequence of objects.  \n\nThe word *ordered* means that the items have a fixed position, counted from 0 at the leftmost item. The word *immutable* means “cannot be altered” – you cannot add, delete, or replace elements after the tuple exists.\n\n---\n\n### Creating a tuple\n\nThe most common way to make a tuple is to write the items separated by commas, optionally surrounded by parentheses:\n\n```python\npoint = (3, 5)          # a tuple with two numbers\ncolors = \"red\", \"green\", \"blue\"   # parentheses are optional\nempty = ()              # an empty tuple\nsingle = (42,)          # a one‑item tuple needs a trailing comma\n```\n\nWhy the comma after a single value? Python uses the comma, not the parentheses, to decide that you want a tuple. Without the comma, `single = (42)` would just be the number `42` inside ordinary parentheses.\n\n---\n\n### Accessing items – indexing\n\nBecause a tuple is ordered, you can retrieve any element by its *index* (its position). Indexes start at 0, so the first item is index 0, the second is index 1, and so on.\n\n```python\npoint = (3, 5)\nx = point[0]   # x becomes 3\ny = point[1]   # y becomes 5\n```\n\nYou can also count from the end using negative indexes: `-1` is the last element, `-2` the one before it, etc.\n\n```python\ncolors = (\"red\", \"green\", \"blue\")\nlast = colors[-1]   # \"blue\"\nsecond = colors[-2] # \"green\"\n```\n\nIf you try to use an index that does not exist, Python raises an `IndexError`. This is a helpful safety net that tells you you are asking for something outside the tuple’s range.\n\n---\n\n### Why immutability matters\n\nImmutability gives several practical benefits:\n\n1. **Safety** – When you pass a tuple to a function, you know the function cannot accidentally change the data you sent. This makes debugging easier because the original data stays the same throughout the program.\n\n2. **Hashability** – Because a tuple cannot change, Python can compute a stable *hash* value for it. This allows tuples to be used as keys in dictionaries or to be stored in sets. Lists, being mutable, cannot be dictionary keys.\n\n3. **Performance** – Creating a tuple is slightly faster and uses a bit less memory than creating a list with the same items, because Python does not need to allocate extra space for future modifications.\n\n> **In daily life:** Think of a tuple like a sealed envelope that already contains a set of letters. You can read any letter (index), but you cannot add a new one or remove an existing one without breaking the seal. A list, by contrast, is like an open notebook where you can write, erase, or rearrange pages at any time.\n\n---\n\n### Comparing tuples and lists\n\n| Feature | Tuple | List |\n|---------|-------|------|\n| Mutability | **Immutable** – cannot change after creation | Mutable – you can add, remove, or replace items |\n| Syntax | `(a, b, c)` or `a, b, c` | `[a, b, c]` |\n| Use as dictionary key | Allowed (if all items are hashable) | Not allowed |\n| Typical purpose | Fixed collections of related values (e.g., coordinates, RGB colors) | Collections that will grow, shrink, or be reordered (e.g., a shopping cart) |\n\nBecause of these differences, you should choose a tuple when the collection’s size and content are meant to stay constant throughout the program. Use a list when you need flexibility.\n\n> **Remember:** If you ever need to change a tuple, you must create a new tuple instead, often by converting to a list, modifying, and converting back:\n\n```python\nt = (1, 2, 3)\nlst = list(t)   # [1, 2, 3]\nlst.append(4)   # [1, 2, 3, 4]\nt = tuple(lst)  # (1, 2, 3, 4)\n```\n\n---\n\n### Quick practice\n\n1. Create a tuple `person = (\"Alice\", 30, \"Engineer\")`.  \n2. Print the person's occupation using indexing.  \n3. Try to change the age (`person[1] = 31`) and observe the error.  \n\nThese steps show how tuples give you a reliable, read‑only container for related data. Use them whenever you want to guarantee that the data will not be altered by accident.",
+   "code": ""
+  },
+  {
+   "heading": "Dictionaries – Key‑Value Pairs",
+   "body": "A dictionary is a collection that stores data as **key‑value pairs**.  \nThink of a real‑world address book: each person’s name (the *key*) points to a phone number (the *value*).  \nIn a program the dictionary lets you look up a value instantly by giving its key, just as you would flip to a name in the book to find the number.\n\n### Creating a dictionary\n\nIn Python a dictionary is written with curly braces `{}` and a colon `:` between each key and its value.\n\n```python\n# an empty dictionary\nphone_book = {}\n\n# a dictionary with three entries\nphone_book = {\n    \"Alice\": \"555‑0123\",\n    \"Bob\":   \"555‑0456\",\n    \"Carol\": \"555‑0789\"\n}\n```\n\n> **Definition:** A *key* is a unique identifier used to retrieve its associated *value*; a *dictionary* is the whole set of these pairs.\n\nKeys must be **hashable** (immutable types such as strings, numbers, or tuples). Values can be any type, even another dictionary.\n\n### Accessing values\n\nTo get the value for a particular key, place the key in square brackets after the dictionary name:\n\n```python\nbob_number = phone_book[\"Bob\"]      # returns \"555‑0456\"\n```\n\nIf the key does not exist, Python raises a `KeyError`. To avoid this, use the `get` method, which lets you supply a default value:\n\n```python\ndave_number = phone_book.get(\"Dave\", \"not found\")   # returns \"not found\"\n```\n\n### Adding and updating entries\n\nAdding a new pair or changing an existing one uses the same syntax:\n\n```python\n# add a new entry\nphone_book[\"Dave\"] = \"555‑0999\"\n\n# update an existing entry\nphone_book[\"Alice\"] = \"555‑0000\"\n```\n\nThe dictionary does not keep any order of insertion (in older Python versions it was unordered; from Python 3.7 onward it remembers insertion order, but you should not rely on that for program logic).\n\n### Deleting entries\n\nYou can remove a pair with the `del` statement or the `pop` method.\n\n```python\n# delete by key\ndel phone_book[\"Carol\"]\n\n# pop returns the removed value\nbob_number = phone_book.pop(\"Bob\")   # bob_number is \"555‑0456\"\n```\n\nIf you try to delete a key that isn’t present, `del` raises `KeyError`. `pop` can also accept a default to avoid the error:\n\n```python\nmissing = phone_book.pop(\"Eve\", None)   # returns None instead of error\n```\n\n### Iterating over a dictionary\n\nOften you need to look at every key, every value, or both together. Python provides three useful views:\n\n```python\n# iterate over keys\nfor name in phone_book:\n    print(name)\n\n# iterate over values\nfor number in phone_book.values():\n    print(number)\n\n# iterate over both key and value\nfor name, number in phone_book.items():\n    print(f\"{name} → {number}\")\n```\n\n`phone_book.items()` returns a sequence of `(key, value)` tuples, which can be unpacked directly in the `for` loop.\n\n> **In daily life:** Imagine a classroom seating chart where each student’s name (key) points to their assigned seat number (value). Changing seats is just updating the value for that name.\n\n### Common patterns\n\n* **Counting occurrences** – use a dictionary where each key is an item and the value is a count.\n\n  ```python\n  counts = {}\n  for word in words:\n      counts[word] = counts.get(word, 0) + 1\n  ```\n\n* **Grouping items** – store a list as the value to collect several items under the same key.\n\n  ```python\n  groups = {}\n  for item in items:\n      groups.setdefault(category(item), []).append(item)\n  ```\n\n* **Fast lookup** – because dictionary access is $O(1)$ on average, looking up a key is much faster than scanning a list.\n\n  $$\\text{time to find a value} \\approx \\text{constant}$$\n\n> **Remember:** Keys must be unique; adding a new entry with an existing key overwrites the old value.\n\nWith these basics you can store, retrieve, and manipulate data efficiently using dictionaries, turning a simple list of items into a powerful, searchable structure.",
+   "code": ""
+  },
+  {
+   "heading": "Choosing the Right Collection and Common Patterns",
+   "body": "When you start a program you often have to decide **where** to store a group of items and **how** you will work with them later. The choice is not random – each collection type has strengths that match particular tasks. Below we look at the most common situations and show the simple patterns that make those collections easy to use.\n\nFirst, think of a collection as a **container**. Just like a kitchen drawer holds utensils, a collection holds values. The way you open the drawer, reach inside, and take something out depends on the drawer’s design.  \n\n**Lists** are like a row of numbered boxes. You can add a new box at the end, remove any box, or change what is inside a box. Because the order matters, you can always refer to an item by its position (its *index*). Use a list when:\n\n* You need to keep items in the order they were added, for example the daily temperatures you record.\n* You will add or delete items while the program runs, such as a to‑do list that grows and shrinks.\n* You want to loop over every element in the same sequence each time.\n\nA typical pattern with lists is a **list comprehension** – a short way to build a new list from an existing one.\n\n```python\n# original list of numbers\nnumbers = [1, 2, 3, 4, 5]\n\n# new list with each number squared\nsquares = [n * n for n in numbers]\n```\n\nThe expression inside the brackets reads almost like English: “for each *n* in *numbers*, take *n* times *n*”. It creates the whole new list in one line, which is both clear and fast.\n\n> **Note:** List comprehensions are evaluated from left to right, so the order of the resulting list matches the order of the original iterable.\n\n---\n\n**Tuples** are similar to lists but **immutable** – once you create a tuple you cannot change any of its elements. Imagine a sealed envelope: you can look at the letters inside, but you cannot add or remove anything without opening it (which you are not allowed to do). Use a tuple when:\n\n* The data should stay constant throughout the program, such as the coordinates of a fixed point `(x, y)`.\n* You want to use the collection as a key in a dictionary (only immutable objects can be keys).\n* You want to signal to other programmers that the sequence should not be altered.\n\nBecause a tuple cannot be changed, you often see it used to return multiple values from a function:\n\n```python\ndef min_max(values):\n    return (min(values), max(values))   # returns a tuple\nlow, high = min_max([3, 7, 2, 9])\n```\n\n---\n\n**Dictionaries** store items as **key‑value pairs**. Think of a real‑world dictionary: you look up a word (the *key*) and get its definition (the *value*). This structure is perfect when you need fast look‑ups by a meaningful identifier rather than by position. Use a dictionary when:\n\n* You have a natural name for each item, like a student’s ID number mapping to their grade.\n* You need to check quickly whether a particular key exists.\n* You want to group related pieces of information together, for example `{'name': 'Alice', 'age': 17, 'grade': 'A'}`.\n\nA common pattern is the **dictionary look‑up** inside a loop:\n\n```python\nprices = {'apple': 0.50, 'banana': 0.30, 'cherry': 0.75}\nshopping = ['apple', 'cherry', 'banana', 'apple']\n\ntotal = 0\nfor item in shopping:\n    total += prices[item]      # fast O(1) look‑up by key\n```\n\nBecause dictionary look‑ups are on average constant time (written as $O(1)$), they stay fast even when the dictionary holds thousands of entries.\n\n> **In daily life:** A phone contact list works like a dictionary – you type a name (key) and the phone number (value) appears instantly.\n\n---\n\n### How to pick the right collection\n\n1. **Do you need order?**  \n   *Yes* → List or Tuple.  \n   *No* → Dictionary (order is optional; Python 3.7+ preserves insertion order but you usually don’t rely on it).\n\n2. **Will the collection change?**  \n   *Yes* → List (mutable).  \n   *No* → Tuple (immutable) or Dictionary if you need named access.\n\n3. **Do you need fast look‑ups by a name or ID?**  \n   *Yes* → Dictionary.  \n   *No* → List or Tuple, and you can search by index.\n\n4. **Will the collection be used as a key elsewhere?**  \n   *Only immutable objects* can be keys, so a Tuple (or a primitive like a string) is required.\n\n> **Remember:** Choose the simplest collection that satisfies all requirements. Simpler code is easier to read, test, and maintain.\n\n### Putting it together\n\nSuppose you are building a simple grade book. Each student has an ID, a name, and a list of scores. A good design is:\n\n* A **dictionary** `students` where each key is the student ID (string) and each value is a **tuple** `(name, scores)`.  \n* The `scores` element is a **list** because you will add new scores each term.\n\n```python\nstudents = {\n    's001': ('Alice', [88, 92]),\n    's002': ('Bob',   [75, 81, 79]),\n}\n\n# Add a new score for Alice\nstudents['s001'][1].append(95)   # list inside the tuple is still mutable\n```\n\nNotice how each collection plays its part: the dictionary gives fast ID look‑up, the tuple protects the name from accidental change, and the list lets you grow the score list.\n\nBy matching the problem’s needs to the right collection and using the common patterns (list comprehensions for building new lists, dictionary look‑ups for quick access), you write code that is both clear and efficient.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a collection in programming, and why do we use them?",
+   "a": "A collection is a built‑in data structure that can hold multiple values together, such as lists, tuples, or dictionaries. We use collections to store groups of related data so we can process them efficiently, iterate over them, and keep our code organized."
+  },
+  {
+   "level": "Easy",
+   "q": "Give one example of when you would choose a list over a tuple.",
+   "a": "Choose a list when you need to change the data after creation, such as adding new student names to a class roster. Since lists are mutable, you can use methods like append() to add items, while a tuple would not allow this change."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between how you access an element in a list versus a value in a dictionary.",
+   "a": "In a list, you access an element by its numeric index, e.g., my_list[2] gets the third item. In a dictionary, you access a value by its key, e.g., my_dict['age'] gets the value associated with the key 'age'. List indexing is positional; dictionary lookup is key‑based."
+  },
+  {
+   "level": "Medium",
+   "q": "You have a tuple coords = (4, 5). How would you create a new tuple that adds a third coordinate 6 without modifying the original tuple?",
+   "a": "Tuples cannot be changed, so you create a new tuple by concatenation: new_coords = coords + (6,). This builds a new tuple (4, 5, 6) while leaving coords unchanged."
+  },
+  {
+   "level": "Hard",
+   "q": "A program stores student grades in a dictionary where the key is the student’s name and the value is a list of their test scores. Write the steps to add a new score of 88 for a student named \"Alex\", creating the list if Alex is not yet in the dictionary.",
+   "a": "1. Check if \"Alex\" is already a key: if \"Alex\" in grades: 2. If the key exists, append the new score: grades[\"Alex\"].append(88) 3. If the key does not exist, create a new list with the score and assign it: else:     grades[\"Alex\"] = [88] These steps ensure Alex gets a list of scores and the new score is added correctly."
+  },
+  {
+   "level": "Hard",
+   "q": "Compare the time complexity of searching for an item in a list versus looking up a key in a dictionary, and explain why one is generally faster.",
+   "a": "Searching for an item in a list requires checking each element until a match is found, which is O(n) time in the worst case. Looking up a key in a dictionary uses a hash table, giving average‑case O(1) time. Because dictionary lookups use hashing, they are generally much faster than linear scans of a list, especially as the collection grows."
+  }
+ ],
+ "recap": "A collection groups multiple values into a single structure, making it easier to manage related data. Lists are ordered, mutable sequences accessed by index; tuples are ordered but immutable. Dictionaries store key‑value pairs for fast lookup. Choosing the right collection depends on whether you need ordering, mutability, or fast key‑based access.",
+ "key_terms": [
+  {
+   "term": "Collection",
+   "meaning": "A data structure that holds multiple items as a single unit."
+  },
+  {
+   "term": "List",
+   "meaning": "An ordered, mutable sequence of elements accessed by numeric index."
+  },
+  {
+   "term": "Tuple",
+   "meaning": "An ordered, immutable sequence of elements."
+  },
+  {
+   "term": "Dictionary",
+   "meaning": "A collection of unique keys mapped to values, allowing fast lookup."
+  },
+  {
+   "term": "Index",
+   "meaning": "The numeric position of an element in an ordered collection, starting at 0."
+  },
+  {
+   "term": "Mutable",
+   "meaning": "Able to be changed after creation (e.g., adding, removing, or updating items)."
+  },
+  {
+   "term": "Immutable",
+   "meaning": "Cannot be changed after creation; its contents are fixed."
+  },
+  {
+   "term": "Key",
+   "meaning": "A unique identifier used to retrieve its associated value in a dictionary."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which collection type allows you to change its elements after creation?",
+   "options": [
+    "Tuple",
+    "Dictionary",
+    "List",
+    "Set"
+   ],
+   "answer": 2,
+   "why": "Lists are mutable, meaning their items can be added, removed, or changed."
+  },
+  {
+   "q": "What is the index of the first element in a Python list?",
+   "options": [
+    "1",
+    "0",
+    "-1",
+    "2"
+   ],
+   "answer": 1,
+   "why": "Python uses zero‑based indexing, so the first element is at index 0."
+  },
+  {
+   "q": "Which statement about tuples is true?",
+   "options": [
+    "They are mutable",
+    "They can be indexed",
+    "They require curly braces",
+    "They store key‑value pairs"
+   ],
+   "answer": 1,
+   "why": "Tuples are ordered sequences, so you can access elements by index."
+  },
+  {
+   "q": "In a dictionary, what must a key be?",
+   "options": [
+    "Mutable",
+    "Hashable",
+    "A list",
+    "A tuple with mutable items"
+   ],
+   "answer": 1,
+   "why": "Dictionary keys must be hashable, meaning they are immutable types like strings or numbers."
+  },
+  {
+   "q": "Which collection is best for fast lookup by a unique identifier?",
+   "options": [
+    "List",
+    "Tuple",
+    "Dictionary",
+    "Set"
+   ],
+   "answer": 2,
+   "why": "Dictionaries map keys to values, providing O(1) average lookup time."
+  },
+  {
+   "q": "What will happen if you try to assign a new value to a tuple element?",
+   "options": [
+    "The tuple updates",
+    "A TypeError is raised",
+    "The element is appended",
+    "The tuple becomes a list"
+   ],
+   "answer": 1,
+   "why": "Tuples are immutable, so attempting to modify them raises a TypeError."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a collection?",
+   "back": "A data structure that holds multiple items together as a single unit."
+  },
+  {
+   "front": "Define a list in Python.",
+   "back": "An ordered, mutable sequence of elements written with square brackets, e.g., [1, 2, 3]."
+  },
+  {
+   "front": "Define a tuple in Python.",
+   "back": "An ordered, immutable sequence of elements written with commas, optionally in parentheses, e.g., (1, 2)."
+  },
+  {
+   "front": "Define a dictionary in Python.",
+   "back": "A set of key‑value pairs written with curly braces, e.g., {'a':1, 'b':2}."
+  },
+  {
+   "front": "What does mutable mean?",
+   "back": "The ability to change the contents of a collection after it is created."
+  },
+  {
+   "front": "What does immutable mean?",
+   "back": "The inability to change the contents of a collection after it is created."
+  },
+  {
+   "front": "How do you access the value for key \"Alice\" in a dictionary called phone_book?",
+   "back": "phone_book[\"Alice\"]"
+  },
+  {
+   "front": "What is the index of the third item in a list?",
+   "back": "2 (since indexing starts at 0)."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l08-lockers-representing-a-list",
+   "title": "A row of numbered lockers showing ordered, mutable storage.",
+   "alt": "A row of numbered lockers showing ordered, mutable storage.",
+   "priority": 8,
+   "picture_title": "Lockers Representing a List",
+   "kind": "photo",
+   "subject": "Ten metal lockers placed side by side, each with a number on the door. The lockers can be opened and items inside can be changed, illustrating how a list keeps items in order and allows modification.",
+   "layout": "Lockers in a horizontal line, numbers visible on each door, with an open locker showing its contents.",
+   "labels": [
+    "Locker 0",
+    "Locker 1",
+    "Locker 2",
+    "Locker 3",
+    "Locker 4"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l08-address-book-as-dictionary",
+   "title": "An address‑book page showing names linked to phone numbers.",
+   "alt": "An address‑book page showing names linked to phone numbers.",
+   "priority": 7,
+   "picture_title": "Address Book as Dictionary",
+   "kind": "illustration",
+   "subject": "A simple address book open to a page where each entry has a person's name (the key) on the left and their phone number (the value) on the right. This visualizes key‑value pairing in a dictionary.",
+   "layout": "Two columns: left column labelled \"Name (key)\", right column labelled \"Phone (value)\", with several rows of example entries.",
+   "labels": [
+    "Name",
+    "Phone"
+   ],
+   "after": 3
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l08-kitchen-drawer-metaphor",
+   "title": "A kitchen drawer holding different utensils to illustrate a collection container.",
+   "alt": "A kitchen drawer holding different utensils to illustrate a collection container.",
+   "priority": 6,
+   "picture_title": "Kitchen Drawer Metaphor",
+   "kind": "photo",
+   "subject": "A kitchen drawer opened to reveal assorted utensils (spoon, fork, knife, peeler). The drawer represents a container that can hold various items, similar to how a collection groups values together.",
+   "layout": "Drawer centered, utensils spread inside, with a label pointing to the drawer as \"Collection Container\".",
+   "labels": [],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Common Collection Types",
+   "items": [
+    {
+     "value": "List",
+     "label": "Ordered, mutable"
+    },
+    {
+     "value": "Tuple",
+     "label": "Ordered, immutable"
+    },
+    {
+     "value": "Dictionary",
+     "label": "Key‑value mapping"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "List vs Tuple",
+   "left": {
+    "name": "List",
+    "points": [
+     "Ordered sequence",
+     "Mutable – can add, remove, change items"
+    ]
+   },
+   "right": {
+    "name": "Tuple",
+    "points": [
+     "Ordered sequence",
+     "Immutable – cannot change after creation"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Dictionary Structure",
+   "items": [
+    {
+     "name": "Key",
+     "role": "Unique identifier used to look up a value"
+    },
+    {
+     "name": "Value",
+     "role": "Data associated with the key"
+    },
+    {
+     "name": "Colon \":\"",
+     "role": "Separates each key from its value"
+    },
+    {
+     "name": "Comma \",\"",
+     "role": "Separates each key‑value pair"
+    }
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Choosing the Right Collection",
+   "steps": [
+    {
+     "label": "Identify data pattern",
+     "text": "Is the order important? Are items changeable?"
+    },
+    {
+     "label": "Match to type",
+     "text": "Use List for ordered mutable data, Tuple for ordered immutable data, Dictionary for key‑value lookups."
+    },
+    {
+     "label": "Implement",
+     "text": "Create the collection with the appropriate Python syntax."
+    }
+   ],
+   "loop": false,
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

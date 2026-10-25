@@ -1,0 +1,381 @@
+{
+ "title": "Getting Started with Python",
+ "summary": "In this lesson students will install Python, set up an IDE, and write their first simple program. They will learn how to run code and see immediate results, building confidence for future programming tasks.",
+ "objectives": [
+  "Install Python on a computer",
+  "Choose and open an appropriate IDE",
+  "Create a new Python file and write a basic program",
+  "Run the program and interpret its output"
+ ],
+ "prerequisites": "No prior programming experience is required, though basic computer literacy (using a mouse and keyboard) is helpful.",
+ "why": [
+  "Understanding how to set up a programming environment is the first step toward any software development career. It enables students to experiment with code, solve problems, and create digital tools.",
+  "Being able to write and run a simple program demonstrates the core workflow of programming, reinforcing logical thinking and preparing learners for more complex concepts later in the course."
+ ],
+ "sections": [
+  {
+   "heading": "Installing Python",
+   "body": "When you want to write a program in Python, the first thing you need is the Python language itself installed on your computer. Think of Python as a special toolbox that lets you give instructions to the computer. Without the toolbox, you cannot start building anything.\n\n**Why you need to download Python**  \nYour computer does not come with this toolbox pre‑installed (except on some Linux systems). By downloading Python you are adding the tools, the instructions, and the “interpreter” – the program that reads your Python code and turns it into actions the computer can perform.\n\n**Where to download**  \n1. Open a web browser (Chrome, Firefox, Edge, etc.).  \n2. Go to the official Python website: **https://www.python.org**.  \n   Using the official site is important because it guarantees you get a safe, up‑to‑date version.  \n3. Click the **Downloads** menu at the top. The page will automatically suggest the best version for your operating system (Windows, macOS, or Linux).  \n\n> **Note:** The official site shows a big button that says “Download Python 3.x.x”. The “3” means you are getting Python 3, the current major version that is taught in schools. Do **not** download Python 2.x – it is outdated and no longer supported.\n\n**Choosing the correct version**  \nYour operating system (OS) is the basic software that runs your computer – Windows, macOS, or Linux. Each OS needs a slightly different installer file:\n\n| OS | Installer file you will see |\n|----|------------------------------|\n| Windows | `python‑3.x.x‑amd64.exe` (for 64‑bit) or `python‑3.x.x‑win32.exe` (for 32‑bit) |\n| macOS   | `python‑3.x.x‑macos11.pkg` (or similar) |\n| Linux   | Usually you install from the package manager, but you can also download a source tarball (`.tgz`). |\n\nIf you are not sure whether your Windows is 32‑bit or 64‑bit, you can check: open **Settings → System → About** and look for “System type”. Most modern computers are 64‑bit, so the `amd64` installer is the right choice.\n\n**Running the installer**  \n\n*Windows*  \n1. Locate the downloaded file (usually in the **Downloads** folder).  \n2. Double‑click the file to start the installer.  \n3. **Important step:** On the first screen, check the box that says **“Add Python 3.x to PATH”**.  \n   - *PATH* is a list of folders that the computer looks through when you type a command. Adding Python to PATH lets you run Python from any command prompt without typing the full folder name.  \n4. Click **“Install Now”**. The installer will copy files, set up shortcuts, and configure the PATH automatically.  \n5. When the screen says **“Setup was successful”**, click **Close**.\n\n*macOS*  \n1. Open the downloaded `.pkg` file.  \n2. Follow the prompts: click **Continue**, agree to the license, and then **Install**.  \n3. macOS may ask for your administrator password – enter it to allow the installation.  \n4. After installation, the Python executable is placed in `/usr/local/bin/python3`.\n\n*Linux*  \n1. Open a terminal window.  \n2. Type `sudo apt update && sudo apt install python3` (for Debian/Ubuntu) or `sudo dnf install python3` (for Fedora).  \n3. Press **Enter** and provide your password when asked.  \n4. The package manager will download and install Python automatically.\n\n> **Definition:** *Installer* – a program that copies files to the right places on your computer and sets up everything you need to run another program.\n\n**Verifying the installation** (you will do this in the next section, but it is good to know now)  \nOpen a command prompt (Windows) or terminal (macOS/Linux) and type:\n\n$$\npython3 --version\n$$\n\nIf the installer worked, the screen will show something like `Python 3.11.4`. Seeing the version number means Python is ready to use.\n\n> **Common mistake:** Forgetting to tick “Add Python to PATH” on Windows. If you later type `python` and get an error like “‘python’ is not recognized”, it usually means the PATH entry was missed. You can fix it by rerunning the installer and selecting “Modify”, then checking the PATH box.\n\n**What to do next**  \nNow that Python is on your computer, you can write code in a text editor or an Integrated Development Environment (IDE). The next lesson will show you how to choose a simple IDE and create your first Python file.\n\n> **Remember:** Always download Python from the official site, choose the installer that matches your operating system, and make sure the PATH option is selected (Windows). These small steps prevent many later frustrations and let you start coding right away.",
+   "code": ""
+  },
+  {
+   "heading": "Verifying the Installation",
+   "body": "When you have finished installing Python, the first thing to do is to make sure the program is really there and that your computer can talk to it.  \nThink of it like checking that a new TV remote works before you sit down to watch a movie – you press a button and see if the TV turns on.  \nHere we will “press a button” by typing a short command in a terminal (on macOS or Linux) or a command prompt (on Windows). If the computer replies with the version number of Python, the installation was successful.\n\n### Open the terminal or command prompt  \n\n- **Windows:** Click the Start button, type **cmd**, and press **Enter**. A black window titled *Command Prompt* will appear.  \n- **macOS:** Open the *Finder*, go to *Applications → Utilities*, and double‑click **Terminal**.  \n- **Linux:** Press **Ctrl+Alt+T** or look for *Terminal* in your applications menu.\n\n> **Note:** The terminal is a place where you can type text commands that the computer will execute directly, without a graphical interface.\n\n### Type the version‑check command  \n\nIn the terminal window type exactly one of the following commands and then press **Enter**:\n\n```\npython --version\n```\n\nor, on some systems where both Python 2 and Python 3 may be installed,\n\n```\npython3 --version\n```\n\n> **Definition:** `--version` is an *option* that tells the program to display its version number instead of doing its normal work. Options always start with one or two hyphens (`-` or `--`).\n\nIf everything is set up correctly, you will see a line that looks something like:\n\n```\nPython 3.11.2\n```\n\nThe numbers after the word *Python* are the **version** of the interpreter you have installed. The first number (3) is the *major* version, the second (11) is the *minor* version, and the third (2) is the *patch* level.  \n\n> **Remember:** A newer major version (for example, Python 4) may introduce changes that break old code, so most tutorials use the current major version 3.\n\n### What to do if you see an error  \n\nIf the terminal replies with something like `'python' is not recognized as an internal or external command` (Windows) or `command not found` (macOS/Linux), it means the computer cannot find the Python program. This usually happens because the *PATH* environment variable does not include the folder where Python was installed.\n\n- **Windows:** During installation, make sure you checked the box that says **Add Python to PATH**. If you missed it, you can reinstall Python or edit the system environment variables manually.  \n- **macOS/Linux:** Python is often installed in `/usr/local/bin` or `/usr/bin`. You can add that directory to your PATH by editing the file `~/.bash_profile` (or `~/.zshrc` for newer macOS) and adding a line like `export PATH=\"/usr/local/bin:$PATH\"`.\n\n> **Common mistake:** Typing `python –‑version` with a long dash (–) instead of two normal hyphens (--) will not work. Always use the standard hyphen key on your keyboard.\n\n### Why this check matters  \n\nVerifying the installation early saves you time later. Imagine you write a program, press *Run*, and get an error that says “Python not found.” If you had already confirmed that Python works, you would know the problem lies elsewhere (perhaps in the code, not the installation).  \n\n> **In daily life:** It’s like checking that your car has fuel before a long trip. If you discover the tank is empty right after you start, you can fill it right away instead of being stranded halfway down the road.\n\n### Quick recap  \n\n1. Open the terminal or command prompt.  \n2. Type `python --version` (or `python3 --version`).  \n3. Press **Enter** and look for a line that starts with `Python` followed by three numbers.  \n4. If you see an error, adjust your PATH or reinstall Python.\n\nOnce you see the version number, you can be confident that Python is ready for the next steps: choosing an IDE, writing your first file, and running a program.",
+   "code": ""
+  },
+  {
+   "heading": "Choosing an IDE",
+   "body": "Choosing an IDE  \n---  \n\nWhen you write a story, you usually use a notebook or a word‑processor that lets you see the words, correct mistakes, and print the final draft. An **IDE** (Integrated Development Environment) is the same idea for computer programs: it is a special application that lets you type code, highlights possible errors, and runs the program with a single click.  \n\nWhy use an IDE at all? You could write Python code in a plain text editor like Notepad and then run it from a command line, but an IDE saves you many small steps. It keeps your code tidy, shows you where you missed a colon or a parenthesis, and lets you test the program instantly. Think of it as a kitchen where the stove, sink, and cutting board are all in one place, rather than moving between separate rooms to prepare a meal.  \n\n### Three beginner‑friendly IDEs  \n\n1. **IDLE** – This is the editor that comes bundled with Python, so you already have it after installing Python. It opens with a simple window called the *Shell* where you can type commands one at a time, and a *File* window where you can write a full script.  \n\n2. **Thonny** – Designed especially for newcomers, Thonny shows the program’s *variables* (the boxes that store data) in a side panel while the code runs. It also gives clear messages when something goes wrong.  \n\n3. **Visual Studio Code (VS Code)** – A free, powerful editor made by Microsoft. It works for many languages, not just Python, and you can add *extensions* (extra pieces of software) to make Python coding even smoother.  \n\n> **Definition:** *Extension* – a small add‑on that gives an IDE extra features, such as syntax highlighting or code completion for a specific language.  \n\n### Installing an IDE (step‑by‑step)  \n\n**Step 1 – Download**  \n- For IDLE, nothing extra is needed; it is already on your computer after you install Python.  \n- For Thonny, go to `https://thonny.org`, click the download button that matches your operating system (Windows, macOS, or Linux), and save the installer file.  \n- For VS Code, visit `https://code.visualstudio.com`, choose the appropriate installer, and download it.  \n\n**Step 2 – Run the installer**  \n- Double‑click the downloaded file.  \n- Follow the on‑screen prompts: usually you just keep clicking “Next” until the “Install” button appears.  \n- On the final screen, you may be asked whether to create a desktop shortcut; checking this box makes it easier to open the IDE later.  \n\n**Step 3 – Add Python support (only for VS Code)**  \n- Open VS Code.  \n- In the left sidebar, click the square icon (Extensions).  \n- Type “Python” in the search box, and click **Install** on the extension published by Microsoft. This gives you colour‑coded syntax, auto‑completion, and a built‑in terminal for running scripts.  \n\n> **Note:** After installing the Python extension, VS Code may ask you to select a Python interpreter. Choose the one that points to the folder where you installed Python (often shown as `python.exe`).  \n\n### Basic features you will use  \n\n- **Code editor** – the large white area where you type your program. It highlights keywords (like `print` or `def`) in a different colour so you can see the structure at a glance.  \n- **Run button** – usually a green triangle or a shortcut like `F5`. Clicking it tells the IDE to execute the whole script and show the output in a console window.  \n- **Console / Terminal** – a small pane that displays the results of your program, such as printed text or error messages.  \n- **File explorer** – a side panel that lists the folders and files in your project, making it easy to open, rename, or delete scripts.  \n\n> **Common mistake:** Forgetting to save the file before running it. The IDE runs the last saved version, so any recent changes that are only in the editor will be ignored. Always press `Ctrl+S` (or use the Save button) after editing.  \n\n### Trying it out  \n\n1. Open your chosen IDE.  \n2. Create a new file and name it `hello.py`.  \n3. Type the following line:  \n\n   ```python\n   print(\"Hello, world!\")\n   ```  \n\n4. Save the file.  \n5. Click the Run button.  \n\nYou should see `Hello, world!` appear in the console. If you see an error, read the message carefully; the IDE will usually underline the problematic part of the code.  \n\n> **Remember:** An IDE is a tool to help you write, test, and fix code faster. Spend a few minutes exploring its menus, but focus first on the editor, the run command, and the console. Once you are comfortable, you can experiment with extra features like debugging (stepping through code line by line) or installing extensions for linting (checking style).  \n\nWith a working IDE, you are ready to write more complex programs and see the results instantly—just like a chef tasting a dish while cooking. Happy coding!",
+   "code": ""
+  },
+  {
+   "heading": "Creating Your First Python File",
+   "body": "When you want a computer to do something, you first have to give it *instructions* written in a language it understands.  \nIn Python, those instructions are stored in a plain‑text file whose name ends with **`.py`**.  \nThe “`.py`” tells the computer “this is a Python program”.  \n\n### 1. Open your IDE (or a simple text editor)\n\nAn **IDE** (Integrated Development Environment) is a program that helps you write code.  \nIf you are using a simple editor like **Notepad** (Windows) or **TextEdit** (macOS), make sure it is set to *plain text* mode, not rich‑text mode.  \n\n> **Note:** Plain text means the file contains only the characters you type, without any hidden formatting codes.  \n\n### 2. Create a new file\n\n1. In the IDE, click **File → New** (or press the shortcut, often `Ctrl+N` / `Cmd+N`).  \n2. A blank window appears – this is where you will type your Python code.\n\n### 3. Write your first line of code\n\nType exactly the following:\n\n```python\nprint(\"Hello, world!\")\n```\n\n* **`print`** is a *function* – a built‑in command that tells Python to display something on the screen.  \n* The text inside the parentheses is a **string** – a sequence of characters surrounded by quotation marks (`\"` or `'`).  \n* When the program runs, `print` will show the string on the console.\n\n> **In daily life:** Think of `print` like a loudspeaker. When you speak into a microphone (the code), the loudspeaker (the function) repeats your words so everyone can hear them.\n\n### 4. Save the file with the correct name\n\n1. Choose **File → Save As…**  \n2. In the dialog box, navigate to a folder where you keep your projects (for example, a folder called `PythonProjects`).  \n3. In the **File name** field, type a name that ends with `.py`, such as `first_program.py`.  \n4. Click **Save**.\n\n> **Definition:** The **file extension** is the part after the last dot in a file name (here, `py`). It tells the operating system which program should open the file.\n\n### 5. Check that the file really saved as plain text\n\nOpen the file again (you can double‑click it in your file explorer).  \nYou should see exactly the line you typed, with no extra symbols or formatting. If you see things like “¶” or strange colors, you may have saved it as a rich‑text file; repeat the steps using a plain‑text editor.\n\n### 6. What happens when you run the file?\n\nWhen you later tell Python to *execute* `first_program.py`, it reads the file line by line.  \nIt sees the `print` function, evaluates the string `\"Hello, world!\"`, and sends that text to the console.  \nThe result you will see is:\n\n```\nHello, world!\n```\n\nThat single line of output proves that the computer understood your instructions.\n\n> **Common mistake:** Forgetting the `.py` extension. If you name the file `first_program` without `.py`, Python will not recognize it as a script, and the command to run it will fail.\n\n### 7. Try a tiny variation\n\nReplace the text inside the quotes with your own name:\n\n```python\nprint(\"My name is Alex\")\n```\n\nSave the file again (you can keep the same name). When you run it, the output will change accordingly. This shows that the **string** inside `print` can be any message you choose.\n\n### 8. Recap of the steps\n\n1. Open a new plain‑text file in your IDE.  \n2. Type a `print` statement.  \n3. Save the file with a `.py` extension.  \n4. Verify the file is plain text.  \n\n> **Remember:** Every Python program starts as a plain‑text file ending in `.py`. Writing even one line correctly is the first step toward building larger, more useful programs.",
+   "code": ""
+  },
+  {
+   "heading": "Running the Program",
+   "body": "When you have written a short program, the next step is to **run** it – that means telling the computer to read the instructions you typed and to do exactly what they say.  \nRunning a program is like pressing the “play” button on a music player: the file you created is the song, and the computer’s interpreter (the part of Python that understands the code) is the player. When you press “play”, the music starts and you hear the sound; when you run a Python script, the interpreter reads each line and shows the result on the screen.\n\n### Running from the IDE  \n\n1. **Save** the file first. In most IDEs you can press **Ctrl + S** (or **Cmd + S** on a Mac).  \n2. Look for a button that usually looks like a green triangle ►. This is the **run button**.  \n3. Click the run button. The IDE will open a **console window** (sometimes called a *terminal* or *output pane*) at the bottom of the screen.  \n4. In that console you will see the text that your program printed, for example:\n\n```\nHello, world!\n```\n\nIf your program asks for input, the console will pause and wait for you to type something, then press **Enter**.\n\n> **Note:** The IDE automatically adds the command `python your_file.py` behind the scenes, so you do not need to type anything in the terminal yourself.\n\n### Running from the Command Line  \n\nThe command line (also called a *shell* or *terminal*) is a text‑only window where you type commands directly to the operating system.\n\n1. **Open** the terminal.  \n   - On Windows, you can type **cmd** in the Start menu.  \n   - On macOS, open **Terminal** from Applications → Utilities.  \n   - On Linux, look for **Terminal** in your applications menu.  \n2. **Navigate** to the folder where you saved your script. Use the `cd` command (short for *change directory*). For example, if your file is in a folder called `PythonProjects` on the desktop:\n\n```\ncd Desktop/PythonProjects\n```\n\n3. **Run** the script by typing the word `python` (or `python3` on some systems) followed by a space and the file name:\n\n```\npython hello.py\n```\n\n4. Press **Enter**. The interpreter reads `hello.py` line by line and prints the output right there:\n\n```\nHello, world!\n```\n\nIf you see an error message that starts with `Traceback`, it means something went wrong. Read the message carefully – it tells you the line number and the type of error.\n\n> **Common mistake:** Forgetting to add the file extension `.py` when typing the command. The interpreter will look for a file named `hello` (without extension) and report “file not found”.\n\n### Understanding What You See  \n\nWhen the program prints text, it is sending data to the **standard output** (the screen). In Python, the function `print()` writes whatever you give it to this output stream. For example:\n\n```python\nprint(\"The answer is\", 2 + 3)\n```\n\nThe interpreter evaluates the expression `2 + 3` first, getting the number `5`, then `print` joins the two pieces into one line and displays:\n\n```\nThe answer is 5\n```\n\nIf you type something after the program finishes, the terminal will treat it as a new command, not as part of the program.\n\n> **Definition:** *Standard output* – the default place where a program sends its results, usually the screen.  \n\n> **In daily life:** Think of standard output as the speaker of a phone. When you speak (run a program), the words come out of the speaker (the screen) so you can hear them.\n\n### Quick Checklist  \n\n- Save the file before running.  \n- Use the IDE’s run button for a visual, one‑click experience.  \n- Use `python file_name.py` in the terminal for a command‑line approach.  \n- Look at the console output to see the result or any error messages.  \n\n> **Remember:** Running a program does not change the code; it only *executes* it. You can run the same script many times, each time getting the same result unless you change the code or provide different input.  \n\nNow you have two reliable ways to see your Python code come to life. Try both methods with the same script and notice how the output looks identical – the only difference is *how* you told the computer to start the program. This skill will be useful every time you test a new idea, debug a problem, or share your code with others. Happy coding!",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What command do you type in a terminal to check the version of Python that is installed?",
+   "a": "Open a terminal (Command Prompt on Windows, Terminal on macOS/Linux). Type `python --version` and press Enter. The system will display something like `Python 3.11.2`. If the command is not recognized, you may need to try `python3 --version` instead. This shows the installed Python version."
+  },
+  {
+   "level": "Easy",
+   "q": "Name two popular free IDEs or code editors that are suitable for writing Python programs.",
+   "a": "Two common choices are **VS Code** (Visual Studio Code) and **PyCharm Community Edition**. Both are free, support syntax highlighting, code completion, and can run Python scripts directly from the editor."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the steps to create a new Python file named `hello.py` using an IDE, write a simple program that prints “Hello, World!”, and then run it.",
+   "a": "1. Open your chosen IDE (e.g., VS Code).\n2. Choose “File → New File” and save it as `hello.py` in a folder you can remember.\n3. In the editor, type the code:\n```python\nprint(\"Hello, World!\")\n```\n4. Save the file (`Ctrl+S` or the save button).\n5. To run the program, you can:\n- Use the built‑in terminal: open it (`Ctrl+` `) and type `python hello.py` (or `python3 hello.py` on some systems), then press Enter.\n- Or click the IDE’s “Run” button if it provides one.\n6. The output `Hello, World!` should appear in the terminal or output pane."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare the differences between running a Python script from the command line versus using the “Run” button in an IDE. Mention at least three points.",
+   "a": "1. **Interface**: The command line requires you to type a command (`python script.py`), while the IDE’s Run button is a mouse click that automatically executes the script.\n2. **Environment**: The command line uses the system’s default Python interpreter and PATH settings; an IDE may let you select a virtual environment or specific interpreter for the project.\n3. **Feedback**: In the terminal you see raw output and any error messages directly; an IDE often formats errors, may highlight the line causing the error, and can provide debugging tools like breakpoints.\n4. **Additional features** (optional): IDEs can show variable values, allow step‑by‑step debugging, and integrate with version control, which the plain command line does not provide by itself."
+  },
+  {
+   "level": "Hard",
+   "q": "You have installed Python but the command `python --version` returns an error, while `python3 --version` shows Python 3.10. Explain why this might happen and describe how to set up your system so that `python` runs Python 3 without changing the script files.",
+   "a": "Many operating systems (especially macOS and some Linux distributions) keep `python` reserved for Python 2, which may not be installed, so the command fails. `python3` explicitly calls the Python 3 interpreter, which is why it works. To make `python` point to Python 3, you can create an alias or update the PATH:\n- **Temporary alias**: In the terminal, type `alias python=python3`. This works for the current session.\n- **Permanent alias**: Add the line `alias python=python3` to your shell’s configuration file (e.g., `~/.bashrc` or `~/.zshrc`) and reload the file with `source ~/.bashrc`.\n- **On Windows**: Install the “Python Launcher for Windows” and ensure the option “Add Python to PATH” is checked. Then you can use the `py` command: `py -3` runs Python 3, and you can set a shebang in scripts (`#!/usr/bin/env python3`). After these steps, typing `python` will invoke Python 3, allowing existing scripts that use `python` to run correctly."
+  },
+  {
+   "level": "Hard",
+   "q": "Imagine you are setting up a classroom computer lab. List the complete sequence of actions you would take to ensure every computer has Python installed, an IDE ready, and a sample script that all students can run successfully. Include verification steps.",
+   "a": "1. **Download Python**: Go to python.org, download the latest stable version for the OS (Windows/macOS/Linux). Choose the installer that includes “Add Python to PATH” (Windows).\n2. **Install Python**: Run the installer on each machine (or use a network deployment tool). Accept defaults, ensure “pip” and “Add to PATH” are selected.\n3. **Verify Installation**: Open a terminal/Command Prompt and type `python --version` (or `python3 --version`). Confirm the displayed version matches the downloaded one.\n4. **Install IDE**: Download VS Code (or PyCharm Community). Run the installer on each computer. During installation, allow the option to add VS Code to the system PATH.\n5. **Configure IDE for Python**: Open VS Code, install the official “Python” extension when prompted. This enables syntax highlighting, linting, and run commands.\n6. **Create a Shared Folder**: On a network drive or each local disk, create a folder named `PythonLab`.\n7. **Add Sample Script**: Inside `PythonLab`, create a file `sample.py` with the code:\n```python\nprint(\"Welcome to the Python class!\")\n```\n8. **Test the Script**: Open the script in VS Code, click the Run button or press `Ctrl+Shift+` ` (open terminal) and type `python sample.py`. Verify that the output `Welcome to the Python class!` appears.\n9. **Document Steps for Students**: Write a short hand‑out: open VS Code, open `sample.py`, press Run, see the message.\n10. **Final Check**: On each computer, repeat step 8 to ensure the script runs without errors. If any computer fails, re‑check PATH settings or reinstall Python/IDE."
+  }
+ ],
+ "recap": "This lesson explains how to install Python, verify the installation, choose a beginner-friendly IDE, create a first .py file, and run the program. It uses everyday analogies like toolboxes and remote controls to make the steps clear. By the end you should be able to download Python, check it works, pick an IDE, write a simple script, and execute it.",
+ "key_terms": [
+  {
+   "term": "Python",
+   "meaning": "A high‑level programming language used to write scripts and applications."
+  },
+  {
+   "term": "Interpreter",
+   "meaning": "The program that reads Python code and executes it line by line."
+  },
+  {
+   "term": "IDE",
+   "meaning": "Integrated Development Environment – a tool that helps you write, check, and run code."
+  },
+  {
+   "term": "IDLE",
+   "meaning": "The default IDE that comes with Python, suitable for beginners."
+  },
+  {
+   "term": "Terminal",
+   "meaning": "A text‑based interface where you can type commands to the operating system."
+  },
+  {
+   "term": "Command Prompt",
+   "meaning": "Windows' version of a terminal where you can run commands."
+  },
+  {
+   "term": ".py file",
+   "meaning": "A plain‑text file whose name ends with .py, indicating it contains Python code."
+  },
+  {
+   "term": "Run button",
+   "meaning": "A button (often a green triangle) in an IDE that executes the current script."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the purpose of downloading Python from python.org?",
+   "options": [
+    "To get a text editor",
+    "To install the Python interpreter and standard library",
+    "To update your operating system",
+    "To install a web browser"
+   ],
+   "answer": 1,
+   "why": "Downloading from the official site provides the interpreter needed to run Python code."
+  },
+  {
+   "q": "Which tool lets you check if Python was installed correctly?",
+   "options": [
+    "A web browser",
+    "A terminal or command prompt",
+    "Microsoft Word",
+    "A graphics editor"
+   ],
+   "answer": 1,
+   "why": "Running 'python --version' in a terminal confirms the interpreter is available."
+  },
+  {
+   "q": "What does IDE stand for?",
+   "options": [
+    "International Development Engine",
+    "Integrated Development Environment",
+    "Independent Data Editor",
+    "Internal Device Emulator"
+   ],
+   "answer": 1,
+   "why": "IDE means Integrated Development Environment, a program for writing and running code."
+  },
+  {
+   "q": "Which of these IDEs comes bundled with Python?",
+   "options": [
+    "PyCharm",
+    "VS Code",
+    "IDLE",
+    "Eclipse"
+   ],
+   "answer": 2,
+   "why": "IDLE is included with the standard Python installation."
+  },
+  {
+   "q": "What file extension indicates a Python script?",
+   "options": [
+    ".java",
+    ".txt",
+    ".py",
+    ".exe"
+   ],
+   "answer": 2,
+   "why": "Python scripts are saved with the .py extension."
+  },
+  {
+   "q": "How do you run a Python file from an IDE?",
+   "options": [
+    "Press the green run button after saving",
+    "Double‑click the file in Explorer",
+    "Open it in a web browser",
+    "Send it via email"
+   ],
+   "answer": 0,
+   "why": "The run button tells the IDE to execute the saved script."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is the Python interpreter?",
+   "back": "It is the program that reads Python code and executes it line by line."
+  },
+  {
+   "front": "Why use an IDE instead of a plain text editor?",
+   "back": "An IDE provides syntax highlighting, error checking, and one‑click execution, making coding easier."
+  },
+  {
+   "front": "Name a beginner‑friendly IDE that comes with Python.",
+   "back": "IDLE"
+  },
+  {
+   "front": "How can you open the terminal on Windows?",
+   "back": "Press Start, type 'cmd', and press Enter."
+  },
+  {
+   "front": "What command shows the installed Python version?",
+   "back": "'python --version' (or 'python3 --version' on some systems)."
+  },
+  {
+   "front": "What does the .py file extension signify?",
+   "back": "It tells the computer the file contains Python code."
+  },
+  {
+   "front": "What is the purpose of the run button in an IDE?",
+   "back": "It executes the current Python script and shows the output."
+  },
+  {
+   "front": "What analogy is used for checking Python installation?",
+   "back": "Like testing a new TV remote before watching a movie."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l02-python-installer-window",
+   "title": "The installer screen used to download and install Python on a computer.",
+   "alt": "The installer screen used to download and install Python on a computer.",
+   "priority": 9,
+   "picture_title": "Python Installer Window",
+   "kind": "photo",
+   "subject": "A screenshot of the official Python installer showing the welcome screen, license agreement, and install options. It helps students see exactly what they need to click to get Python onto their machine.",
+   "layout": "Full installer window centered, with key buttons highlighted by a subtle border.",
+   "labels": [],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l02-checking-python-version",
+   "title": "Running `python --version` in a terminal to verify the installation.",
+   "alt": "Running `python --version` in a terminal to verify the installation.",
+   "priority": 8,
+   "picture_title": "Checking Python Version",
+   "kind": "illustration",
+   "subject": "A terminal window (macOS/Linux) or command prompt (Windows) displaying the command `python --version` and the resulting version number, e.g., `Python 3.11.2`. This shows students the exact output they should expect.",
+   "layout": "Terminal window occupies the centre; the command is highlighted in bold, the version output is shown below it.",
+   "labels": [
+    "command",
+    "output"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l02-simple-ide-interface",
+   "title": "A basic IDE window with a code editor pane and a run button.",
+   "alt": "A basic IDE window with a code editor pane and a run button.",
+   "priority": 7,
+   "picture_title": "Simple IDE Interface",
+   "kind": "illustration",
+   "subject": "An example of a beginner‑friendly IDE such as IDLE or Thonny, showing the main editing area, line numbers, and a clearly marked Run button. This visual helps students understand what an IDE looks like before they open one.",
+   "layout": "IDE window centered; editor pane on the left, toolbar with Run button on top, labels pointing to each part.",
+   "labels": [
+    "editor pane",
+    "run button",
+    "toolbar"
+   ],
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Install Python",
+   "steps": [
+    {
+     "label": "Open browser",
+     "text": "Launch Chrome, Firefox, or Edge."
+    },
+    {
+     "label": "Visit site",
+     "text": "Go to python.org and click Downloads."
+    },
+    {
+     "label": "Run installer",
+     "text": "Download the installer and run it, accepting defaults."
+    },
+    {
+     "label": "Add to PATH",
+     "text": "Check the box to add Python to the system PATH."
+    },
+    {
+     "label": "Finish",
+     "text": "Complete the setup and close the installer."
+    }
+   ],
+   "loop": false,
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Verify Python Installation",
+   "steps": [
+    {
+     "label": "Open terminal",
+     "text": "Windows: type cmd, macOS/Linux: open Terminal."
+    },
+    {
+     "label": "Run version command",
+     "text": "Type python --version and press Enter."
+    },
+    {
+     "label": "Check output",
+     "text": "If a version number appears, Python is installed."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "IDE vs Text Editor",
+   "left": {
+    "name": "IDE",
+    "points": [
+     "Syntax highlighting",
+     "Error checking",
+     "One‑click run",
+     "Project management"
+    ]
+   },
+   "right": {
+    "name": "Text Editor",
+    "points": [
+     "Simple interface",
+     "No built‑in run button",
+     "Manual error spotting",
+     "Good for tiny scripts"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Create First Python File",
+   "steps": [
+    {
+     "label": "Open IDE",
+     "text": "Start your chosen IDE or plain text editor."
+    },
+    {
+     "label": "New file",
+     "text": "Create a new file and name it hello.py."
+    },
+    {
+     "label": "Write code",
+     "text": "Type: print(\"Hello, world!\")"
+    },
+    {
+     "label": "Save",
+     "text": "Press Ctrl+S (Cmd+S on Mac) to save."
+    }
+   ],
+   "loop": false,
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Run the Program",
+   "steps": [
+    {
+     "label": "Save file",
+     "text": "Make sure the .py file is saved."
+    },
+    {
+     "label": "Press Run",
+     "text": "Click the Run button in the IDE or type python hello.py in the terminal."
+    },
+    {
+     "label": "See output",
+     "text": "The screen shows: Hello, world!"
+    }
+   ],
+   "loop": false,
+   "after": 4
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
