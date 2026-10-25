@@ -1,0 +1,331 @@
+{
+ "title": "Decision Making",
+ "summary": "This lesson introduces how programs make choices based on specific conditions. Students will learn to control the flow of a program using conditional statements.",
+ "objectives": [
+  "Write simple if statements to execute code based on a condition",
+  "Use if-else and else-if structures to handle multiple possible outcomes",
+  "Implement nested conditions for complex decision-making",
+  "Apply switch statements to manage multiple fixed-value options"
+ ],
+ "prerequisites": "Students should understand basic variables, data types, and comparison operators like ==, >, and <.",
+ "why": [
+  "Decision making is what makes software 'smart.' Without it, a program would simply run the same list of instructions every time, regardless of the user's input or the current situation.",
+  "In the real world, this logic powers everything from a thermostat turning on the heat when it gets cold, to a banking app checking if you have enough money before allowing a withdrawal."
+ ],
+ "sections": [
+  {
+   "heading": "Introduction to Control Flow",
+   "body": "Imagine you are writing a list of instructions for a friend to follow. Most of the time, your friend will simply start at the top of the list and follow every step in order, one by one. In programming, we call this \"sequential execution.\" This means the computer reads your code like a book: it starts at line one, finishes it, and then moves to line two.\n\nWhile running code in a straight line is simple, it is not how the real world works. A program that only does the same thing every time is very limited. To make a program smart, it needs to be able to make choices. This is where **Control Flow** comes in. Control flow is the order in which the computer executes the statements in a program. By changing the flow, we can tell the computer to skip certain lines of code or repeat others based on the situation.\n\n> **Definition:** Control flow is the order in which individual statements or instructions are executed in a program.\n\nTo make these choices, the computer uses something called a **condition**. A condition is a question that can only have one of two answers: \"Yes\" (True) or \"No\" (False). In programming, we call these **Boolean values**. A Boolean is a data type that represents one of these two states: `True` or `False`.\n\nWhen the computer reaches a decision point, it checks the condition. If the condition is `True`, the computer follows one path. If the condition is `False`, the computer skips that path and moves to a different part of the code.\n\n> **In daily life:** Think of a morning routine. You might have a rule: \"If it is raining, I will take an umbrella.\" If you look outside and see rain, the condition is `True`, so you perform the action of grabbing the umbrella. If it is sunny, the condition is `False`, and you simply skip that step and walk out the door.\n\nWithout control flow, your program would be like a train on a single track; it can only go forward. With control flow, your program is like a car at a crossroads; it can choose which road to take based on the signs it sees. This allows you to create software that reacts to user input, handles errors, or changes behavior based on different settings.\n\n> **Remember:** Decision-making does not happen randomly. The computer only skips or executes code based on whether a specific condition evaluates to `True` or `False`.\n\nBy mastering control flow, you move from writing simple lists of commands to writing actual logic. You can tell your program to behave differently for different users, or to stop running if something goes wrong. In the next sections, we will learn the specific keywords and symbols used to build these conditions in your code.",
+   "code": ""
+  },
+  {
+   "heading": "The Simple If Statement",
+   "body": "Imagine you are writing a program and you want it to make a choice. Most of the time, code runs in a straight line from top to bottom. However, sometimes you only want a piece of code to run if something specific is true. This is where the \"if statement\" comes in.\n\nThe if statement allows your program to check a condition. A condition is a question that can only have two answers: **True** or **False**. If the answer is True, the computer runs the block of code inside the statement. If the answer is False, the computer simply skips that block and moves to the next part of the program.\n\n> **In daily life:** Think of an alarm clock. You might tell yourself, \"If it is 7:00 AM, then I will wake up.\" If it is only 6:00 AM, the condition is False, so you keep sleeping. You don't do anything else; you just wait for the condition to become True.\n\nTo use this in programming, we use the `if` keyword. The basic structure looks like this:\n\n`if (condition) {`\n`  // code to run if true`\n`}`\n\nInside the parentheses, we use comparison operators to create our condition. A comparison operator is a symbol used to compare two values. For example, we use `>` for \"greater than,\" `<` for \"less than,\" and `==` for \"equal to.\"\n\nLet's look at a concrete example. Imagine you are making a game where a player needs 10 points to win. You can write a condition like this:\n\n$points > 9$\n\nIf the variable $points$ is 10, the condition is True. The computer will then enter the curly braces `{ }` and run the code inside, such as printing \"You Win!\" to the screen. If the player only has 5 points, the condition is False, and the \"You Win!\" message will never appear.\n\n> **Definition:** A **Boolean** is a data type that can only hold one of two values: True or False. Every condition in an if statement results in a Boolean value.\n\nWhen writing your code, you must be careful with the symbols you use. In many programming languages, a single equals sign `=` is used to assign a value to a variable. To check if two things are equal, you must use a double equals sign `==`.\n\n> **Common mistake:** Using a single `=` inside an if statement. This tells the computer to change a value rather than check if it is equal to something else, which often leads to bugs or errors.\n\nBy using the simple if statement, you give your program \"intelligence.\" Instead of doing the exact same thing every time, the program can now react to different situations based on the data it receives.\n\n> **Remember:** The code inside an if statement is optional. It only runs when the condition is True. If the condition is False, the program doesn't crash; it just skips that section entirely.",
+   "code": ""
+  },
+  {
+   "heading": "The If-Else Statement",
+   "body": "A simple `if` statement is like a one-way street. If the condition is true, the program does something. If the condition is false, the program simply skips that part and moves on. However, in the real world, we often need a \"Plan B.\" We want the program to do one thing when a condition is true, but a different thing when it is false. This is where the `else` block comes in.\n\nThe `else` block is a piece of code that follows an `if` statement. It acts as a safety net. It tells the computer: \"If the first condition was not met, do this instead.\"\n\n> **Definition:** An `else` block is a section of code that runs only when the preceding `if` condition evaluates to false.\n\nThink of this like a light switch. When you flip the switch, there are only two possible states: the light is either on or it is off. There is no third option. If the \"on\" condition is not met, the \"off\" state is the only remaining possibility.\n\n> **In daily life:** Imagine a rule at a movie theater: \"If you have a ticket, you may enter.\" An `else` statement would add: \"Otherwise, you must go to the box office to buy one.\"\n\nTo use this in programming, you place the keyword `else` immediately after the closing bracket of your `if` statement. You do not put a new condition next to `else` because it doesn't need one. The `else` block automatically covers every single case where the `if` condition failed.\n\nFor example, imagine a program that checks if a user is old enough to vote. If the age is 18 or older, the program prints \"You can vote!\" If the age is anything less than 18, the `else` block triggers and prints \"You are too young to vote.\"\n\nThe logic follows a simple path:\n$$\\text{If (Condition is True)} \\rightarrow \\text{Action A}$$\n$$\\text{If (Condition is False)} \\rightarrow \\text{Action B}$$\n\nThis structure is useful because it ensures that your program always provides a response. Without the `else` block, a user might enter a value that doesn't trigger the `if` statement, and the program would stay silent. This can make the user think the program has crashed or frozen. By providing an alternative action, you make your software more reliable and user-friendly.\n\n> **Common mistake:** Trying to put a condition inside the `else` parentheses, like `else (age < 18)`. Remember that `else` never takes its own condition; it simply handles everything the `if` missed.\n\nNow, the program is making a binary choice. A binary choice is a decision between two mutually exclusive options, meaning only one of them can happen. If the `if` block runs, the `else` block is completely ignored. If the `if` block is skipped, the `else` block must run.\n\n> **Remember:** The `if` and `else` blocks work as a pair. Together, they ensure that exactly one of the two paths is taken every time the code is executed.",
+   "code": ""
+  },
+  {
+   "heading": "Handling Multiple Options with Else-If",
+   "body": "Sometimes, a simple \"yes or no\" choice is not enough. In many programs, you need to check for several different possibilities. If you only used a basic `if-else` statement, you could only handle two paths. To handle three, four, or even ten different options, we use the `else if` statement.\n\nAn `else if` allows the program to check a series of conditions one by one. The program starts at the top and asks, \"Is this first condition true?\" If the answer is yes, it runs that block of code and then jumps completely past all the other options. If the answer is no, it moves down to the next `else if` to try again.\n\n> **Definition:** An `else if` statement is a conditional check that only runs if all the previous conditions in that chain were false.\n\nThink of this like a sorting machine at a post office. Imagine a machine that looks at a package to decide where it goes. First, it checks: \"Is this package going to New York?\" If yes, it puts it in the New York bin and stops looking. If not, it moves to the next check: \"Is this package going to London?\" If that is true, it goes in the London bin. It only checks for London because it already knows the package is not going to New York.\n\n> **In daily life:** This is like choosing a clothing outfit based on the temperature. If it is below 0°C, you wear a heavy coat. Else if it is between 0°C and 15°C, you wear a jacket. Else if it is above 15°C, you wear a t-shirt. You only pick one outfit, not all three.\n\nIn code, this looks like a chain. You start with one `if`, follow it with as many `else if` blocks as you need, and usually end with a final `else` to catch anything that didn't match.\n\nFor example, imagine a program that gives a grade based on a score $S$.\nIf $S \\ge 90$, the grade is \"A\".\nElse if $S \\ge 80$, the grade is \"B\".\nElse if $S \\ge 70$, the grade is \"C\".\nElse, the grade is \"F\".\n\nThe order of these checks is very important. If the score is 95, the first condition ($S \\ge 90$) is true. The program assigns \"A\" and skips everything else. If we put the $S \\ge 70$ check first, a student with 95 would get a \"C\" because 95 is indeed greater than 70, and the program would stop there.\n\n> **Common mistake:** Putting a general condition before a specific one. Always check for the most strict or specific requirement first.\n\nBy using this structure, your code becomes much cleaner. Instead of writing many separate `if` statements that the computer has to check every single time, the `else if` chain tells the computer to stop as soon as it finds the correct answer. This makes your program faster and easier for other humans to read.\n\n> **Remember:** Only the first block that evaluates to true will execute. Once a match is found, the rest of the chain is ignored.",
+   "code": ""
+  },
+  {
+   "heading": "Nested Conditions",
+   "body": "Sometimes, checking one condition is not enough. You might need to check a second condition, but only if the first one is already true. This is called nesting. In programming, \"nesting\" means placing one piece of code inside another piece of the same type.\n\nImagine you are deciding if you can go for a walk. First, you check if it is sunny. If it is raining, you don't even need to check anything else; you stay inside. But if it is sunny, you then check a second condition: do you have free time? You only care about your schedule if the weather is already good.\n\n> **Definition:** Nested conditions occur when an `if` statement is placed inside the body of another `if` statement.\n\nThis structure is useful because it creates a hierarchy of requirements. The inner condition is \"protected\" by the outer condition. The computer will never even look at the second check unless the first check evaluates to true.\n\n> **In daily life:** Think of a security gate. First, the guard checks if you have an ID card. If you don't have one, you are stopped immediately. If you do have one, the guard then checks if your name is on the guest list. The guest list is the \"nested\" check.\n\nLet's look at how this works in code. Suppose we are writing a program for a cinema. We want to check if a person can buy a ticket for an R-rated movie.\n\nFirst, we check if the person is 17 years old or older. If this is true, we then check if they have enough money.\n\n```python\nif age >= 17:\n    print(\"You are old enough.\")\n    if money >= 10:\n        print(\"You can buy the ticket!\")\n    else:\n        print(\"You are old enough, but you don't have enough money.\")\nelse:\n    print(\"You are too young for this movie.\")\n```\n\nIn this example, the second `if` (checking the money) is nested inside the first `if` (checking the age). If the person is only 12 years old, the program skips everything inside the first block. It never checks the money because the age requirement was not met.\n\n> **Note:** Every nested `if` must be indented (shifted to the right) further than the one above it. This tells the computer which condition belongs to which block.\n\nAs you add more nested conditions, your code moves further to the right. While this is powerful, adding too many layers can make your code hard to read. This is often called \"deep nesting.\" If you find yourself nesting four or five levels deep, it might be time to look for a simpler way to organize your logic.\n\n> **Common mistake:** Forgetting to indent the inner `if` statement. If the second `if` is not indented, the computer treats it as a separate check rather than a nested one.\n\nBy using nested conditions, you can handle complex rules step-by-step. You ensure that the program only performs specific checks when it is logically necessary to do so.",
+   "code": ""
+  },
+  {
+   "heading": "The Switch Statement",
+   "body": "Sometimes, you need to check one single variable against a long list of possible values. For example, imagine you are writing a program that tells a user what day of the week it is based on a number from 1 to 7. You could use seven different `else-if` statements, but that makes your code look cluttered and harder to read.\n\nThis is where the **Switch Statement** comes in. A switch statement is a control structure that takes one variable and \"switches\" the program's path based on which specific value that variable holds. Instead of asking \"Is it this? No. Is it that? No,\" the program jumps directly to the matching value.\n\n> **Definition:** A switch statement is a tool used to execute one block of code among many options based on the value of a single expression.\n\nTo understand this, think of a vending machine. You don't ask the machine, \"Is the button pressed A1? No. Is it A2? No. Is it A3?\" Instead, the machine looks at the specific code you entered and goes directly to the slot that matches that code to drop your snack.\n\nHere is how a switch statement works step-by-step:\n\nFirst, you provide the variable you want to check inside the parentheses of the `switch` keyword. This variable is called the **expression**.\n\nSecond, you list several **cases**. A case is a specific value that you are looking for. If the expression matches a case, the code inside that case runs.\n\nThird, you use a keyword called `break`. The `break` command tells the computer, \"I found the right match, now stop and exit the switch statement.\" Without a `break`, the computer will keep running the code in the next cases even if they don't match. This is called \"falling through.\"\n\nFinally, you can add a **default** case. The default case acts like a safety net. It runs only if none of the other cases match the variable.\n\n> **In daily life:** A switch statement is like a train station where the tracks split. The train (your program) follows the track that matches its destination sign (the case) and stops once it arrives.\n\nLet's look at the logic. If we have a variable $x$ and we check it against values $A, B,$ and $C$, the logic looks like this:\n\n$$\n\\text{If } x = A \\rightarrow \\text{Do Action 1} \\\\\n\\text{If } x = B \\rightarrow \\text{Do Action 2} \\\\\n\\text{If } x = C \\rightarrow \\text{Do Action 3} \\\\\n\\text{Otherwise} \\rightarrow \\text{Do Default Action}\n$$\n\nUsing a switch statement is more efficient than a long `else-if` chain because it is cleaner to write and often faster for the computer to process. However, it only works when you are comparing one variable to constant values, like numbers or strings. You cannot use a switch statement to check for ranges, such as \"if the temperature is between 20 and 30 degrees.\"\n\n> **Common mistake:** Forgetting to put a `break` at the end of each case. This causes the program to execute all following cases regardless of whether they match the variable.\n\n> **Remember:** Use a switch statement when you have one variable and many specific, fixed options to choose from.",
+   "code": ""
+  },
+  {
+   "heading": "Choosing the Right Tool",
+   "body": "Now that you know how to use both `if-else` and `switch` statements, you might wonder which one to pick. Both tools allow your program to make decisions, but they are not always the same. Choosing the right one makes your code easier to read and maintain.\n\nThink of an `if-else` statement as a flexible filter. It can check for almost anything. You can check if a number is greater than 10, if a name starts with the letter \"A\", or if two different conditions are both true at the same time. This is because `if` statements use boolean expressions. A boolean expression is a piece of code that results in only one of two values: true or false.\n\n> **Definition:** A boolean expression is a logical statement that the computer evaluates as either true or false.\n\nBecause `if-else` is so flexible, it is the best tool for ranges of values. For example, if you are grading a student, you might check if a score is between 90 and 100 for an \"A\". You cannot easily do this with a `switch` statement because you are checking a range, not one specific value.\n\nOn the other hand, a `switch` statement is like a specialized sorting machine. It is designed to look at one single variable and jump directly to the matching \"case.\" This is called equality checking, which means the computer asks, \"Is this value exactly equal to this other value?\"\n\n> **In daily life:** Imagine a vending machine. You press a specific button (the case), and the machine gives you a specific snack. You aren't asking if the button is \"between A1 and A5\"; you are picking exactly one option.\n\nWhen you have a long list of specific options for one variable, a `switch` statement is much cleaner. If you used `if-else` for ten different options, you would have to write the variable name over and over again. This creates \"clutter,\" which makes the code harder for other humans to read. A `switch` statement lists the variable once at the top and then lists the options clearly below it.\n\n> **Note:** Readability refers to how easy it is for a programmer to look at a piece of code and understand what it does without having to struggle.\n\nTo decide which tool to use, ask yourself these two questions:\n1. Am I checking for a range of values (like $x > 10$) or complex logic? Use `if-else`.\n2. Am I checking one single variable against a list of specific, fixed values? Use `switch`.\n\n> **Common mistake:** Do not use a `switch` statement to check if a number is \"greater than\" or \"less than\" another number. Most programming languages do not allow this inside a `switch` case.\n\nBy following these rules, your code will stay organized. You will use `if-else` for complex logic and `switch` for clear, simple lists. This balance ensures your program is both powerful and easy to manage.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the purpose of a simple \"if\" statement in a program?",
+   "a": "A simple \"if\" statement allows a program to execute a specific block of code only if a certain condition is true. If the condition is false, the program simply skips that block and moves to the next part of the code."
+  },
+  {
+   "level": "Easy",
+   "q": "Explain the difference between an \"if\" statement and an \"if-else\" statement.",
+   "a": "An \"if\" statement only handles one possibility (what happens when the condition is true). An \"if-else\" statement handles two possibilities: it provides one block of code for when the condition is true and a different block of code for when the condition is false."
+  },
+  {
+   "level": "Medium",
+   "q": "When should a programmer use an \"else-if\" chain instead of multiple separate \"if\" statements?",
+   "a": "Use \"else-if\" when the options are mutually exclusive, meaning only one of the conditions can be true at a time. This is more efficient because once the program finds a true condition, it skips the rest of the chain. Multiple \"if\" statements would force the program to check every single condition, even if a match was already found."
+  },
+  {
+   "level": "Medium",
+   "q": "Describe a real-world scenario where a \"switch\" statement would be a better choice than an \"if-else\" chain.",
+   "a": "A \"switch\" statement is ideal for a menu system where a user chooses from a list of fixed options (e.g., Press 1 for English, 2 for Spanish, 3 for French). Since the program is checking a single variable against several specific constant values, a switch statement is cleaner and easier to read than many \"else-if\" blocks."
+  },
+  {
+   "level": "Hard",
+   "q": "What are \"nested conditions,\" and what is a potential risk of using them too deeply in a program?",
+   "a": "Nested conditions occur when an \"if\" statement is placed inside another \"if\" statement. This is used to check a secondary condition only after a primary condition is met. The risk is \"spaghetti code\" or high complexity; too many levels of nesting make the code very difficult to read, debug, and maintain."
+  },
+  {
+   "level": "Hard",
+   "q": "Compare the \"switch\" statement and the \"else-if\" chain in terms of the types of conditions they can evaluate.",
+   "a": "An \"else-if\" chain is flexible; it can evaluate complex ranges (e.g., if age > 18 AND age < 65) and different variables in the same chain. A \"switch\" statement is more restrictive; it generally only evaluates a single variable against specific, fixed values (like integers or strings) and cannot handle ranges or complex logical comparisons."
+  }
+ ],
+ "recap": "This lesson introduces control flow, which allows programs to make decisions rather than just running in a straight line. Students learned about various conditional tools, including simple if statements, else blocks, and else-if chains for multiple options. The lesson also covered nesting conditions for complex requirements and the switch statement for checking a single variable against many values.",
+ "key_terms": [
+  {
+   "term": "Control Flow",
+   "meaning": "The order in which individual statements or instructions are executed in a program."
+  },
+  {
+   "term": "Sequential Execution",
+   "meaning": "When a computer reads and runs code line by line, from top to bottom."
+  },
+  {
+   "term": "Condition",
+   "meaning": "A question or expression that can only result in a value of True or False."
+  },
+  {
+   "term": "Else Block",
+   "meaning": "A section of code that runs only when the preceding if condition is false."
+  },
+  {
+   "term": "Nested Conditions",
+   "meaning": "When one if statement is placed inside the body of another if statement."
+  },
+  {
+   "term": "Switch Statement",
+   "meaning": "A tool used to execute one block of code among many options based on the value of a single expression."
+  },
+  {
+   "term": "Boolean Expression",
+   "meaning": "A logical statement that the computer evaluates as either true or false."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is 'sequential execution' in programming?",
+   "options": [
+    "Running code in a random order",
+    "Running code line by line from top to bottom",
+    "Skipping lines of code based on a condition",
+    "Repeating a block of code multiple times"
+   ],
+   "answer": 1,
+   "why": "Sequential execution means the computer reads the code like a book, starting at line one and moving down."
+  },
+  {
+   "q": "When does the code inside a simple 'if' statement run?",
+   "options": [
+    "Every time the program starts",
+    "Only when the condition is False",
+    "Only when the condition is True",
+    "Only when there is an else block"
+   ],
+   "answer": 2,
+   "why": "An if statement only executes its block of code if the condition evaluates to True."
+  },
+  {
+   "q": "What is the primary purpose of an 'else' block?",
+   "options": [
+    "To repeat the if statement",
+    "To provide an alternative path when the if condition is false",
+    "To check a second, unrelated condition",
+    "To stop the program from running"
+   ],
+   "answer": 1,
+   "why": "The else block acts as a safety net or 'Plan B' for when the first condition is not met."
+  },
+  {
+   "q": "Which tool is best for checking a series of different conditions one by one?",
+   "options": [
+    "Sequential execution",
+    "A simple if statement",
+    "An else-if chain",
+    "A boolean expression"
+   ],
+   "answer": 2,
+   "why": "Else-if allows a program to test multiple possibilities in order until one is found to be true."
+  },
+  {
+   "q": "What happens in a 'nested' condition structure?",
+   "options": [
+    "The program skips all conditions",
+    "The inner condition is checked only if the outer condition is true",
+    "The inner condition is checked first, then the outer one",
+    "The program runs both conditions regardless of the result"
+   ],
+   "answer": 1,
+   "why": "Nesting places one if statement inside another, creating a hierarchy of requirements."
+  },
+  {
+   "q": "When is a 'switch' statement more useful than an 'if-else' chain?",
+   "options": [
+    "When checking for ranges of values (e.g., 10 to 20)",
+    "When you have only one possible outcome",
+    "When checking one variable against a long list of specific values",
+    "When you need to check multiple different variables at once"
+   ],
+   "answer": 2,
+   "why": "Switch statements are cleaner and more efficient when matching a single variable to specific values."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Control Flow",
+   "back": "The order in which a computer executes statements in a program."
+  },
+  {
+   "front": "Condition",
+   "back": "A question that can only be answered as True or False."
+  },
+  {
+   "front": "If Statement",
+   "back": "A structure that runs a block of code only if a specific condition is true."
+  },
+  {
+   "front": "Else Statement",
+   "back": "A block of code that runs only if the preceding if condition was false."
+  },
+  {
+   "front": "Else-If",
+   "back": "A conditional check that runs only if all previous conditions in the chain were false."
+  },
+  {
+   "front": "Nesting",
+   "back": "Placing one control structure (like an if statement) inside another."
+  },
+  {
+   "front": "Switch Statement",
+   "back": "A tool that jumps directly to a matching value from a list of options for a single variable."
+  },
+  {
+   "front": "Boolean Expression",
+   "back": "A logical statement that results in either True or False."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l05-the-decision-process",
+   "title": "A visual representation of how a program chooses a path based on a condition.",
+   "alt": "A visual representation of how a program chooses a path based on a condition.",
+   "priority": 7,
+   "picture_title": "The Decision Process",
+   "kind": "illustration",
+   "subject": "A person standing at a fork in the road with a signpost. One path is labeled 'True' and the other 'False'.",
+   "layout": "A character at a junction; the path to the left leads to one action, and the path to the right leads to a different action.",
+   "labels": [
+    "Condition",
+    "True Path",
+    "False Path"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l05-nested-decision-making",
+   "title": "How a second decision is only made after the first condition is met.",
+   "alt": "How a second decision is only made after the first condition is met.",
+   "priority": 6,
+   "picture_title": "Nested Decision Making",
+   "kind": "illustration",
+   "subject": "A series of two gates. The first gate (Is it sunny?) must be open before the person can reach the second gate (Do I have time?).",
+   "layout": "Two gates in a sequence; the second gate is physically located behind the first one.",
+   "labels": [
+    "First Condition",
+    "Second Condition",
+    "Blocked Path"
+   ],
+   "after": 4
+  },
+  {
+   "type": "steps",
+   "title": "How an If-Else Statement Works",
+   "after": 2,
+   "steps": [
+    {
+     "label": "Check Condition",
+     "text": "The computer asks a True or False question."
+    },
+    {
+     "label": "True Path",
+     "text": "If true, the code inside the if block runs."
+    },
+    {
+     "label": "False Path",
+     "text": "If false, the code inside the else block runs."
+    },
+    {
+     "label": "Continue",
+     "text": "The program moves to the next part of the code."
+    }
+   ],
+   "loop": false
+  },
+  {
+   "type": "steps",
+   "title": "The Else-If Process",
+   "after": 3,
+   "steps": [
+    {
+     "label": "First Check",
+     "text": "Is the first condition true?"
+    },
+    {
+     "label": "Next Check",
+     "text": "If no, move to the next else-if condition."
+    },
+    {
+     "label": "Execute",
+     "text": "Run the first block that evaluates to true."
+    },
+    {
+     "label": "Exit",
+     "text": "Jump past all remaining options in the chain."
+    }
+   ],
+   "loop": false
+  },
+  {
+   "type": "compare",
+   "title": "If-Else vs. Switch Statements",
+   "after": 6,
+   "left": {
+    "name": "If-Else",
+    "points": [
+     "Flexible filters",
+     "Checks boolean expressions",
+     "Handles ranges (e.g., > 10)",
+     "Checks multiple different variables"
+    ]
+   },
+   "right": {
+    "name": "Switch",
+    "points": [
+     "Direct matching",
+     "Checks one single variable",
+     "Handles specific values",
+     "Cleaner for long lists of options"
+    ]
+   }
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "google/gemma-4-31b-it"
+ ]
+}

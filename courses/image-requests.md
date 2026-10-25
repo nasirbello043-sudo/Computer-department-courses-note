@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
+Waiting: **27** | Uploaded: **41** | Covers waiting: **8**
 
 ## Course covers
 
@@ -116,6 +116,22 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "CALCULUS FOUNDATION"
 - Subtitle under it, smaller: "Unlocking Change: From Slopes to Areas"
 The spine shows "CALCULUS FOUNDATION" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Programming Course
+
+Save as:
+```
+cover-programming-course.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a purple colour palette, showing a lively scene built around: A laptop with a code editor, A curly bracket { }, A binary code sequence 0101, A coffee mug, A logic flow chart, A glowing computer chip, A terminal command prompt, A bug icon, A cloud computing symbol, A pixelated game character.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "PROGRAMMING COURSE"
+- Subtitle under it, smaller: "Building the future one line of code at a time"
+The spine shows "PROGRAMMING COURSE" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -280,24 +296,27 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 ## Organic Chemistry
 
-### Lesson 3: Functional Groups I: Hydrocarbons
+### Lesson 6: Isomerism
 
 Save as:
 ```
-organic-chemistry-l03-straight-chain-alkane.png
+organic-chemistry-l06-chiral-carbon-center.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational labelled diagram for secondary-school students.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Show: A linear chain of carbon atoms each bonded to the maximum number of hydrogen atoms, illustrating the saturated nature of alkanes.
+Show: The diagram shows a tetrahedral carbon with four distinct substituents, its mirror image, and how they cannot be aligned by rotation, illustrating molecular chirality.
 
-Layout: Carbon atoms in a horizontal line, each labelled C, with hydrogen atoms drawn as small circles attached above and below; single lines for bonds.
+Layout: Two tetrahedral models side‑by‑side, each with colored sticks for the four bonds; arrows point from each model to its mirror image.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "C"
-- "H"
-- "single bond"
+- "Group A"
+- "Group B"
+- "Group C"
+- "Group D"
+- "Mirror Image"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -478,4 +497,199 @@ Prompt:
 Create a realistic photograph for a school lesson: The photo shows a person running outdoors, wearing a device that displays instantaneous speed (velocity) and cumulative distance, illustrating how integrating velocity gives distance.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Programming Course
+
+### Lesson 1: Introduction to Programming
+
+Save as:
+```
+programming-course-l01-compiler-workflow.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: The flow from a text file (source code) through lexical analysis, syntax analysis, optimization, and code generation to produce an executable file that the computer can run directly.
+
+Layout: Horizontal flow chart with boxes for each stage; arrows connect them in order; final box labeled Executable.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Source Code"
+- "Lexical Analysis"
+- "Syntax Analysis"
+- "Optimization"
+- "Code Generation"
+- "Executable"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l01-recipe-vs-program.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A kitchen scene with a chef following a written recipe and a computer screen showing a short program, highlighting the parallel between cooking steps and code statements.
+
+Layout: Two panels: left panel a chef reading a recipe, right panel a monitor with code; arrows point from each recipe step to the matching code line.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Chef"
+- "Recipe"
+- "Code"
+- "Step 1"
+- "Step 2"
+- "Step 3"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l01-interpreter-process.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A program file being read by an interpreter, which translates each line on the fly and immediately performs the action, without producing a separate executable.
+
+Layout: Vertical sequence: Program File → Interpreter → Action; each step in a separate box with arrows pointing down.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Program File"
+- "Interpreter"
+- "Execute Line"
+- "Result"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 3: Operators and Expressions
+
+Save as:
+```
+programming-course-l03-calculator-buttons.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A simple hand‑held calculator with the +, –, ×, ÷ and % keys highlighted. The picture helps students link the operator symbols to real‑world devices they already know.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+programming-course-l03-balance-scale-comparison.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A classic two‑pan balance scale with different numbers of apples on each side, showing which side is heavier, lighter, or equal. This visual maps to >, <, and == operators.
+
+Layout: Scale in the centre; left pan labeled "<" arrow pointing to lighter side, right pan labeled ">" arrow pointing to heavier side, and a balanced view labeled "==".
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "<"
+- ">"
+- "=="
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l03-logic-gate-symbols.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: Standard Boolean logic gate icons (AND, OR, NOT) with simple input‑output arrows, demonstrating how multiple conditions are joined.
+
+Layout: Three separate gate symbols arranged horizontally; each gate has two input lines (one for NOT) and one output line, with labels beneath.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "AND"
+- "OR"
+- "NOT"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 5: Decision Making
+
+Save as:
+```
+programming-course-l05-the-decision-process.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A person standing at a fork in the road with a signpost. One path is labeled 'True' and the other 'False'.
+
+Layout: A character at a junction; the path to the left leads to one action, and the path to the right leads to a different action.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Condition"
+- "True Path"
+- "False Path"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+programming-course-l05-nested-decision-making.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A series of two gates. The first gate (Is it sunny?) must be open before the person can reach the second gate (Do I have time?).
+
+Layout: Two gates in a sequence; the second gate is physically located behind the first one.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "First Condition"
+- "Second Condition"
+- "Blocked Path"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 6: Loops and Repetition
+
+Save as:
+```
+programming-course-l06-reading-a-book-process.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A person reading a book, highlighting the relationship between the outer loop (pages) and the inner loop (lines).
+
+Layout: A book open with an arrow pointing to the sequence of pages and a smaller arrow pointing to the sequence of lines on a single page.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Outer Loop (Pages)"
+- "Inner Loop (Lines)"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```

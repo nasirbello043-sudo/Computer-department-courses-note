@@ -1,0 +1,326 @@
+{
+ "title": "Loops and Repetition",
+ "summary": "This lesson introduces loops, which allow a program to repeat a block of code multiple times. Students will learn how to use different types of loops to handle repetitive tasks efficiently.",
+ "objectives": [
+  "Differentiate between for, while, and do-while loops",
+  "Implement nested loops to handle multi-dimensional data",
+  "Use break and continue statements to control loop flow",
+  "Write loops that terminate correctly to avoid infinite loops"
+ ],
+ "prerequisites": "Students should understand basic variables, operators, and decision-making structures like if-else statements.",
+ "why": [
+  "In the real world, computers are used to process massive amounts of data. Instead of writing a thousand lines of code to process a thousand customers, a loop allows a programmer to write three lines of code that repeat a thousand times.",
+  "Loops power everything from the clock on your phone to the way a web browser loads a list of search results. Mastering loops is the key to creating software that can scale and handle dynamic amounts of information."
+ ],
+ "sections": [
+  {
+   "heading": "Introduction to Repetition",
+   "body": "Imagine you are writing a program to print the phrase \"Hello World\" on the screen. If you want to do this twice, you simply write the print command two times. If you want to do it five times, you write it five times. This is easy and fast.\n\nBut what happens if you need to print that phrase 1,000 times? Or 1,000,000 times? Writing the same line of code over and over again would take hours. It would make your file massive, and if you made a small typo in one line, you would have to find and fix it in a thousand different places. This is where we use a concept called repetition.\n\nIn programming, repetition is often called **iteration**. Iteration is the process of repeating a set of instructions multiple times until a specific goal is reached. Instead of writing the same line of code many times, we write the code once and tell the computer to \"loop\" through it.\n\n> **Definition:** Iteration is the act of repeating a process or a block of code multiple times.\n\nThink of a loop like a track athlete running laps around a stadium. The athlete does not have a different set of instructions for every single lap. Instead, they have one simple instruction: \"Run one lap.\" They repeat this same action over and over. They only stop when they have completed the required number of laps.\n\n> **In daily life:** Brushing your teeth is a loop. You don't think, \"Now I will brush tooth number one, now I will brush tooth number two.\" Instead, you follow a loop: \"Brush a tooth, then move to the next one, and repeat until all teeth are clean.\"\n\nUsing loops makes your code much more efficient. Efficiency means doing the same amount of work using fewer resources, such as time or memory. When we use a loop, we can handle a huge amount of data with just a few lines of code. For example, if you want to calculate the sum of numbers from 1 to 100, you don't need to write:\n\n$$1 + 2 + 3 + ... + 100$$\n\nInstead, you tell the computer to start at 1 and keep adding the next number until it reaches 100.\n\n> **Remember:** Loops allow you to write shorter, cleaner code that is easier to read and faster to fix.\n\nAs we move forward, you will learn that there are different types of loops. Some loops are used when you know exactly how many times you need to repeat something. Other loops are used when you want to keep repeating something until a certain condition changes—like a \"While\" loop that keeps a game running while the player still has health points.\n\nBy mastering iteration, you stop thinking about individual lines of code and start thinking about patterns. This is one of the most powerful tools in a programmer's toolkit because it allows the computer to do the boring, repetitive work that would be impossible for a human to do manually.",
+   "code": ""
+  },
+  {
+   "heading": "The For Loop",
+   "body": "Imagine you want your computer to perform the same task several times. If you want to print \"Hello\" five times, you could write the print command five times. But what if you need to do it 1,000 times? Writing 1,000 lines of code is slow and boring. This is why we use loops.\n\nThe **for loop** is a special tool we use when we know exactly how many times we want to repeat a block of code before we even start. It acts like a counter that keeps track of the repetitions for us.\n\n> **In daily life:** Think of a gym teacher telling a student, \"Do 10 jumping jacks.\" The student starts at zero, does one jump, counts \"1,\" and continues until they reach 10. They know the exact end point before they begin.\n\nTo make a for loop work, the computer needs three pieces of information. These are usually written together in one line of code.\n\nFirst is **initialization**. This is where we create a variable, often called a counter, and give it a starting value. For example, we might start at $i = 0$. The letter $i$ is commonly used in programming as a shorthand for \"index\" or \"iteration.\"\n\nSecond is the **condition**. This is a true-or-false question the computer asks before every single loop. For example: \"Is $i$ still less than 10?\" If the answer is \"Yes\" (True), the loop runs. If the answer is \"No\" (False), the loop stops immediately.\n\nThird is the **increment**. This happens at the end of every loop. It changes the counter variable so that the loop eventually ends. The most common increment is adding 1 to the counter, written as $i = i + 1$.\n\n> **Definition:** An increment is the process of increasing a value by a specific amount after each cycle of a loop.\n\nWhen we put these together, the logic looks like this:\n\n$$ \\text{for (initialization; condition; increment)} $$\n\nHere is how the computer processes this step-by-step:\n1. It sets the starting value (initialization).\n2. It checks the condition. If it is false, it skips the loop entirely.\n3. If the condition is true, it runs the code inside the loop.\n4. It updates the counter (increment).\n5. It goes back to step 2 and checks the condition again.\n\n> **Remember:** The condition is checked *before* the code inside the loop runs. If your starting value already fails the condition, the loop will never run even once.\n\nIf you want to repeat a task 5 times starting from 0, your loop would look like this:\n`for (int i = 0; i < 5; i++)`\n\nIn this example, the loop runs when $i$ is 0, 1, 2, 3, and 4. As soon as $i$ becomes 5, the condition $i < 5$ becomes false, and the computer moves on to the next part of your program.\n\n> **Common mistake:** Using the wrong comparison symbol. If you use $i \\le 5$ instead of $i < 5$, the loop will run 6 times instead of 5 because it includes the number 5.",
+   "code": ""
+  },
+  {
+   "heading": "The While Loop",
+   "body": "Sometimes, you do not know exactly how many times you need to repeat a task. You only know that you should keep going as long as a certain rule is true. This is where the **while loop** becomes useful.\n\nA while loop tells the computer: \"Check this condition first. If it is true, run the code inside. After the code finishes, check the condition again. Keep doing this until the condition becomes false.\"\n\n> **Definition:** A **condition** is a statement that the computer evaluates as either True or False.\n\nThink of this like eating a bowl of cereal. You do not decide to take exactly ten spoonfuls before you start. Instead, you check your bowl. If there is still cereal in the bowl (the condition), you take another bite. You repeat this action over and over. The moment the bowl is empty, the condition \"there is cereal in the bowl\" becomes false, and you stop eating.\n\n> **In daily life:** Checking if a phone is still charging before unplugging it is a while loop. You wait *while* the battery is not yet 100%.\n\nIn programming, a while loop follows a specific structure. It looks like this:\n\n`while (condition)`\n`{`\n`  // Code to repeat`\n`}`\n\nThe computer evaluates the condition inside the parentheses. If the result is true, it enters the curly braces `{ }` and executes the instructions. Once it reaches the bottom of the braces, it jumps back to the top to check the condition again.\n\nFor a while loop to be useful, something inside the loop must change. This change is called an **update**. If the condition is based on a variable $x$, you must change the value of $x$ inside the loop. If you do not, the condition will stay true forever, and the program will never stop.\n\nFor example, imagine you are writing a program to count down from 5 to 1. You would create a variable $count$ and set it to 5. Your condition would be $count > 0$. Inside the loop, you would print the number and then subtract 1 from $count$.\n\nThe logic looks like this:\n1. Is $5 > 0$? Yes. Print 5, then $count$ becomes 4.\n2. Is $4 > 0$? Yes. Print 4, then $count$ becomes 3.\n3. Is $3 > 0$? Yes. Print 3, then $count$ becomes 2.\n4. Is $2 > 0$? Yes. Print 2, then $count$ becomes 1.\n5. Is $1 > 0$? Yes. Print 1, then $count$ becomes 0.\n6. Is $0 > 0$? No. Stop the loop.\n\n> **Remember:** The while loop checks the condition *before* it runs the code. If the condition is false at the very start, the code inside the loop will never run even once.\n\nThis makes the while loop different from a for loop. While a for loop is best for counting a specific number of times, the while loop is best for situations where the end point depends on a changing event, such as waiting for a user to press a \"Quit\" button or waiting for a sensor to reach a certain temperature.\n\n> **Common mistake:** Forgetting to update the variable inside the loop. This creates a loop that never ends, which can cause your program to crash.",
+   "code": ""
+  },
+  {
+   "heading": "The Do-While Loop",
+   "body": "So far, we have looked at loops that check a condition *before* they run any code. These are called pre-test loops. In a pre-test loop, if the condition is false at the very start, the code inside the loop never runs at all. However, sometimes you need a loop that guarantees the code will execute at least one time, regardless of whether the condition is true or false. This is where the **do-while loop** comes in.\n\nA do-while loop is a post-test loop. This means it performs the action first and checks the condition *afterward*. Because the check happens at the end, the computer does not know if it should stop until it has already finished the first cycle.\n\n> **Definition:** A post-test loop is a loop that executes its block of code first and then evaluates the condition to decide if it should repeat.\n\nTo understand this, think about how you might interact with a vending machine. You do not check if you have a snack before you put money in; you first perform the action of buying the snack, and then you check if you still have enough money left to buy another one.\n\n> **In daily life:** Imagine a \"Try Again\" screen in a video game. The game must let you play the level at least once before it can ask you, \"Do you want to play again?\"\n\nIn a standard `while` loop, the logic looks like this:\n1. Check condition.\n2. If true, run code.\n3. Repeat.\n\nIn a `do-while` loop, the logic shifts:\n1. Run code.\n2. Check condition.\n3. If true, repeat.\n\nThis is incredibly useful for creating user menus. For example, if you want to show a user a list of options (like \"1. Start Game\" or \"2. Exit\"), you must show the menu at least once. You cannot check if the user has chosen \"Exit\" before you have even shown them the menu.\n\nThe structure of the loop usually looks like this in code:\n\n`do {`\n  `// Code to execute`\n`} while (condition);`\n\nNotice that the condition is placed at the bottom. This ensures that the code block is entered immediately. If the condition is true after the first run, the program jumps back to the `do` keyword and runs the code again. If the condition is false, the loop ends.\n\n> **Remember:** A do-while loop will always execute its code block at least once, even if the condition is false from the very beginning.\n\nOne important detail is the syntax. In many programming languages, a `while` loop does not need a semicolon at the end of the condition, but a `do-while` loop does. This semicolon tells the computer that the loop structure is officially finished.\n\nIf you are unsure which loop to use, ask yourself: \"Does this code need to run once before I check the rule?\" If the answer is yes, use a do-while loop. If the answer is \"It might not need to run at all,\" stick with a standard while loop.\n\n> **Note:** The main difference between pre-test and post-test loops is the timing of the condition check. Pre-test checks before; post-test checks after.",
+   "code": ""
+  },
+  {
+   "heading": "Controlling Loop Execution",
+   "body": "Sometimes, a loop needs to do more than just repeat a task until a counter reaches a certain number. You might need to stop the loop entirely because you found what you were looking for, or you might want to skip one specific item and move to the next. To do this, we use \"control statements.\"\n\nThe first tool is the `break` statement. In programming, `break` tells the computer to stop the loop immediately and jump to the code that comes after the loop. This is useful when you are searching for a specific item in a long list. Once you find that item, there is no reason to keep looking at the rest of the list.\n\n> **In daily life:** Imagine you are looking for a specific book on a shelf. You check the books one by one from left to right. As soon as you find your book, you stop searching and take it. You do not keep checking the remaining books because your goal is finished.\n\nIf you use `break` inside a loop, the program exits the loop instantly. For example, if you have a loop that counts from 1 to 100, but you place a `break` when the number equals 10, the loop will stop at 10 and will never reach 11.\n\nThe second tool is the `continue` statement. Unlike `break`, `continue` does not stop the whole loop. Instead, it tells the computer to skip the rest of the code inside the loop for the *current* turn and jump straight to the next iteration. An iteration is simply one single cycle or \"lap\" of the loop.\n\n> **Definition:** An iteration is one complete execution of the block of code inside a loop.\n\nThis is useful when you want to ignore certain values. For example, imagine you are writing a program to print all numbers from 1 to 10, but you want to skip the number 5. You would tell the loop: \"If the number is 5, `continue` to the next number.\" The program will print 1, 2, 3, 4, skip 5, and then print 6, 7, 8, 9, 10.\n\n> **Note:** While `break` kills the loop entirely, `continue` only kills the current lap.\n\nTo understand the difference, think of a race. A `break` is like a runner tripping and being forced to leave the race entirely. A `continue` is like a runner skipping one lap because of a penalty but then continuing to run the rest of the race.\n\nWhen using these statements, you must be careful about where you place them. If you put a `continue` statement before you update your loop counter (like $i = i + 1$), you might create a loop that never moves forward.\n\n> **Common mistake:** Placing a `continue` statement before the counter increases in a `while` loop. This can lead to an infinite loop because the counter never changes, so the condition always stays true.\n\nBy using `break` and `continue`, you gain precise control over your repetitions. You can make your programs faster by stopping them early and smarter by filtering out data you do not need.",
+   "code": ""
+  },
+  {
+   "heading": "Nested Loops",
+   "body": "Sometimes, a single loop is not enough to handle a task. You might need to repeat a set of instructions, and inside those instructions, repeat another set of steps. This is called a nested loop. A nested loop is simply a loop placed inside the body of another loop.\n\nTo understand this, think about how you read a book. You read one page at a time from the start to the end of the book. However, on every single page, you must read every line from top to bottom.\n\n> **In daily life:** Reading a book is like a nested loop. The \"outer loop\" is the page number, and the \"inner loop\" is the line number. You cannot move to the next page until you have finished every line on the current page.\n\nIn programming, we use this structure to work with grids or tables. A table has rows (horizontal lines) and columns (vertical lines). To visit every cell in a table, you use an outer loop to track which row you are on, and an inner loop to visit every column in that specific row.\n\nLet's look at how this works step-by-step. Imagine we have a grid with 3 rows and 4 columns.\n\n1. The outer loop starts at Row 1.\n2. While the outer loop is stuck on Row 1, the inner loop runs completely. It visits Column 1, then Column 2, then Column 3, and finally Column 4.\n3. Only after the inner loop finishes does the outer loop move to Row 2.\n4. The inner loop now starts all over again, visiting Column 1 through 4 for Row 2.\n5. This repeats until the outer loop reaches the final row.\n\n> **Definition:** A nested loop is a loop that exists inside another loop. The \"outer loop\" controls how many times the entire \"inner loop\" will run.\n\nIf the outer loop runs $N$ times and the inner loop runs $M$ times, the code inside the inner loop will execute a total of $N \\times M$ times. For our grid example:\n\n$$3 \\text{ rows} \\times 4 \\text{ columns} = 12 \\text{ total visits}$$\n\nThis is very useful for creating coordinates, such as $(0,0), (0,1), (0,2)$. The first number comes from the outer loop, and the second number comes from the inner loop.\n\nWhen writing nested loops, you must be careful with your variable names. If you use the same variable name for both loops, the program will get confused and likely crash or loop forever.\n\n> **Common mistake:** Using the same counter variable (like $i$) for both the outer and inner loop. Always use different names, such as $i$ for the outer loop and $j$ for the inner loop.\n\nAs you add more layers of nesting, your program can slow down quickly. If you have three loops nested together, the number of operations grows very fast.\n\n> **Remember:** The inner loop must finish all its repetitions before the outer loop can move to its next step.",
+   "code": ""
+  },
+  {
+   "heading": "Common Pitfalls: Infinite Loops",
+   "body": "Imagine you are following a recipe to stir a pot of soup. The instructions say, \"Stir the soup until it is hot.\" If the stove is turned off, the soup will never get hot. You will stand there stirring forever because the condition to stop—the soup becoming hot—will never happen.\n\nIn programming, this is called an **infinite loop**. An infinite loop occurs when the condition that tells the loop to stop is never met. Because computers follow instructions exactly, the program will keep running the same block of code over and over again. It will not stop until the computer runs out of memory or you manually force the program to quit.\n\n> **Definition:** An infinite loop is a sequence of instructions in a computer program which loops endlessly, either because the loop has no terminating condition or because the condition can never be false.\n\nTo understand why this happens, let us look at how a loop works. A loop checks a condition, which is a statement that is either true or false. If the condition is true, the loop runs. If it is false, the loop stops. To prevent an infinite loop, you must ensure that something inside the loop changes a variable so that the condition eventually becomes false.\n\nFor example, consider a loop that counts from 1 to 5. You might use a variable called a counter, which is a variable used to keep track of how many times a loop has run.\n\n$$counter = 1$$\n\nThe loop condition might be $counter \\le 5$. Inside the loop, you must increase the counter by 1 each time. If you forget to add this step, the counter stays at 1. Since 1 is always less than or equal to 5, the loop never ends.\n\n> **Common mistake:** Forgetting to update the loop control variable. This means the value used in the condition never changes, so the condition stays true forever.\n\nAnother way an infinite loop happens is by moving the counter in the wrong direction. If your condition is $counter > 0$, but you subtract 1 from the counter instead of adding to it, the number will get smaller and smaller (into negative numbers). It will always be less than the target, but it will never stop the loop if the logic is flipped.\n\n> **In daily life:** This is like a treadmill that doesn't have a \"stop\" button. No matter how far you run, you never reach a destination because the environment doesn't change.\n\nTo ensure your loops always end, follow these three steps:\n1. Identify the variable that controls the loop.\n2. Check that the variable is changing inside the loop body.\n3. Confirm that the change moves the variable closer to the value that makes the condition false.\n\n> **Remember:** Always double-check your loop logic. If your program \"freezes\" or your computer fan starts spinning very loudly, you likely have an infinite loop.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is the main difference between a `for` loop and a `while` loop?",
+   "a": "A `for` loop is typically used when you know exactly how many times the code should repeat (definite iteration). A `while` loop is used when the code should repeat until a specific condition changes, regardless of how many turns it takes (indefinite iteration)."
+  },
+  {
+   "level": "Easy",
+   "q": "What is an infinite loop, and why does it happen?",
+   "a": "An infinite loop is a loop that never stops running. This happens because the loop's exit condition is never met. For example, if a `while` loop checks if `x < 10` but the code inside the loop never increases the value of `x`, the condition will always be true."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare the `while` loop and the `do-while` loop. Which one guarantees that the code block runs at least once?",
+   "a": "In a `while` loop, the condition is checked at the start; if the condition is false immediately, the code block never runs. In a `do-while` loop, the code block runs first, and the condition is checked at the end. Therefore, the `do-while` loop guarantees the code runs at least once."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the purpose of the `break` and `continue` statements in loop control.",
+   "a": "The `break` statement immediately exits the entire loop, skipping any remaining iterations. The `continue` statement skips the rest of the current iteration and jumps directly to the next check or increment of the loop."
+  },
+  {
+   "level": "Hard",
+   "q": "You need to print a grid of stars (5 rows and 5 columns). Explain how you would use nested loops to achieve this.",
+   "a": "1. Create an outer loop that runs 5 times to represent the rows.\n2. Inside the outer loop, create an inner loop that also runs 5 times to represent the columns.\n3. Inside the inner loop, print a star character without a new line.\n4. After the inner loop finishes one full cycle, print a new line character to move to the next row.\n5. Repeat until the outer loop completes."
+  },
+  {
+   "level": "Hard",
+   "q": "A programmer writes a `while` loop to count down from 10 to 1, but the program crashes or runs forever. The condition is `while (count > 0)`. What is the most likely mistake in the loop body?",
+   "a": "The programmer likely forgot to decrement the counter. If the code does not include a line like `count = count - 1` (or `count--`), the value of `count` remains 10. Since 10 is always greater than 0, the condition remains true forever, creating an infinite loop."
+  }
+ ],
+ "recap": "This lesson introduces loops, which allow programmers to repeat blocks of code efficiently through iteration. It covers the for loop for known repetitions, and while and do-while loops for condition-based repetition. Additionally, it explains how to control loops with break statements, how to use nested loops for complex structures, and the danger of infinite loops.",
+ "key_terms": [
+  {
+   "term": "Iteration",
+   "meaning": "The process of repeating a set of instructions multiple times until a specific goal is reached."
+  },
+  {
+   "term": "For Loop",
+   "meaning": "A loop used when the exact number of repetitions is known before the loop starts."
+  },
+  {
+   "term": "While Loop",
+   "meaning": "A loop that repeats as long as a specific condition remains true."
+  },
+  {
+   "term": "Condition",
+   "meaning": "A statement that the computer evaluates as either True or False."
+  },
+  {
+   "term": "Do-While Loop",
+   "meaning": "A post-test loop that executes its code at least once before checking the condition."
+  },
+  {
+   "term": "Break Statement",
+   "meaning": "A command that tells the computer to stop the loop immediately and exit."
+  },
+  {
+   "term": "Nested Loop",
+   "meaning": "A loop placed inside the body of another loop."
+  },
+  {
+   "term": "Infinite Loop",
+   "meaning": "A loop that never stops because its terminating condition is never met."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which loop should you use if you know exactly how many times to repeat a task?",
+   "options": [
+    "While loop",
+    "For loop",
+    "Do-while loop",
+    "Infinite loop"
+   ],
+   "answer": 1,
+   "why": "The for loop acts as a counter for a specific, known number of repetitions."
+  },
+  {
+   "q": "What is the main difference between a while loop and a do-while loop?",
+   "options": [
+    "While loops are faster",
+    "Do-while loops never check conditions",
+    "Do-while loops always run at least once",
+    "While loops always run at least once"
+   ],
+   "answer": 2,
+   "why": "Do-while loops are post-test loops, meaning they execute the code before checking the condition."
+  },
+  {
+   "q": "What happens when a 'break' statement is encountered in a loop?",
+   "options": [
+    "The loop restarts from the beginning",
+    "The loop skips one iteration",
+    "The program crashes",
+    "The loop stops immediately"
+   ],
+   "answer": 3,
+   "why": "The break statement forces the computer to jump to the code following the loop."
+  },
+  {
+   "q": "Which of these is an example of a nested loop in real life?",
+   "options": [
+    "Eating a bowl of cereal",
+    "Reading lines on a page while moving through a book",
+    "Doing 10 jumping jacks",
+    "Stirring soup until it is hot"
+   ],
+   "answer": 1,
+   "why": "Reading a book involves an outer loop (pages) and an inner loop (lines per page)."
+  },
+  {
+   "q": "What causes an infinite loop?",
+   "options": [
+    "Using a break statement",
+    "Using a nested loop",
+    "A stop condition that is never met",
+    "Using a for loop instead of a while loop"
+   ],
+   "answer": 2,
+   "why": "If the condition to stop never becomes false, the loop will run forever."
+  },
+  {
+   "q": "What is a 'condition' in programming?",
+   "options": [
+    "A type of loop",
+    "A statement that is either True or False",
+    "A variable that counts numbers",
+    "A way to stop a program"
+   ],
+   "answer": 1,
+   "why": "Conditions are boolean evaluations used to decide if a loop should continue."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is Iteration?",
+   "back": "The process of repeating a set of instructions multiple times."
+  },
+  {
+   "front": "When do you use a For Loop?",
+   "back": "When you know the exact number of times you want to repeat a block of code."
+  },
+  {
+   "front": "What is a While Loop?",
+   "back": "A loop that runs as long as a certain condition is true."
+  },
+  {
+   "front": "What is a Post-Test Loop?",
+   "back": "A loop (like do-while) that executes its code first and checks the condition afterward."
+  },
+  {
+   "front": "What does the 'break' statement do?",
+   "back": "It stops the loop immediately and exits to the next part of the program."
+  },
+  {
+   "front": "What is a Nested Loop?",
+   "back": "A loop located inside the body of another loop."
+  },
+  {
+   "front": "What is an Infinite Loop?",
+   "back": "A loop that runs endlessly because the stop condition is never reached."
+  },
+  {
+   "front": "What is a Pre-Test Loop?",
+   "back": "A loop that checks the condition before running any code inside."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l06-reading-a-book-process",
+   "title": "A nested loop is like reading a book: you move through pages, and for each page, you move through lines.",
+   "alt": "A nested loop is like reading a book: you move through pages, and for each page, you move through lines.",
+   "priority": 7,
+   "picture_title": "Reading a Book Process",
+   "kind": "illustration",
+   "subject": "A person reading a book, highlighting the relationship between the outer loop (pages) and the inner loop (lines).",
+   "layout": "A book open with an arrow pointing to the sequence of pages and a smaller arrow pointing to the sequence of lines on a single page.",
+   "labels": [
+    "Outer Loop (Pages)",
+    "Inner Loop (Lines)"
+   ],
+   "after": 5
+  },
+  {
+   "type": "compare",
+   "title": "For Loop vs. While Loop",
+   "left": {
+    "name": "For Loop",
+    "points": [
+     "Used when the number of repetitions is known",
+     "Acts like a counter",
+     "Fixed end point"
+    ]
+   },
+   "right": {
+    "name": "While Loop",
+    "points": [
+     "Used when repetitions are unknown",
+     "Depends on a condition",
+     "Ends when condition is false"
+    ]
+   },
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "How a While Loop Works",
+   "steps": [
+    {
+     "label": "Check Condition",
+     "text": "The computer evaluates if the rule is True or False."
+    },
+    {
+     "label": "Execute Code",
+     "text": "If True, the computer runs the instructions inside the loop."
+    },
+    {
+     "label": "Repeat",
+     "text": "The computer goes back to check the condition again."
+    }
+   ],
+   "loop": true,
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Pre-test vs. Post-test Loops",
+   "left": {
+    "name": "Pre-test (For/While)",
+    "points": [
+     "Checks condition first",
+     "May never run if condition is False"
+    ]
+   },
+   "right": {
+    "name": "Post-test (Do-While)",
+    "points": [
+     "Runs code first",
+     "Guaranteed to run at least once"
+    ]
+   },
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Nested Loop Process",
+   "steps": [
+    {
+     "label": "Outer Loop Start",
+     "text": "Begin the first cycle of the main task."
+    },
+    {
+     "label": "Inner Loop Cycle",
+     "text": "Repeat all sub-tasks until the inner loop finishes."
+    },
+    {
+     "label": "Outer Loop Next",
+     "text": "Move to the next cycle of the main task."
+    }
+   ],
+   "loop": true,
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "google/gemma-4-31b-it"
+ ]
+}

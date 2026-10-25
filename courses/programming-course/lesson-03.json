@@ -1,0 +1,382 @@
+{
+ "title": "Operators and Expressions",
+ "summary": "This lesson introduces the different kinds of operators used in programming and shows how expressions are built and evaluated. Students will learn the rules that decide the order in which parts of an expression are processed.",
+ "objectives": [
+  "Identify and use arithmetic, comparison, logical, and assignment operators",
+  "Explain operator precedence and how parentheses change evaluation order",
+  "Write correct expressions to solve simple programming problems",
+  "Predict the result of an expression before running code"
+ ],
+ "prerequisites": "Students should already know how to write and run a basic program that prints text to the screen.",
+ "why": [
+  "Operators are the building blocks of any calculation a program performs, from adding two numbers to deciding if a condition is true. Without a clear understanding of operators, code becomes error‑prone and hard to read.",
+  "In real life, software that controls banking, games, or robots relies on correct expressions. Knowing operator precedence prevents costly bugs, such as calculating the wrong total or making the wrong decision."
+ ],
+ "sections": [
+  {
+   "heading": "1. Arithmetic Operators",
+   "body": "When a computer works with numbers it needs symbols that tell it **what** to do.  \nThese symbols are called *operators*. The first group we meet is **arithmetic operators** – they perform the same kind of calculations you do with a pencil and paper: addition, subtraction, multiplication, division, and finding a remainder.\n\n> **Definition:** *Arithmetic operators* are symbols that combine numeric values to produce a new numeric value.  \n\nThink of each operator as a tiny machine. You feed the machine two numbers (called *operands*) and it spits out the result. The machine’s shape tells you which operation it will perform.\n\n---\n\n### 1. Addition (`+`)\n\nThe plus sign adds two numbers together.  \nIf you have 8 apples and you get 5 more, you now have 13 apples.\n\n**Example 1 (Easy): Adding two numbers**  \nCompute the sum of 8 and 5 using `8 + 5`.\n\n1. Write the addition expression.  \n   $$8 + 5$$\n2. Count up from the first number (8) by the amount of the second number (5).  \n   8 → 9 → 10 → 11 → 12 → 13.\n3. The result of the expression is the total count.\n\n**Answer:** The sum is **13**.\n\n---\n\n### 2. Subtraction (`-`)\n\nThe minus sign removes one quantity from another.  \nIf you start with 13 apples and give away 5, you are left with 8.\n\nThe same symbol `-` is also used to write *negative* numbers, but in this lesson we focus on the *binary* use (two operands).\n\n---\n\n### 3. Multiplication (`*`)\n\nThe asterisk multiplies. Multiplication is repeated addition: “3 times 4” means add 4 three times (4 + 4 + 4).\n\n**Worked idea:**  \n$$3 * 4 = 4 + 4 + 4 = 12$$\n\nMultiplication is useful for scaling. If each notebook costs \\$7 and you buy 6 notebooks, the total cost is `7 * 6 = 42` dollars.\n\n---\n\n### 4. Division (`/`)\n\nThe slash divides one number by another. It answers “how many groups of the second number fit into the first?”  \n\nIf you have 20 cookies and want to share them equally among 4 friends, each friend gets  \n\n$$20 / 4 = 5$$ cookies.\n\nDivision can produce a *quotient* (the whole‑number part) and sometimes a *remainder* (what is left over). The remainder is handled by the next operator, **modulus**.\n\n---\n\n### 5. Modulus (`%`)\n\nThe percent sign after two numbers gives the *remainder* after division.  \nIt answers “what is left after we make as many full groups as possible?”\n\n**Example 2 (Medium): Remainder of a division**  \nFind the remainder of 27 divided by 4 with `27 % 4`.\n\n1. Perform the division to see how many full groups of 4 fit into 27.  \n   $$27 / 4 = 6\\text{ remainder }3$$  \n   (Six groups of 4 give 24, leaving 3.)\n2. Write the modulus expression.  \n   $$27 \\% 4$$\n3. The result of the modulus expression is the leftover amount, which is 3.\n\n**Answer:** The remainder is **3**.\n\n> **In daily life:** Modulus is like counting the number of leftover socks after you pack them in pairs. If you have 27 socks and pack them 4 at a time, the `%` tells you how many socks are left unpaired.\n\n---\n\n### Putting the operators together\n\nYou can chain several operators in one expression, but the computer follows a set of rules called *precedence* (later lesson). For now, use parentheses to make the order clear.\n\n**Example 3 (Combined):**  \nCalculate the average of three scores: 8, 5, and 7.\n\n1. Add the scores.  \n   $$8 + 5 + 7 = 20$$\n2. Count how many scores there are (3).  \n3. Divide the total by the count.  \n   $$20 / 3 = 6.666\\ldots$$\n\n**Answer:** The average is approximately **6.67** (rounded to two decimal places).\n\n> **Remember:** Use parentheses `()` to group operations you want to happen first, especially when mixing `*`, `/`, `%` with `+` or `-`.\n\n---\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting that `/` gives a *quotient* that may include a fractional part, while `%` only returns the integer remainder. Trying to use `%` when you need a full division result will give a wrong answer.\n\n---\n\n### Quick recap\n\n- `+` adds two numbers.  \n- `-` subtracts the second number from the first.  \n- `*` multiplies; think of repeated addition.  \n- `/` divides; gives the whole‑number quotient (and possibly a fraction).  \n- `%` finds the remainder after division.  \n\nThese five operators are the building blocks for every numeric calculation you will write in a program. Master them now, and later you’ll combine them to solve far more complex problems.",
+   "code": ""
+  },
+  {
+   "heading": "2. Comparison Operators",
+   "body": "Comparison operators let a program ask questions about numbers (or other comparable values) and receive a logical answer – **True** if the statement is correct, **False** if it is not.  \nThe six basic comparison symbols are  \n\n$$ == \\;\\; != \\;\\; < \\;\\; > \\;\\; \\le \\;\\; \\ge $$  \n\nwhere  \n\n* `==` means “is equal to”  \n* `!=` means “is not equal to”  \n* `<` means “is less than”  \n* `>` means “is greater than”  \n* `<=` means “is less than or **equal** to”  \n* `>=` means “is greater than or **equal** to”\n\n> **Definition:** A comparison operator evaluates two operands and returns the Boolean value **True** or **False**.\n\nWhy are these useful?  \nWhen a program decides what to do next, it often needs to know whether a condition holds. For example, a game might check if the player's score is high enough to win, or a thermostat might test if the current temperature is lower than the desired setting. By turning a numeric relationship into a True/False answer, the program can choose different paths (like “if‑else” statements).\n\n### Everyday comparison\n\nThink of a teacher looking at two test scores on a piece of paper. She can quickly say “Score A is higher than Score B” or “Score C is the same as Score D.” In programming, the teacher’s verbal judgment is replaced by a comparison operator that writes the same idea in code.\n\n### Step‑by‑step use of each operator\n\n1. **Equality (`==`)** – checks whether two values are exactly the same.  \n   Example: `5 == 5` yields **True**, while `5 == 4` yields **False**.\n\n2. **Inequality (`!=`)** – the opposite of equality.  \n   Example: `5 != 4` is **True**, `5 != 5` is **False**.\n\n3. **Less than (`<`)** – asks if the left value is smaller than the right one.  \n   Example: `3 < 7` is **True**.\n\n4. **Greater than (`>`)** – asks if the left value is larger than the right one.  \n   Example: `9 > 2` is **True**.\n\n5. **Less‑than‑or‑equal (`<=`)** – true when the left value is smaller **or** exactly the same as the right.  \n   Example: `4 <= 4` is **True**.\n\n6. **Greater‑than‑or‑equal (`>=`)** – true when the left value is larger **or** exactly the same as the right.  \n   Example: `6 >= 5` is **True**.\n\n> **In daily life:** When you compare prices while shopping, you are using the same logic as `price1 < price2` to decide which item is cheaper.\n\n### Worked examples\n\n**Example 3 (Easy): Check if 7 is greater than 3**  \nQuestion: Does the number 7 exceed the number 3?  \n\n1. Identify the left operand (7) and the right operand (3).  \n2. Apply the greater‑than operator `>` between them.  \n   $$ 7 > 3 $$  \n3. Evaluate the expression: 7 is indeed larger than 3, so the result is **True**.\n\n**Answer:** **True** – 7 is greater than 3.\n\n**Example 4 (Hard): Determine if a student's score (85) is at least the passing mark (60)**  \nQuestion: Is the score 85 greater than or equal to the passing threshold 60?  \n\n1. Choose the appropriate operator for “at least,” which is `>=`.  \n2. Write the comparison with the score on the left and the passing mark on the right.  \n   $$ 85 \\ge 60 $$  \n3. Compare the numbers: 85 is larger than 60, satisfying the “greater‑than‑or‑equal” condition, so the expression evaluates to **True**.\n\n**Answer:** **True** – the student’s score of 85 meets or exceeds the passing mark of 60.\n\n### Common pitfalls\n\n> **Common mistake:** Using a single `=` instead of `==` when you intend to test equality. In most languages, `=` assigns a value, while `==` performs the comparison. Accidentally writing `x = 5` inside a condition will change `x` rather than check it, leading to bugs that are hard to spot.\n\n### Quick checklist\n\n> **Remember:**  \n> * Always place the value you are testing on the left side and the reference value on the right side.  \n> * The result of any comparison is a Boolean: **True** or **False** – never a number.  \n> * Use `>=` and `<=` when the boundary itself should count as a valid case.\n\nBy mastering these six operators, you can ask a program any simple numeric question and let it decide what to do next based on a clear True/False answer. This foundation is essential before moving on to logical operators that combine several comparisons into more complex decisions.",
+   "code": ""
+  },
+  {
+   "heading": "3. Logical Operators",
+   "body": "Logical operators let us join separate true‑or‑false statements (called **Boolean** values) into a single, more complex condition.  \nThe three basic logical operators are:\n\n* **and** – the whole expression is true only if *both* parts are true.  \n* **or** – the whole expression is true if *at least one* part is true.  \n* **not** – flips a Boolean value: true becomes false, false becomes true.\n\n> **Definition:** A *Boolean* value is a result that can be only **True** or **False**.  \n\nWhy do we need them? In programs we often have to decide whether to run a piece of code based on several requirements. For example, “allow a student to register for a class **if** they have passed the prerequisite **and** the class is not full.” The word **and** in the sentence becomes the logical **and** operator in code.\n\n### The word “and”\n\nThink of two light switches that must both be on for a lamp to light. If either switch is off, the lamp stays dark. In logical terms:\n\n```\ncondition1 and condition2\n```\n\nis **True** only when *condition1* is true **and** *condition2* is true.\n\n### The word “or”\n\nNow imagine two doors that lead to the same garden. You can enter the garden if **either** door is open. This matches the logical **or**:\n\n```\ncondition1 or condition2\n```\n\nis **True** when at least one of the conditions is true. It is false only when **both** are false.\n\n### The word “not”\n\nSometimes we need the opposite of a condition. If a rule says “the user **must not** be under 18,” we use **not** to invert the test “age < 18”.  \n\n```\nnot (age < 18)\n```\n\nbecomes **True** when the age is 18 or older.\n\n> **In daily life:** “I will go for a walk **if** it is sunny **and** I have finished my homework.” Both parts must happen, just like the logical **and**.\n\n### Truth tables\n\nA quick way to see how the operators work is a *truth table*. It lists every possible combination of true/false inputs and the resulting output.\n\n| A | B | A **and** B | A **or** B | **not** A |\n|---|---|------------|-----------|----------|\n| T | T | T          | T         | F        |\n| T | F | F          | T         | F        |\n| F | T | F          | T         | T        |\n| F | F | F          | F         | T        |\n\n> **Note:** The **not** operator works on a single value, while **and** and **or** need two.\n\n### Worked example – Easy\n\n**Example 5 (Easy): Evaluate (5 > 2) and (3 < 4).**  \n\nWe must find the overall truth of the expression that joins two comparisons with **and**.\n\n1. **Evaluate the first comparison** `5 > 2`.  \n   $$5 > 2 \\; \\text{is True}$$\n2. **Evaluate the second comparison** `3 < 4`.  \n   $$3 < 4 \\; \\text{is True}$$\n3. **Combine the two results with `and`**. Both are true, so the whole expression is true.  \n   $$\\text{True and True} = \\text{True}$$\n\n**Answer:** The expression evaluates to **True**.\n\n### Worked example – Medium\n\n**Example 6 (Medium): Evaluate not (10 == 10) or (2 != 2).**  \n\nHere we have a **not**, an equality test, an inequality test, and an **or**.\n\n1. **Evaluate the equality** `10 == 10`.  \n   $$10 == 10 \\; \\text{is True}$$\n2. **Apply `not` to the result**.  \n   $$\\text{not True} = \\text{False}$$\n3. **Evaluate the inequality** `2 != 2`.  \n   $$2 \\neq 2 \\; \\text{is False}$$\n4. **Combine the two Boolean values with `or`**.  \n   $$\\text{False or False} = \\text{False}$$\n\n**Answer:** The expression evaluates to **False**.\n\n### Putting it together\n\nWhen you write a condition in code, you can nest logical operators to any depth, just like sentences with multiple clauses. Parentheses `()` are used to group parts and make the intended order clear, just as commas and brackets help us read complex English sentences.\n\n> **Common mistake:** Forgetting parentheses can change the meaning.  \n> For instance, `a or b and c` is interpreted as `a or (b and c)` because **and** has higher precedence than **or**. If you meant `(a or b) and c`, you must write the parentheses explicitly.\n\n### Short checklist\n\n* Use **and** when *all* conditions must hold.  \n* Use **or** when *any* condition may hold.  \n* Use **not** to invert a single condition.  \n* Always group with parentheses to avoid accidental precedence errors.\n\n> **Remember:** Logical operators do not produce numbers; they always give a Boolean **True** or **False** that you can use to control the flow of a program.",
+   "code": ""
+  },
+  {
+   "heading": "4. Assignment Operators",
+   "body": "Assignment operators are a shortcut that lets you **store a result** and **update a variable** in one step.  \nThe most basic assignment uses the equals sign `=`. It means “take the value on the right‑hand side and put it into the variable on the left‑hand side.”  \n\n> **Definition:** `=` copies the value on its right into the name on its left.\n\nWhy is this useful? Imagine you have a jar and you want to fill it with a certain number of marbles. Each time you add marbles, you have to count how many are already inside and then write down the new total. In programming, the variable is the jar and the assignment operator is the act of writing the new total on the label.\n\n### Simple assignment\n\n```python\nx = 10          # put the number 10 into the variable x\n```\n\nNow `x` holds the value 10. If later we write `x = 3`, the old value (10) is overwritten and `x` now holds 3.\n\n### Combined assignment operators\n\nOften we want to **change** a variable by adding, subtracting, multiplying, dividing, or taking a remainder, and then store the new value back into the same variable. Writing the full expression each time would be repetitive:\n\n```python\nx = x + 5       # add 5 to x and store the result back in x\n```\n\nThe language provides a compact form that combines the arithmetic operator with `=`. The symbol on the left tells the operation, and the `=` tells the computer to store the result.\n\n| Operator | Meaning                              | Example (starting with `x = 8`) |\n|----------|--------------------------------------|---------------------------------|\n| `+=`     | add and assign                       | `x += 3`  →  `x = x + 3` → `x` becomes 11 |\n| `-=`     | subtract and assign                  | `x -= 2`  →  `x = x - 2` → `x` becomes 6 |\n| `*=`     | multiply and assign                  | `x *= 4`  →  `x = x * 4` → `x` becomes 32 |\n| `/=`     | divide and assign (real division)   | `x /= 2`  →  `x = x / 2` → `x` becomes 4 |\n| `%=`     | remainder and assign (modulo)        | `x %= 5`  →  `x = x % 5` → `x` becomes 4 |\n\nEach of these does two things at once: it performs the arithmetic and then writes the result back into the same variable. This reduces typing and makes the code easier to read.\n\n> **In daily life:** Think of a bank account balance. When you deposit $50, you don’t write “new balance = old balance + 50” on a piece of paper each time; you simply say “add $50 to the balance.” The `+=` operator works the same way for numbers in a program.\n\n### Worked example – Easy\n\n**Example 7 (Easy): Adding a small amount**  \nYou start with a variable `x` that holds the number 10. Then you use the combined operator `+=` to add 5.\n\n1. **Set the initial value.**  \n   $$ x = 10 $$\n2. **Add 5 using `+=`.**  \n   $$ x += 5 $$\n   This is the same as `x = x + 5`, so the computer computes `10 + 5` and stores 15 in `x`.\n3. **Check the new value.**  \n   $$ x = 15 $$\n\n**Answer:** After the operation, `x` equals **15**.\n\n### Worked example – Hard\n\n**Example 8 (Hard): Summing several prices**  \nYou want to keep a running total of three item prices: 12, 7, and 9. Start with `total = 0` and add each price using `+=`.\n\n1. **Initialize the total.**  \n   $$ total = 0 $$\n2. **Add the first price (12).**  \n   $$ total += 12 $$  \n   This changes `total` to `0 + 12 = 12`.\n3. **Add the second price (7).**  \n   $$ total += 7 $$  \n   Now `total` becomes `12 + 7 = 19`.\n4. **Add the third price (9).**  \n   $$ total += 9 $$  \n   Finally `total` becomes `19 + 9 = 28`.\n\n**Answer:** The final `total` is **28**, which is the sum of the three prices.\n\n### Why combined operators matter\n\nWhen you write loops or process data, you often need to update a variable repeatedly. Using `+=` (or its siblings) keeps the code short and signals the programmer’s intent clearly: “I am changing this variable by this amount.” It also reduces the chance of a typo such as writing `x = x + 5` but accidentally using a different variable on the right side.\n\n> **Common mistake:** Forgetting that `=` is assignment, not equality testing. Writing `x = x == 5` will first evaluate `x == 5` (a Boolean) and then store that Boolean in `x`, which is almost never what you want.\n\n> **Remember:** The combined operator always uses the current value of the variable on the left, performs the arithmetic, and then stores the new value back into the same variable.\n\n### Quick checklist for using assignment operators\n\n- **Identify** the variable you want to change.  \n- **Choose** the appropriate arithmetic operation (`+`, `-`, `*`, `/`, `%`).  \n- **Replace** the full expression `var = var <op> value` with the short form `var <op>= value`.  \n- **Test** the result by printing the variable or using it in a later calculation.\n\nBy mastering these operators, you will write cleaner, more efficient code and avoid repetitive patterns that can lead to errors. Keep practicing with small numbers, then move to loops and larger data sets—your programs will become both shorter and easier to understand.",
+   "code": ""
+  },
+  {
+   "heading": "5. Operator Precedence",
+   "body": "When a computer reads an expression it does not simply go from left to right.  \nIt follows a built‑in ranking called **operator precedence**.  \nThink of it as a set of traffic rules that tell each operator when it has the right of way.  \nIf we ignore these rules we can get the wrong answer, just like ignoring stop signs can lead to a crash.\n\n> **Definition:** *Operator precedence* is the default order in which different kinds of operators are evaluated in an expression, unless we change that order with parentheses.\n\nThe order is the same in almost every programming language:\n\n1. **Parentheses** `()` – anything inside them is done first.  \n2. **Multiplication `*`, division `/`, and remainder `%`** – these come next.  \n3. **Addition `+` and subtraction `-`** – they are evaluated after the previous group.  \n4. **Comparison operators** (`==`, `!=`, `<`, `>`, `<=`, `>=`) – they turn two numbers into a true/false value.  \n5. **Logical operators** (`&&`, `||`, `!`) – they combine true/false values.  \n6. **Assignment `=`** – finally the result is stored in a variable.\n\nWhy does this matter? Imagine you are baking a cake and the recipe says “mix flour, then add sugar, then bake”. If you bake before mixing, you end up with a mess. The same idea applies to calculations: the computer must know which operations to do first so the final result is correct.\n\n> **In daily life:** When you write “2 + 3 × 4” you naturally think “multiply first, then add”. The multiplication sign has priority, just like a taller person steps ahead in a line.\n\n### Step‑by‑step with an easy example\n\n**Example 9 (Easy): Evaluate 2 + 3 * 4**  \n\nWe have two different operators: `+` and `*`. According to precedence, `*` is done before `+`.\n\n1. Identify the highest‑priority operator.  \n   $$ * $$  \n2. Perform the multiplication.  \n   $$ 3 * 4 = 12 $$  \n3. Replace the multiplication part with its result and do the remaining addition.  \n   $$ 2 + 12 = 14 $$  \n\n**Answer:** The expression `2 + 3 * 4` evaluates to **14**.\n\nIf we had evaluated from left to right we would have gotten ` (2 + 3) * 4 = 20`, which is wrong for this expression because we ignored precedence.\n\n> **Common mistake:** Forgetting that `*` and `/` are higher than `+` and `-`. Many beginners write the answer they get by reading left‑to‑right, leading to incorrect results.\n\n### Adding parentheses to change the order\n\nParentheses are a way to tell the computer, “do this part first, even if it normally has lower priority.” They are like putting a “do this now” note on a specific step of a recipe.\n\n**Example 10 (Medium): Evaluate (2 + 3) * 4**  \n\nHere the parentheses force the addition to happen before the multiplication.\n\n1. Look for parentheses – they have the highest precedence.  \n   $$ (2 + 3) $$  \n2. Evaluate the expression inside the parentheses.  \n   $$ 2 + 3 = 5 $$  \n3. Replace the parentheses with their result and continue with the remaining operator `*`.  \n   $$ 5 * 4 = 20 $$  \n\n**Answer:** The expression `(2 + 3) * 4` evaluates to **20**.\n\nNotice how the same numbers give a different result simply because we changed the order with parentheses. This shows why understanding precedence is essential.\n\n### Moving on to the next levels\n\nAfter mastering the basic arithmetic precedence, the same rules extend to more complex expressions that also contain comparisons, logical operators, and assignments. For instance, in  \n\n```c\nint x = 5 + 2 > 6 && false;\n```  \n\nthe computer first adds `5 + 2`, then compares the sum to `6`, then evaluates the logical `&&`, and finally stores the final true/false value in `x`. Each step follows the precedence list we just learned.\n\n> **Remember:** If you are ever unsure, use parentheses to make the intended order explicit. It makes your code easier to read and prevents subtle bugs.\n\n### Quick checklist for writing clear expressions\n\n- **Start with parentheses** if you want a specific order.  \n- **Do `* / %` before `+ -`** – think “multiply before add”.  \n- **Do comparisons after arithmetic** – they need numbers to compare.  \n- **Do logical operators after comparisons** – they work with true/false results.  \n- **Assign last** – store the final result only after everything else is computed.\n\nBy following these rules, you can read and write expressions confidently, just as you would follow a well‑ordered recipe to get the right dish every time.",
+   "code": ""
+  },
+  {
+   "heading": "6. Putting It All Together",
+   "body": "When we write a program we rarely use just one kind of operator.  \nA real‑world calculation often mixes **arithmetic** (adding, multiplying), **comparison** (checking if something is big enough), **logical** (combining true/false conditions) and **assignment** (storing the result) operators.  \nUnderstanding how these pieces fit together—and the order in which the computer evaluates them—lets us write short, clear code that does exactly what we intend.\n\n> **Remember:** The computer follows *operator precedence*: it does multiplication before addition, comparisons after arithmetic, and logical operators after comparisons, unless parentheses tell it otherwise.\n\nBelow we build a complete expression step by step. Each example shows the thought process, the exact code line, and the intermediate results.  \n\n---\n\n**Example 11 (Easy): Calculate a discounted price**  \nA shop gives a 20 % discount on an item that costs `$price`. If the customer has a loyalty card (`hasCard` is `true`), they get an extra $5 off. Compute the final amount to pay.\n\n1. **Check the loyalty card** – we need a boolean value.  \n   $$hasCard = true$$\n2. **Apply the 20 % discount** – multiply by 0.8 (because 100 % – 20 % = 80 %).  \n   $$discounted = price * 0.8$$\n3. **Add the extra $5 only when the card is present** – use the logical *and* (`&&`) inside a conditional expression.  \n   $$final = discounted - (hasCard && 5)$$  \n\n**Answer:** If `price = 50` and `hasCard = true`, `final = 50 * 0.8 - 5 = 35`.  \n\n---\n\n**Example 12 (Medium): Decide if a student passes**  \nA student passes when the average of three test scores is at least 60 **and** the attendance rate is at least 75 %. Compute a boolean variable `passes`.\n\n1. **Add the three scores** – arithmetic addition.  \n   $$total = s1 + s2 + s3$$\n2. **Find the average** – divide by 3.  \n   $$average = total / 3$$\n3. **Compare average and attendance** – two comparisons combined with logical *and*.  \n   $$passes = (average >= 60) && (attendance >= 75)$$  \n\n**Answer:** With scores 70, 55, 65 and attendance 80 %, `passes` becomes `true`.  \n\n---\n\n**Example 13 (Hard): Compute `finalScore`**  \n> Compute `finalScore = (base + bonus) * 0.9` if `passed` else `base * 0.5` using assignment, arithmetic, comparison, and logical operators.\n\n1. **Add `base` and `bonus`** – first arithmetic operation inside parentheses.  \n   $$sum = base + bonus$$\n2. **Apply the 0.9 factor** – multiply the sum.  \n   $$discounted = sum * 0.9$$\n3. **Compute the alternative when the student did not pass** – half of `base`.  \n   $$half = base * 0.5$$\n4. **Choose the correct value with a conditional (ternary) operator** – the comparison `passed` decides which expression to assign.  \n   $$finalScore = passed ? discounted : half$$  \n\n**Answer:** If `base = 80`, `bonus = 20`, and `passed = true`, then `finalScore = (80+20)*0.9 = 90`. If `passed = false`, `finalScore = 80*0.5 = 40`.  \n\n---\n\n**Example 14 (Medium‑Hard): Determine eligibility for a loan**  \nA person is eligible if their credit score is at least 700 **or** their income is over $50 000 **and** they have no overdue debts. Compute `eligible`.\n\n1. **Check credit score** – comparison.  \n   $$goodScore = creditScore >= 700$$\n2. **Check income** – comparison.  \n   $$highIncome = income > 50000$$\n3. **Check debts** – logical *not* (`!`) because we need “no overdue debts”.  \n   $$noDebt = !overdueDebt$$\n4. **Combine conditions** – `highIncome && noDebt` must be true together, then `goodScore || (highIncome && noDebt)`.  \n   $$eligible = goodScore || (highIncome && noDebt)$$  \n\n**Answer:** With `creditScore = 680`, `income = 60000`, `overdueDebt = false`, `eligible` evaluates to `true` because the income condition and debt condition are both satisfied.  \n\n---\n\n> **In daily life:** Think of these operators as kitchen tools. Arithmetic operators are like knives that cut numbers, comparison operators are tasting spoons that tell you if something is sweet enough, logical operators are the decision‑making steps (“if the soup is salty **and** the broth is hot, add water”), and assignment operators are the plates where you finally serve the dish.\n\nBy writing the expression in one line, the computer still follows the same steps we listed, thanks to precedence rules and the parentheses we placed.  \nIf we omitted parentheses, the order could change and give a wrong result—just as forgetting to add a pinch of salt before cooking the rice would spoil the meal.\n\n> **Common mistake:** Forgetting parentheses around mixed arithmetic and logical parts, causing the computer to evaluate a comparison before the intended arithmetic calculation.\n\nNow you can combine any operators you need, always remembering to:\n\n1. **Break the problem into small, logical steps.**  \n2. **Write each step as a simple expression.**  \n3. **Use parentheses to enforce the order you want.**  \n4. **Assign the final result to a variable.**\n\nWith practice, building complex expressions becomes as natural as solving a puzzle—piece by piece, until the whole picture appears.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What does the `+` operator do in the expression `a + b`?",
+   "a": "The `+` operator adds the values of `a` and `b`. It takes the two operands, calculates their sum, and returns that sum as the result."
+  },
+  {
+   "level": "Easy",
+   "q": "Explain the difference between the `==` operator and the `=` operator.",
+   "a": "`==` is a comparison operator that checks whether two values are equal and returns a Boolean result (`True` or `False`). `=` is an assignment operator that stores a value into a variable; it does not compare anything."
+  },
+  {
+   "level": "Medium",
+   "q": "Given `x = 5`, `y = 3`, evaluate the expression `x * y + 2 > 10 and not (x == y)`. Show each step.",
+   "a": "1. Compute `x * y`: 5 * 3 = 15.\n2. Add 2: 15 + 2 = 17.\n3. Compare `17 > 10`: True.\n4. Evaluate `x == y`: 5 == 3 → False.\n5. Apply `not` to False: not False → True.\n6. Combine with `and`: True and True → True.\nResult: the whole expression evaluates to **True**."
+  },
+  {
+   "level": "Medium",
+   "q": "Write an expression using assignment operators that doubles the value of variable `n` and then adds 4, all in one line. Show the final value if `n` starts as 7.",
+   "a": "Use the combined assignment operator `*=` to double, then `+=` to add 4:\n`n *= 2` → n becomes 14.\n`n += 4` → n becomes 18.\nIf written in one line: `n = (n * 2) + 4` gives the same result. Final value of `n` is **18**."
+  },
+  {
+   "level": "Hard",
+   "q": "Determine the result of the following Python expression and explain the order in which operations are performed: `result = 3 + 4 * 2 ** 3 // 5 % 2 - (6 // 2)`",
+   "a": "Follow operator precedence (exponents, then multiplication/division/floor division/modulus, then addition/subtraction, parentheses last).\n1. Exponent: `2 ** 3` = 8.\n2. Multiplication: `4 * 8` = 32.\n3. Floor division: `32 // 5` = 6 (because 32 ÷ 5 = 6.4, floor is 6).\n4. Modulus: `6 % 2` = 0 (6 divided by 2 leaves remainder 0).\n5. Parentheses: `6 // 2` = 3.\n6. Now expression is `3 + 0 - 3`.\n7. Addition: `3 + 0` = 3.\n8. Subtraction: `3 - 3` = 0.\nResult stored in `result` is **0**."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain why the expression `a < b < c` is valid in Python and what it checks. Provide an example with `a = 2`, `b = 5`, `c = 4` and state the result.",
+   "a": "Python allows chained comparisons. `a < b < c` is equivalent to `(a < b) and (b < c)`. It checks that `a` is less than `b` **and** `b` is less than `c` in a single statement.\nExample: `a = 2`, `b = 5`, `c = 4`.\nFirst part: `2 < 5` → True.\nSecond part: `5 < 4` → False.\nCombined with `and`: True and False → False.\nTherefore, `a < b < c` evaluates to **False**."
+  }
+ ],
+ "recap": "Operators are symbols that tell a computer how to manipulate values. Arithmetic operators (+, -, *, /, %) perform basic math, while comparison operators (==, !=, <, >, <=, >=) return True or False. Logical operators (and, or, not) combine Boolean results, and assignment operators (=, +=, etc.) store values in variables. Operator precedence decides the order in which these operations are carried out unless parentheses change it.",
+ "key_terms": [
+  {
+   "term": "Arithmetic operator",
+   "meaning": "A symbol like +, -, *, /, % that combines numeric operands to produce a new numeric value."
+  },
+  {
+   "term": "Operand",
+   "meaning": "A value or variable that an operator works on."
+  },
+  {
+   "term": "Comparison operator",
+   "meaning": "A symbol that compares two values and returns a Boolean (True/False)."
+  },
+  {
+   "term": "Logical operator",
+   "meaning": "An operator (and, or, not) that combines or modifies Boolean values."
+  },
+  {
+   "term": "Assignment operator",
+   "meaning": "The = sign (or its variants) that stores a value into a variable."
+  },
+  {
+   "term": "Operator precedence",
+   "meaning": "The default order in which different operators are evaluated in an expression."
+  },
+  {
+   "term": "Boolean",
+   "meaning": "A data type that can only be True or False."
+  },
+  {
+   "term": "Parentheses",
+   "meaning": "Symbols ( ) used to group parts of an expression and override precedence."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which operator adds two numbers?",
+   "options": [
+    "-",
+    "*",
+    "/",
+    "+"
+   ],
+   "answer": 3,
+   "why": "The plus sign (+) is the addition operator."
+  },
+  {
+   "q": "What does the expression 7 > 5 evaluate to?",
+   "options": [
+    "True",
+    "False",
+    "7",
+    "5"
+   ],
+   "answer": 0,
+   "why": "7 is greater than 5, so the comparison returns True."
+  },
+  {
+   "q": "Which logical operator returns True only if both conditions are True?",
+   "options": [
+    "or",
+    "not",
+    "and",
+    "xor"
+   ],
+   "answer": 2,
+   "why": "The and operator requires both operands to be True."
+  },
+  {
+   "q": "What does the assignment statement x = 10 do?",
+   "options": [
+    "Adds 10 to x",
+    "Compares x with 10",
+    "Stores the value 10 in x",
+    "Deletes x"
+   ],
+   "answer": 2,
+   "why": "= copies the right‑hand value into the variable on the left."
+  },
+  {
+   "q": "In the expression 3 + 4 * 2, which operation is performed first?",
+   "options": [
+    "Addition",
+    "Multiplication",
+    "Both at the same time",
+    "Left‑to‑right"
+   ],
+   "answer": 1,
+   "why": "Multiplication has higher precedence than addition."
+  },
+  {
+   "q": "How can you change the precedence to add 3 and 4 before multiplying by 2?",
+   "options": [
+    "(3 + 4) * 2",
+    "3 + (4 * 2)",
+    "3 + 4 * 2",
+    "(3 * 4) + 2"
+   ],
+   "answer": 0,
+   "why": "Parentheses force the addition to be evaluated first."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What symbol is used for subtraction?",
+   "back": "-"
+  },
+  {
+   "front": "What does the % operator return?",
+   "back": "The remainder after division (modulus)."
+  },
+  {
+   "front": "True or False: 5 != 5 evaluates to True.",
+   "back": "False"
+  },
+  {
+   "front": "Which operator flips a Boolean value?",
+   "back": "not"
+  },
+  {
+   "front": "What does the += operator do?",
+   "back": "Adds the right‑hand value to the variable and assigns the result back to the variable."
+  },
+  {
+   "front": "Name the operator that checks if a value is less than or equal to another.",
+   "back": "<="
+  },
+  {
+   "front": "What is the result of (8 / 2) + 3?",
+   "back": "7"
+  },
+  {
+   "front": "Why are parentheses important in expressions?",
+   "back": "They override the default operator precedence to control evaluation order."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l03-calculator-buttons",
+   "title": "Shows the symbols for addition, subtraction, multiplication, division and remainder.",
+   "alt": "Shows the symbols for addition, subtraction, multiplication, division and remainder.",
+   "priority": 8,
+   "picture_title": "Calculator Buttons",
+   "kind": "photo",
+   "subject": "A simple hand‑held calculator with the +, –, ×, ÷ and % keys highlighted. The picture helps students link the operator symbols to real‑world devices they already know.",
+   "layout": "The calculator is centered; each highlighted key is circled with a thin line and a short label.",
+   "labels": [
+    "+",
+    "–",
+    "×",
+    "÷",
+    "%"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l03-balance-scale-comparison",
+   "title": "Illustrates how comparison operators work like a weighing scale.",
+   "alt": "Illustrates how comparison operators work like a weighing scale.",
+   "priority": 7,
+   "picture_title": "Balance Scale Comparison",
+   "kind": "illustration",
+   "subject": "A classic two‑pan balance scale with different numbers of apples on each side, showing which side is heavier, lighter, or equal. This visual maps to >, <, and == operators.",
+   "layout": "Scale in the centre; left pan labeled \"<\" arrow pointing to lighter side, right pan labeled \">\" arrow pointing to heavier side, and a balanced view labeled \"==\".",
+   "labels": [
+    "<",
+    ">",
+    "=="
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l03-logic-gate-symbols",
+   "title": "Shows AND, OR, and NOT symbols used to combine true‑false statements.",
+   "alt": "Shows AND, OR, and NOT symbols used to combine true‑false statements.",
+   "priority": 6,
+   "picture_title": "Logic Gate Symbols",
+   "kind": "labelled diagram",
+   "subject": "Standard Boolean logic gate icons (AND, OR, NOT) with simple input‑output arrows, demonstrating how multiple conditions are joined.",
+   "layout": "Three separate gate symbols arranged horizontally; each gate has two input lines (one for NOT) and one output line, with labels beneath.",
+   "labels": [
+    "AND",
+    "OR",
+    "NOT"
+   ],
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "Arithmetic vs Comparison Operators",
+   "left": {
+    "name": "Arithmetic",
+    "points": [
+     "+ addition",
+     "- subtraction",
+     "* multiplication",
+     "/ division",
+     "% remainder"
+    ]
+   },
+   "right": {
+    "name": "Comparison",
+    "points": [
+     "== equal",
+     "!= not equal",
+     "< less than",
+     "> greater than",
+     "<= ≤",
+     ">= ≥"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "parts",
+   "title": "Parts of a Simple Expression",
+   "items": [
+    {
+     "name": "Operand 1",
+     "role": "first number (e.g., 3)"
+    },
+    {
+     "name": "Operator",
+     "role": "action to perform (e.g., *)"
+    },
+    {
+     "name": "Operand 2",
+     "role": "second number (e.g., 4)"
+    },
+    {
+     "name": "Result",
+     "role": "value produced (e.g., 12)"
+    }
+   ],
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Operator Precedence Order",
+   "items": [
+    {
+     "value": "1",
+     "label": "Parentheses ()"
+    },
+    {
+     "value": "2",
+     "label": "Multiplication *, Division /, Remainder %"
+    },
+    {
+     "value": "3",
+     "label": "Addition +, Subtraction -"
+    },
+    {
+     "value": "4",
+     "label": "Comparison ==, !=, <, >, <=, >="
+    },
+    {
+     "value": "5",
+     "label": "Logical not"
+    },
+    {
+     "value": "6",
+     "label": "Logical and"
+    },
+    {
+     "value": "7",
+     "label": "Logical or"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "steps",
+   "title": "Evaluating 3 + 4 * 2",
+   "steps": [
+    {
+     "label": "Identify operators",
+     "text": "Multiplication (*) has higher precedence than addition (+)."
+    },
+    {
+     "label": "Compute multiplication",
+     "text": "4 * 2 = 8"
+    },
+    {
+     "label": "Add the result",
+     "text": "3 + 8 = 11"
+    }
+   ],
+   "loop": false,
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
