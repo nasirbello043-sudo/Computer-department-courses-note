@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **29** | Uploaded: **41** | Covers waiting: **8**
+Waiting: **18** | Uploaded: **41** | Covers waiting: **7**
 
 ## Course covers
 
@@ -116,22 +116,6 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "CALCULUS FOUNDATION"
 - Subtitle under it, smaller: "Unlocking Change: From Slopes to Areas"
 The spine shows "CALCULUS FOUNDATION" running vertically. Do not add any other text, author names, logos or watermarks.
-```
-
-### Programming Course
-
-Save as:
-```
-cover-programming-course.jpg
-```
-Prompt:
-```
-Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
-The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a purple colour palette, showing a lively scene built around: Laptop with code editor, Binary numbers (0 and 1), Flowchart diagram, Robot arm, Puzzle pieces fitting together, Keyboard with highlighted keys, Debugging magnifying glass, Game controller with code snippets, Circuit board with LEDs.
-Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
-- Main title at the top: "PROGRAMMING COURSE"
-- Subtitle under it, smaller: "Unlocking Logic and Creativity Through Code"
-The spine shows "PROGRAMMING COURSE" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -289,6 +273,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 3: Functional Groups I: Hydrocarbons
+
+Save as:
+```
+organic-chemistry-l03-straight-chain-alkane.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A linear chain of carbon atoms each bonded to the maximum number of hydrogen atoms, illustrating the saturated nature of alkanes.
+
+Layout: Carbon atoms in a horizontal line, each labelled C, with hydrogen atoms drawn as small circles attached above and below; single lines for bonds.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C"
+- "H"
+- "single bond"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -467,244 +476,6 @@ calculus-foundation-l24-runner-with-speedometer.png
 Prompt:
 ```
 Create a realistic photograph for a school lesson: The photo shows a person running outdoors, wearing a device that displays instantaneous speed (velocity) and cumulative distance, illustrating how integrating velocity gives distance.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-## Programming Course
-
-### Lesson 1: Introduction to Programming Concepts
-
-Save as:
-```
-programming-course-l01-robot-following-commands.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A cartoon robot with a speech bubble showing a short list of commands (e.g., move forward, turn left, stop). The robot follows the list exactly, showing how precise instructions make the robot work correctly.
-
-Layout: Robot on the left, command list on the right, arrows from each command to the robot's actions.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "move forward"
-- "turn left"
-- "stop"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-Save as:
-```
-programming-course-l01-recipe-as-algorithm.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A kitchen scene with a recipe card that lists numbered steps (e.g., 1. Crack eggs, 2. Whisk, 3. Heat pan). Each step is linked to a corresponding action in the kitchen, demonstrating the step‑by‑step nature of algorithms.
-
-Layout: Recipe card centered, kitchen actions around it with lines pointing from each numbered step to the action.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "step 1"
-- "step 2"
-- "step 3"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 2: Getting Started with Python
-
-Save as:
-```
-programming-course-l02-python-installer-window.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: A screenshot of the official Python installer showing the welcome screen, license agreement, and install options. It helps students see exactly what they need to click to get Python onto their machine.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-Save as:
-```
-programming-course-l02-checking-python-version.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A terminal window (macOS/Linux) or command prompt (Windows) displaying the command `python --version` and the resulting version number, e.g., `Python 3.11.2`. This shows students the exact output they should expect.
-
-Layout: Terminal window occupies the centre; the command is highlighted in bold, the version output is shown below it.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "command"
-- "output"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 3: Variables and Data Types
-
-Save as:
-```
-programming-course-l03-variable-as-labeled-box.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A simple drawing of a cardboard box with a name tag on the front and an item (e.g., a number) inside, representing a variable as a named container.
-
-Layout: Box in the centre, label on the left side, arrow pointing from label to box, item inside shown with a small icon.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Variable name"
-- "Stored value"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 4: Basic Input and Output
-
-Save as:
-```
-programming-course-l04-user-typing-input.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: The picture shows a person sitting at a computer, hands on the keyboard, with a dialog box on the screen prompting for input. It visualises the concept that a program can pause and wait for the user to provide data.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-Save as:
-```
-programming-course-l04-input-output-flow-diagram.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: The diagram depicts three boxes: User, Program, and Screen. Arrows point from User to Program labeled "input" and from Program to Screen labeled "output". It clarifies the two‑way communication between a program and its user.
-
-Layout: Three boxes in a horizontal line with arrows between them; labels placed next to each arrow.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "User"
-- "Program"
-- "Screen"
-- "input"
-- "output"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 5: Control Flow: Conditionals
-
-Save as:
-```
-programming-course-l05-traffic-light-decision.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A simple traffic intersection with three lights labeled green, yellow, and red, each with arrows indicating the allowed car movement for that signal.
-
-Layout: Three vertical lights on the left, each with a colored circle; arrows pointing right from each light showing go, prepare, stop.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "green"
-- "yellow"
-- "red"
-- "go"
-- "prepare"
-- "stop"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-Save as:
-```
-programming-course-l05-if-elif-else-flowchart.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: A diagram with a decision diamond for the first condition, a second diamond for the elif condition, and a final else path, each leading to separate action boxes.
-
-Layout: Start box at top, arrow to first decision diamond, two arrows (yes to action box, no to second diamond), then arrows to elif action or else action, all ending at a stop box.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Start"
-- "Condition 1"
-- "Condition 2"
-- "Action 1"
-- "Action 2"
-- "Else Action"
-- "End"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 6: Control Flow: Loops
-
-Save as:
-```
-programming-course-l06-counting-steps.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: Shows a staircase with a child moving upward, counting each step. The picture emphasizes repeating an action until a condition (reaching the top) becomes true.
-
-Layout: Staircase drawn vertically in the centre, child on each step with a number label beside the step.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "step 1"
-- "step 2"
-- "step 3"
-- "top"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 7: Functions and Modularity
-
-Save as:
-```
-programming-course-l07-recipe-card.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: A real recipe card with numbered steps such as "mix flour", "add eggs", "bake". It illustrates how a function is a reusable set of instructions.
-
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-### Lesson 8: Working with Collections
-
-Save as:
-```
-programming-course-l08-lockers-representing-a-list.png
-```
-Prompt:
-```
-Create a realistic photograph for a school lesson: Ten metal lockers placed side by side, each with a number on the door. The lockers can be opened and items inside can be changed, illustrating how a list keeps items in order and allows modification.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
