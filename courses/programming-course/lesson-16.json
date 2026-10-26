@@ -1,0 +1,370 @@
+{
+ "title": "Practical Programming Projects",
+ "summary": "In this final lesson students will apply all previously learned concepts to build several real‑world programs. They will see how a small project grows from a simple calculator to a full student management system.",
+ "objectives": [
+  "Design and implement a basic calculator using operators and input/output",
+  "Create a quiz application that uses decision making and loops",
+  "Develop an expense tracker that stores and retrieves data from files",
+  "Build a student management system employing functions, data structures, and object‑oriented concepts",
+  "Integrate error handling and debugging techniques into each project"
+ ],
+ "prerequisites": "Students should already be comfortable with variables, control structures, functions, basic data structures, file handling, and object‑oriented programming.",
+ "why": [
+  "Programming projects give learners a chance to see how abstract concepts become useful tools. By building applications that solve everyday problems, students understand the relevance of coding beyond the classroom.",
+  "Working on complete projects also introduces real software development practices such as planning, testing, and debugging, which are essential skills for any future programmer or tech professional."
+ ],
+ "sections": [
+  {
+   "heading": "1. Project Planning and Requirements",
+   "body": "When you start any programming project, the most important step is **planning**. Planning is like drawing a map before you go on a road trip – it tells you where you want to end up and which roads you will take to get there. Without a map, you might get lost, waste time, or even end up in the wrong place. The same happens in code: if you begin writing without a clear idea, you will spend extra time fixing mistakes, and the final program may not do what you expect.\n\n### 1. Define the Goal  \nThe goal is a short sentence that explains *what* the program should achieve. It should be specific enough to be measurable.  \n\n*Example*: “The calculator must be able to add, subtract, multiply, and divide two numbers entered by the user.”  \n\nWriting the goal first helps you stay focused. If later you think about adding a graphing feature, you can check the goal: does it still fit, or is it a new project?\n\n> **Definition:** *Goal* – a clear, concise statement of the problem the program will solve.\n\n### 2. List the Features (Requirements)  \nFeatures, also called *requirements*, are the individual abilities the program must have to meet the goal. Write them as bullet points, using simple language.  \n\n*For the calculator*:  \n- Accept two numbers from the user.  \n- Ask the user which operation (+, –, *, /) they want.  \n- Show the result on the screen.  \n- Warn the user if they try to divide by zero.\n\nEach bullet is a **requirement** that can be tested later. Keeping the list short and realistic prevents the project from becoming overwhelming.\n\n> **Note:** A requirement should describe *what* the program does, not *how* it does it. “Use a loop to repeat calculations” is a *how* detail and belongs in the design stage, not the requirement list.\n\n### 3. Sketch a Simple Design  \nDesign is the step where you decide how the program will be organized before you write any code. Think of it as a blueprint for a house: you decide where the kitchen, bedroom, and bathroom go, but you don’t start building walls yet.\n\nA very simple design tool for beginners is the **flowchart**. A flowchart uses boxes and arrows to show the order of actions. For the calculator, a flowchart might look like this in words:\n\n1. **Start** – program begins.  \n2. **Input** – ask for first number, second number, and operation.  \n3. **Decision** – is the operation division and is the second number zero?  \n   - If *yes*, go to step 4 (error message).  \n   - If *no*, go to step 5 (perform calculation).  \n4. **Output** – display “Cannot divide by zero”.  \n5. **Process** – compute result using the chosen operation.  \n6. **Output** – show the result.  \n7. **End** – program finishes.\n\nYou can draw this on paper with rectangles for actions and diamonds for decisions. The visual picture makes it easier to see missing steps.\n\n> **In daily life:** Planning a school project is like planning a birthday party. First you decide the purpose (celebrate a friend), then you list what you need (cake, invitations, games), and finally you sketch a timeline (order cake on Monday, send invites on Tuesday, set up games on Saturday).\n\n### 4. Turn the Design into Small Tasks  \nBreak the design into tiny, manageable tasks that you can code one at a time. Each task should correspond to one line in your flowchart.\n\n*Task examples for the calculator*:  \n- Write code to read a number from the user.  \n- Write code to read the operation symbol.  \n- Write an `if` statement that checks for division by zero.  \n- Write the arithmetic calculations.  \n- Write code to display the result.\n\nCompleting tasks one by one gives a sense of progress and makes debugging easier, because you know exactly which piece of code to check if something goes wrong.\n\n> **Common mistake:** Skipping the task list and trying to code everything at once. This often leads to “I don’t know where the bug is” because many pieces are written together without testing.\n\n### 5. Check Your Plan  \nBefore you start coding, read through the goal, requirements, design, and task list. Ask yourself:\n\n- Does every requirement appear in the design?  \n- Does the design flow logically from start to end?  \n- Are any tasks missing or duplicated?\n\nIf you find gaps, add them now. A quick review saves hours later.\n\n> **Remember:** Planning is not a one‑time activity. As you code, you may discover new requirements or better ways to organize the program. Update your list and diagram whenever you learn something new.\n\n### Quick Checklist  \n\n- **Goal** – one clear sentence.  \n- **Requirements** – bullet list of what the program must do.  \n- **Design** – simple flowchart or step‑by‑step description.  \n- **Tasks** – tiny coding steps that match the design.  \n\nFollowing these steps gives you a solid foundation. When you finally write the first line of code, you will already know exactly where it belongs and why it is needed. This reduces frustration and makes the whole programming experience smoother and more enjoyable.",
+   "code": ""
+  },
+  {
+   "heading": "2. Building a Simple Calculator",
+   "body": "Imagine you want a tiny program that can do the four basic maths operations – addition, subtraction, multiplication and division – just like the calculator on your phone, but it runs in a command‑line window.  \nThe idea is simple: the program asks the user for two numbers, asks which operation to perform, does the calculation, and then shows the result.  \n\nFirst, let’s see why this is useful. When you write a program that talks to a user, you must **receive input**, **process it**, and **display output**. A calculator contains all three steps, so building one gives you practice with the core flow of almost any interactive program.\n\n### Step 1 – Getting user input  \n\nIn most languages you use a function called `input()` (or similar) to read a line of text that the user types.  \n```python\nnum1 = input(\"Enter the first number: \")\n```  \nThe value returned by `input()` is a *string* – a sequence of characters – even if the user typed `12.5`. To use it in maths we must turn it into a *numeric* type. In Python we write:\n\n```python\nnum1 = float(num1)      # converts the string to a floating‑point number\n```\n\n> **Definition:** *float* – a number that can have a decimal part, e.g., `3.14`.  \n\nDo the same for the second number.\n\n### Step 2 – Choosing the operation  \n\nAsk the user which operation they want. A convenient way is to let them type a single character:\n\n```python\nop = input(\"Choose an operation (+, -, *, /): \")\n```\n\nNow `op` will contain one of the four symbols, or something else if the user makes a mistake.\n\n### Step 3 – Performing the calculation  \n\nWe use **conditional statements** (`if`, `elif`, `else`) to decide which arithmetic operator to apply.\n\n```python\nif op == '+':\n    result = num1 + num2\nelif op == '-':\n    result = num1 - num2\nelif op == '*':\n    result = num1 * num2\nelif op == '/':\n    # we must check for division by zero\n    if num2 == 0:\n        print(\"Error: Cannot divide by zero.\")\n        exit()\n    result = num1 / num2\nelse:\n    print(\"Invalid operation.\")\n    exit()\n```\n\nThe four symbols `+`, `-`, `*`, `/` are the **arithmetic operators** that tell the computer which mathematical rule to apply.\n\n> **Note:** The division operator `/` produces a *float* result even when the division is exact (e.g., `4 / 2` gives `2.0`).  \n\n### Step 4 – Showing the result  \n\nFinally, print the answer in a friendly sentence:\n\n```python\nprint(f\"The result of {num1} {op} {num2} is {result}\")\n```\n\nThe `f` before the string lets us insert variable values directly inside the text.\n\n### Step 5 – Adding basic error checking  \n\n1. **Non‑numeric input** – If the user types “abc” instead of a number, `float()` will raise a `ValueError`. Wrap the conversion in a `try/except` block:\n\n```python\ntry:\n    num1 = float(input(\"Enter the first number: \"))\n    num2 = float(input(\"Enter the second number: \"))\nexcept ValueError:\n    print(\"Please enter valid numbers.\")\n    exit()\n```\n\n2. **Invalid operation** – Handled by the `else` clause above.\n\n3. **Division by zero** – Already checked before performing `/`.\n\n> **Common mistake:** Forgetting to check `num2 == 0` before division. The program will crash with a “ZeroDivisionError”, which stops the whole script.\n\n### Full example  \n\nPutting everything together, the complete script looks like this:\n\n```python\ntry:\n    num1 = float(input(\"Enter the first number: \"))\n    num2 = float(input(\"Enter the second number: \"))\nexcept ValueError:\n    print(\"Please enter valid numbers.\")\n    exit()\n\nop = input(\"Choose an operation (+, -, *, /): \")\n\nif op == '+':\n    result = num1 + num2\nelif op == '-':\n    result = num1 - num2\nelif op == '*':\n    result = num1 * num2\nelif op == '/':\n    if num2 == 0:\n        print(\"Error: Cannot divide by zero.\")\n        exit()\n    result = num1 / num2\nelse:\n    print(\"Invalid operation.\")\n    exit()\n\nprint(f\"The result of {num1} {op} {num2} is {result}\")\n```\n\nWhen you run this program, it behaves like a tiny pocket calculator.  \n\n> **In daily life:** Think of the program as a vending machine. You insert money (input), choose a snack (operation), the machine checks if you have enough money (error checking), and then gives you the snack (output).  \n\n> **Remember:** Always validate what the user gives you before you try to use it. This keeps your program from crashing and makes it friendly to anyone who runs it.",
+   "code": ""
+  },
+  {
+   "heading": "3. Creating a Quiz Application",
+   "body": "Imagine you want to ask a friend a few questions, check the answers, and then tell them how many they got right.  \nA **quiz application** does exactly that, but the computer does the asking, the checking, and the scoring automatically.  \nDoing this in code teaches you three important ideas:\n\n* **Loops** – repeat the same steps many times without writing the same line over and over.  \n* **Conditionals** – decide what to do based on a true or false test.  \n* **Functions** – give a name to a group of statements so you can use them again later.\n\n> **Definition:** *Loop* – a programming structure that repeats a block of code while a condition is true.  \n> **Definition:** *Conditional* – a statement that runs one block of code if a condition is true and another block if it is false.  \n> **Note:** A *function* is like a mini‑program inside your program; you can call it whenever you need its work done.\n\n---\n\n### Step 1: List the questions and answers\n\nFirst we need a place to store each question, the possible choices, and the correct answer.  \nA simple way is to use a **list** (an ordered collection) of **dictionaries** (key‑value pairs).\n\n```python\nquiz = [\n    {\"question\": \"What is the capital of France?\",\n     \"options\": [\"A) Berlin\", \"B) Paris\", \"C) Rome\"],\n     \"answer\": \"B\"},\n    {\"question\": \"2 + 2 equals?\",\n     \"options\": [\"A) 3\", \"B) 4\", \"C) 5\"],\n     \"answer\": \"B\"},\n    {\"question\": \"Which planet is known as the Red Planet?\",\n     \"options\": [\"A) Mars\", \"B) Venus\", \"C) Jupiter\"],\n     \"answer\": \"A\"}\n]\n```\n\nEach dictionary has three keys:\n\n* `question` – the text we will show.  \n* `options` – a list of the possible answers.  \n* `answer` – the letter of the correct option.\n\n---\n\n### Step 2: Write a function to ask one question\n\nA **function** lets us reuse the same code for every item in `quiz`.  \nThe function will:\n\n1. Print the question and its options.  \n2. Read the user’s answer.  \n3. Return `True` if the answer matches the stored correct answer, otherwise `False`.\n\n```python\ndef ask_question(item):\n    print(\"\\n\" + item[\"question\"])\n    for opt in item[\"options\"]:\n        print(opt)\n    user = input(\"Your answer (A, B, C): \").strip().upper()\n    return user == item[\"answer\"]\n```\n\n*`strip()`* removes any extra spaces the user might type, and *`upper()`* makes the answer capital‑letter regardless of how they typed it.\n\n---\n\n### Step 3: Loop over all questions and keep score\n\nNow we need a **loop** that goes through every dictionary in `quiz`.  \nWe also need a variable `score` that counts how many times the user answered correctly.\n\n```python\nscore = 0                     # start with zero points\nfor q in quiz:                # loop over each question\n    if ask_question(q):      # conditional: did they get it right?\n        print(\"Correct!\")\n        score += 1           # add one point\n    else:\n        print(\"Wrong. The correct answer was\", q[\"answer\"])\n```\n\nThe line `score += 1` is a short way of writing `score = score + 1`.  \nAfter the loop finishes, `score` holds the total number of correct answers.\n\n---\n\n### Step 4: Show the final result\n\nWhen the loop ends, we can calculate the percentage of correct answers.  \nThe formula for a percentage is:\n\n$$\n\\text{percentage} = \\frac{\\text{score}}{\\text{total questions}} \\times 100\n$$\n\n```python\ntotal = len(quiz)                     # how many questions we asked\npercent = (score / total) * 100\nprint(f\"\\nYou answered {score} out of {total} correctly.\")\nprint(f\"Your score: {percent:.1f}%\")\n```\n\nThe `len()` function tells us how many items are in the list, and the `f`‑string lets us embed variables directly inside the printed text. The `:.1f` formats the percentage to one decimal place.\n\n---\n\n### Putting it all together\n\n```python\ndef ask_question(item):\n    print(\"\\n\" + item[\"question\"])\n    for opt in item[\"options\"]:\n        print(opt)\n    user = input(\"Your answer (A, B, C): \").strip().upper()\n    return user == item[\"answer\"]\n\nquiz = [\n    {\"question\": \"What is the capital of France?\",\n     \"options\": [\"A) Berlin\", \"B) Paris\", \"C) Rome\"],\n     \"answer\": \"B\"},\n    {\"question\": \"2 + 2 equals?\",\n     \"options\": [\"A) 3\", \"B) 4\", \"C) 5\"],\n     \"answer\": \"B\"},\n    {\"question\": \"Which planet is known as the Red Planet?\",\n     \"options\": [\"A) Mars\", \"B) Venus\", \"C) Jupiter\"],\n     \"answer\": \"A\"}\n]\n\nscore = 0\nfor q in quiz:\n    if ask_question(q):\n        print(\"Correct!\")\n        score += 1\n    else:\n        print(\"Wrong. The correct answer was\", q[\"answer\"])\n\ntotal = len(quiz)\npercent = (score / total) * 100\nprint(f\"\\nYou answered {score} out of {total} correctly.\")\nprint(f\"Your score: {percent:.1f}%\")\n```\n\nRun this program, answer the three questions, and you will see your final percentage.  \n\n> **In daily life:** Think of the loop as a teacher who repeatedly asks each student a question, and the conditional as the teacher checking whether the answer matches the answer key.  \n\n> **Common mistake:** Forgetting to convert the user’s input to upper‑case can cause a correct answer like “b” to be marked wrong. Always normalise input before comparing.",
+   "code": ""
+  },
+  {
+   "heading": "4. Developing an Expense Tracker",
+   "body": "Imagine you want to know how much money you spend each month on food, transport, movies, and other things.  \nAn **expense tracker** is a small program that lets you write down each purchase, saves the information, and later shows you totals and averages.  \nBy building one you will learn two very useful ideas:\n\n* **File handling** – how a program reads from and writes to a file on your computer, so the data is not lost when the program stops.\n* **Simple data structures** – lists and dictionaries that let you store many pieces of information in an organized way.\n\n---\n\n### 1. Where do we keep the data?\n\nWhen you type a new expense, the program needs a place to keep it temporarily while it is running.  \nA **list** is an ordered collection of items, like a shopping list written on paper.  \nA **dictionary** (sometimes called a *map*) stores pairs of *key* and *value*, like a phone book where a name (key) points to a phone number (value).\n\nFor our tracker each expense will be a dictionary with three keys:\n\n```python\nexpense = {\n    \"date\": \"2026-10-01\",\n    \"category\": \"Food\",\n    \"amount\": 12.50\n}\n```\n\nAll expenses together will be stored in a list:\n\n```python\nexpenses = []          # start with an empty list\nexpenses.append(expense)   # add a new expense to the list\n```\n\n> **Definition:** *List* – an ordered collection of items, accessed by their position (index).  \n> **Definition:** *Dictionary* – a collection of key‑value pairs, accessed by the key.\n\n---\n\n### 2. Writing the data to a file\n\nIf we only keep the list in memory, everything disappears when the program ends.  \nA **file** is a place on the disk where data can be saved permanently.  \nPython lets us open a file with `open(filename, mode)`. The mode `'w'` means *write* (create a new file or overwrite an existing one), and `'a'` means *append* (add to the end of the file).\n\nA simple way to store our list is to write each expense as a line of text, separating fields with commas (a **CSV** format).\n\n```python\ndef save_expenses(expenses, filename=\"expenses.txt\"):\n    with open(filename, \"w\") as f:          # open for writing\n        for exp in expenses:\n            line = f\"{exp['date']},{exp['category']},{exp['amount']}\\n\"\n            f.write(line)\n```\n\nThe `with` statement automatically closes the file when the block finishes, so we never forget to close it.\n\n> **Note:** Using `with open(...) as f:` is safer than opening a file and forgetting to call `f.close()`.\n\n---\n\n### 3. Reading the data back\n\nWhen the program starts we want to load any previously saved expenses.  \nWe open the file in **read** mode `'r'` and split each line at the commas to rebuild the dictionaries.\n\n```python\ndef load_expenses(filename=\"expenses.txt\"):\n    expenses = []\n    try:\n        with open(filename, \"r\") as f:\n            for line in f:\n                date, category, amount = line.strip().split(\",\")\n                expenses.append({\n                    \"date\": date,\n                    \"category\": category,\n                    \"amount\": float(amount)   # convert string to number\n                })\n    except FileNotFoundError:\n        # No file yet – start with an empty list\n        pass\n    return expenses\n```\n\nThe `try … except` block catches the situation where the file does not exist yet, preventing the program from crashing.\n\n> **Common mistake:** Forgetting to convert the `amount` from a string to a number; arithmetic will not work on strings.\n\n---\n\n### 4. Displaying and summarizing\n\nNow we can show the user all recorded expenses and compute totals.\n\n```python\ndef show_expenses(expenses):\n    print(\"Date        Category   Amount\")\n    print(\"-\"*30)\n    for exp in expenses:\n        print(f\"{exp['date']}  {exp['category']:10}  ${exp['amount']:.2f}\")\n\ndef total_by_category(expenses):\n    totals = {}\n    for exp in expenses:\n        cat = exp[\"category\"]\n        totals[cat] = totals.get(cat, 0) + exp[\"amount\"]\n    return totals\n```\n\nThe `totals.get(cat, 0)` expression returns the current sum for the category, or `0` if the category has not been seen yet.\n\nYou can then print the summary:\n\n```python\nsummary = total_by_category(expenses)\nprint(\"\\nSpending by category:\")\nfor cat, amount in summary.items():\n    print(f\"{cat:10}: ${amount:.2f}\")\n```\n\n> **In daily life:** Think of the dictionary `totals` as a notebook where you write down “Food – $150”, “Transport – $80”, and keep adding to each line as new receipts arrive.\n\n---\n\n### 5. Putting it all together\n\nA minimal main loop might look like this:\n\n```python\ndef main():\n    expenses = load_expenses()\n    while True:\n        print(\"\\n1) Add expense  2) Show expenses  3) Summary  4) Quit\")\n        choice = input(\"Choose: \")\n        if choice == \"1\":\n            date = input(\"Date (YYYY-MM-DD): \")\n            cat = input(\"Category: \")\n            amt = float(input(\"Amount: \"))\n            expenses.append({\"date\": date, \"category\": cat, \"amount\": amt})\n        elif choice == \"2\":\n            show_expenses(expenses)\n        elif choice == \"3\":\n            for c, a in total_by_category(expenses).items():\n                print(f\"{c}: ${a:.2f}\")\n        elif choice == \"4\":\n            save_expenses(expenses)\n            print(\"Goodbye!\")\n            break\n\nif __name__ == \"__main__\":\n    main()\n```\n\nWhen the user selects **Quit**, the program writes all expenses to `expenses.txt`. The next time it runs, `load_expenses()` reads the file and restores the list, so the data persists across sessions.\n\n> **Remember:** Always test the program with a few entries, then close it and run it again to verify that the saved file is read correctly. This confirms that both file handling and the data structures are working together.",
+   "code": ""
+  },
+  {
+   "heading": "5. Designing a Student Management System",
+   "body": "Imagine a small school office that keeps a list of every student: their name, age, grade, and a unique ID number. Whenever a teacher needs to find a student, add a new enrollee, or remove someone who has left, the office staff simply looks at the paper list, writes a new line, or crosses one out. In programming we can do the same thing, but the computer can do it much faster and can also remember the list even after we turn the program off. This is what a **Student Management System** (SMS) does.\n\n### The building blocks\n\n1. **Class** – Think of a class as a blueprint for a type of object, just like a recipe tells you how to make a cake.  \n2. **Object** – An object is a concrete instance made from a class, like a baked cake made from the recipe.  \n3. **Collection** – A collection stores many objects together, similar to a bookshelf that holds many books. In Python we often use a *list*; in Java we might use an *ArrayList*.\n\n> **Definition:** A **class** defines attributes (data) and methods (behaviour) that its objects will have.\n\n### Step 1: Define the `Student` class\n\nFirst we decide what information we need for each student. A simple set of attributes could be:\n\n- `student_id` (a unique number)\n- `name`\n- `age`\n- `grade`\n\n```python\nclass Student:\n    def __init__(self, student_id, name, age, grade):\n        self.student_id = student_id   # unique identifier\n        self.name = name\n        self.age = age\n        self.grade = grade\n```\n\nThe special method `__init__` is called a **constructor**; it runs automatically when we create a new `Student` object and fills in the attributes.\n\n### Step 2: Store many students in a collection\n\nWe create an empty list to hold all student objects:\n\n```python\nstudents = []          # this list will store Student objects\n```\n\nAdding a new student is as easy as creating an object and appending it to the list:\n\n```python\nnew_student = Student(101, \"Alice Wong\", 14, 9)\nstudents.append(new_student)\n```\n\n### Step 3: Basic operations\n\n- **Add** – create a `Student` object and `append` it to the list.  \n- **Remove** – find the object with a matching `student_id` and use `remove`.  \n- **Search** – loop through the list and compare each object's `student_id` (or name).  \n- **List** – simply iterate over the list and print each student's details.\n\n```python\ndef find_student(student_id):\n    for s in students:\n        if s.student_id == student_id:\n            return s\n    return None\n```\n\n> **Note:** The `return None` tells the caller that no matching student was found.\n\n### Step 4: Persistent storage with files\n\nIf we stop the program now, the list lives only in memory and disappears. To keep the data, we write it to a file and read it back later. A simple format is **CSV** (comma‑separated values), where each line looks like:\n\n```\n101,Alice Wong,14,9\n```\n\n**Saving** the list:\n\n```python\ndef save_students(filename=\"students.csv\"):\n    with open(filename, \"w\") as f:\n        for s in students:\n            line = f\"{s.student_id},{s.name},{s.age},{s.grade}\\n\"\n            f.write(line)\n```\n\n**Loading** the list:\n\n```python\ndef load_students(filename=\"students.csv\"):\n    students.clear()                     # start with an empty list\n    with open(filename, \"r\") as f:\n        for line in f:\n            sid, name, age, grade = line.strip().split(\",\")\n            students.append(Student(int(sid), name, int(age), int(grade)))\n```\n\nThe `with open(...)` construct automatically closes the file, preventing data loss.\n\n### Step 5: Putting it together\n\nA tiny menu lets a user choose an action:\n\n```python\nwhile True:\n    print(\"\\n1 Add  2 Remove  3 Search  4 List  5 Save  6 Load  0 Exit\")\n    choice = input(\"Choose: \")\n    if choice == \"1\":\n        sid = int(input(\"ID: \"))\n        name = input(\"Name: \")\n        age = int(input(\"Age: \"))\n        grade = int(input(\"Grade: \"))\n        students.append(Student(sid, name, age, grade))\n    elif choice == \"2\":\n        sid = int(input(\"ID to remove: \"))\n        s = find_student(sid)\n        if s:\n            students.remove(s)\n    elif choice == \"3\":\n        sid = int(input(\"ID to find: \"))\n        s = find_student(sid)\n        if s:\n            print(s.student_id, s.name, s.age, s.grade)\n    elif choice == \"4\":\n        for s in students:\n            print(s.student_id, s.name, s.age, s.grade)\n    elif choice == \"5\":\n        save_students()\n    elif choice == \"6\":\n        load_students()\n    elif choice == \"0\":\n        break\n```\n\nRunning this loop lets a user manage the student records just like the school office does with paper, but instantly and without errors.\n\n> **Common mistake:** Forgetting to convert strings read from a file back to integers (`int(sid)`, `int(age)`). This leads to comparison problems later.\n\n### Why this matters\n\nBy combining **classes**, **objects**, and **collections**, we create a flexible structure that can grow: you could add more attributes (address, phone), more operations (update grade), or even switch to a database for larger schools. The file‑based persistence shows how programs can remember information across runs, a fundamental idea behind almost every real‑world software system.\n\n> **Remember:** Keep each responsibility separate—`Student` holds data, the collection holds many students, and separate functions handle file I/O. This makes the code easier to read, test, and extend.",
+   "code": ""
+  },
+  {
+   "heading": "6. Adding Error Handling and Debugging",
+   "body": "When you write a program you are talking to a computer that follows every instruction **exactly**.  \nIf a user does something the program did not expect – for example typing letters where a number is required – the program will stop with an error and the user sees a scary message.  \n**Error handling** is the practice of catching those unexpected situations before they crash the program, and **debugging** is the process of finding and fixing mistakes in the code.\n\n> **Definition:** *Error handling* means writing extra code that anticipates possible problems and tells the program what to do when they happen.  \n> **Definition:** *Debugging* is the systematic search for bugs (mistakes) in a program, using tools or simple print statements to see what the program is actually doing.\n\n### 1. Anticipating user mistakes\n\nThink of a calculator. The user should enter numbers, but they might type “five” or press the plus key twice. Before the program tries to add the values, you can check that the input is a valid number.\n\n```python\nuser_input = input(\"Enter a number: \")\nif user_input.replace('.','',1).isdigit():\n    number = float(user_input)\nelse:\n    print(\"That is not a valid number. Please try again.\")\n```\n\nThe `replace` trick allows one decimal point. This simple test prevents the program from trying to convert a non‑numeric string, which would raise a `ValueError`.\n\n### 2. Using `try` / `except` blocks\n\nSometimes you cannot know every possible mistake in advance. Python gives us a convenient structure called a **try/except block**. The code inside `try:` is attempted; if it raises an error, the code inside `except:` runs instead of crashing the whole program.\n\n```python\ntry:\n    number = float(user_input)          # may raise ValueError\n    result = 100 / number               # may raise ZeroDivisionError\nexcept ValueError:\n    print(\"Please type a real number.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero.\")\nelse:\n    print(f\"The result is {result}\")\n```\n\nThe `else:` part runs only when no exception occurred, keeping the normal flow tidy.\n\n> **Note:** You can catch several specific errors (like `ValueError` and `ZeroDivisionError`) or a generic `except Exception:` to handle any unexpected problem, but catching specific errors helps you give clearer feedback.\n\n### 3. Debugging tools for the projects\n\n#### a) Print‑statement debugging\nThe oldest and simplest tool is `print()`. Insert statements to show the values of variables at key points.\n\n```python\nprint(\"DEBUG: expenses list =\", expenses)\n```\n\nWhen the expense tracker gives a wrong total, you can print the list before summing it to see if an item is missing or mis‑typed.\n\n#### b) The built‑in debugger `pdb`\nRun a script with `python -m pdb myscript.py`. The program stops at the first line and lets you step through line by line, inspect variables, and continue execution.\n\nKey commands:\n- `n` – next line\n- `c` – continue until the next breakpoint\n- `p variable` – print the current value of *variable*\n\n#### c) Integrated Development Environment (IDE) breakpoints\nMost IDEs (like VS Code, PyCharm, or Thonny) let you click beside a line number to set a **breakpoint**. When the program runs, it pauses there, and you can hover over variables to see their values. This visual approach is often easier than remembering `pdb` commands.\n\n### 4. Common debugging steps for all projects\n\n1. **Reproduce the error** – run the program with the same input that caused the crash.\n2. **Read the traceback** – Python prints a *traceback* that shows the file, line number, and type of error. The last line tells you the exact problem, e.g., `ZeroDivisionError: division by zero`.\n3. **Isolate the cause** – add a `print()` before the line that failed to display the variables involved.\n4. **Fix the code** – apply a check, a `try/except`, or correct the logic.\n5. **Test again** – try several inputs, including edge cases (empty strings, very large numbers, negative values).\n\n> **Common mistake:** Forgetting to handle the case where a user enters nothing (`\"\"`). Converting an empty string to `int` or `float` always raises `ValueError`. Always check for empty input first.\n\n### 5. Applying error handling to each project\n\n- **Simple Calculator:** Wrap each arithmetic operation in `try/except` to catch `ZeroDivisionError` and `ValueError`. Prompt the user again if the input is invalid.\n- **Quiz Application:** When asking for a choice (A, B, C, D), verify that the answer is one of the allowed letters. Use `try/except` if you store scores as integers and the conversion fails.\n- **Expense Tracker:** Validate that the amount entered is a positive number. Use `try/except` when reading a file; if the file does not exist, create a new empty file instead of crashing.\n- **Student Management System:** When searching for a student ID, ensure the ID is numeric and exists in the list. Catch `KeyError` if you use a dictionary and the ID is missing.\n\n### 6. A final tip\n\n> **Remember:** Good error handling makes your program **user‑friendly** and **robust**. Debugging is a skill that improves with practice; treat each bug as a puzzle and use the tools above to uncover the hidden mistake. When you finish, run a quick “stress test” – try many unusual inputs – to be confident your program can handle real‑world use.",
+   "code": ""
+  },
+  {
+   "heading": "7. Final Integration and Presentation",
+   "body": "Imagine you have finished building four small programs: a calculator, a quiz, an expense tracker, and a student manager.  The last step is to **bring everything together**, check that each piece works as expected, write a short guide for anyone who might use the code, and then show your work to the class.  This mirrors what professional developers do before a product is released.\n\nFirst, run a **test** on each program.  A test is simply a set of actions you perform to see if the program behaves correctly.  For example, in the calculator you might type `7 + 5` and verify that the result shown is `12`.  In the expense tracker you could add a purchase of `$20` and then check that the total expenses increase by exactly `$20`.  Write down at least three different scenarios for each program: a normal case, an edge case (something unusual, like dividing by zero), and an error case (entering a letter where a number is expected).  When you finish testing, count how many scenarios passed and how many failed.  You can record this with a tiny formula:\n\n$$\n\\text{Pass rate} = \\frac{\\text{Number of passed tests}}{\\text{Total number of tests}} \\times 100\\%\n$$\n\nIf the pass rate is below 100 %, go back to the code, find the bug, and test again until every scenario succeeds.\n\n> **Note:** *Testing is not a one‑time activity.*  Run the tests after you add a new feature or fix a bug, because a change in one part of the program can unintentionally break another part.\n\nNext, write **brief documentation**.  Documentation is a short written guide that explains what the program does, how to start it, and how to use its main features.  Keep it to a few paragraphs for each project:\n\n1. **Purpose** – a single sentence describing the problem the program solves.  \n2. **How to run** – the command you type in a terminal or the button you click.  \n3. **Key actions** – list the most important steps a user must follow (e.g., “Enter two numbers, choose an operation, press =”).  \n4. **Known limits** – any situations the program does not handle yet (e.g., “Only whole numbers are accepted”).\n\nUse simple language and bullet points so that a peer can read the guide in under two minutes.\n\n> **Definition:** *Documentation* is a written description that tells users and future developers what a program does and how to use or modify it.\n\nNow prepare to **present** your projects.  A good presentation has three parts:\n\n1. **Introduction** – state the problem you chose and why it matters (e.g., “Students often lose track of small expenses, so an expense tracker helps them see where their money goes.”).  \n2. **Demo** – run the program live, showing the test scenarios you prepared.  Speak aloud what you are doing, so the audience follows each step.  \n3. **Reflection** – talk about what you learned, any difficulties you faced, and how you solved them.  Mention the pass rate you calculated and any remaining bugs you plan to fix later.\n\nTreat the presentation like a short story: set the scene, show the action, and end with a lesson.  Keep each segment to about two minutes so the whole talk fits within a ten‑minute slot.\n\n> **In daily life:** *Presenting your work is like showing a recipe to a friend.*  You first explain what the dish is, then walk through the cooking steps, and finally share tips on how to improve the flavor.\n\nFinally, adopt a habit that professional teams value: **version control**.  If you have not already, create a simple folder for each project and copy the final code files into it with a clear name such as `calculator_v1.zip`.  This makes it easy to retrieve the exact version you presented later.\n\n> **Remember:** *Good software development is not just writing code; it is also testing, documenting, and communicating your work clearly.*  \n\nBy following these steps—testing thoroughly, writing concise documentation, and presenting confidently—you will finish the course with a portfolio of polished, reliable programs and the professional habits that will serve you in any future coding project.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What are the three main steps you should follow when planning a new programming project?",
+   "a": "1. Identify the problem or need the project will address.\n2. List the functional requirements (what the program must do) and non‑functional requirements (performance, usability, etc.).\n3. Break the work into smaller tasks, estimate time for each, and create a simple timeline or checklist."
+  },
+  {
+   "level": "Easy",
+   "q": "In a simple calculator program, why is it important to separate the user‑interface code from the calculation logic?",
+   "a": "Separating UI from logic makes the code easier to read, test, and modify. The UI handles input/output, while the calculation logic performs arithmetic. If you need to change how numbers are entered (e.g., from console to GUI), you only adjust the UI part; the core calculations stay unchanged, reducing bugs and duplication."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare the way data is stored in an expense tracker versus a student management system. What are the key differences in the data structures you would choose for each?",
+   "a": "An expense tracker mainly records transactions, so a list (or array) of objects where each object holds fields like date, category, amount, and description is sufficient. A student management system must handle many related entities (students, courses, grades), so you would use multiple collections: a list of student objects, a list of course objects, and perhaps a dictionary (or map) that links a student ID to their grades. The tracker focuses on a single, repetitive record type; the management system requires relational structures to connect different types of data."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain how you would add error handling to the quiz application so that it gracefully handles a user entering a non‑numeric answer when a numeric answer is expected.",
+   "a": "1. Wrap the code that reads and converts the answer in a try‑except (or try‑catch) block.\n2. Attempt to convert the input to the required type (e.g., int).\n3. If conversion fails, catch the exception and display a friendly message like “Please enter a number.”\n4. Prompt the user again, looping until a valid numeric input is received. This prevents the program from crashing and guides the user to correct input."
+  },
+  {
+   "level": "Hard",
+   "q": "Design a small integration test scenario for the final project that combines the calculator, quiz, and expense tracker modules. Describe the steps and expected outcomes.",
+   "a": "1. Start the integrated application and navigate to the calculator module.\n2. Perform a calculation, e.g., 12 + 8, and verify the displayed result is 20.\n3. Without restarting, switch to the quiz module and answer a question correctly; confirm the score increments.\n4. Move to the expense tracker, add an expense of $20, and check that the total expense reflects the new entry.\n5. Return to the calculator and perform another calculation, e.g., 5 × 4, confirming the result is 20 again.\n6. Verify that the quiz score and expense total remain unchanged after the second calculator use. The expected outcome is that each module works independently and retains its state when the user navigates between them, showing successful integration."
+  },
+  {
+   "level": "Hard",
+   "q": "Apply the concept of modular programming to refactor a monolithic student management system that currently handles input, processing, and file storage in one large function. Outline the new module structure and the responsibilities of each module.",
+   "a": "1. **Input Module** – Handles all user interactions: reading student data, course selections, and commands. It validates input and passes clean data to the processing layer.\n2. **Processing Module** – Contains the core logic: creating student objects, enrolling them in courses, calculating grades, and managing relationships. It exposes functions like `add_student()`, `enroll_course()`, and `calculate_gpa()`.\n3. **Storage Module** – Responsible for saving and loading data to/from files or a database. Functions such as `save_students()` and `load_students()` are defined here, keeping file I/O separate from business logic.\n4. **Presentation Module (optional)** – Formats output for the console or GUI, turning processed data into readable tables or reports.\nBy moving code into these distinct modules, each part can be developed, tested, and maintained independently, reducing complexity and improving readability."
+  }
+ ],
+ "recap": "The lesson teaches how to plan and build small programming projects such as a calculator, quiz, expense tracker, and student management system. It covers defining goals, getting user input, using loops, conditionals, functions, file handling, and error handling. Each project reinforces core concepts and ends with integration and testing.",
+ "key_terms": [
+  {
+   "term": "Goal",
+   "meaning": "A short, measurable statement of what a program should achieve."
+  },
+  {
+   "term": "Input",
+   "meaning": "Data entered by the user that the program reads, often via an input() function."
+  },
+  {
+   "term": "Loop",
+   "meaning": "A structure that repeats a block of code while a condition remains true."
+  },
+  {
+   "term": "Conditional",
+   "meaning": "A statement that chooses between two blocks of code based on a true/false test."
+  },
+  {
+   "term": "Function",
+   "meaning": "A reusable block of code given a name, which can be called with arguments."
+  },
+  {
+   "term": "File handling",
+   "meaning": "Reading from and writing to files so data persists after the program stops."
+  },
+  {
+   "term": "Error handling",
+   "meaning": "Code that anticipates possible problems and prevents the program from crashing."
+  },
+  {
+   "term": "Class",
+   "meaning": "A blueprint that defines attributes and behaviors for objects."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Why is defining a goal important before coding?",
+   "options": [
+    "It makes the code run faster",
+    "It helps you stay focused and measure success",
+    "It eliminates the need for testing",
+    "It automatically writes the program"
+   ],
+   "answer": 1,
+   "why": "A clear goal guides design decisions and lets you check if the final program meets expectations."
+  },
+  {
+   "q": "What type of data does the Python input() function return?",
+   "options": [
+    "Integer",
+    "Float",
+    "String",
+    "Boolean"
+   ],
+   "answer": 2,
+   "why": "input() always returns a string, which may need conversion to numbers."
+  },
+  {
+   "q": "Which structure would you use to repeat asking quiz questions until all are asked?",
+   "options": [
+    "if statement",
+    "for loop",
+    "while loop",
+    "try‑except block"
+   ],
+   "answer": 2,
+   "why": "A while loop can continue until a condition (e.g., no more questions) becomes false."
+  },
+  {
+   "q": "In an expense tracker, which data structure is best for storing each purchase as a pair of description and amount?",
+   "options": [
+    "List",
+    "Dictionary",
+    "Tuple",
+    "Set"
+   ],
+   "answer": 1,
+   "why": "A dictionary maps a description (key) to an amount (value), making look‑ups easy."
+  },
+  {
+   "q": "What does error handling allow a program to do?",
+   "options": [
+    "Run faster",
+    "Ignore user input",
+    "Catch unexpected situations without crashing",
+    "Automatically fix bugs"
+   ],
+   "answer": 2,
+   "why": "Error handling catches exceptions and lets the program respond gracefully."
+  },
+  {
+   "q": "Which concept describes a class in programming?",
+   "options": [
+    "A list of numbers",
+    "A blueprint for objects",
+    "A type of loop",
+    "A file on disk"
+   ],
+   "answer": 1,
+   "why": "A class defines attributes and methods that objects instantiated from it will have."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define 'Goal' in project planning.",
+   "back": "A concise, measurable statement of what the program should accomplish."
+  },
+  {
+   "front": "What are the three steps of an interactive program?",
+   "back": "Receive input, process it, and display output."
+  },
+  {
+   "front": "Explain a 'Loop' with an example.",
+   "back": "A loop repeats code; e.g., while questions remain, ask the next quiz question."
+  },
+  {
+   "front": "What is a 'Conditional'?",
+   "back": "A statement that runs one block of code if a condition is true and another if false."
+  },
+  {
+   "front": "Purpose of a 'Function'.",
+   "back": "To group reusable code under a name, allowing it to be called multiple times."
+  },
+  {
+   "front": "How does 'File handling' help an expense tracker?",
+   "back": "It saves expenses to a file so data persists after the program exits."
+  },
+  {
+   "front": "What does 'Error handling' protect against?",
+   "back": "Unexpected user input or runtime errors that would otherwise crash the program."
+  },
+  {
+   "front": "Difference between a 'Class' and an 'Object'.",
+   "back": "A class is a blueprint; an object is an instance created from that blueprint."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l16-project-planning-map",
+   "title": "A simple map showing the steps from idea to finished program.",
+   "alt": "A simple map showing the steps from idea to finished program.",
+   "priority": 8,
+   "picture_title": "Project Planning Map",
+   "kind": "illustration",
+   "subject": "The illustration shows a road‑trip style map with icons for brainstorming, requirements, design, coding, testing and deployment, linked by arrows to emphasize the planning sequence.",
+   "layout": "Horizontal road with milestone icons placed along the path, each labeled with a step.",
+   "labels": [
+    "Idea",
+    "Requirements",
+    "Design",
+    "Code",
+    "Test",
+    "Deploy"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l16-command-line-calculator",
+   "title": "What a tiny calculator looks like in a terminal window.",
+   "alt": "What a tiny calculator looks like in a terminal window.",
+   "priority": 7,
+   "picture_title": "Command‑Line Calculator",
+   "kind": "photo",
+   "subject": "A screenshot of a command‑line program asking for two numbers, the operation choice, and then displaying the result, showing the text‑based interaction.",
+   "layout": "Full terminal window centered, with the prompt lines and result highlighted.",
+   "labels": [],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l16-expense-tracker-data-flow",
+   "title": "How an expense entry moves from input to saved file and summary display.",
+   "alt": "How an expense entry moves from input to saved file and summary display.",
+   "priority": 6,
+   "picture_title": "Expense Tracker Data Flow",
+   "kind": "labelled diagram",
+   "subject": "A flow diagram that starts with the user entering a purchase, then shows the data being written to a file, later read back, and finally used to calculate totals and averages shown to the user.",
+   "layout": "Boxes for 'User Input', 'Write to File', 'Read File', 'Calculate Totals', 'Show Summary' arranged left‑to‑right with arrows.",
+   "labels": [
+    "Input",
+    "Save",
+    "Load",
+    "Compute",
+    "Display"
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Building a Simple Calculator",
+   "steps": [
+    {
+     "label": "Get Input",
+     "text": "Ask the user for two numbers"
+    },
+    {
+     "label": "Choose Operation",
+     "text": "Ask which of +, -, *, / to perform"
+    },
+    {
+     "label": "Compute",
+     "text": "Perform the selected arithmetic"
+    },
+    {
+     "label": "Show Result",
+     "text": "Display the answer to the user"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Student Management System Components",
+   "items": [
+    {
+     "name": "Class",
+     "role": "Blueprint that defines student attributes"
+    },
+    {
+     "name": "Object",
+     "role": "Concrete student record created from the class"
+    },
+    {
+     "name": "List",
+     "role": "Stores all student objects in order"
+    },
+    {
+     "name": "Functions",
+     "role": "Add, remove, find, and update student records"
+    }
+   ],
+   "after": 5
+  },
+  {
+   "type": "compare",
+   "title": "Error Handling vs Debugging",
+   "left": {
+    "name": "Error Handling",
+    "points": [
+     "Anticipates possible user mistakes",
+     "Catches problems before the program crashes",
+     "Shows friendly messages to the user"
+    ]
+   },
+   "right": {
+    "name": "Debugging",
+    "points": [
+     "Searches for bugs in the code",
+     "Uses tests, print statements, or a debugger",
+     "Fixes logic or syntax errors"
+    ]
+   },
+   "after": 6
+  },
+  {
+   "type": "facts",
+   "title": "Core Steps of an Interactive Program",
+   "items": [
+    {
+     "value": "Input",
+     "label": "Receive data from the user"
+    },
+    {
+     "value": "Process",
+     "label": "Perform calculations or decisions"
+    },
+    {
+     "value": "Output",
+     "label": "Show results back to the user"
+    }
+   ],
+   "after": 2
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

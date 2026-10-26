@@ -1,0 +1,390 @@
+{
+ "title": "Working with Data",
+ "summary": "In this lesson students learn how to work with data using JSON, process data, call APIs, make HTTP requests, and connect programs to external services. They will see how these techniques let programs interact with the web and other applications.",
+ "objectives": [
+  "Parse and generate JSON data in a program",
+  "Send an HTTP GET request to retrieve data from a web API",
+  "Process the received data to extract useful information",
+  "Use a simple library to post data to an external service",
+  "Explain the role of APIs in modern software"
+ ],
+ "prerequisites": "Students should already know basic programming concepts, including variables, functions, and file handling.",
+ "why": [
+  "Web services and cloud platforms rely on data exchange formats like JSON, so understanding them is essential for building modern applications.",
+  "Being able to call APIs lets programs use maps, weather data, social media, and many other services without reinventing the wheel, opening up endless project possibilities."
+ ],
+ "sections": [
+  {
+   "heading": "What is JSON?",
+   "body": "JSON (JavaScript Object Notation) is a **lightweight text format** that lets computers exchange *structured* information in a way that is easy for both people and programs to read.  \nThink of it as a digital version of a well‑organized filing cabinet: each drawer (an *object*) holds labeled folders (key‑value pairs), and inside those folders you can place other drawers, lists of items, or simple values like numbers and words.\n\n> **Definition:** JSON is a plain‑text format that represents data as *objects* (curly braces) and *arrays* (square brackets), using only a few basic data types.\n\n### The basic building blocks\n\n1. **Objects** – written with curly braces `{ }`. Inside, you write *key*: *value* pairs, separated by commas.  \n   Example:  \n   $$\\{ \"name\": \"Alice\", \"age\": 30 \\}$$  \n   Here `\"name\"` and `\"age\"` are *keys* (also called *property names*), and `\"Alice\"` and `30` are their corresponding *values*.\n\n2. **Arrays** – written with square brackets `[ ]`. An array holds an ordered list of values, also separated by commas.  \n   Example:  \n   $$[ \"red\", \"green\", \"blue\" ]$$  \n\n3. **Values** – the things you store. JSON allows only a small set of value types:\n   - **Strings** – text surrounded by double quotes, e.g. `\"hello world\"`.  \n   - **Numbers** – integers or decimals, e.g. `42` or `3.14`.  \n   - **Booleans** – the logical values `true` or `false`.  \n   - **null** – a special value meaning “no value” or “empty”.  \n   - **Objects** – as described above, allowing nesting.  \n   - **Arrays** – also as described above, allowing lists of any of the other types.\n\n> **Note:** All keys **must** be strings and must be written with double quotes. Single quotes are not allowed in valid JSON.\n\n### How JSON looks compared to everyday data\n\nImagine you have a recipe card:\n\n- Title: *Chocolate Chip Cookies*  \n- Servings: 4  \n- Ingredients: flour, sugar, butter, chocolate chips  \n\nIf you wrote this on paper, you might list each item on a new line. In JSON, the same information becomes:\n\n```json\n{\n  \"title\": \"Chocolate Chip Cookies\",\n  \"servings\": 4,\n  \"ingredients\": [ \"flour\", \"sugar\", \"butter\", \"chocolate chips\" ]\n}\n```\n\nYou can see the parallel: the *keys* (`\"title\"`, `\"servings\"`, `\"ingredients\"`) label each piece of data, just like headings on the card, and the *values* give the actual information. The array groups the ingredients in the order you need them.\n\n### Why JSON is useful\n\n- **Human‑readable**: Because it is plain text, you can open a JSON file in any text editor and understand the structure at a glance.\n- **Language‑independent**: Although the name comes from JavaScript, almost every programming language (Python, Java, C#, etc.) has built‑in tools to parse JSON, turning the text into native data structures (like dictionaries or lists).\n- **Compact**: Compared with XML or binary formats, JSON uses fewer characters, which makes it faster to send over the internet.\n\n> **In daily life:** Think of JSON as the “shopping list” you might send to a friend via a messaging app. The list is just text, but it tells the receiver exactly what items (keys) and quantities (values) you need, and the receiver’s phone can automatically turn that text into a usable list in their notes app.\n\n### Small rules to keep in mind\n\n- Keys and string values **always** use double quotes `\"`.\n- No trailing commas are allowed after the last item in an object or array.\n- Numbers are written without quotes; they are not strings.\n- `true`, `false`, and `null` are all lowercase and unquoted.\n\n> **Remember:** Valid JSON is a strict subset of JavaScript object literal syntax. Anything that works in JavaScript may *not* be valid JSON if it breaks the rules above (for example, using single quotes or leaving out commas).\n\nUnderstanding these fundamentals will let you read data that a web service sends you, and later you’ll learn how to create your own JSON to send data back. The next steps will show you how a program can turn this text into usable objects and arrays, and how to work with real APIs that speak JSON.",
+   "code": ""
+  },
+  {
+   "heading": "Reading JSON in a program",
+   "body": "Imagine you have a piece of text that looks like this:\n\n```json\n{\n    \"name\": \"Alice\",\n    \"age\": 17,\n    \"subjects\": [\"Math\", \"Science\", \"Art\"]\n}\n```\n\nThat text is **JSON** – a way to write data that both humans and computers can read.  \nWhen a program receives this text, it cannot use the information directly because the program works with its own data types, such as *dictionaries* (key‑value maps) and *lists* (ordered collections).  \nThe first step is to **load** the JSON text and **convert** it into those native structures. Once converted, you can ask the program questions like “What is Alice’s age?” or “What is the second subject?”\n\n> **Definition:** *Loading* means reading the raw JSON string (or file) into memory, and *parsing* means turning that string into the program’s built‑in data types.\n\n### Step 1 – Get the JSON text\n\nYou can obtain JSON in two common ways:\n\n1. **From a string** that you already have in your code.\n2. **From a file** that was saved on disk, for example `student.json`.\n\nBoth cases start with a plain text representation of the data.\n\n### Step 2 – Use a JSON library\n\nMost programming languages include a small library for handling JSON. In Python, the library is called `json`; in JavaScript it is built‑in as `JSON`; in Java you might use `org.json` or `Gson`. The library provides two essential functions:\n\n- `loads` / `parse` – turn a JSON *string* into native objects.\n- `load` – read a JSON *file* and parse it in one step.\n\nHere is the Python example for a string:\n\n```python\nimport json                     # bring the library into your program\n\njson_text = '{\"name\":\"Alice\",\"age\":17,\"subjects\":[\"Math\",\"Science\",\"Art\"]}'\ndata = json.loads(json_text)    # <-- parsing happens here\n```\n\nAnd for a file:\n\n```python\nimport json\n\nwith open('student.json', 'r') as f:   # open the file for reading\n    data = json.load(f)                # read and parse in one line\n```\n\n> **Note:** The functions are named slightly differently in each language, but the idea is the same: *read → parse → native object*.\n\n### Step 3 – What you get after parsing\n\nAfter the call to `json.loads` or `json.load`, the variable `data` now holds a **dictionary** (also called a *map* or *object*). Its keys are the strings `\"name\"`, `\"age\"`, and `\"subjects\"`. The values are:\n\n- `\"Alice\"` – a **string**\n- `17` – an **integer**\n- `[\"Math\", \"Science\", \"Art\"]` – a **list** of strings\n\nYou can think of the dictionary as a real‑world filing cabinet: each drawer (key) holds a specific item (value). The list inside the `\"subjects\"` drawer is like a stack of index cards ordered from first to last.\n\n### Step 4 – Accessing values\n\nNow that the data is in native structures, you can retrieve any piece you need using simple syntax.\n\n```python\nname = data[\"name\"]          # \"Alice\"\nage = data[\"age\"]            # 17\nfirst_subject = data[\"subjects\"][0]   # \"Math\"\nsecond_subject = data[\"subjects\"][1]  # \"Science\"\n```\n\nThe expression `data[\"subjects\"][1]` works because:\n\n1. `data[\"subjects\"]` returns the list `[\"Math\",\"Science\",\"Art\"]`.\n2. Adding `[1]` selects the element at index 1 (the second item, because counting starts at 0).\n\n> **In daily life:** Accessing a value is like opening a specific drawer in a cabinet and then picking the exact card you need from a stack inside that drawer.\n\n### Step 5 – Handling errors gently\n\nIf you ask for a key that does not exist, the program will raise an error (e.g., `KeyError` in Python). A safe way is to use the dictionary’s `get` method, which lets you provide a default value:\n\n```python\nnickname = data.get(\"nickname\", \"No nickname provided\")\n```\n\nNow `nickname` will be the string `\"No nickname provided\"` instead of crashing the program.\n\n> **Common mistake:** Forgetting that JSON keys are case‑sensitive. `\"Name\"` and `\"name\"` are different keys, so always match the exact spelling from the JSON source.\n\n### Step 6 – Working with nested structures\n\nJSON can contain objects inside objects, like this:\n\n```json\n{\n    \"student\": {\n        \"name\": \"Bob\",\n        \"details\": {\"age\": 18, \"grade\": \"A\"}\n    }\n}\n```\n\nAfter parsing, you reach deep values by chaining brackets:\n\n```python\nage = data[\"student\"][\"details\"][\"age\"]   # 18\n```\n\nThink of it as walking through a series of rooms: you first enter the `\"student\"` room, then the `\"details\"` room, and finally you pick up the `\"age\"` item.\n\n### Quick recap\n\n- Load the JSON text (string or file) using a library.\n- Parse it to obtain native dictionaries/lists.\n- Access values with `[`key`]` for dictionaries and `[index]` for lists.\n- Use `get` to avoid crashes, and remember keys are case‑sensitive.\n- For nested data, chain the brackets.\n\n> **Remember:** Once JSON is parsed, you are no longer dealing with a mysterious text format; you are working with ordinary data structures that your program already knows how to handle. This makes it easy to read, modify, and use the information in any further calculations or displays.",
+   "code": ""
+  },
+  {
+   "heading": "Writing JSON from a program",
+   "body": "When a program has data in its own “native” form—lists, dictionaries, numbers, and strings—it often needs to share that data with other programs, store it on disk, or send it over the internet.  \nThe way we do that is by **serialising** the data: turning the in‑memory structures into a text format that anyone can read later. JSON (JavaScript Object Notation) is the most common text format for this job.\n\n### From native objects to a JSON string  \n\nImagine you have a simple address book entry in Python:\n\n```python\ncontact = {\n    \"name\": \"Ada Lovelace\",\n    \"age\": 36,\n    \"email\": \"ada@example.com\",\n    \"languages\": [\"English\", \"French\"]\n}\n```\n\n`contact` is a **dictionary** (a collection of *key‑value* pairs).  \nTo turn it into JSON we use a library that knows the rules of JSON syntax. In Python the standard library provides `json`.\n\n```python\nimport json\n\njson_string = json.dumps(contact, indent=4, ensure_ascii=False)\nprint(json_string)\n```\n\n`json.dumps` means **dumps** → “dump the data into a string”.  \nThe result looks like:\n\n```json\n{\n    \"name\": \"Ada Lovelace\",\n    \"age\": 36,\n    \"email\": \"ada@example.com\",\n    \"languages\": [\n        \"English\",\n        \"French\"\n    ]\n}\n```\n\n> **Definition:** *Serialisation* is the process of converting a program’s internal data structures into a format that can be stored or transmitted, such as a JSON string.\n\n#### Why the extra arguments?  \n\n- `indent=4` tells the library to add line breaks and spaces so the output is **pretty‑printed**. This makes it easier for humans to read, just like adding spaces in a handwritten list.\n- `ensure_ascii=False` allows non‑ASCII characters (like “é” or “ß”) to appear directly instead of being escaped as `\\u00e9`. This keeps the text readable for people who speak other languages.\n\n### Writing JSON to a file  \n\nOften we want the JSON to live on disk, not just in memory. The same library can write directly to a file:\n\n```python\nwith open(\"contact.json\", \"w\", encoding=\"utf-8\") as f:\n    json.dump(contact, f, indent=4, ensure_ascii=False)\n```\n\n`json.dump` (without the “s”) means “dump the data **into** a file object”.  \nThe `with open(..., \"w\", encoding=\"utf-8\")` part opens a file for **writing** (`\"w\"`), using UTF‑8 encoding so any Unicode characters are stored correctly.\n\n> **Note:** Always open the file with `encoding=\"utf-8\"` when you plan to write JSON. UTF‑8 is the universal character set that can represent every symbol you might need.\n\n### What JSON looks like under the hood  \n\nJSON has a very small set of building blocks:\n\n- **Objects**: `{ \"key\": value, ... }` – like a dictionary.\n- **Arrays**: `[ value1, value2, ... ]` – like a list.\n- **Strings**: `\"text\"` – always double‑quoted.\n- **Numbers**: `123`, `4.56` – no quotes.\n- **Booleans**: `true`, `false`.\n- **Null**: `null` – represents “nothing”.\n\nWhen the library writes JSON, it follows these rules automatically. You do not need to add commas or quotes yourself; the library guarantees correct **formatting**.\n\n### Handling special data types  \n\nNative data types that JSON does not understand (for example, Python `datetime` objects or custom classes) must be converted first.\n\n```python\nimport json\nfrom datetime import datetime\n\nevent = {\n    \"title\": \"Conference\",\n    \"date\": datetime(2024, 11, 5, 9, 30)   # not JSON‑serialisable directly\n}\n\ndef default_converter(o):\n    if isinstance(o, datetime):\n        return o.isoformat()   # turn datetime into an ISO‑8601 string\n    raise TypeError(f\"Object of type {type(o)} is not JSON serializable\")\n\njson_string = json.dumps(event, default=default_converter, indent=2)\nprint(json_string)\n```\n\nThe `default` parameter tells the library how to handle objects it does not recognise.\n\n> **Common mistake:** Trying to `json.dumps` a set (`{1, 2, 3}`) or a tuple (`(1, 2)`) without converting them first. JSON only knows arrays, so convert them to a list: `list(my_set)`.\n\n### Quick checklist before you write JSON  \n\n1. **All keys are strings** – JSON objects require string keys; if you have integers as keys, convert them: `str(key)`.\n2. **No circular references** – an object that contains itself will cause an error.\n3. **Use UTF‑8** – ensures every character is saved correctly.\n4. **Validate the output** – you can read the file back with `json.load` to be sure it is well‑formed.\n\n> **Remember:** JSON is a *text* format, not a binary one. That means you can open a JSON file in any text editor and see exactly what your program wrote.\n\nBy following these steps—choosing the right library function, adding optional formatting arguments, and handling unsupported types—you can reliably turn any native data structure into a clean, correctly encoded JSON string or file, ready to be shared with other programs or stored for later use.",
+   "code": ""
+  },
+  {
+   "heading": "Making HTTP requests",
+   "body": "When a program talks to another computer over the internet it does so using **HTTP**, which stands for *HyperText Transfer Protocol*. Think of HTTP as a set of polite rules that let two people (or two programs) ask each other for information and give information back, just like you might ask a librarian for a book and then return it later.\n\n> **Definition:** **HTTP** is a protocol – a shared language – that defines how messages are formatted and transmitted between a client (your program) and a server (the computer that stores the data).\n\nThe most common ways to use this language are the **GET** and **POST** methods.\n\n* **GET** is like raising your hand and saying “Please show me the page about cats.” You are only asking to *receive* data; you do not change anything on the server.\n* **POST** is like handing the librarian a new manuscript and saying “Please add this to the collection.” You are *sending* data that the server should store or process.\n\nBoth methods start with a **request line** that tells the server what you want, followed by optional **headers** (extra information such as the format you accept) and, for POST, a **body** that carries the actual data.\n\n### Why use GET and POST?\n\n* **GET** is fast and safe for reading because it does not modify anything. It can be bookmarked, cached, and even shared as a simple URL.\n* **POST** is needed when you have to send more complex data—like a form with many fields, a file, or a JSON object—because the amount of information can be larger and it should not appear in the URL.\n\n### Everyday comparison\n\nImagine you are ordering a pizza online:\n\n1. You **GET** the menu page to see what toppings are available.  \n2. When you decide, you **POST** your order (address, toppings, payment info) to the restaurant’s server.  \n\nThe menu page is just information you read; the order is data you send.\n\n### Using a simple library\n\nMost programming languages provide a small library that hides the low‑level details of building HTTP messages. Below is a short example in Python using the popular `requests` library, but the ideas are the same in JavaScript (`fetch`), Java (`HttpURLConnection`), or other languages.\n\n```python\nimport requests   # load the library\n\n# ----- GET request -----\nresponse = requests.get('https://api.example.com/users')\n# response now holds the server’s answer\nprint('Status code:', response.status_code)   # 200 means OK\nprint('Body as text:', response.text)         # raw text\nprint('Body as JSON:', response.json())       # parsed into Python objects\n```\n\nIn this snippet:\n\n* `requests.get` builds a GET request, sends it to the URL, and waits for the reply.\n* `response.status_code` tells you whether the request succeeded (200) or failed (e.g., 404 = not found).\n* `response.json()` automatically converts a JSON‑formatted body into a Python dictionary, saving you from manual parsing.\n\n```python\n# ----- POST request -----\npayload = {'name': 'Alice', 'score': 42}\nresponse = requests.post('https://api.example.com/scores', json=payload)\nprint('Created?', response.status_code == 201)   # 201 means “created”\nprint('Server reply:', response.json())\n```\n\nHere:\n\n* `payload` is a Python dictionary that we want to send.\n* `requests.post(..., json=payload)` tells the library to turn the dictionary into a JSON string, set the appropriate `Content‑Type: application/json` header, and place it in the request body.\n* The server responds, often with a new object that includes an ID or confirmation message.\n\n### What happens behind the scenes?\n\n1. **Your code** calls `requests.get` or `requests.post`.  \n2. The library opens a **TCP connection** to the server’s IP address (the internet’s version of a phone line).  \n3. It writes the HTTP request text, for example:  \n\n   $$\\text{GET /users HTTP/1.1}$$  \n\n   followed by headers like `Host: api.example.com`.  \n4. The server reads the request, processes it, and sends back a response that starts with a **status line** (e.g., `HTTP/1.1 200 OK`) and then the **body** (the data you asked for).  \n5. The library receives the response, parses the status line and headers, and gives you easy‑to‑use objects like `response.status_code` and `response.json()`.\n\n> **Note:** Always check the **status code** before using the response data. A code other than 200 (for GET) or 201/200 (for POST) means something went wrong, and trying to read the body may raise an error.\n\n### Quick checklist before you send a request\n\n* Choose **GET** when you only need to read data.  \n* Choose **POST** when you need to send new data or perform an action that changes the server’s state.  \n* Use the library’s built‑in functions (`json=` in Python, `body:` in JavaScript) to handle JSON automatically.  \n* Look at the **status code** to confirm success.  \n\n> **Common mistake:** Putting a large amount of data in the URL of a GET request. URLs have length limits and expose sensitive information; use POST with a body instead.\n\nBy mastering these basics, you can let your programs talk to any web service—whether it’s a weather API, a social‑media platform, or a simple database you built yourself. The same pattern repeats: build a request, send it, check the response, and then use the data in your own code. Happy coding!",
+   "code": ""
+  },
+  {
+   "heading": "Calling a public API",
+   "body": "Imagine you have a library of books, and you want to know which titles are currently on loan. Instead of walking into the library and asking the librarian, you could send a short note asking for that information, and the librarian would reply with a list. In programming, an **API** (Application Programming Interface) works like that note‑passing system: you send a request over the internet, and the server sends back data, often in **JSON** format.\n\n### 1. Find an API you can use\n\nThe first step is to locate a public API that offers the data you need. Public APIs are listed on sites such as **public‑apis.io**, **RapidAPI**, or on the website of the service you are interested in (for example, the OpenWeatherMap API for weather data). Look for an API that is **free** or has a free tier, and that provides clear documentation.\n\n> **In daily life:** Think of an API as a vending machine. You insert a specific code (the request) and the machine gives you a snack (the data). You need to know the right code and how the machine works before you can get what you want.\n\n### 2. Read the documentation\n\nDocumentation is the instruction manual for the API. It tells you:\n\n* **Base URL** – the main web address you will contact, e.g. `https://api.openweathermap.org`.\n* **Endpoints** – specific paths that represent different actions, such as `/data/2.5/weather`.\n* **HTTP method** – usually `GET` for reading data or `POST` for sending data.\n* **Parameters** – extra pieces of information you must include, like an API key (`appid`) or a city name (`q=London`).\n* **Response format** – most APIs return JSON, which you will later parse.\n\nRead the examples carefully; they show the exact URL you need to build.\n\n> **Definition:** *Endpoint* – a specific URL path on an API that performs a particular function, such as returning weather data for a city.\n\n### 3. Build the request URL\n\nCombine the base URL, endpoint, and required parameters into a single string. For the weather example:\n\n```\nhttps://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY\n```\n\nReplace `YOUR_KEY` with the personal API key you obtained by signing up on the API’s website. The `q=London` part tells the server you want the weather for London.\n\n### 4. Send the request from your program\n\nIn most languages you can use a built‑in library to make HTTP requests. Here is a short Python example using the `requests` library:\n\n```python\nimport requests\n\nurl = \"https://api.openweathermap.org/data/2.5/weather\"\nparams = {\"q\": \"London\", \"appid\": \"YOUR_KEY\"}\n\nresponse = requests.get(url, params=params)   # send a GET request\n```\n\nThe `get` function automatically adds the parameters to the URL and contacts the server. The server’s reply is stored in `response`.\n\n> **Common mistake:** Forgetting to check the response status code. The server may return `404` (not found) or `401` (unauthorized) if the URL or key is wrong.\n\n### 5. Check that the request succeeded\n\nA successful request returns status code `200`. You can test it like this:\n\n```python\nif response.status_code == 200:\n    print(\"Success!\")\nelse:\n    print(\"Error:\", response.status_code)\n```\n\nIf the status is not `200`, read the documentation for that code; it often tells you what went wrong (e.g., missing parameter, exceeded rate limit).\n\n### 6. Parse the JSON response\n\nAssuming the request succeeded, the body of `response` contains JSON text. Most languages have a function to convert that text into a native data structure (dictionary, object, etc.). In Python:\n\n```python\ndata = response.json()   # turn JSON text into a Python dict\n```\n\nNow `data` is a dictionary you can explore:\n\n```python\ntemp_k = data[\"main\"][\"temp\"]          # temperature in Kelvin\ndescription = data[\"weather\"][0][\"description\"]\nprint(f\"The weather in London is {description} with a temperature of {temp_k} K.\")\n```\n\n### 7. Use the data in your program\n\nYou can now display the information, store it in a file, or combine it with other data. For example, you might convert Kelvin to Celsius:\n\n$$\nC = K - 273.15\n$$\n\n```python\ntemp_c = temp_k - 273.15\nprint(f\"{temp_c:.1f}°C\")\n```\n\n### 8. Handle possible errors gracefully\n\nNetwork problems, invalid JSON, or unexpected data structures can cause crashes. Wrap the parsing in a `try/except` block:\n\n```python\ntry:\n    data = response.json()\n    # proceed with using data\nexcept ValueError:\n    print(\"Received data is not valid JSON.\")\n```\n\n### 9. Respect the API’s rules\n\nPublic APIs often limit how many requests you can make per minute or per day. Check the **rate limit** section of the documentation and add delays (`time.sleep`) if needed. Also, include a meaningful **User‑Agent** header so the service knows who is using it.\n\n> **Remember:** Always read the API’s terms of service. Using an API without permission or exceeding limits can lead to your key being blocked.\n\nBy following these steps—finding an API, reading its docs, building the request, sending it, checking the response, parsing JSON, and handling errors—you can reliably pull live data from the internet and make your programs much more powerful and interactive.",
+   "code": ""
+  },
+  {
+   "heading": "Processing API data",
+   "body": "When you ask a web service for information, the service sends back a big chunk of data, usually in **JSON** format. That data is like a giant spreadsheet: many rows, each row has several columns. Before you can show the information to a user or use it in calculations, you often need to **filter** (pick only the rows you care about), **transform** (change the shape of each row), and **summarize** (combine many rows into a single result).  \n\nThink of it like sorting a pile of mail. First you discard the junk letters (**filter**), then you rewrite the addresses in a uniform style (**transform**), and finally you count how many letters go to each city (**summarize**). The same ideas apply to data that comes from an API.\n\n### 1. Getting the data into a list\n\nMost programming languages turn the raw JSON string into a native data structure, often a list (or array) of dictionaries (or objects). In Python, for example:\n\n```python\nimport json, requests\nresponse = requests.get('https://api.example.com/users')\ndata = json.loads(response.text)   # data is now a list of dicts\n```\n\nNow `data` might look like:\n\n```python\n[\n    {\"id\": 1, \"name\": \"Alice\", \"age\": 28, \"city\": \"London\"},\n    {\"id\": 2, \"name\": \"Bob\",   \"age\": 34, \"city\": \"Paris\"},\n    {\"id\": 3, \"name\": \"Cara\",  \"age\": 22, \"city\": \"London\"},\n    ...\n]\n```\n\n### 2. Filtering – keeping only what you need  \n\nFiltering means walking through the list and selecting the items that satisfy a condition. A common way is to use a **loop** (a repeated set of instructions) together with an **if‑statement** (a test that decides whether to keep an item).\n\n```python\nlondon_users = []\nfor user in data:\n    if user['city'] == 'London':\n        london_users.append(user)\n```\n\n> **Definition:** *Loop* – a programming construct that repeats a block of code many times, usually over each element of a collection.\n\nAfter the loop, `london_users` contains only the users who live in London.\n\n### 3. Transforming – changing each item  \n\nSometimes you need only part of each record, or you want to compute a new value. This is called **transformation**. You can create a new list where each element is the result of a small function.\n\n```python\ndef name_and_age(user):\n    return {\"name\": user['name'], \"age\": user['age']}\n\nsimple_list = []\nfor user in london_users:\n    simple_list.append(name_and_age(user))\n```\n\nNow `simple_list` looks like:\n\n```python\n[{\"name\": \"Alice\", \"age\": 28},\n {\"name\": \"Cara\",  \"age\": 22}]\n```\n\n> **In daily life:** Transforming data is like taking a full recipe and writing only the ingredient list you actually need for a quick grocery run.\n\n### 4. Summarizing – reducing many rows to one value  \n\nA **summary** combines many items into a single number or short report. A classic example is the average age of the filtered users.\n\n```python\ntotal_age = 0\ncount = 0\nfor user in london_users:\n    total_age += user['age']\n    count += 1\n\naverage_age = total_age / count\n```\n\nYou can also write the formula directly:\n\n$$\n\\text{average\\_age} = \\frac{\\sum_{i=1}^{n} \\text{age}_i}{n}\n$$\n\n> **Note:** The variable `count` must never be zero before you divide, otherwise you get a *division‑by‑zero* error.\n\n### 5. Putting it together in a function  \n\nTo keep your code tidy, wrap the whole process in a **function** (a reusable block of code that can be called with different inputs).\n\n```python\ndef average_age_in_city(data, city_name):\n    ages = []\n    for user in data:\n        if user['city'] == city_name:\n            ages.append(user['age'])\n    if not ages:                     # empty list → no users found\n        return None\n    return sum(ages) / len(ages)\n```\n\nNow you can ask for any city:\n\n```python\nprint(average_age_in_city(data, 'London'))   # → 25.0\nprint(average_age_in_city(data, 'Paris'))    # → 34.0\n```\n\n> **Common mistake:** Forgetting to handle the case where the filtered list is empty. The function above returns `None` instead of trying to divide by zero.\n\n### 6. Why this matters  \n\nFiltering, transforming, and summarizing let you turn a raw API response into exactly the information your application needs. Without these steps you would either show too much data (confusing users) or miss important insights (like the average age). By mastering loops, if‑statements, and functions, you gain a toolbox that works for any API, whether you are building a weather app, a movie recommendation system, or a simple student‑grade tracker.",
+   "code": ""
+  },
+  {
+   "heading": "Posting data to an API",
+   "body": "Imagine you have a robot that can talk to a web service.  \nWhen you want the robot to **add** something new – for example a new user profile – you send a *POST* request.  \nA POST request is like handing a filled‑out form to a clerk at a desk: you give the clerk (the server) the data, and the clerk decides what to do with it.\n\n### 1. The shape of the data – JSON  \n\nFirst, the data you send must be in a format the server understands.  \nThe most common format is **JSON** (JavaScript Object Notation).  \n\n> **Definition:** JSON is a text representation of data using *key‑value* pairs, e.g. `{\"name\":\"Alice\",\"age\":30}`.  \n\nThink of JSON as a simple table written in plain text: each *key* is a column name, each *value* is the entry for that column.\n\n### 2. Building the request  \n\nIn most programming languages you will use a library (for example `requests` in Python or `fetch` in JavaScript).  \nThe steps are:\n\n1. **Create a dictionary / object** with the data you want to send.  \n2. **Convert** that dictionary to a JSON string.  \n3. **Add headers** that tell the server “the body is JSON”.  \n4. **Send** the request to the correct URL using the POST method.\n\n```python\nimport json, requests\n\ndata = {\"title\":\"My first post\",\"body\":\"Hello world!\",\"userId\":1}\njson_body = json.dumps(data)                     # turn dict into JSON text\nheaders = {\"Content-Type\":\"application/json\"}   # tell server the format\nresponse = requests.post(\"https://jsonplaceholder.typicode.com/posts\",\n                         data=json_body, headers=headers)\n```\n\n### 3. Authentication basics  \n\nMany APIs do not let anyone add data; they require you to prove who you are.  \nThe simplest way is an **API key** – a secret string that you include in a header.\n\n```python\nheaders = {\n    \"Content-Type\":\"application/json\",\n    \"Authorization\":\"Bearer YOUR_API_KEY\"\n}\n```\n\n> **Note:** The word *Authorization* in the header is a convention; the exact header name may differ (some APIs use `X-API-Key`).  \n\nThink of the API key as a badge you wear when you go to a secure building. The guard (the server) checks the badge before letting you hand over the form.\n\n### 4. Interpreting the response  \n\nAfter the server receives your POST request, it sends back a **response**.  \nThe response has two important parts:\n\n* **Status code** – a three‑digit number that tells you whether the request succeeded.  \n  * `200` or `201` means success (201 is “created”).  \n  * `400` series means a client error (e.g., missing fields).  \n  * `500` series means a server error.\n\n* **Response body** – often JSON that contains the newly created object or an error message.\n\n```python\nif response.status_code == 201:\n    created = response.json()          # turn JSON text back into a dict\n    print(\"Created item with id:\", created[\"id\"])\nelse:\n    print(\"Error:\", response.status_code, response.text)\n```\n\n> **Common mistake:** Forgetting to set the `Content-Type: application/json` header. Without it, the server may treat the body as plain text and reject the request.\n\n### 5. Putting it all together  \n\n1. Prepare your data as a dictionary / object.  \n2. Convert it to a JSON string (`json.dumps` or `JSON.stringify`).  \n3. Build a header that includes at least `Content-Type: application/json` and, if required, an `Authorization` entry with your API key.  \n4. Send the request with the POST method to the endpoint URL.  \n5. Check the status code; if it indicates success, read the response body to confirm what the server stored.\n\n> **Remember:** A POST request is a *write* operation. Always verify that you have permission (via authentication) and that the server confirms the creation before assuming the data is saved.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What does JSON stand for and what is its main purpose in programming?",
+   "a": "JSON stands for JavaScript Object Notation. Its main purpose is to provide a lightweight, text‑based format for representing structured data (objects, arrays, numbers, strings, booleans, and null). It is easy for both humans to read and write, and for machines to parse and generate, making it ideal for data exchange between a client and a server."
+  },
+  {
+   "level": "Easy",
+   "q": "In Python, which standard library module is commonly used to read a JSON string into a dictionary?",
+   "a": "The `json` module is used. You call `json.loads(json_string)`, which parses the JSON‑formatted string and returns a Python dictionary (or list, depending on the JSON structure)."
+  },
+  {
+   "level": "Medium",
+   "q": "Show how to read a JSON file named `data.json` in JavaScript (Node.js) and log the value of the key `name` to the console.",
+   "a": "1. Import the built‑in `fs` (file system) module: `const fs = require('fs');`\n2. Read the file synchronously (or asynchronously). Synchronous example: `const raw = fs.readFileSync('data.json', 'utf8');`\n3. Parse the JSON string: `const obj = JSON.parse(raw);`\n4. Access the `name` property: `console.log(obj.name);`\nThe console will display the value stored under the `name` key in `data.json`."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between a GET request and a POST request when calling a public API, and give an example of when you would use each.",
+   "a": "A GET request asks the server to retrieve data. It includes any parameters in the URL query string and does not change server state. Example: requesting the current weather from `api.weather.com` with `GET /current?city=London`.\nA POST request sends data to the server, often to create or update a resource. The data is placed in the request body, and the server may change its state. Example: submitting a new user registration to `api.example.com/users` with `POST` and a JSON body containing the user's details. Use GET for reading data, POST for sending new data."
+  },
+  {
+   "level": "Hard",
+   "q": "Write a short Python script that (1) sends a GET request to the public API `https://api.agify.io?name=michael`, (2) parses the returned JSON to extract the predicted age, and (3) prints “The predicted age for Michael is X.” Replace X with the actual number.",
+   "a": "1. Import required modules:\n```python\nimport requests\nimport json\n```\n2. Send the GET request:\n```python\nresponse = requests.get('https://api.agify.io', params={'name': 'michael'})\n```\n3. Ensure the request succeeded:\n```python\nresponse.raise_for_status()   # raises an error if status != 200\n```\n4. Parse the JSON response:\n```python\ndata = response.json()   # returns a dict like {'name':'michael','age':69,'count':12345}\n```\n5. Extract the age:\n```python\nage = data['age']\n```\n6. Print the result:\n```python\nprint(f\"The predicted age for Michael is {age}.\")\n```\nRunning the script will output something like “The predicted age for Michael is 69.”"
+  },
+  {
+   "level": "Hard",
+   "q": "A web service expects a POST request with a JSON body containing `{\"title\":\"Hello\",\"body\":\"World\"}` and returns a JSON response with a field `id`. Using JavaScript (fetch API), write code that sends the POST request to `https://jsonplaceholder.typicode.com/posts`, parses the response, and logs “Created post with id: Y” where Y is the returned id.",
+   "a": "1. Use `fetch` with method `POST` and appropriate headers:\n```javascript\nfetch('https://jsonplaceholder.typicode.com/posts', {\nmethod: 'POST',\nheaders: {\n'Content-Type': 'application/json'\n},\nbody: JSON.stringify({title: 'Hello', body: 'World'})\n})\n```\n2. Handle the response:\n```javascript\n.then(response => {\nif (!response.ok) {\nthrow new Error('Network response was not ok');\n}\nreturn response.json();   // parse JSON body\n})\n```\n3. Extract the `id` and log the message:\n```javascript\n.then(data => {\nconsole.log(`Created post with id: ${data.id}`);\n})\n.catch(error => {\nconsole.error('Error:', error);\n});\n```\nThe code sends the required JSON, receives a response like `{..., \"id\":101}`, and logs “Created post with id: 101”."
+  }
+ ],
+ "recap": "This lesson introduced JSON as a lightweight text format for storing and exchanging structured data, showed how programs read (parse) and write (serialize) JSON, explained basic HTTP methods GET and POST, described how to call public APIs and process their JSON responses, and covered posting data to APIs using JSON.",
+ "key_terms": [
+  {
+   "term": "JSON",
+   "meaning": "A plain‑text format that represents data as objects (curly braces) and arrays (square brackets) with key‑value pairs."
+  },
+  {
+   "term": "Object",
+   "meaning": "A collection of unordered key‑value pairs written inside { }."
+  },
+  {
+   "term": "Array",
+   "meaning": "An ordered list of values written inside [ ]."
+  },
+  {
+   "term": "Parse",
+   "meaning": "Convert a JSON string into native data structures like dictionaries and lists."
+  },
+  {
+   "term": "Serialize",
+   "meaning": "Convert native data structures into a JSON string."
+  },
+  {
+   "term": "GET request",
+   "meaning": "An HTTP method used to retrieve data from a server without changing it."
+  },
+  {
+   "term": "POST request",
+   "meaning": "An HTTP method used to send new data to a server, often creating or updating resources."
+  },
+  {
+   "term": "API",
+   "meaning": "A set of rules that lets programs request and receive data or services over the internet, often returning JSON."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What characters surround a JSON object?",
+   "options": [
+    "[ ]",
+    "{ }",
+    "( )",
+    "< >"
+   ],
+   "answer": 1,
+   "why": "Objects are enclosed in curly braces { }."
+  },
+  {
+   "q": "Which HTTP method is used to retrieve data without modifying the server?",
+   "options": [
+    "POST",
+    "PUT",
+    "GET",
+    "DELETE"
+   ],
+   "answer": 2,
+   "why": "GET requests retrieve data without side effects."
+  },
+  {
+   "q": "What does parsing JSON do?",
+   "options": [
+    "Turns a JSON string into native data types",
+    "Compresses the JSON file",
+    "Encrypts the JSON data",
+    "Deletes the JSON file"
+   ],
+   "answer": 0,
+   "why": "Parsing converts the text into structures like dictionaries and lists."
+  },
+  {
+   "q": "Which Python module provides json.dumps()?",
+   "options": [
+    "os",
+    "json",
+    "sys",
+    "re"
+   ],
+   "answer": 1,
+   "why": "The json module contains dumps for serializing objects."
+  },
+  {
+   "q": "When sending data to an API, which format is most commonly required?",
+   "options": [
+    "XML",
+    "CSV",
+    "JSON",
+    "YAML"
+   ],
+   "answer": 2,
+   "why": "APIs typically expect data in JSON format."
+  },
+  {
+   "q": "What is the purpose of a POST request?",
+   "options": [
+    "To fetch data",
+    "To delete data",
+    "To add or update data on the server",
+    "To authenticate a user"
+   ],
+   "answer": 2,
+   "why": "POST sends new data to be created or updated on the server."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Define JSON",
+   "back": "A lightweight text format using objects and arrays to represent key‑value data."
+  },
+  {
+   "front": "What is an object in JSON?",
+   "back": "A set of unordered key‑value pairs enclosed in { }."
+  },
+  {
+   "front": "What is an array in JSON?",
+   "back": "An ordered list of values enclosed in [ ]."
+  },
+  {
+   "front": "What does 'parse' mean in the context of JSON?",
+   "back": "Reading a JSON string and converting it to native data structures."
+  },
+  {
+   "front": "What does 'serialize' mean in the context of JSON?",
+   "back": "Converting native data structures into a JSON string."
+  },
+  {
+   "front": "Name two common HTTP methods used with APIs.",
+   "back": "GET (retrieve data) and POST (send new data)."
+  },
+  {
+   "front": "What is an API?",
+   "back": "A set of rules that allows programs to request and receive data or services over the internet."
+  },
+  {
+   "front": "When would you use a POST request instead of GET?",
+   "back": "When you need to send new data to the server, such as creating a record."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l14-json-object-diagram",
+   "title": "Shows how keys and values are organized in a JSON object.",
+   "alt": "Shows how keys and values are organized in a JSON object.",
+   "priority": 9,
+   "picture_title": "JSON Object Diagram",
+   "kind": "illustration",
+   "subject": "A labelled diagram of a JSON object with nested objects and arrays, illustrating the hierarchy of key‑value pairs such as \"name\": \"Alice\" and \"subjects\": [\"Math\", \"Science\", \"Art\"].",
+   "layout": "A central box representing the whole JSON object, with arrows pointing to smaller boxes for each key; nested boxes show inner objects and arrays.",
+   "labels": [
+    "object",
+    "key",
+    "value",
+    "array",
+    "nested object"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l14-http-request-cycle",
+   "title": "Visualises the steps of a client sending an HTTP request and receiving a response.",
+   "alt": "Visualises the steps of a client sending an HTTP request and receiving a response.",
+   "priority": 8,
+   "picture_title": "HTTP Request Cycle",
+   "kind": "labelled diagram",
+   "subject": "A flow diagram that displays a client computer, the internet, and a server. Arrows indicate the request (GET/POST) traveling to the server and the response (status code, JSON data) returning to the client.",
+   "layout": "Three horizontal panels: client on the left, internet in the middle, server on the right; arrows between them labelled with request and response details.",
+   "labels": [
+    "client",
+    "request",
+    "server",
+    "response",
+    "status code"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l14-api-call-example",
+   "title": "Depicts a simple API request and JSON reply for a book‑loan service.",
+   "alt": "Depicts a simple API request and JSON reply for a book‑loan service.",
+   "priority": 7,
+   "picture_title": "API Call Example",
+   "kind": "illustration",
+   "subject": "A diagram showing a program sending a GET request to an API endpoint (e.g., /books/on‑loan) and receiving a JSON array of book titles, illustrating the request URL, headers, and the JSON payload returned.",
+   "layout": "Two boxes side by side: left box labelled 'Program' with an arrow labelled 'GET /books/on‑loan' pointing to a middle cloud labelled 'Internet', then an arrow back to the program labelled 'JSON response'.",
+   "labels": [
+    "GET request",
+    "endpoint",
+    "JSON response",
+    "book titles"
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "Loading JSON",
+   "steps": [
+    {
+     "label": "Read text",
+     "text": "Get the raw JSON string from a file or the web"
+    },
+    {
+     "label": "Parse",
+     "text": "Convert the string into native objects (dicts, lists)"
+    },
+    {
+     "label": "Use data",
+     "text": "Access values like age or subjects in the program"
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Serialising JSON",
+   "steps": [
+    {
+     "label": "Prepare data",
+     "text": "Create native structures such as dictionaries"
+    },
+    {
+     "label": "Convert",
+     "text": "Turn the structures into a JSON‑formatted string"
+    },
+    {
+     "label": "Store or send",
+     "text": "Write the string to a file or send it over the network"
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "compare",
+   "title": "GET vs POST",
+   "left": {
+    "name": "GET",
+    "points": [
+     "Requests data from the server",
+     "Parameters placed in the URL",
+     "Safe – does not change server state"
+    ]
+   },
+   "right": {
+    "name": "POST",
+    "points": [
+     "Sends new data to the server",
+     "Data placed in the request body",
+     "Used to create or update resources"
+    ]
+   },
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "API Request Parts",
+   "items": [
+    {
+     "name": "Endpoint",
+     "role": "URL of the service"
+    },
+    {
+     "name": "Method",
+     "role": "GET, POST, etc."
+    },
+    {
+     "name": "Headers",
+     "role": "Metadata such as content‑type"
+    },
+    {
+     "name": "Body",
+     "role": "Data sent with POST or PUT"
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Processing API Data",
+   "items": [
+    {
+     "value": "Filter",
+     "label": "Pick rows you need"
+    },
+    {
+     "value": "Transform",
+     "label": "Change shape of each row"
+    },
+    {
+     "value": "Summarize",
+     "label": "Combine rows into a result"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

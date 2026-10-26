@@ -665,32 +665,6 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
-### Lesson 9: Algorithms and Problem-Solving
-
-Save as:
-```
-programming-course-l09-problem-breakdown-puzzle.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A jigsaw puzzle with edge pieces labeled "Goal", "Inputs", "Outputs" and interior pieces labeled as sub‑tasks, arranged to suggest assembling the whole picture step by step.
-
-Layout: Puzzle outline in the centre, edge pieces around the border with text labels, interior pieces grouped by colour in the middle.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Goal"
-- "Inputs"
-- "Outputs"
-- "Sub‑task 1"
-- "Sub‑task 2"
-- "Sub‑task 3"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
 ### Lesson 10: Object-Oriented Programming
 
 Save as:
@@ -714,22 +688,50 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
+### Lesson 13: Advanced Programming Concepts
+
 Save as:
 ```
-programming-course-l10-class-as-blueprint.png
+programming-course-l13-recursive-dolls.png
 ```
 Prompt:
 ```
 Create a clear, accurate educational illustration for secondary-school students.
 
-Show: The diagram shows a simple architectural blueprint with labeled rooms, doors and windows, representing a class that describes the parts of an object before any house is constructed.
+Show: A series of Russian nesting dolls where each larger doll contains a smaller one, with the smallest doll highlighted as the base case. Arrows indicate the process of opening each doll to reach the next smaller one.
 
-Layout: Blueprint centered, with callout arrows pointing to labeled parts (rooms, doors, windows).
+Layout: Dolls arranged from largest on the left to smallest on the right, with arrows pointing from one doll to the next and a label on the smallest doll.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Rooms"
-- "Doors"
-- "Windows"
+- "largest doll"
+- "next doll"
+- "smaller doll"
+- "base case"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 14: Working with Data
+
+Save as:
+```
+programming-course-l14-json-object-diagram.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A labelled diagram of a JSON object with nested objects and arrays, illustrating the hierarchy of key‑value pairs such as "name": "Alice" and "subjects": ["Math", "Science", "Art"].
+
+Layout: A central box representing the whole JSON object, with arrows pointing to smaller boxes for each key; nested boxes show inner objects and arrays.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "object"
+- "key"
+- "value"
+- "array"
+- "nested object"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.

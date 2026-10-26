@@ -1,0 +1,390 @@
+{
+ "title": "File Handling",
+ "summary": "In this lesson students learn how to open, read, write, and update files using a programming language. They also explore handling different file formats such as text, CSV, and JSON.",
+ "objectives": [
+  "Read data from a text file",
+  "Write data to a new file",
+  "Update existing file contents",
+  "Handle CSV and JSON file formats",
+  "Choose the appropriate file mode for a given task"
+ ],
+ "prerequisites": "Students should already know basic input/output commands, variables, and control structures such as loops and conditionals.",
+ "why": [
+  "File handling lets programs store and retrieve information permanently, which is essential for everything from saving game scores to logging sensor data.",
+  "Understanding different file formats enables students to work with real‑world data sources, such as spreadsheets (CSV) or web APIs (JSON), expanding the usefulness of their programs.",
+  "Being able to read and write files is a core skill for any software developer, as most applications need to persist data between runs."
+ ],
+ "sections": [
+  {
+   "heading": "What is a File?",
+   "body": "A file is simply a collection of data that a computer stores on a storage device such as a hard‑drive, SSD, or USB stick.  \nThink of a file like a notebook you keep on a shelf. Each notebook holds a set of pages, and each page contains information you wrote down. In the same way, a computer file holds a sequence of bytes (tiny pieces of information) that together represent text, numbers, images, or any other kind of data.\n\n> **Definition:** *A file is a named container on a storage medium that holds a sequence of bytes.*\n\nWhy do programs need files?  \nWhen a program runs, it can only keep a limited amount of information in its memory (the part of the computer that is active while the program is running). As soon as the program stops, everything in memory disappears. If you want to keep data for later use—like a list of high scores in a game, a student's grades, or a photo you took—you must write that data to a file. Later, the program can open the same file, read the stored data back into memory, and continue working with it. This ability to **save** and **load** information makes programs useful beyond a single execution.\n\n> **Note:** *Files provide persistence, meaning the data survives after the program ends.*\n\nAn everyday comparison helps: imagine you are writing a diary. You could speak the thoughts out loud, but once you stop talking, the words are gone. By writing them in a diary (a physical file), you can read them again tomorrow, share them with friends, or add new entries later. The diary’s cover and page numbers give you a way to locate the exact place you want to read or write—this is similar to how a computer finds a file.\n\n### File paths – how the computer finds a file\n\nA file does not float freely; it lives inside a **directory** (also called a folder). Directories can contain other directories, forming a tree‑like structure. To tell the computer exactly which file you want, you give it a **file path**. A path is a string that lists the directories you must travel through, ending with the file’s name.\n\nFor example, on a Windows system the path  \n\n```\nC:\\Users\\Alice\\Documents\\report.txt\n```  \n\nmeans:\n\n* Start at the drive `C:`  \n* Go into the folder `Users` → `Alice` → `Documents`  \n* Open the file named `report.txt`\n\nOn macOS or Linux the same idea uses forward slashes:\n\n```\n/home/alice/documents/report.txt\n```\n\nThe first character (`/`) represents the **root directory**, the top of the hierarchy. Each subsequent name after a slash tells the system which sub‑folder to enter.\n\n> **In daily life:** *A file path is like a set of directions to a house: “Take Main Street, turn left on Oak Avenue, then the house is number 12.”*\n\n#### Absolute vs. relative paths\n\n*An **absolute path*** starts from the root directory and gives the complete route to the file, just like the examples above.  \n*A **relative path*** starts from the program’s current working directory (the folder the program is “standing in”) and describes how to get to the target file from there. If your program’s current folder is `C:\\Users\\Alice\\Documents`, the relative path to `report.txt` is simply `report.txt`. To reach a file in a sibling folder `C:\\Users\\Alice\\Pictures\\photo.jpg`, you could write `..\\Pictures\\photo.jpg` (`..` means “go up one level”).\n\nUnderstanding paths is essential because if you give a wrong path, the program cannot locate the file and will raise an error.\n\n> **Common mistake:** *Assuming a file is in the same folder as the program without checking the current working directory; always verify the path you use.*\n\n### Quick recap\n\n- A file stores data permanently, allowing programs to remember information between runs.  \n- Files live inside directories; the full address of a file is its **path**.  \n- Paths can be **absolute** (complete from the root) or **relative** (from the current folder).  \n\n> **Remember:** *When you open a file in code, you must supply the correct path; otherwise the computer will say “file not found.”*",
+   "code": ""
+  },
+  {
+   "heading": "Opening Files",
+   "body": "When a program needs to work with data that lives outside the program—like a list of scores saved on your computer—it must first **open** the file that holds that data.  \nThink of a file as a locked drawer in a filing cabinet. Before you can read a letter inside, you have to turn the drawer handle (open the file). The way you turn the handle tells the computer what you intend to do: just look inside, add new papers, or change what’s already there.\n\n### File modes – the “handle” you choose  \n\nWhen you open a file you must tell Python the **mode** you want. The mode is a short string placed after the file name:\n\n| Mode | Meaning | What happens to existing content |\n|------|---------|-----------------------------------|\n| `'r'` | **read** – you only want to look at the data | Nothing is changed; the file must already exist |\n| `'w'` | **write** – you want to create a new file or replace everything | If the file exists, its old contents are **deleted** before new data is written |\n| `'a'` | **append** – you want to add more data at the end | Existing content stays; new data is added after it |\n\n> **Definition:** *File mode* is a short code that tells Python how you plan to use the file (read, write, or append).\n\nWhy do we need different modes? Imagine you have a notebook. If you open it to **read**, you just flip pages. If you open it to **write**, you erase the old pages and start fresh. If you open it to **append**, you keep the old pages and add new ones at the back. The same idea applies to digital files.\n\n### Opening a file safely with a *context manager*\n\nIn Python the built‑in function `open()` creates a *file object* that you can then read from or write to. However, every opened file uses system resources (like a handle to the operating system). If you forget to close the file, those resources stay occupied and can cause errors later, especially when you try to open the same file again.\n\nA **context manager** is a special Python construct that automatically takes care of closing the file for you, even if something goes wrong inside the block of code. The syntax uses the `with` keyword:\n\n```python\nwith open('scores.txt', 'r') as file:\n    data = file.read()\n    # you can work with data here\n# when the block ends, file is automatically closed\n```\n\nInside the `with` block the variable `file` refers to the opened file. As soon as the block finishes—whether it ends normally or an exception is raised—Python calls `file.close()` behind the scenes.\n\n> **Note:** Using `with` is the recommended way to open files because it guarantees the file is closed properly, preventing resource leaks.\n\n### Step‑by‑step example\n\n1. **Choose the mode** – suppose you want to add a new score to an existing list. You need the *append* mode `'a'`.\n2. **Write the `with` statement** – tell Python which file and mode to use.  \n   ```python\n   with open('scores.txt', 'a') as f:\n   ```\n3. **Write the data** – use the file object’s `write()` method.  \n   ```python\n       f.write('Alice, 92\\n')\n   ```\n4. **Leave the block** – Python automatically closes `scores.txt`.\n\nIf you later want to read the whole file, you would switch to mode `'r'`:\n\n```python\nwith open('scores.txt', 'r') as f:\n    content = f.read()\nprint(content)\n```\n\n### Things to watch out for\n\n> **Common mistake:** Opening a file with `'w'` when you only meant to read. This erases the file’s contents before you even get a chance to look at them.\n\nAlways double‑check the mode you need. If you are unsure whether a file already exists, you can use `'a'` (append) because it creates the file if it does not exist, but does not delete existing data.\n\n### Quick recap\n\n- `'r'` = read only, file must exist.  \n- `'w'` = write only, old content is cleared.  \n- `'a'` = append, keep old content, add new at the end.  \n- Use `with open(..., mode) as var:` to open safely; Python closes the file automatically.\n\n> **Remember:** The `with` statement is your safety net. It lets you focus on what you want to do with the data, while Python handles the housekeeping of opening and closing the file.",
+   "code": ""
+  },
+  {
+   "heading": "Reading Files",
+   "body": "When you want a program to *use* information that already exists, the first step is to **read** that information from a file.  \nThink of a file as a notebook that lives on your computer. Opening the notebook lets you look at the pages, and reading the pages gives you the words inside. In programming, we do the same thing with code: we open the file, then tell the computer how to take the text out of it.\n\n### The basic idea\n\n1. **Open** the file in *read* mode – this tells Python we only want to look at the contents, not change them.  \n2. **Read** the data – either all at once or line by line.  \n3. **Close** the file – this frees the computer’s resources, just like putting the notebook back on the shelf.\n\nPython makes this easy with the built‑in function `open()`. The first argument is the file name (a string), and the second argument is the mode. The mode `'r'` stands for *read*.\n\n```python\nfile = open('notes.txt', 'r')\n```\n\n> **Definition:** *Mode* – a single character that tells Python how you intend to use the file (`'r'` for read, `'w'` for write, `'a'` for append, etc.).\n\n### Reading the whole file at once\n\nIf the file is small (a few kilobytes), you can pull all its text into one string with the method `read()`.\n\n```python\ncontent = file.read()\nprint(content)\n```\n\n`read()` returns everything from the current position (the start, after opening) to the end of the file. The result is a single string that may contain newline characters (`\\n`) where the original file had line breaks.\n\n**Why this is useful:**  \nSometimes you need the entire text to search for a pattern, count words, or pass it to another function that expects one big string.\n\n### Reading line by line\n\nLarge files (like logs or data dumps) can be too big to hold in memory all at once. In that case, read one line at a time. A *line* is the text up to the next newline character.\n\n```python\nfor line in file:\n    print(line.strip())\n```\n\nThe `for` loop automatically calls the file’s iterator, giving you each line sequentially. `strip()` removes the trailing newline so the output looks tidy.\n\n> **In daily life:** Imagine reading a newspaper article one paragraph at a time instead of memorising the whole article before you start discussing it.\n\n### Storing the lines in a list\n\nOften you want to keep the lines for later use. Python provides the method `readlines()` which returns a **list** – an ordered collection – where each element is one line from the file.\n\n```python\nfile.seek(0)               # go back to the start of the file\nlines = file.readlines()\nprint(lines[0])            # first line\nprint(lines[-1])           # last line\n```\n\n`seek(0)` moves the file pointer back to the beginning; otherwise `readlines()` would return an empty list because we have already read to the end.\n\nIf you prefer a more explicit loop, you can build the list yourself:\n\n```python\nfile.seek(0)\nmy_list = []\nfor line in file:\n    my_list.append(line.rstrip('\\n'))   # remove only the newline\n```\n\nNow `my_list` holds each line as a clean string, ready for further processing such as converting numbers, filtering, or writing to another file.\n\n### Using the `with` statement (recommended)\n\nManually calling `close()` works, but forgetting to do it can leave the file open and waste system resources. Python’s `with` statement handles opening **and** closing automatically.\n\n```python\nwith open('data.txt', 'r') as f:\n    data = f.read()          # whole file\n# file is automatically closed here\n```\n\nOr line‑by‑line:\n\n```python\nwith open('data.txt', 'r') as f:\n    for line in f:\n        process(line)       # replace with your own function\n```\n\n> **Remember:** Files opened with `with` are closed automatically, even if an error occurs inside the block.\n\n### Putting it together – a small example\n\nSuppose you have a file `scores.txt` that contains one student name and their score per line:\n\n```\nAlice,85\nBob,92\nCharlie,78\n```\n\nYou can read the file, split each line at the comma, and store the results in two parallel lists:\n\n```python\nnames = []\nscores = []\n\nwith open('scores.txt', 'r') as f:\n    for line in f:\n        name, score = line.strip().split(',')   # split returns a list of two strings\n        names.append(name)\n        scores.append(int(score))               # convert score to an integer\n```\n\nNow `names` is `['Alice', 'Bob', 'Charlie']` and `scores` is `[85, 92, 78]`. You can later compute the average with:\n\n$$\n\\text{average} = \\frac{\\sum \\text{scores}}{\\text{len(scores)}}\n$$\n\n> **Common mistake:** Forgetting to convert the score from a string to an integer; leaving it as `'85'` would cause arithmetic errors later.\n\n### Summary of steps\n\n1. Open the file with `open('file.txt', 'r')` or, better, `with open(...) as f:`.  \n2. Choose a reading method: `read()` for the whole file, `readlines()` for a list of lines, or iterate directly for line‑by‑line processing.  \n3. Store the data in variables (`content`, `lines`, `my_list`) or in custom structures (lists of names and scores).  \n4. Let Python close the file automatically (using `with`) or call `file.close()` yourself.\n\nBy mastering these patterns, you can bring any external text into your program, ready to be analysed, transformed, or displayed.",
+   "code": ""
+  },
+  {
+   "heading": "Writing Files",
+   "body": "When you *write* to a file you are telling the computer to store some characters on the disk so that they can be read later.  \nThink of a file like a notebook: you can open a fresh page (a new file), erase what is already written (overwrite), or add a new line at the bottom (append). In programming we use special commands to do exactly those actions.\n\nFirst, we need to **open** the file. The built‑in function `open()` takes two important arguments:\n\n```python\nopen('myfile.txt', mode)\n```\n\nThe *mode* tells Python how we intend to use the file:\n\n| mode | meaning |\n|------|---------|\n| `'w'` | write – create a new file or **overwrite** an existing one |\n| `'a'` | append – add data to the end of an existing file |\n| `'x'` | exclusive creation – fail if the file already exists |\n\n> **Definition:** *Mode* is a short string that tells the `open()` function what you want to do with the file (read, write, or append).\n\n### Writing a brand‑new file\n\n```python\n# Create a new text file and write a single line\nwith open('hello.txt', 'w') as f:\n    f.write('Hello, world!')\n```\n\nThe `with` statement is a *context manager* that automatically closes the file when the block ends, so you do not have to remember to call `f.close()`.  \nThe method `write()` takes a **string** (a sequence of characters) and stores it exactly as it appears.\n\nIf `hello.txt` did not exist before, Python creates it for you. If it already existed, the `'w'` mode **erases** everything that was there before writing the new text.\n\n> **Common mistake:** Forgetting that `'w'` removes old content. If you only want to add new information, use `'a'` instead of `'w'`.\n\n### Overwriting existing content\n\nSuppose `notes.txt` already contains several sentences and you want to replace everything with a fresh report:\n\n```python\nreport = \"\"\"Quarterly Report\nRevenue: $12,340\nExpenses: $8,210\nProfit: $4,130\"\"\"\n\nwith open('notes.txt', 'w') as f:\n    f.write(report)\n```\n\nThe triple quotes `\"\"\" … \"\"\"` let you write a *multiline* string without needing explicit newline characters. When the file is opened in `'w'` mode, the old data disappears the moment the file is opened, and the new string is written in its place.\n\n> **In daily life:** Overwriting a file is like wiping a whiteboard clean before drawing a new diagram. The old marks are gone, and only the new drawing remains.\n\n### Adding line breaks\n\nText files do not understand the concept of “lines” on their own; they just store a stream of characters. A *newline character* (`\\n`) tells a viewer where one line ends and the next begins.\n\n```python\nlines = ['First line', 'Second line', 'Third line']\nwith open('list.txt', 'w') as f:\n    for line in lines:\n        f.write(line + '\\n')   # add a newline after each line\n```\n\nAfter this code runs, `list.txt` will look like:\n\n```\nFirst line\nSecond line\nThird line\n```\n\nEach `\\n` moves the cursor to the start of the next line, just as pressing **Enter** on a keyboard does.\n\n> **Remember:** Always include `\\n` when you want separate lines; otherwise everything will appear on a single long line.\n\n### Writing and then reading back (quick test)\n\nA good habit is to verify that what you wrote is really there:\n\n```python\nwith open('test.txt', 'w') as f:\n    f.write('Line A\\nLine B\\n')\n\nwith open('test.txt', 'r') as f:   # 'r' = read mode\n    content = f.read()\nprint(content)\n```\n\nThe output will be:\n\n```\nLine A\nLine B\n```\n\nThe second `open()` uses mode `'r'` (read) to fetch the data we just stored. This round‑trip shows that the write operation succeeded.\n\n### Summary of the steps\n\n1. Choose the correct mode (`'w'` for new or overwrite, `'a'` for add).  \n2. Open the file with `with open(filename, mode) as f:`.  \n3. Use `f.write(string)` to store text.  \n4. Insert `\\n` wherever you need a new line.  \n5. The file is automatically closed when the `with` block ends.\n\nBy treating a file like a notebook—deciding whether to start fresh, erase old notes, or simply add a new entry—you can control exactly what data is saved on disk. This ability is fundamental for logging program activity, saving user preferences, or generating reports that other programs can later read.",
+   "code": ""
+  },
+  {
+   "heading": "Updating Files",
+   "body": "When you want to change only a part of a file, you cannot simply “jump” to the exact spot and type over the old text (unless the new text is exactly the same length).  \nInstead, the usual and safest way is to **read the whole file into memory**, modify the data you need, and then **write the entire content back**.  \n\nThink of a notebook you keep at home. If you discover a mistake on page 3, you don’t erase the ink; you copy every page into a new notebook, correct the mistake on the copied page 3, and then keep the new notebook as the official version. The old notebook is discarded. The same idea works for computer files.\n\n### Step‑by‑step process\n\n1. **Open the file for reading** – this lets the program load the current contents.  \n2. **Read the data** – you can read line by line, or read the whole file at once with `read()` or `readlines()`.  \n3. **Close the reading handle** – once the data is in memory you no longer need the file open for reading.  \n4. **Change the data in memory** – treat the data as ordinary Python objects (strings, lists, dictionaries, etc.) and edit the part you want.  \n5. **Open the same file for writing** – this creates a fresh, empty file (or overwrites the existing one).  \n6. **Write the updated data back** – use `write()` or `writelines()` to store the new content.  \n7. **Close the writing handle** – this finalises the changes on disk.\n\n### Example: fixing a typo in a text file\n\n```python\n# 1. Open for reading\nwith open('notes.txt', 'r') as f:\n    lines = f.readlines()          # 2. Read all lines into a list\n\n# 3. No need to close explicitly; `with` does it\n\n# 4. Change the line that contains the typo\nfor i, line in enumerate(lines):\n    if 'recieve' in line:          # the wrong spelling\n        lines[i] = line.replace('recieve', 'receive')\n\n# 5. Open for writing (this clears the old file)\nwith open('notes.txt', 'w') as f:\n    f.writelines(lines)            # 6. Write the corrected list back\n# 7. `with` closes the file automatically\n```\n\n> **Definition:** *Updating a file* means reading its current contents, altering the data in memory, and writing the whole result back to the same file.\n\n### Why we rewrite the whole file\n\nA file on disk is a sequence of bytes. If you replace a short piece with a longer one, the bytes after that piece must shift to make room. Doing this byte‑by‑byte is complex and error‑prone. By rewriting, the operating system handles all the shifting for you, guaranteeing a consistent file.\n\n### Updating a CSV row\n\nCSV (comma‑separated values) files are often used for tables. Suppose we have `students.csv` and want to change the grade of the student with ID 42.\n\n```python\nimport csv\n\n# Read all rows\nwith open('students.csv', newline='') as f:\n    rows = list(csv.reader(f))\n\n# Modify the target row (assume ID is in column 0, grade in column 2)\nfor row in rows:\n    if row[0] == '42':\n        row[2] = 'A'               # new grade\n\n# Write back\nwith open('students.csv', 'w', newline='') as f:\n    writer = csv.writer(f)\n    writer.writerows(rows)\n```\n\n> **In daily life:** Updating a file is like editing a printed report: you photocopy the whole document, make the correction on the copy, then replace the original with the corrected version.\n\n### A small gotcha\n\nWhen you open a file with mode `'w'`, the file is **truncated** (emptied) immediately. If you accidentally open it before you have finished reading, you will lose the original data.\n\n> **Common mistake:** Opening the same file for writing *before* you have finished reading its contents. Always read first, close (or exit the `with` block), then open for writing.\n\n### Quick formula for the workflow\n\n$$\n\\text{Updated file} = \\text{write}\\bigl(\\text{modify}(\\text{read}(\\text{original file}))\\bigr)\n$$\n\n> **Remember:** Always keep a backup of important files before you start an update operation, especially when the file is large or critical.\n\nBy following these steps, you can safely change any part of a file—whether it’s a single word in a text file, a row in a CSV table, or a value inside a JSON object. The key idea is: **read → change in memory → write back**. This pattern works in virtually every programming language and keeps your data reliable.",
+   "code": ""
+  },
+  {
+   "heading": "Working with CSV Files",
+   "body": "Imagine you have a table of data – for example a list of students, their ages and their favourite colour.  \nIf you open that table in a spreadsheet program you will see rows and columns.  \nWhen we save the same table as a plain text file, each row becomes one line of text and the values in a row are separated by a special character, most often a **comma**.  \nThat plain‑text format is called **CSV**, which stands for *Comma‑Separated Values*.\n\n> **Definition:** CSV is a simple text format where each line represents a record and fields inside the record are separated by commas (or another delimiter).\n\nWhy is CSV useful?  \nBecause it is human‑readable (you can open it in any text editor) and it can be read by almost every programming language, database, or spreadsheet program.  \nThink of CSV like a grocery list written on a piece of paper: each item is on its own line, and the details of the item (name, quantity, price) are separated by commas. Anyone can understand the list without needing a special app.\n\n### Reading a CSV file in Python\n\nPython provides a built‑in module called `csv` that knows how to split each line at the commas and give you the fields as separate strings.\n\n```python\nimport csv\n\nwith open('students.csv', newline='') as file:   # open the file for reading\n    reader = csv.reader(file)                    # create a CSV reader object\n    for row in reader:                           # iterate over each row\n        print(row)                               # row is a list like ['Alice', '14', 'Blue']\n```\n\n* `open` opens the file; the argument `newline=''` tells Python not to treat line‑breaks specially, which lets the `csv` module handle them correctly.  \n* `csv.reader` returns an **iterator** – a special object you can loop over, and each iteration gives you a list of strings representing one line of the file.\n\nIf the first line of the file contains column names, you can skip it or use `csv.DictReader` to get a dictionary for each row:\n\n```python\nwith open('students.csv', newline='') as file:\n    reader = csv.DictReader(file)               # keys come from the first line\n    for row in reader:\n        print(row['name'], row['age'], row['colour'])\n```\n\nNow `row` behaves like a small map: you can refer to fields by their header names instead of by numeric index.\n\n### Writing a CSV file\n\nCreating a CSV file is just the reverse process. Use `csv.writer` (or `csv.DictWriter` for dictionaries).\n\n```python\nimport csv\n\ndata = [\n    ['Bob', 15, 'Green'],\n    ['Carol', 13, 'Red'],\n    ['Dave', 16, 'Yellow']\n]\n\nwith open('new_students.csv', 'w', newline='') as file:   # open for writing\n    writer = csv.writer(file)\n    writer.writerow(['name', 'age', 'colour'])           # optional header\n    writer.writerows(data)                               # write all rows at once\n```\n\n* `writer.writerow` writes a single list as one line.  \n* `writer.writerows` takes an iterable of lists and writes each one.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to open the file with `newline=''`.  \nIf you omit this argument, Python may translate line endings on some operating systems, causing extra blank lines to appear when you read the file later.\n\n> **Note:** CSV files can use other delimiters such as tabs (`\\t`) or semicolons (`;`).  \nWhen the data itself contains commas (e.g., a field like “New York, NY”), the `csv` module automatically encloses the field in double quotes. You can control this behaviour with the `quotechar` and `quoting` parameters.\n\nAnother subtle issue is **encoding**. By default `open` uses the system’s default encoding, which may be UTF‑8 on many machines but could be something else elsewhere. If your data contains non‑ASCII characters (like “José”), specify the encoding explicitly:\n\n```python\nwith open('students.csv', newline='', encoding='utf-8') as file:\n    ...\n```\n\n### Quick checklist\n\n> **Remember:**  \n> 1. Always open CSV files with `newline=''`.  \n> 2. Use `csv.reader` for simple lists, `csv.DictReader` when you have headers.  \n> 3. Choose the correct delimiter if your file is not comma‑separated.  \n> 4. Specify `encoding='utf-8'` when you expect special characters.\n\nWith these steps you can safely move tabular data between programs, store results of a program, or load configuration tables for later processing. CSV may look tiny, but it is a powerful bridge between humans and computers.",
+   "code": ""
+  },
+  {
+   "heading": "Working with JSON Files",
+   "body": "Imagine you have a notebook where each page contains a list of facts about a person: name, age, favorite colors, and maybe a list of their pets.  \nIf you wanted to share that notebook with a friend on the internet, you would need a format that both computers can read and write easily. **JSON** (JavaScript Object Notation) is exactly that format – a simple, text‑based way to represent data structures such as numbers, strings, lists, and dictionaries.\n\n> **Definition:** JSON is a lightweight data‑interchange format that uses human‑readable text to represent objects (key‑value pairs) and arrays (ordered lists).\n\n### The basic building blocks\n\n1. **Object** – a collection of *key*: *value* pairs, surrounded by curly braces `{}`.  \n   Example: `{ \"name\": \"Ana\", \"age\": 17 }`  \n   Think of an object like a real‑world dictionary where each word (the key) points to a definition (the value).\n\n2. **Array** – an ordered list of values, surrounded by square brackets `[]`.  \n   Example: `[ \"red\", \"green\", \"blue\" ]`  \n   This is similar to a shopping list: the items have a specific order, but no names attached to them.\n\n3. **Value** – can be a string (text in double quotes), a number, `true`/`false`, `null`, another object, or another array.  \n\nA complete JSON document can be a single object or a single array at the top level. For instance, a file that stores many students might look like this:\n\n```json\n[\n    { \"name\": \"Ana\", \"age\": 17, \"subjects\": [\"Math\", \"Science\"] },\n    { \"name\": \"Ben\", \"age\": 18, \"subjects\": [\"History\", \"Art\"] }\n]\n```\n\n### Why JSON is useful\n\n- **Human readable** – you can open the file in any text editor and understand the data.\n- **Language independent** – almost every programming language (Python, Java, JavaScript, C#, etc.) has built‑in tools to convert JSON to native data structures and back.\n- **Compact** – compared with XML, JSON uses fewer characters, which saves bandwidth when sending data over the internet.\n\n> **In daily life:** Think of JSON like a recipe card. The card lists ingredients (keys) and their amounts (values). Anyone who reads the card can recreate the dish, just as a program can recreate the data structure from the JSON text.\n\n### Parsing JSON into objects (Python example)\n\nParsing means turning the text you read from a file into Python objects you can work with.\n\n```python\nimport json          # the module that knows how to handle JSON\n\n# 1. Open the file for reading\nwith open('students.json', 'r', encoding='utf-8') as f:\n    text = f.read()          # read the whole file as a string\n\n# 2. Convert the JSON string into Python data\nstudents = json.loads(text) # now `students` is a list of dictionaries\n```\n\nAfter these two steps, `students` behaves like any normal Python list:\n\n```python\nprint(students[0]['name'])   # prints: Ana\nprint(students[1]['subjects'][1])  # prints: Art\n```\n\nThe function `json.loads` (load **s**tring) does the heavy lifting: it scans the text, recognises the curly braces, brackets, commas, and quotes, and builds the corresponding Python objects.\n\n> **Common mistake:** Forgetting to open the file with the correct encoding (usually UTF‑8). If the file contains non‑ASCII characters (like “é” or “ß”), reading it with the default encoding can raise an error or corrupt the data.\n\n### Serializing objects back to JSON\n\nWhen you have modified the data in your program and want to save it, you *serialize* – turn the Python objects back into a JSON string.\n\n```python\n# Suppose we add a new student\nstudents.append({\n    \"name\": \"Cara\",\n    \"age\": 17,\n    \"subjects\": [\"Physics\", \"Chemistry\"]\n})\n\n# Convert the Python list back to a JSON formatted string\njson_text = json.dumps(students, indent=4)   # `indent` makes it pretty\n\n# Write the string to a file\nwith open('students.json', 'w', encoding='utf-8') as f:\n    f.write(json_text)\n```\n\nThe function `json.dumps` (dump **s**tring) walks through the Python objects, writes opening `{` or `[`, adds commas between items, and encloses strings in double quotes, producing a valid JSON document.\n\n### Small checklist for safe JSON handling\n\n1. **Read** – use `open(..., 'r', encoding='utf-8')` and `json.loads`.\n2. **Modify** – work with the resulting Python objects (lists, dicts).\n3. **Write** – use `json.dumps(..., indent=4)` for readability, then `open(..., 'w', encoding='utf-8')` and `write`.\n4. **Validate** – if you receive JSON from an external source, wrap `json.loads` in a `try/except` block to catch malformed data.\n\n> **Remember:** JSON is just text. As long as the text follows the correct syntax (curly braces, commas, quotes), any language can turn it into usable data structures and back again. This makes it the go‑to format for saving settings, exchanging information between web services, and persisting simple databases.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a file in the context of programming, and why do we need to open a file before reading or writing?",
+   "a": "A file is a collection of data stored on a storage device, such as a text document or a spreadsheet. In programming, we treat a file as a sequence of bytes that we can read from or write to. Before we can access its contents, we must open the file because opening creates a connection (a file object) between the program and the file on disk, allowing the operating system to manage reading, writing, and positioning within the file."
+  },
+  {
+   "level": "Easy",
+   "q": "Write a short code snippet in Python that opens a text file called \"notes.txt\" for reading and then closes it.",
+   "a": "\n1. Use the built‑in `open` function with mode `'r'` (read).\n```python\nfile = open('notes.txt', 'r')\n```\n2. After we are done (here we do nothing else), close the file to free resources.\n```python\nfile.close()\n```\nThe complete snippet is:\n```python\nfile = open('notes.txt', 'r')\nfile.close()\n```"
+  },
+  {
+   "level": "Medium",
+   "q": "Explain the difference between reading a file line‑by‑line using a `for` loop and reading the whole file at once with `read()`. When might each method be preferred?",
+   "a": "\n1. `read()` reads the entire contents of the file into a single string.\n- Simple when the file is small and you need all data at once.\n- Consumes memory proportional to file size; not good for very large files.\n2. Iterating with a `for` loop (`for line in file:`) reads one line at a time.\n- Uses little memory because only one line is held in memory at a time.\n- Ideal for large files or when you want to process each line sequentially (e.g., counting words).\nPrefer `read()` for small configuration files, CSVs that fit in memory, or when you need random access after loading. Prefer line‑by‑line for log files, big data sets, or streaming data."
+  },
+  {
+   "level": "Medium",
+   "q": "You have a CSV file \"scores.csv\" with two columns: `name,score`. Write Python code that reads the file and prints the name of the student with the highest score.",
+   "a": "\n1. Import the `csv` module.\n```python\nimport csv\n```\n2. Open the file for reading.\n```python\nwith open('scores.csv', 'r', newline='') as f:\nreader = csv.reader(f)\n```\n3. Skip the header row (optional if present).\n```python\nnext(reader)  # assumes first row is header\n```\n4. Initialise variables to track the best student.\n```python\nbest_name = None\nbest_score = -float('inf')\n```\n5. Loop through each row, compare scores.\n```python\nfor row in reader:\nname, score_str = row\nscore = int(score_str)          # convert from string to int\nif score > best_score:\nbest_score = score\nbest_name = name\n```\n6. After the loop, print the result.\n```python\nprint(f'Highest scorer: {best_name} with {best_score}')\n```\nThe full code:\n```python\nimport csv\nwith open('scores.csv', 'r', newline='') as f:\nreader = csv.reader(f)\nnext(reader)               # skip header\nbest_name = None\nbest_score = -float('inf')\nfor name, score_str in reader:\nscore = int(score_str)\nif score > best_score:\nbest_score = score\nbest_name = name\nprint(f'Highest scorer: {best_name} with {best_score}')\n```"
+  },
+  {
+   "level": "Hard",
+   "q": "Describe how you would update a JSON file \"config.json\" to change the value of the key `\"timeout\"` to `30` without losing any other data. Provide a step‑by‑step Python solution.",
+   "a": "\n1. Import the `json` module.\n```python\nimport json\n```\n2. Open the JSON file for reading and load its contents into a Python dictionary.\n```python\nwith open('config.json', 'r') as f:\ndata = json.load(f)   # data is now a dict\n```\n3. Modify the desired key.\n```python\ndata['timeout'] = 30\n```\n4. Open the same file for writing (this overwrites the file) and dump the updated dictionary back to JSON format.\n```python\nwith open('config.json', 'w') as f:\njson.dump(data, f, indent=4)   # indent makes the file readable\n```\n5. The file now contains the same structure as before, but the `\"timeout\"` value is updated to `30`. No other keys or values are changed because we only altered the dictionary entry for `\"timeout\"`."
+  },
+  {
+   "level": "Hard",
+   "q": "A large log file \"access.log\" is 2 GB in size. You need to count how many lines contain the word `\"ERROR\"` without loading the whole file into memory. Write an efficient Python function to do this and explain why it works for large files.",
+   "a": "\n1. Define the function signature.\n```python\ndef count_error_lines(filepath):\n```\n2. Initialise a counter.\n```python\ncount = 0\n```\n3. Open the file using a `with` statement and iterate line‑by‑line.\n```python\nwith open(filepath, 'r') as f:\nfor line in f:\nif 'ERROR' in line:\ncount += 1\n```\n4. Return the final count.\n```python\nreturn count\n```\n5. Full function:\n```python\ndef count_error_lines(filepath):\ncount = 0\nwith open(filepath, 'r') as f:\nfor line in f:\nif 'ERROR' in line:\ncount += 1\nreturn count\n```\n**Why it works:**\n- The `for line in f` construct reads one line at a time from the file, keeping only that line in memory.\n- Even for a 2 GB file, memory usage stays low (roughly the size of the longest line).\n- The function processes the file sequentially, which is fast because it avoids random‑access seeks.\n- No intermediate data structures (like lists) are created, so the algorithm scales to very large files."
+  }
+ ],
+ "recap": "This lesson introduced files as named containers that store data on a storage device. It explained how to open files in different modes for reading, writing, appending, or exclusive creation, and covered the basic steps for reading, writing, and updating file contents. The lesson also described CSV and JSON formats, showing how they structure tabular and hierarchical data for easy sharing.",
+ "key_terms": [
+  {
+   "term": "File",
+   "meaning": "A named container on a storage medium that holds a sequence of bytes."
+  },
+  {
+   "term": "File mode",
+   "meaning": "A short string (e.g., 'r', 'w', 'a') that tells the open() function how the file will be used."
+  },
+  {
+   "term": "Read mode ('r')",
+   "meaning": "Opens an existing file for reading without changing its contents."
+  },
+  {
+   "term": "Write mode ('w')",
+   "meaning": "Creates a new file or overwrites an existing one."
+  },
+  {
+   "term": "Append mode ('a')",
+   "meaning": "Opens a file and adds new data to the end without removing existing content."
+  },
+  {
+   "term": "CSV",
+   "meaning": "Comma‑Separated Values, a plain‑text format where each line is a record and fields are separated by commas."
+  },
+  {
+   "term": "JSON",
+   "meaning": "JavaScript Object Notation, a text format that represents data as objects (key‑value pairs) and arrays."
+  },
+  {
+   "term": "Update file",
+   "meaning": "The process of reading a file’s content, modifying it in memory, then writing the whole content back."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What does the file mode 'r' do?",
+   "options": [
+    "Creates a new file",
+    "Opens a file for reading",
+    "Appends data to a file",
+    "Deletes the file"
+   ],
+   "answer": 1,
+   "why": "'r' opens an existing file for reading only."
+  },
+  {
+   "q": "Which mode should you use to add data to the end of an existing file?",
+   "options": [
+    "'w'",
+    "'a'",
+    "'x'",
+    "'r'"
+   ],
+   "answer": 1,
+   "why": "'a' stands for append, which adds data without erasing existing content."
+  },
+  {
+   "q": "What does CSV stand for?",
+   "options": [
+    "Comma‑Separated Values",
+    "Computer System Variables",
+    "Common Structured Variables",
+    "Comma‑Simple Vector"
+   ],
+   "answer": 0,
+   "why": "CSV is the abbreviation for Comma‑Separated Values."
+  },
+  {
+   "q": "In JSON, what character encloses an object?",
+   "options": [
+    "[]",
+    "()",
+    "{}",
+    "<>"
+   ],
+   "answer": 2,
+   "why": "Objects in JSON are enclosed in curly braces {}."
+  },
+  {
+   "q": "When updating a file, why is it common to read the whole file first?",
+   "options": [
+    "To delete the file",
+    "To ensure the file is locked",
+    "To modify data in memory before rewriting",
+    "To change the file name"
+   ],
+   "answer": 2,
+   "why": "Reading the whole file lets you modify the data in memory and then write the updated content back."
+  },
+  {
+   "q": "Which file mode will fail if the file already exists?",
+   "options": [
+    "'w'",
+    "'a'",
+    "'x'",
+    "'r'"
+   ],
+   "answer": 2,
+   "why": "'x' is exclusive creation and raises an error if the file exists."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "What is a file?",
+   "back": "A named container on a storage medium that holds a sequence of bytes."
+  },
+  {
+   "front": "What does the file mode 'w' do?",
+   "back": "Creates a new file or overwrites an existing one."
+  },
+  {
+   "front": "How are records separated in a CSV file?",
+   "back": "Each record is on a new line, and fields within a record are separated by commas."
+  },
+  {
+   "front": "What is the purpose of JSON?",
+   "back": "To represent data structures (objects and arrays) in a lightweight, human‑readable text format."
+  },
+  {
+   "front": "What does the 'a' mode allow?",
+   "back": "It opens a file for appending, adding new data to the end without removing existing content."
+  },
+  {
+   "front": "How do you safely update part of a file?",
+   "back": "Read the whole file into memory, modify the needed parts, then write the entire content back."
+  },
+  {
+   "front": "What character starts a JSON array?",
+   "back": "The square bracket '[' starts a JSON array."
+  },
+  {
+   "front": "Why use CSV files?",
+   "back": "Because they are simple, human‑readable, and can be imported by many programs like spreadsheets and databases."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l12-file-drawer-analogy",
+   "title": "A filing cabinet drawer representing an opened file",
+   "alt": "A filing cabinet drawer representing an opened file",
+   "priority": 7,
+   "picture_title": "File Drawer Analogy",
+   "kind": "illustration",
+   "subject": "Shows a filing cabinet with a drawer labeled as a file, the handle turned to indicate opening, and a document inside representing file contents.",
+   "layout": "Drawer in centre, label on drawer, arrow from handle to open position, document icon inside drawer",
+   "labels": [
+    "File",
+    "Open",
+    "Handle",
+    "Contents"
+   ],
+   "after": 1
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l12-csv-table-example",
+   "title": "A simple spreadsheet displayed as comma‑separated text",
+   "alt": "A simple spreadsheet displayed as comma‑separated text",
+   "priority": 6,
+   "picture_title": "CSV Table Example",
+   "kind": "illustration",
+   "subject": "Depicts a small table of student data (name, age, colour) with rows shown as lines of text where values are separated by commas.",
+   "layout": "Two columns: left shows spreadsheet grid, right shows equivalent CSV lines, arrows linking rows to text lines",
+   "labels": [
+    "Name",
+    "Age",
+    "Colour",
+    "CSV line"
+   ],
+   "after": 5
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l12-json-data-structure",
+   "title": "A JSON object representing a person’s details",
+   "alt": "A JSON object representing a person’s details",
+   "priority": 5,
+   "picture_title": "JSON Data Structure",
+   "kind": "illustration",
+   "subject": "Illustrates a JSON snippet with keys like \"name\", \"age\", \"colors\", and a nested list of pets, displayed as formatted text.",
+   "layout": "Centered block of formatted JSON text with brackets and commas highlighted, small icons for person and pet beside it",
+   "labels": [
+    "name",
+    "age",
+    "colors",
+    "pets"
+   ],
+   "after": 6
+  },
+  {
+   "type": "steps",
+   "title": "Opening a file",
+   "steps": [
+    {
+     "label": "Choose mode",
+     "text": "Decide if you will read, write or append."
+    },
+    {
+     "label": "Call open()",
+     "text": "Use open('filename', mode) to get a file handle."
+    },
+    {
+     "label": "Work with file",
+     "text": "Read data, write data, or both."
+    },
+    {
+     "label": "Close file",
+     "text": "Call close() to free resources."
+    }
+   ],
+   "loop": false,
+   "after": 1
+  },
+  {
+   "type": "compare",
+   "title": "File modes",
+   "left": {
+    "name": "Read ('r')",
+    "points": [
+     "Opens existing file",
+     "Cannot modify content",
+     "Error if file missing"
+    ]
+   },
+   "right": {
+    "name": "Write ('w') / Append ('a')",
+    "points": [
+     "Creates new file or overwrites ('w')",
+     "Adds to end without erasing ('a')",
+     "Can create file if it does not exist"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "facts",
+   "title": "Key definitions",
+   "items": [
+    {
+     "value": "File",
+     "label": "A named container on storage holding a sequence of bytes"
+    },
+    {
+     "value": "CSV",
+     "label": "Comma‑Separated Values, plain‑text table format"
+    },
+    {
+     "value": "JSON",
+     "label": "JavaScript Object Notation, text format for objects and arrays"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Reading a file",
+   "steps": [
+    {
+     "label": "Open",
+     "text": "open('data.txt', 'r')"
+    },
+    {
+     "label": "Read",
+     "text": "use read(), readline() or readlines()"
+    },
+    {
+     "label": "Close",
+     "text": "file.close()"
+    }
+   ],
+   "loop": false,
+   "after": 2
+  },
+  {
+   "type": "steps",
+   "title": "Writing to a file",
+   "steps": [
+    {
+     "label": "Open",
+     "text": "open('out.txt', 'w') or 'a'"
+    },
+    {
+     "label": "Write",
+     "text": "use write() or writelines()"
+    },
+    {
+     "label": "Close",
+     "text": "file.close()"
+    }
+   ],
+   "loop": false,
+   "after": 3
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

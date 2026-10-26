@@ -1,0 +1,368 @@
+{
+ "title": "Error Handling and Debugging",
+ "summary": "This lesson introduces the three main types of programming errors and shows how to find and fix them. Students will also learn basic debugging tools and how to use exceptions to handle unexpected situations.",
+ "objectives": [
+  "Identify syntax, runtime, and logical errors in code",
+  "Apply basic debugging techniques such as print statements and step‑through debugging",
+  "Write simple try‑catch blocks to handle exceptions",
+  "Explain why handling errors improves program reliability"
+ ],
+ "prerequisites": "Students should already know basic programming concepts such as variables, control structures, and functions.",
+ "why": [
+  "In real life, software that crashes or gives wrong results can cause lost data, wasted time, or even safety hazards. Being able to spot and fix errors keeps programs reliable and trustworthy.",
+  "Debugging and exception handling are essential skills for any developer, whether building a small script or a large commercial system. They help you diagnose problems quickly and make your code robust against unexpected inputs."
+ ],
+ "sections": [
+  {
+   "heading": "What Are Errors?",
+   "body": "When we write a program we are giving the computer a set of instructions, just like a recipe tells a cook what to do.  \nIf any part of that recipe is wrong, the cook will either stop, make a mistake, or end up with a dish that doesn’t taste right.  \nThe same thing happens with code: the computer can encounter three main kinds of problems, called **errors**. Understanding the three types helps us know why a program stops, why it produces strange results, and how we can fix it.\n\n> **Definition:** **Syntax errors** are mistakes that break the rules of the programming language, much like a grammar mistake in a sentence.  \n> The computer reads the code line by line. If it sees something that does not follow the language’s “grammar”, it cannot even start to run the program. The interpreter or compiler will stop and show a message such as “unexpected token” or “missing colon”.\n\nThink of syntax errors like trying to write a letter with the wrong punctuation: “Dear John I hope you are well” is hard to read because the commas and periods are missing. The reader (or the computer) cannot understand where one part ends and the next begins, so they ask you to fix it before continuing.\n\n> **In daily life:** **Runtime errors** happen while the program is already running, similar to a car breaking down after you have already started driving.  \n> These errors occur when the code is syntactically correct, but something goes wrong during execution. Common examples are trying to divide by zero, accessing an array element that does not exist, or opening a file that isn’t there. The program may crash or stop with a message like “ZeroDivisionError” or “FileNotFoundError”.\n\nImagine you are pouring water into a glass that is already full. The glass itself is fine (the syntax is fine), but the act of adding more water causes it to overflow. The overflow is the runtime error – it only appears when you actually perform the action.\n\n> **Common mistake:** **Logical errors** are the hardest to spot because the program runs without crashing, yet it gives the wrong answer.  \n> A logical error means the code does what it is told, but the instructions themselves are wrong. For example, if you write a function that should calculate the average of three numbers but you accidentally add them together without dividing by three, the program will finish cleanly but the result will be too large.\n\nThis is like following a recipe that tells you to bake a cake at 500 °C instead of 180 °C. The oven will heat up, the batter will bake, but the cake will be burnt. The steps were followed correctly; the problem is the **logic** behind the steps.\n\n---\n\n### How the three errors differ\n\n| Error type | When it appears | What stops it | Typical message |\n|------------|----------------|---------------|-----------------|\n| Syntax     | Before the program starts | The compiler/interpreter refuses to translate the code | “SyntaxError: unexpected ‘)’” |\n| Runtime    | While the program is running | An exception is raised during execution | “IndexError: list index out of range” |\n| Logical    | After the program finishes | No automatic stop; the output is simply wrong | No error message – you must check the result |\n\nUnderstanding these categories lets us choose the right tool for fixing them.  \n- **Syntax errors** are caught by the language itself; just read the error message and correct the spelling of keywords, missing commas, or mismatched parentheses.  \n- **Runtime errors** need us to think about the data we are handling at that moment; adding checks like “if divisor != 0” can prevent the crash.  \n- **Logical errors** require us to step through the program mentally or with a debugger, comparing each step to the intended algorithm.\n\n---\n\n### A tiny example\n\n```python\ndef average(a, b, c):\n    total = a + b + c          # correct addition\n    return total / 3           # correct division\n```\n\nIf we forget the division:\n\n```python\ndef average(a, b, c):\n    total = a + b + c\n    return total               # <-- logical error: returns sum, not average\n```\n\nThe code runs, no syntax or runtime error occurs, but the answer is wrong. Spotting this requires us to **remember** what the function is supposed to do.\n\n> **Remember:** Distinguishing between syntax, runtime, and logical errors is the first step toward effective debugging. Each type tells us *where* to look: the code’s grammar, the data during execution, or the algorithm’s intention. By treating them separately, we can fix problems faster and write more reliable programs.",
+   "code": ""
+  },
+  {
+   "heading": "Syntax Errors",
+   "body": "When you write a program, the computer reads every character exactly as you typed it.  \nIf something is out of place—like a missing comma, a misspelled keyword, or the wrong amount of space at the start of a line—the computer cannot understand the instruction and stops before it even tries to run the program. This kind of problem is called a **syntax error**.\n\n> **Definition:** A syntax error is a mistake in the way the code is written that breaks the language’s rules, preventing the program from being compiled or interpreted.\n\nThink of syntax like the grammar of a spoken language. If you say “She go store,” most listeners will understand you, but a language‑checking tool (like a spell‑checker) will flag it because the verb form is wrong. In programming, the “grammar checker” is the compiler or interpreter, and it will refuse to translate your code until the mistake is fixed.\n\n### Missing punctuation\n\nPunctuation marks such as commas, colons, parentheses, and semicolons tell the computer where one part of a statement ends and another begins. Forgetting one is like leaving out a period at the end of a sentence—readers cannot tell where the thought stops.\n\n```python\nnumbers = [1, 2, 3, 4, 5]   # correct\ntotal = sum(numbers)        # correct\n\n# missing closing parenthesis\naverage = sum(numbers / len(numbers)   # ❌ syntax error\n```\n\nIn the second line the closing parenthesis after `len(numbers)` is missing, so the interpreter reaches the end of the line still expecting a `)`. It reports an error like *“SyntaxError: unexpected EOF while parsing”*.\n\n### Misspelled keywords\n\nKeywords are reserved words that have special meaning in the language (e.g., `if`, `while`, `return`). They cannot be changed, just like “Monday” is always spelled with an “M”. If you type `iff` instead of `if`, the compiler treats it as an ordinary identifier, which usually does not make sense in that position.\n\n```python\n# correct\nif score > 90:\n    grade = 'A'\n\n# misspelled keyword\niff score > 90:          # ❌ syntax error\n    grade = 'A'\n```\n\nThe interpreter sees `iff` and looks for a variable named `iff`. Because a statement cannot start with an undefined variable followed by a condition, it raises a syntax error.\n\n### Incorrect indentation\n\nSome languages (Python is a prime example) use indentation—how many spaces or tabs appear at the start of a line—to define blocks of code. Think of indentation like the way you organize items on a shelf: items that belong together are placed at the same level. If a book is placed a few centimeters higher than the rest, it looks out of place and you might think it belongs elsewhere.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)   # correct indentation\n\n    if name == \"Alice\":\n        print(\"Welcome back!\")   # correct indentation\n\n# wrong indentation\ndef greet(name):\nprint(\"Hello, \" + name)          # ❌ syntax error\n    if name == \"Alice\":\n        print(\"Welcome back!\")\n```\n\nIn the wrong version, the line `print(\"Hello, \" + name)` is not indented under the function definition. Python expects every line that belongs to the function body to be indented by the same amount. The interpreter stops with *“IndentationError: expected an indented block”*.\n\n### Why fixing syntax errors matters\n\nIf the code never gets past the compiler, none of the logic you wrote will ever run, no matter how clever it is. By catching syntax errors early, you save time that would otherwise be spent wondering why a program does nothing at all.\n\n> **Note:** Most modern editors highlight syntax errors as you type, using red underlines or squiggly lines. Use these visual cues; they are your first line of defense.\n\n### Quick checklist for spotting syntax errors\n\n1. **Punctuation:** Verify that every opening `(`, `{`, `[`, or `\"` has a matching closing partner.  \n2. **Keywords:** Compare each reserved word against the language’s list; avoid accidental extra letters.  \n3. **Indentation:** Ensure that blocks (functions, loops, conditionals) have consistent leading spaces or tabs.\n\n> **Remember:** A program that compiles successfully is not guaranteed to be correct, but a program that does not compile cannot be correct. Fixing syntax errors is the first step toward a working program.",
+   "code": ""
+  },
+  {
+   "heading": "Runtime Errors",
+   "body": "When a program has already started and is doing its work, something can still go wrong. These problems are called **runtime errors** because they appear *while the program is running*, not before it starts.  \n\nImagine you are driving a car that works fine when you turn the key, but suddenly the engine stalls because you ran out of fuel. The car itself is not broken; the problem happened only after you began the journey. In the same way, a program may compile without any complaints, yet crash or behave strangely the moment it reaches a certain line of code.\n\n### What makes a runtime error happen?\n\nA runtime error occurs when the computer tries to perform an operation that it cannot complete. The most common reasons are:\n\n1. **Division by zero** – trying to divide a number by 0.  \n2. **Null (or None) reference** – trying to use an object that does not exist.  \n3. **Out‑of‑bounds access** – trying to read or write an element outside the limits of an array or list.\n\nEach of these situations forces the computer to stop the program and usually display an error message.\n\n#### Division by zero\n\nMathematically, dividing any number by zero has no meaning. The computer follows the same rule. If you write\n\n```python\nresult = 10 / 0\n```\n\nthe interpreter will raise an error because it cannot compute the value. Think of it like trying to share a pizza among zero friends – there is no way to split it.\n\n> **Definition:** A *division‑by‑zero* runtime error occurs when the divisor (the number you are dividing by) is zero, which makes the operation undefined.\n\n#### Null (or None) reference\n\nMany programming languages use a special value called **null**, **None**, or **nil** to indicate “nothing here”. If you create a variable but never give it a real object, it holds this special value. Trying to call a method or access a property on a null value is like trying to open a door that does not exist.\n\n```java\nString name = null;\nint length = name.length();   // <-- runtime error: null reference\n```\n\nThe program crashes because there is no actual `String` object for `length()` to work on.\n\n> **Note:** A *null reference* error tells you that you tried to use something that was never created or was deliberately set to “nothing”.\n\n#### Out‑of‑bounds access\n\nArrays, lists, and similar collections have a fixed number of positions, indexed from 0 up to *size‑1*. If you ask for an element at an index that is outside this range, the program cannot find it and throws an error.\n\n```csharp\nint[] numbers = { 2, 4, 6 };\nint value = numbers[3];   // <-- runtime error: index 3 is out of bounds\n```\n\nHere the valid indices are 0, 1, and 2. Asking for index 3 is like reaching for a book on a shelf that has only three slots – the slot simply isn’t there.\n\n> **Common mistake:** Assuming that the last index of an array is the same as its length. Remember that the highest valid index is *length – 1*.\n\n### Why do runtime errors matter?\n\nIf a program stops unexpectedly, any work it was doing is lost, and the user may see a confusing crash screen. In critical systems (e.g., medical devices or banking software), such crashes can have serious real‑world consequences. Detecting and preventing runtime errors makes software more reliable and safe.\n\n### How can we see a runtime error in action?\n\nMost languages automatically generate an **exception** when a runtime error occurs. An exception is a special object that carries information about what went wrong. For example, Python prints a *ZeroDivisionError* message, while Java throws an *ArithmeticException*. The message usually includes the line number, helping you locate the problem quickly.\n\n```python\n>>> 5 / 0\nTraceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nZeroDivisionError: division by zero\n```\n\nThe word *Traceback* is a clue that the program is showing you the *call stack* – the sequence of function calls that led to the error. By reading it, you can trace back to the exact spot in your code that caused the problem.\n\n### Simple ways to avoid common runtime errors\n\n- **Check before you divide.** Test that the divisor is not zero:\n\n  ```python\n  if divisor != 0:\n      result = numerator / divisor\n  else:\n      print(\"Cannot divide by zero\")\n  ```\n\n- **Initialize objects.** Make sure every variable that should hold an object actually receives one before you use it.\n\n- **Validate indices.** Before accessing a list element, compare the index with the list’s length:\n\n  ```java\n  if (i >= 0 && i < numbers.length) {\n      value = numbers[i];\n  }\n  ```\n\n- **Use built‑in safety features.** Some languages offer optional types or bounds‑checking methods that raise clear errors instead of silently corrupting data.\n\n> **Remember:** Runtime errors are not “bugs you missed in the compiler”; they are problems that only appear when the program’s actual data triggers an illegal operation. By anticipating the data you will handle and adding simple checks, you can catch many of these errors before they crash your program.",
+   "code": ""
+  },
+  {
+   "heading": "Logical Errors",
+   "body": "Logical errors are mistakes in a program that do **not** stop it from running, but they make the program give the wrong answer.  \nImagine you are following a recipe for chocolate chip cookies. The oven is turned on, the ingredients are mixed, and the dough is baked. The cookies come out, but they taste salty because you added sugar and salt in the wrong bowls. The kitchen worked perfectly – the oven heated, the timer rang – yet the result is not what you expected. In programming, a logical error is just like that: the code executes without crashing, but the output is not what you intended.\n\nWhy does this happen?  \nWhen we write code we translate a plan (the algorithm) into statements that the computer can understand. If any step of the plan is expressed incorrectly, the computer will faithfully follow the wrong step. The computer does exactly what you tell it, even if that “what” is wrong. Therefore, logical errors are often the hardest to find because the program looks healthy.\n\n### How to recognise a logical error\n\n1. **Run the program and compare the actual output with the expected output.**  \n   If they differ, a logical error is likely present.  \n2. **Check the values of variables at key points.**  \n   Print or log the variables to see if they hold the numbers you think they should.  \n3. **Think about edge cases.**  \n   Test the program with unusual or extreme inputs (e.g., empty lists, negative numbers).  \n4. **Simplify the code.**  \n   Replace a complex expression with a series of smaller steps; this makes it easier to see where the logic went wrong.\n\n> **Definition:** A logical error is a mistake that allows a program to run but produces incorrect results.\n\n### A simple example\n\nSuppose we want to compute the average of three scores stored in variables `a`, `b`, and `c`. A student writes:\n\n```python\naverage = a + b + c / 3\n```\n\nBecause division has higher precedence than addition, the computer first calculates `c / 3` and then adds `a` and `b`. The intended formula is\n\n$$\n\\text{average} = \\frac{a + b + c}{3}\n$$\n\nTo fix the logic we need parentheses:\n\n```python\naverage = (a + b + c) / 3\n```\n\nThe program never crashes, but the first version gives a wrong average unless `c` happens to be zero.\n\n### Everyday comparison\n\nThink of a traffic light controller. If the code that decides when the light turns green mistakenly uses “greater than” instead of “greater than or equal to,” the light might stay red for an extra second. The system still works – cars stop and go – but the timing is off, causing traffic jams. Spotting that timing error requires observing the real‑world outcome (cars waiting too long) and comparing it to the expected outcome (smooth flow).\n\n### Strategies for spotting logical errors\n\n- **Use print statements or a debugger.**  \n  Insert `print(\"x =\", x)` after each calculation to watch how values change.  \n- **Write unit tests.**  \n  A unit test is a small piece of code that checks whether a function returns the correct result for a given input. For the average function, a test could be:\n\n  ```python\n  assert average(2, 4, 6) == 4\n  ```\n\n  If the assertion fails, you know there is a logical error.  \n- **Trace the algorithm on paper.**  \n  Before running the program, walk through the steps with sample numbers. This manual trace often reveals where the logic diverges from the plan.  \n- **Check boundary conditions.**  \n  For loops that run `for i in range(n)`, verify what happens when `n` is 0 or 1. Off‑by‑one errors (doing one iteration too many or too few) are classic logical mistakes.\n\n> **Common mistake:** Forgetting to use parentheses when mixing operators with different precedence, leading to unintended order of evaluation.\n\n### When you find a logical error\n\n1. **Identify the exact line** where the wrong value is produced (the output of a print statement or debugger will point you there).  \n2. **Read the line carefully** and ask: *What did I intend to compute?*  \n3. **Rewrite the statement** in a clearer way, perhaps breaking it into multiple lines.  \n4. **Re‑run the test cases** to confirm the fix works for both normal and edge inputs.\n\n> **Remember:** A program that runs without crashing is not necessarily correct; always verify the results against what you expect.\n\n### Summary\n\nLogical errors hide behind successful execution. By constantly comparing the program’s actual output with the expected output, using simple debugging tools, and testing edge cases, you can uncover these hidden bugs. Treat each unexpected result as a clue, and follow the trail step by step until the logic aligns with your original intention.",
+   "code": ""
+  },
+  {
+   "heading": "Basic Debugging Techniques",
+   "body": "When a program does not behave the way you expect, the first thing to do is **find out where it goes wrong**.  \nThink of it like looking for a leak in a garden hose: you follow the water line until you see a drip. In programming we follow the flow of the code until we see the point where the program “drips” – that is, where it stops working correctly or gives a wrong result.\n\n### Print‑statement debugging\n\nThe simplest tool you already have is the **print statement** (sometimes called `console.log`, `System.out.println`, `printf`, etc., depending on the language).  \nYou insert a line that tells the computer to show the value of a variable or a short message at a certain place in the program.\n\n```python\nprint(\"Starting loop, i =\", i)\n```\n\nWhen you run the program, the text appears in the terminal. By looking at the sequence of printed values you can see:\n\n* which parts of the code were executed,\n* what the variables contained at each step,\n* where the values stop matching what you expected.\n\n> **Note:** Print‑statement debugging works even in the most basic text editor; you do not need a special development environment.\n\n**Why it helps:**  \nIf you expect `i` to become 5 after three iterations but the printed line shows `i = 2`, you know the problem occurs before that line. You can add more prints earlier to narrow the search.\n\n**Everyday comparison:**  \nImagine you are baking a cake and you taste the batter after each ingredient is added. If the batter tastes wrong after the sugar, you know the problem is with the sugar or what you added just before it.\n\n### Using an IDE’s step‑through debugger\n\nAn **IDE** (Integrated Development Environment) is a program that helps you write code. Most IDEs include a **debugger**, a tool that lets you run your program **step by step** instead of all at once.\n\nKey concepts:\n\n* **Breakpoint** – a marker you place on a line of code. When the program reaches that line, it pauses.\n* **Step over** – run the current line and move to the next line in the same function.\n* **Step into** – if the current line calls another function, go inside that function and pause at its first line.\n* **Watch** – a list of variables whose values the debugger shows automatically each time you pause.\n\nTo use it:\n\n1. Open your source file in the IDE.\n2. Click in the margin next to the line where you suspect the error; a red dot appears (the breakpoint).\n3. Press the **Debug** button. The program starts and stops at the breakpoint.\n4. Look at the **variables pane** to see current values.\n5. Use **Step over** or **Step into** to move forward one line at a time, watching how values change.\n\n> **Definition:** A *debugger* is a tool that lets you pause a running program, examine its state, and continue execution line by line.\n\n**Why it is useful:**  \nYou can see the exact moment a variable gets an unexpected value, without adding many print statements. It also lets you inspect complex data structures (lists, objects) in a readable form.\n\n**Everyday comparison:**  \nThink of a detective watching a suspect’s movements on a security camera, pausing the video at each doorway to note what the suspect is carrying. The debugger does the same for your code.\n\n### Reading error messages\n\nWhen the interpreter or compiler stops your program, it usually prints an **error message**. This message is a clue, not a curse. It typically contains three parts:\n\n1. **Type of error** – e.g., `SyntaxError`, `NullReferenceException`, `IndexError`.\n2. **Location** – file name and line number where the error was detected.\n3. **Description** – a short phrase explaining what went wrong, such as “unexpected indent” or “division by zero”.\n\nExample:\n\n```\nTraceback (most recent call last):\n  File \"calc.py\", line 12, in <module>\n    result = divide(a, b)\n  File \"calc.py\", line 5, in divide\n    return a / b\nZeroDivisionError: division by zero\n```\n\nFrom this you can deduce:\n\n* The error happened in `calc.py` on line 5, inside the function `divide`.\n* The problem is a **ZeroDivisionError**, meaning the program tried to divide by zero, which is mathematically undefined.\n\n> **Common mistake:** Ignoring the line number and trying to fix code elsewhere. Always start at the exact line the message points to.\n\n**How to act on it:**\n\n1. Look at the line number and open that line in your editor.\n2. Identify the variable(s) involved (`b` in the example).\n3. Ask yourself: *What value does `b` have at this point?* You can add a print statement or use the debugger to check.\n4. Add a guard if needed, e.g., `if b != 0: return a / b else: raise ValueError(\"b must not be zero\")`.\n\n**Why it matters:**  \nError messages are the program’s way of telling you *where* it got stuck. Treat them like a road sign that says “detour ahead”; follow the sign and you will find the correct path.\n\n### Putting the three techniques together\n\nStart with the error message to locate the problematic line. If the message is vague, add a few print statements around that line to see the values. When you need finer control, switch to the IDE debugger, set a breakpoint at the same line, and step through to watch the exact flow.\n\n> **Remember:** Combine print‑statement debugging, step‑through debugging, and careful reading of error messages. Each method gives you a different view, and together they let you locate and fix bugs quickly.",
+   "code": ""
+  },
+  {
+   "heading": "Exception Handling Basics",
+   "body": "Imagine you are writing a story and you want to make sure that, if something goes wrong, the reader gets a helpful note instead of the book stopping in the middle. In programming we do the same thing with **exception handling**. An *exception* is a special signal that tells the program “something unexpected happened”. Instead of letting the program crash and show a scary error message, we can *catch* that signal, deal with it, and let the program continue or end gracefully.\n\n### The basic idea: try‑catch (or try‑except)\n\n1. **try** – put the code that might cause a problem inside a *try block*.  \n2. **catch / except** – write another block that says what to do **if** an exception occurs.  \n\nIn Python the syntax looks like this:\n\n```python\ntry:\n    # code that might fail\n    result = a / b\nexcept ZeroDivisionError:\n    # what to do if b is zero\n    print(\"You cannot divide by zero!\")\n```\n\nIn Java or C++ the same idea uses `catch`:\n\n```java\ntry {\n    int result = a / b;\n} catch (ArithmeticException e) {\n    System.out.println(\"You cannot divide by zero!\");\n}\n```\n\n> **Definition:** *Exception* – a signal that an error or unusual condition has occurred during program execution.\n\nWhen the code inside `try` runs without problems, the `except` (or `catch`) part is simply skipped. If an error happens, the normal flow jumps straight to the matching handler, and the rest of the `try` block is ignored.\n\n### Raising (throwing) your own exceptions\n\nSometimes you know a condition is wrong even before the computer would notice it. You can *raise* (or *throw*) an exception yourself to tell the surrounding code, “stop, this is not allowed”.\n\n```python\ndef set_age(age):\n    if age < 0:\n        raise ValueError(\"Age cannot be negative\")\n    return age\n```\n\n```java\nvoid setAge(int age) {\n    if (age < 0) {\n        throw new IllegalArgumentException(\"Age cannot be negative\");\n    }\n}\n```\n\n> **Note:** Raising an exception is like raising your hand in class to say “I need help now”. It stops the current activity and asks the teacher (the surrounding code) to respond.\n\n### Why it is better than a crash\n\nWhen a program crashes, the operating system stops it and usually prints a generic traceback. The user sees a confusing message and the program loses any data it was working with. With exception handling:\n\n- **Control** – you decide exactly how to respond (show a friendly message, ask for new input, write to a log, etc.).\n- **Safety** – resources such as files or network connections can be closed cleanly in a `finally` block (code that always runs).\n- **Readability** – the normal logic stays separate from the error‑handling logic, making the program easier to understand.\n\nThink of a kitchen: if a pot boils over, you could let the water spill everywhere (crash) or you could have a sensor that turns the heat off and alerts you (exception handling). The latter keeps the kitchen tidy and prevents damage.\n\n### A tiny complete example\n\n```python\ndef divide(a, b):\n    try:\n        return a / b          # $$ result = \\frac{a}{b} $$\n    except ZeroDivisionError:\n        print(\"Oops! Division by zero.\")\n        return None            # give back a safe value\n\nprint(divide(10, 2))   # prints 5.0\nprint(divide(10, 0))   # prints the warning and returns None\n```\n\nIn this snippet the `try` block attempts the division. If `b` is zero, Python raises a `ZeroDivisionError`. The `except` block catches it, prints a helpful note, and returns `None` so the rest of the program can keep running.\n\n> **In daily life:** Using exceptions is like having a backup plan. If your bus is late, you don’t just sit on the curb; you might take a taxi or call a friend. The program’s backup plan keeps things moving.\n\n### Common pitfalls\n\n> **Common mistake:** Catching *all* exceptions with a bare `except:` (or `catch (Exception e)`) can hide real bugs. It is better to catch only the specific exceptions you expect, such as `ZeroDivisionError` or `ValueError`.\n\n### Quick checklist\n\n- Put risky code inside `try`.\n- Catch only the exceptions you can handle.\n- Use `raise` (or `throw`) to signal your own error conditions.\n- Clean up resources with `finally` if needed.\n- Keep the normal flow separate from error handling for clarity.\n\nBy mastering this pattern, you give your programs the ability to notice problems, explain them politely, and keep working instead of stopping abruptly. This makes your code more robust, user‑friendly, and easier to maintain.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "Imagine you have a tiny program that should read a number from the user, divide 100 by that number, and print the result.  \nWe will write it step‑by‑step, see the different kinds of errors appear, fix them, and finally add proper **exception handling** (a way to tell the computer what to do when something goes wrong).\n\n```python\n# step 1 – the first draft\nnum = input(\"Enter a divisor: \")\nresult = 100 / num\nprint(\"100 divided by\", num, \"is\", result)\n```\n\n### 1. Spot the syntax error  \nWhen we run the program we get:\n\n```\n  File \"example.py\", line 3\n    result = 100 / num\n                     ^\nSyntaxError: invalid syntax\n```\n\nThe caret (^) points to the end of the line. The problem is that `input()` returns a **string** (text), but the division operator `/` expects numbers. The real syntax error is that we forgot to **convert** the string to an integer.\n\n```python\nnum = int(input(\"Enter a divisor: \"))\n```\n\nNow the program can be parsed, so the **syntax error** is gone.\n\n### 2. Run the program – a runtime error appears  \nWe type `0` as the divisor and the program crashes:\n\n```\nZeroDivisionError: division by zero\n```\n\nA **runtime error** happens while the program is running, because dividing by zero is mathematically undefined. The computer stops because it does not know what value to produce.\n\n### 3. Fix the logical error – the program still works but gives a wrong answer  \nSuppose we change the line to:\n\n```python\nresult = 100 / num + 1\n```\n\nNow the program prints a number that is **one too large**. The code runs without crashing, but the result is wrong. This is a **logical error** – the program’s logic (the steps we told it to follow) does not match what we actually want.\n\n### 4. Debugging – find and correct each mistake  \n\n1. **Syntax fix** – convert the input to an integer.  \n2. **Runtime fix** – check that the divisor is not zero before dividing.  \n3. **Logical fix** – remove the stray `+ 1`.\n\n```python\nnum = int(input(\"Enter a divisor: \"))\nif num == 0:\n    print(\"You cannot divide by zero!\")\nelse:\n    result = 100 / num          # correct formula\n    print(\"100 divided by\", num, \"is\", result)\n```\n\nNow the program runs safely for any non‑zero integer.\n\n> **Definition:** *Exception handling* is a programming technique that lets you “catch” errors (exceptions) and decide how to respond, instead of letting the program crash.\n\n### 5. Add proper exception handling  \n\nEven with the `if` test, the user might type something that isn’t a number, like “hello”. Converting that text with `int()` raises a **ValueError**. We can catch both possible errors with a `try … except` block:\n\n```python\ntry:\n    num = int(input(\"Enter a divisor: \"))\n    result = 100 / num\nexcept ValueError:\n    print(\"Please type a whole number.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero!\")\nelse:\n    print(\"100 divided by\", num, \"is\", result)\n```\n\nExplanation of the new words:\n\n- **try**: attempt to run the indented code.  \n- **except**: if a specific error occurs, run the code that follows it.  \n- **else**: run this part only if no error happened in the `try` block.\n\nThe program now handles three situations:\n\n1. Non‑numeric input → prints a friendly reminder.  \n2. Zero as divisor → warns about division by zero.  \n3. Valid input → shows the correct result.\n\n> **Note:** The `else` block runs *only* when the `try` block finishes without raising any exception. This keeps the success path clean and separate from error handling.\n\n### 6. Test all cases  \n\n| Input | Output |\n|------|--------|\n| `25` | `100 divided by 25 is 4.0` |\n| `0`  | `You cannot divide by zero!` |\n| `abc`| `Please type a whole number.` |\n\nAll three error types have been addressed, and the program behaves predictably.\n\n> **In daily life:** Think of exception handling like a safety net for a tightrope walker. If the walker slips (an error occurs), the net catches them and lets the show continue safely, instead of the walker falling and the show stopping abruptly.\n\n### 7. Summary  \n\n- **Syntax errors** stop the code from being read; fix them by following the language rules.  \n- **Runtime errors** happen while the program runs; anticipate them with checks or exception handling.  \n- **Logical errors** produce wrong results; locate them by testing with known inputs.  \n- **Exception handling** groups error‑checking code (`try`) with specific responses (`except`) and a clean success path (`else`).  \n\nBy building a small program, spotting each error type, and then wrapping the risky parts in a `try … except` structure, you have practiced the whole debugging cycle. This pattern works for larger programs too: write, run, observe the error, fix the cause, and finally protect the code with exceptions so users get helpful messages instead of crashes.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a syntax error? Give one simple example in Python.",
+   "a": "A syntax error occurs when the code does not follow the rules of the programming language, so the interpreter cannot parse it. Example: forgetting a colon after an if statement.\n```python\nif x > 5      # missing colon\nprint(x)\n```\nWhen this code is run, Python stops and shows a SyntaxError because the colon is required after the condition."
+  },
+  {
+   "level": "Easy",
+   "q": "Explain the difference between a runtime error and a logical error.",
+   "a": "A runtime error happens while the program is running and stops execution, such as dividing by zero or accessing a missing file. The interpreter raises an exception and the program crashes unless the error is caught.\nA logical error does not crash the program; the code runs, but it produces the wrong result because the algorithm or the logic is incorrect. For example, using `>` instead of `<` in a comparison may give an unexpected output, but no exception is raised."
+  },
+  {
+   "level": "Medium",
+   "q": "You wrote the following code. Identify the type of error and suggest a fix. ```python numbers = [1, 2, 3, 4] total = 0 for i in range(5): total += numbers[i] print(total) ```",
+   "a": "The code raises an **IndexError**, which is a runtime error. The list `numbers` has indices 0‑3, but the loop goes from 0 to 4 (`range(5)`), so when `i` becomes 4 the program tries to access `numbers[4]`, which does not exist.\nFix: Change the loop to iterate only over existing indices:\n```python\nfor i in range(len(numbers)):   # or range(4)\ntotal += numbers[i]\n```\nNow the loop stops at `i = 3`, and the program prints the correct sum `10`."
+  },
+  {
+   "level": "Medium",
+   "q": "Write a short Python snippet that deliberately raises a `ValueError` and then catches it using a try/except block, printing a friendly message.",
+   "a": "\n```python\ntry:\n# Deliberately raise a ValueError\nraise ValueError(\"The input must be a positive integer.\")\nexcept ValueError as e:\n# Catch the error and print a friendly message\nprint(\"Oops! There was a problem:\", e)\n```\nExplanation step‑by‑step:\n1. The `raise` statement creates a `ValueError` with a custom message.\n2. The `try` block contains the code that may raise the error.\n3. When the error occurs, control jumps to the `except ValueError as e` block.\n4. Inside the `except` block we print a friendly message that includes the original error text."
+  },
+  {
+   "level": "Hard",
+   "q": "A program reads a file, processes each line, and writes results to another file. It sometimes crashes with an `IOError`. Describe a debugging strategy to locate the exact line causing the crash, and rewrite the code fragment using exception handling to keep the program running even if the input file is missing.",
+   "a": "Debugging strategy:\n1. Add print statements (or logging) before each file operation to show which file is being opened.\n2. Use a try/except block around the whole file‑reading section to catch `IOError` and print the traceback.\n3. If the traceback points to a specific line, focus on that line and check file paths, permissions, and whether the file exists.\nRewritten code with handling:\n```python\nimport traceback\ninput_path = \"data.txt\"\noutput_path = \"results.txt\"\ntry:\nwith open(input_path, \"r\") as infile:\nlines = infile.readlines()\nexcept IOError as e:\nprint(f\"Error opening input file '{input_path}': {e}\")\nprint(\"Skipping processing because the input file is unavailable.\")\nlines = []  # Continue with an empty list so the program can still create the output file\ntry:\nwith open(output_path, \"w\") as outfile:\nfor line in lines:\n# Example processing: strip newline and reverse the text\nprocessed = line.strip()[::-1]\noutfile.write(processed + \"\\n\")\nexcept IOError as e:\nprint(f\"Error writing to output file '{output_path}': {e}\")\ntraceback.print_exc()\n```\nExplanation:\n- The first `try` block attempts to open the input file; if it fails, we catch the `IOError`, report it, and continue with an empty `lines` list so the program does not stop.\n- The second `try` block handles possible errors when writing the output file, printing the full traceback for deeper debugging."
+  },
+  {
+   "level": "Hard",
+   "q": "Compare three debugging techniques: print‑statement debugging, using an interactive debugger (like Python’s `pdb`), and writing unit tests. For each, mention one advantage and one limitation, and give a scenario where it is the most appropriate tool.",
+   "a": "\n**Print‑statement debugging**\n- Advantage: Very quick to add; works in any environment, even when a full debugger is unavailable.\n- Limitation: Can clutter the code, and you may miss the exact state if you forget to print a variable.\n- Best scenario: Small scripts where you need to check the value of a variable at a single point, e.g., verifying the result of a loop in a homework assignment.\n**Interactive debugger (`pdb`)**\n- Advantage: Lets you pause execution, inspect any variable, step line‑by‑line, and change values on the fly.\n- Limitation: Requires learning debugger commands; harder to use in non‑terminal environments (e.g., some IDEs or remote servers).\n- Best scenario: Complex functions where the error occurs deep inside a call stack, such as tracking down why a recursive algorithm returns the wrong result.\n**Unit tests**\n- Advantage: Provide automated checks that can be run repeatedly; they catch regressions when code changes.\n- Limitation: Writing good tests takes time, and they only verify behavior you have anticipated.\n- Best scenario: Larger projects or libraries where you need to ensure that each function works correctly after each change, e.g., testing a sorting function with many different input arrays."
+  }
+ ],
+ "recap": "The lesson explains the three main types of programming errors—syntax, runtime, and logical—using everyday analogies. It introduces basic debugging techniques like print‑statement debugging and explains exception handling with try‑except blocks. A step‑by‑step example shows how to identify and fix errors, culminating in a robust program that safely handles user input.",
+ "key_terms": [
+  {
+   "term": "Syntax error",
+   "meaning": "A mistake that breaks the language's grammar, preventing the code from being compiled or interpreted."
+  },
+  {
+   "term": "Runtime error",
+   "meaning": "An error that occurs while the program is running, such as division by zero or null reference."
+  },
+  {
+   "term": "Logical error",
+   "meaning": "A mistake in the program's logic that produces incorrect results without crashing."
+  },
+  {
+   "term": "Debugging",
+   "meaning": "The process of locating and fixing errors in code."
+  },
+  {
+   "term": "Print‑statement debugging",
+   "meaning": "Inserting print statements to display variable values and program flow."
+  },
+  {
+   "term": "Exception",
+   "meaning": "A special signal that an unexpected problem occurred during execution."
+  },
+  {
+   "term": "Try‑except block",
+   "meaning": "A construct that attempts code that may fail and catches specific exceptions to handle them."
+  },
+  {
+   "term": "Null reference",
+   "meaning": "Attempting to use an object or variable that has not been initialized."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type of error prevents a program from starting at all?",
+   "options": [
+    "Syntax error",
+    "Runtime error",
+    "Logical error",
+    "Exception"
+   ],
+   "answer": 0,
+   "why": "Syntax errors break the language's grammar, so the code cannot be compiled or interpreted."
+  },
+  {
+   "q": "What happens during a runtime error?",
+   "options": [
+    "The program never compiles",
+    "The program crashes while running",
+    "The output is wrong but program finishes",
+    "The code is syntactically perfect"
+   ],
+   "answer": 1,
+   "why": "Runtime errors occur after the program has started, causing it to crash or behave unexpectedly."
+  },
+  {
+   "q": "Which of the following is an example of a logical error?",
+   "options": [
+    "Missing colon after an if statement",
+    "Dividing by zero",
+    "Using the wrong formula for area",
+    "Accessing an array out of bounds"
+   ],
+   "answer": 2,
+   "why": "A logical error produces incorrect results while the program runs without crashing."
+  },
+  {
+   "q": "What does a try‑except block do?",
+   "options": [
+    "Stops the program immediately",
+    "Runs code and handles specified errors",
+    "Converts strings to numbers",
+    "Prints debugging information"
+   ],
+   "answer": 1,
+   "why": "The try block contains code that may raise an exception, and the except block defines how to handle it."
+  },
+  {
+   "q": "Which debugging technique involves adding statements that output variable values?",
+   "options": [
+    "Unit testing",
+    "Print‑statement debugging",
+    "Code refactoring",
+    "Static analysis"
+   ],
+   "answer": 1,
+   "why": "Print‑statement debugging inserts prints to show internal state during execution."
+  },
+  {
+   "q": "In Python, what exception is raised when you try to divide by zero?",
+   "options": [
+    "ValueError",
+    "ZeroDivisionError",
+    "TypeError",
+    "IndexError"
+   ],
+   "answer": 1,
+   "why": "Dividing by zero triggers a ZeroDivisionError in Python."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Syntax error",
+   "back": "A mistake that violates the programming language's grammar, stopping compilation or interpretation."
+  },
+  {
+   "front": "Runtime error",
+   "back": "An error that occurs while the program is executing, such as division by zero or null reference."
+  },
+  {
+   "front": "Logical error",
+   "back": "A flaw in the program's logic that leads to incorrect results without crashing."
+  },
+  {
+   "front": "Print‑statement debugging",
+   "back": "Inserting print statements to display variable values and trace program flow."
+  },
+  {
+   "front": "Exception",
+   "back": "A signal that an unexpected problem occurred during execution, which can be caught and handled."
+  },
+  {
+   "front": "Try‑except block",
+   "back": "Code structure that attempts risky operations in 'try' and handles specific errors in 'except'."
+  },
+  {
+   "front": "Null (None) reference",
+   "back": "Attempting to use a variable that has no value or object assigned."
+  },
+  {
+   "front": "Out‑of‑bounds access",
+   "back": "Trying to read or write an element outside the valid range of an array or list."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l11-recipe-with-mistakes",
+   "title": "A cooking recipe showing missing commas and misspelled words that cause the chef to stop.",
+   "alt": "A cooking recipe showing missing commas and misspelled words that cause the chef to stop.",
+   "priority": 8,
+   "picture_title": "Recipe with Mistakes",
+   "kind": "illustration",
+   "subject": "A side‑by‑side view of a written recipe where one version is correct and the other has obvious syntax mistakes such as a missing comma and a misspelled ingredient name.",
+   "layout": "Two columns: left column shows the correct recipe, right column shows the same recipe with highlighted errors; arrows point from errors to a “stop” icon.",
+   "labels": [
+    "missing comma",
+    "misspelled word",
+    "stop"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l11-error-types-flowchart",
+   "title": "A flowchart that classifies syntax, runtime, and logical errors.",
+   "alt": "A flowchart that classifies syntax, runtime, and logical errors.",
+   "priority": 7,
+   "picture_title": "Error Types Flowchart",
+   "kind": "labelled diagram",
+   "subject": "A simple diagram that starts with ‘Program Problem’ and branches into three boxes labeled Syntax Error, Runtime Error, and Logical Error, each with a brief example icon.",
+   "layout": "Central box at top with three arrows leading to three side boxes arranged horizontally; each side box contains an icon and a short label.",
+   "labels": [
+    "Syntax Error",
+    "Runtime Error",
+    "Logical Error"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l11-print-statement-debugging",
+   "title": "Using print statements to locate a bug in a program.",
+   "alt": "Using print statements to locate a bug in a program.",
+   "priority": 6,
+   "picture_title": "Print‑Statement Debugging",
+   "kind": "illustration",
+   "subject": "A code snippet with several print statements inserted, and arrows showing the flow of execution stopping at the point where the unexpected output appears.",
+   "layout": "Code block in the centre, three small print‑output bubbles below it connected by arrows; the last bubble is highlighted to indicate the bug location.",
+   "labels": [
+    "print",
+    "output",
+    "bug"
+   ],
+   "after": 4
+  },
+  {
+   "type": "compare",
+   "title": "Syntax Errors vs Runtime Errors",
+   "left": {
+    "name": "Syntax Errors",
+    "points": [
+     "Detected before program runs",
+     "Break language grammar",
+     "Prevent compilation or interpretation"
+    ]
+   },
+   "right": {
+    "name": "Runtime Errors",
+    "points": [
+     "Detected while program runs",
+     "Cause crashes or unexpected behavior",
+     "Example: division by zero"
+    ]
+   },
+   "after": 0
+  },
+  {
+   "type": "facts",
+   "title": "Three Main Types of Errors",
+   "items": [
+    {
+     "value": "1",
+     "label": "Syntax Error"
+    },
+    {
+     "value": "2",
+     "label": "Runtime Error"
+    },
+    {
+     "value": "3",
+     "label": "Logical Error"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "steps",
+   "title": "Simple Print‑Statement Debugging",
+   "steps": [
+    {
+     "label": "Insert Print",
+     "text": "Add a print statement before the suspected line"
+    },
+    {
+     "label": "Run Program",
+     "text": "Execute the program and watch the output"
+    },
+    {
+     "label": "Check Values",
+     "text": "Compare printed values to expected ones"
+    },
+    {
+     "label": "Adjust Code",
+     "text": "Modify the code based on what you saw"
+    }
+   ],
+   "loop": false,
+   "after": 4
+  },
+  {
+   "type": "parts",
+   "title": "Structure of a Try‑Catch Block",
+   "items": [
+    {
+     "name": "try",
+     "role": "Code that might raise an exception"
+    },
+    {
+     "name": "except / catch",
+     "role": "Handles the exception if it occurs"
+    },
+    {
+     "name": "else (optional)",
+     "role": "Runs if no exception was raised"
+    },
+    {
+     "name": "finally (optional)",
+     "role": "Runs no matter what, for cleanup"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

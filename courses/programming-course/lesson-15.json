@@ -1,0 +1,392 @@
+{
+ "title": "Software Development Practices",
+ "summary": "In this lesson students learn how to write clean, well‑structured code that is easy to understand and maintain. They will explore naming conventions, documentation, testing, version control, and best practices for maintainable software.",
+ "objectives": [
+  "Apply consistent naming conventions to variables, functions, and classes",
+  "Organize code into logical modules and packages",
+  "Create clear documentation and comments for code",
+  "Write simple unit tests and use a version‑control system",
+  "Identify and refactor code to improve maintainability"
+ ],
+ "prerequisites": "Students should already know basic programming constructs such as variables, functions, and simple data structures.",
+ "why": [
+  "Good software development practices make programs easier to read, debug, and extend, which saves time and reduces errors in real‑world projects.",
+  "Employers and collaborators expect code that follows standards, includes documentation, and is tracked with version control, so mastering these habits prepares students for teamwork and professional development."
+ ],
+ "sections": [
+  {
+   "heading": "Code Organization",
+   "body": "When you write a program, you are really giving the computer a set of instructions that work together to solve a problem. If all those instructions are placed in one huge file, it becomes hard to read, hard to change, and easy to break. **Code organization** means arranging those instructions into smaller, logical pieces—files, modules, and packages—so that each piece does a clear job and related jobs stay together.\n\n### Why split a program?\n\nThink of a school project where each group member is responsible for a different part: research, writing, drawing, and presenting. If everyone writes their work on the same sheet of paper, the final product is a confusing mess. By giving each person a separate page, you can see who did what, edit a single page without touching the others, and later combine the pages into one polished report. The same idea works for code: separating concerns makes the program easier to understand, test, and maintain.\n\n### Files, modules, and packages – what are they?\n\n- **File** – The most basic container. It is a single text document that the computer reads as code. In many languages a file ends with a specific extension, like `.py` for Python or `.js` for JavaScript.\n- **Module** – A file that is meant to be *imported* by other files. It usually contains functions, classes, or variables that belong together. For example, a file `math_utils.py` might hold all the helper functions for calculations.\n- **Package** – A folder (directory) that groups several related modules together. The folder contains a special file (often called `__init__.py` in Python) that tells the language “this folder is a package”. A package can also contain sub‑packages, creating a hierarchy.\n\nPutting these together, a typical project might look like this:\n\n```\nmy_app/\n│\n├─ main.py                # entry point of the program\n├─ utils/\n│   ├─ __init__.py        # marks utils as a package\n│   ├─ file_io.py         # functions for reading/writing files\n│   └─ math_ops.py        # functions for arithmetic\n└─ gui/\n    ├─ __init__.py\n    └─ window.py          # code for the graphical interface\n```\n\n> **Definition:** *A module is a single file that groups related code and can be imported by other files.*\n\n### How to decide what goes where\n\n1. **Identify responsibilities** – Ask yourself what each piece of code does. If a group of functions all deal with user input, they belong together. If another group handles data storage, they belong in a different module.\n2. **Keep modules small** – A good rule of thumb is that a module should be no longer than about 300 lines of code. If it grows larger, consider splitting it into two modules with clearer names.\n3. **Name modules after their purpose** – Choose a file name that tells you what the module contains, like `network.py` for networking code or `logger.py` for logging utilities.\n\n### Importing and using modules\n\nMost programming languages provide a way to bring code from one file into another. In Python, you write:\n\n```python\nfrom utils.math_ops import add, multiply\nresult = add(5, 3)\n```\n\nThe line `from utils.math_ops import add, multiply` tells the interpreter: “Go into the `utils` package, open the `math_ops` module, and give me the `add` and `multiply` functions.” After that, you can call them as if they were defined in the current file.\n\n> **Note:** Importing only the functions you need keeps the program’s memory usage lower and makes the code clearer.\n\n### Benefits of good organization\n\n- **Readability** – A new developer can open `file_io.py` and instantly see all file‑handling code.\n- **Reusability** – The same `math_ops` module can be used in a different project without copying code.\n- **Testability** – Unit tests can focus on a single module, reducing the chance of hidden bugs.\n- **Collaboration** – Multiple people can work on different modules at the same time without causing merge conflicts.\n\n### A simple formula for estimating structure\n\nIf you know the total number of functions $F$ you plan to write and you aim for at most $M$ functions per module, you can estimate the number of modules $N$ you will need:\n\n$$\nN = \\left\\lceil \\frac{F}{M} \\right\\rceil\n$$\n\nThe ceiling symbol $\\lceil \\ \\rceil$ means “round up to the next whole number”. This helps you decide early whether you need additional packages to keep the hierarchy tidy.\n\n> **Common mistake:** Putting unrelated functions in the same module because they are small. This makes the module’s purpose unclear and defeats the goal of organization.\n\n### Practical steps to start organizing\n\n1. **Create a top‑level folder** for your project. Give it a meaningful name.\n2. **Add an entry‑point file** (often called `main.py` or `app.js`). This file only coordinates the high‑level flow.\n3. **Make sub‑folders for major areas** (e.g., `data`, `ui`, `services`). Inside each, add an `__init__` file if required.\n4. **Move related functions** into appropriately named files inside those folders.\n5. **Run the program** to ensure imports still work. Fix any broken paths.\n\n> **Remember:** The goal of code organization is not to create many empty folders, but to group *related* functionality together so that anyone reading the code can quickly find what they need.",
+   "code": ""
+  },
+  {
+   "heading": "Naming Conventions",
+   "body": "When we write a program, the computer only sees a long list of symbols. It does not understand what those symbols mean to us. By giving those symbols clear, consistent names, we turn the code into a tiny “story” that anyone reading it can follow without guessing.\n\n**Why naming matters**  \nImagine you open a notebook where every line is labeled “x”. One line stores a person’s age, another stores the price of a book, and a third stores the number of seats in a classroom. If you later need the book price, you must search through the whole notebook to find the right “x”. The same thing happens in code: unclear names force a programmer to read more lines, add extra comments, or even make mistakes. Good names make the code *self‑describing*: the name itself tells you what the value represents.\n\n**Every kind of name has its own style**  \nIn most programming languages we work with four main kinds of identifiers:\n\n1. **Variables** – places that hold data which can change while the program runs.  \n2. **Functions (or methods)** – blocks of code that perform a specific task and can be called many times.  \n3. **Classes** – blueprints for creating objects; they group related data and behavior together.  \n4. **Constants** – values that never change after they are defined.\n\nBelow are the most common conventions used in languages such as Python, Java, JavaScript, and C‑like languages.\n\n> **Definition:** *CamelCase* – write the first word in lower case and start each subsequent word with a capital letter, e.g., `totalScore`. This style is popular for variable and function names in JavaScript and Java.\n\n> **Definition:** *PascalCase* – like CamelCase but the first word also starts with a capital letter, e.g., `StudentRecord`. This is the usual way to name classes.\n\n> **Definition:** *snake_case* – separate words with an underscore, all letters in lower case, e.g., `max_speed`. Many Python programmers prefer this for variables and functions.\n\n> **Definition:** *UPPER_SNAKE_CASE* – same as snake_case but all letters are capitalised, e.g., `PI`, `MAX_USERS`. This signals a constant that should never be reassigned.\n\n**How to choose a good name**  \n- **Be descriptive, not cryptic.** `cnt` tells you nothing; `itemCount` immediately reveals that the variable stores how many items there are.  \n- **Keep it short enough to type quickly, but long enough to be clear.** `i` is fine for a short loop index, but `indexOfCurrentStudent` is better for a variable used throughout a function.  \n- **Avoid abbreviations unless they are universally known.** `avg` for “average” is fine; `prc` for “price” is not.  \n- **Use nouns for variables and constants, verbs for functions.** A function named `calculateTotal()` tells you it *does* something, while a variable named `total` tells you it *is* something.\n\n**Putting it together**  \nSuppose we are writing a program that tracks books in a library. Using the conventions above, we might write:\n\n```python\nMAX_BOOKS = 1000                     # constant, never changes\nclass Book:                          # class name in PascalCase\n    def __init__(self, title, author):   # function name in snake_case\n        self.title = title               # variable name in snake_case\n        self.author = author\n        self.is_checked_out = False\n\ndef check_out(book, member_id):           # function name in snake_case\n    if not book.is_checked_out:\n        book.is_checked_out = True\n        book.checked_out_by = member_id\n```\n\nNotice how each identifier instantly tells you its role: `MAX_BOOKS` is a fixed limit, `Book` is a blueprint, `check_out` performs an action, and `is_checked_out` is a boolean flag.\n\n> **Note:** Consistency is more important than picking the “perfect” style. If a project already uses `snake_case` for variables, keep using it throughout the codebase.\n\n> **Common mistake:** Mixing styles in the same file, such as naming some functions `calculateTotal` and others `calculate_total`. This makes the code look messy and can confuse collaborators.\n\n> **Remember:** When you rename something, change every occurrence. Modern editors have a “rename symbol” feature that updates all references automatically, preventing bugs caused by mismatched names.\n\nBy following these simple naming rules, your programs become easier to read, easier to debug, and easier for others (or your future self) to extend. Clear names are the first step toward clean, maintainable code.",
+   "code": ""
+  },
+  {
+   "heading": "Documentation and Comments",
+   "body": "When you write a program, the computer can run the instructions, but a human reader often cannot understand *why* those instructions are there.  \nDocumentation and comments are the words we add to the code so that other people – and our future selves – can quickly see what the program does, how it does it, and the reasons behind the choices we made.\n\n**What is a comment?**  \nA comment is a piece of text that the interpreter or compiler ignores. It lives inside the source file next to the code, but it never changes the program’s behavior. Think of a comment as a sticky note you attach to a page in a textbook: the note does not alter the printed words, but it helps you remember an important point.\n\n**What is a docstring?**  \nA docstring (short for *documentation string*) is a special kind of comment that is placed at the beginning of a module, class, or function. In many languages (Python, for example) the docstring becomes part of the object’s metadata, so tools can automatically display it. You can think of a docstring as the “title page” of a chapter: it gives a concise summary that anyone can read without opening the whole chapter.\n\n> **Definition:** A *docstring* is a string literal that appears as the first statement in a module, class, or function and describes its purpose, inputs, outputs, and side effects.\n\n### Writing useful inline comments\n\n1. **Explain *why*, not *what***  \n   The code itself already shows *what* is happening. Use comments to explain the reasoning behind a decision.  \n   ```python\n   # We use a set here because we need O(1) look‑ups for duplicate detection\n   seen = set()\n   ```\n\n2. **Keep them short and relevant**  \n   A comment that repeats the code line adds no value.  \n   ```python\n   total = price * quantity   # Multiply price by quantity   <-- not useful\n   ```\n\n3. **Update comments when the code changes**  \n   Out‑of‑date comments are worse than no comments because they mislead the reader.\n\n### Writing clear docstrings\n\nA good docstring follows a simple structure:\n\n- **One‑line summary** – a brief description of what the function does.  \n- **Optional blank line** – separates the summary from the details.  \n- **Detailed description** – explains the algorithm, important edge cases, and any assumptions.  \n- **Parameters** – list each argument with its type and meaning.  \n- **Returns** – describe the value returned and its type.  \n\nExample in Python:\n```python\ndef average(values):\n    \"\"\"\n    Compute the arithmetic mean of a list of numbers.\n\n    The function adds all numbers and divides by the count.\n    It raises ValueError if the list is empty.\n\n    Parameters\n    ----------\n    values : list of float\n        The numbers to average.\n\n    Returns\n    -------\n    float\n        The mean of the input numbers.\n    \"\"\"\n    if not values:\n        raise ValueError(\"values must not be empty\")\n    return sum(values) / len(values)\n```\n\nNotice how the docstring tells the *why* (it raises an error for an empty list) and the *what* (what the parameters are and what is returned).  \n\n> **Note:** A well‑written docstring lets tools like `help()` or Sphinx generate automatic documentation without you writing a separate manual.\n\n### External documentation\n\nFor larger projects, a separate set of files (often in Markdown or reStructuredText) provides an overview: installation steps, architecture diagrams, usage examples, and contribution guidelines. This is similar to a user manual for a kitchen appliance – the manual explains how to set it up, how to operate it safely, and how to troubleshoot problems.\n\nWhen you create external docs:\n\n- **Start with a high‑level overview** – describe the purpose of the whole project.  \n- **Provide quick‑start examples** – a short code snippet that a new user can copy‑paste and see results.  \n- **Link to API reference** – each module or class should have a link to its docstring‑generated documentation.  \n- **Keep it versioned** – store the docs in the same version‑control system as the code so they evolve together.\n\n### When to comment and when not to\n\n- **Comment** complex algorithms, non‑obvious business rules, and any “magic numbers” (constants whose meaning is not clear).  \n- **Do not comment** obvious statements like `i = i + 1` or `return True` unless the return value has a subtle meaning.  \n\n> **Common mistake:** Adding comments that restate the code line by line. This creates noise and makes maintenance harder because the comment must be edited every time the code changes.\n\n### Quick checklist for every new piece of code\n\n1. Does the function have a one‑line summary in its docstring?  \n2. Are the parameters and return values described?  \n3. Are there inline comments for any non‑trivial logic?  \n4. Is there an entry in the external documentation that points to this module?  \n\nIf the answer to any question is “no”, add the missing piece before moving on.  \n\n> **Remember:** Good documentation is an investment. It reduces bugs, speeds up onboarding of new developers, and makes your code reusable for years to come.",
+   "code": ""
+  },
+  {
+   "heading": "Testing Basics",
+   "body": "Testing Basics  \n\nWhen you write a program, you are telling the computer how to do something step by step.  \nEven a tiny mistake – a miss‑typed number, a wrong comparison, or a misplaced bracket – can make the whole program behave incorrectly.  \n**Testing** is the practice of checking that each part of your code does exactly what you expect, before you give it to anyone else to use.\n\n> **Definition:** *Unit testing* is a type of test that focuses on the smallest, independent piece of code (usually a single function or method) and verifies that it returns the correct result for a set of inputs.\n\nWhy test at the unit level?  \nThink of a car engine. Before you assemble the whole vehicle, you run each cylinder on a test bench to be sure it fires correctly. If a single cylinder is faulty, the whole engine will run poorly. In the same way, if a single function is wrong, the larger program that calls it will also be wrong. By testing each “cylinder” (function) early, you catch problems before they spread.\n\n### The structure of a test case  \n\nA test case is a small, repeatable script that follows a simple pattern:\n\n1. **Set up** – create the data the function needs.  \n2. **Execute** – call the function with that data.  \n3. **Check** – compare the function’s output to the expected result.  \n4. **Tear down** – clean up any temporary resources (optional for simple tests).\n\nIn code, this often looks like:\n\n```python\ndef test_addition():\n    # 1. Set up\n    a = 3\n    b = 5\n    # 2. Execute\n    result = add(a, b)\n    # 3. Check\n    assert result == 8   # <-- the test passes if this is true\n```\n\nThe line `assert result == 8` is the **assertion**. An assertion is a statement that must be true for the test to succeed. If the condition is false, the test framework reports a failure, telling you exactly which test broke.\n\n### How automated tests help catch bugs early  \n\nWhen you run a test manually, you might forget to try a particular edge case (for example, what happens when the input is zero?). Automated test frameworks (such as `unittest` in Python, `JUnit` in Java, or `pytest`) let you write many test cases once and then run them all with a single command. The framework will:\n\n- Execute each test in isolation, so one test’s failure does not hide another’s.  \n- Report a summary like “12 passed, 2 failed”, letting you see the health of your code at a glance.  \n- Integrate with version‑control systems so that tests run automatically every time you add new code (this is called *continuous integration*).\n\nBecause the tests run automatically, you discover bugs the moment they are introduced, not weeks later when a user reports a strange crash. This early feedback loop saves time and reduces frustration.\n\n> **In daily life:** Imagine you are baking cookies. Before serving a whole batch, you bake a single test cookie to check the temperature and dough consistency. If the test cookie is too hard, you adjust the recipe before making the full batch. Automated unit tests work the same way for code.\n\n### Simple equation for test coverage  \n\nTest coverage measures how much of your code is exercised by tests. A common metric is:\n\n$$\n\\text{Coverage (\\%)} = \\frac{\\text{Number of lines executed by tests}}{\\text{Total number of executable lines}} \\times 100\n$$\n\nHigher coverage means more of your code has been checked, but 100 % coverage does not guarantee bug‑free software; the quality of the test cases matters too.\n\n### Building a habit  \n\nStart with one test for every new function you write. As you add features, add new tests for the new behavior and for any previously discovered bugs (this is called a *regression test*). Over time, your test suite becomes a safety net that lets you refactor code confidently, knowing that any mistake will be caught quickly.\n\n> **Remember:** Write tests *before* you fix a bug, and *after* you write a new function. This keeps your code reliable and your mind clear.",
+   "code": ""
+  },
+  {
+   "heading": "Version Control Fundamentals",
+   "body": "Version control is a tool that keeps a complete history of every change you make to your code, just like a diary records everything you did each day.  \nWhen you work on a program, you often add new features, fix bugs, or try different ideas. Without a system to remember what you changed and why, you could easily lose work or be unable to understand how the program evolved. A version‑control system (VCS) solves this problem by storing *snapshots* of your files at each step, allowing you to go back, compare, or combine work from many people.\n\n> **Definition:** A version‑control system is software that records changes to files over time, lets you retrieve specific versions, and helps multiple people work together without overwriting each other’s work.\n\n### Why a VCS is useful\n\n1. **Safety net** – If a change breaks the program, you can revert to a previous snapshot that still works.  \n2. **Collaboration** – Several developers can edit the same project at the same time; the VCS merges their contributions and flags conflicts.  \n3. **Traceability** – Every change is accompanied by a short description (a *commit message*) that explains *what* was done and *why*. This makes it easier to understand the code months later.\n\nThink of a VCS like a shared Google Docs document for code. Each time you press “Save,” Google creates a new version that you can view or restore. In programming, the most popular VCS is **Git**, which works locally on your computer and can also sync with remote servers such as GitHub or GitLab.\n\n### Basic Git workflow\n\n1. **Initialize a repository** – Turn a folder into a place where Git can track changes.  \n   ```bash\n   git init\n   ```\n   After this command, Git creates a hidden `.git` directory that stores all the history.\n\n2. **Check status** – See which files are new, modified, or ready to be saved.  \n   ```bash\n   git status\n   ```\n\n3. **Stage changes** – Choose the files you want to include in the next snapshot. This step is called *staging* because you are preparing the changes.  \n   ```bash\n   git add file1.py file2.py\n   ```\n   You can also add everything at once with `git add .`.\n\n4. **Commit** – Record the staged changes as a new version, adding a descriptive message.  \n   ```bash\n   git commit -m \"Add function to calculate factorial\"\n   ```\n   The `-m` flag tells Git to use the text that follows as the commit message.\n\n5. **View history** – Look at the list of past commits.  \n   ```bash\n   git log\n   ```\n   Each entry shows a unique identifier called a *hash*, the author, date, and the message you wrote.\n\n6. **Create a branch** – Make a parallel line of development where you can experiment without affecting the main code.  \n   ```bash\n   git branch new-feature\n   git checkout new-feature   # or: git switch new-feature\n   ```\n   Branches are like separate pages in a notebook; you can write on one page while keeping the original page unchanged.\n\n7. **Merge** – Bring changes from a branch back into another branch (often the main branch, called `main` or `master`).  \n   ```bash\n   git checkout main\n   git merge new-feature\n   ```\n   If Git can combine the changes automatically, the merge succeeds; otherwise you must resolve *conflicts* (places where two people edited the same line).\n\n8. **Push and pull** – Share your commits with a remote repository (`push`) or bring others’ commits into your local copy (`pull`).  \n   ```bash\n   git push origin main\n   git pull origin main\n   ```\n\n> **In daily life:** Imagine a group of friends editing a shared photo album. Each friend uploads new pictures (push) and downloads pictures added by others (pull). If two friends edit the same caption, they must discuss whose version to keep—just like resolving a merge conflict.\n\n### Collaborative tips\n\n- **Commit often** – Small, logical commits make it easier to locate bugs later.  \n- **Write clear messages** – A good message answers *what* changed and *why*.  \n- **Pull before you push** – Always run `git pull` first so you incorporate teammates’ latest work and reduce the chance of conflicts.  \n- **Use branches for features or experiments** – This keeps the main line stable.\n\n> **Common mistake:** Forgetting to stage files (`git add`) before committing. Git will create a commit, but the new changes stay untracked, leading to confusion when you later try to push.\n\n> **Remember:** A VCS does not replace good communication. It records what you did; you still need to discuss design decisions, review code, and agree on naming conventions.\n\nBy mastering these basic Git commands and the idea of tracking changes, you gain a reliable safety net and a powerful way to collaborate with others, turning a solo coding effort into a coordinated team project.",
+   "code": ""
+  },
+  {
+   "heading": "Writing Maintainable Code",
+   "body": "When we talk about **maintainable code** we mean code that stays easy to read, change, and reuse even after weeks, months, or years. Imagine a kitchen where every utensil has a clear place, labels are consistent, and the recipe book explains each step. If you need to add a new dish or fix a mistake, you can do it quickly without searching through a messy drawer. The same idea applies to programs: clear organization, good names, helpful comments, and small, testable pieces let anyone (including your future self) understand and improve the code.\n\nFirst, keep each file focused on a single responsibility. A file that handles user input should not also contain database queries. This follows the **Single‑Responsibility Principle**:  \n\n$$\\text{One module = one purpose}$$  \n\nBy separating concerns, you reduce the chance that a change in one area accidentally breaks another. For example, if you need to change how dates are formatted, you only edit the date‑utility module, not every place where dates appear.\n\nNext, use **meaningful naming** for variables, functions, and classes. A name should tell you *what* the thing is and *why* it exists.  \n```python\n# Bad\na = 5\nb = a * 3.14159\n\n# Good\nradius = 5\ncircumference = radius * 3.14159\n```  \nThe good version lets a reader understand the calculation without extra comments. Consistent naming conventions (camelCase, snake_case, PascalCase) act like a shared language in a team, just as a family might agree on calling the living‑room “the lounge” every time.\n\n**Documentation and comments** are not a place to repeat what the code already says; they should explain *why* a decision was made.  \n```python\n# Bad comment\ntotal = price * quantity  # multiply price by quantity\n\n# Good comment\n# Apply bulk discount: if more than 100 items, each extra item gets 5% off\nif quantity > 100:\n    discount = 0.05 * (quantity - 100)\n    total = price * quantity * (1 - discount)\nelse:\n    total = price * quantity\n```  \nThe good comment tells future developers the business rule behind the calculation, which is far more useful when the rule changes.\n\nTesting is another pillar of maintainable code. Small **unit tests** check individual functions, while **integration tests** verify that modules work together. When a test fails, you immediately know which part of the program broke, making debugging faster. Think of tests as a safety net that catches errors before they reach users, similar to how a spell‑checker catches typos before you send an email.\n\nVersion control (e.g., Git) records every change with a descriptive message. A good commit message follows the pattern: *What* changed, *Why* it changed, and *How* it was done. This history lets you revert a bad change or understand the evolution of a feature, just as a diary helps you recall why you rearranged furniture in a room.\n\n> **Note:** Keep functions short—ideally no longer than 20 lines. Short functions are easier to test, understand, and reuse.\n\n> **In daily life:** Think of a well‑organized toolbox. Each tool has its own slot, labeled clearly, and you have a small manual that explains when to use each tool. When you need a new screwdriver, you add it to the right slot without moving everything else.\n\n> **Common mistake:** Adding comments that restate the code instead of explaining the intention. This creates noise and can become outdated when the code changes, leading readers astray.\n\n> **Remember:** When you refactor (re‑arrange) code, run all tests first. If the tests still pass, you know the behavior is unchanged.\n\nFinally, aim for **reusability**. If you find yourself writing similar code in multiple places, extract it into a function or class. Reusable components reduce duplication, which means fewer places to fix bugs. For example, a `format_date()` function can be used wherever dates appear, so a single update fixes the format everywhere.\n\nPutting it all together:\n\n1. **Organize** code into focused modules.  \n2. **Name** everything clearly and consistently.  \n3. **Document** the purpose, not the mechanics.  \n4. **Test** small pieces and their interactions.  \n5. **Version control** with clear commit messages.  \n6. **Refactor** regularly, keeping functions short and reusable.\n\nBy following these steps, your code will behave like a tidy, well‑labelled kitchen: anyone can find what they need, understand the recipe, and add new dishes without chaos. This is the essence of maintainable code.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "Why is it important to keep related functions in the same file or module?",
+   "a": "Keeping related functions together makes the code easier to read because a programmer can find all the pieces that work on the same task in one place. It also reduces the chance of duplicate code, since you can reuse the same function instead of writing a new one that does the same thing. Finally, when you need to change how that task works, you only have to edit one file, which lowers the risk of missing a spot and causing bugs."
+  },
+  {
+   "level": "Easy",
+   "q": "Give an example of a good variable name for storing a user's age and explain why it follows naming conventions.",
+   "a": "A good name is `userAge`. It follows the common camelCase convention used in many languages: the first word is all lower‑case (`user`) and each new word starts with a capital letter (`Age`). The name is descriptive, so anyone reading the code knows the variable holds the age of a user, and it contains no spaces or special characters, which are not allowed in identifiers."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare the purpose of comments and documentation strings (docstrings). When should each be used?",
+   "a": "Comments are short notes placed in the code to explain *why* something is done, to clarify a tricky algorithm, or to mark a TODO. They are meant for developers reading the source. Docstrings are special strings placed at the beginning of modules, classes, or functions; they describe *what* the component does, its parameters, return values, and possible exceptions. Docstrings can be accessed programmatically (e.g., via `help()` in Python) and are used to generate external documentation. Use comments for internal explanations and quick reminders; use docstrings for public‑facing descriptions that should be part of the official documentation."
+  },
+  {
+   "level": "Medium",
+   "q": "Explain how a simple version‑control workflow using Git works for a single developer working on a new feature.",
+   "a": "1. The developer starts with the latest code by running `git pull` to update the local repository. 2. They create a new branch for the feature: `git checkout -b feature‑login`. 3. They make changes, adding and editing files. 4. After each logical change they stage the modifications with `git add <files>` and commit them with a message: `git commit -m \"Add login form\"`. 5. When the feature is complete, they switch back to the main branch (`git checkout main`) and merge the feature branch: `git merge feature‑login`. 6. Finally, they push the updated main branch to the remote server with `git push`. This keeps the main line stable and isolates work on the new feature."
+  },
+  {
+   "level": "Hard",
+   "q": "You have a function `calculateTotal(price, tax)` that returns the total price including tax. Write a short docstring for this function, then show an example of a unit test that checks it works for `price = 100` and `tax = 0.07`. Explain each part of the test.",
+   "a": "Docstring:\n```python\ndef calculateTotal(price, tax):\n\"\"\"\nCalculate the total amount after adding tax.\nParameters\n----------\nprice : float\nThe base price of the item.\ntax : float\nThe tax rate as a decimal (e.g., 0.07 for 7%).\nReturns\n-------\nfloat\nThe total price including tax.\n\"\"\"\nreturn price * (1 + tax)\n```\nUnit test (using `unittest`):\n```python\nimport unittest\nclass TestCalculateTotal(unittest.TestCase):\ndef test_basic_case(self):\n# Arrange: set up inputs and expected result\nprice = 100\ntax = 0.07\nexpected = 107.0\n# Act: call the function\nresult = calculateTotal(price, tax)\n# Assert: verify the result matches expectation\nself.assertAlmostEqual(result, expected, places=2)\nif __name__ == '__main__':\nunittest.main()\n```\nExplanation:\n- **Arrange**: Define the known inputs (`price`, `tax`) and what we expect (`expected = 107.0`).\n- **Act**: Call `calculateTotal` with the inputs and store the output in `result`.\n- **Assert**: Use `assertAlmostEqual` because floating‑point arithmetic can introduce tiny rounding errors; we check the result is equal to 107.0 within two decimal places."
+  },
+  {
+   "level": "Hard",
+   "q": "A codebase uses snake_case for variables but camelCase for class names. A new developer suggests switching everything to PascalCase. Discuss the impact of this change on readability, tooling, and team collaboration. Provide at least three concrete points.",
+   "a": "1. **Readability Consistency** – The current mixed style (snake_case for variables, camelCase for classes) follows common language conventions (e.g., Python). Changing everything to PascalCase would make variable names look like class names, confusing readers about the role of each identifier. Consistent, conventional naming helps developers quickly identify whether something is a variable, function, or class.\n2. **Tooling and Linting** – Many linters (e.g., `flake8`, `pylint`) have rules that expect specific naming styles. Switching to PascalCase would cause a large number of style warnings or errors, requiring re‑configuration of the linter or massive code changes. Automated tools that generate documentation or perform static analysis might also misinterpret the new names.\n3. **Team Collaboration and Merge Conflicts** – The codebase already has many files with the existing naming scheme. Renaming every identifier would create a huge diff, increasing the risk of merge conflicts and making code reviews harder. It would also require all team members to update their local copies and IDE settings, slowing down development. The effort outweighs any marginal benefit, so it is better to keep the established conventions."
+  }
+ ],
+ "recap": "The lesson explains why organizing code into files, modules, and packages makes programs easier to read, change, and debug. It stresses clear naming, helpful comments and docstrings, and the importance of testing, version control, and writing maintainable code. By following these practices, developers create software that is reliable and easy for others (and future selves) to understand.",
+ "key_terms": [
+  {
+   "term": "Code organization",
+   "meaning": "Arranging program code into logical files, modules, or packages so each part has a clear purpose."
+  },
+  {
+   "term": "Naming conventions",
+   "meaning": "Consistent rules for choosing identifiers (variables, functions, classes) that describe their role."
+  },
+  {
+   "term": "Comment",
+   "meaning": "A line of text in source code ignored by the compiler/interpreter, used to explain what the code does."
+  },
+  {
+   "term": "Docstring",
+   "meaning": "A special multi‑line comment placed at the start of a module, class, or function that documents its purpose and usage."
+  },
+  {
+   "term": "Unit test",
+   "meaning": "A test that checks a single, isolated piece of code (usually a function) for correct behavior."
+  },
+  {
+   "term": "Version control system (VCS)",
+   "meaning": "Software that records changes to files over time, allowing you to revert, compare, and collaborate safely."
+  },
+  {
+   "term": "Maintainable code",
+   "meaning": "Code written so it remains easy to read, modify, and extend long after it was first created."
+  },
+  {
+   "term": "Single‑Responsibility Principle",
+   "meaning": "A design guideline stating that a module or class should have only one reason to change."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Why should a large program be split into multiple files or modules?",
+   "options": [
+    "It makes the program run faster",
+    "It reduces the number of lines of code",
+    "It improves readability and makes changes safer",
+    "It eliminates the need for testing"
+   ],
+   "answer": 2,
+   "why": "Separate files keep related code together, making it easier to understand and modify."
+  },
+  {
+   "q": "What is the main benefit of using clear naming conventions?",
+   "options": [
+    "They make the code compile faster",
+    "They allow the computer to understand the meaning of variables",
+    "They help humans read and understand the code quickly",
+    "They reduce the size of the source file"
+   ],
+   "answer": 2,
+   "why": "Good names act as a self‑describing story for anyone reading the code."
+  },
+  {
+   "q": "Which of the following is a docstring in Python?",
+   "options": [
+    "# This is a comment",
+    "/* documentation */",
+    "'''Function adds two numbers'''",
+    "// TODO: improve algorithm"
+   ],
+   "answer": 2,
+   "why": "Triple quotes create a documentation string that can be accessed at runtime."
+  },
+  {
+   "q": "What does a unit test focus on?",
+   "options": [
+    "Testing the whole application end‑to‑end",
+    "Checking the performance of the program",
+    "Verifying a single function or method works correctly",
+    "Ensuring the user interface looks good"
+   ],
+   "answer": 2,
+   "why": "Unit tests isolate the smallest piece of code to confirm its behavior."
+  },
+  {
+   "q": "Which statement best describes a version‑control system?",
+   "options": [
+    "It automatically writes code for you",
+    "It records every change to files and lets you revert or merge them",
+    "It formats code according to style guides",
+    "It runs tests on every commit"
+   ],
+   "answer": 1,
+   "why": "A VCS keeps a history of snapshots, enabling safe collaboration and rollback."
+  },
+  {
+   "q": "The Single‑Responsibility Principle advises that a module should:",
+   "options": [
+    "Handle input, processing, and output all together",
+    "Do only one kind of work or have one reason to change",
+    "Contain as many functions as possible",
+    "Be written in a single line of code"
+   ],
+   "answer": 1,
+   "why": "One responsibility per module reduces unintended side effects when changes are made."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Code organization",
+   "back": "Dividing code into files, modules, or packages so each part has a clear, separate job."
+  },
+  {
+   "front": "Naming conventions",
+   "back": "Standard ways to name variables, functions, and classes so their purpose is obvious."
+  },
+  {
+   "front": "Comment",
+   "back": "Text in code ignored by the computer, used to explain what the code does."
+  },
+  {
+   "front": "Docstring",
+   "back": "A special comment placed at the start of a module, class, or function that documents its purpose."
+  },
+  {
+   "front": "Unit test",
+   "back": "A test that checks a single function or method for correct output given specific inputs."
+  },
+  {
+   "front": "Version control system (VCS)",
+   "back": "Tool that tracks changes to code over time, allowing revert, compare, and collaborative work."
+  },
+  {
+   "front": "Maintainable code",
+   "back": "Code that remains easy to read, modify, and extend long after it was written."
+  },
+  {
+   "front": "Single‑Responsibility Principle",
+   "back": "Design rule that a module or class should have only one reason to change."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l15-file-organization-diagram",
+   "title": "Shows how a program can be split into folders, modules and files.",
+   "alt": "Shows how a program can be split into folders, modules and files.",
+   "priority": 8,
+   "picture_title": "File Organization Diagram",
+   "kind": "illustration",
+   "subject": "A simple tree diagram with a top‑level project folder containing sub‑folders for modules, each folder holding a few source files. The layout demonstrates logical grouping of related code.",
+   "layout": "Tree view with the project folder at the centre, branches to module folders on the left and right, and file icons at the ends of each branch.",
+   "labels": [
+    "Project",
+    "Module A",
+    "Module B",
+    "File 1",
+    "File 2",
+    "File 3"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l15-version-control-timeline",
+   "title": "Illustrates snapshots of code saved at different points.",
+   "alt": "Illustrates snapshots of code saved at different points.",
+   "priority": 7,
+   "picture_title": "Version Control Timeline",
+   "kind": "illustration",
+   "subject": "A horizontal line representing time, with numbered boxes (commits) showing a brief description of each change, and arrows pointing back to previous versions to show branching and merging.",
+   "layout": "Timeline across the centre, commit boxes stacked above it, arrows linking them, and a side branch splitting off and later merging back.",
+   "labels": [
+    "Commit 1",
+    "Commit 2",
+    "Branch",
+    "Merge",
+    "HEAD"
+   ],
+   "after": 4
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l15-commented-code-example",
+   "title": "A short code snippet with highlighted comment lines.",
+   "alt": "A short code snippet with highlighted comment lines.",
+   "priority": 5,
+   "picture_title": "Commented Code Example",
+   "kind": "illustration",
+   "subject": "A few lines of simple pseudo‑code where comment lines are shown in a different colour and marked with //, demonstrating how comments are ignored by the computer but help readers.",
+   "layout": "Code block centred, comment lines highlighted in green, regular code in black, with a small legend indicating ‘comment’.",
+   "labels": [],
+   "after": 2
+  },
+  {
+   "type": "parts",
+   "title": "Code Organization Parts",
+   "items": [
+    {
+     "name": "File",
+     "role": "holds related code together"
+    },
+    {
+     "name": "Module",
+     "role": "groups files with a common purpose"
+    },
+    {
+     "name": "Package",
+     "role": "contains multiple modules as a library"
+    },
+    {
+     "name": "Function",
+     "role": "does one small task inside a file"
+    }
+   ],
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Good vs Bad Naming",
+   "left": {
+    "name": "Clear Names",
+    "points": [
+     "Describe what the variable holds",
+     "Easy to read",
+     "Reduces bugs"
+    ]
+   },
+   "right": {
+    "name": "Vague Names",
+    "points": [
+     "Single letters like x, y",
+     "Hard to understand",
+     "Leads to mistakes"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "steps",
+   "title": "Simple Unit Test Process",
+   "steps": [
+    {
+     "label": "Write Test",
+     "text": "Create a test that calls the function with known input"
+    },
+    {
+     "label": "Run Test",
+     "text": "Execute the test and check the output"
+    },
+    {
+     "label": "Fix Code",
+     "text": "If the test fails, correct the function"
+    },
+    {
+     "label": "Repeat",
+     "text": "Add more tests for other cases"
+    }
+   ],
+   "loop": true,
+   "after": 3
+  },
+  {
+   "type": "parts",
+   "title": "Version Control Elements",
+   "items": [
+    {
+     "name": "Repository",
+     "role": "stores all file versions"
+    },
+    {
+     "name": "Commit",
+     "role": "records a snapshot with a message"
+    },
+    {
+     "name": "Branch",
+     "role": "creates an independent line of work"
+    },
+    {
+     "name": "Merge",
+     "role": "combines changes from branches"
+    }
+   ],
+   "after": 4
+  },
+  {
+   "type": "facts",
+   "title": "Benefits of Maintainable Code",
+   "items": [
+    {
+     "value": "Easier debugging",
+     "label": "Find bugs quickly"
+    },
+    {
+     "value": "Faster updates",
+     "label": "Add features with less risk"
+    },
+    {
+     "value": "Team friendly",
+     "label": "Others can understand your code"
+    },
+    {
+     "value": "Long‑term reuse",
+     "label": "Code lasts years"
+    }
+   ],
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}

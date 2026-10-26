@@ -1,0 +1,392 @@
+{
+ "title": "Advanced Programming Concepts",
+ "summary": "In this lesson students explore advanced programming concepts such as recursion, lambda functions, modules, libraries, higher‑order functions, and basic asynchronous programming. Each concept is introduced step‑by‑step with clear explanations and simple code snippets.",
+ "objectives": [
+  "Explain how recursion works and write a recursive function",
+  "Create and use lambda (anonymous) functions",
+  "Import and organize code with modules and libraries",
+  "Apply higher‑order functions to process collections",
+  "Write a basic asynchronous function using async/await"
+ ],
+ "prerequisites": "Students should already be comfortable with functions, loops, and basic input/output from earlier lessons.",
+ "why": [
+  "Modern software relies on reusable code, event‑driven designs, and efficient data processing. Understanding recursion, lambdas, and modules lets programmers write clearer, shorter, and more maintainable code.",
+  "Asynchronous programming is essential for responsive applications, such as web servers or mobile apps, where tasks run in the background without freezing the user interface. Mastering these concepts prepares students for real‑world development and further study."
+ ],
+ "sections": [
+  {
+   "heading": "Recursion Basics",
+   "body": "Recursion is a way of solving a problem by letting a function call **itself**.  \nThink of it like a set of Russian nesting dolls: each doll contains a smaller one, and the process stops when you reach the tiniest doll that cannot be opened any further. In a recursive function the “smallest doll” is called the **base case**, and the step that creates the next smaller problem is the **recursive step**.\n\n> **Definition:** *Recursion* – a programming technique where a function solves a problem by calling itself with a simpler input.\n\nWhy is this useful? Some problems are naturally defined in terms of smaller versions of themselves. For example, the number of ways to climb a staircase of *n* steps can be expressed using the ways to climb *n‑1* and *n‑2* steps. Writing the solution recursively mirrors the mathematical definition, often making the code shorter and easier to understand.\n\n### Everyday comparison\nImagine you are asked to count how many coins are in a stack. One way is to count each coin one by one. Another way is to take the top coin off, then ask the same question about the remaining stack, and finally add one for the coin you removed. The second method repeats the same question on a smaller stack until no coins are left – that moment when the stack is empty is the **base case**.\n\n### Building a simple recursive function: factorial\n\nThe factorial of a non‑negative integer *n* (written *n!*) is the product of all positive integers up to *n*.  \nMathematically:\n\n$$\nn! = \n\\begin{cases}\n1 & \\text{if } n = 0 \\\\\nn \\times (n-1)! & \\text{if } n > 0\n\\end{cases}\n$$\n\nNotice two parts:\n\n1. **Base case** – when *n = 0*, the result is defined as 1.  \n2. **Recursive step** – for *n > 0*, we multiply *n* by the factorial of the smaller number *(n‑1)*.\n\nNow we translate this directly into code (Python is used for illustration, but the idea works in any language).\n\n```python\ndef factorial(n):\n    # Base case: stop recursion when n reaches 0\n    if n == 0:\n        return 1\n    # Recursive step: call factorial with a smaller argument\n    else:\n        return n * factorial(n - 1)\n```\n\nLet’s walk through `factorial(3)` step by step:\n\n1. `factorial(3)` sees that `n` is not 0, so it returns `3 * factorial(2)`.  \n2. To compute `factorial(2)`, the function calls itself again, returning `2 * factorial(1)`.  \n3. `factorial(1)` returns `1 * factorial(0)`.  \n4. `factorial(0)` hits the base case and returns `1`.  \n\nNow the calls unwind:\n\n- `factorial(1)` becomes `1 * 1 = 1`.  \n- `factorial(2)` becomes `2 * 1 = 2`.  \n- `factorial(3)` becomes `3 * 2 = 6`.  \n\nThus `factorial(3)` correctly yields 6.\n\n> **Note:** Every recursive function must have **exactly one** base case and a recursive step that moves toward that base case. Without both, the function would call itself forever.\n\n### Visualising the call stack\nWhen a function calls itself, the computer keeps track of each unfinished call in a structure called the **call stack**. Think of it as a stack of plates: each new call puts a plate on top, and when a call finishes, its plate is removed. The base case is the bottom plate that never needs to call again, allowing the stack to start unwinding.\n\n> **Common mistake:** Forgetting the base case or writing the recursive step so it never reaches the base case. This leads to infinite recursion and eventually a *stack overflow* error.\n\n### When to prefer recursion\n- Problems that are naturally hierarchical (e.g., tree traversals, file system navigation).  \n- When a concise, readable solution is more important than raw speed.  \n- When you want to mirror a mathematical definition directly in code.\n\nHowever, recursion can use more memory than an equivalent **iterative** solution (a loop), because each call stores its own set of local variables. For very deep recursions, some languages offer *tail‑call optimization* to reuse stack frames, but Python does not, so be cautious with large inputs.\n\n> **Remember:** Always test your recursive function with the smallest inputs first (the base case) to confirm it stops correctly before trying larger values.\n\nIn summary, recursion lets a function solve a problem by breaking it into a smaller version of the same problem, solving that smaller version, and then combining the result with the current step. The factorial example shows the pattern clearly: a base case (`n == 0`) stops the recursion, and the recursive step (`n * factorial(n‑1)`) moves the computation toward that base case. Once you grasp this pattern, you can apply it to many other problems, such as computing Fibonacci numbers, searching trees, or processing nested data structures.",
+   "code": ""
+  },
+  {
+   "heading": "Lambda (Anonymous) Functions",
+   "body": "Lambda (anonymous) functions are tiny, nameless pieces of code that you can write in a single line.  \nThink of them as “quick notes” you jot down when you need a very short calculation, and then you throw the note away.  \nBecause they have no name, you cannot call them later by writing the name; you use them exactly where they are needed.\n\n**Why they are useful**  \nWhen a function does only one simple thing—like adding two numbers, converting a string to upper‑case, or checking if a value is even—it can be noisy to define a full `def` block with a name, a docstring, and a `return` statement. A lambda lets you express the same idea in just a few characters, keeping the surrounding code tidy.\n\n> **Definition:** A lambda function is created with the keyword `lambda`, followed by a list of parameters, a colon, and an expression. The expression’s value becomes the function’s return value.\n\nThe general syntax looks like this:\n\n$$\n\\text{lambda } \\text{parameters} : \\text{expression}\n$$\n\nFor example, a function that adds two numbers can be written as:\n\n```python\nadd = lambda x, y: x + y\n```\n\nHere `x` and `y` are the **parameters** (the inputs), the colon separates them from the **expression** `x + y`, and the whole line creates a function that returns the sum. You can now call it exactly like a normal function:\n\n```python\nresult = add(3, 5)   # result is 8\n```\n\n**When to use a lambda**  \nThe best situation for a lambda is when you need a short operation that will be passed as an argument to another function. Common places are:\n\n* `sorted` or `list.sort` where you specify a custom key:\n  ```python\n  names = [\"alice\", \"Bob\", \"charlie\"]\n  names.sort(key=lambda s: s.lower())   # sort ignoring case\n  ```\n* `map` to transform each element of a list:\n  ```python\n  numbers = [1, 2, 3]\n  squares = list(map(lambda n: n*n, numbers))   # [1, 4, 9]\n  ```\n* `filter` to keep only elements that satisfy a condition:\n  ```python\n  evens = list(filter(lambda n: n % 2 == 0, numbers))   # [2]\n  ```\n\n> **In daily life:** A lambda is like a “post‑it note” you stick on a toolbox. You write the instruction, use it once, and then discard it, instead of carving the instruction into a permanent block of wood.\n\n**Things to keep in mind**  \n\n* A lambda can contain only a single expression, not multiple statements. If you need loops, `if … else` blocks, or several lines, write a regular function with `def`.\n* The expression is evaluated **when the lambda is called**, not when it is created. This means you can capture variables from the surrounding scope (a feature called a *closure*).\n\n> **Note:** Even though lambdas are anonymous, you can assign them to a variable (as in `add = lambda …`). The variable name then becomes the way you refer to the function, but the function itself still has no internal name.\n\n**Common mistake**  \n\n> **Common mistake:** Trying to write a statement like `lambda x: print(x)` and expecting it to return the printed value. `print` returns `None`, so the lambda’s result is `None`. Use `lambda x: x` if you just want to pass the value through, or define a regular function if you need side effects.\n\n**Remember**  \n\n> **Remember:** Use lambdas for short, one‑line operations that are passed as arguments or used temporarily. When the logic grows beyond a single expression, switch to a normal `def` function for readability and maintainability.",
+   "code": ""
+  },
+  {
+   "heading": "Modules and Importing",
+   "body": "When a program gets larger, keeping every line in one file quickly becomes messy.  \nThink of a school project where each team member writes a separate chapter of a report.  \nWhen you combine the chapters you get the full document, but each chapter can still be read and edited on its own.  \nIn programming we do the same thing by **splitting code into separate files** and then **importing** the pieces we need.\n\n### Why split code?\n\n* **Readability** – a file that is a few dozen lines long is easier to understand than one that is thousands of lines.\n* **Re‑use** – the same piece of code can be used in many different programs without copying it each time.\n* **Collaboration** – different people can work on different files at the same time without stepping on each other’s toes.\n\n### Creating a module\n\nA file that contains Python definitions (functions, classes, variables) is called a **module**.  \nThe file name (without the “.py” extension) becomes the module’s name.\n\n```python\n# file: math_helpers.py\ndef square(x):\n    \"\"\"Return the square of x.\"\"\"\n    return x * x\n\nPI = 3.14159\n```\n\nHere `math_helpers.py` is a module that defines a function `square` and a constant `PI`.\n\n> **Definition:** A *module* is a Python file that groups related code so it can be imported elsewhere.\n\n### Importing a module\n\nTo use the code from another file, we write an **import statement** at the top of our script.\n\n```python\n# file: main.py\nimport math_helpers          # loads the whole module\nprint(math_helpers.square(5))   # calls the function\nprint(math_helpers.PI)          # accesses the constant\n```\n\nWhen Python sees `import math_helpers`, it looks for a file named `math_helpers.py` in the same directory (or in a directory listed in `sys.path`). It then creates a **module object** named `math_helpers` that contains everything defined in that file.\n\n#### Importing only what you need\n\nIf you only need one function, you can import it directly:\n\n```python\nfrom math_helpers import square\nprint(square(7))\n```\n\nNow the name `square` is available without the `math_helpers.` prefix.\n\nYou can also give an imported name a **nickname** (called an *alias*) to make it shorter:\n\n```python\nimport math_helpers as mh\nprint(mh.square(3))\n```\n\n> **Note:** Using `from module import *` (the asterisk) brings *all* names into the current namespace. This is discouraged because it can hide where a name came from and cause accidental overwriting.\n\n### The standard library\n\nPython ships with a large collection of ready‑made modules called the **standard library**.  \nThese are like a toolbox that comes with the language; you do not need to install anything extra.\n\nSome useful standard‑library modules:\n\n| Module | What it helps you do |\n|--------|----------------------|\n| `random` | Generate random numbers, pick items from a list |\n| `datetime` | Work with dates and times |\n| `os` | Interact with the operating system (files, directories) |\n| `json` | Read and write JSON data, a common format for web communication |\n| `math` | Advanced mathematical functions (sin, log, etc.) |\n\nYou import them exactly the same way as your own modules:\n\n```python\nimport random\nprint(random.randint(1, 10))   # random integer between 1 and 10\n```\n\n### Where Python looks for modules\n\nWhen an `import` statement runs, Python searches in a specific order:\n\n1. The **current directory** (the folder containing the script you are running).\n2. The directories listed in the environment variable `PYTHONPATH` (if you set it).\n3. The **standard library** directories.\n4. Any **site‑packages** directories where third‑party libraries are installed.\n\nIf Python cannot find a file with the requested name, it raises a `ModuleNotFoundError`.\n\n> **Common mistake:** Forgetting to put the module file in the same folder (or in a folder that Python searches) leads to this error. Double‑check the file location and spelling of the module name.\n\n### A small project example\n\nSuppose you are building a simple text‑based game. You could organize it like this:\n\n```\ngame/\n│   main.py          # starts the game\n│   player.py        # defines the Player class\n│   enemy.py         # defines the Enemy class\n│   utils.py         # helper functions such as roll_dice()\n```\n\n`main.py` might contain:\n\n```python\nfrom player import Player\nfrom enemy import Enemy\nfrom utils import roll_dice\n\ndef start():\n    hero = Player(\"Aria\")\n    monster = Enemy(\"Goblin\")\n    # use roll_dice() to decide who attacks first\n    ...\n\nif __name__ == \"__main__\":\n    start()\n```\n\nEach file focuses on one responsibility, making the whole project easier to read and modify.\n\n> **Remember:** Keep modules small and focused. If a file starts to hold many unrelated functions, consider breaking it into two modules.\n\nBy splitting code into modules and using the import system, you turn a tangled script into a clean, maintainable collection of building blocks—just like chapters in a well‑organized book.",
+   "code": ""
+  },
+  {
+   "heading": "Using External Libraries",
+   "body": "When you write a program, you often need tools that are not built into the language itself.  \nAn **external library** is a collection of ready‑made code that someone else has written and shared, so you can reuse it instead of starting from scratch.  \n\n> **Definition:** An external library is a separate package of code that you can add to your project to gain new functionality.\n\n---\n\n### Installing a library\n\nBefore you can use a library, you have to **install** it on your computer.  \nThe most common way to do this in Python is with the package manager **pip** (short for *Package Installer for Python*). Think of pip as a vending machine for code: you tell it the name of the snack (the library) you want, and it drops the package into your environment.\n\n1. Open a terminal or command prompt.  \n2. Type the command  \n\n   ```bash\n   pip install random2\n   ```  \n\n   Here, `random2` is a small library that extends the built‑in `random` module.  \n3. Press **Enter**. Pip contacts the online Python Package Index, downloads the files, and places them where Python can find them.\n\nIf you are using a virtual environment (a separate folder that isolates your project’s packages), make sure it is activated before running the command. This keeps your main Python installation clean.\n\n> **Note:** On some systems the command may be `python -m pip install …` or `pip3 install …` if you have multiple Python versions.\n\n---\n\n### Importing a library\n\nAfter installation, the library lives on your computer, but your program still has to **import** it – that is, tell Python, “I want to use the code from this package now.”  \n\n```python\nimport random2\n```\n\nThe word **import** works like opening a toolbox and taking out the specific tools you need. Once imported, you can call any function that the library provides, using the syntax `library_name.function_name()`.\n\n---\n\n### A simple example: generating random numbers\n\nThe built‑in `random` module already lets you pick random numbers, but the external `random2` library adds a convenient function called `randint_inclusive` that includes both end points. Let’s see it in action.\n\n```python\nimport random2   # bring the library into our program\n\n# Generate a random integer between 1 and 10, inclusive\nnumber = random2.randint_inclusive(1, 10)\n\nprint(\"Your lucky number is:\", number)\n```\n\nWhen you run this script, Python looks for `random2` in the places where pip installed it, loads the module, and then executes the `randint_inclusive` function. Each time you run the program, you’ll likely see a different number because the function uses a random algorithm.\n\n> **In daily life:** Using an external library is like borrowing a kitchen appliance—say, a blender—from a neighbor instead of buying your own. You still need to plug it in (install) and turn it on (import) before you can make a smoothie (use its functions).\n\n---\n\n### Why use external libraries?\n\n- **Save time:** Complex tasks such as image processing, web requests, or data analysis already have well‑tested libraries.  \n- **Reduce errors:** Established libraries are maintained by many developers, so bugs are found and fixed faster than in a small personal script.  \n- **Learn best practices:** Reading library code shows you how experienced programmers solve problems.\n\n---\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to install the library before importing it.  \nIf you write `import random2` without running `pip install random2` first, Python will raise a `ModuleNotFoundError`. The error message tells you the module cannot be found, which usually means the installation step was missed or you are using the wrong Python environment.\n\n---\n\n### Quick checklist\n\n1. **Find** the library you need (search PyPI, the Python Package Index).  \n2. **Install** it with `pip install library_name`.  \n3. **Import** it in your script with `import library_name`.  \n4. **Use** the functions or classes the library provides.\n\n> **Remember:** Every external library starts as a set of files on your computer; pip puts those files in the right place, and `import` makes them available to your code. By following these steps, you can extend your programs with powerful new capabilities quickly and safely.",
+   "code": ""
+  },
+  {
+   "heading": "Higher‑Order Functions",
+   "body": "Higher‑order functions are simply functions that **work with other functions**.  \nThey can receive a function as an argument, return a new function, or both.  \nThink of a higher‑order function as a *tool* that lets you plug in a small piece of logic and have the tool apply that logic many times for you.\n\n> **Definition:** A higher‑order function is a function that takes another function as a parameter, returns a function, or does both.\n\nWhy is this useful?  \nWhen you write the same pattern of looping or processing over data many times, you can keep the pattern in one place and only change the tiny piece that varies. This reduces duplicated code, makes programs easier to read, and helps you reason about each part separately.\n\n### Everyday comparison\nImagine a bakery that makes different kinds of pastries. The bakery has a *mixer* that can blend any ingredients you give it. The mixer itself does not care whether you are making a croissant, a muffin, or a bagel; it just follows the recipe you hand over. In programming, the mixer is the higher‑order function, and the recipe you give it is the ordinary function you pass as an argument.\n\n### The built‑in higher‑order functions `map` and `filter`\n\nPython (and many other languages) already provides two very common higher‑order functions: `map` and `filter`.\n\n#### `map`\n`map` applies a given function to every item in an iterable (like a list) and returns a new iterable with the results.\n\n```python\nnumbers = [1, 2, 3, 4]\nsquared = list(map(lambda x: x ** 2, numbers))\n# squared is now [1, 4, 9, 16]\n```\n\nIn the example above:\n\n* `lambda x: x ** 2` is an **anonymous function** (a function without a name) that squares its input.\n* `map` takes that function and the list `numbers`, then produces a new list where each element has been squared.\n\nThe underlying idea can be written as a simple formula:\n\n$$\n\\text{map}(f, [a_1, a_2, \\dots, a_n]) = [f(a_1), f(a_2), \\dots, f(a_n)]\n$$\n\n#### `filter`\n`filter` keeps only the items that satisfy a condition defined by a function that returns `True` or `False`.\n\n```python\nnumbers = [1, 2, 3, 4, 5, 6]\nevens = list(filter(lambda x: x % 2 == 0, numbers))\n# evens is now [2, 4, 6]\n```\n\nHere the anonymous function checks whether a number is even. `filter` builds a new list containing only the numbers for which the function returned `True`.\n\nThe mathematical view is:\n\n$$\n\\text{filter}(p, [a_1, a_2, \\dots, a_n]) = [a_i \\mid p(a_i) = \\text{True}]\n$$\n\n> **Note:** `map` changes each element, while `filter` decides which elements to keep.\n\n### Writing your own higher‑order function\n\nYou can create a higher‑order function whenever you notice a repeated pattern. Suppose you often need to apply a transformation to every element of a list, but you also want to optionally skip elements that do not meet a certain condition. A custom function can combine the ideas of `map` and `filter`.\n\n```python\ndef map_if(func, condition, iterable):\n    \"\"\"\n    Apply `func` to each item in `iterable` only if `condition(item)` is True.\n    Return a new list with the transformed items; items that fail the condition\n    are left unchanged.\n    \"\"\"\n    result = []\n    for item in iterable:\n        if condition(item):\n            result.append(func(item))\n        else:\n            result.append(item)\n    return result\n```\n\nUsing it:\n\n```python\nwords = [\"apple\", \"Banana\", \"cherry\", \"Date\"]\n# Capitalize only the words that start with a lowercase letter\ncapitalized = map_if(str.upper, lambda w: w[0].islower(), words)\n# capitalized -> ['APPLE', 'Banana', 'CHERRY', 'Date']\n```\n\nIn this example:\n\n* `func` (`str.upper`) is the transformation we want to apply.\n* `condition` (`lambda w: w[0].islower()`) decides whether to apply it.\n* `map_if` loops through the list once, applying the logic exactly where needed.\n\n> **Remember:** A higher‑order function lets you separate *what* you want to do (the small function) from *how* you want to do it (the higher‑order wrapper).\n\n### Benefits recap\n* **Reusability:** Write the looping logic once, reuse it with many different small functions.\n* **Clarity:** The main program reads like a sentence – “map each number to its square”, “filter out the odds”.\n* **Flexibility:** You can easily change the behavior by swapping the passed‑in function without touching the surrounding code.\n\nBy mastering higher‑order functions, you gain a powerful tool for building clean, modular programs that are easy to extend and maintain.",
+   "code": ""
+  },
+  {
+   "heading": "Basic Asynchronous Programming",
+   "body": "Imagine you have a list of chores to do: washing dishes, watering the plants, and waiting for a pizza delivery. If you did each chore one after the other, you would sit idle while the pizza driver drives to your house. In programming we face the same problem when a task has to **wait** for something outside the computer – for example, a response from a web server. While we are waiting, the computer could be doing other useful work, but a normal (synchronous) function blocks everything until the waiting is finished.\n\n> **In daily life:** Think of a restaurant kitchen where the chef prepares a soup, then puts it on the stove and waits for it to boil. Instead of standing by the pot, the chef can start chopping vegetables for the next dish. The waiting time is used for other work.\n\n### What “asynchronous” means\n\n*Asynchronous* (often shortened to *async*) describes code that can start a task, **continue** running other code, and later **receive** the result when the task finishes. The key words in Python are `async` and `await`.\n\n- `async` marks a **coroutine** – a special kind of function that can be paused and resumed.\n- `await` tells the coroutine to **pause** until another coroutine finishes and gives back a value.\n\nWhen a coroutine is paused, the Python interpreter does not waste CPU cycles; it hands control back to the **event loop**. The event loop is a tiny manager that keeps track of all paused coroutines and wakes them up as soon as the data they are waiting for becomes available.\n\n> **Definition:** An *event loop* is a continuously running process that schedules and runs asynchronous tasks, resuming each one when its awaited operation is ready.\n\n### A tiny example with `asyncio`\n\nPython’s standard library provides the `asyncio` module, which contains an event loop and many helper functions. Let’s write a very small program that pretends to fetch data from the internet.\n\n```python\nimport asyncio\nimport random\n\nasync def fake_fetch(url):\n    # Simulate network latency with a random sleep\n    delay = random.uniform(0.5, 2.0)\n    await asyncio.sleep(delay)          # pause here, let the loop run other tasks\n    return f\"Data from {url} (took {delay:.2f}s)\"\n\nasync def main():\n    urls = [\"https://example.com/a\", \"https://example.com/b\", \"https://example.com/c\"]\n    tasks = [asyncio.create_task(fake_fetch(u)) for u in urls]\n\n    # Gather runs all tasks concurrently and returns their results in order\n    results = await asyncio.gather(*tasks)\n    for r in results:\n        print(r)\n\n# Start the event loop and run the main coroutine\nasyncio.run(main())\n```\n\nExplanation step‑by‑step:\n\n1. `async def fake_fetch(url):` declares a coroutine named `fake_fetch`.  \n2. Inside it, `await asyncio.sleep(delay)` **awaits** a built‑in asynchronous sleep. While the coroutine is sleeping, the event loop can run other coroutines (like the other `fake_fetch` calls).  \n3. `async def main():` is another coroutine that creates three tasks with `asyncio.create_task`. A *task* is a coroutine that the event loop will manage.  \n4. `await asyncio.gather(*tasks)` tells the event loop: *run all these tasks at the same time and give me a list of their results when they are all done*.  \n5. `asyncio.run(main())` starts the event loop, runs `main`, and shuts the loop down when `main` finishes.\n\nBecause each `fake_fetch` pauses for a different random time, the total running time is roughly the **longest** delay, not the sum of all delays. If the delays were 0.8 s, 1.5 s, and 1.2 s, the whole program finishes in about 1.5 s instead of 3.5 s.\n\n> **Note:** `await` can only be used inside an `async` function. Trying to use it elsewhere raises a `SyntaxError`.\n\n### Why async is useful\n\n- **Responsiveness:** In a graphical user interface, async code prevents the window from freezing while waiting for a file download.\n- **Scalability:** A web server can handle thousands of connections with a single thread, because each request is an async coroutine that yields while waiting for network I/O.\n- **Resource efficiency:** No need to create many OS threads, which consume memory and context‑switching overhead.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting to `await` a coroutine. If you call `fake_fetch(url)` without `await`, you get a coroutine object that never runs, and the program will not perform the intended work.\n\n### Quick checklist\n\n> **Remember:**  \n> 1. Mark a function with `async def` to make it a coroutine.  \n> 2. Use `await` **only** inside an `async` function, and only on awaitable objects (other coroutines, `asyncio.sleep`, I/O functions, etc.).  \n> 3. Start the whole process with an event loop (`asyncio.run` or a manually created loop).  \n\nWith these ideas, you can now write code that does many things at once without blocking, just like a chef who multitasks while the soup simmers.",
+   "code": ""
+  },
+  {
+   "heading": "Putting It All Together",
+   "body": "Imagine you want to look through every file in a folder, count how many lines each file has, and then write a short report.  \nDoing this the **old-fashioned way** would mean:  \n\n1. Walk through the directory tree one folder after another.  \n2. Open each file, read it line by line, count the lines, close the file.  \n3. Store the result somewhere and finally print the report.\n\nNow picture a **team of helpers**: one helper walks the tree, another counts lines, a third writes the report, and they all talk to each other without waiting for the previous step to finish.  \nThat is exactly what we can build with **recursion**, **lambda (anonymous) functions**, **modules**, **higher‑order functions**, and **asynchronous programming**.  \n\n---\n\n### 1. The project layout (modules)\n\nWe split the code into three small files (modules).  \nA *module* is just a separate Python file that can be **imported** by other files, like a toolbox you can carry around.\n\n```\nproject/\n│─ scanner.py      # walks the directory tree (recursive, async)\n│─ counter.py      # counts lines in a file (uses a lambda)\n│─ reporter.py     # formats and prints the final report\n│─ main.py         # puts everything together\n```\n\n> **Definition:** A **module** is a file containing Python definitions (functions, classes, variables) that can be reused in other files by using the `import` statement.\n\n---\n\n### 2. Walking the tree recursively and asynchronously  \n\nIn `scanner.py` we write an **asynchronous** function `scan_dir`.  \n*Asynchronous* means the function can start a long‑running operation (like reading a disk) and then **pause** while the operation finishes, allowing other code to run in the meantime.  \nWe use `async def` to declare such a function and `await` to pause until a sub‑task is done.\n\n```python\n# scanner.py\nimport os\nimport asyncio\nfrom counter import count_lines_async\n\nasync def scan_dir(path, process_file):\n    \"\"\"Recursively walk `path` and call `process_file` for each file.\"\"\"\n    for entry in os.scandir(path):\n        if entry.is_dir():\n            # recursion: call ourselves for the sub‑directory\n            await scan_dir(entry.path, process_file)\n        else:\n            # async call to count lines; we do not block here\n            await process_file(entry.path)\n```\n\nThe recursion is the line `await scan_dir(entry.path, process_file)`.  \nEach call handles a smaller part of the directory tree until there are no more sub‑folders.\n\n> **In daily life:** Think of recursion like a set of Russian nesting dolls: you open one doll, find a smaller doll inside, open that one, and keep going until the smallest doll (the base case) has no more dolls inside.\n\n---\n\n### 3. Counting lines with a lambda  \n\n`counter.py` contains a tiny helper that reads a file **asynchronously** and returns the line count.  \nWe use a **lambda** – a short, unnamed function – to transform the raw text into a number.\n\n```python\n# counter.py\nimport aiofiles   # external library for async file I/O\n\nasync def count_lines_async(file_path):\n    async with aiofiles.open(file_path, mode='r') as f:\n        content = await f.read()\n    # lambda takes the whole text and returns its line count\n    line_counter = lambda txt: txt.count('\\n') + 1 if txt else 0\n    return line_counter(content)\n```\n\n> **Note:** A **lambda function** is written as `lambda arguments: expression`. It can be used when you need a simple function only once, so you don’t have to give it a name.\n\n---\n\n### 4. Higher‑order function that collects results  \n\nA **higher‑order function** is a function that receives another function as an argument or returns one.  \nIn `reporter.py` we create `make_reporter` which returns a new function that stores results and later prints them.\n\n```python\n# reporter.py\ndef make_reporter():\n    results = []                     # closed over by the inner function\n\n    def add_result(file_path, line_count):\n        results.append((file_path, line_count))\n\n    def print_report():\n        for path, cnt in sorted(results):\n            print(f\"{path}: {cnt} lines\")\n        print(f\"Total files: {len(results)}\")\n    return add_result, print_report\n```\n\n`make_reporter` returns **two** functions: one to add a result (`add_result`) and one to display everything (`print_report`).  \nBecause `add_result` closes over the `results` list, it remembers all the data without using global variables.\n\n---\n\n### 5. Putting everything together in `main.py`\n\nNow we import the three modules, create the reporter, and start the asynchronous scan.\n\n```python\n# main.py\nimport asyncio\nfrom scanner import scan_dir\nfrom counter import count_lines_async\nfrom reporter import make_reporter\n\nasync def main():\n    add_result, print_report = make_reporter()\n\n    async def process(file_path):\n        lines = await count_lines_async(file_path)\n        add_result(file_path, lines)\n\n    await scan_dir('sample_folder', process)\n    print_report()\n\nif __name__ == '__main__':\n    asyncio.run(main())\n```\n\n* Step 1: `make_reporter()` gives us `add_result` and `print_report`.  \n* Step 2: `process` is a small **lambda‑like** helper (written as a normal `async def` for clarity) that calls the async line counter and stores the outcome.  \n* Step 3: `scan_dir` walks the directory tree recursively, calling `process` for each file **without waiting** for the previous file to finish.  \n* Step 4: After the whole tree is scanned, `print_report()` shows the collected data.\n\n> **Remember:** Asynchronous code does not mean “runs in parallel threads”; it means “does not block while waiting”. The event loop (`asyncio.run`) switches between tasks, giving the illusion of many things happening at once.\n\n---\n\n### 6. Why this matters  \n\n* **Modularity** – each module does one clear job, making the code easier to test and reuse.  \n* **Performance** – async I/O lets the program handle thousands of files quickly because it never sits idle while the disk reads.  \n* **Readability** – lambdas keep tiny transformations short, and higher‑order functions let us build flexible pipelines without global state.  \n* **Scalability** – you can replace `count_lines_async` with any other analysis (e.g., counting words) without touching the scanner or reporter.\n\nBy combining recursion, lambdas, modules, higher‑order functions, and async calls, we have built a compact yet powerful file‑scanning tool that mirrors how larger real‑world applications are structured.",
+   "code": ""
+  }
+ ],
+ "examples": [],
+ "examples_version": 3,
+ "practice": [
+  {
+   "level": "Easy",
+   "q": "What is a recursive function and how does it differ from a regular (iterative) function?",
+   "a": "A recursive function is a function that calls itself inside its own definition. It solves a problem by breaking it into smaller sub‑problems of the same type. In contrast, a regular (iterative) function uses loops (for, while) to repeat work. Example: To compute the factorial of n, a recursive version calls factorial(n‑1) until it reaches 1, while an iterative version multiplies numbers in a loop from 1 to n."
+  },
+  {
+   "level": "Easy",
+   "q": "Explain in one sentence what a lambda (anonymous) function is in Python.",
+   "a": "A lambda function is a small, unnamed function defined with the keyword `lambda` that can take any number of arguments but can only contain a single expression."
+  },
+  {
+   "level": "Medium",
+   "q": "Write a Python function `sum_list(lst)` that uses recursion to return the sum of all numbers in a list `lst`. Show the steps of how it works on the list `[3, 5, 2]`.",
+   "a": "\n1. Define the function:\n```python\ndef sum_list(lst):\nif not lst:               # base case: empty list\nreturn 0\nreturn lst[0] + sum_list(lst[1:])   # recursive step\n```\n2. Call `sum_list([3,5,2])`.\n- First call: `lst = [3,5,2]`. Not empty, so return `3 + sum_list([5,2])`.\n- Second call: `lst = [5,2]`. Return `5 + sum_list([2])`.\n- Third call: `lst = [2]`. Return `2 + sum_list([])`.\n- Fourth call: `lst = []`. Base case, return `0`.\n- Unwind: third call returns `2 + 0 = 2`.\n- Second call returns `5 + 2 = 7`.\n- First call returns `3 + 7 = 10`.\nResult: `10`."
+  },
+  {
+   "level": "Medium",
+   "q": "Compare the use of a module (`math`) imported with `import math` versus `from math import sqrt`. When would you choose each style?",
+   "a": "\n- `import math` brings the whole module into the namespace under the name `math`. You must call functions with the prefix, e.g., `math.sqrt(9)`. This makes it clear where `sqrt` comes from and avoids name clashes.\n- `from math import sqrt` imports only the `sqrt` function directly into the current namespace, so you call it as `sqrt(9)`. This is shorter but can overwrite an existing `sqrt` name.\n- Choose `import math` when you need many functions from the module or want to keep the source explicit.\n- Choose `from math import sqrt` when you only need one or two functions and want concise code."
+  },
+  {
+   "level": "Hard",
+   "q": "Write a higher‑order function `apply_twice(func, value)` that takes a function `func` and a value, applies `func` to the value, then applies `func` again to the result, and returns the final result. Demonstrate it with a lambda that adds 3, using the initial value 5.",
+   "a": "\n1. Define the higher‑order function:\n```python\ndef apply_twice(func, value):\nfirst = func(value)      # apply once\nsecond = func(first)     # apply again\nreturn second\n```\n2. Create a lambda that adds 3:\n```python\nadd_three = lambda x: x + 3\n```\n3. Call `apply_twice(add_three, 5)`:\n- First application: `add_three(5)` → `5 + 3 = 8`.\n- Second application: `add_three(8)` → `8 + 3 = 11`.\n- The function returns `11`.\nResult: `11`."
+  },
+  {
+   "level": "Hard",
+   "q": "Explain how asynchronous programming with `asyncio` can improve the performance of a program that needs to download data from three different URLs. Outline the steps using `async def`, `await`, and `asyncio.gather`, without writing full code.",
+   "a": "\n1. Define an `async def fetch(url)` coroutine that opens a network connection, sends the request, and uses `await` to pause until the response arrives.\n2. In the main coroutine, create three `fetch` coroutine objects, one for each URL.\n3. Use `await asyncio.gather(fetch1, fetch2, fetch3)` to run all three coroutines concurrently. `gather` schedules them together and waits until all finish.\n4. Because each `fetch` yields control while waiting for I/O, the event loop can switch to another `fetch` that is ready, so the three downloads overlap in time.\n5. The program finishes faster than a sequential version where each download blocks the whole program until it completes."
+  }
+ ],
+ "recap": "This lesson introduced recursion as functions calling themselves with a base case, lambda (anonymous) functions for short, one‑line operations, and the use of modules to split code into separate files. It explained external libraries and how to install them with pip, and described higher‑order functions that take or return other functions. Finally, it covered basic asynchronous programming, showing how tasks can run without waiting for each other, and combined all concepts in a small project example.",
+ "key_terms": [
+  {
+   "term": "Recursion",
+   "meaning": "A function that solves a problem by calling itself with a simpler input until a base case is reached."
+  },
+  {
+   "term": "Base case",
+   "meaning": "The condition that stops a recursive function from calling itself again."
+  },
+  {
+   "term": "Lambda function",
+   "meaning": "An anonymous, one‑line function created with the keyword lambda."
+  },
+  {
+   "term": "Module",
+   "meaning": "A separate Python file containing definitions that can be imported into other files."
+  },
+  {
+   "term": "External library",
+   "meaning": "A collection of pre‑written code packaged separately that can be installed and used in a project."
+  },
+  {
+   "term": "Higher‑order function",
+   "meaning": "A function that takes another function as an argument, returns a function, or both."
+  },
+  {
+   "term": "Asynchronous programming",
+   "meaning": "Running tasks that can start, wait, and resume without blocking other code."
+  },
+  {
+   "term": "pip",
+   "meaning": "Python's package manager used to install external libraries."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What stops a recursive function from calling itself forever?",
+   "options": [
+    "The recursive step",
+    "The base case",
+    "A lambda expression",
+    "An import statement"
+   ],
+   "answer": 1,
+   "why": "The base case defines when the recursion ends."
+  },
+  {
+   "q": "Which keyword creates an anonymous function in Python?",
+   "options": [
+    "def",
+    "func",
+    "lambda",
+    "anonymous"
+   ],
+   "answer": 2,
+   "why": "The lambda keyword defines a one‑line anonymous function."
+  },
+  {
+   "q": "What is the main benefit of splitting code into modules?",
+   "options": [
+    "It makes the program run faster",
+    "It improves readability and re‑use",
+    "It removes the need for functions",
+    "It eliminates recursion"
+   ],
+   "answer": 1,
+   "why": "Modules keep code organized, easier to read, and reusable."
+  },
+  {
+   "q": "How do you install the external library 'random2' using pip?",
+   "options": [
+    "pip add random2",
+    "pip install random2",
+    "install random2",
+    "pip get random2"
+   ],
+   "answer": 1,
+   "why": "The correct pip command is 'pip install random2'."
+  },
+  {
+   "q": "Which of the following is a higher‑order function in Python?",
+   "options": [
+    "len()",
+    "map()",
+    "print()",
+    "range()"
+   ],
+   "answer": 1,
+   "why": "map() takes another function as an argument, making it higher‑order."
+  },
+  {
+   "q": "What does asynchronous code allow a program to do?",
+   "options": [
+    "Run multiple tasks without waiting for each other",
+    "Execute only one task at a time",
+    "Avoid using functions",
+    "Force all code to be sequential"
+   ],
+   "answer": 0,
+   "why": "Asynchronous code lets tasks run concurrently, using waiting time for other work."
+  }
+ ],
+ "flashcards": [
+  {
+   "front": "Recursion",
+   "back": "A function that calls itself with a simpler input until a base case is met."
+  },
+  {
+   "front": "Base case",
+   "back": "The condition that ends recursion."
+  },
+  {
+   "front": "Lambda function",
+   "back": "A short, anonymous function defined with the keyword lambda."
+  },
+  {
+   "front": "Module",
+   "back": "A separate .py file that can be imported to reuse its code."
+  },
+  {
+   "front": "External library",
+   "back": "Pre‑written code packaged separately, installed via pip."
+  },
+  {
+   "front": "Higher‑order function",
+   "back": "A function that takes another function as an argument or returns one."
+  },
+  {
+   "front": "Asynchronous programming",
+   "back": "Running tasks that can start, wait, and resume without blocking other code."
+  },
+  {
+   "front": "pip",
+   "back": "Python's package installer used to download and install external libraries."
+  }
+ ],
+ "diagrams": [
+  {
+   "type": "image",
+   "file": "programming-course-l13-recursive-dolls",
+   "title": "A set of nesting dolls showing the base case and recursive step.",
+   "alt": "A set of nesting dolls showing the base case and recursive step.",
+   "priority": 9,
+   "picture_title": "Recursive Dolls",
+   "kind": "illustration",
+   "subject": "A series of Russian nesting dolls where each larger doll contains a smaller one, with the smallest doll highlighted as the base case. Arrows indicate the process of opening each doll to reach the next smaller one.",
+   "layout": "Dolls arranged from largest on the left to smallest on the right, with arrows pointing from one doll to the next and a label on the smallest doll.",
+   "labels": [
+    "largest doll",
+    "next doll",
+    "smaller doll",
+    "base case"
+   ],
+   "after": 0
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l13-code-modules",
+   "title": "Separate files acting as chapters that are imported into a main program.",
+   "alt": "Separate files acting as chapters that are imported into a main program.",
+   "priority": 8,
+   "picture_title": "Code Modules",
+   "kind": "illustration",
+   "subject": "Three separate file icons labeled 'module1.py', 'module2.py', and 'module3.py' feeding into a larger file icon labeled 'main.py' to show how modules are imported.",
+   "layout": "File icons placed side‑by‑side on the left, arrows pointing from each to a central main file icon on the right.",
+   "labels": [
+    "module1",
+    "module2",
+    "module3",
+    "main program"
+   ],
+   "after": 2
+  },
+  {
+   "type": "image",
+   "file": "programming-course-l13-external-library",
+   "title": "A library package being added to a project.",
+   "alt": "A library package being added to a project.",
+   "priority": 7,
+   "picture_title": "External Library",
+   "kind": "illustration",
+   "subject": "A box labeled 'External Library' with a download arrow pointing to a computer screen that shows a simple program using a function from that library.",
+   "layout": "Box on the left, arrow pointing to a screen on the right, with a small code snippet displayed on the screen.",
+   "labels": [
+    "library",
+    "download",
+    "program"
+   ],
+   "after": 3
+  },
+  {
+   "type": "steps",
+   "title": "How Recursion Works",
+   "steps": [
+    {
+     "label": "Base case",
+     "text": "Stop when the smallest problem is solved"
+    },
+    {
+     "label": "Recursive step",
+     "text": "Call the same function with a simpler input"
+    },
+    {
+     "label": "Combine results",
+     "text": "Use the result of the smaller call to build the larger answer"
+    }
+   ],
+   "loop": false,
+   "after": 0
+  },
+  {
+   "type": "compare",
+   "title": "Lambda vs. Named Function",
+   "left": {
+    "name": "Lambda",
+    "points": [
+     "One‑line definition",
+     "No name, used inline",
+     "Good for short, simple tasks"
+    ]
+   },
+   "right": {
+    "name": "Named function",
+    "points": [
+     "Defined with def and a name",
+     "Can be called many times",
+     "Better for longer, reusable code"
+    ]
+   },
+   "after": 1
+  },
+  {
+   "type": "parts",
+   "title": "Structure of a Python Module",
+   "items": [
+    {
+     "name": "module file",
+     "role": "holds related functions, classes, constants"
+    },
+    {
+     "name": "import statement",
+     "role": "makes the module’s contents available"
+    },
+    {
+     "name": "namespace",
+     "role": "prevents name clashes between modules"
+    },
+    {
+     "name": "package folder",
+     "role": "groups several modules together"
+    }
+   ],
+   "after": 2
+  },
+  {
+   "type": "facts",
+   "title": "External Library Basics",
+   "items": [
+    {
+     "value": "pip",
+     "label": "default Python package manager"
+    },
+    {
+     "value": "PyPI",
+     "label": "online repository of libraries"
+    },
+    {
+     "value": "install with: pip install <name>",
+     "label": "command to add a library"
+    },
+    {
+     "value": "import library_name",
+     "label": "make it usable in code"
+    }
+   ],
+   "after": 3
+  },
+  {
+   "type": "compare",
+   "title": "Synchronous vs. Asynchronous Code",
+   "left": {
+    "name": "Synchronous",
+    "points": [
+     "Runs one task at a time",
+     "Waits for each operation to finish",
+     "Simple but can be slow"
+    ]
+   },
+   "right": {
+    "name": "Asynchronous",
+    "points": [
+     "Can start other tasks while waiting",
+     "Uses async/await or callbacks",
+     "More efficient for I/O‑bound work"
+    ]
+   },
+   "after": 5
+  }
+ ],
+ "images_version": 5,
+ "reviewed": false,
+ "models": [
+  "openai/gpt-oss-120b"
+ ]
+}
