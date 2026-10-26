@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **29** | Uploaded: **41** | Covers waiting: **8**
+Waiting: **30** | Uploaded: **41** | Covers waiting: **8**
 
 ## Course covers
 
@@ -289,6 +289,34 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom, with the carbon shown as slightly positive (δ+) and the oxygen as slightly negative (δ−). The diagram also labels the sigma and pi components of the bond.
+
+Layout: Carbon atom in the centre, oxygen to the right, double bond between them; arrows indicate electron density and partial charges; labels placed around the bond.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C"
+- "O"
+- "δ+"
+- "δ−"
+- "σ bond"
+- "π bond"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
