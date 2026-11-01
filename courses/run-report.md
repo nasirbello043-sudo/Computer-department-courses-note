@@ -1,12 +1,12 @@
 # Last run report
 
-2026-10-31 10:51 UTC
+2026-11-01 11:48 UTC
 
 - Groq keys: 3 | model: openai/gpt-oss-120b
 - Cloudflare account ID: set | Cloudflare token: set
 - Cloudflare drawing: OFF (you upload the pictures yourself)
 - Covers drawn this run: 0 | pictures drawn: 0 | label redraws: 0 | gave up on labels: 0
-- Glitches caught and rewritten: 0 | tokens used: 19812
+- Glitches caught and rewritten: 0 | tokens used: 19647
 - Lessons finished this run: 0 | lessons skipped (will be retried): 0
 - Why the run stopped: finished all it could
 - Pictures waiting: 29 | already done: 41
