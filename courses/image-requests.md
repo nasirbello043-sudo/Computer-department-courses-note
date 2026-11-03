@@ -306,15 +306,15 @@ Prompt:
 ```
 Create a clear, accurate educational labelled diagram for secondary-school students.
 
-Show: Shows two atoms with their outer shells and a shared electron pair represented by a line, illustrating how each atom counts the shared electrons toward a full valence shell.
+Show: Shows two atoms (e.g., hydrogen and carbon) with their outer electrons and a shared electron pair represented by a line, illustrating how each atom counts the shared electrons toward a full outer shell.
 
-Layout: Two atoms side‑by‑side in the centre, the shared electron pair drawn as a line between them, with arrows pointing to each atom's valence shell and labels for "shared electrons" and "valence shell".
+Layout: Two atoms side‑by‑side in the centre, the shared electron pair drawn as a line between them, with individual electron dots labelled and arrows indicating sharing.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "Atom A"
 - "Atom B"
-- "Shared electrons"
-- "Valence shell"
+- "Shared pair"
+- "Valence electrons"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
