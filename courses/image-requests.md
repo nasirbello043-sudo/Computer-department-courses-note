@@ -296,25 +296,27 @@ Style: clean modern textbook illustration on a plain white background, soft natu
 
 ## Organic Chemistry
 
-### Lesson 2: Structure of Carbon Compounds
+### Lesson 6: Isomerism
 
 Save as:
 ```
-organic-chemistry-l02-covalent-bond-diagram.png
+organic-chemistry-l06-chiral-carbon-center.png
 ```
 Prompt:
 ```
-Create a clear, accurate educational labelled diagram for secondary-school students.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Show: Shows two atoms (e.g., hydrogen and carbon) with their outer electrons and a shared electron pair represented by a line, illustrating how each atom counts the shared electrons toward a full outer shell.
+Show: The diagram shows a tetrahedral carbon with four distinct substituents (e.g., H, Cl, CH3, OH). Two versions are displayed: the original molecule and its mirror image, highlighting that they cannot be rotated to match each other.
 
-Layout: Two atoms side‑by‑side in the centre, the shared electron pair drawn as a line between them, with individual electron dots labelled and arrows indicating sharing.
+Layout: Two tetrahedral models side‑by‑side, each with bonds drawn as wedges and dashes; arrows point from each model to a label indicating 'original' and 'mirror image'.
 
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Atom A"
-- "Atom B"
-- "Shared pair"
-- "Valence electrons"
+- "C"
+- "H"
+- "Cl"
+- "CH3"
+- "OH"
+- "mirror image"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
