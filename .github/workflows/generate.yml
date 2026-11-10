@@ -18,6 +18,7 @@ jobs:
       - run: python generate.py
         env:
           JOB: none
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
       - run: |
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
@@ -111,6 +112,7 @@ jobs:
       - run: python generate.py
         env:
           JOB: none
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
       - run: python make_updates.py
       - run: |
           git config user.name "course-bot"
