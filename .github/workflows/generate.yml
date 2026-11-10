@@ -6,7 +6,27 @@ on:
 permissions:
   contents: write
 jobs:
-  generate:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: none
+      - run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Setup: move courses to the new layout"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
+
+  writer1:
+    needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -14,24 +34,87 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          JOB: writer1
           MAX_MINUTES: "60"
-      - if: always()
-        run: python make_updates.py
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
-          git config user.name "picture-bot"
-          git config user.email "picture-bot@users.noreply.github.com"
-          git add courses/images
-          git diff --staged --quiet || git commit -m "Add pictures"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
-          git diff --staged --quiet || git commit -m "Add generated lessons and updates"
-          git pull --rebase origin main
-          git push
+          git diff --staged --quiet || git commit -m "Writer 1: lessons"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
+
+  writer2:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: writer2
+          MAX_MINUTES: "60"
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER2 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Writer 2: lessons"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
+
+  writer3:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: writer3
+          MAX_MINUTES: "60"
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER3 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Writer 3: lessons"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
+
+  combine:
+    needs: [setup, writer1, writer2, writer3]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: none
+      - run: python make_updates.py
+      - run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Combine: shared index, report and updates"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
