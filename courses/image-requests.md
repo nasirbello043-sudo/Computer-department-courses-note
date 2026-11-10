@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **29** | Uploaded: **41** | Covers waiting: **8**
+Waiting: **53** | Uploaded: **41** | Covers waiting: **10**
 
 ## Course covers
 
@@ -132,6 +132,37 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "PROGRAMMING COURSE"
 - Subtitle under it, smaller: "Building the future one line of code at a time"
 The spine shows "PROGRAMMING COURSE" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Statistics
+
+Save as:
+```
+cover-introduction-to-statistics.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a orange colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO STATISTICS"
+The spine shows "INTRODUCTION TO STATISTICS" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Research Methods
+
+Save as:
+```
+cover-research-methods.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a orange colour palette, showing a lively scene built around: Microscope, Survey questionnaire, Statistical software, Lab notebook, Data chart, Focus group discussion, Field notebook, Research ethics checklist, Experimental setup, Citation manager.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "RESEARCH METHODS"
+- Subtitle under it, smaller: "Unlocking Knowledge: Tools and Techniques"
+The spine shows "RESEARCH METHODS" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -732,6 +763,441 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "value"
 - "array"
 - "nested object"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Introduction to Statistics
+
+### Lesson 1: Introduction to Statistics
+
+Save as:
+```
+introduction-to-statistics-l01-population-vs-sample.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A stylised crowd silhouette filling most of the image; a smaller circle of highlighted figures inside the crowd indicates the sample taken for study.
+
+Layout: Full‑width crowd background, central circle of highlighted figures, arrows pointing from the sample to a notebook.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Population"
+- "Sample"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+introduction-to-statistics-l01-class-age-list.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A classroom scene where a teacher has a chalkboard with a column of ages (e.g., 12, 13, 14…) representing the data collected from all students.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 2: Types of Data
+
+Save as:
+```
+introduction-to-statistics-l02-measuring-height.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A student standing next to a wall‑mounted measuring tape, with the tape showing a precise reading (e.g., 170.23 cm).
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+introduction-to-statistics-l02-counting-coins.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A handful of identical coins laid out on a table, showing that the number of coins can only be whole numbers (0, 1, 2, …).
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 3: Collecting Data
+
+Save as:
+```
+introduction-to-statistics-l03-measuring-student-height.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A group of pupils standing in a line while a teacher uses a tape measure to note each student's height on a clipboard.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+introduction-to-statistics-l03-experiment-setup-control-vs-treatment.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: Two identical pots with seedlings; one receives regular water (control) and the other receives water plus fertilizer (treatment). The illustration highlights the difference in conditions.
+
+Layout: Two pots side‑by‑side in the centre, arrows pointing to each pot with labels "Control" and "Treatment", plus a small inset showing the fertilizer bottle.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Control"
+- "Treatment"
+- "Water"
+- "Fertilizer"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: Frequency Tables
+
+Save as:
+```
+introduction-to-statistics-l04-beads-count.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A clear photograph showing several groups of beads of different colours laid out side by side, each group labelled with its colour name.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+introduction-to-statistics-l04-class-intervals-on-number-line.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A horizontal number line marked from 0 to 100 with vertical ticks indicating the start and end of each class interval, e.g., 0‑10, 10‑20, …, 90‑100.
+
+Layout: Number line runs across the centre; each interval is highlighted with a light shading and a bracket label above it.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "0‑10"
+- "10‑20"
+- "20‑30"
+- "30‑40"
+- "40‑50"
+- "50‑60"
+- "60‑70"
+- "70‑80"
+- "80‑90"
+- "90‑100"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 5: Charts and Graphs
+
+Save as:
+```
+introduction-to-statistics-l05-bar-chart-example.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple vertical bar chart with five bars representing the numbers 0, 2, 3, 5, 7, 9, and 12. Each bar is labeled with the corresponding student count.
+
+Layout: Bars arranged side‑by‑side from left to right, axis labels at bottom and left, title at top.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "0"
+- "2"
+- "3"
+- "5"
+- "7"
+- "9"
+- "12"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 6: Measures of Centre
+
+Save as:
+```
+introduction-to-statistics-l06-apple-weights.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A real basket containing apples of different sizes and weights. One apple is marked with a bright circle to show the idea of a single typical weight representing the whole basket.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 7: Measures of Spread
+
+Save as:
+```
+introduction-to-statistics-l07-class-height-measurement.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A real classroom scene where each student’s height is recorded on a wall‑mounted chart, clearly indicating the minimum and maximum values.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 8: Probability Basics
+
+Save as:
+```
+introduction-to-statistics-l08-coin-die-card.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A photograph showing a flipped coin, a six‑sided die, and a playing card spread out to illustrate the kinds of outcomes that form a sample space.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Research Methods
+
+### Lesson 2: Formulating Research Questions
+
+Save as:
+```
+research-methods-l02-research-question-compass.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple compass graphic where the needle is labeled "Research Question" and the north direction represents the focus of the investigation.
+
+Layout: Compass centered, needle labeled, surrounding text indicating "north = study direction"
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Research Question"
+- "North"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+research-methods-l02-c-f-a-checklist.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: Three boxes stacked vertically, each containing one of the letters C, F, A with a short description of the quality.
+
+Layout: Vertical list, each box labeled with the letter and a brief phrase (Clear, Focused, Answerable)
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Clear"
+- "Focused"
+- "Answerable"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 3: Literature Review Basics
+
+Save as:
+```
+research-methods-l03-literature-review-map.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A visual map with nodes representing individual research papers linked by topic lines; empty spaces highlight unexplored areas for new research.
+
+Layout: Central node labeled 'Your Topic' with surrounding nodes around it; lines connect related studies; blank zones marked as 'Research Gap'.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Your Topic"
+- "Study A"
+- "Study B"
+- "Study C"
+- "Research Gap"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+research-methods-l03-academic-database-search.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A screenshot of a typical scholarly database interface showing a search bar, filter options, and a list of article titles with abstracts.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 5: Sampling Strategies
+
+Save as:
+```
+research-methods-l05-marble-jar-sampling.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A clear glass jar filled with marbles of many colours. A person’s hand is shown with eyes closed, pulling out a few marbles. The scene visualises each marble having an equal chance of being selected.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+research-methods-l05-stratified-fruit-boxes.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: Three distinct piles of fruit—apples, oranges, bananas—each placed in its own labeled box. A researcher draws a few items from each box, demonstrating that every sub‑group is represented in the sample.
+
+Layout: Three boxes side by side, each containing one fruit type; arrows from each box to a small mixed sample basket in the centre.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Apples"
+- "Oranges"
+- "Bananas"
+- "Box 1"
+- "Box 2"
+- "Box 3"
+- "Sample basket"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 6: Data Collection Techniques
+
+Save as:
+```
+research-methods-l06-observation-in-action.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A student researcher sits at the back of a classroom, observing a group experiment. The researcher has a notebook and a pen, while the students in the foreground are conducting a simple science task.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+Save as:
+```
+research-methods-l06-survey-questionnaire.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A typical paper survey showing a list of questions with check boxes and space for short answers. The photo shows a hand holding a pen and marking responses.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 7: Ethics in Research
+
+Save as:
+```
+research-methods-l07-irb-review-process.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A step‑by‑step diagram showing a researcher submitting a proposal, the IRB reviewing it, possible revisions, and final approval.
+
+Layout: Vertical flowchart with arrows connecting four boxes: Submit Proposal → IRB Review → Revise (if needed) → Approval.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Submit"
+- "Review"
+- "Revise"
+- "Approve"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 8: Data Analysis Fundamentals
+
+Save as:
+```
+research-methods-l08-apple-basket-statistics.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A basket of apples of different sizes with numbers on each apple; arrows point to the average size (mean), the middle-sized apple (median), the most common size (mode) and the smallest and largest apples (range).
+
+Layout: Apples arranged in a loose pile; three highlighted apples labeled mean, median, mode; two extreme apples labeled min and max with a line indicating range.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Mean"
+- "Median"
+- "Mode"
+- "Min"
+- "Max"
+- "Range"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 9: Interpreting Results
+
+Save as:
+```
+research-methods-l09-research-summary-draft.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A notebook page shows a table of numbers on one side and a few sentences summarising the main findings on the other side.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 10: Presenting Research Findings
+
+Save as:
+```
+research-methods-l10-research-report-road-map.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A linear diagram that lists Title, Abstract, Introduction, Methods, Results, Discussion, Conclusion, and References, each placed in a box connected by arrows to show the flow of the report.
+
+Layout: Boxes arranged horizontally from left to right with arrows pointing from one box to the next; each box contains the section name.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Title"
+- "Abstract"
+- "Introduction"
+- "Methods"
+- "Results"
+- "Discussion"
+- "Conclusion"
+- "References"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
