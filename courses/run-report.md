@@ -1,16 +1,17 @@
 # Last run report
 
-2026-11-09 13:46 UTC
+2026-11-10 07:56 UTC
 
-- Groq keys: 3 | model: openai/gpt-oss-120b
-- Cloudflare account ID: set | Cloudflare token: set
+- Groq keys: 1 | model: openai/gpt-oss-120b
+- Cloudflare account ID: MISSING | Cloudflare token: MISSING
 - Cloudflare drawing: OFF (you upload the pictures yourself)
 - Covers drawn this run: 0 | pictures drawn: 0 | label redraws: 0 | gave up on labels: 0
-- Glitches caught and rewritten: 0 | tokens used: 19701
+- Glitches caught and rewritten: 0 | tokens used: 0
 - Lessons finished this run: 0 | lessons skipped (will be retried): 0
 - Why the run stopped: finished all it could
 - Pictures waiting: 29 | already done: 41
 
 ## What happened
 
+- Moved to the new layout: calculus-foundation, calculus-i, introduction-to-agriculture, introduction-to-biology, introduction-to-programming, maths-104, organic-chemistry, programming-course
 - Cloudflare drawing: OFF - pictures and covers come from your uploads
