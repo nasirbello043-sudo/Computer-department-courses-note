@@ -971,6 +971,19 @@ Style: realistic, well-lit, sharp photograph with natural colours, landscape ori
 
 ## Research Methods
 
+### Lesson 1: Introduction to Research Methods
+
+Save as:
+```
+research-methods-l01-researcher-collecting-data.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The picture shows a learner with a notebook and a clipboard, watching a small garden experiment. It illustrates the step of collecting and recording data in a real‑world setting.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
 ### Lesson 2: Formulating Research Questions
 
 Save as:
@@ -988,27 +1001,6 @@ Layout: Compass centered, needle labeled, surrounding text indicating "north = s
 The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
 - "Research Question"
 - "North"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-Save as:
-```
-research-methods-l02-c-f-a-checklist.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: Three boxes stacked vertically, each containing one of the letters C, F, A with a short description of the quality.
-
-Layout: Vertical list, each box labeled with the letter and a brief phrase (Clear, Focused, Answerable)
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Clear"
-- "Focused"
-- "Answerable"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -1039,15 +1031,53 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
+### Lesson 4: Choosing a Research Design
+
 Save as:
 ```
-research-methods-l03-academic-database-search.png
+research-methods-l04-research-design-blueprint.png
 ```
 Prompt:
 ```
-Create a realistic photograph for a school lesson: A screenshot of a typical scholarly database interface showing a search bar, filter options, and a list of article titles with abstracts.
+Create a clear, accurate educational illustration for secondary-school students.
 
-Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+Show: The picture shows a simple architectural blueprint with labeled sections such as "walls", "doors", and "windows" alongside matching labels for research steps like "question", "data collection", and "analysis" to highlight the analogy.
+
+Layout: Blueprint occupies the centre; research labels are placed in a column on the right with arrows pointing to corresponding blueprint parts.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Question"
+- "Data collection"
+- "Analysis"
+- "Walls"
+- "Doors"
+- "Windows"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+Save as:
+```
+research-methods-l04-mixed-methods-flow.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: The diagram displays two parallel tracks – one with numbers and charts (quantitative) and one with interview notes and photos (qualitative) – merging into a single box labeled "Integrated Findings".
+
+Layout: Two vertical columns on the left and right converge into a central box; arrows indicate the flow from each method to the integration step.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Quantitative"
+- "Qualitative"
+- "Data collection"
+- "Integration"
+- "Findings"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
 ### Lesson 5: Sampling Strategies
@@ -1061,31 +1091,6 @@ Prompt:
 Create a realistic photograph for a school lesson: A clear glass jar filled with marbles of many colours. A person’s hand is shown with eyes closed, pulling out a few marbles. The scene visualises each marble having an equal chance of being selected.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
-```
-
-Save as:
-```
-research-methods-l05-stratified-fruit-boxes.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: Three distinct piles of fruit—apples, oranges, bananas—each placed in its own labeled box. A researcher draws a few items from each box, demonstrating that every sub‑group is represented in the sample.
-
-Layout: Three boxes side by side, each containing one fruit type; arrows from each box to a small mixed sample basket in the centre.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Apples"
-- "Oranges"
-- "Bananas"
-- "Box 1"
-- "Box 2"
-- "Box 3"
-- "Sample basket"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
 ### Lesson 6: Data Collection Techniques
