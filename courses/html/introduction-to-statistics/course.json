@@ -3904,98 +3904,6 @@
    "title": "Hypothesis Testing",
    "focus": "Null and alternative hypotheses, p-values and conclusions",
    "file": "lesson-11.json",
-   "draft": {
-    "plan": {
-     "summary": "This lesson introduces the framework for making scientific decisions using data. Students will learn how to set up hypotheses and use p-values to determine if a result is statistically significant.",
-     "objectives": [
-      "Define and write null and alternative hypotheses",
-      "Explain the meaning of a p-value in simple terms",
-      "Determine whether to reject or fail to reject the null hypothesis",
-      "Draw a final conclusion based on a chosen significance level"
-     ],
-     "prerequisites": "Students should understand probability distributions and the concept of a mean.",
-     "why": [
-      "Hypothesis testing is the backbone of modern science. It allows researchers to prove if a new medicine actually works or if a change in a website's design truly increases sales, rather than just guessing.",
-      "In daily life, it helps us think critically about claims. Instead of believing every 'breakthrough' headline, we can ask if the evidence is strong enough to rule out simple luck."
-     ],
-     "calculation": true,
-     "sections": [
-      {
-       "heading": "The Concept of Hypothesis Testing",
-       "points": "Introduction to the logic of testing. We start by assuming nothing has changed (the status quo) and look for evidence strong enough to prove otherwise.",
-       "examples": []
-      },
-      {
-       "heading": "Null and Alternative Hypotheses",
-       "points": "Defining the Null Hypothesis (H0) as the statement of 'no effect' and the Alternative Hypothesis (H1) as the claim we are testing. Learning to write them using symbols like = and ≠.",
-       "examples": [
-        "Easy: A company claims their lightbulbs last 1000 hours. Write the hypotheses. (H0: mean = 1000; H1: mean ≠ 1000)"
-       ]
-      },
-      {
-       "heading": "The Significance Level (Alpha)",
-       "points": "Explaining alpha (α), usually set at 0.05. This is the 'threshold' for evidence; it represents the risk we are willing to take of being wrong.",
-       "examples": [
-        "Easy: If α = 0.05, what percentage of risk is the researcher accepting? (5%)"
-       ]
-      },
-      {
-       "heading": "Understanding the P-Value",
-       "points": "Defining the p-value as the probability that the observed data happened by random chance. A low p-value means the result is unlikely to be a fluke.",
-       "examples": [
-        "Medium: A test results in a p-value of 0.02. Explain what this means in plain English. (There is only a 2% chance this result happened by luck.)",
-        "Medium: Compare two p-values: 0.01 and 0.25. Which one provides stronger evidence against the null? (0.01)"
-       ]
-      },
-      {
-       "heading": "Making the Decision",
-       "points": "The decision rule: If p-value ≤ α, reject H0. If p-value > α, fail to reject H0. Emphasizing that we never 'accept' the null, we only 'fail to reject' it.",
-       "examples": [
-        "Medium: p-value = 0.03, α = 0.05. Do you reject H0? (Yes, because 0.03 ≤ 0.05)",
-        "Medium: p-value = 0.12, α = 0.05. Do you reject H0? (No, because 0.12 > 0.05)"
-       ]
-      },
-      {
-       "heading": "Drawing Final Conclusions",
-       "points": "Translating the mathematical decision back into the context of the original problem. Connecting the 'Reject H0' step to a real-world statement.",
-       "examples": [
-        "Hard: A study on a new fertilizer shows a p-value of 0.001 with α = 0.05. Write the full conclusion. (Reject H0; there is sufficient evidence to conclude the fertilizer increases plant growth.)",
-        "Hard: A test for a new drug shows a p-value of 0.08 with α = 0.05. Write the full conclusion. (Fail to reject H0; there is not enough evidence to say the drug is effective.)"
-       ]
-      },
-      {
-       "heading": "Type I and Type II Errors",
-       "points": "Discussing the two ways we can be wrong: False Positives (Type I) and False Negatives (Type II).",
-       "examples": [
-        "Hard: In a court trial, H0 is 'innocent'. What is a Type I error in this scenario? (Convicting an innocent person.)",
-        "Hard: In a medical test, H0 is 'healthy'. What is a Type II error? (Telling a sick person they are healthy.)"
-       ]
-      }
-     ]
-    },
-    "secs": [
-     {
-      "heading": "The Concept of Hypothesis Testing",
-      "body": "Imagine you are a scientist or a researcher. You have a theory about how the world works, or perhaps you believe a new medicine works better than an old one. How do you prove this using data? You cannot simply look at a few numbers and say, \"I am right.\" In statistics, we use a formal process called **Hypothesis Testing**.\n\nHypothesis testing is a way of using a sample of data to make a decision about a larger population. The core logic is not to prove that your idea is true, but to see if there is enough evidence to reject the idea that nothing has changed.\n\nIn statistics, we always start with a \"status quo.\" This is the assumption that everything is normal, there is no effect, or there is no difference. We assume this status quo is true until the data provides overwhelming evidence against it. This is a cautious approach. It prevents us from claiming a discovery every time we see a small, random flicker in our data.\n\n> **In daily life:** Think of a courtroom trial. In many legal systems, a defendant is \"presumed innocent until proven guilty.\" The \"status quo\" is innocence. The prosecutor must provide evidence strong enough to move the jury away from that assumption. If the evidence is weak, the defendant remains innocent. The jury does not prove the person is \"innocent\"; they simply find that there wasn't enough evidence to prove they were \"guilty.\"\n\nThis is exactly how statistical testing works. We start by assuming a specific condition is true. We then collect data. If the data is very unlikely to happen under our starting assumption, we conclude that the assumption must be wrong.\n\nTo do this, we use a probability. If we assume the status quo is true, what is the chance that we would see the results we just found? If that probability is very low, we say the result is **statistically significant**. This means the result is too unusual to be explained by random chance alone.\n\n> **Definition:** Hypothesis Testing is a statistical method used to decide whether the data supports a particular theory or if the observed effect is just due to random chance.\n\nWe can represent the logic using a simple comparison. Let $P(\\text{data} | \\text{status quo})$ be the probability of seeing our data given that the status quo is true. If this value is very small, we reject the status quo.\n\n$$P(\\text{data} | \\text{status quo}) < \\text{threshold}$$\n\nIf the probability is higher than our threshold, we do not have enough evidence to change our minds. We don't say the status quo is \"proven true\"; we simply say we \"fail to reject\" it.\n\n> **Remember:** In hypothesis testing, we never \"prove\" the status quo is true. We only decide if we have enough evidence to move away from it.\n\nBy following this strict logic, scientists ensure that their conclusions are based on evidence rather than wishful thinking. It forces us to be skeptical and requires a high standard of proof before we claim a new discovery.",
-      "code": ""
-     },
-     {
-      "heading": "Null and Alternative Hypotheses",
-      "body": "In statistics, we rarely prove that something is 100% true. Instead, we look for evidence to see if a claim is likely or unlikely. To do this, we set up two competing statements. These are called hypotheses. A hypothesis is simply a claim or a guess about a population parameter, such as a mean (the average) or a proportion (the percentage).\n\nThe first statement is the **Null Hypothesis**, written as $H_0$. The word \"null\" means zero or void. In statistics, the null hypothesis is the statement of \"no effect\" or \"no change.\" It assumes that the current situation is true or that there is no difference between two groups. We assume the null hypothesis is true until we find strong evidence to reject it.\n\n> **Definition:** The Null Hypothesis ($H_0$) is a statement that there is no effect, no difference, or that a population parameter equals a specific value.\n\nThink of this like a court trial. In a legal system, a person is \"presumed innocent until proven guilty.\" The presumption of innocence is the null hypothesis. The prosecutor must provide enough evidence to prove the person is guilty. If the evidence is weak, the person remains \"not guilty.\" We do not prove they are \"innocent\"; we simply fail to prove they are guilty.\n\nThe second statement is the **Alternative Hypothesis**, written as $H_1$ (or sometimes $H_a$). This is the claim we are actually testing. It represents the change, the effect, or the difference that the researcher suspects is happening. If the data provides strong evidence against the null hypothesis, we accept the alternative hypothesis instead.\n\n> **In daily life:** If you believe a new study habit improves grades, the null hypothesis is \"the new habit does not change grades,\" while the alternative hypothesis is \"the new habit increases grades.\"\n\nTo write these hypotheses, we use mathematical symbols. We never use symbols like $\\neq$ or $>$ in the null hypothesis. The null hypothesis always uses an equals sign ($=$) because it represents a specific, fixed value. The alternative hypothesis uses symbols to show a difference, such as \"not equal to\" ($\\neq$), \"greater than\" ($>$), or \"less than\" ($<$).\n\n**Example 1 (Easy): Lightbulb Lifespan**\nA company claims that their lightbulbs last an average of 1000 hours. A consumer group suspects this claim is incorrect and wants to test if the actual average is different from 1000 hours.\n\n1. Identify the population parameter. Here, it is the mean lifespan, represented by the symbol $\\mu$.\n2. Write the null hypothesis. We assume the company is telling the truth, so the mean equals 1000.\n$$H_0: \\mu = 1000$$\n3. Write the alternative hypothesis. The group suspects the claim is incorrect, meaning the mean is not equal to 1000.\n$$H_1: \\mu \\neq 1000$$\n\n**Answer:** $H_0: \\mu = 1000$ hours; $H_1: \\mu \\neq 1000$ hours.\n\nDepending on the research question, the alternative hypothesis can be \"one-sided\" or \"two-sided.\" A two-sided test (like the example above) looks for any difference, whether the value is higher or lower. A one-sided test looks for a difference in only one specific direction. For example, if we only care if the lightbulbs last *less* than 1000 hours, we use a one-sided test.\n\n> **Note:** A one-sided test is used when we are only interested in whether a value has increased or decreased, not just changed in any direction.\n\n**Example 2 (Medium): New Fertilizer Growth**\nA farmer uses a new fertilizer and believes it will make his corn grow taller than the current average of 160 centimeters. He wants to test if the new fertilizer increases the mean height.\n\n1. Identify the population parameter. The parameter is the mean height of the corn, $\\mu$.\n2. Write the null hypothesis. The null hypothesis assumes the fertilizer has no effect, so the height remains 160.\n$$H_0: \\mu = 160$$\n3. Write the alternative hypothesis. The farmer specifically believes the height will be *greater than* 160.\n$$H_1: \\mu > 160$$\n\n**Answer:** $H_0: \\mu = 160$ cm; $H_1: \\mu > 160$ cm.\n\nIt is important to remember that we never \"prove\" the null hypothesis is true. We only decide if we have enough evidence to reject it. If our data is not strong enough, we say we \"fail to reject\" the null hypothesis. This is a subtle but vital distinction in science.\n\n> **Common mistake:** Writing the null hypothesis with a \"not equal\" sign ($\\neq$). Always use the equals sign ($=$) for $H_0$.\n\nFinally, let us look at a case where we suspect a decrease. Suppose a school implements a new discipline policy and believes it will reduce the average number of detentions per student from 5 per year to something lower.\n\n**Example 3 (Medium): School Detentions**\nA school wants to test if a new policy reduces the mean number of detentions from 5 per year.\n\n1. Identify the population parameter. The parameter is the mean number of detentions, $\\mu$.\n2. Write the null hypothesis. The null hypothesis assumes the policy has no effect.\n$$H_0: \\mu = 5$$\n3. Write the alternative hypothesis. The school believes the mean will be *less than* 5.\n$$H_1: \\mu < 5$$\n\n**Answer:** $H_0: \\mu = 5$ detentions; $H_1: \\mu < 5$ detentions.",
-      "code": ""
-     },
-     {
-      "heading": "The Significance Level (Alpha)",
-      "body": "Before we can decide if our data is \"strong enough\" to reject the null hypothesis, we need a rule. In statistics, we cannot be 100% certain about anything because we are usually working with a sample, not the entire population. There is always a small chance that our results happened by pure luck.\n\nThe significance level, written as the Greek letter alpha ($\\alpha$), is the boundary we set to manage this risk. It is the \"threshold\" for evidence. If the probability of our result happening by chance is lower than $\\alpha$, we decide that the result is \"statistically significant.\" This means the result is too unlikely to be a coincidence, so we reject the null hypothesis.\n\n> **Definition:** The significance level ($\\alpha$) is the probability of rejecting the null hypothesis when it is actually true.\n\nThink of $\\alpha$ as your \"standard of proof.\" If you set a very low $\\alpha$, you are demanding very strong evidence before you are willing to change your mind. If you set a higher $\\alpha$, you are more relaxed about the evidence required.\n\n> **In daily life:** Imagine a courtroom. The \"threshold\" for a criminal conviction is \"beyond a reasonable doubt.\" This is like a very small $\\alpha$. The court wants the risk of convicting an innocent person to be extremely low. If the evidence is only \"probably true,\" it does not meet the threshold, and the person is not convicted.\n\nIn most scientific research, the standard value for $\\alpha$ is $0.05$. This means the researcher is willing to accept a 5% risk of being wrong. If the probability of the observed data occurring by chance is $5\\%$ or less, the researcher rejects the null hypothesis.\n\nLet's look at how this number translates into a percentage of risk.\n\n**Example 2 (Easy): Calculating Risk Percentage**\nA researcher sets the significance level at $\\alpha = 0.05$. What percentage of risk is the researcher accepting that they might reject the null hypothesis even if it is true?\n\n1. Identify the given significance level as a decimal:\n$$\\alpha = 0.05$$\n2. Convert the decimal to a percentage by multiplying by 100:\n$$0.05 \\times 100 = 5\\%$$\n3. State the final risk percentage:\n$$5\\%$$\n**Answer:** The researcher is accepting a 5% risk of being wrong.\n\nWhy don't we just set $\\alpha$ to $0$ to avoid all mistakes? Because if we make the threshold too strict, we might miss a real discovery. If $\\alpha$ is too small, we might fail to reject a null hypothesis that is actually false simply because our evidence wasn't \"perfect.\"\n\nDepending on the goal of the study, researchers might choose different values:\n*   $\\alpha = 0.10$ (10% risk): Used in exploratory studies where we don't want to miss any potential trends.\n*   $\\alpha = 0.05$ (5% risk): The most common standard for general science.\n*   $\\alpha = 0.01$ (1% risk): Used in critical trials, such as testing a new medical drug, where a mistake could be dangerous.\n\n> **Note:** The significance level must be chosen *before* the data is collected. If a researcher looks at the results first and then picks $\\alpha$, they are \"cherry-picking\" the data to make it look successful, which is scientifically dishonest.\n\nTo see how this works in a real decision, let's look at a scenario where we compare a result to the threshold.\n\n**Example 3 (Medium): Comparing Results to Alpha**\nA biologist is testing a new fertilizer. She sets her significance level at $\\alpha = 0.01$. After running the experiment, she calculates a p-value (the probability that the result happened by chance) of $0.03$. Should she reject the null hypothesis?\n\n1. Identify the chosen significance level:\n$$\\alpha = 0.01$$\n2. Identify the calculated p-value from the data:\n$$p = 0.03$$\n3. Compare the p-value to the significance level to see if $p \\leq \\alpha$:\n$$0.03 \\leq 0.01 \\text{ is False}$$\n4. Since the p-value is greater than $\\alpha$, the evidence is not strong enough to meet the threshold.\n**Answer:** The biologist should not reject the null hypothesis because $0.03 > 0.01$.\n\n> **Common mistake:** Do not confuse $\\alpha$ with the p-value. $\\alpha$ is the line you draw in the sand *before* the test. The p-value is the actual measurement you get *after* the test. You compare the measurement to the line to make your decision.\n\nIn summary, $\\alpha$ is our safety valve. It allows us to quantify exactly how much risk we are taking when we claim a discovery. By choosing $\\alpha = 0.05$, we accept that in 5 out of 100 cases, we will claim a result is significant when it was actually just a lucky fluke.\n\n> **Remember:** A smaller $\\alpha$ means you require stronger evidence to reject the null hypothesis, which reduces the risk of a \"false alarm.\"",
-      "code": ""
-     },
-     {
-      "heading": "Understanding the P-Value",
-      "body": "Once we have collected our data and calculated a test statistic, we need a way to decide if our result is \"special\" or just a result of random luck. This is where the p-value comes in.\n\nIn plain words, the p-value tells us how surprising our data is if we assume that nothing interesting is actually happening. In statistics, \"nothing interesting happening\" means the null hypothesis ($H_0$) is true. If the p-value is very small, it means our observed result would be very rare if the null hypothesis were true. Therefore, a small p-value suggests that the null hypothesis is likely wrong, and our result is not just a fluke.\n\n> **Definition:** The p-value is the probability of obtaining test results at least as extreme as the results actually observed, under the assumption that the null hypothesis is correct.\n\nTo understand this, imagine you have a friend who claims they can tell the difference between bottled water and tap water just by tasting it. To test this, you give them a glass of water. They guess correctly. Does this prove they have a superpower? Not necessarily. Even if they were just guessing randomly, they would have a 50% chance of being right. In this case, the p-value is $0.50$. Because $0.50$ is a high probability, the result is not surprising. It is very likely that they just got lucky.\n\nHowever, if you gave them 10 glasses of water and they guessed all 10 correctly, the chance of that happening by pure luck is very small. The p-value would be tiny. At that point, you would conclude that the result is too unlikely to be a fluke, and your friend probably actually has the skill they claimed.\n\n> **In daily life:** A p-value is like a \"surprise meter.\" A high p-value means \"I am not surprised; this could easily happen by chance.\" A low p-value means \"I am very surprised; this is unlikely to be a coincidence.\"\n\nThe p-value is expressed as a number between 0 and 1. It is a probability, so it is often written as a decimal. For example, a p-value of $0.05$ means there is a 5% chance that the observed data happened by random chance.\n\n**Example 3 (Medium): Interpreting a p-value**\nA medical researcher tests a new vitamin and finds that the p-value for the improvement in patient health is $0.02$. What does this mean in plain English?\n\n1. Identify the p-value provided in the study.\n$$p = 0.02$$\n2. Convert the decimal probability into a percentage to make it easier to understand.\n$$0.02 \\times 100 = 2\\%$$\n3. Interpret this percentage as the likelihood that the result occurred by random luck, assuming the vitamin actually does nothing.\n$$\\text{Probability of fluke} = 2\\%$$\n\n**Answer:** This means there is only a 2% chance that the observed improvement in patients happened by random luck.\n\nNow that we know how to interpret a single p-value, we can use them to compare different sets of evidence. When we compare two p-values, the smaller value always provides stronger evidence against the null hypothesis. This is because a smaller p-value indicates a more \"extreme\" or \"rare\" result. If one experiment has a p-value of $0.10$ and another has a p-value of $0.01$, the second experiment is much more convincing. The first result could happen 10% of the time by chance, but the second result only happens 1% of the time by chance.\n\n> **Remember:** The smaller the p-value, the stronger the evidence that you should reject the null hypothesis.\n\n**Example 4 (Medium): Comparing two p-values**\nA scientist conducts two different experiments to see if a plant grows faster with a specific fertilizer. Experiment A results in a p-value of $0.25$, and Experiment B results in a p-value of $0.01$. Which one provides stronger evidence against the null hypothesis?\n\n1. List the p-values for both experiments.\n$$\\text{Exp A: } p = 0.25, \\quad \\text{Exp B: } p = 0.01$$\n2. Compare the two values to see which one is smaller.\n$$0.01 < 0.25$$\n3. Determine which value represents a lower probability of the result being a fluke.\n$$\\text{Stronger Evidence} = \\text{Lower p-value}$$\n\n**Answer:** Experiment B provides stronger evidence against the null hypothesis because its p-value is significantly lower.\n\nIt is important to note that the p-value does not tell us the probability that the null hypothesis is \"true\" or \"false.\" It only tells us how well our data fits the assumption that the null hypothesis is true. If the data fits very poorly (low p-value), we stop believing the assumption.\n\n> **Common mistake:** Thinking that a p-value of $0.05$ means there is a 95% chance that the alternative hypothesis is true. The p-value only describes the probability of the data, not the probability of the hypothesis itself.",
-      "code": ""
-     }
-    ]
-   },
    "data": {
     "title": "Hypothesis Testing",
     "summary": "This lesson introduces the framework for making scientific decisions using data. Students will learn how to set up hypotheses and use p-values to determine if a result is statistically significant.",
@@ -4218,11 +4126,55 @@
       "back": "Because we can only gather evidence against H0, not proof that it is exactly true."
      }
     ],
-    "diagrams": [],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-statistics-l11-hypothesis-test-flow",
+      "title": "Step‑by‑step flowchart of the hypothesis‑testing procedure.",
+      "alt": "Step‑by‑step flowchart of the hypothesis‑testing procedure.",
+      "priority": 9,
+      "picture_title": "Hypothesis Test Flow",
+      "kind": "illustration",
+      "subject": "A visual sequence showing: start → state null and alternative hypotheses → choose significance level α → collect data → compute test statistic → find p‑value → compare p‑value with α → decision (reject or fail to reject) → final conclusion.",
+      "layout": "Horizontal left‑to‑right arrows connecting rectangular boxes for each step, with brief text inside each box.",
+      "labels": [
+       "Start",
+       "Null & Alt",
+       "α level",
+       "Data",
+       "Statistic",
+       "p‑value",
+       "Decision",
+       "Conclusion"
+      ],
+      "after": 0
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-statistics-l11-type-i-vs-type-ii",
+      "title": "Illustration of the two possible errors in hypothesis testing.",
+      "alt": "Illustration of the two possible errors in hypothesis testing.",
+      "priority": 7,
+      "picture_title": "Type I vs Type II",
+      "kind": "labelled diagram",
+      "subject": "A 2×2 table showing truth of H₀ (true/false) versus decision (reject/fail to reject), highlighting the cells that correspond to Type I error (reject true H₀) and Type II error (fail to reject false H₀).",
+      "layout": "Table centered with four cells; the top‑left and bottom‑right cells shaded for correct decisions, the top‑right cell labelled “Type I error”, the bottom‑left cell labelled “Type II error”.",
+      "labels": [
+       "True H₀",
+       "False H₀",
+       "Reject",
+       "Fail to reject",
+       "Type I",
+       "Type II"
+      ],
+      "after": 6
+     }
+    ],
     "reviewed": false,
     "models": [
      "openai/gpt-oss-120b"
-    ]
+    ],
+    "images_version": 5
    }
   },
   {
@@ -4452,16 +4404,83 @@
       "back": "A statement that there is no real effect or difference in the population being studied."
      }
     ],
-    "diagrams": [],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-statistics-l12-newspaper-article-example",
+      "title": "A newspaper clipping showing a headline about coffee and health with a highlighted p‑value.",
+      "alt": "A newspaper clipping showing a headline about coffee and health with a highlighted p‑value.",
+      "priority": 8,
+      "picture_title": "Newspaper Article Example",
+      "kind": "photo",
+      "subject": "The picture shows a typical news article layout with the headline, a short summary, and the reported p‑value in bold, illustrating how statistics are presented to the public.",
+      "layout": "Full page photo of the article, headline at top, paragraph below, p‑value highlighted in red.",
+      "labels": [],
+      "after": 5
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-statistics-l12-p-value-illustration",
+      "title": "A simple illustration of a normal distribution curve with the observed result and the tail area representing the p‑value.",
+      "alt": "A simple illustration of a normal distribution curve with the observed result and the tail area representing the p‑value.",
+      "priority": 7,
+      "picture_title": "P‑value Illustration",
+      "kind": "illustration",
+      "subject": "The diagram shows a bell‑shaped curve, a vertical line marking the observed statistic, and the shaded tail area that corresponds to the probability of obtaining such an extreme result if the null hypothesis were true.",
+      "layout": "Curve centered, observed value marked with a vertical line, shaded tail on the right side, label arrows pointing to the curve and shaded area.",
+      "labels": [
+       "null hypothesis",
+       "observed value",
+       "p‑value area"
+      ],
+      "after": 1
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-statistics-l12-transparent-reporting-checklist",
+      "title": "A flowchart of the key elements that must be reported in a statistical study.",
+      "alt": "A flowchart of the key elements that must be reported in a statistical study.",
+      "priority": 6,
+      "picture_title": "Transparent Reporting Checklist",
+      "kind": "labelled diagram",
+      "subject": "The flowchart lists steps such as study design, sample description, data collection method, statistical analysis, results, and reproducibility notes, showing how each part connects to the next.",
+      "layout": "Vertical flowchart with boxes stacked, arrows linking each box, each box contains a short phrase.",
+      "labels": [
+       "design",
+       "sample",
+       "methods",
+       "analysis",
+       "results",
+       "reproducibility"
+      ],
+      "after": 3
+     }
+    ],
     "reviewed": false,
     "models": [
      "openai/gpt-oss-120b"
-    ]
+    ],
+    "images_version": 5
    }
   }
  ],
  "theme": {
   "hue": 40,
   "code": "STA"
+ },
+ "cover_plan": {
+  "subtitle": "Discover Patterns in Data Everyday",
+  "elements": [
+   "Bar chart",
+   "Histogram",
+   "Scatter plot",
+   "Bell curve (normal distribution)",
+   "Survey questionnaire",
+   "Probability dice",
+   "Box-and-whisker plot",
+   "Pie chart",
+   "Data spreadsheet",
+   "Sampling funnel"
+  ]
  }
 }
