@@ -875,34 +875,6 @@ Create a realistic photograph for a school lesson: A clear photograph showing se
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
-Save as:
-```
-introduction-to-statistics-l04-class-intervals-on-number-line.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A horizontal number line marked from 0 to 100 with vertical ticks indicating the start and end of each class interval, e.g., 0‑10, 10‑20, …, 90‑100.
-
-Layout: Number line runs across the centre; each interval is highlighted with a light shading and a bracket label above it.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "0‑10"
-- "10‑20"
-- "20‑30"
-- "30‑40"
-- "40‑50"
-- "50‑60"
-- "60‑70"
-- "70‑80"
-- "80‑90"
-- "90‑100"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
 ### Lesson 5: Charts and Graphs
 
 Save as:
@@ -965,6 +937,19 @@ introduction-to-statistics-l08-coin-die-card.png
 Prompt:
 ```
 Create a realistic photograph for a school lesson: A photograph showing a flipped coin, a six‑sided die, and a playing card spread out to illustrate the kinds of outcomes that form a sample space.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 10: Correlation and Regression
+
+Save as:
+```
+introduction-to-statistics-l10-plant-growth-experiment.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A series of potted plants on a lab bench, each with a water measuring cup beside it and a ruler indicating plant height; students can see how the two variables are recorded together.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
