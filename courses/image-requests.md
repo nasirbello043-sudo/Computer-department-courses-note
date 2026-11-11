@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **53** | Uploaded: **41** | Covers waiting: **10**
+Waiting: **54** | Uploaded: **41** | Covers waiting: **10**
 
 ## Course covers
 
@@ -143,9 +143,10 @@ cover-introduction-to-statistics.jpg
 Prompt:
 ```
 Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
-The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a orange colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a orange colour palette, showing a lively scene built around: Bar chart, Histogram, Scatter plot, Bell curve (normal distribution), Survey questionnaire, Probability dice, Box-and-whisker plot, Pie chart, Data spreadsheet, Sampling funnel.
 Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
 - Main title at the top: "INTRODUCTION TO STATISTICS"
+- Subtitle under it, smaller: "Discover Patterns in Data Everyday"
 The spine shows "INTRODUCTION TO STATISTICS" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
@@ -320,6 +321,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
+
+Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C=O"
+- "δ+"
+- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -840,28 +866,6 @@ Create a realistic photograph for a school lesson: A group of pupils standing in
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
-Save as:
-```
-introduction-to-statistics-l03-experiment-setup-control-vs-treatment.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: Two identical pots with seedlings; one receives regular water (control) and the other receives water plus fertilizer (treatment). The illustration highlights the difference in conditions.
-
-Layout: Two pots side‑by‑side in the centre, arrows pointing to each pot with labels "Control" and "Treatment", plus a small inset showing the fertilizer bottle.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Control"
-- "Treatment"
-- "Water"
-- "Fertilizer"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
 ### Lesson 4: Frequency Tables
 
 Save as:
@@ -952,6 +956,34 @@ Prompt:
 Create a realistic photograph for a school lesson: A series of potted plants on a lab bench, each with a water measuring cup beside it and a ruler indicating plant height; students can see how the two variables are recorded together.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 11: Hypothesis Testing
+
+Save as:
+```
+introduction-to-statistics-l11-hypothesis-test-flow.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A visual sequence showing: start → state null and alternative hypotheses → choose significance level α → collect data → compute test statistic → find p‑value → compare p‑value with α → decision (reject or fail to reject) → final conclusion.
+
+Layout: Horizontal left‑to‑right arrows connecting rectangular boxes for each step, with brief text inside each box.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Start"
+- "Null & Alt"
+- "α level"
+- "Data"
+- "Statistic"
+- "p‑value"
+- "Decision"
+- "Conclusion"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
 ## Research Methods
