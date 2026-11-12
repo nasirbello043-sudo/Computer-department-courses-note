@@ -1580,7 +1580,7 @@
   {
    "title": "Introduction to SQL",
    "focus": "Creating tables, inserting, updating and deleting data",
-   "file": null,
+   "file": "lesson-05.json",
    "draft": {
     "plan": {
      "summary": "In this lesson students learn how to create tables and manage data using SQL commands. They will practice writing statements to add, modify, and remove records in a relational database.",
@@ -1703,6 +1703,411 @@
       "q": "You have a table Employees with columns emp_id (INTEGER PRIMARY KEY), name (TEXT), department (TEXT), salary (INTEGER). Write a single SQL statement that increases the salary by 10% for all employees in the 'Sales' department, but only if their current salary is less than 50000.",
       "a": "\n1. Use UPDATE to modify rows.\n2. Set salary to salary * 1.10 (10% increase).\n3. Add a WHERE clause to restrict to department = 'Sales' and salary < 50000.\nThe statement is:\n```sql\nUPDATE Employees\nSET salary = CAST(salary * 1.10 AS INTEGER)\nWHERE department = 'Sales' AND salary < 50000;\n```\n(Using CAST ensures the result stays an integer if the column type is INTEGER.)"
      }
+    ]
+   },
+   "data": {
+    "title": "Introduction to SQL",
+    "summary": "In this lesson students learn how to create tables and manage data using SQL commands. They will practice writing statements to add, modify, and remove records in a relational database.",
+    "objectives": [
+     "Create a new table with appropriate column definitions",
+     "Insert rows of data into a table",
+     "Update existing records based on conditions",
+     "Delete rows safely using criteria",
+     "Explain the purpose of each SQL data‑manipulation command"
+    ],
+    "prerequisites": "Students should already understand basic concepts of databases and the relational model from previous lessons.",
+    "why": [
+     "SQL is the standard language for interacting with relational databases, which power everything from web applications to banking systems. Knowing how to create and modify tables lets you store and organize information effectively.",
+     "Being able to insert, update, and delete data is essential for maintaining accurate, up‑to‑date records in real‑world projects such as inventory tracking, user management, and reporting tools."
+    ],
+    "sections": [
+     {
+      "heading": "What Is a Table?",
+      "body": "A table is the most basic way a database stores information.  \nThink of a spreadsheet you might have used in school: it is made up of **rows** that run horizontally and **columns** that run vertically. Each row represents one complete record – for example, one student – and each column holds a specific piece of information about that record, such as the student’s name or birth date. In a database, a table works exactly the same way, only the data lives on a server and can be queried by many users at the same time.\n\n> **Definition:** A table is a collection of rows (records) and columns (fields) that together hold related data in a structured format.\n\nWhy use a table?  \nWhen data is organized into rows and columns, you can quickly find, add, change, or remove a single piece of information without touching the rest. This structure also lets the database enforce rules that keep the data consistent and reliable.\n\n### Columns and Data Types\n\nEach column has a **name** and a **data type**. The name tells you what the column stores (e.g., `first_name`). The data type tells the database what kind of values are allowed in that column, such as:\n\n| Data type | What it stores | Example |\n|-----------|----------------|---------|\n| `INTEGER` | Whole numbers   | `42` |\n| `REAL`    | Numbers with decimals | `3.14` |\n| `TEXT`    | Strings of characters | `'Alice'` |\n| `DATE`    | Calendar dates | `'2023-09-01'` |\n\nChoosing the right data type is important because it prevents mistakes like putting a word where a number should be, and it helps the database run faster.\n\n### Primary Keys\n\nEvery table should have a **primary key**. This is a column (or a combination of columns) whose values are unique for each row. The primary key lets the database identify each record without ambiguity. For a table of students, a common primary key is `student_id`, because no two students share the same ID number.\n\n> **Note:** A primary key cannot contain `NULL` (unknown) values and must be unique across all rows.\n\n### Basic CREATE TABLE Syntax\n\nTo create a new table, you use the `CREATE TABLE` statement. The general form looks like this:\n\n$$\n\\text{CREATE TABLE table_name ( column1 datatype [constraints], column2 datatype [constraints], ... );}\n$$\n\nLet’s break it down step‑by‑step:\n\n1. **`CREATE TABLE`** – tells the database you want to make a new table.\n2. **`table_name`** – the name you give the table, such as `students`. Choose a name that describes the data.\n3. **`(` … `)`** – inside the parentheses you list each column definition, separated by commas.\n4. **`column_name datatype`** – defines a column’s name and what kind of data it holds.\n5. **`[constraints]`** – optional rules for the column, such as `PRIMARY KEY`, `NOT NULL`, or `UNIQUE`.\n\nHere is a concrete example that creates a simple table for storing student information:\n\n```sql\nCREATE TABLE students (\n    student_id INTEGER PRIMARY KEY,\n    first_name TEXT NOT NULL,\n    last_name  TEXT NOT NULL,\n    birth_date DATE,\n    gpa        REAL\n);\n```\n\nExplanation of the example:\n\n- `student_id INTEGER PRIMARY KEY` creates a column named `student_id` that stores whole numbers and serves as the unique identifier for each row.\n- `first_name TEXT NOT NULL` and `last_name TEXT NOT NULL` store the student’s names; `NOT NULL` means a name must be provided – the column cannot be left empty.\n- `birth_date DATE` stores the student’s birth date; it can be left empty if the information is unknown.\n- `gpa REAL` stores the grade point average, which may have a decimal part.\n\n> **In daily life:** Imagine a library catalog. Each book is a row, and columns hold the title, author, ISBN, and whether the book is checked out. The ISBN works like a primary key because every book has a unique ISBN.\n\n> **Common mistake:** Forgetting to declare a primary key. Without it, the database cannot guarantee that each row is distinct, which makes updates and deletions error‑prone.\n\n> **Remember:** Choose clear column names, appropriate data types, and always define a primary key. This foundation makes all later SQL commands—`INSERT`, `UPDATE`, `DELETE`, and `SELECT`—work smoothly and safely.",
+      "code": ""
+     },
+     {
+      "heading": "Creating a Table with CREATE TABLE",
+      "body": "When you start a new database you first need a place to store information.  \nIn SQL that place is called a **table** – think of it like a spreadsheet where each row is one record (for example, one student) and each column is a piece of data about that record (for example, the student’s name or birth date).\n\nTo tell the database **what the table looks like**, you write a **CREATE TABLE** statement.  \nThis statement is the blueprint: it lists every column, decides what kind of data each column can hold, and marks which column uniquely identifies each row (the **primary key**).\n\n---\n\n### Step 1 – Choose a table name  \n\nPick a short, meaningful name that tells you what the table stores.  \nIf we are keeping information about students, a good name is `students`.  \nSQL identifiers are not case‑sensitive, but writing them in lower‑case makes the code easier to read.\n\n```sql\nCREATE TABLE students (\n    ...\n);\n```\n\n### Step 2 – List the columns  \n\nInside the parentheses you write one line for each column.  \nEach line has three parts:\n\n1. **Column name** – a single word, like `id` or `first_name`.  \n2. **Data type** – tells the database what kind of values are allowed (numbers, text, dates, etc.).  \n3. Optional **constraints** – rules such as “this column cannot be empty” or “this column must be unique”.\n\n#### Common data types for beginners  \n\n| Data type | What it stores | Example |\n|-----------|----------------|---------|\n| `INTEGER` | Whole numbers | `23` |\n| `REAL`    | Numbers with decimals | `3.14` |\n| `TEXT`    | Strings of characters | `'Alice'` |\n| `DATE`    | Calendar dates | `'2005-09-01'` |\n\n> **Definition:** *Data type* – a label that tells the database what kind of value a column can contain, ensuring the data is stored consistently.\n\n### Step 3 – Decide the primary key  \n\nEvery row should be distinguishable from all other rows.  \nThe simplest way is to create an `id` column that contains a unique number for each student.  \nMark this column as the **primary key** with the keyword `PRIMARY KEY`.  \nThe primary key automatically gets two important properties:\n\n* No two rows can have the same value.  \n* The column cannot be `NULL` (empty).\n\n### Step 4 – Put it all together  \n\nHere is a complete, step‑by‑step `CREATE TABLE` statement for our `students` table:\n\n```sql\nCREATE TABLE students (\n    id          INTEGER PRIMARY KEY,\n    first_name  TEXT    NOT NULL,\n    last_name   TEXT    NOT NULL,\n    birth_date  DATE,\n    gpa         REAL\n);\n```\n\nExplanation of each line:\n\n* `id INTEGER PRIMARY KEY` – a unique whole‑number identifier for each student.  \n* `first_name TEXT NOT NULL` – the student’s first name; `TEXT` means any string, `NOT NULL` means you must provide a value.  \n* `last_name TEXT NOT NULL` – same idea for the last name.  \n* `birth_date DATE` – optional column for the student’s birth date; it can be left empty.  \n* `gpa REAL` – optional column for the grade point average, which may have a decimal point.\n\n> **Note:** The order of columns does not affect how the table works, but placing the primary key first is a common convention that makes the definition easier to read.\n\n### Step 5 – Run the statement  \n\nCopy the whole block into your SQL client (such as SQLite, MySQL Workbench, or psql) and execute it.  \nIf everything is correct, the database will respond with a message like “Table created”.  \nNow you have a ready‑made container for student records.\n\n> **Common mistake:** Forgetting the comma after a column definition (e.g., writing `last_name TEXT NOT NULL birth_date DATE`). The database will report a syntax error; always end each line with a comma except the last one.\n\n### Step 6 – Verify the table  \n\nYou can check that the table exists and see its structure with a command such as:\n\n```sql\nPRAGMA table_info(students);\n```\n\nor, in MySQL:\n\n```sql\nDESCRIBE students;\n```\n\nThe output will list each column, its data type, and whether it can be `NULL`.\n\n> **Remember:** A well‑designed table starts with clear column names, appropriate data types, and a primary key. This foundation makes later tasks—adding, updating, or deleting data—much smoother.",
+      "code": ""
+     },
+     {
+      "heading": "Inserting Data with INSERT INTO",
+      "body": "When you first learn a language, you start by saying a single word, then a short sentence, and finally a whole paragraph.  \nIn SQL the same idea applies: the first step is to **insert** one row of data, then you can add many rows at once.  \nInserting means “putting a new record into a table”, just like putting a new card into a deck of playing cards.  \nEach card (row) has several fields (columns) such as *name*, *age*, and *city*.  \n\n**Definition:** *INSERT INTO* is the SQL command that adds new rows to an existing table.  \n\nThe simplest form tells the database exactly what values belong in each column, in the same order the columns were defined when the table was created.  \nAssume we have a table called `Students` that was created like this:\n\n```sql\nCREATE TABLE Students (\n    id   INT PRIMARY KEY,\n    name VARCHAR(50),\n    age  INT,\n    city VARCHAR(30)\n);\n```\n\nHere `id`, `name`, `age`, and `city` are the column names.  \nTo add a single student we write:\n\n```sql\nINSERT INTO Students\nVALUES (1, 'Alice', 20, 'London');\n```\n\nThe word **VALUES** tells SQL that the list inside the parentheses are the actual data for the new row.  \nThe first value (`1`) goes into the `id` column, the second (`'Alice'`) into `name`, and so on.  \nIf you forget the order or give a value of the wrong type (e.g., a word where a number is expected), the database will raise an error.\n\n> **Note:** The column list is optional **only** when you provide a value for **every** column **in the exact order** they were defined.\n\nOften you do not want to supply a value for every column.  \nMaybe the `id` column is set to auto‑increment, meaning the database will automatically generate the next number for you.  \nIn that case you list only the columns you are providing:\n\n```sql\nINSERT INTO Students (name, age, city)\nVALUES ('Bob', 22, 'Paris');\n```\n\nBecause we omitted `id`, the database fills it in automatically.  \nYou can also use the keyword **DEFAULT** to tell SQL to use the column’s default value (if one was defined) instead of writing a literal value:\n\n```sql\nINSERT INTO Students (id, name, age, city)\nVALUES (DEFAULT, 'Clara', 19, 'Berlin');\n```\n\n### Adding Multiple Rows at Once  \n\nWriting a separate `INSERT` statement for each row can be tedious and slow, especially when you have many records.  \nSQL lets you insert several rows in a single command by separating each row’s values with a comma:\n\n```sql\nINSERT INTO Students (name, age, city)\nVALUES\n    ('David', 21, 'Rome'),\n    ('Eva',   20, 'Madrid'),\n    ('Frank', 23, 'Dublin');\n```\n\nAll three rows are added together, and the database treats the operation as one transaction, which is faster and keeps the data consistent.\n\n> **In daily life:** Think of this as buying a pack of postcards. Instead of writing each postcard one by one, you write all the addresses on a single sheet and hand the whole sheet to the post office. The post office processes them together, saving time.\n\n### When to Use a Column List vs. No List  \n\n- **Use a column list** when you:\n  1. Want to skip columns that have defaults or auto‑generated values.\n  2. Are not sure of the exact column order (perhaps the table was altered later).\n  3. Want your code to be clear and resistant to future schema changes.\n\n- **Omit the column list** only when:\n  1. You are providing a value for **every** column.\n  2. The order of columns in the table will never change.\n\n> **Common mistake:** Forgetting to include the column list and then adding a new column to the table later. Existing `INSERT` statements will start failing because the order of values no longer matches the table definition.\n\n### Quick Checklist  \n\n1. Identify the table you want to add data to.  \n2. Decide whether you need to list the columns.  \n3. Write the `INSERT INTO` line, optionally followed by a column list in parentheses.  \n4. Use the `VALUES` keyword and supply one set of parentheses for each row.  \n5. Separate multiple rows with commas.  \n6. End the statement with a semicolon (`;`).  \n\n> **Remember:** Every value must match the data type of its column (e.g., numbers for `INT`, text in single quotes for `VARCHAR`). If a column allows `NULL` (meaning “no value”), you can write `NULL` instead of a real value.\n\nBy mastering these patterns you can quickly populate any table, whether you are entering a single record by hand or loading a batch of data from another source. The same principles apply no matter which SQL database you use—MySQL, PostgreSQL, SQLite, or others. Once the data is in the table, you will be ready to retrieve, update, or delete it in later lessons.",
+      "code": ""
+     },
+     {
+      "heading": "Updating Data with UPDATE",
+      "body": "Updating existing rows in a table is done with the **UPDATE** command.  \nThink of a table as a spreadsheet that already has many rows of information.  \nSometimes the data we entered earlier changes – a student’s address moves, a product’s price is reduced, or a status flag flips from “pending” to “approved”. The UPDATE statement lets us change exactly those cells without having to delete the whole row and re‑insert it.\n\n### The basic shape of an UPDATE statement  \n\nThe simplest form looks like this:\n\n$$\n\\text{UPDATE } \\textit{table\\_name} \\\\\n\\text{SET } \\textit{column\\_1} = \\textit{new\\_value\\_1}, \\; \\textit{column\\_2} = \\textit{new\\_value\\_2}, \\dots \\\\\n\\text{WHERE } \\textit{condition};\n$$\n\n* **UPDATE** – tells the database which table we want to change.  \n* **SET** – introduces the list of columns that will receive new values, and the values themselves.  \n* **WHERE** – a filter that decides which rows are affected. Only rows that satisfy the condition are updated.\n\nIf we omit the **WHERE** clause, *every* row in the table is changed. That is why the **WHERE** part is so important; it keeps our updates focused.\n\n### A concrete example  \n\nSuppose we have a table called `Students` with columns `id`, `name`, `grade`, and `city`.  \nA student named Alice just moved from “Springfield” to “Rivertown”. We can record the move with:\n\n```sql\nUPDATE Students\nSET city = 'Rivertown'\nWHERE name = 'Alice' AND city = 'Springfield';\n```\n\nThe **WHERE** clause checks two things: the row’s `name` must be “Alice” **and** the current `city` must be “Springfield”. This double check prevents us from accidentally changing a different Alice who already lives in Rivertown.\n\n### Updating several columns at once  \n\nYou can change more than one column in a single statement. Imagine the school decided to give every student who scored below 60 a “remedial” status:\n\n```sql\nUPDATE Students\nSET grade = grade + 5,\n    status = 'remedial'\nWHERE grade < 60;\n```\n\nHere the new value for `grade` is expressed as an *expression*: `grade + 5`. The database takes the existing grade, adds 5, and stores the result back into the same column.\n\n### Why limiting updates matters  \n\n> **Note:** Updating without a proper **WHERE** clause can unintentionally modify every row, leading to data loss or corruption.\n\nThink of it like editing a word document: if you use “Replace All” without checking the search term, you might replace words you never intended to change. In a database, the consequences are often larger because many applications rely on that data.\n\n### Tips for safe updates  \n\n1. **Test with SELECT first** – Write the same **WHERE** condition in a `SELECT` query to see which rows will be affected.  \n2. **Back up before big changes** – Especially on production systems, make a copy of the table or the whole database.  \n3. **Use transactions** – Wrap the UPDATE in `BEGIN TRANSACTION` … `COMMIT`. If something goes wrong, you can `ROLLBACK` to the original state.\n\n### Example with a transaction  \n\n```sql\nBEGIN TRANSACTION;\n\nUPDATE Employees\nSET salary = salary * 1.10\nWHERE department = 'Sales';\n\nCOMMIT;\n```\n\nIf the `WHERE` clause accidentally matches the wrong department, you could instead issue `ROLLBACK;` before committing, and the salaries would stay unchanged.\n\n> **Remember:** Always double‑check the **WHERE** clause and, when possible, preview the rows with a `SELECT` before running the UPDATE. This habit protects your data and saves you from costly mistakes.",
+      "code": ""
+     },
+     {
+      "heading": "Deleting Data with DELETE",
+      "body": "When you first learn SQL, you might think that once data is stored in a table it stays there forever. In reality, databases are meant to change over time – new information arrives, old information becomes irrelevant, and sometimes mistakes are made. The **DELETE** statement is the tool that lets you remove rows (records) that you no longer need.\n\n> **Definition:** `DELETE` is an SQL command that permanently removes one or more rows from a table.\n\n### The basic idea\n\nImagine a notebook where each page is a row of a table, and the whole notebook is the table itself. If you write a wrong entry on a page, you can either cross it out (which leaves the mistake visible) or you can tear the page out completely. `DELETE` is like tearing the page out – the data disappears from the table and is not shown in any future queries.\n\n### Simple syntax\n\nThe most basic form of the command looks like this:\n\n$$\n\\text{DELETE FROM table_name;}\n$$\n\nIf you run this exact statement, **every** row in `table_name` is removed. This is rarely what you want, because it erases all the data in one step.\n\n### Using `WHERE` to target specific rows\n\nTo delete only the rows that meet a certain condition, you add a **WHERE** clause. `WHERE` works like a filter: it tells the database *“only delete rows where this condition is true.”*  \n\nExample: suppose we have a table called `Students` with columns `id`, `name`, and `grade`. To remove the record of a student named Alice, you would write:\n\n```sql\nDELETE FROM Students\nWHERE name = 'Alice';\n```\n\nHere’s what each part means:\n\n- **DELETE FROM** – tells the database you want to delete rows.\n- **Students** – the name of the table.\n- **WHERE** – introduces the condition.\n- **name = 'Alice'** – the condition; only rows whose `name` column equals the text *Alice* will be deleted.\n\nYou can combine multiple conditions using `AND` or `OR`:\n\n```sql\nDELETE FROM Students\nWHERE grade < 60 AND name = 'Bob';\n```\n\nThis removes Bob’s record only if his grade is below 60.\n\n> **In daily life:** Think of `WHERE` like a grocery store’s “sale aisle” sign. Only the items in that aisle get the discount; the rest stay at full price. Similarly, only rows that match the `WHERE` condition get deleted.\n\n### Safety tips – avoid accidental data loss\n\nBecause `DELETE` permanently removes data, it’s easy to make a mistake that wipes out more than you intended. Follow these habits:\n\n1. **Always preview with SELECT first.** Before running a `DELETE`, run the same `WHERE` clause with a `SELECT` to see which rows will be affected.\n\n   ```sql\n   SELECT * FROM Students\n   WHERE grade < 60;\n   ```\n\n   If the result set looks correct, you can proceed to delete.\n\n2. **Use transactions when possible.** A transaction groups several statements together; you can *commit* (make permanent) or *rollback* (undo) the whole group.\n\n   ```sql\n   BEGIN TRANSACTION;\n   DELETE FROM Students WHERE grade < 60;\n   -- If you realize something is wrong:\n   ROLLBACK;\n   -- Otherwise:\n   COMMIT;\n   ```\n\n3. **Limit with `TOP` or `LIMIT` (if supported).** Some databases let you delete only a certain number of rows at a time, which reduces risk.\n\n   ```sql\n   DELETE FROM Logs\n   WHERE created_at < '2023-01-01'\n   LIMIT 1000;\n   ```\n\n4. **Never omit the `WHERE` clause unless you truly want to clear the whole table.** A missing `WHERE` is the most common cause of accidental data loss.\n\n> **Common mistake:** Running `DELETE FROM Orders;` when you meant `DELETE FROM Orders WHERE status = 'canceled';` deletes every order, not just the canceled ones.\n\n### What happens after a delete?\n\nWhen a row is deleted, the space it occupied becomes available for new rows. Some database engines keep a *log* of the deletion so they can roll back the change if you use a transaction. However, once you `COMMIT` the transaction, the data is gone from the logical view of the table. It may still exist on disk for a short time, but you should treat it as permanently lost.\n\n> **Remember:** Deleting is irreversible in normal use. Always double‑check your `WHERE` clause and consider backing up the table before large deletions.\n\n### Quick checklist before you hit “run”\n\n- [ ] Did you run a matching `SELECT` to see the rows?\n- [ ] Is the `WHERE` clause precise enough?\n- [ ] Are you inside a transaction you can roll back if needed?\n- [ ] Have you considered using `LIMIT` to delete in batches?\n\nBy treating `DELETE` with the same caution you would use when erasing a chalkboard, you keep your database clean without losing valuable information by accident.",
+      "code": ""
+     },
+     {
+      "heading": "Putting It All Together: A Mini Project",
+      "body": "Imagine you are building a small digital notebook where each page is a **record** that stores information about a book you own.  \nFirst we will create a table that represents the notebook, then we will add some pages, change a few details, and finally remove the pages we no longer need.  \nDoing all these steps in one place helps you see how the SQL commands fit together, just like following a recipe from start to finish.\n\n### 1. Create the table  \n\nA **table** is like a spreadsheet: it has columns (the headings) and rows (the data).  \nWe will call our table **books** and give it four columns:\n\n- `id` – a unique number for each book (like a barcode)  \n- `title` – the name of the book  \n- `author` – who wrote it  \n- `year` – the year it was published  \n\n```sql\nCREATE TABLE books (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    author TEXT NOT NULL,\n    year INTEGER\n);\n```\n\n> **Definition:** `PRIMARY KEY` means the column must contain a unique value for every row, so we can always find a specific book.\n\n### 2. Insert some sample data  \n\nNow we add three books to our notebook. The **INSERT INTO** command puts a new row into the table.\n\n```sql\nINSERT INTO books (id, title, author, year) VALUES\n(1, 'The Little Prince', 'Antoine de Saint-Exupéry', 1943),\n(2, '1984', 'George Orwell', 1949),\n(3, 'Pride and Prejudice', 'Jane Austen', 1813);\n```\n\n> **Note:** The list of column names `(id, title, author, year)` must match the order of the values inside each set of parentheses.\n\n### 3. Update a record  \n\nSuppose you discover that the publication year for *1984* was entered incorrectly.  \nThe **UPDATE** command changes existing rows. We tell SQL *which rows* to modify with a **WHERE** clause.\n\n```sql\nUPDATE books\nSET year = 1948\nWHERE title = '1984';\n```\n\n> **In daily life:** Think of `WHERE` as a filter that selects only the pages that match a condition, just like you would pick out all the receipts from a certain month.\n\n### 4. Add another book  \n\nMaybe you bought a new novel and want to record it.\n\n```sql\nINSERT INTO books (id, title, author, year) VALUES\n(4, 'The Hobbit', 'J.R.R. Tolkien', 1937);\n```\n\n### 5. Delete a record  \n\nYou decide to give away *Pride and Prejudice*. The **DELETE** command removes rows that meet a condition.\n\n```sql\nDELETE FROM books\nWHERE id = 3;\n```\n\n> **Common mistake:** Forgetting the `WHERE` clause deletes **all** rows in the table. Always double‑check that the condition correctly identifies only the rows you want to remove.\n\n### 6. Verify the final state  \n\nRun a simple **SELECT** query to see what remains:\n\n```sql\nSELECT * FROM books;\n```\n\nYou should see three rows: *The Little Prince*, *1984* (with the corrected year), and *The Hobbit*.\n\n### 7. Wrap‑up checklist  \n\n1. **Create** the table with the right column types.  \n2. **Insert** data using one `INSERT INTO` statement or multiple rows at once.  \n3. **Update** only the rows you intend to change, using a precise `WHERE`.  \n4. **Delete** rows carefully; always include a `WHERE`.  \n5. **Select** to confirm your changes.\n\n> **Remember:** SQL works step by step, just like writing on a piece of paper: you first draw the table, then fill it, then edit, then erase. Practicing this mini project gives you a complete picture of the typical workflow you will use in real databases.",
+      "code": ""
+     },
+     {
+      "heading": "Common Errors and Best Practices",
+      "body": "When you write SQL, the computer will tell you if something is wrong, but the messages can look like a foreign language at first. Learning how to read those messages and avoiding the most common slip‑ups will save you a lot of time and frustration.\n\n**Common mistake:**  \n> **Common mistake:** Forgetting a comma between column definitions, mismatching parentheses, or using the wrong quotation marks.\n\nSQL has a very strict grammar. Think of it like a recipe: every ingredient (column name, data type, value) must be listed in the right order, and the punctuation (commas, parentheses, quotes) tells the database where one step ends and the next begins. If you leave out a comma after a column name, the database thinks the next word is still part of the same column definition, and it will raise a syntax error.\n\n**How to read an error message**  \nWhen the database finds a problem, it returns a message that usually contains three parts:\n\n1. **Error code** – a short number or word that identifies the type of error (e.g., `SQLSTATE 42601`).  \n2. **Location** – the line number and sometimes the column number where the parser stopped.  \n3. **Description** – a brief English sentence such as “syntax error near ‘VARCHAR’”.\n\nStart by looking at the line number. Open your script and go to that line; the error is often right before or after the highlighted spot. If the description mentions a specific token (like `‘)’` or `‘INSERT’`), check the surrounding punctuation. Many editors can highlight matching parentheses, which helps you see if one is missing.\n\n**Typical syntax pitfalls**\n\n| Situation | What often goes wrong | How to fix it |\n|-----------|----------------------|--------------|\n| `CREATE TABLE` column list | Missing comma between columns, e.g. `id INT name VARCHAR(50)` | Add a comma: `id INT, name VARCHAR(50)` |\n| Data type spelling | Writing `VARCHR` instead of `VARCHAR` | Use the exact keyword from the documentation |\n| Quoting values | Using single quotes for identifiers (`'order'`) instead of double quotes or backticks | Identifier: `\"order\"` (or `` `order` `` in MySQL); Value: `'2023-01-01'` |\n| Parentheses balance | Forgetting the closing `)` after a column list | Count opening and closing parentheses; most editors show matching pairs |\n| `INSERT INTO` column/value mismatch | Supplying 3 values for a table that has 4 columns without specifying the column list | Either list the columns you are providing or give a value for every column (or use `DEFAULT`) |\n\n**Best practices for writing robust SQL**\n\n> **Remember:** Choose clear, consistent names for tables and columns.  \n> Use lowercase letters and underscores (snake_case) like `customer_orders` instead of `CustomerOrders` or `custOrders`. This avoids case‑sensitivity surprises on databases that treat identifiers differently.\n\n> **Note:** Add comments to explain why a table exists or why a column has a special constraint.  \n> In SQL, a comment starts with `--` for a single line or `/* … */` for a block. Example:  \n\n```sql\n-- Stores each order placed by a customer\nCREATE TABLE customer_orders (\n    order_id   INT PRIMARY KEY,\n    customer_id INT NOT NULL,\n    order_date DATE NOT NULL\n);\n```\n\nComments do not affect execution, but they make the script readable for you and for anyone else who later maintains the database.\n\n> **In daily life:** Test each statement before adding it to a larger script.  \n> Just as you might taste a sauce before adding the next ingredient, run `CREATE TABLE` by itself, then run a few `INSERT` statements, and finally try a `SELECT` to verify the data looks correct. If an error appears, you can isolate the problem to the most recent command.\n\nAdditional tips:\n\n- **Use explicit column lists** in `INSERT` statements. Even if the table’s column order seems obvious, writing `INSERT INTO customers (id, name, email) VALUES (1, 'Alice', 'a@example.com');` protects you from future schema changes.\n- **Avoid reserved words** as identifiers. Words like `order`, `group`, or `select` have special meanings in SQL. If you must use them, enclose them in double quotes or backticks, but it is better to rename the column (e.g., `order_number`).\n- **Keep statements short and readable**. Break long `SELECT` queries onto multiple lines, aligning keywords (`SELECT`, `FROM`, `WHERE`) at the start of each line. This makes it easier to spot missing commas or misplaced clauses.\n- **Check data types** before inserting. Trying to put a string into an `INT` column will raise a conversion error. Cast values explicitly if needed, using `CAST(value AS INT)`.\n\nBy paying attention to the exact wording of error messages, following a consistent naming style, commenting your code, and testing step by step, you will write SQL that is both correct and easy to maintain. The more you practice spotting these small details, the faster you will become at turning error messages into quick fixes.",
+      "code": ""
+     }
+    ],
+    "examples": [],
+    "examples_version": 3,
+    "practice": [
+     {
+      "level": "Easy",
+      "q": "What is a table in a relational database?",
+      "a": "A table is a collection of rows and columns that stores data in a structured way. Each column has a name and a data type (like INTEGER or VARCHAR), and each row represents a single record with a value for each column."
+     },
+     {
+      "level": "Easy",
+      "q": "Write the SQL statement to create a table named Students with columns id (integer primary key), name (text), and age (integer).",
+      "a": "\n1. Start with the CREATE TABLE command.\n2. Specify the table name: Students.\n3. List the columns inside parentheses, giving each a name and type.\n4. Mark id as PRIMARY KEY.\nThe full statement is:\n```sql\nCREATE TABLE Students (\nid INTEGER PRIMARY KEY,\nname TEXT,\nage INTEGER\n);\n```"
+     },
+     {
+      "level": "Medium",
+      "q": "How would you insert three rows into the Students table you just created, with the following data: (1, 'Alice', 20), (2, 'Bob', 22), (3, 'Charlie', 19)?",
+      "a": "\n1. Use the INSERT INTO command followed by the table name.\n2. List the column names in the same order as the values.\n3. Provide the values for each row, separating rows with commas.\nThe full statement is:\n```sql\nINSERT INTO Students (id, name, age) VALUES\n(1, 'Alice', 20),\n(2, 'Bob', 22),\n(3, 'Charlie', 19);\n```"
+     },
+     {
+      "level": "Medium",
+      "q": "Explain what the following SQL statement does: `UPDATE Students SET age = age + 1 WHERE name = 'Bob';`",
+      "a": "\n1. The UPDATE command tells the database to modify existing rows in the Students table.\n2. `SET age = age + 1` means increase the value in the age column by 1.\n3. The WHERE clause limits the change to rows where the name column equals 'Bob'.\nResult: Only Bob’s age is increased from 22 to 23; other rows stay unchanged."
+     },
+     {
+      "level": "Hard",
+      "q": "A table Courses has columns course_id (INTEGER PRIMARY KEY), title (TEXT), credits (INTEGER). Write SQL statements to (a) create the table, (b) add a new course (101, 'Database Systems', 3), (c) change the credits of 'Database Systems' to 4, and (d) remove the course with course_id 101.",
+      "a": "\na) Create the table:\n```sql\nCREATE TABLE Courses (\ncourse_id INTEGER PRIMARY KEY,\ntitle TEXT,\ncredits INTEGER\n);\n```\nb) Insert the new course:\n```sql\nINSERT INTO Courses (course_id, title, credits) VALUES (101, 'Database Systems', 3);\n```\nc) Update the credits:\n```sql\nUPDATE Courses SET credits = 4 WHERE title = 'Database Systems';\n```\nd) Delete the course:\n```sql\nDELETE FROM Courses WHERE course_id = 101;\n```"
+     },
+     {
+      "level": "Hard",
+      "q": "You have a table Employees with columns emp_id (INTEGER PRIMARY KEY), name (TEXT), department (TEXT), salary (INTEGER). Write a single SQL statement that increases the salary by 10% for all employees in the 'Sales' department, but only if their current salary is less than 50000.",
+      "a": "\n1. Use UPDATE to modify rows.\n2. Set salary to salary * 1.10 (10% increase).\n3. Add a WHERE clause to restrict to department = 'Sales' and salary < 50000.\nThe statement is:\n```sql\nUPDATE Employees\nSET salary = CAST(salary * 1.10 AS INTEGER)\nWHERE department = 'Sales' AND salary < 50000;\n```\n(Using CAST ensures the result stays an integer if the column type is INTEGER.)"
+     }
+    ],
+    "recap": "This lesson introduces SQL tables as structured collections of rows and columns, similar to a spreadsheet. It shows how to create a table with CREATE TABLE, add data using INSERT INTO, modify data with UPDATE, and remove data with DELETE. The mini‑project demonstrates these commands together, and the final section gives tips for avoiding common syntax errors.",
+    "key_terms": [
+     {
+      "term": "Table",
+      "meaning": "A collection of rows (records) and columns (fields) that stores related data in a database."
+     },
+     {
+      "term": "Row",
+      "meaning": "A single record in a table, analogous to a line in a spreadsheet."
+     },
+     {
+      "term": "Column",
+      "meaning": "A field that holds a specific type of data for every row, similar to a spreadsheet heading."
+     },
+     {
+      "term": "Primary Key",
+      "meaning": "A column (or set of columns) that uniquely identifies each row in a table."
+     },
+     {
+      "term": "CREATE TABLE",
+      "meaning": "SQL statement that defines a new table’s name, columns, data types, and primary key."
+     },
+     {
+      "term": "INSERT INTO",
+      "meaning": "SQL command that adds new rows of data to an existing table."
+     },
+     {
+      "term": "UPDATE",
+      "meaning": "SQL command that changes the values of existing rows based on a condition."
+     },
+     {
+      "term": "DELETE",
+      "meaning": "SQL command that permanently removes rows from a table based on a condition."
+     }
+    ],
+    "quiz": [
+     {
+      "q": "What does a table represent in a database?",
+      "options": [
+       "A list of databases",
+       "A collection of rows and columns",
+       "A single SQL command",
+       "A type of index"
+      ],
+      "answer": 1,
+      "why": "A table stores data as rows (records) and columns (fields)."
+     },
+     {
+      "q": "Which SQL statement is used to define a new table?",
+      "options": [
+       "INSERT INTO",
+       "SELECT",
+       "CREATE TABLE",
+       "DROP"
+      ],
+      "answer": 2,
+      "why": "CREATE TABLE specifies the table structure and columns."
+     },
+     {
+      "q": "In the statement CREATE TABLE students (id INT PRIMARY KEY, name VARCHAR(50));, what is 'id'?",
+      "options": [
+       "A column that stores names",
+       "The table name",
+       "A primary key column",
+       "A data type"
+      ],
+      "answer": 2,
+      "why": "'id' is defined as INT PRIMARY KEY, making it the unique identifier for each row."
+     },
+     {
+      "q": "Which command adds new rows to an existing table?",
+      "options": [
+       "UPDATE",
+       "DELETE",
+       "INSERT INTO",
+       "ALTER"
+      ],
+      "answer": 2,
+      "why": "INSERT INTO inserts new records into a table."
+     },
+     {
+      "q": "What does the WHERE clause do in an UPDATE statement?",
+      "options": [
+       "Specifies which table to update",
+       "Lists the new values",
+       "Filters which rows are changed",
+       "Deletes the table"
+      ],
+      "answer": 2,
+      "why": "WHERE limits the UPDATE to rows that meet the condition."
+     },
+     {
+      "q": "What will happen if you run DELETE FROM books; without a WHERE clause?",
+      "options": [
+       "Only the first row is removed",
+       "All rows in the books table are removed",
+       "The table structure is deleted",
+       "An error is thrown"
+      ],
+      "answer": 1,
+      "why": "Without WHERE, DELETE removes every row in the specified table."
+     }
+    ],
+    "flashcards": [
+     {
+      "front": "Define a database table.",
+      "back": "A structured set of rows and columns that stores related data."
+     },
+     {
+      "front": "What is a primary key?",
+      "back": "A column (or set) that uniquely identifies each row in a table."
+     },
+     {
+      "front": "SQL command to create a table?",
+      "back": "CREATE TABLE"
+     },
+     {
+      "front": "SQL command to add a new record?",
+      "back": "INSERT INTO"
+     },
+     {
+      "front": "SQL command to change existing data?",
+      "back": "UPDATE"
+     },
+     {
+      "front": "SQL command to remove rows?",
+      "back": "DELETE"
+     },
+     {
+      "front": "Purpose of the WHERE clause?",
+      "back": "To filter which rows a statement (UPDATE, DELETE, SELECT) affects."
+     },
+     {
+      "front": "Common syntax error when defining columns?",
+      "back": "Missing commas between column definitions or mismatched parentheses."
+     }
+    ],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l05-table-structure",
+      "title": "A spreadsheet‑style view showing rows as records and columns as fields.",
+      "alt": "A spreadsheet‑style view showing rows as records and columns as fields.",
+      "priority": 9,
+      "picture_title": "Table Structure",
+      "kind": "illustration",
+      "subject": "A simple table with three columns (ID, Name, Birthdate) and several rows, each row representing a student record.",
+      "layout": "Columns labeled at the top, rows numbered on the left, data cells filled with example values.",
+      "labels": [
+       "ID",
+       "Name",
+       "Birthdate",
+       "Row 1",
+       "Row 2",
+       "Row 3"
+      ],
+      "after": 0
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l05-create-table-blueprint",
+      "title": "Visual representation of a CREATE TABLE statement as a blueprint for a new table.",
+      "alt": "Visual representation of a CREATE TABLE statement as a blueprint for a new table.",
+      "priority": 8,
+      "picture_title": "CREATE TABLE Blueprint",
+      "kind": "labelled diagram",
+      "subject": "Shows the mapping from a CREATE TABLE command to the resulting table layout, highlighting column names, data types, and primary key.",
+      "layout": "Left side displays a short CREATE TABLE snippet, arrow points to a table diagram on the right with column headings and type labels.",
+      "labels": [
+       "Column Name",
+       "Data Type",
+       "Primary Key"
+      ],
+      "after": 1
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l05-crud-process-flow",
+      "title": "Sequence of Create, Read, Update, Delete operations on a table.",
+      "alt": "Sequence of Create, Read, Update, Delete operations on a table.",
+      "priority": 7,
+      "picture_title": "CRUD Process Flow",
+      "kind": "illustration",
+      "subject": "A flowchart that connects the four main SQL commands (INSERT, SELECT, UPDATE, DELETE) with example actions on a book‑record table.",
+      "layout": "Four boxes arranged in a clockwise loop, each box contains the command name and a tiny icon (plus, eye, pencil, trash). Arrows show the cycle.",
+      "labels": [
+       "INSERT",
+       "SELECT",
+       "UPDATE",
+       "DELETE"
+      ],
+      "after": 5
+     },
+     {
+      "type": "parts",
+      "title": "Components of a Table",
+      "items": [
+       {
+        "name": "Row",
+        "role": "One complete record (e.g., one student)"
+       },
+       {
+        "name": "Column",
+        "role": "A field that holds one type of data (e.g., name)"
+       },
+       {
+        "name": "Primary Key",
+        "role": "Uniquely identifies each row"
+       },
+       {
+        "name": "Cell",
+        "role": "Intersection of a row and column, holds a single value"
+       }
+      ],
+      "after": 0
+     },
+     {
+      "type": "steps",
+      "title": "Creating a Table with CREATE TABLE",
+      "steps": [
+       {
+        "label": "Choose name",
+        "text": "Pick a short, meaningful table name."
+       },
+       {
+        "label": "Define columns",
+        "text": "List each column and its data type."
+       },
+       {
+        "label": "Set primary key",
+        "text": "Mark the column that uniquely identifies rows."
+       },
+       {
+        "label": "Execute statement",
+        "text": "Run the CREATE TABLE command on the server."
+       }
+      ],
+      "loop": false,
+      "after": 1
+     },
+     {
+      "type": "steps",
+      "title": "Inserting Data with INSERT INTO",
+      "steps": [
+       {
+        "label": "Specify table",
+        "text": "Write INSERT INTO followed by the table name."
+       },
+       {
+        "label": "List columns",
+        "text": "Optionally list the columns you will fill."
+       },
+       {
+        "label": "Provide values",
+        "text": "Give the values for each column in the same order."
+       },
+       {
+        "label": "Run command",
+        "text": "Execute the statement to add the new row."
+       }
+      ],
+      "loop": false,
+      "after": 2
+     },
+     {
+      "type": "steps",
+      "title": "Updating Rows with UPDATE",
+      "steps": [
+       {
+        "label": "Target table",
+        "text": "Write UPDATE followed by the table name."
+       },
+       {
+        "label": "Set new values",
+        "text": "Use SET column = new_value for each change."
+       },
+       {
+        "label": "Choose rows",
+        "text": "Add a WHERE clause to limit which rows are updated."
+       },
+       {
+        "label": "Execute",
+        "text": "Run the UPDATE command."
+       }
+      ],
+      "loop": false,
+      "after": 3
+     },
+     {
+      "type": "steps",
+      "title": "Removing Rows with DELETE",
+      "steps": [
+       {
+        "label": "Target table",
+        "text": "Write DELETE FROM followed by the table name."
+       },
+       {
+        "label": "Select rows",
+        "text": "Add a WHERE clause to specify which rows to delete."
+       },
+       {
+        "label": "Confirm",
+        "text": "Make sure the condition is correct to avoid accidental loss."
+       },
+       {
+        "label": "Execute",
+        "text": "Run the DELETE statement."
+       }
+      ],
+      "loop": false,
+      "after": 4
+     }
+    ],
+    "images_version": 5,
+    "reviewed": false,
+    "models": [
+     "openai/gpt-oss-120b"
     ]
    }
   },
@@ -2472,7 +2877,7 @@
   {
    "title": "Grouping and Aggregates",
    "focus": "COUNT, SUM, AVG, GROUP BY and HAVING",
-   "file": null,
+   "file": "lesson-08.json",
    "draft": {
     "plan": {
      "summary": "This lesson introduces aggregate functions and how to group rows in SQL queries. Students learn to count, sum, average, and filter groups using GROUP BY and HAVING.",
@@ -2609,6 +3014,403 @@
       "q": "A table Visits(visitor_id, visit_date, pages_viewed) records each website visit. Write a query to find the day with the highest total pages viewed, and show that date and the total. Explain why you need a subquery or ORDER BY with LIMIT.",
       "a": "Query using ORDER BY and LIMIT:\n```sql\nSELECT visit_date,\nSUM(pages_viewed) AS total_pages\nFROM Visits\nGROUP BY visit_date\nORDER BY total_pages DESC\nLIMIT 1;\n```\nExplanation:\n1. `GROUP BY visit_date` aggregates rows per calendar day.\n2. `SUM(pages_viewed) AS total_pages` adds up pages viewed for each day.\n3. `ORDER BY total_pages DESC` sorts the days from highest to lowest total.\n4. `LIMIT 1` keeps only the top row, which is the day with the maximum total pages.\nA subquery could also be used to first compute the sums per day, then select the row where the sum equals the maximum sum, but ORDER BY … LIMIT 1 is simpler and achieves the same result."
      }
+    ]
+   },
+   "data": {
+    "title": "Grouping and Aggregates",
+    "summary": "This lesson introduces aggregate functions and how to group rows in SQL queries. Students learn to count, sum, average, and filter groups using GROUP BY and HAVING.",
+    "objectives": [
+     "Explain what an aggregate function does",
+     "Write queries that use COUNT, SUM, and AVG",
+     "Group rows with GROUP BY",
+     "Filter groups with HAVING",
+     "Interpret the results of grouped queries"
+    ],
+    "prerequisites": "Students should already know basic SELECT statements and simple WHERE clauses from the \"Querying Data\" lesson.",
+    "why": [
+     "Aggregates let you turn many rows into useful summary numbers, such as total sales or average grades, which are essential for reports and decision‑making.",
+     "GROUP BY and HAVING let you break data into categories (e.g., per store or per student) and apply conditions to those categories, a common task in business, science, and education."
+    ],
+    "sections": [
+     {
+      "heading": "What Is an Aggregate Function?",
+      "body": "Imagine you have a list of many numbers, like the scores of all students in a class exam. If you look at each score one by one, you see many separate values. An **aggregate function** is a special tool that looks at all those values together and squeezes them down to **one single result**.  \n\n> **Definition:** An aggregate function is a built‑in operation that takes a set of rows (or a column of values) as input and returns a single scalar value that summarizes that set.\n\nWhy do we need such a function? Often we are not interested in every individual row; we want to know something about the whole collection. For example, a teacher may want to know the **average** score of the class, not each student’s exact mark. The average tells the teacher quickly how the class performed overall. That single number is the output of an aggregate function applied to many rows.\n\n### How it works, step by step  \n\n1. **Select the column** that contains the values you want to summarize.  \n2. **Apply the aggregate function** to that column.  \n3. The database engine scans every row that matches the query, feeds each value into the function, and finally returns one number.\n\nThink of it like a kitchen blender. You put many fruit pieces (the rows) into the blender, press the button (the aggregate function), and out comes a smooth drink (the single result). The blender does not give you each fruit back; it gives you the blended mixture, which represents the whole batch.\n\n### Common aggregate functions you will meet  \n\n- `COUNT` – tells you **how many rows** there are.  \n- `SUM` – adds up all the numbers.  \n- `AVG` – calculates the **average** (mean) value.  \n- `MAX` and `MIN` – give the largest and smallest values.\n\nEach of these follows the same pattern: many inputs → one output.\n\n### A tiny example in SQL  \n\nSuppose we have a table called `sales` with a column `amount`. To find the total sales we write:\n\n$$\n\\text{SELECT SUM(amount) FROM sales;}\n$$\n\nThe `SUM` function looks at every `amount` value, adds them together, and returns just one number – the total.\n\nIf we only want to know how many sales records exist, we use `COUNT`:\n\n$$\n\\text{SELECT COUNT(*) FROM sales;}\n$$\n\nThe asterisk `*` means “all rows”. The result is a single integer representing the row count.\n\n> **In daily life:** Counting the number of apples in a basket, adding up the price of all items on a receipt, or finding the average temperature over a week are all everyday versions of aggregate functions.\n\n### What makes an aggregate different from ordinary functions?  \n\nA regular (scalar) function, like `ABS(x)` which returns the absolute value of a single number, works on **one value at a time**. You must call it separately for each row if you want every row’s result. An aggregate function, on the other hand, automatically processes the whole set in one go and never returns a separate value for each row—only the single summary.\n\n> **Remember:** Aggregate functions always produce **one** result per query (or per group, when we later use `GROUP BY`). They never return a list of values.\n\n### Why the result is always a single value  \n\nThe mathematics behind an aggregate is a reduction operation: it reduces a collection to a single element. For `SUM`, the reduction rule is addition; for `AVG`, it is addition followed by division by the count. Because the reduction rule combines every element into one, the final output cannot be a list—it must be a single scalar.\n\n> **Note:** When you combine aggregates with other columns that are not aggregated, you must tell the database how to group rows (using `GROUP BY`). Otherwise the database would not know which rows belong together for the reduction.\n\nUnderstanding aggregate functions is the first step toward summarizing data efficiently. Once you can turn many rows into one meaningful number, you can answer questions like “How many students passed?”, “What is the total revenue this month?”, or “Which product sold the most?” – all without manually inspecting each individual record.",
+      "code": ""
+     },
+     {
+      "heading": "COUNT – Counting Rows",
+      "body": "COUNT is the simplest aggregate function.  \nIt looks at a set of rows and tells you **how many** rows are there.  \nIf you add a column name inside the parentheses, COUNT only counts the rows where that column is **not NULL** (i.e., where a real value exists).  \n\n> **Definition:** `COUNT(*)` returns the total number of rows in the selected set, while `COUNT(column)` returns the number of rows with a non‑NULL value in *column*.\n\nWhy is this useful?  \nImagine you run a school and you want to know how many students are enrolled, or a shop that wants to know how many orders actually received a discount. Counting rows gives you a quick summary without having to look at each record individually.\n\n> **In daily life:** Counting rows is like counting the number of people standing in a line. If you only count the people who are wearing a hat, you are doing the same as `COUNT(column)` where the column records “has_hat”.\n\n### How COUNT works step by step  \n\n1. **Select the rows** – The `FROM` clause tells the database which table to look at, and any `WHERE` clause can filter the rows first.  \n2. **Apply COUNT** –  \n   * `COUNT(*)` simply adds 1 for every row that survived the filter.  \n   * `COUNT(col)` adds 1 only when the value in *col* is not NULL.  \n3. **Return a single number** – The result is a single scalar value, not a list of rows.\n\nBecause COUNT never looks at the actual data values (except to test for NULL), it is very fast. The database can often compute it using internal statistics without scanning every column.\n\n---\n\n**Example 1 (Easy): Count how many students are in the table.**  \n\nWe have a table `Students(id, name, grade)` and we want the total number of students.\n\n1. **Choose the table** – `FROM Students`.  \n2. **Apply COUNT to all rows** – use `COUNT(*)`.  \n\n   $$\\text{total\\_students} = \\text{COUNT(*)}$$  \n\n3. **Run the query** –  \n\n   ```sql\n   SELECT COUNT(*) AS total_students\n   FROM Students;\n   ```\n\n**Answer:** The query returns a single number, e.g., `total_students = 124`. This means there are 124 rows (students) in the `Students` table.\n\n---\n\n**Example 2 (Medium): Count how many orders have a non‑NULL discount column.**  \n\nTable `Orders(order_id, customer_id, discount)` stores a discount amount, but some orders have no discount (NULL). We need the count of orders where a discount was actually recorded.\n\n1. **Select the table** – `FROM Orders`.  \n2. **Filter to non‑NULL discounts** – use `COUNT(discount)`.  \n\n   $$\\text{discounted\\_orders} = \\text{COUNT(discount)}$$  \n\n3. **Run the query** –  \n\n   ```sql\n   SELECT COUNT(discount) AS discounted_orders\n   FROM Orders;\n   ```\n\n**Answer:** If the result is `discounted_orders = 37`, then 37 orders have a discount value; the remaining orders either have a discount of 0 or a NULL (meaning no discount was applied).\n\n> **Note:** `COUNT(discount)` ignores rows where *discount* is NULL. If you wrote `COUNT(*)` you would get the total number of orders, not just the discounted ones.\n\n### When to prefer `COUNT(*)` vs. `COUNT(column)`\n\n- Use `COUNT(*)` when you need the size of the whole result set, regardless of any column values.  \n- Use `COUNT(column)` when you are interested only in rows that contain meaningful data in that column.  \n\n> **Common mistake:** Writing `COUNT(column)` expecting it to count all rows, even those where *column* is NULL. The function will skip NULLs, leading to a smaller number than intended.\n\n### Quick checklist\n\n- Make sure the column you count is the one that matters for your question.  \n- Remember that `NULL` means “unknown” or “missing”; COUNT treats it as invisible.  \n- If you need to count rows that meet a condition (e.g., orders with a discount **greater than 0**), combine `WHERE` with `COUNT(*)` instead of relying on `COUNT(column)`.\n\n> **Remember:** `COUNT` always returns a single integer value; it never returns NULL itself. Even if the result set is empty, `COUNT(*)` returns 0.\n\nWith this foundation, you can now use COUNT as a building block for more complex queries, such as grouping students by grade or finding the number of orders per customer. The next sections will show how to combine COUNT with `GROUP BY` and `HAVING` to answer those kinds of questions.",
+      "code": ""
+     },
+     {
+      "heading": "SUM and AVG – Adding and Averaging",
+      "body": "When we talk about **adding** numbers in a database, we use the **SUM** function.  \nWhen we want the **average** (the “typical” value) of a set of numbers, we use the **AVG** function.  \nBoth functions look at a column that contains numeric data (like prices, scores, or ages) and return a single number that summarizes the whole set.\n\n> **Definition:** `SUM(column)` adds together every value that appears in *column* for the rows that are being considered.  \n> **Definition:** `AVG(column)` adds the same values together and then divides by the count of those values, giving the arithmetic mean.\n\nWhy are these useful?  \nImagine you run a small shop and you keep a table called **Sales** with a column **price** for each item sold. At the end of the day you want to know how much money you made – that is exactly what `SUM(price)` tells you.  \nNow think of a teacher who records test scores for each class. She may want to know how well the class performed on average, which is what `AVG(score)` provides.\n\n### How SUM works, step by step\n\n1. **Select the rows** you are interested in (maybe all rows, or only those that meet a condition).  \n2. **Take the numeric value** from the chosen column for each row.  \n3. **Add them together**.  \n\nMathematically this is written as  \n\n$$\n\\text{SUM} = \\sum_{i=1}^{n} v_i\n$$  \n\nwhere $v_i$ is the value in the column for row $i$, and $n$ is the number of rows being summed.\n\n### How AVG works, step by step\n\n1. **Select the rows** you want to average.  \n2. **Add the values** exactly as `SUM` does.  \n3. **Count how many values** were added.  \n4. **Divide the total sum by the count**.  \n\nThe formula looks like  \n\n$$\n\\text{AVG} = \\frac{\\displaystyle\\sum_{i=1}^{n} v_i}{n}\n$$  \n\nIf any row has a *NULL* (unknown) value, that row is ignored – the functions only use the numbers that actually exist.\n\n> **In daily life:** Adding up the prices of groceries in your cart is like `SUM`. Dividing that total by the number of items gives you the average price per item, just like `AVG`.\n\n### Worked Example – Easy: Total price of all items in the **Sales** table  \n\n**Example 3 (Easy): Sum the total price of all items in the Sales table.**  \n\nWe have a table **Sales** with a column **price** that contains the following values: 12.50, 7.99, 15.00, 3.45.  \n\n1. **Identify the column** to sum: `price`.  \n2. **List the values**: 12.50, 7.99, 15.00, 3.45.  \n3. **Add them together**  \n\n   $$  \n   \\text{Total} = 12.50 + 7.99 + 15.00 + 3.45  \n   $$  \n\n**Answer:** The total sales amount is **$38.94**.\n\n### Worked Example – Medium: Average score of each class  \n\n**Example 4 (Medium): Find the average score of each class.**  \n\nAssume a table **Results** with columns **class_id** and **score**.  \nData:  \n\n| class_id | score |\n|----------|-------|\n| A        | 78    |\n| A        | 85    |\n| A        | 92    |\n| B        | 66    |\n| B        | 74    |\n| B        | 80    |\n\nWe want the average score for class A and for class B.\n\n1. **Group rows by class** so that each class is treated separately.  \n2. **For class A**, list the scores: 78, 85, 92.  \n   - Compute the sum  \n\n     $$  \n     \\text{SUM}_A = 78 + 85 + 92 = 255  \n     $$  \n\n   - Count the rows: $n_A = 3$.  \n   - Divide to get the average  \n\n     $$  \n     \\text{AVG}_A = \\frac{255}{3} = 85  \n     $$  \n\n3. **For class B**, list the scores: 66, 74, 80.  \n   - Compute the sum  \n\n     $$  \n     \\text{SUM}_B = 66 + 74 + 80 = 220  \n     $$  \n\n   - Count the rows: $n_B = 3$.  \n   - Divide to get the average  \n\n     $$  \n     \\text{AVG}_B = \\frac{220}{3} \\approx 73.33  \n     $$  \n\n**Answer:**  \n- Class A average score = **85** points.  \n- Class B average score ≈ **73.33** points.\n\n### When to use SUM vs. AVG\n\n- Use **SUM** when you need a total amount, such as total revenue, total distance traveled, or total inventory cost.  \n- Use **AVG** when you need a typical value, like average test score, average temperature, or average salary.\n\n> **Remember:** `AVG` is essentially `SUM` divided by `COUNT`. If you already have the sum and the count, you can compute the average yourself, but the database does it for you automatically.\n\n### Common pitfalls\n\n> **Common mistake:** Forgetting that `NULL` values are ignored. If a column contains a `NULL`, `SUM` and `AVG` treat it as if the row does not exist for that calculation. This can lead to a lower count than you expect, especially for `AVG`. Always check for `NULL`s or use `COALESCE(column, 0)` if you want to treat missing numbers as zero.\n\nBy mastering `SUM` and `AVG`, you gain two of the most frequently used tools for turning raw numbers into meaningful insights. They are the foundation for many reports, dashboards, and data‑driven decisions.",
+      "code": ""
+     },
+     {
+      "heading": "GROUP BY – Creating Groups",
+      "body": "When we use an aggregate function such as `COUNT`, `SUM` or `AVG`, the database looks at **all** rows that match the query and produces a single number.  \nOften we do not want one number for the whole table, but a separate number for each category – for example, the total sales for each store, or the average salary for each department.  \nThat is exactly what the **`GROUP BY`** clause does: it tells the database to **split** the rows into groups that share the same value(s) in one or more columns, then apply the aggregate function **inside each group**.\n\n> **Definition:** `GROUP BY` divides a result set into groups that have identical values in the specified column(s). After grouping, any aggregate function is calculated separately for each group.\n\nWhy is this useful?  \nThink of a classroom where the teacher wants to know the average test score for each grade level. If the teacher simply averages all scores together, the result hides the differences between grades. By first separating the students into grade‑level groups, the teacher can compute a meaningful average for each grade. The same idea works for data stored in a database.\n\n### How `GROUP BY` works, step by step  \n\n1. **Select the columns that will define the groups.**  \n   These columns appear after the `GROUP BY` keyword. All rows that have the same value in these columns belong to the same group.\n\n2. **Collect rows into groups.**  \n   The database scans the table, compares the values of the grouping columns, and puts matching rows together.\n\n3. **Apply aggregate functions to each group.**  \n   For every group, the database evaluates functions like `SUM`, `COUNT`, `AVG`, `MAX`, `MIN`. The result is one row per group.\n\n4. **Return one output row per group.**  \n   The output contains the grouping column(s) and the calculated aggregates.\n\n> **In daily life:** Imagine a grocery store manager who wants to know how many apples were sold each day. The manager first sorts the sales receipts by date (the grouping column) and then adds up the apple quantities for each date. The sorted dates are the “groups,” and the addition is the aggregate.\n\n### Important rule about columns in the `SELECT` list  \n\nWhen you write a `SELECT` statement with `GROUP BY`, **every column that is not inside an aggregate function must appear in the `GROUP BY` clause**. This rule ensures the database knows how to assign each non‑aggregated value to a specific group.\n\n> **Common mistake:** Forgetting to list a non‑aggregated column in `GROUP BY`. The query will either error out or give unexpected results.\n\n### Worked Example 1 – Total sales per store for June (Hard)\n\n**Example 5 (Hard): Total sales per store for June**  \n\n*Question:* From the table **Sales** (`store_id`, `sale_date`, `amount`), find the total amount sold by each store during June 2023.\n\n**Steps**\n\n1. **Identify the grouping column.**  \n   We want totals per store, so we group by `store_id`.  \n\n   $$\\text{GROUP BY store\\_id}$$\n\n2. **Restrict rows to June 2023.**  \n   Use a `WHERE` clause to keep only rows where `sale_date` falls in June.  \n\n   $$\\text{WHERE sale\\_date BETWEEN '2023-06-01' AND '2023-06-30'}$$\n\n3. **Sum the amounts inside each group.**  \n   Apply the aggregate `SUM(amount)` to get the total for each store.  \n\n   $$\\text{SELECT store\\_id, SUM(amount) AS total\\_june}$$\n\n**Answer:**  \n| store_id | total_june |\n|----------|------------|\n| 101      | 45 230.00 |\n| 102      | 38 750.00 |\n| 103      | 52 410.00 |\n\n(Values are illustrative; each row shows the total sales for that store in June.)\n\n### Worked Example 2 – Average salary per department (Hard)\n\n**Example 6 (Hard): Average salary for each department**  \n\n*Question:* From the table **Employees** (`dept_id`, `salary`), compute the average salary for every department.\n\n**Steps**\n\n1. **Choose the grouping column.**  \n   Departments are identified by `dept_id`, so we group by that column.  \n\n   $$\\text{GROUP BY dept\\_id}$$\n\n2. **Apply the average aggregate.**  \n   Use `AVG(salary)` to calculate the mean salary inside each department.  \n\n   $$\\text{SELECT dept\\_id, AVG(salary) AS avg\\_salary}$$\n\n3. **(Optional) Order the result for readability.**  \n   Sort by `dept_id` or by `avg_salary` if we want the highest‑paid department first.  \n\n   $$\\text{ORDER BY dept\\_id}$$\n\n**Answer:**  \n| dept_id | avg_salary |\n|---------|------------|\n| 10      | 68 200.00 |\n| 20      | 74 500.00 |\n| 30      | 59 750.00 |\n\nEach row tells us the average salary of the employees in that department.\n\n### Putting it all together  \n\nA full query that combines the ideas above looks like this:\n\n```sql\nSELECT store_id,\n       SUM(amount) AS total_june\nFROM   Sales\nWHERE  sale_date BETWEEN '2023-06-01' AND '2023-06-30'\nGROUP BY store_id\nORDER BY store_id;\n```\n\nNotice how the `GROUP BY` appears **after** the `WHERE` clause (filtering rows first) and **before** the `ORDER BY` clause (sorting the final groups).\n\n> **Remember:** `GROUP BY` works on the rows that remain after `WHERE` has filtered them. The order of clauses is `SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY …`.\n\n### Quick checklist when writing a `GROUP BY` query  \n\n- Identify the column(s) that define the groups.  \n- Put those column(s) in the `GROUP BY` list.  \n- Make sure every column in `SELECT` that is not aggregated appears in `GROUP BY`.  \n- Use `WHERE` to filter rows **before** grouping, and `HAVING` to filter groups **after** aggregation.  \n\nBy mastering `GROUP BY`, you can turn a flat list of records into meaningful summaries, just like sorting receipts by date to see daily totals or grouping students by class to compare their average scores. This ability is at the heart of data analysis and reporting.",
+      "code": ""
+     },
+     {
+      "heading": "HAVING – Filtering Groups",
+      "body": "When we group rows with **GROUP BY**, the database first collects rows that share the same values in the chosen columns.  \nAfter the groups are built, we can compute aggregate values such as `COUNT`, `SUM`, or `AVG` for each group.  \nSometimes we only want to keep the groups that satisfy a certain condition – for instance, “only departments whose average salary is above $70 000”.  \nThat is what the **HAVING** clause does.\n\n> **Definition:** `HAVING` is a clause that filters groups after the `GROUP BY` step, keeping only those groups that meet a specified condition on aggregate results.\n\nWhy do we need a separate clause?  \nThe `WHERE` clause filters rows **before** they are grouped, while `HAVING` works **after** the grouping.  \nThink of a classroom: `WHERE` decides which students are allowed to sit in the room (e.g., only those who arrived on time).  \n`HAVING` looks at the groups of students that formed later (e.g., teams for a project) and decides which teams stay in the competition (e.g., only teams whose average score exceeds a threshold).  \n\n### How `HAVING` fits into a query\n\nA typical query with aggregation looks like this:\n\n```sql\nSELECT department, AVG(salary) AS avg_sal\nFROM employees\nGROUP BY department\nHAVING AVG(salary) > 70000;\n```\n\n1. `FROM` tells the database where to read the rows.  \n2. `WHERE` (if present) would discard rows that do not meet a condition.  \n3. `GROUP BY department` builds one group for each distinct department.  \n4. `SELECT` computes `AVG(salary)` for each group and names it `avg_sal`.  \n5. `HAVING AVG(salary) > 70000` removes any department whose average salary is **not** greater than $70 000.\n\n> **Note:** The condition inside `HAVING` can use any aggregate function (`COUNT`, `SUM`, `MAX`, `MIN`, `AVG`) and can also combine them with ordinary columns that appear in the `GROUP BY` list.\n\n### Step‑by‑step illustration\n\nSuppose we have a table **employees**:\n\n| emp_id | department | salary |\n|--------|------------|--------|\n| 1      | Sales      | 65000 |\n| 2      | Sales      | 72000 |\n| 3      | HR         | 58000 |\n| 4      | HR         | 61000 |\n| 5      | IT         | 90000 |\n| 6      | IT         | 85000 |\n\nIf we run the query above, the database will:\n\n1. Group rows by `department` → three groups: Sales, HR, IT.  \n2. Compute `AVG(salary)` for each group → Sales = 68 500, HR = 59 500, IT = 87 500.  \n3. Apply `HAVING AVG(salary) > 70000` → keep only the IT group.\n\nThe final result is a single row: `IT | 87500`.\n\n> **In daily life:** Imagine you are sorting a pile of fruits by type (apples, oranges, bananas). After sorting, you only keep the piles that weigh more than 5 kg. The sorting step is like `GROUP BY`; the weighing and discarding step is like `HAVING`.\n\n### Worked examples\n\n**Example 7 (Hard): Departments with average salary greater than $70,000**  \n\n*Question:* List each department whose average employee salary exceeds $70 000, and show that average.\n\n1. **Group rows** by `department`.  \n   $$\\text{Groups} = \\{\\text{Sales}, \\text{HR}, \\text{IT}\\}$$\n2. **Compute the average salary** for each group using `AVG(salary)`.  \n   $$\\text{Avg}_{\\text{Sales}} = \\frac{65000 + 72000}{2} = 68500$$  \n   $$\\text{Avg}_{\\text{HR}} = \\frac{58000 + 61000}{2} = 59500$$  \n   $$\\text{Avg}_{\\text{IT}} = \\frac{90000 + 85000}{2} = 87500$$\n3. **Apply HAVING** to keep groups where the average is > 70000.  \n   $$\\text{Keep } \\text{IT} \\text{ because } 87500 > 70000$$\n\n**Answer:** The only department meeting the condition is **IT** with an average salary of **$87,500**.\n\n**Example 8 (Very Hard): Products sold more than 100 times and whose total revenue exceeds $5,000**  \n\n*Question:* From a `sales` table containing `product_id`, `quantity`, and `price_per_unit`, find the product IDs that have been sold in more than 100 transactions **and** whose total revenue (`SUM(quantity * price_per_unit)`) is greater than $5 000.\n\n1. **Group rows** by `product_id`.  \n   $$\\text{Groups} = \\{p_1, p_2, \\dots, p_n\\}$$\n2. **Count the number of transactions** per product with `COUNT(*)`.  \n   $$\\text{TransCount}_{p_i} = \\text{COUNT(*) for } p_i$$\n3. **Compute total revenue** per product using `SUM(quantity * price_per_unit)`.  \n   $$\\text{Revenue}_{p_i} = \\sum (\\text{quantity} \\times \\text{price\\_per\\_unit})$$\n4. **Apply HAVING** with two conditions combined by `AND`.  \n   $$\\text{HAVING } \\text{TransCount}_{p_i} > 100 \\; \\text{AND} \\; \\text{Revenue}_{p_i} > 5000$$\n5. **Select** the `product_id` that satisfy both.  \n\nAssume the table contains the following aggregated results after steps 2‑3:\n\n| product_id | TransCount | Revenue |\n|------------|------------|---------|\n| 101        | 120        | 4800    |\n| 102        | 95         | 6200    |\n| 103        | 130        | 7200    |\n| 104        | 150        | 4500    |\n\nApplying the `HAVING` condition:\n\n- 101: 120 > 100 **but** 4800 ≤ 5000 → discard.  \n- 102: 95 ≤ 100 → discard.  \n- 103: 130 > 100 **and** 7200 > 5000 → keep.  \n- 104: 150 > 100 **but** 4500 ≤ 5000 → discard.\n\n**Answer:** Only **product 103** meets both criteria; it was sold in 130 transactions and generated $7,200 in revenue.\n\n> **Common mistake:** Writing the condition in `WHERE` instead of `HAVING`. `WHERE` cannot see aggregate results, so the query would either error out or return no rows because the condition would be evaluated on individual rows, not on the grouped totals.\n\n> **Remember:** Use `HAVING` whenever you need to filter **after** aggregation. The columns you reference in a `HAVING` clause must either be aggregate expressions or appear in the `GROUP BY` list. This keeps the query logical and the database engine happy.",
+      "code": ""
+     },
+     {
+      "heading": "Combining Multiple Aggregates",
+      "body": "When you write a query you can ask the database to give you many different summaries at the same time.  \nInstead of asking “how many rows?” you can also ask “what is the total?” and “what is the average?” in one go.  \nThe database evaluates each aggregate function for the same set of rows (or for each group if you use **GROUP BY**) and then returns a single row that contains all the results.  \n\n> **Definition:** An *aggregate function* is a special kind of function that takes many input rows and returns a single value, such as `COUNT`, `SUM`, `AVG`, `MIN`, or `MAX`.  \n\nWhy combine them?  \nThink of a school report card. One line shows the number of subjects taken, the total marks earned, and the average mark. All three numbers come from the same list of marks, but you read them together because they describe the same student. In a database the same idea lets you see a complete picture of each group without running several separate queries.\n\n### Step‑by‑step logic\n\n1. **Select the columns you want to keep** – usually the columns that identify the group (e.g., city name).  \n2. **Add each aggregate you need** – write `COUNT(*)`, `SUM(amount)`, `AVG(amount)`, etc., and give each a clear alias with `AS`.  \n3. **Group the rows** – use `GROUP BY` with the identifier columns.  \n4. **Order the result** – if you want the biggest totals first, add `ORDER BY` with the appropriate aggregate alias and the keyword `DESC` (descending).  \n\nAll of these clauses are written in the same `SELECT` statement, so the database does the work only once.\n\n### Worked Example\n\n**Example 9 (Very Hard): City‑wide sales summary**  \n*For each city, display the number of customers, total purchases, and average purchase amount, sorted by total purchases descending.*\n\n1. **Identify the tables and columns** – suppose we have a table `Customers` with `city` and `customer_id`, and a table `Orders` with `customer_id` and `order_total`.  \n2. **Join the tables** – we need the city for each order, so we join on `customer_id`.  \n\n   $$\\text{FROM Customers c JOIN Orders o ON c.customer_id = o.customer_id}$$  \n\n3. **Group by city** – this creates one group per city.  \n\n   $$\\text{GROUP BY c.city}$$  \n\n4. **Add the three aggregates** – count distinct customers, sum all order totals, and compute the average order total.  \n\n   $$\\text{SELECT c.city, COUNT(DISTINCT c.customer_id) AS num_customers,}$$  \n   $$\\text{SUM(o.order_total) AS total_purchases, AVG(o.order_total) AS avg_purchase}$$  \n\n5. **Order by total purchases descending** – the city with the highest sales appears first.  \n\n   $$\\text{ORDER BY total_purchases DESC}$$  \n\nPutting it all together:\n\n```sql\nSELECT\n    c.city,\n    COUNT(DISTINCT c.customer_id) AS num_customers,\n    SUM(o.order_total)          AS total_purchases,\n    AVG(o.order_total)          AS avg_purchase\nFROM Customers c\nJOIN Orders o ON c.customer_id = o.customer_id\nGROUP BY c.city\nORDER BY total_purchases DESC;\n```\n\n**Answer:** The query returns a table like  \n\n| city      | num_customers | total_purchases | avg_purchase |\n|-----------|---------------|----------------|--------------|\n| New York  | 124           | 1 254 300.00   | 10 115.73    |\n| Chicago   | 98            | 987 450.00     | 10 080.71    |\n| …         | …             | …              | …            |\n\nThe rows are sorted so the city with the largest `total_purchases` appears at the top.\n\n### Using Multiple Aggregates without GROUP BY\n\nSometimes you want several summaries of the whole table, not per group. The same principle applies; just omit `GROUP BY`.\n\n```sql\nSELECT\n    COUNT(*)               AS total_rows,\n    SUM(salary)            AS total_salary,\n    AVG(salary)            AS avg_salary\nFROM Employees;\n```\n\nThe result is a single row with three numbers: how many employees, how much money the company pays in total, and the average salary.\n\n> **Note:** All aggregates in the same `SELECT` must refer to the same set of rows. If you mix aggregated columns with non‑aggregated columns, you must use `GROUP BY` to tell the database how to split the rows.\n\n### Ordering by an Aggregate Alias\n\nWhen you give an aggregate an alias (e.g., `total_purchases`), you can refer to that alias in `ORDER BY`. This makes the query easier to read.\n\n```sql\nSELECT\n    department,\n    COUNT(*)          AS emp_cnt,\n    AVG(salary)       AS avg_sal\nFROM Employees\nGROUP BY department\nORDER BY emp_cnt DESC;   -- shows departments with most employees first\n```\n\nThe database first computes `emp_cnt` for each department, then sorts the rows using that value.\n\n> **In daily life:** Imagine you are sorting a list of classrooms by the number of students they contain. You first count the students in each room, then you arrange the rooms from biggest to smallest. The database does exactly the same with `ORDER BY emp_cnt DESC`.\n\n### Common Pitfalls\n\n> **Common mistake:** Forgetting to give each aggregate a distinct alias and then trying to order by the original function name. Some SQL dialects allow `ORDER BY COUNT(*)`, but many require the alias, leading to an error.\n\n### Quick Checklist\n\n- Write every aggregate you need in the same `SELECT`.  \n- Give each aggregate a clear alias (`AS …`).  \n- If you need separate rows per category, add `GROUP BY` with the category columns.  \n- Use `ORDER BY <alias> DESC` (or `ASC`) to sort by any aggregate result.  \n\nBy combining aggregates, you get a richer, more informative result set with a single, efficient query. This saves time, reduces server load, and keeps your code tidy.",
+      "code": ""
+     },
+     {
+      "heading": "Common Pitfalls and Tips",
+      "body": "> **Common mistake:** Mixing aggregated and non‑aggregated columns without using **GROUP BY** will cause an error because the database does not know how to combine the raw values with the summary values.\n\nWhen you write a query that contains an aggregate function such as `COUNT`, `SUM`, or `AVG`, every column that appears in the `SELECT` list must either be inside an aggregate function **or** be listed in a `GROUP BY` clause. Think of it like a classroom: if the teacher asks each group of students to report the total number of books they read, the teacher also needs to know which group each total belongs to. The group name (e.g., “Group A”) is the **GROUP BY** part; the total number of books is the **aggregate** part. Without the group name, the teacher cannot match a total to a specific group, and the request is ambiguous.\n\n> **Remember:** `WHERE` filters rows **before** aggregation, while `HAVING` filters groups **after** aggregation.\n\nThis distinction is crucial. `WHERE` works on the original table rows, so it can only refer to columns that exist in each row. `HAVING` works on the results of aggregation, so it can refer to aggregate expressions like `COUNT(*)` or `SUM(sales)`. An everyday analogy is sorting laundry: you first **remove** any dirty socks (`WHERE`) before you **count** how many clean pairs you have (`HAVING`). If you tried to count socks before removing the dirty ones, you would get a misleading total.\n\n> **Note:** `HAVING` can be used without `GROUP BY` when you want to apply an aggregate condition to the whole table as a single group.\n\n### Pitfall 1 – Forgetting to Group\n\nSuppose we have a table `Orders`:\n\n| order_id | customer_id | amount |\n|----------|-------------|--------|\n| 1        | 101         | 50     |\n| 2        | 102         | 30 |\n| 3        | 101         | 20 |\n\nIf we write:\n\n```sql\nSELECT customer_id, SUM(amount) FROM Orders;\n```\n\nthe database will raise an error because `customer_id` is not aggregated and not grouped. The correct query adds `GROUP BY`:\n\n```sql\nSELECT customer_id, SUM(amount) FROM Orders GROUP BY customer_id;\n```\n\nNow each `customer_id` is paired with the sum of its orders.\n\n### Pitfall 2 – Using `WHERE` Instead of `HAVING` for Aggregates\n\nImagine we want customers whose total spending exceeds $60. A wrong attempt is:\n\n```sql\nSELECT customer_id, SUM(amount) AS total\nFROM Orders\nWHERE SUM(amount) > 60\nGROUP BY customer_id;\n```\n\n`WHERE` cannot see `SUM(amount)` because the sum is calculated **after** the rows are filtered. The database will reject the query. The right way is:\n\n```sql\nSELECT customer_id, SUM(amount) AS total\nFROM Orders\nGROUP BY customer_id\nHAVING SUM(amount) > 60;\n```\n\nNow the `HAVING` clause evaluates the sum for each group and keeps only those groups that satisfy the condition.\n\n> **In daily life:** Think of `WHERE` as a sieve that removes unwanted items **before** you count them, while `HAVING` is a filter that discards counted groups you don’t need **after** you have the totals.\n\n### Pitfall 3 – Mixing Aggregates and Non‑Aggregates in `HAVING`\n\nA subtle error is to place a non‑aggregated column in `HAVING` without also grouping by it. For example:\n\n```sql\nSELECT customer_id, SUM(amount) AS total\nFROM Orders\nGROUP BY customer_id\nHAVING customer_id > 100 AND SUM(amount) > 60;\n```\n\nHere `customer_id` is already part of the `GROUP BY`, so it is allowed. If we omitted `customer_id` from the `GROUP BY`, the query would be invalid because `HAVING` would be trying to use a column that is not uniquely defined for each group.\n\n### Worked Example – Fixing a Mixed‑Up Query\n\n**Example 10 (Intermediate): Wrong use of WHERE with an aggregate**\n\nWe have a table `Sales`:\n\n| sale_id | region | revenue |\n|---------|--------|---------|\n| 1       | North  | 120 |\n| 2       | South  | 80 |\n| 3       | North  | 150 |\n| 4       | East   | 60 |\n| 5       | South  | 200 |\n\nWe want to list each region whose total revenue is **greater than 200**.\n\n**Steps**\n\n1. **Identify the aggregate needed.**  \n   We need the sum of `revenue` per `region`, so we will use `SUM(revenue)`.\n\n2. **Group the rows by region.**  \n   Write the `GROUP BY` clause to create one group for each region.  \n\n   $$ \\text{GROUP BY region} $$\n\n3. **Filter groups with HAVING.**  \n   Apply the condition on the aggregated sum.  \n\n   $$ \\text{HAVING SUM(revenue) > 200} $$\n\n4. **Combine into a full query.**  \n\n   ```sql\n   SELECT region, SUM(revenue) AS total_rev\n   FROM Sales\n   GROUP BY region\n   HAVING SUM(revenue) > 200;\n   ```\n\n**Answer:** The query returns  \n\n| region | total_rev |\n|--------|-----------|\n| North  | 270 |\n| South  | 280 |\n\nBoth North and South have total revenue exceeding 200.\n\n### Pitfall 4 – Assuming `COUNT(*)` Counts Only Non‑NULL Values\n\n`COUNT(*)` counts **all rows**, even if some columns are `NULL`. If you need to count only rows where a specific column has a value, use `COUNT(column_name)`. For example, `COUNT(email)` counts only rows where `email` is not `NULL`. Forgetting this can lead to over‑counting.\n\n### Pitfall 5 – Overusing `HAVING` When `WHERE` Suffices\n\nIf a condition does not involve an aggregate, place it in `WHERE`. This lets the database eliminate rows early, which is usually more efficient. For instance, to ignore orders with a negative amount before summing:\n\n```sql\nSELECT customer_id, SUM(amount)\nFROM Orders\nWHERE amount >= 0          -- filter rows first\nGROUP BY customer_id;\n```\n\nPutting `amount >= 0` in `HAVING` would still work, but it would be evaluated after the grouping, wasting resources.\n\n### Quick Checklist\n\n- **Every column in SELECT** must be either aggregated **or** listed in `GROUP BY`.  \n- **Use `WHERE`** for row‑level conditions that do **not** involve aggregates.  \n- **Use `HAVING`** for conditions that involve aggregates or that need to filter whole groups.  \n- **Remember** `COUNT(*)` counts all rows; `COUNT(column)` ignores `NULL`s.  \n- **Test** your query with a small data set to see how groups are formed before scaling up.\n\nBy keeping these rules in mind, you can avoid the most common errors when working with aggregates and groups, and write clear, correct SQL that behaves exactly as you expect.",
+      "code": ""
+     }
+    ],
+    "examples": [],
+    "examples_version": 3,
+    "practice": [
+     {
+      "level": "Easy",
+      "q": "What does the COUNT(*) aggregate function do in a SQL query?",
+      "a": "COUNT(*) counts the total number of rows returned by the query, including rows with NULL values. It simply adds 1 for each row it sees, so the result is the number of rows in the result set."
+     },
+     {
+      "level": "Easy",
+      "q": "Explain the difference between SUM(column) and AVG(column) when used on the same numeric column.",
+      "a": "SUM(column) adds together all the non‑NULL values in the column and returns the total sum. AVG(column) first adds the same non‑NULL values (like SUM) and then divides that sum by the number of non‑NULL rows, giving the average. So SUM gives a total, AVG gives a mean."
+     },
+     {
+      "level": "Medium",
+      "q": "A table Sales has columns (region, amount). Write in words what the query `SELECT region, SUM(amount) FROM Sales GROUP BY region;` returns.",
+      "a": "The query groups all rows that have the same region value. For each region group it adds up the amount values (ignoring NULLs) and returns one row per region showing the region name and the total sales amount for that region."
+     },
+     {
+      "level": "Medium",
+      "q": "Why might you need a HAVING clause after a GROUP BY, and how does it differ from a WHERE clause?",
+      "a": "WHERE filters rows **before** grouping, so it decides which rows go into each group. HAVING filters groups **after** they are formed; it can test aggregate results (e.g., SUM, COUNT). You use HAVING when you want to keep only groups that meet a condition on the aggregated values."
+     },
+     {
+      "level": "Hard",
+      "q": "Consider a table Orders(order_id, customer_id, total). Write a query to list customers who have placed at least three orders and whose average order total is greater than $200. Explain each part of the query.",
+      "a": "Query:\n```sql\nSELECT customer_id,\nCOUNT(*)        AS order_count,\nAVG(total)      AS avg_total\nFROM Orders\nGROUP BY customer_id\nHAVING COUNT(*) >= 3\nAND AVG(total) > 200;\n```\nExplanation:\n1. `FROM Orders` selects the source table.\n2. `GROUP BY customer_id` creates one group for each customer.\n3. `COUNT(*) AS order_count` counts how many orders each customer has.\n4. `AVG(total) AS avg_total` computes the average order amount per customer.\n5. `HAVING COUNT(*) >= 3` keeps only groups (customers) with three or more orders.\n6. `AND AVG(total) > 200` further keeps only those whose average order total exceeds $200.\nThe result shows each qualifying customer’s id, number of orders, and average total."
+     },
+     {
+      "level": "Hard",
+      "q": "A table Visits(visitor_id, visit_date, pages_viewed) records each website visit. Write a query to find the day with the highest total pages viewed, and show that date and the total. Explain why you need a subquery or ORDER BY with LIMIT.",
+      "a": "Query using ORDER BY and LIMIT:\n```sql\nSELECT visit_date,\nSUM(pages_viewed) AS total_pages\nFROM Visits\nGROUP BY visit_date\nORDER BY total_pages DESC\nLIMIT 1;\n```\nExplanation:\n1. `GROUP BY visit_date` aggregates rows per calendar day.\n2. `SUM(pages_viewed) AS total_pages` adds up pages viewed for each day.\n3. `ORDER BY total_pages DESC` sorts the days from highest to lowest total.\n4. `LIMIT 1` keeps only the top row, which is the day with the maximum total pages.\nA subquery could also be used to first compute the sums per day, then select the row where the sum equals the maximum sum, but ORDER BY … LIMIT 1 is simpler and achieves the same result."
+     }
+    ],
+    "recap": "Aggregate functions turn many rows into a single summary value, such as COUNT, SUM, or AVG. GROUP BY splits rows into categories so each group gets its own aggregate result, while HAVING filters those groups after aggregation. COUNT counts rows, SUM adds values, and AVG computes the mean. Remember that non‑aggregated columns must appear in GROUP BY and that WHERE works before grouping, HAVING after.",
+    "key_terms": [
+     {
+      "term": "Aggregate function",
+      "meaning": "A built‑in operation that takes a set of rows and returns one summarized scalar value (e.g., COUNT, SUM, AVG)."
+     },
+     {
+      "term": "COUNT",
+      "meaning": "Counts rows; COUNT(*) counts all rows, COUNT(column) counts only rows where the column is not NULL."
+     },
+     {
+      "term": "SUM",
+      "meaning": "Adds together all numeric values in a column for the selected rows."
+     },
+     {
+      "term": "AVG",
+      "meaning": "Calculates the arithmetic mean of numeric values by dividing SUM by COUNT."
+     },
+     {
+      "term": "GROUP BY",
+      "meaning": "Divides a result set into groups that share the same values in specified columns, then applies aggregates to each group."
+     },
+     {
+      "term": "HAVING",
+      "meaning": "Filters groups after they have been formed by GROUP BY, based on aggregate conditions."
+     },
+     {
+      "term": "WHERE",
+      "meaning": "Filters individual rows before any grouping or aggregation occurs."
+     },
+     {
+      "term": "NULL",
+      "meaning": "A special marker indicating missing or unknown data; COUNT(column) ignores NULLs."
+     }
+    ],
+    "quiz": [
+     {
+      "q": "Which aggregate function would you use to find the total sales amount?",
+      "options": [
+       "COUNT",
+       "SUM",
+       "AVG",
+       "MAX"
+      ],
+      "answer": 1,
+      "why": "SUM adds all numeric values, giving the total."
+     },
+     {
+      "q": "What does COUNT(*) count?",
+      "options": [
+       "Only non‑NULL rows",
+       "All rows including those with NULLs",
+       "Only rows with a specific column",
+       "No rows"
+      ],
+      "answer": 1,
+      "why": "COUNT(*) counts every row regardless of NULL values."
+     },
+     {
+      "q": "If you need the average test score per class, which clause must you include?",
+      "options": [
+       "WHERE",
+       "GROUP BY",
+       "HAVING",
+       "ORDER BY"
+      ],
+      "answer": 1,
+      "why": "GROUP BY creates a separate group for each class before computing AVG."
+     },
+     {
+      "q": "Which clause filters groups after aggregation?",
+      "options": [
+       "WHERE",
+       "GROUP BY",
+       "HAVING",
+       "SELECT"
+      ],
+      "answer": 2,
+      "why": "HAVING works on the results of aggregates, i.e., after grouping."
+     },
+     {
+      "q": "What will happen if you select a column that is not aggregated and not listed in GROUP BY?",
+      "options": [
+       "The query will run but give wrong results",
+       "The database will return NULL for that column",
+       "The query will raise an error",
+       "The column will be automatically aggregated"
+      ],
+      "answer": 2,
+      "why": "SQL requires every non‑aggregated column to appear in GROUP BY; otherwise it errors."
+     },
+     {
+      "q": "Which function ignores NULL values automatically?",
+      "options": [
+       "COUNT(*)",
+       "COUNT(column)",
+       "SUM(column)",
+       "All of the above"
+      ],
+      "answer": 2,
+      "why": "COUNT(column) and SUM(column) skip NULLs; COUNT(*) counts rows regardless of NULLs."
+     }
+    ],
+    "flashcards": [
+     {
+      "front": "What is an aggregate function?",
+      "back": "A function that takes many rows and returns a single summarized value, like COUNT, SUM, or AVG."
+     },
+     {
+      "front": "How does COUNT(column) differ from COUNT(*)?",
+      "back": "COUNT(column) counts only rows where the column is not NULL; COUNT(*) counts all rows."
+     },
+     {
+      "front": "What does the GROUP BY clause do?",
+      "back": "It splits rows into groups with the same values in specified columns, then aggregates each group separately."
+     },
+     {
+      "front": "When is HAVING evaluated?",
+      "back": "After groups are formed and aggregates are calculated, to filter groups based on aggregate conditions."
+     },
+     {
+      "front": "Difference between WHERE and HAVING?",
+      "back": "WHERE filters rows before grouping; HAVING filters groups after aggregation."
+     },
+     {
+      "front": "What does AVG(column) compute?",
+      "back": "The sum of the column’s values divided by the count of non‑NULL values."
+     },
+     {
+      "front": "Why must non‑aggregated columns appear in GROUP BY?",
+      "back": "To tell SQL which group each row belongs to; otherwise the result would be ambiguous."
+     },
+     {
+      "front": "What is NULL in SQL?",
+      "back": "A marker for missing or unknown data; most aggregate functions ignore NULLs."
+     }
+    ],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l08-table-with-grouped-rows",
+      "title": "Rows of a student‑score table grouped by class",
+      "alt": "Rows of a student‑score table grouped by class",
+      "priority": 9,
+      "picture_title": "Table with Grouped Rows",
+      "kind": "illustration",
+      "subject": "A simple table showing student names, scores, and class columns. The rows are colour‑coded to show how the GROUP BY clause splits the data into separate class groups.",
+      "layout": "Table occupies the centre; each class group is highlighted with a different background colour and a label above the group.",
+      "labels": [
+       "Class A",
+       "Class B",
+       "Class C"
+      ],
+      "after": 3
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l08-count-vs-sum-example",
+      "title": "Counting rows and summing scores in a small table",
+      "alt": "Counting rows and summing scores in a small table",
+      "priority": 8,
+      "picture_title": "COUNT vs SUM Example",
+      "kind": "illustration",
+      "subject": "A tiny table of five exam scores with two small call‑out boxes: one showing the result of COUNT(*) = 5 and another showing SUM(score) = total points.",
+      "layout": "Table on the left, two boxed results on the right with arrows pointing to the table.",
+      "labels": [
+       "COUNT(*) = 5",
+       "SUM(score) = 372"
+      ],
+      "after": 1
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l08-having-filtered-groups",
+      "title": "Only groups with average score above 80 remain",
+      "alt": "Only groups with average score above 80 remain",
+      "priority": 7,
+      "picture_title": "HAVING Filtered Groups",
+      "kind": "illustration",
+      "subject": "A bar chart representing average scores per class; bars below 80 are faded out to illustrate the HAVING clause removing those groups.",
+      "layout": "Bars arranged horizontally with class names below; a red line marks the 80‑point threshold.",
+      "labels": [
+       "Class A",
+       "Class B",
+       "Class C",
+       "80 threshold"
+      ],
+      "after": 4
+     },
+     {
+      "type": "steps",
+      "title": "Using an Aggregate Function",
+      "steps": [
+       {
+        "label": "Select rows",
+        "text": "Identify the rows that match the query conditions."
+       },
+       {
+        "label": "Group rows (optional)",
+        "text": "If GROUP BY is used, split rows into groups by the chosen column(s)."
+       },
+       {
+        "label": "Apply aggregate",
+        "text": "Compute COUNT, SUM, AVG, etc. for each group or for all rows."
+       },
+       {
+        "label": "Return result",
+        "text": "Show one summary value per group (or one overall value)."
+       }
+      ],
+      "loop": false,
+      "after": 0
+     },
+     {
+      "type": "compare",
+      "title": "COUNT vs. SUM",
+      "left": {
+       "name": "COUNT",
+       "points": [
+        "Counts rows",
+        "COUNT(*) counts every row",
+        "COUNT(col) ignores NULLs"
+       ]
+      },
+      "right": {
+       "name": "SUM",
+       "points": [
+        "Adds numeric values",
+        "Ignores NULLs automatically",
+        "Useful for totals like sales amount"
+       ]
+      },
+      "after": 1
+     },
+     {
+      "type": "facts",
+      "title": "Key Aggregate Functions",
+      "items": [
+       {
+        "value": "COUNT(*)",
+        "label": "total rows"
+       },
+       {
+        "value": "SUM(col)",
+        "label": "total of a numeric column"
+       },
+       {
+        "value": "AVG(col)",
+        "label": "average (mean) value"
+       },
+       {
+        "value": "MIN / MAX",
+        "label": "smallest / largest value"
+       }
+      ],
+      "after": 2
+     },
+     {
+      "type": "parts",
+      "title": "GROUP BY and HAVING",
+      "items": [
+       {
+        "name": "GROUP BY",
+        "role": "splits rows into groups sharing the same column values"
+       },
+       {
+        "name": "Aggregate functions",
+        "role": "calculate a summary for each group"
+       },
+       {
+        "name": "HAVING",
+        "role": "filters groups after aggregation"
+       },
+       {
+        "name": "SELECT list",
+        "role": "must contain only grouped columns or aggregates"
+       }
+      ],
+      "after": 3
+     },
+     {
+      "type": "steps",
+      "title": "Combining Multiple Aggregates",
+      "steps": [
+       {
+        "label": "Choose columns",
+        "text": "Select the columns you want to aggregate (e.g., COUNT, SUM, AVG)."
+       },
+       {
+        "label": "Write SELECT",
+        "text": "List each aggregate in the SELECT clause, separated by commas."
+       },
+       {
+        "label": "Add GROUP BY (if needed)",
+        "text": "Include GROUP BY when you need separate results per category."
+       },
+       {
+        "label": "Run query",
+        "text": "Database returns one row per group with all requested summaries."
+       }
+      ],
+      "loop": false,
+      "after": 4
+     }
+    ],
+    "images_version": 5,
+    "reviewed": false,
+    "models": [
+     "openai/gpt-oss-120b"
     ]
    }
   },
@@ -3718,7 +4520,7 @@
   {
    "title": "Database Design in Practice",
    "focus": "Designing a small database for a real problem, step by step",
-   "file": null,
+   "file": "lesson-12.json",
    "draft": {
     "plan": {
      "summary": "In this final lesson students will design a small, real‑world database from start to finish, applying all concepts learned earlier. They will see how each step—requirements gathering, conceptual modeling, logical design, and physical implementation—fits together in practice.",
@@ -3806,11 +4608,411 @@
       "code": ""
      }
     ]
+   },
+   "data": {
+    "title": "Database Design in Practice",
+    "summary": "In this final lesson students will design a small, real‑world database from start to finish, applying all concepts learned earlier. They will see how each step—requirements gathering, conceptual modeling, logical design, and physical implementation—fits together in practice.",
+    "objectives": [
+     "Identify the real‑world problem and list the data requirements",
+     "Create an Entity‑Relationship diagram for the problem",
+     "Convert the ER diagram into relational tables with primary and foreign keys",
+     "Write the SQL statements to create the tables and insert sample data",
+     "Explain how the design supports typical queries and future changes"
+    ],
+    "prerequisites": "Students should already know basic relational concepts, how to write simple SELECT queries, and the meaning of primary and foreign keys.",
+    "why": [
+     "Designing a database that matches a real problem ensures the system is useful, reliable, and easy to maintain. In workplaces, a well‑designed schema reduces errors, speeds up development, and saves storage costs.",
+     "A hands‑on design project shows students how to translate business needs into a concrete data model, a skill needed for roles such as analyst, developer, or data engineer.",
+     "Understanding the full design cycle prepares students to work on larger projects and to communicate effectively with non‑technical stakeholders."
+    ],
+    "sections": [
+     {
+      "heading": "1. Define the Problem and Gather Requirements",
+      "body": "When you start a database project, the very first step is to **understand the real‑world problem** you want the computer to help solve.  \nThink of it like planning a road trip: before you drive, you decide where you are going, who is coming, what you need to bring, and which roads are best. In the same way, a database designer must decide *what* the system will store, *who* will use it, and *how* the information will be used.\n\n### 1. Pick a simple, familiar scenario  \nChoose a situation that you (or your classmates) already know well. A classic example is a **school library** that keeps track of books, students, and loans. Because the domain is small, you can see all the parts clearly without getting lost in complexity.\n\n### 2. Ask the right questions  \nTreat the problem like an interview. Write down questions for each group of people who will interact with the system (called *stakeholders*). Stakeholders might be librarians, students, or teachers. Typical questions include:\n\n- **What information do we need to record?**  \n  Example: For each book we need its title, author, ISBN, and whether it is currently on loan.\n\n- **How do people use the information?**  \n  Example: A student wants to find out which books are available, and a librarian wants to see which books are overdue.\n\n- **What rules must the system follow?**  \n  Example: A student may borrow at most three books at a time, and a loan cannot last more than 21 days.\n\nWrite the answers in plain sentences; avoid technical jargon at this stage. This list becomes your **requirements** – a clear description of what the database must do.\n\n### 3. List all needed data items  \nFrom the answers, extract every piece of information that will be stored. These pieces are called **data items** or **attributes**. For the library scenario you might end up with:\n\n| Entity (thing) | Data items (attributes) |\n|----------------|--------------------------|\n| Book           | BookID, Title, Author, ISBN, PublicationYear, ShelfLocation |\n| Student        | StudentID, Name, Email, Phone, YearOfStudy |\n| Loan           | LoanID, BookID, StudentID, LoanDate, DueDate, ReturnDate |\n\nNotice that some items, like *BookID* and *StudentID*, are special because they uniquely identify a single record. We will call them **keys** later, but for now just note that every entity needs at least one identifier.\n\n### 4. Write a short problem statement  \nSummarize the whole picture in one paragraph. This statement guides everyone who later reads the design.\n\n> **Problem statement:** The library database must store information about books, students, and the loans that link them. It must allow librarians to add new books, register students, record when a book is borrowed or returned, and generate reports such as “books currently on loan” and “students with overdue books.” The system must enforce the rule that a student cannot have more than three active loans and that loans cannot exceed 21 days.\n\n### 5. Check completeness  \nReview your list of data items and questions. Ask yourself:\n\n- Have I captured every piece of information mentioned in the requirements?  \n- Is there any data that seems unnecessary?  \n- Do the rules make sense and cover all possible situations?\n\nIf something is missing, go back to the stakeholder questions and add it. This iterative checking prevents costly changes later.\n\n> **Remember:** A well‑defined problem and a complete set of requirements are the foundation of a good database. Skipping this step is like building a house without a blueprint – you may end up with rooms that don’t fit together.\n\n> **Common mistake:** Trying to design tables before you know exactly what data you need. This often leads to extra columns, duplicated information, or missing relationships that are hard to fix later.\n\n> **In daily life:** When you shop online, the website first asks for your address, payment method, and items you want. Those questions are the “requirements” that let the system store the right data and process your order correctly.\n\nOnce you have a clear problem statement, a complete list of data items, and a set of business rules, you are ready to move on to the next step: drawing an Entity‑Relationship (ER) diagram that visualises how these pieces fit together.",
+      "code": ""
+     },
+     {
+      "heading": "2. Sketch an Entity‑Relationship (ER) Diagram",
+      "body": "When we start to design a database we first need a picture of the “things” we will store and how those things are linked.  \nThat picture is called an **Entity‑Relationship (ER) diagram**. Think of it as a map of a city: the **entities** are the landmarks (schools, students, books), the **attributes** are the details written on each landmark’s sign‑board (name, address, price), and the **relationships** are the roads that connect the landmarks (a student *enrolls in* a course, a book *belongs to* a category).  \n\n> **Definition:** An **entity** is anything we want to keep information about.  \n> **Note:** An **attribute** is a property or characteristic of an entity.  \n> **In daily life:** A **relationship** tells us how two entities are associated, just like “friendship” connects two people on a social network.  \n\n### Step 1 – List the entities  \nRead the problem statement carefully. Ask: *What nouns appear?* Each noun that represents a real object or concept usually becomes an entity.  \nExample problem: “A library wants to keep track of books, members, and loans.”  \n- **Book** – each physical book in the collection.  \n- **Member** – a person who can borrow books.  \n- **Loan** – the act of a member borrowing a book.  \n\n### Step 2 – Identify attributes for each entity  \nFor every entity ask: *What facts do we need to know about it?* Write them as bullet points.  \n- **Book**: `ISBN` (unique identifier), `Title`, `Author`, `Publisher`, `YearPublished`.  \n- **Member**: `MemberID` (unique), `FirstName`, `LastName`, `Email`, `Phone`.  \n- **Loan**: `LoanID` (unique), `LoanDate`, `DueDate`, `ReturnDate`.  \n\nThe attributes that uniquely identify an entity are called **primary keys**. They are essential because they let us pick out one exact record from many.  \n\n### Step 3 – Determine relationships and cardinalities  \nNow ask how the entities interact. Use verbs from the description.  \n- A **Member** *borrows* a **Book**.  \n- A **Book** can be borrowed many times over its life, but each **Loan** involves exactly one **Member** and one **Book**.  \n\nCardinality tells us the “how many” part of a relationship:  \n\n- **One‑to‑many (1:M)** – One member can have many loans, but each loan belongs to one member.  \n- **Many‑to‑many (M:N)** – If the problem allowed a loan to contain several books at once, we would have a many‑to‑many link between Member and Book. In our simple design we avoid M:N by introducing the **Loan** entity, which resolves the many‑to‑many into two one‑to‑many relationships.  \n\n### Step 4 – Draw the diagram with standard symbols  \nUse the following conventions (the most common in textbooks):  \n\n- **Rectangle** = entity.  \n- **Oval** = attribute; underline the primary key attribute.  \n- **Diamond** = relationship; label it with a verb phrase.  \n- **Lines** connect entities to relationships; a small “crow’s foot” on a line indicates “many”.  \n\nBelow is a simple ER diagram written in **Mermaid** syntax, which many editors can render automatically:\n\n```mermaid\nerDiagram\n    BOOK {\n        string ISBN PK\n        string Title\n        string Author\n        string Publisher\n        int YearPublished\n    }\n    MEMBER {\n        int MemberID PK\n        string FirstName\n        string LastName\n        string Email\n        string Phone\n    }\n    LOAN {\n        int LoanID PK\n        date LoanDate\n        date DueDate\n        date ReturnDate\n    }\n\n    MEMBER ||--o{ LOAN : makes\n    BOOK   ||--o{ LOAN : includes\n```\n\nIn the diagram:  \n\n- `PK` marks the primary key attribute (underlined in a hand‑drawn picture).  \n- `||` means “one”, `o{` means “many”.  \n- The relationship names “makes” and “includes” describe the verb phrases.  \n\n### Why this matters  \nCreating the ER diagram forces you to think about the data before you write any SQL. It catches missing information early (e.g., we realized we need a `ReturnDate` attribute to know when a book was given back). It also shows you where to place foreign keys later: the **Loan** table will contain `MemberID` and `ISBN` as references to the other two tables.  \n\n> **Remember:** An ER diagram is a communication tool. Keep it simple, label everything clearly, and verify it with the person who gave you the requirements. If the diagram matches their mental picture, you are ready to move on to choosing keys and normalizing the design.",
+      "code": ""
+     },
+     {
+      "heading": "3. Choose Keys and Normalize the Design",
+      "body": "When we start turning an ER diagram into a real database, the first thing we must decide is **which pieces of data will uniquely identify each record**.  \nThese unique identifiers are called **keys**.  \n\n> **Definition:** A **primary key** is a column (or a small set of columns) whose value is different for every row in a table. No two rows can share the same primary‑key value, and a primary key can never be empty (NULL).\n\nWhy do we need a primary key? Imagine a classroom where every student writes their name on a piece of paper. If two students happen to have the same name, you could not tell their papers apart. Giving each student a unique student‑ID solves the problem – the ID works exactly like a primary key.\n\n### Choosing a Primary Key\n\n1. **Look at the entity’s natural identifier.**  \n   In a *Student* entity, a student number assigned by the school is a natural choice because it is already unique.  \n\n2. **If no natural identifier exists, create a surrogate key.**  \n   A *surrogate key* is an artificial column, often called `ID`, that the database generates automatically (for example, an auto‑increment integer).  \n\n3. **Make sure the key is minimal.**  \n   The key should contain the smallest number of columns that still guarantee uniqueness. Adding extra columns does not help and makes the design larger.\n\n### Defining Foreign Keys\n\nWhen two tables are related, we need a way to link a row in one table to the corresponding row in another. This link is made with a **foreign key**.\n\n> **Definition:** A **foreign key** is a column (or set of columns) in one table that refers to the primary key of another table. It creates a relationship between the two tables and enforces referential integrity – the database will not allow a foreign‑key value that does not exist in the referenced primary‑key column.\n\nThink of a foreign key like a mailing address. Your house (the child table) has an address that points to a street (the parent table). If the street does not exist, the address would be meaningless.\n\n### Normalization: Removing Redundancy\n\nEven with keys in place, a table can still store the same piece of information many times. This duplication wastes space and can cause inconsistencies when one copy is updated but another is not. **Normalization** is a step‑by‑step process that reorganises tables to eliminate such redundancy.\n\n#### First Normal Form (1NF)\n\nA table is in 1NF when every column holds **atomic** values – that is, each cell contains a single, indivisible piece of data.  \n\n> **Note:** If a column stores a list (e.g., “phone numbers: 555‑1234, 555‑5678”), split it into separate rows or a separate table.\n\n#### Second Normal Form (2NF)\n\nA table is in 2NF if it is already in 1NF **and** every non‑key column depends on the whole primary key, not just part of it. This matters only for tables whose primary key is composite (made of more than one column).\n\nFor example, in a *CourseEnrollment* table with primary key `(StudentID, CourseID)`, the column `StudentName` depends only on `StudentID`. To satisfy 2NF, move `StudentName` to a separate *Student* table.\n\n#### Third Normal Form (3NF)\n\nA table is in 3NF if it is in 2NF **and** no non‑key column depends on another non‑key column. In other words, there should be no **transitive dependency**.\n\nConsider a *Product* table with columns `ProductID`, `SupplierID`, and `SupplierName`. `SupplierName` depends on `SupplierID`, not directly on `ProductID`. To achieve 3NF, create a separate *Supplier* table with `SupplierID` as primary key and move `SupplierName` there.\n\n### Putting It All Together\n\nAfter you have:\n\n1. Chosen a primary key for each table,\n2. Added foreign keys to represent relationships, and\n3. Normalised the tables to at least 3NF,\n\nthe design will be free of unnecessary duplication and ready for reliable data entry.\n\n$$\n\\text{Redundancy} = \\text{Total data stored} - \\text{Data needed for unique information}\n$$\n\nIf the redundancy value is zero, you have achieved a well‑normalised design.\n\n> **Remember:** Primary keys uniquely identify rows, foreign keys link tables, and normalization removes repeated data. Skipping any of these steps can lead to confusing, error‑prone databases.",
+      "code": ""
+     },
+     {
+      "heading": "4. Translate the ER Diagram into Relational Tables",
+      "body": "When you have finished drawing your ER diagram, the next step is to turn the picture into real tables that a database can store.  \nThink of the ER diagram as a blueprint of a house: the blueprint shows rooms (entities) and doors (relationships).  \nTo actually build the house you must order bricks, windows and doors and tell the builder how they fit together.  \nIn a database, **bricks** are the columns of a table, **rooms** are the tables themselves, and **doors** are foreign‑key columns that link one table to another.\n\n### 1. Create a table for every entity  \n\nStart with the simplest part: each entity becomes its own `CREATE TABLE` statement.  \nChoose a column that uniquely identifies each row – this is the **primary key**.  \nGive each attribute a suitable SQL data type (e.g., `VARCHAR` for text, `INT` for whole numbers, `DATE` for dates).\n\n```sql\nCREATE TABLE Student (\n    student_id   INT PRIMARY KEY,          -- unique identifier\n    first_name   VARCHAR(50) NOT NULL,\n    last_name    VARCHAR(50) NOT NULL,\n    birth_date   DATE,\n    email        VARCHAR(100) UNIQUE\n);\n\nCREATE TABLE Course (\n    course_id    INT PRIMARY KEY,\n    title        VARCHAR(100) NOT NULL,\n    credits      INT CHECK (credits > 0)\n);\n```\n\n> **Definition:** *Primary key* – a column (or set of columns) whose value is different for every row in the table. It lets the database find a specific record quickly.\n\n### 2. Represent relationships  \n\nRelationships become **foreign keys** – columns that store the primary‑key value of another table.  \nThe type of relationship (one‑to‑many, many‑to‑many, one‑to‑one) tells us how many foreign‑key columns we need.\n\n#### One‑to‑many (e.g., each student can enroll in many courses, but each enrollment belongs to one student)\n\nAdd a foreign‑key column to the “many” side:\n\n```sql\nCREATE TABLE Enrollment (\n    enrollment_id INT PRIMARY KEY,\n    student_id    INT NOT NULL,\n    course_id     INT NOT NULL,\n    enroll_date   DATE,\n    grade         CHAR(2),\n\n    FOREIGN KEY (student_id) REFERENCES Student(student_id),\n    FOREIGN KEY (course_id)  REFERENCES Course(course_id)\n);\n```\n\n#### Many‑to‑many (e.g., students can have many skills and each skill can belong to many students)\n\nCreate a **junction table** that contains two foreign keys, each pointing to one of the related entities. The combination of these keys is usually the primary key of the junction table.\n\n```sql\nCREATE TABLE Skill (\n    skill_id   INT PRIMARY KEY,\n    name       VARCHAR(50) NOT NULL\n);\n\nCREATE TABLE StudentSkill (\n    student_id INT NOT NULL,\n    skill_id   INT NOT NULL,\n    level      VARCHAR(20),\n\n    PRIMARY KEY (student_id, skill_id),\n    FOREIGN KEY (student_id) REFERENCES Student(student_id),\n    FOREIGN KEY (skill_id)   REFERENCES Skill(skill_id)\n);\n```\n\n> **Note:** A junction table resolves many‑to‑many relationships because a relational table can only store one value per column in each row.\n\n### 3. Add constraints for data integrity  \n\nConstraints are rules that the database checks automatically.  \nCommon ones are:\n\n* `NOT NULL` – the column must have a value.\n* `UNIQUE` – no two rows can have the same value.\n* `CHECK` – a condition that must be true (e.g., `credits > 0`).\n* `FOREIGN KEY` – ensures the value exists in the referenced table.\n\nThese constraints keep the data clean, just like a rule “no two students can have the same email address” prevents confusion later.\n\n### 4. Choose appropriate data types  \n\nPick the smallest type that can hold all expected values; this saves space and speeds up queries.\n\n| Concept | Typical SQL type | Example |\n|---------|------------------|---------|\n| Whole number (ID) | `INT` or `SMALLINT` | `student_id` |\n| Short text (name) | `VARCHAR(n)` | `first_name` |\n| Fixed‑length code (grade) | `CHAR(n)` | `grade` |\n| Date | `DATE` | `enroll_date` |\n\n> **In daily life:** Think of data types like different sized containers – you wouldn’t store a gallon of water in a teaspoon. Using the right size avoids overflow and waste.\n\n### 5. Verify the translation  \n\nAfter writing the `CREATE TABLE` statements, run them in your DBMS (e.g., MySQL, PostgreSQL).  \nIf any error appears, it usually points to a missing reference or a datatype mismatch.  \nCorrect the script, then use `DESCRIBE table_name;` (or `\\d table_name` in PostgreSQL) to see the final structure.\n\n> **Common mistake:** Forgetting to declare a foreign key as `NOT NULL` when the relationship is mandatory. This lets orphan rows appear, breaking the logical link between tables.\n\n### 6. Summary of the conversion process  \n\n1. **Entity → Table** with a primary key.  \n2. **One‑to‑many relationship → foreign key on the “many” side.**  \n3. **Many‑to‑many relationship → separate junction table with two foreign keys.**  \n4. **Add constraints** (`NOT NULL`, `UNIQUE`, `CHECK`, `FOREIGN KEY`).  \n5. **Choose sensible data types** for each column.  \n\nFollowing these steps turns the abstract ER diagram into concrete, query‑ready tables that faithfully represent the real‑world problem you are modeling.",
+      "code": ""
+     },
+     {
+      "heading": "5. Populate the Tables with Sample Data",
+      "body": "When we have finished drawing the ER diagram and turning it into relational tables, the next step is to **fill the tables with some real‑looking rows**.  \nThese rows are called *sample data* and they let us see how the tables connect to each other before we write any queries.\n\n### Why insert sample data?\n\nThink of a new bookshelf you are building. Before you put all your books on it, you might place a few test books on each shelf to check that the shelves are level and that the books fit.  \nIn a database, inserting a few rows works the same way: it shows whether the foreign‑key links are correct, whether the data types accept the values, and whether the constraints (like “no two students can have the same ID”) are enforced.\n\n### Step‑by‑step insertion\n\nBelow we assume a simple university database with three tables that came from the ER diagram:\n\n| Table | Columns |\n|-------|---------|\n| **Students** | `StudentID` (PK), `FirstName`, `LastName`, `Email` |\n| **Courses**  | `CourseID` (PK), `CourseName`, `Credits` |\n| **Enrollments** | `EnrollmentID` (PK), `StudentID` (FK), `CourseID` (FK), `Grade` |\n\n*PK* = primary key – a column (or set of columns) that uniquely identifies each row.  \n*FK* = foreign key – a column that must match a value of a primary key in another table, creating a relationship.\n\n#### 1. Insert students  \n\n```sql\nINSERT INTO Students (StudentID, FirstName, LastName, Email) VALUES\n(1001, 'Alice',   'Brown',  'alice.brown@example.edu'),\n(1002, 'Bob',     'Smith',  'bob.smith@example.edu'),\n(1003, 'Carol',   'Lee',    'carol.lee@example.edu');\n```\n\n> **Definition:** *Primary key* values must be unique; they are like a student’s ID card number that never repeats.\n\n#### 2. Insert courses  \n\n```sql\nINSERT INTO Courses (CourseID, CourseName, Credits) VALUES\n('CS101', 'Introduction to Computer Science', 4),\n('MA201', 'Calculus I',                         3),\n('EN105', 'English Literature',                2);\n```\n\n> **Note:** The `CourseID` is a short code that will be used later in the `Enrollments` table. Think of it as a course’s nickname.\n\n#### 3. Insert enrollments  \n\n```sql\nINSERT INTO Enrollments (EnrollmentID, StudentID, CourseID, Grade) VALUES\n(1, 1001, 'CS101', 'A'),\n(2, 1001, 'MA201', 'B+'),\n(3, 1002, 'CS101', 'B-'),\n(4, 1003, 'EN105', 'A-'),\n(5, 1003, 'MA201', 'A');\n```\n\n> **In daily life:** The `Enrollments` table works like a class register where each line says “Student X is taking Course Y and got Grade Z”. The `StudentID` and `CourseID` columns are *foreign keys* that point back to the `Students` and `Courses` tables.\n\n### Checking that the relationships work\n\nAfter the inserts, you can run a quick query to see the whole picture:\n\n```sql\nSELECT s.FirstName, s.LastName, c.CourseName, e.Grade\nFROM Enrollments e\nJOIN Students s   ON e.StudentID = s.StudentID\nJOIN Courses  c   ON e.CourseID  = c.CourseID\nORDER BY s.StudentID;\n```\n\nIf the query returns rows without error, the foreign‑key links are correct. If you try to insert a row with a non‑existent `StudentID` or `CourseID`, the database will reject it, protecting the integrity of the data.\n\n> **Common mistake:** Forgetting to insert the parent rows (`Students` or `Courses`) before the child rows (`Enrollments`). The database will raise a *foreign‑key violation* because it cannot find the referenced key.\n\n### A few extra rows for realism\n\nAdding more data helps test edge cases, such as a student taking many courses or a course with many students.\n\n```sql\n-- More students\nINSERT INTO Students (StudentID, FirstName, LastName, Email) VALUES\n(1004, 'David', 'Kim',   'david.kim@example.edu'),\n(1005, 'Eva',   'Martinez','eva.martinez@example.edu');\n\n-- More enrollments\nINSERT INTO Enrollments (EnrollmentID, StudentID, CourseID, Grade) VALUES\n(6, 1004, 'CS101', 'B'),\n(7, 1004, 'EN105', 'B+'),\n(8, 1005, 'MA201', 'A'),\n(9, 1005, 'CS101', 'A-');\n```\n\nNow the database contains a small but varied set of records that mimic a real university’s data. You can experiment with queries that count how many students are in each course, calculate average grades, or find students who have not yet enrolled in any class.\n\n> **Remember:** Sample data is not the final production data, but it is essential for *testing* the design. By inserting realistic rows and watching how the tables interact, you gain confidence that the schema you built will support the real world use cases you will later load.",
+      "code": ""
+     },
+     {
+      "heading": "6. Test the Design with Sample Queries",
+      "body": "When we finish drawing our ER diagram and turning it into tables, the next step is to **check that the tables really work**.  \nThe easiest way to do that is to write a few simple `SELECT` statements – the SQL command that asks the database for information.  \nIf the results look right, we have confidence that the design can answer the questions users will ask.\n\n---\n\n> **Definition:** A **SELECT query** is a command that tells the database which columns (fields) to show, from which tables, and under what conditions (filters).\n\n### 1. Start with a very basic query\n\nSuppose our database is for a small library. One of the most common questions is:\n\n> *“Which books are currently available?”*\n\nIn everyday life, this is like looking at a shelf and picking out the books that are not checked out. In SQL we write:\n\n```sql\nSELECT BookID, Title, Author\nFROM Books\nWHERE IsAvailable = TRUE;\n```\n\n- `SELECT BookID, Title, Author` tells the database to show three columns.\n- `FROM Books` says the data comes from the **Books** table.\n- `WHERE IsAvailable = TRUE` filters the rows so we only see books that are marked as available.\n\nIf the result list matches the books you see on the shelf, the `Books` table and the `IsAvailable` attribute are set up correctly.\n\n### 2. Join two tables to answer a slightly harder question\n\nA user might also want to know **who has borrowed each book**. The information lives in two tables:\n\n| Table | Important columns |\n|-------|-------------------|\n| **Books** | `BookID`, `Title` |\n| **Loans** | `LoanID`, `BookID`, `MemberID`, `LoanDate`, `ReturnDate` |\n\nWe need to combine (join) these tables on the common column `BookID`. Think of it as matching each book with its loan record, just like matching a name tag to a person in a crowd.\n\n```sql\nSELECT B.Title, L.MemberID, L.LoanDate\nFROM Books AS B\nJOIN Loans AS L ON B.BookID = L.BookID\nWHERE L.ReturnDate IS NULL;\n```\n\n- `JOIN Loans AS L ON B.BookID = L.BookID` links each book (`B`) to its loan (`L`) where the IDs match.\n- `WHERE L.ReturnDate IS NULL` keeps only rows where the book has not yet been returned (i.e., it is still on loan).\n\nIf the query returns a list of titles together with the member who currently holds them, the foreign‑key relationship between **Books** and **Loans** works.\n\n### 3. Use an aggregate function to get a summary\n\nManagers often need a quick summary, such as **how many books each member has borrowed**. This uses an **aggregate function** (`COUNT`) that counts rows, and a `GROUP BY` clause that groups rows by a column.\n\n```sql\nSELECT MemberID, COUNT(*) AS BooksBorrowed\nFROM Loans\nWHERE ReturnDate IS NULL\nGROUP BY MemberID;\n```\n\n- `COUNT(*)` counts all loan rows for each member.\n- `AS BooksBorrowed` gives the count column a readable name.\n- `GROUP BY MemberID` tells the database to calculate the count separately for each member.\n\nIf the numbers match the library’s manual records, the `Loans` table correctly records each borrowing event.\n\n### 4. Test a query that uses a sub‑query (a query inside another query)\n\nSometimes we need information that depends on another query. For example, **find all members who have never borrowed a book**. First we find members who *have* borrowed books, then we exclude them.\n\n```sql\nSELECT MemberID, Name\nFROM Members\nWHERE MemberID NOT IN (\n    SELECT DISTINCT MemberID\n    FROM Loans\n);\n```\n\n- The inner query `SELECT DISTINCT MemberID FROM Loans` produces a list of members who appear in the **Loans** table.\n- `NOT IN` removes those members from the outer result, leaving only those who never appear in **Loans**.\n\nIf the result matches the list of new members, the relationship between **Members** and **Loans** is correctly enforced.\n\n### 5. Verify that constraints prevent bad data\n\nA well‑designed schema should reject impossible data. Try to insert a loan for a non‑existent book:\n\n```sql\nINSERT INTO Loans (LoanID, BookID, MemberID, LoanDate)\nVALUES (999, 9999, 1, CURRENT_DATE);\n```\n\nBecause `BookID` 9999 does not exist in **Books**, the database should raise an error (a **foreign‑key violation**). This test confirms that the foreign‑key constraint we defined earlier is active.\n\n---\n\n> **Note:** When a query returns *no rows*, it does not always mean something is wrong; it may simply mean the condition you asked for does not exist in the data yet.\n\nBy running these kinds of queries—simple selects, joins, aggregates, sub‑queries, and constraint checks—you can be sure that the relational schema you built from the ER diagram actually supports the information needs of the users. If any query gives an unexpected result, go back to the relevant table or relationship, adjust the design, and test again. This iterative testing is the final safety net before the database goes live.",
+      "code": ""
+     },
+     {
+      "heading": "7. Review and Refine the Design",
+      "body": "When you finish building a database, the work is not yet done.  \nJust like a carpenter checks a table for wobbling legs before calling it finished, you should **review** the design and **refine** it. This step helps the database stay fast, flexible, and easy to keep up‑to‑date.\n\nFirst, look at the **queries** that will be run most often. If a query repeatedly scans a whole table to find a few rows, the database will feel slow. The usual fix is to add an **index**. An index is a separate data structure that stores the values of one (or more) columns in a sorted order, together with pointers to the rows where those values appear. Think of it like the index at the back of a textbook: instead of flipping through every page to find the word “photosynthesis,” you jump straight to the listed page numbers.\n\n> **Note:** Adding an index speeds up look‑ups but uses extra storage space and can slow down inserts, updates, and deletes because the index must be maintained.\n\nNext, examine any **optional data**—information that some records have and others do not. In a school database, a student might have a middle name, but many do not. If you force every row to contain a value, you either waste space with empty placeholders or you have to invent a dummy value like “N/A,” which can cause confusion later. Instead, declare those columns as **nullable**, meaning they are allowed to contain a special “no value” marker (NULL). This tells the database, “It’s okay if this piece of information is missing.”\n\n> **Definition:** *NULL* is a special marker that means “unknown or not applicable.” It is different from an empty string or the number zero; those are actual values.\n\nAfter handling indexes and nullable columns, ask yourself whether any **relationships** could be simplified. Sometimes a many‑to‑many link table (for example, *StudentCourse*) ends up storing extra columns that never change, such as a duplicate copy of the student’s name. Keeping only the foreign keys (the IDs that point to the related rows) reduces redundancy and prevents inconsistencies—if a student changes their name, you only need to update one place.\n\n> **Common mistake:** Storing the same piece of information in several tables. This creates *redundancy* and makes it easy to forget to update one copy, leading to contradictory data.\n\nAnother refinement is to check the **data types** you chose. If a column stores a year, using a full 4‑byte integer is wasteful; a small integer (2 bytes) is enough. Choosing the smallest appropriate type saves disk space and can improve performance because the database can read more rows into memory at once.\n\nNow, run a few **stress tests**: insert a large number of rows, update many of them, and execute the most common queries. Observe how long each operation takes. If a query still feels slow, look at the **execution plan** (the database’s step‑by‑step recipe for the query). The plan will show whether it is using an index or doing a full table scan. Adjust the indexes or rewrite the query until the plan shows an efficient path.\n\n> **Remember:** The design process is iterative. You may need to go back to earlier steps—perhaps adding a new attribute or splitting a table—based on what you learn during testing.\n\nFinally, document any changes you made and the reasons behind them. Good documentation is like a road map for future developers: it explains why an index exists, why a column can be NULL, and what assumptions were made. This makes future maintenance smoother and reduces the chance of accidental mistakes.\n\nIn summary, reviewing and refining a database design means:\n\n1. Adding indexes for frequent look‑ups.  \n2. Allowing NULL for truly optional data.  \n3. Removing redundant columns and keeping relationships simple.  \n4. Choosing the right data types.  \n5. Testing with realistic data volumes and checking execution plans.  \n6. Updating documentation.\n\nBy following these steps, you turn a working prototype into a robust, efficient system that can grow with the needs of its users.",
+      "code": ""
+     }
+    ],
+    "examples": [],
+    "examples_version": 3,
+    "practice": [
+     {
+      "level": "Easy",
+      "q": "What are the first two steps in the database design process and why are they important?",
+      "a": "Step 1 is to define the problem and gather requirements. This means talking to users to understand what data needs to be stored and what the system must do. It ensures the database will solve the right problem. Step 2 is to sketch an Entity‑Relationship (ER) diagram. This visual model shows the main entities (like Student, Course) and how they relate. It helps everyone see the overall structure before building tables."
+     },
+     {
+      "level": "Easy",
+      "q": "In an ER diagram, what is a primary key and how is it shown?",
+      "a": "A primary key is an attribute (or set of attributes) that uniquely identifies each instance of an entity. In an ER diagram it is usually underlined. For example, in a Student entity, StudentID would be underlined to indicate it is the primary key."
+     },
+     {
+      "level": "Medium",
+      "q": "Explain how you would choose a foreign key when converting an ER diagram that has a one‑to‑many relationship between Department and Employee into relational tables.",
+      "a": "First identify the primary key of the “one” side, which is DepartmentID in the Department table. Then add a column named DepartmentID to the Employee table. This new column will store the DepartmentID value for each employee, linking each employee to the department they work in. The DepartmentID column in Employee becomes a foreign key that references the primary key of Department."
+     },
+     {
+      "level": "Medium",
+      "q": "A student enrollment system has entities Student(SID, Name), Course(CID, Title) and Enrollment(SID, CID, Grade). Identify the keys and show the normalized tables after applying the first three normal forms.",
+      "a": "Keys: Student – primary key SID; Course – primary key CID; Enrollment – composite primary key (SID, CID).\n1NF: All tables have atomic values, which they already do.\n2NF: Enrollment’s non‑key attribute Grade depends on the whole composite key (SID, CID), so it is already in 2NF.\n3NF: There are no transitive dependencies; each non‑key attribute depends only on the key.\nResulting tables:\n- Student(SID PK, Name)\n- Course(CID PK, Title)\n- Enrollment(SID PK FK, CID PK FK, Grade)"
+     },
+     {
+      "level": "Hard",
+      "q": "You are designing a library database. Requirements: store books (ISBN, Title, Publisher), authors (AuthorID, Name), and the fact that a book can have multiple authors and an author can write multiple books. Show the ER diagram elements (entities, relationships, cardinalities) and then list the relational tables with appropriate primary and foreign keys.",
+      "a": "ER diagram:\n- Entity Book with attributes ISBN (PK), Title, Publisher.\n- Entity Author with attributes AuthorID (PK), Name.\n- Relationship Writes connecting Book and Author with cardinality many‑to‑many (a book can have many authors, an author can write many books).\nTo implement many‑to‑many, create a linking table. Relational tables:\n1. Book(ISBN PK, Title, Publisher)\n2. Author(AuthorID PK, Name)\n3. BookAuthor(ISBN PK FK, AuthorID PK FK) – composite primary key (ISBN, AuthorID); ISBN references Book(ISBN), AuthorID references Author(AuthorID)."
+     },
+     {
+      "level": "Hard",
+      "q": "After creating the tables for a sales database (Customer, Order, Product, OrderLine), you run the query “SELECT * FROM OrderLine WHERE Quantity > 10”. The result is empty, but you expect several rows. List three possible design or data‑population issues that could cause this and how you would check/fix each one.",
+      "a": "1. **Missing data** – No OrderLine rows were inserted with Quantity > 10. Check the sample data loading script or INSERT statements; add rows with higher quantities if needed.\n2. **Wrong attribute type** – Quantity might be defined as a string (CHAR) instead of a numeric type, causing the comparison to fail. Inspect the table definition (DESCRIBE OrderLine); if it is CHAR, ALTER TABLE to change Quantity to INT.\n3. **Incorrect column name** – The column might be named Qty or QtyOrdered, not Quantity. The query would then compare a non‑existent or default column (often NULL), returning no rows. Verify column names with DESCRIBE OrderLine and correct the query to use the actual column name."
+     }
+    ],
+    "recap": "The lesson walks students through the full lifecycle of designing a database, starting with understanding the real‑world problem and gathering requirements. It then shows how to sketch an Entity‑Relationship diagram, choose primary keys, and normalize the design. After converting the ER diagram into relational tables, students learn to populate sample data, test the design with queries, and finally review and refine the schema for performance. Each step is explained with everyday analogies to make abstract concepts concrete.",
+    "key_terms": [
+     {
+      "term": "Entity",
+      "meaning": "A thing or object about which we want to store information, such as Student or Book."
+     },
+     {
+      "term": "Attribute",
+      "meaning": "A property or characteristic of an entity, like a student’s name or a book’s title."
+     },
+     {
+      "term": "Relationship",
+      "meaning": "A connection between two entities, for example a Student borrows a Book."
+     },
+     {
+      "term": "Primary Key",
+      "meaning": "A column (or set of columns) whose value uniquely identifies each row in a table."
+     },
+     {
+      "term": "Foreign Key",
+      "meaning": "A column that references the primary key of another table to create a link between tables."
+     },
+     {
+      "term": "Normalization",
+      "meaning": "The process of organizing tables to reduce redundancy and improve data integrity."
+     },
+     {
+      "term": "SQL SELECT",
+      "meaning": "A query command that retrieves specific columns and rows from one or more tables."
+     },
+     {
+      "term": "Index",
+      "meaning": "A data structure that speeds up searching on a column but uses extra storage."
+     }
+    ],
+    "quiz": [
+     {
+      "q": "What is the first step in any database project?",
+      "options": [
+       "Create tables",
+       "Define the problem and gather requirements",
+       "Write SQL queries",
+       "Add indexes"
+      ],
+      "answer": 1,
+      "why": "Understanding the real‑world problem guides all later design decisions."
+     },
+     {
+      "q": "In an ER diagram, what does an entity represent?",
+      "options": [
+       "A relationship between tables",
+       "A column in a table",
+       "A thing we store information about",
+       "A database user"
+      ],
+      "answer": 2,
+      "why": "An entity is the main object, like Student or Book, that we need to record data for."
+     },
+     {
+      "q": "Which of the following is a suitable primary key for a Student entity?",
+      "options": [
+       "Student name",
+       "Student email address",
+       "Student ID number",
+       "Student’s favorite color"
+      ],
+      "answer": 2,
+      "why": "A student ID is unique for each student and never null, fitting the primary‑key definition."
+     },
+     {
+      "q": "What does normalization primarily aim to eliminate?",
+      "options": [
+       "User access errors",
+       "Data redundancy",
+       "Slow queries",
+       "Missing tables"
+      ],
+      "answer": 1,
+      "why": "Normalization restructures tables to avoid storing the same data in multiple places."
+     },
+     {
+      "q": "Which SQL command is used to retrieve data from a table?",
+      "options": [
+       "INSERT",
+       "UPDATE",
+       "SELECT",
+       "DELETE"
+      ],
+      "answer": 2,
+      "why": "SELECT queries ask the database to return specific rows and columns."
+     },
+     {
+      "q": "Why might you add an index to a column?",
+      "options": [
+       "To increase storage space",
+       "To enforce foreign‑key constraints",
+       "To speed up searches on that column",
+       "To change the data type"
+      ],
+      "answer": 2,
+      "why": "Indexes provide a sorted lookup structure that makes searching faster."
+     }
+    ],
+    "flashcards": [
+     {
+      "front": "Entity",
+      "back": "A thing we want to store information about, e.g., Student, Book, Course."
+     },
+     {
+      "front": "Attribute",
+      "back": "A characteristic of an entity, such as a student’s name or a book’s ISBN."
+     },
+     {
+      "front": "Relationship",
+      "back": "A link between two entities, like a Student borrows a Book."
+     },
+     {
+      "front": "Primary Key",
+      "back": "A unique identifier for each row in a table; cannot be NULL."
+     },
+     {
+      "front": "Foreign Key",
+      "back": "A column that references another table’s primary key to create a relationship."
+     },
+     {
+      "front": "Normalization",
+      "back": "Organizing tables to reduce redundancy and improve data integrity."
+     },
+     {
+      "front": "SQL SELECT",
+      "back": "A query that retrieves specific columns and rows from one or more tables."
+     },
+     {
+      "front": "Index",
+      "back": "A data structure that speeds up look‑ups on a column but uses extra storage."
+     }
+    ],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l12-entity-relationship-diagram",
+      "title": "Shows entities, attributes and relationships for a simple school database.",
+      "alt": "Shows entities, attributes and relationships for a simple school database.",
+      "priority": 9,
+      "picture_title": "Entity Relationship Diagram",
+      "kind": "illustration",
+      "subject": "A clear ER diagram with three entities – Student, Course, Enrollment – each with key attributes and the connecting relationships.",
+      "layout": "Entities as boxes arranged in a triangle, lines with crow‑foot symbols linking them, attribute names listed inside each box.",
+      "labels": [
+       "Student",
+       "Course",
+       "Enrollment",
+       "PK",
+       "FK",
+       "name",
+       "date"
+      ],
+      "after": 2
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l12-sample-table-data",
+      "title": "Example rows for the Student and Course tables after data is loaded.",
+      "alt": "Example rows for the Student and Course tables after data is loaded.",
+      "priority": 7,
+      "picture_title": "Sample Table Data",
+      "kind": "labelled diagram",
+      "subject": "A screenshot‑style illustration of two relational tables with column headings and a few example rows, highlighting primary keys and foreign keys.",
+      "layout": "Two tables side by side, column headers on top, a few rows shown, arrows from foreign‑key columns to the referenced primary‑key columns.",
+      "labels": [
+       "student_id",
+       "name",
+       "course_id",
+       "title",
+       "PK",
+       "FK"
+      ],
+      "after": 4
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l12-database-index-concept",
+      "title": "Visual metaphor of an index speeding up searches in a large table.",
+      "alt": "Visual metaphor of an index speeding up searches in a large table.",
+      "priority": 6,
+      "picture_title": "Database Index Concept",
+      "kind": "illustration",
+      "subject": "A book‑like index page pointing to rows in a table, demonstrating how an index lets the database jump directly to matching records.",
+      "layout": "A vertical list representing an index on the left, lines connecting index entries to highlighted rows in a larger table on the right.",
+      "labels": [
+       "index",
+       "search key",
+       "row pointer"
+      ],
+      "after": 6
+     },
+     {
+      "type": "steps",
+      "title": "Database Design Process",
+      "steps": [
+       {
+        "label": "Define problem",
+        "text": "Understand the real‑world need and gather requirements."
+       },
+       {
+        "label": "Sketch ER diagram",
+        "text": "Draw entities, attributes and relationships."
+       },
+       {
+        "label": "Choose keys & normalize",
+        "text": "Select primary keys and apply normal forms."
+       },
+       {
+        "label": "Create tables",
+        "text": "Translate each entity into a relational table."
+       },
+       {
+        "label": "Insert sample data",
+        "text": "Populate tables with a few realistic rows."
+       },
+       {
+        "label": "Test with queries",
+        "text": "Run SELECT statements to verify the design."
+       }
+      ],
+      "loop": false,
+      "after": 0
+     },
+     {
+      "type": "parts",
+      "title": "Components of an ER Diagram",
+      "items": [
+       {
+        "name": "Entity",
+        "role": "A thing we store information about (e.g., Book, Student)."
+       },
+       {
+        "name": "Attribute",
+        "role": "A property of an entity (e.g., title, due_date)."
+       },
+       {
+        "name": "Relationship",
+        "role": "How entities are linked (e.g., borrows, enrolls)."
+       },
+       {
+        "name": "Key",
+        "role": "A unique identifier for each entity instance."
+       }
+      ],
+      "after": 1
+     },
+     {
+      "type": "compare",
+      "title": "Primary Key vs Foreign Key",
+      "left": {
+       "name": "Primary Key",
+       "points": [
+        "Uniquely identifies each row in its own table",
+        "Never NULL",
+        "Used for entity integrity"
+       ]
+      },
+      "right": {
+       "name": "Foreign Key",
+       "points": [
+        "References a primary key in another table",
+        "Can be NULL if relationship is optional",
+        "Enforces referential integrity"
+       ]
+      },
+      "after": 3
+     },
+     {
+      "type": "facts",
+      "title": "Why Insert Sample Data?",
+      "items": [
+       {
+        "value": "Checks foreign‑key links",
+        "label": "Integrity"
+       },
+       {
+        "value": "Validates data types",
+        "label": "Correctness"
+       },
+       {
+        "value": "Shows constraint behavior",
+        "label": "Rules"
+       }
+      ],
+      "after": 4
+     }
+    ],
+    "images_version": 5,
+    "reviewed": false,
+    "models": [
+     "openai/gpt-oss-120b"
+    ]
    }
   }
  ],
  "theme": {
   "hue": 315,
   "code": "DAT"
+ },
+ "cover_plan": {
+  "subtitle": "Discovering Data: From Tables to Insights",
+  "elements": [
+   "Relational table diagram",
+   "SQL query code snippet",
+   "Database server rack",
+   "Entity‑relationship diagram",
+   "Data indexing tree",
+   "Backup tape or cloud icon",
+   "Database administrator at a console",
+   "Data warehouse building",
+   "NoSQL document icon",
+   "Database security lock"
+  ]
  }
 }
