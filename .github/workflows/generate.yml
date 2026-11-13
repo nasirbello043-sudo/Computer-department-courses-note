@@ -24,7 +24,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add courses
           git diff --staged --quiet || git commit -m "Setup: move courses to the new layout"
-          for i in $(seq 1 8); do git pull --rebase -X theirs origin main && git push && break; git rebase --abort 2>/dev/null; sleep $((RANDOM % 20 + 5)); done
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
 
   writer1:
     needs: setup
@@ -48,7 +52,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add courses
           git diff --staged --quiet || git commit -m "Writer 1: lessons"
-          for i in $(seq 1 8); do git pull --rebase -X theirs origin main && git push && break; git rebase --abort 2>/dev/null; sleep $((RANDOM % 20 + 5)); done
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
 
   writer2:
     needs: setup
@@ -72,7 +80,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add courses
           git diff --staged --quiet || git commit -m "Writer 2: lessons"
-          for i in $(seq 1 8); do git pull --rebase -X theirs origin main && git push && break; git rebase --abort 2>/dev/null; sleep $((RANDOM % 20 + 5)); done
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
 
   writer3:
     needs: setup
@@ -96,7 +108,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add courses
           git diff --staged --quiet || git commit -m "Writer 3: lessons"
-          for i in $(seq 1 8); do git pull --rebase -X theirs origin main && git push && break; git rebase --abort 2>/dev/null; sleep $((RANDOM % 20 + 5)); done
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
 
   combine:
     needs: [setup, writer1, writer2, writer3]
@@ -119,4 +135,8 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add courses
           git diff --staged --quiet || git commit -m "Combine: shared index, report and updates"
-          for i in $(seq 1 8); do git pull --rebase -X theirs origin main && git push && break; git rebase --abort 2>/dev/null; sleep $((RANDOM % 20 + 5)); done
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
