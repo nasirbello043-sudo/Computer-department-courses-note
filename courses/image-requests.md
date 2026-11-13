@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **54** | Uploaded: **41** | Covers waiting: **10**
+Waiting: **65** | Uploaded: **41** | Covers waiting: **13**
 
 ## Course covers
 
@@ -164,6 +164,54 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "RESEARCH METHODS"
 - Subtitle under it, smaller: "Unlocking Knowledge: Tools and Techniques"
 The spine shows "RESEARCH METHODS" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Database Systems
+
+Save as:
+```
+cover-introduction-to-database-systems.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: Relational table diagram, SQL query code snippet, Database server rack, Entity‑relationship diagram, Data indexing tree, Backup tape or cloud icon, Database administrator at a console, Data warehouse building, NoSQL document icon, Database security lock.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO DATABASE SYSTEMS"
+- Subtitle under it, smaller: "Discovering Data: From Tables to Insights"
+The spine shows "INTRODUCTION TO DATABASE SYSTEMS" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Academic Writing
+
+Save as:
+```
+cover-academic-writing.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: pen and notebook, laptop with word processor, outline diagram, essay structure chart, citation style guide, bibliography list, research article example, peer‑review feedback, thesis statement graphic.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "ACADEMIC WRITING"
+- Subtitle under it, smaller: "Mastering Clear, Persuasive Academic Writing"
+The spine shows "ACADEMIC WRITING" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Economics
+
+Save as:
+```
+cover-introduction-to-economics.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: Supply and demand curves, Coins and banknotes, Shopping cart with price tags, Factory with production line, Graph of inflation over time, World map with trade routes, People exchanging goods in a market, Bank building with vault, Pie chart of household budget.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO ECONOMICS"
+- Subtitle under it, smaller: "Understanding Choices, Markets, and Everyday Money"
+The spine shows "INTRODUCTION TO ECONOMICS" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ## Introduction to Agriculture
@@ -1220,6 +1268,241 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Discussion"
 - "Conclusion"
 - "References"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Introduction to Database Systems
+
+### Lesson 1: What Is a Database
+
+Save as:
+```
+introduction-to-database-systems-l01-filing-cabinet-vs-file-drawer.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The left side shows a tidy filing cabinet where each drawer is labeled as a database table (e.g., Customers, Orders). The right side shows an open drawer filled with random loose papers representing a basic file system.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 2: Data Models
+
+Save as:
+```
+introduction-to-database-systems-l02-simple-er-diagram.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A small library example with three entities – Student, Book, and Loan – each displayed as a rectangle, their key attributes listed inside, and lines connecting them to illustrate the relationships (Student borrows Book, Loan records the transaction).
+
+Layout: Three rectangles arranged in a triangle; Student at top left, Book at top right, Loan at bottom centre; lines with crow's‑foot symbols connect Student to Loan and Book to Loan.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Student"
+- "Book"
+- "Loan"
+- "student_id"
+- "name"
+- "book_id"
+- "title"
+- "loan_date"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 3: The Relational Model
+
+Save as:
+```
+introduction-to-database-systems-l03-simple-table-grid.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A hand‑drawn table with three columns labeled Name, Age, Grade and several rows filled with example student data. The picture highlights the rectangular shape of a relational table.
+
+Layout: Table occupies the centre; column headings at the top, rows below; each cell contains a short example value.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Name"
+- "Age"
+- "Grade"
+- "Row 1"
+- "Row 2"
+- "Row 3"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: Designing Tables
+
+Save as:
+```
+introduction-to-database-systems-l04-repeating-group-example.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: The picture shows a single table row where the "Courses" column contains several course codes separated by commas, highlighting why this violates 1NF.
+
+Layout: One table row centered, with the problematic cell highlighted in red and a magnified inset of the cell showing the comma‑separated values.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Student ID"
+- "Name"
+- "Courses (repeating)"
+- "Red highlight"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 5: Introduction to SQL
+
+Save as:
+```
+introduction-to-database-systems-l05-table-structure.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple table with three columns (ID, Name, Birthdate) and several rows, each row representing a student record.
+
+Layout: Columns labeled at the top, rows numbered on the left, data cells filled with example values.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "ID"
+- "Name"
+- "Birthdate"
+- "Row 1"
+- "Row 2"
+- "Row 3"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Academic Writing
+
+### Lesson 2: Planning an Essay
+
+Save as:
+```
+academic-writing-l02-essay-outline-skeleton.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A simple building frame with labeled parts: foundation = thesis, vertical beams = main points, windows = supporting evidence, door = introduction, roof = conclusion.
+
+Layout: Skeleton drawn in the centre; labels placed around each component with lines pointing to the corresponding part of the frame.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Thesis"
+- "Intro"
+- "Main Point 1"
+- "Main Point 2"
+- "Evidence"
+- "Conclusion"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: Structuring Paragraphs
+
+Save as:
+```
+academic-writing-l04-topic-sentence-road-sign.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple road sign with an arrow and the words "Main Idea" to show how a topic sentence directs the reader.
+
+Layout: Road sign centered, arrow pointing right, label "Main Idea" on the sign.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Main Idea"
+- "Arrow"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 7: Avoiding Plagiarism
+
+Save as:
+```
+academic-writing-l07-student-copying-text.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The photo shows a teenager sitting at a desk, looking at a printed article and typing the same sentences into a laptop. No citation or quotation marks are visible, illustrating direct plagiarism.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Introduction to Economics
+
+### Lesson 1: What is Economics?
+
+Save as:
+```
+introduction-to-economics-l01-scarcity-example.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A photo of a pizza cut into a few slices on a table with several friends looking at it, illustrating that the resource (pizza) is limited while the wants are many.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 3: Supply and Demand Fundamentals
+
+Save as:
+```
+introduction-to-economics-l03-market-stall-interaction.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A bustling outdoor market with stalls displaying goods, customers holding baskets, and sellers pointing to price tags, illustrating real‑world demand and supply interactions.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 4: Elasticity and Its Applications
+
+Save as:
+```
+introduction-to-economics-l04-tax-incidence-split.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A simple bar diagram showing the price paid by consumers, the price received by producers, and the tax wedge between them, with arrows indicating the share each side bears.
+
+Layout: Two vertical bars side‑by‑side; the left bar labelled 'Consumer Price', the right bar labelled 'Producer Price', with a shaded wedge labelled 'Tax' between them.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Consumer Price"
+- "Producer Price"
+- "Tax"
+- "Elastic Demand"
+- "Inelastic Supply"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
