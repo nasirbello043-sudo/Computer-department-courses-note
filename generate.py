@@ -1672,12 +1672,23 @@ def main():
         STATS["stop"] = str(e)
         print(e, "- it will continue on the next run.")
     finally:
+        if THIS_JOB == "none":  # setup and combine: rebuild every [PDF] book from its saved lessons (no AI calls)
+            for title, _, flags in entries:
+                if "pdf" in flags:
+                    cid = slug(title)
+                    PDF_COURSES.add(cid)
+                    done = load(f"courses/html/{cid}/course.json", None) or {}
+                    if done.get("lessons"):
+                        try:
+                            build_pdf(cid, title, [l.get("data") for l in done["lessons"]], f"courses/pdf/{cid}.pdf")
+                            print("Rebuilt PDF book", cid)
+                        except Exception as e:
+                            print("PDF rebuild stopped for", cid, "-", e)
         for title, _, flags in entries:
             c = load(f"courses/html/{slug(title)}/course.json", None)
             if c:
                 index.append({"id": slug(title), "title": c["title"], "total": len(c["lessons"]),
-                              "ready": sum(1 for l in c["lessons"] if l["file"]), "theme": c.get("theme"), "depts": depts_of(flags),
-                              "kind": "pdf" if "pdf" in flags else "html"})
+                              "ready": sum(1 for l in c["lessons"] if l["file"]), "theme": c.get("theme"), "depts": depts_of(flags)})
         if SHARED_WRITES: save("courses/index.json", index)
         write_departments(entries)
         try:

@@ -21,6 +21,64 @@ def clean(text):
         t = t.replace(k, v)
     return escape(t)
 
+
+import re as _re
+
+def _inline(text):
+    """Turn a line of lesson text into safe PDF markup: bold/italics kept, markdown symbols removed."""
+    t = str(text or "").replace("\u25a0", "-").replace("\u200b", "")
+    t = escape(t)
+    t = _re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+    t = _re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"<i>\1</i>", t)
+    t = _re.sub(r"`([^`]+)`", r"<font name='Courier'>\1</font>", t)
+    t = t.replace("^2", "\u00b2").replace("^3", "\u00b3")
+    t = _re.sub(r"\^(\w+)", r"^\1", t)
+    t = t.replace("**", "").replace("__", "").replace("`", "")
+    for k, v in SYMBOLS.items():
+        t = t.replace(k, v)
+    return t.strip()
+
+def _blocks(text):
+    """Split lesson text into headings, bullet points, notes and paragraphs."""
+    out = []
+    for raw in str(text or "").replace("\r", "").split("\n"):
+        line = raw.strip()
+        if not line or _re.fullmatch(r"[-|:\s]+", line):
+            continue
+        if line.startswith("#"):
+            out.append(("h", _inline(line.lstrip("#"))))
+        elif line.startswith("|"):
+            cells = [c.strip() for c in line.strip("|").split("|") if c.strip()]
+            if cells:
+                out.append(("li", " - ".join(_inline(c) for c in cells)))
+        elif line.startswith(">"):
+            out.append(("note", _inline(line.lstrip("> ").strip())))
+        elif _re.match(r"^[-*]\s+", line):
+            out.append(("li", _inline(_re.sub(r"^[-*]\s+", "", line))))
+        elif _re.match(r"^\d+[.)]\s", line):
+            parts = _re.split(r"\s(?=\d+[.)]\s)", line)
+            for p in parts:
+                out.append(("li", _inline(_re.sub(r"^\d+[.)]\s*", "", p.strip()))))
+        else:
+            out.append(("p", _inline(line)))
+    return out
+
+def _prose(text, st, width_style="body"):
+    """Flowables for a block of lesson text, in a clean black-and-white layout."""
+    flow = []
+    for kind, txt in _blocks(text):
+        if not txt:
+            continue
+        if kind == "h":
+            flow.append(Paragraph(txt, st["h3"]))
+        elif kind == "li":
+            flow.append(Paragraph(txt, st["li"], bulletText="\u2022"))
+        elif kind == "note":
+            flow.append(Paragraph(txt, st["note"]))
+        else:
+            flow.append(Paragraph(txt, st["body"]))
+    return flow
+
 def styles():
     base = getSampleStyleSheet()
     return {
@@ -29,6 +87,8 @@ def styles():
         "h2": ParagraphStyle("h2", parent=base["Heading2"], textColor=colors.black, fontSize=13.5, leading=18, spaceBefore=10, spaceAfter=5),
         "body": ParagraphStyle("body", parent=base["BodyText"], textColor=colors.black, fontSize=10.5, leading=15, spaceAfter=7),
         "small": ParagraphStyle("small", parent=base["BodyText"], textColor=colors.black, fontSize=9, leading=12, spaceAfter=4),
+        "h3": ParagraphStyle("h3", parent=base["Heading3"], textColor=colors.black, fontSize=11.5, leading=15, spaceBefore=8, spaceAfter=4),
+        "li": ParagraphStyle("li", parent=base["BodyText"], textColor=colors.black, fontSize=10.5, leading=14.5, leftIndent=16, bulletIndent=4, spaceAfter=3),
         "note": ParagraphStyle("note", parent=base["BodyText"], textColor=colors.black, fontSize=9, leading=12, borderColor=colors.black, borderWidth=0.6, borderPadding=6, spaceBefore=14),
     }
 
@@ -66,17 +126,15 @@ def build_pdf(cid, title, lessons, out_path):
         story.append(PageBreak())
         story.append(Paragraph(f"{n}. {clean(les.get('title') or '')}", st["lesson"]))
         if les.get("summary"):
-            story.append(Paragraph(clean(les["summary"]), st["body"]))
+            story.extend(_prose(les["summary"], st))
         if les.get("objectives"):
             story.append(Paragraph("What you will be able to do", st["h2"]))
-            story.append(ListFlowable([ListItem(Paragraph(clean(o), st["body"]), leftIndent=14) for o in les["objectives"]],
-                                      bulletType="bullet", start="-", leftIndent=14))
+            for o in les["objectives"]:
+                story.extend(_prose("- " + str(o), st))
         width = 15 * cm
         for sec in les.get("sections", []):
             story.append(Paragraph(clean(sec.get("heading")), st["h2"]))
-            for para in str(sec.get("body") or "").split("\n\n"):
-                if para.strip():
-                    story.append(Paragraph(clean(para.strip()), st["body"]))
+            story.extend(_prose(sec.get("body"), st))
             if sec.get("code"):
                 story.append(Preformatted(str(sec["code"]), ParagraphStyle("code", fontName="Courier", fontSize=9, leading=12)))
                 story.append(Spacer(1, 6))
@@ -84,7 +142,7 @@ def build_pdf(cid, title, lessons, out_path):
         if les.get("key_terms"):
             story.append(Paragraph("Key terms", st["h2"]))
             for kt in les["key_terms"]:
-                story.append(Paragraph(f"<b>{clean(kt.get('term'))}</b>: {clean(kt.get('meaning'))}", st["body"]))
+                story.append(Paragraph(f"<b>{_inline(kt.get('term'))}</b>: {_inline(kt.get('meaning'))}", st["li"], bulletText="\u2022"))
     story.append(Spacer(1, 16))
     story.append(Paragraph(clean(NOTE), st["note"]))
 
