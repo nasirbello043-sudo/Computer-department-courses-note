@@ -37,12 +37,12 @@ def compile_pages(body):
         doc = "\\input{template}\n\\begin{document}\n\\input{lesson}\n\\end{document}\n"
         with open(os.path.join(work, "check.tex"), "w", encoding="utf-8") as f:
             f.write(doc)
-        r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "check.tex"], cwd=work, capture_output=True, text=True)
+        r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "check.tex"], cwd=work, capture_output=True, encoding="utf-8", errors="replace")
         log = r.stdout
         errors = [l for l in log.splitlines() if l.startswith("!")]
         if r.returncode != 0 or errors or not os.path.exists(os.path.join(work, "check.pdf")):
             return None, errors[:5] or ["LaTeX did not produce a PDF"]
-        info = subprocess.run(["pdfinfo", os.path.join(work, "check.pdf")], capture_output=True, text=True).stdout
+        info = subprocess.run(["pdfinfo", os.path.join(work, "check.pdf")], capture_output=True, encoding="utf-8", errors="replace").stdout
         pages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
         return pages, []
     finally:
