@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **64** | Uploaded: **41** | Covers waiting: **13**
+Waiting: **65** | Uploaded: **41** | Covers waiting: **13**
 
 ## Course covers
 
@@ -175,9 +175,10 @@ cover-introduction-to-database-systems.jpg
 Prompt:
 ```
 Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
-The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a pink colour palette, showing a lively scene built around: A cylinder database icon, A relational table with rows and columns, A magnifying glass over a data record, A network diagram of connected nodes, A SQL query code snippet, A primary key gold key symbol, A server rack with blinking lights, A cloud storage icon, An Entity-Relationship (ER) diagram, A lightning bolt representing fast search.
 Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
 - Main title at the top: "INTRODUCTION TO DATABASE SYSTEMS"
+- Subtitle under it, smaller: "Organizing the world's data for a digital age"
 The spine shows "INTRODUCTION TO DATABASE SYSTEMS" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
@@ -368,6 +369,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
+
+Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C=O"
+- "δ+"
+- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -1262,6 +1288,34 @@ Create a realistic photograph for a school lesson: A modern library interior wit
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
+### Lesson 2: Data Models
+
+Save as:
+```
+introduction-to-database-systems-l02-simple-er-diagram.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A small library example with three entities – Book, Student, and Loan – each shown as a rectangle, their key attributes listed inside, and lines connecting them to represent the Borrow relationship.
+
+Layout: Three rectangles arranged in a triangle; Book at top left, Student at top right, Loan at bottom centre; lines with crow‑foot symbols connect Book to Loan and Student to Loan.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Book"
+- "Student"
+- "Loan"
+- "title"
+- "author"
+- "ISBN"
+- "name"
+- "email"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
 ### Lesson 3: The Relational Model
 
 Save as:
@@ -1310,32 +1364,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "PK"
 - "CustomerName"
 - "ProductDesc"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 5: Introduction to SQL
-
-Save as:
-```
-introduction-to-database-systems-l05-sql-table-grid.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: Shows a simple table named Students with columns Id, Name, Age and three example rows of data, highlighting how each row is a record and each column a data field.
-
-Layout: Table occupies the centre of the image; column headings are labelled on top, rows are numbered on the left, with arrows pointing from the headings to example cell values.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "Id"
-- "Name"
-- "Age"
-- "Row 1"
-- "Row 2"
-- "Row 3"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -1461,15 +1489,15 @@ Create a realistic photograph for a school lesson: A real‑world farmers market
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
 
-### Lesson 4: Elasticity
+### Lesson 3: Market Structures
 
 Save as:
 ```
-introduction-to-economics-l04-supermarket-price-change.png
+introduction-to-economics-l03-single-power-plant.png
 ```
 Prompt:
 ```
-Create a realistic photograph for a school lesson: A grocery aisle showing a product with a new higher price tag and shoppers either putting it back or looking for alternatives, illustrating elastic demand.
+Create a realistic photograph for a school lesson: A large power-generating station standing alone on a hill, with no other similar facilities nearby, representing a market with only one seller.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
 ```
