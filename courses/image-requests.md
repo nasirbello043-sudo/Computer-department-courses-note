@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **54** | Uploaded: **41** | Covers waiting: **10**
+Waiting: **53** | Uploaded: **41** | Covers waiting: **10**
 
 ## Course covers
 
