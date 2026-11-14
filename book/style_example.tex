@@ -1,0 +1,80 @@
+\lessonlabel{1}
+\section{What Is a Database?}
+
+\begin{note}
+\textbf{Learning outcomes.} By the end of this lesson you should be able to:
+\begin{itemize}
+  \item distinguish between data and information;
+  \item explain the problems of storing data in ordinary files;
+  \item describe what a database management system (DBMS) does for us;
+  \item decide when a database is the right tool for a problem.
+\end{itemize}
+\end{note}
+
+\subsection{Data and information}
+
+\term{Data} are raw facts: numbers, words, dates, or images that have been recorded but not yet interpreted. On their own, the value \texttt{23} or the text \texttt{Okafor} says very little.
+
+\term{Information} is data that has been processed, organised, or placed in a context so that it answers a question. The statement ``Student 1043 scored 23 out of 30 in Database Systems'' is information, because it describes a specific person and a specific result.
+
+The step from data to information is what databases are built to support. A database stores data in a structured way so that it can be retrieved, combined, and checked to produce information quickly and reliably.
+
+\subsection{Storing data in files}
+
+Before databases, most data was kept in ordinary files, one file per purpose. A registry might keep a file of students, another of courses, and another of results. Each program that needed the data read its own file.
+
+This approach works for small amounts of data, but it creates four recurring problems:
+
+\begin{enumerate}
+  \item \term{Redundancy.} The same fact is copied into several files. A student's address may appear in the student file, the fees file and the hostel file.
+  \item \term{Inconsistency.} When one copy is updated and the others are not, the files disagree. The fees file says one address, the hostel file says another.
+  \item \term{Difficult access.} Answering a new question, such as ``Which students owe fees and live in hostel B?'', usually means writing a new program to read and combine the files.
+  \item \term{Concurrent use.} If two people update the same file at the same time, one update can be lost.
+\end{enumerate}
+
+\begin{example}
+A school keeps a \texttt{students.txt} file and a \texttt{fees.txt} file. A student changes address. The office updates \texttt{students.txt} but forgets \texttt{fees.txt}. The next fee reminder is posted to the old address, and nobody notices the mismatch until a complaint arrives.
+\end{example}
+
+\subsection{What a database is}
+
+A \term{database} is an organised collection of related data, stored so that many users and programs can share it. A \term{database management system} (DBMS) is the software that creates, stores, protects and queries the database. Examples include MySQL, PostgreSQL, Oracle and SQLite.
+
+A DBMS provides several services that file-based systems do not:
+\begin{itemize}
+  \item \textbf{Single copy of data.} Each fact is stored once, so updates happen in one place.
+  \item \textbf{Querying.} Questions are written in a query language, usually SQL, and the DBMS finds the answer.
+  \item \textbf{Integrity.} Rules such as ``every result must belong to an existing student'' are enforced automatically.
+  \item \textbf{Concurrency and recovery.} Many users can work at once, and the database can recover from a crash without losing committed work.
+  \item \textbf{Security.} Access can be limited to particular users and particular actions.
+\end{itemize}
+
+\subsection{When a database is the right tool}
+
+A database is worth its cost when the data is shared, changes often, and must stay correct. A single list of ten names that one person edits once a month does not need one. A university's student records, which many offices read and update every day, do.
+
+\begin{keytest}
+\textbf{Key test.} Ask two questions. Will more than one program or person need this data? Must the data remain correct when it changes? If both answers are yes, a database is almost certainly the better choice.
+\end{keytest}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+  \item Give one example each of data and information from your own course registration.
+  \item A bookshop keeps stock in a spreadsheet and sales in a separate notebook. Name two problems this may cause.
+  \item Explain why a DBMS stores each fact once, and why this helps when a fact changes.
+\end{enumerate}
+
+\subsection{Key terms}
+
+\begin{tabular}{@{}p{3.6cm}p{10.4cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Meaning} \\
+\midrule
+Data & Raw recorded facts without interpretation. \\
+Information & Data organised to answer a question. \\
+DBMS & Software that stores, protects and queries a database. \\
+Redundancy & The same fact stored in more than one place. \\
+Integrity & The rules that keep data correct. \\
+\bottomrule
+\end{tabular}
