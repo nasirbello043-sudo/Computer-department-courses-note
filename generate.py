@@ -1435,6 +1435,13 @@ def _write_json(p, d):
 # (index, departments, knowledge, report, image list) are written by the setup and combine jobs.
 THIS_JOB = os.environ.get("JOB", "").strip()  # set per workflow job: writer1, writer2, writer3, none
 SHARED_WRITES = not THIS_JOB.startswith("writer")
+PDF_WRITERS = {"writer4", "writer5", "writer6"}  # writers 1-3 build HTML courses, writers 4-6 build PDF books
+
+def format_of(flags):
+    """A course's format comes from the writer that builds it: writer4-6 = PDF, writer1-3 = HTML."""
+    job = next((f[4:] for f in flags if f.startswith("job=")), "")
+    return "pdf" if job in PDF_WRITERS else "html"
+
 PDF_COURSES = set()  # courses tagged [PDF]: their working data is courses/pdf/<course>.json
 
 def _course_json(cid):
@@ -1602,7 +1609,7 @@ def main():
                 delete_course(slug(title))
                 continue
             cid = slug(title)
-            if "pdf" in flags:
+            if format_of(flags) == "pdf":
                 PDF_COURSES.add(cid)  # before anything is loaded, so its data goes to courses/pdf/
             cpath = f"courses/html/{cid}/course.json"
             course = load(cpath, None)
@@ -1664,7 +1671,7 @@ def main():
                 made += 1
                 STATS["lessons_done"] += 1
                 print("Wrote", cid, les["file"], "- tokens used so far:", used)
-            if "pdf" in flags:
+            if format_of(flags) == "pdf":
                 done = load(cpath, None) or {}
                 build_pdf(cid, title, [l.get("data") for l in done.get("lessons", [])], f"courses/pdf/{cid}.pdf")
                 print("Wrote PDF book courses/pdf/" + cid + ".pdf")
@@ -1674,7 +1681,7 @@ def main():
     finally:
         if THIS_JOB == "none":  # setup and combine: rebuild every [PDF] book from its saved lessons (no AI calls)
             for title, _, flags in entries:
-                if "pdf" in flags:
+                if format_of(flags) == "pdf":
                     cid = slug(title)
                     PDF_COURSES.add(cid)
                     done = load(f"courses/html/{cid}/course.json", None) or {}
@@ -1689,7 +1696,7 @@ def main():
             if c:
                 index.append({"id": slug(title), "title": c["title"], "total": len(c["lessons"]),
                               "ready": sum(1 for l in c["lessons"] if l["file"]), "theme": c.get("theme"), "depts": depts_of(flags),
-                              "kind": "pdf" if "pdf" in flags else "html"})
+                              "kind": "pdf" if format_of(flags) == "pdf" else "html"})
         if SHARED_WRITES: save("courses/index.json", index)
         write_departments(entries)
         try:
