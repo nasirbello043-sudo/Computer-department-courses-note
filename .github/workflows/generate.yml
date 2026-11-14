@@ -114,8 +114,92 @@ jobs:
             sleep $((RANDOM % 20 + 5))
           done
 
+  writer4:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: writer4
+          MAX_MINUTES: "50"
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER4 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Writer 4: lessons"
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
+
+  writer5:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: writer5
+          MAX_MINUTES: "50"
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER5 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Writer 5: lessons"
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
+
+  writer6:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab matplotlib
+      - run: python generate.py
+        env:
+          JOB: writer6
+          MAX_MINUTES: "50"
+          GROQ_API_KEY: ${{ secrets.GROQ_WRITER6 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - if: always()
+        run: |
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses
+          git diff --staged --quiet || git commit -m "Writer 6: lessons"
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
+
   combine:
-    needs: [setup, writer1, writer2, writer3]
+    needs: [setup, writer1, writer2, writer3, writer4, writer5, writer6]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 30
