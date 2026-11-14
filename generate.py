@@ -1652,7 +1652,8 @@ def main():
                     return not (used > BUDGET or time.time() - START > MAX_MIN * 60)
                 tex_made, _ = texbook.tex_course(cid, title, course.get("theme"),
                                                  [l.get("title", "") for l in course["lessons"]],
-                                                 lambda p: ask(p, as_json=False, max_tokens=6000), _tex_budget_ok)
+                                                 lambda p: ask(p, as_json=False, max_tokens=6000), _tex_budget_ok,
+                                                 rewrite="rewrite" in flags)
                 made += tex_made
                 STATS["lessons_done"] += tex_made
                 continue
