@@ -98,9 +98,14 @@ def _expand_book(cid, title, data, ask, budget_ok, subs):
                 ok, tries, reasons = write_lesson(idx + 1, task, topics, entry["tex"], out, ask)
                 if ok:
                     new = open(out, encoding="utf-8").read()
-                    if (_lesson_pages(new, work) or 0) > n_old:
+                    n_new = _lesson_pages(new, work) or 0
+                    if n_new > n_old:
                         entry["tex"] = new
-                        print(f"Expanded lesson {idx + 1} ({entry['title']}): {n_old} -> more pages")
+                        print(f"Expanded lesson {idx + 1} ({entry['title']}): {n_old} -> {n_new} pages")
+                    else:
+                        print(f"Expansion of lesson {idx + 1} ({entry['title']}) was not longer ({n_new} vs {n_old} pages), old version kept")
+                else:
+                    print(f"Expansion of lesson {idx + 1} ({entry['title']}) not accepted:", "; ".join(reasons))
                 if os.path.exists(out):
                     os.remove(out)
             save_working(cid, data)
