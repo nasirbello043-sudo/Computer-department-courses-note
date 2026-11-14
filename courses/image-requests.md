@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **64** | Uploaded: **41** | Covers waiting: **13**
+Waiting: **65** | Uploaded: **41** | Covers waiting: **16**
 
 ## Course covers
 
@@ -214,6 +214,54 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 The spine shows "INTRODUCTION TO ECONOMICS" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
+### Introduction to Accounting
+
+Save as:
+```
+cover-introduction-to-accounting.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Ledger book, Balance sheet, Income statement, Cash flow diagram, Accounting calculator, Bank statement, Tax form, Audit checklist, Financial ratios chart, Depreciation schedule.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO ACCOUNTING"
+- Subtitle under it, smaller: "Numbers that Tell Your Business Story"
+The spine shows "INTRODUCTION TO ACCOUNTING" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Digital Electronics
+
+Save as:
+```
+cover-digital-electronics.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Logic gates, Flip-flops, Binary counters, Microcontroller, Seven‑segment display, Breadboard circuits, Digital clock, Multiplexer, Decoder, Programmable logic device.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "DIGITAL ELECTRONICS"
+- Subtitle under it, smaller: "Unlocking Logic: From Bits to Boards"
+The spine shows "DIGITAL ELECTRONICS" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Principles of Management
+
+Save as:
+```
+cover-principles-of-management.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Organizational chart, Gantt chart timeline, Team meeting discussion, Leadership compass, Decision‑making flowchart, Performance dashboard, Motivation pyramid, Strategic planning map, Resource allocation pie chart, Change management cycle.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "PRINCIPLES OF MANAGEMENT"
+- Subtitle under it, smaller: "Mastering Teams, Goals, and Organizational Success"
+The spine shows "PRINCIPLES OF MANAGEMENT" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
 ## Introduction to Agriculture
 
 ### Lesson 7: Pest and Disease Control
@@ -369,6 +417,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
+
+Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C=O"
+- "δ+"
+- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
