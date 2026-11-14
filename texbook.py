@@ -49,7 +49,7 @@ def assemble(cid, title, data, out_pdf):
         built = os.path.join(work, "book.pdf")
         if not os.path.exists(built):
             return 0, ["the book did not compile"]
-        info = subprocess.run(["pdfinfo", built], capture_output=True, text=True).stdout
+        info = subprocess.run(["pdfinfo", built], capture_output=True, encoding="utf-8", errors="replace").stdout
         pages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
         os.makedirs(os.path.dirname(out_pdf), exist_ok=True)
         shutil.copy(built, out_pdf)
