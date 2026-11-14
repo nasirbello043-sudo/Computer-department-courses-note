@@ -11,7 +11,8 @@ Models: set MODELS (comma separated) to change the fallback order.
 Safe to re-run: finished lessons are skipped and half-written long lessons are resumed."""
 import base64, html, json, math, os, random, re, shutil, sys, time, urllib.request, urllib.error
 from fractions import Fraction
-from pdfcourse import build_pdf  # [PDF] courses are written as PDF books
+from pdfcourse import build_pdf
+import texbook  # LaTeX route for PDF courses (writers 4-6)  # [PDF] courses are written as PDF books
 from migrate import migrate as migrate_old_courses
 
 
@@ -1503,7 +1504,7 @@ def save(p, d):
         old = existing.get("lessons", [])
         for i, entry in enumerate(d.get("lessons", [])):
             if i < len(old):
-                for key in ("data", "draft"):
+                for key in ("data", "draft", "tex"):
                     if key not in entry and key in old[i]:
                         entry[key] = old[i][key]
         if cid in PDF_COURSES:
@@ -1646,6 +1647,15 @@ def main():
                     if enrich(title, cid, no, ld):
                         save(lp, ld)
                         print("Updated diagrams and picture list for", lp)
+            if format_of(flags) == "pdf":
+                def _tex_budget_ok():
+                    return not (used > BUDGET or time.time() - START > MAX_MIN * 60)
+                tex_made, _ = texbook.tex_course(cid, title, course.get("theme"),
+                                                 [l.get("title", "") for l in course["lessons"]],
+                                                 lambda p: ask(p, as_json=False, max_tokens=6000), _tex_budget_ok)
+                made += tex_made
+                STATS["lessons_done"] += tex_made
+                continue
             for i, les in enumerate(course["lessons"], 1):
                 old = load(f"courses/html/{cid}/{les['file']}", None) if les["file"] else None
                 if les["file"] and not ("rewrite" in flags and old and "objectives" not in old):
@@ -1685,7 +1695,13 @@ def main():
                     cid = slug(title)
                     PDF_COURSES.add(cid)
                     done = load(f"courses/html/{cid}/course.json", None) or {}
-                    if done.get("lessons"):
+                    if any(l.get("tex") for l in done.get("lessons", [])):
+                        try:
+                            texbook.assemble(cid, title, done, f"courses/pdf/{cid}.pdf")
+                            print("Rebuilt LaTeX book", cid)
+                        except Exception as e:
+                            print("LaTeX rebuild stopped for", cid, "-", e)
+                    elif done.get("lessons"):
                         try:
                             build_pdf(cid, title, [l.get("data") for l in done["lessons"]], f"courses/pdf/{cid}.pdf")
                             print("Rebuilt PDF book", cid)
