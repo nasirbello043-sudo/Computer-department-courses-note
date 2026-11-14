@@ -361,7 +361,7 @@
   {
    "title": "Data Models",
    "focus": "Entities, attributes, relationships and the entity-relationship diagram",
-   "file": null,
+   "file": "lesson-02.json",
    "draft": {
     "plan": {
      "summary": "This lesson introduces the core concepts of data modeling: entities, attributes, and relationships, and shows how to represent them with an Entity‑Relationship (ER) diagram. Students will learn to identify these components in a real‑world scenario and draw a simple ER diagram.",
@@ -462,6 +462,364 @@
       "q": "Consider an ER diagram with entities Customer (CustomerID, Name), Order (OrderID, Date), and Product (ProductID, Name, Price). An Order can contain many Products, and a Product can appear in many Orders. Additionally, each Order is placed by exactly one Customer. Explain how to convert this ER model into a set of relational tables, specifying primary keys, foreign keys, and any associative tables needed.",
       "a": "Conversion steps: 1) Create table Customer(CustomerID PK, Name). 2) Create table Order(OrderID PK, Date, CustomerID FK). The foreign key CustomerID references Customer(CustomerID) to enforce that each order is placed by one customer. 3) Create table Product(ProductID PK, Name, Price). 4) Because Order and Product have a many‑to‑many relationship, introduce an associative (junction) table OrderProduct. Its attributes: OrderID FK, ProductID FK, Quantity (optional). The primary key can be the composite (OrderID, ProductID). Define foreign keys: OrderID references Order(OrderID) and ProductID references Product(ProductID). This table records each product line in an order, allowing an order to contain many products and a product to appear in many orders."
      }
+    ]
+   },
+   "data": {
+    "title": "Data Models",
+    "summary": "This lesson introduces the core concepts of data modeling: entities, attributes, and relationships, and shows how to represent them with an Entity‑Relationship (ER) diagram. Students will learn to identify these components in a real‑world scenario and draw a simple ER diagram.",
+    "objectives": [
+     "Identify entities, attributes, and relationships in a given scenario",
+     "Distinguish between different types of relationships (one‑to‑one, one‑to‑many, many‑to‑many)",
+     "Create a basic Entity‑Relationship diagram using standard symbols"
+    ],
+    "prerequisites": "Students should already know what a database is and why we store data, as covered in Lesson 1.",
+    "why": [
+     "Data models are the blueprint of any database; they help us organise information so that computers can store and retrieve it efficiently.",
+     "Understanding entities, attributes, and relationships lets you translate real‑world problems into a form that can be implemented as a working database, a skill needed in many jobs such as software development, data analysis, and system design."
+    ],
+    "sections": [
+     {
+      "heading": "What Is an Entity?",
+      "body": "An **entity** is simply a “thing” that we care about and want to keep information on.  \nIn the world of databases, an entity can be a person, a place, an object, an event, or even an idea—anything that has a distinct identity and about which we might ask questions.\n\n> **Definition:** An entity is a thing or object of interest that we want to store information about.\n\nWhy does this matter?  When we design a database we need to decide *what* we are going to record.  By naming the entities first, we create a clear mental map of the data we will later organise into tables.  If we skip this step, we might end up mixing unrelated facts together, which makes the database hard to use and to keep correct.\n\n### Recognising entities in everyday life\n\nThink of a school library.  If you walk in, you see many items: books, shelves, students, librarians, borrowing transactions, and even the building itself.  Each of these can be an entity because we can ask specific questions about them:\n\n- **Book** – What is its title? Who is the author? When was it published?  \n- **Student** – What is the student’s name? Which class are they in? What is their email address?  \n- **Librarian** – What shift does the librarian work? What employee ID do they have?  \n\nNotice that we are not yet talking about the *relationships* (for example, which student borrowed which book).  We are only listing the distinct things that exist independently and that we might want to describe.\n\nAnother everyday example is a grocery store.  When you look at a shopping list, you might see:\n\n- **Product** – Apples, bread, milk.  \n- **Customer** – The person buying the items.  \n- **Order** – The collection of items purchased at one time.\n\nEach of these can stand on its own, and each has its own set of facts (attributes) that we could store.\n\n### How to tell if something is an entity\n\n1. **Identify a unique identity.**  An entity must be distinguishable from other things of the same kind.  For a *book* the ISBN (International Standard Book Number) gives a unique identity.  For a *student* a student ID does the same.  If you can assign a unique label, you likely have an entity.  \n2. **Ask “Can we store facts about it?”**  If you can imagine a list of properties—name, date, price, location—then the thing is a candidate for an entity.  \n3. **Check independence.**  An entity should exist without needing another entity to define it.  A *borrow transaction* depends on a *student* and a *book*, so it is usually modelled as a relationship, not as a primary entity.\n\n> **In daily life:** When you fill out a form at the doctor’s office, the *patient* is an entity because you record name, birthdate, and medical history—facts that belong to that person alone.\n\n### A tiny exercise\n\nPick three things around your desk: perhaps a *pen*, a *notebook*, and a *computer*.  Write down one piece of information you could store for each (e.g., “pen color”, “notebook page count”, “computer serial number”).  If you can do this, you have identified three entities.\n\n> **Common mistake:** Treating a relationship as an entity.  For example, calling “borrowing a book” an entity would be wrong; it is the *relationship* between the *student* entity and the *book* entity.\n\n### Summarising the idea\n\nAn entity is the building block of any database model.  By first deciding what things we need to know about, we set the stage for a clean, logical structure.  Remember that each entity has a unique identity, can have its own facts (attributes), and stands independently of other entities.\n\n> **Remember:** Start every database design by listing the entities; everything else (attributes, relationships) follows from that list.",
+      "code": ""
+     },
+     {
+      "heading": "Attributes: Describing Entities",
+      "body": "An **attribute** is simply a property or characteristic that tells us something about an entity.  \nIf an entity is a “thing” we want to store information about, an attribute is a piece of information that describes that thing.  \n\n> **Definition:** An attribute is a named data item that holds a value describing an entity.\n\nThink of a student in a school database. The student is the entity; the student’s name, birth date, and email address are attributes because each of them gives us a specific detail about that student.\n\n### Why attributes matter\nAttributes let us answer questions like “What is the student’s email?” or “When was the product manufactured?” Without attributes we would only know that an entity exists, but we could not retrieve any useful information about it. In a database, attributes become the columns of a table, and each row (record) stores the values for those columns.\n\n### Types of attributes\n\n#### 1. Simple (or atomic) attributes\nA simple attribute cannot be broken down into smaller meaningful parts. Its value is stored as a single unit.\n\n*Example*: `StudentID` is a simple attribute. Even though the ID may look like a string of numbers, we treat the whole string as one piece of data; we do not split it into separate digits.\n\n#### 2. Composite attributes\nA composite attribute can be divided into smaller sub‑attributes, each of which has its own meaning. The whole attribute is a logical grouping of those parts.\n\n*Example*: `Address` can be split into `Street`, `City`, `State`, and `ZipCode`.  \nWhen we store an address, we may keep it as one field for convenience, but conceptually it is made up of several simpler pieces.\n\n> **In daily life:** Think of a full name. It is a composite attribute made of `FirstName` and `LastName`. You can refer to the whole name, or you can work with each part separately.\n\n#### 3. Derived (or calculated) attributes\nA derived attribute is not stored directly; instead, its value is computed from other stored attributes whenever we need it.\n\n*Example*: `Age` can be derived from the stored `BirthDate`. If today’s date is 2026‑11‑14 and a student’s birth date is 2005‑03‑22, then  \n\n$$\n\\text{Age} = \\text{CurrentYear} - \\text{BirthYear}\n$$  \n\ngives the age. The database does not need to keep an `Age` column; it can calculate it on the fly.\n\n> **Note:** Derived attributes save space and keep data consistent, because the value is always up‑to‑date with its source attributes.\n\n### How to choose the right kind\nWhen designing a database, ask yourself:\n\n1. **Can the attribute be meaningfully split?** If yes, make it composite; this helps when you need to query or sort by a part of it (e.g., searching by city).\n2. **Is the value changing over time?** If the value can be recomputed from other stable attributes, store it as derived instead of storing redundant data.\n3. **Do you need the value as a single unit for simplicity?** Then keep it simple.\n\n> **Common mistake:** Storing a derived attribute as a separate column and then forgetting to update it when the source data changes. This leads to inconsistent information (e.g., an age that no longer matches the birth date).\n\n### Putting attributes into a table\nIn an Entity‑Relationship (ER) diagram, attributes are drawn as ovals attached to the entity rectangle. Simple attributes appear as single ovals, composite attributes are shown with a larger oval that encloses smaller ovals for each sub‑attribute, and derived attributes are often drawn with a dashed oval.\n\nWhen the ER diagram is transformed into a relational table, each simple or sub‑attribute becomes a column. Composite attributes are “flattened” into separate columns, while derived attributes may be omitted from the table definition because they can be calculated with a query.\n\n> **Remember:** Every attribute must have a clear name, a defined data type (such as integer, text, or date), and a purpose that helps answer a specific question about the entity. Clear attributes make the whole database easier to understand, query, and maintain.",
+      "code": ""
+     },
+     {
+      "heading": "Relationships Between Entities",
+      "body": "Relationships are the ways that two or more entities are linked together in a database.  \nThink of an entity as a “thing” you want to keep information about – for example a **Student**, a **Course**, or a **Library Book**. A relationship tells you how those things interact with each other.  \n\n> **Definition:** A **relationship** is an association between two or more entities that describes how instances of those entities are connected.\n\nWhy do we need relationships?  \nIf we stored every piece of information in a single table, we would repeat the same data many times and the table would become huge and hard to maintain. By separating data into entities and then linking them with relationships, we keep each table focused on one subject and avoid duplication. This makes the database easier to update, query, and understand.\n\n### Cardinalities – how many can be linked?\n\nWhen we draw a relationship, we must specify **cardinality**, which tells us how many instances of one entity can be related to how many instances of another entity. There are three basic cardinalities:\n\n1. **One‑to‑One (1:1)** – each instance of Entity A is linked to at most one instance of Entity B, and vice‑versa.  \n   *Example*: Each **Student** has exactly one **StudentIDCard**, and each card belongs to exactly one student.\n\n2. **One‑to‑Many (1:N)** – one instance of Entity A can be linked to many instances of Entity B, but each instance of B links back to only one A.  \n   *Example*: A **Teacher** can teach many **Courses**, but each course has only one primary teacher.\n\n3 **Many‑to‑Many (M:N)** – many instances of Entity A can be linked to many instances of Entity B.  \n   *Example*: Students enroll in many courses, and each course can have many students.\n\nWe can write these ideas with a simple notation. If we let $|A|$ be the number of A‑instances that can be related to a single B‑instance, and $|B|$ the number of B‑instances that can be related to a single A‑instance, then:\n\n$$\n\\text{Cardinality} = (|A|, |B|)\n$$\n\n- For 1:1, $(|A|,|B|) = (1,1)$  \n- For 1:N, $(|A|,|B|) = (1,\\text{many})$  \n- For M:N, $(|A|,|B|) = (\\text{many},\\text{many})$\n\n### Everyday comparison\n\nImagine a **library**.  \n- A **book** can have only one **ISBN** number → one‑to‑one.  \n- A **library branch** holds many **books**, but each copy of a book lives in only one branch at a time → one‑to‑many.  \n- **Readers** can borrow many books, and each book can be borrowed by many readers over time → many‑to‑many.\n\nSeeing these real‑world links helps you picture how the same ideas appear in a database.\n\n> **In daily life:** Think of a school timetable. One teacher (Entity A) may teach several classes (Entity B) – that’s a one‑to‑many relationship. Two teachers never share the same class at the same time, so the reverse direction is “many‑to‑one”.\n\n### How relationships are stored\n\n- **One‑to‑One**: Usually we put a foreign key (a reference column) in either table, because each side needs only one link.  \n- **One‑to‑Many**: The “many” side gets a foreign key that points to the “one” side. In the teacher‑course example, the **Course** table would contain a column `teacher_id`.  \n- **Many‑to‑Many**: We create a third table, called a **junction** or **association** table, that holds pairs of foreign keys. For students and courses, a table **Enrollment** with columns `student_id` and `course_id` records each enrollment.\n\n> **Common mistake:** Trying to store a many‑to‑many relationship directly in one of the original tables (e.g., putting a list of course IDs inside the Student table). This leads to data that is hard to query and update. The proper way is to use a junction table.\n\n### Why cardinality matters\n\nWhen you design a database, choosing the correct cardinality determines how you will query the data and how you will enforce rules (called **integrity constraints**) that keep the data consistent. For instance, if a relationship should be one‑to‑many but you accidentally model it as many‑to‑many, you might allow a student to be assigned to two primary teachers, which could break business rules.\n\n> **Remember:** Always ask, “For each instance of Entity A, how many instances of Entity B can it be linked to?” and answer the same question in the opposite direction. The pair of answers gives you the cardinality, and that tells you exactly how to store the relationship in the database.",
+      "code": ""
+     },
+     {
+      "heading": "Entity‑Relationship Diagram Basics",
+      "body": "An Entity‑Relationship (ER) diagram is a picture that shows how the important things in a database are linked together.  \nThink of it as a simple map of a small town: the **entities** are the buildings (a school, a library), the **attributes** are the details written on each building’s sign (its name, address), and the **relationships** are the roads that connect the buildings (students travel from home to school). By drawing this map with a few standard symbols, we can see at a glance what data we need to store and how the pieces fit.\n\n**Rectangles for entities**  \nThe first symbol you will meet is a plain rectangle. Inside the rectangle we write the name of an entity – a thing we want to keep information about. An entity can be a person, a place, an object, or even an abstract concept. For example, in a university database we might have entities called **Student**, **Course**, and **Professor**. The rectangle tells us “this is a main object in our system”.\n\n> **Definition:** An *entity* is a distinct object or concept that we want to store data about, represented by a rectangle in an ER diagram.\n\n**Ovals for attributes**  \nEvery entity has properties that describe it. In the diagram these properties are drawn as ovals (also called ellipses) and are connected to their entity by a straight line. If the entity is **Student**, typical attributes could be *StudentID*, *Name*, *BirthDate*, and *Email*. The oval holds the attribute’s name, and the line shows which entity the attribute belongs to.\n\n> **Note:** An attribute that uniquely identifies an entity (like *StudentID*) is called a *primary key*. It is often underlined in the diagram, but the underline is just a visual cue – the shape stays an oval.\n\n**Diamonds for relationships**  \nWhen two (or more) entities are linked in a meaningful way, we draw a diamond between them. The diamond is labeled with a verb phrase that describes the connection, such as **enrolls in**, **teaches**, or **belongs to**. The diamond’s position in the middle makes it clear that the relationship involves the entities on both sides.\n\nFor instance, the relationship between **Student** and **Course** could be **enrolls in**. The diamond sits between the two rectangles, and a line runs from each rectangle to the diamond.\n\n**Lines and cardinality markers**  \nLines are the glue that hold the diagram together. Besides simply connecting shapes, they also carry *cardinality* information – how many instances of one entity can be related to a single instance of another entity. Cardinality is shown by small symbols placed near the line ends:\n\n- **1** means “exactly one”.\n- **N** (or the crow’s‑foot symbol) means “many”.\n- **0..1** means “zero or one”.\n- **0..N** means “zero or many”.\n\nPutting these markers on the lines tells us the rules of the data. For the **enrolls in** relationship, we might write **1** near the **Student** side (each enrollment record involves one student) and **N** near the **Course** side (a student can enroll in many courses). Conversely, a course can have many students, so the **Course** side also gets an **N**.\n\n> **In daily life:** Think of a library card system. A *Member* (entity) has a *CardNumber* (attribute). The *borrows* relationship (diamond) connects *Member* to *Book*. One member can borrow many books (**1** on the member side, **N** on the book side), while each book can be borrowed by many members over time (**N** on both sides).\n\n**Putting the symbols together**  \nWhen you combine rectangles, ovals, diamonds, and labeled lines, you get a complete ER diagram. The diagram does not contain any data itself; it only describes the structure of the data we will later store in tables. By looking at the diagram, a designer can decide what tables to create, which columns belong in each table, and how foreign keys will enforce the relationships.\n\n> **Common mistake:** Forgetting to add cardinality markers. Without them, the diagram shows that entities are linked, but it hides the crucial rule “one student can enroll in many courses”. Always check that each line has a clear cardinality symbol.\n\nRemember that an ER diagram is a communication tool. Its simple, standardized symbols let anyone – a programmer, a business analyst, or a teacher – understand the database design quickly and correctly. By mastering these four symbols, you have the basic visual language needed to describe almost any data model.",
+      "code": ""
+     },
+     {
+      "heading": "Putting It All Together: A Simple ER Diagram",
+      "body": "Imagine you have a small library that lends books to students.  \nWe want to draw one picture that shows **everything** we have talked about so far: the things (entities), what we know about them (attributes), and how they are linked (relationships).  \nThat picture is called an **Entity‑Relationship (ER) diagram**.  \n\n### 1. List the entities first  \nThink of each real‑world object that has its own identity.  \nIn our library example the obvious objects are:\n\n* **Book** – each book has its own barcode.  \n* **Student** – each student has a university ID.  \n* **Loan** – the act of giving a book to a student.\n\nWrite each name inside a rectangle; rectangles are the standard symbol for entities.\n\n### 2. Add attributes to each entity  \nAttributes are the facts we store about an entity.  \nWrite them as ovals (or simply list them under the rectangle) and connect each oval to its entity with a line.\n\n* **Book**: `ISBN` (primary key), `Title`, `Author`, `Year`.\n* **Student**: `StudentID` (primary key), `Name`, `Email`.\n* **Loan**: `LoanDate`, `DueDate`.\n\n> **Definition:** *Primary key* – an attribute (or group of attributes) whose value uniquely identifies each instance of an entity.  \n> **Remember:** The primary key is underlined in the diagram.\n\n### 3. Decide the relationships  \nAsk yourself: how do the entities interact?  \nA **Student** can borrow many **Books**, but each **Loan** connects exactly one **Student** with exactly one **Book**.  \nSo we need two relationships:\n\n* **borrows** – between *Student* and *Loan*.\n* **contains** – between *Book* and *Loan*.\n\nDraw a diamond (or a labeled line) for each relationship and attach it to the related entities.\n\n### 4. Set the cardinalities (the “how many”)  \nCardinality tells us the maximum and minimum number of instances that can participate in a relationship.\n\n* A **Student** may have **0, 1, or many** *Loans* → write `0..*` near the Student side of *borrows*.\n* A **Loan** must belong to **exactly one** *Student* → write `1` near the Loan side.\n* A **Book** may be part of **0, 1, or many** *Loans* (if the library has multiple copies) → write `0..*` near the Book side of *contains*.\n* A **Loan** always refers to **exactly one** *Book* → write `1` near the Loan side.\n\n> **In daily life:** Think of a classroom roster. One teacher can teach many classes, but each class has exactly one teacher. The same idea of “one‑to‑many” appears in our diagram.\n\n### 5. Put it all together  \nNow place the rectangles, ovals, and diamonds on a single sheet:\n\n```\n[Student]───(borrows)───[Loan]───(contains)───[Book]\n   |                |                |\n   |                |                |\n  (StudentID)   (LoanDate)        (ISBN)\n  (Name)        (DueDate)         (Title)\n  (Email)                         (Author)\n                                 (Year)\n```\n\nYou can also add the cardinality symbols next to each line, for example `Student 0..* ── borrows ── 1 Loan`.\n\n### 6. Check your work  \n\n1. **All entities are present?**  \n2. **Every attribute is attached to the right entity?**  \n3. **Each relationship connects the correct entities and has clear cardinalities?**  \n\nIf the answer is “yes” to all three, your ER diagram is complete.\n\n> **Common mistake:** Forgetting to mark the primary key. Without a primary key the database cannot tell two rows apart, and the diagram will be ambiguous.\n\n### 7. Why this matters  \n\nAn ER diagram is a blueprint. Just as an architect’s drawing guides the construction of a house, an ER diagram guides the creation of a database. It forces you to think clearly about what data you need, how pieces of data relate, and what rules (cardinalities) must be enforced. When you later translate the diagram into tables, the entities become tables, attributes become columns, and relationships become foreign keys.\n\nNow you have a complete, simple ER diagram for a library system. Use the same step‑by‑step method—list entities, add attributes, draw relationships, set cardinalities, and verify—to model any small scenario you encounter.",
+      "code": ""
+     }
+    ],
+    "examples": [],
+    "examples_version": 3,
+    "practice": [
+     {
+      "level": "Easy",
+      "q": "What is an entity in a database model? Give a simple example.",
+      "a": "An entity is something we want to store information about; it represents a real‑world object or concept. For example, in a school database, a “Student” is an entity because we need to keep data about each student."
+     },
+     {
+      "level": "Easy",
+      "q": "List three possible attributes of the Student entity and explain what an attribute is.",
+      "a": "An attribute is a property or characteristic of an entity. For the Student entity, three attributes could be: 1) StudentID – a unique number that identifies each student, 2) Name – the student’s full name, 3) BirthDate – the date the student was born. Each attribute holds a single piece of data about the student."
+     },
+     {
+      "level": "Medium",
+      "q": "Explain the difference between a one‑to‑many (1:M) relationship and a many‑to‑many (M:N) relationship, and give an example of each using entities from a library system.",
+      "a": "In a 1:M relationship, one instance of the first entity relates to many instances of the second, but each instance of the second relates to only one instance of the first. Example: One “Author” can write many “Books”, but each “Book” has only one primary “Author”. In an M:N relationship, many instances of the first entity can relate to many instances of the second. Example: “Books” and “Categories” – a book can belong to multiple categories (e.g., Fiction, Mystery) and each category contains many books."
+     },
+     {
+      "level": "Medium",
+      "q": "Draw (describe in words) a simple ER diagram that includes the entities Student, Course, and Enrollment, showing their relationships and key attributes.",
+      "a": "Describe: • Entity Student with key attribute StudentID and other attributes Name, Email. • Entity Course with key attribute CourseID and attributes Title, Credits. • Entity Enrollment is a relationship (or associative entity) connecting Student and Course. It is many‑to‑many: a student can enroll in many courses, and a course can have many students. The Enrollment relationship includes attribute Grade. In the diagram, draw Student and Course as rectangles, connect both to a diamond labeled “Enrolls” (or an associative rectangle “Enrollment”) with lines marked “M” on both sides, and list the key attributes inside each rectangle."
+     },
+     {
+      "level": "Hard",
+      "q": "A university database has entities Professor (ProfID, Name), Department (DeptID, DeptName), and Course (CourseID, Title). Professors belong to one Department, and each Course is taught by exactly one Professor, but a Professor can teach multiple Courses. Show how to model these constraints in an ER diagram and explain how you would enforce them in a relational schema.",
+      "a": "Modeling in ER: • Professor rectangle with ProfID (PK), Name. • Department rectangle with DeptID (PK), DeptName. • Course rectangle with CourseID (PK), Title. • Relationship “WorksIn” between Professor and Department: 1 (Professor) to 1 (Department) – each professor belongs to one department, each department can have many professors (so draw a line with “1” near Professor and “M” near Department). • Relationship “Teaches” between Professor and Course: 1 (Professor) to M (Course) – each course taught by one professor, a professor may teach many courses (line with “1” near Professor, “M” near Course). Enforcing in relational schema: Create tables Professor(ProfID PK, Name, DeptID FK), Department(DeptID PK, DeptName), Course(CourseID PK, Title, ProfID FK). The foreign key DeptID in Professor references Department(DeptID) ensures each professor is linked to a valid department. The foreign key ProfID in Course references Professor(ProfID) ensures each course has a professor. The “M” side does not need extra constraints because multiple rows can share the same foreign key value."
+     },
+     {
+      "level": "Hard",
+      "q": "Consider an ER diagram with entities Customer (CustomerID, Name), Order (OrderID, Date), and Product (ProductID, Name, Price). An Order can contain many Products, and a Product can appear in many Orders. Additionally, each Order is placed by exactly one Customer. Explain how to convert this ER model into a set of relational tables, specifying primary keys, foreign keys, and any associative tables needed.",
+      "a": "Conversion steps: 1) Create table Customer(CustomerID PK, Name). 2) Create table Order(OrderID PK, Date, CustomerID FK). The foreign key CustomerID references Customer(CustomerID) to enforce that each order is placed by one customer. 3) Create table Product(ProductID PK, Name, Price). 4) Because Order and Product have a many‑to‑many relationship, introduce an associative (junction) table OrderProduct. Its attributes: OrderID FK, ProductID FK, Quantity (optional). The primary key can be the composite (OrderID, ProductID). Define foreign keys: OrderID references Order(OrderID) and ProductID references Product(ProductID). This table records each product line in an order, allowing an order to contain many products and a product to appear in many orders."
+     }
+    ],
+    "recap": "The lesson explains that an entity is any distinct thing we want to store information about, while attributes are the properties that describe an entity. Relationships link entities together, preventing data duplication and enabling meaningful queries. An Entity‑Relationship (ER) diagram visualises entities, their attributes, and relationships using standard symbols.",
+    "key_terms": [
+     {
+      "term": "Entity",
+      "meaning": "A distinct object or thing of interest that we store information about, such as a student or a book."
+     },
+     {
+      "term": "Attribute",
+      "meaning": "A named property of an entity that holds a specific piece of data, like a student’s email address."
+     },
+     {
+      "term": "Relationship",
+      "meaning": "An association that connects two or more entities, showing how they interact (e.g., a student borrows a book)."
+     },
+     {
+      "term": "Cardinality",
+      "meaning": "Specifies how many instances of one entity can be linked to instances of another (e.g., one‑to‑many)."
+     },
+     {
+      "term": "Entity‑Relationship (ER) Diagram",
+      "meaning": "A visual representation using rectangles for entities, ovals for attributes, and diamonds for relationships."
+     },
+     {
+      "term": "Primary Key",
+      "meaning": "An attribute (or set of attributes) that uniquely identifies each record of an entity."
+     },
+     {
+      "term": "Foreign Key",
+      "meaning": "An attribute in one entity that references the primary key of another entity to establish a relationship."
+     },
+     {
+      "term": "Schema",
+      "meaning": "The overall structure of a database, describing its entities, attributes, and relationships."
+     }
+    ],
+    "quiz": [
+     {
+      "q": "What is an entity in a database?",
+      "options": [
+       "A column in a table",
+       "A distinct thing we store information about",
+       "A rule for data entry",
+       "A type of query"
+      ],
+      "answer": 1,
+      "why": "An entity represents a real‑world object like a student or a book."
+     },
+     {
+      "q": "Which of the following is an attribute of the entity 'Book'?",
+      "options": [
+       "ISBN",
+       "Borrower",
+       "Library",
+       "Loan"
+      ],
+      "answer": 0,
+      "why": "ISBN is a property that describes a specific book."
+     },
+     {
+      "q": "What does cardinality describe?",
+      "options": [
+       "The size of a database file",
+       "The number of tables",
+       "How many instances of one entity relate to another",
+       "The speed of queries"
+      ],
+      "answer": 2,
+      "why": "Cardinality tells us the possible number of links between entity instances."
+     },
+     {
+      "q": "In an ER diagram, which shape is used for relationships?",
+      "options": [
+       "Rectangle",
+       "Oval",
+       "Diamond",
+       "Circle"
+      ],
+      "answer": 2,
+      "why": "Relationships are conventionally drawn as diamonds."
+     },
+     {
+      "q": "Why are relationships important in database design?",
+      "options": [
+       "They increase storage space",
+       "They allow data duplication",
+       "They help avoid redundancy and keep data organized",
+       "They make tables larger"
+      ],
+      "answer": 2,
+      "why": "Relationships link entities without repeating the same data."
+     },
+     {
+      "q": "What is a primary key?",
+      "options": [
+       "An attribute that uniquely identifies each record",
+       "A foreign attribute",
+       "A type of relationship",
+       "A diagram symbol"
+      ],
+      "answer": 0,
+      "why": "A primary key uniquely distinguishes each entity instance."
+     }
+    ],
+    "flashcards": [
+     {
+      "front": "Entity",
+      "back": "A distinct thing we want to store information about, such as Student or Book."
+     },
+     {
+      "front": "Attribute",
+      "back": "A property of an entity that holds a specific value, like a student's email."
+     },
+     {
+      "front": "Relationship",
+      "back": "An association between two or more entities, e.g., Student borrows Book."
+     },
+     {
+      "front": "Cardinality",
+      "back": "Describes how many instances of one entity can be linked to another (one‑to‑many, many‑to‑many)."
+     },
+     {
+      "front": "ER Diagram Symbol for Entity",
+      "back": "Rectangle containing the entity name."
+     },
+     {
+      "front": "ER Diagram Symbol for Attribute",
+      "back": "Oval (or listed under the entity) showing the attribute name."
+     },
+     {
+      "front": "Primary Key",
+      "back": "An attribute that uniquely identifies each record in an entity."
+     },
+     {
+      "front": "Foreign Key",
+      "back": "An attribute that references the primary key of another entity to create a relationship."
+     }
+    ],
+    "diagrams": [
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l02-simple-er-diagram",
+      "title": "Shows entities, attributes and relationships for a library system.",
+      "alt": "Shows entities, attributes and relationships for a library system.",
+      "priority": 9,
+      "picture_title": "Simple ER Diagram",
+      "kind": "labelled diagram",
+      "subject": "A small library example with three entities – Book, Student, and Loan – each shown as a rectangle, their key attributes listed inside, and lines connecting them to represent the Borrow relationship.",
+      "layout": "Three rectangles arranged in a triangle; Book at top left, Student at top right, Loan at bottom centre; lines with crow‑foot symbols connect Book to Loan and Student to Loan.",
+      "labels": [
+       "Book",
+       "Student",
+       "Loan",
+       "title",
+       "author",
+       "ISBN",
+       "name",
+       "email"
+      ],
+      "after": 4
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l02-entity-example-photo",
+      "title": "A photo of a school student holding an ID badge.",
+      "alt": "A photo of a school student holding an ID badge.",
+      "priority": 7,
+      "picture_title": "Entity Example Photo",
+      "kind": "photo",
+      "subject": "The picture depicts a real‑world entity – a student – to illustrate that an entity is any distinct thing we want to store information about.",
+      "layout": "Student centred in the frame, ID badge clearly visible; background shows a classroom.",
+      "labels": [],
+      "after": 0
+     },
+     {
+      "type": "image",
+      "file": "introduction-to-database-systems-l02-relationship-illustration",
+      "title": "Illustrates how a student enrolls in a course.",
+      "alt": "Illustrates how a student enrolls in a course.",
+      "priority": 6,
+      "picture_title": "Relationship Illustration",
+      "kind": "illustration",
+      "subject": "Two icons, one representing a student and one a course, are linked by an arrow labelled \"enrolls in\" to demonstrate a relationship between two entities.",
+      "layout": "Student icon on the left, course icon on the right, arrow pointing from student to course with label in the middle.",
+      "labels": [
+       "Student",
+       "Course",
+       "enrolls in"
+      ],
+      "after": 2
+     },
+     {
+      "type": "parts",
+      "title": "Entity components",
+      "items": [
+       {
+        "name": "Entity",
+        "role": "A thing we want to store information about"
+       },
+       {
+        "name": "Attribute",
+        "role": "A property that describes the entity"
+       },
+       {
+        "name": "Relationship",
+        "role": "How entities are linked together"
+       }
+      ],
+      "after": 0
+     },
+     {
+      "type": "compare",
+      "title": "Entity vs Attribute",
+      "left": {
+       "name": "Entity",
+       "points": [
+        "Has its own identity",
+        "Examples: Student, Book, Course",
+        "Stored as a table (or rectangle in ER diagram)"
+       ]
+      },
+      "right": {
+       "name": "Attribute",
+       "points": [
+        "Describes an entity",
+        "Examples: name, birthdate, ISBN",
+        "Stored as a column in the entity's table"
+       ]
+      },
+      "after": 1
+     },
+     {
+      "type": "steps",
+      "title": "Creating a Relationship",
+      "steps": [
+       {
+        "label": "Identify entities",
+        "text": "Choose the two entities that interact"
+       },
+       {
+        "label": "Define cardinality",
+        "text": "Decide one‑to‑one, one‑to‑many, or many‑to‑many"
+       },
+       {
+        "label": "Add foreign key",
+        "text": "Place a reference to one entity in the other"
+       },
+       {
+        "label": "Name the relationship",
+        "text": "Give a clear verb phrase (e.g., enrolls in)"
+       }
+      ],
+      "loop": false,
+      "after": 2
+     },
+     {
+      "type": "facts",
+      "title": "ER diagram symbols",
+      "items": [
+       {
+        "value": "Rectangle",
+        "label": "Entity"
+       },
+       {
+        "value": "Oval",
+        "label": "Attribute"
+       },
+       {
+        "value": "Diamond",
+        "label": "Relationship"
+       },
+       {
+        "value": "Line",
+        "label": "Connects them"
+       }
+      ],
+      "after": 3
+     }
+    ],
+    "images_version": 5,
+    "reviewed": false,
+    "models": [
+     "openai/gpt-oss-120b"
     ]
    }
   },
@@ -4269,5 +4627,20 @@
  "theme": {
   "hue": 315,
   "code": "DAT"
+ },
+ "cover_plan": {
+  "subtitle": "Organizing the world's data for a digital age",
+  "elements": [
+   "A cylinder database icon",
+   "A relational table with rows and columns",
+   "A magnifying glass over a data record",
+   "A network diagram of connected nodes",
+   "A SQL query code snippet",
+   "A primary key gold key symbol",
+   "A server rack with blinking lights",
+   "A cloud storage icon",
+   "An Entity-Relationship (ER) diagram",
+   "A lightning bolt representing fast search"
+  ]
  }
 }
