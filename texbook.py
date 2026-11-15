@@ -36,9 +36,13 @@ def save_working(cid, data):
         json.dump(data, f, ensure_ascii=False, indent=1)
     os.replace(tmp, f"courses/pdf/{cid}.json")
 
-def assemble(cid, title, data, out_pdf):
+def _strip_exercises(tex):
+    """Non-maths courses have no exercise sections: remove them from the lesson text."""
+    return re.sub(r"\\subsection\{Exercises\}.*?(?=\\subsection\{Key terms\})", "", tex, flags=re.S)
+
+def assemble(cid, title, data, out_pdf, maths=False):
     """Joins the accepted lessons into one book. Returns (pages, problems)."""
-    tex_lessons = [l["tex"] for l in data.get("lessons", []) if l.get("tex")]
+    tex_lessons = [l["tex"] if maths else _strip_exercises(l["tex"]) for l in data.get("lessons", []) if l.get("tex")]
     work = tempfile.mkdtemp()
     try:
         shutil.copy(os.path.join(BOOK, "template.tex"), work)
@@ -64,26 +68,26 @@ def assemble(cid, title, data, out_pdf):
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-def _lesson_pages(tex, work_dir):
+def _lesson_pages(tex, work_dir, maths=False):
     from check_lesson import check
     tmp = os.path.join(work_dir, "measure.tex")
     with open(tmp, "w", encoding="utf-8") as f:
         f.write(tex)
-    pages, reasons = check(tmp)
+    pages, reasons = check(tmp, maths)
     return pages if not reasons else None
 
-def _expand_book(cid, title, data, ask, budget_ok, subs):
+def _expand_book(cid, title, data, ask, budget_ok, subs, maths=False):
     """If the book is under the minimum, rewrite the shortest lessons with more depth.
     A rewrite is kept only if the lesson gets longer. Returns the final (pages, problems)."""
     work = tempfile.mkdtemp()
     try:
-        pages, problems = assemble(cid, title, data, f"courses/pdf/{cid}.pdf")
+        pages, problems = assemble(cid, title, data, f"courses/pdf/{cid}.pdf", maths)
         rounds = 0
         while pages < MIN_BOOK_PAGES and rounds < EXPAND_ROUNDS and budget_ok():
             rounds += 1
             lengths = []
             for idx, entry in enumerate(data["lessons"]):
-                n = _lesson_pages(entry["tex"], work) or 1
+                n = _lesson_pages(entry["tex"], work, maths) or 1
                 lengths.append((n, idx))
             lengths.sort()
             for n_old, idx in lengths[:3]:
@@ -95,10 +99,10 @@ def _expand_book(cid, title, data, ask, budget_ok, subs):
                 os.makedirs(os.path.dirname(out), exist_ok=True)
                 task = (entry["title"] + " (EXPAND: rewrite this lesson with more depth: "
                         "more worked examples and fuller explanation for each sub-topic; keep the same layout and structure)")
-                ok, tries, reasons = write_lesson(idx + 1, task, topics, entry["tex"], out, ask)
+                ok, tries, reasons = write_lesson(idx + 1, task, topics, entry["tex"], out, ask, maths)
                 if ok:
                     new = open(out, encoding="utf-8").read()
-                    n_new = _lesson_pages(new, work) or 0
+                    n_new = _lesson_pages(new, work, maths) or 0
                     if n_new > n_old:
                         entry["tex"] = new
                         print(f"Expanded lesson {idx + 1} ({entry['title']}): {n_old} -> {n_new} pages")
@@ -109,12 +113,12 @@ def _expand_book(cid, title, data, ask, budget_ok, subs):
                 if os.path.exists(out):
                     os.remove(out)
             save_working(cid, data)
-            pages, problems = assemble(cid, title, data, f"courses/pdf/{cid}.pdf")
+            pages, problems = assemble(cid, title, data, f"courses/pdf/{cid}.pdf", maths)
         return pages, problems
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-def tex_course(cid, title, theme, lesson_titles, ask, budget_ok, rewrite=False):
+def tex_course(cid, title, theme, lesson_titles, ask, budget_ok, rewrite=False, maths=False):
     """Writes every missing lesson of a PDF course. ask(prompt) returns text. budget_ok() returns False when time is up.
     rewrite=True clears the saved lessons once, so the whole course is written again (used for courses that are too short)."""
     subs = _read_outline_subtopics(cid)
@@ -139,7 +143,7 @@ def tex_course(cid, title, theme, lesson_titles, ask, budget_ok, rewrite=False):
         topics = subs.get(t.lower(), [t])
         out = os.path.join("courses", "pdf", f"{cid}-{i:02d}.tex.tmp")
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        ok, tries, reasons = write_lesson(i, t, topics, style, out, ask)
+        ok, tries, reasons = write_lesson(i, t, topics, style, out, ask, maths)
         if ok:
             entry["tex"] = open(out, encoding="utf-8").read()
             entry["file"] = f"tex-{i:02d}"
@@ -151,7 +155,7 @@ def tex_course(cid, title, theme, lesson_titles, ask, budget_ok, rewrite=False):
             os.remove(out)
         save_working(cid, data)
     if all(l.get("tex") for l in data["lessons"]):
-        pages, problems = _expand_book(cid, title, data, ask, budget_ok, subs)
+        pages, problems = _expand_book(cid, title, data, ask, budget_ok, subs, maths)
         print(f"PDF book courses/pdf/{cid}.pdf: {pages} pages")
         for p in problems:
             print("  -", p)

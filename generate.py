@@ -1653,7 +1653,7 @@ def main():
                 tex_made, _ = texbook.tex_course(cid, title, course.get("theme"),
                                                  [l.get("title", "") for l in course["lessons"]],
                                                  lambda p: ask(p, as_json=False, max_tokens=6000), _tex_budget_ok,
-                                                 rewrite="rewrite" in flags)
+                                                 rewrite="rewrite" in flags, maths="maths" in flags)
                 made += tex_made
                 STATS["lessons_done"] += tex_made
                 continue
@@ -1698,7 +1698,7 @@ def main():
                     done = load(f"courses/html/{cid}/course.json", None) or {}
                     if any(l.get("tex") for l in done.get("lessons", [])):
                         try:
-                            texbook.assemble(cid, title, done, f"courses/pdf/{cid}.pdf")
+                            texbook.assemble(cid, title, done, f"courses/pdf/{cid}.pdf", "maths" in flags)
                             print("Rebuilt LaTeX book", cid)
                         except Exception as e:
                             print("LaTeX rebuild stopped for", cid, "-", e)
