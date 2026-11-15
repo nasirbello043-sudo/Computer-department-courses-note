@@ -13,7 +13,7 @@ Use ONLY these environments and commands:
   \begin{note} \textbf{Learning outcomes.} ... \begin{itemize} ... \end{itemize} \end{note}   (first, after the section title)
   \begin{example} ... \end{example}   (a worked example, right after each rule or method is introduced)
   \begin{keytest} \textbf{Key test.} ... \end{keytest}
-  \subsection{Exercises} with an enumerate list
+  \subsection{Exercises} with an enumerate list (ONLY if this is a maths course; otherwise leave it out)
   \subsection{Key terms} with a tabular of Term and Meaning
 Maths uses $...$ or \[ ... \]. Use \term{...} for new terms.
 Write plainly and directly. No filler, no motivational talk, no summary section.
@@ -32,14 +32,14 @@ def clean(text):
     t = re.sub(r"^```[a-zA-Z]*\s*|\s*```$", "", text.strip())
     return t.strip() + "\n"
 
-def write_lesson(lesson_no, outline_line, subtopics, style_example, out_path, ask):
+def write_lesson(lesson_no, outline_line, subtopics, style_example, out_path, ask, maths=False):
     reasons = None
     for attempt in range(1, MAX_TRIES + 1):
         body = clean(ask(build_prompt(lesson_no, outline_line, subtopics, style_example, reasons)))
         tmp = out_path + ".draft"
         with open(tmp, "w", encoding="utf-8") as f:
             f.write(body)
-        pages, reasons = check(tmp)
+        pages, reasons = check(tmp, maths)
         if not reasons:
             os.replace(tmp, out_path)
             return True, attempt, []

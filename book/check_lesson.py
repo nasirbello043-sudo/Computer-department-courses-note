@@ -18,12 +18,14 @@ REQUIRED = {
     "key terms table": r"\\subsection\{Key terms\}",
 }
 
-def check_text(body):
+def check_text(body, maths=False):
     reasons = []
     for pat in FORBIDDEN:
         if re.search(pat, body):
             reasons.append("forbidden command for layout or font size: " + pat.replace("\\\\", "\\").replace("\\{", "{").replace("\\}", "}"))
     for name, pat in REQUIRED.items():
+        if name == "exercises" and not maths:
+            continue  # exercises are only for maths courses
         if not re.search(pat, body):
             reasons.append("missing: " + name)
     return reasons
@@ -48,9 +50,9 @@ def compile_pages(body):
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-def check(path):
+def check(path, maths=False):
     body = open(path, encoding="utf-8").read()
-    reasons = check_text(body)
+    reasons = check_text(body, maths)
     pages, errs = compile_pages(body)
     if errs:
         reasons += ["LaTeX error: " + e for e in errs]
