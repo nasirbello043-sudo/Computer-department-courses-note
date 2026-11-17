@@ -246,6 +246,10 @@ jobs:
           JOB: none
           GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
       - run: python make_updates.py
+      - name: Write build stamp
+        run: |
+          mkdir -p courses
+          echo "run ${{ github.run_number }} built $(date -u '+%Y-%m-%d %H:%M UTC')" > courses/build-stamp.txt
       - run: |
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
