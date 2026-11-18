@@ -82,6 +82,8 @@ nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-conte
 const $=s=>document.querySelector(s),EXT=['png','jpg','jpeg','webp','svg'];
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const get=u=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+let BUILD=String(Date.now());
+const stamp=fetch('courses/build-stamp.txt?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{const m=/run\s+(\d+)/.exec(t);if(m)BUILD=m[1]}).catch(()=>{});
 const probe=(base,fn)=>{let i=0;const t=new Image(),go=()=>{t.src=`${base}.${EXT[i]}`};t.onload=()=>fn(t.src);t.onerror=()=>{if(++i<EXT.length)go()};go()};
 let C=[],D=[],st={m:'all',d:null,q:''},done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch(e){}
 const seen=id=>Object.keys(done).filter(k=>k.startsWith(id+'/')).length;
@@ -99,8 +101,8 @@ function shelf(){const L=list();
   const dn=st.d?(st.d==='general'?'General Courses':(D.find(d=>d.id===st.d)||{}).name):null;
   $('#ht').innerHTML=dn?esc(dn):'All <em>Courses</em>';
   $('#sf').innerHTML=L.length?L.map(c=>{const t=c.theme||{hue:150,code:''},p=c.total?seen(c.id)/c.total*100:0;
-    const pdf=c.kind==='pdf', open=pdf?`courses/pdf/${esc(c.id)}.pdf`:`reader.html#/c/${esc(c.id)}`;
-    return`<div class="crd"><a class="cov" href="${open}"><div class="cv" data-c="${esc(c.id)}"><div class="ph" style="--h:${t.hue}"><b>${esc(t.code)}</b><span>${esc(c.title)}</span></div></div></a><div class="inf"><a class="nm" href="${open}">${esc(c.title)}</a><div class="mt">${c.ready} of ${c.total} lessons</div><div class="pr"><i style="width:${p}%"></i></div><div class="tag ${pdf?'pdf':'html'}">${pdf?'PDF course · read or download':'HTML course · read online'}</div><div class="btns"><a class="btn open" href="${open}">Open Course</a><a class="btn sum" href="courses/summaries/${esc(c.id)}.pdf">Course Summary</a>${pdf?`<a class="btn dl" href="courses/pdf/${esc(c.id)}.pdf" download>Download Course</a>`:''}</div></div></div>`
+    const pdf=c.kind==='pdf', pdfUrl=`courses/pdf/${esc(c.id)}.pdf?b=${BUILD}`, open=pdf?pdfUrl:`reader.html#/c/${esc(c.id)}`;
+    return`<div class="crd"><a class="cov" href="${open}"><div class="cv" data-c="${esc(c.id)}"><div class="ph" style="--h:${t.hue}"><b>${esc(t.code)}</b><span>${esc(c.title)}</span></div></div></a><div class="inf"><a class="nm" href="${open}">${esc(c.title)}</a><div class="mt">${c.ready} of ${c.total} lessons</div><div class="pr"><i style="width:${p}%"></i></div><div class="tag ${pdf?'pdf':'html'}">${pdf?'PDF course · read or download':'HTML course · read online'}</div><div class="btns"><a class="btn open" href="${open}">Open Course</a><a class="btn sum" href="courses/summaries/${esc(c.id)}.pdf">Course Summary</a>${pdf?`<a class="btn dl" href="${pdfUrl}" download>Download Course</a>`:''}</div></div></div>`
     }).join('')
    :'<div class="empty">No courses here yet.</div>';
   document.querySelectorAll('#sf [data-c]').forEach(el=>probe(`courses/images/cover-${el.dataset.c}`,u=>{el.innerHTML=`<img src="${u}" alt="">`}))}
@@ -111,6 +113,7 @@ async function init(){
   if(S.hero_opacity!=null)$('#hero').style.setProperty('--ho',S.hero_opacity);
   probe('site/hero',u=>$('#hero').style.setProperty('--hi',`url(${u})`));
   $('#lg').onerror=e=>e.target.style.display='none';
+  await stamp;
   try{C=await get('courses/index.json')}catch(e){C=[]}
   try{D=await get('courses/departments.json')}catch(e){D=[]}
   $('#s1').textContent=C.length;$('#s2').textContent=D.length;$('#s3').textContent=C.reduce((a,c)=>a+(c.ready||0),0);
