@@ -1,0 +1,105 @@
+\lessonlabel{7}
+\section{Sequential Circuits}
+
+\begin{note}
+\textbf{Learning outcomes.} By the end of this lesson you should be able to:
+\begin{itemize}
+  \item define a \term{latch} and describe its transparent behaviour;
+  \item explain the internal operation of a \term{flip‑flop} and why it is edge‑triggered;
+  \item compare level‑triggered and edge‑triggered devices and list common mistakes;
+  \item illustrate the purpose of a \term{clock signal} in synchronous designs and give a real‑world example.
+\end{itemize}
+\end{note}
+
+\subsection{Latches}
+
+A \term{latch} is a bistable circuit that stores one bit of information as long as power is supplied. The word ``latch'' implies that the device can be *latched* (held) in a particular state. The most widely used latch is the SR (Set‑Reset) latch built from two cross‑coupled NAND or NOR gates.
+
+\paragraph{Structure.} In an SR NAND latch each gate's output feeds the other gate's input. The external inputs are labelled \texttt{S} (set) and \texttt{R} (reset). An enable signal, often called \texttt{EN} or \texttt{G}, controls whether the latch is transparent. When \texttt{EN}=0 the internal feedback loop isolates the inputs, so the outputs retain their previous values. When \texttt{EN}=1 the latch becomes level‑triggered: the outputs follow the inputs according to the NAND truth table.
+
+\paragraph{Operation.}
+\begin{itemize}
+  \item \texttt{S}=0, \texttt{R}=1, \texttt{EN}=1 forces the upper NAND output to 1, which drives the lower gate so that \texttt{Q}=1 (set condition).
+  \item \texttt{S}=1, \texttt{R}=0, \texttt{EN}=1 forces the lower NAND output to 1, making \texttt{Q}=0 (reset condition).
+  \item \texttt{S}=1, \texttt{R}=1, \texttt{EN}=1 leaves both NAND gates with a high input, so each output remains whatever it was before -- this is the hold condition.
+  \item \texttt{S}=0, \texttt{R}=0 is illegal for a NAND latch because both outputs would be forced to 1, breaking the complementary relationship.
+\end{itemize}
+
+\paragraph{Common mistake.} Students often forget that the latch is only transparent while \texttt{EN} is active. If they treat the latch as if it were edge‑triggered, they may predict a change when the enable goes low, which never occurs.
+
+\begin{example}
+Consider an SR NAND latch with \texttt{EN}=1, \texttt{S}=0 and \texttt{R}=1. The upper NAND receives a 0 on \texttt{S}, so its output becomes 1 regardless of the other input. This 1 is fed to the lower NAND as its second input, while the lower NAND's first input is \texttt{R}=1. Because both inputs are 1, the lower NAND output becomes 0, giving \texttt{Q}=0 and \texttt{\={Q}}=1. When \texttt{EN} later changes to 0, the outputs stay at these values even if \texttt{S} and \texttt{R} are altered, demonstrating the hold behaviour.
+\end{example}
+
+\subsection{Flip‑Flops}
+
+A \term{flip‑flop} is a clocked version of a latch. It stores a single bit but changes its state only at a defined instant of a periodic clock signal. This edge‑triggered behaviour eliminates the transparency problem of level‑triggered latches and makes flip‑flops the building blocks of synchronous digital systems.
+
+\paragraph{Basic types.}
+\begin{itemize}
+  \item \textbf{D (Data) flip‑flop:} has a data input \texttt{D} and a clock input \texttt{CLK}. On the active clock edge (rising or falling, depending on the design) the value of \texttt{D} is copied to the output \texttt{Q}.
+  \item \textbf{JK flip‑flop:} generalises the SR latch by allowing both inputs to be high; in that case the output toggles.
+  \item \textbf{T (Toggle) flip‑flop:} changes state on every active clock edge when its enable input \texttt{T}=1.
+\end{itemize}
+
+\paragraph{Edge triggering.} Edge‑triggered flip‑flops are usually built from two latches in a master‑slave configuration. The first latch (master) is transparent when the clock is low; the second latch (slave) is transparent when the clock is high. Because the two latches are never transparent at the same time, the overall circuit only updates on the transition from low to high (or high to low). This eliminates the race condition that would occur if a single latch were used.
+
+\paragraph{Common mistake.} A frequent error is to connect a flip‑flop directly to a slow or noisy signal and expect reliable operation. Since the flip‑flop reacts only to the clock edge, any glitch on the data line that occurs near the edge can be captured unintentionally, leading to metastability.
+
+\begin{example}
+A positive‑edge‑triggered D flip‑flop receives \texttt{D}=1 while \texttt{CLK}=0. When \texttt{CLK} makes a rising transition, the master latch closes and the slave latch opens, copying the 1 into \texttt{Q}. After the edge, both latches are closed, so \texttt{Q} remains 1 even if \texttt{D} later changes to 0. Only the next rising edge will allow the new data to be stored.
+\end{example}
+
+\begin{example}
+A master‑slave JK flip‑flop has \texttt{J}=1, \texttt{K}=1 and receives a clean clock. On each rising edge the output toggles: if \texttt{Q}=0 before the edge, it becomes 1 after; if \texttt{Q}=1 before, it becomes 0 after. This behaviour is useful for binary counters, where each flip‑flop toggles at half the frequency of the preceding stage.
+\end{example}
+
+\subsection{Clock Signals}
+
+A \term{clock signal} is a periodic binary waveform that provides timing references for all synchronous elements in a digital system. The waveform is typically a square wave with two key parameters: frequency and duty cycle.
+
+\paragraph{Frequency.} Measured in hertz (Hz), the frequency determines how many clock cycles occur per second. Higher frequency allows faster data processing but also increases power consumption and the risk of timing violations.
+
+\paragraph{Duty cycle.} Defined as the percentage of one period during which the clock is high. A 50 \% duty cycle means the clock is high for exactly half the period and low for the other half. Designers may adjust the duty cycle to meet setup and hold time requirements of particular flip‑flops.
+
+\paragraph{Synchronous design.} In a synchronous circuit every flip‑flop receives the same clock. This guarantees that all state changes happen simultaneously, preventing race conditions where one flip‑flop's output changes before another has sampled it. The clock also defines the maximum speed at which data can propagate through combinational logic between flip‑flops.
+
+\paragraph{Real‑world context.} Microprocessors, memory modules, and communication interfaces all rely on a global clock. For example, a 3.2 GHz processor uses a 3.2 GHz clock to coordinate billions of flip‑flops that implement registers, pipelines, and control logic. The clock distribution network must preserve signal integrity across the entire chip; otherwise, different parts of the chip could see slightly different clock edges, causing timing errors.
+
+\paragraph{Common mistake.} Beginners sometimes treat the clock as an ordinary data line and try to route it through logic gates. This degrades the clock's edge quality and introduces skew. The correct practice is to keep the clock path short, use dedicated buffers, and avoid combinational logic on the clock line.
+
+\begin{example}
+A 8‑bit parallel register consists of eight D flip‑flops that share a common \texttt{CLK}. When the clock rises, each flip‑flop captures its respective data bit simultaneously, producing a stable 8‑bit word. If the clock were replaced by a level‑triggered enable, some flip‑flops might capture new data earlier than others, leading to a corrupted word.
+\end{example}
+
+\begin{keytest}
+\textbf{Key test.} Given a circuit that contains an SR latch and a D flip‑flop, describe how the presence of a clock signal changes the timing of state changes. Identify one situation where a latch is preferred over a flip‑flop and explain why.
+\end{keytest}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+  \item Draw the truth table for an SR NAND latch, label the set, reset, hold and illegal conditions, and explain how the enable signal modifies the table.
+  \item A D flip‑flop is connected to a clock that exhibits jitter of 0.2 ns on a 5 ns period. Discuss the possible effects on setup and hold times, and suggest a design technique to mitigate the problem.
+  \item Design a simple two‑stage counter using JK flip‑flops. Show the connection of clock and toggle inputs, and explain how the counter advances on each clock pulse.
+\end{enumerate}
+
+\subsection{Key terms}
+
+\begin{tabular}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{Term} & \textbf{Meaning} \\
+\hline
+Latch & A level‑triggered bistable element that is transparent while its enable signal is active and holds its state otherwise. \\
+\hline
+Flip‑flop & An edge‑triggered bistable element that changes output only on a specified clock transition, used in synchronous designs. \\
+\hline
+Clock signal & A periodic square‑wave that provides timing references; its frequency and duty cycle determine the speed and timing constraints of a digital system. \\
+\hline
+Master‑slave configuration & A pair of latches arranged so that one is transparent on the low phase of the clock and the other on the high phase, producing edge‑triggered behaviour. \\
+\hline
+Setup time & The minimum interval that data must be stable before the active clock edge for a flip‑flop to capture it correctly. \\
+\hline
+Hold time & The minimum interval that data must remain stable after the active clock edge. \\
+\hline
+\end{tabular}
