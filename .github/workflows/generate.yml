@@ -228,7 +228,7 @@ jobs:
 
   combine:
     needs: [setup, writer1, writer2, writer3, writer4, writer5, writer6]
-    if: always()
+    if: always() && needs.setup.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
