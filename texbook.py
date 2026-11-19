@@ -203,3 +203,8 @@ def tex_course(cid, title, theme, lesson_titles, ask, budget_ok, rewrite=False, 
         for p in problems:
             print("  -", p)
     return made, data
+
+def fit_saved(cid, title, data, ask, budget_ok, maths, rng):
+    """Fits an already finished book to its page range. Used by the setup and combine rebuild, which previously only assembled it."""
+    subs = _read_outline_subtopics(cid)
+    return _fit_book(cid, title, data, ask, budget_ok, subs, maths, rng)
