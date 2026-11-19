@@ -199,6 +199,7 @@ jobs:
         env:
           JOB: none
           GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
+      - run: python manual.py || echo "manual step skipped"
       - run: python make_updates.py
       - name: Write build stamp
         run: |
