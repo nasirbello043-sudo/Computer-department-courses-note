@@ -1699,9 +1699,7 @@ def main():
                     done = load(f"courses/html/{cid}/course.json", None) or {}
                     if any(l.get("tex") for l in done.get("lessons", [])):
                         try:
-                            texbook.fit_saved(cid, title, done, lambda p: ask(p, as_json=False, max_tokens=6000),
-                                                  lambda: not (used > BUDGET or time.time() - START > MAX_MIN * 60),
-                                                  "maths" in flags, texbook.page_range(flags))
+                            texbook.assemble(cid, title, done, f"courses/pdf/{cid}.pdf", "maths" in flags, texbook.page_range(flags))
                             print("Rebuilt LaTeX book", cid)
                         except Exception as e:
                             print("LaTeX rebuild stopped for", cid, "-", e)
