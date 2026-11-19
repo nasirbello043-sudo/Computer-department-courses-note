@@ -5,27 +5,21 @@ on:
     - cron: "0 5 * * *"
 permissions:
   contents: write
+  packages: read
 jobs:
   setup:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: none
           GROQ_API_KEY: ${{ secrets.GROQ_WRITER1 }}
       - run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -40,18 +34,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer1
@@ -60,6 +46,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -74,18 +61,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer2
@@ -94,6 +73,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -108,18 +88,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer3
@@ -128,6 +100,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -142,18 +115,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer4
@@ -162,6 +127,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -176,18 +142,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer5
@@ -196,6 +154,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -210,18 +169,10 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: writer6
@@ -230,6 +181,7 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
       - if: always()
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
@@ -245,18 +197,10 @@ jobs:
     if: always() && needs.setup.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install tools (cached)
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
-          version: 1
-      - run: pip install reportlab matplotlib
       - run: python generate.py
         env:
           JOB: none
@@ -267,6 +211,7 @@ jobs:
           mkdir -p courses
           echo "run ${{ github.run_number }} built $(date -u '+%Y-%m-%d %H:%M UTC')" > courses/build-stamp.txt
       - run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "course-bot"
           git config user.email "bot@users.noreply.github.com"
           git add courses
