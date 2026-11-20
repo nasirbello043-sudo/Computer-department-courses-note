@@ -101,12 +101,32 @@ function shelf(){const L=list();
   const dn=st.d?(st.d==='general'?'General Courses':(D.find(d=>d.id===st.d)||{}).name):null;
   $('#ht').innerHTML=dn?esc(dn):'All <em>Courses</em>';
   $('#sf').innerHTML=L.length?L.map(c=>{const t=c.theme||{hue:150,code:''},p=c.total?seen(c.id)/c.total*100:0;
-    const pdf=c.kind==='pdf', pdfUrl=`courses/pdf/${esc(c.id)}.pdf?b=${BUILD}`, open=c.url?esc(c.url):(pdf?pdfUrl:`reader.html#/c/${esc(c.id)}`);
+    const pdf=c.kind==='pdf', pdfUrl=c.url?esc(c.url):`courses/pdf/${esc(c.id)}.pdf?b=${BUILD}`, open=c.url?esc(c.url):(pdf?pdfUrl:`reader.html#/c/${esc(c.id)}`);
     return`<div class="crd"><a class="cov" href="${open}"><div class="cv" data-c="${esc(c.id)}"><div class="ph" style="--h:${t.hue}"><b>${esc(t.code)}</b><span>${esc(c.title)}</span></div></div></a><div class="inf"><a class="nm" href="${open}">${esc(c.title)}</a><div class="mt">${c.manual?'Ready to read':c.ready+' of '+c.total+' lessons'}</div><div class="pr"><i style="width:${p}%"></i></div><div class="tag ${pdf?'pdf':'html'}">${pdf?'PDF course · read or download':'HTML course · read online'}</div><div class="btns"><a class="btn open" href="${open}">Open Course</a><a class="btn sum" href="courses/summaries/${esc(c.id)}.pdf">Course Summary</a>${pdf?`<a class="btn dl" href="${pdfUrl}" download>Download Course</a>`:''}</div></div></div>`
     }).join('')
    :'<div class="empty">No courses here yet.</div>';
   document.querySelectorAll('#sf [data-c]').forEach(el=>probe(`courses/images/cover-${el.dataset.c}`,u=>{el.innerHTML=`<img src="${u}" alt="">`}))}
 function all(){side();shelf();document.querySelectorAll('#fb [data-m]').forEach(b=>b.classList.toggle('on',!st.d&&b.dataset.m===st.m))}
+const slugOf=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+async function loadManual(){
+  let txt='';try{txt=await fetch('manual-upload.txt?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'')}catch(e){}
+  const out=[];
+  for(const raw of txt.split('\n')){
+    const line=raw.trim();if(!line||line.startsWith('#'))continue;
+    const flags=[...line.matchAll(/\[([^\]]+)\]/g)].map(m=>m[1].trim().toLowerCase());
+    const title=line.replace(/\[[^\]]+\]/g,'').trim();
+    const fmt=flags.includes('pdf')?'pdf':flags.includes('html')?'html':null;
+    if(!fmt||!title)continue;
+    const id=slugOf(title);
+    const url=fmt==='pdf'?`manual/pdf/${id}.pdf`:`manual/html/${id}.html`;
+    let ok=false;try{ok=(await fetch(url,{method:'HEAD',cache:'no-store'})).ok}catch(e){}
+    if(!ok)continue;  // no file, no card
+    const depts=flags.filter(f=>f.startsWith('dept=')).flatMap(f=>f.slice(5).split('+')).filter(Boolean);
+    out.push({id,title,total:1,ready:1,theme:{hue:[...title].reduce((a,c)=>a+c.charCodeAt(0),0)%360,code:title.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4)},
+      depts:depts.length?depts:['general'],kind:fmt,manual:true,url:url+'?v='+Date.now()});
+  }
+  return out;
+}
 async function init(){
   let S={};try{S=await get('site.json')}catch(e){}
   if(S.name)$('#nm').textContent=S.name;if(S.short)$('#sh').textContent=S.short;if(S.school)$('#he').textContent=S.school;if(S.tagline)$('#hp').textContent=S.tagline;
@@ -116,6 +136,9 @@ async function init(){
   await stamp;
   try{C=await get('courses/index.json')}catch(e){C=[]}
   try{D=await get('courses/departments.json')}catch(e){D=[]}
+  const MAN=await loadManual();
+  C=C.filter(c=>!c.manual).concat(MAN);
+  MAN.forEach(c=>c.depts.forEach(d=>{if(!D.find(x=>x.id===d))D.push({id:d,name:d.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase())})}));
   $('#s1').textContent=C.length;$('#s2').textContent=D.length;$('#s3').textContent=C.reduce((a,c)=>a+(c.ready||0),0);
   all()}
 const tg=o=>{$('#sb').classList.toggle('o',o);$('#bd').classList.toggle('o',o)};
