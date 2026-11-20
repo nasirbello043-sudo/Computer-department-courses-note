@@ -1,0 +1,122 @@
+\lessonlabel{2}
+\section{Number Systems and Codes}
+
+\begin{note}
+\textbf{Learning outcomes.} By the end of this lesson you should be able to:
+\begin{itemize}
+  \item write numbers in binary, octal and hexadecimal;
+  \item convert between decimal, binary, octal and hexadecimal;
+  \item explain the purpose of binary coded decimal (BCD);
+  \item perform simple BCD encoding and decoding;
+  \item understand the basic idea of Gray code and how to convert to and from binary.
+\end{itemize}
+\end{note}
+
+\subsection{Binary system}
+
+The \term{binary} system uses only the two digits 0 and 1. Each position represents a power of two, starting with \$2^{0}$ at the right most digit. To find the decimal value, multiply each digit by its power of two and add the results.
+
+\begin{example}
+Convert \$11010_{2}$ to decimal.
+\[
+1\cdot2^{4}+1\cdot2^{3}+0\cdot2^{2}+1\cdot2^{1}+0\cdot2^{0}=16+8+0+2+0=26_{10}.
+\]
+\end{example}
+
+\subsection{Octal system}
+
+The \term{octal} system uses the digits 0 through 7. Each position represents a power of eight. Conversion to decimal follows the same pattern as binary, but with powers of eight.
+
+For example, \$157_{8}$ equals:
+\[
+1\cdot8^{2}+5\cdot8^{1}+7\cdot8^{0}=64+40+7=111_{10}.
+\]
+
+\subsection{Hexadecimal system}
+
+The \term{hexadecimal} system uses sixteen symbols: the digits 0--9 and the letters A--F, where A represents ten, B eleven, up to F fifteen. Each position represents a power of sixteen.
+
+For example, \$2B_{16}$ equals:
+\[
+2\cdot16^{1}+11\cdot16^{0}=32+11=43_{10}.
+\]
+
+\subsection{Conversions between bases}
+
+\subsubsection{Decimal to binary}
+
+Repeatedly divide the decimal number by two, recording the remainder each time. The binary representation is the list of remainders read from bottom to top.
+
+\subsubsection{Binary to octal}
+
+Group binary digits in sets of three, starting from the right. Replace each group with its octal equivalent.
+
+\subsubsection{Binary to hexadecimal}
+
+Group binary digits in sets of four, starting from the right. Replace each group with its hexadecimal equivalent.
+
+\begin{example}
+Convert \$10111011_{2}$ to hexadecimal.
+\[
+1011\ 1011\rightarrow B\ B_{16}=BB_{16}.
+\]
+\end{example}
+
+\subsubsection{Octal or hexadecimal to binary}
+
+Replace each octal digit by its three bit binary equivalent, or each hexadecimal digit by its four bit binary equivalent.
+
+\subsection{Binary coded decimal (BCD)}
+
+\term{Binary coded decimal} stores each decimal digit separately as a four bit binary number. For example, the decimal number 47 is stored as \$0100\ 0111$ (4 = 0100, 7 = 0111). This representation is useful in devices that need to display decimal digits directly, such as digital clocks and calculators.
+
+\begin{example}
+Encode the decimal number 259 in BCD.
+\[
+2\rightarrow0010,\;5\rightarrow0101,\;9\rightarrow1001,\; \text{so }259_{10}=0010\ 0101\ 1001_{BCD}.
+\]
+\end{example}
+
+\subsection{Gray code}
+
+The \term{Gray code} is a binary numeral system where two successive values differ in only one bit. This property reduces errors in digital communication and position encoding. To convert a binary number to Gray code, keep the most significant bit unchanged and XOR each subsequent bit with the bit to its left. Converting back to binary requires a cumulative XOR from the most significant bit downwards.
+
+\begin{example}
+Convert binary \$1010_{2}$ to Gray code.
+\[
+\text{Most significant bit stays }1.\\
+\text{Next bit }0\oplus1=1.\\
+\text{Next bit }1\oplus0=1.\\
+\text{Last bit }0\oplus1=1.\\
+\text{Resulting Gray code }1111_{G}.
+\]
+\end{example}
+
+\begin{keytest}
+\textbf{Key test.} Convert \$101101_{2}$ to octal and hexadecimal, then encode the decimal result in BCD.
+\end{keytest}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+  \item Write the decimal number 45 in binary, octal and hexadecimal.
+  \item Convert \$7F_{16}$ to decimal and then to binary.
+  \item Encode the decimal number 83 in BCD and decode the BCD \$1000\ 0011$ back to decimal.
+  \item Convert the binary number \$101101_{2}$ to octal, to hexadecimal, and then encode the decimal result in BCD.
+  \item Convert binary \$1010_{2}$ to Gray code and back to binary.
+\end{enumerate}
+
+\subsection{Key terms}
+
+\begin{tabular}{@{}p{3.6cm}p{10.4cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Meaning} \\
+\midrule
+Binary & Base 2 number system using digits 0 and 1. \\
+Octal & Base 8 number system using digits 0--7. \\
+Hexadecimal & Base 16 number system using digits 0--9 and A--F. \\
+Conversion & Process of changing a number from one base to another. \\
+Binary coded decimal (BCD) & Representation of each decimal digit by a four bit binary code. \\
+Gray code & Binary code where successive values differ in only one bit. \\
+\bottomrule
+\end{tabular}
