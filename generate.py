@@ -1715,6 +1715,13 @@ def main():
                 index.append({"id": slug(title), "title": c["title"], "total": len(c["lessons"]),
                               "ready": sum(1 for l in c["lessons"] if l["file"]), "theme": c.get("theme"), "depts": depts_of(flags),
                               "kind": "pdf" if format_of(flags) == "pdf" else "html"})
+            else:
+                # a course whose writer has not saved anything yet still shows on the site, with no lessons ready
+                sp = os.path.join("syllabi", slug(title) + ".txt")
+                total = sum(1 for l in open(sp, encoding="utf-8") if re.match(r"^\s*\d+\.", l)) if os.path.exists(sp) else 0
+                index.append({"id": slug(title), "title": title, "total": total, "ready": 0,
+                              "theme": {"hue": sum(map(ord, title)) % 360, "code": re.sub(r"[^A-Z0-9]", "", title.upper())[:4]},
+                              "depts": depts_of(flags), "kind": "pdf" if format_of(flags) == "pdf" else "html"})
         if SHARED_WRITES: save("courses/index.json", index)
         write_departments(entries)
         try:
