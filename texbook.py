@@ -36,7 +36,7 @@ MAX_EXAMPLES = 3  # worked examples for the whole book (non-maths)
 MAX_EXAMPLES_MATHS = 10  # worked examples for the whole book (maths)
 WORDS_PER_PAGE = 240  # used to size a lesson's word target
 WORDS_PER_PAGE_EST = 420  # measured: about this many words fill one page of the book layout
-DEFAULT_PAGES = (20, 40)
+DEFAULT_PAGES = (30, 40)  # every PDF course is at least 30 pages unless its tag says otherwise
 FIT_REWRITES = 24  # most lesson rewrites in one run, to stay within the daily allowance
 
 def page_range(flags, default=DEFAULT_PAGES):
