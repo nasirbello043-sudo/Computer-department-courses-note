@@ -1,0 +1,121 @@
+\lessonlabel{3}
+\section{Boolean Algebra}
+
+\begin{note}
+\textbf{Learning outcomes.} By the end of this lesson you should be able to:
+\begin{itemize}
+  \item state the basic Boolean laws and use them in algebraic manipulation;
+  \item construct complete truth tables for Boolean expressions with two or three variables;
+  \item simplify Boolean expressions by applying the laws and verify the result with a truth table;
+  \item write a Boolean expression in canonical sum of products form.
+\end{itemize}
+\end{note}
+
+\subsection{Boolean laws}
+
+The following identities hold for any Boolean variables \term{A}, \term{B}, \term{C}.
+
+\begin{itemize}
+  \item \term{Identity laws}: \term{A}+0 = \term{A}, \term{A}\cdot1 = \term{A}.
+  \item \term{Null laws}: \term{A}+1 = 1, \term{A}\cdot0 = 0.
+  \item \term{Idempotent laws}: \term{A}+\term{A} = \term{A}, \term{A}\cdot\term{A} = \term{A}.
+  \item \term{Complement laws}: \term{A}+\overline{\term{A}} = 1, \term{A}\cdot\overline{\term{A}} = 0.
+  \item \term{Commutative laws}: \term{A}+\term{B} = \term{B}+\term{A}, \term{A}\cdot\term{B} = \term{B}\cdot\term{A}.
+  \item \term{Associative laws}: (\term{A}+\term{B})+\term{C} = \term{A}+(\term{B}+\term{C}), (\term{A}\cdot\term{B})\cdot\term{C} = \term{A}\cdot(\term{B}\cdot\term{C}).
+  \item \term{Distributive laws}: \term{A}\cdot(\term{B}+\term{C}) = \term{A}\cdot\term{B} + \term{A}\cdot\term{C}, \term{A}+(\term{B}\cdot\term{C}) = (\term{A}+\term{B})\cdot(\term{A}+\term{C}).
+  \item \term{De Morgan's laws}: \overline{\term{A}+\term{B}} = \overline{\term{A}}\cdot\overline{\term{B}}, \overline{\term{A}\cdot\term{B}} = \overline{\term{A}}+\overline{\term{B}}.
+  \item \term{Absorption laws}: \term{A}+\term{A}\cdot\term{B} = \term{A}, \term{A}\cdot(\term{A}+\term{B}) = \term{A}.
+  \item \term{Consensus law}: \term{A}\cdot\term{B} + \overline{\term{A}}\cdot\term{C} + \term{B}\cdot\term{C} = \term{A}\cdot\term{B} + \overline{\term{A}}\cdot\term{C}.
+\end{itemize}
+
+\begin{example}
+Simplify \term{A}\cdot(\term{A}+\overline{\term{B}}).
+\[
+\begin{aligned}
+\term{A}\cdot(\term{A}+\overline{\term{B}}) &= (\term{A}\cdot\term{A}) + (\term{A}\cdot\overline{\term{B}}) && \text{distributive law}\\
+&= \term{A} + \term{A}\cdot\overline{\term{B}} && \text{idempotent law}\\
+&= \term{A} && \text{absorption law}
+\end{aligned}
+\]
+Result: \term{A}.
+\end{example}
+
+\subsection{Truth tables}
+
+A truth table lists the output of a Boolean expression for every possible combination of its inputs. Use 0 for false and 1 for true.
+
+\begin{example}
+Truth table for \term{F} = \term{A}\cdot\overline{\term{B}} + \term{C} (three variables).
+\[
+\begin{array}{c c c | c c | c}
+\term{A} & \term{B} & \term{C} & \overline{\term{B}} & \term{A}\cdot\overline{\term{B}} & \term{F}\\\hline
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 1 & 0 & 1\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 1 & 1 & 0 & 0 & 1\\
+1 & 0 & 0 & 1 & 1 & 1\\
+1 & 0 & 1 & 1 & 1 & 1\\
+1 & 1 & 0 & 0 & 0 & 0\\
+1 & 1 & 1 & 0 & 0 & 1
+\end{array}
+\]
+\end{example}
+
+\subsection{Simplifying expressions}
+
+Simplification combines the Boolean laws, often followed by a truth table check to confirm equivalence.
+
+\begin{example}
+Simplify \term{F} = \overline{\term{A}}\cdot\term{B} + \term{A}\cdot\term{B} + \overline{\term{A}}\cdot\overline{\term{B}}.
+\[
+\begin{aligned}
+\term{F} &= \term{B}(\overline{\term{A}}+\term{A}) + \overline{\term{A}}\cdot\overline{\term{B}} && \text{factor \term{B}}\\
+&= \term{B}\cdot1 + \overline{\term{A}}\cdot\overline{\term{B}} && \text{complement law}\\
+&= \term{B} + \overline{\term{A}}\cdot\overline{\term{B}} && \text{identity law}
+\end{aligned}
+\]
+No further reduction is possible.
+\end{example}
+
+\subsection{Canonical sum of products form}
+
+Any Boolean function can be written as a sum of minterms, each minterm being a product of all variables in either complemented or uncomplemented form. This is called the canonical sum of products (SOP) form.
+
+\begin{example}
+Write the function \term{G} = \overline{\term{A}} + \term{B}\cdot\term{C} in canonical SOP form.
+\[
+\begin{aligned}
+\overline{\term{A}} &= \overline{\term{A}}\cdot\term{B}\cdot\term{C} + \overline{\term{A}}\cdot\term{B}\cdot\overline{\term{C}} + \overline{\term{A}}\cdot\overline{\term{B}}\cdot\term{C} + \overline{\term{A}}\cdot\overline{\term{B}}\cdot\overline{\term{C}}\\
+\term{B}\cdot\term{C} &= \overline{\term{A}}\cdot\term{B}\cdot\term{C} + \term{A}\cdot\term{B}\cdot\term{C}
+\end{aligned}
+\]
+Combining and removing duplicate minterms gives
+\[
+\overline{\term{A}} + \term{B}\cdot\term{C} = \overline{\term{A}}\cdot\term{B}\cdot\term{C} + \overline{\term{A}}\cdot\term{B}\cdot\overline{\term{C}} + \overline{\term{A}}\cdot\overline{\term{B}}\cdot\term{C} + \overline{\term{A}}\cdot\overline{\term{B}}\cdot\overline{\term{C}} + \term{A}\cdot\term{B}\cdot\term{C}.
+\]
+This is the canonical SOP representation.
+\end{example}
+
+\begin{keytest}
+\textbf{Key test.} Reduce the expression \term{G} = \term{A}\cdot\term{B} + \term{A}\cdot\overline{\term{B}} + \overline{\term{A}}\cdot\term{B} using Boolean laws. Write each step and name the law applied.
+\end{keytest}
+
+\subsection{Key terms}
+
+\begin{tabular}{@{}p{3.6cm}p{10.4cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Meaning} \\
+\midrule
+Boolean law & An identity that holds for all Boolean values; used to transform expressions. \\
+Identity law & \term{A}+0=\term{A}, \term{A}\cdot1=\term{A}. \\
+Null law & \term{A}+1=1, \term{A}\cdot0=0. \\
+Idempotent law & \term{A}+\term{A}=\term{A}, \term{A}\cdot\term{A}=\term{A}. \\
+Complement & The logical NOT of a variable, written \overline{\term{A}}. \\
+De Morgan's law & Relates complements of sums and products: \overline{\term{A}+\term{B}} = \overline{\term{A}}\cdot\overline{\term{B}}, \overline{\term{A}\cdot\term{B}} = \overline{\term{A}}+\overline{\term{B}}. \\
+Absorption law & Removes redundant terms, e.g., \term{A}+\term{A}\cdot\term{B} = \term{A}. \\
+Consensus law & Allows dropping a term: \term{A}\cdot\term{B} + \overline{\term{A}}\cdot\term{C} + \term{B}\cdot\term{C} = \term{A}\cdot\term{B} + \overline{\term{A}}\cdot\term{C}. \\
+Truth table & Tabular method showing the output of a Boolean expression for every input combination. \\
+Simplification & Process of reducing a Boolean expression to a shorter, equivalent form. \\
+Canonical sum of products & Standard form where the function is expressed as a sum of minterms, each containing every variable. \\
+\bottomrule
+\end{tabular}
