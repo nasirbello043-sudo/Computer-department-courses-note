@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **72** | Uploaded: **41** | Covers waiting: **20**
+Waiting: **73** | Uploaded: **41** | Covers waiting: **20**
 
 ## Course covers
 
@@ -481,6 +481,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
+
+Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C=O"
+- "δ+"
+- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -1615,6 +1640,31 @@ No title, no caption, no numbers, no other words.
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
 
+### Lesson 3: Organelles
+
+Save as:
+```
+introduction-to-cell-biology-l03-cell-with-organelles.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: The illustration displays the nucleus, mitochondria, rough and smooth endoplasmic reticulum, and Golgi apparatus within a single cell, helping students visualise the city‑like analogy.
+
+Layout: Cell outline in the centre with each organelle coloured differently; lines radiate outward to labels placed around the perimeter.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Nucleus"
+- "Mitochondria"
+- "Rough ER"
+- "Smooth ER"
+- "Golgi"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
 ### Lesson 4: The Cytoskeleton
 
 Save as:
@@ -1635,31 +1685,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Intermediate filaments"
 - "Plasma membrane"
 - "Nucleus"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-### Lesson 5: Cell Division
-
-Save as:
-```
-introduction-to-cell-biology-l05-cell-cycle-overview.png
-```
-Prompt:
-```
-Create a clear, accurate educational illustration for secondary-school students.
-
-Show: A circular diagram showing the order of G1, S, G2, Mitosis (prophase, metaphase, anaphase, telophase) and Cytokinesis, with arrows indicating the flow.
-
-Layout: Circle in the centre with each phase as a segment; labels placed around the circle with lines pointing to each segment.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "G1"
-- "S"
-- "G2"
-- "Mitosis"
-- "Cytokinesis"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
