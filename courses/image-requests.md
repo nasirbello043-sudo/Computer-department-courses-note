@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **65** | Uploaded: **41** | Covers waiting: **16**
+Waiting: **72** | Uploaded: **41** | Covers waiting: **20**
 
 ## Course covers
 
@@ -262,6 +262,70 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 The spine shows "PRINCIPLES OF MANAGEMENT" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
+### Introduction to Cell Biology
+
+Save as:
+```
+cover-introduction-to-cell-biology.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: DNA double helix, Light microscope, Cell membrane, Mitochondrion, Plant cell with chloroplasts, Animal cell with nucleus, Cell division (mitosis) diagram, Microscopic view of bacteria, Fluorescently labeled proteins, Cell culture flask.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO CELL BIOLOGY"
+- Subtitle under it, smaller: "Discover Cells: From Structure to Function"
+The spine shows "INTRODUCTION TO CELL BIOLOGY" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Analytical Chemistry
+
+Save as:
+```
+cover-analytical-chemistry.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Spectrometer, Chromatography column, pH meter, Calibration curve, Standard solutions, Mass spectrometer, Electrochemical cell, Sample vial, Laboratory notebook, Data analysis software.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "ANALYTICAL CHEMISTRY"
+- Subtitle under it, smaller: "Unveiling Molecules: From Sample to Insight"
+The spine shows "ANALYTICAL CHEMISTRY" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Political Science
+
+Save as:
+```
+cover-introduction-to-political-science.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Parliament building, Voting ballot box, World map with country flags, Political protest signs, Political party logos, Constitution book, Debate podium, Election campaign poster, Government building silhouette, International organization emblem.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO POLITICAL SCIENCE"
+- Subtitle under it, smaller: "Understanding Power, Politics, and Society"
+The spine shows "INTRODUCTION TO POLITICAL SCIENCE" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Software Engineering
+
+Save as:
+```
+cover-introduction-to-software-engineering.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a green colour palette, showing a lively scene built around: software development lifecycle diagram, agile sprint board, code editor interface, version control system (Git), user interface mockup, software testing checklist, system architecture diagram, collaboration tools (chat, video call), deployment pipeline illustration, project management timeline.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO SOFTWARE ENGINEERING"
+- Subtitle under it, smaller: "Building Digital Solutions from Idea to Launch"
+The spine shows "INTRODUCTION TO SOFTWARE ENGINEERING" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
 ## Introduction to Agriculture
 
 ### Lesson 7: Pest and Disease Control
@@ -417,31 +481,6 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
-No title, no caption, no numbers, no other words.
-
-Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
-```
-
-## Organic Chemistry
-
-### Lesson 5: Functional Groups III: Carbonyl Compounds
-
-Save as:
-```
-organic-chemistry-l05-carbonyl-group-structure-2.png
-```
-Prompt:
-```
-Create a clear, accurate educational labelled diagram for secondary-school students.
-
-Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
-
-Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
-
-The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
-- "C=O"
-- "δ+"
-- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
@@ -1548,4 +1587,183 @@ Prompt:
 Create a realistic photograph for a school lesson: A large power-generating station standing alone on a hill, with no other similar facilities nearby, representing a market with only one seller.
 
 Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Introduction to Cell Biology
+
+### Lesson 2: Cell Membranes
+
+Save as:
+```
+introduction-to-cell-biology-l02-phospholipid-bilayer.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A cross‑section of a cell membrane displaying two rows of phospholipids. The hydrophilic heads face the water on each side, while the hydrophobic tails point toward each other in the middle.
+
+Layout: Two parallel rows of phospholipids in the centre, heads labelled and arrows pointing to water on both sides, tails labelled in the middle.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "hydrophilic head"
+- "hydrophobic tail"
+- "water outside"
+- "membrane interior"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 4: The Cytoskeleton
+
+Save as:
+```
+introduction-to-cell-biology-l04-cytoskeleton-overview.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: The image displays a cross‑section of a cell with the three main cytoskeletal networks highlighted in different colours. Each network is labeled and arrows point to its location relative to the plasma membrane, nucleus, and organelles.
+
+Layout: Cell outline in the centre, three coloured filament networks spread outward, each with a label and a short arrow pointing to the structure.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Actin filaments"
+- "Microtubules"
+- "Intermediate filaments"
+- "Plasma membrane"
+- "Nucleus"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 5: Cell Division
+
+Save as:
+```
+introduction-to-cell-biology-l05-cell-cycle-overview.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: A circular diagram showing the order of G1, S, G2, Mitosis (prophase, metaphase, anaphase, telophase) and Cytokinesis, with arrows indicating the flow.
+
+Layout: Circle in the centre with each phase as a segment; labels placed around the circle with lines pointing to each segment.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "G1"
+- "S"
+- "G2"
+- "Mitosis"
+- "Cytokinesis"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Analytical Chemistry
+
+### Lesson 1: Chemical Measurement
+
+Save as:
+```
+analytical-chemistry-l01-accuracy-vs-precision.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: Three concentric target diagrams: one where hits cluster tightly at the centre (high accuracy, high precision), one where hits are spread out around the centre (high accuracy, low precision), and one where hits cluster tightly away from the centre (low accuracy, high precision).
+
+Layout: Three small targets placed side‑by‑side, each with coloured dots representing measurement results.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "high accuracy, high precision"
+- "high accuracy, low precision"
+- "low accuracy, high precision"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 2: Sampling and Preparation
+
+Save as:
+```
+analytical-chemistry-l02-candy-jar-sample.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: A transparent jar filled with red, green, and blue candies. A hand holds a small scoop that contains a mix of all three colours, illustrating a representative sample of the whole jar.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+### Lesson 3: Titration
+
+Save as:
+```
+analytical-chemistry-l03-burette-titration-setup.png
+```
+Prompt:
+```
+Create a realistic photograph for a school lesson: The photo shows a glass burette mounted on a stand, filled with titrant, delivering drops into a conical flask that contains the analyte and a few drops of indicator. The setup also includes a white background for clear visibility.
+
+Style: realistic, well-lit, sharp photograph with natural colours, landscape orientation (4:3). No text, no watermark, no logos.
+```
+
+## Introduction to Political Science
+
+### Lesson 1: What Political Science Studies
+
+Save as:
+```
+introduction-to-political-science-l01-state-components-map.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A simple map showing a defined territory (outline of a country), a population icon, a government building, and a flag representing sovereignty, each labeled to match the definition of a state.
+
+Layout: Territory outline at top, population icons below left, government building below centre, flag at bottom right, with lines connecting each element to its label.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Territory"
+- "Population"
+- "Government"
+- "Sovereignty"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+### Lesson 2: Political Systems
+
+Save as:
+```
+introduction-to-political-science-l02-political-system-board.png
+```
+Prompt:
+```
+Create a clear, accurate educational illustration for secondary-school students.
+
+Show: The picture shows a simple game board with squares labeled "Elections", "Legislature", "Judiciary", and "Checks & Balances". Arrows indicate how decisions flow from citizens to institutions and back, visualising the definition of a political system.
+
+Layout: Board layout in the centre, each square labelled, arrows connecting squares, with a legend at the bottom.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "Elections"
+- "Legislature"
+- "Judiciary"
+- "Checks"
+- "Balance"
+- "Power Flow"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
 ```
