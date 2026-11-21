@@ -34,7 +34,8 @@ def ask(prompt):
         if time.time() - START > MAX_MINUTES * 60:
             raise Stop("time is up for this run")
         req = urllib.request.Request("https://api.groq.com/openai/v1/chat/completions", body,
-                                     {"Content-Type": "application/json", "Authorization": "Bearer " + KEY})
+                                     {"Content-Type": "application/json", "Authorization": "Bearer " + KEY,
+                                      "User-Agent": "school-course-generator/1.0"})  # without this Groq blocks the request (error 1010)
         try:
             with urllib.request.urlopen(req, timeout=150) as r:
                 data = json.loads(r.read().decode())
@@ -157,8 +158,10 @@ def compile_cheatsheet(title, body):
         if not os.path.exists(pdf) or errs:
             return 0, None, errs or ["LaTeX did not produce a PDF"]
         info = subprocess.run(["pdfinfo", pdf], capture_output=True, encoding="utf-8", errors="replace").stdout
-        pages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
-        return pages, open(pdf, "rb").read(), []
+        found = re.search(r"Pages:\s+(\d+)", info)
+        if not found:
+            return 0, None, ["the PDF could not be read"]
+        return int(found.group(1)), open(pdf, "rb").read(), []
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
@@ -169,6 +172,12 @@ def make_summary(cid, title, text):
     reply = ask(PROMPT.replace("{words}", str(words)).replace("{source}", source))
     best = None
     for attempt in range(1, TRIES + 1):
+        if not reply.strip():
+            reply = ""  # an empty reply is a failed try, not a crash
+            if attempt == TRIES or budget_gone():
+                break
+            reply = ask(PROMPT.replace("{words}", str(words)).replace("{source}", source) + "\n\nSend the complete cheat sheet now.")
+            continue
         body = sanitize(clean(reply))
         pages, pdf, errs = compile_cheatsheet(title, body)
         if pdf is not None and MIN_PAGES <= pages <= MAX_PAGES:
