@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **73** | Uploaded: **41** | Covers waiting: **20**
+Waiting: **73** | Uploaded: **41** | Covers waiting: **21**
 
 ## Course covers
 
@@ -308,6 +308,21 @@ Use exactly this text on the cover, spelled exactly as written, in large, bold, 
 - Main title at the top: "INTRODUCTION TO POLITICAL SCIENCE"
 - Subtitle under it, smaller: "Understanding Power, Politics, and Society"
 The spine shows "INTRODUCTION TO POLITICAL SCIENCE" running vertically. Do not add any other text, author names, logos or watermarks.
+```
+
+### Introduction to Business Law
+
+Save as:
+```
+cover-introduction-to-business-law.jpg
+```
+Prompt:
+```
+Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
+- Main title at the top: "INTRODUCTION TO BUSINESS LAW"
+The spine shows "INTRODUCTION TO BUSINESS LAW" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
 ### Introduction to Software Engineering
