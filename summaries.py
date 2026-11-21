@@ -16,7 +16,8 @@ KEY = os.environ.get("GROQ_API_KEY", "").strip()
 MAX_MINUTES = int(os.environ.get("MAX_MINUTES", "60"))
 START = time.time()
 PDF_WRITERS = {"writer4", "writer5", "writer6"}
-SOURCE_LIMIT = 90000  # characters of course text sent to the model
+CHUNK = 9000  # characters of course text per note request (small enough for the Groq request limit)
+NOTES_LIMIT = 16000  # characters of notes sent for the final cheat sheet
 
 class Stop(Exception):
     pass
@@ -165,9 +166,39 @@ def compile_cheatsheet(title, body):
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
+NOTE_PROMPT = """Read this part of a course and write concise revision notes from it: every definition, key term, rule, law,
+formula, method step and common exam mistake, in plain English, as a bulleted list. At most 400 words. No introduction.
+
+COURSE PART:
+{part}
+"""
+
+def chunks(text):
+    """Splits course text into parts of about CHUNK characters, breaking at paragraph ends."""
+    parts, cur = [], ""
+    for para in text.split("\n"):
+        if len(cur) + len(para) > CHUNK and cur:
+            parts.append(cur)
+            cur = ""
+        cur += para + "\n"
+    if cur.strip():
+        parts.append(cur)
+    return parts
+
+def build_notes(text):
+    """Notes for the whole course, one request per part. Keeps each request inside the Groq request limit."""
+    notes = []
+    for part in chunks(text):
+        reply = ask(NOTE_PROMPT.replace("{part}", part))
+        if reply.strip():
+            notes.append(reply.strip())
+        if budget_gone():
+            break
+    return "\n\n".join(notes)[:NOTES_LIMIT]
+
 def make_summary(cid, title, text):
     """Writes a cheat sheet in the 7 to 10 page range. Returns (status, pages, pdf bytes or None)."""
-    source = text[:SOURCE_LIMIT]
+    source = build_notes(text) if len(text) > CHUNK else text
     words = 3600
     reply = ask(PROMPT.replace("{words}", str(words)).replace("{source}", source))
     best = None
