@@ -1,0 +1,33 @@
+name: Course summaries
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 9 * * *"
+permissions:
+  contents: write
+  packages: read
+jobs:
+  summaries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    container:
+      image: ghcr.io/nasirbello043-sudo/learning-hub-tools:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write exam cheat sheets
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_SUMMARY }}
+          MAX_MINUTES: "100"
+        run: python summaries.py
+      - name: Save cheat sheets
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "course-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add courses/summaries
+          git diff --staged --quiet || git commit -m "Course cheat sheets"
+          for i in $(seq 1 8); do
+            if git pull --rebase -X theirs origin main && git push; then break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((RANDOM % 20 + 5))
+          done
