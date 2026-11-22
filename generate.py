@@ -1567,8 +1567,6 @@ def write_knowledge(entries):
                 item["summary"] = cut(l.get("focus"), 300)
             lessons.append(item)
         courses.append({"id": cid, "title": cut(c.get("title") or title, 120), "depts": depts_of(flags),
-                        "school": "school" in flags, "code": next((f[5:] for f in flags if f.startswith("code=")), "").upper(),
-                        "kind": "pdf" if format_of(flags) == "pdf" else "html", "url": None,
                         "ready": sum(1 for l in lessons if l["ready"]), "total": len(lessons), "lessons": lessons})
     if SHARED_WRITES: save("site/knowledge.json", {"built": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
                                  "site": {k: site.get(k) for k in ("name", "short", "school", "tagline") if site.get(k)},

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1b4332;--mid:#2d6a4f;--gold:#c9a84c;--canvas:#f4f2ed;--line:#e2ddd4;--tx:#1a1a1a;--soft:#6f6c66;--bh:62px}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.5 Inter,sans-serif;background:var(--canvas);color:var(--tx);padding-bottom:var(--bh)}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:var(--green);border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:10px;padding:8px 12px}
+header button{background:#ffffff1a;border:0;color:#fff;border-radius:9px;width:40px;height:40px;font-size:1.1rem}
+.br{display:flex;align-items:center;gap:10px;flex:1;min-width:0;color:#fff}.br img{width:38px;height:38px;border-radius:50%;border:2px solid var(--gold);background:#fff;object-fit:cover}
+.br b{display:block;font:700 1.05rem "Playfair Display",serif;line-height:1.1}.br small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+#sb{position:fixed;top:0;bottom:var(--bh);left:0;width:270px;max-width:84%;background:var(--green);color:#e6efe9;overflow:auto;padding:64px 10px 16px;z-index:40;transform:translateX(-100%);transition:transform .25s}
+#sb.o{transform:none;box-shadow:4px 0 24px #0005}
+#sb input{width:100%;background:#ffffff14;border:1px solid #ffffff22;border-radius:9px;color:#fff;padding:10px 12px;font:inherit;margin-bottom:12px}#sb input::placeholder{color:#ffffff88}
+#sb .l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#ffffff77;font-weight:700;padding:6px 8px}
+#sb button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;background:none;border:0;border-left:3px solid transparent;color:#e6efe9;font:inherit;text-align:left;padding:11px 10px;border-radius:0 8px 8px 0;min-height:44px}
+#sb button.on{background:#ffffff14;border-left-color:var(--gold);color:#fff;font-weight:600}#sb button i{font-style:normal;font-size:.75rem;color:var(--gold)}
+#bd{position:fixed;inset:0;background:#0006;z-index:35;display:none}#bd.o{display:block}
+main{padding:14px 12px 28px;max-width:980px;margin:0 auto}
+.hero{position:relative;background:var(--green);border-radius:16px;padding:20px 20px 18px;margin-bottom:18px;overflow:hidden;color:#fff;--ho:.16}
+.hero::after{content:"";position:absolute;inset:0;background:var(--hi,none) center/cover;opacity:var(--ho);z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero .e{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font:700 1.45rem/1.2 "Playfair Display",serif;margin:5px 0}.hero p{font-size:.8rem;color:#ffffffb8;max-width:340px;margin-bottom:14px}
+.st{display:flex;gap:20px;margin-bottom:14px}.st b{display:block;font:700 1.5rem "Playfair Display",serif;color:var(--gold);line-height:1}.st span{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#ffffff99}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.tools a{background:#ffffff14;border:1px solid #ffffff22;border-radius:12px;padding:10px 4px;text-align:center;font-size:.68rem;font-weight:600;color:#e6efe9}.tools svg{display:block;margin:0 auto 5px;color:var(--gold)}
+.eb{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:700}
+h2{font:700 1.5rem "Playfair Display",serif;color:var(--green);margin:2px 0 10px}h2 em{color:var(--gold)}
+.fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.fb button{font:inherit;font-size:.82rem;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 16px;min-height:40px;color:var(--tx)}
+.fb button.on{background:var(--green);color:#fff;border-color:var(--green)}.fb span{margin-left:auto;font-size:.78rem;color:var(--soft)}
+.shelf{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 12px}
+.bk{display:block}.cv{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative}
+.kind{position:absolute;top:8px;right:8px;font:700 10px Inter,sans-serif;letter-spacing:.08em;padding:3px 7px;border-radius:9px;background:#1b4332;color:#fff;z-index:2}
+.kind.pdf{background:#7a1f1f}
+.crd{display:flex;gap:12px;align-items:stretch;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.cov{width:40%;flex:0 0 40%}.inf{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.tag{background:#fbf3e0;border:1px solid #efe2bf;border-radius:10px;padding:8px 10px;font:600 .72rem Inter,sans-serif;color:#5a4a1f}
+.tag.pdf{color:#7a1f1f}.tag.html{color:#1b4332}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.btns .btn{flex:1 1 calc(50% - 6px);min-width:0;white-space:normal;line-height:1.2}
+.btn{flex:1 1 auto;text-align:center;font:600 .72rem Inter,sans-serif;padding:7px 4px;border-radius:9px;text-decoration:none;color:#fff;background:#1b4332;white-space:nowrap}
+.btn{padding:9px 4px;font:700 .7rem Inter,sans-serif}.btn.open{background:#1d4ed8}.btn.sum{background:#1f1f1f;border:2px solid #d98a14}.btn.dl{background:#15803d}
+@media(max-width:700px){.shelf{grid-template-columns:1fr}}
+.cv img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.ph{width:72%;height:88%;border-radius:4px 10px 10px 4px;background:linear-gradient(90deg,hsl(var(--h) 45% 20%) 0 7%,hsl(var(--h) 50% 36%) 7%);box-shadow:5px 7px 14px #0003;color:#fff;padding:14px 10px 10px 18px;display:flex;flex-direction:column;justify-content:space-between}
+.ph b{font:600 .65rem monospace;letter-spacing:.14em;color:#ffffffcc}.ph span{font:700 .95rem/1.15 "Playfair Display",serif}
+.nm{font-weight:600;font-size:.88rem;line-height:1.3;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mt{font-size:.72rem;color:var(--soft);margin:2px 0 5px}.pr{height:4px;border-radius:9px;background:var(--line);overflow:hidden}.pr i{display:block;height:100%;background:var(--gold)}
+.empty{grid-column:1/-1;text-align:center;color:var(--soft);padding:30px 10px}
+nav{position:fixed;bottom:0;left:0;right:0;height:var(--bh);background:var(--green);display:flex;z-index:30;border-top:1px solid #ffffff14}
+nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#ffffff99;font-size:.55rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}nav a.on{color:#fff}nav a.on svg{color:var(--gold)}
+@media(min-width:701px){#sb{transform:none;width:250px;padding-top:70px;bottom:0}header button,nav,#bd{display:none!important}main{margin-left:250px;max-width:none;padding:22px 28px 40px}.shelf{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}body{padding-bottom:0}.hero{max-width:760px}}
+
+/* mockup layout: one card per row, on phone and desktop */
+.shelf{grid-template-columns:1fr!important;max-width:760px;margin:0 auto}
+.crd{display:block;padding:14px;border-radius:16px;border:1px solid #e6dfcc;background:#fff}
+.crd .top{display:flex;gap:16px;align-items:flex-start}
+.cov{width:40%;flex:0 0 40%;min-width:0}
+.cv{aspect-ratio:auto;height:auto;display:block}
+.ph{position:relative;background:hsl(var(--h,190) 45% 34%);border-radius:10px 14px 14px 10px;padding:14px 14px 16px 18px;min-height:150px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.ph:before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:rgba(0,0,0,.25)}
+.ph .lbl{font:600 11px Inter,sans-serif;letter-spacing:.16em;color:#e8f4f2;font-weight:600}
+.ph .big{font:700 22px Georgia,'Times New Roman',serif;color:#fff;overflow-wrap:break-word;word-break:normal;line-height:1.15;max-width:100%}
+.ph .big.small{font-size:15px;line-height:1.2}
+.inf{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.nm{font:700 17px Inter,sans-serif;color:#111;text-decoration:none;line-height:1.25}
+.mt{font:500 14px Inter,sans-serif;color:#666}
+.pr{height:6px;border-radius:4px;background:#e3dccb;overflow:hidden}.pr i{display:block;height:100%;background:#d9a525}
+.tag{border-radius:12px;padding:10px 12px;font:600 13px Inter,sans-serif;line-height:1.35;background:#fdf6df;border:1px solid #efe2bf}
+.tag.pdf{color:#8a1d1d}.tag.html{color:#1b4332}
+.btns{display:flex;gap:10px;margin-top:4px}
+.btns .btn{flex:1 1 0;min-width:0;text-align:center;padding:11px 6px;border-radius:12px;font:700 14px Inter,sans-serif;line-height:1.15;color:#fff;text-decoration:none;white-space:normal}
+.btns.full{margin-top:12px}
+.btn.open{background:#0f4fe0}.btn.sum{background:#1b1b1b;border:3px solid #e0901b}.btn.dl{background:#15813d}
+
+/* cover fills the space up to the course name; buttons span the card like the PDF row */
+.cov{width:48%;flex:0 0 48%}
+.crd .top{gap:12px}
+.btns.full{display:flex;gap:10px;margin-top:14px}
+.btns.full .btn{flex:1 1 0;min-width:0;padding:15px 8px;font:800 15px Inter,sans-serif;line-height:1.2;white-space:normal;border-radius:14px;text-align:center}
+.btn.sum{font-size:14px}
+</style>
+</head>
+<body>
+<header><button id="mt" aria-label="Menu">&#9776;</button>
+<a class="br" href="index.html"><img id="lg" src="site/logo.png" alt=""><div><b id="nm">Learning Hub</b><small id="sh">FUE Kontagora</small></div></a></header>
+<aside id="sb"><input id="q" type="search" placeholder="Search course or code..." autocomplete="off"><div class="l">Departments</div><div id="dl"></div></aside>
+<div id="bd"></div>
+<main>
+<div class="hero" id="hero"><div class="e" id="he">Your school</div><h1>Your Learning<br>Starts Here.</h1><p id="hp">Browse course materials from all departments — free, anytime.</p>
+<div class="st"><div><b id="s1">0</b><span>Courses</span></div><div><b id="s2">0</b><span>Departments</span></div><div><b id="s3">0</b><span>Lessons</span></div></div>
+<div class="tools">
+<a href="tools/calculator.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg>Calculator</a>
+<a href="tools/timetable.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Timetable</a>
+<a href="tools/study.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h1V4H9z"/><path d="M15 4a3 3 0 0 1 3 3v1a3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h-1V4h1z"/></svg><b style="font-weight:800">AI</b></a>
+<a href="tools/updates.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Updates</a></div></div>
+<div class="eb">Learning hub</div><h2 id="ht">All <em>Courses</em></h2>
+<div class="fb" id="fb"><button data-m="all" class="on">All courses</button><button data-m="general">General</button><button data-m="dept">Departmental</button><span id="ct"></span></div>
+<div class="shelf" id="sf"></div>
+</main>
+<nav><a class="on" href="index.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+<a href="tools/calculator.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg>Calc</a>
+<a href="tools/timetable.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Timetable</a>
+<a href="tools/study.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h1V4H9z"/><path d="M15 4a3 3 0 0 1 3 3v1a3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h-1V4h1z"/></svg><b style="font-weight:800">AI</b></a>
+<a href="tools/updates.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Updates</a></nav>
+<script>
+const $=s=>document.querySelector(s),EXT=['png','jpg','jpeg','webp','svg'];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const get=u=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+let BUILD=String(Date.now());
+const stamp=fetch('courses/build-stamp.txt?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{const m=/run\s+(\d+)/.exec(t);if(m)BUILD=m[1]}).catch(()=>{});
+const probe=(base,fn)=>{let i=0;const t=new Image(),go=()=>{t.src=`${base}.${EXT[i]}`};t.onload=()=>fn(t.src);t.onerror=()=>{if(++i<EXT.length)go()};go()};
+let C=[],D=[],st={m:'all',d:null,q:''},done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch(e){}
+const seen=id=>Object.keys(done).filter(k=>k.startsWith(id+'/')).length;
+const ds=c=>c.depts&&c.depts.length?c.depts:['general'];
+const isDept=c=>ds(c).some(d=>d!=='general');
+function list(){return C.filter(c=>{
+  if(st.q){const q=st.q.toLowerCase();if(!(c.title.toLowerCase().includes(q)||c.id.includes(q)||((c.theme||{}).code||'').toLowerCase().includes(q)))return false}
+  if(st.d)return ds(c).includes(st.d);
+  return st.m==='all'||(st.m==='general'?ds(c).includes('general'):isDept(c))})}
+function side(){const n=k=>C.filter(c=>ds(c).includes(k)).length;
+  $('#dl').innerHTML=[['',`All courses`,C.length],['general','General Courses',n('general')],...D.map(d=>[d.id,d.name,n(d.id)])]
+   .map(([id,nm,k])=>`<button data-d="${esc(id)}" class="${(st.d||'')===id?'on':''}">${esc(nm)}<i>${k}</i></button>`).join('')}
+function shelf(){const L=list();
+  $('#ct').textContent=L.length+(L.length===1?' course':' courses');
+  const dn=st.d?(st.d==='general'?'General Courses':(D.find(d=>d.id===st.d)||{}).name):null;
+  $('#ht').innerHTML=dn?esc(dn):'All <em>Courses</em>';
+  $('#sf').innerHTML=L.length?L.map(c=>{const t=c.theme||{hue:150,code:''},p=c.total?seen(c.id)/c.total*100:0;
+    const pdf=c.kind==='pdf', pdfUrl=c.url?esc(c.url):`courses/pdf/${esc(c.id)}.pdf?b=${BUILD}`, open=c.url?esc(c.url):(pdf?pdfUrl:`reader.html#/c/${esc(c.id)}`);
+    const dept=(c.depts&&c.depts[0]||'').replace(/[^a-z]/g,'').slice(0,3).toUpperCase();
+    const top=c.school?(dept||'NSC'):'NSC';
+    const cover=c.code?`<span class="big" style="font-size:${c.code.length>7?16:22}px">${esc(c.code.toUpperCase())}</span>`:`<span class="big small">${esc(c.title)}</span>`;
+    const label=pdf?'PDF course · read or download':'HTML course · read online';
+    const bOpen=`<a class="btn open" href="${open}">Open Course</a>`;
+    const bSum=`<a class="btn sum" href="courses/summaries/${esc(c.id)}.pdf">Course Summary</a>`;
+    const bDl=pdf?`<a class="btn dl" href="${pdfUrl}" download>Download Course</a>`:'';
+    const row=`<div class="btns full">${bOpen}${bSum}${bDl}</div>`;
+    return`<div class="crd"><div class="top"><a class="cov" href="${open}"><div class="cv" data-c="${esc(c.id)}"><div class="ph" style="--h:${t.hue}"><b class="lbl">${esc(top)}</b>${cover}</div></div></a><div class="inf"><a class="nm" href="${open}">${esc(c.title)}</a><div class="mt">${c.manual?'Ready to read':c.ready+' of '+c.total+' lessons'}</div><div class="pr"><i style="width:${p}%"></i></div><div class="tag ${pdf?'pdf':'html'}">${label}</div></div></div>${row}</div>`
+    }).join('')
+   :'<div class="empty">No courses here yet.</div>';
+  document.querySelectorAll('#sf [data-c]').forEach(el=>probe(`courses/images/cover-${el.dataset.c}`,u=>{el.innerHTML=`<img src="${u}" alt="">`}))}
+function all(){side();shelf();document.querySelectorAll('#fb [data-m]').forEach(b=>b.classList.toggle('on',!st.d&&b.dataset.m===st.m))}
+const slugOf=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+async function loadManual(){
+  let txt='';try{txt=await fetch('manual-upload.txt?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'')}catch(e){}
+  const out=[];
+  for(const raw of txt.split('\n')){
+    const line=raw.trim();if(!line||line.startsWith('#'))continue;
+    const flags=[...line.matchAll(/\[([^\]]+)\]/g)].map(m=>m[1].trim().toLowerCase());
+    const title=line.replace(/\[[^\]]+\]/g,'').trim();
+    const fmt=flags.includes('pdf')?'pdf':flags.includes('html')?'html':null;
+    if(!fmt||!title)continue;
+    const id=slugOf(title);
+    const url=fmt==='pdf'?`manual/pdf/${id}.pdf`:`manual/html/${id}.html`;
+    let ok=false;try{ok=(await fetch(url,{method:'HEAD',cache:'no-store'})).ok}catch(e){}
+    if(!ok)continue;  // no file, no card
+    const depts=flags.filter(f=>f.startsWith('dept=')).flatMap(f=>f.slice(5).split('+')).filter(Boolean);
+    const code=(flags.find(f=>f.startsWith('code='))||'').slice(5).toUpperCase();
+    const school=flags.includes('school');
+    out.push({id,title,total:1,ready:1,theme:{hue:[...title].reduce((a,c)=>a+c.charCodeAt(0),0)%360,code:title.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4)},
+      depts:depts.length?depts:['general'],kind:fmt,manual:true,url:url+'?v='+Date.now(),code,school});
+  }
+  return out;
+}
+async function init(){
+  let S={};try{S=await get('site.json')}catch(e){}
+  if(S.name)$('#nm').textContent=S.name;if(S.short)$('#sh').textContent=S.short;if(S.school)$('#he').textContent=S.school;if(S.tagline)$('#hp').textContent=S.tagline;
+  if(S.hero_opacity!=null)$('#hero').style.setProperty('--ho',S.hero_opacity);
+  probe('site/hero',u=>$('#hero').style.setProperty('--hi',`url(${u})`));
+  $('#lg').onerror=e=>e.target.style.display='none';
+  await stamp;
+  try{C=await get('courses/index.json')}catch(e){C=[]}
+  try{D=await get('courses/departments.json')}catch(e){D=[]}
+  const MAN=await loadManual();
+  C=C.filter(c=>!c.manual).concat(MAN);
+  MAN.forEach(c=>c.depts.forEach(d=>{if(!D.find(x=>x.id===d))D.push({id:d,name:d.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase())})}));
+  $('#s1').textContent=C.length;$('#s2').textContent=D.length;$('#s3').textContent=C.reduce((a,c)=>a+(c.ready||0),0);
+  all()}
+const tg=o=>{$('#sb').classList.toggle('o',o);$('#bd').classList.toggle('o',o)};
+$('#mt').onclick=()=>tg(true);$('#bd').onclick=()=>tg(false);
+$('#dl').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.d=b.dataset.d||null;st.m='all';all();tg(false)};
+$('#fb').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;st.m=b.dataset.m;st.d=null;all()};
+$('#q').oninput=e=>{st.q=e.target.value.trim();shelf()};
+init();
+</script>
+<script src="tools/bell.js" data-base=""></script>
+<script src="tools/sidebar.js" data-base=""></script>
+</body>
+</html>
