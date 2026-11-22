@@ -705,6 +705,8 @@ function send(text, isRetry) {
   // a vague message ("quiz me", "why?") borrows the topic of the last clear question; a clear one stands alone
   var strong = function (t) { var r = search(t, focus); return r.lessons.length > 0 && r.lessons[0].s >= 3; };
   var q = text; if (!strong(text) && !(typeof RECOMMEND_RE !== 'undefined' && RECOMMEND_RE.test(text.toLowerCase()))) { for (var i = chat.length - 2; i >= 0; i--) if (chat[i].role === 'user' && strong(chat[i].content)) { q = chat[i].content + ' ' + text; break; } }
+  var fwd = forwardFor(text);  // course, summary and department requests are answered here, before the remote AI
+  if (fwd) { return Promise.resolve().then(function () { showAnswer(bub, fwd.md, true, null); chat.push({ role: 'assistant', content: fwd.md }); chat = chat.slice(-30); store.set('study_chat', chat); }).then(function () { setBusy(false); }); }
   if (!isAI()) { return runLocal(text, bub, focus, q); }
   buildContext(q, focus).then(function (c) {
     ctrl = new AbortController();
