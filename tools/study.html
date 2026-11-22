@@ -80,6 +80,15 @@ details.pqa{margin-top:6px}details.pqa summary{cursor:pointer;color:var(--mid);f
 
 .aino{font:600 12px/1.4 Inter,sans-serif;color:#8a5a00;background:#fff7e0;border:1px solid #f0dfa8;border-radius:8px;padding:6px 9px;margin:0 0 10px}
 
+
+.fcard{display:flex;align-items:center;gap:10px;background:#faf8f3;border:1.5px solid #e0d9c6;border-radius:12px;padding:10px 12px;margin-top:7px}
+.fic{width:44px;height:52px;border-radius:6px;background:#e53935;color:#fff;font:800 13px Inter,sans-serif;display:flex;align-items:center;justify-content:center;flex:0 0 44px}
+.fcard.html .fic{background:#e8581c}
+.fcard{flex-wrap:wrap;row-gap:10px}.fi{flex:1 1 180px;min-width:0}.fi b{display:block;font:700 15px Inter,sans-serif;color:#14221c;line-height:1.3;word-break:break-word}.fi small{display:block;font:500 12px Inter,sans-serif;color:#777;margin-top:3px}
+.dlb{width:46px;height:46px;border-radius:10px;background:#15813d;display:flex;align-items:center;justify-content:center;flex:0 0 46px}
+.fcard .sep{width:1px;height:40px;background:#ccc;flex:0 0 1px}
+.fcard .ob{display:flex;align-items:center;gap:6px;color:#15813d;font:700 14px Inter,sans-serif;text-decoration:none;line-height:1.15;flex:0 0 auto}
+.fcard.html .ob{margin-left:auto}
 </style></head>
 <body>
 <div class="app">
@@ -319,13 +328,13 @@ function extract(text) {
   var clean = text.replace(MARK, function (m, kind, id, n) {
     if (kind.toLowerCase() === 'page') { var pg = PAGES[String(id).toLowerCase()]; if (pg && !seen['p:' + id]) { seen['p:' + id] = 1; cards.push({ href: pg.href, title: pg.title, sub: pg.sub }); } return ''; }
     var c = findCourse(String(id).toLowerCase()); if (!c) return '';
-    if (kind.toLowerCase() === 'sum') { var sid = 'sum:' + c.id; if (!seen[sid]) { seen[sid] = 1; cards.push({ href: '../courses/summaries/' + c.id + '.pdf', title: 'Summary: ' + c.title, sub: 'Exam cheat sheet · PDF' }); } return ''; }
-    if (kind.toLowerCase() === 'dl') { var did = 'dl:' + c.id; if (!seen[did]) { seen[did] = 1; cards.push({ href: c.url || ('../courses/pdf/' + c.id + '.pdf'), title: 'Download: ' + c.title, sub: 'PDF file' }); } return ''; }
-    if (c.manual && !seen[c.id]) { seen[c.id] = 1; cards.push({ href: c.url, title: c.title, sub: (c.code ? c.code + ' · ' : '') + (c.kind === 'pdf' ? 'PDF · open or download' : 'HTML · open online') }); return ''; }
+    if (kind.toLowerCase() === 'sum') { var sid = 'sum:' + c.id; if (!seen[sid]) { seen[sid] = 1; cards.push({ href: '../courses/summaries/' + c.id + '.pdf', title: 'Summary: ' + c.title, sub: 'Exam cheat sheet · PDF', kind: 'pdf', file: '../courses/summaries/' + c.id + '.pdf' }); } return ''; }
+    if (kind.toLowerCase() === 'dl') { var f = c.url || ('../courses/pdf/' + c.id + '.pdf'); var hit = cards.filter(function (x) { return x.href === f; })[0]; if (hit) { hit.dl = true; } else { cards.push({ href: f, title: c.title, sub: 'PDF file', kind: 'pdf', file: f, dl: true }); } return ''; }
+    if (c.manual && !seen[c.id]) { seen[c.id] = 1; cards.push({ kind: c.kind === 'pdf' ? 'pdf' : 'html', file: c.url, href: c.url, title: c.title, sub: (c.code ? c.code + ' · ' : '') + (c.kind === 'pdf' ? 'PDF · open or download' : 'HTML · open online') }); return ''; }
     if (kind.toLowerCase() === 'lesson' && n) {
       var l = c.lessons.filter(function (x) { return x.n === +n; })[0];
       if (l && l.ready && !seen[c.id + '/' + n]) { seen[c.id + '/' + n] = 1; cards.push({ href: '../reader.html#/c/' + c.id + '/' + l.n, title: 'Lesson ' + l.n + ': ' + l.title, sub: c.title }); }
-    } else if (!seen[c.id]) { seen[c.id] = 1; cards.push({ href: c.kind === 'pdf' ? '../courses/pdf/' + c.id + '.pdf' : '../reader.html#/c/' + c.id, title: c.title, sub: (c.deptNames || []).join(', ') + ' · ' + (c.ready || 0) + ' lesson' + (c.ready === 1 ? '' : 's') + ' ready' }); }
+    } else if (!seen[c.id]) { seen[c.id] = 1; cards.push({ kind: c.kind === 'pdf' ? 'pdf' : 'html', href: c.kind === 'pdf' ? '../courses/pdf/' + c.id + '.pdf' : '../reader.html#/c/' + c.id, title: c.title, sub: (c.deptNames || []).join(', ') + ' · ' + (c.ready || 0) + ' lesson' + (c.ready === 1 ? '' : 's') + ' ready' }); }
     return '';
   });
   clean = clean.replace(/[ \t]+([.,;:!?])/g, '$1').replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
@@ -461,6 +470,30 @@ function forwardFor(q) {
     return { md: 'Here are the school courses for **' + dept.name + '**. Courses marked *general course* are open to every department:\n\n' + lines.join('\n') + '\n\n' + marks.join(' ') };
   }
   return null;
+}
+
+var DL_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>';
+var BOOK_ICON = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#15813d" stroke-width="1.8" stroke-linejoin="round"><path d="M2 5.5C4.5 4 7.5 4 11 5.5V20c-3.5-1.5-6.5-1.5-9-.2z"/><path d="M22 5.5C19.5 4 16.5 4 13 5.5V20c3.5-1.5 6.5-1.5 9-.2z"/></svg>';
+function sizeLater(file, node) {
+  fetch(file, { method: 'HEAD' }).then(function (r) { var n = +r.headers.get('content-length'); if (n && node) node.textContent = 'PDF File · ' + (n / 1048576).toFixed(1) + ' MB'; }).catch(function () {});
+}
+function cardNode(c) {
+  if (c.kind !== 'pdf' && c.kind !== 'html') {
+    var a = el('a', 'card'); a.href = c.href; a.innerHTML = '<div class="t"><b>' + esc(c.title) + '</b><small>' + esc(c.sub) + '</small></div><i>›</i>'; return a;
+  }
+  var box = el('div', 'fcard ' + c.kind);
+  var ico = el('div', 'fic'); ico.textContent = c.kind === 'pdf' ? 'PDF' : 'HTML'; box.appendChild(ico);
+  var info = el('div', 'fi'); info.innerHTML = '<b>' + esc(c.title) + '</b><small>' + (c.kind === 'pdf' ? 'PDF File' : 'HTML Course') + '</small>'; box.appendChild(info);
+  if (c.kind === 'pdf') {
+    var file = c.file || c.href;
+    var dl = el('a', 'dlb'); dl.href = file; dl.setAttribute('download', ''); dl.setAttribute('aria-label', 'Download course'); dl.innerHTML = DL_ICON; box.appendChild(dl);
+    var sep = el('span', 'sep'); box.appendChild(sep);
+    var op = el('a', 'ob'); op.href = c.href; op.innerHTML = BOOK_ICON + '<span>Open<br>Course</span>'; box.appendChild(op);
+    sizeLater(file, info.querySelector('small'));
+  } else {
+    var op2 = el('a', 'ob'); op2.href = c.href; op2.innerHTML = BOOK_ICON + '<span>Open<br>Course</span>'; box.appendChild(op2);
+  }
+  return box;
 }
 function recommendFor(q, focus) {
   var fw = forwardFor(q); if (fw) return fw;
@@ -646,7 +679,7 @@ function showAnswer(b, raw, final, hits) {
   if (final) {
     var cards = x.cards;
     if (!cards.length && hits && hits.lessons.length && hits.lessons[0].s >= 7 && hits.lessons[0].d.ready) { var d = hits.lessons[0].d; cards = [{ href: '../reader.html#/c/' + d.cid + '/' + d.n, title: 'Lesson ' + d.n + ': ' + d.l.title, sub: 'Related lesson · ' + d.c.title }]; }
-    if (cards.length) { var w = el('div', 'cards'); cards.forEach(function (c) { var a = el('a', 'card'); a.href = c.href; a.innerHTML = '<div class="t"><b>' + esc(c.title) + '</b><small>' + esc(c.sub) + '</small></div><i>›</i>'; w.appendChild(a); }); b.appendChild(w); }
+    if (cards.length) { var w = el('div', 'cards'); cards.forEach(function (c) { w.appendChild(cardNode(c)); }); b.appendChild(w); }
     renderMath(b);
   }
   scrollDown(false);
