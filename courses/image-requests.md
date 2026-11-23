@@ -1,6 +1,6 @@
 # Pictures to add
 
-Waiting: **72** | Uploaded: **41** | Covers waiting: **22**
+Waiting: **73** | Uploaded: **41** | Covers waiting: **22**
 
 ## Course covers
 
@@ -335,9 +335,10 @@ cover-linear-algebra.jpg
 Prompt:
 ```
 Create a high-quality 3D mockup of a hardcover school textbook standing at a slight angle, showing the front cover and the spine, with a soft studio shadow on a plain light background (portrait orientation, 3:4).
-The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: a few simple, recognisable symbols of the subject.
+The front cover is a rich, colourful, detailed digital illustration in a friendly educational style, with a teal colour palette, showing a lively scene built around: Matrix grids with colorful numbers, 3D coordinate axes with arrows, Vector arrows of different lengths, Determinant symbol with a checkmark, Eigenvalue/eigenvector diagram, Linear transformation mapping a shape, Dot product illustration with angles, System of linear equations solved graphically, Basis vectors forming a frame, Projection of a vector onto a line.
 Use exactly this text on the cover, spelled exactly as written, in large, bold, clear capital letters:
 - Main title at the top: "LINEAR ALGEBRA"
+- Subtitle under it, smaller: "Vectors, Spaces, and Transformations in Motion"
 The spine shows "LINEAR ALGEBRA" running vertically. Do not add any other text, author names, logos or watermarks.
 ```
 
@@ -512,6 +513,31 @@ The only text allowed in the picture is these labels, each spelled exactly as wr
 - "Musculoskeletal"
 - "Immune"
 - "Excretory"
+No title, no caption, no numbers, no other words.
+
+Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
+```
+
+## Organic Chemistry
+
+### Lesson 5: Functional Groups III: Carbonyl Compounds
+
+Save as:
+```
+organic-chemistry-l05-carbonyl-group-structure-2.png
+```
+Prompt:
+```
+Create a clear, accurate educational labelled diagram for secondary-school students.
+
+Show: A carbon atom double‑bonded to an oxygen atom; the carbon carries a partial positive charge (δ+) and the oxygen a partial negative charge (δ−).
+
+Layout: Carbonyl carbon in the centre, double bond to oxygen on the right, arrows indicating δ+ on carbon and δ− on oxygen, with labels.
+
+The only text allowed in the picture is these labels, each spelled exactly as written between the quotes, in large, clear sans-serif letters, each joined by a thin straight line to the correct part:
+- "C=O"
+- "δ+"
+- "δ−"
 No title, no caption, no numbers, no other words.
 
 Style: clean modern textbook illustration on a plain white background, soft natural colours with strong contrast, large easy-to-read sans-serif text, uncluttered, landscape orientation (4:3), high resolution. No watermark, no decorative border, no extra words.
