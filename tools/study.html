@@ -407,9 +407,19 @@ function listAllCourses() {
   var cites = K.courses.filter(function (c) { return c.ready > 0; }).slice(0, 5).map(function (c) { return '[[course:' + c.id + ']]'; }).join(' ');
   return md + '\n\n' + cites;
 }
+function allDepts() {
+  var seen = {}, out = [];
+  ((K && K.departments) || []).forEach(function (d) { if (!seen[d.id]) { seen[d.id] = 1; out.push(d); } });
+  ((K && K.courses) || []).forEach(function (c) {
+    (c.depts || []).forEach(function (id) {
+      if (id && id !== 'general' && !seen[id]) { seen[id] = 1; out.push({ id: id, name: id.replace(/-/g, ' ').replace(/\b\w/g, function (l) { return l.toUpperCase(); }) }); }
+    });
+  });
+  return out;
+}
 function deptFor(q) {
   var lq = (' ' + q.toLowerCase() + ' ').replace(/[^a-z0-9]+/g, ' ');
-  var depts = (K && K.departments) || [];
+  var depts = allDepts();
   if (/ computer | cs | software | programming /.test(lq)) { var cs = depts.filter(function (d) { return d.id === 'computer-science'; })[0]; if (cs) return cs; }
   var hit = null;
   depts.forEach(function (d) {
@@ -727,6 +737,21 @@ function aiFallback(e, text, bub, focus, q) {
     bub.insertBefore(n, bub.firstChild);
   });
 }
+var FORWARD_RULES = 'TASK: the student asks you to forward courses or summaries. Decide which catalogue entries match the request. '
+  + 'Only forward entries listed in the catalogue. If the student names a department, include that department\'s courses and the courses marked general, and label general ones "general course". '
+  + 'If the student asks for a number, give that many. For a summary, use only entries marked summary ready: yes. '
+  + 'Show each course with a card marker on its own: [[course:ID]] opens the course. For a PDF course, add [[dl:ID]] to show its download card. '
+  + 'For a summary use [[sum:ID]]. Use the IDs exactly as listed. Never invent an ID. Keep the text short: one line per course with its code and type.';
+function catalogueText() {
+  var rows = ((K && K.courses) || []).filter(function (c) { return c.school; }).map(function (c) {
+    var ready = SUM[c.id] && SUM[c.id].status === 'ok' ? 'yes' : 'no';
+    return '- id: ' + c.id + ' | title: ' + c.title + ' | code: ' + (c.code || '-') + ' | departments: ' + (c.depts || []).join('+') + ' | type: ' + (c.kind === 'pdf' ? 'PDF' : 'HTML') + ' | summary ready: ' + ready;
+  });
+  return 'COURSE CATALOGUE (school courses only):\n' + (rows.join('\n') || '(none)') + '\n\n' + FORWARD_RULES;
+}
+function isForwardIntent(t) {
+  return /forward|send me|give me|show me|download|summar|cheat ?sheet|recommend|department|\bdept\b|which courses|what courses|any \d+ courses|courses? (on|in|for|from)/i.test(t);
+}
 function send(text, isRetry) {
   text = String(text || '').trim().slice(0, MAX_CHARS);
   if (!text || busy) return;
@@ -738,10 +763,14 @@ function send(text, isRetry) {
   // a vague message ("quiz me", "why?") borrows the topic of the last clear question; a clear one stands alone
   var strong = function (t) { var r = search(t, focus); return r.lessons.length > 0 && r.lessons[0].s >= 3; };
   var q = text; if (!strong(text) && !(typeof RECOMMEND_RE !== 'undefined' && RECOMMEND_RE.test(text.toLowerCase()))) { for (var i = chat.length - 2; i >= 0; i--) if (chat[i].role === 'user' && strong(chat[i].content)) { q = chat[i].content + ' ' + text; break; } }
-  var fwd = forwardFor(text);  // course, summary and department requests are answered here, before the remote AI
-  if (fwd) { return Promise.resolve().then(function () { showAnswer(bub, fwd.md, true, null); chat.push({ role: 'assistant', content: fwd.md }); chat = chat.slice(-30); store.set('study_chat', chat); }).then(function () { setBusy(false); }); }
-  if (!isAI()) { return runLocal(text, bub, focus, q); }
+  var isFwd = isForwardIntent(text);
+  if (!isAI()) {
+    var fb = forwardFor(text);  // without the AI, forwarding uses the local rules
+    if (fb) { return Promise.resolve().then(function () { showAnswer(bub, fb.md, true, null); chat.push({ role: 'assistant', content: fb.md }); chat = chat.slice(-30); store.set('study_chat', chat); }).then(function () { setBusy(false); }); }
+    return runLocal(text, bub, focus, q);
+  }
   buildContext(q, focus).then(function (c) {
+    if (isFwd) { c = { text: catalogueText(), hits: [] }; }
     ctrl = new AbortController();
     var hist = chat.slice(-10).map(function (m) { return { role: m.role, content: m.content }; });
     return getStream(hist, c.text, ctrl.signal).then(function (r) {
