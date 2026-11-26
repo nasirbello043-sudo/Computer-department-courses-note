@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Feedback | Learning Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;color:#0d2a1a;background:#fbfaf6}
+.top{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#0b4d2a;border-bottom:3px solid #f2c230;color:#fff;min-height:70px}
+.menu{width:46px;height:46px;border-radius:14px;background:#ffffff1f;border:0;display:flex;align-items:center;justify-content:center;flex:0 0 46px}
+.logo{width:50px;height:50px;border-radius:50%;background:#fff;object-fit:contain;flex:0 0 50px}
+.brand{flex:1;min-width:0}
+.brand b{display:block;font:700 24px/1.05 Georgia,'Times New Roman',serif;white-space:nowrap}
+.brand small{display:block;color:#f2c230;letter-spacing:.2em;font-weight:600;font-size:12px;margin-top:2px;white-space:nowrap}
+@media(max-width:620px){.banner .mega{display:none}.banner{min-height:96px}.banner h1{font-size:26px}}
+@media(max-width:440px){.top{gap:8px;padding:10px 10px}.menu{width:40px;height:40px;flex-basis:40px}.logo{width:42px;height:42px;flex-basis:42px}.brand b{font-size:19px}.brand small{font-size:10px;letter-spacing:.14em}.bell svg{width:26px;height:26px}.bell{width:34px}.avatar{width:40px;height:40px;flex-basis:40px}.avatar svg{width:28px;height:28px}}
+.bell{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.badge{position:absolute;top:2px;right:0;background:#e53935;color:#fff;border-radius:50%;width:22px;height:22px;font:700 12px/22px Inter;text-align:center}
+.avatar{width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 46px}
+.wrap{padding:18px 14px 36px;max-width:760px;margin:0 auto}
+.banner{position:relative;display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:18px;background:linear-gradient(110deg,#e4f2df 0%,#f3f9ec 55%,#e9f5e4 100%);overflow:hidden;min-height:112px}
+.banner .bi{width:70px;height:70px;flex:0 0 70px}
+.banner h1{margin:0;font:700 30px/1.1 Inter,system-ui,sans-serif;color:#0b4d2a}
+.banner p{margin:4px 0 0;color:#2a3d31;font-size:15px;line-height:1.35}
+.banner .mega{position:absolute;right:8px;bottom:0;width:120px;opacity:.95}
+.card{position:relative;margin-top:14px;background:#fff;border:1px solid #e7e4d8;border-radius:22px;padding:20px 18px 18px;box-shadow:0 1px 0 #efece2}
+.lbl{font:700 17px Inter,sans-serif;color:#0b4d2a;margin:14px 0 10px}
+.lbl span{font-weight:400;color:#0d2a1a}
+.lbl:first-child{margin-top:0}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:620px){.chips{grid-template-columns:repeat(3,1fr)}}
+.chip{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:10px 14px;border-radius:30px;border:1.5px solid #cfd6cf;background:#fff;font:600 16px/1.2 Inter,sans-serif;color:#0d2a1a;cursor:pointer;text-align:center;width:100%}
+.chip svg{flex:0 0 22px;width:22px;height:22px}
+.chip.on{background:#0b4d2a;border-color:#0b4d2a;color:#fff}
+.chip.on svg{stroke:#fff}
+.field{position:relative;display:flex;align-items:center;gap:10px;min-height:56px;border:1.5px solid #cfd6cf;border-radius:18px;padding:0 14px;background:#fff}
+.field svg{flex:0 0 22px;width:22px;height:22px}
+.field select{flex:1;border:0;outline:0;background:transparent;font:500 16px Inter,sans-serif;color:#6b7670;appearance:none;padding:14px 0;min-width:0}
+.field select.picked{color:#0d2a1a}
+.chev{flex:0 0 auto}
+.area{align-items:flex-start;padding-top:14px;min-height:150px;position:relative}
+.area textarea{flex:1;border:0;outline:0;resize:none;font:500 16px/1.4 Inter,sans-serif;min-height:110px;background:transparent;width:100%;padding:0;color:#0d2a1a}
+.area textarea::placeholder{color:#6b7670}
+.count{position:absolute;right:16px;bottom:12px;color:#6b7670;font-size:14px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;min-height:96px;border:2px dashed #0b4d2a;border-radius:18px;background:#f4faf2;color:#0b4d2a;font:600 16px/1.3 Inter,sans-serif;text-align:center;cursor:pointer;padding:14px}
+.drop .row{display:flex;align-items:center;gap:10px}
+.drop small{color:#5f6b63;font-weight:500;font-size:14px}
+.send{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:60px;margin-top:18px;border:0;border-radius:32px;background:#0b4d2a;color:#fff;font:700 20px Inter,sans-serif;cursor:pointer}
+.send svg{width:26px;height:26px}
+.foot{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 4px;color:#5f6b63;font-size:15px;text-align:center}
+.foot svg{flex:0 0 22px}
+.msg{margin:12px 0 0;padding:12px 14px;border-radius:12px;font-size:15px;display:none}
+.ok{background:#e4f4e6;color:#0b4d2a}.bad{background:#fbe6e4;color:#8a1d1d}
+input[type=file]{display:none}
+</style></head>
+<body>
+<header class="top">
+  <button class="menu" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <img class="logo" src="../site/logo.png" alt="">
+  <div class="brand"><b>Learning Hub</b><small>FUE KONTAGORA</small></div>
+  
+  
+</header>
+<main class="wrap">
+  <section class="banner">
+    <svg class="bi" viewBox="0 0 72 72"><path d="M10 14h38a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H26l-10 9v-9h-6a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z" fill="#0b4d2a"/><path d="M28 30h26a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5h-4v8l-9-8H28a5 5 0 0 1-5-5V35a5 5 0 0 1 5-5z" fill="#2e8b57"/><path d="M29 47l3-3 2 2 4-5" stroke="#fff" stroke-width="0"/><path d="M24 22l2.6 5.3 5.8.8-4.2 4.1 1 5.8L24 35.4l-5.2 2.6 1-5.8-4.2-4.1 5.8-.8z" fill="#fff"/></svg>
+    <div><h1>Send Feedback</h1><p>Help us improve! Share your thoughts,<br>report issues or suggest ideas.</p></div>
+    <svg class="mega" viewBox="0 0 120 90"><path d="M22 36l58-22v56L22 52z" fill="#f2c230"/><rect x="6" y="36" width="18" height="16" rx="4" fill="#0b4d2a"/><path d="M34 56l12 24h10l-8-22" fill="#0b4d2a"/><path d="M96 10l4 9M104 8l1 10M110 18l-8 2" stroke="#0b4d2a" stroke-width="3" stroke-linecap="round"/><path d="M26 42h30" stroke="#0b4d2a" stroke-width="3" opacity=".4"/></svg>
+  </section>
+
+  <form class="card" id="f">
+    <div class="lbl">What type of feedback is this?</div>
+    <div class="chips" id="types">
+      <button type="button" class="chip on" data-t="course_issue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M2 5.5C4.5 4 7.5 4 11 5.5V20c-3.5-1.5-6.5-1.5-9-.2zM22 5.5C19.5 4 16.5 4 13 5.5V20c3.5-1.5 6.5-1.5 9-.2z"/></svg>Course Issue</button>
+      <button type="button" class="chip" data-t="bug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="13" rx="5" ry="6.5"/><path d="M12 6.5V4M9 4.5l1.5 2M15 4.5l-1.5 2M7 10H3M21 10h-4M7 16H3M21 16h-4M9 19.5L7 22M15 19.5l2 2.5"/></svg>Report a Bug</button>
+      <button type="button" class="chip" data-t="suggestion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>Suggestion</button>
+      <button type="button" class="chip" data-t="other_issue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v6M12 16.8v.2" stroke-linecap="round"/></svg>Other Issue</button>
+      <button type="button" class="chip" data-t="general"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.5L3 21l1.5-5.3A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-linecap="round" stroke-width="2.6"/></svg>General Feedback</button>
+      <button type="button" class="chip" data-t="rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>Rate Our App</button>
+    </div>
+
+    <div class="lbl" style="margin-top:20px">Select a Course <span>(Optional)</span></div>
+    <label class="field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0b4d2a" stroke-width="2" stroke-linejoin="round"><path d="M2 5.5C4.5 4 7.5 4 11 5.5V20c-3.5-1.5-6.5-1.5-9-.2zM22 5.5C19.5 4 16.5 4 13 5.5V20c3.5-1.5 6.5-1.5 9-.2z"/></svg>
+      <select id="course"><option value="">Choose a course (if related)</option></select>
+      <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b4d2a" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </label>
+
+    <div class="lbl" style="margin-top:20px">Your Message</div>
+    <label class="field area">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0b4d2a" stroke-width="2" stroke-linejoin="round"><path d="M4 20l4.5-1 10-10-3.5-3.5-10 10z"/><path d="M14 6.5l3.5 3.5"/></svg>
+      <textarea id="msg" maxlength="1000" placeholder="Describe the issue, give details, or share your suggestion..."></textarea>
+      <span class="count"><span id="n">0</span>/1000</span>
+    </label>
+
+    <div class="lbl" style="margin-top:20px">Add Attachment <span>(Optional)</span></div>
+    <label class="drop" id="drop">
+      <span class="row"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0b4d2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.4 11.1l-9.2 9.2a5.5 5.5 0 0 1-7.8-7.8l9.2-9.2a3.7 3.7 0 0 1 5.2 5.2l-9.2 9.2a1.8 1.8 0 0 1-2.6-2.6l8.5-8.5"/></svg><span id="dtext">Tap to upload a screenshot or file</span></span>
+      <small>(PNG, JPG, up to 5MB)</small>
+      <input id="file" type="file" accept="image/png,image/jpeg">
+    </label>
+
+    <button class="send" type="submit"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2.5 11.2L21 3.5c.8-.3 1.5.5 1.2 1.3l-6.7 16.4c-.3.8-1.4.8-1.7 0l-2.4-6.6-6.6-2.4c-.8-.3-.8-1.4 0-1.7z"/></svg>Send Feedback</button>
+    <p class="msg" id="msg2"></p>
+    <p class="foot"><svg width="22" height="22" viewBox="0 0 24 24" fill="#6b7670"><circle cx="12" cy="12" r="10"/><path d="M12 10.5v6M12 7.2v.1" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>Your feedback helps us make Learning Hub better for you.</p>
+  </form>
+</main>
+<script src="config.js"></script><script src="hub.js"></script>
+<script>
+(function(){
+  var type='course_issue', file=null;
+  document.querySelectorAll('.chip').forEach(function(c){ c.onclick=function(){ document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')}); c.classList.add('on'); type=c.getAttribute('data-t'); }; });
+  var ta=document.getElementById('msg'), sel=document.getElementById('course');
+  ta.oninput=function(){ document.getElementById('n').textContent=ta.value.length; };
+  sel.onchange=function(){ sel.classList.toggle('picked', !!sel.value); };
+  document.getElementById('drop').onclick=function(){ document.getElementById('file').click(); };
+  document.getElementById('file').onchange=function(e){ file=e.target.files[0]||null; document.getElementById('dtext').textContent=file?file.name:'Tap to upload a screenshot or file'; };
+  fetch('../courses/index.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []})
+    .then(function(list){ list.forEach(function(c){ var o=document.createElement('option'); o.value=c.id; o.textContent=c.title; sel.appendChild(o); }); });
+  function say(t,ok){ var m=document.getElementById('msg2'); m.textContent=t; m.className='msg '+(ok?'ok':'bad'); m.style.display='block'; }
+  document.getElementById('f').onsubmit=function(e){
+    e.preventDefault();
+    if(!ta.value.trim()) return say('Please write your message first.',false);
+    if(file && file.size>5*1024*1024) return say('The file is larger than 5MB.',false);
+    if(!HUB.ready) return say('Feedback is not connected yet. It will work once sign-in is set up.',false);
+    HUB.ensureReady().then(function(c){
+      return c.auth.getUser().then(function(u){ var user=u.data.user, path=null;
+        var up = file ? c.storage.from('feedback-attachments').upload((user?user.id:'anon')+'/'+Date.now()+'-'+file.name.replace(/[^A-Za-z0-9._-]/g,'_'), file) : Promise.resolve({data:null});
+        return up.then(function(r){ if(r.error) throw r.error; path = r.data ? r.data.path : null;
+          return c.from('feedback').insert({ user_id:user?user.id:null, kind:type, course_id:sel.value||null, message:ta.value.trim(), attachment_path:path });
+        });
+      }).then(function(r){ if(r.error) return say(r.error.message,false);
+        ta.value=''; document.getElementById('n').textContent='0'; file=null; document.getElementById('dtext').textContent='Tap to upload a screenshot or file';
+        say('Thank you. Your feedback has been sent.',true);
+      });
+    }).catch(function(err){ say(err.message||'Could not send. Please try again.',false); });
+  };
+})();
+</script>
+</body></html>
