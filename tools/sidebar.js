@@ -27,6 +27,22 @@
     sb.classList.toggle('o', open);
     bd.classList.toggle('o', open);
   }
+  mt.onclick = function (e) { e.stopPropagation(); setOpen(!sb.classList.contains('o')); };
+  bd.onclick = function () { setOpen(false); };
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  // Departments: hidden until pressed
+  var label = sb.querySelector('.l');
+  list.style.display = 'none';
+  var deptBtn = document.createElement('button');
+  deptBtn.type = 'button';
+  deptBtn.className = 'lh-acc lh-dept';
+  deptBtn.innerHTML = 'Departments <span>&#9662;</span>';
+  if (label) label.replaceWith(deptBtn); else sb.insertBefore(deptBtn, list);
+  deptBtn.onclick = function () {
+    var open = list.style.display === 'none';
+    list.style.display = open ? '' : 'none';
+    deptBtn.querySelector('span').innerHTML = open ? '&#9652;' : '&#9662;';
   };
 
   var my = document.createElement('div');
@@ -55,4 +71,3 @@
   var contactBtn = $('#lh-contact-btn'), contact = $('#lh-contact');
   contactBtn.onclick = function () { contact.style.display = contact.style.display === 'none' ? '' : 'none'; };
 })();
-     
