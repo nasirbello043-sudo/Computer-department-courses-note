@@ -99,6 +99,12 @@
     },
     toast: function (msg) {
       var t = document.getElementById('hub-toast');
+      if (!t) { t = document.createElement('div'); t.id = 'hub-toast'; document.body.appendChild(t); }
+      t.textContent = msg; t.className = 'show';
+      clearTimeout(t._h); t._h = setTimeout(function () { t.className = ''; }, 2200);
+    }
+  });
+
   /* ---- press and hold (phone) and right click (computer) on course cards ---- */
   var css = document.createElement('style');
   css.textContent =
@@ -173,4 +179,3 @@
   });
   if (!READY) document.addEventListener('DOMContentLoaded', function () { /* menu works once sign-in is connected */ });
 })();
-                                                                  
